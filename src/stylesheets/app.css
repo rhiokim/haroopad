@@ -7,22 +7,52 @@
 :: Page Name 1
 :: Page Name 2
 */
-
+html, body { height:100% }
+body {
+	margin: 0;
+  font-family: Droid Sans, Arial, sans-serif;
+  line-height: 1.5;
+}
 
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
-#navbar {
-    position: fixed;
-    top: 0px;
-    width: 100%;
-    z-index: 99;
-}​
-
-#content {
-	top: 50px;
+#editor {
+	width: 49%;
+	height: 100%;
+	float: left;
+	display: inline-block;
 }
 
+#spliter {
+	width: 2%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+	background: #afafaf;
+}
+
+#haroo {
+	width: 49%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+	border-bottom: 1px solid #000;
+	word-wrap: break-word;
+	overflow-y: auto;
+}
+
+#haroo article {
+	padding: 20px;
+}
+
+.CodeMirror {
+	height: 100%;
+}
+/*
+#viewer > p {
+	margin: 0;
+}*/
 
 /* -----------------------------------------
    Page Name 1
