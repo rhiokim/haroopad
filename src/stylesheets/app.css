@@ -10,6 +10,8 @@
 html, body { height:100% }
 body {
 	margin: 0;
+  font-family: Droid Sans, Arial, sans-serif;
+  line-height: 1.5;
 }
 
 /* -----------------------------------------
@@ -30,12 +32,18 @@ body {
 	background: #afafaf;
 }
 
-#viewer {
+#haroo {
 	width: 49%;
 	height: 100%;
-	float: right;
+	float: left;
 	display: inline-block;
 	border-bottom: 1px solid #000;
+	word-wrap: break-word;
+	overflow-y: auto;
+}
+
+#haroo article {
+	padding: 20px;
 }
 
 .CodeMirror {

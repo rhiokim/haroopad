@@ -10,10 +10,10 @@
     "width": 1024,
     "height": 768,
     "position": "mouse",
-    "min_width": 400,
+    "min_width": 1024,
     "min_height": 768,
-    "max_width": 800,
-    "max_height": 768
+    "max_width": 1920,
+    "max_height": 1080
   },
   "webkit": {
     "plugin": true
