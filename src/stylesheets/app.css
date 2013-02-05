@@ -7,13 +7,44 @@
 :: Page Name 1
 :: Page Name 2
 */
-
+html, body { height:100% }
+body {
+	margin: 0;
+}
 
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
+#editor {
+	width: 49%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+}
 
+#spliter {
+	width: 2%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+	background: #afafaf;
+}
 
+#viewer {
+	width: 49%;
+	height: 100%;
+	float: right;
+	display: inline-block;
+	border-bottom: 1px solid #000;
+}
+
+.CodeMirror {
+	height: 100%;
+}
+/*
+#viewer > p {
+	margin: 0;
+}*/
 
 /* -----------------------------------------
    Page Name 1
