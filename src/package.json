@@ -6,15 +6,15 @@
   "keywords": [ "markdown", "haroopress" ],
   "window": {
     "icon": "link.png",
-    "toolbar": true,
+    "toolbar": false,
+    // "frame": false,
     "width": 1024,
     "height": 768,
     "position": "mouse",
     "min_width": 1024,
     "min_height": 768,
     "max_width": 1920,
-    "max_height": 1080,
-    "as_desktop": true
+    "max_height": 1080
   },
   "webkit": {
     "plugin": true

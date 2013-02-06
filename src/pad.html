@@ -27,6 +27,7 @@
 </head>
 <body>
 
+<input style="display:none;" id="fileDialog" type="file" />
   <div id="editor"><textarea id="code" name="code"># 하루프레스란?
 하루프레스는 하루라는 순 우리말과 프레스라는 단어의 조합으로 **하루에 이야기**를 작성하여 **발행**하는 매우 간단한 블로그 엔진이라는 의미에서 **하루프레스** 라고 이름을 지었습니다.
 
@@ -173,41 +174,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   <script src="javascripts/app.js"></script>
   
   <script>
-    var res;
-    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-      mode: 'markdown',
-      lineNumbers: false,
-      theme: "solarized dark",
-      keyMap: "vim",
-      viewportMargin: 40,
-      lineWrapping: true,
-      extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
-    });
-
-    marked.setOptions({
-      gfm: true,
-      tables: true,
-      breaks: false,
-      pedantic: false,
-      sanitize: true,
-      smartLists: true,
-      langPrefix: 'language-',
-      highlight: function(code, lang) {
-        if (lang === 'js') {
-          //TODO
-          // return highlighter.javascript(code);
-        }
-        return code;
-      }
-    });
-
-    function changeHandler() {
-      res = marked(editor.getValue());
-      $('#haroo article').html(res);
-    }
-
-    editor.on("change", changeHandler);
-    changeHandler();
   </script>
 
 </body>
