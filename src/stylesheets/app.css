@@ -39,7 +39,7 @@ body {
 	height: 100%;
 	float: left;
 	display: inline-block;
-	border-bottom: 1px solid #000;
+	/*border-bottom: 1px solid #000;*/
 	word-wrap: break-word;
 	overflow-y: auto;
 }
