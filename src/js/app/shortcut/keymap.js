@@ -19,7 +19,7 @@ define([
 
 			initialize: function(){
 
-				keyboard.on('ctrl + o', function() {
+				keyboard.on('ctrl + o', function(e) {
 					$('#fileDialog').trigger('click');
 				});
 

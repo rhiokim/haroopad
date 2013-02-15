@@ -28,9 +28,50 @@ requirejs([
         'shortcut/keymap'
     ], function(shortcut) {
 
+        var res;
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+          mode: 'markdown',
+          lineNumbers: false,
+          theme: "solarized dark",
+          keyMap: "vim",
+          viewportMargin: 40,
+          lineWrapping: true,
+          extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
+        });
+
+        marked.setOptions({
+          gfm: true,
+          tables: true,
+          breaks: false,
+          pedantic: false,
+          sanitize: true,
+          smartLists: true,
+          langPrefix: 'language-',
+          highlight: function(code, lang) {
+            if (lang === 'js') {
+              //TODO
+              // return highlighter.javascript(code);
+            }
+            return code;
+          }
+        });
+
+        /**
+         * 코드미러 내용 변경 이벤트 핸들러
+         * @return {[type]} [description]
+         */
+        function changeHandler() {
+            //TODO: throttle 적용
+          res = marked(editor.getValue());
+          $('#haroo article').html(res);
+        }
+
+        editor.on("change", changeHandler);
+        changeHandler();
+
         shortcut.bind('open_file', function(str) {
             // $('#code').val(str);
             editor.setValue(str);
-        })
+        });
 
 });
