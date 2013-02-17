@@ -106,7 +106,7 @@ a:visited {
 /* Slide 2 */ 
 
 #slide2{
-	background-image:url('../images/footprints.png');
+	background-image:url('../images/dr4.jpg');
 	background-color:#f68f67;
 	color:#ffffff;
 }
@@ -161,7 +161,7 @@ a:visited {
 /* Slide 4 */
 
 #slide4{
-	background-image:url('../images/sunglasses.png');
+	background-image:url('../images/dr6.jpg');
 	background-color:#8a8683;
 	color:#ffffff;
 }
@@ -173,6 +173,53 @@ a:visited {
 	font-weight: 700;
 }
 #slide4 h2 {
+	font-size: 2em;
+	color: #ffffff;
+	line-height: 0px;
+	padding-bottom:20px;
+	font-weight: 400;
+}
+
+
+
+
+/* Slide 3 */ 
+
+#slide5{
+	background-color:#ffffff;
+}
+#slide5 h1 {
+	font-size: 3.8em;
+	letter-spacing: -3px;
+	line-height: 0px;
+	color:#8a8683;
+	font-weight: 700;
+}
+#slide5 h2 {
+	font-size: 2em;
+	color: #8a8683;
+	line-height: 0px;
+	padding-bottom:20px;
+	font-weight: 400;
+}
+
+
+
+/* Slide 5 */
+
+#slide6{
+	background-image:url('../images/dr2.jpg');
+	background-color:#8a8683;
+	color:#ffffff;
+}
+#slide6 h1 {
+	font-size: 3.8em;
+	letter-spacing: -3px;
+	line-height: 0px;
+	color:#ffffff;
+	font-weight: 700;
+}
+#slide6 h2 {
 	font-size: 2em;
 	color: #ffffff;
 	line-height: 0px;
