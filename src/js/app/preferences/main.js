@@ -1,10 +1,30 @@
 define([
+		'module',
 		'vendors/keyboard',
-		'text!tpl/menu.html'
-	], function(keyboard, html) {
+		'text!tpl/preferences.html'
+	], function(module, keyboard, html) {
 
-	keyboard.on('ctrl + ,', function() {
-		alert('open file');
-	});
+		$('#dialogs').append(html);
+
+		var View = Backbone.View.extend({
+			el: '#dialogs',
+
+			events: {
+				'click ._preferences': 'clickHandler'	
+			},
+
+			initialize: function() {
+
+				keyboard.on('super + i', function(e) {
+					$('._preferences').click();
+				});
+
+			},
+
+			clickHandler: function() {
+			}
+		});
+
+		module.exports = new View();
 
 });

@@ -50,9 +50,13 @@ body {
 
 .CodeMirror {
 	height: 100%;
-	padding-left: 10px;
+	/*padding-left: 10px;*/
 	padding-right: 10px;
 	margin-bottom: 10px;
+}
+
+.CodeMirror-lines {
+  padding: 15px 0;
 }
 
 /* Change the docs' brand */

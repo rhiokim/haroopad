@@ -8,7 +8,8 @@ requirejs.config({
     paths: {
         vendors: '../vendors',
         tpl: '../../tpl',
-        text: '../vendors/text'
+        text: '../vendors/text',
+        editor: 'editor/main'
     },
     config: {
         text: {
@@ -25,19 +26,21 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
-        'shortcut/keymap'
-    ], function(shortcut) {
+        'editor',
+        'file/main',
+        'preferences/main'
+    ], function(editor, shortcut) {
 
         var res;
-        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-          mode: 'markdown',
-          lineNumbers: false,
-          theme: "solarized dark",
-          keyMap: "vim",
-          viewportMargin: 40,
-          lineWrapping: true,
-          extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
-        });
+        // var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        //   mode: 'markdown',
+        //   lineNumbers: true,
+        //   theme: "solarized dark",
+        //   keyMap: "vim",
+        //   viewportMargin: 40,
+        //   lineWrapping: true,
+        //   extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
+        // });
 
         marked.setOptions({
           gfm: true,
@@ -72,6 +75,10 @@ requirejs([
         shortcut.bind('open_file', function(str) {
             // $('#code').val(str);
             editor.setValue(str);
+        });
+
+        shortcut.bind('save_file', function() {
+          editor.getValue();
         });
 
 });

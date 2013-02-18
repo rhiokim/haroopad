@@ -82,6 +82,10 @@ module.exports = function(grunt) {
 
       clear: {
         command: 'rm -rf build; mkdir -p build'
+      },
+
+      exec: {
+        command: 'open ./build/haroopad.app'
       }
     },
 
@@ -105,5 +109,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [  ]);
   grunt.registerTask('clean', [ 'shell:clear' ]);
-  grunt.registerTask('build', [ 'shell:clear', 'shell:cpLib', 'shell:cpSrc', 'replace:info' ]);
+  grunt.registerTask('build', [ 'shell:clear', 'shell:cpLib', 'shell:cpSrc', 'replace:info', 'shell:exec' ]);
 };
