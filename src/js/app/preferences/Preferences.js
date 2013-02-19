@@ -7,16 +7,16 @@ define([
 		$('#dialogs').append(html);
 
 		var View = Backbone.View.extend({
-			el: '#dialogs',
+			// el: '#dialogs',
 
-			events: {
-				'click ._preferences': 'clickHandler'	
-			},
+			// events: {
+			// 	'click ._preferences': 'clickHandler'	
+			// },
 
 			initialize: function() {
 
 				keyboard.on('super + i', function(e) {
-					$('._preferences').click();
+					$('._preferences').modal('show');
 				});
 
 			},
