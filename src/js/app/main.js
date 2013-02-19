@@ -29,7 +29,7 @@ requirejs([
         'editor',
         'file/File',
         'preferences/Preferences'
-    ], function(editor, file) {
+    ], function(Editor, file) {
 
         var res;
         // var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -65,11 +65,11 @@ requirejs([
          */
         function changeHandler() {
             //TODO: throttle 적용
-          res = marked(editor.getValue());
+          res = marked(Editor.getValue());
           $('#haroo article').html(res);
         }
 
-        editor.on("change", changeHandler);
+        Editor.on("change", changeHandler);
         changeHandler();
 
 });

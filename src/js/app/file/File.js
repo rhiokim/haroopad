@@ -1,24 +1,99 @@
 define([
 		'module',
+		'text!tpl/file.html',
 		'vendors/keyboard',
 		'editor',
-		'file/Open'
+		'file/Recents'
 	], 
 
-	function(module, keyboard, editor, File) {
+	function(module, html, keyboard, Editor, Recents) {
 		var fs = require('fs');
-		var str;
+		var hasWriteAccess = false, fileEntry, str;
 
-		keyboard.on('super + o', function(e) {
-			File.open();
+		$('#fields').append(html);
+
+		function openFileDialog() {
+			$("#openFile").trigger("click");
+		}
+
+		function openSaveDialog() {
+			if(fileEntry) {
+				view.save(fileEntry);
+				return;
+			}
+
+			$("#saveFile").trigger("click");
+		}
+
+		function newHandler() {
+	    var x = window.screenX + 10;
+	    var y = window.screenY + 10;
+    	window.open('pad.html', '_blank', 'screenX=' + x + ',screenY=' + y);
+		}
+
+		var View = Backbone.View.extend({
+			el: '#fields',
+
+			events: {
+				'change #saveFile': 'saveHandler',
+				'change #openFile': 'openHandler'
+			},
+
+			initialize: function() {
+				keyboard.on('super+o', openFileDialog);
+				keyboard.on('super+s', openSaveDialog);
+				keyboard.on('super+n', newHandler);
+			},
+
+			saveHandler: function(e) {
+				fileEntry = $(e.target).val();
+
+				this.save(fileEntry);
+			},
+
+			openHandler: function(e) {
+				fileEntry = $(e.target).val();
+				if(!fileEntry) { return; }
+
+				str = fs.readFileSync(fileEntry, 'utf8');
+				Recents.push(fileEntry);
+				Editor.setValue(str);
+			},
+
+			save: function(file) {
+				fs.writeFileSync(fileEntry, Editor.getValue(), 'utf8');
+			}
 		});
 
-		keyboard.on('super + s', function(e) {
-		});
+		module.exports = view = new View();
 
-		File.bind('open_file', function(file) {
-			str = fs.readFileSync(file, 'utf8');
-			editor.setValue(str);
-		});
+	 //  $("#saveFile").change(function(evt) {
+	 //    onChosenFileToSave($(this).val());
+	 //  });
+
+
+
+		// keyboard.on('super+n', function(e) {
+		// 	var doSave, nowStr = Editor.getValue();
+
+		// 	if(hasWriteAccess) {
+		// 		doSave = confirm('save?');
+
+		// 		//TODO: 
+		// 		if(!doSave) {
+		// 			return;
+		// 		}
+		// 	}
+
+		// 	_file = undefined;
+		// 	Editor.setValue('');
+		// });
+
+		// Open.bind('open_file', function(file) {
+		// 	_file = file; 
+		// 	str = fs.readFileSync(file, 'utf8');
+		// 	Recents.push(file);
+		// 	Editor.setValue(str);
+		// });
 
 });

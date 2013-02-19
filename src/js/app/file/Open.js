@@ -12,18 +12,18 @@ define([
 			el: '#fields',
 
 			events: {
-				'change #fileDialog': 'changeHandler'	
+				'change #openFile': 'changeHandler'	
 			},
 
 			changeHandler: function() {
-				file = $('#fileDialog').val();
+				file = $('#openFile').val();
 				if(!file) { return; }
 				
 				this.trigger('open_file', file);
 			},
 
-			open: function() {
-				$('#fileDialog').trigger('click');
+			pop: function() {
+				$('#openFile').trigger('click');
 			}
 		});
 

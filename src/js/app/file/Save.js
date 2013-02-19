@@ -5,21 +5,14 @@ define([
 
 	function(module, html) {
 		
-		$('#dialog').append(html);
-
 		var View = Backbone.View.extend({
-			el: '#dialog',
-
-			events: {
-				'change #fileDialog': 'changeHandler'	
-			},
 
 			changeHandler: function() {
 				this.trigger('open_file', file);
 			},
 
-			open: function() {
-				$('#fileDialog').trigger('click');
+			do: function() {
+				$("#saveFile").trigger("click");
 			}
 		});
 
