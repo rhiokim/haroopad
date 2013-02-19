@@ -9,7 +9,9 @@ requirejs.config({
         vendors: '../vendors',
         tpl: '../../tpl',
         text: '../vendors/text',
-        editor: 'editor/Editor'
+        editor: 'editor/Editor',
+        store: '../vendors/store',
+        keyboard: '../vendors/keymage'
     },
     config: {
         text: {
@@ -49,13 +51,13 @@ requirejs([
           pedantic: false,
           sanitize: true,
           smartLists: true,
-          langPrefix: 'language-',
+          // langPrefix: 'language-',
           highlight: function(code, lang) {
-            if (lang === 'js') {
-              //TODO
-              // return highlighter.javascript(code);
+            if(!lang) {
+              return code;
             }
-            return code;
+            lang = lang == 'js' && 'javascript';
+            return hljs.highlight(lang, code).value;
           }
         });
 

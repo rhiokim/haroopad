@@ -1,12 +1,12 @@
 define([
 		'module',
 		'text!tpl/file.html',
-		'vendors/keyboard',
+		'keyboard',
 		'editor',
 		'file/Recents'
 	], 
 
-	function(module, html, keyboard, Editor, Recents) {
+	function(module, html, HotKey, Editor, Recents) {
 		var fs = require('fs');
 		var hasWriteAccess = false, fileEntry, str;
 
@@ -40,9 +40,9 @@ define([
 			},
 
 			initialize: function() {
-				keyboard.on('super+o', openFileDialog);
-				keyboard.on('super+s', openSaveDialog);
-				keyboard.on('super+n', newHandler);
+				HotKey('super-o', openFileDialog);
+				HotKey('super-s', openSaveDialog);
+				HotKey('super-n', newHandler);
 			},
 
 			saveHandler: function(e) {
@@ -66,34 +66,5 @@ define([
 		});
 
 		module.exports = view = new View();
-
-	 //  $("#saveFile").change(function(evt) {
-	 //    onChosenFileToSave($(this).val());
-	 //  });
-
-
-
-		// keyboard.on('super+n', function(e) {
-		// 	var doSave, nowStr = Editor.getValue();
-
-		// 	if(hasWriteAccess) {
-		// 		doSave = confirm('save?');
-
-		// 		//TODO: 
-		// 		if(!doSave) {
-		// 			return;
-		// 		}
-		// 	}
-
-		// 	_file = undefined;
-		// 	Editor.setValue('');
-		// });
-
-		// Open.bind('open_file', function(file) {
-		// 	_file = file; 
-		// 	str = fs.readFileSync(file, 'utf8');
-		// 	Recents.push(file);
-		// 	Editor.setValue(str);
-		// });
 
 });

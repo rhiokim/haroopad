@@ -1,8 +1,8 @@
 define([
 		'module',
-		'vendors/keyboard',
-		'text!tpl/preferences.html'
-	], function(module, keyboard, html) {
+		'text!tpl/preferences.html',
+		'keyboard'
+	], function(module, html, HotKey) {
 
 		$('#dialogs').append(html);
 
@@ -15,7 +15,7 @@ define([
 
 			initialize: function() {
 
-				keyboard.on('super + i', function(e) {
+				HotKey('super-i', function(e) {
 					$('._preferences').modal('show');
 				});
 
