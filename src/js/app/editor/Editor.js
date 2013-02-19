@@ -1,9 +1,9 @@
 define([
 		'module'
 	],
-	function(moule) {
+	function(module) {
 		
-		return CodeMirror.fromTextArea(document.getElementById("code"), {
+		module.exports = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
 					    lineNumbers: true,
 					    theme: "solarized dark",

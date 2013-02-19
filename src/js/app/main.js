@@ -9,7 +9,7 @@ requirejs.config({
         vendors: '../vendors',
         tpl: '../../tpl',
         text: '../vendors/text',
-        editor: 'editor/main'
+        editor: 'editor/Editor'
     },
     config: {
         text: {
@@ -27,9 +27,9 @@ requirejs.onError = function (e) {
 
 requirejs([
         'editor',
-        'file/main',
-        'preferences/main'
-    ], function(editor, shortcut) {
+        'file/File',
+        'preferences/Preferences'
+    ], function(editor, file) {
 
         var res;
         // var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -71,14 +71,5 @@ requirejs([
 
         editor.on("change", changeHandler);
         changeHandler();
-
-        shortcut.bind('open_file', function(str) {
-            // $('#code').val(str);
-            editor.setValue(str);
-        });
-
-        shortcut.bind('save_file', function() {
-          editor.getValue();
-        });
 
 });
