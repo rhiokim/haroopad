@@ -15,7 +15,7 @@ define([
 
 			initialize: function() {
 
-				HotKey('super-i', function(e) {
+				HotKey('super-,', function(e) {
 					$('._preferences').modal('show');
 				});
 

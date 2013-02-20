@@ -10,6 +10,7 @@ requirejs.config({
         tpl: '../../tpl',
         text: '../vendors/text',
         editor: 'editor/Editor',
+        viewer: 'viewer/Viewer',
         store: '../vendors/store',
         keyboard: '../vendors/keymage'
     },
@@ -29,9 +30,10 @@ requirejs.onError = function (e) {
 
 requirejs([
         'editor',
+        'viewer',
         'file/File',
         'preferences/Preferences'
-    ], function(Editor, file) {
+    ], function(Editor, Viewer, file) {
 
         var res;
         // var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -51,13 +53,26 @@ requirejs([
           pedantic: false,
           sanitize: true,
           smartLists: true,
-          // langPrefix: 'language-',
+          langPrefix: '',
           highlight: function(code, lang) {
+            var res;
             if(!lang) {
               return code;
             }
-            lang = lang == 'js' && 'javascript';
-            return hljs.highlight(lang, code).value;
+
+            switch(lang) {
+              case 'js':
+                lang = 'javascript';
+              break;
+            }
+
+            try {
+              res = hljs.highlight(lang, code).value;
+            } catch(e) {
+
+            } finally {
+              return res || code;
+            }
           }
         });
 
@@ -68,10 +83,10 @@ requirejs([
         function changeHandler() {
             //TODO: throttle 적용
           res = marked(Editor.getValue());
-          $('#haroo article').html(res);
+          Viewer.update(res);
         }
 
         Editor.on("change", changeHandler);
-        changeHandler();
+        // changeHandler();
 
 });

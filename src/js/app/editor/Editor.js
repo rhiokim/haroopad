@@ -10,6 +10,7 @@ define([
 					    keyMap: "vim",
 					    viewportMargin: 40,
 					    lineWrapping: true,
+					    autofocus: true,
 					    extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
 					  });
 		
