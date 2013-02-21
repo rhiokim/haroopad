@@ -21,7 +21,7 @@ define([
 		HotKey('shift-ctrl-v', function() {
 			var map = editor.getOption('keyMap');
 			alert(map);
-			editor.setOption(map == 'vim' ? '' : 'vim');
+			editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
 		});
 		
 		module.exports = editor;

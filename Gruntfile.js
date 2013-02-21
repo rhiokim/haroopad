@@ -8,6 +8,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   // grunt.loadNpmTasks('grunt-contrib');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -102,6 +103,22 @@ module.exports = function(grunt) {
           './build/haroopad.app/Contents/Info.plist': [
             'Info.plist'
           ]
+        }
+      }
+    },
+
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: "src/js/app",
+          mainConfigFile: "src/js/app/main.js",
+          dir: "build/app.nw",
+          modules: [
+            { name: "main" }
+          ],
+          uglify: {
+              max_line_length: 100
+          }
         }
       }
     }

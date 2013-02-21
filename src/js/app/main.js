@@ -6,17 +6,16 @@ requirejs.config({
     waitSeconds: 30,
     locale: 'ko-kr',
     paths: {
-        vendors: '../vendors',
         tpl: '../../tpl',
-        text: '../vendors/text',
+        vendors: '../vendors',
         editor: 'editor/Editor',
         viewer: 'viewer/Viewer',
+        text: '../vendors/text',
         store: '../vendors/store',
         keyboard: '../vendors/keymage'
     },
     config: {
         text: {
-            //Valid values are 'node', 'xhr', or 'rhino'
             env: 'xhr'
         }
     },
