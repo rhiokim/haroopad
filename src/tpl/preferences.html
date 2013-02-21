@@ -1,25 +1,127 @@
-<div class="modal container hide fade _preferences" tabindex="-1">
-  <div class="modal-header">
+<div class="modal container hide fade _preferences" tabindex="-1" data-width="760" data-height="400">
+  <!-- <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3><i class="icon-cog"></i> Preferences</h3>
-  </div>
+  </div> -->
   <div class="modal-body">
-    <div class="tabbable tabs-left"> <!-- Only required for left/right tabs -->
-      <ul class="nav nav-tabs">
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+      <ul class="nav nav-tabs nav-tabs-google">
         <li class="active"><a href="#tab1" data-toggle="tab">default</a></li>
         <li><a href="#tab2" data-toggle="tab">editor</a></li>
-        <li><a href="#tab2" data-toggle="tab">viewer</a></li>
-        <li><a href="#tab3" data-toggle="tab">export</a></li>
+        <li><a href="#tab3" data-toggle="tab">viewer</a></li>
+        <li><a href="#tab4" data-toggle="tab">export</a></li>
+        <li><a href="#tab5" data-toggle="tab">about</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="tab1">
-          <p>Howdy, I'm in Section 2.</p>
+          <div class="bs-docs-example">
+            <div class="row-fluid">
+              <div class="span2">
+              </div>
+              <div class="span10">
+                <label class="checkbox">
+                  <input type="checkbox" value="">
+                  Option one is this and that—be sure to include why it's great
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" value="">
+                  Option one is this and that—be sure to include why it's great
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" value="">
+                  Option one is this and that—be sure to include why it's great
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="bs-docs-example">
+            <div class="row-fluid">
+              <div class="span2">
+              </div>
+              <div class="span10">
+                <div class="switch switch-small" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>" data-off="danger">
+                  <input type="checkbox">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
         </div>
         <div class="tab-pane" id="tab2">
-          <p>Howdy, I'm in Section 2.</p>
+          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
+
+          <div class="bs-docs-example">
+            <div class="row-fluid">
+              <div class="span2">
+                <strong>themes</strong>
+              </div>
+              <div class="span10">
+                <select class="select2 span4">
+                  <option>default</option>
+                  <option>ambiance</option>
+                  <option>blackboard</option>
+                  <option>cobalt</option>
+                  <option>eclipse</option>
+                  <option>elegant</option>
+                  <option>erlang-dark</option>
+                  <option>lesser-dark</option>
+                  <option>monokai</option>
+                  <option>neat</option>
+                  <option>night</option>
+                  <option>rubyblue</option>
+                  <option>solarized dark</option>
+                  <option>solarized light</option>
+                  <option>twilight</option>
+                  <option>vibrant-ink</option>
+                  <option>xq-dark</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
+          
         </div>
         <div class="tab-pane" id="tab3">
-          <p>Howdy, I'm in Section 2.</p>
+          <div class="row-fluid">
+            <div class="span4">
+              <storng>aaaaa</strong>
+            </div>
+            <div class="span8">
+              <div class="switch switch-small" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>" data-off="danger">
+                <input type="checkbox">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="tab4">
+          <div class="bs-docs-example">
+          </div>
+        </div>
+        <div class="tab-pane" id="tab5">
+          <div class="bs-docs-example">
+            <div class="row-fluid">
+              <div class="span6">
+                <blockquote class="pull-right">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                  <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+                </blockquote>
+              </div>
+              <div class="span6">
+                <address>
+                  <strong>Haroo, Inc.</strong><br>
+                  655-19 Yeoksam-dong Kangnam-gu<br>
+                  Seoul in Korea<br>
+                </address>
+                 
+                <address>
+                  <strong>Rhio Kim</strong><br>
+                  <a href="mailto:rhio.kim@gmail.com">rhio.kim@gmail.com</a>
+                </address>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

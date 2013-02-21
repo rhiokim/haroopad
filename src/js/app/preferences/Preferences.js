@@ -19,6 +19,8 @@ define([
 					$('._preferences').modal('show');
 				});
 
+				$('.switch').bootstrapSwitch();
+				$('.select2').select2();
 			},
 
 			clickHandler: function() {

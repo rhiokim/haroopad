@@ -16,11 +16,11 @@ define([
 
 
 		HotKey('super-ctrl-l', function() {
-			alert('')
+			var lineNumbers = editor.getOption('lineNumbers');
+			editor.setOption('lineNumbers', !lineNumbers);
 		});
-		HotKey('shift-ctrl-v', function() {
+		HotKey('super-ctrl-v', function() {
 			var map = editor.getOption('keyMap');
-			alert(map);
 			editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
 		});
 		
