@@ -87,6 +87,10 @@ module.exports = function(grunt) {
 
       exec: {
         command: 'open ./build/haroopad.app'
+      },
+
+      deploy: {
+        command: 'cp -R ./build/haroopad.app /Applications'
       }
     },
 
@@ -126,5 +130,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [  ]);
   grunt.registerTask('clean', [ 'shell:clear' ]);
+  grunt.registerTask('deploy', [ 'shell:deploy']);
   grunt.registerTask('build', [ 'shell:clear', 'shell:cpLib', 'shell:cpSrc', 'replace:info', 'shell:exec' ]);
 };
