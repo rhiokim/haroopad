@@ -128,7 +128,7 @@ body > .navbar .brand:hover {
 
 /* Echo out a label for the example */
 .bs-docs-example:after {
-  /*content: "Example";*/
+  content: "Options";
   position: absolute;
   top: -1px;
   left: -1px;

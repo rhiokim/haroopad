@@ -6,11 +6,11 @@
   <div class="modal-body">
     <div class="tabbable"> <!-- Only required for left/right tabs -->
       <ul class="nav nav-tabs nav-tabs-google">
-        <li class="active"><a href="#tab1" data-toggle="tab">default</a></li>
-        <li><a href="#tab2" data-toggle="tab">editor</a></li>
-        <li><a href="#tab3" data-toggle="tab">viewer</a></li>
-        <li><a href="#tab4" data-toggle="tab">export</a></li>
-        <li><a href="#tab5" data-toggle="tab">about</a></li>
+        <li class="active"><a href="#tab1" data-toggle="tab">General</a></li>
+        <li><a href="#tab2" data-toggle="tab">Editor</a></li>
+        <li><a href="#tab3" data-toggle="tab">Viewer</a></li>
+        <li><a href="#tab4" data-toggle="tab">Export</a></li>
+        <li><a href="#tab5" data-toggle="tab">About</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="tab1">
@@ -34,6 +34,9 @@
               </div>
             </div>
           </div>
+
+          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
+
           <div class="bs-docs-example">
             <div class="row-fluid">
               <div class="span2">
@@ -45,8 +48,6 @@
               </div>
             </div>
           </div>
-
-          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
         </div>
         <div class="tab-pane" id="tab2">
           <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
@@ -78,15 +79,33 @@
                 </select>
               </div>
             </div>
-          </div>
+                
+            <hr>
 
-          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
+            <div class="row-fluid">
+              <div class="span2">
+                general
+              </div>
+              <div class="span10">
+                <label class="checkbox">
+                  <input type="checkbox" value="">
+                  Display line number
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" value="">
+                  Vim key binding
+                </label>
+                <label>Label name</label>
+                <input type="text" placeholder="Type something…">
+              </div>
+            </div>
+          </div>
           
         </div>
         <div class="tab-pane" id="tab3">
           <div class="row-fluid">
             <div class="span4">
-              <storng>aaaaa</strong>
+              <storng>option</strong>
             </div>
             <div class="span8">
               <div class="switch switch-small" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>" data-off="danger">
@@ -96,6 +115,9 @@
           </div>
         </div>
         <div class="tab-pane" id="tab4">
+
+          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
+
           <div class="bs-docs-example">
           </div>
         </div>
@@ -104,7 +126,7 @@
             <div class="row-fluid">
               <div class="span6">
                 <blockquote class="pull-right">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                  <p>"Haroo" means "a day" in korean.</p>
                   <small>Someone famous <cite title="Source Title">Source Title</cite></small>
                 </blockquote>
               </div>
@@ -117,7 +139,9 @@
                  
                 <address>
                   <strong>Rhio Kim</strong><br>
-                  <a href="mailto:rhio.kim@gmail.com">rhio.kim@gmail.com</a>
+                  <i class="icon-envelope"></i> <a href="mailto:rhio.kim@gmail.com">rhio.kim@gmail.com</a><br>
+                  <i class="icon-twitter"></i> <a href="http://twitter.com/rhiokim" target="_blank">@rhiokim</a><br>
+                  <i class="icon-github-alt"></i> <a href="http://github.com/rhiokim" target="_blank">rhiokim</a>
                 </address>
               </div>
             </div>
