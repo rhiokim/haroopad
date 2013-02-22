@@ -2,11 +2,11 @@ define([
 	'module'
 	], 
 	function(module) {
-		var viewer = $('#haroo iframe').contents().find('body');
+		var viewer = $('#haroo iframe')[0].contentWindow;
 		
 		module.exports = {
 			update: function(contents) {
-				viewer.html(contents);
+				viewer.update(contents);
 			}
 		};
 	});

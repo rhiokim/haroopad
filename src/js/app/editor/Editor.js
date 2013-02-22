@@ -8,9 +8,11 @@ define([
 					    lineNumbers: true,
 					    theme: "solarized dark",
 					    // keyMap: "vim",
+					    electricChars: false,
 					    viewportMargin: 40,
 					    lineWrapping: true,
 					    autofocus: true,
+					    workDelay: 1000,
 					    extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
 					  });
 

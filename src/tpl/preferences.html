@@ -9,11 +9,15 @@
         <li class="active"><a href="#tab1" data-toggle="tab">General</a></li>
         <li><a href="#tab2" data-toggle="tab">Editor</a></li>
         <li><a href="#tab3" data-toggle="tab">Viewer</a></li>
-        <li><a href="#tab4" data-toggle="tab">Export</a></li>
-        <li><a href="#tab5" data-toggle="tab">About</a></li>
+        <!-- <li><a href="#tab4" data-toggle="tab">Add-ons</a></li>
+        <li><a href="#tab5" data-toggle="tab">Export</a></li> -->
+        <li><a href="#tab6" data-toggle="tab">About</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="tab1">
+
+          <p></p>
+
           <div class="bs-docs-example">
             <div class="row-fluid">
               <div class="span2">
@@ -21,23 +25,17 @@
               <div class="span10">
                 <label class="checkbox">
                   <input type="checkbox" value="">
-                  Option one is this and that—be sure to include why it's great
+                  Enable Sync Scroll
                 </label>
                 <label class="checkbox">
                   <input type="checkbox" value="">
-                  Option one is this and that—be sure to include why it's great
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="">
-                  Option one is this and that—be sure to include why it's great
+                  Play Keypress Sound
                 </label>
               </div>
             </div>
           </div>
 
-          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
-
-          <div class="bs-docs-example">
+          <!-- <div class="bs-docs-example">
             <div class="row-fluid">
               <div class="span2">
               </div>
@@ -47,10 +45,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="tab-pane" id="tab2">
-          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
+          <p>하루패드는 16가지의 테마를 지원하며 마크다운 에디팅에 포커스 되어 있습니다.</p>
 
           <div class="bs-docs-example">
             <div class="row-fluid">
@@ -95,26 +93,118 @@
                   <input type="checkbox" value="">
                   Vim key binding
                 </label>
-                <label>Label name</label>
-                <input type="text" placeholder="Type something…">
+                <label class="checkbox">
+                  <input type="checkbox" value="">
+                  Insert 4 spaces insted of one tab
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" value="">
+                  Auto pair characters ( [] () "" )
+                </label>
+
               </div>
             </div>
           </div>
           
         </div>
         <div class="tab-pane" id="tab3">
-          <div class="row-fluid">
-            <div class="span4">
-              <storng>option</strong>
+          <p></p>
+
+          <div class="bs-docs-example">
+            <div class="row-fluid">
+              <div class="span2">
+                <strong>viewer style</strong>
+              </div>
+              <div class="span4">
+                <select class="select2 span8">
+                  <option>Clearness</option>
+                  <option>Clearness Dark</option>
+                  <option>Github</option>
+                  <option>Github2</option>
+                  <option>Solarized (Dark)</option>
+                  <option>Solarized (Light)</option>
+                </select>
+              </div>
+              <div class="span2">
+                <strong>code themes</strong>
+              </div>
+              <div class="span4">
+                <select class="select2 span9">
+                  <option>Default</option>
+                  <option>Dark</option>
+                  <option>FAR</option>
+                  <option>IDEA</option>
+                  <option>Sunburst</option>
+                  <option>Zenburn</option>
+                  <option>Visual Studio</option>
+                  <option>Ascetic</option>
+                  <option>Magula</option>
+                  <option>GitHub</option>
+                  <option>Google Code</option>
+                  <option>Brown Paper</option>
+                  <option>School Book</option>
+                  <option>IR Black</option>
+                  <option>Solarized - Dark</option>
+                  <option>Solarized - Light </option>
+                  <option>Arta</option>
+                  <option>Monokai</option>
+                  <option>XCode</option>
+                  <option>Pojoaque</option>
+                  <option>Rainbow</option>
+                  <option>Tomorrow</option>
+                  <option>Tomorrow Night</option>
+                  <option>Tomorrow Night Bright</option>
+                  <option>Tomorrow Night Blue</option>
+                  <option>Tomorrow Night Eighties</option>
+                </select>
+              </div>
             </div>
-            <div class="span8">
-              <div class="switch switch-small" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>" data-off="danger">
-                <input type="checkbox">
+                
+            <hr>
+
+            <div class="row-fluid">
+              <div class="span2">
+                <strong>general</strong>
+              </div>
+              <div class="span10">
+                <label class="checkbox">
+                  <input type="checkbox" value="">
+                  Make links clickable in Editor view
+                </label>
+              </div>
+            </div>
+                
+            <hr>
+
+            <div class="row-fluid">
+              <div class="span2">
+                <strong>plugins</strong>
+              </div>
+              <div class="span10">
+                <p class="text-warning">하루패드는 마크다운 포맷에는 없는 플러그인 문법([플러그인명:속성])을 지원하여 다양한 외부 컨텐츠를 문서에 포함시킬 수 있도록 지원합니다.</p>
+                <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox1" value="option1" checked="checked">youtube
+                </label>
+                <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox2" value="option2" checked="checked">slideshare
+                </label>
+                <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked">vimeo
+                </label>
+                <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked">jsfiddle
+                </label>
+                <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked">tweet
+                </label>
+                <label class="checkbox inline">
+                  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked">gist
+                </label>
               </div>
             </div>
           </div>
         </div>
-        <div class="tab-pane" id="tab4">
+        <!-- <div class="tab-pane" id="tab4">
 
           <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
 
@@ -122,12 +212,25 @@
           </div>
         </div>
         <div class="tab-pane" id="tab5">
+
+          <p>이 옵션은 좌측 에디터 영역에 옵션을 선택할 수 있습니다.</p>
+
+          <div class="bs-docs-example">
+          </div>
+        </div> -->
+        <div class="tab-pane" id="tab6">
           <div class="bs-docs-example">
             <div class="row-fluid">
               <div class="span6">
                 <blockquote class="pull-right">
                   <p>"Haroo" means "a day" in korean.</p>
-                  <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+                  <small>offical site <cite title="Source Title">http://pad.haroopress.com</cite></small>
+                </blockquote>
+                <blockquote class="pull-right">
+                  <p>
+                    <a href="http://haroopress.com" target="_blank">haroopress.com</a><br> 
+                    <a href="http://nodejs.kr" target="_blank">nodejs.kr</a>
+                  </p>
                 </blockquote>
               </div>
               <div class="span6">

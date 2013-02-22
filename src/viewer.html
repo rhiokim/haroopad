@@ -13,7 +13,22 @@
   <link rel="stylesheet" href="css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="css/viewer.css">
   <!-- <link rel="stylesheet" href="css/app.css"> -->
-
+  <script src="js/vendors/jquery-1.9.1.min.js"></script>
+  <script>
+    /**
+     * update contents
+     * @param  {[type]} contents [description]
+     * @return {[type]}          [description]
+     */
+    function update(contents) {
+      $(document.body).html(contents);
+      
+      //prevent click link event
+      $('a').click(function(e) {
+        e.preventDefault();
+      })
+    }
+  </script>
 </head>
 <body>
 </body>
