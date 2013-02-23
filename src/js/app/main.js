@@ -37,16 +37,6 @@ requirejs([
     ], function(Editor,Parser, Viewer, file) {
 
         var res;
-        // var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        //   mode: 'markdown',
-        //   lineNumbers: true,
-        //   theme: "solarized dark",
-        //   keyMap: "vim",
-        //   viewportMargin: 40,
-        //   lineWrapping: true,
-        //   extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
-        // });
-
 
         /**
          * 코드미러 내용 변경 이벤트 핸들러

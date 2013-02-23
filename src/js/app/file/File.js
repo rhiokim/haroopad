@@ -56,7 +56,7 @@ define([
 				if(!fileEntry) { return; }
 
 				str = fs.readFileSync(fileEntry, 'utf8');
-				Recents.push(fileEntry);
+				Recents.add(fileEntry, 'file');
 				Editor.setValue(str);
 			},
 

@@ -1,21 +1,13 @@
 define([
-		'module',
-		'store'
-	], function(module, store) {
+		// 'store'
+	], function() {
 
-		var general = store.get('general') || { enableSyncScroll: false },
-				editor = store.get('editor'),
-				viewer = store.get('viewer'),
-				helper = store.get('helper'),
-				parser = store.get('parser'),
-				external = store.get('external');
-
-		var General = Backbone.Model.extend({
-			defaults: {
-				enableSyncScroll: true,
-				playKeypressSound: false
-			}
-		});
+		// var general = store.get('general') || { enableSyncScroll: false },
+		// 		editor = store.get('editor'),
+		// 		viewer = store.get('viewer'),
+		// 		helper = store.get('helper'),
+		// 		parser = store.get('parser'),
+		// 		external = store.get('external');
 
 		var Editor = Backbone.Model.extend({
 			defaults: {
@@ -24,7 +16,8 @@ define([
 				vimKeyBinding: false,
 				insertFourSpace: false,
 				autoPairCharacters: true
-			}
+			},
+			localStorage: new Backbone.LocalStorage('Editor')
 		});
 
 		var Viewer = Backbone.Model.extend({
@@ -32,7 +25,8 @@ define([
 				theme: 'default',
 				codeTheme: 'default',
 				clickableLink: false
-			}
+			},
+			localStorage: new Backbone.LocalStorage('Viewer')
 		});
 
 		var Helper = Backbone.Model.extend({
@@ -43,24 +37,27 @@ define([
 				jsfiddle: true,
 				tweet: true,
 				gist: true
-			}
+			},
+			localStorage: new Backbone.LocalStorage('Helper')
 		});
 
 		var Parser = Backbone.Model.extend({
-			defaults: {}
+			defaults: {},
+			localStorage: new Backbone.LocalStorage('Parser')
 		});
 
 		var External = Backbone.Model.extend({
-			defaults: {}
+			defaults: {},
+			localStorage: new Backbone.LocalStorage('External')
 		});
 
-		module.exports = {
-			general : new General(general),
-			editor : new Editor(editor),
-			viewer : new Viewer(viewer),
-			helper : new Helper(helper),
-			parser : new Parser(parser),
-			external : new External(external)
+		return {
+			general : new General(),
+			editor : new Editor(),
+			viewer : new Viewer(),
+			helper : new Helper(),
+			parser : new Parser(),
+			external : new External()
 		};
 
 });
