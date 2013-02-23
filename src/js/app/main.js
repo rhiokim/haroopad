@@ -9,6 +9,7 @@ requirejs.config({
         tpl: '../../tpl',
         vendors: '../vendors',
         editor: 'editor/Editor',
+        parser: 'editor/Parser',
         viewer: 'viewer/Viewer',
         text: '../vendors/text',
         store: '../vendors/store',
@@ -29,10 +30,11 @@ requirejs.onError = function (e) {
 
 requirejs([
         'editor',
+        'parser',
         'viewer',
         'file/File',
         'preferences/Preferences'
-    ], function(Editor, Viewer, file) {
+    ], function(Editor,Parser, Viewer, file) {
 
         var res;
         // var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -45,35 +47,6 @@ requirejs([
         //   extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
         // });
 
-        marked.setOptions({
-          gfm: true,
-          tables: true,
-          breaks: false,
-          pedantic: false,
-          sanitize: true,
-          smartLists: true,
-          langPrefix: '',
-          highlight: function(code, lang) {
-            var res;
-            if(!lang) {
-              return code;
-            }
-
-            switch(lang) {
-              case 'js':
-                lang = 'javascript';
-              break;
-            }
-
-            try {
-              res = hljs.highlight(lang, code).value;
-            } catch(e) {
-
-            } finally {
-              return res || code;
-            }
-          }
-        });
 
         /**
          * 코드미러 내용 변경 이벤트 핸들러
@@ -81,7 +54,7 @@ requirejs([
          */
         function changeHandler() {
             //TODO: throttle 적용
-          res = marked(Editor.getValue());
+          res = Parser(Editor.getValue());
           Viewer.update(res);
         }
 
