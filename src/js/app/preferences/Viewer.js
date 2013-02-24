@@ -6,16 +6,26 @@ define([
 			el: '#viewer-tab',
 
 			events: {
-				'click input[name=enableSyncScroll]': 'enableSyncScroll'	
+				'change select[name=viewStyle]': 'changeViewStyle',
+				'change select[name=codeStyle]': 'changeCodeStyle',
+				'click input[name=clickableLink]': 'clickableLink'	
 			},
 
 			initialize: function() {
-				console.log(option.toJSON());
+				this.$el.find('select').select2();
 			},
 
-			enableSyncScroll: function(e) {
+			changeViewStyle: function(e) {
+				option.set({ viewStyle: e.val });
+			},
+
+			changeCodeStyle: function(e) {
+				option.set({ codeStyle: e.val });
+			},
+
+			clickableLink: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('enableSyncScroll', bool);
+				option.set('clickableLink', bool);
 			}
 		});
 

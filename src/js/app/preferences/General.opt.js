@@ -11,16 +11,15 @@ define([
 			initialize: function() {
 				var opt = store.get('General');
 
+				this.bind('change', function() {
+					store.set('General', this.toJSON());
+				});
+
 				if(opt) {
 					this.set(opt);
 				} else {
 					this.set(this.defaults);
 				}
-			},
-
-			set: function() {
-    		Backbone.Model.prototype.set.apply(this, arguments);
-    		store.set('General', this.toJSON());
 			}
 		});
 

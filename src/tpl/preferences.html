@@ -116,7 +116,7 @@
                 <strong>viewer style</strong>
               </div>
               <div class="span4">
-                <select class="select2 span8">
+                <select class="select2 span8" name="viewStyle">
                   <option>Clearness</option>
                   <option>Clearness Dark</option>
                   <option>Github</option>
@@ -129,7 +129,7 @@
                 <strong>code themes</strong>
               </div>
               <div class="span4">
-                <select class="select2 span9">
+                <select class="select2 span9" name="codeStyle">
                   <option>Default</option>
                   <option>Dark</option>
                   <option>FAR</option>
@@ -168,7 +168,7 @@
               </div>
               <div class="span10">
                 <label class="checkbox">
-                  <input type="checkbox" value="">
+                  <input type="checkbox" value="" name="clickableLink">
                   Make links clickable in Editor view
                 </label>
               </div>
@@ -176,29 +176,29 @@
                 
             <hr>
 
-            <div class="row-fluid">
+            <div id="helper-section" class="row-fluid">
               <div class="span2">
                 <strong>markdown helpers</strong>
               </div>
               <div class="span10">
                 <p class="text-warning">하루패드는 마크다운 포맷에는 없는 플러그인 문법([helper:properties])을 지원하여 다양한 외부 컨텐츠를 문서에 포함시킬 수 있도록 지원합니다.</p>
                 <label class="checkbox inline">
-                  <input type="checkbox" id="inlineCheckbox1" value="option1" checked="checked">youtube
+                  <input type="checkbox" value="" name="youtube" checked="checked">youtube
                 </label>
                 <label class="checkbox inline">
-                  <input type="checkbox" id="inlineCheckbox2" value="option2" checked="checked">slideshare
+                  <input type="checkbox" value="" name="slideshare" checked="checked">slideshare
                 </label>
                 <label class="checkbox inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked">vimeo
+                  <input type="checkbox" value="" name="vimeo" checked="checked">vimeo
                 </label>
                 <label class="checkbox inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked">jsfiddle
+                  <input type="checkbox" value="" name="jsfiddle" checked="checked">jsfiddle
                 </label>
                 <label class="checkbox inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked">tweet
+                  <input type="checkbox" value="" name="tweet" checked="checked">tweet
                 </label>
                 <label class="checkbox inline">
-                  <input type="checkbox" id="inlineCheckbox3" value="option3" checked="checked">gist
+                  <input type="checkbox" value="" name="gist" checked="checked">gist
                 </label>
               </div>
             </div>
@@ -253,8 +253,8 @@
       </div>
     </div>
   </div>
-  <div class="modal-footer">
+  <!--div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Close</button>
     <button type="button" class="btn btn-primary">Save changes</button>
-  </div>
+  </div-->
 </div>

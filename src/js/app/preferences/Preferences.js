@@ -4,8 +4,9 @@ define([
 		'keyboard',
 		'preferences/General',
 		'preferences/Editor',
-		'preferences/Viewer'
-	], function(require, html, HotKey, General, Editor, Viewer) {
+		'preferences/Viewer',
+		'preferences/Helper'
+	], function(require, html, HotKey, General, Editor, Viewer, Helper) {
 
 		$('#dialogs').append(html);
 		$('.switch').bootstrapSwitch();
@@ -16,4 +17,6 @@ define([
 
 		var tabGeneral = new General();
 		var tabEditor = new Editor();
+		var tabViewer = new Viewer();
+		var tabHelper = new Helper();
 });
