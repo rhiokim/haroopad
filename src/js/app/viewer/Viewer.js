@@ -7,6 +7,10 @@ define([
 		module.exports = {
 			update: function(contents) {
 				viewer.update(contents);
+			},
+
+			scroll: function(top, per) {
+				viewer.scrollTop(top * 100 / per);
 			}
 		};
 	});

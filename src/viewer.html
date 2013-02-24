@@ -28,6 +28,18 @@
         e.preventDefault();
       })
     }
+
+    /**
+     * sync scroll position
+     * @param  {[type]} per [description]
+     * @return {[type]}     [description]
+     */
+    function scrollTop(per) {
+      var h = $(window).height();
+      var top = $(document.body).prop('clientHeight') - h;
+
+      $(window).scrollTop(top / 100 * per);
+    }
   </script>
 </head>
 <body>
