@@ -1,15 +1,12 @@
 define([
-		'module',
-		'require',
 		'keyboard',
 		'preferences/Editor.opt'
 	],
-	function(module, require, HotKey, Config) {
+	function(HotKey, option) {
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
 					    lineNumbers: true,
-					    theme: "solarized dark",
-					    // keyMap: "vim",
+					    // theme: "solarized dark",
 					    electricChars: false,
 					    viewportMargin: 40,
 					    lineWrapping: true,
@@ -17,6 +14,15 @@ define([
 					    workDelay: 1000,
 					    extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
 					  });
+		var config = option.toJSON();
+
+		/**
+		 * initialize editor
+		 */
+		editor.setOption('theme', config.theme);
+		editor.setOption('lineNumbers', config.displayLineNumber);
+		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
+		editor.setOption('tabSize', config.insertFourSpace ? 4 : 2);
 
 		HotKey('super-ctrl-l', function() {
 			var lineNumbers = editor.getOption('lineNumbers');
@@ -27,22 +33,21 @@ define([
 			editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
 		});
 
-		Config.bind('change:theme', function(model, value, memo) {
+		option.bind('change:theme', function(model, value, memo) {
 			editor.setOption('theme', value);
-			loadCss('js/vendors/codemirror-3.02/theme/'+ value +'.css');
 		});
 
-		Config.bind('change:displayLineNumber', function(model, value, memo) {
+		option.bind('change:displayLineNumber', function(model, value, memo) {
 			editor.setOption('lineNumbers', value);
 		});
 
-		Config.bind('change:vimKeyBinding', function(model, value, memo) {
-			editor.setOption('keyMap', value ? 'vim' : '');
+		option.bind('change:vimKeyBinding', function(model, value, memo) {
+			editor.setOption('keyMap', value ? 'vim' : 'default');
 		});
 
-		Config.bind('change:insertFourSpace', function(model, value, memo) {
-			editor.setOption('keyMap', value ? 'vim' : '');
+		option.bind('change:insertFourSpace', function(model, value, memo) {
+			editor.setOption('tabSize', value ? 4 : 2);
 		});
 		
-		module.exports = editor;
+		return editor;
 });

@@ -2,6 +2,8 @@ define([
 		'preferences/Helper.opt'
 	], function(option) {
 
+		var config = option.toJSON();
+
 		var EditorTabView = Backbone.View.extend({
 			el: '#helper-section',
 
@@ -15,6 +17,12 @@ define([
 			},
 
 			initialize: function() {
+				this.$el.find('input[name=youtube]').prop('checked', config.youtube);
+				this.$el.find('input[name=slideshare]').prop('checked', config.slideshare);
+				this.$el.find('input[name=vimeo]').prop('checked', config.vimeo);
+				this.$el.find('input[name=jsfiddle]').prop('checked', config.jsfiddle);
+				this.$el.find('input[name=tweet]').prop('checked', config.tweet);
+				this.$el.find('input[name=gist]').prop('checked', config.gist);
 			},
 
 			youtube: function(e) {
