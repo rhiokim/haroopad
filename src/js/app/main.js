@@ -41,11 +41,12 @@ requirejs([
     'parser',
     'viewer',
     'file/File',
-    'preferences/Preferences'
-  ], function(Editor,Parser, Viewer, file) {
+    'preferences/Preferences',
+    'window/Window'
+  ], function(Editor, Parser, Viewer) {
 
     var res;
-
+    
     /**
      * 코드미러 내용 변경 이벤트 핸들러
      * @return {[type]} [description]

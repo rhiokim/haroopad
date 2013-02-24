@@ -11,7 +11,6 @@ define([
 			},
 
 			initialize: function() {
-				console.log(option.toJSON());
 			},
 
 			enableSyncScroll: function(e) {

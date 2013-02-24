@@ -10,16 +10,17 @@ define([
 
 			// localStorage: new Backbone.LocalStorage('General'),
 			initialize: function() {
-				var opt = store.get('Viewer');
+				var opt = localStorage.getItem('Viewer');
 
 				this.bind('change', function() {
 					store.set('Viewer', this.toJSON());
 				});
 
 				if(opt) {
-					this.set(opt);
+					this.set(JSON.parse(opt));
 				} else {
 					this.set(this.defaults);
+					store.set('Viewer', this.toJSON());
 				}
 			}
 		});

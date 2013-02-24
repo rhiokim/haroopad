@@ -13,16 +13,17 @@ define([
 
 			// localStorage: new Backbone.LocalStorage('General'),
 			initialize: function() {
-				var opt = store.get('Helper');
+				var opt = localStorage.getItem('Helper');
 
 				this.bind('change', function() {
 					store.set('Helper', this.toJSON());
 				});
 
 				if(opt) {
-					this.set(opt);
+					this.set(JSON.parse(opt));
 				} else {
 					this.set(this.defaults);
+					store.set('Helper', this.toJSON());
 				}
 			}
 		});

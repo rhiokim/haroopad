@@ -12,16 +12,17 @@ define([
 			},
 
 			initialize: function() {
-				var opt = store.get('Editor');
+				var opt = localStorage.getItem('Editor');
 
 				this.bind('change', function() {
 					store.set('Editor', this.toJSON());
 				});
 
 				if(opt) {
-					this.set(opt);
+					this.set(JSON.parse(opt));
 				} else {
-					this.set(defaults);
+					this.set(this.defaults);
+					store.set('Editor', this.toJSON());
 				}
 			}
 		});

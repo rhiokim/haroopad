@@ -91,6 +91,10 @@ module.exports = function(grunt) {
 
       deploy: {
         command: 'cp -R ./build/haroopad.app /Applications'
+      },
+
+      snapShot: {
+        command: './lib/nwsnapshot --extra_code ./src/js/app/haroopad.js ./src/js/app/haroopad.bin'
       }
     },
 
