@@ -1,28 +1,31 @@
-define([], 
-	function() {
-		// var items = store.get('recents') || [];
+define([
+		'store'
+	], function(store) {
 
-		var Recents = Backbone.Model.extend({
-			defaults: {},
-			id: 'some-uid',
-			localStorage: new Backbone.LocalStorage('Recents')
-		})
+		var recents = [];
 
-		return new Recents();
-		// module.exports = {
-		// 	push: function(file) {
-		// 		items = [file].concat(items);
-		// 		items = _.uniq(items);
-		// 		store.set('recents', items);
-		// 	},
+		var Model = Backbone.Model.extend({
 
-		// 	get: function(items) {
-		// 		return _.first(items, 5);
-		// 	},
+			initialize: function() {
+				var opt = localStorage.getItem('Recents');
 
-		// 	clear: function(items) {
-		// 		items = [];
-		// 		store.remove('recents');
-		// 	}
-		// };
-	});
+				this.bind('change', function() {
+					store.set('Recents', this.toJSON());
+				});
+
+				if(opt) {
+					this.set(JSON.parse(opt));
+				} else {
+					this.set(this.defaults);
+					store.set('Recents', this.toJSON());
+				}
+			},
+
+			add: function(file) {
+				recents.push(file);
+				this.set('Recents', recents.reverse());
+			}
+		});
+
+		return new Model();
+});
