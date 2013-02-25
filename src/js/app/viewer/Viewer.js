@@ -11,12 +11,15 @@ define([
 		option.bind('change:codeStyle', function(model, value) {});
 
 		option.bind('change:clickableLink', function(model, value) {
-			value ? viewer.blockLink() : viewer.allowLink();
+			value ? viewer.allowLink() : viewer.blockLink() ;
 		});
+
 
 		return {
 			update: function(contents) {
 				viewer.update(contents);
+
+				option.clickableLink ? viewer.allowLink() : viewer.blockLink();
 			},
 
 			scroll: function(top, per) {

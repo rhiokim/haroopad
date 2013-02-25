@@ -24,9 +24,9 @@
      * @return {[type]}          [description]
      */
     function update(contents) {
+      //unregister previous anchor click event handler
+      $('a').off('click', '**');
       $(document.body).html(contents);
-
-      allowLink();
     }
 
     function clickLinkHandler(e) {
@@ -40,7 +40,10 @@
     }
 
     function blockLink() {
-      $('a').off('click', '**');
+      $('a').on('click', function(e) {
+        e.preventDefault();
+      });
+      // $('a').off('click', '**');
     }
 
     /**
