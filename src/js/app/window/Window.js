@@ -1,8 +1,9 @@
 define([
 		'window/Window.opt',
-		'file/File'
+		'file/File',
+    'preferences/Preferences'
 	], 
-	function(option, File) {
+	function(option, File, Preferences) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
 		var orgTitle = win.title = 'Untitled';

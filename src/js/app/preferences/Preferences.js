@@ -1,12 +1,11 @@
 define([
-		'require',
 		'text!tpl/preferences.html',
 		'keyboard',
 		'preferences/General',
 		'preferences/Editor',
 		'preferences/Viewer',
 		'preferences/Helper'
-	], function(require, html, HotKey, General, Editor, Viewer, Helper) {
+	], function(html, HotKey, General, Editor, Viewer, Helper) {
 
 		$('#dialogs').append(html);
 		$('.switch').bootstrapSwitch();

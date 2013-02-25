@@ -40,9 +40,7 @@ requirejs([
     'window/Window',
     'editor',
     'parser',
-    'viewer',
-    'file/File',
-    'preferences/Preferences'
+    'viewer'
   ], function(Window, Editor, Parser, Viewer) {
 
     var res;
