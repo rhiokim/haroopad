@@ -55,6 +55,10 @@ body {
 	margin-bottom: 10px;
 }
 
+#code {
+  display: none;
+}
+
 .CodeMirror-lines {
   padding: 15px 0;
 }

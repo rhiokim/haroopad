@@ -27,7 +27,11 @@ define([
 		editor.setOption('lineNumbers', editorConf.displayLineNumber);
 		editor.setOption('keyMap', editorConf.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', editorConf.insertFourSpace ? 4 : 2);
+		editor.setOption('autoCloseBrackets', editorConf.autoPairCharacters);
 
+		/**
+		 * hotkey area
+		 */
 		HotKey('super-ctrl-l', function() {
 			var lineNumbers = editor.getOption('lineNumbers');
 			editor.setOption('lineNumbers', !lineNumbers);
@@ -37,6 +41,9 @@ define([
 			editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
 		});
 
+		/**
+		 * change preferences events
+		 */
 		editorOpt.bind('change:theme', function(model, value, memo) {
 			editor.setOption('theme', value);
 		});
@@ -53,6 +60,14 @@ define([
 			editor.setOption('tabSize', value ? 4 : 2);
 		});
 
+		editorOpt.bind('change:autoPairCharacters', function(model, value, memo) {
+			editor.setOption('autoCloseBrackets', value);
+		});
+
+		/**
+		 * sync scroll handler
+		 * @return {[type]} [description]
+		 */
 		function syncScrollHandler() {
 			var scrollInfo = editor.getScrollInfo();
 			Viewer.scroll(scrollInfo.top, scrollInfo.height - scrollInfo.clientHeight)
