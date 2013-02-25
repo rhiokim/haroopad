@@ -8,7 +8,7 @@
   "window": {
     "icon": "link.png",
     "toolbar": true,
-    // "show": false,
+    "show": false,
     // "frame": false,
     "width": 1024,
     "height": 600,

@@ -8,6 +8,7 @@ define([
 
 	function(module, html, HotKey, Editor, Recents) {
 		var fs = require('fs');
+		var path = require('path');
 		var hasWriteAccess = false, fileEntry, str;
 
 		$('#fields').append(html);
@@ -58,10 +59,14 @@ define([
 				str = fs.readFileSync(fileEntry, 'utf8');
 				Recents.add(fileEntry, 'file');
 				Editor.setValue(str);
+
+				this.trigger('opened', path.dirname(fileEntry), path.basename(fileEntry));
 			},
 
 			save: function(file) {
 				fs.writeFileSync(fileEntry, Editor.getValue(), 'utf8');
+
+				this.trigger('saved', path.dirname(fileEntry), path.basename(fileEntry));
 			}
 		});
 

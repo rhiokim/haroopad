@@ -37,13 +37,13 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
+    'window/Window',
     'editor',
     'parser',
     'viewer',
     'file/File',
-    'preferences/Preferences'/*,
-    'window/Window'*/
-  ], function(Editor, Parser, Viewer) {
+    'preferences/Preferences'
+  ], function(Window, Editor, Parser, Viewer) {
 
     var res;
 
@@ -55,8 +55,11 @@ requirejs([
       //TODO: throttle 적용
       res = Parser(Editor.getValue());
       Viewer.update(res);
+
+      Window.edited();
     }
 
     Editor.on("change", changeHandler);
+
 
 });
