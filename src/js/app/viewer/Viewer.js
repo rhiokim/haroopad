@@ -1,10 +1,20 @@
 define([
-	'module'
+		'preferences/Viewer.opt'
 	], 
-	function(module) {
+	function(option) {
 		var viewer = $('#haroo iframe')[0].contentWindow;
 		
-		module.exports = {
+		var config = option.toJSON();
+
+		option.bind('change:viewStyle', function(model, value) {});
+		
+		option.bind('change:codeStyle', function(model, value) {});
+
+		option.bind('change:clickableLink', function(model, value) {
+			value ? viewer.blockLink() : viewer.allowLink();
+		});
+
+		return {
 			update: function(contents) {
 				viewer.update(contents);
 			},

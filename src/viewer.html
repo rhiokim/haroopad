@@ -15,6 +15,9 @@
   <!-- <link rel="stylesheet" href="css/app.css"> -->
   <script src="js/vendors/jquery-1.9.1.min.js"></script>
   <script>
+    // Load native UI library.
+    var gui = require('nw.gui');
+
     /**
      * update contents
      * @param  {[type]} contents [description]
@@ -22,11 +25,22 @@
      */
     function update(contents) {
       $(document.body).html(contents);
-      
-      //prevent click link event
-      $('a').click(function(e) {
-        e.preventDefault();
-      })
+
+      allowLink();
+    }
+
+    function clickLinkHandler(e) {
+      gui.Shell.openExternal($(e.target).attr('href'));
+
+      e.preventDefault();
+    }
+
+    function allowLink() {
+      $('a').on('click', clickLinkHandler);
+    }
+
+    function blockLink() {
+      $('a').off('click', '**');
     }
 
     /**
