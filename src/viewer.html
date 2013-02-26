@@ -2,20 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <!-- <link rel="stylesheet" href="stylesheets/viewer-theme/Solarized (Dark).css"> -->
-  <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
-  <!-- <link rel="stylesheet" href="css/viewer/Github2.css"> -->
-  <!-- <link rel="stylesheet" href="css/viewer/Solarized (Dark).css"> -->
-  <!-- <link rel="stylesheet" href="css/viewer/Solarized (Light).css"> -->
-  <!-- <link rel="stylesheet" href="css/code/solarized_dark.css"> -->
-  <!-- <link rel="stylesheet" href="css/code/solarized_light.css"> -->
-  <!-- <link rel="stylesheet" href="css/todc-bootstrap.css"> -->
-  <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
-  <!-- <link rel="stylesheet" href="css/viewer/reset.css"> -->
-  <!-- <link rel="stylesheet" href="css/viewer/standard.css"> -->
-  <!-- <link rel="stylesheet" href="css/viewer/markdown.css"> -->
   <link rel="stylesheet" href="css/viewer.css">
-  <!-- <link rel="stylesheet" href="css/app.css"> -->
   <script src="js/vendors/jquery-1.9.1.min.js"></script>
   <script src="js/vendors/js-url.js"></script>
   <script>
@@ -24,17 +11,19 @@
 
     function loadCss(url) {
       var link = document.createElement("link");
-      link.type = "text/css";
-      link.rel = "stylesheet";
-      link.href = url;
+          link.type = "text/css";
+          link.rel = "stylesheet";
+          link.href = url;
       document.getElementsByTagName("head")[0].appendChild(link);
     }
 
-    window.onload = function() {
-      loadCss('css/viewer/'+ url('?view') +'.css');
-      loadCss('css/code/'+ url('?code') +'.css');
+    function setViewStyle(style) {
+      loadCss('css/viewer/'+ style +'.css');
     }
-
+    function setCodeStyle(style) {
+      loadCss('css/code/'+ style +'.css');
+    }
+    
     /**
      * update contents
      * @param  {[type]} contents [description]

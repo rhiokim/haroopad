@@ -9,13 +9,13 @@ define([
 		var config = option.toJSON();
 
 		option.bind('change:viewStyle', function(model, value) {
+			config = model.toJSON();
 			iframe.src = 'viewer.html?view='+ value +'&code='+ config.codeStyle;
-			viewer.update(content);
 		});
 		
 		option.bind('change:codeStyle', function(model, value) {
+			config = model.toJSON();
 			iframe.src = 'viewer.html?view='+ config.viewStyle +'&code='+ value;
-			viewer.update(content);
 		});
 
 		option.bind('change:clickableLink', function(model, value) {
@@ -23,6 +23,12 @@ define([
 		});
 
 		iframe.src = 'viewer.html?view='+ config.viewStyle +'&code='+ config.codeStyle;
+
+		$(iframe).bind('load', function(e) {
+			viewer.setViewStyle(config.viewStyle);
+			viewer.setCodeStyle(config.codeStyle);
+			viewer.update(content);
+		});
 
 		return {
 			update: function(text) {
