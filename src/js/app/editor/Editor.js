@@ -32,11 +32,11 @@ define([
 		/**
 		 * hotkey area
 		 */
-		HotKey('super-ctrl-l', function() {
+		HotKey('defmod-ctrl-l', function() {
 			var lineNumbers = editor.getOption('lineNumbers');
 			editor.setOption('lineNumbers', !lineNumbers);
 		});
-		HotKey('super-ctrl-v', function() {
+		HotKey('defmod-ctrl-v', function() {
 			var map = editor.getOption('keyMap');
 			editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
 		});

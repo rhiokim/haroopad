@@ -10,7 +10,7 @@ define([
 		$('#dialogs').append(html);
 		$('.switch').bootstrapSwitch();
 
-		HotKey('super-,', function(e) {
+		HotKey('defmod-,', function(e) {
 			$('._preferences').modal('show');
 		});
 

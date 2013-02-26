@@ -41,9 +41,9 @@ define([
 			},
 
 			initialize: function() {
-				HotKey('super-o', openFileDialog);
-				HotKey('super-s', openSaveDialog);
-				HotKey('super-n', newHandler);
+				HotKey('defmod-o', openFileDialog);
+				HotKey('defmod-s', openSaveDialog);
+				HotKey('defmod-n', newHandler);
 			},
 
 			saveHandler: function(e) {
