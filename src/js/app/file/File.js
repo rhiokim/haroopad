@@ -49,7 +49,7 @@ define([
 			saveHandler: function(e) {
 				fileEntry = $(e.target).val();
 
-				this.save(fileEntry);
+				this.save();
 			},
 
 			openHandler: function(e) {
@@ -63,7 +63,11 @@ define([
 				this.trigger('opened', path.dirname(fileEntry), path.basename(fileEntry));
 			},
 
-			save: function(file) {
+			externalSave: function() {
+				openSaveDialog();
+			},
+
+			save: function() {
 				fs.writeFileSync(fileEntry, Editor.getValue(), 'utf8');
 
 				this.trigger('saved', path.dirname(fileEntry), path.basename(fileEntry));

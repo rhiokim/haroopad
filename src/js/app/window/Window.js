@@ -1,23 +1,41 @@
 define([
 		'window/Window.opt',
+		'dialog/Dialogs',
 		'file/File',
     'preferences/Preferences'
 	], 
-	function(option, File, Preferences) {
+	function(option, Dialogs, File, Preferences) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
 		var orgTitle = win.title = 'Untitled';
-
+		var edited = false;
 		var config = option.toJSON();
+
+		function close() {
+			option.save();
+			win.hide();
+			win.close(true);
+		}
 
 		win.on('closed', function() {
 			win = null;
 		});
 
 		win.on('close', function() {
-			this.hide();
-			option.save();
-			this.close(true);
+			if(edited) {
+				Dialogs.save.show();
+			} else {
+				close();
+			}
+		});
+
+		Dialogs.save.bind('save', function() {
+			File.externalSave();
+			// close();
+		});
+
+		Dialogs.save.bind('dont-save', function() {
+			close();
 		});
 
 		win.resizeTo(config.width, config.height);
@@ -32,6 +50,7 @@ define([
 
 		File.bind('saved', function(dirname, basename) {
 			win.title = orgTitle = basename;
+			edited = false;
 		});
 
 		win.show();
@@ -39,6 +58,7 @@ define([
 		return {
 			edited: function() {
 				win.title = orgTitle + ' •';
+				edited = true;
 			},
 
 			setTitle: function(title) {
