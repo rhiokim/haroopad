@@ -1,10 +1,11 @@
 define([
 		'window/Window.opt',
+		'window/Splitter',
 		'dialog/Dialogs',
 		'file/File',
     'preferences/Preferences'
 	], 
-	function(option, Dialogs, File, Preferences) {
+	function(option, Splitter, Dialogs, File, Preferences) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
 		var orgTitle = win.title = 'Untitled';
@@ -54,7 +55,7 @@ define([
 			win.title = orgTitle = basename;
 			edited = false;
 
-			//window close
+			//window closing save
 			if(delayClose) {
 				close();
 			}

@@ -23,19 +23,9 @@ body {
 	width: 50%;
 	height: 100%;
 	float: left;
-	margin-left: -2px;
+	/*margin-left: -2px;*/
 	display: inline-block;
 }
-
-#spliter {
-	width: 2px;
-	height: 100%;
-	float: left;
-	display: inline-block;
-	background: #000;
-  cursor: ew-resize;
-}
-
 
 #haroo iframe {
   width: 50%;
@@ -47,6 +37,15 @@ body {
   frameborder: 0;
   margin: 0;
   padding: 0;
+}
+
+#spliter {
+  width: 2px;
+  height: 100%;
+  float: left;
+  display: inline-block;
+  background: #000;
+  cursor: ew-resize;
 }
 
 .CodeMirror {
@@ -88,29 +87,42 @@ body > .navbar .brand:hover {
 }*/
 
 /* -----------------------------------------
+   block bootstrap
+----------------------------------------- */
+@media (max-width: 767px) {
+  body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+/* -----------------------------------------
    custom scroll
 ----------------------------------------- */
 
 /* Let's get this party started */
-#editor ::-webkit-scrollbar, #haroo ::-webkit-scrollbar {
+#editor ::-webkit-scrollbar, 
+#haroo ::-webkit-scrollbar {
     width: 6px;
 }
  
 /* Track */
-#editor ::-webkit-scrollbar-track, #haroo ::-webkit-scrollbar-track {
+#editor ::-webkit-scrollbar-track, 
+#haroo ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
  
 /* Handle */
-#editor ::-webkit-scrollbar-thumb, #haroo ::-webkit-scrollbar-thumb {
+#editor ::-webkit-scrollbar-thumb, 
+#haroo ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 6px;
     border-radius: 6px;
     background: rgba(255,255,255,0.8); 
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
-#editor ::-webkit-scrollbar-thumb:window-inactive, #haroo ::-webkit-scrollbar-thumb:window-inactive {
+#editor ::-webkit-scrollbar-thumb:window-inactive, 
+#haroo ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(255,0,0,0.4); 
 }
 

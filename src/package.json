@@ -13,8 +13,8 @@
     "width": 1024,
     "height": 600,
     "position": "mouse",
-    "min_width": 1024,
-    "min_height": 400,
+    "min_width": 300,
+    "min_height": 200,
     "max_width": 1920,
     "max_height": 1080,
     "as_desktop": true
