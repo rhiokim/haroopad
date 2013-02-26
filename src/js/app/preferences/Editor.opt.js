@@ -4,8 +4,8 @@ define([
 
 		var Model = Backbone.Model.extend({
 			defaults: {
-				theme: 'default',
-				displayLineNumber: false,
+				theme: 'solarized dark',
+				displayLineNumber: true,
 				vimKeyBinding: false,
 				insertFourSpace: false,
 				autoPairCharacters: true

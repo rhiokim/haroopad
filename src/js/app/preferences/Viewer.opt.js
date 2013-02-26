@@ -3,8 +3,8 @@ define([
 	], function(store) {
 		var Model = Backbone.Model.extend({
 			defaults: {
-				viewStyle: 'default',
-				codeStyle: 'default',
+				viewStyle: 'Github2',
+				codeStyle: 'solarized_light',
 				clickableLink: false
 			},
 
