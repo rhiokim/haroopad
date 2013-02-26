@@ -8,7 +8,8 @@ define([
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
 		var orgTitle = win.title = 'Untitled';
-		var edited = false;
+		var edited = false,
+				delayClose = false;
 		var config = option.toJSON();
 
 		function close() {
@@ -31,6 +32,7 @@ define([
 
 		Dialogs.save.bind('save', function() {
 			File.externalSave();
+			delayClose = true;
 			// close();
 		});
 
@@ -51,6 +53,11 @@ define([
 		File.bind('saved', function(dirname, basename) {
 			win.title = orgTitle = basename;
 			edited = false;
+
+			//window close
+			if(delayClose) {
+				close();
+			}
 		});
 
 		win.show();

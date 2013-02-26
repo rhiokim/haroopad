@@ -1,8 +1,16 @@
 하루패드는 
 
-## why
+## why?
 
 ## haroopad?
+
+
+## features
+* cross platform markdown editor
+	- support Window, Linux, Mac OS
+* support multi-markdown
+* editor theme, syntax highlight, markdown theme
+* vim key binding
 
 ## example
 
