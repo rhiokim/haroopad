@@ -2,8 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <link rel="stylesheet" href="css/Tocify/jquery.tocify.css">
   <link rel="stylesheet" href="css/viewer.css">
+  <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
   <script src="js/vendors/jquery-1.9.1.min.js"></script>
+  <script src="js/vendors/jquery-ui-1.9.2.custom.min.js"></script>
+  <script src="js/vendors/jquery.tocify.js"></script>
   <script src="js/vendors/js-url.js"></script>
   <script>
     // Load native UI library.
@@ -24,6 +28,12 @@
       loadCss('css/code/'+ style +'.css');
     }
     
+    function createTOC() {
+      $("#toc").html('');
+      $("#toc").tocify({ selectors: "h2, h3, h4" }).data("toc-tocify").generateToc();
+      // $("#toc").tocify();
+    }
+
     /**
      * update contents
      * @param  {[type]} contents [description]
@@ -32,7 +42,9 @@
     function update(contents) {
       //unregister previous anchor click event handler
       $('a').off('click', '**');
-      $(document.body).html(contents);
+      $('#contents').html(contents);
+
+      createTOC();
     }
 
     function allowLink() {
@@ -61,6 +73,8 @@
     }
   </script>
 </head>
-<body class="markdown">
+<body>
+  <div id="toc"></div>
+  <div id="contents"></div>
 </body>
 </html>

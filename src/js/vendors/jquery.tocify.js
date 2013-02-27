@@ -866,6 +866,10 @@
             // Maintains chainability
             return self;
 
+        },
+
+        generateToc: function() {
+            this._generateToc()
         }
 
     });
