@@ -36,7 +36,7 @@ define([
 			dontSaveHandler: function() {
 				this.trigger('dont-save');
 				this.hide();
-			},
+			}
 		});
 
 		return View;
