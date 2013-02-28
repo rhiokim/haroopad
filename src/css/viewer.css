@@ -19,6 +19,7 @@ pre>code {
 #toc {
 	display: none;
 }
+
 /*
 li.item.active > a {
 	color: #ffffff;
@@ -30,7 +31,7 @@ li.item.active > a {
   #toc {
   	display: inline-block;
   	float: left;
-  	width: 25%;
+  	width: 20%;
 		margin-top: 24px;
 		margin-left: -20px;
   }
@@ -38,6 +39,6 @@ li.item.active > a {
   #contents {
   	display: inline-block;
   	float: right;
-  	width: 70%;
+  	width: 75%;
   }
 }

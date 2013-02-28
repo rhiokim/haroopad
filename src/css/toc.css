@@ -1,0 +1,37 @@
+
+/* The Table of Contents container element */
+#toc {
+  width: 20%;
+  margin-left: 2%;
+  position: fixed;
+  border: 1px solid #ccc;
+  webkit-border-radius: 6px;
+  moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
+/* The Table of Contents is composed of multiple nested unordered lists.  These styles remove the default styling of an unordered list because it is ugly. */
+#toc ul, #toc li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  line-height: 30px;
+}
+
+#toc li a {
+  display: block;
+}
+#toc li a:hover {
+    color: red;
+}
+
+#toc li a.lvl2 {
+  padding-left: 10px;
+}
+#toc li a.lvl3 {
+  padding-left: 20px;
+}
+#toc li a.lvl4 {
+  padding-left: 30px;
+}
