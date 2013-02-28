@@ -12,3 +12,31 @@ pre>code {
 	word-wrap: break-word;
   margin: 0;
 }
+
+/* -----------------------------------------
+   table of contents
+----------------------------------------- */
+#toc {
+	display: none;
+  margin-left: -240px;
+  margin-top: 40px;
+}
+
+/*
+li.item.active > a {
+	color: #ffffff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+	background-color: #0088cc;
+}*/
+
+@media (min-width: 979px) {
+  #toc {
+  	display: inline-block;
+  }
+
+  body {
+  	display: inline-block;
+  	float: right;
+  	width: 70%;
+  }
+}

@@ -2,65 +2,17 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <link rel="stylesheet" href="css/toc.css">
+  <link rel="stylesheet" href="css/font-awesome.css">
   <link rel="stylesheet" href="css/viewer.css">
+
   <script src="js/vendors/jquery-1.9.1.min.js"></script>
+  <script src="js/vendors/jquery-ui-1.9.2.custom.min.js"></script>
+  <script src="js/vendors/bootstrap.min.js"></script>
   <script src="js/vendors/js-url.js"></script>
-  <script>
-    // Load native UI library.
-    var gui = require('nw.gui');
-
-    function loadCss(url) {
-      var link = document.createElement("link");
-          link.type = "text/css";
-          link.rel = "stylesheet";
-          link.href = url;
-      document.getElementsByTagName("head")[0].appendChild(link);
-    }
-
-    function setViewStyle(style) {
-      loadCss('css/viewer/'+ style +'.css');
-    }
-    function setCodeStyle(style) {
-      loadCss('css/code/'+ style +'.css');
-    }
-    
-    /**
-     * update contents
-     * @param  {[type]} contents [description]
-     * @return {[type]}          [description]
-     */
-    function update(contents) {
-      //unregister previous anchor click event handler
-      $('a').off('click', '**');
-      $(document.body).html(contents);
-    }
-
-    function allowLink() {
-      $('a').on('click', function(e) {
-        gui.Shell.openExternal($(e.target).attr('href'));
-        e.preventDefault();
-      });
-    }
-
-    function blockLink() {
-      $('a').on('click', function(e) {
-        e.preventDefault();
-      });
-    }
-
-    /**
-     * sync scroll position
-     * @param  {[type]} per [description]
-     * @return {[type]}     [description]
-     */
-    function scrollTop(per) {
-      var h = $(window).height();
-      var top = $(document.body).prop('clientHeight') - h;
-
-      $(window).scrollTop(top / 100 * per);
-    }
-  </script>
+  <script src="js/vendors/toc.js"></script>
+  <script src="js/viewer/main.js"></script>
 </head>
-<body class="markdown">
+<body data-spy="scroll" data-target="#toc">
 </body>
 </html>
