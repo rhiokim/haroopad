@@ -43,6 +43,7 @@ requirejs([
   ], function(Window, Editor, Parser, Viewer) {
 
     var res;
+    var _tid_;
 
     /**
      * 코드미러 내용 변경 이벤트 핸들러
@@ -56,7 +57,16 @@ requirejs([
       Window.edited();
     }
 
-    Editor.on("change", changeHandler);
+    function delayChange() {
+      if(_tid_) {
+        clearTimeout(_tid_);
+      }
+
+      _tid_ = setTimeout(changeHandler, 200);
+    }
+
+    // Editor.on("change", changeHandler);
+    Editor.on("change", delayChange);
 
 
 });
