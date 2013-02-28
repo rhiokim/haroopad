@@ -26,12 +26,6 @@ define([
 			$("#saveFile").trigger("click");
 		}
 
-		function newHandler() {
-	    var x = window.screenX + 10;
-	    var y = window.screenY + 10;
-    	window.open('pad.html', '_blank', 'screenX=' + x + ',screenY=' + y);
-		}
-
 		var View = Backbone.View.extend({
 			el: '#fields',
 
@@ -43,7 +37,6 @@ define([
 			initialize: function() {
 				HotKey('defmod-o', openFileDialog);
 				HotKey('defmod-s', openSaveDialog);
-				HotKey('defmod-n', newHandler);
 			},
 
 			saveHandler: function(e) {

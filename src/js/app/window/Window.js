@@ -1,17 +1,32 @@
 define([
 		'window/Window.opt',
+		'keyboard',
 		'window/Splitter',
 		'dialog/Dialogs',
 		'file/File',
     'preferences/Preferences'
 	], 
-	function(option, Splitter, Dialogs, File, Preferences) {
+	function(option, HotKey, Splitter, Dialogs, File, Preferences) {
 		var gui = require('nw.gui');
-		var win = gui.Window.get();
+		var win = gui.Window.get(),
+				subWin;
 		var orgTitle = win.title = 'Untitled';
 		var edited = false,
 				delayClose = false;
 		var config = option.toJSON();
+
+		function newHandler() {
+    	var subWin = gui.Window.open('pad.html', {
+					  width: win.width,
+					  height: win.height,
+					  x: win.x+10,
+					  y: win.y+10,
+					  toolbar: false
+					});
+    	subWin.on('loaded', function() {
+    		subWin.moveTo(win.x+20, win.y+20);
+    	});
+		}
 
 		function close() {
 			option.save();
@@ -41,9 +56,6 @@ define([
 			close();
 		});
 
-		win.resizeTo(config.width, config.height);
-		win.moveTo(config.x, config.y);
-
 		/**
 		 * event bind for File
 		 */
@@ -60,6 +72,15 @@ define([
 				close();
 			}
 		});
+
+		HotKey('defmod-n', newHandler);
+
+		HotKey('defmod-shift-ctrl-d', function() {
+			win.showDevTools();
+		});
+
+		win.resizeTo(config.width, config.height);
+		// win.moveTo(config.x, config.y);
 
 		win.show();
 
