@@ -49,7 +49,6 @@ define([
 		Dialogs.save.bind('save', function() {
 			delayClose = true;
 			File.externalSave();
-			// close();
 		});
 
 		Dialogs.save.bind('dont-save', function() {

@@ -35,7 +35,7 @@ define([
 				content = text;
 				viewer.update(content);
 
-				option.clickableLink ? viewer.allowLink() : viewer.blockLink();
+				config.clickableLink ? viewer.allowLink() : viewer.blockLink();
 			},
 
 			scroll: function(top, per) {
