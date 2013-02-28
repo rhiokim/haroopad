@@ -3,10 +3,12 @@
  * License: MIT
  */
 function generateTOC (rootNode, startLevel) {
+  var stringEx = require('stringex');
+
   var lastLevel = 0;
   startLevel = startLevel || 2; //which H# tag to start indexing.
   
-  var html = "<ul>";
+  var html = "<ul class=\"nav\">";
 
   //loop every node in rootNode
   for (var i = 0; i < rootNode.childNodes.length; ++i) {
@@ -30,6 +32,10 @@ function generateTOC (rootNode, startLevel) {
     	//on the name but without dots or spaces
   	var hashable = name.replace(/[\.\s]/g, "-");
     
+    hashable = stringEx.stripHtmlTags(hashable);
+    hashable = stringEx.toASCII(hashable);
+    hashable = stringEx.toUrl(hashable);
+
     	//set the id of the <H#> tag to this hash
   	node.id = hashable;
   
@@ -42,7 +48,7 @@ function generateTOC (rootNode, startLevel) {
   		html += "</ul></li>";
   	}
   
-  	html += "<li><a class='lvl"+level+"' href='#" + hashable + "'>" + name + "</a><ul>";
+  	html += "<li><a class='lvl"+level+"' href='#" + hashable + "'><i class=\"icon-chevron-right\"></i>" + name + "</a><ul>";
   	lastLevel = level;
   }
 

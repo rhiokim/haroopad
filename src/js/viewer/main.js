@@ -20,8 +20,10 @@ function createTOC() {
   // $("#toc").html('');
   // $("#toc").tocify({ selectors: "h2, h3, h4" }).data("toc-tocify").generateToc();
   // $("#toc").tocify();
-  var toc = generateTOC($('#contents')[0]);
+  var toc = generateTOC($(document.body)[0]);
+  $(document.body).prepend('<div id="toc"></div>');
   $('#toc').html(toc);
+  $(document.body).scrollspy('refresh');
 }
 
 /**
@@ -32,9 +34,9 @@ function createTOC() {
 function update(contents) {
   //unregister previous anchor click event handler
   $('a').off('click', '**');
-  $('#contents').html(contents);
+  $(document.body).html(contents);
 
-  createTOC();
+  // createTOC();
 }
 
 function allowLink() {
