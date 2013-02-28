@@ -16,16 +16,15 @@ define([
 		var config = option.toJSON();
 
 		function newHandler() {
+			option.set({
+				x: win.x+20,
+				y: win.x+20
+			});
     	var subWin = gui.Window.open('pad.html', {
 					  width: win.width,
 					  height: win.height,
-					  x: win.x+10,
-					  y: win.y+10,
 					  toolbar: false
 					});
-    	subWin.on('loaded', function() {
-    		subWin.moveTo(win.x+20, win.y+20);
-    	});
 		}
 
 		function close() {
@@ -47,8 +46,8 @@ define([
 		});
 
 		Dialogs.save.bind('save', function() {
-			File.externalSave();
 			delayClose = true;
+			File.externalSave();
 			// close();
 		});
 
@@ -80,7 +79,7 @@ define([
 		});
 
 		win.resizeTo(config.width, config.height);
-		// win.moveTo(config.x, config.y);
+		win.moveTo(config.x, config.y);
 
 		win.show();
 
