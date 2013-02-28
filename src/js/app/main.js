@@ -32,8 +32,7 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  alert('requireJS Error raised, check the console');
-  console.log(e);
+  $('#crash-dialog').modal();
 };
 
 requirejs([

@@ -18,12 +18,13 @@ define([
 		function newHandler() {
 			option.set({
 				x: win.x+20,
-				y: win.x+20
+				y: win.y+20
 			});
     	var subWin = gui.Window.open('pad.html', {
-					  width: win.width,
-					  height: win.height,
-					  toolbar: false
+    				width: win.width,
+    				height: win.height,
+					  toolbar: false,
+					  show: false
 					});
 		}
 
