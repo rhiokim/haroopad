@@ -3,9 +3,10 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  // grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   // grunt.loadNpmTasks('grunt-contrib');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
@@ -13,44 +14,114 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    // dist: 'build/Release/<%= pkg.version %>',
-
+    vendors: 'src/js/vendors',
+    
     // concat: {
-    //   dist: {
-    //     files: {
-    //       '<%= dist %>/baas.io.js': [
-    //             'src/build.before.js',
-    //             'src/base/core/core.js',
-    //             'src/base/entity/entity.js', 
-    //             'src/base/collection/collection.js', 
-    //             'src/build.after.js'
-    //         ]
-    //     }
+    //   pad: {
+    //     src: [ 
+    //       '<%= vendors %>/jquery-1.9.1.min.js',
+    //       '<%= vendors %>/bootstrap.min.js',
+    //       '<%= vendors %>/bootstrapSwitch.js',
+    //       '<%= vendors %>/bootstrap-modalmanager.js',
+    //       '<%= vendors %>/bootstrap-modal.js',
+    //       '<%= vendors %>/select2',
+    //       '<%= vendors %>/marked.js',
+    //       '<%= vendors %>/highlight.pack.js',
+    //       '<%= vendors %>/underscore.js',
+    //       '<%= vendors %>/backbone.js'
+    //     ],
+    //     dest: 'build/js/haroopad.vendors.concat.js'
     //   },
 
-    //   release: {
-    //     options: {
-    //       stripBanners: true,
-    //       banner: '// baas.io.js - v<%= pkg.version %>\n' +
-    //               '// <%= pkg.homepage %>\n' +
-    //               '// <%= pkg.description %>\n' +
-    //               '// (c) 2012-2013 KTH, <%= pkg.author %>\n'
-    //     },
-    //     files: {
-    //       'baas.io.min.js': [ '<%= dist %>/baas.io.min.js' ],
-    //       'baas.io.js': [ '<%= dist %>/baas.io.js' ]
-    //     }
-    //   },
-
-    //   kitchen: {
-    //     files: {
-    //       'kitchen_sink/desktop/js/baas.io.min.js': [ '<%= dist %>/baas.io.min.js' ],
-    //       'kitchen_sink/desktop/js/baas.io.js': [ '<%= dist %>/baas.io.js' ],
-    //       'kitchen_sink/demo/js/baas.io.min.js': [ '<%= dist %>/baas.io.min.js' ],
-    //       'kitchen_sink/demo/js/baas.io.js': [ '<%= dist %>/baas.io.js' ]
-    //     }
+    //   codeMirror: {
+    //     src: [
+    //       '<%= vendors %>/CodeMirror/lib/codemirror.js',
+    //       '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
+    //       '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
+    //       '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
+    //       '<%= vendors %>/CodeMirror/mode/xml/xml.js',
+    //       '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
+    //       '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
+    //       '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
+    //       '<%= vendors %>/CodeMirror/keymap/vim.js',
+    //     ],
+    //     dest: 'build/js/codemirror.concat.js'
     //   }
     // },
+
+    cssmin: {
+      compress: {
+        options: {
+          keepSpecialComments: 0
+        },
+        files: {
+          "build/css/codemirror.min.css": [
+            '<%= vendors %>/CodeMirror/lib/codemirror.css',
+            '<%= vendors %>/CodeMirror/theme/ambiance.css',
+            '<%= vendors %>/CodeMirror/theme/blackboard.css',
+            '<%= vendors %>/CodeMirror/theme/cobalt.css',
+            '<%= vendors %>/CodeMirror/theme/elegant.css',
+            '<%= vendors %>/CodeMirror/theme/erlang-dark.css',
+            '<%= vendors %>/CodeMirror/theme/lesser-dark.css',
+            '<%= vendors %>/CodeMirror/theme/monokai.css',
+            '<%= vendors %>/CodeMirror/theme/neat.css',
+            '<%= vendors %>/CodeMirror/theme/night.css',
+            '<%= vendors %>/CodeMirror/theme/rubyblue.css',
+            '<%= vendors %>/CodeMirror/theme/solarized.css',
+            '<%= vendors %>/CodeMirror/theme/twilight.css',
+            '<%= vendors %>/CodeMirror/theme/vibrant-ink.css',
+            '<%= vendors %>/CodeMirror/theme/xq-dark.css'
+          ],
+          "build/css/haroopad.min.css": [
+            'src/css/bootstrap.css',
+            'src/css/todc-bootstrap.css',
+            'src/css/bootstrapSwitch.css',
+            'src/css/select2.css',
+            'src/css/font-awesome.min.css',
+            'src/css/bootstrap-modal.css',
+            'src/css/app.css',
+          ]
+        }
+      }
+    },
+
+    uglify: {
+      pad: {
+        options: {
+          // mangle: true,
+          // compress: true
+        },
+        files: {
+          'build/js/haroopad.bin.js': [
+            '<%= vendors %>/marked.js',
+            '<%= vendors %>/highlight.pack.js',
+            '<%= vendors %>/underscore.js',
+            '<%= vendors %>/require.js',
+            'src/js/app/before.bin.js'
+          ],
+          'build/js/haroopad.vendors.min.js': [ 
+            '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/bootstrap.min.js',
+            '<%= vendors %>/bootstrapSwitch.js',
+            '<%= vendors %>/bootstrap-modalmanager.js',
+            '<%= vendors %>/bootstrap-modal.js',
+            '<%= vendors %>/select2',
+            '<%= vendors %>/backbone.js'
+          ],
+          'build/js/codemirror.min.js': [
+            '<%= vendors %>/CodeMirror/lib/codemirror.js',
+            '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
+            '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
+            '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
+            '<%= vendors %>/CodeMirror/mode/xml/xml.js',
+            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
+            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
+            '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
+            '<%= vendors %>/CodeMirror/keymap/vim.js',
+          ]
+        }
+      }
+    },
 
     copy: {
       build: {
@@ -59,18 +130,6 @@ module.exports = function(grunt) {
         ]
       }
     },
-
-    // compress: {
-    //   demo: {
-    //     options: {
-    //       archive: '<%= dist %>/demo/baasio_js_demoapp_V<%= pkg.version %>.zip'
-    //     },
-
-    //     files: [
-    //       { expand: true, cwd: 'kitchen_sink/demo/', src: ['**'] }
-    //     ]
-    //   }
-    // },
 
     shell: {
       cpLib: {
@@ -132,7 +191,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('default', [  ]);
+  grunt.registerTask('default', [ 'uglify:pad', 'cssmin' ]);
   grunt.registerTask('clean', [ 'shell:clear' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
   grunt.registerTask('build', [ 'shell:clear', 'shell:cpLib', 'shell:cpSrc', 'replace:info', 'shell:exec' ]);

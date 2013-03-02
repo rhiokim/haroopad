@@ -16,7 +16,9 @@
     "grunt": "~0.4.0",
     "grunt-requirejs": "~0.3.1",
     "grunt-contrib-requirejs": "~0.4.0",
-    "stringex": "~0.2.4"
+    "stringex": "~0.2.4",
+    "grunt-contrib-uglify": "~0.1.2",
+    "grunt-contrib-cssmin": "~0.4.1"
   },
   "deploy": {
     "docs": "../baas.io-Portal/_documentation/_docs/ko/javascript/reference",

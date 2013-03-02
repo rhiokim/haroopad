@@ -3,7 +3,6 @@
 //
 // (c) 2012 Alexander Solovyov
 // under terms of ISC License
-
 (function(define, undefined) {
 define(function() {
     // Defining all keys
