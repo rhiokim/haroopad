@@ -1,5 +1,5 @@
 define([
-		'text!tpl/preferences.html',
+		'vendors/text!tpl/preferences.html',
 		'keyboard',
 		'preferences/General',
 		'preferences/Editor',

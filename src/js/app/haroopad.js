@@ -5,7 +5,10 @@ function loadCss(url) {
     link.href = url;
     document.getElementsByTagName("head")[0].appendChild(link);
 }
-    
+
+//fixed text.js error on node-webkit
+require.nodeRequire = require;
+
 /**
  * require.js 환경 설정
  */
@@ -27,8 +30,7 @@ requirejs.config({
     text: {
       env: 'xhr'
     }
-  },
-  urlArgs: 'v0.1.0'
+  }
 });
 
 requirejs.onError = function (e) {

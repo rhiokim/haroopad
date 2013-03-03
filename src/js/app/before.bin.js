@@ -1,5 +1,5 @@
 var haroopad = {
 	start: function() {
-		requirejs(['js/app/main']);
+		requirejs(['js/modules']);
 	}
 };

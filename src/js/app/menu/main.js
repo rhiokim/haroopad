@@ -1,5 +1,5 @@
 define([
-		'text!tpl/menu.html',
+		'vendors/text!tpl/menu.html',
 		'keyboard'
 	], function(html, HotKey) {
 

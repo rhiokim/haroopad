@@ -1,6 +1,6 @@
 define([
 		'module',
-		'text!tpl/file.html',
+		'vendors/text!tpl/file.html',
 		'keyboard',
 		'editor',
 		'file/Recents'

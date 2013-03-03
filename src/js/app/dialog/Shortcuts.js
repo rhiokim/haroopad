@@ -1,5 +1,5 @@
 define([
-		'text!tpl/modal-shortcuts.html',
+		'vendors/text!tpl/modal-shortcuts.html',
 		'keyboard'
 	], 
 	function(html, HotKey) {

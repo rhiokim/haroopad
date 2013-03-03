@@ -7,8 +7,8 @@
   "keywords": [ "markdown", "haroopress" ],
   "window": {
     "icon": "link.png",
-    "toolbar": true,
-    "show": true,
+    "toolbar": false,
+    "show": false,
     // "frame": false,
     "width": 1024,
     "height": 600,
