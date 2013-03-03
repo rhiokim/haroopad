@@ -152,7 +152,7 @@ module.exports = function(grunt) {
           // { expand: true, cwd: 'src/js/viewer/', src: [ '**' ], dest: 'build/haroopad/js/viewer' },
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
           { src: 'src/viewer.bin.html', dest: 'build/haroopad/viewer.html' },
-          { src: 'src/package.json', dest: 'build/haroopad/package.json' }
+          { src: 'src/package.bin.json', dest: 'build/haroopad/package.json' }
         ]
       }
     },
@@ -209,7 +209,7 @@ module.exports = function(grunt) {
         options: {
           baseUrl: "src/js/app",
           mainConfigFile: "src/js/app/main.js",
-          dir: "build/app.nw",
+          dir: "build/",
           modules: [
             { name: "main" }
           ],

@@ -1,7 +1,7 @@
 {
   "main": "pad.html",
   "name": "haroopad",
-  // "snapshot": "js/haroopad.bin",
+  "snapshot": "js/haroopad.bin",
   "description": "instant markdown editor for cross platform",
   "version": "0.1.0",
   "keywords": [ "markdown", "haroopress" ],
