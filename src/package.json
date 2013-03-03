@@ -1,14 +1,14 @@
 {
   "main": "pad.html",
   "name": "haroopad",
-  // "snapshot": "mytest.bin",
+  "snapshot": "js/haroopad.bin",
   "description": "instant markdown editor for cross platform",
   "version": "0.1.0",
   "keywords": [ "markdown", "haroopress" ],
   "window": {
     "icon": "link.png",
-    "toolbar": false,
-    "show": false,
+    "toolbar": true,
+    "show": true,
     // "frame": false,
     "width": 1024,
     "height": 600,

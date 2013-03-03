@@ -1,3 +1,5 @@
-function lunch(src) {
-	requirejs([ src ]);
-}
+var haroopad = {
+	start: function() {
+		requirejs(['js/app/main']);
+	}
+};
