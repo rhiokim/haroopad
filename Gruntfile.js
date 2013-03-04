@@ -17,8 +17,8 @@ module.exports = function(grunt) {
     vendors: 'src/js/vendors',
     
     clean: {
-      build: [ '**' ],
-      pkg: [ 'build/haroo.app/**' ]
+      build: [ 'build/*' ],
+      release: [ 'build/haroopad.app' ]
     },
 
     cssmin: {
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
           // compress: true
         },
         files: {
-          'build/haroopad/js/haroopad.bin.js': [
+          'build/haroopad.bin.js': [
             '<%= vendors %>/marked.js',
             '<%= vendors %>/highlight.pack.js',
             '<%= vendors %>/underscore.js',
@@ -137,10 +137,6 @@ module.exports = function(grunt) {
         command: 'cp -R ./build/haroopad  ./build/haroopad.app/Contents/Resources/app.nw'
       },
 
-      clear: {
-        command: 'rm -rf build; mkdir -p build'
-      },
-
       exec: {
         command: 'open ./build/haroopad.app'
       },
@@ -150,15 +146,15 @@ module.exports = function(grunt) {
       },
 
       ss_darwin: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad/js/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
+        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
       },
 
       ss_win32: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad/js/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
+        command: '"./lib/nwsnapshot.exe" --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
       },
 
       ss_linux: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad/js/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
+        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
       }
     },
 
@@ -198,8 +194,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', [ 'clean', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy', 'requirejs', 'snapshot' ]);
-  grunt.registerTask('clean', [ 'shell:clear' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
-  grunt.registerTask('build', [ 'clean:pkg', 'shell:cpLib', 'shell:cpSrc', 'replace:info', 'shell:exec' ]);
-  grunt.registerTask('pkg', [ 'clean:pkg', 'shell:cpLib', 'shell:cpZipSrc', 'replace:info', 'shell:exec' ]);
+  grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:cpSrc', 'replace:info', 'shell:exec' ]);
+  grunt.registerTask('pkg', [ 'clean:release', 'shell:cpLib', 'shell:cpZipSrc', 'replace:info', 'shell:exec' ]);
 };
