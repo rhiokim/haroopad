@@ -1,10 +1,7 @@
 define([
-		'vendors/keyboard',
-		'text!tpl/menu.html'
-	], function(keyboard, html) {
+		'vendors/text!tpl/menu.html',
+		'keyboard'
+	], function(html, HotKey) {
 
-	keyboard.on('ctrl + b', function() {
-		alert('show menu');
-	});
-
+		//TODO
 });

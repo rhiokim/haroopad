@@ -1,0 +1,167 @@
+/* Artfully masterminded by ZURB  */
+
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Page Name 1
+:: Page Name 2
+*/
+html, body { height:100% }
+body {
+	margin: 0;
+  font-family: Droid Sans, Arial, sans-serif;
+  line-height: 1.5;
+  overflow-y: hidden;
+}
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+
+#editor {
+	width: 50%;
+	height: 100%;
+	float: left;
+	/*margin-left: -2px;*/
+	display: inline-block;
+}
+
+#haroo iframe {
+  width: 50%;
+  height: 100%;
+  float: left;
+  display: inline-block;
+  overflow-y: auto;
+  border: 0;
+  frameborder: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#spliter {
+  width: 2px;
+  height: 100%;
+  float: left;
+  display: inline-block;
+  background: #000;
+  cursor: ew-resize;
+}
+
+.CodeMirror {
+	height: 100%;
+	/*padding-left: 10px;*/
+	padding-right: 10px;
+	margin-bottom: 10px;
+}
+
+#code {
+  display: none;
+}
+
+.CodeMirror-lines {
+  padding: 15px 0;
+}
+
+/* Change the docs' brand */
+body > .navbar .brand {
+  padding-right: 0;
+  padding-left: 0;
+  margin-left: 20px;
+  float: right;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+  -webkit-transition: all .2s linear;
+     -moz-transition: all .2s linear;
+          transition: all .2s linear;
+}
+body > .navbar .brand:hover {
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
+}
+
+/*
+#viewer > p {
+	margin: 0;
+}*/
+
+/* -----------------------------------------
+   block bootstrap
+----------------------------------------- */
+@media (max-width: 767px) {
+  body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+/* -----------------------------------------
+   custom scroll
+----------------------------------------- */
+
+/* Let's get this party started */
+#editor ::-webkit-scrollbar, 
+#haroo ::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+/* Track */
+#editor ::-webkit-scrollbar-track, 
+#haroo ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+#editor ::-webkit-scrollbar-thumb, 
+#haroo ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+#editor ::-webkit-scrollbar-thumb:window-inactive, 
+#haroo ::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.4); 
+}
+
+
+/* -----------------------------------------
+   Preferences
+----------------------------------------- */
+/* Base class */
+.bs-docs-example {
+  position: relative;
+  margin: 15px 0;
+  padding: 39px 19px 14px;
+  *padding-top: 19px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+/* Echo out a label for the example */
+.bs-docs-example:after {
+  content: "Options";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #9da0a4;
+  -webkit-border-radius: 4px 0 4px 0;
+     -moz-border-radius: 4px 0 4px 0;
+          border-radius: 4px 0 4px 0;
+}
+
+/* -----------------------------------------
+   Page Name 2
+----------------------------------------- */
+
+

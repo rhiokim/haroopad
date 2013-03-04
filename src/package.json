@@ -2,23 +2,35 @@
   "main": "pad.html",
   "name": "haroopad",
   "description": "instant markdown editor for cross platform",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [ "markdown", "haroopress" ],
   "window": {
     "icon": "link.png",
-    "toolbar": false,
-    // "frame": false,
+    "toolbar": true,
+    "show": true,
     "width": 1024,
     "height": 600,
-    "position": "mouse",
-    "min_width": 1024,
-    "min_height": 400,
+    "min_width": 300,
+    "min_height": 200,
     "max_width": 1920,
     "max_height": 1080,
     "as_desktop": true
-    // ,"frame": false
   },
   "webkit": {
     "plugin": true
-  }
+  },
+  "maintainers":[{
+   "name": "Rhio Kim",
+   "email": "rhio.kim@gmail.com",
+   "web": "http://pad.haroopress.com"
+  }],
+  "licenses": [{
+    "type": "GPLv2",
+    "url": "http://www.example.com/licenses/gpl.html"
+  }],
+  "bugs": "https://github.com/rhiokim/haroopad/issues",
+  "repositories": [{
+    "type": "git", 
+    "url": "git@github.com:rhiokim/haroopad.git"
+  }]
 }

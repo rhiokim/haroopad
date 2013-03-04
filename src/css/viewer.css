@@ -1,0 +1,35 @@
+body {
+	padding: 30px;
+}
+
+code {
+  margin: 0 2px;
+  padding: 0 5px;
+}
+
+pre>code {
+	word-break: break-all;
+	word-wrap: break-word;
+  margin: 0;
+}
+
+/* -----------------------------------------
+   table of contents
+----------------------------------------- */
+/*#toc {
+	display: none;
+  margin-left: -240px;
+  margin-top: 40px;
+}
+
+@media (min-width: 979px) {
+  #toc {
+  	display: inline-block;
+  }
+
+  body {
+  	display: inline-block;
+  	float: right;
+  	width: 70%;
+  }
+}*/

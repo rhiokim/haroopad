@@ -1,0 +1,28 @@
+{
+  "name": "haroopad",
+  "version": "0.1.1",
+  "description": "Markdown Editor",
+  "main": "",
+  "homepage": "https://rhiokim.github.com/haroopad",
+  "repository": "git://github.com/rhiokim/haroopad.git",
+  "author": "rhio.kim@gmail.com",
+  "license": "LGPL",
+  "devDependencies": {
+    "grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
+    "grunt-contrib-copy": "git://github.com/gruntjs/grunt-contrib-copy.git",
+    "grunt-shell": "git://github.com/excellenteasy/grunt-shell.git#13d09d3c936036087bd814a920d19d55f0c44cb6",
+    "grunt-contrib-compress": "git://github.com/ctalkington/grunt-contrib-compress.git#18d386688961e8040c6169eccdbb941ef71cb2fb",
+    "grunt-replace": "git://github.com/outaTiME/grunt-replace.git",
+    "grunt": "~0.4.0",
+    "grunt-requirejs": "~0.3.1",
+    "grunt-contrib-requirejs": "~0.4.0",
+    "stringex": "~0.2.4",
+    "grunt-contrib-uglify": "~0.1.2",
+    "grunt-contrib-cssmin": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.0"
+  },
+  "deploy": {
+    "docs": "../baas.io-Portal/_documentation/_docs/ko/javascript/reference",
+    "sdk": "../baas.io-Portal/_documentation/_docs/sdk/javascript/"
+  }
+}
