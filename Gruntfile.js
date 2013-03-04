@@ -193,7 +193,7 @@ module.exports = function(grunt) {
     grunt.task.run('shell:ss_'+ process.platform);
   });
 
-  grunt.registerTask('default', [ 'clean', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy', 'requirejs', 'snapshot' ]);
+  grunt.registerTask('default', [ 'clean', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy', 'requirejs' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:cpSrc', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('pkg', [ 'clean:release', 'shell:cpLib', 'shell:cpZipSrc', 'replace:info', 'shell:exec' ]);
