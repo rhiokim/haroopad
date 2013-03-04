@@ -17,7 +17,8 @@ module.exports = function(grunt) {
     vendors: 'src/js/vendors',
     
     clean: {
-      build: [ '**' ]
+      build: [ '**' ],
+      pkg: [ 'build/haroo.app/**' ]
     },
 
     cssmin: {
@@ -184,20 +185,21 @@ module.exports = function(grunt) {
           name: 'haroopad',
           baseUrl: "src/js/app",
           mainConfigFile: "src/js/app/haroopad.js",
-          out: "build/haroopad/js/modules.js"
+          out: "build/haroopad/js/modules.js",
+          preserveLicenseComments: false
         }
       }
     }
   });
-
+  
+  /* v8 protect source code task for cross platform */  
   grunt.registerTask('snapshot', 'cross platform snapshot', function() {
     grunt.task.run('shell:ss_'+ process.platform);
   });
 
   grunt.registerTask('default', [ 'clean', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy', 'requirejs', 'snapshot' ]);
-  // grunt.registerTask('snapshot', [ 'snapshot' ]);
   grunt.registerTask('clean', [ 'shell:clear' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
-  grunt.registerTask('build', [ 'shell:cpLib', 'shell:cpSrc', 'replace:info', 'shell:exec' ]);
-  grunt.registerTask('pkg', [ 'shell:cpLib', 'shell:cpZipSrc', 'replace:info', 'shell:exec' ]);
+  grunt.registerTask('build', [ 'clean:pkg', 'shell:cpLib', 'shell:cpSrc', 'replace:info', 'shell:exec' ]);
+  grunt.registerTask('pkg', [ 'clean:pkg', 'shell:cpLib', 'shell:cpZipSrc', 'replace:info', 'shell:exec' ]);
 };
