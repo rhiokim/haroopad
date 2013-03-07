@@ -95,7 +95,7 @@ jedi | 44 | robot
 
 **URL autolinking**
 
-* http://www.naver.com
+* http://pad.haroopress.com
 
 **Multiple underscores in words**
 
