@@ -22,7 +22,38 @@
 
 ## example
 
+**header**
+
+## This is an H2
+### This is an H3
+#### This is an H4
+##### This is an H5
+###### This is an H6
+
+**blockquote**
+
+> ## This is a H2.
+> 
+> 1.   This is the first list item.
+> 2.   This is the second list item.
+> 
+> Here's some example code:
+> 
+> ```js
+> function syntaxHighlight() {
+>   return true;
+> }
+> ```
+
+** Image **
+
+![](http://placekitten.com/g/160/180)
+![](http://placekitten.com/g/160/180)
+![](http://placekitten.com/g/160/180)
+
 **Syntax highlighting**
+
+`code`
 
 ```js
 function syntaxHighlight() {
@@ -70,6 +101,5 @@ jedi | 44 | robot
 
 perform_complicated_task
 do_this_and_do_that_and_another_thing
-
 
 

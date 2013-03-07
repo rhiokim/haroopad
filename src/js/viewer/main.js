@@ -10,7 +10,10 @@ function loadCss(url) {
 }
 
 function setViewStyle(style) {
-  loadCss('css/viewer/'+ style +'.css');
+  loadCss('css/markdown/assets/css/'+ style +'.css');
+  $(document.body).removeClass();
+  $(document.body).addClass('markdown');
+  $(document.body).addClass(style);
 }
 function setCodeStyle(style) {
   loadCss('css/code/'+ style +'.css');
