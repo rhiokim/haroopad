@@ -165,3 +165,10 @@ body > .navbar .brand:hover {
 ----------------------------------------- */
 
 
+/* -----------------------------------------
+   Error Fix
+----------------------------------------- */
+/* solarized theme underline markdown error */
+.cm-s-solarized .cm-em {
+  text-decoration: none !important;
+}
