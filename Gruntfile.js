@@ -122,6 +122,25 @@ module.exports = function(grunt) {
           { src: 'src/css/keys.css', dest: 'build/haroopad/css/keys.css' },
           { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' }
         ]
+      },
+
+      build: {
+        files: [
+          // { expand: true, cwd: 'src/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
+          { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
+          { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/img/' },
+          { expand: true, flatten: true, src: [ 'src/css/*' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/', filter:'isFile' },
+          { expand: true, cwd: 'src/js/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/js/' },
+          { expand: true, cwd: 'src/tpl/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/tpl/' },
+          { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/code/' },
+          { expand: true, cwd: 'src/css/viewer/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/viewer/' },
+          { expand: true, cwd: 'src/css/markdown/build/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/markdown/' },
+          { src: 'src/pad.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/pad.html' },
+          { src: 'src/viewer.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/viewer.html' },
+          { src: 'src/package.json', dest: 'build/haroopad.app/Contents/Resources/app.nw/package.json' },
+          { src: 'src/css/keys.css', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/keys.css' },
+          { src: 'src/css/select2.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/select2.png' }
+        ]
       }
     },
 
@@ -196,6 +215,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [ 'clean', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy', 'requirejs' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
-  grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:cpSrc', 'replace:info', 'shell:exec' ]);
+  grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('pkg', [ 'clean:release', 'shell:cpLib', 'shell:cpZipSrc', 'replace:info', 'shell:exec' ]);
 };
