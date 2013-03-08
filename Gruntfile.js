@@ -115,7 +115,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
-          { expand: true, cwd: 'src/css/markdown/assets/css', src: [ '**' ], dest: 'build/haroopad/css/markdown/assets/css/' },
+          { expand: true, cwd: 'src/css/markdown/build/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
           { src: 'src/viewer.bin.html', dest: 'build/haroopad/viewer.html' },
           { src: 'src/package.bin.json', dest: 'build/haroopad/package.json' },

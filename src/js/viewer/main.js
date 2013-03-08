@@ -10,7 +10,7 @@ function loadCss(url) {
 }
 
 function setViewStyle(style) {
-  loadCss('css/markdown/assets/css/'+ style +'.css');
+  loadCss('css/markdown/'+ style +'/'+ style +'.css');
   $(document.body).removeClass();
   $(document.body).addClass('markdown');
   $(document.body).addClass(style);
