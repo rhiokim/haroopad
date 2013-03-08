@@ -119,7 +119,8 @@ module.exports = function(grunt) {
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
           { src: 'src/viewer.bin.html', dest: 'build/haroopad/viewer.html' },
           { src: 'src/package.bin.json', dest: 'build/haroopad/package.json' },
-          { src: 'src/css/keys.css', dest: 'build/haroopad/css/keys.css' }
+          { src: 'src/css/keys.css', dest: 'build/haroopad/css/keys.css' },
+          { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' }
         ]
       }
     },
