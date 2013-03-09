@@ -17,6 +17,7 @@
     "as_desktop": true
   },
   "snapshot": "js/haroopad.bin",
+  "chromium-args" : "--disable-gpu",
   "webkit": {
     "plugin": true
   },
