@@ -16,6 +16,7 @@
     "max_height": 1080,
     "as_desktop": true
   },
+  "chromium-args" : "--disable-gpu",
   "webkit": {
     "plugin": true
   },

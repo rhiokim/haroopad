@@ -149,10 +149,6 @@ module.exports = function(grunt) {
         command: 'cp -R lib/nw.app build/haroopad.app'
       },
 
-      cpSrc: {
-        command: 'cp -R ./src  ./build/haroopad.app/Contents/Resources/app.nw'
-      },
-
       cpZipSrc: {
         command: 'cp -R ./build/haroopad  ./build/haroopad.app/Contents/Resources/app.nw'
       },
