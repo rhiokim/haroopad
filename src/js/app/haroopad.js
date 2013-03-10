@@ -70,5 +70,5 @@ requirejs([
     // Editor.on("change", changeHandler);
     Editor.on("change", delayChange);
 
-
+    Window.show();
 });

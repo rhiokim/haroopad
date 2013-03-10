@@ -81,8 +81,6 @@ define([
 		win.resizeTo(config.width, config.height);
 		win.moveTo(config.x, config.y);
 
-		win.show();
-
 		return {
 			edited: function() {
 				win.title = orgTitle + ' •';
@@ -91,6 +89,10 @@ define([
 
 			setTitle: function(title) {
 				win.title = orgTitle = title;
+			},
+
+			show: function() {
+				win.show();
 			}
 		}
 });

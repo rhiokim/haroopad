@@ -13,6 +13,7 @@ body {
   font-family: Droid Sans, Arial, sans-serif;
   line-height: 1.5;
   overflow-y: hidden;
+  background: url('../img/linen.png');
 }
 
 /* -----------------------------------------
