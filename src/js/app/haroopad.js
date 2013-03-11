@@ -19,7 +19,7 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    editor: 'editor/Editor',
+    // editor: 'editor/Editor',
     parser: 'editor/Parser',
     viewer: 'viewer/Viewer',
     text: '../vendors/text',
@@ -39,7 +39,7 @@ requirejs.onError = function (e) {
 
 requirejs([
     'window/Window',
-    'editor',
+    'editor/Editor',
     'parser',
     'viewer'
   ], function(Window, Editor, Parser, Viewer) {
