@@ -1,20 +1,20 @@
 define([
 		'keyboard',
 		'viewer',
+		'editor/Editor.keymap',
 		'preferences/Editor.opt',
 		'preferences/General.opt'
 	],
-	function(HotKey, Viewer, editorOpt, generalOpt) {
+	function(HotKey, Viewer, Keymap, editorOpt, generalOpt) {
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
 					    lineNumbers: true,
-					    // theme: "solarized dark",
 					    electricChars: false,
 					    viewportMargin: 40,
 					    lineWrapping: true,
 					    autofocus: true,
 					    workDelay: 1000,
-					    extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
+					    extraKeys: Keymap
 					  });
 
 		var editorConf = editorOpt.toJSON();

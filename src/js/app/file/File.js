@@ -2,7 +2,7 @@ define([
 		'module',
 		'vendors/text!tpl/file.html',
 		'keyboard',
-		'editor',
+		'editor/Editor',
 		'file/Recents'
 	], 
 
