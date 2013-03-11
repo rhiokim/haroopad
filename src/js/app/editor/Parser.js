@@ -3,7 +3,7 @@ define([
 		'keyboard'
 	],
 	function(module, HotKey) {
-		var md = marked.setOptions({
+		marked.setOptions({
           gfm: true,
           tables: true,
           breaks: false,
@@ -33,5 +33,5 @@ define([
           }
         });
 
-		module.exports = md;
+		module.exports = marked;
 });
