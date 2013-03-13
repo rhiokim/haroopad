@@ -1,0 +1,31 @@
+body {
+	font: 14px/1.231 "Lato", "AppleSDGothicNeo-Medium", sans-serif !important;
+}
+
+footer {
+	background-color: #95A5A6 !important;
+	color: #eceff1 !important;
+}
+footer a {
+  color: #ECF0F1 !important;
+  font-weight: 700; 
+}
+
+.footer-banner {
+	background-color: #8E44AD !important;
+	color: white !important;
+}
+
+.footer-banner ul {
+	margin: 0 !important;
+}
+
+.footer-banner ul li {
+	border-top: 1px solid #9B59B6 !important;
+	opacity: 0.8;
+}
+
+.footer-banner ul li:first-child {
+	border-top: none !important;
+	padding-top: 1px;
+}

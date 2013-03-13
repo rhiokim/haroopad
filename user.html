@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flat UI</title>
+    <title>Markdown Editor on Cross Platform</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
@@ -14,6 +14,7 @@
     <link href="assets3/css/themes/bar/bar.css" rel="stylesheet">
     <link href="assets3/css/themes/flat/flat.css" rel="stylesheet">
     <link href="assets3/css/nivo-slider.css" rel="stylesheet">
+    <link href="assets3/css/style.css" rel="stylesheet">
 
     <!-- Loading Flat UI -->
     <link href="assets3/css/flat-ui.css" rel="stylesheet">
@@ -49,9 +50,9 @@
                   </a>
                   <ul>
                     <li><a href="#">Seamless on Cross Platform</a></li>
-                    <li><a href="#">Multi Markdown</a></li>
+                    <li><a href="#">MultiMarkdown + Extensions</a></li>
                     <li><a href="#">Easy Import Contents</a></li>
-                    <li><a href="#">Themes</a></li>
+                    <li><a href="#">Themes, Skin, Components</a></li>
                     <li><a href="#">Social Stream</a></li>
                     <li><a href="#">Easy Publishing</a></li>
                   </ul> <!-- /Sub menu -->
@@ -62,10 +63,10 @@
                     <span class="navbar-unread">1</span>
                   </a>
                   <ul>
-                    <li><a href="#">Window 7, 8 (32bit)</a></li>
-                    <li><a href="#">Mac OS (32bit)</a></li>
-                    <li><a href="#">Ubuntu (32bit)</a></li>
-                    <li><a href="#">Ubuntu (64bit)</a></li>
+                    <li><a href="https://www.dropbox.com/s/rqnps3mbrhtaktt/haroopad-win32-v0.2.0.exe" target="_blank">Window 7, 8 (32bit)</a></li>
+                    <li><a href="https://www.dropbox.com/s/qguw1u3yclhd4c1/haroopad-v0.2.0.dmg" target="_blank">Mac OS (32bit)</a></li>
+                    <li><a href="#"><del>Ubuntu (32bit)</del> not yet</a></li>
+                    <li><a href="#"><del>Ubuntu (64bit)</del> not yet</a></li>
                   </ul> <!-- /Sub menu -->
                 </li>
                 <li>
@@ -75,9 +76,15 @@
                   </a>
                   <ul>
                     <li><a href="#">Menual</a></li>
-                    <li><a href="#">Issue Tracker</a></li>
+                    <li><a href="https://github.com/rhiokim/haroopad/issues" target="_blank">Issue Tracker</a></li>
                     <li><a href="#">FAQ</a></li>
                   </ul> <!-- /Sub menu -->
+                </li>
+                <li>
+                  <a href="#">
+                    Social
+                    <span class="navbar-unread">1</span>
+                  </a>
                 </li>
                 <li>
                   <a href="#">
@@ -97,13 +104,26 @@
         <div class="span8">
           <div class="slider-wrapper theme-flat">
             <div id="slider" class="nivoSlider">
-              <img src="assets3/images/toystory.jpg" data-thumb="images/toystory.jpg" alt="" />
-              <a href="http://dev7studios.com"><img src="assets3/images/up.jpg" data-thumb="images/up.jpg" alt="" title="This is an example of a caption" /></a>
-              <img src="assets3/images/walle.jpg" data-thumb="images/walle.jpg" alt="" data-transition="slideInLeft" />
-              <img src="assets3/images/nemo.jpg" data-thumb="images/nemo.jpg" alt="" title="#htmlcaption" />
+              <img src="assets3/images/toystory.jpg" data-thumb="images/toystory.jpg" alt=""  title="#crossplatform"/>
+              <a href="http://dev7studios.com"><img src="assets3/images/up.jpg" data-thumb="images/up.jpg" alt="" title="#multimarkdown"  /></a>
+              <img src="assets3/images/walle.jpg" data-thumb="images/walle.jpg" alt="" data-transition="slideInLeft" title="#easyimport" />
+              <img src="assets3/images/nemo.jpg" data-thumb="images/nemo.jpg" alt="" title="#themes" />
+              <img src="assets3/images/walle.jpg" data-thumb="images/walle.jpg" alt="" data-transition="slideInLeft" title="#socialstream" />
             </div>
-            <div id="htmlcaption" class="nivo-html-caption">
-              <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>. 
+            <div id="crossplatform" class="nivo-html-caption">
+              Seamless markdown editing!, Support cross platform
+            </div>
+            <div id="multimarkdown" class="nivo-html-caption">
+              Seamless markdown editing!, Support cross platform
+            </div>
+            <div id="easyimport" class="nivo-html-caption">
+              Seamless markdown editing!, Support cross platform
+            </div>
+            <div id="themes" class="nivo-html-caption">
+              6 theme & 6 view theme,
+            </div>
+            <div id="socialstream" class="nivo-html-caption">
+              Easy share & collaboration
             </div>
           </div>
         </div>
@@ -166,14 +186,16 @@
         </div>
         <div class="span5">
           <h4>Support Cross Platform</h4>
-          <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p>
+          하루패드는 윈도우 7/8(32bit), 맥(32bit), 리눅스(Ubuntu 32, 64bit) 환경에서 동일한 편집 환경을 제공합니다.
+          <!-- <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p> -->
         </div>
         <div class="span1">
           <img alt="" src="assets3/images/illustrations/share.png" style="width:52px; height:52px;" class="pull-right"/>
         </div>
         <div class="span5">
-          <h4>Multimarkdown</h4>
-          <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p>
+          <h4>Multimarkdown + Extensions</h4>
+          멀티 마크다운과 확장 문법은 <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">마크다운 표준 문법</a> 이외에 모던한 문서 편집에 필요한 경량 마크업을 추가로 제공합니다.
+          <!-- <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p> -->
         </div>
       </div>
       <div class="row demo-row">
@@ -182,14 +204,16 @@
         </div>
         <div class="span5">
           <h4>Easy Publishing</h4>
-          <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p>
+          PDF, HTML 로 출력 기능을 제공하며 워드프레스, 텀블러, 구글문서와 같은 블로그 혹은 클라우드 서비스로의 출력 기능도 제공합니다.
+          <!-- <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p> -->
         </div>
         <div class="span1">
           <img alt="" src="assets3/images/illustrations/retina.png" style="width:52px; height:52px;" class="pull-right"/>
         </div>
         <div class="span5">
-          <h4>Template</h4>
-          <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p>
+          <h4>Theme, Skin, Component</h4>
+          마크다운 뷰를 위한 다양한 테마와 스킨, 그리고 컴포넌트를 제공하여 내 문서를 더욱 강력한 대화형 문서로 만들 수 있습니다.
+          <!-- <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p> -->
         </div>
       </div>
       <div class="row demo-row">
@@ -198,24 +222,26 @@
         </div>
         <div class="span5">
           <h4>Easy Import Contents</h4>
-          <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p>
+          언젠가부터 우리가 생산하는 대부분의 기록은 유튜브, 블로그, 슬라이드쉐어, 플리커와 같은 곳에 저장되어 있습니다. 이런 컨텐츠를 내 문서에 손쉽게 추가할 수 있습니다.
+          <!-- <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p> -->
         </div>
         <div class="span1">
           <img alt="" src="assets3/images/illustrations/colors.png" style="width:52px; height:52px;" class="pull-right"/>
         </div>
         <div class="span5">
           <h4>Social Stream</h4>
-          <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p>
+          하루패드로 작성한 문서를 페이스북, 트위터등을 통해 손쉽게 알릴 수 있습니다.
+          <!-- <p><strong>Lato</strong> is free web-font designed by <strong>Lukasz&nbsp;Dziedzic</strong> from Warsaw.</p> -->
         </div>
       </div>
 
-      <h1 class="demo-panel-title page-header">Basic elements</h1>
+      <!--h1 class="demo-panel-title page-header">Service Plan</h1>
       <div class="row demo-tiles">
         <div class="span3">
           <div class="tile">
             <img class="tile-image big-illustration" alt="" src="assets3/images/illustrations/compass.png" />
-            <h3 class="tile-title">Web Oriented</h3>
-            <p>100% convertable to HTML/CSS layout.</p>
+            <h3 class="tile-title">App is Free</h3>
+            <p>커뮤니티 사용자들에게는 제한이 없음</p>
             <a class="btn btn-large btn-block" href="#">Free</a>
           </div>
         </div>
@@ -223,8 +249,8 @@
         <div class="span3">
           <div class="tile">
             <img class="tile-image" alt="" src="assets3/images/illustrations/infinity.png" />
-            <h3 class="tile-title">Easy to Customize</h3>
-            <p>Vector-based shapes and minimum of layer styles.</p>
+            <h3 class="tile-title">Plugin & Component</h3>
+            <p>컴포넌트, 플러그인을 이용해 좀더 강력한 문서 도구로 활용</p>
             <a class="btn btn-large btn-block" href="#">Free</a>
           </div>
         </div>
@@ -233,7 +259,7 @@
           <div class="tile">
             <img class="tile-image" alt="" src="assets3/images/illustrations/colors.png" />
             <h3 class="tile-title">Cloud Service</h3>
-            <p>Easy to add or change elements. </p>
+            <p>기업형 문서 도구, 스토리지 사용 무제한</p>
             <a class="btn btn-primary btn-large btn-block" href="#">Get Pro</a>
           </div>
         </div>
@@ -242,26 +268,32 @@
           <div class="tile tile-hot">
             <img class="tile-image big-illustration" alt="" src="assets3/images/illustrations/share.png" />
             <h3 class="tile-title">Expert Publishing</h3>
-            <p>Your likes, shares and comments helps us.</p>
+            <p>전문가 문서 작성을 위한 커스터마이징 및 교육 플랜</p>
             <a class="btn btn-primary btn-large btn-block" href="#">Get Pro</a>
           </div>
 
         </div>
-      </div> <!-- /tiles -->
+      </div--> <!-- /tiles -->
 
       <h1 class="demo-panel-title page-header">Downloads</h1>
       <div class="row demo-tiles" style="text-align: center;">
         <div class="span4">
-          <img src="assets3/images/illustrations/infinity.png">
-          </br>window
+          <img src="assets3/images/windows-8-logo.jpg" width="160" class="demo-tiles">
+          </br>
+          <h4>window</h4>
+          <span><a href="https://www.dropbox.com/s/rqnps3mbrhtaktt/haroopad-win32-v0.2.0.exe" target="_blank">32bit</a>, <del>64bit</del></span>
         </div>
         <div class="span4">
-          <img src="assets3/images/illustrations/infinity.png">
-          </br>mac
+          <img src="assets3/images/Apple2.png" width="138" class="demo-tiles">
+          </br>
+          <h4>mac</h4>
+          <span><a href="https://www.dropbox.com/s/qguw1u3yclhd4c1/haroopad-v0.2.0.dmg" target="_blank">32bit</a>, <del>64bit</del></span>
         </div>
         <div class="span4">
-          <img src="assets3/images/illustrations/infinity.png">
-          </br>linux
+          <img src="assets3/images/Ubuntu_logo_copyleft_1.svg.png" width="160" class="demo-tiles">
+          </br>
+          <h4>linux</h4>
+          <span><del>32bit</del>, <del>64bit</del></span>
         </div>
       </div>
 
@@ -296,7 +328,7 @@
           <div class="span7">
             <h3 class="footer-title">Subscribe</h3>
             <p>Do you like this freebie? Want to get more stuff like this?<br/>
-              Subscribe to designmodo news and updates to stay tuned on great designs.<br/>
+              Subscribe to haroopad news and updates to stay tuned on easy and nice documentation.<br/>
               Go to: <a href="http://pad.haroopress.com" target="_blank">pad.haroopress.com</a>
             </p>
 
@@ -308,7 +340,7 @@
             <a class="footer-brand" href="http://pad.haroopress.com" target="_blank">
               <!-- <img src="images/footer/logo.png" alt="Designmodo.com" /> -->
             </a>
-          </div> <!-- /span8 -->
+          </div> <!-- /span7 -->
 
           <div class="span5">
             <div class="footer-banner">
@@ -316,11 +348,10 @@
               <ul>
                 <li>Tons of Basic and Custom UI Elements</li>
                 <li>A Lot of Useful Samples</li>
-                <li>More Vector Icons and Glyphs</li>
-                <li>Pro Color Swatches</li>
                 <li>Bootstrap Based HTML/CSS/JS Layout</li>
               </ul>
-              Go to: <a href="http://designmodo.com/flat" target="_blank">designmodo.com/flat</a>
+              <h3 class="footer-title">Contacts</h3>
+              email: <a href="">rhio.kim@gmail.com</a>
             </div>
           </div>
         </div>
