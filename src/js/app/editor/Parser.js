@@ -1,8 +1,7 @@
 define([
-		'module',
 		'keyboard'
 	],
-	function(module, HotKey) {
+	function(HotKey) {
 		marked.setOptions({
       gfm: true,
       tables: true,
@@ -33,12 +32,5 @@ define([
       }
     });
 
-    var renderer = new marked.Renderer();
-
-    var parse = function(src, options) {
-      options = options || {};
-      return marked.parser(marked.lexer(src, options), options, renderer);
-    }
-
-		module.exports = parse;
+		return marked;
 });
