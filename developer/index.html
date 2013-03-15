@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="README.md"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">README.md</div></div><div id="document"><div class="segment"><div class="comments"><div class="wrapper"><h2 id="why">why?</h2>
+
+<h2 id="haroopad">haroopad?</h2>
+
+<p>하루패드는 마크다운 에디터로 크로스 플랫폼에서 동일한 에디팅과 뷰잉을 지원합니다.</p>
+
+<p>특히 마크다운 포맷의 고유의 기능을 잘 살려 원하는 에디팅 테마와 뷰어 테마를 제공하여 경량의 마크다운 문서가 고품질의 문서로 출력해줍니다.</p>
+
+<p>멀티 마크다운을 기본적으로 지원하고 그에 더불어 하루패드만의 확장 마크다운을 지원합니다. 이 확장 마크다운은 온라인 환경에 의존하는 오픈 컨텐츠 미디어(유튜브, 슬라이드쉐어, 트윗등을)를 손쉽게 문서내에 포함시킬 수 있습니다. </p>
+
+<p>하루패드를 사용하여 새로운 문서 편집의 경험을 느껴보세요.</p>
+
+<ul>
+<li><a href="http://pad.haroopress.com">official site</a></li>
+<li><a href="https://github.com/rhiokim/haroopad">official repository</a></li>
+</ul>
+
+<h2 id="features">features</h2>
+
+<ul>
+<li>cross platform markdown editor
+<ul><li>support Window, Linux, Mac OS</li></ul></li>
+<li>support multi-markdown</li>
+<li>editor theme, syntax highlight, markdown theme</li>
+<li>vim key binding</li>
+<li>auto publishing to sites(tumblr, github)</li>
+</ul>
+
+<h2 id="example">example</h2>
+
+<p><strong>header</strong></p>
+
+<h2 id="this-is-an-h2">This is an H2</h2>
+
+<h3 id="this-is-an-h3">This is an H3</h3>
+
+<h4 id="this-is-an-h4">This is an H4</h4>
+
+<h5 id="this-is-an-h5">This is an H5</h5>
+
+<h6 id="this-is-an-h6">This is an H6</h6>
+
+<p><strong>blockquote</strong></p>
+
+<blockquote>
+  <h2 id="this-is-a-h2">This is a H2.</h2>
+  
+  <ol>
+  <li>This is the first list item.</li>
+  <li>This is the second list item.</li>
+  </ol>
+  
+  <p>Here's some example code:</p>
+  
+  <p><code>js
+  function syntaxHighlight() {
+    return true;
+  }
+  </code></p>
+</blockquote>
+
+<p><strong>list</strong></p>
+
+<ul>
+<li>li1
+<ul><li>li1-1</li>
+<li>li1-2
+<ul><li>li-2-1</li>
+<li>li-2-2</li>
+<li>li-2-2-1</li>
+<li>li-2-2-2</li></ul></li></ul></li>
+</ul>
+
+<p><em>* Image *</em></p>
+
+<p><img src="http://placekitten.com/g/160/180" alt="" title="" />
+<img src="http://placekitten.com/g/160/180" alt="" title="" />
+<img src="http://placekitten.com/g/160/180" alt="" title="" /></p>
+
+<p><strong>Syntax highlighting</strong></p>
+
+<p><code>code</code></p>
+
+<pre><code class="js">function syntaxHighlight() {
+  var name = 'haroopad';
+}
+</code></pre>
+
+<pre><code class="xml">&lt;html&gt;
+ &lt;head&gt;
+   &lt;title&gt;haroopad example&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+   &lt;span class="text-info"&gt;cross-platform markdown editor&lt;/span&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<pre><code class="css">body {
+    font-size: 1em;
+}
+</code></pre>
+
+<pre><code class="ruby">require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+</code></pre>
+
+<p><strong>GFM style table</strong></p>
+
+<p>name | age | gender
+---|---|---|
+rhio | 33 | male
+edina | 28 | female
+jedi | 44 | robot</p>
+
+<p><strong>URL autolinking</strong></p>
+
+<ul>
+<li>http://pad.haroopress.com</li>
+</ul>
+
+<p><strong>Multiple underscores in words</strong></p>
+
+<p>perform<em>complicated</em>task
+do<em>this</em>and<em>do</em>that<em>and</em>another_thing</p></div></div></div></div></body></html>
