@@ -1,8 +1,7 @@
 define([
-		'module',
 		'keyboard'
 	],
-	function(module, HotKey) {
+	function(HotKey) {
 		marked.setOptions({
           gfm: true,
           tables: true,
@@ -33,5 +32,5 @@ define([
           }
         });
 
-		module.exports = marked;
+		return marked;
 });
