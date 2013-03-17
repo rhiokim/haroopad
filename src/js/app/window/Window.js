@@ -4,9 +4,10 @@ define([
 		'window/Splitter',
 		'dialog/Dialogs',
 		'file/File',
-    'preferences/Preferences'
+    'preferences/Preferences',
+    'viewer'
 	], 
-	function(option, HotKey, Splitter, Dialogs, File, Preferences) {
+	function(option, HotKey, Splitter, Dialogs, File, Preferences, Viewer) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get(),
 				subWin;
@@ -60,11 +61,18 @@ define([
 		 */
 		File.bind('opened', function(dirname, basename) {
 			win.title = orgTitle = basename;
+			Viewer.init({
+				dirname: dirname
+			});
 		});
 
 		File.bind('saved', function(dirname, basename) {
 			win.title = orgTitle = basename;
 			edited = false;
+			
+			Viewer.init({
+				dirname: dirname
+			});
 
 			//window closing save
 			if(delayClose) {

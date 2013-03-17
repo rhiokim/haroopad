@@ -54,7 +54,6 @@ requirejs([
     function changeHandler() {
       //TODO: throttle 적용
       res = Parser(Editor.getValue());
-      alert(res)
       Viewer.update(res);
 
       Window.edited();
