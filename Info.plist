@@ -9,6 +9,22 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>md</string>
+				<string>markdown</string>
+				<string>mdown</string>
+				<string>markdn</string>
+				<string>mkd</string>
+				<string>mkdn</string>
+				<string>mdwn</string>
+				<string>mdtxt</string>
+				<string>mdtext</string>
+				<string>mdml</string>
+				<string>text</string>
+				<string>txt</string>
+				<string>*</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>nw.icns</string>
 			<key>CFBundleTypeName</key>
