@@ -32,7 +32,7 @@ footer a {
 
 .rule {
     display: block;
-    height: 50px;
+    height: 35px;
     overflow: hidden;    
 }
 
@@ -51,4 +51,18 @@ footer a {
     -webkit-box-shadow: 0 0 35px #444;
         -ms-box-shadow: 0 0 35px #444;
             box-shadow: 0 0 35px #444;
+}
+
+#download-area img{
+    /*width: 160px;*/
+    height: 160px;
+}
+
+/**
+ * fixed
+ */
+.todo li:first-child {
+    -webkit-border-radius: 6px 6px 0 0 !important;
+        -ms-border-radius: 6px 6px 0 0 !important;
+            border-radius: 6px 6px 0 0;
 }
