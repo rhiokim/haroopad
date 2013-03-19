@@ -2,10 +2,10 @@
   "main": "pad.html",
   "name": "haroopad",
   "description": "instant markdown editor for cross platform",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "keywords": [ "markdown", "haroopress" ],
   "window": {
-    "icon": "link.png",
+    "icon": "logo.png",
     "toolbar": false,
     "show": false,
     "width": 1024,

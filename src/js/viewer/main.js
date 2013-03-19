@@ -1,5 +1,6 @@
 // Load native UI library.
 var gui = require('nw.gui');
+var _options;
 
 function loadCss(url) {
   var link = document.createElement("link");
@@ -29,6 +30,21 @@ function createTOC() {
   $(document.body).scrollspy('refresh');
 }
 
+function init(options) {
+  _options = options;
+}
+
+/**
+ * for fix image path
+ * @return {[type]} [description]
+ */
+function _fixImagePath() {
+  $('img').each(function() {
+    var src = $(this).attr('src');
+    $(this).attr('src', _options.dirname +'/'+ src);
+  });
+}
+
 /**
  * update contents
  * @param  {[type]} contents [description]
@@ -39,6 +55,7 @@ function update(contents) {
   $('a').off('click', '**');
   $(document.body).html(contents);
 
+  _fixImagePath();
   // createTOC();
 }
 
