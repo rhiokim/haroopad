@@ -58,6 +58,9 @@ footer a {
     height: 160px;
 }
 
+img.logo {
+    margin-top: -40px;
+}
 /**
  * fixed
  */
