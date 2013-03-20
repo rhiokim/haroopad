@@ -10,9 +10,6 @@
   <!-- Included CSS Files (Compressed) -->
   <link rel="stylesheet" href="css/codemirror.min.css">
   <link rel="stylesheet" href="css/haroopad.min.css">
-
-  <script src="js/vendors.min.js"></script>
-  <script src="js/codemirror.min.js"></script>
   <!--script>
     haroopad.start();
   </script-->
@@ -33,7 +30,10 @@
     </div>
   </div>
 </body>
+
 <script>
-  haroopad(window, document);
+  haroopad.apply(this, [this, document]);
 </script>
+<script src="js/vendors.min.js"></script>
+<script src="js/codemirror.min.js"></script>
 </html>
