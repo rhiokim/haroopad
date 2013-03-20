@@ -64,21 +64,21 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'build/haroopad.js': [
-            'src/js/app/before.bin.js',
+            '<%= vendors %>/underscore.js',
             '<%= vendors %>/marked.js',
             '<%= vendors %>/highlight.pack.js',
-            '<%= vendors %>/underscore.js',
-            'src/js/app/after.bin.js'
-          ],
-          'build/vendors.js': [
-            '<%= vendors %>/jquery-1.9.1.min.js',
+            'src/js/app/before.bin.js',
+            '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',
-            '<%= vendors %>/require.js',
             '<%= vendors %>/bootstrap.min.js',
             '<%= vendors %>/bootstrapSwitch.js',
             '<%= vendors %>/bootstrap-modalmanager.js',
             '<%= vendors %>/bootstrap-modal.js',
-            '<%= vendors %>/select2.js'
+            '<%= vendors %>/select2.js',
+            'src/js/app/after.bin.js'
+          ],
+          'build/vendors.js': [
+            '<%= vendors %>/require.js'
           ],
           'build/codemirror.js': [
             '<%= vendors %>/CodeMirror/lib/codemirror.js',
@@ -102,7 +102,7 @@ module.exports = function(grunt) {
           // compress: true
         },
         files: {
-          'build/haroopad/js/haroopad.min.js': [
+          'build/haroopad.bin.js': [
             'build/haroopad.js'
           ],
           'build/haroopad/js/vendors.min.js': [
@@ -188,15 +188,15 @@ module.exports = function(grunt) {
       },
 
       ss_darwin: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad/js/haroopad.min.js ./build/haroopad/js/haroopad.bin'
+        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
       },
 
       ss_win32: {
-        command: '"./lib/nwsnapshot.exe" --extra_code ./build/haroopad/js/haroopad.min.js ./build/haroopad/js/haroopad.bin'
+        command: '"./lib/nwsnapshot.exe" --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
       },
 
       ss_linux: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad/js/haroopad.min.js ./build/haroopad/js/haroopad.bin'
+        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
       }
     },
 

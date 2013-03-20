@@ -1,2 +1,2 @@
-	requirejs(['js/modules']);
+	// requirejs(['js/modules']);
 } // end bin
