@@ -18,12 +18,14 @@ haroopad technical stack
 * bash for create .dmg
 * node.js
 * grunt.js
-	- grunt-contrib
-	- grunt-shell
+  - grunt-contrib
+  - grunt-shell
   - grunt-replace
   - grunt-contrib-requirejs
 * stringex
 * node-webkit
+
+### for windows
 * NSIS(Nullsoft Scriptable Install System) for window
 
 ## html5
@@ -32,3 +34,13 @@ haroopad technical stack
 ## technical specification
 * less
 * package.json
+
+
+## sub project
+* standard style for markdown using less
+* cross platform build tool for hybrid web application
+  - grunt.js
+  - bash
+    > .dmg creation - https://github.com/andreyvit/yoursway-create-dmg
+  - NSIS
+  - v8 heap memory snapshot
