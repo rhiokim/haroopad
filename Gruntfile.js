@@ -144,7 +144,6 @@ module.exports = function(grunt) {
 
       debug: {
         files: [
-          // { expand: true, cwd: 'src/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
           { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/img/' },
           { expand: true, flatten: true, src: [ 'src/css/*' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/', filter:'isFile' },
@@ -185,18 +184,6 @@ module.exports = function(grunt) {
 
       deploy: {
         command: 'cp -R ./build/haroopad.app /Applications'
-      },
-
-      ss_darwin: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
-      },
-
-      ss_win32: {
-        command: '"./lib/nwsnapshot.exe" --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
-      },
-
-      ss_linux: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
       }
     },
 
@@ -229,13 +216,8 @@ module.exports = function(grunt) {
       }
     }
   });
-  
-  /* v8 protect source code task for cross platform */  
-  grunt.registerTask('snapshot', 'cross platform snapshot', function() {
-    grunt.task.run('shell:ss_'+ process.platform);
-  });
 
-  grunt.registerTask('default', [ 'clean', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'requirejs', 'snapshot' ]);
+  grunt.registerTask('default', [ 'clean', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'requirejs' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:exec' ]);
