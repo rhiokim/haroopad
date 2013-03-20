@@ -22,8 +22,12 @@ haroopad technical stack
 	- grunt-shell
   - grunt-replace
   - grunt-contrib-requirejs
+* stringex
 * node-webkit
 * NSIS(Nullsoft Scriptable Install System) for window
+
+## html5
+* PouchDB based on IndexedDB in the browser
 
 ## technical specification
 * less
