@@ -60,20 +60,17 @@ module.exports = function(grunt) {
       }
     },
 
-    uglify: {
-      pad: {
-        options: {
-          // mangle: true,
-          // compress: true
-        },
+    concat: {
+      dist: {
         files: {
-          'build/haroopad.bin.js': [
+          'build/haroopad.js': [
+            'src/js/app/before.bin.js',
             '<%= vendors %>/marked.js',
             '<%= vendors %>/highlight.pack.js',
             '<%= vendors %>/underscore.js',
-            'src/js/app/before.bin.js'
+            'src/js/app/after.bin.js'
           ],
-          'build/haroopad/js/haroopad.vendors.min.js': [ 
+          'build/vendors.js': [
             '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/backbone.js',
             '<%= vendors %>/require.js',
@@ -83,7 +80,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/select2.js'
           ],
-          'build/haroopad/js/codemirror.min.js': [
+          'build/codemirror.js': [
             '<%= vendors %>/CodeMirror/lib/codemirror.js',
             '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
             '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
@@ -92,7 +89,27 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
             '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
             '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
-            '<%= vendors %>/CodeMirror/keymap/vim.js',
+            '<%= vendors %>/CodeMirror/keymap/vim.js'
+          ]
+        }
+      }
+    },
+
+    uglify: {
+      pad: {
+        options: {
+          // mangle: true,
+          // compress: true
+        },
+        files: {
+          'build/haroopad/js/haroopad.min.js': [
+            'build/haroopad.js'
+          ],
+          'build/haroopad/js/vendors.min.js': [
+            'build/vendors.js'
+          ],
+          'build/haroopad/js/codemirror.min.js': [
+            'build/codemirror.js'
           ]
         }
       },
@@ -119,12 +136,13 @@ module.exports = function(grunt) {
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
           { src: 'src/viewer.bin.html', dest: 'build/haroopad/viewer.html' },
           { src: 'src/package.bin.json', dest: 'build/haroopad/package.json' },
+          { src: 'src/logo.png', dest: 'build/haroopad/logo.png' },
           { src: 'src/css/keys.css', dest: 'build/haroopad/css/keys.css' },
           { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' }
         ]
       },
 
-      build: {
+      debug: {
         files: [
           // { expand: true, cwd: 'src/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
           { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
@@ -140,7 +158,14 @@ module.exports = function(grunt) {
           { src: 'src/package.json', dest: 'build/haroopad.app/Contents/Resources/app.nw/package.json' },
           { src: 'src/css/keys.css', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/keys.css' },
           { src: 'src/css/select2.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/select2.png' },
-          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' }
+          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
+          { src: 'src/logo.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/logo.png' }
+        ]
+      },
+
+      build: {
+        files: [
+          { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' }
         ]
       }
     },
@@ -163,15 +188,15 @@ module.exports = function(grunt) {
       },
 
       ss_darwin: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
+        command: './lib/nwsnapshot --extra_code ./build/haroopad/js/haroopad.min.js ./build/haroopad/js/haroopad.bin'
       },
 
       ss_win32: {
-        command: '"./lib/nwsnapshot.exe" --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
+        command: '"./lib/nwsnapshot.exe" --extra_code ./build/haroopad/js/haroopad.min.js ./build/haroopad/js/haroopad.bin'
       },
 
       ss_linux: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
+        command: './lib/nwsnapshot --extra_code ./build/haroopad/js/haroopad.min.js ./build/haroopad/js/haroopad.bin'
       }
     },
 
@@ -210,8 +235,9 @@ module.exports = function(grunt) {
     grunt.task.run('shell:ss_'+ process.platform);
   });
 
-  grunt.registerTask('default', [ 'clean', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy', 'requirejs' ]);
+  grunt.registerTask('default', [ 'clean', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'requirejs', 'snapshot' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
+  grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('pkg', [ 'clean:release', 'shell:cpLib', 'shell:cpZipSrc', 'replace:info', 'shell:exec' ]);
 };
