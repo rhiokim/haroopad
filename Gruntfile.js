@@ -182,6 +182,11 @@ module.exports = function(grunt) {
         command: 'open ./build/haroopad.app'
       },
 
+      /* v8 heap snapshot for protect source */
+      ss_darwin: {
+        command: 'nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
+      },
+
       deploy: {
         command: 'cp -R ./build/haroopad.app /Applications'
       }
@@ -220,6 +225,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [ 'clean', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'requirejs' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
-  grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:exec' ]);
-  grunt.registerTask('pkg', [ 'clean:release', 'shell:cpLib', 'shell:cpZipSrc', 'replace:info', 'shell:exec' ]);
+  grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:ss_darwin', 'shell:exec' ]);
 };
