@@ -16,22 +16,25 @@ function setViewStyle(style) {
   $(document.body).addClass('markdown');
   $(document.body).addClass(style);
 }
+
 function setCodeStyle(style) {
   loadCss('css/code/'+ style +'.css');
 }
 
 function createTOC() {
-  // $("#toc").html('');
-  // $("#toc").tocify({ selectors: "h2, h3, h4" }).data("toc-tocify").generateToc();
-  // $("#toc").tocify();
   var toc = generateTOC($(document.body)[0]);
   $(document.body).prepend('<div id="toc"></div>');
   $('#toc').html(toc);
   $(document.body).scrollspy('refresh');
 }
 
+function delegateKeydown() {
+}
+
 function init(options) {
   _options = options;
+
+  delegateKeydown();
 }
 
 /**
@@ -59,6 +62,10 @@ function update(contents) {
   // createTOC();
 }
 
+/**
+ * enable click event at link
+ * @return {[type]} [description]
+ */
 function allowLink() {
   $('a').on('click', function(e) {
     gui.Shell.openExternal($(e.target).attr('href'));
@@ -66,6 +73,10 @@ function allowLink() {
   });
 }
 
+/**
+ * disable click event at link
+ * @return {[type]} [description]
+ */
 function blockLink() {
   $('a').on('click', function(e) {
     e.preventDefault();
@@ -83,3 +94,8 @@ function scrollTop(per) {
 
   $(window).scrollTop(top / 100 * per);
 }
+
+$(window).bind('keydown', function(e) {
+  // $(window).trigger('keydown', e);
+  // console.log(e, window.parent);
+});

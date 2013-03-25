@@ -1,13 +1,14 @@
 define([
 		'window/Window.opt',
 		'keyboard',
+		'menu/MenuBar',
 		'window/Splitter',
 		'dialog/Dialogs',
 		'file/File',
     'preferences/Preferences',
     'viewer'
 	], 
-	function(option, HotKey, Splitter, Dialogs, File, Preferences, Viewer) {
+	function(option, HotKey, MenuBar, Splitter, Dialogs, File, Preferences, Viewer) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get(),
 				subWin;
