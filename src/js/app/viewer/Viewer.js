@@ -30,24 +30,22 @@ define([
 			viewer.update(content);
 
 			viewer.addEventListener('keydown', function(e) {
-				// this.parent.dispatchEvent(e);
-				var keyboardEvent = document.createEvent("KeyboardEvent");
-				keyboardEvent.initEvent(
-						'keydown',
-						true,
-						true,
-						null,
-						e.ctrlKey,
-						e.altKey,
-						e.shiftKey,
-						e.metaKey,
-						e.keyCode,
-						e.keyIdentifier
-					)
 
+		    var evt = document.createEvent("Events");
+		    evt.initEvent("keydown", true, true);
 
-				window.dispatchEvent(keyboardEvent);
+		    evt.view = e.view;
+		    evt.altKey = e.altKey;
+		    evt.ctrlKey = e.ctrlKey;
+		    evt.shiftKey = e.shiftKey;
+		    evt.metaKey = e.metaKey;
+		    evt.keyCode = e.keyCode;
+		    evt.charCode = e.charCode;
+
+		    viewer.top.dispatchEvent(evt);
+
 			}, false);
+			
 		});
 
 		return {
