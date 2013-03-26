@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>node-webkit</string>
+	<string>haroopad</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -28,7 +28,7 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>nw.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>node-webkit App</string>
+			<string>haroopad App</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
@@ -97,7 +97,7 @@
 				<string>com.pkware.zip-archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>node-webkit App</string>
+			<string>haroopad App</string>
 			<key>UTTypeIconFile</key>
 			<string>nw.icns</string>
 			<key>UTTypeIdentifier</key>
@@ -107,7 +107,7 @@
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>com.apple.ostype</key>
-				<string>node-webkit</string>
+				<string>haroopad</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>nw</string>
