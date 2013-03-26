@@ -18,10 +18,11 @@ define([
         }
         submenu.append(
             new gui.MenuItem({
-                label: name
+                label: name,
+                tooltip: prop
             })
         );
     }
 
-    return new gui.MenuItem({ label: 'Recents', submenu: submenu });
+    return submenu;
 });

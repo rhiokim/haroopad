@@ -1,74 +1,76 @@
 define([
+      'menu/Menu.file.recents'
 	],
-	function() {
+	function(Recents) {
 
 	var gui = require('nw.gui');
 	var File = new gui.Menu();
 
 	File.append(
-    new gui.MenuItem({
-        label: 'New'
-    })
+        new gui.MenuItem({
+            label: 'New'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        label: 'Open'
-    })
+        new gui.MenuItem({
+            label: 'Open'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        label: 'Open Recent'
-    })
+        new gui.MenuItem({
+            label: 'Open Recent',
+            submenu: Recents
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        type: 'separator'
-    })
+        new gui.MenuItem({
+            type: 'separator'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        label: 'Close'
-    })
+        new gui.MenuItem({
+            label: 'Close'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        label: 'Save'
-    })
+        new gui.MenuItem({
+            label: 'Save'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        type: 'separator'
-    })
+        new gui.MenuItem({
+            type: 'separator'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        label: 'Post'
-    })
+        new gui.MenuItem({
+            label: 'Post'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        label: 'Export'
-    })
+        new gui.MenuItem({
+            label: 'Export'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        type: 'separator'
-    })
+        new gui.MenuItem({
+            type: 'separator'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        label: 'Page Setup'
-    })
+        new gui.MenuItem({
+            label: 'Page Setup'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        label: 'Print Source'
-    })
+        new gui.MenuItem({
+            label: 'Print Source'
+        })
 	);
 	File.append(
-    new gui.MenuItem({
-        label: 'Print Result'
-    })
+        new gui.MenuItem({
+            label: 'Print Result'
+        })
 	);
 
 	return new gui.MenuItem({ label: 'File', submenu: File });
