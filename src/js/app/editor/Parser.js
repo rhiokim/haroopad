@@ -1,8 +1,8 @@
 define([
-		'keyboard'
-	],
-	function(HotKey) {
-		marked.setOptions({
+    'keyboard'
+  ],
+  function(HotKey) {
+    marked.setOptions({
       gfm: true,
       tables: true,
       breaks: false,
@@ -32,5 +32,5 @@ define([
       }
     });
 
-		return marked;
+    return marked;
 });

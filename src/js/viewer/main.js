@@ -94,8 +94,3 @@ function scrollTop(per) {
 
   $(window).scrollTop(top / 100 * per);
 }
-
-$(window).bind('keydown', function(e) {
-  // $(window).trigger('keydown', e);
-  // console.log(e, window.parent);
-});
