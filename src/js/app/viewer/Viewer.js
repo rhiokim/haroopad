@@ -29,6 +29,9 @@ define([
 			viewer.setCodeStyle(config.codeStyle);
 			viewer.update(content);
 
+			/**
+			 * delegate to parent window key mouse down event
+			 */
 			viewer.addEventListener('keydown', function(e) {
 
 		    var evt = document.createEvent("Events");
@@ -45,6 +48,16 @@ define([
 		    viewer.top.dispatchEvent(evt);
 
 			}, false);
+
+			/**
+			 * delegate right mouse down event
+			 */
+			$(viewer).mousedown(function(e) {
+				if (e.which === 3) {
+
+					$(viewer.top).trigger('mousedown', [e]);
+		    }
+			});
 			
 		});
 
