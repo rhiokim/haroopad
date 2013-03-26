@@ -44,7 +44,10 @@ function init(options) {
 function _fixImagePath() {
   $('img').each(function() {
     var src = $(this).attr('src');
-    $(this).attr('src', _options.dirname +'/'+ src);
+
+    if(src.indexOf('://') == -1) {
+      $(this).attr('src', _options.dirname +'/'+ src);
+    }
   });
 }
 
