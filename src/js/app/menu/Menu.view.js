@@ -5,7 +5,37 @@ define(function() {
 
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Test Menu Item'
+	        label: 'Toggle Live Preview'
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Toggle Line Number'
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Toggle Word Count'
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+          type: 'separator'
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Live Viewer width +5%'
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Live Viewer width -5%'
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Reset width'
 	    })
 	);
 

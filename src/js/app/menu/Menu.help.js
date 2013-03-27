@@ -5,7 +5,44 @@ define(function() {
 
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Test Menu Item'
+	        label: 'Haroopad Help'
+	    })
+	);
+	Help.append(
+	    new gui.MenuItem({
+	        label: 'Markdown Syntax Help'
+	    })
+	);
+	Help.append(
+		new gui.MenuItem({
+      type: 'separator'
+  	})
+	);
+
+	Help.append(
+	    new gui.MenuItem({
+	        label: 'Release Notes'
+	    })
+	);
+	Help.append(
+	    new gui.MenuItem({
+	        label: 'Acknowledgements'
+	    })
+	);
+	Help.append(
+		new gui.MenuItem({
+      type: 'separator'
+  	})
+	);
+
+	Help.append(
+	    new gui.MenuItem({
+	        label: 'Haroopad Website'
+	    })
+	);
+	Help.append(
+	    new gui.MenuItem({
+	        label: 'Send Feedback'
 	    })
 	);
 
