@@ -5,6 +5,11 @@ define([
 
 		var recents = [];
 
+		function removeAt(idx) {
+			recents.splice(idx, 1);
+			return recents;
+		}
+
 		var Model = Backbone.Model.extend({
 
 			defaults: {
@@ -32,6 +37,14 @@ define([
 				var name = path.basename(file);
 				var o = {};
 						o[file] = name;
+				
+				recents.forEach(function(item, idx) {
+					if(item.hasOwnProperty(file)) {
+						removeAt(idx);
+						return;
+					}
+				});
+
 				recents.push(o);
 				
 				this.set('files', recents.reverse());

@@ -63,6 +63,7 @@ define([
 	File.append(
         new gui.MenuItem({
             label: 'Post',
+            enabled: false,
             submenu: Posts
         })
 	);
@@ -75,6 +76,7 @@ define([
 	File.append(
         new gui.MenuItem({
             label: 'Activity stream',
+            enabled: false,
             submenu: Activities
         })
 	);

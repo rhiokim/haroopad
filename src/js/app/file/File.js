@@ -8,6 +8,8 @@ define([
 
 	function(module, html, HotKey, Editor, Recents) {
 		var fs = require('fs');
+		var gui = require('nw.gui'),
+				win = gui.Window.get();
 		var path = require('path');
 		var hasWriteAccess = false, fileEntry, str;
 
@@ -37,6 +39,9 @@ define([
 			initialize: function() {
 				HotKey('defmod-o', openFileDialog);
 				HotKey('defmod-s', openSaveDialog);
+
+				win.on('file.open', openFileDialog);
+				win.on('file.save', openSaveDialog);
 			},
 
 			saveHandler: function(e) {
