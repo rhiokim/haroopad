@@ -1,15 +1,15 @@
 define(function() {
 
-	var gui = require('nw.gui');
+	var gui = require('nw.gui'),
+      win = gui.Window.get();
 	var Action = new gui.Menu();
-
-	var separator = new gui.MenuItem({
-					          type: 'separator'
-						    	});
 
 	Action.append(
     new gui.MenuItem({
-      label: 'Copy HTML'
+      label: 'Copy HTML',
+      click: function() {
+        win.emit('copy.html');
+      }
     })
 	);
 	Action.append(
@@ -20,17 +20,26 @@ define(function() {
 	
 	Action.append(
     new gui.MenuItem({
-      label: 'Insert'
+      label: 'Insert',
+      click: function() {
+        win.emit('action.insert');
+      }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Select'
+      label: 'Select',
+      click: function() {
+        win.emit('action.select');
+      }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Convert'
+      label: 'Convert',
+      click: function() {
+        win.emit('action.convert');
+      }
     })
   );
 	Action.append(
@@ -41,27 +50,42 @@ define(function() {
 
 	Action.append(
     new gui.MenuItem({
-      label: 'Strong'
+      label: 'Strong',
+      click: function() {
+        win.emit('action.strong');
+      }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Emphasize'
+      label: 'Emphasize',
+      click: function() {
+        win.emit('action.emphasize');
+      }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Inline Code'
+      label: 'Inline Code',
+      click: function() {
+        win.emit('action.inline.code');
+      }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Fenced Code'
+      label: 'Fenced Code',
+      click: function() {
+        win.emit('action.fenced.code');
+      }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Strikethrough'
+      label: 'Strikethrough',
+      click: function() {
+        win.emit('action.strikethrough');
+      }
     })
   );
 	Action.append(
@@ -72,12 +96,18 @@ define(function() {
 
 	Action.append(
     new gui.MenuItem({
-      label: 'Image'
+      label: 'Image',
+      click: function() {
+        win.emit('action.image');
+      }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Link'
+      label: 'Link',
+      click: function() {
+        win.emit('action.link');
+      }
     })
   );
 	Action.append(
@@ -88,18 +118,28 @@ define(function() {
 
 	Action.append(
     new gui.MenuItem({
-      label: 'Table'
+      label: 'Table',
+      click: function() {
+        win.emit('action.table');
+      }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Table Row'
+      label: 'Table Row',
+      click: function() {
+        win.emit('action.table.row');
+      }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Table Cell'
+      label: 'Table Cell',
+      click: function() {
+        win.emit('action.table.cell');
+      }
     })
   );
+
 	return new gui.MenuItem({ label: 'Action', submenu: Action });
 });

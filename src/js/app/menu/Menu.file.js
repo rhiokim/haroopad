@@ -6,17 +6,24 @@ define([
 	],
 	function(Recents, Exports, Posts, Activities) {
 
-	var gui = require('nw.gui');
+	var gui = require('nw.gui'),
+        win = gui.Window.get();
 	var File = new gui.Menu();
 
 	File.append(
         new gui.MenuItem({
-            label: 'New'
+            label: 'New',
+            click: function() {
+                win.emit('file.new');
+            }
         })
 	);
 	File.append(
         new gui.MenuItem({
-            label: 'Open'
+            label: 'Open',
+            click: function() {
+                win.emit('file.open');
+            }
         })
 	);
 	File.append(
@@ -30,14 +37,21 @@ define([
             type: 'separator'
         })
 	);
+
 	File.append(
         new gui.MenuItem({
-            label: 'Close'
+            label: 'Close',
+            click: function() {
+                win.emit('file.close');
+            }
         })
 	);
 	File.append(
         new gui.MenuItem({
-            label: 'Save'
+            label: 'Save',
+            click: function() {
+                win.emit('file.save');
+            }
         })
 	);
 	File.append(
@@ -45,6 +59,7 @@ define([
             type: 'separator'
         })
 	);
+
 	File.append(
         new gui.MenuItem({
             label: 'Post',
@@ -63,26 +78,29 @@ define([
             submenu: Activities
         })
 	);
-	// File.append(
- //        new gui.MenuItem({
- //            type: 'separator'
- //        })
-	// );
-	// File.append(
- //        new gui.MenuItem({
- //            label: 'Page Setup'
- //        })
-	// );
-	// File.append(
- //        new gui.MenuItem({
- //            label: 'Print Source'
- //        })
-	// );
-	// File.append(
- //        new gui.MenuItem({
- //            label: 'Print Result'
- //        })
-	// );
+
+    /*
+	File.append(
+        new gui.MenuItem({
+            type: 'separator'
+        })
+	);
+	File.append(
+        new gui.MenuItem({
+            label: 'Page Setup'
+        })
+	);
+	File.append(
+        new gui.MenuItem({
+            label: 'Print Source'
+        })
+	);
+	File.append(
+        new gui.MenuItem({
+            label: 'Print Result'
+        })
+	);
+     */
 
 	return new gui.MenuItem({ label: 'File', submenu: File });
 });

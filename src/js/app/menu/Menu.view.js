@@ -1,6 +1,7 @@
 define(function() {
 
-	var gui = require('nw.gui');
+	var gui = require('nw.gui'),
+      win = gui.Window.get();
 	var View = new gui.Menu();
 
 	View.append(

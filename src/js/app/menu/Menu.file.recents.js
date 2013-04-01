@@ -3,7 +3,8 @@ define([
     ],
     function(store) {
 
-    var gui = require('nw.gui');
+    var gui = require('nw.gui'),
+        win = gui.Window.get();
     var submenu = new gui.Menu();
     var path = require('path');
     var name, full, item, prop;
@@ -19,7 +20,10 @@ define([
         submenu.append(
             new gui.MenuItem({
                 label: name,
-                tooltip: prop
+                tooltip: prop,
+                click: function() {
+                    // win.emit();
+                }
             })
         );
     }

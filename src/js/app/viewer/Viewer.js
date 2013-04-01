@@ -5,6 +5,10 @@ define([
 		var iframe = $('#haroo iframe')[0];
 		var viewer = iframe.contentWindow;
 		var content = '';
+
+		var gui = require('nw.gui'),
+				win = gui.Window.get(),
+				clipboard = gui.Clipboard.get();
 		
 		var config = option.toJSON();
 
@@ -59,6 +63,10 @@ define([
 		    }
 			});
 			
+		});
+
+		win.on('copy.html', function() {
+			clipboard.set(content, 'text');
 		});
 
 		return {
