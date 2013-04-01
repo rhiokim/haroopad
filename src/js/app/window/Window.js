@@ -84,6 +84,8 @@ define([
 		HotKey('defmod-n', newHandler);
 		win.on('file.new', newHandler);
 
+		win.on('file.close', win.close);
+
 		HotKey('defmod-shift-ctrl-d', function() {
 			win.showDevTools();
 		});
