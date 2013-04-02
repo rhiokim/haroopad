@@ -28,6 +28,14 @@ define([
 			$("#saveFile").trigger("click");
 		}
 
+		function open(fileEntry) {
+			str = fs.readFileSync(fileEntry, 'utf8');
+			Recents.add(fileEntry, 'file');
+			Editor.setValue(str);
+
+			view.trigger('opened', path.dirname(fileEntry), path.basename(fileEntry));
+		}
+
 		var View = Backbone.View.extend({
 			el: '#fields',
 
@@ -42,6 +50,7 @@ define([
 
 				win.on('file.open', openFileDialog);
 				win.on('file.save', openSaveDialog);
+				win.on('file.recents', open);
 			},
 
 			saveHandler: function(e) {
@@ -54,11 +63,7 @@ define([
 				fileEntry = $(e.target).val();
 				if(!fileEntry) { return; }
 
-				str = fs.readFileSync(fileEntry, 'utf8');
-				Recents.add(fileEntry, 'file');
-				Editor.setValue(str);
-
-				this.trigger('opened', path.dirname(fileEntry), path.basename(fileEntry));
+				open(fileEntry);
 			},
 
 			externalSave: function() {

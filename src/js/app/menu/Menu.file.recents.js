@@ -22,7 +22,7 @@ define([
                 label: name,
                 tooltip: prop,
                 click: function() {
-                    // win.emit();
+                    win.emit('file.recents', this.tooltip);
                 }
             })
         );
