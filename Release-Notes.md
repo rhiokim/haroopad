@@ -1,5 +1,5 @@
 ## haroopad v0.4.0
-	- Public activity stream (only Twitter) 
+- Public activity stream (only Twitter) 
 
 ## Haroopad v0.3.0
 

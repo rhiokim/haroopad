@@ -2,28 +2,31 @@ define([
 		'keyboard'
 	], 
 	function(HotKey) {
+		var gui = require('nw.gui'),
+				win = gui.Window.get();
 		var $editor = $('#editor');
-		// var $spliter = $('#spliter');
 		var $viewer = $('#haroo iframe');
 
 		var left = 50;
 		var right = 50;
 		var gap = 5;
 
-		HotKey('defmod-]', function(e) {
+		function setModeEditor() {
 			$editor.show().css({ width: '100%' });
 			$viewer.hide();
-		});
-		HotKey('defmod-[', function(e) {
+		}
+
+		function setModeView() {
 			$editor.hide();
 			$viewer.show().css({ width: '100%' });
-		});
-		HotKey('defmod-\\', function(e) {
+		}
+
+		function resetMode() {
 			$editor.show().css({ width: '50%' });
 			$viewer.show().css({ width: '50%' });
-		});
+		}
 
-		HotKey('defmod-alt-]', function(e) {
+		function setPlus5Width() {
 			if(right <= 20) {
 				return;
 			}
@@ -31,9 +34,9 @@ define([
 			right = right - gap;
 			$editor.show().css({ width: left+'%' });
 			$viewer.show().css({ width: right+'%' });
-		});
+		}
 
-		HotKey('defmod-alt-[', function(e) {
+		function setMinus5Width() {
 			if(left <= 20) {
 				return;
 			}
@@ -41,5 +44,18 @@ define([
 			right = right + gap;
 			$editor.show().css({ width: left+'%' });
 			$viewer.show().css({ width: right+'%' });
-		});
+		}
+
+		HotKey('defmod-]', setModeEditor);
+		HotKey('defmod-[', setModeView);
+		HotKey('defmod-\\', setModeReset);
+
+		HotKey('defmod-alt-]', setPlus5Width);
+		HotKey('defmod-alt-[', setMinus5Width);
+
+		win.on('view.mode.editor', setModeEditor);
+		win.on('view.mode.preview', setModeView);
+		win.on('view.reset.mode', resetMode);
+		win.on('view.plus5.width', setPlus5Width);
+		win.on('view.minus5.width', setMinus5Width);
 });

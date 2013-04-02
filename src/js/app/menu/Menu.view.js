@@ -6,17 +6,42 @@ define(function() {
 
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Toggle Live Preview'
+	        label: 'Editor Mode',
+		      click: function() {
+		        win.emit('view.mode.editor');
+		      }
 	    })
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Toggle Line Number'
+	        label: 'Preview Mode',
+		      click: function() {
+		        win.emit('view.mode.preview');
+		      }
 	    })
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Toggle Word Count'
+	        label: 'Reset Mode',
+		      click: function() {
+		        win.emit('view.reset.mode');
+		      }
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Toggle Line Number',
+		      click: function() {
+		        win.emit('show.toggle.linenum');
+		      }
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Toggle Word Count',
+		      click: function() {
+		        win.emit('show.toggle.wordcount');
+		      }
 	    })
 	);
 	View.append(
@@ -26,17 +51,18 @@ define(function() {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Live Viewer width +5%'
+	        label: 'Live Viewer width +5%',
+		      click: function() {
+		        win.emit('view.plus5.width');
+		      }
 	    })
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Live Viewer width -5%'
-	    })
-	);
-	View.append(
-	    new gui.MenuItem({
-	        label: 'Reset width'
+	        label: 'Live Viewer width -5%',
+		      click: function() {
+		        win.emit('view.minus5.width');
+		      }
 	    })
 	);
 
