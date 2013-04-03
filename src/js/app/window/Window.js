@@ -14,13 +14,13 @@ define([
 				subWin;
 		var orgTitle = win.title = 'Untitled';
 		var edited = false,
-				delayClose = false;
+			delayClose = false;
 		var config = option.toJSON();
 
 		function newHandler() {
 			option.set({
-				x: win.x+20,
-				y: win.y+20
+				x: win.x + 20,
+				y: win.y + 20
 			});
     	var subWin = gui.Window.open('pad.html', {
     				width: win.width,

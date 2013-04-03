@@ -13,6 +13,8 @@ define([
 				height: 600,
 				isFullscreen: false,
 				zoom: 1,
+				mode: 0, // view mode 0 is dual, 1 is only editor
+				viewerWidth: 50
 			},
 
 			initialize: function() {

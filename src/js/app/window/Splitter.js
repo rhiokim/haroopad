@@ -1,61 +1,83 @@
 define([
+		'window/Window.opt',
 		'keyboard'
 	], 
-	function(HotKey) {
+	function(options, HotKey) {
 		var gui = require('nw.gui'),
-				win = gui.Window.get();
+			win = gui.Window.get();
 		var $editor = $('#editor');
 		var $viewer = $('#haroo iframe');
 
-		var left = 50;
-		var right = 50;
+		var width, viewerWidth = options.get('viewerWidth');
 		var gap = 5;
+		var mode = options.get('mode');
 
-		function setModeEditor() {
-			$editor.show().css({ width: '100%' });
-			$viewer.hide();
+		width = 100 - viewerWidth;
+
+		if(!options.get('mode')) {
+			setModeEditor();
+		} else {
+			setModeDual();
 		}
 
-		function setModeView() {
-			$editor.hide();
-			$viewer.show().css({ width: '100%' });
+		function toggle() {
+	        mode = mode ? 0 : 1;
+
+	      	!mode ? 
+	        	setModeEditor() :
+	        	setModeDual() ;
+
+	        options.set('mode', mode);
+		}
+
+		function setModeEditor() {
+			width = 100;
+			$editor.css({ width: width +'%' });
+			$viewer.css({ width: '0%' });
+		}
+
+		function setModeDual() {
+			width = 100 - viewerWidth;
+			$editor.css({ width: width +'%' });
+			$viewer.css({ width: viewerWidth +'%' });
+			options.set('viewerWidth', viewerWidth);
 		}
 
 		function resetMode() {
-			$editor.show().css({ width: '50%' });
-			$viewer.show().css({ width: '50%' });
+			width = viewerWidth = 50;
+			setModeDual();
 		}
 
 		function setPlus5Width() {
-			if(right <= 20) {
+			if(width > 80) {
 				return;
 			}
-			left = left + gap;
-			right = right - gap;
-			$editor.show().css({ width: left+'%' });
-			$viewer.show().css({ width: right+'%' });
+
+			viewerWidth = viewerWidth - gap;
+			setModeDual();
 		}
 
 		function setMinus5Width() {
-			if(left <= 20) {
+			if(width < 20) {
 				return;
 			}
-			left = left - gap;
-			right = right + gap;
-			$editor.show().css({ width: left+'%' });
-			$viewer.show().css({ width: right+'%' });
+
+			viewerWidth = viewerWidth + gap;
+			setModeDual();
 		}
 
-		HotKey('defmod-]', setModeEditor);
-		HotKey('defmod-[', setModeView);
-		HotKey('defmod-\\', setModeReset);
+		HotKey('ctrl-]', setModeEditor);
+		HotKey('ctrl-[', setModeDual);
+		HotKey('ctrl-\\', resetMode);
 
-		HotKey('defmod-alt-]', setPlus5Width);
-		HotKey('defmod-alt-[', setMinus5Width);
+		HotKey('ctrl-alt-]', setPlus5Width);
+		HotKey('ctrl-alt-[', setMinus5Width);
 
-		win.on('view.mode.editor', setModeEditor);
-		win.on('view.mode.preview', setModeView);
+		// win.on('view.mode.editor', setModeEditor);
+		// win.on('view.mode.dual', setModeDual);
 		win.on('view.reset.mode', resetMode);
 		win.on('view.plus5.width', setPlus5Width);
 		win.on('view.minus5.width', setMinus5Width);
+
+		win.on('view.mode.toggle', toggle);
 });

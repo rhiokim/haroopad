@@ -1,31 +1,29 @@
-define(function() {
+define([
+	],function() {
 
 	var gui = require('nw.gui'),
-      win = gui.Window.get();
+      	win = gui.Window.get();
 	var View = new gui.Menu();
 
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Editor Mode',
+	        label: 'Toggle Live Preview',
 		      click: function() {
-		        win.emit('view.mode.editor');
+		      	win.emit('view.mode.toggle');
 		      }
 	    })
 	);
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Reset Mode',
+	// 	      click: function() {
+	// 	        win.emit('view.reset.mode');
+	// 	      }
+	//     })
+	// );
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Preview Mode',
-		      click: function() {
-		        win.emit('view.mode.preview');
-		      }
-	    })
-	);
-	View.append(
-	    new gui.MenuItem({
-	        label: 'Reset Mode',
-		      click: function() {
-		        win.emit('view.reset.mode');
-		      }
+          type: 'separator'
 	    })
 	);
 	View.append(
@@ -36,14 +34,14 @@ define(function() {
 		      }
 	    })
 	);
-	View.append(
-	    new gui.MenuItem({
-	        label: 'Toggle Word Count',
-		      click: function() {
-		        win.emit('show.toggle.wordcount');
-		      }
-	    })
-	);
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Toggle Word Count',
+	// 	      click: function() {
+	// 	        win.emit('show.toggle.wordcount');
+	// 	      }
+	//     })
+	// );
 	View.append(
 	    new gui.MenuItem({
           type: 'separator'
