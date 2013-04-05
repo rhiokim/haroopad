@@ -10,7 +10,7 @@ define([
 
 		var width, viewerWidth = options.get('viewerWidth');
 		var gap = 5;
-		var mode = options.get('mode');
+		var mode;
 
 		width = 100 - viewerWidth;
 
@@ -21,19 +21,21 @@ define([
 		}
 
 		function toggle() {
-	        mode = mode ? 0 : 1;
+      mode = options.get('mode') ? 0 : 1;
 
-	      	!mode ? 
-	        	setModeEditor() :
-	        	setModeDual() ;
+    	!mode ? 
+      	setModeEditor() :
+      	setModeDual() ;
 
-	        options.set('mode', mode);
+      options.set('mode', mode);
 		}
 
 		function setModeEditor() {
 			width = 100;
 			$editor.css({ width: width +'%' });
 			$viewer.css({ width: '0%' });
+
+      options.set('mode', 0);
 		}
 
 		function setModeDual() {
@@ -41,11 +43,15 @@ define([
 			$editor.css({ width: width +'%' });
 			$viewer.css({ width: viewerWidth +'%' });
 			options.set('viewerWidth', viewerWidth);
+
+      options.set('mode', 1);
 		}
 
 		function resetMode() {
 			width = viewerWidth = 50;
 			setModeDual();
+			
+      options.set('mode', 1);
 		}
 
 		function setPlus5Width() {
