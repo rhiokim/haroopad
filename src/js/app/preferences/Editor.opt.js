@@ -2,6 +2,14 @@ define([
 		'store'
 	], function(store) {
 
+		var gui = require('nw.gui');
+		var win = gui.Window.get();
+		var model;
+
+		win.on('show.toggle.linenum', function() {
+			model.set('displayLineNumber', !model.get('displayLineNumber'));
+		});
+
 		var Model = Backbone.Model.extend({
 			defaults: {
 				theme: 'solarized dark',
@@ -27,5 +35,5 @@ define([
 			}
 		});
 
-		return new Model();
+		return model = new Model;
 });
