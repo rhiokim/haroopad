@@ -11,7 +11,7 @@ define(function() {
         win.emit('copy.html');
       }
     })
-	);
+	);/*
 	Action.append(
 		new gui.MenuItem({
       type: 'separator'
@@ -139,7 +139,7 @@ define(function() {
         win.emit('action.table.cell');
       }
     })
-  );
+  );*/
 
 	return new gui.MenuItem({ label: 'Action', submenu: Action });
 });

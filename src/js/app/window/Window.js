@@ -3,18 +3,21 @@ define([
 		'keyboard',
 		'menu/MenuBar',
 		'window/Splitter',
+		'window/Window.help',
 		'dialog/Dialogs',
 		'file/File',
     'preferences/Preferences',
     'viewer'
 	], 
-	function(option, HotKey, MenuBar, Splitter, Dialogs, File, Preferences, Viewer) {
+	function(option, HotKey, MenuBar, Splitter, Help, Dialogs, File, Preferences, Viewer) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get(),
 				subWin;
+
 		var orgTitle = win.title = 'Untitled';
 		var edited = false,
-			delayClose = false;
+				delayClose = false;
+
 		var config = option.toJSON();
 
 		function newHandler() {
@@ -22,7 +25,8 @@ define([
 				x: win.x + 20,
 				y: win.y + 20
 			});
-    	var subWin = gui.Window.open('pad.html', {
+			
+    	subWin = gui.Window.open('pad.html', {
     				width: win.width,
     				height: win.height,
 					  toolbar: false,
