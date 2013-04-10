@@ -70,6 +70,8 @@ define([
 				openSaveDialog();
 			},
 
+			open: open,
+
 			save: function() {
 				fs.writeFileSync(fileEntry, Editor.getValue(), 'utf8');
 

@@ -109,6 +109,10 @@ define([
 
 			show: function() {
 				win.show();
+			},
+
+			open: function(fileEntry) {
+				File.open(fileEntry);
 			}
 		}
 });

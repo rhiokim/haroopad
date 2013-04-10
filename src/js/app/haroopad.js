@@ -47,6 +47,18 @@ requirejs([
     var res;
     var _tid_;
 
+    var gui = require('nw.gui');
+
+    if(gui.App.argv.length > 0) {
+      Window.open(gui.App.argv[0]);
+      changeHandler();
+    }
+    
+    // Listen to `open` event
+    gui.App.on('open', function(path) {
+      Window.open(path);
+    });
+
     /**
      * 코드미러 내용 변경 이벤트 핸들러
      * @return {[type]} [description]
