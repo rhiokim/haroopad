@@ -1,4 +1,5 @@
-define(function() {
+define([],
+	function() {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 	var shell = gui.Shell;
@@ -31,7 +32,7 @@ define(function() {
 	});
 	
 	win.on('help.markdown', function() {
-		
+
 	});
 
 	win.on('help.release', function() {

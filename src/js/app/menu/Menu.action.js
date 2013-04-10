@@ -1,4 +1,5 @@
-define(function() {
+define([],
+  function() {
 
 	var gui = require('nw.gui'),
       win = gui.Window.get();
