@@ -58,9 +58,8 @@ define([
 			 */
 			$(viewer).mousedown(function(e) {
 				if (e.which === 3) {
-
 					$(viewer.top).trigger('mousedown', [e]);
-		    }
+		    	}
 			});
 			
 		});
