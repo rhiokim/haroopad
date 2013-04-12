@@ -29,27 +29,27 @@ define([
 			},
 
 			changeTheme: function(e) {
-				option.set({ theme: e.val });
+				options.set({ theme: e.val });
 			},
 
 			displayLineNumber: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('displayLineNumber', bool);
+				options.set('displayLineNumber', bool);
 			},
 
 			vimKeyBinding: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('vimKeyBinding', bool);
+				options.set('vimKeyBinding', bool);
 			},
 
 			insertFourSpace: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('insertFourSpace', bool);
+				options.set('insertFourSpace', bool);
 			},
 
 			autoPairCharacters: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('autoPairCharacters', bool);
+				options.set('autoPairCharacters', bool);
 			}
 		});
 

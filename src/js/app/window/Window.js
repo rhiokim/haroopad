@@ -7,9 +7,10 @@ define([
 		'dialog/Dialogs',
 		'file/File',
     'preferences/Preferences',
-    'viewer'
+    'viewer',
+		'window/Window.dragdrop'
 	], 
-	function(option, HotKey, MenuBar, Splitter, Help, Dialogs, File, Preferences, Viewer) {
+	function(options, HotKey, MenuBar, Splitter, Help, Dialogs, File, Preferences, Viewer) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get(),
 				subWin;
@@ -18,10 +19,10 @@ define([
 		var edited = false,
 				delayClose = false;
 
-		var config = option.toJSON();
+		var config = options.toJSON();
 
 		function newHandler() {
-			option.set({
+			options.set({
 				x: win.x + 20,
 				y: win.y + 20
 			});
@@ -35,7 +36,7 @@ define([
 		}
 
 		function close() {
-			option.save();
+			options.save();
 			win.hide();
 			win.close(true);
 		}

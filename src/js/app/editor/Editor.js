@@ -14,6 +14,8 @@ define([
 					    lineWrapping: true,
 					    autofocus: true,
 					    workDelay: 1000,
+					    dragDrop: false,
+					    // onDragEvent: dragDropHandler,
 					    extraKeys: Keymap
 					  });
 
@@ -64,6 +66,11 @@ define([
 			editor.setOption('autoCloseBrackets', value);
 		});
 
+		function dragDropHandler(cm, e) {
+			console.log(e)
+			e.preventDefault();
+			return false;
+		}
 		/**
 		 * sync scroll handler
 		 * @return {[type]} [description]

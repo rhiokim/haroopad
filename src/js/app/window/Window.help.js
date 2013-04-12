@@ -1,5 +1,7 @@
-define([],
-	function() {
+define([
+		'window/Window.opt'
+		],
+	function(options) {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 	var shell = gui.Shell;
@@ -16,12 +18,22 @@ define([],
 	}
 
 	win.on('help', function() {
-		helpWin = gui.Window.open('pad.html', {
+		if(helpWin) {
+			//TODO: focus
+			return;
+		}
+
+		options.set({
+			x: win.x + 20,
+			y: win.y + 20
+		});
+		
+		helpWin = gui.Window.open('pad.html?file=About.md', {
 						x: win.x + 20,
 						y: win.y + 20,
     				width: win.width,
     				height: win.height,
-					  toolbar: false,
+					  toolbar: true,
 					  show: false
 					});
 

@@ -44,20 +44,32 @@ requirejs([
     'viewer'
   ], function(Window, Editor, Parser, Viewer) {
 
-    var res;
+    var res, file;
     var _tid_;
 
-    var gui = require('nw.gui');
+    var gui = require('nw.gui'),
+        win = gui.Window.get();
 
+    file = url('?file');
+
+    // Listen to `open` event
+    win.on('open.file', function(path) {
+      Window.open(path);
+
+      res = Parser(Editor.getValue());
+      Viewer.update(res);
+    });
+
+    //run with file open;
+    if(file) {
+      win.emit('open.file', file);
+    }
+
+    //open file with commend line
     if(gui.App.argv.length > 0) {
       Window.open(gui.App.argv[0]);
       changeHandler();
     }
-    
-    // Listen to `open` event
-    gui.App.on('open', function(path) {
-      Window.open(path);
-    });
 
     /**
      * 코드미러 내용 변경 이벤트 핸들러
@@ -76,7 +88,7 @@ requirejs([
         clearTimeout(_tid_);
       }
 
-      _tid_ = setTimeout(changeHandler, 200);
+      _tid_ = setTimeout(changeHandler, 300);
     }
 
     // Editor.on("change", changeHandler);

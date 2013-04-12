@@ -1,6 +1,18 @@
 // Load native UI library.
-var gui = require('nw.gui');
+var gui = require('nw.gui'),
+    win = gui.Window.get();
 var _options;
+
+window.ondragover = function(e) { 
+  e.preventDefault(); 
+  win.emit('dragover', e);
+  return false;
+};
+window.ondrop = function(e) { 
+  e.preventDefault(); 
+  win.emit('dragdrop', e);
+  return false;
+};
 
 function loadCss(url) {
   var link = document.createElement("link");
