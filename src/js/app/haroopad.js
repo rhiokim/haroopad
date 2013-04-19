@@ -51,6 +51,8 @@ requirejs([
         win = gui.Window.get();
 
     file = url('?file');
+    x = url('?x');
+    y = url('?y');
 
     // Listen to `open` event
     win.on('open.file', function(path) {
@@ -62,7 +64,7 @@ requirejs([
 
     //run with file open;
     if(file) {
-      win.emit('open.file', file);
+      win.emit('open.file', file, x, y);
     }
 
     //open file with commend line

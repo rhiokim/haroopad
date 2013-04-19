@@ -1,6 +1,6 @@
 define([
 		'window/Window.opt'
-		],
+	],
 	function(options) {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
@@ -29,8 +29,6 @@ define([
 		});
 		
 		helpWin = gui.Window.open('pad.html?file=About.md', {
-						x: win.x + 20,
-						y: win.y + 20,
     				width: win.width,
     				height: win.height,
 					  toolbar: true,
