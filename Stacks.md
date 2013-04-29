@@ -13,10 +13,13 @@ haroopad technical stack
 * font-awesome-more
 * highlight.js
 * underscore.js
+* markdown-css
 
 ## automation build system
 * bash for create .dmg
 * node.js
+   - node-mailer
+   - passport
 * grunt.js
 	- grunt-contrib
 	- grunt-shell
