@@ -53,6 +53,29 @@ footer a {
             box-shadow: 0 0 35px #444;
 }
 
+.rule-b {
+    display: block;
+    height: 35px;
+    overflow: hidden;    
+}
+
+.rule-b i {
+    display: block;
+    background: gray;
+    height: 3px;
+}
+
+.rule-b > i {
+    margin-top: 35px;
+    height: 100px;
+    -webkit-border-radius: 100%;
+        -ms-border-radius: 100%;
+            border-radius: 100%;
+    -webkit-box-shadow: 0 0 35px #444;
+        -ms-box-shadow: 0 0 35px #444;
+            box-shadow: 0 0 35px #444;
+}
+
 #download-area img{
     /*width: 160px;*/
     height: 160px;

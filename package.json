@@ -10,7 +10,7 @@
   "devDependencies": {
     "grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
     "grunt-contrib-copy": "git://github.com/gruntjs/grunt-contrib-copy.git",
-    "grunt-shell": "git://github.com/excellenteasy/grunt-shell.git#13d09d3c936036087bd814a920d19d55f0c44cb6",
+    "grunt-shell": "~0.2.2",
     "grunt-contrib-compress": "git://github.com/ctalkington/grunt-contrib-compress.git#18d386688961e8040c6169eccdbb941ef71cb2fb",
     "grunt-replace": "git://github.com/outaTiME/grunt-replace.git",
     "grunt": "~0.4.0",
