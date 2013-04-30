@@ -92,3 +92,7 @@ img.logo {
         -ms-border-radius: 6px 6px 0 0 !important;
             border-radius: 6px 6px 0 0;
 }
+
+.share .nav li {
+    padding-top: 0;
+}

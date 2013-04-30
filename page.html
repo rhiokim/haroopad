@@ -69,22 +69,23 @@
     <div class="container">
       <div class="row demo-tiles">
         <div class="span4">
-          <div class="well mrl" >
+          <div class="share mrl" >
             <ul class="nav nav-list">
               <li class="nav-header">List header</li>
-              <li><a href="#">Home</a></li>
-              <li><a href="#Stacks">Stacks</a></li>
-              <li><a href="#">Acknowlements</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#markdown">Markdown?</a></li>
+              <li><a href="#syntax">Markdown syntax</a></li>
               <li class="nav-header">Usage</li>
-              <li><a href="#">Editing Markdown</a></li>
-              <li><a href="#">Load & Save</a></li>
-              <li><a href="#">Show Shortcuts</a></li>
-              <li><a href="#">Publishing & Sharing</a></li>
-              <li><a href="#">Importing local/external contents</a></li>
-              <li class="divider"></li>
+              <li><a href="#editing-markdown">Editing markdown</a></li>
+              <li><a href="#load-and-save">Load & Save</a></li>
+              <li><a href="#show-shortcuts">Show shortcuts</a></li>
+              <li><a href="#publishing-sharing">Publishing & Sharing</a></li>
+              <li><a href="#importing-external-contents">Importing local/external contents</a></li>
+              <li><a href="#change-theme-and-style">Change theme & style</a></li>
+              <!--li class="divider"></li>
               <li class="nav-header">Hacking</li>
               <li><a href="#">Customizing my theme</a></li>
-              <li><a href="#">Create addon, component</a></li>
+              <li><a href="#">Create addon, component</a></li-->
               <li class="divider"></li>
               <li class="nav-header">FAQ</li>
               <li><a href="#">How to import my external contents?</a></li>
@@ -92,14 +93,14 @@
               <li><a href="#">How to export my content to other services?</a></li>
               <li class="divider"></li>
             </ul>
-            <a href="#" class="btn btn-primary btn-block btn-large">Share</a>
+            <a href="#" class="btn btn-primary btn-block btn-large">Share to Twitter</a>
+            <a href="#" class="btn btn-primary btn-block btn-large">Share to Facebook</a>
           </div>
         </div>
         <div class="span8 contents">
         </div>
       </div>
     </div>
-
 
     <footer>
       <div class="container">
@@ -164,7 +165,7 @@
     </script>
     <script>
       function loadPost(file) {
-        file = 'docs/'+ file.replace('#', '') +'.md';
+        file = 'docs/'+ file.replace('#', '') +'/index.md';
 
         $.ajax({
           url: file
@@ -190,6 +191,8 @@
 
         if(file) {
           loadPost(file);
+        } else {
+          loadPost('About');
         }
       });
     </script>
