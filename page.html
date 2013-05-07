@@ -13,6 +13,8 @@
     <link href="/assets/css/themes/dark/dark.css" rel="stylesheet">
     <link href="/assets/css/themes/bar/bar.css" rel="stylesheet">
     <link href="/assets/css/themes/flat/flat.css" rel="stylesheet">
+    <link href="/assets/css/markdown.css" rel="stylesheet">
+    <link href="/assets/css/markdown-haroopad.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
 
     <!-- Loading Flat UI -->
@@ -71,10 +73,11 @@
         <div class="span4">
           <div class="share mrl" >
             <ul class="nav nav-list">
-              <li class="nav-header">List header</li>
+              <li class="nav-header">Haroopad</li>
               <li><a href="#about">About</a></li>
               <li><a href="#markdown">Markdown?</a></li>
               <li><a href="#syntax">Markdown syntax</a></li>
+              <li><a href="#multimarkdown">Multi Markdown?</a></li>
               <li class="nav-header">Usage</li>
               <li><a href="#editing-markdown">Editing markdown</a></li>
               <li><a href="#load-and-save">Load & Save</a></li>
@@ -88,6 +91,7 @@
               <li><a href="#">Create addon, component</a></li-->
               <li class="divider"></li>
               <li class="nav-header">FAQ</li>
+              <li><a href="#">Markdown merits</a></li>
               <li><a href="#">How to import my external contents?</a></li>
               <li><a href="#">How can save my documents to blog?</a></li>
               <li><a href="#">How to export my content to other services?</a></li>
@@ -97,7 +101,7 @@
             <a href="#" class="btn btn-primary btn-block btn-large">Share to Facebook</a>
           </div>
         </div>
-        <div class="span8 contents">
+        <div class="span8 contents markdown haroopad">
         </div>
       </div>
     </div>
@@ -165,12 +169,15 @@
     </script>
     <script>
       function loadPost(file) {
-        file = 'docs/'+ file.replace('#', '') +'/index.md';
+        var dir = 'docs/'+ file.replace('#', '') +'/';
+        file = dir +'index.md';
 
         $.ajax({
           url: file
         }).done(function(data) {
-          $('.contents').html(marked(data))
+          var str = marked(data);
+          str = str.replace(/src=\"images/g, 'src="'+ dir +'images');
+          $('.contents').html(str)
         });
       }
 

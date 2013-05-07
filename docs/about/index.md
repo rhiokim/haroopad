@@ -2,6 +2,8 @@
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
+하루패드는 기술적으로는 마크다운 포맷을 기반으로 하는 **웹 친화적인 문서 편집도구** 입니다.
+
 * Support cross platform
 * Multi markdown & extensions
 * Easy Publishing

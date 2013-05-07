@@ -1,4 +1,4 @@
-# Standard Markdown
+## Standard Markdown
 
 ### BLOCK ELEMENTS
 ##### HEADERS
@@ -131,7 +131,3 @@ Here’s an example of reference links in action:
 ##### EMAIL
 
     Contact to <example@example.com>.
-
-# Multi Markdown
-
-# Extra Syntax
