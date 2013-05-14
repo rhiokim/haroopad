@@ -1,4 +1,4 @@
-# Markdown
+## Markdown
 ![](images/markdown_128.png)
 
 [마크다운(markdown)][markdown]은 문서를 작성하는 경량 마크업 언어의 하나이다.  

@@ -131,3 +131,7 @@ Here’s an example of reference links in action:
 ##### EMAIL
 
     Contact to <example@example.com>.
+
+--- 
+
+Standard Markdown Syntax References : [http://daringfireball.net/projects/markdown/syntax](http://daringfireball.net/projects/markdown/syntax)

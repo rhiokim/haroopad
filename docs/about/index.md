@@ -1,4 +1,4 @@
-# Haroopad
+## Haroopad
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
