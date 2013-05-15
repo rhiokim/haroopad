@@ -5,11 +5,11 @@
 일반적으로 단축키는 드랍다운 메뉴에 함께 표시되는게 일반적이나 웹 기술을 기반으로 하는 하루패드는 아직 이 부분에 있어서는 완벽하지 않다.
 
 단축키 맵의 경우도 단축키로만 접근할 수 있다.
-(![](/assets/images/mac_shortcuts/ks_command.gif) - ![](/assets/images/mac_shortcuts/ks_control.gif) - k)
+(Command - Ctrl - K)
 
 ![](images/shortcuts-0.png)
 
-단축키를 이용할 때 유의해야할 점은 각 운영체제마다 특수키(Window, Command) 를 이용하는 경우는 Ctrl 키로 대체된다.
+단축키를 이용할 때 유의해야 할 점은 각 운영체제마다 특수키(Window, Command) 를 이용하는 경우는 **Ctrl** 키로 대체된다.
 
 ### 키 맵 (for haroopad)
 
@@ -20,10 +20,12 @@ Command - S | Save file
 Command - O | Open file
 Command - , | Preferences
 Ctrl - ]    | Only Editor mode
-Ctrl + [    | Dual Mode
-Ctrl +Alt + ] |Editor with + 5%
-Ctrl +Alt + [ |Editor with - 5%
-Ctrl + \    | Reset Dual Mode
+Ctrl - [    | Dual Mode
+Ctrl - Alt - ] | Editor with + 5%
+Ctrl - Alt - [ | Editor with - 5%
+Ctrl - \    | Reset Dual Mode
+Command - Ctrl - K | Show Shortcuts
+
   
 ### 키 맵 (for markdown editing)
 
