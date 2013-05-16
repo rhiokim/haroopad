@@ -96,3 +96,7 @@ img.logo {
 .share .nav li {
     padding-top: 0;
 }
+
+.share li>ul {
+    padding: 0 15px;
+}

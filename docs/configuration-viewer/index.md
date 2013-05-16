@@ -14,14 +14,15 @@ Markdown CSS 표준 프로젝트 : [http://rhiokim.github.com/markdown-css](http
 
 #### code style
 
-멀티 마크다운에서 제공되는 팬스 코드 블럭(Fenced Code block)은 프로그래머들은 자주 사용하게 된다.
+멀티 마크다운에 팬스 코드 블럭(Fenced Code block)은 프로그래머들 사이에서 자주 사용한다.
 
-프로그래밍 언어는 무수히 많다. 
-
-이것들을 개별적으로 구문 강조하기란 쉬운일이 아니고 원하는 스타일을 적용하기 쉽지 않다
+그리고 프로그래밍 언어의 종류는 매우 많아 개별적으로 구문 강조하기란 쉬운일이 아니고 원하는 스타일을 적용하기 쉽지 않다.
 
 ![](images/theme-1.png).
 
-하지만 하루패드에서는 54 가지의 프로그래밍 언어와 26 가지의 구문 강조 스타일을 제공한다.
+하지만 하루패드에서는 54가지의 프로그래밍 언어와 26가지의 구문 강조 스타일을 제공한다.
 
 ![](images/theme-3.png)
+
+코드 스타일 테마와 지원 언어에 대한 정보는 [여기](http://softwaremaniacs.org/media/soft/highlight/test.html)를 참고하세요.
+
