@@ -100,3 +100,45 @@ img.logo {
 .share li>ul {
     padding: 0 15px;
 }
+
+/**
+ * theme
+ */
+
+.navbar-clouds .navbar-inner {
+    background-color: #ECF0F1;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.intro {
+    height: 500px;
+    overflow: hidden;
+}
+
+.header-intro {
+    padding: 50px 0 0 0;
+    display: block;
+}
+
+.header-desc {
+    width: 100%; overflow: hidden; display: block;
+}
+
+.header-desc .frame {
+    float: left; /*width: 370px; */display: block;
+}
+
+.header-desc {
+    color: #fff;
+}
+.header-desc h2 {
+    font-size: 38px;
+    line-height: 35px;
+    margin: 0 0 20px;
+}
+
+.header-img {
+    /*float: right;*/
+    display: block;
+    text-align: center;
+}
