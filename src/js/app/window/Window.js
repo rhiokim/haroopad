@@ -15,7 +15,7 @@ define([
 		var win = gui.Window.get(),
 				subWin;
 
-		var orgTitle = win.title = 'Untitled';
+		var orgTitle = 'Untitled';
 		var edited = false,
 				delayClose = false;
 
