@@ -5,6 +5,7 @@
   "version": "0.2.2",
   "keywords": [ "markdown", "haroopress" ],
   "window": {
+    "title": "haroopad",
     "icon": "logo.png",
     "toolbar": false,
     "show": false,
