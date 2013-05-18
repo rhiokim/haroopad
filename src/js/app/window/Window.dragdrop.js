@@ -40,8 +40,7 @@ define([
 
     win.on('dragdrop', function(e) {
       for (var i = 0; i < e.dataTransfer.files.length; ++i) {
-        // console.log(e.dataTransfer.files[i].path);
-        openFileHandler(e.dataTransfer.files[i].path, i);
+        // openFileHandler(e.dataTransfer.files[i].path, i);
       }
       return false;
     });

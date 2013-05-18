@@ -13,8 +13,7 @@
     "min_width": 300,
     "min_height": 200,
     "max_width": 1920,
-    "max_height": 1080,
-    "as_desktop": true
+    "max_height": 1080
   },
   "snapshot": "js/haroopad.bin",
   "chromium-args" : "--disable-gpu",

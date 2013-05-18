@@ -9,36 +9,36 @@ define([
 	var helpWin;
 
 	function closeHandler() {
-    helpWin.hide();
+    // helpWin.hide();
 
-    if (helpWin != null)
-      helpWin.close(true);
+    // if (helpWin != null)
+    //   helpWin.close(true);
 
-    helpWin.close(true);
+    // helpWin.close(true);
 	}
 
 	win.on('help', function() {
-		if(helpWin) {
-			//TODO: focus
-			return;
-		}
+		// if(helpWin) {
+		// 	//TODO: focus
+		// 	return;
+		// }
 
-		options.set({
-			x: win.x + 20,
-			y: win.y + 20
-		});
+		// options.set({
+		// 	x: win.x + 20,
+		// 	y: win.y + 20
+		// });
 		
-		helpWin = gui.Window.open('pad.html?file=About.md', {
-    				width: win.width,
-    				height: win.height,
-					  toolbar: true,
-					  show: false
-					});
+		// helpWin = gui.Window.open('pad.html?file=About.md', {
+  //   				width: win.width,
+  //   				height: win.height,
+		// 			  toolbar: true,
+		// 			  show: false
+		// 			});
 
-		helpWin.on('close', closeHandler);
-		helpWin.on('closed', function() {
-	    helpWin = null;
-	  });
+		// helpWin.on('close', closeHandler);
+		// helpWin.on('closed', function() {
+	 //    helpWin = null;
+	 //  });
 	});
 	
 	win.on('help.markdown', function() {
@@ -50,12 +50,12 @@ define([
 	});
 
 	win.on('help.acknowledgements', function() {
-		gui.Window.open('pad.html', {
-			width: 350,
-			height: 500,
-			toolbar: false,
-			show: false
-		});
+		// gui.Window.open('pad.html', {
+		// 	width: 350,
+		// 	height: 500,
+		// 	toolbar: false,
+		// 	show: false
+		// });
 	});
 
 	win.on('help.site', function() {
