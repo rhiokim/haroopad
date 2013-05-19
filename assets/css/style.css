@@ -111,12 +111,12 @@ img.logo {
 }
 
 .intro {
-    height: 500px;
+    height: 400px;
     overflow: hidden;
 }
 
 .header-intro {
-    padding: 50px 0 0 0;
+    padding: 100px 0 0 0;
     display: block;
 }
 
@@ -125,7 +125,7 @@ img.logo {
 }
 
 .header-desc .frame {
-    float: left; /*width: 370px; */display: block;
+    float: left; width: 370px; display: block;
 }
 
 .header-desc {
@@ -133,12 +133,13 @@ img.logo {
 }
 .header-desc h2 {
     font-size: 38px;
-    line-height: 35px;
+    line-height: 38px;
     margin: 0 0 20px;
 }
 
 .header-img {
-    /*float: right;*/
+    float: right;
+    margin:-310px 0;
     display: block;
     text-align: center;
 }
