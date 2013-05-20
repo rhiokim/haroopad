@@ -62,10 +62,12 @@ define([
 			e.preventDefault();
 
 			e = (ev) ? ev : e;
-			x = (ev) ? $('#editor').width() + e.pageX : e.pageX;
+			x = (ev) ? $('#editor').width() + e.clientX : e.clientX;
+			y = (ev) ? e.clientY : e.clientY;
 
+console.log(e, x, y)
 			if (e.which === 3) {
-				Context.popup(x, e.pageY);
+				Context.popup(x, y);
 				return false;
 	    }
 
