@@ -101,6 +101,11 @@ img.logo {
     padding: 0 15px;
 }
 
+.share .btn {
+    -webkit-border-radius: 0 6px 6px 6px !important;
+    -moz-border-radius: 0 6px 6px 6px !important;
+    border-radius: 0 6px 6px 6px !important; 
+}
 /**
  * theme
  */
