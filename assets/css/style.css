@@ -84,6 +84,10 @@ footer a {
 img.logo {
     margin-top: -23px;
 }
+
+blockquote p {
+    font-size: 1em;
+}
 /**
  * fixed
  */
