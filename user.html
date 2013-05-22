@@ -4,6 +4,10 @@
   <head>
     <meta charset="utf-8">
     <title>Haroopad - Markdown Editor on Cross Platform</title>
+    <meta name="description" content="하루패드는 마크다운 에디터로 웹 친화적인 문서 작성을 위한 도구입니다.마크다운을 기반으로 웹 문서, 블로그, 메일뿐만 아니라 전문가적인 리포팅 문서를 작성할 수도 있습니다. 윈도우, 리눅스, 맥 운영체제를 지원하여 원하는 플랫폼에서 동일한 마크다운 문서편집 경험을 얻을 수 있습니다.">
+    <meta name="author" content="Rhio Kim">
+    <meta name="keywords" content="markdown, editor, haroopad, haroopress" />
+    <meta name="generator" content="sublime text" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
@@ -24,6 +28,59 @@
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
     <![endif]-->
+
+    <!--
+      # haroopad technical stack
+      
+      소스 보기를 했다면 개발자겠죠?
+
+      하루패드는 웹 기술(HTML, CSS, Javascript)을 기반으로 한 수 많은 오픈 소스를 활용하여 개발된
+      데스크탑 애플리케이션입니다. 다음은 기술 스택에 대한 소개입니다.
+
+      ## front-end
+      * codemirror
+      * marked
+      * twitter bootstrap of google style
+      * jquery
+      * backbone.js
+      * require.js + text.js
+      * store.js
+      * keymage.js
+      * font-awesome-more
+      * highlight.js
+      * underscore.js
+
+      ## automation build system
+      * bash for create .dmg
+      * node.js
+      * grunt.js
+        - grunt-contrib
+        - grunt-shell
+        - grunt-replace
+        - grunt-contrib-requirejs
+      * stringex
+      * node-webkit
+
+      ### for windows
+      * NSIS(Nullsoft Scriptable Install System) for window
+
+      ## html5
+      * PouchDB based on IndexedDB in the browser
+
+      ## technical specification
+      * less
+      * package.json
+
+
+      ## sub project
+      * standard style for markdown using less
+      * cross platform build tool for hybrid web application
+        - grunt.js
+        - bash
+          > .dmg creation - https://github.com/andreyvit/yoursway-create-dmg
+        - NSIS
+        - v8 heap memory snapshot
+    -->
   </head>
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
     <div style="background-color: #1ABC9C;">
@@ -306,8 +363,8 @@
           </div>
           <br/>
           <p class="text-center">
-            <a href="feedback.html" class="btn btn-large" target="_blank"><span class="fui-bubble-24"></span> 사용해 보니 어떠세요?</a>
-            <a href="https://github.com/rhiokim/haroopad/issues" class="btn btn-large btn-danger" target="_blank"><span class="fui-eye-24"></span> 무슨 문제라도 있으세요?</a>
+            <a href="https://twitter.com/intent/tweet?original_referer=http://pad.haroopress.com&tw_p=tweetbutton&text=via @haroopad %23feedback" class="btn btn-large btn-success" target="_blank" data-toggle="tooltip" data-placement="bottom" data-original-title="<p>많은 피드백은 오픈소스를 성장시킵니다. 트윗을 날려주시면 실시간으로 반응합니다. :-)</p>"><span class="fui-bubble-24"></span> 사용해 보니 어떠세요?</a>
+            <a href="https://github.com/rhiokim/haroopad/issues" class="btn btn-large btn-danger" target="_blank" data-toggle="tooltip" data-placement="bottom" data-original-title="<p>사용하시다가 발생한 오류나 불편/개선 사항은 언제든지 Github 이슈트래커에 남겨주세요.:-)</p>"><span class="fui-eye-24"></span> 오류나 불편사항 있으세요?</a>
           </p>
         </div>
         <!-- <div class="span12">
@@ -401,7 +458,7 @@
             기부는 <strong>Paypal</strong> 로 이루어집니다.
           </p>
           <p>
-            <a href="https://twitter.com/intent/tweet?original_referer=http://pad.haroopress.com/page.html&tw_p=tweetbutton&text=하루패드 유용하게 쓸께요. @Rhiokim 고마워요!. 언제 커피 한잔해요. 제가 살께요.:-) " class="btn btn-large btn-block btn-warning">커피 한잔 후원하기 :-)</a>
+            <a href="https://twitter.com/intent/tweet?original_referer=http://pad.haroopress.com/page.html&tw_p=tweetbutton&text=하루패드 유용하게 쓸께요. @Rhiokim 고마워요!. 언제 커피어(or 비어) 한잔해요. 제가 살께요.:-) %23coffeeWithYou" class="btn btn-large btn-block btn-warning">커피(or 비어) 한잔 후원하기 :-)</a>
           </p>
 
           <br/>
@@ -409,15 +466,15 @@
             '<strong>하루패드</strong>'의 개발자의 노고와 발전 가능성에 투자하기
           </p>
           <p>
-            <a href="#" class="btn btn-large btn-primary">$5</a>
-            <a href="#" class="btn btn-large btn-primary">$10</a>
-            <a href="#" class="btn btn-large btn-primary">$25</a>
-            <a href="#" class="btn btn-large btn-primary">$50</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F7A6CN8KBMF7J" class="btn btn-large btn-primary" target="_blank">$5</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FFZRJ6QVASMZJ" class="btn btn-large btn-primary" target="_blank">$10</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FEFMLNAMJQJ86" class="btn btn-large btn-primary" target="_blank">$25</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4VXMBSMX2CFM6" class="btn btn-large btn-primary" target="_blank">$50</a>
           </p>
           <p>
-            <a href="#" class="btn btn-large btn-primary">$100</a>
-            <a href="#" class="btn btn-large btn-primary">$200</a>
-            <a href="#" class="btn btn-large btn-primary">$500</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=88WE6QJEYGLW2" class="btn btn-large btn-primary" target="_blank">$100</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y6K5XFSNLTQRE" class="btn btn-large btn-primary" target="_blank">$200</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3SHSPHGUGYWH4" class="btn btn-large btn-primary" target="_blank">$500</a>
           </p>
         </div>
         

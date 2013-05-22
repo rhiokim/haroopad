@@ -1,5 +1,16 @@
-## haroopad v0.4.0
-- Public activity stream (only Twitter) 
+## Haroopad v0.3.1
+
+##### New Features
+##### Bug fixes
+
+* error context menu position #15
+
+##### Enhancements
+
+* enhance markdown css for viewer area #21
+
+
+[https://github.com/rhiokim/haroopad/issues?milestone=2&page=1&state=closed](https://github.com/rhiokim/haroopad/issues?milestone=2&page=1&state=closed)
 
 ## Haroopad v0.3.0
 
