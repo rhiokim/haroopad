@@ -6,6 +6,10 @@ define([
 		'preferences/General.opt'
 	],
 	function(HotKey, Viewer, Keymap, editorOpt, generalOpt) {
+		var gui = require('nw.gui'),
+      	win = gui.Window.get(),
+      	clipboard = gui.Clipboard.get();
+
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
 					    lineNumbers: true,
@@ -66,8 +70,25 @@ define([
 			editor.setOption('autoCloseBrackets', value);
 		});
 
+		/**
+		 * fire context menu event
+		 */
+
+		win.on('context.cut', function() {
+			clipboard.set(editor.getSelection());
+			editor.replaceSelection('');
+		});
+		win.on('context.copy', function() {
+			clipboard.set(editor.getSelection());
+		});
+		win.on('context.paste', function() {
+			editor.replaceSelection(clipboard.get());
+		});
+		win.on('context.select.all', function() {
+			editor.setSelection(0, 2);
+		});
+
 		function dragDropHandler(cm, e) {
-			console.log(e)
 			e.preventDefault();
 			return false;
 		}

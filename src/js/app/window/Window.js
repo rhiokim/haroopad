@@ -2,6 +2,7 @@ define([
 		'window/Window.opt',
 		'keyboard',
 		'menu/MenuBar',
+		'menu/Context/Context',
 		'window/Splitter',
 		'window/Window.help',
 		'dialog/Dialogs',
@@ -10,7 +11,7 @@ define([
     'viewer',
 		'window/Window.dragdrop'
 	], 
-	function(options, HotKey, MenuBar, Splitter, Help, Dialogs, File, Preferences, Viewer) {
+	function(options, HotKey, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Viewer) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get(),
 				subWin;
