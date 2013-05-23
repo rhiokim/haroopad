@@ -28,7 +28,8 @@ define([
 			$("#saveFile").trigger("click");
 		}
 
-		function open(fileEntry) {
+		function open(file) {
+			fileEntry = file;
 			str = fs.readFileSync(fileEntry, 'utf8');
 			Recents.add(fileEntry, 'file');
 			Editor.setValue(str);
