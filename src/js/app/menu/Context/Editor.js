@@ -48,7 +48,7 @@ define([
 		Context.append(mCut);
 		Context.append(mCopy);
 		Context.append(mPaste);
-		Context.append(mSelectAll);
+		// Context.append(mSelectAll);
 
 		Context.append(sepItem());
 
