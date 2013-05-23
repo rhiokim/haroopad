@@ -5,14 +5,30 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>node-webkit</string>
+	<string>haroopad</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>md</string>
+				<string>markdown</string>
+				<string>mdown</string>
+				<string>markdn</string>
+				<string>mkd</string>
+				<string>mkdn</string>
+				<string>mdwn</string>
+				<string>mdtxt</string>
+				<string>mdtext</string>
+				<string>mdml</string>
+				<string>text</string>
+				<string>txt</string>
+				<string>*</string>
+			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>nw.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>node-webkit App</string>
+			<string>haroopad App</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
@@ -39,6 +55,18 @@
 	<string>node-webkit</string>
 	<key>CFBundleIconFile</key>
 	<string>nw.icns</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Haroopad URL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>haroopad</string>
+				<string>haroopad.mac</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.intel.nw</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -69,17 +97,17 @@
 				<string>com.pkware.zip-archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>node-webkit App</string>
+			<string>haroopad App</string>
 			<key>UTTypeIconFile</key>
 			<string>nw.icns</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.intel.nw.app</string>
+			<string>haroopad</string>
 			<key>UTTypeReferenceURL</key>
 			<string>https://haroopress.com/haroopad</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>com.apple.ostype</key>
-				<string>node-webkit</string>
+				<string>haroopad</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>nw</string>

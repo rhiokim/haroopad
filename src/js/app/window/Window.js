@@ -1,26 +1,35 @@
 define([
 		'window/Window.opt',
 		'keyboard',
+		'menu/MenuBar',
+		'menu/Context/Context',
 		'window/Splitter',
+		'window/Window.help',
 		'dialog/Dialogs',
 		'file/File',
-    'preferences/Preferences'
+    'preferences/Preferences',
+    'viewer',
+		'window/Window.dragdrop',
+		'window/Window.exports'
 	], 
-	function(option, HotKey, Splitter, Dialogs, File, Preferences) {
+	function(options, HotKey, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Viewer) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get(),
 				subWin;
-		var orgTitle = win.title = 'Untitled';
+
+		var orgTitle = 'Untitled';
 		var edited = false,
 				delayClose = false;
-		var config = option.toJSON();
+
+		var config = options.toJSON();
 
 		function newHandler() {
-			option.set({
-				x: win.x+20,
-				y: win.y+20
+			options.set({
+				x: win.x + 20,
+				y: win.y + 20
 			});
-    	var subWin = gui.Window.open('pad.html', {
+			
+    	subWin = gui.Window.open('pad.html', {
     				width: win.width,
     				height: win.height,
 					  toolbar: false,
@@ -29,7 +38,7 @@ define([
 		}
 
 		function close() {
-			option.save();
+			options.save();
 			win.hide();
 			win.close(true);
 		}
@@ -60,11 +69,18 @@ define([
 		 */
 		File.bind('opened', function(dirname, basename) {
 			win.title = orgTitle = basename;
+			Viewer.init({
+				dirname: dirname
+			});
 		});
 
 		File.bind('saved', function(dirname, basename) {
 			win.title = orgTitle = basename;
 			edited = false;
+			
+			Viewer.init({
+				dirname: dirname
+			});
 
 			//window closing save
 			if(delayClose) {
@@ -73,6 +89,9 @@ define([
 		});
 
 		HotKey('defmod-n', newHandler);
+		win.on('file.new', newHandler);
+
+		win.on('file.close', win.close);
 
 		HotKey('defmod-shift-ctrl-d', function() {
 			win.showDevTools();
@@ -80,8 +99,6 @@ define([
 
 		win.resizeTo(config.width, config.height);
 		win.moveTo(config.x, config.y);
-
-		win.show();
 
 		return {
 			edited: function() {
@@ -91,6 +108,14 @@ define([
 
 			setTitle: function(title) {
 				win.title = orgTitle = title;
+			},
+
+			show: function() {
+				win.show();
+			},
+
+			open: function(fileEntry) {
+				File.open(fileEntry);
 			}
 		}
 });

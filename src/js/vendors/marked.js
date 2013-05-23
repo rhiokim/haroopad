@@ -70,7 +70,7 @@ block.normal = merge({}, block);
  */
 
 block.gfm = merge({}, block.normal, {
-  fences: /^ *(`{3,}|~{3,}) *(\w+)? *\n([\s\S]+?)\s*\1 *(?:\n+|$)/,
+  fences: /^ *(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n+|$)/,
   paragraph: /^/
 });
 
@@ -274,19 +274,15 @@ Lexer.prototype.token = function(src, top) {
     // list
     if (cap = this.rules.list.exec(src)) {
       src = src.substring(cap[0].length);
+      bull = cap[2];
 
       this.tokens.push({
         type: 'list_start',
-        ordered: isFinite(cap[2])
+        ordered: bull.length > 1
       });
 
       // Get each top-level item.
       cap = cap[0].match(this.rules.item);
-
-      // Get bullet.
-      if (this.options.smartLists) {
-        bull = block.bullet.exec(cap[0])[0];
-      }
 
       next = false;
       l = cap.length;
@@ -313,7 +309,7 @@ Lexer.prototype.token = function(src, top) {
         // Backpedal if it does not belong in this list.
         if (this.options.smartLists && i !== l - 1) {
           b = block.bullet.exec(cap[i+1])[0];
-          if (bull !== b && !(bull[1] === '.' && b[1] === '.')) {
+          if (bull !== b && !(bull.length > 1 && b.length > 1)) {
             src = cap.slice(i + 1).join('\n') + src;
             i = l - 1;
           }

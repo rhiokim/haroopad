@@ -1,27 +1,15 @@
 <!DOCTYPE html>
-
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="en"> 
 <head>
   <meta charset="utf-8" />
-  <title>하루패드</title>
+  <title>haroopad</title>
   
-  <!-- Included CSS Files (Compressed) -->
   <link rel="stylesheet" href="css/codemirror.min.css">
   <link rel="stylesheet" href="css/haroopad.min.css">
-
-  <script src="js/haroopad.vendors.min.js"></script>
-  <script src="js/codemirror.min.js"></script>
-  <script>
-    haroopad.start();
-  </script>
 </head>
 <body>
   
   <div id="editor"><textarea id="code" name="code"></textarea></div>
-  <!-- <div id="spliter"></div> -->
-  <!-- <div id="haroo"><article></article></div> -->
   <div id="haroo"><iframe src="viewer.html"></iframe></div>
 
   <div id="fields"></div>
@@ -32,6 +20,11 @@
       </div>
     </div>
   </div>
-
 </body>
+
+<script>
+  haroopad.apply(this, [this, document]);
+</script>
+<script src="js/vendors.min.js" data-main="js/modules"></script>
+<script src="js/codemirror.min.js"></script>
 </html>

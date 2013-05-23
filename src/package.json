@@ -2,10 +2,11 @@
   "main": "pad.html",
   "name": "haroopad",
   "description": "instant markdown editor for cross platform",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "keywords": [ "markdown", "haroopress" ],
   "window": {
-    "icon": "link.png",
+    "title": "haroopad",
+    "icon": "logo.png",
     "toolbar": true,
     "show": true,
     "width": 1024,
@@ -13,9 +14,9 @@
     "min_width": 300,
     "min_height": 200,
     "max_width": 1920,
-    "max_height": 1080,
-    "as_desktop": true
+    "max_height": 1080
   },
+  "single-instance": false,
   "chromium-args" : "--disable-gpu",
   "webkit": {
     "plugin": true

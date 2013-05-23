@@ -13,6 +13,8 @@ define([
 				height: 600,
 				isFullscreen: false,
 				zoom: 1,
+				mode: 1, // view mode 0 is dual, 1 is only editor
+				viewerWidth: 50
 			},
 
 			initialize: function() {
@@ -38,7 +40,9 @@ define([
 					height: win.height,
 					isFullscreen: win.isFullscreen,
 					isKioskMode: win.isKioskMode,
-					zoom: win.zoom
+					zoom: win.zoom,
+					mode: this.get('mode'),
+					viewerWidth: this.get('viewerWidth')
 				});
 			}
 		});

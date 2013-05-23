@@ -1,8 +1,8 @@
 define([
 		'preferences/Editor.opt'
-	], function(option) {
+	], function(options) {
 
-		var config = option.toJSON();
+		var config = options.toJSON();
 
 		var EditorTabView = Backbone.View.extend({
 			el: '#editor-tab',
@@ -22,30 +22,34 @@ define([
 				this.$el.find('input[name=vimKeyBinding]').prop('checked', config.vimKeyBinding);
 				this.$el.find('input[name=insertFourSpace]').prop('checked', config.insertFourSpace);
 				this.$el.find('input[name=autoPairCharacters]').prop('checked', config.autoPairCharacters);
+			
+				options.bind('change:displayLineNumber', function(model, data) {
+					this.$el.find('input[name=displayLineNumber]').prop('checked', data);
+				}.bind(this))
 			},
 
 			changeTheme: function(e) {
-				option.set({ theme: e.val });
+				options.set({ theme: e.val });
 			},
 
 			displayLineNumber: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('displayLineNumber', bool);
+				options.set('displayLineNumber', bool);
 			},
 
 			vimKeyBinding: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('vimKeyBinding', bool);
+				options.set('vimKeyBinding', bool);
 			},
 
 			insertFourSpace: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('insertFourSpace', bool);
+				options.set('insertFourSpace', bool);
 			},
 
 			autoPairCharacters: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('autoPairCharacters', bool);
+				options.set('autoPairCharacters', bool);
 			}
 		});
 

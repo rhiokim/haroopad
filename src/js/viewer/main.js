@@ -1,5 +1,18 @@
 // Load native UI library.
-var gui = require('nw.gui');
+var gui = require('nw.gui'),
+    win = gui.Window.get();
+var _options;
+
+window.ondragover = function(e) { 
+  e.preventDefault(); 
+  win.emit('dragover', e);
+  return false;
+};
+window.ondrop = function(e) { 
+  e.preventDefault(); 
+  win.emit('dragdrop', e);
+  return false;
+};
 
 function loadCss(url) {
   var link = document.createElement("link");
@@ -15,18 +28,39 @@ function setViewStyle(style) {
   $(document.body).addClass('markdown');
   $(document.body).addClass(style);
 }
+
 function setCodeStyle(style) {
   loadCss('css/code/'+ style +'.css');
 }
 
 function createTOC() {
-  // $("#toc").html('');
-  // $("#toc").tocify({ selectors: "h2, h3, h4" }).data("toc-tocify").generateToc();
-  // $("#toc").tocify();
   var toc = generateTOC($(document.body)[0]);
   $(document.body).prepend('<div id="toc"></div>');
   $('#toc').html(toc);
   $(document.body).scrollspy('refresh');
+}
+
+function delegateKeydown() {
+}
+
+function init(options) {
+  _options = options;
+
+  delegateKeydown();
+}
+
+/**
+ * for fix image path
+ * @return {[type]} [description]
+ */
+function _fixImagePath() {
+  $('img').each(function() {
+    var src = $(this).attr('src');
+
+    if(src.indexOf('://') == -1) {
+      $(this).attr('src', _options.dirname +'/'+ src);
+    }
+  });
 }
 
 /**
@@ -39,9 +73,14 @@ function update(contents) {
   $('a').off('click', '**');
   $(document.body).html(contents);
 
+  _fixImagePath();
   // createTOC();
 }
 
+/**
+ * enable click event at link
+ * @return {[type]} [description]
+ */
 function allowLink() {
   $('a').on('click', function(e) {
     gui.Shell.openExternal($(e.target).attr('href'));
@@ -49,6 +88,10 @@ function allowLink() {
   });
 }
 
+/**
+ * disable click event at link
+ * @return {[type]} [description]
+ */
 function blockLink() {
   $('a').on('click', function(e) {
     e.preventDefault();

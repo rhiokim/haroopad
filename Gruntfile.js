@@ -60,30 +60,28 @@ module.exports = function(grunt) {
       }
     },
 
-    uglify: {
-      pad: {
-        options: {
-          // mangle: true,
-          // compress: true
-        },
+    concat: {
+      dist: {
         files: {
-          'build/haroopad.bin.js': [
+          'build/haroopad.js': [
+            '<%= vendors %>/underscore.js',
             '<%= vendors %>/marked.js',
             '<%= vendors %>/highlight.pack.js',
-            '<%= vendors %>/underscore.js',
-            'src/js/app/before.bin.js'
-          ],
-          'build/haroopad/js/haroopad.vendors.min.js': [ 
-            '<%= vendors %>/jquery-1.9.1.min.js',
+            'src/js/app/before.bin.js',
+            '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',
-            '<%= vendors %>/require.js',
             '<%= vendors %>/bootstrap.min.js',
             '<%= vendors %>/bootstrapSwitch.js',
             '<%= vendors %>/bootstrap-modalmanager.js',
             '<%= vendors %>/bootstrap-modal.js',
-            '<%= vendors %>/select2.js'
+            '<%= vendors %>/select2.js',
+            '<%= vendors %>/js-url.js',
+            'src/js/app/after.bin.js'
           ],
-          'build/haroopad/js/codemirror.min.js': [
+          'build/vendors.js': [
+            '<%= vendors %>/require.js'
+          ],
+          'build/codemirror.js': [
             '<%= vendors %>/CodeMirror/lib/codemirror.js',
             '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
             '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
@@ -92,7 +90,27 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
             '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
             '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
-            '<%= vendors %>/CodeMirror/keymap/vim.js',
+            '<%= vendors %>/CodeMirror/keymap/vim.js'
+          ]
+        }
+      }
+    },
+
+    uglify: {
+      pad: {
+        options: {
+          // mangle: true,
+          // compress: true
+        },
+        files: {
+          'build/haroopad.bin.js': [
+            'build/haroopad.js'
+          ],
+          'build/haroopad/js/vendors.min.js': [
+            'build/vendors.js'
+          ],
+          'build/haroopad/js/codemirror.min.js': [
+            'build/codemirror.js'
           ]
         }
       },
@@ -119,14 +137,14 @@ module.exports = function(grunt) {
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
           { src: 'src/viewer.bin.html', dest: 'build/haroopad/viewer.html' },
           { src: 'src/package.bin.json', dest: 'build/haroopad/package.json' },
+          { src: 'src/logo.png', dest: 'build/haroopad/logo.png' },
           { src: 'src/css/keys.css', dest: 'build/haroopad/css/keys.css' },
           { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' }
         ]
       },
 
-      build: {
+      debug: {
         files: [
-          // { expand: true, cwd: 'src/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
           { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/img/' },
           { expand: true, flatten: true, src: [ 'src/css/*' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/', filter:'isFile' },
@@ -139,7 +157,16 @@ module.exports = function(grunt) {
           { src: 'src/viewer.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/viewer.html' },
           { src: 'src/package.json', dest: 'build/haroopad.app/Contents/Resources/app.nw/package.json' },
           { src: 'src/css/keys.css', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/keys.css' },
-          { src: 'src/css/select2.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/select2.png' }
+          { src: 'src/css/select2.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/select2.png' },
+          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
+          { src: 'src/logo.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/logo.png' },
+          { src: 'About.md', dest: 'build/haroopad.app/Contents/Resources/app.nw/About.md' }
+        ]
+      },
+
+      build: {
+        files: [
+          { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' }
         ]
       }
     },
@@ -157,20 +184,13 @@ module.exports = function(grunt) {
         command: 'open ./build/haroopad.app'
       },
 
+      /* v8 heap snapshot for protect source */
+      ss_darwin: {
+        command: 'nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
+      },
+
       deploy: {
         command: 'cp -R ./build/haroopad.app /Applications'
-      },
-
-      ss_darwin: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
-      },
-
-      ss_win32: {
-        command: '"./lib/nwsnapshot.exe" --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
-      },
-
-      ss_linux: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad.bin.js ./build/haroopad/js/haroopad.bin'
       }
     },
 
@@ -203,14 +223,9 @@ module.exports = function(grunt) {
       }
     }
   });
-  
-  /* v8 protect source code task for cross platform */  
-  grunt.registerTask('snapshot', 'cross platform snapshot', function() {
-    grunt.task.run('shell:ss_'+ process.platform);
-  });
 
-  grunt.registerTask('default', [ 'clean', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy', 'requirejs' ]);
+  grunt.registerTask('default', [ 'clean', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'requirejs' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
-  grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:exec' ]);
-  grunt.registerTask('pkg', [ 'clean:release', 'shell:cpLib', 'shell:cpZipSrc', 'replace:info', 'shell:exec' ]);
+  grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
+  grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:ss_darwin', 'shell:exec' ]);
 };

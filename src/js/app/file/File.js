@@ -2,12 +2,14 @@ define([
 		'module',
 		'vendors/text!tpl/file.html',
 		'keyboard',
-		'editor',
+		'editor/Editor',
 		'file/Recents'
 	], 
 
 	function(module, html, HotKey, Editor, Recents) {
 		var fs = require('fs');
+		var gui = require('nw.gui'),
+				win = gui.Window.get();
 		var path = require('path');
 		var hasWriteAccess = false, fileEntry, str;
 
@@ -26,6 +28,15 @@ define([
 			$("#saveFile").trigger("click");
 		}
 
+		function open(file) {
+			fileEntry = file;
+			str = fs.readFileSync(fileEntry, 'utf8');
+			Recents.add(fileEntry, 'file');
+			Editor.setValue(str);
+
+			view.trigger('opened', path.dirname(fileEntry), path.basename(fileEntry));
+		}
+
 		var View = Backbone.View.extend({
 			el: '#fields',
 
@@ -37,6 +48,10 @@ define([
 			initialize: function() {
 				HotKey('defmod-o', openFileDialog);
 				HotKey('defmod-s', openSaveDialog);
+
+				win.on('file.open', openFileDialog);
+				win.on('file.save', openSaveDialog);
+				win.on('file.recents', open);
 			},
 
 			saveHandler: function(e) {
@@ -49,16 +64,14 @@ define([
 				fileEntry = $(e.target).val();
 				if(!fileEntry) { return; }
 
-				str = fs.readFileSync(fileEntry, 'utf8');
-				Recents.add(fileEntry, 'file');
-				Editor.setValue(str);
-
-				this.trigger('opened', path.dirname(fileEntry), path.basename(fileEntry));
+				open(fileEntry);
 			},
 
 			externalSave: function() {
 				openSaveDialog();
 			},
+
+			open: open,
 
 			save: function() {
 				fs.writeFileSync(fileEntry, Editor.getValue(), 'utf8');

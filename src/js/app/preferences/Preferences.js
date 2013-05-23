@@ -11,13 +11,20 @@ define([
 		$('#dialogs').append(html);
 		$('.switch').bootstrapSwitch();
 
-		HotKey('defmod-,', function(e) {
+		function showPreferences(e) {
 			$('._preferences').modal('show');
-		});
+		}
 
 		var tabGeneral = new General();
 		var tabEditor = new Editor();
 		var tabViewer = new Viewer();
 		var tabHelper = new Helper();
 		var tabAbout = new About();
+
+		var gui = require('nw.gui'),
+      	win = gui.Window.get();
+
+    win.on('context.preferences', showPreferences);
+
+		HotKey('defmod-,', showPreferences);
 });

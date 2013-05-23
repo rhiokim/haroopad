@@ -1,20 +1,26 @@
 define([
 		'keyboard',
 		'viewer',
+		'editor/Editor.keymap',
 		'preferences/Editor.opt',
 		'preferences/General.opt'
 	],
-	function(HotKey, Viewer, editorOpt, generalOpt) {
+	function(HotKey, Viewer, Keymap, editorOpt, generalOpt) {
+		var gui = require('nw.gui'),
+      	win = gui.Window.get(),
+      	clipboard = gui.Clipboard.get();
+
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
 					    lineNumbers: true,
-					    // theme: "solarized dark",
 					    electricChars: false,
 					    viewportMargin: 40,
 					    lineWrapping: true,
 					    autofocus: true,
 					    workDelay: 1000,
-					    extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
+					    dragDrop: false,
+					    // onDragEvent: dragDropHandler,
+					    extraKeys: Keymap
 					  });
 
 		var editorConf = editorOpt.toJSON();
@@ -64,6 +70,28 @@ define([
 			editor.setOption('autoCloseBrackets', value);
 		});
 
+		/**
+		 * fire context menu event
+		 */
+
+		win.on('context.cut', function() {
+			clipboard.set(editor.getSelection());
+			editor.replaceSelection('');
+		});
+		win.on('context.copy', function() {
+			clipboard.set(editor.getSelection());
+		});
+		win.on('context.paste', function() {
+			editor.replaceSelection(clipboard.get());
+		});
+		win.on('context.select.all', function() {
+			editor.setSelection(0, 2);
+		});
+
+		function dragDropHandler(cm, e) {
+			e.preventDefault();
+			return false;
+		}
 		/**
 		 * sync scroll handler
 		 * @return {[type]} [description]
