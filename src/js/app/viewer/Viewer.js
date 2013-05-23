@@ -83,6 +83,10 @@ define([
 
 			scroll: function(top, per) {
 				viewer.scrollTop(top * 100 / per);
+			},
+
+			getContentDocument: function() {
+				return iframe.contentDocument;
 			}
 		};
 	});

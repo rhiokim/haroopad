@@ -39,17 +39,20 @@ define([
 		// helpWin.on('closed', function() {
 	 //    helpWin = null;
 	 //  });
+	 //  
+		shell.openExternal('http://pad.haroopress.com/page.html');
 	});
 	
 	win.on('help.markdown', function() {
-
+		shell.openExternal('http://pad.haroopress.com/page.html#markdown');
 	});
 
 	win.on('help.release', function() {
-		shell.openExternal('http://pad.haroopress.com/release');
+		shell.openExternal('http://pad.haroopress.com/page.html#release-notes');
 	});
 
 	win.on('help.acknowledgements', function() {
+		shell.openExternal('http://pad.haroopress.com/page.html#acknowledgements');
 		// gui.Window.open('pad.html', {
 		// 	width: 350,
 		// 	height: 500,
@@ -62,7 +65,7 @@ define([
 		shell.openExternal('http://pad.haroopress.com/');
 	});
 
-	win.on('help.feedback', function() {
-		shell.openExternal('http://pad.haroopress.com/feedback');
+	win.on('help.issue', function() {
+		shell.openExternal('https://github.com/rhiokim/haroopad/issues');
 	});
 });

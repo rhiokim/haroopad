@@ -59,7 +59,7 @@ define([],
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Send Feedback',
+	        label: 'Bug Report',
 		      click: function() {
 		        win.emit('help.feedback');
 		      }

@@ -9,7 +9,8 @@ define([
 		'file/File',
     'preferences/Preferences',
     'viewer',
-		'window/Window.dragdrop'
+		'window/Window.dragdrop',
+		'window/Window.exports'
 	], 
 	function(options, HotKey, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Viewer) {
 		var gui = require('nw.gui');

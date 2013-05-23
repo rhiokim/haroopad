@@ -37,15 +37,6 @@ define([
             type: 'separator'
         })
 	);
-
-	File.append(
-        new gui.MenuItem({
-            label: 'Close',
-            click: function() {
-                win.emit('file.close');
-            }
-        })
-	);
 	File.append(
         new gui.MenuItem({
             label: 'Save',
@@ -54,6 +45,15 @@ define([
             }
         })
 	);
+
+    File.append(
+        new gui.MenuItem({
+            label: 'Close',
+            click: function() {
+                win.emit('file.close');
+            }
+        })
+    );
 	File.append(
         new gui.MenuItem({
             type: 'separator'
@@ -70,6 +70,7 @@ define([
     File.append(
         new gui.MenuItem({
             label: 'Export',
+            // enabled: false,
             submenu: Exports
         })
     );
