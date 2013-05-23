@@ -16,6 +16,7 @@
     "max_width": 1920,
     "max_height": 1080
   },
+  "single-instance": false,
   "snapshot": "js/haroopad.bin",
   "chromium-args" : "--disable-gpu",
   "webkit": {

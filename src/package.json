@@ -16,6 +16,7 @@
     "max_width": 1920,
     "max_height": 1080
   },
+  "single-instance": false,
   "chromium-args" : "--disable-gpu",
   "webkit": {
     "plugin": true

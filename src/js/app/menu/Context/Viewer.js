@@ -24,7 +24,7 @@ define([],
 			} 
 		});
 		
-		Context.append(mCopy);
+		// Context.append(mCopy);
 
 		mCopyHTML = menuItem({ 
 			label: 'Copy HTML', 
