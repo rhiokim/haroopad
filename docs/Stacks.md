@@ -15,7 +15,7 @@ haroopad technical stack
 * underscore.js
 
 ## automation build system
-* bash for create .dmg
+* bash for create .dmg (mac)
 * node.js
 * grunt.js
   - grunt-contrib
@@ -24,9 +24,6 @@ haroopad technical stack
   - grunt-contrib-requirejs
 * stringex
 * node-webkit
-
-### for windows
-* NSIS(Nullsoft Scriptable Install System) for window
 
 ## html5
 * PouchDB based on IndexedDB in the browser
@@ -39,8 +36,3 @@ haroopad technical stack
 ## sub project
 * standard style for markdown using less
 * cross platform build tool for hybrid web application
-  - grunt.js
-  - bash
-    > .dmg creation - https://github.com/andreyvit/yoursway-create-dmg
-  - NSIS
-  - v8 heap memory snapshot
