@@ -12,21 +12,40 @@ define([
     var recents = store.get('Recents');
         recents = recents && recents.files;
 
+    var mClear = new gui.MenuItem({
+                label: 'Clear all',
+                click: function() {
+                    win.emit('file.recents.clear');
+                }
+            });
 
-    while(item = recents.shift()) {
-        for(prop in item) {
-            name = item[prop];
+    if(recents) {
+        while(item = recents.shift()) {
+            for(prop in item) {
+                name = item[prop];
+            }
+            submenu.append(
+                new gui.MenuItem({
+                    label: name,
+                    tooltip: prop,
+                    click: function() {
+                        win.emit('file.recents', this.tooltip);
+                    }
+                })
+            );
         }
+
         submenu.append(
             new gui.MenuItem({
-                label: name,
-                tooltip: prop,
-                click: function() {
-                    win.emit('file.recents', this.tooltip);
-                }
+                type: 'separator'
             })
         );
+
+    } else {
+        mClear.enabled = false;
     }
+
+    submenu.append(mClear);
 
     return submenu;
 });
