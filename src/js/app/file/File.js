@@ -72,6 +72,10 @@ define([
 			open: open,
 
 			save: function() {
+				if(path.extname(fileEntry).indexOf('.md') < 0) {
+					fileEntry += '.md';
+				}
+
 				fs.writeFileSync(fileEntry, Editor.getValue(), 'utf8');
 
 				this.trigger('saved', path.dirname(fileEntry), path.basename(fileEntry));
