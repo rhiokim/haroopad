@@ -9,6 +9,7 @@ define([
 		'file/File',
     'preferences/Preferences',
     'viewer',
+		'window/Window.file',
 		'window/Window.dragdrop',
 		'window/Window.exports'
 	], 

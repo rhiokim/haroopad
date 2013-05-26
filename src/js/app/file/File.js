@@ -19,8 +19,8 @@ define([
 			$("#openFile").trigger("click");
 		}
 
-		function openSaveDialog() {
-			if(fileEntry) {
+		function openSaveDialog(force) {
+			if(!force && fileEntry) {
 				view.save(fileEntry);
 				return;
 			}
@@ -67,9 +67,7 @@ define([
 				open(fileEntry);
 			},
 
-			externalSave: function() {
-				openSaveDialog();
-			},
+			externalSave: openSaveDialog,
 
 			open: open,
 
