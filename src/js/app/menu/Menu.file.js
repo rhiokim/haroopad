@@ -10,72 +10,76 @@ define([
         win = gui.Window.get();
 	var File = new gui.Menu();
 
-	File.append(
-        new gui.MenuItem({
+    function menuItem(options) {
+        return new gui.MenuItem(options);
+    }
+
+    function sepItem() {
+        return new gui.MenuItem({
+      type: 'separator'
+    });
+    }
+
+	File.append(menuItem({
             label: 'New',
             click: function() {
                 win.emit('file.new');
             }
         })
 	);
-	File.append(
-        new gui.MenuItem({
+	File.append(menuItem({
             label: 'Open',
             click: function() {
                 win.emit('file.open');
             }
         })
 	);
-	File.append(
-        new gui.MenuItem({
+	File.append(menuItem({
             label: 'Open Recent',
             submenu: Recents
         })
 	);
-	File.append(
-        new gui.MenuItem({
-            type: 'separator'
-        })
-	);
-	File.append(
-        new gui.MenuItem({
+	File.append(sepItem());
+    File.append(menuItem({
             label: 'Save',
             click: function() {
                 win.emit('file.save');
             }
         })
-	);
+    );
+    File.append(menuItem({
+            label: 'Save As',
+            click: function() {
+                win.emit('file.save.as');
+            }
+        })
+    );
 
-    File.append(
-        new gui.MenuItem({
+    File.append(menuItem({
             label: 'Close',
             click: function() {
                 win.emit('file.close');
             }
         })
     );
-	File.append(
-        new gui.MenuItem({
+	File.append(menuItem({
             type: 'separator'
         })
 	);
 
-	File.append(
-        new gui.MenuItem({
+	File.append(menuItem({
             label: 'Post',
             enabled: false,
             submenu: Posts
         })
 	);
-    File.append(
-        new gui.MenuItem({
+    File.append(menuItem({
             label: 'Export',
             // enabled: false,
             submenu: Exports
         })
     );
-	File.append(
-        new gui.MenuItem({
+	File.append(menuItem({
             label: 'Activity stream',
             enabled: false,
             submenu: Activities
