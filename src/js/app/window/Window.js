@@ -90,13 +90,18 @@ define([
 		});
 
 		HotKey('defmod-n', newHandler);
-		win.on('file.new', newHandler);
-
-		win.on('file.close', win.close);
 
 		HotKey('defmod-shift-ctrl-d', function() {
 			win.showDevTools();
 		});
+		
+		win.on('file.new', newHandler);
+		win.on('file.close', win.close);
+
+	    // Listen to `open` event
+	    win.on('open.file', function(path) {
+			File.open(path);
+	    });
 
 		win.resizeTo(config.width, config.height);
 		win.moveTo(config.x, config.y);
@@ -109,10 +114,6 @@ define([
 
 			setTitle: function(title) {
 				win.title = orgTitle = title;
-			},
-
-			show: function() {
-				win.show();
 			},
 
 			open: function(fileEntry) {

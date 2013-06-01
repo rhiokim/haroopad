@@ -52,24 +52,17 @@ requirejs([
     x = url('?x');
     y = url('?y');
 
-    // Listen to `open` event
-    win.on('open.file', function(path) {
-      Window.open(path);
-
-      res = Parser(Editor.getValue());
-      Viewer.update(res);
-    });
 
     //run with file open;
-    if(file) {
+    if (file) {
       win.emit('open.file', file, x, y);
     }
 
     //open file with commend line
-    if(gui.App.argv.length > 0) {
+    if (gui.App.argv.length > 0) {
       Window.open(gui.App.argv[0]);
       changeHandler();
     }
 
-    Window.show();
+    win.show();
 });

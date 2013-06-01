@@ -88,6 +88,10 @@ define([
 				viewer.scrollTop(top * 100 / per);
 			},
 
+			/**
+			 * for html exporting 
+			 * @return {[type]} [description]
+			 */
 			getContentDocument: function() {
 				return iframe.contentDocument;
 			}
