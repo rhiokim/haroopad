@@ -1,6 +1,6 @@
 define([
 		'window/Window.opt',
-		'viewer',
+		'viewer/Viewer',
 		'vendors/text!tpl/exports.html'
 	],
 	function(options, Viewer, html) {

@@ -20,7 +20,7 @@ requirejs.config({
     tpl: '../../tpl',
     vendors: '../vendors',
     // editor: 'editor/Editor',
-    viewer: 'viewer/Viewer',
+    // viewer: 'viewer/Viewer',
     text: '../vendors/text',
     store: '../vendors/store',
     keyboard: '../vendors/keymage'
@@ -33,15 +33,15 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  $('#crash-dialog').modal();
+  alert('Oops! Haroopad is crash :-(');
 };
 
 requirejs([
     'window/Window',
     'editor/Editor',
-    'viewer'
+    'viewer/Viewer',
+    'utils/Error'
   ], function(Window, Editor, Viewer) {
-
     var res, file;
     var _tid_;
 
@@ -55,13 +55,12 @@ requirejs([
 
     //run with file open;
     if (file) {
-      win.emit('open.file', file, x, y);
+      win.emit('open.file', decodeURIComponent(file), x, y);
     }
 
     //open file with commend line
     if (gui.App.argv.length > 0) {
-      Window.open(gui.App.argv[0]);
-      changeHandler();
+      win.emit('open.file', gui.App.argv[0]);
     }
 
     win.show();

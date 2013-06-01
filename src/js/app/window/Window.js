@@ -1,19 +1,21 @@
 define([
 		'window/Window.opt',
 		'keyboard',
+	    'utils/Error',
 		'menu/MenuBar',
 		'menu/Context/Context',
 		'window/Splitter',
 		'window/Window.help',
 		'dialog/Dialogs',
 		'file/File',
-    'preferences/Preferences',
-    'viewer',
+	    'preferences/Preferences',
+	    'editor/Editor',
+	    'viewer/Viewer',
 		'window/Window.file',
 		'window/Window.dragdrop',
 		'window/Window.exports'
 	], 
-	function(options, HotKey, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Viewer) {
+	function(options, HotKey, Err, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Editor, Viewer) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get(),
 				subWin;
@@ -68,11 +70,17 @@ define([
 		/**
 		 * event bind for File
 		 */
-		File.bind('opened', function(dirname, basename) {
+		File.bind('file.opened', function(markdown, dirname, basename) {
 			win.title = orgTitle = basename;
 			Viewer.init({
 				dirname: dirname
 			});
+
+			Editor.setValue(markdown);
+		});
+
+		File.bind('file.not.exist', function() {
+			Err.throw('error', 'File is not exist');
 		});
 
 		File.bind('saved', function(dirname, basename) {
@@ -94,7 +102,7 @@ define([
 		HotKey('defmod-shift-ctrl-d', function() {
 			win.showDevTools();
 		});
-		
+
 		win.on('file.new', newHandler);
 		win.on('file.close', win.close);
 
@@ -110,10 +118,6 @@ define([
 			edited: function() {
 				win.title = orgTitle + ' •';
 				edited = true;
-			},
-
-			setTitle: function(title) {
-				win.title = orgTitle = title;
 			},
 
 			open: function(fileEntry) {
