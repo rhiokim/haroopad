@@ -50,6 +50,7 @@ define([
 				this.set('files', recents.reverse());
 				this.trigger('change');
 			}
+			//TODO : remove recent file item
 		});
 
 		return new Model();

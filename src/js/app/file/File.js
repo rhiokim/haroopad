@@ -71,6 +71,8 @@ define([
 
 				win.on('file.open', openFileDialog);
 				win.on('file.save', openSaveDialog);
+
+				//TODO : notify removed recent file item
 				win.on('file.recents', openWindow);
 			},
 
