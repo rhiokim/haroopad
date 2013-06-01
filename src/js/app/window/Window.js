@@ -22,7 +22,7 @@ define([
 
 		var orgTitle = 'Untitled';
 		var edited = false,
-				delayClose = false;
+			delayClose = false;
 
 		var config = options.toJSON();
 
@@ -67,9 +67,7 @@ define([
 			close();
 		});
 
-		/**
-		 * event bind for File
-		 */
+		/* event bind for File */
 		File.bind('file.opened', function(markdown, dirname, basename) {
 			win.title = orgTitle = basename;
 			Viewer.init({
@@ -79,6 +77,7 @@ define([
 			Editor.setValue(markdown);
 		});
 
+		/* openning not exist file */
 		File.bind('file.not.exist', function() {
 			Err.throw('error', 'File is not exist');
 		});
@@ -111,17 +110,11 @@ define([
 			File.open(path);
 	    });
 
+	    win.on('change.markdown', function(markdown, html, editor) {
+			win.title = orgTitle + ' (edited)';
+			edited = true;
+	    });
+
 		win.resizeTo(config.width, config.height);
 		win.moveTo(config.x, config.y);
-
-		return {
-			edited: function() {
-				win.title = orgTitle + ' •';
-				edited = true;
-			},
-
-			open: function(fileEntry) {
-				File.open(fileEntry);
-			}
-		}
 });

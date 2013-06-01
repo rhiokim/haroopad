@@ -19,8 +19,8 @@ define([
 			$("#openFile").trigger("click");
 		}
 
-		function openSaveDialog(force) {
-			if(!force && fileEntry) {
+		function openSaveDialog() {
+			if(fileEntry) {
 				view.save(fileEntry);
 				return;
 			}
@@ -28,11 +28,14 @@ define([
 			$("#saveFile").trigger("click");
 		}
 
+		function openForceSaveDialog() {
+			$("#saveFile").trigger("click");
+		}
+
 		function open(file) {
 			fileEntry = file;
 			markdown = fs.readFileSync(fileEntry, 'utf8');
 			Recents.add(fileEntry, 'file');
-			// Editor.setValue(str);
 
 			view.trigger('file.opened', markdown, path.dirname(fileEntry), path.basename(fileEntry));
 		}
@@ -44,7 +47,7 @@ define([
 				view.trigger('file.not.exist');
 				return;
 			}
-			
+
 			gui.Window.open('pad.html?file='+ file, {
 				width: win.width,
 				height: win.height,
@@ -64,6 +67,7 @@ define([
 			initialize: function() {
 				HotKey('defmod-o', openFileDialog);
 				HotKey('defmod-s', openSaveDialog);
+				HotKey('defmod-shift-s', openForceSaveDialog);
 
 				win.on('file.open', openFileDialog);
 				win.on('file.save', openSaveDialog);

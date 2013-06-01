@@ -118,7 +118,7 @@ define([
 	     */
 	    function changeHandler() {
 	      res = Parser(editor.getValue());
-	      win.emit('change.markdown', res, editor);
+	      win.emit('change.markdown', editor.getValue(), res, editor);
 	    }
 
 	    function delayChange() {

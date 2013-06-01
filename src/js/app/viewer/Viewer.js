@@ -70,7 +70,7 @@ define([
 		});
 
 		/* change markdown event handler */
-		win.on('change.markdown', function(html, editor) {
+		win.on('change.markdown', function(markdown, html, editor) {
 			content = html;
 			viewer.update(content);
 

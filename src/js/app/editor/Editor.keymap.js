@@ -9,11 +9,11 @@ define([
 	      'Cmd-B': 'markdownBold',
 	      'Cmd-I': 'markdownItalic',
 	      'Cmd-L': 'markdownLink',
-	      'Shift-Cmd-S': 'markdownStrike',
-	      'Shift-Cmd-O': 'markdownOrderedList',
-	      'Shift-Cmd-U': 'markdownUnorderedList',
-	      'Shift-Cmd-I': 'markdownImage',
-	      'Shift-Cmd-B': 'markdownBlockQuote'
+	      'Cmd-Alt-S': 'markdownStrike',
+	      'Cmd-Alt-O': 'markdownOrderedList',
+	      'Cmd-Alt-U': 'markdownUnorderedList',
+	      'Cmd-Alt-I': 'markdownImage',
+	      'Cmd-Alt-B': 'markdownBlockQuote'
 	    };
 
 	  } else {
@@ -21,11 +21,11 @@ define([
 	      'Ctrl-B': 'markdownBold',
 	      'Ctrl-I': 'markdownItalic',
 	      'Ctrl-L': 'markdownLink',
-	      'Shift-Ctrl-S': 'markdownStrike',
-	      'Shift-Ctrl-O': 'markdownOrderedList',
-	      'Shift-Ctrl-U': 'markdownUnorderedList',
-	      'Shift-Ctrl-I': 'markdownImage',
-	      'Shift-Ctrl-B': 'markdownBlockQuote'
+	      'Ctrl-Alt-S': 'markdownStrike',
+	      'Ctrl-Alt-O': 'markdownOrderedList',
+	      'Ctrl-Alt-U': 'markdownUnorderedList',
+	      'Ctrl-Alt-I': 'markdownImage',
+	      'Ctrl-Alt-B': 'markdownBlockQuote'
 	    };
 	  }
 
