@@ -68,17 +68,20 @@ define([
 			clipboard.set(content, 'text');
 		});
 
+		/*
+		 * change markdown event handler 
+		 */
+		win.on('change.markdown', function(html, editor) {
+			content = html;
+			viewer.update(content);
+
+			config.clickableLink ? viewer.allowLink() : viewer.blockLink();
+		});
+
 		return {
 			init: function(options) {
 				options = options || {};
 				viewer.init(options);
-			},
-
-			update: function(text) {
-				content = text;
-				viewer.update(content);
-
-				config.clickableLink ? viewer.allowLink() : viewer.blockLink();
 			},
 
 			scroll: function(top, per) {
