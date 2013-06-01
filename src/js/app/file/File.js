@@ -9,9 +9,9 @@ define([
 	function(module, html, HotKey, Editor, Recents) {
 		var fs = require('fs');
 		var gui = require('nw.gui'),
-				win = gui.Window.get();
+			win = gui.Window.get();
 		var path = require('path');
-		var hasWriteAccess = false, fileEntry, str;
+		var hasWriteAccess = false, fileEntry, markdown;
 
 		$('#fields').append(html);
 
@@ -19,8 +19,8 @@ define([
 			$("#openFile").trigger("click");
 		}
 
-		function openSaveDialog(force) {
-			if(!force && fileEntry) {
+		function openSaveDialog() {
+			if(fileEntry) {
 				view.save(fileEntry);
 				return;
 			}
@@ -28,13 +28,32 @@ define([
 			$("#saveFile").trigger("click");
 		}
 
+		function openForceSaveDialog() {
+			$("#saveFile").trigger("click");
+		}
+
 		function open(file) {
 			fileEntry = file;
-			str = fs.readFileSync(fileEntry, 'utf8');
+			markdown = fs.readFileSync(fileEntry, 'utf8');
 			Recents.add(fileEntry, 'file');
-			Editor.setValue(str);
 
-			view.trigger('opened', path.dirname(fileEntry), path.basename(fileEntry));
+			view.trigger('file.opened', markdown, path.dirname(fileEntry), path.basename(fileEntry));
+		}
+
+		function openWindow(file) {
+			var have = fs.existsSync(decodeURIComponent(file));
+
+			if (!have) {
+				view.trigger('file.not.exist');
+				return;
+			}
+
+			gui.Window.open('pad.html?file='+ file, {
+				width: win.width,
+				height: win.height,
+				  toolbar: false,
+				  show: true
+				});
 		}
 
 		var View = Backbone.View.extend({
@@ -48,10 +67,13 @@ define([
 			initialize: function() {
 				HotKey('defmod-o', openFileDialog);
 				HotKey('defmod-s', openSaveDialog);
+				HotKey('defmod-shift-s', openForceSaveDialog);
 
 				win.on('file.open', openFileDialog);
 				win.on('file.save', openSaveDialog);
-				win.on('file.recents', open);
+
+				//TODO : notify removed recent file item
+				win.on('file.recents', openWindow);
 			},
 
 			saveHandler: function(e) {
@@ -64,7 +86,8 @@ define([
 				fileEntry = $(e.target).val();
 				if(!fileEntry) { return; }
 
-				open(fileEntry);
+				openWindow(fileEntry);
+				// open(fileEntry);
 			},
 
 			externalSave: openSaveDialog,

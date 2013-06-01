@@ -38,18 +38,18 @@ define([
 			 */
 			viewer.addEventListener('keydown', function(e) {
 
-		    var evt = document.createEvent("Events");
-		    evt.initEvent("keydown", true, true);
+			    var evt = document.createEvent("Events");
+				    evt.initEvent("keydown", true, true);
 
-		    evt.view = e.view;
-		    evt.altKey = e.altKey;
-		    evt.ctrlKey = e.ctrlKey;
-		    evt.shiftKey = e.shiftKey;
-		    evt.metaKey = e.metaKey;
-		    evt.keyCode = e.keyCode;
-		    evt.charCode = e.charCode;
+				    evt.view = e.view;
+				    evt.altKey = e.altKey;
+				    evt.ctrlKey = e.ctrlKey;
+				    evt.shiftKey = e.shiftKey;
+				    evt.metaKey = e.metaKey;
+				    evt.keyCode = e.keyCode;
+				    evt.charCode = e.charCode;
 
-		    viewer.top.dispatchEvent(evt);
+				    viewer.top.dispatchEvent(evt);
 
 			}, false);
 
@@ -64,8 +64,22 @@ define([
 			
 		});
 
+		/* copy html to clipboard */
 		win.on('copy.html', function() {
 			clipboard.set(content, 'text');
+		});
+
+		/* change markdown event handler */
+		win.on('change.markdown', function(markdown, html, editor) {
+			content = html;
+			viewer.update(content);
+
+			config.clickableLink ? viewer.allowLink() : viewer.blockLink();
+		});
+
+		/* scroll editor for sync */
+		win.on('editor.scroll', function(top, per) {
+			viewer.scrollTop(top * 100 / per);
 		});
 
 		return {
@@ -74,17 +88,10 @@ define([
 				viewer.init(options);
 			},
 
-			update: function(text) {
-				content = text;
-				viewer.update(content);
-
-				config.clickableLink ? viewer.allowLink() : viewer.blockLink();
-			},
-
-			scroll: function(top, per) {
-				viewer.scrollTop(top * 100 / per);
-			},
-
+			/**
+			 * for html exporting 
+			 * @return {[type]} [description]
+			 */
 			getContentDocument: function() {
 				return iframe.contentDocument;
 			}

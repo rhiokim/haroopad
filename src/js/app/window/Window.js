@@ -1,26 +1,28 @@
 define([
 		'window/Window.opt',
 		'keyboard',
+	    'utils/Error',
 		'menu/MenuBar',
 		'menu/Context/Context',
 		'window/Splitter',
 		'window/Window.help',
 		'dialog/Dialogs',
 		'file/File',
-    'preferences/Preferences',
-    'viewer',
+	    'preferences/Preferences',
+	    'editor/Editor',
+	    'viewer/Viewer',
 		'window/Window.file',
 		'window/Window.dragdrop',
 		'window/Window.exports'
 	], 
-	function(options, HotKey, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Viewer) {
+	function(options, HotKey, Err, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Editor, Viewer) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get(),
 				subWin;
 
 		var orgTitle = 'Untitled';
 		var edited = false,
-				delayClose = false;
+			delayClose = false;
 
 		var config = options.toJSON();
 
@@ -65,14 +67,19 @@ define([
 			close();
 		});
 
-		/**
-		 * event bind for File
-		 */
-		File.bind('opened', function(dirname, basename) {
+		/* event bind for File */
+		File.bind('file.opened', function(markdown, dirname, basename) {
 			win.title = orgTitle = basename;
 			Viewer.init({
 				dirname: dirname
 			});
+
+			Editor.setValue(markdown);
+		});
+
+		/* openning not exist file */
+		File.bind('file.not.exist', function() {
+			Err.throw('error', 'File is not exist');
 		});
 
 		File.bind('saved', function(dirname, basename) {
@@ -90,33 +97,24 @@ define([
 		});
 
 		HotKey('defmod-n', newHandler);
-		win.on('file.new', newHandler);
-
-		win.on('file.close', win.close);
 
 		HotKey('defmod-shift-ctrl-d', function() {
 			win.showDevTools();
 		});
 
+		win.on('file.new', newHandler);
+		win.on('file.close', win.close);
+
+	    // Listen to `open` event
+	    win.on('open.file', function(path) {
+			File.open(path);
+	    });
+
+	    win.on('change.markdown', function(markdown, html, editor) {
+			win.title = orgTitle + ' (edited)';
+			edited = true;
+	    });
+
 		win.resizeTo(config.width, config.height);
 		win.moveTo(config.x, config.y);
-
-		return {
-			edited: function() {
-				win.title = orgTitle + ' •';
-				edited = true;
-			},
-
-			setTitle: function(title) {
-				win.title = orgTitle = title;
-			},
-
-			show: function() {
-				win.show();
-			},
-
-			open: function(fileEntry) {
-				File.open(fileEntry);
-			}
-		}
 });

@@ -20,8 +20,7 @@ requirejs.config({
     tpl: '../../tpl',
     vendors: '../vendors',
     // editor: 'editor/Editor',
-    parser: 'editor/Parser',
-    viewer: 'viewer/Viewer',
+    // viewer: 'viewer/Viewer',
     text: '../vendors/text',
     store: '../vendors/store',
     keyboard: '../vendors/keymage'
@@ -34,16 +33,15 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  $('#crash-dialog').modal();
+  alert('Oops! Haroopad is crash :-(');
 };
 
 requirejs([
     'window/Window',
     'editor/Editor',
-    'parser',
-    'viewer'
-  ], function(Window, Editor, Parser, Viewer) {
-
+    'viewer/Viewer',
+    'utils/Error'
+  ], function(Window, Editor, Viewer) {
     var res, file;
     var _tid_;
 
@@ -54,47 +52,16 @@ requirejs([
     x = url('?x');
     y = url('?y');
 
-    // Listen to `open` event
-    win.on('open.file', function(path) {
-      Window.open(path);
-
-      res = Parser(Editor.getValue());
-      Viewer.update(res);
-    });
 
     //run with file open;
-    if(file) {
-      win.emit('open.file', file, x, y);
+    if (file) {
+      win.emit('open.file', decodeURIComponent(file), x, y);
     }
 
     //open file with commend line
-    if(gui.App.argv.length > 0) {
-      Window.open(gui.App.argv[0]);
-      changeHandler();
+    if (gui.App.argv.length > 0) {
+      win.emit('open.file', gui.App.argv[0]);
     }
 
-    /**
-     * 코드미러 내용 변경 이벤트 핸들러
-     * @return {[type]} [description]
-     */
-    function changeHandler() {
-      //TODO: throttle 적용
-      res = Parser(Editor.getValue());
-      Viewer.update(res);
-
-      Window.edited();
-    }
-
-    function delayChange() {
-      if(_tid_) {
-        clearTimeout(_tid_);
-      }
-
-      _tid_ = setTimeout(changeHandler, 300);
-    }
-
-    // Editor.on("change", changeHandler);
-    Editor.on("change", delayChange);
-
-    Window.show();
+    win.show();
 });
