@@ -61,7 +61,7 @@ body {
 }
 
 .CodeMirror-lines {
-  padding: 15px 0;
+  padding: 15px 0 35px 0;
 }
 
 /* Change the docs' brand */

@@ -75,6 +75,9 @@ function update(contents) {
   $('a').off('click', '**');
   $(document.body).html(contents);
 
+  $('img').on('error', function() {
+    $(this).attr('src', './img/noimage.gif');
+  });
   _fixImagePath();
   // createTOC();
 }
