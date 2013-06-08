@@ -17,14 +17,7 @@ define([
 	  	win.emit('file.opened', markdown);
 	  }
 
-	  Opt.bind('change', function() {
-	  	console.log(arguments)
-	  });
-
-	  HotKey('defmod-o', OpenDialog.show.bind(OpenDialog));
-
-	  //open dialog fire change event
-	  OpenDialog.on('file.open', function(file) {
+	  function _openWindow(file) {
 	  	var x = win.x,
 	  		y = win.y;
 
@@ -34,7 +27,19 @@ define([
 			  toolbar: false,
 			  show: true
 			});
-	  });	
+	  }
+
+	  Opt.bind('change', function() {
+	  	console.log(arguments)
+	  });
+
+	  HotKey('defmod-o', OpenDialog.show.bind(OpenDialog));
+
+	  win.on('file.open', OpenDialog.show.bind(OpenDialog));
+	  win.on('file.recents', _openWindow);
+	  
+	  //open dialog fire change event
+	  OpenDialog.on('file.open', _openWindow);	
 
 	  return {
 	  	open: function(file) {
