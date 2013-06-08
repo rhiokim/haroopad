@@ -1,7 +1,9 @@
 // Load native UI library.
 var gui = require('nw.gui'),
     win = gui.Window.get();
-var _options;
+var _options = {
+  dirname: '.'
+};
 
 window.ondragover = function(e) { 
   e.preventDefault(); 
@@ -73,6 +75,9 @@ function update(contents) {
   $('a').off('click', '**');
   $(document.body).html(contents);
 
+  $('img').on('error', function() {
+    $(this).attr('src', './img/noimage.gif');
+  });
   _fixImagePath();
   // createTOC();
 }
