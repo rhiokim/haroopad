@@ -41,9 +41,9 @@ define([
 		}
 
 		function openWindow(file) {
-			var have = fs.existsSync(decodeURIComponent(file));
+			var isExist = fs.existsSync(decodeURIComponent(file));
 
-			if (!have) {
+			if (!isExist) {
 				view.trigger('file.not.exist');
 				return;
 			}
@@ -54,6 +54,19 @@ define([
 				  toolbar: false,
 				  show: true
 				});
+		}
+
+		function checkExist(file) {
+			var isExist;
+
+			file = decodeURIComponent(file);
+			isExist = fs.existsSync(file);
+
+			if (isExist) {
+				view.trigger('file.save.exist', file);
+				fileEntry = undefined;
+				throw new Error('File already exist');
+			}
 		}
 
 		var View = Backbone.View.extend({
@@ -87,16 +100,19 @@ define([
 				if(!fileEntry) { return; }
 
 				openWindow(fileEntry);
-				// open(fileEntry);
 			},
 
 			externalSave: openSaveDialog,
 
 			open: open,
 
-			save: function() {
+			save: function(force) {
 				if(path.extname(fileEntry).indexOf('.md') < 0) {
 					fileEntry += '.md';
+				}
+
+				if (!force) {
+					checkExist(fileEntry);
 				}
 
 				fs.writeFileSync(fileEntry, Editor.getValue(), 'utf8');

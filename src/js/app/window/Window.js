@@ -67,6 +67,11 @@ define([
 			close();
 		});
 
+		/* file overwrite */
+		Dialogs.saveReplace.bind('save', function() {
+			File.save();
+		});
+
 		/* event bind for File */
 		// File.bind('file.opened', function(markdown, dirname, basename) {
 		// 	win.title = orgTitle = basename;
@@ -74,17 +79,34 @@ define([
 		// 		dirname: dirname
 		// 	});
 
-		// 	Editor.setValue(markdown);
-		// });
+// <<<<<<< HEAD
+// 		// 	Editor.setValue(markdown);
+// 		// });
+// =======
+// 			Editor.setValue(markdown);
+// 			win.emit('file.opened');
+// 		});
+// >>>>>>> feature/saving-exist-file
 
 		/* openning not exist file */
 		// File.bind('file.not.exist', function() {
 		// 	Err.throw('error', 'File is not exist');
 		// });
 
-		// File.bind('saved', function(dirname, basename) {
-		// 	win.title = orgTitle = basename;
-		// 	edited = false;
+// <<<<<<< HEAD
+// 		// File.bind('saved', function(dirname, basename) {
+// 		// 	win.title = orgTitle = basename;
+// 		// 	edited = false;
+// =======
+// 		/* file overwrite */
+// 		File.bind('file.save.exist', function() {
+// 			Dialogs.saveReplace.show();
+// 		});
+
+// 		File.bind('saved', function(dirname, basename) {
+// 			win.title = orgTitle = basename;
+// 			edited = false;
+// >>>>>>> feature/saving-exist-file
 			
 		// 	Viewer.init({
 		// 		dirname: dirname
