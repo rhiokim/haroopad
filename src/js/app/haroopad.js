@@ -40,8 +40,9 @@ requirejs([
     'window/Window',
     'editor/Editor',
     'viewer/Viewer',
+    'ui/file/File',
     'utils/Error'
-  ], function(Window, Editor, Viewer) {
+  ], function(Window, Editor, Viewer, File) {
     var res, file;
     var _tid_;
 
