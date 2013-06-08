@@ -4,7 +4,8 @@ define([
 	function(option) {
 		var iframe = $('#haroo iframe')[0];
 		var viewer = iframe.contentWindow;
-		var content = '';
+		var content = '',
+			options;
 
 		var gui = require('nw.gui'),
 				win = gui.Window.get(),
@@ -31,6 +32,7 @@ define([
 		$(iframe).bind('load', function(e) {
 			viewer.setViewStyle(config.viewStyle);
 			viewer.setCodeStyle(config.codeStyle);
+			viewer.init(options);
 			viewer.update(content);
 
 			/**
@@ -83,8 +85,8 @@ define([
 		});
 
 		return {
-			init: function(options) {
-				options = options || {};
+			init: function(opt) {
+				options = opt || {};
 				viewer.init(options);
 			},
 
