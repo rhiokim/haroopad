@@ -44,7 +44,7 @@ requirejs([
     'ui/file/File',
     'utils/Error'
   ], function(Window, Editor, Parser, Viewer, File) {
-    var res, file;
+    var html, file;
     var _tid_;
 
     var gui = require('nw.gui'),
@@ -54,11 +54,10 @@ requirejs([
     x = url('?x');
     y = url('?y');
 
-    win.on('file.opened', function() {
-      // changeHandler();
-      var md = Editor.getValue();
-      res = Parser(md);
-      Viewer.update(md, res, Editor);
+    win.on('file.opened', function(markdown) {
+      Editor.setValue(markdown);
+      html = Parser(markdown);
+      Viewer.update(markdown, html, Editor);
       Editor.on("change", delayChange); 
     });
 
