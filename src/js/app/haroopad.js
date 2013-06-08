@@ -64,6 +64,7 @@ requirejs([
     //run with file open;
     if (file) {
       File.open(decodeURIComponent(file));
+      win.moveTo(x, y);
     } else {
       Editor.on("change", delayChange);
     }

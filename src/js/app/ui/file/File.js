@@ -18,8 +18,8 @@ define([
 	  }
 
 	  function _openWindow(file) {
-	  	var x = win.x,
-	  		y = win.y;
+	  	var x = win.x + 20,
+	  		y = win.y + 20;
 
 		gui.Window.open('pad.html?file='+ file +'&x='+ x +'&y='+ y, {
 			width: win.width,
@@ -37,7 +37,7 @@ define([
 
 	  win.on('file.open', OpenDialog.show.bind(OpenDialog));
 	  win.on('file.recents', _openWindow);
-	  
+
 	  //open dialog fire change event
 	  OpenDialog.on('file.open', _openWindow);	
 
