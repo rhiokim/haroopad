@@ -56,12 +56,14 @@ requirejs([
 
     //run with file open;
     if (file) {
-      win.emit('open.file', decodeURIComponent(file), x, y);
+      File.open(decodeURIComponent(file));
+      // win.emit('open.file', decodeURIComponent(file), x, y);
     }
 
     //open file with commend line
     if (gui.App.argv.length > 0) {
-      win.emit('open.file', gui.App.argv[0]);
+      File.open(gui.App.argv[0])
+      // win.emit('open.file', gui.App.argv[0]);
     }
 
     win.show();
