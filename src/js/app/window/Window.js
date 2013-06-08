@@ -7,15 +7,15 @@ define([
 		'window/Splitter',
 		'window/Window.help',
 		'dialog/Dialogs',
-		'file/File',
+		// 'file/File',
 	    'preferences/Preferences',
 	    'editor/Editor',
 	    'viewer/Viewer',
-		'window/Window.file',
+		// 'window/Window.file',
 		'window/Window.dragdrop',
 		'window/Window.exports'
 	], 
-	function(options, HotKey, Err, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Editor, Viewer) {
+	function(options, HotKey, Err, MenuBar, Context, Splitter, Help, Dialogs, /*File,*/ Preferences, Editor, Viewer) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get(),
 				subWin;
@@ -60,7 +60,7 @@ define([
 
 		Dialogs.save.bind('save', function() {
 			delayClose = true;
-			File.externalSave();
+			// File.externalSave();
 		});
 
 		Dialogs.save.bind('dont-save', function() {
@@ -68,33 +68,33 @@ define([
 		});
 
 		/* event bind for File */
-		File.bind('file.opened', function(markdown, dirname, basename) {
-			win.title = orgTitle = basename;
-			Viewer.init({
-				dirname: dirname
-			});
+		// File.bind('file.opened', function(markdown, dirname, basename) {
+		// 	win.title = orgTitle = basename;
+		// 	Viewer.init({
+		// 		dirname: dirname
+		// 	});
 
-			Editor.setValue(markdown);
-		});
+		// 	Editor.setValue(markdown);
+		// });
 
 		/* openning not exist file */
-		File.bind('file.not.exist', function() {
-			Err.throw('error', 'File is not exist');
-		});
+		// File.bind('file.not.exist', function() {
+		// 	Err.throw('error', 'File is not exist');
+		// });
 
-		File.bind('saved', function(dirname, basename) {
-			win.title = orgTitle = basename;
-			edited = false;
+		// File.bind('saved', function(dirname, basename) {
+		// 	win.title = orgTitle = basename;
+		// 	edited = false;
 			
-			Viewer.init({
-				dirname: dirname
-			});
+		// 	Viewer.init({
+		// 		dirname: dirname
+		// 	});
 
-			//window closing save
-			if(delayClose) {
-				close();
-			}
-		});
+		// 	//window closing save
+		// 	if(delayClose) {
+		// 		close();
+		// 	}
+		// });
 
 		HotKey('defmod-n', newHandler);
 
@@ -107,7 +107,7 @@ define([
 
 	    // Listen to `open` event
 	    win.on('open.file', function(path) {
-			File.open(path);
+			// File.open(path);
 	    });
 
 	    win.on('change.markdown', function(markdown, html, editor) {
