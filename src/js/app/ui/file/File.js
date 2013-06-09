@@ -26,9 +26,12 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 	function _open(file) {
 		var markdown;
 		
-		_update(file);
-		
 		markdown = fs.readFileSync(file, 'utf8');
+		
+		_update(file);
+
+		Opt.set({ markdown: markdown });
+
 		win.emit('file.opened', Opt.toJSON(), markdown);
 	}
 
@@ -41,6 +44,8 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 
 		_update(file);
 
+		Opt.set({ markdown: markdown });
+
 		fs.writeFileSync(file, markdown, 'utf8');
 
 		win.emit('file.saved', Opt.toJSON());
@@ -49,12 +54,12 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 	function _openWindow(file) {
 		var x = win.x + 20,
 			y = win.y + 20;
-
-		gui.Window.open('pad.html?file=' + file + '&x=' + x + '&y=' + y, {
+    
+		gui.Window.open('pad.html#file=' + file + '&x=' + x + '&y=' + y, {
 			width: win.width,
 			height: win.height,
-			toolbar: false,
-			show: true
+			toolbar: true,
+			show: true,
 		});
 	}
 

@@ -2,7 +2,6 @@ define([
 		'window/Window.opt',
 		'keyboard',
 		'utils/Error',
-		'menu/MenuBar',
 		'menu/Context/Context',
 		'window/Splitter',
 		'window/Window.help',
@@ -10,7 +9,7 @@ define([
 		'preferences/Preferences',
 		'window/Window.dragdrop',
 		'window/Window.exports'
-], function(options, HotKey, Err, MenuBar, Context, Splitter, Help, Dialogs, Preferences) {
+], function(options, HotKey, Err, Context, Splitter, Help, Dialogs, Preferences) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -62,57 +61,6 @@ define([
 		close();
 	});
 
-	/* file overwrite */
-	// Dialogs.saveReplace.bind('save', function() {
-	// 	File.save();
-	// });
-
-	/* event bind for File */
-	// File.bind('file.opened', function(markdown, dirname, basename) {
-	// 	win.title = orgTitle = basename;
-	// 	Viewer.init({
-	// 		dirname: dirname
-	// 	});
-
-	// <<<<<<< HEAD
-	// 		// 	Editor.setValue(markdown);
-	// 		// });
-	// =======
-	// 			Editor.setValue(markdown);
-	// 			win.emit('file.opened');
-	// 		});
-	// >>>>>>> feature/saving-exist-file
-
-	/* openning not exist file */
-	// File.bind('file.not.exist', function() {
-	// 	Err.throw('error', 'File is not exist');
-	// });
-
-	// <<<<<<< HEAD
-	// 		// File.bind('saved', function(dirname, basename) {
-	// 		// 	win.title = orgTitle = basename;
-	// 		// 	edited = false;
-	// =======
-	// 		/* file overwrite */
-	// 		File.bind('file.save.exist', function() {
-	// 			Dialogs.saveReplace.show();
-	// 		});
-
-	// 		File.bind('saved', function(dirname, basename) {
-	// 			win.title = orgTitle = basename;
-	// 			edited = false;
-	// >>>>>>> feature/saving-exist-file
-
-	// 	Viewer.init({
-	// 		dirname: dirname
-	// 	});
-
-	// 	//window closing save
-	// 	if(delayClose) {
-	// 		close();
-	// 	}
-	// });
-
 	HotKey('defmod-n', newHandler);
 
 	HotKey('defmod-shift-ctrl-d', function() {
@@ -122,10 +70,11 @@ define([
 	win.on('file.new', newHandler);
 	win.on('file.close', win.close);
 
-	// Listen to `open` event
-	// win.on('open.file', function(path) {
-	// File.open(path);
-	// });
+  win.on('file.saved', function(opt) {
+		win.title = orgTitle = opt.basename;
+		delayClose = true;
+		edited = false;	
+  });
 
 	win.on('change.markdown', function(markdown, html, editor) {
 		win.title = orgTitle + ' (edited)';
@@ -134,4 +83,10 @@ define([
 
 	win.resizeTo(config.width, config.height);
 	win.moveTo(config.x, config.y);
+
+	return {
+		updateTitle: function(title) {
+			win.title = orgTitle = title;
+		}
+	}
 });

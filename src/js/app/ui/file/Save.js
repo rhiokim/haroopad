@@ -17,6 +17,9 @@ define(function() {
 
   	changeHandler: function(e) {
   	  var file = this.$el.val();
+      if (!file) {
+        return;
+      }
   	  view.trigger('file.save', file);
   	}
   });

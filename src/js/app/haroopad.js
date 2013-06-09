@@ -37,29 +37,32 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
+    'menu/MenuBar',
     'window/Window',
     'editor/Editor',
     'editor/Parser',
     'viewer/Viewer',
     'ui/file/File',
     'utils/Error'
-  ], function(Window, Editor, Parser, Viewer, File) {
+  ], function(MenuBar, Window, Editor, Parser, Viewer, File) {
     var html, file;
     var _tid_;
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-    file = url('?file');
-    x = url('?x');
-    y = url('?y');
+    file = url('#file');
+    x = url('#x');
+    y = url('#y');
+    location.hash = '';
 
-    win.on('file.opened', function(opt, markdown) {
-      Editor.setValue(markdown);
-      html = Parser(markdown);
+    win.on('file.opened', function(opt) {
+      Editor.setValue(opt.markdown);
+      html = Parser(opt.markdown);
 
+      Window.updateTitle(opt.basename);
       Viewer.init(opt);
-      Viewer.update(markdown, html, Editor);
+      Viewer.update(opt.markdown, html, Editor);
       Editor.on("change", delayChange); 
     });
 
@@ -99,4 +102,5 @@ requirejs([
     }
 
     win.show();
+    win.focus();
 });
