@@ -1,6 +1,6 @@
 define([
-		'dialog/Save',
-		'dialog/Shortcuts'
+		'ui/dialog/Save',
+		'ui/dialog/Shortcuts'
 	], 
 	function(Save, Shortcuts) {
 

@@ -5,7 +5,7 @@ define([
 		'menu/Context/Context',
 		'window/Splitter',
 		'window/Window.help',
-		'dialog/Dialogs',
+		'ui/dialog/Dialogs',
 		'preferences/Preferences',
 		'window/Window.dragdrop',
 		'window/Window.exports'
