@@ -58,8 +58,8 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 		gui.Window.open('pad.html#file=' + file + '&x=' + x + '&y=' + y, {
 			width: win.width,
 			height: win.height,
-			toolbar: true,
-			show: true,
+			toolbar: false,
+			show: false,
 		});
 	}
 
