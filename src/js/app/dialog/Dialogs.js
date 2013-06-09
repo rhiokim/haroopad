@@ -1,13 +1,11 @@
 define([
 		'dialog/Save',
-		'dialog/Save.replace',
 		'dialog/Shortcuts'
 	], 
-	function(Save, SaveReplace, Shortcuts) {
+	function(Save, Shortcuts) {
 
 		return {
 			save: new Save,
-			saveReplace: new SaveReplace,
 			shortcuts: new Shortcuts
 		}
 });

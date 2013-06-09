@@ -1,142 +1,137 @@
 define([
 		'window/Window.opt',
 		'keyboard',
-	    'utils/Error',
+		'utils/Error',
 		'menu/MenuBar',
 		'menu/Context/Context',
 		'window/Splitter',
 		'window/Window.help',
 		'dialog/Dialogs',
-		// 'file/File',
-	    'preferences/Preferences',
-	    'editor/Editor',
-	    'viewer/Viewer',
-		// 'window/Window.file',
+		'preferences/Preferences',
 		'window/Window.dragdrop',
 		'window/Window.exports'
-	], 
-	function(options, HotKey, Err, MenuBar, Context, Splitter, Help, Dialogs, /*File,*/ Preferences, Editor, Viewer) {
-		var gui = require('nw.gui');
-		var win = gui.Window.get(),
-				subWin;
+], function(options, HotKey, Err, MenuBar, Context, Splitter, Help, Dialogs, Preferences) {
+	var gui = require('nw.gui');
+	var win = gui.Window.get(),
+		subWin;
 
-		var orgTitle = 'Untitled';
-		var edited = false,
-			delayClose = false;
+	var orgTitle = 'Untitled';
+	var edited = false,
+		delayClose = false;
 
-		var config = options.toJSON();
+	var config = options.toJSON();
 
-		function newHandler() {
-			options.set({
-				x: win.x + 20,
-				y: win.y + 20
-			});
-			
-    	subWin = gui.Window.open('pad.html', {
-    				width: win.width,
-    				height: win.height,
-					  toolbar: false,
-					  show: false
-					});
-		}
-
-		function close() {
-			options.save();
-			win.hide();
-			win.close(true);
-		}
-
-		win.on('closed', function() {
-			win = null;
+	function newHandler() {
+		options.set({
+			x: win.x + 20,
+			y: win.y + 20
 		});
 
-		win.on('close', function() {
-			if(edited) {
-				Dialogs.save.show();
-			} else {
-				close();
-			}
+		subWin = gui.Window.open('pad.html', {
+			width: win.width,
+			height: win.height,
+			toolbar: false,
+			show: false
 		});
+	}
 
-		Dialogs.save.bind('save', function() {
-			delayClose = true;
-			// File.externalSave();
-		});
+	function close() {
+		options.save();
+		win.hide();
+		win.close(true);
+	}
 
-		Dialogs.save.bind('dont-save', function() {
+	win.on('closed', function() {
+		win = null;
+	});
+
+	win.on('close', function() {
+		if (edited) {
+			Dialogs.save.show();
+		} else {
 			close();
-		});
+		}
+	});
 
-		/* file overwrite */
-		Dialogs.saveReplace.bind('save', function() {
-			File.save();
-		});
+	Dialogs.save.bind('save', function() {
+		delayClose = true;
+		// File.externalSave();
+	});
 
-		/* event bind for File */
-		// File.bind('file.opened', function(markdown, dirname, basename) {
-		// 	win.title = orgTitle = basename;
-		// 	Viewer.init({
-		// 		dirname: dirname
-		// 	});
+	Dialogs.save.bind('dont-save', function() {
+		close();
+	});
 
-// <<<<<<< HEAD
-// 		// 	Editor.setValue(markdown);
-// 		// });
-// =======
-// 			Editor.setValue(markdown);
-// 			win.emit('file.opened');
-// 		});
-// >>>>>>> feature/saving-exist-file
+	/* file overwrite */
+	// Dialogs.saveReplace.bind('save', function() {
+	// 	File.save();
+	// });
 
-		/* openning not exist file */
-		// File.bind('file.not.exist', function() {
-		// 	Err.throw('error', 'File is not exist');
-		// });
+	/* event bind for File */
+	// File.bind('file.opened', function(markdown, dirname, basename) {
+	// 	win.title = orgTitle = basename;
+	// 	Viewer.init({
+	// 		dirname: dirname
+	// 	});
 
-// <<<<<<< HEAD
-// 		// File.bind('saved', function(dirname, basename) {
-// 		// 	win.title = orgTitle = basename;
-// 		// 	edited = false;
-// =======
-// 		/* file overwrite */
-// 		File.bind('file.save.exist', function() {
-// 			Dialogs.saveReplace.show();
-// 		});
+	// <<<<<<< HEAD
+	// 		// 	Editor.setValue(markdown);
+	// 		// });
+	// =======
+	// 			Editor.setValue(markdown);
+	// 			win.emit('file.opened');
+	// 		});
+	// >>>>>>> feature/saving-exist-file
 
-// 		File.bind('saved', function(dirname, basename) {
-// 			win.title = orgTitle = basename;
-// 			edited = false;
-// >>>>>>> feature/saving-exist-file
-			
-		// 	Viewer.init({
-		// 		dirname: dirname
-		// 	});
+	/* openning not exist file */
+	// File.bind('file.not.exist', function() {
+	// 	Err.throw('error', 'File is not exist');
+	// });
 
-		// 	//window closing save
-		// 	if(delayClose) {
-		// 		close();
-		// 	}
-		// });
+	// <<<<<<< HEAD
+	// 		// File.bind('saved', function(dirname, basename) {
+	// 		// 	win.title = orgTitle = basename;
+	// 		// 	edited = false;
+	// =======
+	// 		/* file overwrite */
+	// 		File.bind('file.save.exist', function() {
+	// 			Dialogs.saveReplace.show();
+	// 		});
 
-		HotKey('defmod-n', newHandler);
+	// 		File.bind('saved', function(dirname, basename) {
+	// 			win.title = orgTitle = basename;
+	// 			edited = false;
+	// >>>>>>> feature/saving-exist-file
 
-		HotKey('defmod-shift-ctrl-d', function() {
-			win.showDevTools();
-		});
+	// 	Viewer.init({
+	// 		dirname: dirname
+	// 	});
 
-		win.on('file.new', newHandler);
-		win.on('file.close', win.close);
+	// 	//window closing save
+	// 	if(delayClose) {
+	// 		close();
+	// 	}
+	// });
 
-	    // Listen to `open` event
-	    win.on('open.file', function(path) {
-			// File.open(path);
-	    });
+	HotKey('defmod-n', newHandler);
 
-	    win.on('change.markdown', function(markdown, html, editor) {
-			win.title = orgTitle + ' (edited)';
-			edited = true;
-	    });
+	HotKey('defmod-shift-ctrl-d', function() {
+		win.showDevTools();
+	});
 
-		win.resizeTo(config.width, config.height);
-		win.moveTo(config.x, config.y);
+	win.on('file.new', newHandler);
+	win.on('file.close', win.close);
+
+	// Listen to `open` event
+	// win.on('open.file', function(path) {
+	// File.open(path);
+	// });
+
+	win.on('change.markdown', function(markdown, html, editor) {
+		win.title = orgTitle + ' (edited)';
+		edited = true;
+	});
+
+	win.resizeTo(config.width, config.height);
+	win.moveTo(config.x, config.y);
 });

@@ -5,7 +5,7 @@ define(function() {
       created_at: new Date,
       updated_at: new Date,
       fileEntry: undefined,
-      extname: 'md',
+      extname: '.md',
       basename: undefined,
       markdown: undefined
     }

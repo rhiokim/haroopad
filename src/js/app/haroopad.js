@@ -54,9 +54,11 @@ requirejs([
     x = url('?x');
     y = url('?y');
 
-    win.on('file.opened', function(markdown) {
+    win.on('file.opened', function(opt, markdown) {
       Editor.setValue(markdown);
       html = Parser(markdown);
+
+      Viewer.init(opt);
       Viewer.update(markdown, html, Editor);
       Editor.on("change", delayChange); 
     });
@@ -74,6 +76,10 @@ requirejs([
       File.open(gui.App.argv[0])
       // win.emit('open.file', gui.App.argv[0]);
     }
+
+    win.on('file.saved', function(opt) {
+      Viewer.init(opt);
+    });
 
     /**
      * 코드미러 내용 변경 이벤트 핸들러

@@ -1,56 +1,106 @@
 define([
-	  'keyboard',
-	  'ui/file/File.opt',
-	  'ui/file/Open',
-	  'ui/file/Save'
-	], 
+		'keyboard',
+		'ui/file/File.opt',
+		'ui/file/Open',
+		'ui/file/Save',
+		'editor/Editor'
+],
 
-	function(HotKey, Opt, OpenDialog, SaveDialog) {
-	  var fs = require('fs'),
-	  	  path = require('path');
+function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
+	var fs = require('fs'),
+		path = require('path');
 
-	  var gui = require('nw.gui');
-	  	  win = gui.Window.get();
+	var gui = require('nw.gui');
+	win = gui.Window.get();
 
-	  function _open(file) {
-	  	var markdown = fs.readFileSync(file, 'utf8');
-	  	win.emit('file.opened', markdown);
-	  }
+	function _update(file) {
+		Opt.set({
+			'fileEntry': file,
+			'extname': path.extname(file) || '.md',
+			'dirname': path.dirname(file),
+			'basename': path.basename(file),
+			'updated_at': new Date
+		});
+	}
 
-	  function _openWindow(file) {
-	  	var x = win.x + 20,
-	  		y = win.y + 20;
+	function _open(file) {
+		var markdown;
+		
+		_update(file);
+		
+		markdown = fs.readFileSync(file, 'utf8');
+		win.emit('file.opened', Opt.toJSON(), markdown);
+	}
 
-		gui.Window.open('pad.html?file='+ file +'&x='+ x +'&y='+ y, {
+	function _save(file) {
+		var markdown = Editor.getValue();
+
+		if (!path.extname(file)) {
+			file += '.md';
+		}
+
+		_update(file);
+
+		fs.writeFileSync(file, markdown, 'utf8');
+
+		win.emit('file.saved', Opt.toJSON());
+	}
+
+	function _openWindow(file) {
+		var x = win.x + 20,
+			y = win.y + 20;
+
+		gui.Window.open('pad.html?file=' + file + '&x=' + x + '&y=' + y, {
 			width: win.width,
 			height: win.height,
-			  toolbar: false,
-			  show: true
-			});
-	  }
+			toolbar: false,
+			show: true
+		});
+	}
 
-	  Opt.bind('change', function() {
-	  	console.log(arguments)
-	  });
+	Opt.bind('change', function() {
+		console.log(arguments)
+	});
 
-	  HotKey('defmod-o', OpenDialog.show.bind(OpenDialog));
+	HotKey('defmod-o', function() {
+		win.emit('file.open');
+	});
 
-	  win.on('file.open', OpenDialog.show.bind(OpenDialog));
-	  win.on('file.recents', _openWindow);
+	win.on('file.open', OpenDialog.show.bind(OpenDialog));
+	win.on('file.recents', _openWindow);
 
-	  //open dialog fire change event
-	  OpenDialog.on('file.open', _openWindow);	
+	//open dialog fire change event
+	OpenDialog.on('file.open', _openWindow);
 
-	  return {
-	  	open: function(file) {
-		  	Opt.set({
-		  	  'fileEntry': file,
-		  	  'extname': path.extname(file),
-		  	  'basename': path.basename(file),
-		  	  'updated_at': new Date
-		  	});
+	HotKey('defmod-s', function() {
+		win.emit('file.save');
+	});
 
-		  	_open(file);
-	  	}
-	  }
+	HotKey('defmod-shift-s', function() {
+		win.emit('file.save.as');
+	});
+
+	win.on('file.save', function() {
+		var file = Opt.get('fileEntry');
+		if (!file) {
+			SaveDialog.show();
+		} else {
+			_save(file);
+		}
+	});
+
+	win.on('file.save.as', SaveDialog.show.bind(SaveDialog));
+
+	SaveDialog.on('file.save', _save);
+
+	return {
+		open: function(file) {
+
+			_open(file);
+		},
+
+		save: function(file) {
+
+		}
+	}
 });
