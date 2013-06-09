@@ -71,13 +71,15 @@ define([
 			clipboard.set(content, 'text');
 		});
 
-		/* change markdown event handler */
-		win.on('change.markdown', function(markdown, html, editor) {
+		function update(markdown, html, editor) {
 			content = html;
 			viewer.update(content);
 
 			config.clickableLink ? viewer.allowLink() : viewer.blockLink();
-		});
+		}
+
+		/* change markdown event handler */
+		win.on('change.markdown', update);
 
 		/* scroll editor for sync */
 		win.on('editor.scroll', function(top, per) {
@@ -89,6 +91,8 @@ define([
 				options = opt || {};
 				viewer.init(options);
 			},
+
+			update: update,
 
 			/**
 			 * for html exporting 

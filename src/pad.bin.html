@@ -12,7 +12,11 @@
   <div id="editor"><textarea id="code" name="code"></textarea></div>
   <div id="haroo"><iframe src="viewer.html"></iframe></div>
 
-  <div id="fields"></div>
+  <div id="fields">
+    <input class="hide" id="openFile" type="file" />
+    <input class="hide" id="saveFile" type="file" nwsaveas />
+    <input class="hide" id="saveHTMLFile" type="file" nwsaveas />
+  </div>
   <div id="dialogs">
     <div id="error-dialog" class="modal hide fade" data-width="400">
       <div class="modal-body text-center" style="text-align: center;">

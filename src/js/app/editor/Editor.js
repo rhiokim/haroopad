@@ -1,11 +1,11 @@
 define([
 		'keyboard',
-		'editor/Parser',
+		// 'editor/Parser',
 		'editor/Editor.keymap',
 		'preferences/Editor.opt',
 		'preferences/General.opt'
 	],
-	function(HotKey, Parser, Keymap, editorOpt, generalOpt) {
+	function(HotKey, /*Parser,*/ Keymap, editorOpt, generalOpt) {
 		var gui = require('nw.gui'),
       		win = gui.Window.get(),
       		clipboard = gui.Clipboard.get();
@@ -112,24 +112,22 @@ define([
 		  editor.off('scroll', syncScrollHandler);
 		}
 
-	    /**
-	     * 코드미러 내용 변경 이벤트 핸들러
-	     * @return {[type]} [description]
-	     */
-	    function changeHandler() {
-	      res = Parser(editor.getValue());
-	      win.emit('change.markdown', editor.getValue(), res, editor);
-	    }
+	    // /**
+	    //  * 코드미러 내용 변경 이벤트 핸들러
+	    //  * @return {[type]} [description]
+	    //  */
+	    // function changeHandler() {
+	    //   res = Parser(editor.getValue());
+	    //   win.emit('change.markdown', editor.getValue(), res, editor);
+	    // }
 
-	    function delayChange() {
-	      if(_tid_) {
-	        clearTimeout(_tid_);
-	      }
+	    // function delayChange() {
+	    //   if(_tid_) {
+	    //     clearTimeout(_tid_);
+	    //   }
 
-	      _tid_ = setTimeout(changeHandler, 300);
-	    }
-
-	    editor.on("change", delayChange);
+	    //   _tid_ = setTimeout(changeHandler, 300);
+	    // }
 
 		return editor;
 });

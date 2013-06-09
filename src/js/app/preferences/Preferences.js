@@ -25,6 +25,7 @@ define([
       	win = gui.Window.get();
 
     win.on('context.preferences', showPreferences);
+    win.on('preferences.show', showPreferences);
 
 		HotKey('defmod-,', showPreferences);
 });

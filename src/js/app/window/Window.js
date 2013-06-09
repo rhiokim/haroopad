@@ -1,120 +1,92 @@
 define([
 		'window/Window.opt',
 		'keyboard',
-	    'utils/Error',
-		'menu/MenuBar',
+		'utils/Error',
 		'menu/Context/Context',
 		'window/Splitter',
 		'window/Window.help',
-		'dialog/Dialogs',
-		'file/File',
-	    'preferences/Preferences',
-	    'editor/Editor',
-	    'viewer/Viewer',
-		'window/Window.file',
+		'ui/dialog/Dialogs',
+		'preferences/Preferences',
 		'window/Window.dragdrop',
 		'window/Window.exports'
-	], 
-	function(options, HotKey, Err, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Editor, Viewer) {
-		var gui = require('nw.gui');
-		var win = gui.Window.get(),
-				subWin;
+], function(options, HotKey, Err, Context, Splitter, Help, Dialogs, Preferences) {
+	var gui = require('nw.gui');
+	var win = gui.Window.get(),
+		subWin;
 
-		var orgTitle = 'Untitled';
-		var edited = false,
-			delayClose = false;
+	var orgTitle = 'Untitled';
+	var edited = false,
+		delayClose = false;
 
-		var config = options.toJSON();
+	var config = options.toJSON();
 
-		function newHandler() {
-			options.set({
-				x: win.x + 20,
-				y: win.y + 20
-			});
-			
-    	subWin = gui.Window.open('pad.html', {
-    				width: win.width,
-    				height: win.height,
-					  toolbar: false,
-					  show: false
-					});
-		}
-
-		function close() {
-			options.save();
-			win.hide();
-			win.close(true);
-		}
-
-		win.on('closed', function() {
-			win = null;
+	function newHandler() {
+		options.set({
+			x: win.x + 20,
+			y: win.y + 20
 		});
 
-		win.on('close', function() {
-			if(edited) {
-				Dialogs.save.show();
-			} else {
-				close();
-			}
+		subWin = gui.Window.open('pad.html', {
+			width: win.width,
+			height: win.height,
+			toolbar: false,
+			show: false
 		});
+	}
 
-		Dialogs.save.bind('save', function() {
-			delayClose = true;
-			File.externalSave();
-		});
+	function close() {
+		options.save();
+		win.hide();
+		win.close(true);
+	}
 
-		Dialogs.save.bind('dont-save', function() {
+	win.on('closed', function() {
+		win = null;
+	});
+
+	win.on('close', function() {
+		if (edited) {
+			Dialogs.save.show();
+		} else {
 			close();
-		});
+		}
+	});
 
-		/* event bind for File */
-		File.bind('file.opened', function(markdown, dirname, basename) {
-			win.title = orgTitle = basename;
-			Viewer.init({
-				dirname: dirname
-			});
+	Dialogs.save.bind('save', function() {
+		delayClose = true;
+		// File.externalSave();
+	});
 
-			Editor.setValue(markdown);
-		});
+	Dialogs.save.bind('dont-save', function() {
+		close();
+	});
 
-		/* openning not exist file */
-		File.bind('file.not.exist', function() {
-			Err.throw('error', 'File is not exist');
-		});
+	HotKey('defmod-n', newHandler);
 
-		File.bind('saved', function(dirname, basename) {
-			win.title = orgTitle = basename;
-			edited = false;
-			
-			Viewer.init({
-				dirname: dirname
-			});
+	HotKey('defmod-shift-ctrl-d', function() {
+		win.showDevTools();
+	});
 
-			//window closing save
-			if(delayClose) {
-				close();
-			}
-		});
+	win.on('file.new', newHandler);
+	win.on('file.close', win.close);
 
-		HotKey('defmod-n', newHandler);
+  win.on('file.saved', function(opt) {
+		win.title = orgTitle = opt.basename;
+		delayClose = true;
+		edited = false;	
+  });
 
-		HotKey('defmod-shift-ctrl-d', function() {
-			win.showDevTools();
-		});
+	win.on('change.markdown', function(markdown, html, editor) {
+		win.title = orgTitle + ' (edited)';
+		edited = true;
+	});
 
-		win.on('file.new', newHandler);
-		win.on('file.close', win.close);
+	win.resizeTo(config.width, config.height);
+	win.moveTo(config.x, config.y);
 
-	    // Listen to `open` event
-	    win.on('open.file', function(path) {
-			File.open(path);
-	    });
-
-	    win.on('change.markdown', function(markdown, html, editor) {
-			win.title = orgTitle + ' (edited)';
-			edited = true;
-	    });
-
-		win.resizeTo(config.width, config.height);
-		win.moveTo(config.x, config.y);
+	return {
+		updateTitle: function(title) {
+			win.title = orgTitle = title;
+		}
+	}
 });
