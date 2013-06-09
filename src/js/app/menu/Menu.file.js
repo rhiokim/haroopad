@@ -85,6 +85,18 @@ define([
             submenu: Activities
         })
 	);
+    File.append(menuItem({
+            type: 'separator'
+        })
+    );
+
+    File.append(menuItem({
+            label: 'Preferences',
+            click: function() {
+                win.emit('preferences.show');
+            }
+        })
+    );
 
     /*
 	File.append(
