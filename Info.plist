@@ -68,7 +68,7 @@
 		</dict>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.intel.nw</string>
+	<string>haroopad</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -76,7 +76,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string></string>
+	<string>v@@version</string>
 	<key>CFBundleVersion</key>
 	<string>v@@version</string>
 	<key>LSFileQuarantineEnabled</key>
