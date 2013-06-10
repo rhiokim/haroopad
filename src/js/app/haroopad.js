@@ -26,6 +26,7 @@ window.addEventListener('error', function(err) {
       ' Information | Description \n'
     + '-------------|-----------------------------\n'
     + ' Type        | Error\n'
+    + ' Date        | '+ new Date +'\n'
     + ' File        | '+ err.filename.replace(process.cwd(), '') +'\n'
     + ' Line Number | '+ err.lineno +'\n'
     + ' Message     | '+ err.message +'\n\n'
@@ -55,8 +56,6 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    // editor: 'editor/Editor',
-    // viewer: 'viewer/Viewer',
     text: '../vendors/text',
     store: '../vendors/store',
     keyboard: '../vendors/keymage'
@@ -81,7 +80,7 @@ requirejs([
     'ui/file/File',
     'utils/Error'
   ], function(MenuBar, Window, Editor, Parser, Viewer, File) {
-    var html, file;
+    var html, res, file, x, y;
     var _tid_;
 
     var gui = require('nw.gui'),
@@ -96,7 +95,6 @@ requirejs([
       Editor.setValue(opt.markdown);
       html = Parser(opt.markdown);
 
-      Window.updateTitle(opt.basename);
       Viewer.init(opt);
       Viewer.update(opt.markdown, html, Editor);
       Editor.on("change", delayChange); 
@@ -105,9 +103,12 @@ requirejs([
     //run with file open;
     if (file) {
       File.open(decodeURIComponent(file));
-      win.moveTo(x, y);
     } else {
       Editor.on("change", delayChange);
+    }
+
+    if (x && y) {
+      win.moveTo(x, y);
     }
 
     //open file with commend line

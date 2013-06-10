@@ -70,6 +70,10 @@ define([
 	win.on('file.new', newHandler);
 	win.on('file.close', win.close);
 
+	win.on('file.opend', function(opt) {
+		win.title = orgTitle = opt.basename;
+  });
+
   win.on('file.saved', function(opt) {
 		win.title = orgTitle = opt.basename;
 		delayClose = true;
@@ -83,10 +87,4 @@ define([
 
 	win.resizeTo(config.width, config.height);
 	win.moveTo(config.x, config.y);
-
-	return {
-		updateTitle: function(title) {
-			win.title = orgTitle = title;
-		}
-	}
 });
