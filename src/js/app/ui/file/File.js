@@ -77,6 +77,7 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 			if (exists) {
 				_openWindow(file);
 			} else {
+				//TODO: enhancement ux
 				alert('File not found\n'+ file);
 			}
 		});
