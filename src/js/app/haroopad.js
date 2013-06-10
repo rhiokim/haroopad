@@ -77,9 +77,10 @@ requirejs([
     'editor/Editor',
     'editor/Parser',
     'viewer/Viewer',
+    'preferences/Preferences',
     'ui/file/File',
     'utils/Error'
-  ], function(MenuBar, Window, Editor, Parser, Viewer, File) {
+  ], function(MenuBar, Window, Editor, Parser, Viewer, Preferences, File) {
     var html, res, file, x, y;
     var _tid_;
 

@@ -6,10 +6,9 @@ define([
 		'window/Splitter',
 		'window/Window.help',
 		'ui/dialog/Dialogs',
-		'preferences/Preferences',
 		'window/Window.dragdrop',
 		'window/Window.exports'
-], function(options, HotKey, Err, Context, Splitter, Help, Dialogs, Preferences) {
+], function(options, HotKey, Err, Context, Splitter, Help, Dialogs) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
