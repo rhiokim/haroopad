@@ -1,9 +1,7 @@
 // Load native UI library.
 var gui = require('nw.gui'),
     win = gui.Window.get();
-var _options = {
-  dirname: '.'
-};
+var _options;
 
 window.ondragover = function(e) { 
   e.preventDefault(); 
@@ -46,7 +44,7 @@ function delegateKeydown() {
 }
 
 function init(options) {
-  _options = options;
+  _options = options || { dirname: '.' };
 
   delegateKeydown();
 }

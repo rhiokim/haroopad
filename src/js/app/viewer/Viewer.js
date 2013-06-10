@@ -88,7 +88,7 @@ define([
 
 		return {
 			init: function(opt) {
-				options = opt || {};
+				options = opt;
 				viewer.init(options);
 			},
 
