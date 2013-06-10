@@ -18,7 +18,8 @@ module.exports = function(grunt) {
     
     clean: {
       build: [ 'build/*' ],
-      release: [ 'build/haroopad.app' ]
+      release: [ 'build/haroopad.app' ],
+      core: [ 'build/haroopad.app' ]
     },
 
     cssmin: {
@@ -155,6 +156,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/css/markdown/build/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/markdown/' },
           { src: 'src/pad.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/pad.html' },
           { src: 'src/viewer.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/viewer.html' },
+          { src: 'src/index.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/index.html' },
           { src: 'src/package.json', dest: 'build/haroopad.app/Contents/Resources/app.nw/package.json' },
           { src: 'src/css/keys.css', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/keys.css' },
           { src: 'src/css/select2.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/select2.png' },
@@ -226,6 +228,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [ 'clean', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'requirejs' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
+  grunt.registerTask('core', [ 'clean:core', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:ss_darwin', 'shell:exec' ]);
 };

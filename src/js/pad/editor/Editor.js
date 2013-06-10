@@ -1,14 +1,12 @@
 define([
 		'keyboard',
 		// 'editor/Parser',
-		'editor/Editor.keymap',
-		'preferences/Editor.opt',
-		'preferences/General.opt'
+		'editor/Editor.keymap'
 	],
-	function(HotKey, /*Parser,*/ Keymap, editorOpt, generalOpt) {
+	function(HotKey, /*Parser,*/ Keymap) {
 		var gui = require('nw.gui'),
-      		win = gui.Window.get(),
-      		clipboard = gui.Clipboard.get();
+    		win = gui.Window.get(),
+    		clipboard = gui.Clipboard.get();
 
 	    var _tid_;	//for throttle
 
@@ -25,15 +23,15 @@ define([
 					    extraKeys: Keymap
 					  });
 
-		var editorConf = editorOpt.toJSON();
-		var generalConf = generalOpt.toJSON();
+		// var editorConf = editorOpt.toJSON();
+		// var generalConf = generalOpt.toJSON();
 
 		/* initialize editor */
-		editor.setOption('theme', editorConf.theme);
-		editor.setOption('lineNumbers', editorConf.displayLineNumber);
-		editor.setOption('keyMap', editorConf.vimKeyBinding ? 'vim' : 'default');
-		editor.setOption('tabSize', editorConf.insertFourSpace ? 4 : 2);
-		editor.setOption('autoCloseBrackets', editorConf.autoPairCharacters);
+		// editor.setOption('theme', editorConf.theme);
+		// editor.setOption('lineNumbers', editorConf.displayLineNumber);
+		// editor.setOption('keyMap', editorConf.vimKeyBinding ? 'vim' : 'default');
+		// editor.setOption('tabSize', editorConf.insertFourSpace ? 4 : 2);
+		// editor.setOption('autoCloseBrackets', editorConf.autoPairCharacters);
 
 		/* hotkey area */
 		HotKey('defmod-ctrl-l', function() {
@@ -46,25 +44,25 @@ define([
 		});
 
 		/* change preferences events */
-		editorOpt.bind('change:theme', function(model, value, memo) {
-		  editor.setOption('theme', value);
-		});
+		// editorOpt.bind('change:theme', function(model, value, memo) {
+		//   editor.setOption('theme', value);
+		// });
 
-		editorOpt.bind('change:displayLineNumber', function(model, value, memo) {
-		  editor.setOption('lineNumbers', value);
-		});
+		// editorOpt.bind('change:displayLineNumber', function(model, value, memo) {
+		//   editor.setOption('lineNumbers', value);
+		// });
 
-		editorOpt.bind('change:vimKeyBinding', function(model, value, memo) {
-		  editor.setOption('keyMap', value ? 'vim' : 'default');
-		});
+		// editorOpt.bind('change:vimKeyBinding', function(model, value, memo) {
+		//   editor.setOption('keyMap', value ? 'vim' : 'default');
+		// });
 
-		editorOpt.bind('change:insertFourSpace', function(model, value, memo) {
-		  editor.setOption('tabSize', value ? 4 : 2);
-		});
+		// editorOpt.bind('change:insertFourSpace', function(model, value, memo) {
+		//   editor.setOption('tabSize', value ? 4 : 2);
+		// });
 
-		editorOpt.bind('change:autoPairCharacters', function(model, value, memo) {
-		  editor.setOption('autoCloseBrackets', value);
-		});
+		// editorOpt.bind('change:autoPairCharacters', function(model, value, memo) {
+		//   editor.setOption('autoCloseBrackets', value);
+		// });
 
 		/* fire context menu event */
 		win.on('context.cut', function() {
@@ -90,27 +88,27 @@ define([
 		 * sync scroll handler
 		 * @return {[type]} [description]
 		 */
-		function syncScrollHandler() {
-		  var scrollInfo = editor.getScrollInfo();
-		  var top = scrollInfo.top;
-		  var per = scrollInfo.height - scrollInfo.clientHeight;
+		// function syncScrollHandler() {
+		//   var scrollInfo = editor.getScrollInfo();
+		//   var top = scrollInfo.top;
+		//   var per = scrollInfo.height - scrollInfo.clientHeight;
 		
-		  win.emit('editor.scroll', top, per);
-		}
+		//   win.emit('editor.scroll', top, per);
+		// }
 
-		generalOpt.bind('change:enableSyncScroll', function(model, value, memo) {
-		  if(value) {
-		    editor.on('scroll', syncScrollHandler);
-		  } else {
-		 	editor.off('scroll', syncScrollHandler);
-		  }
-		});
+		// generalOpt.bind('change:enableSyncScroll', function(model, value, memo) {
+		//   if(value) {
+		//     editor.on('scroll', syncScrollHandler);
+		//   } else {
+		//  	editor.off('scroll', syncScrollHandler);
+		//   }
+		// });
 
-		if(generalConf.enableSyncScroll) {
-		  editor.on('scroll', syncScrollHandler);
-		} else {
-		  editor.off('scroll', syncScrollHandler);
-		}
+		// if(generalConf.enableSyncScroll) {
+		//   editor.on('scroll', syncScrollHandler);
+		// } else {
+		//   editor.off('scroll', syncScrollHandler);
+		// }
 
 	    // /**
 	    //  * 코드미러 내용 변경 이벤트 핸들러

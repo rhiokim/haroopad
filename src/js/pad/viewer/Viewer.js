@@ -1,7 +1,7 @@
 define([
-		'preferences/Viewer.opt'
+		// 'preferences/Viewer.opt'
 	], 
-	function(option) {
+	function(/*option*/) {
 		var iframe = $('#haroo iframe')[0];
 		var viewer = iframe.contentWindow;
 		var content = '',
@@ -11,27 +11,27 @@ define([
 				win = gui.Window.get(),
 				clipboard = gui.Clipboard.get();
 		
-		var config = option.toJSON();
+		// var config = option.toJSON();
 
-		option.bind('change:viewStyle', function(model, value) {
-			config = model.toJSON();
-			iframe.src = 'viewer.html?view='+ value +'&code='+ config.codeStyle;
-		});
+		// option.bind('change:viewStyle', function(model, value) {
+		// 	config = model.toJSON();
+		// 	iframe.src = 'viewer.html?view='+ value +'&code='+ config.codeStyle;
+		// });
 		
-		option.bind('change:codeStyle', function(model, value) {
-			config = model.toJSON();
-			iframe.src = 'viewer.html?view='+ config.viewStyle +'&code='+ value;
-		});
+		// option.bind('change:codeStyle', function(model, value) {
+		// 	config = model.toJSON();
+		// 	iframe.src = 'viewer.html?view='+ config.viewStyle +'&code='+ value;
+		// });
 
-		option.bind('change:clickableLink', function(model, value) {
-			value ? viewer.allowLink() : viewer.blockLink() ;
-		});
+		// option.bind('change:clickableLink', function(model, value) {
+		// 	value ? viewer.allowLink() : viewer.blockLink() ;
+		// });
 
-		iframe.src = 'viewer.html?view='+ config.viewStyle +'&code='+ config.codeStyle;
+		// iframe.src = 'viewer.html?view='+ config.viewStyle +'&code='+ config.codeStyle;
 
 		$(iframe).bind('load', function(e) {
-			viewer.setViewStyle(config.viewStyle);
-			viewer.setCodeStyle(config.codeStyle);
+			// viewer.setViewStyle(config.viewStyle);
+			// viewer.setCodeStyle(config.codeStyle);
 			viewer.init(options);
 			viewer.update(content);
 
@@ -75,7 +75,7 @@ define([
 			content = html;
 			viewer.update(content);
 
-			config.clickableLink ? viewer.allowLink() : viewer.blockLink();
+			// config.clickableLink ? viewer.allowLink() : viewer.blockLink();
 		}
 
 		/* change markdown event handler */

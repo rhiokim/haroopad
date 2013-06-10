@@ -1,39 +1,3 @@
-'use strict';
-
-var path = require('path'),
-  fs = require('fs'),
-  userDataDir = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'] + '/.haroopad',
-  errorLog = userDataDir + '/error.md';
-
-if (!fs.existsSync(userDataDir)) {
-  fs.mkdirSync(userDataDir);
-}
-
-process.on('uncaughtException', function(err) {
-
-  var message = 
-      ' Information | Description \n'
-    + '-------------|-----------------------------\n'
-    + ' Type        | UncaughtException \n'
-    + ' Date        | '+ new Date +'\n'
-    + ' Stack       | '+ err.stack +'\n\n'
-    
-  fs.appendFile(errorLog, '---uncaughtException---\n' + new Date +'\n'+ err.stack + '\n\n');
-});
-
-window.addEventListener('error', function(err) {
-  var message = 
-      ' Information | Description \n'
-    + '-------------|-----------------------------\n'
-    + ' Type        | Error\n'
-    + ' Date        | '+ new Date +'\n'
-    + ' File        | '+ err.filename.replace(process.cwd(), '') +'\n'
-    + ' Line Number | '+ err.lineno +'\n'
-    + ' Message     | '+ err.message +'\n\n'
-    
-  fs.appendFile(errorLog, message);
-}, false);
-
 
 function loadCss(url) {
     var link = document.createElement("link");
@@ -50,7 +14,7 @@ require.nodeRequire = require;
  * require.js 환경 설정
  */
 requirejs.config({
-  baseUrl: 'js/app',
+  baseUrl: 'js/pad',
   waitSeconds: 30,
   locale: 'ko-kr',
   paths: {
@@ -72,15 +36,14 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
-    'menu/MenuBar',
-    'window/Window',
+    // 'menu/MenuBar',
+    // 'window/Window',
     'editor/Editor',
     'editor/Parser',
     'viewer/Viewer',
-    'preferences/Preferences',
-    'ui/file/File',
-    'utils/Error'
-  ], function(MenuBar, Window, Editor, Parser, Viewer, Preferences, File) {
+    // 'preferences/Preferences',
+    'ui/file/File'
+  ], function(/*MenuBar, Window, */Editor, Parser, Viewer, /*Preferences, */File) {
     var html, res, file, x, y;
     var _tid_;
 
@@ -90,7 +53,7 @@ requirejs([
     file = url('#file');
     x = url('#x');
     y = url('#y');
-    location.hash = '';
+    // location.hash = '';
 
     win.on('file.opened', function(opt) {
       Editor.setValue(opt.markdown);
