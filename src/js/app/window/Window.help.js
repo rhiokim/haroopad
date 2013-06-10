@@ -65,7 +65,7 @@ define([
 		shell.openExternal('http://pad.haroopress.com/');
 	});
 
-	win.on('help.issue', function() {
+	win.on('help.feedback', function() {
 		shell.openExternal('https://github.com/rhiokim/haroopad/issues');
 	});
 });
