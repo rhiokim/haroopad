@@ -72,7 +72,16 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 	});
 
 	win.on('file.open', OpenDialog.show.bind(OpenDialog));
-	win.on('file.recents', _openWindow);
+	win.on('file.recents', function(file) {
+		fs.exists(file, function(exists) {
+			if (exists) {
+				_openWindow(file);
+			} else {
+				alert('File not found\n'+ file);
+			}
+		});
+		
+	});
 
 	//open dialog fire change event
 	OpenDialog.on('file.open', _openWindow);
