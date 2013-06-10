@@ -44,7 +44,7 @@ define([
 	});
 	
 	win.on('help.markdown', function() {
-		shell.openExternal('http://pad.haroopress.com/page.html#markdown');
+		shell.openExternal('http://pad.haroopress.com/page.html#syntax');
 	});
 
 	win.on('help.release', function() {
