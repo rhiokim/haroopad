@@ -51,7 +51,8 @@ define([
 				    evt.keyCode = e.keyCode;
 				    evt.charCode = e.charCode;
 
-				    viewer.top.dispatchEvent(evt);
+				    // viewer.top.dispatchEvent(evt);
+				    window.parent.dispatchEvent(evt);
 
 			}, false);
 

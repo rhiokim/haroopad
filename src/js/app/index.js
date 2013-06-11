@@ -77,15 +77,13 @@ requirejs([
     })
 
     HotKey('defmod-n', function() {
-      alert('')
       WindowMgr.open();
     });
 
     HotKey('defmod-q', function() {
-      alert('q')
     });
 
-    win.on('close.all', function() {
+    win.on('file.exit', function() {
       gui.App.quit();
     });
 
@@ -93,23 +91,4 @@ requirejs([
     //   Viewer.init(opt);
     // });
 
-    /**
-     * 코드미러 내용 변경 이벤트 핸들러
-     * @return {[type]} [description]
-     */
-    // function changeHandler() {
-    //   res = Parser(Editor.getValue());
-    //   win.emit('change.markdown', Editor.getValue(), res, Editor);
-    // }
-
-    // function delayChange() {
-    //   if(_tid_) {
-    //     clearTimeout(_tid_);
-    //   }
-
-    //   _tid_ = setTimeout(changeHandler, 300);
-    // }
-
-    // win.show();
-    // win.focus();
 });

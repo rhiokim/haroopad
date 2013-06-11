@@ -62,7 +62,6 @@ requirejs([
     x = url('#x');
     y = url('#y');
 
-
     win.on('file.opened', function(opt) {
       Editor.setValue(opt.markdown);
       html = Parser(opt.markdown);
@@ -110,6 +109,7 @@ requirejs([
       _tid_ = setTimeout(changeHandler, 300);
     }
 
-    win.show();
-    win.focus();
+    win.on('focus', function() {
+      window.parent.win.emit('actived', win);
+    });
 });

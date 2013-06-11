@@ -7,7 +7,8 @@ define([
 			win = gui.Window.get();
 
 	var windows = {},
-			count = 0;
+			count = 0,
+			actived;
 
 	function _add(newWin) {
 		newWin.created_at = new Date().getTime();
@@ -23,7 +24,7 @@ define([
 					count--;
 
 					if (!count) {
-						win.emit('close.all');
+						win.emit('file.exit');
 					}
 					return;
 				}
@@ -31,10 +32,17 @@ define([
 
 		});
 
+		//window instance delivery to child window
 		newWin.on('loaded', function() {
 			newWin.window.haveParent(window);
+	    newWin.show();
+	    newWin.focus();
 		});
 	}
+
+	win.on('actived', function(child) {
+		actived = child;
+	})
 
 	exports.open = function(file) {
     var newWin,
