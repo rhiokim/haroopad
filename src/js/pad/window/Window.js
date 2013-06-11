@@ -40,11 +40,11 @@ define([
 		win.title = orgTitle = opt.basename;
   });
 
- //  win.on('file.saved', function(opt) {
-	// 	win.title = orgTitle = opt.basename;
-	// 	delayClose = true;
-	// 	edited = false;	
- //  });
+  win.on('file.saved', function(opt) {
+		win.title = orgTitle = opt.basename;
+		delayClose = true;
+		edited = false;	
+  });
 
 	win.on('change.markdown', function(markdown, html, editor) {
 		win.title = orgTitle + ' (edited)';
