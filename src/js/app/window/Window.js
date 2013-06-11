@@ -21,11 +21,11 @@ define([
   	WindowMgr.open(file);
   });
 
-  win.on('menu.file.recent', function(file) {
+  win.on('menu.file.recents', function(file) {
   	WindowMgr.open(file);
   });
 
-  win.on('menu.file.exit', function() {
+  win.on('exit', function() {
     gui.App.quit();
   });
 

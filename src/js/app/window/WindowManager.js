@@ -25,7 +25,7 @@ define([
 					count--;
 
 					if (!count) {
-						win.emit('file.exit');
+						win.emit('exit');
 					}
 					return;
 				}
