@@ -28,6 +28,10 @@ body {
 	display: inline-block;
 }
 
+#haroo {
+  height: 100%;
+}
+
 #haroo iframe {
   width: 50%;
   height: 100%;
@@ -58,10 +62,6 @@ body {
 
 #code {
   display: none;
-}
-
-.CodeMirror-lines {
-  padding: 15px 0 35px 0;
 }
 
 /* Change the docs' brand */
@@ -172,4 +172,8 @@ body > .navbar .brand:hover {
 /* solarized theme underline markdown error */
 .cm-s-solarized .cm-em {
   text-decoration: none !important;
+}
+
+.CodeMirror-lines {
+  padding: 15px 0 35px 0;
 }
