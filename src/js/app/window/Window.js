@@ -16,9 +16,13 @@ define([
   win.on('menu.file.open', function() {
   	WindowMgr.actived.emit('file.open');
   });
-  
+
   win.on('menu.file.save', function() {
   	WindowMgr.actived.emit('file.save');
+  });
+
+  win.on('menu.file.save.as', function() {
+  	WindowMgr.actived.emit('file.save.as');
   });
 
   win.on('file.open', function(file) {
