@@ -37,6 +37,7 @@ define([
 			newWin.window.haveParent(window);
 	    newWin.show();
 	    newWin.focus();
+	    newWin.window.focus();
 		});
 	}
 
@@ -47,8 +48,8 @@ define([
 	exports.open = function(file) {
     var newWin,
     	file = file ? '&file='+ file : ''
-    	x = win.x + 20,
-      y = win.y + 20;
+    	x = win.x + 20 * count,
+      y = win.y + 20 * count;
 
 		newWin = gui.Window.open('pad.html#x=' + x + '&y=' + y + file, {
         width: win.width,
