@@ -12,6 +12,7 @@ define([
 
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
+					    theme: 'solarized dark',
 					    lineNumbers: true,
 					    electricChars: false,
 					    viewportMargin: 40,

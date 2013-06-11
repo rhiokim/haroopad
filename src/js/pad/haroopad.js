@@ -7,6 +7,10 @@ function loadCss(url) {
     document.getElementsByTagName("head")[0].appendChild(link);
 }
 
+function haveParent(parent) {
+  window.parent = parent;
+}
+
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
 
@@ -37,15 +41,19 @@ requirejs.onError = function (e) {
 
 requirejs([
     // 'menu/MenuBar',
-    // 'window/Window',
+    'window/Window',
     'editor/Editor',
     'editor/Parser',
     'viewer/Viewer',
     // 'preferences/Preferences',
     'ui/file/File'
-  ], function(/*MenuBar, Window, */Editor, Parser, Viewer, /*Preferences, */File) {
+  ], function(/*MenuBar,  */Window, Editor, Parser, Viewer, /*Preferences, */File) {
     var html, res, file, x, y;
     var _tid_;
+
+    var orgTitle = 'Untitled';
+    var edited = false,
+      delayClose = false;
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
@@ -53,7 +61,7 @@ requirejs([
     file = url('#file');
     x = url('#x');
     y = url('#y');
-    // location.hash = '';
+
 
     win.on('file.opened', function(opt) {
       Editor.setValue(opt.markdown);
