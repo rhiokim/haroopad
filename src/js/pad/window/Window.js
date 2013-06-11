@@ -32,9 +32,7 @@ define([
 		close();
 	});
 
-
-	// win.on('file.new', newHandler);
-	// win.on('file.close', win.close);
+	win.on('file.close', win.close);
 
 	win.on('file.opened', function(opt) {
 		win.title = orgTitle = opt.basename;

@@ -25,6 +25,10 @@ define([
   	WindowMgr.actived.emit('file.save.as');
   });
 
+  win.on('menu.file.close', function() {
+  	WindowMgr.actived.emit('file.close');
+  });
+
   win.on('file.open', function(file) {
   	WindowMgr.open(file);
   });
