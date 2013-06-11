@@ -33,7 +33,7 @@ define([
                     label: name,
                     tooltip: prop,
                     click: function() {
-                        win.emit('file.recents', this.tooltip);
+                        win.emit('menu.file.recents', this.tooltip);
                     }
                 }));
             }
