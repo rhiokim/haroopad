@@ -7,12 +7,13 @@ define([
 			win = gui.Window.get();
 
 	var windows = {},
-			count = 0,
-			actived;
+			count = 0;
+
+	exports.actived;
 
 	function _add(newWin) {
 		newWin.created_at = new Date().getTime();
-		windows[newWin.created_at] = newWin;
+		exports.actived = windows[newWin.created_at] = newWin;
 
 		count++;
 
@@ -42,7 +43,7 @@ define([
 	}
 
 	win.on('actived', function(child) {
-		actived = child;
+		exports.actived = child;
 	})
 
 	exports.open = function(file) {

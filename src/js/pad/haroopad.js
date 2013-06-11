@@ -83,10 +83,10 @@ requirejs([
     }
 
     //open file with commend line
-    if (gui.App.argv.length > 0) {
-      File.open(gui.App.argv[0])
+    // if (gui.App.argv.length > 0) {
+      // File.open(gui.App.argv[0])
       // win.emit('open.file', gui.App.argv[0]);
-    }
+    // }
 
     win.on('file.saved', function(opt) {
       Viewer.init(opt);

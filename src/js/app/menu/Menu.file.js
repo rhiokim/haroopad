@@ -23,14 +23,14 @@ define([
 	File.append(menuItem({
             label: 'New',
             click: function() {
-                win.emit('file.new');
+                win.emit('menu.file.new');
             }
         })
 	);
 	File.append(menuItem({
             label: 'Open',
             click: function() {
-                win.emit('file.open');
+                win.emit('menu.file.open');
             }
         })
 	);
@@ -43,14 +43,14 @@ define([
     File.append(menuItem({
             label: 'Save',
             click: function() {
-                win.emit('file.save');
+                win.emit('menu.file.save');
             }
         })
     );
     File.append(menuItem({
             label: 'Save As',
             click: function() {
-                win.emit('file.save.as');
+                win.emit('menu.file.save.as');
             }
         })
     );
@@ -58,7 +58,7 @@ define([
     File.append(menuItem({
             label: 'Close',
             click: function() {
-                win.emit('file.close');
+                win.emit('menu.file.close');
             }
         })
     );

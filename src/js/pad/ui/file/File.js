@@ -72,7 +72,7 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 	});
 
 	win.on('file.open', OpenDialog.show.bind(OpenDialog));
-	win.on('file.recents1', function(file) {
+	win.on('file.recents', function(file) {
 		fs.exists(file, function(exists) {
 			if (exists) {
 				_openWindow(file);
@@ -85,7 +85,10 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 	});
 
 	//open dialog fire change event
-	OpenDialog.on('file.open', _openWindow);
+	// OpenDialog.on('file.open', _openWindow);
+	OpenDialog.on('file.open', function(file) {
+		window.parent.win.emit('file.open', file);
+	});
 
 	HotKey('defmod-s', function() {
 		win.emit('file.save');

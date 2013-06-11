@@ -28,13 +28,10 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
-    'keyboard',
     'menu/MenuBar',
-    'window/WindowManager'/*,
-    'window/Window'*/
-  ], function(HotKey, MenuBar, WindowMgr, Window) {
-    var html, res, file, x, y;
-    var _tid_;
+    'window/Window',
+    'window/WindowManager'
+  ], function(MenuBar, Window, WindowMgr) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
@@ -45,24 +42,5 @@ requirejs([
     } else {
       WindowMgr.open();
     }
-
-    win.on('file.new', function() {
-      WindowMgr.open();
-    })
-
-    HotKey('defmod-n', function() {
-      WindowMgr.open();
-    });
-
-    HotKey('defmod-q', function() {
-    });
-
-    win.on('file.exit', function() {
-      gui.App.quit();
-    });
-
-    // win.on('file.saved', function(opt) {
-    //   Viewer.init(opt);
-    // });
 
 });
