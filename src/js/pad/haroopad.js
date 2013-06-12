@@ -40,14 +40,13 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
-    // 'menu/MenuBar',
     'window/Window',
+    'menu/Menu',
     'editor/Editor',
     'editor/Parser',
     'viewer/Viewer',
-    // 'preferences/Preferences',
     'ui/file/File'
-  ], function(/*MenuBar,  */Window, Editor, Parser, Viewer, /*Preferences, */File) {
+  ], function(Window, Menu, Editor, Parser, Viewer, File) {
     var html, res, file, x, y;
     var _tid_;
 

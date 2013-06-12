@@ -2,7 +2,7 @@ define([
 		'keyboard',
     'window/WindowManager',
 		'menu/Context/Context',
-		'window/Window.help'
+    'window/Window.help'
 ], function(HotKey, WindowMgr, Context, Help) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
@@ -26,7 +26,11 @@ define([
   });
 
   win.on('menu.file.close', function() {
-  	WindowMgr.actived.emit('file.close');
+    WindowMgr.actived.emit('file.close');
+  });
+
+  win.on('menu.file.exports.html', function() {
+  	WindowMgr.actived.emit('file.exports.html');
   });
 
   win.on('file.open', function(file) {

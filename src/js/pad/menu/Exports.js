@@ -1,8 +1,8 @@
 define([
-		// 'viewer/Viewer',
+		'viewer/Viewer',
 		'vendors/text!tpl/exports.html'
 	],
-	function(html) {
+	function(Viewer, html) {
 		var fs = require('fs'),
 				path = require('path');
 		var gui = require('nw.gui'),
@@ -11,6 +11,11 @@ define([
 		var res;
 		
 		function save(file) {
+
+			if(path.extname(file).indexOf('.htm') < 0) {
+				file += '.html';
+			}
+			
 			if(fs.existsSync(file)) {
 				//TODO overwriting confirm dialog
 				fs.writeFileSync(file, res, 'utf8');
@@ -44,22 +49,18 @@ define([
 		function saveHandler(e) {
 			var file = $(e.target).val();
 
-			if(path.extname(file).indexOf('.htm') < 0) {
-				file += '.html';
-			}
-
 			save(file);
 
-			$("#saveHTMLFile").off('change', saveHandler);
-			$("#saveHTMLFile").val("");
+			$("#exportHTML").off('change', saveHandler);
+			$("#exportHTML").val("");
 		}
 
-		win.on('menu.file.exports.html', function() {alert('')
+		win.on('file.exports.html', function() {
 			res = html.replace('@@style', getStyleSheets());
 			res = res.replace('@@body', getBodyHtml());
 
-			$("#saveHTMLFile").trigger("click");
-			$("#saveHTMLFile").on('change', saveHandler);
+			$("#exportHTML").trigger("click");
+			$("#exportHTML").on('change', saveHandler);
 			/**
 			 * 1. get html
 			 * 2. load template
