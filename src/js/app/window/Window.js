@@ -52,6 +52,11 @@ define([
   });
   
 
+  win.on('menu.action.copy.html', function() {
+    WindowMgr.actived.emit('action.copy.html');
+  });
+  
+
   win.on('file.open', function(file) {
   	WindowMgr.open(file);
   });

@@ -68,7 +68,7 @@ define([
 		});
 
 		/* copy html to clipboard */
-		win.on('copy.html', function() {
+		win.on('action.copy.html', function() {
 			clipboard.set(content, 'text');
 		});
 
