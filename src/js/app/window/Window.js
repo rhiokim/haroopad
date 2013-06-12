@@ -68,6 +68,28 @@ define([
     gui.App.quit();
   });
 
+  /**
+   * context function
+   */
+  win.on('context.cut', function(e) {
+    WindowMgr.actived.emit('context.cut', e);
+  });
+  win.on('context.copy', function(e) {
+    WindowMgr.actived.emit('context.copy');
+  });
+  win.on('context.paste', function(e) {
+    WindowMgr.actived.emit('context.paste');
+  });
+  win.on('context.select.all', function(e) {
+    WindowMgr.actived.emit('context.select.all');
+  });
+  win.on('context.preferences', function(e) {
+    WindowMgr.actived.emit('context.preferences');
+  });
+  win.on('context.copy.html', function(e) {
+    WindowMgr.actived.emit('context.copy.html');
+  });
+
   HotKey('defmod-n', function() {
     WindowMgr.open();
   });

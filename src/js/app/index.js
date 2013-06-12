@@ -28,11 +28,11 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
-    'window/Window',
-    'window/WindowManager',
     'menu/MenuBar',
-    'context/Context'
-  ], function(Window, WindowMgr, MenuBar, Context) {
+    'context/Context',
+    'window/Window',
+    'window/WindowManager'
+  ], function(MenuBar, Context, Window, WindowMgr) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();

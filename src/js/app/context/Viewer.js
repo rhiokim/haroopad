@@ -29,7 +29,7 @@ define([],
 		mCopyHTML = menuItem({ 
 			label: 'Copy HTML', 
 			click: function() {
-		  	win.emit('copy.html');
+		  	win.emit('context.copy.html');
 			} 
 		});
 		Context.append(mCopyHTML);

@@ -4,22 +4,15 @@ define([
 	],
 	function(Editor, Viewer) {
 
-		$(window).mousedown(function(e, ev) { 
-			var x, y;
-			e.preventDefault();
+		var gui = require('nw.gui'),
+				win = gui.Window.get();
 
-			e = (ev) ? ev : e;
-			x = (ev) ? $('#editor').width() + e.clientX : e.clientX;
-			y = e.clientY;
+		win.on('popup.context.viewer', function(x, y) {
+			Viewer.popup(x, y);
+		});
 
-			if (e.which === 3) {
-				if(ev) {
-					Viewer.popup(x, y);
-				} else {
-					Editor.popup(x, y);
-				}
-				return false;
-	    }
+		win.on('popup.context.editor', function(x, y) {
+			Editor.popup(x, y);
 		});
 
 	});

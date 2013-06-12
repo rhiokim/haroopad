@@ -75,7 +75,7 @@ define([
 		// });
 
 		/* fire context menu event */
-		win.on('context.cut', function() {
+		win.on('context.cut', function(e) {
 		  clipboard.set(editor.getSelection());
 		  editor.replaceSelection('');
 		});
@@ -89,10 +89,10 @@ define([
 		  editor.setSelection(0, 2);
 		});
 
-		function dragDropHandler(cm, e) {
-		  e.preventDefault();
-		  return false;
-		}
+		// function dragDropHandler(cm, e) {
+		//   e.preventDefault();
+		//   return false;
+		// }
 
 		/**
 		 * sync scroll handler
