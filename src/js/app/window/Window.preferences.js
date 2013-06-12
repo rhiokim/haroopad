@@ -5,12 +5,12 @@ define([], function() {
 	var prefWin;
 
 	prefWin = gui.Window.open('preferences.html', {
-        toolbar: true,
+        toolbar: false,
         show: false,
         position: 'center',
-        width: 700,
-        height: 400,
-        resizable: false,
+        width: 500,
+        height: 350,
+        resizable: true,
         'always-on-top': true
       });
 
