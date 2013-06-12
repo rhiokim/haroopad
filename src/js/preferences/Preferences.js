@@ -4,9 +4,10 @@ define([
 		'General',
 		'Editor',
 		'Viewer',
+		'Code',
 		'Helper',
 		'About'
-	], function(/*html, HotKey,*/ General, Editor, Viewer, Helper, About) {
+	], function(/*html, HotKey,*/ General, Editor, Viewer, Code, Helper, About) {
 
 		// $('#dialogs').append(html);
 		$('.switch').bootstrapSwitch();
@@ -18,6 +19,7 @@ define([
 		var tabGeneral = new General();
 		var tabEditor = new Editor();
 		var tabViewer = new Viewer();
+		var tabCode = new Code();
 		var tabHelper = new Helper();
 		var tabAbout = new About();
 
