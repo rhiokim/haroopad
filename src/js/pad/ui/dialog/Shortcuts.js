@@ -1,6 +1,5 @@
 define([
-		'vendors/text!tpl/modal-shortcuts.html',
-		'keyboard'
+		'vendors/text!tpl/modal-shortcuts.html'
 	], 
 	function(html, HotKey) {
 		$('#dialogs').append(html);
@@ -14,7 +13,6 @@ define([
 			},
 
 			initialize: function() {
-				HotKey('defmod-ctrl-k', this.show.bind(this));
 			},
 
 			show: function() {

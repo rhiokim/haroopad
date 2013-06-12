@@ -1,5 +1,5 @@
 define([
-		'menu/Context/search/Search'
+		'context/search/Search'
 	], 
 	function(Search) {
 

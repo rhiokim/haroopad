@@ -1,9 +1,8 @@
 define([
-		'keyboard',
 		// 'editor/Parser',
 		'editor/Editor.keymap'
 	],
-	function(HotKey, /*Parser,*/ Keymap) {
+	function(/*Parser,*/ Keymap) {
 		var gui = require('nw.gui'),
     		win = gui.Window.get(),
     		clipboard = gui.Clipboard.get();
@@ -35,11 +34,16 @@ define([
 		// editor.setOption('autoCloseBrackets', editorConf.autoPairCharacters);
 
 		/* hotkey area */
-		HotKey('defmod-ctrl-l', function() {
-		  var lineNumbers = editor.getOption('lineNumbers');
-		  editor.setOption('lineNumbers', !lineNumbers);
-		});
-		HotKey('defmod-ctrl-v', function() {
+		// HotKey('defmod-ctrl-l', function() {
+		//   var lineNumbers = editor.getOption('lineNumbers');
+		//   editor.setOption('lineNumbers', !lineNumbers);
+		// });
+		// HotKey('defmod-ctrl-v', function() {
+		//   var map = editor.getOption('keyMap');
+		//   editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
+		// });
+		
+		win.on('toggle.vim.keybind', function() {
 		  var map = editor.getOption('keyMap');
 		  editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
 		});

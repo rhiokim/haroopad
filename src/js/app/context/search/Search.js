@@ -1,5 +1,5 @@
 define([
-		'menu/Context/search/Google'
+		'context/search/Google'
 	],
 	function(Google) {
 

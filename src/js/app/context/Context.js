@@ -1,6 +1,6 @@
 define([
-		'menu/Context/Editor',
-		'menu/Context/Viewer'
+		'context/Editor',
+		'context/Viewer'
 	],
 	function(Editor, Viewer) {
 

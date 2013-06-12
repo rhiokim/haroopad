@@ -1,9 +1,8 @@
 define([
 		'keyboard',
     'window/WindowManager',
-		'menu/Context/Context',
     'window/Window.help'
-], function(HotKey, WindowMgr, Context, Help) {
+], function(HotKey, WindowMgr, Help) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -73,14 +72,36 @@ define([
     WindowMgr.open();
   });
 
-  HotKey('defmod-q', function() {
+  HotKey('defmod-o', function() {
+    WindowMgr.actived.emit('file.open');
   });
 
-	HotKey('defmod-shift-ctrl-d', function() {
+  HotKey('defmod-s', function() {
+    WindowMgr.actived.emit('file.save');
+  });
+
+  HotKey('defmod-shift-s', function() {
+    WindowMgr.actived.emit('file.save.as');
+  });
+
+  HotKey('defmod-q', function() {
+    gui.App.quit();
+  });
+
+  /**
+   * function shortcut
+   * @return {[type]} [description]
+   */
+	HotKey('defmod-shift-alt-d', function() {
 		win.showDevTools();
 	});
 
-	// win.on('file.new', newHandler);
-	// win.on('file.close', win.close);
+  HotKey('defmod-shift-l', function() {
+    WindowMgr.actived.emit('show.toggle.linenum');
+  });
+
+  HotKey('defmod-shift-v', function() {
+    WindowMgr.actived.emit('toggle.vim.keybind');
+  });
 
 });

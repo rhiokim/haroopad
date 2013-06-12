@@ -28,6 +28,7 @@ define([
 		// });
 
 		// iframe.src = 'viewer.html?view='+ config.viewStyle +'&code='+ config.codeStyle;
+		iframe.src = 'viewer.html?view=haroopad&code=solarized_light';
 
 		$(iframe).bind('load', function(e) {
 			// viewer.setViewStyle(config.viewStyle);
@@ -51,8 +52,7 @@ define([
 				    evt.keyCode = e.keyCode;
 				    evt.charCode = e.charCode;
 
-				    viewer.top.dispatchEvent(evt);
-				    // window.parent.dispatchEvent(evt);
+				    window.parent.dispatchEvent(evt);
 
 			}, false);
 

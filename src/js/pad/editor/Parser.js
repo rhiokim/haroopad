@@ -1,7 +1,6 @@
 define([
-    'keyboard'
   ],
-  function(HotKey) {
+  function() {
     marked.setOptions({
       gfm: true,
       tables: true,

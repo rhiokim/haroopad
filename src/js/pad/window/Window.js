@@ -1,7 +1,6 @@
 define([
-		'keyboard',
 		'ui/dialog/Dialogs'
-], function(HotKey, Dialogs) {
+], function(Dialogs) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;

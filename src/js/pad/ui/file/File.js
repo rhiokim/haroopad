@@ -1,12 +1,11 @@
 define([
-		'keyboard',
 		'ui/file/File.opt',
 		'ui/file/Open',
 		'ui/file/Save',
 		'editor/Editor'
 ],
 
-function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
+function(Opt, OpenDialog, SaveDialog, Editor) {
 	var fs = require('fs'),
 		path = require('path');
 
@@ -67,10 +66,6 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 		console.log(arguments)
 	});
 
-	HotKey('defmod-o', function() {
-		win.emit('file.open');
-	});
-
 	win.on('file.open', OpenDialog.show.bind(OpenDialog));
 	win.on('file.recents', function(file) {
 		fs.exists(file, function(exists) {
@@ -88,14 +83,6 @@ function(HotKey, Opt, OpenDialog, SaveDialog, Editor) {
 	// OpenDialog.on('file.open', _openWindow);
 	OpenDialog.on('file.open', function(file) {
 		window.parent.win.emit('file.open', file);
-	});
-
-	HotKey('defmod-s', function() {
-		win.emit('file.save');
-	});
-
-	HotKey('defmod-shift-s', function() {
-		win.emit('file.save.as');
 	});
 
 	win.on('file.save', function() {
