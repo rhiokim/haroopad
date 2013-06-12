@@ -44,6 +44,11 @@ define([
 		  editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
 		});
 
+		win.on('show.toggle.linenum', function() {
+			var value = editor.getOption('lineNumbers') ? false : true;
+			editor.setOption('lineNumbers', value);	
+		});
+
 		/* change preferences events */
 		// editorOpt.bind('change:theme', function(model, value, memo) {
 		//   editor.setOption('theme', value);

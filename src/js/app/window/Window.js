@@ -33,6 +33,25 @@ define([
   	WindowMgr.actived.emit('file.exports.html');
   });
 
+
+
+  win.on('menu.view.mode.toggle', function() {
+    WindowMgr.actived.emit('view.mode.toggle');
+  });
+
+  win.on('menu.show.toggle.linenum', function() {
+    WindowMgr.actived.emit('show.toggle.linenum');
+  });
+
+  win.on('menu.view.plus5.width', function() {
+    WindowMgr.actived.emit('view.plus5.width');
+  });
+
+  win.on('menu.view.minus5.width', function() {
+    WindowMgr.actived.emit('view.minus5.width');
+  });
+  
+
   win.on('file.open', function(file) {
   	WindowMgr.open(file);
   });

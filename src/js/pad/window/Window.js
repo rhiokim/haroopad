@@ -44,6 +44,7 @@ define([
 		edited = false;	
   });
 
+
 	win.on('change.markdown', function(markdown, html, editor) {
 		win.title = orgTitle + ' (edited)';
 		edited = true;

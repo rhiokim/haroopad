@@ -9,7 +9,7 @@ define([
 	    new gui.MenuItem({
 	        label: 'Toggle Live Preview',
 		      click: function() {
-		      	win.emit('view.mode.toggle');
+		      	win.emit('menu.view.mode.toggle');
 		      }
 	    })
 	);
@@ -30,7 +30,7 @@ define([
 	    new gui.MenuItem({
 	        label: 'Toggle Line Number',
 		      click: function() {
-		        win.emit('show.toggle.linenum');
+		        win.emit('menu.show.toggle.linenum');
 		      }
 	    })
 	);
@@ -51,7 +51,7 @@ define([
 	    new gui.MenuItem({
 	        label: 'Live Viewer width +5%',
 		      click: function() {
-		        win.emit('view.plus5.width');
+		        win.emit('menu.view.plus5.width');
 		      }
 	    })
 	);
@@ -59,7 +59,7 @@ define([
 	    new gui.MenuItem({
 	        label: 'Live Viewer width -5%',
 		      click: function() {
-		        win.emit('view.minus5.width');
+		        win.emit('menu.view.minus5.width');
 		      }
 	    })
 	);

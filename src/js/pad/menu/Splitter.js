@@ -1,33 +1,32 @@
 define([
-		'window/Window.opt',
 		'keyboard'
 	], 
-	function(options, HotKey) {
+	function(HotKey) {
 		var gui = require('nw.gui'),
 			win = gui.Window.get();
 		var $editor = $('#editor');
 		var $viewer = $('#haroo iframe');
 
-		var width, viewerWidth = options.get('viewerWidth');
+		var width, viewerWidth = 50;//options.get('viewerWidth');
 		var gap = 5;
-		var mode;
+		var mode = 1;
 
 		width = 100 - viewerWidth;
 
-		if(!options.get('mode')) {
+		if(!mode) {
 			setModeEditor();
 		} else {
 			setModeDual();
 		}
 
 		function toggle() {
-      mode = options.get('mode') ? 0 : 1;
+      mode = mode ? 0 : 1;
 
     	!mode ? 
       	setModeEditor() :
       	setModeDual() ;
 
-      options.set('mode', mode);
+      // options.set('mode', mode);
 		}
 
 		function setModeEditor() {
@@ -35,23 +34,26 @@ define([
 			$editor.css({ width: width +'%' });
 			$viewer.css({ width: '0%' });
 
-      options.set('mode', 0);
+      // options.set('mode', 0);
+      mode = 0;
 		}
 
 		function setModeDual() {
 			width = 100 - viewerWidth;
 			$editor.css({ width: width +'%' });
 			$viewer.css({ width: viewerWidth +'%' });
-			options.set('viewerWidth', viewerWidth);
+			// options.set('viewerWidth', viewerWidth);
 
-      options.set('mode', 1);
+      // options.set('mode', 1);
+      mode = 1;
 		}
 
 		function resetMode() {
 			width = viewerWidth = 50;
 			setModeDual();
 			
-      options.set('mode', 1);
+      // options.set('mode', 1);
+      // mode = 1;
 		}
 
 		function setPlus5Width() {
