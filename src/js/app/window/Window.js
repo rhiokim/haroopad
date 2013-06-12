@@ -1,8 +1,9 @@
 define([
 		'keyboard',
     'window/WindowManager',
-    'window/Window.help'
-], function(HotKey, WindowMgr, Help) {
+    'window/Window.help',
+    'window/Window.preferences'
+], function(HotKey, WindowMgr, Help, Preferences) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -124,6 +125,10 @@ define([
 
   HotKey('defmod-shift-v', function() {
     WindowMgr.actived.emit('toggle.vim.keybind');
+  });
+
+  HotKey('defmod-,', function() {
+    Preferences.show();
   });
 
 });

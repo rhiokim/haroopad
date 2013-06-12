@@ -1,5 +1,5 @@
 define([
-		'preferences/Helper.opt'
+		'Helper.opt'
 	], function(option) {
 
 		var config = option.toJSON();

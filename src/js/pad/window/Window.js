@@ -71,10 +71,11 @@ define([
 		e.preventDefault();
 
 		e = (ev) ? ev : e;
-		x = (ev) ? $('#editor').width() + e.clientX : e.clientX;
-		y = e.clientY;
 
 		if (e.which === 3) {
+			x = (ev) ? $('#editor').width() + e.clientX : e.clientX;
+			y = e.clientY;
+		
 			if(ev) {
 				window.parent.win.emit('popup.context.viewer', x, y);
 				// Viewer.popup(x, y);

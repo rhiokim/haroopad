@@ -1,5 +1,5 @@
 define([
-		'preferences/Viewer.opt'
+		'Viewer.opt'
 	], function(option) {
 
 		var config = option.toJSON();

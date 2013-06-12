@@ -1,5 +1,5 @@
 define([
-		'preferences/General.opt'
+		'General.opt'
 	], function(option) {
 
 		var config = option.toJSON();

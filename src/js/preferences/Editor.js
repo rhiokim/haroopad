@@ -1,5 +1,5 @@
 define([
-		'preferences/Editor.opt'
+		'Editor.opt'
 	], function(options) {
 
 		var config = options.toJSON();
