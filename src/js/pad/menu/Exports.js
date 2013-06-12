@@ -11,7 +11,6 @@ define([
 		var res;
 		
 		function save(file) {
-
 			if(path.extname(file).indexOf('.htm') < 0) {
 				file += '.html';
 			}
