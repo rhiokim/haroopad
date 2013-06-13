@@ -34,9 +34,11 @@ define([
 			},
 
 			add: function(file) {
+				alert(file);
 				var name = path.basename(file);
 				var o = {};
 						o[file] = name;
+						alert(name)
 				
 				recents.forEach(function(item, idx) {
 					if(item.hasOwnProperty(file)) {

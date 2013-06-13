@@ -55,7 +55,8 @@ define([
 		newWin = gui.Window.open('pad.html#x=' + x + '&y=' + y + file, {
         width: win.width,
         height: win.height,
-        toolbar: true
+        toolbar: false,
+        show: false
       });
 
 		_add(newWin);

@@ -1,15 +1,16 @@
 define([
+    'store',
 		'keyboard',
     'window/Window.opt',
     'window/WindowManager',
     'window/Window.help',
     'window/Window.preferences',
-    'window/Window.dragdrop'
-], function(HotKey, Options, WindowMgr, Help, Preferences, DragDrop) {
+    'window/Window.dragdrop',
+    'file/Recents'
+], function(store, HotKey, Options, WindowMgr, Help, Preferences, DragDrop, Recents) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
-
 
   win.on('menu.file.new', function() {
     WindowMgr.open();
@@ -66,6 +67,7 @@ define([
 
   win.on('file.open', function(file) {
   	WindowMgr.open(file);
+    Recents.add(file);
   });
 
   win.on('menu.file.recents', function(file) {

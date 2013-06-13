@@ -1,6 +1,7 @@
 define([
+		'store',
 		'ui/dialog/Dialogs'
-], function(Dialogs) {
+], function(store, Dialogs) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -9,9 +10,18 @@ define([
 	var edited = false,
 		delayClose = false;
 
+	var config = store.get('Window') || {};
 
 	function close() {
 		win.hide();
+
+		config.x = win.x;
+		config.y = win.y;
+		config.width = win.width;
+		config.height = win.height;
+		config.zoom = win.zoom;
+		store.set('Window', config);
+
 		win.close(true);
 	}
 
@@ -43,12 +53,14 @@ define([
 		edited = false;	
   });
 
-
 	win.on('change.markdown', function(markdown, html, editor) {
 		win.title = orgTitle + ' (edited)';
 		edited = true;
 	});
-	
+
+  win.moveTo(url('#x'), url('#y'));
+	win.resizeTo(config.width, config.height);
+
   window.addEventListener('keydown', function(e) {
 
     var evt = document.createEvent("Events");

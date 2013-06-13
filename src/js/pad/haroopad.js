@@ -58,8 +58,6 @@ requirejs([
         win = gui.Window.get();
 
     file = url('#file');
-    x = url('#x');
-    y = url('#y');
 
     win.on('file.opened', function(opt) {
       Editor.setValue(opt.markdown);
@@ -75,10 +73,6 @@ requirejs([
       File.open(decodeURIComponent(file));
     } else {
       Editor.on("change", delayChange);
-    }
-
-    if (x && y) {
-      win.moveTo(x, y);
     }
 
     //open file with commend line
