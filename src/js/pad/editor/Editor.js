@@ -8,7 +8,10 @@ define([
     		win = gui.Window.get(),
     		clipboard = gui.Clipboard.get();
 
-	    var _tid_;	//for throttle
+    var _tid_;	//for throttle
+
+    var config = store.get('Editor');
+    alert(config)
 
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
