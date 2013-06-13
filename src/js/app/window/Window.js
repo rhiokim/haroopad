@@ -1,9 +1,10 @@
 define([
 		'keyboard',
+    'window/Window.opt',
     'window/WindowManager',
     'window/Window.help',
     'window/Window.preferences'
-], function(HotKey, WindowMgr, Help, Preferences) {
+], function(HotKey, Options, WindowMgr, Help, Preferences) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;

@@ -1,7 +1,6 @@
 define([
-		'window/Window.opt'
 	],
-	function(options) {
+	function() {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 	var shell = gui.Shell;
