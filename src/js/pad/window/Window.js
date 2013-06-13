@@ -58,9 +58,6 @@ define([
 		edited = true;
 	});
 
-  win.moveTo(url('#x'), url('#y'));
-	win.resizeTo(config.width, config.height);
-
   window.addEventListener('keydown', function(e) {
 
     var evt = document.createEvent("Events");
@@ -110,4 +107,8 @@ define([
     window.parent.win.emit('dragdrop', e);
     return false;
   };
+
+ //  win.moveTo(url('#x'), url('#y'));
+	// win.resizeTo(config.width, config.height);
+
 });

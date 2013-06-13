@@ -1,30 +1,33 @@
 define([
-		'exports'
+		'exports',
+		'store'
 	],
-	function(exports) {
+	function(exports, store) {
 
 	var gui = require('nw.gui');
 			win = gui.Window.get();
 
 	var windows = {},
-			count = 0;
+			realCount = 0,
+			shadowCount = 0,
+			gapX = 0, gapY = 0;
 
-	exports.actived;
+	var config = store.get('Window') || {};
 
 	function _add(newWin) {
 		newWin.created_at = new Date().getTime();
 		exports.actived = windows[newWin.created_at] = newWin;
 
-		count++;
+		realCount++;
 
 		newWin.on('closed', function() {
 			for(var prop in windows) {
 				if (prop == newWin.created_at) {
 					windows[prop] = null;
 					delete windows[prop];
-					count--;
+					realCount--;
 
-					if (!count) {
+					if (!realCount) {
 						win.emit('exit');
 					}
 					return;
@@ -36,25 +39,44 @@ define([
 		//window instance delivery to child window
 		newWin.on('loaded', function() {
 			newWin.window.haveParent(window);
-	    newWin.show();
-	    newWin.focus();
-	    newWin.window.focus();
+
+    	var x = config.x + gapX + 20 * shadowCount,
+      		y = config.y + gapY + 20 * shadowCount;
+
+      if (config.height + y > window.screen.height) {
+      	shadowCount = 0;
+      	// config.x = 0;
+      	gapX += 20;
+      	config.y = 0;
+      }
+
+      if (config.width + x > window.screen.width) {
+      	shadowCount = 1;
+      	// config.y = 0;
+      	gapY += 20;
+      	config.x = 0;
+      }
+  
+  		newWin.moveTo(x, y);
+			newWin.resizeTo(config.width, config.height);
+
+			shadowCount++;
+	    // newWin.show();
+	    // newWin.focus();
+	    // newWin.window.focus();
 		});
 	}
 
 	win.on('actived', function(child) {
+		child.show();
 		exports.actived = child;
 	})
 
 	exports.open = function(file) {
     var newWin,
-    	file = file ? '&file='+ file : ''
-    	x = win.x + 20 * count,
-      y = win.y + 20 * count;
+    	file = file ? '&file='+ file : '';
 
-		newWin = gui.Window.open('pad.html#x=' + x + '&y=' + y + file, {
-        width: win.width,
-        height: win.height,
+		newWin = gui.Window.open('pad.html#'+ file, {
         toolbar: false,
         show: false
       });

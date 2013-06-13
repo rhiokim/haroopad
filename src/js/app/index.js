@@ -43,5 +43,4 @@ requirejs([
     } else {
       WindowMgr.open();
     }
-
 });

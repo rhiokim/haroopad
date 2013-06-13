@@ -102,7 +102,9 @@ requirejs([
       _tid_ = setTimeout(changeHandler, 300);
     }
 
+      window.parent.win.emit('actived', win);
     win.on('focus', function() {
       window.parent.win.emit('actived', win);
     });
+
 });
