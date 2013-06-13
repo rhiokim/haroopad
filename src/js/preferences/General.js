@@ -32,12 +32,12 @@ define([
 
 			enableSyncScroll: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('enableSyncScroll', bool);
+				options.set('enableSyncScroll', bool);
 			},
 
 			playKeypressSound: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('playKeypressSound', bool);
+				options.set('playKeypressSound', bool);
 			}
 		});
 

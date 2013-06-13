@@ -4,7 +4,16 @@ body {
   background-color: #fff;
 }
 
-code {
+body h1:first-child,
+body h2:first-child,
+body h3:first-child,
+body h4:first-child,
+body h5:first-child,
+body h6:first-child {
+  margin-top: 0 !important;
+}
+
+/*code {
   margin: 0 2px;
   padding: 0 5px;
 }
@@ -13,7 +22,7 @@ pre>code {
 	word-break: break-all;
 	word-wrap: break-word;
   margin: 0;
-}
+}*/
 
 /* -----------------------------------------
    table of contents

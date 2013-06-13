@@ -27,32 +27,32 @@ define([
 
 			youtube: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('youtube', bool);
+				options.set('youtube', bool);
 			},
 
 			slideshare: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('slideshare', bool);
+				options.set('slideshare', bool);
 			},
 
 			vimeo: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('vimeo', bool);
+				options.set('vimeo', bool);
 			},
 
 			jsfiddle: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('jsfiddle', bool);
+				options.set('jsfiddle', bool);
 			},
 
 			tweet: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('tweet', bool);
+				options.set('tweet', bool);
 			},
 
 			gist: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('gist', bool);
+				options.set('gist', bool);
 			}
 		});
 

@@ -91,11 +91,6 @@ define([
 		  editor.setSelection(0, 2);
 		});
 
-		// function dragDropHandler(cm, e) {
-		//   e.preventDefault();
-		//   return false;
-		// }
-
 		/**
 		 * sync scroll handler
 		 * @return {[type]} [description]

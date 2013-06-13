@@ -93,10 +93,6 @@ define([
     WindowMgr.actived.emit('context.copy.html');
   });
 
-  // win.on('preferences.general.enableSyncScroll', function(value) {
-  //   WindowMgr.actived.emit('preferences.general.enableSyncScroll', value);
-  // });
-
   HotKey('defmod-n', function() {
     WindowMgr.open();
   });

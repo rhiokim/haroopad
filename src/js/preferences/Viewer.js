@@ -4,6 +4,16 @@ define([
 
 		var config = options.toJSON();
 
+		options.bind('change', function(model) {
+			var prop, en,
+				data = model.changedAttributes();
+
+			for (prop in data) {
+				en = 'preferences.viewer.'+ prop;
+				window.parent.win.emit(en, data[prop]);
+			}
+		});
+
 		var ViewerTabView = Backbone.View.extend({
 			el: '#viewer-tab',
 
@@ -19,12 +29,12 @@ define([
 			},
 
 			changeViewStyle: function(e) {
-				option.set({ viewStyle: e.val });
+				options.set({ viewStyle: e.val });
 			},
 
 			clickableLink: function(e) {
 				var bool = $(e.target).is(':checked');
-				option.set('clickableLink', bool);
+				options.set('clickableLink', bool);
 			}
 		});
 

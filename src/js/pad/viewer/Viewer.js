@@ -1,7 +1,7 @@
 define([
-		// 'preferences/Viewer.opt'
+		'store'
 	], 
-	function(/*option*/) {
+	function(store) {
 		var iframe = $('#haroo iframe')[0];
 		var viewer = iframe.contentWindow;
 		var content = '',
@@ -12,6 +12,15 @@ define([
 				clipboard = gui.Clipboard.get();
 		
 		// var config = option.toJSON();
+
+
+		window.parent.win.on('preferences.viewer.viewStyle', function(value) {
+			viewer.setViewStyle(value);
+			// iframe.src = 'viewer.html?view='+ value +'&code='+ config.codeStyle;
+		});
+		window.parent.win.on('preferences.viewer.clickableLink', function(value) {
+			value ? viewer.allowLink() : viewer.blockLink() ;
+		});
 
 		// option.bind('change:viewStyle', function(model, value) {
 		// 	config = model.toJSON();

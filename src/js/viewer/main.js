@@ -2,6 +2,7 @@
 var gui = require('nw.gui'),
     win = gui.Window.get();
 var _options;
+var viewStyle, codeStyle;
 
 window.ondragover = function(e) { 
   e.preventDefault(); 
@@ -15,22 +16,31 @@ window.ondrop = function(e) {
 };
 
 function loadCss(url) {
-  var link = document.createElement("link");
-      link.type = "text/css";
-      link.rel = "stylesheet";
-      link.href = url;
-  document.getElementsByTagName("head")[0].appendChild(link);
+  // var link = document.createElement("link");
+  //     link.type = "text/css";
+  //     link.rel = "stylesheet";
+  //     link.href = url;
+  // viewStyle = document.getElementsByTagName("head")[0].appendChild(link);
+  $('<link>').attr({
+    type: 'text/css',
+    rel: 'stylesheet',
+    href: url
+  }).appendTo('head');
 }
 
 function setViewStyle(style) {
-  loadCss('css/markdown/'+ style +'/'+ style +'.css');
+  var href = 'css/markdown/'+ style +'/'+ style +'.css';
+
+  $('#view').attr({ href: href });
+
   $(document.body).removeClass();
   $(document.body).addClass('markdown');
   $(document.body).addClass(style);
 }
 
 function setCodeStyle(style) {
-  loadCss('css/code/'+ style +'.css');
+  var href = 'css/code/'+ style +'.css';
+  $('#code').attr({ href: href });
 }
 
 function createTOC() {
