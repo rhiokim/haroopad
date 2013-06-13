@@ -23,13 +23,13 @@ define([
 			},
 
 			initialize: function() {
-				this.$el.find('select[name=codeStyle]').select2().select2("val", config.viewStyle);
+				this.$el.find('select[name=codeStyle]').select2().select2("val", config.theme);
 
 				this.$el.find('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
 			},
 
 			changeCodeStyle: function(e) {
-				option.set({ codeStyle: e.val });
+				options.set({ theme: e.val });
 			},
 
 			displayLineNumber: function(e) {

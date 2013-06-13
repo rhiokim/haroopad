@@ -3,7 +3,7 @@ define([
 	], function(store) {
 		var Model = Backbone.Model.extend({
 			defaults: {
-				viewStyle: 'haroopad',
+				theme: 'haroopad',
 				clickableLink: false
 			},
 

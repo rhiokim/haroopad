@@ -10,8 +10,8 @@ define([
 
     var _tid_;	//for throttle
 
-    var config = store.get('Editor');
-    alert(config)
+    var config = store.get('Editor') || {};
+    var generalConf = store.get('General') || {};
 
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
@@ -31,11 +31,11 @@ define([
 		// var generalConf = generalOpt.toJSON();
 
 		/* initialize editor */
-		// editor.setOption('theme', editorConf.theme);
-		// editor.setOption('lineNumbers', editorConf.displayLineNumber);
-		// editor.setOption('keyMap', editorConf.vimKeyBinding ? 'vim' : 'default');
-		// editor.setOption('tabSize', editorConf.insertFourSpace ? 4 : 2);
-		// editor.setOption('autoCloseBrackets', editorConf.autoPairCharacters);
+		editor.setOption('theme', config.theme || 'solarized dark');
+		editor.setOption('lineNumbers', config.displayLineNumber || true);
+		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
+		editor.setOption('tabSize', config.insertFourSpace ? 4 : 2);
+		editor.setOption('autoCloseBrackets', config.autoPairCharacters || true);
 
 		/* hotkey area */
 		// HotKey('defmod-ctrl-l', function() {
@@ -113,11 +113,12 @@ define([
 				editor.off('scroll', syncScrollHandler);
 			}
 		});
-		// if(generalConf.enableSyncScroll) {
-		//   editor.on('scroll', syncScrollHandler);
-		// } else {
-		//   editor.off('scroll', syncScrollHandler);
-		// }
+		
+		if(generalConf.enableSyncScroll) {
+		  editor.on('scroll', syncScrollHandler);
+		} else {
+		  editor.off('scroll', syncScrollHandler);
+		}
 
 	    // /**
 	    //  * 코드미러 내용 변경 이벤트 핸들러

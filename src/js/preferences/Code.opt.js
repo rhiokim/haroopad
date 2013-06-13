@@ -3,7 +3,7 @@ define([
 	], function(store) {
 		var Model = Backbone.Model.extend({
 			defaults: {
-				codeStyle: 'solarized_light',
+				theme: 'solarized_light',
 				displayLineNumber: false
 			},
 

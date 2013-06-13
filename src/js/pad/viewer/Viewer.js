@@ -11,13 +11,16 @@ define([
 				win = gui.Window.get(),
 				clipboard = gui.Clipboard.get();
 		
+		var viewerConfig = store.get('Viewer') || {};
+		var codeConfig = store.get('Code') || {};
+
 		// var config = option.toJSON();
 
-		window.parent.win.on('preferences.viewer.viewStyle', function(value) {
+		window.parent.win.on('preferences.viewer.theme', function(value) {
 			viewer.setViewStyle(value);
 		});
 
-		window.parent.win.on('preferences.viewer.viewStyle', function(value) {
+		window.parent.win.on('preferences.code.theme', function(value) {
 			viewer.setCodeStyle(value);
 		});
 		
@@ -26,8 +29,9 @@ define([
 		});
 
 
-		viewer.setViewStyle('haroopad');
-		viewer.setCodeStyle('solarized_light');
+		viewer.setViewStyle(viewerConfig.theme || 'haroopad');
+		viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
+		viewerConfig.clickableLink ? viewer.allowLink() : viewer.blockLink() ;
 		
 		/**
 		 * delegate to parent window key mouse down event

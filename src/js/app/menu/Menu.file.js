@@ -93,7 +93,7 @@ define([
     File.append(menuItem({
             label: 'Preferences',
             click: function() {
-                win.emit('preferences.show');
+                win.emit('menu.preferences.show');
             }
         })
     );

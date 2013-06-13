@@ -23,13 +23,13 @@ define([
 			},
 
 			initialize: function() {
-				this.$el.find('select[name=viewStyle]').select2().select2("val", config.viewStyle);
+				this.$el.find('select[name=viewStyle]').select2().select2("val", config.theme);
 				
 				this.$el.find('input[name=clickableLink]').prop('checked', config.clickableLink);
 			},
 
 			changeViewStyle: function(e) {
-				options.set({ viewStyle: e.val });
+				options.set({ theme: e.val });
 			},
 
 			clickableLink: function(e) {

@@ -32,8 +32,13 @@ define([
   });
 
   win.on('menu.file.exports.html', function() {
-  	WindowMgr.actived.emit('file.exports.html');
+    WindowMgr.actived.emit('file.exports.html');
   });
+
+  win.on('menu.preferences.show', function() {
+    Preferences.show();
+  });
+
 
 
 
@@ -87,7 +92,7 @@ define([
     WindowMgr.actived.emit('context.select.all');
   });
   win.on('context.preferences', function(e) {
-    WindowMgr.actived.emit('context.preferences');
+    Preferences.show();
   });
   win.on('context.copy.html', function(e) {
     WindowMgr.actived.emit('context.copy.html');
