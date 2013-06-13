@@ -13,67 +13,49 @@ define([
 		
 		// var config = option.toJSON();
 
-
 		window.parent.win.on('preferences.viewer.viewStyle', function(value) {
 			viewer.setViewStyle(value);
-			// iframe.src = 'viewer.html?view='+ value +'&code='+ config.codeStyle;
 		});
+
+		window.parent.win.on('preferences.viewer.viewStyle', function(value) {
+			viewer.setCodeStyle(value);
+		});
+		
 		window.parent.win.on('preferences.viewer.clickableLink', function(value) {
 			value ? viewer.allowLink() : viewer.blockLink() ;
 		});
 
-		// option.bind('change:viewStyle', function(model, value) {
-		// 	config = model.toJSON();
-		// 	iframe.src = 'viewer.html?view='+ value +'&code='+ config.codeStyle;
-		// });
+
+		viewer.setViewStyle('haroopad');
+		viewer.setCodeStyle('solarized_light');
 		
-		// option.bind('change:codeStyle', function(model, value) {
-		// 	config = model.toJSON();
-		// 	iframe.src = 'viewer.html?view='+ config.viewStyle +'&code='+ value;
-		// });
+		/**
+		 * delegate to parent window key mouse down event
+		 */
+		viewer.addEventListener('keydown', function(e) {
 
-		// option.bind('change:clickableLink', function(model, value) {
-		// 	value ? viewer.allowLink() : viewer.blockLink() ;
-		// });
+	    var evt = document.createEvent("Events");
+		    evt.initEvent("keydown", true, true);
 
-		// iframe.src = 'viewer.html?view='+ config.viewStyle +'&code='+ config.codeStyle;
-		iframe.src = 'viewer.html?view=haroopad&code=solarized_light';
+		    evt.view = e.view;
+		    evt.altKey = e.altKey;
+		    evt.ctrlKey = e.ctrlKey;
+		    evt.shiftKey = e.shiftKey;
+		    evt.metaKey = e.metaKey;
+		    evt.keyCode = e.keyCode;
+		    evt.charCode = e.charCode;
 
-		$(iframe).bind('load', function(e) {
-			// viewer.setViewStyle(config.viewStyle);
-			// viewer.setCodeStyle(config.codeStyle);
-			viewer.init(options);
-			viewer.update(content);
+		    window.parent.dispatchEvent(evt);
 
-			/**
-			 * delegate to parent window key mouse down event
-			 */
-			viewer.addEventListener('keydown', function(e) {
+		}, false);
 
-			    var evt = document.createEvent("Events");
-				    evt.initEvent("keydown", true, true);
-
-				    evt.view = e.view;
-				    evt.altKey = e.altKey;
-				    evt.ctrlKey = e.ctrlKey;
-				    evt.shiftKey = e.shiftKey;
-				    evt.metaKey = e.metaKey;
-				    evt.keyCode = e.keyCode;
-				    evt.charCode = e.charCode;
-
-				    window.parent.dispatchEvent(evt);
-
-			}, false);
-
-			/**
-			 * delegate right mouse down event
-			 */
-			$(viewer).mousedown(function(e) {
-				if (e.which === 3) {
-					$(viewer.top).trigger('mousedown', [e]);
-		    	}
-			});
-			
+		/**
+		 * delegate right mouse down event
+		 */
+		$(viewer).mousedown(function(e) {
+			if (e.which === 3) {
+				$(viewer.top).trigger('mousedown', [e]);
+	    }
 		});
 
 		/* copy html to clipboard */

@@ -4,6 +4,16 @@ define([
 
 		var config = options.toJSON();
 
+		options.bind('change', function(model) {
+			var prop, en,
+				data = model.changedAttributes();
+
+			for (prop in data) {
+				en = 'preferences.code.'+ prop;
+				window.parent.win.emit(en, data[prop]);
+			}
+		});
+
 		var ViewerTabView = Backbone.View.extend({
 			el: '#code-tab',
 
