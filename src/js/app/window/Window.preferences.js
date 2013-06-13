@@ -7,10 +7,11 @@ define([], function() {
 	prefWin = gui.Window.open('preferences.html', {
         toolbar: false,
         show: false,
-        position: 'center',
         width: 500,
         height: 280,
         resizable: false,
+        position: 'center',
+        fullscreen: false,
         'always-on-top': true
       });
 
