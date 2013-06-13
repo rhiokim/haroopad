@@ -4,26 +4,35 @@ define([], function() {
 
 	var prefWin;
 
-	prefWin = gui.Window.open('preferences.html', {
-        toolbar: false,
-        show: false,
-        width: 500,
-        height: 280,
-        resizable: false,
-        position: 'center',
-        fullscreen: false,
-        'always-on-top': true
-      });
+	function init() {
+		prefWin = gui.Window.open('preferences.html', {
+	        toolbar: true,
+	        show: false,
+	        width: 500,
+	        height: 280,
+	        resizable: false,
+	        position: 'center',
+	        fullscreen: false,
+	        'always-on-top': true
+	      });
 
-	prefWin.on('close', function() {
-		prefWin.hide();
-	});
+		prefWin.on('close', function() {
+			prefWin.hide();
+		});
 
-	prefWin.on('loaded', function() {
-	});
+		prefWin.on('loaded', function() {
+			prefWin.window.haveParent(window);
+	    // newWin.focus();
+	    // newWin.window.focus();
+		});
+	}
 
 	return {
 		show: function() {
+			if (!prefWin) {
+				init();
+			}
+			
 			prefWin.show();
 		},
 

@@ -1,8 +1,9 @@
 define([
 		// 'editor/Parser',
+		'store',
 		'editor/Editor.keymap'
 	],
-	function(/*Parser,*/ Keymap) {
+	function(store, Keymap) {
 		var gui = require('nw.gui'),
     		win = gui.Window.get(),
     		clipboard = gui.Clipboard.get();
@@ -98,22 +99,21 @@ define([
 		 * sync scroll handler
 		 * @return {[type]} [description]
 		 */
-		// function syncScrollHandler() {
-		//   var scrollInfo = editor.getScrollInfo();
-		//   var top = scrollInfo.top;
-		//   var per = scrollInfo.height - scrollInfo.clientHeight;
+		function syncScrollHandler() {
+		  var scrollInfo = editor.getScrollInfo();
+		  var top = scrollInfo.top;
+		  var per = scrollInfo.height - scrollInfo.clientHeight;
 		
-		//   win.emit('editor.scroll', top, per);
-		// }
+		  win.emit('editor.scroll', top, per);
+		}
 
-		// generalOpt.bind('change:enableSyncScroll', function(model, value, memo) {
-		//   if(value) {
-		//     editor.on('scroll', syncScrollHandler);
-		//   } else {
-		//  	editor.off('scroll', syncScrollHandler);
-		//   }
-		// });
-
+		window.parent.win.on('preferences.general.enableSyncScroll', function(value) {
+			if (value) {
+				editor.on('scroll', syncScrollHandler);
+			} else {
+				editor.off('scroll', syncScrollHandler);
+			}
+		});
 		// if(generalConf.enableSyncScroll) {
 		//   editor.on('scroll', syncScrollHandler);
 		// } else {

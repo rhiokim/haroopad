@@ -28,6 +28,6 @@ define([
 			}
 		});
 
-		return ViewerTabView;
+		return new ViewerTabView;
 
 });

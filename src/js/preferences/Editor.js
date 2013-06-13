@@ -53,6 +53,6 @@ define([
 			}
 		});
 
-		return EditorTabView;
+		return new EditorTabView;
 
 });

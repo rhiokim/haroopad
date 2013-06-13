@@ -2,7 +2,20 @@ define([
 		'General.opt'
 	], function(option) {
 
+		// var gui = require('nw.gui'),
+		// 	win = gui.Window.get();
+
 		var config = option.toJSON();
+
+		option.bind('change', function(model) {
+			var prop, en,
+				data = model.changedAttributes();
+
+			for (prop in data) {
+				en = 'preferences.general.'+ prop;
+				window.parent.win.emit(en, data[prop]);
+			}
+		});
 
 		var GeneralTabView = Backbone.View.extend({
 			el: '#general-tab',
@@ -28,6 +41,6 @@ define([
 			}
 		});
 
-		return GeneralTabView;
+		return new GeneralTabView;
 
 });
