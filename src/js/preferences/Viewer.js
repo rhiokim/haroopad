@@ -9,7 +9,6 @@ define([
 
 			events: {
 				'change select[name=viewStyle]': 'changeViewStyle',
-				'change select[name=codeStyle]': 'changeCodeStyle',
 				'click input[name=clickableLink]': 'clickableLink'	
 			},
 
@@ -21,10 +20,6 @@ define([
 
 			changeViewStyle: function(e) {
 				option.set({ viewStyle: e.val });
-			},
-
-			changeCodeStyle: function(e) {
-				option.set({ codeStyle: e.val });
 			},
 
 			clickableLink: function(e) {

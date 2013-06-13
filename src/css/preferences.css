@@ -1,3 +1,11 @@
 body {
 	margin-top: 10px;
 }
+
+.select2-search {
+	display: none;
+}
+
+.select2-results {
+	max-height: 132px;
+}

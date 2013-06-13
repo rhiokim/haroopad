@@ -3,11 +3,10 @@ define([
 	], function(store) {
 		var Model = Backbone.Model.extend({
 			defaults: {
-				enableSyncScroll: true,
-				playKeypressSound: false
+				codeStyle: 'solarized_light',
+				displayLineNumber: false
 			},
 
-			// localStorage: new Backbone.LocalStorage('General'),
 			initialize: function() {
 				var opt = localStorage.getItem('Code');
 

@@ -9,8 +9,8 @@ define([], function() {
         show: false,
         position: 'center',
         width: 500,
-        height: 350,
-        resizable: true,
+        height: 280,
+        resizable: false,
         'always-on-top': true
       });
 

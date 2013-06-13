@@ -4,7 +4,6 @@ define([
 		var Model = Backbone.Model.extend({
 			defaults: {
 				viewStyle: 'haroopad',
-				codeStyle: 'solarized_light',
 				clickableLink: false
 			},
 
