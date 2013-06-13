@@ -86,4 +86,16 @@ define([
 			return false;
     }
 	});
+
+  window.ondragover = function(e) { 
+    e.preventDefault(); 
+    window.parent.win.emit('dragover', e);
+    return false;
+  };
+
+  window.ondrop = function(e) {
+    e.preventDefault(); 
+    window.parent.win.emit('dragdrop', e);
+    return false;
+  };
 });
