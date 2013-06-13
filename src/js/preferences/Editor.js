@@ -4,6 +4,16 @@ define([
 
 		var config = options.toJSON();
 
+		options.bind('change', function(model) {
+			var prop, en,
+				data = model.changedAttributes();
+
+			for (prop in data) {
+				en = 'preferences.editor.'+ prop;
+				window.parent.win.emit(en, data[prop]);
+			}
+		});
+
 		var EditorTabView = Backbone.View.extend({
 			el: '#editor-tab',
 

@@ -1,8 +1,8 @@
 define([
 		'Helper.opt'
-	], function(option) {
+	], function(options) {
 
-		var config = option.toJSON();
+		var config = options.toJSON();
 
 		var EditorTabView = Backbone.View.extend({
 			el: '#helper-section',

@@ -1,13 +1,13 @@
 define([
 		'General.opt'
-	], function(option) {
+	], function(options) {
 
 		// var gui = require('nw.gui'),
 		// 	win = gui.Window.get();
 
-		var config = option.toJSON();
+		var config = options.toJSON();
 
-		option.bind('change', function(model) {
+		options.bind('change', function(model) {
 			var prop, en,
 				data = model.changedAttributes();
 

@@ -55,25 +55,26 @@ define([
 		});
 
 		/* change preferences events */
-		// editorOpt.bind('change:theme', function(model, value, memo) {
-		//   editor.setOption('theme', value);
-		// });
 
-		// editorOpt.bind('change:displayLineNumber', function(model, value, memo) {
-		//   editor.setOption('lineNumbers', value);
-		// });
+		window.parent.win.on('preferences.editor.theme', function(value) {
+			editor.setOption('theme', value);
+		});
 
-		// editorOpt.bind('change:vimKeyBinding', function(model, value, memo) {
-		//   editor.setOption('keyMap', value ? 'vim' : 'default');
-		// });
+		window.parent.win.on('preferences.editor.displayLineNumber', function(value) {
+			editor.setOption('lineNumbers', value);
+		});
 
-		// editorOpt.bind('change:insertFourSpace', function(model, value, memo) {
-		//   editor.setOption('tabSize', value ? 4 : 2);
-		// });
+		window.parent.win.on('preferences.editor.vimKeyBinding', function(value) {
+			editor.setOption('keyMap', value ? 'vim' : 'default');
+		});
 
-		// editorOpt.bind('change:autoPairCharacters', function(model, value, memo) {
-		//   editor.setOption('autoCloseBrackets', value);
-		// });
+		window.parent.win.on('preferences.editor.insertFourSpace', function(value) {
+			editor.setOption('tabSize', value ? 4 : 2);
+		});
+		
+		window.parent.win.on('preferences.editor.autoPairCharacters', function(value) {
+			editor.setOption('autoCloseBrackets', value);
+		});
 
 		/* fire context menu event */
 		win.on('context.cut', function(e) {

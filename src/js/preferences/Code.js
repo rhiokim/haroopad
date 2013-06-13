@@ -1,8 +1,8 @@
 define([
 		'Code.opt'
-	], function(option) {
+	], function(options) {
 
-		var config = option.toJSON();
+		var config = options.toJSON();
 
 		var ViewerTabView = Backbone.View.extend({
 			el: '#code-tab',
