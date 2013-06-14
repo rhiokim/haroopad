@@ -63,7 +63,7 @@ function(Opt, OpenDialog, SaveDialog, Editor) {
 	// }
 
 	Opt.bind('change', function() {
-		console.log(arguments)
+		// console.log(arguments)
 	});
 
 	win.on('file.open', OpenDialog.show.bind(OpenDialog));

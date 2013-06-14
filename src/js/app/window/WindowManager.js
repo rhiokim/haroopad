@@ -41,7 +41,7 @@ define([
 		});
 
 		//window instance delivery to child window
-		newWin.on('loaded', function() {
+		newWin.once('loaded', function() {
 			_updateStore();
 
 			newWin.window.haveParent(window);
@@ -65,16 +65,13 @@ define([
   
   		newWin.moveTo(x, y);
 			newWin.resizeTo(config.width, config.height);
+			newWin.show();
 
 			shadowCount++;
-	    // newWin.show();
-	    // newWin.focus();
-	    // newWin.window.focus();
 		});
 	}
 
 	win.on('actived', function(child) {
-		child.show();
 		exports.actived = child;
 	})
 
@@ -83,8 +80,8 @@ define([
     	file = file ? '&file='+ file : '';
 
 		newWin = gui.Window.open('pad.html#'+ file, {
-		    "min_width": 300,
-		    "min_height": 200,
+		    "min_width": 500,
+		    "min_height": 400,
 		    "max_width": 1920,
 		    "max_height": 1080,
         "toolbar": false,

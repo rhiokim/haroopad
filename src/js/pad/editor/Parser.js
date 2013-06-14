@@ -1,7 +1,7 @@
 define([
   ],
   function() {
-    marked.setOptions({
+    var opt = {
       gfm: true,
       tables: true,
       breaks: false,
@@ -10,37 +10,35 @@ define([
       smartLists: true,
       smartypants: false,
       silent: false,
-      highlight: null,
-      langPrefix: '',
-      highlight: function(code, lang) {
-        var res;
-        if(!lang) {
-          return code;
-        }
+      langPrefix: 'language-'
+    };
 
-        switch(lang) {
-          case 'js':
-            lang = 'javascript';
-          break;
-        }
-
-        try {
-          res = hljs.highlight(lang, code).value;
-        } catch(e) {
-
-        } finally {
-          return res || code;
-        }
-      }
-    });
+    marked.setOptions(opt);
 
     var renderer = new marked.Renderer();
-    // renderer.header = function(text, level) {
-    //   return '<div class="h-'+ level +'">'+ text +'</div>';
-    // }
+    // renderer.blockcode = function(code, lang) {
+    //   var res;
+    //   if(!lang) {
+    //     return code;
+    //   }
+
+    //   switch(lang) {
+    //     case 'js':
+    //       lang = 'javascript';
+    //     break;
+    //   }
+
+    //   try {
+    //     res = hljs.highlight(lang, code).value;
+    //   } catch(e) {
+
+    //   } finally {
+    //     return res || code;
+    //   }
+    // };
 
     var parse = function(src, options) {
-      options = options || marked.defaults;
+      options = options || opt;
       return marked.parser(marked.lexer(src, options), options, renderer);
     }
 

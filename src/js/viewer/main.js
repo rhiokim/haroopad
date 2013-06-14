@@ -73,6 +73,18 @@ function _fixImagePath() {
   });
 }
 
+//for performance
+var timeoutSyntaxHighlight;
+function _lazySyntaxHighlight() {
+  clearTimeout(timeoutSyntaxHighlight);
+
+  setTimeout(function() {
+    $('pre code').each(function(i, e) {
+      hljs.highlightBlock(e);
+    });
+  }, 250);
+}
+
 /**
  * update contents
  * @param  {[type]} contents [description]
@@ -88,6 +100,8 @@ function update(contents) {
   });
   _fixImagePath();
   // createTOC();
+  
+  _lazySyntaxHighlight();
 }
 
 /**

@@ -87,7 +87,6 @@ module.exports = function(grunt) {
           'build/haroopad.js': [
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/marked.js',
-            '<%= vendors %>/highlight.pack.js',
             'src/js/app/before.bin.js',
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',
@@ -158,6 +157,7 @@ module.exports = function(grunt) {
           'build/haroopad/js/viewer.min.js': [
             '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/js-url.js',
+            '<%= vendors %>/highlight.pack.js',
             'src/js/viewer/main.js',
           ]
         }
@@ -208,7 +208,8 @@ module.exports = function(grunt) {
 
       build: {
         files: [
-          { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' }
+          { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
+          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' }
         ]
       }
     },

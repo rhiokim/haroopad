@@ -29,6 +29,7 @@ define([
 	win.on('close', function() {
 		if (edited) {
 			Dialogs.save.show();
+			return;
 		} else {
 			close();
 		}
