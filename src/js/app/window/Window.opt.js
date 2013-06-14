@@ -4,6 +4,8 @@ define([
 	function(store) {
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
+		var model;
+
 
 		var Model = Backbone.Model.extend({
 			defaults: {
@@ -11,7 +13,6 @@ define([
 				y: 0,
 				width: 1024,
 				height: 600,
-				isFullscreen: false,
 				zoom: 1,
 				mode: 1, // view mode 0 is dual, 1 is only editor
 				viewerWidth: 50
@@ -30,22 +31,8 @@ define([
 					this.set(this.defaults);
 					store.set('Window', this.toJSON());
 				}
-			},
-
-			save: function() {
-				this.set({
-					x: win.x,
-					y: win.y,
-					width: win.width,
-					height: win.height,
-					isFullscreen: win.isFullscreen,
-					isKioskMode: win.isKioskMode,
-					zoom: win.zoom,
-					mode: this.get('mode'),
-					viewerWidth: this.get('viewerWidth')
-				});
 			}
 		});
 
-		return new Model();
+		return model = new Model();
 });

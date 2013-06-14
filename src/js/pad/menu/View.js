@@ -1,0 +1,3 @@
+define([
+	'menu/Splitter'
+	], function() {});

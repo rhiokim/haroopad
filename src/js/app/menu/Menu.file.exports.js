@@ -9,7 +9,7 @@ define([],
       new gui.MenuItem({
           label: 'HTML',
           click: function() {
-            win.emit('file.exports.html');
+            win.emit('menu.file.exports.html');
           }
       })
     );

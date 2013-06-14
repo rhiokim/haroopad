@@ -1,89 +1,140 @@
 define([
-		'window/Window.opt',
+    'store',
 		'keyboard',
-		'utils/Error',
-		'menu/Context/Context',
-		'window/Splitter',
-		'window/Window.help',
-		'ui/dialog/Dialogs',
-		'window/Window.dragdrop',
-		'window/Window.exports'
-], function(options, HotKey, Err, Context, Splitter, Help, Dialogs) {
+    'window/Window.opt',
+    'window/WindowManager',
+    'window/Window.help',
+    'window/Window.preferences',
+    'window/Window.dragdrop',
+    'file/Recents'
+], function(store, HotKey, Options, WindowMgr, Help, Preferences, DragDrop, Recents) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
 
-	var orgTitle = 'Untitled';
-	var edited = false,
-		delayClose = false;
-
-	var config = options.toJSON();
-
-	function newHandler() {
-		options.set({
-			x: win.x + 20,
-			y: win.y + 20
-		});
-
-		subWin = gui.Window.open('pad.html', {
-			width: win.width,
-			height: win.height,
-			toolbar: false,
-			show: false
-		});
-	}
-
-	function close() {
-		options.save();
-		win.hide();
-		win.close(true);
-	}
-
-	win.on('closed', function() {
-		win = null;
-	});
-
-	win.on('close', function() {
-		if (edited) {
-			Dialogs.save.show();
-		} else {
-			close();
-		}
-	});
-
-	Dialogs.save.bind('save', function() {
-		delayClose = true;
-		// File.externalSave();
-	});
-
-	Dialogs.save.bind('dont-save', function() {
-		close();
-	});
-
-	HotKey('defmod-n', newHandler);
-
-	HotKey('defmod-shift-ctrl-d', function() {
-		win.showDevTools();
-	});
-
-	win.on('file.new', newHandler);
-	win.on('file.close', win.close);
-
-	win.on('file.opend', function(opt) {
-		win.title = orgTitle = opt.basename;
+  win.on('menu.file.new', function() {
+    WindowMgr.open();
   });
 
-  win.on('file.saved', function(opt) {
-		win.title = orgTitle = opt.basename;
-		delayClose = true;
-		edited = false;	
+  win.on('menu.file.open', function() {
+  	WindowMgr.actived.emit('file.open');
   });
 
-	win.on('change.markdown', function(markdown, html, editor) {
-		win.title = orgTitle + ' (edited)';
-		edited = true;
-	});
+  win.on('menu.file.save', function() {
+  	WindowMgr.actived.emit('file.save');
+  });
 
-	win.resizeTo(config.width, config.height);
-	win.moveTo(config.x, config.y);
+  win.on('menu.file.save.as', function() {
+  	WindowMgr.actived.emit('file.save.as');
+  });
+
+  win.on('menu.file.close', function() {
+    WindowMgr.actived.emit('file.close');
+  });
+
+  win.on('menu.file.exports.html', function() {
+    WindowMgr.actived.emit('file.exports.html');
+  });
+
+  win.on('menu.preferences.show', function() {
+    Preferences.show();
+  });
+
+
+
+
+  win.on('menu.view.mode.toggle', function() {
+    WindowMgr.actived.emit('view.mode.toggle');
+  });
+
+  win.on('menu.show.toggle.linenum', function() {
+    WindowMgr.actived.emit('show.toggle.linenum');
+  });
+
+  win.on('menu.view.plus5.width', function() {
+    WindowMgr.actived.emit('view.plus5.width');
+  });
+
+  win.on('menu.view.minus5.width', function() {
+    WindowMgr.actived.emit('view.minus5.width');
+  });
+  
+
+  win.on('menu.action.copy.html', function() {
+    WindowMgr.actived.emit('action.copy.html');
+  });
+  
+
+  win.on('file.open', function(file) {
+  	WindowMgr.open(file);
+    Recents.add(file);
+  });
+
+  win.on('menu.file.recents', function(file) {
+  	WindowMgr.open(file);
+  });
+
+  win.on('exit', function() {
+    gui.App.quit();
+  });
+
+  /**
+   * context function
+   */
+  win.on('context.cut', function(e) {
+    WindowMgr.actived.emit('context.cut', e);
+  });
+  win.on('context.copy', function(e) {
+    WindowMgr.actived.emit('context.copy');
+  });
+  win.on('context.paste', function(e) {
+    WindowMgr.actived.emit('context.paste');
+  });
+  win.on('context.select.all', function(e) {
+    WindowMgr.actived.emit('context.select.all');
+  });
+  win.on('context.preferences', function(e) {
+    Preferences.show();
+  });
+  win.on('context.copy.html', function(e) {
+    WindowMgr.actived.emit('context.copy.html');
+  });
+
+  HotKey('defmod-n', function() {
+    WindowMgr.open();
+  });
+
+  HotKey('defmod-o', function() {
+    WindowMgr.actived.emit('file.open');
+  });
+
+  HotKey('defmod-s', function() {
+    WindowMgr.actived.emit('file.save');
+  });
+
+  HotKey('defmod-shift-s', function() {
+    WindowMgr.actived.emit('file.save.as');
+  });
+
+  HotKey('defmod-q', function() {
+    gui.App.quit();
+  });
+
+  /**
+   * function shortcut
+   * @return {[type]} [description]
+   */
+
+  HotKey('defmod-shift-l', function() {
+    WindowMgr.actived.emit('show.toggle.linenum');
+  });
+
+  HotKey('defmod-shift-v', function() {
+    WindowMgr.actived.emit('toggle.vim.keybind');
+  });
+
+  HotKey('defmod-,', function() {
+    Preferences.show();
+  });
+
 });
