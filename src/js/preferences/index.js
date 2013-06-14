@@ -30,8 +30,24 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
-  'Preferences'
-  ], function(Preferences) {
+    'tabs/General',
+    'tabs/Editor',
+    'tabs/Viewer',
+    'tabs/Code',
+    'tabs/Helper',
+    'tabs/About'
+  ], function(General, Editor, Viewer, Code, Helper, About) {
 
+    $('.switch').bootstrapSwitch();
+
+    var gui = require('nw.gui'),
+        win = gui.Window.get();
+
+    win.on('context.preferences', function() {
+      alert('context.prefe')
+    });
+    win.on('preferences.show', function() {
+      alert('prefe.show')
+    });
 
 });
