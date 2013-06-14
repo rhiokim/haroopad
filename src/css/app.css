@@ -173,6 +173,15 @@ body > .navbar .brand:hover {
 .cm-s-solarized .cm-em {
   text-decoration: none !important;
 }
+.cm-s-solarized .cm-hr {
+  color: inherit;
+  border: 0;
+  display: inline-block;
+}
+
+.CodeMirror {
+  border-top: 0;
+}
 
 .CodeMirror-lines {
   padding: 15px 0 35px 0;
