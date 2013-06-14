@@ -124,9 +124,6 @@ define([
    * function shortcut
    * @return {[type]} [description]
    */
-	HotKey('defmod-shift-alt-d', function() {
-		win.showDevTools();
-	});
 
   HotKey('defmod-shift-l', function() {
     WindowMgr.actived.emit('show.toggle.linenum');

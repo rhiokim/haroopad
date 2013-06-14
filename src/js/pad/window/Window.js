@@ -1,7 +1,8 @@
 define([
 		'store',
+		'keyboard',
 		'ui/dialog/Dialogs'
-], function(store, Dialogs) {
+], function(store, HotKey, Dialogs) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -58,6 +59,12 @@ define([
 		edited = true;
 	});
 
+
+
+	HotKey('defmod-shift-alt-d', function() {
+		win.showDevTools();
+	});
+
   window.addEventListener('keydown', function(e) {
 
     var evt = document.createEvent("Events");
@@ -107,6 +114,22 @@ define([
     window.parent.win.emit('dragdrop', e);
     return false;
   };
+
+  var resizeTimeout;
+  window.onresize = function(e) {
+
+    clearTimeout(resizeTimeout);
+
+    resizeTimeout = setTimeout(function() {
+	  	config.width = win.width;
+	  	config.height = win.height;
+	  	config.x = win.x;
+	  	config.y = win.y;
+
+	  	store.set('Window', config);
+    }, 250); 
+
+  }
 
  //  win.moveTo(url('#x'), url('#y'));
 	// win.resizeTo(config.width, config.height);

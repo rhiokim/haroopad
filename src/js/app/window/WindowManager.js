@@ -12,7 +12,11 @@ define([
 			shadowCount = 0,
 			gapX = 0, gapY = 0;
 
-	var config = store.get('Window') || {};
+	var config;
+
+	function _updateStore() {
+		config = store.get('Window') || {};
+	}
 
 	function _add(newWin) {
 		newWin.created_at = new Date().getTime();
@@ -38,6 +42,8 @@ define([
 
 		//window instance delivery to child window
 		newWin.on('loaded', function() {
+			_updateStore();
+
 			newWin.window.haveParent(window);
 
     	var x = config.x + gapX + 20 * shadowCount,
@@ -77,8 +83,12 @@ define([
     	file = file ? '&file='+ file : '';
 
 		newWin = gui.Window.open('pad.html#'+ file, {
-        toolbar: false,
-        show: false
+		    "min_width": 300,
+		    "min_height": 200,
+		    "max_width": 1920,
+		    "max_height": 1080,
+        "toolbar": false,
+        "show": false
       });
 
 		_add(newWin);
