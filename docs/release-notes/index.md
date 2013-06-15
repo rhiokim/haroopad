@@ -1,10 +1,17 @@
-<!--
+
 ## Haroopad v0.4.0
-New Features    | Description
----------------:|-----------------------------------------------
-**Bugs**        | 
-**Enhancements**|
--->
+
+New Features     | Description
+----------------:|-----------------------------------------------
+**Bugs**         | 
+#42, 55          | Disabled auto hr tag in editor
+#49              | Recent file open error
+#32              | CMD + ` shortcut on mac
+**Enhancements** |
+#59              | Error editor/viewer theme
+#58              | Disable responsive dialog
+#56              | **Critical issue**: separate node-webkit native function / editor function
+                 | Preference UX enhancements
 
 ## Haroopad v0.3.2
 
