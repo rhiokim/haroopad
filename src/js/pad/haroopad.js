@@ -62,10 +62,10 @@ requirejs([
 
       window.parent.win.emit('change.markdown', opt.markdown, function(html) {
         Editor.setValue(opt.markdown);
+        
+        Viewer.init(opt);
         win.emit('change.after.markdown', Editor.getValue(), html, Editor);
 
-        Viewer.init(opt);
-        Viewer.update(opt.markdown, html, Editor);
         Editor.on("change", delayChange); 
       });
 

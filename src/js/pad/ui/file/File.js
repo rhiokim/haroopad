@@ -50,37 +50,14 @@ function(Opt, OpenDialog, SaveDialog, Editor) {
 		win.emit('file.saved', Opt.toJSON());
 	}
 
-	// function _openWindow(file) {
-	// 	var x = win.x + 20,
-	// 		y = win.y + 20;
-    
-	// 	gui.Window.open('pad.html#file=' + file + '&x=' + x + '&y=' + y, {
-	// 		width: win.width,
-	// 		height: win.height,
-	// 		toolbar: false,
-	// 		show: false,
-	// 	});
-	// }
 
 	Opt.bind('change', function() {
 		// console.log(arguments)
 	});
 
 	win.on('file.open', OpenDialog.show.bind(OpenDialog));
-	// win.on('file.recents', function(file) {
-	// 	fs.exists(file, function(exists) {
-	// 		if (exists) {
-	// 			_openWindow(file);
-	// 		} else {
-	// 			//TODO: enhancement ux
-	// 			alert('File not found\n'+ file);
-	// 		}
-	// 	});
-		
-	// });
 
 	//open dialog fire change event
-	// OpenDialog.on('file.open', _openWindow);
 	OpenDialog.on('file.open', function(file) {
 		window.parent.win.emit('file.open', file);
 	});

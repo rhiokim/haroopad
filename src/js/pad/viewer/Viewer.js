@@ -69,7 +69,7 @@ define([
 			content = html;
 			viewer.update(content);
 
-			// config.clickableLink ? viewer.allowLink() : viewer.blockLink();
+			viewerConfig.clickableLink ? viewer.allowLink() : viewer.blockLink();
 		}
 
 		/* change markdown event handler */
