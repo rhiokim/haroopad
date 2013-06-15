@@ -5,39 +5,46 @@
 일반적으로 단축키는 드랍다운 메뉴에 함께 표시되는게 일반적이나 웹 기술을 기반으로 하는 하루패드는 아직 이 부분에 있어서는 완벽하지 않다.
 
 단축키 맵의 경우도 단축키로만 접근할 수 있다.
-(Command - Ctrl - K)
+(Shift - Ctrl - space)
 
 ![](images/shortcuts-0.png)
 
 단축키를 이용할 때 유의해야 할 점은 각 운영체제마다 특수키(Window, Command) 를 이용하는 경우는 **Ctrl** 키로 대체된다.
 
-### 키 맵 (for haroopad)
+## shortcuts
 
-Shortcut    | Description
-------------|-------------
-Command - N | Create new window
-Command - S | Save file
-Command - O | Open file
-Command - , | Preferences
-Ctrl - ]    | Only Editor mode
-Ctrl - [    | Dual Mode
-Ctrl - Alt - ] | Editor with + 5%
-Ctrl - Alt - [ | Editor with - 5%
-Ctrl - \    | Reset Dual Mode
-Command - Ctrl - K | Show Shortcuts
+##### File
 
-  
-### 키 맵 (for markdown editing)
+Shortcut                  | Description
+--------------------------|-------------------
+COMMAND(CTRL) + N         | 새로운 에디터 윈도우 생성
+COMMAND(CTRL) + S         | 파일 저장
+COMMAND(CTRL) + SHIFT + S | 새로운 이름으로 저장
+COMMAND(CTRL) + O         | 파일 불러오기
+COMMAND(CTRL) + ,         | 환경설정
+COMMAND(CTRL) + Q         | 에디터 윈도우 종료
 
-Shortcut    | Description
-------------|-------------
-Command - B | Bold
-Command - L | Link
-Command - I | Italic
-Command - Shift - O | Ordered list
-Command - Shift - U | Unordered list
-Command - Shift - I | Image
-Command - Shift - B | Block quote
+##### Window
+Shortcut                  | Description
+--------------------------|-------------------
+CTRL + ]                  | 에디터 모드
+CTRL + [                  | 에디터 + 뷰어 모드
+CTRL + ALT + ]            | 에디터 가로 사이즈 +5%
+CTRL + ALT + [            | 에디터 가로 사이즈 -5%
+COMMAND(CTRL) + SHIFT + L | 에디터 라인넘버 토글
+COMMAND(CTRL) + SHIFT + V | VIM 키 바인딩
+
+##### Editing
+Shortcut                | Description
+------------------------|-------------------
+COMMAND(CTRL) + B       | 볼드
+COMMAND(CTRL) + I       | 이탤릭
+COMMAND(CTRL) + L       | 링크
+COMMAND(CTRL) + ALT + S | 중간물결
+COMMAND(CTRL) + ALT + O | 정렬 목록
+COMMAND(CTRL) + ALT + U | 비정렬 목록
+COMMAND(CTRL) + ALT + I | 이미지
+COMMAND(CTRL) + ALT + B | 블럭쿼트
 
 ---
 
