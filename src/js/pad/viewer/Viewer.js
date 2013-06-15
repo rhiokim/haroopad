@@ -56,11 +56,9 @@ define([
 		/**
 		 * delegate right mouse down event
 		 */
-		$(viewer).mousedown(function(e) {
-			if (e.which === 3) {
-				$(viewer.top).trigger('mousedown', [e]);
-	    }
-		});
+		viewer.addEventListener('contextmenu', function(ev) {
+			$(document.body).trigger('contextmenu', [ev]);
+		}.bind(this), false);
 
 		/* copy html to clipboard */
 		win.on('action.copy.html', function() {

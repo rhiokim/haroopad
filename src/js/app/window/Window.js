@@ -97,7 +97,7 @@ define([
     Preferences.show();
   });
   win.on('context.copy.html', function(e) {
-    WindowMgr.actived.emit('context.copy.html');
+    WindowMgr.actived.emit('action.copy.html');
   });
 
   HotKey('defmod-n', function() {
