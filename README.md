@@ -97,11 +97,11 @@ puts markdown.to_html
 
 **GFM style table**
 
-name | age | gender
----|---|---|
-rhio | 33 | male
-edina | 28 | female
-jedi | 44 | robot
+name  | age | gender
+------|:---:|-------
+rhio  | 33  | male
+edina | 28  | female
+jedi  | 44  | robot
 
 
 **URL autolinking**
@@ -110,7 +110,7 @@ jedi | 44 | robot
 
 **Multiple underscores in words**
 
-perform_complicated_task
+perform_complicated_task  
 do_this_and_do_that_and_another_thing
 
 
