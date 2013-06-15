@@ -81,12 +81,12 @@ module.exports = function(grunt) {
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/backbone.js',
+            '<%= vendors %>/marked.js',
             '<%= vendors %>/js-url.js',
             '<%= vendors %>/require.js'
           ],
           'build/haroopad.js': [
             '<%= vendors %>/underscore.js',
-            '<%= vendors %>/marked.js',
             'src/js/app/before.bin.js',
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',

@@ -120,22 +120,5 @@ define([
 		  editor.off('scroll', syncScrollHandler);
 		}
 
-	    // /**
-	    //  * 코드미러 내용 변경 이벤트 핸들러
-	    //  * @return {[type]} [description]
-	    //  */
-	    // function changeHandler() {
-	    //   res = Parser(editor.getValue());
-	    //   win.emit('change.markdown', editor.getValue(), res, editor);
-	    // }
-
-	    // function delayChange() {
-	    //   if(_tid_) {
-	    //     clearTimeout(_tid_);
-	    //   }
-
-	    //   _tid_ = setTimeout(changeHandler, 300);
-	    // }
-
 		return editor;
 });

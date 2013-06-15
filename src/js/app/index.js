@@ -30,9 +30,10 @@ requirejs.onError = function (e) {
 requirejs([
     'menu/MenuBar',
     'context/Context',
+    'core/Parser',
     'window/Window',
     'window/WindowManager'
-  ], function(MenuBar, Context, Window, WindowMgr) {
+  ], function(MenuBar, Context, Parser, Window, WindowMgr) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
@@ -43,4 +44,14 @@ requirejs([
     } else {
       WindowMgr.open();
     }
+
+   win.on('change.markdown', function(md, options, cb) {
+    var cb = typeof options == 'function' ? options : cb;
+    // var options = typeof options == 'function' ? undefined : options;
+    
+    var html = Parser(md, options);
+
+      cb(html);
+      // WindowMgr.actived.updateMarkdown(html);
+    });
 });

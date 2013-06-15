@@ -75,7 +75,7 @@ define([
 		}
 
 		/* change markdown event handler */
-		win.on('change.markdown', update);
+		win.on('change.after.markdown', update);
 
 		/* scroll editor for sync */
 		win.on('editor.scroll', function(top, per) {

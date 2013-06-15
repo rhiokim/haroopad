@@ -43,10 +43,9 @@ requirejs([
     'window/Window',
     'menu/Menu',
     'editor/Editor',
-    'editor/Parser',
     'viewer/Viewer',
     'ui/file/File'
-  ], function(Window, Menu, Editor, Parser, Viewer, File) {
+  ], function(Window, Menu, Editor, Viewer, File) {
     var html, res, file, x, y;
     var _tid_;
 
@@ -75,34 +74,23 @@ requirejs([
       Editor.on("change", delayChange);
     }
 
-    //open file with commend line
-    // if (gui.App.argv.length > 0) {
-      // File.open(gui.App.argv[0])
-      // win.emit('open.file', gui.App.argv[0]);
-    // }
-
     win.on('file.saved', function(opt) {
       Viewer.init(opt);
     });
 
-    /**
-     * 코드미러 내용 변경 이벤트 핸들러
-     * @return {[type]} [description]
-     */
-    function changeHandler() {
-      res = Parser(Editor.getValue());
-      win.emit('change.markdown', Editor.getValue(), res, Editor);
-    }
-
     function delayChange() {
-      if(_tid_) {
-        clearTimeout(_tid_);
-      }
+      clearTimeout(_tid_);
 
-      _tid_ = setTimeout(changeHandler, 300);
+      win.emit('change.before.markdown', Editor.getValue());
+
+      _tid_ = setTimeout(function() {
+        window.parent.win.emit('change.markdown', Editor.getValue(), function(html) {
+          win.emit('change.after.markdown', Editor.getValue(), html, Editor);
+        });
+      }, 300);
     }
 
-      window.parent.win.emit('actived', win);
+    win.focus();
     win.on('focus', function() {
       window.parent.win.emit('actived', win);
     });
