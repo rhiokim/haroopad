@@ -2,6 +2,8 @@
 
 깃허브가 그랬듯이 사실상 표준인 마크다운에는 복잡한 문서를 표현하는데 한계가 있다. 문서 도구에서 쉽게 표현하는 테이블이 하나의 예이다. 
 
+![](http://media02.dconstruct.org/2010-0008/i/speakers/profile/john-gruber.jpg)
+
 [존 그루버][gruber]가 제안한 마크다운에는 테이블(표)에 대한 정의는 없다. 그래서 마크다운을 즐겨쓰는 깃허브와 커뮤니티에서는 테이블을 표현하기 위한 마크다운을 제안하여 사용하고 있다.
 
 **markdown**  
@@ -45,3 +47,6 @@ row2        | 456
 ![](images/002.png)
 
 이런 방식을 통해 유튜브, 플리커, 슬라이드 쉐어등과 같이 온라인 콘텐츠를 문서에 첨부 하는 것이 간단해 진다.  더 많은 확장 구문은 [여기](http://haroopress.com/post/support-plugins/)를 참고하세요.
+
+
+[gruber]: http://en.wikipedia.org/wiki/John_Gruber
