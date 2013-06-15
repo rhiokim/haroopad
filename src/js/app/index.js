@@ -47,7 +47,7 @@ requirejs([
 
    win.on('change.markdown', function(md, options, cb) {
     var cb = typeof options == 'function' ? options : cb;
-    // var options = typeof options == 'function' ? undefined : options;
+    var options = typeof options == 'object' ? options : undefined;
     
     var html = Parser(md, options);
 

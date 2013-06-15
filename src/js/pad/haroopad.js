@@ -59,12 +59,16 @@ requirejs([
     file = url('#file');
 
     win.on('file.opened', function(opt) {
-      Editor.setValue(opt.markdown);
-      html = Parser(opt.markdown);
 
-      Viewer.init(opt);
-      Viewer.update(opt.markdown, html, Editor);
-      Editor.on("change", delayChange); 
+      window.parent.win.emit('change.markdown', opt.markdown, function(html) {
+        Editor.setValue(opt.markdown);
+        win.emit('change.after.markdown', Editor.getValue(), html, Editor);
+
+        Viewer.init(opt);
+        Viewer.update(opt.markdown, html, Editor);
+        Editor.on("change", delayChange); 
+      });
+
     });
 
     //run with file open;
