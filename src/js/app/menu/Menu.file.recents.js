@@ -15,11 +15,15 @@ define([
     var mClear = new gui.MenuItem({
         label: 'Clear all',
         click: function() {
-            win.emit('file.recents.clear');
+            while (submenu.items.length - 2) {
+                submenu.removeAt(0);
+            }
+            mClear.enabled = false;
+            win.emit('menu.file.recents.clear');
         }
     });
 
-    if (recents) {
+    if (recents.length) {
         while (item = recents.shift()) {
             for (prop in item) {
                 name = item[prop];

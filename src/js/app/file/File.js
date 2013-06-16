@@ -1,0 +1,15 @@
+define([
+	],
+	function() {
+		var fs = require('fs'),
+			path = require('path');
+
+		var gui = require('nw.gui'),
+			win = gui.Window.get();
+
+		return {
+			save: function(file, markdown, cb) {
+				fs.writeFile(file, markdown, 'utf8', cb);
+			}
+		}
+});

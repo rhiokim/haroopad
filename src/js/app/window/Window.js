@@ -6,8 +6,9 @@ define([
     'window/Window.help',
     'window/Window.preferences',
     'window/Window.dragdrop',
+    'file/File',
     'file/Recents'
-], function(store, HotKey, Options, WindowMgr, Help, Preferences, DragDrop, Recents) {
+], function(store, HotKey, Options, WindowMgr, Help, Preferences, DragDrop, File, Recents) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -17,7 +18,15 @@ define([
   });
 
   win.on('menu.file.open', function() {
-  	WindowMgr.actived.emit('file.open');
+    WindowMgr.actived.emit('file.open');
+  });
+
+  win.on('menu.file.recents', function(file) {
+    WindowMgr.open(file);
+  });
+
+  win.on('menu.file.recents.clear', function() {
+    Recents.clearAll();
   });
 
   win.on('menu.file.save', function() {
@@ -69,13 +78,18 @@ define([
   });
   
 
+  //fire by child window
   win.on('file.open', function(file) {
   	WindowMgr.open(file);
     Recents.add(file);
   });
 
-  win.on('menu.file.recents', function(file) {
-  	WindowMgr.open(file);
+  //fire by child window
+  win.on('file.save', function(file, markdown, cb) {
+    File.save(file, markdown, cb);
+    Recents.add(file);
+    // cb(file, markdown);
+    // WindowMgr.actived.emit('file.saved');
   });
 
   win.on('exit', function() {
