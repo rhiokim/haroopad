@@ -10,6 +10,10 @@ define([
 		return {
 			save: function(file, markdown, cb) {
 				fs.writeFile(file, markdown, 'utf8', cb);
+			},
+			
+			open: function(file, cb) {
+				fs.readFile(file, 'utf8', cb);
 			}
 		}
 });

@@ -80,10 +80,9 @@ define([
 
   //fire by child window
   win.on('file.open', function(file) {
-  	WindowMgr.open(file);
+    WindowMgr.open(file);
     Recents.add(file);
   });
-
   //fire by child window
   win.on('file.save', function(file, markdown, cb) {
     File.save(file, markdown, cb);
