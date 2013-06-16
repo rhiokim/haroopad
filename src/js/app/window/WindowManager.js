@@ -8,6 +8,7 @@ define([
 			win = gui.Window.get();
 
 	var windows = {},
+			openning = false,
 			realCount = 0,
 			shadowCount = 0,
 			gapX = 0, gapY = 0;
@@ -37,7 +38,6 @@ define([
 					return;
 				}
 			}
-
 		});
 
 		//window instance delivery to child window
@@ -65,10 +65,12 @@ define([
   
   		newWin.moveTo(x, y);
 			newWin.resizeTo(config.width, config.height);
-			newWin.show();
+			// newWin.show();
 
 			shadowCount++;
 		});
+
+    openning = false;
 	}
 
 	win.on('actived', function(child) {
@@ -79,13 +81,20 @@ define([
     var newWin,
     	file = file ? '&file='+ file : '';
 
+    if (openning) {
+    	return;
+    }
+
+    openning = true;
+
 		newWin = gui.Window.open('pad.html#'+ file, {
 		    "min_width": 500,
 		    "min_height": 400,
 		    "max_width": 1920,
 		    "max_height": 1080,
         "toolbar": false,
-        "show": false
+        "show": false,
+        "readonly": true
       });
 
 		_add(newWin);

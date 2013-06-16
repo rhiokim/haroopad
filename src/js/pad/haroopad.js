@@ -99,4 +99,7 @@ requirejs([
       window.parent.win.emit('actived', win);
     });
 
+    setTimeout(function() {
+      win.show();
+    }, 50);
 });
