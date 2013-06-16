@@ -23,12 +23,8 @@ define([
 					    autofocus: true,
 					    workDelay: 1000,
 					    dragDrop: false,
-					    // onDragEvent: dragDropHandler,
 					    extraKeys: Keymap
 					  });
-
-		// var editorConf = editorOpt.toJSON();
-		// var generalConf = generalOpt.toJSON();
 
 		/* initialize editor */
 		editor.setOption('theme', config.theme || 'solarized dark');
@@ -36,16 +32,6 @@ define([
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', config.insertFourSpace ? 4 : 2);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters || true);
-
-		/* hotkey area */
-		// HotKey('defmod-ctrl-l', function() {
-		//   var lineNumbers = editor.getOption('lineNumbers');
-		//   editor.setOption('lineNumbers', !lineNumbers);
-		// });
-		// HotKey('defmod-ctrl-v', function() {
-		//   var map = editor.getOption('keyMap');
-		//   editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
-		// });
 		
 		win.on('toggle.vim.keybind', function() {
 		  var map = editor.getOption('keyMap');

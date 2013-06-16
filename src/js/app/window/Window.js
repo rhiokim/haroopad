@@ -87,8 +87,6 @@ define([
   win.on('file.save', function(file, markdown, cb) {
     File.save(file, markdown, cb);
     Recents.add(file);
-    // cb(file, markdown);
-    // WindowMgr.actived.emit('file.saved');
   });
 
   win.on('exit', function() {
