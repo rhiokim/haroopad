@@ -27,6 +27,10 @@ define([
 		window.parent.win.on('preferences.viewer.clickableLink', function(value) {
 			value ? viewer.allowLink() : viewer.blockLink() ;
 		});
+		
+		win.on('print.html', function(value) {
+			viewer.print();
+		});
 
 
 		viewer.setViewStyle(viewerConfig.theme || 'haroopad');

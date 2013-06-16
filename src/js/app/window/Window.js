@@ -36,6 +36,10 @@ define([
     WindowMgr.actived.emit('file.exports.html');
   });
 
+  win.on('menu.print.html', function() {
+    WindowMgr.actived.emit('print.html');
+  });
+
   win.on('menu.preferences.show', function() {
     Preferences.show();
   });

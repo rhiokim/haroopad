@@ -85,11 +85,33 @@ define([
             submenu: Activities
         })
 	);
+
+    File.append(
+        new gui.MenuItem({
+            type: 'separator'
+        })
+    );
+    File.append(
+        new gui.MenuItem({
+            label: 'Print...',
+            click: function() {
+                win.emit('menu.print.html');
+            }
+        })
+    );
+    // File.append(
+    //     new gui.MenuItem({
+    //         label: 'Print Markdown',
+    //         click: function() {
+    //             win.emit('menu.print.markdown');
+    //         }
+    //     })
+    // );
+
     File.append(menuItem({
             type: 'separator'
         })
     );
-
     File.append(menuItem({
             label: 'Preferences',
             click: function() {
@@ -97,13 +119,7 @@ define([
             }
         })
     );
-
     /*
-	File.append(
-        new gui.MenuItem({
-            type: 'separator'
-        })
-	);
 	File.append(
         new gui.MenuItem({
             label: 'Page Setup'
