@@ -13,7 +13,8 @@ define([
 			shadowCount = 0,
 			gapX = 0, gapY = 0;
 
-	var config;
+	var config = store.get('Window') || {};
+	var top = config.y, left = config.x;
 
 	function _updateStore() {
 		config = store.get('Window') || {};
@@ -46,35 +47,29 @@ define([
 
 			newWin.window.haveParent(window);
 
-    	var x = config.x + gapX + 20 * shadowCount,
-      		y = config.y + gapY + 20 * shadowCount;
-
-      if (config.height + y > window.screen.height) {
-      	shadowCount = 0;
-      	// config.x = 0;
-      	gapX += 20;
-      	config.y = 0;
+      if (config.height + top > window.screen.height) {
+      	top = 0;
       }
 
-      if (config.width + x > window.screen.width) {
-      	shadowCount = 1;
-      	// config.y = 0;
-      	gapY += 20;
-      	config.x = 0;
+      if (config.width + left > window.screen.width) {
+      	left = 0;
       }
+
+    	left = left + 20;
+      top = top + 20;
   
-  		newWin.moveTo(x, y);
+  		newWin.moveTo(left, top);
 			newWin.resizeTo(config.width, config.height);
 			// newWin.show();
 
 			shadowCount++;
 		});
-
-    openning = false;
 	}
 
 	win.on('actived', function(child) {
 		exports.actived = child;
+
+    openning = false;
 	})
 
 	exports.open = function(file) {
