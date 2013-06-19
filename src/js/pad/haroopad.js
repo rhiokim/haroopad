@@ -95,11 +95,12 @@ requirejs([
     }
 
     win.focus();
-    // win.on('focus', function() {
-    // });
+    win.on('focus', function() {
+      window.parent.win.emit('actived', win);
+    });
 
     setTimeout(function() {
       window.parent.win.emit('actived', win);
       win.show();
-    }, 50);
+    }, 10);
 });
