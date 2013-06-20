@@ -1,5 +1,16 @@
+## Haroopad v0.4.2
+
+##### Download
+> * Windows NSIS installer:[https://www.dropbox.com/s/3ix0t59hh6acwau/haroopad-win32-v0.3.1.exe](https://www.dropbox.com/s/3ix0t59hh6acwau/haroopad-win32-v0.3.1.exe)
+> * Mac OS X DMG: [https://www.dropbox.com/s/ht4ldva42u5ukj6/haroopad-v0.3.1.dmg](https://www.dropbox.com/s/ht4ldva42u5ukj6/haroopad-v0.3.1.dmg)
+> * Linux 32-bit Binary:[https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb](https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb)
+> * Linux 64-bit Binary:[https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb](https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb)
+> * Linux 32-bit Debian Package:[https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb](https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb)
+> * Linux 64-bit Debian Package:[https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb](https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb)
 
 ## Haroopad v0.4.0
+
+> We did not release v0.4.0 because some critical issues.
 
 New Features     | Description
 ----------------:|-----------------------------------------------
@@ -41,6 +52,11 @@ New Features    | Description
 
 
 [https://github.com/rhiokim/haroopad/issues?milestone=2&page=1&state=closed](https://github.com/rhiokim/haroopad/issues?milestone=2&page=1&state=closed)
+
+##### Download
+* Windows NSIS installer:[https://www.dropbox.com/s/3ix0t59hh6acwau/haroopad-win32-v0.3.1.exe](https://www.dropbox.com/s/3ix0t59hh6acwau/haroopad-win32-v0.3.1.exe)
+* Mac OS X DMG: [https://www.dropbox.com/s/ht4ldva42u5ukj6/haroopad-v0.3.1.dmg](https://www.dropbox.com/s/ht4ldva42u5ukj6/haroopad-v0.3.1.dmg)
+* Linux 32-bit Binary:[https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb](https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb)
 
 ## Haroopad v0.3.0
 
