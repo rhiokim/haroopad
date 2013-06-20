@@ -10,6 +10,13 @@ function loadCss(url) {
 function haveParent(parent) {
   window.parent = parent;
 }
+function haveMenu(MenuBar, guiW, winW) {
+  var gui = require('nw.gui'),
+    win = gui.Window.get();
+
+    // win.menu = MenuBar;
+  // window.parent = parent;
+}
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -41,11 +48,10 @@ requirejs.onError = function (e) {
 
 requirejs([
     'window/Window',
-    'menu/Menu',
     'editor/Editor',
     'viewer/Viewer',
     'ui/file/File'
-  ], function(Window, Menu, Editor, Viewer, File) {
+  ], function(Window, Editor, Viewer, File) {
     var html, res, file, x, y;
     var _tid_;
 

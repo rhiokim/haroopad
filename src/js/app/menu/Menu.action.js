@@ -1,11 +1,11 @@
 define([],
   function() {
-
-	var gui = require('nw.gui'),
-      win = gui.Window.get();
 	
-  return function() {
+  return function(win) {
+    var gui = require('nw.gui');
     var Action = new gui.Menu();
+
+    win = win || gui.Window.get();
 
   	Action.append(
       new gui.MenuItem({

@@ -25,10 +25,7 @@ define([
 		newWin.created_at = new Date().getTime();
 		exports.actived = windows[newWin.created_at] = newWin;
 
-		if (process.platform != 'darwin') {
-			newWin.menu = MenuBar();
-		}
-
+		// console.log()
 		realCount++;
 
 		newWin.on('closed', function() {
@@ -51,6 +48,8 @@ define([
 			_updateStore();
 
 			newWin.window.haveParent(window);
+			newWin.window.haveMenu(MenuBar(newWin), gui, win);
+		// newWin.window.win.menu = MenuBar(newWin);
 
       if (config.height + top > window.screen.height) {
       	top = 0;

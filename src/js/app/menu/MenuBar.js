@@ -6,21 +6,19 @@ define([
 		'menu/Menu.action',
 		'menu/Menu.help'
 	], function(HotKey, File, View, Action, Help) {
-		var gui = require('nw.gui');
 
-		return function() {
+		return function(win) {
+			var gui = require('nw.gui');
+
 			var Menu = new gui.Menu({
 			    type:   'menubar'
 			});
 
-			Menu.append(File());
-			Menu.append(View());
-			Menu.append(Action());
-			Menu.append(Help());
+			Menu.append(File(win));
+			Menu.append(View(win));
+			Menu.append(Action(win));
+			Menu.append(Help(win));
 
 			return Menu;
 		}
-
-
-		// gui.Window.get().menu = Menu;
 });

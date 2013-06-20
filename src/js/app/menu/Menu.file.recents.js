@@ -3,16 +3,18 @@ define([
 ], function(store) {
     var fs = require('fs');
 
-    var gui = require('nw.gui'),
-        win = gui.Window.get();
     var path = require('path');
     var name, full, item, prop, res;
 
     var recents = store.get('Recents');
     recents = recents && recents.files;
 
-    return function() {
+    return function(win) {
+        var gui = require('nw.gui');
         var submenu = new gui.Menu();
+        
+        win = win || gui.Window.get();
+
         var mClear = new gui.MenuItem({
             label: 'Clear all',
             click: function() {

@@ -5,12 +5,13 @@ define([
       'menu/Menu.file.activities'
 	],
 	function(Recents, Exports, Posts, Activities) {
-
-	var gui = require('nw.gui'),
-        win = gui.Window.get();
 	
-    return function() {
+    return function(win) {
+
+        var gui = require('nw.gui');
         var File = new gui.Menu();
+
+        win = win || gui.Window.get();
 
         function menuItem(options) {
             return new gui.MenuItem(options);

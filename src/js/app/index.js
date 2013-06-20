@@ -28,19 +28,15 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
-    'menu/MenuBar',
+    // 'menu/MenuBar',
     'context/Context',
     'core/Parser',
     'window/Window',
     'window/WindowManager'
-  ], function(MenuBar, Context, Parser, Window, WindowMgr) {
+  ], function(/*MenuBar, */Context, Parser, Window, WindowMgr) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
-
-    if (process.platform == 'darwin') {
-      win.menu = MenuBar();
-    }
 
     //open file with commend line
     if (gui.App.argv.length > 0) {
@@ -49,11 +45,11 @@ requirejs([
       WindowMgr.open();
     }
 
-   win.on('change.markdown', function(md, options, cb) {
-    var cb = typeof options == 'function' ? options : cb;
-    var options = typeof options == 'object' ? options : undefined;
-    
-    var html = Parser(md, options);
+    win.on('change.markdown', function(md, options, cb) {
+      var cb = typeof options == 'function' ? options : cb;
+      var options = typeof options == 'object' ? options : undefined;
+      
+      var html = Parser(md, options);
 
       cb(html);
       // WindowMgr.actived.updateMarkdown(html);

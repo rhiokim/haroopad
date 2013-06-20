@@ -1,7 +1,8 @@
 define([
 		'store',
 		'keyboard',
-		'ui/dialog/Dialogs'
+		'ui/dialog/Dialogs',
+		'ui/splitter/Splitter'
 ], function(store, HotKey, Dialogs) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
