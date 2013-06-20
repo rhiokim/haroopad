@@ -8,7 +8,7 @@ define([
       pedantic: false,
       sanitize: false,
       smartLists: true,
-      smartypants: false,
+      smartypants: true,
       silent: false,
       langPrefix: 'language-'
     };
