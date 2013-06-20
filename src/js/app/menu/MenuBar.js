@@ -8,14 +8,19 @@ define([
 	], function(HotKey, File, View, Action, Help) {
 		var gui = require('nw.gui');
 
-		var Menu = new gui.Menu({
-		    type:   'menubar'
-		});
+		return function() {
+			var Menu = new gui.Menu({
+			    type:   'menubar'
+			});
 
-		Menu.append(File);
-		Menu.append(View);
-		Menu.append(Action);
-		Menu.append(Help);
+			Menu.append(File());
+			Menu.append(View());
+			Menu.append(Action());
+			Menu.append(Help());
 
-		gui.Window.get().menu = Menu;
+			return Menu;
+		}
+
+
+		// gui.Window.get().menu = Menu;
 });

@@ -38,6 +38,10 @@ requirejs([
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
+    if (process.platform == 'darwin') {
+      win.menu = MenuBar();
+    }
+
     //open file with commend line
     if (gui.App.argv.length > 0) {
       WindowMgr.open(gui.App.argv[0]);

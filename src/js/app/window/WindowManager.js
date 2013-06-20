@@ -1,8 +1,9 @@
 define([
 		'exports',
-		'store'
+		'store',
+		'menu/MenuBar'
 	],
-	function(exports, store) {
+	function(exports, store, MenuBar) {
 
 	var gui = require('nw.gui');
 			win = gui.Window.get();
@@ -23,6 +24,10 @@ define([
 	function _add(newWin) {
 		newWin.created_at = new Date().getTime();
 		exports.actived = windows[newWin.created_at] = newWin;
+
+		if (process.platform != 'darwin') {
+			newWin.menu = MenuBar();
+		}
 
 		realCount++;
 
