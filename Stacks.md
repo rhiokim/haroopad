@@ -23,6 +23,7 @@ haroopad technical stack
   - grunt-replace
   - grunt-contrib-requirejs
 * stringex
+* nodemailer
 * node-webkit
 
 ## html5

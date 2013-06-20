@@ -9,7 +9,7 @@ define([],
       new gui.MenuItem({
           label: 'Tumblr',
           click: function() {
-            win.emit('file.posts.tumblr');
+            win.emit('menu.posts.tumblr');
           }
       })
     );
