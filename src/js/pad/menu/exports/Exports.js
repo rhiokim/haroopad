@@ -54,7 +54,7 @@ define([
 			$("#exportHTML").val("");
 		}
 
-		win.on('file.exports.html', function() {
+		window.ee.on('file.exports.html', function() {
 			res = html.replace('@@style', getStyleSheets());
 			res = res.replace('@@body', getBodyHtml());
 

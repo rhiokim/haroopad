@@ -57,13 +57,13 @@ requirejs([
 
     file = url('#file');
 
-    win.on('file.opened', function(opt) {
+    window.ee.on('file.opened', function(opt) {
 
       window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
         Editor.setValue(opt.markdown);
         
         Viewer.init(opt);
-        win.emit('change.after.markdown', Editor.getValue(), html, Editor);
+        window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
 
         Editor.on("change", delayChange); 
       });
@@ -84,11 +84,11 @@ requirejs([
     function delayChange() {
       clearTimeout(_tid_);
 
-      win.emit('change.before.markdown', Editor.getValue());
+      window.ee.emit('change.before.markdown', Editor.getValue());
 
       _tid_ = setTimeout(function() {
         window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
-          win.emit('change.after.markdown', Editor.getValue(), html, Editor);
+          window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
         });
       }, 300);
     }

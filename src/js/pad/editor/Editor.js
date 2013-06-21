@@ -33,35 +33,35 @@ define([
 		editor.setOption('tabSize', config.insertFourSpace ? 4 : 2);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters || true);
 		
-		win.on('toggle.vim.keybind', function() {
+		window.ee.on('toggle.vim.keybind', function() {
 		  var map = editor.getOption('keyMap');
 		  editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
 		});
 
-		win.on('show.toggle.linenum', function() {
+		window.ee.on('show.toggle.linenum', function() {
 			var value = editor.getOption('lineNumbers') ? false : true;
 			editor.setOption('lineNumbers', value);	
 		});
 
 		/* change preferences events */
 
-		window.parent.win.on('preferences.editor.theme', function(value) {
+		window.parent.ee.on('preferences.editor.theme', function(value) {
 			editor.setOption('theme', value);
 		});
 
-		window.parent.win.on('preferences.editor.displayLineNumber', function(value) {
+		window.parent.ee.on('preferences.editor.displayLineNumber', function(value) {alert(value)
 			editor.setOption('lineNumbers', value);
 		});
 
-		window.parent.win.on('preferences.editor.vimKeyBinding', function(value) {
+		window.parent.ee.on('preferences.editor.vimKeyBinding', function(value) {
 			editor.setOption('keyMap', value ? 'vim' : 'default');
 		});
 
-		window.parent.win.on('preferences.editor.insertFourSpace', function(value) {
+		window.parent.ee.on('preferences.editor.insertFourSpace', function(value) {
 			editor.setOption('tabSize', value ? 4 : 2);
 		});
 		
-		window.parent.win.on('preferences.editor.autoPairCharacters', function(value) {
+		window.parent.ee.on('preferences.editor.autoPairCharacters', function(value) {
 			editor.setOption('autoCloseBrackets', value);
 		});
 
@@ -89,10 +89,10 @@ define([
 		  var top = scrollInfo.top;
 		  var per = scrollInfo.height - scrollInfo.clientHeight;
 		
-		  win.emit('editor.scroll', top, per);
+		  window.ee.emit('editor.scroll', top, per);
 		}
 
-		window.parent.win.on('preferences.general.enableSyncScroll', function(value) {
+		window.parent.ee.on('preferences.general.enableSyncScroll', function(value) {alert(value)
 			if (value) {
 				editor.on('scroll', syncScrollHandler);
 			} else {

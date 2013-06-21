@@ -89,43 +89,43 @@ define([
   
 
   //fire by child window
-  process.on('file.open', function(file) {
+  window.ee.on('file.open', function(file) {
     WindowMgr.open(file);
     Recents.add(file);
   });
   //fire by child window
-  process.on('file.save', function(file, markdown, cb) {
+  window.ee.on('file.save', function(file, markdown, cb) {
     File.save(file, markdown, cb);
     Recents.add(file);
   });
 
-  // process.on('exit', function() {
-  //   gui.App.quit();
-  // });
+  window.ee.on('exit', function() {
+    gui.App.quit();
+  });
 
   /**
    * context function
    */
-  process.on('context.cut', function(e) {
+  window.ee.on('context.cut', function(e) {
     // WindowMgr.actived.emit('context.cut', e);
     WindowMgr.actived.window.ee.emit('context.cut', e);
   });
-  process.on('context.copy', function(e) {
+  window.ee.on('context.copy', function(e) {
     // WindowMgr.actived.emit('context.copy');
     WindowMgr.actived.window.ee.emit('context.copy');
   });
-  process.on('context.paste', function(e) {
+  window.ee.on('context.paste', function(e) {
     // WindowMgr.actived.emit('context.paste');
     WindowMgr.actived.window.ee.emit('context.paste');
   });
-  process.on('context.select.all', function(e) {
+  window.ee.on('context.select.all', function(e) {
     // WindowMgr.actived.emit('context.select.all');
     WindowMgr.actived.window.ee.emit('context.select.all');
   });
-  process.on('context.preferences', function(e) {
+  window.ee.on('context.preferences', function(e) {
     Preferences.show();
   });
-  process.on('context.copy.html', function(e) {
+  window.ee.on('context.copy.html', function(e) {
     // WindowMgr.actived.emit('action.copy.html');
     WindowMgr.actived.window.ee.emit('action.copy.html');
   });
@@ -135,15 +135,15 @@ define([
   });
 
   HotKey('defmod-o', function() {
-    WindowMgr.actived.emit('file.open');
+    WindowMgr.actived.window.ee.emit('file.open');
   });
 
   HotKey('defmod-s', function() {
-    WindowMgr.actived.emit('file.save');
+    WindowMgr.actived.window.ee.emit('file.save');
   });
 
   HotKey('defmod-shift-s', function() {
-    WindowMgr.actived.emit('file.save.as');
+    WindowMgr.actived.window.ee.emit('file.save.as');
   });
 
   HotKey('defmod-q', function() {
@@ -156,11 +156,11 @@ define([
    */
 
   HotKey('defmod-shift-l', function() {
-    WindowMgr.actived.emit('show.toggle.linenum');
+    WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
   HotKey('defmod-shift-v', function() {
-    WindowMgr.actived.emit('toggle.vim.keybind');
+    WindowMgr.actived.window.ee.emit('toggle.vim.keybind');
   });
 
   HotKey('defmod-,', function() {

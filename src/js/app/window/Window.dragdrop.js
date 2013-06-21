@@ -7,7 +7,7 @@ define([
 
 		var i = 0;
 
-    win.on('dragdrop', function(e) {
+    window.ee.on('dragdrop', function(e) {
       for (i; i < e.dataTransfer.files.length; ++i) {
   			WindowMgr.open(e.dataTransfer.files[i].path);
       }

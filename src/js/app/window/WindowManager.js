@@ -1,9 +1,8 @@
 define([
 		'exports',
-		'store',
-		'menu/MenuBar'
+		'store'
 	],
-	function(exports, store, MenuBar) {
+	function(exports, store) {
 
 	var gui = require('nw.gui');
 			win = gui.Window.get();
@@ -36,7 +35,7 @@ define([
 					realCount--;
 
 					if (!realCount) {
-						win.emit('exit');
+						window.ee.emit('exit');
 					}
 					return;
 				}

@@ -2,8 +2,7 @@ define([
 		'keyboard'
 	], 
 	function(HotKey) {
-		var gui = require('nw.gui'),
-			win = gui.Window.get();
+		var gui = require('nw.gui');
 		var $editor = $('#editor');
 		var $viewer = $('#haroo iframe');
 
@@ -81,12 +80,7 @@ define([
 		HotKey('ctrl-alt-]', setPlus5Width);
 		HotKey('ctrl-alt-[', setMinus5Width);
 
-		// win.on('view.mode.editor', setModeEditor);
-		// win.on('view.mode.dual', setModeDual);
 		window.ee.on('view.reset.mode', resetMode);
-		// win.on('view.reset.mode', resetMode);
-		// win.on('view.plus5.width', setPlus5Width);
-		// win.on('view.minus5.width', setMinus5Width);
 		window.ee.on('view.plus5.width', setPlus5Width);
 		window.ee.on('view.minus5.width', setMinus5Width);
 
