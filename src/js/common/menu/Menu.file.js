@@ -1,4 +1,4 @@
-MenuBar.file = function () {
+MenuBarFile = function () {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 
@@ -29,7 +29,7 @@ MenuBar.file = function () {
         });
 	menuItem({
             label: 'Open Recent',
-            submenu: MenuBar.file.Recents()
+            submenu: MenuBarFileRecents()
         });
 	sepItem();
 	
@@ -57,18 +57,18 @@ MenuBar.file = function () {
 	menuItem({
             label: 'Post',
             enabled: false,
-            submenu: MenuBar.file.Posts()
+            submenu: MenuBarFilePosts()
         });
   menuItem({
           label: 'Export',
           // enabled: false,
-          submenu: MenuBar.file.Exports()
+          submenu: MenuBarFileExports()
       });
-	menuItem({
-            label: 'Activity stream',
-            enabled: false,
-            submenu: MenuBar.file.Activities()
-        });
+	// menuItem({
+ //            label: 'Activity stream',
+ //            enabled: false,
+ //            submenu: MenuBarFileActivities()
+ //        });
   sepItem();
   
   menuItem({

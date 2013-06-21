@@ -93,19 +93,19 @@ module.exports = function(grunt) {
         files: {
           'build/index.js': [
             'src/js/lib/logger.js',
+            'build/menu.concat.js',
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/backbone.js',
             '<%= vendors %>/marked.js',
             '<%= vendors %>/store.js',
-            '<%= vendors %>/require.js',
-            'build/menu.concat.js'
+            '<%= vendors %>/require.js'
           ],
           'build/haroopad.js': [
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/eventemitter.js',
-            'build/menu.concat.js',
             'src/js/app/before.bin.js',
+            'src/js/lib/logger.js',
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',
             '<%= vendors %>/bootstrap.min.js',
@@ -126,6 +126,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/select2.js'
           ],
           'build/vendors.js': [
+            'build/menu.concat.js',
             '<%= vendors %>/require.js'
           ],
           'build/codemirror.js': [
@@ -175,7 +176,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/js-url.js',
             '<%= vendors %>/highlight.pack.js',
-            'src/js/viewer/main.js',
+            'src/js/viewer/main.js'
           ]
         }
       }

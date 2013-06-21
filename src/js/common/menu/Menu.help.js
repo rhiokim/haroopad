@@ -1,4 +1,4 @@
-MenuBar.help = function () {
+MenuBarHelp = function () {
 	var gui = require('nw.gui');
 	var shell = gui.Shell;
 	

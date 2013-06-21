@@ -9,10 +9,10 @@ function MenuBar() {
 		    type:   'menubar'
 		});
 
-		menu.append( MenuBar.file() );
-		menu.append( MenuBar.view() );
-		menu.append( MenuBar.action() );
-		menu.append( MenuBar.help() );
+		menu.append( MenuBarFile() );
+		menu.append( MenuBarView() );
+		menu.append( MenuBarAction() );
+		menu.append( MenuBarHelp() );
 
 		win.menu = MenuBar._systemMenu = menu;
 	}

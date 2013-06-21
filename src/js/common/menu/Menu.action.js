@@ -1,4 +1,4 @@
-MenuBar.action = function () {	
+MenuBarAction = function () {	
   var gui = require('nw.gui');
   var Action = new gui.Menu();
 

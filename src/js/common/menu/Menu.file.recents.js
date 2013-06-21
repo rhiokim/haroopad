@@ -1,4 +1,4 @@
-MenuBar.file.Recents = function() {
+MenuBarFileRecents = function() {
     var fs = require('fs');
 
     var path = require('path');
@@ -7,7 +7,7 @@ MenuBar.file.Recents = function() {
     var gui = require('nw.gui');
     var submenu = new gui.Menu();
 
-    var recents = store.get('Recents');
+    var recents = store.get('Recents') || { files:[] };
     recents = recents && recents.files;
 
     var mClear = new gui.MenuItem({

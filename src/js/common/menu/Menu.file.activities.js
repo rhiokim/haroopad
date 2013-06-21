@@ -1,4 +1,4 @@
-MenuBar.file.Activities = function () {
+MenuBarFileActivities = function () {
   var gui = require('nw.gui');
   var submenu = new gui.Menu();
   

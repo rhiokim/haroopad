@@ -1,4 +1,4 @@
-MenuBar.view = function () {
+MenuBarView = function () {
 	var gui = require('nw.gui');
 	var View = new gui.Menu();
 
