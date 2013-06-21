@@ -17,7 +17,7 @@ MenuBar.file.Recents = function() {
                 submenu.removeAt(0);
             }
             mClear.enabled = false;
-            window.ee.emit('menu.file.recents.clear');
+            window.parent.ee.emit('menu.file.recents.clear');
         }
     });
 
@@ -35,7 +35,7 @@ MenuBar.file.Recents = function() {
                     label: name,
                     tooltip: prop,
                     click: function() {
-                        window.ee.emit('menu.file.recents', this.tooltip);
+                        window.parent.ee.emit('menu.file.recents', this.tooltip);
                     }
                 }));
             }

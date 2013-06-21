@@ -17,8 +17,6 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    // text: '../vendors/text',
-    store: '../vendors/store',
     keyboard: '../vendors/keymage'
   },
   config: {
@@ -33,12 +31,11 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
-    // 'menu/MenuBar',
     'context/Context',
     'core/Parser',
     'window/Window',
     'window/WindowManager'
-  ], function(/*MenuBar, */Context, Parser, Window, WindowMgr) {
+  ], function(Context, Parser, Window, WindowMgr) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();

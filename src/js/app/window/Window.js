@@ -1,5 +1,4 @@
 define([
-    'store',
 		'keyboard',
     'window/Window.opt',
     'window/WindowManager',
@@ -7,7 +6,7 @@ define([
     'window/Window.dragdrop',
     'file/File',
     'file/Recents'
-], function(store, HotKey, Options, WindowMgr, /*Help,*/ Preferences, DragDrop, File, Recents) {
+], function(HotKey, Options, WindowMgr, /*Help,*/ Preferences, DragDrop, File, Recents) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;

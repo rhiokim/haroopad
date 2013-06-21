@@ -74,28 +74,46 @@ module.exports = function(grunt) {
     },
 
     concat: {
+      common: {
+        files: {
+          'build/menu.concat.js': [
+            'src/js/common/menu/MenuBar.js',
+            'src/js/common/menu/Menu.file.js',
+            'src/js/common/menu/Menu.view.js',
+            'src/js/common/menu/Menu.action.js',
+            'src/js/common/menu/Menu.help.js',
+            'src/js/common/menu/Menu.file.recents.js',
+            'src/js/common/menu/Menu.file.posts.js',
+            'src/js/common/menu/Menu.file.exports.js',
+            'src/js/common/menu/Menu.file.activities.js'
+          ]
+        }
+      },
       dist: {
         files: {
           'build/index.js': [
             'src/js/lib/logger.js',
-            '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/backbone.js',
             '<%= vendors %>/marked.js',
+            '<%= vendors %>/store.js',
             '<%= vendors %>/js-url.js',
-            '<%= vendors %>/require.js'
+            '<%= vendors %>/require.js',
+            '<%= vendors %>/eventemitter.js',
+            'build/menu.concat.js'
           ],
           'build/haroopad.js': [
             '<%= vendors %>/underscore.js',
+            '<%= vendors %>/eventemitter.js',
             'src/js/app/before.bin.js',
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',
             '<%= vendors %>/bootstrap.min.js',
-            // '<%= vendors %>/bootstrapSwitch.js',
             '<%= vendors %>/bootstrap-modalmanager.js',
             '<%= vendors %>/bootstrap-modal.js',
-            // '<%= vendors %>/select2.js',
+            '<%= vendors %>/store.js',
             '<%= vendors %>/js-url.js',
+            'build/menu.concat.js',
             'src/js/app/after.bin.js'
           ],
           'build/preferences.js': [
@@ -287,7 +305,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('default', [ 'clean', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'requirejs:index', 'requirejs:pad', 'requirejs:preferences' ]);
+  grunt.registerTask('default', [ 'clean', 'concat:common', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'requirejs:index', 'requirejs:pad', 'requirejs:preferences' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
   grunt.registerTask('core', [ 'clean:core', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);

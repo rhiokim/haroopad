@@ -6,7 +6,7 @@ MenuBar.file.Exports = function () {
     new gui.MenuItem({
         label: 'HTML',
         click: function() {
-          window.ee.emit('menu.file.exports.html');
+          window.parent.ee.emit('menu.file.exports.html');
         }
     })
   );

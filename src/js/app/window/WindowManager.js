@@ -1,11 +1,9 @@
 define([
-		'exports',
-		'store'
+		'exports'
 	],
-	function(exports, store) {
+	function(exports) {
 
 	var gui = require('nw.gui');
-			win = gui.Window.get();
 
 	var windows = {},
 			openning = false,
@@ -61,7 +59,6 @@ define([
   
   		newWin.moveTo(left, top);
 			newWin.resizeTo(config.width, config.height);
-			// newWin.show();
 
 			shadowCount++;
 		});

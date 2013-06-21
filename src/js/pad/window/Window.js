@@ -2,6 +2,7 @@ define([
 		'store',
 		'keyboard',
 		'ui/dialog/Dialogs',
+		'ui/exports/Exports',
 		'ui/splitter/Splitter'
 ], function(store, HotKey, Dialogs) {
 	var gui = require('nw.gui');
@@ -92,8 +93,12 @@ define([
 		
 		e = (ev) ? ev : e;
 
-		x = win.x - window.parent.win.x + e.clientX;
-		y = win.y - window.parent.win.y + e.clientY;
+		x = win.x - window.parent.screenX + e.clientX;
+		y = win.y - window.parent.screenY + e.clientY;
+
+		if (process.platform == 'win32') {
+			y += 20;
+		}
 
 		x = (ev) ? x + $('#editor').width() : x;
 
