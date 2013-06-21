@@ -1,3 +1,8 @@
+window.ee = new EventEmitter();
+
+if (process.platform != 'darwin') {
+  MenuBar(); 
+}
 
 function loadCss(url) {
     var link = document.createElement("link");

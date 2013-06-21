@@ -4,7 +4,7 @@ function MenuBar() {
 
 	var menu = MenuBar._systemMenu;
 
-	if (!menu || process.platform != 'darwin') {
+	function create() {
 		menu = new gui.Menu({
 		    type:   'menubar'
 		});
@@ -16,4 +16,6 @@ function MenuBar() {
 
 		win.menu = MenuBar._systemMenu = menu;
 	}
+
+	create();
 }

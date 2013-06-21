@@ -17,13 +17,14 @@ MenuBar.file = function () {
 	menuItem({
             label: 'New',
             click: function() {
-                process.emit('menu.file.new');
+                // process.emit('menu.file.new');
+                window.ee.emit('menu.file.new');
             }
         });
 	menuItem({
             label: 'Open',
             click: function() {
-                process.emit('menu.file.open');
+                window.ee.emit('menu.file.open');
             }
         });
 	menuItem({
@@ -35,20 +36,20 @@ MenuBar.file = function () {
   menuItem({
           label: 'Save',
           click: function() {
-              process.emit('menu.file.save');
+              window.ee.emit('menu.file.save');
           }
       });
   menuItem({
           label: 'Save As',
           click: function() {
-              process.emit('menu.file.save.as');
+              window.ee.emit('menu.file.save.as');
           }
       });
 
   menuItem({
           label: 'Close',
           click: function() {
-              process.emit('menu.file.close');
+              window.ee.emit('menu.file.close');
           }
       });
   sepItem();
@@ -89,7 +90,7 @@ MenuBar.file = function () {
   menuItem({
           label: 'Preferences',
           click: function() {
-              process.emit('menu.preferences.show');
+              window.ee.emit('menu.preferences.show');
           }
       });
     /*

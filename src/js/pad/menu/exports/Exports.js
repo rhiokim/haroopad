@@ -5,8 +5,7 @@ define([
 	function(Viewer, html) {
 		var fs = require('fs'),
 				path = require('path');
-		var gui = require('nw.gui'),
-				win = gui.Window.get();
+		var gui = require('nw.gui');
 
 		var res;
 		
@@ -30,7 +29,7 @@ define([
 			_.each(contentDocument.styleSheets, function(item) {
 				href = item.href;
 
-				if(process.platform.indexOf('win32') < 0) {
+				if(process.platform != 'win32') {
 					href = href.replace('file://', '');
 				}
 

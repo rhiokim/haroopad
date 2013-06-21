@@ -12,77 +12,77 @@ define([
 	var win = gui.Window.get(),
 		subWin;
 
-  process.on('menu.file.new', function() {
+  window.ee.on('menu.file.new', function() {
     WindowMgr.open();
   });
 
-  process.on('menu.file.open', function() {
+  window.ee.on('menu.file.open', function() {
     WindowMgr.actived.window.ee.emit('file.open');
     // WindowMgr.actived.emit('file.open');
   });
 
-  process.on('menu.file.recents', function(file) {
+  window.ee.on('menu.file.recents', function(file) {
     WindowMgr.open(file);
   });
 
-  process.on('menu.file.recents.clear', function() {
+  window.ee.on('menu.file.recents.clear', function() {
     Recents.clearAll();
   });
 
-  process.on('menu.file.save', function() {
+  window.ee.on('menu.file.save', function() {
   	// WindowMgr.actived.emit('file.save');
     WindowMgr.actived.window.ee.emit('file.save');
   });
 
-  process.on('menu.file.save.as', function() {
+  window.ee.on('menu.file.save.as', function() {
   	// WindowMgr.actived.emit('file.save.as');
     WindowMgr.actived.window.ee.emit('file.save.as');
   });
 
-  process.on('menu.file.close', function() {
+  window.ee.on('menu.file.close', function() {
     // WindowMgr.actived.emit('file.close');
     WindowMgr.actived.window.ee.emit('file.close');
   });
 
-  process.on('menu.file.exports.html', function() {
+  window.ee.on('menu.file.exports.html', function() {
     // WindowMgr.actived.emit('file.exports.html');
     WindowMgr.actived.window.ee.emit('file.exports.html');
   });
 
-  process.on('menu.print.html', function() {
+  window.ee.on('menu.print.html', function() {
     // WindowMgr.actived.emit('print.html');
     WindowMgr.actived.window.ee.emit('print.html');
   });
 
-  process.on('menu.preferences.show', function() {
+  window.ee.on('menu.preferences.show', function() {
     Preferences.show();
   });
 
 
 
 
-  process.on('menu.view.mode.toggle', function() {
+  window.ee.on('menu.view.mode.toggle', function() {
     // WindowMgr.actived.emit('view.mode.toggle');
     WindowMgr.actived.window.ee.emit('view.mode.toggle');
   });
 
-  process.on('menu.show.toggle.linenum', function() {
+  window.ee.on('menu.show.toggle.linenum', function() {
     // WindowMgr.actived.emit('show.toggle.linenum');
     WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
-  process.on('menu.view.plus5.width', function() {
+  window.ee.on('menu.view.plus5.width', function() {
     // WindowMgr.actived.emit('view.plus5.width');
     WindowMgr.actived.window.ee.emit('view.plus5.width');
   });
 
-  process.on('menu.view.minus5.width', function() {
+  window.ee.on('menu.view.minus5.width', function() {
     // WindowMgr.actived.emit('view.minus5.width');
     WindowMgr.actived.window.ee.emit('view.minus5.width');
   });
   
 
-  process.on('menu.action.copy.html', function() {
+  window.ee.on('menu.action.copy.html', function() {
     // WindowMgr.actived.emit('action.copy.html');
     WindowMgr.actived.window.ee.emit('action.copy.html');
   });

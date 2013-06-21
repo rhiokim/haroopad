@@ -6,7 +6,7 @@ MenuBar.file.Activities = function () {
     new gui.MenuItem({
         label: 'Twitter',
         click: function() {
-          process.emit('file.activity.twitter');
+          window.ee.emit('file.activity.twitter');
         }
     })
   );

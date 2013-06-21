@@ -6,7 +6,7 @@ MenuBar.action = function () {
     new gui.MenuItem({
       label: 'Copy HTML',
       click: function() {
-        process.emit('menu.action.copy.html');
+        window.ee.emit('menu.action.copy.html');
       }
     })
 	);/*

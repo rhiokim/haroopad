@@ -44,7 +44,9 @@ define([
 		close();
 	});
 
-	window.ee.on('file.close', win.close);
+	window.ee.on('file.close', function() {
+		win.close();
+	});
 
 	window.ee.on('file.opened', function(opt) {
 		win.title = orgTitle = opt.basename;

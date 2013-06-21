@@ -6,7 +6,7 @@ MenuBar.view = function () {
 	    new gui.MenuItem({
 	        label: 'Toggle Live Preview',
 		      click: function() {
-		      	process.emit('menu.view.mode.toggle');
+		      	window.ee.emit('menu.view.mode.toggle');
 		      }
 	    })
 	);
@@ -27,7 +27,7 @@ MenuBar.view = function () {
 	    new gui.MenuItem({
 	        label: 'Toggle Line Number',
 		      click: function() {
-		        process.emit('menu.show.toggle.linenum');
+		        window.ee.emit('menu.show.toggle.linenum');
 		      }
 	    })
 	);
@@ -48,7 +48,7 @@ MenuBar.view = function () {
 	    new gui.MenuItem({
 	        label: 'Live Viewer width +5%',
 		      click: function() {
-		        process.emit('menu.view.plus5.width');
+		        window.ee.emit('menu.view.plus5.width');
 		      }
 	    })
 	);
@@ -56,7 +56,7 @@ MenuBar.view = function () {
 	    new gui.MenuItem({
 	        label: 'Live Viewer width -5%',
 		      click: function() {
-		        process.emit('menu.view.minus5.width');
+		        window.ee.emit('menu.view.minus5.width');
 		      }
 	    })
 	);
