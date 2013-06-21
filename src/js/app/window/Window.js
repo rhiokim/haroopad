@@ -3,115 +3,114 @@ define([
 		'keyboard',
     'window/Window.opt',
     'window/WindowManager',
-    'window/Window.help',
     'window/Window.preferences',
     'window/Window.dragdrop',
     'file/File',
     'file/Recents'
-], function(store, HotKey, Options, WindowMgr, Help, Preferences, DragDrop, File, Recents) {
+], function(store, HotKey, Options, WindowMgr, /*Help,*/ Preferences, DragDrop, File, Recents) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
 
-  win.on('menu.file.new', function() {
+  process.on('menu.file.new', function() {
     WindowMgr.open();
   });
 
-  win.on('menu.file.open', function() {
+  process.on('menu.file.open', function() {
     WindowMgr.actived.emit('file.open');
   });
 
-  win.on('menu.file.recents', function(file) {
+  process.on('menu.file.recents', function(file) {
     WindowMgr.open(file);
   });
 
-  win.on('menu.file.recents.clear', function() {
+  process.on('menu.file.recents.clear', function() {
     Recents.clearAll();
   });
 
-  win.on('menu.file.save', function() {
+  process.on('menu.file.save', function() {
   	WindowMgr.actived.emit('file.save');
   });
 
-  win.on('menu.file.save.as', function() {
+  process.on('menu.file.save.as', function() {
   	WindowMgr.actived.emit('file.save.as');
   });
 
-  win.on('menu.file.close', function() {
+  process.on('menu.file.close', function() {
     WindowMgr.actived.emit('file.close');
   });
 
-  win.on('menu.file.exports.html', function() {
+  process.on('menu.file.exports.html', function() {
     WindowMgr.actived.emit('file.exports.html');
   });
 
-  win.on('menu.print.html', function() {
+  process.on('menu.print.html', function() {
     WindowMgr.actived.emit('print.html');
   });
 
-  win.on('menu.preferences.show', function() {
+  process.on('menu.preferences.show', function() {
     Preferences.show();
   });
 
 
 
 
-  win.on('menu.view.mode.toggle', function() {
+  process.on('menu.view.mode.toggle', function() {
     WindowMgr.actived.emit('view.mode.toggle');
   });
 
-  win.on('menu.show.toggle.linenum', function() {
+  process.on('menu.show.toggle.linenum', function() {
     WindowMgr.actived.emit('show.toggle.linenum');
   });
 
-  win.on('menu.view.plus5.width', function() {
+  process.on('menu.view.plus5.width', function() {
     WindowMgr.actived.emit('view.plus5.width');
   });
 
-  win.on('menu.view.minus5.width', function() {
+  process.on('menu.view.minus5.width', function() {
     WindowMgr.actived.emit('view.minus5.width');
   });
   
 
-  win.on('menu.action.copy.html', function() {
+  process.on('menu.action.copy.html', function() {
     WindowMgr.actived.emit('action.copy.html');
   });
   
 
   //fire by child window
-  win.on('file.open', function(file) {
+  process.on('file.open', function(file) {
     WindowMgr.open(file);
     Recents.add(file);
   });
   //fire by child window
-  win.on('file.save', function(file, markdown, cb) {
+  process.on('file.save', function(file, markdown, cb) {
     File.save(file, markdown, cb);
     Recents.add(file);
   });
 
-  win.on('exit', function() {
+  process.on('exit', function() {
     gui.App.quit();
   });
 
   /**
    * context function
    */
-  win.on('context.cut', function(e) {
+  process.on('context.cut', function(e) {
     WindowMgr.actived.emit('context.cut', e);
   });
-  win.on('context.copy', function(e) {
+  process.on('context.copy', function(e) {
     WindowMgr.actived.emit('context.copy');
   });
-  win.on('context.paste', function(e) {
+  process.on('context.paste', function(e) {
     WindowMgr.actived.emit('context.paste');
   });
-  win.on('context.select.all', function(e) {
+  process.on('context.select.all', function(e) {
     WindowMgr.actived.emit('context.select.all');
   });
-  win.on('context.preferences', function(e) {
+  process.on('context.preferences', function(e) {
     Preferences.show();
   });
-  win.on('context.copy.html', function(e) {
+  process.on('context.copy.html', function(e) {
     WindowMgr.actived.emit('action.copy.html');
   });
 

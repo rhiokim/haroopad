@@ -17,14 +17,14 @@ MenuBar.file = function () {
 	File.append(menuItem({
             label: 'New',
             click: function() {
-                win.emit('menu.file.new');
+                process.emit('menu.file.new');
             }
         })
 	);
 	File.append(menuItem({
             label: 'Open',
             click: function() {
-                win.emit('menu.file.open');
+                process.emit('menu.file.open');
             }
         })
 	);

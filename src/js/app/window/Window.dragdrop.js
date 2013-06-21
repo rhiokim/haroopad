@@ -8,10 +8,8 @@ define([
 		var i = 0;
 
     win.on('dragdrop', function(e) {
-      for (var i = 0; i < e.dataTransfer.files.length; ++i) {
-
+      for (i; i < e.dataTransfer.files.length; ++i) {
   			WindowMgr.open(e.dataTransfer.files[i].path);
-        // openFileHandler(e.dataTransfer.files[i].path, i);
       }
       return false;
     });

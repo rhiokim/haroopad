@@ -31,10 +31,16 @@
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/xq-light.css">
   <link rel="stylesheet" href="css/app.css">
 
+  <script>
+    var gui = require('nw.gui'),
+        win = gui.Window.get();
+
+        win.setMaxListeners(1000);
+  </script>
   <script src="js/lib/logger.js"></script>
 
   <script src="js/vendors/store.js"></script>
-  
+
   <script src="js/common/menu/MenuBar.js"></script>
   <script src="js/common/menu/Menu.file.js"></script>
   <script src="js/common/menu/Menu.view.js"></script>
