@@ -45,7 +45,7 @@ requirejs([
       WindowMgr.open();
     }
 
-    win.on('change.markdown', function(md, options, cb) {
+    window.ee.on('change.markdown', function(md, options, cb) {
       var cb = typeof options == 'function' ? options : cb;
       var options = typeof options == 'object' ? options : undefined;
       

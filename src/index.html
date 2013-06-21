@@ -7,6 +7,7 @@
   <script src="js/lib/logger.js"></script>
 
 
+  <script src="js/vendors/eventemitter.js"></script>
   <script src="js/vendors/underscore.js"></script>
   <script src="js/vendors/backbone.js"></script>
   <script src="js/vendors/marked.js"></script>
@@ -22,7 +23,10 @@
   <script src="js/common/menu/Menu.file.posts.js"></script>
   <script src="js/common/menu/Menu.file.exports.js"></script>
   <script src="js/common/menu/Menu.file.activities.js"></script>
-  <script> MenuBar(); </script>
+  <script> 
+    MenuBar(); 
+    window.ee = new EventEmitter();
+  </script>
   <script>
     requirejs(['js/app/index']);
   </script>

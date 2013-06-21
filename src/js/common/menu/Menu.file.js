@@ -38,14 +38,14 @@ MenuBar.file = function () {
   File.append(menuItem({
           label: 'Save',
           click: function() {
-              win.emit('menu.file.save');
+              process.emit('menu.file.save');
           }
       })
   );
   File.append(menuItem({
           label: 'Save As',
           click: function() {
-              win.emit('menu.file.save.as');
+              process.emit('menu.file.save.as');
           }
       })
   );
@@ -53,7 +53,7 @@ MenuBar.file = function () {
   File.append(menuItem({
           label: 'Close',
           click: function() {
-              win.emit('menu.file.close');
+              process.emit('menu.file.close');
           }
       })
   );
@@ -110,7 +110,7 @@ MenuBar.file = function () {
     File.append(menuItem({
             label: 'Preferences',
             click: function() {
-                win.emit('menu.preferences.show');
+                process.emit('menu.preferences.show');
             }
         })
     );

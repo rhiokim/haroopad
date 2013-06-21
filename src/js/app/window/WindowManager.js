@@ -48,8 +48,6 @@ define([
 			_updateStore();
 
 			newWin.window.haveParent(window);
-			newWin.window.haveMenu(MenuBar(newWin), gui, win);
-		// newWin.window.win.menu = MenuBar(newWin);
 
       if (config.height + top > window.screen.height) {
       	top = 0;
@@ -70,7 +68,7 @@ define([
 		});
 	}
 
-	win.on('actived', function(child) {
+	process.on('actived', function(child) {
 		exports.actived = child;
 
     openning = false;

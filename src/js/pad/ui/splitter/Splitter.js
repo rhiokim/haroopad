@@ -83,9 +83,12 @@ define([
 
 		// win.on('view.mode.editor', setModeEditor);
 		// win.on('view.mode.dual', setModeDual);
-		win.on('view.reset.mode', resetMode);
-		win.on('view.plus5.width', setPlus5Width);
-		win.on('view.minus5.width', setMinus5Width);
+		window.ee.on('view.reset.mode', resetMode);
+		// win.on('view.reset.mode', resetMode);
+		// win.on('view.plus5.width', setPlus5Width);
+		// win.on('view.minus5.width', setMinus5Width);
+		window.ee.on('view.plus5.width', setPlus5Width);
+		window.ee.on('view.minus5.width', setMinus5Width);
 
-		win.on('view.mode.toggle', toggle);
+		window.ee.on('view.mode.toggle', toggle);
 });

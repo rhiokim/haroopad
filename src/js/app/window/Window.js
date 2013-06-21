@@ -17,7 +17,8 @@ define([
   });
 
   process.on('menu.file.open', function() {
-    WindowMgr.actived.emit('file.open');
+    WindowMgr.actived.window.ee.emit('file.open');
+    // WindowMgr.actived.emit('file.open');
   });
 
   process.on('menu.file.recents', function(file) {
@@ -29,23 +30,28 @@ define([
   });
 
   process.on('menu.file.save', function() {
-  	WindowMgr.actived.emit('file.save');
+  	// WindowMgr.actived.emit('file.save');
+    WindowMgr.actived.window.ee.emit('file.save');
   });
 
   process.on('menu.file.save.as', function() {
-  	WindowMgr.actived.emit('file.save.as');
+  	// WindowMgr.actived.emit('file.save.as');
+    WindowMgr.actived.window.ee.emit('file.save.as');
   });
 
   process.on('menu.file.close', function() {
-    WindowMgr.actived.emit('file.close');
+    // WindowMgr.actived.emit('file.close');
+    WindowMgr.actived.window.ee.emit('file.close');
   });
 
   process.on('menu.file.exports.html', function() {
-    WindowMgr.actived.emit('file.exports.html');
+    // WindowMgr.actived.emit('file.exports.html');
+    WindowMgr.actived.window.ee.emit('file.exports.html');
   });
 
   process.on('menu.print.html', function() {
-    WindowMgr.actived.emit('print.html');
+    // WindowMgr.actived.emit('print.html');
+    WindowMgr.actived.window.ee.emit('print.html');
   });
 
   process.on('menu.preferences.show', function() {
@@ -56,24 +62,29 @@ define([
 
 
   process.on('menu.view.mode.toggle', function() {
-    WindowMgr.actived.emit('view.mode.toggle');
+    // WindowMgr.actived.emit('view.mode.toggle');
+    WindowMgr.actived.window.ee.emit('view.mode.toggle');
   });
 
   process.on('menu.show.toggle.linenum', function() {
-    WindowMgr.actived.emit('show.toggle.linenum');
+    // WindowMgr.actived.emit('show.toggle.linenum');
+    WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
   process.on('menu.view.plus5.width', function() {
-    WindowMgr.actived.emit('view.plus5.width');
+    // WindowMgr.actived.emit('view.plus5.width');
+    WindowMgr.actived.window.ee.emit('view.plus5.width');
   });
 
   process.on('menu.view.minus5.width', function() {
-    WindowMgr.actived.emit('view.minus5.width');
+    // WindowMgr.actived.emit('view.minus5.width');
+    WindowMgr.actived.window.ee.emit('view.minus5.width');
   });
   
 
   process.on('menu.action.copy.html', function() {
-    WindowMgr.actived.emit('action.copy.html');
+    // WindowMgr.actived.emit('action.copy.html');
+    WindowMgr.actived.window.ee.emit('action.copy.html');
   });
   
 
@@ -88,30 +99,35 @@ define([
     Recents.add(file);
   });
 
-  process.on('exit', function() {
-    gui.App.quit();
-  });
+  // process.on('exit', function() {
+  //   gui.App.quit();
+  // });
 
   /**
    * context function
    */
   process.on('context.cut', function(e) {
-    WindowMgr.actived.emit('context.cut', e);
+    // WindowMgr.actived.emit('context.cut', e);
+    WindowMgr.actived.window.ee.emit('context.cut', e);
   });
   process.on('context.copy', function(e) {
-    WindowMgr.actived.emit('context.copy');
+    // WindowMgr.actived.emit('context.copy');
+    WindowMgr.actived.window.ee.emit('context.copy');
   });
   process.on('context.paste', function(e) {
-    WindowMgr.actived.emit('context.paste');
+    // WindowMgr.actived.emit('context.paste');
+    WindowMgr.actived.window.ee.emit('context.paste');
   });
   process.on('context.select.all', function(e) {
-    WindowMgr.actived.emit('context.select.all');
+    // WindowMgr.actived.emit('context.select.all');
+    WindowMgr.actived.window.ee.emit('context.select.all');
   });
   process.on('context.preferences', function(e) {
     Preferences.show();
   });
   process.on('context.copy.html', function(e) {
-    WindowMgr.actived.emit('action.copy.html');
+    // WindowMgr.actived.emit('action.copy.html');
+    WindowMgr.actived.window.ee.emit('action.copy.html');
   });
 
   HotKey('defmod-n', function() {

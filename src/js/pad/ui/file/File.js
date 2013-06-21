@@ -59,8 +59,9 @@ function(Opt, OpenDialog, SaveDialog) {
 	/***************************
 	 * node-webkit window event
 	 ***************************/
-	win.on('file.open', OpenDialog.show.bind(OpenDialog));
-
+	// win.on('file.open', OpenDialog.show.bind(OpenDialog));
+	window.ee.on('file.open', OpenDialog.show.bind(OpenDialog));
+	
 	win.on('file.save', function() {
 		var file = Opt.get('fileEntry');
 		if (!file) {

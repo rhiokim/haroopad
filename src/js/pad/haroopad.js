@@ -10,13 +10,6 @@ function loadCss(url) {
 function haveParent(parent) {
   window.parent = parent;
 }
-function haveMenu(MenuBar, guiW, winW) {
-  var gui = require('nw.gui'),
-    win = gui.Window.get();
-
-    // win.menu = MenuBar;
-  // window.parent = parent;
-}
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -66,7 +59,7 @@ requirejs([
 
     win.on('file.opened', function(opt) {
 
-      window.parent.win.emit('change.markdown', opt.markdown, function(html) {
+      window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
         Editor.setValue(opt.markdown);
         
         Viewer.init(opt);
@@ -94,7 +87,7 @@ requirejs([
       win.emit('change.before.markdown', Editor.getValue());
 
       _tid_ = setTimeout(function() {
-        window.parent.win.emit('change.markdown', Editor.getValue(), function(html) {
+        window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
           win.emit('change.after.markdown', Editor.getValue(), html, Editor);
         });
       }, 300);
@@ -102,11 +95,11 @@ requirejs([
 
     win.focus();
     win.on('focus', function() {
-      window.parent.win.emit('actived', win);
+      process.emit('actived', win);
     });
 
     setTimeout(function() {
-      window.parent.win.emit('actived', win);
+      process.emit('actived', win);
       win.show();
     }, 10);
 });

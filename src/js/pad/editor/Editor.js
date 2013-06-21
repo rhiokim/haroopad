@@ -66,17 +66,17 @@ define([
 		});
 
 		/* fire context menu event */
-		win.on('context.cut', function(e) {
+		window.ee.on('context.cut', function(e) {
 		  clipboard.set(editor.getSelection());
 		  editor.replaceSelection('');
 		});
-		win.on('context.copy', function() {
+		window.ee.on('context.copy', function() {
 		  clipboard.set(editor.getSelection());
 		});
-		win.on('context.paste', function() {
+		window.ee.on('context.paste', function() {
 		  editor.replaceSelection(clipboard.get());
 		});
-		win.on('context.select.all', function() {
+		window.ee.on('context.select.all', function() {
 		  editor.setSelection(0, 2);
 		});
 

@@ -6,7 +6,7 @@ MenuBar.file.Posts = function () {
     new gui.MenuItem({
         label: 'Tumblr',
         click: function() {
-          win.emit('file.posts.tumblr');
+          process.emit('file.posts.tumblr');
         }
     })
   );
