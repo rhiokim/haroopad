@@ -93,18 +93,18 @@ module.exports = function(grunt) {
         files: {
           'build/index.js': [
             'src/js/lib/logger.js',
+            '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/backbone.js',
             '<%= vendors %>/marked.js',
             '<%= vendors %>/store.js',
-            '<%= vendors %>/js-url.js',
             '<%= vendors %>/require.js',
-            '<%= vendors %>/eventemitter.js',
             'build/menu.concat.js'
           ],
           'build/haroopad.js': [
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/eventemitter.js',
+            'build/menu.concat.js',
             'src/js/app/before.bin.js',
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',
@@ -113,7 +113,6 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/store.js',
             '<%= vendors %>/js-url.js',
-            'build/menu.concat.js',
             'src/js/app/after.bin.js'
           ],
           'build/preferences.js': [

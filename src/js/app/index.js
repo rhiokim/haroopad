@@ -1,8 +1,5 @@
 window.ee = new EventEmitter();
-
-if (process.platform == 'darwin') {
-  MenuBar(); 
-}
+MenuBar(); 
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;

@@ -12,9 +12,9 @@ function loadCss(url) {
     document.getElementsByTagName("head")[0].appendChild(link);
 }
 
-function haveParent(parent) {
-  window.parent = parent;
-}
+// function haveParent(parent) {
+//   window.parent = parent;
+// }
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;

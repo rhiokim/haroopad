@@ -44,7 +44,8 @@ define([
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			newWin.window.haveParent(window);
+			// newWin.window.haveParent(window);
+			newWin.window.parent = window;
 
       if (config.height + top > window.screen.height) {
       	top = 0;
