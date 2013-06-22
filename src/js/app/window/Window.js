@@ -1,121 +1,155 @@
 define([
-		'window/Window.opt',
+    'store',
 		'keyboard',
-		'menu/MenuBar',
-		'menu/Context/Context',
-		'window/Splitter',
-		'window/Window.help',
-		'dialog/Dialogs',
-		'file/File',
-    'preferences/Preferences',
-    'viewer',
-		'window/Window.dragdrop',
-		'window/Window.exports'
-	], 
-	function(options, HotKey, MenuBar, Context, Splitter, Help, Dialogs, File, Preferences, Viewer) {
-		var gui = require('nw.gui');
-		var win = gui.Window.get(),
-				subWin;
+    'window/Window.opt',
+    'window/WindowManager',
+    'window/Window.help',
+    'window/Window.preferences',
+    'window/Window.dragdrop',
+    'file/File',
+    'file/Recents'
+], function(store, HotKey, Options, WindowMgr, Help, Preferences, DragDrop, File, Recents) {
+	var gui = require('nw.gui');
+	var win = gui.Window.get(),
+		subWin;
 
-		var orgTitle = 'Untitled';
-		var edited = false,
-				delayClose = false;
+  win.on('menu.file.new', function() {
+    WindowMgr.open();
+  });
 
-		var config = options.toJSON();
+  win.on('menu.file.open', function() {
+    WindowMgr.actived.emit('file.open');
+  });
 
-		function newHandler() {
-			options.set({
-				x: win.x + 20,
-				y: win.y + 20
-			});
-			
-    	subWin = gui.Window.open('pad.html', {
-    				width: win.width,
-    				height: win.height,
-					  toolbar: false,
-					  show: false
-					});
-		}
+  win.on('menu.file.recents', function(file) {
+    WindowMgr.open(file);
+  });
 
-		function close() {
-			options.save();
-			win.hide();
-			win.close(true);
-		}
+  win.on('menu.file.recents.clear', function() {
+    Recents.clearAll();
+  });
 
-		win.on('closed', function() {
-			win = null;
-		});
+  win.on('menu.file.save', function() {
+  	WindowMgr.actived.emit('file.save');
+  });
 
-		win.on('close', function() {
-			if(edited) {
-				Dialogs.save.show();
-			} else {
-				close();
-			}
-		});
+  win.on('menu.file.save.as', function() {
+  	WindowMgr.actived.emit('file.save.as');
+  });
 
-		Dialogs.save.bind('save', function() {
-			delayClose = true;
-			File.externalSave();
-		});
+  win.on('menu.file.close', function() {
+    WindowMgr.actived.emit('file.close');
+  });
 
-		Dialogs.save.bind('dont-save', function() {
-			close();
-		});
+  win.on('menu.file.exports.html', function() {
+    WindowMgr.actived.emit('file.exports.html');
+  });
 
-		/**
-		 * event bind for File
-		 */
-		File.bind('opened', function(dirname, basename) {
-			win.title = orgTitle = basename;
-			Viewer.init({
-				dirname: dirname
-			});
-		});
+  win.on('menu.print.html', function() {
+    WindowMgr.actived.emit('print.html');
+  });
 
-		File.bind('saved', function(dirname, basename) {
-			win.title = orgTitle = basename;
-			edited = false;
-			
-			Viewer.init({
-				dirname: dirname
-			});
+  win.on('menu.preferences.show', function() {
+    Preferences.show();
+  });
 
-			//window closing save
-			if(delayClose) {
-				close();
-			}
-		});
 
-		HotKey('defmod-n', newHandler);
-		win.on('file.new', newHandler);
 
-		win.on('file.close', win.close);
 
-		HotKey('defmod-shift-ctrl-d', function() {
-			win.showDevTools();
-		});
+  win.on('menu.view.mode.toggle', function() {
+    WindowMgr.actived.emit('view.mode.toggle');
+  });
 
-		win.resizeTo(config.width, config.height);
-		win.moveTo(config.x, config.y);
+  win.on('menu.show.toggle.linenum', function() {
+    WindowMgr.actived.emit('show.toggle.linenum');
+  });
 
-		return {
-			edited: function() {
-				win.title = orgTitle + ' •';
-				edited = true;
-			},
+  win.on('menu.view.plus5.width', function() {
+    WindowMgr.actived.emit('view.plus5.width');
+  });
 
-			setTitle: function(title) {
-				win.title = orgTitle = title;
-			},
+  win.on('menu.view.minus5.width', function() {
+    WindowMgr.actived.emit('view.minus5.width');
+  });
+  
 
-			show: function() {
-				win.show();
-			},
+  win.on('menu.action.copy.html', function() {
+    WindowMgr.actived.emit('action.copy.html');
+  });
+  
 
-			open: function(fileEntry) {
-				File.open(fileEntry);
-			}
-		}
+  //fire by child window
+  win.on('file.open', function(file) {
+    WindowMgr.open(file);
+    Recents.add(file);
+  });
+  //fire by child window
+  win.on('file.save', function(file, markdown, cb) {
+    File.save(file, markdown, cb);
+    Recents.add(file);
+  });
+
+  win.on('exit', function() {
+    gui.App.quit();
+  });
+
+  /**
+   * context function
+   */
+  win.on('context.cut', function(e) {
+    WindowMgr.actived.emit('context.cut', e);
+  });
+  win.on('context.copy', function(e) {
+    WindowMgr.actived.emit('context.copy');
+  });
+  win.on('context.paste', function(e) {
+    WindowMgr.actived.emit('context.paste');
+  });
+  win.on('context.select.all', function(e) {
+    WindowMgr.actived.emit('context.select.all');
+  });
+  win.on('context.preferences', function(e) {
+    Preferences.show();
+  });
+  win.on('context.copy.html', function(e) {
+    WindowMgr.actived.emit('action.copy.html');
+  });
+
+  HotKey('defmod-n', function() {
+    WindowMgr.open();
+  });
+
+  HotKey('defmod-o', function() {
+    WindowMgr.actived.emit('file.open');
+  });
+
+  HotKey('defmod-s', function() {
+    WindowMgr.actived.emit('file.save');
+  });
+
+  HotKey('defmod-shift-s', function() {
+    WindowMgr.actived.emit('file.save.as');
+  });
+
+  HotKey('defmod-q', function() {
+    gui.App.quit();
+  });
+
+  /**
+   * function shortcut
+   * @return {[type]} [description]
+   */
+
+  HotKey('defmod-shift-l', function() {
+    WindowMgr.actived.emit('show.toggle.linenum');
+  });
+
+  HotKey('defmod-shift-v', function() {
+    WindowMgr.actived.emit('toggle.vim.keybind');
+  });
+
+  HotKey('defmod-,', function() {
+    Preferences.show();
+  });
+
 });

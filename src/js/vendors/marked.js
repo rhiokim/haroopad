@@ -352,7 +352,7 @@ Lexer.prototype.token = function(src, top) {
         type: this.options.sanitize
           ? 'paragraph'
           : 'html',
-        pre: cap[1] === 'pre',
+        pre: cap[1] === 'pre' || cap[1] === 'script',
         text: cap[0]
       });
       continue;
@@ -676,7 +676,7 @@ InlineLexer.prototype.output = function(src) {
     // text
     if (cap = this.rules.text.exec(src)) {
       src = src.substring(cap[0].length);
-      out += escape(cap[0]);
+      out += escape(this.smartypants(cap[0]));
       continue;
     }
 
@@ -722,6 +722,19 @@ InlineLexer.prototype.outputLink = function(cap, link) {
 };
 
 /**
+ * Smartypants Transformations
+ */
+
+InlineLexer.prototype.smartypants = function(text) {
+  if (!this.options.smartypants) return text;
+  return text
+    .replace(/--/g, '\u2014')
+    .replace(/'([^']*)'/g, '\u2018$1\u2019')
+    .replace(/"([^"]*)"/g, '\u201C$1\u201D')
+    .replace(/\.{3}/g, '\u2026');
+};
+
+/**
  * Mangle Links
  */
 
@@ -743,12 +756,76 @@ InlineLexer.prototype.mangle = function(text) {
 };
 
 /**
+ * Renderer
+ */
+
+function Renderer(options) {
+  this.options = options || {};
+}
+Renderer.prototype.blockcode = function(code, lang) {
+  if (!lang) {
+    return '<pre><code>' + escape(code, true) + '\n</code></pre>';
+  }
+  return '<pre><code class="lang-'
+    + lang
+    + '">'
+    + escape(code)
+    + '\n</code></pre>\n';
+};
+Renderer.prototype.blockquote = function(quote) {
+  return '<blockquote>\n' + quote + '</blockquote>\n';
+};
+Renderer.prototype.blockhtml = function(html) {
+  return html;
+};
+Renderer.prototype.header = function(text, level) {
+  return '<h' + level + '>' + text + '</h' + level + '>\n';
+};
+Renderer.prototype.hrule = function() {
+  return '<hr>\n';
+};
+Renderer.prototype.list = function(body, ordered) {
+  var type = ordered ? 'ol' : 'ul';
+  return '<' + type + '>\n' + body + '</' + type + '>\n';
+};
+Renderer.prototype.listitem = function(text) {
+  return '<li>' + text + '</li>\n';
+};
+Renderer.prototype.paragraph = function(text) {
+  return '<p>' + text + '</p>\n';
+};
+Renderer.prototype.table = function(header, body) {
+  return '<table>\n'
+    + '<thead>\n'
+    + header
+    + '</thead>\n'
+    + '<tbody>\n'
+    + body
+    + '</tbody>\n'
+    + '</table>\n';
+};
+Renderer.prototype.tablerow = function(content) {
+  return '<tr>\n' + content + '</tr>\n';
+};
+Renderer.prototype.tablecell = function(content, flags) {
+  var type = flags.header ? 'th' : 'td';
+  var tag = flags.align
+    ? '<' + type + ' align="' + flags.align + '">' : '<' + type + '>';
+  return tag + content + '</' + type + '>\n';
+};
+
+/**
  * Parsing & Compiling
  */
 
-function Parser(options) {
+function Parser(options, renderer) {
   this.tokens = [];
   this.token = null;
+  if (options instanceof Renderer) {
+    options = null;
+    renderer = options;
+  }
+  this.renderer = renderer || new Renderer();
   this.options = options || marked.defaults;
 }
 
@@ -756,8 +833,8 @@ function Parser(options) {
  * Static Parse Method
  */
 
-Parser.parse = function(src, options) {
-  var parser = new Parser(options);
+Parser.parse = function(src, options, renderer) {
+  var parser = new Parser(options, renderer);
   return parser.parse(src);
 };
 
@@ -812,82 +889,60 @@ Parser.prototype.parseText = function() {
  */
 
 Parser.prototype.tok = function() {
+  var renderer = this.renderer;
+
   switch (this.token.type) {
     case 'space': {
       return '';
     }
     case 'hr': {
-      return '<hr>\n';
+      return renderer.hrule();
     }
     case 'heading': {
-      return '<h'
-        + this.token.depth
-        + '>'
-        + this.inline.output(this.token.text)
-        + '</h'
-        + this.token.depth
-        + '>\n';
+      return renderer.header(
+        this.inline.output(this.token.text),
+        this.token.depth
+      );
     }
     case 'code': {
-      if (this.options.highlight) {
-        var code = this.options.highlight(this.token.text, this.token.lang);
-        if (code != null && code !== this.token.text) {
-          this.token.escaped = true;
-          this.token.text = code;
-        }
-      }
-
-      if (!this.token.escaped) {
-        this.token.text = escape(this.token.text, true);
-      }
-
-      return '<pre><code'
-        + (this.token.lang
-        ? ' class="'
-        + this.options.langPrefix
-        + this.token.lang
-        + '"'
-        : '')
-        + '>'
-        + this.token.text
-        + '</code></pre>\n';
+      return renderer.blockcode(this.token.text, this.token.lang);
     }
     case 'table': {
-      var body = ''
-        , heading
+      var header = ''
+        , body = ''
         , i
         , row
         , cell
+        , flags
         , j;
 
       // header
-      body += '<thead>\n<tr>\n';
+      cell = '';
       for (i = 0; i < this.token.header.length; i++) {
-        heading = this.inline.output(this.token.header[i]);
-        body += this.token.align[i]
-          ? '<th align="' + this.token.align[i] + '">' + heading + '</th>\n'
-          : '<th>' + heading + '</th>\n';
+        // render cell
+        flags = {header: true, align: this.token.align[i]};
+        cell += renderer.tablecell(
+          this.inline.output(this.token.header[i]),
+          {header: true, align: this.token.align[i]}
+        );
+        // render row
       }
-      body += '</tr>\n</thead>\n';
+      header += renderer.tablerow(cell);
 
-      // body
-      body += '<tbody>\n'
       for (i = 0; i < this.token.cells.length; i++) {
         row = this.token.cells[i];
-        body += '<tr>\n';
-        for (j = 0; j < row.length; j++) {
-          cell = this.inline.output(row[j]);
-          body += this.token.align[j]
-            ? '<td align="' + this.token.align[j] + '">' + cell + '</td>\n'
-            : '<td>' + cell + '</td>\n';
-        }
-        body += '</tr>\n';
-      }
-      body += '</tbody>\n';
 
-      return '<table>\n'
-        + body
-        + '</table>\n';
+        cell = '';
+        for (j = 0; j < row.length; j++) {
+          cell += renderer.tablecell(
+            this.inline.output(row[j]),
+            {header: false, align: this.token.align[j]}
+          );
+        }
+
+        body += renderer.tablerow(cell);
+      }
+      return renderer.table(header, body);
     }
     case 'blockquote_start': {
       var body = '';
@@ -896,25 +951,16 @@ Parser.prototype.tok = function() {
         body += this.tok();
       }
 
-      return '<blockquote>\n'
-        + body
-        + '</blockquote>\n';
+      return renderer.blockquote(body);
     }
     case 'list_start': {
-      var type = this.token.ordered ? 'ol' : 'ul'
-        , body = '';
+      var body = '', ordered = this.token.ordered;
 
       while (this.next().type !== 'list_end') {
         body += this.tok();
       }
 
-      return '<'
-        + type
-        + '>\n'
-        + body
-        + '</'
-        + type
-        + '>\n';
+      return renderer.list(body, ordered);
     }
     case 'list_item_start': {
       var body = '';
@@ -925,9 +971,7 @@ Parser.prototype.tok = function() {
           : this.tok();
       }
 
-      return '<li>'
-        + body
-        + '</li>\n';
+      return renderer.listitem(body);
     }
     case 'loose_item_start': {
       var body = '';
@@ -936,19 +980,16 @@ Parser.prototype.tok = function() {
         body += this.tok();
       }
 
-      return '<li>'
-        + body
-        + '</li>\n';
+      return renderer.listitem(body);
     }
     case 'html': {
-      return !this.token.pre && !this.options.pedantic
+      var html = !this.token.pre && !this.options.pedantic
         ? this.inline.output(this.token.text)
         : this.token.text;
+      return renderer.blockhtml(html);
     }
     case 'paragraph': {
-      return '<p>'
-        + this.inline.output(this.token.text)
-        + '</p>\n';
+      return renderer.paragraph(this.inline.output(this.token.text));
     }
     case 'text': {
       return '<p>'
@@ -1003,11 +1044,77 @@ function merge(obj) {
   return obj;
 }
 
+
 /**
  * Marked
  */
 
-function marked(src, opt) {
+function marked(src, opt, callback) {
+  if (callback || typeof opt === 'function') {
+    if (!callback) {
+      callback = opt;
+      opt = null;
+    }
+
+    if (opt) opt = merge({}, marked.defaults, opt);
+
+    var highlight = opt.highlight
+      , tokens
+      , pending
+      , i = 0;
+
+    try {
+      tokens = Lexer.lex(src, opt)
+    } catch (e) {
+      return callback(e);
+    }
+
+    pending = tokens.length;
+
+    var done = function(hi) {
+      var out, err;
+
+      if (hi !== true) {
+        delete opt.highlight;
+      }
+
+      try {
+        out = Parser.parse(tokens, opt);
+      } catch (e) {
+        err = e;
+      }
+
+      opt.highlight = highlight;
+
+      return err
+        ? callback(err)
+        : callback(null, out);
+    };
+
+    if (!highlight || highlight.length < 3) {
+      return done(true);
+    }
+
+    if (!pending) return done();
+
+    for (; i < tokens.length; i++) {
+      (function(token) {
+        if (token.type !== 'code') {
+          return --pending || done();
+        }
+        return highlight(token.text, token.lang, function(err, code) {
+          if (code == null || code === token.text) {
+            return --pending || done();
+          }
+          token.text = code;
+          token.escaped = true;
+          --pending || done();
+        });
+      })(tokens[i]);
+    }
+
+    return;
+  }
   try {
     if (opt) opt = merge({}, marked.defaults, opt);
     return Parser.parse(Lexer.lex(src, opt), opt);
@@ -1041,7 +1148,8 @@ marked.defaults = {
   smartLists: false,
   silent: false,
   highlight: null,
-  langPrefix: 'lang-'
+  langPrefix: 'lang-',
+  smartypants: false
 };
 
 /**
@@ -1050,6 +1158,8 @@ marked.defaults = {
 
 marked.Parser = Parser;
 marked.parser = Parser.parse;
+
+marked.Renderer = Renderer;
 
 marked.Lexer = Lexer;
 marked.lexer = Lexer.lex;

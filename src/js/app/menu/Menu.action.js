@@ -9,7 +9,7 @@ define([],
     new gui.MenuItem({
       label: 'Copy HTML',
       click: function() {
-        win.emit('copy.html');
+        win.emit('menu.action.copy.html');
       }
     })
 	);/*

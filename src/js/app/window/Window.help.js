@@ -1,7 +1,6 @@
 define([
-		'window/Window.opt'
 	],
-	function(options) {
+	function() {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 	var shell = gui.Shell;
@@ -44,7 +43,7 @@ define([
 	});
 	
 	win.on('help.markdown', function() {
-		shell.openExternal('http://pad.haroopress.com/page.html#markdown');
+		shell.openExternal('http://pad.haroopress.com/page.html#syntax');
 	});
 
 	win.on('help.release', function() {
@@ -65,7 +64,7 @@ define([
 		shell.openExternal('http://pad.haroopress.com/');
 	});
 
-	win.on('help.issue', function() {
+	win.on('help.feedback', function() {
 		shell.openExternal('https://github.com/rhiokim/haroopad/issues');
 	});
 });

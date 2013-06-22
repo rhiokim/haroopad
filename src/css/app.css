@@ -24,8 +24,11 @@ body {
 	width: 50%;
 	height: 100%;
 	float: left;
-	/*margin-left: -2px;*/
 	display: inline-block;
+}
+
+#haroo {
+  height: 100%;
 }
 
 #haroo iframe {
@@ -49,19 +52,8 @@ body {
   cursor: ew-resize;
 }
 
-.CodeMirror {
-	height: 100%;
-	/*padding-left: 10px;*/
-	padding-right: 10px;
-	margin-bottom: 10px;
-}
-
 #code {
   display: none;
-}
-
-.CodeMirror-lines {
-  padding: 15px 0;
 }
 
 /* Change the docs' brand */
@@ -127,7 +119,6 @@ body > .navbar .brand:hover {
 	background: rgba(255,0,0,0.4); 
 }
 
-
 /* -----------------------------------------
    Preferences
 ----------------------------------------- */
@@ -172,4 +163,21 @@ body > .navbar .brand:hover {
 /* solarized theme underline markdown error */
 .cm-s-solarized .cm-em {
   text-decoration: none !important;
+}
+.cm-s-solarized .cm-hr {
+  color: inherit;
+  border: 0;
+  display: inline-block;
+}
+
+.CodeMirror {
+  height: 100%;
+  /*padding-left: 10px;*/
+  padding-right: 10px;
+  margin-bottom: 10px;
+  border-top: 0;
+}
+
+.CodeMirror-lines {
+  padding: 15px 0 35px 0;
 }

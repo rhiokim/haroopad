@@ -1,9 +1,8 @@
 define([
-		'window/Window.opt',
-		'viewer',
+		// 'viewer/Viewer',
 		'vendors/text!tpl/exports.html'
 	],
-	function(options, Viewer, html) {
+	function(html) {
 		var fs = require('fs'),
 				path = require('path');
 		var gui = require('nw.gui'),
@@ -45,7 +44,6 @@ define([
 		function saveHandler(e) {
 			var file = $(e.target).val();
 
-			console.log(e.target)
 			if(path.extname(file).indexOf('.htm') < 0) {
 				file += '.html';
 			}
@@ -56,7 +54,7 @@ define([
 			$("#saveHTMLFile").val("");
 		}
 
-		win.on('file.exports.html', function() {
+		win.on('menu.file.exports.html', function() {alert('')
 			res = html.replace('@@style', getStyleSheets());
 			res = res.replace('@@body', getBodyHtml());
 
