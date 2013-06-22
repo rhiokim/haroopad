@@ -56,24 +56,28 @@ requirejs([
 
     window.ee.on('posts.tumblr', function(fileInfo, options) {
       var child = WindowMgr.actived;
-
-      if (options.remember) {
-        store.set("Tumblr", {
-          email: options.to,
-          remember: options.remember
-        });
-
-        store.set("Mail", {
-          email: options.from
-        });
-      }
+      var Emails = store.get('Emails') || {};
+      var addrs = Emails.addrs || [];
 
       Mailer.setCredential(options.from, options.password);
       Mailer.send('test', fileInfo.markdown, options.to, function(err, response) {
+
         if (err) {
           child.window.ee.emit('fail.post.tumblr', err);
           return;
         }
+
+        if (options.remember) {
+          addrs.push(options.to);
+
+          store.set('Emails', {
+            to: options.to,
+            from: options.from,
+            addrs: addrs,
+            remember: options.remember
+          });
+        }
+
         child.window.ee.emit('posted.tumblr');
       });
     })

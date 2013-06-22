@@ -50,13 +50,13 @@ define([
 			},
 
 			show: function() {
-				var to = store.get('Tumblr') || {};
-				var from = store.get('Mail') || {};
+				var Emails = store.get('Emails') || {};
 
-				this.$el.find('input[name=to]').val(to.email || '');
-				this.$el.find('input[name=from]').val(from.email || '');
+				this.$el.find('input[name=to]').val(Emails.to || '');
+				this.$el.find('input[name=from]').val(Emails.from || '');
 
-				this.$el.find('input[name=remember]').val(to.remember);
+				this.$el.find('input[name=remember]').val(Emails.remember);
+				this.$el.find('input[name=to]').data({ source: Emails.addrs });
 
 				this.$el.modal('show');
 			},
@@ -78,7 +78,6 @@ define([
 				progress();
 				
 				this.trigger('post', to, from, password, remember);
-				// this.hide();
 			},
 
 			error: function(msg) {
