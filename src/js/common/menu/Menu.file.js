@@ -56,7 +56,7 @@ MenuBarFile = function () {
 
 	menuItem({
             label: 'Post',
-            enabled: false,
+            // enabled: false,
             submenu: MenuBarFilePosts()
         });
   menuItem({

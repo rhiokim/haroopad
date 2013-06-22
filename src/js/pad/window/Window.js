@@ -65,7 +65,6 @@ define([
 	});
 
 
-
 	HotKey('defmod-shift-alt-d', function() {
 		win.showDevTools();
 	});

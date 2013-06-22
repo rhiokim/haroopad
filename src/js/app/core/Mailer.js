@@ -1,6 +1,5 @@
-defind([
-		'store'
-	], function(store) {
+define([
+	], function() {
 
 	var nodemailer = require("nodemailer");
 
@@ -9,8 +8,7 @@ defind([
 
 	// setup e-mail data with unicode symbols
 	var mailOptions = {
-	    from: "
-	    ", // sender address
+	    from: "", // sender address
 	    to: "", // list of receivers
 	    subject: "", // Subject line
 	    text: ""/*, // plaintext body
@@ -19,7 +17,7 @@ defind([
 
 	function createTransport(email, password, service) {
 		// create reusable transport method (opens pool of SMTP connections)
-		mtpTransport = nodemailer.createTransport("SMTP",{
+		smtpTransport = nodemailer.createTransport("SMTP",{
 		    service: service || "Gmail",
 		    auth: {
 		        user: email,
@@ -28,22 +26,18 @@ defind([
 		});
 	}
 
-	function send(title, markdown) {
+	function send(title, text, to, cb) {
 
 			title = '!m '+ title;
 
 			mailOptions.from = email;
-			mailOptions.to = store.get('tumblr');
+			mailOptions.to = to;
 			mailOptions.subject = title;
-			mailOptions.text = markdown;
+			mailOptions.text = text;
 
 			// send mail with defined transport object
 			smtpTransport.sendMail(mailOptions, function(error, response){
-		    if(error){
-		        console.log(error);
-		    }else{
-		        console.log("Message sent: " + response.message);
-		    }
+				cb(error, response);
 
 		    window.clearTimeout(tid);
 		    tid = window.setTimeout(function() {
@@ -57,8 +51,8 @@ defind([
 			createTransport(email, password, service);
 		},
 
-		send: function(title, markdown) {
-			send(title, markdown);
+		send: function(title, text, to, cb) {
+			send(title, text, to, cb);
 		}
 	}
 

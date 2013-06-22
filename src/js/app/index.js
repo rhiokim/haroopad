@@ -30,9 +30,10 @@ requirejs.onError = function (e) {
 requirejs([
     'context/Context',
     'core/Parser',
+    'core/Mailer',
     'window/Window',
     'window/WindowManager'
-  ], function(Context, Parser, Window, WindowMgr) {
+  ], function(Context, Parser, Mailer, Window, WindowMgr) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
@@ -51,6 +52,27 @@ requirejs([
       var html = Parser(md, options);
 
       cb(html);
-      // WindowMgr.actived.updateMarkdown(html);
     });
+
+    window.ee.on('posts.tumblr', function(fileInfo, options) {
+      var child = WindowMgr.actived;
+
+      if (options.remember) {
+        store.set("Tumblr", {
+          email: options.to
+        });
+
+        store.set("Mail", {
+          email: options.from
+        });
+      }
+
+      Mailer.setCredential(options.from, options.password);
+      Mailer.send('test', fileInfo.markdown, options.to, function(err, response) {
+        if (err) {
+          child.window.ee.emit('fail.post.tumblr');
+        }
+        child.window.ee.emit('posted.tumblr');
+      });
+    })
 });

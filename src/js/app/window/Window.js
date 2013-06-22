@@ -48,6 +48,10 @@ define([
     WindowMgr.actived.window.ee.emit('file.exports.html');
   });
 
+  window.ee.on('menu.file.posts.tumblr', function() {
+    WindowMgr.actived.window.ee.emit('file.posts.tumblr');
+  });
+
   window.ee.on('menu.print.html', function() {
     // WindowMgr.actived.emit('print.html');
     WindowMgr.actived.window.ee.emit('print.html');

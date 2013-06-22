@@ -6,7 +6,7 @@ MenuBarFilePosts = function () {
     new gui.MenuItem({
         label: 'Tumblr',
         click: function() {
-          window.parent.ee.emit('file.posts.tumblr');
+          window.parent.ee.emit('menu.file.posts.tumblr');
         }
     })
   );

@@ -4,12 +4,36 @@ define([
 	function(html) {
 		$('#dialogs').append(html);
 
+		var el = $('#post-tumblr-dialog');
+		var bar = el.find('.progress div.bar');
+		var postTimeout;
+
+		function progress() {
+			var per = 0;
+			el.find('.progress').removeClass('hide');
+			window.clearInterval(postTimeout);
+
+			postTimeout = window.setInterval(function() {
+				per += 1.7;
+
+				if (per > 100) { per = 0 }
+
+				bar.css({ width: per+'%' });
+			}, 300);
+		}
+
+		function stop() {
+			window.clearInterval(postTimeout);
+			el.find('.progress').addClass('hide');
+			bar.css({ width: 0 });
+		}
+
 		var View = Backbone.View.extend({
 			el: '#post-tumblr-dialog',
 
 			events: {
 				// 'click ._dont_save': 'dontSaveHandler',
-				'click ._save': 'postHandler',
+				'submit form': 'postHandler',
 				'click ._cancel': 'cancelHandler'
 			},
 
@@ -17,20 +41,38 @@ define([
 			},
 
 			show: function() {
+				var to = store.get('Tumblr');
+				var from = store.get('Mail');
+
+				this.$el.find('input[name=to]').val(to.email || '');
+				this.$el.find('input[name=from]').val(from.email || '');
+
 				this.$el.modal('show');
 			},
 
 			hide: function() {
 				this.$el.modal('hide');
+				stop();
 			},
 
-			postHandler: function() {
-				this.trigger('post');
-				this.hide();
+			postHandler: function(e) {
+				var to, from, password;
+				e.preventDefault();
+
+				to = this.$el.find('input[name=to]').val();
+				from = this.$el.find('input[name=from]').val();
+				password = this.$el.find('input[name=password]').val();
+				remember = this.$el.find('input[name=remember]').val();
+
+				progress();
+				
+				this.trigger('post', to, from, password, remember);
+				// this.hide();
 			},
 
 			cancelHandler: function() {
 				this.hide();
+				stop();
 			},
 			
 			dontSaveHandler: function() {
