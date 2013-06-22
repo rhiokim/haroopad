@@ -18,12 +18,13 @@ define([
 		HotKey('cmd-shift-t', PostsDialog.show.bind(PostsDialog));
 
 		window.ee.on('file.posts.tumblr', PostsDialog.show.bind(PostsDialog));
-		PostsDialog.bind('post', function(to, from, password, remember) {
+		PostsDialog.bind('post', function(to, from, password, remember, mode) {
 			window.parent.ee.emit('posts.tumblr', FileOpt.toJSON(), {
 				to: to, 
 				from: from, 
 				password: password, 
-				remember: remember
+				remember: remember,
+				mode: mode
 			});
 		});
 		window.ee.on('fail.post.tumblr', function(err) {

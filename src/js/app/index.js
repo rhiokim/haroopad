@@ -60,7 +60,7 @@ requirejs([
       var addrs = Emails.addrs || [];
 
       Mailer.setCredential(options.from, options.password);
-      Mailer.send('test', fileInfo.markdown, options.to, function(err, response) {
+      Mailer.send('test', fileInfo.markdown, fileInfo.html, options.to, options.mode, function(err, response) {
 
         if (err) {
           child.window.ee.emit('fail.post.tumblr', err);
@@ -73,6 +73,7 @@ requirejs([
           store.set('Emails', {
             to: options.to,
             from: options.from,
+            mode: options.mode,
             addrs: addrs,
             remember: options.remember
           });

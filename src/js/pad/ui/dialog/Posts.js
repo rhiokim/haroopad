@@ -55,7 +55,8 @@ define([
 				this.$el.find('input[name=to]').val(Emails.to || '');
 				this.$el.find('input[name=from]').val(Emails.from || '');
 
-				this.$el.find('input[name=remember]').val(Emails.remember);
+				this.$el.find('input[name=remember]').attr('checked', Emails.remember);
+				// this.$el.find('button[name=remember]').attr('checked', Emails.remember);
 				this.$el.find('input[name=to]').data({ source: Emails.addrs });
 
 				this.$el.modal('show');
@@ -73,11 +74,13 @@ define([
 				to = this.$el.find('input[name=to]').val();
 				from = this.$el.find('input[name=from]').val();
 				password = this.$el.find('input[name=password]').val();
-				remember = this.$el.find('input[name=remember]').val();
+				remember = this.$el.find('input[name=remember]').is(':checked');
+				mode = this.$el.find('button[name=markdown]').hasClass('active');
+				mode = mode ? 'md' : 'html';
 
 				progress();
 				
-				this.trigger('post', to, from, password, remember);
+				this.trigger('post', to, from, password, remember, mode);
 			},
 
 			error: function(msg) {

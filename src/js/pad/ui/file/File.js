@@ -73,6 +73,9 @@ function(Opt, OpenDialog, SaveDialog) {
 	window.ee.on('change.before.markdown', function(markdown) {
 		Opt.set('markdown', markdown);
 	});
+	window.ee.on('change.after.markdown', function(markdown, html, editor) {
+		Opt.set('html', html);
+	});
 
 	window.ee.on('file.save.as', SaveDialog.show.bind(SaveDialog));
 

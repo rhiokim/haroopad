@@ -26,14 +26,21 @@ define([
 		});
 	}
 
-	function send(title, text, to, cb) {
+	function send(title, text, html, to, mode, cb) {
 
-			title = '!m '+ title;
+			if (to.indexOf('@tumblr.com') > -1) {
+				title = '!m '+ title;
+			}
 
 			mailOptions.from = email;
 			mailOptions.to = to;
 			mailOptions.subject = title;
-			mailOptions.text = text;
+			
+			if (mode == 'html') {
+				mailOptions.html = html;
+			} else {
+				mailOptions.text = text;
+			}
 
 			// send mail with defined transport object
 			smtpTransport.sendMail(mailOptions, function(error, response){
@@ -51,8 +58,8 @@ define([
 			createTransport(email, password, service);
 		},
 
-		send: function(title, text, to, cb) {
-			send(title, text, to, cb);
+		send: function(title, text, html, to, mode, cb) {
+			send(title, text, html, to, mode, cb);
 		}
 	}
 
