@@ -1,11 +1,9 @@
 define([
-		'exports',
-		'store'
+		'exports'
 	],
-	function(exports, store) {
+	function(exports) {
 
 	var gui = require('nw.gui');
-			win = gui.Window.get();
 
 	var windows = {},
 			openning = false,
@@ -24,6 +22,7 @@ define([
 		newWin.created_at = new Date().getTime();
 		exports.actived = windows[newWin.created_at] = newWin;
 
+		// console.log()
 		realCount++;
 
 		newWin.on('closed', function() {
@@ -34,7 +33,7 @@ define([
 					realCount--;
 
 					if (!realCount) {
-						win.emit('exit');
+						window.ee.emit('exit');
 					}
 					return;
 				}
@@ -45,7 +44,8 @@ define([
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			newWin.window.haveParent(window);
+			// newWin.window.haveParent(window);
+			newWin.window.parent = window;
 
       if (config.height + top > window.screen.height) {
       	top = 0;
@@ -60,13 +60,12 @@ define([
   
   		newWin.moveTo(left, top);
 			newWin.resizeTo(config.width, config.height);
-			// newWin.show();
 
 			shadowCount++;
 		});
 	}
 
-	win.on('actived', function(child) {
+	process.on('actived', function(child) {
 		exports.actived = child;
 
     openning = false;

@@ -1,5 +1,3 @@
-'use strict';
-
 var path = require('path'),
   fs = require('fs'),
   userDataDir = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'] + '/.haroopad',

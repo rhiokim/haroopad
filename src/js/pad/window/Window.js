@@ -1,7 +1,9 @@
 define([
 		'store',
 		'keyboard',
-		'ui/dialog/Dialogs'
+		'ui/dialog/Dialogs',
+		'ui/exports/Exports',
+		'ui/splitter/Splitter'
 ], function(store, HotKey, Dialogs) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
@@ -43,19 +45,21 @@ define([
 		close();
 	});
 
-	win.on('file.close', win.close);
+	window.ee.on('file.close', function() {
+		win.close();
+	});
 
-	win.on('file.opened', function(opt) {
+	window.ee.on('file.opened', function(opt) {
 		win.title = orgTitle = opt.basename;
   });
 
-  win.on('file.saved', function(opt) {
+  window.ee.on('file.saved', function(opt) {
 		win.title = orgTitle = opt.basename;
 		delayClose = true;
 		edited = false;	
   });
 
-	win.on('change.before.markdown', function(markdown, html, editor) {
+	window.ee.on('change.before.markdown', function(markdown, html, editor) {
 		win.title = orgTitle + ' (edited)';
 		edited = true;
 	});
@@ -89,15 +93,19 @@ define([
 		
 		e = (ev) ? ev : e;
 
-		x = win.x - window.parent.win.x + e.clientX;
-		y = win.y - window.parent.win.y + e.clientY;
+		x = win.x - window.parent.screenX + e.clientX;
+		y = win.y - window.parent.screenY + e.clientY;
+
+		if (process.platform == 'win32') {
+			y += 20;
+		}
 
 		x = (ev) ? x + $('#editor').width() : x;
 
 		if (ev) {
-			window.parent.win.emit('popup.context.viewer', x, y);
+			window.parent.ee.emit('popup.context.viewer', x, y);
 		} else {
-			window.parent.win.emit('popup.context.editor', x, y);
+			window.parent.ee.emit('popup.context.editor', x, y);
 		}
 		
 	  return false;
@@ -105,13 +113,13 @@ define([
 
   window.ondragover = function(e) { 
     e.preventDefault(); 
-    window.parent.win.emit('dragover', e);
+    window.parent.ee.emit('dragover', e);
     return false;
   };
 
   window.ondrop = function(e) {
     e.preventDefault(); 
-    window.parent.win.emit('dragdrop', e);
+    window.parent.ee.emit('dragdrop', e);
     return false;
   };
 
