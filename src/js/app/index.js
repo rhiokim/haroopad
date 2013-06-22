@@ -59,7 +59,8 @@ requirejs([
 
       if (options.remember) {
         store.set("Tumblr", {
-          email: options.to
+          email: options.to,
+          remember: options.remember
         });
 
         store.set("Mail", {
@@ -70,7 +71,8 @@ requirejs([
       Mailer.setCredential(options.from, options.password);
       Mailer.send('test', fileInfo.markdown, options.to, function(err, response) {
         if (err) {
-          child.window.ee.emit('fail.post.tumblr');
+          child.window.ee.emit('fail.post.tumblr', err);
+          return;
         }
         child.window.ee.emit('posted.tumblr');
       });

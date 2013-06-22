@@ -26,7 +26,11 @@ define([
 				remember: remember
 			});
 		});
-
+		window.ee.on('fail.post.tumblr', function(err) {
+			if(err.name == 'AuthError') {
+				PostsDialog.error('Email and Password not accepted');
+			}
+		});
 		window.ee.on('posted.tumblr', PostsDialog.hide.bind(PostsDialog));
 
 		return dialogs = {

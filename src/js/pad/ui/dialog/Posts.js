@@ -11,6 +11,7 @@ define([
 		function progress() {
 			var per = 0;
 			el.find('.progress').removeClass('hide');
+			el.find('.alert').addClass('hide')
 			window.clearInterval(postTimeout);
 
 			postTimeout = window.setInterval(function() {
@@ -28,6 +29,14 @@ define([
 			bar.css({ width: 0 });
 		}
 
+		function error(msg) {
+			window.clearInterval(postTimeout);
+			el.find('.progress').addClass('hide');
+			bar.css({ width: 0 });
+
+			el.find('.alert').removeClass('hide').html(msg);
+		}
+
 		var View = Backbone.View.extend({
 			el: '#post-tumblr-dialog',
 
@@ -41,11 +50,13 @@ define([
 			},
 
 			show: function() {
-				var to = store.get('Tumblr');
-				var from = store.get('Mail');
+				var to = store.get('Tumblr') || {};
+				var from = store.get('Mail') || {};
 
 				this.$el.find('input[name=to]').val(to.email || '');
 				this.$el.find('input[name=from]').val(from.email || '');
+
+				this.$el.find('input[name=remember]').val(to.remember);
 
 				this.$el.modal('show');
 			},
@@ -68,6 +79,10 @@ define([
 				
 				this.trigger('post', to, from, password, remember);
 				// this.hide();
+			},
+
+			error: function(msg) {
+				error(msg);
 			},
 
 			cancelHandler: function() {
