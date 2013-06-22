@@ -26,8 +26,8 @@
   CodeMirror.commands.markdownStrike = function(cm) {
     var pos = cm.getCursor('end');
     
-    cm.replaceSelection('*'+ cm.getSelection() +'~');
-    pos.ch += 1;
+    cm.replaceSelection('~~'+ cm.getSelection() +'~~');
+    pos.ch += 2;
     cm.setCursor(pos);
     cm.focus();
   };
@@ -35,7 +35,7 @@
     var pos = cm.getCursor('end');
     
     cm.replaceSelection('!['+ cm.getSelection() +'](http://)');
-    pos.ch += 1;
+    pos.ch += 2;
     cm.setCursor(pos);
     cm.focus();
   };
