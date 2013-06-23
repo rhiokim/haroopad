@@ -31,8 +31,6 @@ define([
 				var file = path.join(appDataPath, tmpFile());
 
 				Opt.set({ tmp: file });
-
-				console.log('create: '+ Opt.get('tmp'));
 			},
 
 			update: function() {

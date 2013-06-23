@@ -26,6 +26,12 @@ define([], function() {
 		});
 	}
 
+	window.ee.on('change.markdown', function(md) {
+		if (presentWin) {
+			presentWin.emit('update', md);
+		}
+	});
+
 	return {
 		show: function(file) {
 			open(file);

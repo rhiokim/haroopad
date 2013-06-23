@@ -1,8 +1,7 @@
 var marked = require('marked');
-var watch = require('watch');
-var path = require('path');
-var fs = require('fs');
-var marked = require('marked');
+
+var gui = require('nw.gui'),
+    win = gui.Window.get();
 
 var opt = {
   gfm: true,
@@ -25,32 +24,41 @@ var parse = function(src, options) {
   return marked.parser(marked.lexer(src, options), options, renderer);
 }
 
-function readFile(file) {
-	return fs.readFileSync(file, 'utf8');
-}
-
 function tokenize(md) {
 	var tokens = md.split('===');
 	return tokens;
 }
 
-function monitor(file, options, next) {
-	var dir = path.dirname(file);
+function convert(md) {
 	var tokens, md, steps = [];
 
-	watch.createMonitor(dir, options, function(monitor) {
-		monitor.files[file];
-		monitor.on('changed', function(f, curr, prev) {
-			md = readFile(file);
-			steps.length = 0;
+  tokens = tokenize(md);
 
-			tokens = tokenize(md);
+  tokens.forEach(function(item, idx) {
+    steps.push('<div class="step">\n\t' + parse(item) + '\n</div>');
+  });
 
-			tokens.forEach(function(item, idx) {
-				steps.push('<div class="step">\n\t' + parse(item) + '\n</div>');
-			});
-
-			next(steps.join('\n\n'));
-		});
-	});
+  return steps.join('\n\n');
 }
+
+win.on('update', function(md) {
+  $('#impress').html(convert(md));
+  
+  $('.step').each(function(i) {
+    $(this)
+      .attr('data-x', 0)
+      .attr('data-y', i * -2000)
+      .attr('data-z', i * 2000)
+      .attr('data-rotate', Math.sin(i) / 2 * Math.PI * 100);
+  });
+
+  impress('impress', 1).init();
+  
+  setInterval(function() {
+    $('.active').next().show();
+  }, 200);
+});
+
+$(function() {
+  impress('impress', 1).init();
+});
