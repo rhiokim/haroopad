@@ -12,9 +12,7 @@
     "width": 1024,
     "height": 600,
     "min_width": 500,
-    "min_height": 400,
-    "max_width": 1920,
-    "max_height": 1080
+    "min_height": 400
   },
   "single-instance": false,
   "snapshot": "js/haroopad.bin",
