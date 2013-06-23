@@ -1,15 +1,16 @@
 define([
 		'ui/file/File.opt',
+		'ui/file/File.tmp',
 		'ui/file/Open',
 		'ui/file/Save'
 ],
 
-function(Opt, OpenDialog, SaveDialog) {
+function(Opt, Temporary, OpenDialog, SaveDialog) {
 	var fs = require('fs'),
 		path = require('path');
 
-	var gui = require('nw.gui');
-	win = gui.Window.get();
+	var gui = require('nw.gui'),
+			win = gui.Window.get();
 
 	function _update(file) {
 		Opt.set({
@@ -72,6 +73,7 @@ function(Opt, OpenDialog, SaveDialog) {
 
 	win.on('change.before.markdown', function(markdown) {
 		Opt.set('markdown', markdown);
+		Temporary.update();
 	});
 
 	win.on('file.save.as', SaveDialog.show.bind(SaveDialog));
@@ -81,8 +83,8 @@ function(Opt, OpenDialog, SaveDialog) {
 			_open(file);
 		},
 
-		save: function(file) {
-
+		startAutoSave: function() {
+			Temporary.create();
 		}
 	}
 });
