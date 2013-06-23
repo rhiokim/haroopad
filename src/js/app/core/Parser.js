@@ -13,6 +13,7 @@ define([
       langPrefix: 'language-'
     };
 
+    var marked = require("marked");
     marked.setOptions(opt);
 
     var renderer = new marked.Renderer();
