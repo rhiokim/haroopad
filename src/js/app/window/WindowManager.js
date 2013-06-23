@@ -84,11 +84,8 @@ define([
 		newWin = gui.Window.open('pad.html#'+ file, {
 		    "min_width": 500,
 		    "min_height": 400,
-		    "max_width": 1920,
-		    "max_height": 1080,
         "toolbar": false,
-        "show": false,
-        "readonly": true
+        "show": false
       });
 
 		_add(newWin);
