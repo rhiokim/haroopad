@@ -3,10 +3,11 @@ define([
     'window/Window.opt',
     'window/WindowManager',
     'window/Window.preferences',
+    'window/Window.presentation',
     'window/Window.dragdrop',
     'file/File',
     'file/Recents'
-], function(HotKey, Options, WindowMgr, /*Help,*/ Preferences, DragDrop, File, Recents) {
+], function(HotKey, Options, WindowMgr, /*Help,*/ Preferences, Presentation, DragDrop, File, Recents) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -46,6 +47,11 @@ define([
   window.ee.on('menu.file.exports.html', function() {
     // WindowMgr.actived.emit('file.exports.html');
     WindowMgr.actived.window.ee.emit('file.exports.html');
+  });
+
+  window.ee.on('menu.file.exports.presentation', function() {
+    // WindowMgr.actived.window.ee.emit('file.exports.presentation');
+    Presentation.show();
   });
 
   window.ee.on('menu.print.html', function() {
