@@ -81,7 +81,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/backbone.js',
-            '<%= vendors %>/marked.js',
+            // '<%= vendors %>/marked.js',
             '<%= vendors %>/js-url.js',
             '<%= vendors %>/require.js'
           ],
