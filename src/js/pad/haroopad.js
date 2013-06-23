@@ -78,6 +78,8 @@ requirejs([
       Editor.on("change", delayChange);
     }
 
+    File.startAutoSave();
+
     win.on('file.saved', function(opt) {
       Viewer.init(opt);
     });
