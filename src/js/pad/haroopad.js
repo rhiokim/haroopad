@@ -56,7 +56,8 @@ requirejs([
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-    file = url('#file');
+    // file = url('#file');
+    file = win._params.file;
 
     win.on('file.opened', function(opt) {
 
