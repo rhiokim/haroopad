@@ -17,7 +17,7 @@ define([
 			}
 		});
 
-		var GeneralTabView = Backbone.View.extend({
+		var MarkdownTabView = Backbone.View.extend({
 			el: '#markdown-tab',
 
 			events: {
@@ -69,6 +69,6 @@ define([
 			}
 		});
 
-		return new GeneralTabView;
+		return new MarkdownTabView;
 
 });

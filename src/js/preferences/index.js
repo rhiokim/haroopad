@@ -34,10 +34,10 @@ requirejs([
     'tabs/Editor',
     'tabs/Viewer',
     'tabs/Code',
-    'tabs/Helper',
     'tabs/Markdown',
+    'tabs/Helper',
     'tabs/About'
-  ], function(General, Editor, Viewer, Code, Helper, Markdown, About) {
+  ], function(General, Editor, Viewer, Code, Markdown, Helper, About) {
 
     $('.switch').bootstrapSwitch();
 
