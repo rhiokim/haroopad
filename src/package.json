@@ -7,8 +7,8 @@
   "window": {
     "title": "haroopad",
     "icon": "logo.png",
-    "toolbar": true,
-    "show": true,
+    "toolbar": false,
+    "show": false,
     "width": 1024,
     "height": 600,
     "min_width": 500,
