@@ -8,7 +8,8 @@ define(function() {
       extname: '.md',
       dirname: undefined,
       basename: undefined,
-      markdown: undefined
+      markdown: undefined,
+      tmp: undefined
     }
   });
 

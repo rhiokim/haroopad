@@ -25,6 +25,14 @@ MenuBarHelp = function () {
 	    })
 	);
 	Help.append(
+	    new gui.MenuItem({
+	        label: 'Haroopad Shortcut Help',
+		      click: function() {
+		        open('http://pad.haroopress.com/page.html#show-shortcuts');
+		      }
+	    })
+	);
+	Help.append(
 		new gui.MenuItem({
       type: 'separator'
   	})
