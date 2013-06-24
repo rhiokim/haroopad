@@ -60,7 +60,8 @@ requirejs([
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-    file = url('#file');
+    // file = url('#file');
+    file = win._params.file;
 
     window.ee.on('file.opened', function(opt) {
 
@@ -81,6 +82,8 @@ requirejs([
     } else {
       Editor.on("change", delayChange);
     }
+
+    File.startAutoSave();
 
     win.on('file.saved', function(opt) {
       Viewer.init(opt);
