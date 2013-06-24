@@ -19,8 +19,6 @@ define([
 		win.on('closed', function() {
 			window.clearTimeout(writeTimeout);
 
-			console.log('delete: '+ Opt.get('tmp'));
-
 			if (Opt.get('fileEntry')) {
 				fs.unlinkSync(Opt.get('tmp'));
 			}
@@ -31,8 +29,6 @@ define([
 				var file = path.join(appDataPath, tmpFile());
 
 				Opt.set({ tmp: file });
-
-				console.log('create: '+ Opt.get('tmp'));
 			},
 
 			update: function() {
