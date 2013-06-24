@@ -9,11 +9,10 @@ define([], function() {
 	        toolbar: false,
 	        show: false,
 	        width: 500,
-	        height: 280,
+	        height: 300,
 	        resizable: false,
 	        position: 'center',
-	        fullscreen: false,
-	        'always-on-top': true
+	        fullscreen: false
 	      });
 
 		prefWin.on('close', function() {
