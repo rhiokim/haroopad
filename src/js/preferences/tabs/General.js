@@ -13,7 +13,7 @@ define([
 
 			for (prop in data) {
 				en = 'preferences.general.'+ prop;
-				window.parent.win.emit(en, data[prop]);
+				window.parent.ee.emit(en, data[prop]);
 			}
 		});
 

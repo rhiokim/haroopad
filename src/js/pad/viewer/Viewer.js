@@ -8,7 +8,6 @@ define([
 			options;
 
 		var gui = require('nw.gui'),
-				win = gui.Window.get(),
 				clipboard = gui.Clipboard.get();
 		
 		var viewerConfig = store.get('Viewer') || {};
@@ -16,19 +15,19 @@ define([
 
 		// var config = option.toJSON();
 
-		window.parent.win.on('preferences.viewer.theme', function(value) {
+		window.parent.ee.on('preferences.viewer.theme', function(value) {
 			viewer.setViewStyle(value);
 		});
 
-		window.parent.win.on('preferences.code.theme', function(value) {
+		window.parent.ee.on('preferences.code.theme', function(value) {
 			viewer.setCodeStyle(value);
 		});
 		
-		window.parent.win.on('preferences.viewer.clickableLink', function(value) {
+		window.parent.ee.on('preferences.viewer.clickableLink', function(value) {
 			value ? viewer.allowLink() : viewer.blockLink() ;
 		});
 		
-		win.on('print.html', function(value) {
+		window.ee.on('print.html', function(value) {
 			viewer.print();
 		});
 
@@ -65,7 +64,7 @@ define([
 		}.bind(this), false);
 
 		/* copy html to clipboard */
-		win.on('action.copy.html', function() {
+		window.ee.on('action.copy.html', function() {
 			clipboard.set(content, 'text');
 		});
 
@@ -77,10 +76,10 @@ define([
 		}
 
 		/* change markdown event handler */
-		win.on('change.after.markdown', update);
+		window.ee.on('change.after.markdown', update);
 
 		/* scroll editor for sync */
-		win.on('editor.scroll', function(top, per) {
+		window.ee.on('editor.scroll', function(top, per) {
 			viewer.scrollTop(top * 100 / per);
 		});
 

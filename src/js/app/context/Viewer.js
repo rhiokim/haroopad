@@ -20,7 +20,7 @@ define([],
 		mCopy = menuItem({ 
 			label: 'Copy',
 			click: function() {
-				win.emit('context.copy');
+				window.ee.emit('context.copy');
 			} 
 		});
 		
@@ -29,7 +29,7 @@ define([],
 		mCopyHTML = menuItem({ 
 			label: 'Copy HTML', 
 			click: function() {
-		  	win.emit('context.copy.html');
+		  	window.ee.emit('context.copy.html');
 			} 
 		});
 		Context.append(mCopyHTML);
@@ -38,7 +38,7 @@ define([],
 		mPreferences = menuItem({
 			label: 'Preferences',
 			click: function() {
-		  	win.emit('context.preferences');
+		  	window.ee.emit('context.preferences');
 			}
 		});
 		Context.append(mPreferences);

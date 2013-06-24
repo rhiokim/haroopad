@@ -1,15 +1,13 @@
-define([
-        'store'
-], function(store) {
+MenuBarFileRecents = function() {
     var fs = require('fs');
 
-    var gui = require('nw.gui'),
-        win = gui.Window.get();
-    var submenu = new gui.Menu();
     var path = require('path');
     var name, full, item, prop, res;
 
-    var recents = store.get('Recents');
+    var gui = require('nw.gui');
+    var submenu = new gui.Menu();
+
+    var recents = store.get('Recents') || { files:[] };
     recents = recents && recents.files;
 
     var mClear = new gui.MenuItem({
@@ -19,7 +17,7 @@ define([
                 submenu.removeAt(0);
             }
             mClear.enabled = false;
-            win.emit('menu.file.recents.clear');
+            window.parent.ee.emit('menu.file.recents.clear');
         }
     });
 
@@ -37,7 +35,7 @@ define([
                     label: name,
                     tooltip: prop,
                     click: function() {
-                        win.emit('menu.file.recents', this.tooltip);
+                        window.parent.ee.emit('menu.file.recents', this.tooltip);
                     }
                 }));
             }
@@ -55,4 +53,4 @@ define([
     submenu.append(mClear);
 
     return submenu;
-});
+}

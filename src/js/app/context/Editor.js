@@ -23,25 +23,25 @@ define([
 		mCut = menuItem({ 
 			label: 'Cut',
 			click: function() {
-				win.emit('context.cut');
+				window.ee.emit('context.cut');
 			} 
 		});
 		mCopy = menuItem({ 
 			label: 'Copy',
 			click: function() {
-				win.emit('context.copy');
+				window.ee.emit('context.copy');
 			} 
 		});
 		mPaste = menuItem({ 
 			label: 'Paste',
 			click: function() {
-				win.emit('context.paste');
+				window.ee.emit('context.paste');
 			} 
 		});
 		mSelectAll = menuItem({ 
 			label: 'Select All',
 			click: function() {
-				win.emit('context.select.all');
+				window.ee.emit('context.select.all');
 			}
 		});
 		
@@ -75,7 +75,7 @@ define([
 		mPreferences = menuItem({
 			label: 'Preferences',
 			click: function() {
-		  	win.emit('context.preferences');
+		  	window.ee.emit('context.preferences');
 			}
 		});
 		Context.append(mPreferences);

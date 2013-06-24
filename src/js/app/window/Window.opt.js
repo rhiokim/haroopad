@@ -1,9 +1,7 @@
 define([
-		'store'
 	], 
-	function(store) {
+	function() {
 		var gui = require('nw.gui');
-		var win = gui.Window.get();
 		var model;
 
 

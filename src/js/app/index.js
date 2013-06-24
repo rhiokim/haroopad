@@ -1,3 +1,5 @@
+window.ee = new EventEmitter();
+MenuBar(); 
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -12,8 +14,6 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    // text: '../vendors/text',
-    store: '../vendors/store',
     keyboard: '../vendors/keymage'
   },
   config: {
@@ -28,12 +28,11 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
-    'menu/MenuBar',
     'context/Context',
     'core/Parser',
     'window/Window',
     'window/WindowManager'
-  ], function(MenuBar, Context, Parser, Window, WindowMgr) {
+  ], function(Context, Parser, Window, WindowMgr) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
@@ -45,11 +44,11 @@ requirejs([
       WindowMgr.open();
     }
 
-   win.on('change.markdown', function(md, options, cb) {
-    var cb = typeof options == 'function' ? options : cb;
-    var options = typeof options == 'object' ? options : undefined;
-    
-    var html = Parser(md, options);
+    window.ee.on('change.markdown', function(md, options, cb) {
+      var cb = typeof options == 'function' ? options : cb;
+      var options = typeof options == 'object' ? options : undefined;
+      
+      var html = Parser(md, options);
 
       cb(html);
       // WindowMgr.actived.updateMarkdown(html);

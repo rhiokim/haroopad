@@ -1,15 +1,12 @@
-define([],
-  function() {
-
-	var gui = require('nw.gui'),
-      win = gui.Window.get();
-	var Action = new gui.Menu();
+MenuBarAction = function () {	
+  var gui = require('nw.gui');
+  var Action = new gui.Menu();
 
 	Action.append(
     new gui.MenuItem({
       label: 'Copy HTML',
       click: function() {
-        win.emit('menu.action.copy.html');
+        window.parent.ee.emit('menu.action.copy.html');
       }
     })
 	);/*
@@ -143,4 +140,4 @@ define([],
   );*/
 
 	return new gui.MenuItem({ label: 'Action', submenu: Action });
-});
+}

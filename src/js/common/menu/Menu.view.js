@@ -1,15 +1,12 @@
-define([
-	],function() {
-
-	var gui = require('nw.gui'),
-      	win = gui.Window.get();
+MenuBarView = function () {
+	var gui = require('nw.gui');
 	var View = new gui.Menu();
 
 	View.append(
 	    new gui.MenuItem({
 	        label: 'Toggle Live Preview',
 		      click: function() {
-		      	win.emit('menu.view.mode.toggle');
+		      	window.parent.ee.emit('menu.view.mode.toggle');
 		      }
 	    })
 	);
@@ -30,7 +27,7 @@ define([
 	    new gui.MenuItem({
 	        label: 'Toggle Line Number',
 		      click: function() {
-		        win.emit('menu.show.toggle.linenum');
+		        window.parent.ee.emit('menu.show.toggle.linenum');
 		      }
 	    })
 	);
@@ -51,7 +48,7 @@ define([
 	    new gui.MenuItem({
 	        label: 'Live Viewer width +5%',
 		      click: function() {
-		        win.emit('menu.view.plus5.width');
+		        window.parent.ee.emit('menu.view.plus5.width');
 		      }
 	    })
 	);
@@ -59,10 +56,10 @@ define([
 	    new gui.MenuItem({
 	        label: 'Live Viewer width -5%',
 		      click: function() {
-		        win.emit('menu.view.minus5.width');
+		        window.parent.ee.emit('menu.view.minus5.width');
 		      }
 	    })
 	);
 
 	return new gui.MenuItem({ label: 'View', submenu: View });
-});
+}

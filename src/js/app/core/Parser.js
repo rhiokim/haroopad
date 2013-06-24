@@ -1,7 +1,6 @@
 define([
-    'store'
   ],
-  function(store) {
+  function() {
     // var opt = {
     //   gfm: true,
     //   tables: true,
