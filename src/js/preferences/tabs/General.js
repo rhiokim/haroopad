@@ -2,9 +2,6 @@ define([
 		'tabs/General.opt'
 	], function(options) {
 
-		// var gui = require('nw.gui'),
-		// 	win = gui.Window.get();
-
 		var config = options.toJSON();
 
 		options.bind('change', function(model) {

@@ -43,26 +43,26 @@ define([
     // };
 
     var parse = function(src, options) {
-      options = options || opt;
+      options = options || marked.defaults;
       return marked.parser(marked.lexer(src, options), options, renderer);
     }
 
-    win.on('preferences.markdown.gfm', function(value) {
+    window.ee.on('preferences.markdown.gfm', function(value) {
       marked.setOptions({ gfm: value });
     });
-    win.on('preferences.markdown.sanitize', function(value) {
+    window.ee.on('preferences.markdown.sanitize', function(value) {
       marked.setOptions({ sanitize: value });
     });
-    win.on('preferences.markdown.tables', function(value) {
+    window.ee.on('preferences.markdown.tables', function(value) {
       marked.setOptions({ tables: value });
     });
-    win.on('preferences.markdown.breaks', function(value) {
+    window.ee.on('preferences.markdown.breaks', function(value) {
       marked.setOptions({ breaks: value });
     });
-    win.on('preferences.markdown.smartLists', function(value) {
+    window.ee.on('preferences.markdown.smartLists', function(value) {
       marked.setOptions({ smartLists: value });
     });
-    win.on('preferences.markdown.smartypants', function(value) {
+    window.ee.on('preferences.markdown.smartypants', function(value) {
       marked.setOptions({ smartypants: value });
     });
 

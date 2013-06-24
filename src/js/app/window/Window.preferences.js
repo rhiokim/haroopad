@@ -20,9 +20,8 @@ define([], function() {
 		});
 
 		prefWin.on('loaded', function() {
-			prefWin.window.haveParent(window);
-	    // newWin.focus();
-	    // newWin.window.focus();
+			// prefWin.window.haveParent(window);
+			prefWin.window.parent = window;
 		});
 	}
 

@@ -2,9 +2,6 @@ define([
 		'tabs/Markdown.opt'
 	], function(options) {
 
-		// var gui = require('nw.gui'),
-		// 	win = gui.Window.get();
-
 		var config = options.toJSON();
 
 		options.bind('change', function(model) {
@@ -13,7 +10,7 @@ define([
 
 			for (prop in data) {
 				en = 'preferences.markdown.'+ prop;
-				window.parent.win.emit(en, data[prop]);
+				window.parent.ee.emit(en, data[prop]);
 			}
 		});
 
