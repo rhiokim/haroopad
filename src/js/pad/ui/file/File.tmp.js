@@ -19,8 +19,6 @@ define([
 		win.on('closed', function() {
 			window.clearTimeout(writeTimeout);
 
-			console.log('delete: '+ Opt.get('tmp'));
-
 			if (Opt.get('fileEntry')) {
 				fs.unlinkSync(Opt.get('tmp'));
 			}

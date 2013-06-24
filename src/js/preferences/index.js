@@ -1,8 +1,4 @@
 
-function haveParent(parent) {
-  window.parent = parent;
-}
-
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
 
@@ -34,9 +30,10 @@ requirejs([
     'tabs/Editor',
     'tabs/Viewer',
     'tabs/Code',
+    'tabs/Markdown',
     'tabs/Helper',
     'tabs/About'
-  ], function(General, Editor, Viewer, Code, Helper, About) {
+  ], function(General, Editor, Viewer, Code, Markdown, Helper, About) {
 
     $('.switch').bootstrapSwitch();
 
