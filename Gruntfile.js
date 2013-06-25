@@ -97,6 +97,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/backbone.js',
+            '<%= vendors %>/store.js',
             '<%= vendors %>/js-url.js',
             '<%= vendors %>/require.js'
           ],

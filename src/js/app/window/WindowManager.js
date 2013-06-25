@@ -41,6 +41,8 @@ define([
 				return windows[prop];
 			}
 		}
+
+		return;
 	}
 
 	function _add(newWin) {
@@ -100,7 +102,7 @@ define([
     	options = options || {},
     	hash = file ? '#file='+ file : '';
 
-    if (existWin = getWindowByFile(file)) {
+    if (file && (existWin = getWindowByFile(file))) {
     	existWin.focus();
     	return;
     }
