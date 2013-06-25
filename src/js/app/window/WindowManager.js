@@ -1,92 +1,129 @@
 define([
-		'exports',
-		'store'
+		'exports'
 	],
-	function(exports, store) {
+	function(exports) {
 
 	var gui = require('nw.gui');
-			win = gui.Window.get();
 
 	var windows = {},
+			openning = false,
 			realCount = 0,
 			shadowCount = 0,
 			gapX = 0, gapY = 0;
 
-	var config;
+	var config = store.get('Window') || {};
+	var top = config.y, left = config.x;
+
+	function merge(obj) {
+	  var i = 1
+	    , target
+	    , key;
+
+	  for (; i < arguments.length; i++) {
+	    target = arguments[i];
+	    for (key in target) {
+	      if (Object.prototype.hasOwnProperty.call(target, key)) {
+	        obj[key] = target[key];
+	      }
+	    }
+	  }
+
+	  return obj;
+	}
 
 	function _updateStore() {
 		config = store.get('Window') || {};
 	}
 
-	function _add(newWin) {
-		newWin.created_at = new Date().getTime();
-		exports.actived = windows[newWin.created_at] = newWin;
+	function getWindowByFile(file) {
+		for(var prop in windows) {
+			if (windows[prop]._params.file == file) {
+				return windows[prop];
+			}
+		}
 
+		return;
+	}
+
+	function _add(newWin) {
+		exports.actived = windows[newWin._params.created_at] = newWin;
+
+		// console.log()
 		realCount++;
 
 		newWin.on('closed', function() {
 			for(var prop in windows) {
-				if (prop == newWin.created_at) {
+				if (prop == newWin._params.created_at) {
 					windows[prop] = null;
 					delete windows[prop];
 					realCount--;
 
 					if (!realCount) {
-						win.emit('exit');
+						window.ee.emit('exit');
 					}
 					return;
 				}
 			}
-
 		});
 
 		//window instance delivery to child window
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			newWin.window.haveParent(window);
+			// newWin.window.haveParent(window);
+			newWin.window.parent = window;
 
-    	var x = config.x + gapX + 20 * shadowCount,
-      		y = config.y + gapY + 20 * shadowCount;
-
-      if (config.height + y > window.screen.height) {
-      	shadowCount = 0;
-      	// config.x = 0;
-      	gapX += 20;
-      	config.y = 0;
+      if (config.height + top > window.screen.height) {
+      	top = 0;
       }
 
-      if (config.width + x > window.screen.width) {
-      	shadowCount = 1;
-      	// config.y = 0;
-      	gapY += 20;
-      	config.x = 0;
+      if (config.width + left > window.screen.width) {
+      	left = 0;
       }
+
+    	left = left + 20;
+      top = top + 20;
   
-  		newWin.moveTo(x, y);
+  		newWin.moveTo(left, top);
 			newWin.resizeTo(config.width, config.height);
-			newWin.show();
 
 			shadowCount++;
 		});
 	}
 
-	win.on('actived', function(child) {
+	process.on('actived', function(child) {
 		exports.actived = child;
-	})
 
-	exports.open = function(file) {
-    var newWin,
-    	file = file ? '&file='+ file : '';
+    openning = false;
+	});
 
-		newWin = gui.Window.open('pad.html#'+ file, {
+	exports.open = function(file, options) {
+    var existWin, newWin,
+    	options = options || {},
+    	hash = file ? '#file='+ file : '';
+
+    if (file && (existWin = getWindowByFile(file))) {
+    	existWin.focus();
+    	return;
+    }
+
+    if (openning) {
+    	return;
+    }
+
+    openning = true;
+
+		newWin = gui.Window.open('pad.html'+ hash, {
 		    "min_width": 500,
-		    "min_height": 400,
-		    "max_width": 1920,
-		    "max_height": 1080,
+		    "min_height": 250,
         "toolbar": false,
         "show": false
       });
+
+		newWin._params = merge({}, options, {
+			file: file,
+			created_at: new Date().getTime()
+		});
 
 		_add(newWin);
 

@@ -1,6 +1,5 @@
 define([
-		'store'
-	], function(store) {
+	], function() {
 		var path = require('path');
 
 		var recents = [];
@@ -48,6 +47,12 @@ define([
 				recents.push(o);
 				
 				this.set('files', recents.reverse());
+				this.trigger('change');
+			},
+
+			clearAll: function() {
+				recents.length = 0;
+				this.set('files', []);
 				this.trigger('change');
 			}
 			//TODO : remove recent file item

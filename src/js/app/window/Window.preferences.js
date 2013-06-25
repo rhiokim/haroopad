@@ -9,11 +9,10 @@ define([], function() {
 	        toolbar: false,
 	        show: false,
 	        width: 500,
-	        height: 280,
+	        height: 300,
 	        resizable: false,
 	        position: 'center',
-	        fullscreen: false,
-	        'always-on-top': true
+	        fullscreen: false
 	      });
 
 		prefWin.on('close', function() {
@@ -21,9 +20,8 @@ define([], function() {
 		});
 
 		prefWin.on('loaded', function() {
-			prefWin.window.haveParent(window);
-	    // newWin.focus();
-	    // newWin.window.focus();
+			// prefWin.window.haveParent(window);
+			prefWin.window.parent = window;
 		});
 	}
 

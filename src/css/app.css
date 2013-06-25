@@ -24,7 +24,6 @@ body {
 	width: 50%;
 	height: 100%;
 	float: left;
-	/*margin-left: -2px;*/
 	display: inline-block;
 }
 
@@ -51,13 +50,6 @@ body {
   display: inline-block;
   background: #000;
   cursor: ew-resize;
-}
-
-.CodeMirror {
-	height: 100%;
-	/*padding-left: 10px;*/
-	padding-right: 10px;
-	margin-bottom: 10px;
 }
 
 #code {
@@ -127,7 +119,6 @@ body > .navbar .brand:hover {
 	background: rgba(255,0,0,0.4); 
 }
 
-
 /* -----------------------------------------
    Preferences
 ----------------------------------------- */
@@ -180,6 +171,10 @@ body > .navbar .brand:hover {
 }
 
 .CodeMirror {
+  height: 100%;
+  /*padding-left: 10px;*/
+  padding-right: 10px;
+  margin-bottom: 10px;
   border-top: 0;
 }
 

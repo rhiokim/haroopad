@@ -6,8 +6,10 @@ define(function() {
       updated_at: new Date,
       fileEntry: undefined,
       extname: '.md',
+      dirname: undefined,
       basename: undefined,
-      markdown: undefined
+      markdown: undefined,
+      tmp: undefined
     }
   });
 

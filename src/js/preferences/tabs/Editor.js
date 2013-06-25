@@ -10,7 +10,7 @@ define([
 
 			for (prop in data) {
 				en = 'preferences.editor.'+ prop;
-				window.parent.win.emit(en, data[prop]);
+				window.parent.ee.emit(en, data[prop]);
 			}
 		});
 
