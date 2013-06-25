@@ -19,7 +19,10 @@
     "stringex": "~0.2.4",
     "grunt-contrib-uglify": "~0.1.2",
     "grunt-contrib-cssmin": "~0.4.1",
-    "grunt-contrib-clean": "~0.4.0"
+    "grunt-contrib-clean": "~0.4.0",
+    "marked": "~0.2.9",
+    "watch": "~0.7.0",
+    "base62": "~0.1.1"
   },
   "deploy": {
     "docs": "../baas.io-Portal/_documentation/_docs/ko/javascript/reference",
