@@ -1,8 +1,4 @@
 
-function haveParent(parent) {
-  window.parent = parent;
-}
-
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
 

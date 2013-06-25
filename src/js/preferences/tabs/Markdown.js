@@ -1,9 +1,8 @@
 define([
 		'tabs/Markdown.opt'
 	], function(options) {
-
-		// var gui = require('nw.gui'),
-		// 	win = gui.Window.get();
+		var gui = require('nw.gui');
+		var shell = gui.Shell;
 
 		var config = options.toJSON();
 
@@ -13,7 +12,7 @@ define([
 
 			for (prop in data) {
 				en = 'preferences.markdown.'+ prop;
-				window.parent.win.emit(en, data[prop]);
+				window.parent.ee.emit(en, data[prop]);
 			}
 		});
 
@@ -21,6 +20,7 @@ define([
 			el: '#markdown-tab',
 
 			events: {
+				'click a': 'clickHandler',
 				'click input[name=gfm]': 'enableGFM',	
 				'click input[name=sanitize]': 'enableSanitize',	
 				'click input[name=tables]': 'enableTables',	
@@ -36,6 +36,12 @@ define([
 				this.$el.find('input[name=breaks]').prop('checked', config.breaks);
 				this.$el.find('input[name=smartLists]').prop('checked', config.smartLists);
 				this.$el.find('input[name=smartypants]').prop('checked', config.smartypants);
+			},
+
+			clickHandler: function(e) {
+				var href = $(e.target).attr('href');
+				e.preventDefault();
+				shell.openExternal(href);
 			},
 
 			enableGFM: function(e) {
