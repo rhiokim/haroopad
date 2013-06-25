@@ -5,6 +5,8 @@ Issue Number     | Description
 **New Features** |
 #79, #69         | Add markdown preferences
 #76              | Add shortcut table link at Help Menu
+#54              | Support print document & export PDF
+#57              | Add clear recently file list
 **Bugs**         | 
 #77              | Unlimit width & height size when fullscreen
 **Enhancements** |
