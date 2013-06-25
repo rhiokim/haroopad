@@ -35,16 +35,16 @@ COMMAND(CTRL) + SHIFT + L | 에디터 라인넘버 토글
 COMMAND(CTRL) + SHIFT + V | VIM 키 바인딩
 
 ##### Editing
-Shortcut                | Description
-------------------------|-------------------
-COMMAND(CTRL) + B       | 볼드
-COMMAND(CTRL) + I       | 이탤릭
-COMMAND(CTRL) + L       | 링크
-COMMAND(CTRL) + ALT + S | 중간물결
-COMMAND(CTRL) + ALT + O | 정렬 목록
-COMMAND(CTRL) + ALT + U | 비정렬 목록
-COMMAND(CTRL) + ALT + I | 이미지
-COMMAND(CTRL) + ALT + B | 블럭쿼트
+Shortcut                | Example        | Description
+------------------------|:--------------:|---------
+COMMAND(CTRL) + B       | `**Bold**`     | 볼드
+COMMAND(CTRL) + I       | `*Italic*`     | 이탤릭
+COMMAND(CTRL) + L       | `[link](url)`  | 링크
+COMMAND(CTRL) + ALT + S | `~~strike~~`   | 취소선
+COMMAND(CTRL) + ALT + O | `1. markdown`  | 정렬목록
+COMMAND(CTRL) + ALT + U | `* haroopad`   | 비정렬 목록
+COMMAND(CTRL) + ALT + I | `![]()`        | 이미지
+COMMAND(CTRL) + ALT + B | `> blockquote` | 블럭쿼트
 
 ---
 
