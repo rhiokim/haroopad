@@ -1,5 +1,17 @@
 ## Haroopad v0.4.2
 
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#79, #69         | Add markdown preferences
+#76              | Add shortcut table link at Help Menu
+**Bugs**         | 
+#77              | Unlimit width & height size when fullscreen
+**Enhancements** |
+#73              | Default font-family for viewer area on window
+#72              | **Critical issue**: prevent node.js memory leak detaction
+
+<!--
 ##### Download
 > * Windows NSIS installer:[https://www.dropbox.com/s/3ix0t59hh6acwau/haroopad-win32-v0.3.1.exe](https://www.dropbox.com/s/3ix0t59hh6acwau/haroopad-win32-v0.3.1.exe)
 > * Mac OS X DMG: [https://www.dropbox.com/s/ht4ldva42u5ukj6/haroopad-v0.3.1.dmg](https://www.dropbox.com/s/ht4ldva42u5ukj6/haroopad-v0.3.1.dmg)
@@ -7,6 +19,7 @@
 > * Linux 64-bit Binary:[https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb](https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb)
 > * Linux 32-bit Debian Package:[https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb](https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb)
 > * Linux 64-bit Debian Package:[https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb](https://www.dropbox.com/s/t7vrs09nsghoqqu/haroopad-v0.3.1.deb)
+-->
 
 ## Haroopad v0.4.0
 
