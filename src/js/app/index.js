@@ -1,3 +1,6 @@
+// for Memory leak detect
+process.setMaxListeners(0);
+
 window.ee = new EventEmitter();
 MenuBar(); 
 
