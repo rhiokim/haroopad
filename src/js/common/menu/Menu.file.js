@@ -53,12 +53,6 @@ MenuBarFile = function () {
           }
       });
   sepItem();
-
-	menuItem({
-            label: 'Post',
-            // enabled: false,
-            submenu: MenuBarFilePosts()
-        });
   menuItem({
           label: 'Export',
           // enabled: false,
