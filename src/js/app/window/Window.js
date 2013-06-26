@@ -49,11 +49,6 @@ define([
     WindowMgr.actived.window.ee.emit('file.exports.html');
   });
 
-  window.ee.on('menu.file.exports.presentation', function() {
-    // WindowMgr.actived.window.ee.emit('file.exports.presentation');
-    Presentation.show();
-  });
-
   window.ee.on('menu.print.html', function() {
     // WindowMgr.actived.emit('print.html');
     WindowMgr.actived.window.ee.emit('print.html');
@@ -64,6 +59,12 @@ define([
   });
 
 
+  /**
+   * tools menu event
+   */
+  window.ee.on('tools.presentation', function(theme) {
+    Presentation.show(theme);
+  });
 
 
   window.ee.on('menu.view.mode.toggle', function() {

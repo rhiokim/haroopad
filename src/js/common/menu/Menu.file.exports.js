@@ -10,14 +10,6 @@ MenuBarFileExports = function () {
         }
     })
   );
-  submenu.append(
-    new gui.MenuItem({
-        label: 'Presentation',
-        click: function() {
-          window.parent.ee.emit('menu.file.exports.presentation');
-        }
-    })
-  );
 
   return submenu;
 }
