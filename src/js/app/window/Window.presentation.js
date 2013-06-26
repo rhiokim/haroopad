@@ -3,13 +3,16 @@ define([], function() {
 		win = gui.Window.get();
 
 	var presentWin;
+	var themes = {
+		'impress-default': './views/impress/index.html'
+	}
 
-	function open() {
-		presentWin = gui.Window.open('./views/shower/themes/bright/index.html', {
-	        toolbar: true,
+	function open(view) {
+		presentWin = gui.Window.open(view, {
+	        toolbar: false,
 	        show: true,
 	        width: 800,
-	        height: 500,
+	        height: 600,
 	        position: 'center'
 	      });
 
@@ -22,9 +25,12 @@ define([], function() {
 		});
 
 		presentWin.on('loaded', function() {
-			// prefWin.window.haveParent(window);
 			presentWin.window.parent = window;
 		});
+	}
+
+	function close() {
+		if (presentWin) presentWin.close(true);
 	}
 
 	window.ee.on('change.markdown', function(md) {
@@ -34,8 +40,11 @@ define([], function() {
 	});
 
 	return {
-		show: function() {
-			open();
+		show: function(theme) {
+			var view = themes[theme] || themes['impress-default'];
+
+			close();
+			open(view);
 		}
 	}
 });
