@@ -12,6 +12,7 @@ function MenuBar() {
 		menu.append( MenuBarFile() );
 		menu.append( MenuBarView() );
 		menu.append( MenuBarAction() );
+		// menu.append( MenuBarTools() );
 		menu.append( MenuBarHelp() );
 
 		win.menu = MenuBar._systemMenu = menu;
