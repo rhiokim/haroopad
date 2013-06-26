@@ -6,7 +6,7 @@ MenuBarToolsPresentation = function () {
     new gui.MenuItem({
         label: 'impress',
         click: function() {
-          window.parent.ee.emit('tools.presentation.impress');
+          window.parent.ee.emit('tools.presentation', 'impress-default');
         }
     })
   );
@@ -19,7 +19,7 @@ MenuBarToolsPresentation = function () {
     new gui.MenuItem({
         label: 'shower bright',
         click: function() {
-          window.parent.ee.emit('tools.presentation.shower.bright');
+          window.parent.ee.emit('tools.presentation', 'shower-bright');
         }
     })
   );
@@ -27,7 +27,7 @@ MenuBarToolsPresentation = function () {
     new gui.MenuItem({
         label: 'shower ribbon',
         click: function() {
-          window.parent.ee.emit('tools.presentation.shower.ribbon');
+          window.parent.ee.emit('tools.presentation', 'shower-ribbon');
         }
     })
   );
