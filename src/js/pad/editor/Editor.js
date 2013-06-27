@@ -49,7 +49,7 @@ define([
 			editor.setOption('theme', value);
 		});
 
-		window.parent.ee.on('preferences.editor.displayLineNumber', function(value) {alert(value)
+		window.parent.ee.on('preferences.editor.displayLineNumber', function(value) {
 			editor.setOption('lineNumbers', value);
 		});
 
@@ -92,7 +92,7 @@ define([
 		  window.ee.emit('editor.scroll', top, per);
 		}
 
-		window.parent.ee.on('preferences.general.enableSyncScroll', function(value) {alert(value)
+		window.parent.ee.on('preferences.general.enableSyncScroll', function(value) {
 			if (value) {
 				editor.on('scroll', syncScrollHandler);
 			} else {

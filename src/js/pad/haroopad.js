@@ -85,7 +85,7 @@ requirejs([
 
     File.startAutoSave();
 
-    win.on('file.saved', function(opt) {
+    window.ee.on('file.saved', function(opt) {
       Viewer.init(opt);
     });
 

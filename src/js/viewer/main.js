@@ -1,7 +1,9 @@
 // Load native UI library.
 var gui = require('nw.gui'),
     win = gui.Window.get();
-var _options;
+var _options = {
+  dirname: '.'
+};
 var viewStyle, codeStyle;
 
 window.ondragover = function(e) { 
