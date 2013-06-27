@@ -1,6 +1,5 @@
 define([
-		'store'
-	], function(store) {
+	], function() {
 		var path = require('path');
 
 		var recents = [];

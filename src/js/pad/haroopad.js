@@ -1,3 +1,8 @@
+window.ee = new EventEmitter();
+
+if (process.platform != 'darwin') {
+  MenuBar(); 
+}
 
 function loadCss(url) {
     var link = document.createElement("link");
@@ -7,9 +12,9 @@ function loadCss(url) {
     document.getElementsByTagName("head")[0].appendChild(link);
 }
 
-function haveParent(parent) {
-  window.parent = parent;
-}
+// function haveParent(parent) {
+//   window.parent = parent;
+// }
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -41,11 +46,10 @@ requirejs.onError = function (e) {
 
 requirejs([
     'window/Window',
-    'menu/Menu',
     'editor/Editor',
     'viewer/Viewer',
     'ui/file/File'
-  ], function(Window, Menu, Editor, Viewer, File) {
+  ], function(Window, Editor, Viewer, File) {
     var html, res, file, x, y;
     var _tid_;
 
@@ -56,15 +60,16 @@ requirejs([
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-    file = url('#file');
+    // file = url('#file');
+    file = win._params.file;
 
-    win.on('file.opened', function(opt) {
+    window.ee.on('file.opened', function(opt) {
 
-      window.parent.win.emit('change.markdown', opt.markdown, function(html) {
+      window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
         Editor.setValue(opt.markdown);
         
         Viewer.init(opt);
-        win.emit('change.after.markdown', Editor.getValue(), html, Editor);
+        window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
 
         Editor.on("change", delayChange); 
       });
@@ -78,29 +83,31 @@ requirejs([
       Editor.on("change", delayChange);
     }
 
-    win.on('file.saved', function(opt) {
+    File.startAutoSave();
+
+    window.ee.on('file.saved', function(opt) {
       Viewer.init(opt);
     });
 
     function delayChange() {
       clearTimeout(_tid_);
 
-      win.emit('change.before.markdown', Editor.getValue());
+      window.ee.emit('change.before.markdown', Editor.getValue());
 
       _tid_ = setTimeout(function() {
-        window.parent.win.emit('change.markdown', Editor.getValue(), function(html) {
-          win.emit('change.after.markdown', Editor.getValue(), html, Editor);
+        window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
+          window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
         });
       }, 300);
     }
 
     win.focus();
     win.on('focus', function() {
-      window.parent.win.emit('actived', win);
+      process.emit('actived', win);
     });
 
     setTimeout(function() {
-      window.parent.win.emit('actived', win);
+      process.emit('actived', win);
       win.show();
     }, 10);
 });

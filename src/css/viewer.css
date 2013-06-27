@@ -3,6 +3,8 @@ body {
 	padding: 20px !important;
   margin: 0 !important;
   background-color: #fff;
+  font-family: AppleSDGothicNeo-Medium, "맑은고딕", '돋움', dotum, Helvetica, sans-serif, Menlo, Monaco,"lucida console", monospace;
+  font-size: .9em;
 }
 
 body >:first-child {
