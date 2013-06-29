@@ -17,7 +17,7 @@ define([
 
 	function close() {
 		win.hide();
-
+		
 		config.x = win.x;
 		config.y = win.y;
 		config.width = win.width;

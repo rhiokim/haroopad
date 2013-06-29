@@ -1,10 +1,11 @@
 // Load native UI library.
-var gui = require('nw.gui'),
-    win = gui.Window.get();
+// var gui = require('nw.gui'),
+//     win = gui.Window.get();
 var _options = {
   dirname: '.'
 };
 var viewStyle, codeStyle;
+window.ee = new EventEmitter();
 
 window.ondragover = function(e) { 
   e.preventDefault(); 
@@ -84,7 +85,7 @@ function _lazySyntaxHighlight() {
     $('pre code').each(function(i, e) {
       hljs.highlightBlock(e);
     });
-  }, 250);
+  }, 400);
 }
 
 /**
@@ -103,6 +104,7 @@ function update(contents) {
   _fixImagePath();
   // createTOC();
   
+  _preventDefaultAnchor();
   _lazySyntaxHighlight();
 }
 
@@ -110,19 +112,9 @@ function update(contents) {
  * enable click event at link
  * @return {[type]} [description]
  */
-function allowLink() {
+function _preventDefaultAnchor() {
   $('a').on('click', function(e) {
-    gui.Shell.openExternal($(e.target).attr('href'));
-    e.preventDefault();
-  });
-}
-
-/**
- * disable click event at link
- * @return {[type]} [description]
- */
-function blockLink() {
-  $('a').on('click', function(e) {
+    window.ee.emit('link', $(e.target).attr('href'));
     e.preventDefault();
   });
 }

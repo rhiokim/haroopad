@@ -17,9 +17,10 @@ define([
 		}
 
 		win.on('closed', function() {
+
 			window.clearTimeout(writeTimeout);
 
-			if (Opt.get('fileEntry')) {
+			if (Opt.get('fileEntry') || Opt.get('tmp')) {
 				fs.unlinkSync(Opt.get('tmp'));
 			}
 		});
