@@ -14,6 +14,8 @@ body {
   line-height: 1.5;
   overflow-y: hidden;
   background: url('../img/linen.png');
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 form {
