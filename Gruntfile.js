@@ -177,8 +177,8 @@ module.exports = function(grunt) {
         files: {
           'build/haroopad/js/viewer.min.js': [
             '<%= vendors %>/jquery-1.9.1.min.js',
-            '<%= vendors %>/js-url.js',
             '<%= vendors %>/highlight.pack.js',
+            'src/js/viewer/disable.debug.js',
             'src/js/viewer/main.js'
           ]
         }

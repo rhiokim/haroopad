@@ -1,11 +1,14 @@
 define([
+		'file/File.tmp'
 	],
-	function() {
+	function(Temporary) {
 		var fs = require('fs'),
 			path = require('path');
 
 		var gui = require('nw.gui'),
 			win = gui.Window.get();
+
+		
 
 		return {
 			save: function(file, markdown, cb) {
