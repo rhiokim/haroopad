@@ -12,6 +12,10 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 
+	function getWorkingDir() {
+		return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+	}
+
 	function _update(file) {
 		Opt.set({
 			'fileEntry': file,
@@ -64,7 +68,7 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 	window.ee.on('file.save', function() {
 		var file = Opt.get('fileEntry');
 		if (!file) {
-			SaveDialog.show();
+			SaveDialog.show(getWorkingDir());
 		} else {
 			_save(file);
 		}
@@ -85,16 +89,13 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 
 		openTmp: function(file, uid) {
 			//지정된 파일이 있는 경우
-			if (file.indexOf(uid) > -1) {
+			if (file.indexOf(uid) < 0) {
 				_update(file);
 			}
-
 				
-					_open(file);
+			_open(file);
 
-					Temporary.sync(file, uid);	
-				
-
+			Temporary.sync(file, uid);	
 		},
 
 		startAutoSave: function() {
