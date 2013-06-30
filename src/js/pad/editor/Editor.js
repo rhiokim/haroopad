@@ -23,7 +23,8 @@ define([
 					    autofocus: true,
 					    workDelay: 1000,
 					    dragDrop: false,
-					    extraKeys: Keymap
+					    extraKeys: Keymap,
+  						showTrailingSpace: true
 					  });
 
 		/* initialize editor */

@@ -11,7 +11,7 @@ var code = '' +
 '    bufp = buf;\n' +
 '  }\n' +
 '\n' +
-'  return (--n >= 0) ? (unsigned char) *bufp++ : EOF;\n' + 
+'  return (--n >= 0) ? (unsigned char) *bufp++ : EOF;\n' +
 ' \n' +
 '}\n';
 
@@ -124,6 +124,31 @@ function testVim(name, run, opts, expectedFail) {
         }
       }
     }
+    function doInsertModeKeysFn(cm) {
+      return function(args) {
+        if (args instanceof Array) { arguments = args; }
+        function executeHandler(handler) {
+          if (typeof handler == 'string') {
+            CodeMirror.commands[handler](cm);
+          } else {
+            handler(cm);
+          }
+          return true;
+        }
+        for (var i = 0; i < arguments.length; i++) {
+          var key = arguments[i];
+          // Find key in keymap and handle.
+          var handled = CodeMirror.lookupKey(key, ['vim-insert'], executeHandler);
+          // Record for insert mode.
+          if (handled === true && cm.vimState.insertMode && arguments[i] != 'Esc') {
+            var lastChange = CodeMirror.Vim.getVimGlobalState_().macroModeState.lastInsertModeChanges;
+            if (lastChange) {
+              lastChange.changes.push(new CodeMirror.Vim.InsertModeKey(key));
+            }
+          }
+        }
+      }
+    }
     function doExFn(cm) {
       return function(command) {
         cm.openDialog = helpers.fakeOpenDialog(command);
@@ -148,6 +173,10 @@ function testVim(name, run, opts, expectedFail) {
     }
     var helpers = {
       doKeys: doKeysFn(cm),
+      // Warning: Only emulates keymap events, not character insertions. Use
+      // replaceRange to simulate character insertions.
+      // Keys are in CodeMirror format, NOT vim format.
+      doInsertModeKeys: doInsertModeKeysFn(cm),
       doEx: doExFn(cm),
       assertCursorAt: assertCursorAtFn(cm),
       fakeOpenDialog: fakeOpenDialog,
@@ -782,6 +811,19 @@ testVim('dd_multiply_repeat', function(cm, vim, helpers) {
   is(register.linewise);
   helpers.assertCursorAt(0, lines[6].textStart);
 });
+testVim('dd_lastline', function(cm, vim, helpers) {
+  cm.setCursor(cm.lineCount(), 0);
+  var expectedLineCount = cm.lineCount() - 1;
+  helpers.doKeys('d', 'd');
+  eq(expectedLineCount, cm.lineCount());
+  helpers.assertCursorAt(cm.lineCount() - 1, 0);
+});
+testVim('cw', function(cm, vim, helpers) {
+  cm.setCursor(0, 0);
+  helpers.doKeys('c', '2', 'w');
+  eq(' word3', cm.getValue());
+  helpers.assertCursorAt(0, 0);
+}, { value: 'word1 word2 word3'});
 // Yank commands should behave the exact same as d commands, expect that nothing
 // gets deleted.
 testVim('yw_repeat', function(cm, vim, helpers) {
@@ -1031,8 +1073,22 @@ testVim('i', function(cm, vim, helpers) {
   helpers.assertCursorAt(0, 1);
   eq('vim-insert', cm.getOption('keyMap'));
 });
+testVim('i_repeat', function(cm, vim, helpers) {
+  helpers.doKeys('3', 'i');
+  cm.replaceRange('test', cm.getCursor());
+  helpers.doInsertModeKeys('Esc');
+  eq('testtesttest', cm.getValue());
+  helpers.assertCursorAt(0, 11);
+}, { value: '' });
+testVim('i_repeat_delete', function(cm, vim, helpers) {
+  cm.setCursor(0, 4);
+  helpers.doKeys('2', 'i');
+  cm.replaceRange('z', cm.getCursor());
+  helpers.doInsertModeKeys('Backspace', 'Backspace', 'Esc');
+  eq('abe', cm.getValue());
+  helpers.assertCursorAt(0, 1);
+}, { value: 'abcde' });
 testVim('A', function(cm, vim, helpers) {
-  cm.setCursor(0, 0);
   helpers.doKeys('A');
   helpers.assertCursorAt(0, lines[0].length);
   eq('vim-insert', cm.getOption('keyMap'));
@@ -1043,6 +1099,14 @@ testVim('I', function(cm, vim, helpers) {
   helpers.assertCursorAt(0, lines[0].textStart);
   eq('vim-insert', cm.getOption('keyMap'));
 });
+testVim('I_repeat', function(cm, vim, helpers) {
+  cm.setCursor(0, 1);
+  helpers.doKeys('3', 'I');
+  cm.replaceRange('test', cm.getCursor());
+  helpers.doInsertModeKeys('Esc');
+  eq('testtesttestblah', cm.getValue());
+  helpers.assertCursorAt(0, 11);
+}, { value: 'blah' });
 testVim('o', function(cm, vim, helpers) {
   cm.setCursor(0, 4);
   helpers.doKeys('o');
@@ -1050,6 +1114,14 @@ testVim('o', function(cm, vim, helpers) {
   helpers.assertCursorAt(1, 0);
   eq('vim-insert', cm.getOption('keyMap'));
 }, { value: 'word1\nword2' });
+testVim('o_repeat', function(cm, vim, helpers) {
+  cm.setCursor(0, 0);
+  helpers.doKeys('3', 'o');
+  cm.replaceRange('test', cm.getCursor());
+  helpers.doInsertModeKeys('Esc');
+  eq('\ntest\ntest\ntest', cm.getValue());
+  helpers.assertCursorAt(3, 3);
+}, { value: '' });
 testVim('O', function(cm, vim, helpers) {
   cm.setCursor(0, 4);
   helpers.doKeys('O');
@@ -1552,6 +1624,97 @@ testVim('._repeat', function(cm, vim, helpers) {
   helpers.doKeys('3', '.');
   eq('6', cm.getValue());
 }, { value: '1 2 3 4 5 6'});
+testVim('._insert', function(cm, vim, helpers) {
+  helpers.doKeys('i');
+  cm.replaceRange('test', cm.getCursor());
+  helpers.doInsertModeKeys('Esc');
+  helpers.doKeys('.');
+  eq('testestt', cm.getValue());
+  helpers.assertCursorAt(0, 6);
+}, { value: ''});
+testVim('._insert_repeat', function(cm, vim, helpers) {
+  helpers.doKeys('i');
+  cm.replaceRange('test', cm.getCursor());
+  cm.setCursor(0, 4);
+  helpers.doInsertModeKeys('Esc');
+  helpers.doKeys('2', '.');
+  eq('testesttestt', cm.getValue());
+  helpers.assertCursorAt(0, 10);
+}, { value: ''});
+testVim('._repeat_insert', function(cm, vim, helpers) {
+  helpers.doKeys('3', 'i');
+  cm.replaceRange('te', cm.getCursor());
+  cm.setCursor(0, 2);
+  helpers.doInsertModeKeys('Esc');
+  helpers.doKeys('.');
+  eq('tetettetetee', cm.getValue());
+  helpers.assertCursorAt(0, 10);
+}, { value: ''});
+testVim('._insert_o', function(cm, vim, helpers) {
+  helpers.doKeys('o');
+  cm.replaceRange('z', cm.getCursor());
+  cm.setCursor(1, 1);
+  helpers.doInsertModeKeys('Esc');
+  helpers.doKeys('.');
+  eq('\nz\nz', cm.getValue());
+  helpers.assertCursorAt(2, 0);
+}, { value: ''});
+testVim('._insert_o_repeat', function(cm, vim, helpers) {
+  helpers.doKeys('o');
+  cm.replaceRange('z', cm.getCursor());
+  helpers.doInsertModeKeys('Esc');
+  cm.setCursor(1, 0);
+  helpers.doKeys('2', '.');
+  eq('\nz\nz\nz', cm.getValue());
+  helpers.assertCursorAt(3, 0);
+}, { value: ''});
+testVim('._insert_o_indent', function(cm, vim, helpers) {
+  helpers.doKeys('o');
+  cm.replaceRange('z', cm.getCursor());
+  helpers.doInsertModeKeys('Esc');
+  cm.setCursor(1, 2);
+  helpers.doKeys('.');
+  eq('{\n  z\n  z', cm.getValue());
+  helpers.assertCursorAt(2, 2);
+}, { value: '{'});
+testVim('._insert_cw', function(cm, vim, helpers) {
+  helpers.doKeys('c', 'w');
+  cm.replaceRange('test', cm.getCursor());
+  helpers.doInsertModeKeys('Esc');
+  cm.setCursor(0, 3);
+  helpers.doKeys('2', 'l');
+  helpers.doKeys('.');
+  eq('test test word3', cm.getValue());
+  helpers.assertCursorAt(0, 8);
+}, { value: 'word1 word2 word3' });
+testVim('._insert_cw_repeat', function(cm, vim, helpers) {
+  // For some reason, repeat cw in desktop VIM will does not repeat insert mode
+  // changes. Will conform to that behavior.
+  helpers.doKeys('c', 'w');
+  cm.replaceRange('test', cm.getCursor());
+  helpers.doInsertModeKeys('Esc');
+  cm.setCursor(0, 4);
+  helpers.doKeys('l');
+  helpers.doKeys('2', '.');
+  eq('test test', cm.getValue());
+  helpers.assertCursorAt(0, 8);
+}, { value: 'word1 word2 word3' });
+testVim('._delete', function(cm, vim, helpers) {
+  cm.setCursor(0, 5);
+  helpers.doKeys('i');
+  helpers.doInsertModeKeys('Backspace', 'Esc');
+  helpers.doKeys('.');
+  eq('zace', cm.getValue());
+  helpers.assertCursorAt(0, 1);
+}, { value: 'zabcde'});
+testVim('._delete_repeat', function(cm, vim, helpers) {
+  cm.setCursor(0, 6);
+  helpers.doKeys('i');
+  helpers.doInsertModeKeys('Backspace', 'Esc');
+  helpers.doKeys('2', '.');
+  eq('zzce', cm.getValue());
+  helpers.assertCursorAt(0, 1);
+}, { value: 'zzabcde'});
 testVim('f;', function(cm, vim, helpers) {
   cm.setCursor(0, 0);
   helpers.doKeys('f', 'x');
@@ -1933,6 +2096,59 @@ testVim('ex_write', function(cm, vim, helpers) {
   }
   CodeMirror.commands.save = tmp;
 });
+testVim('ex_sort', function(cm, vim, helpers) {
+  helpers.doEx('sort');
+  eq('Z\na\nb\nc\nd', cm.getValue());
+}, { value: 'b\nZ\nd\nc\na'});
+testVim('ex_sort_reverse', function(cm, vim, helpers) {
+  helpers.doEx('sort!');
+  eq('d\nc\nb\na', cm.getValue());
+}, { value: 'b\nd\nc\na'});
+testVim('ex_sort_range', function(cm, vim, helpers) {
+  helpers.doEx('2,3sort');
+  eq('b\nc\nd\na', cm.getValue());
+}, { value: 'b\nd\nc\na'});
+testVim('ex_sort_oneline', function(cm, vim, helpers) {
+  helpers.doEx('2sort');
+  // Expect no change.
+  eq('b\nd\nc\na', cm.getValue());
+}, { value: 'b\nd\nc\na'});
+testVim('ex_sort_ignoreCase', function(cm, vim, helpers) {
+  helpers.doEx('sort i');
+  eq('a\nb\nc\nd\nZ', cm.getValue());
+}, { value: 'b\nZ\nd\nc\na'});
+testVim('ex_sort_unique', function(cm, vim, helpers) {
+  helpers.doEx('sort u');
+  eq('Z\na\nb\nc\nd', cm.getValue());
+}, { value: 'b\nZ\na\na\nd\na\nc\na'});
+testVim('ex_sort_decimal', function(cm, vim, helpers) {
+  helpers.doEx('sort d');
+  eq('d3\n s5\n6\n.9', cm.getValue());
+}, { value: '6\nd3\n s5\n.9'});
+testVim('ex_sort_decimal_negative', function(cm, vim, helpers) {
+  helpers.doEx('sort d');
+  eq('z-9\nd3\n s5\n6\n.9', cm.getValue());
+}, { value: '6\nd3\n s5\n.9\nz-9'});
+testVim('ex_sort_decimal_reverse', function(cm, vim, helpers) {
+  helpers.doEx('sort! d');
+  eq('.9\n6\n s5\nd3', cm.getValue());
+}, { value: '6\nd3\n s5\n.9'});
+testVim('ex_sort_hex', function(cm, vim, helpers) {
+  helpers.doEx('sort x');
+  eq(' s5\n6\n.9\n&0xB\nd3', cm.getValue());
+}, { value: '6\nd3\n s5\n&0xB\n.9'});
+testVim('ex_sort_octal', function(cm, vim, helpers) {
+  helpers.doEx('sort o');
+  eq('.8\n.9\nd3\n s5\n6', cm.getValue());
+}, { value: '6\nd3\n s5\n.9\n.8'});
+testVim('ex_sort_decimal_mixed', function(cm, vim, helpers) {
+  helpers.doEx('sort d');
+  eq('y\nz\nc1\nb2\na3', cm.getValue());
+}, { value: 'a3\nz\nc1\ny\nb2'});
+testVim('ex_sort_decimal_mixed_reverse', function(cm, vim, helpers) {
+  helpers.doEx('sort! d');
+  eq('a3\nb2\nc1\nz\ny', cm.getValue());
+}, { value: 'a3\nz\nc1\ny\nb2'});
 testVim('ex_substitute_same_line', function(cm, vim, helpers) {
   cm.setCursor(1, 0);
   helpers.doEx('s/one/two');
@@ -1978,6 +2194,78 @@ testVim('ex_substitute_count_with_range', function(cm, vim, helpers) {
   helpers.doEx('1,3s/\\d/0/ 3');
   eq('1\n2\n0\n0', cm.getValue());
 }, { value: '1\n2\n3\n4' });
+function testSubstituteConfirm(name, command, initialValue, expectedValue, keys, finalPos) {
+  testVim(name, function(cm, vim, helpers) {
+    var savedOpenDialog = cm.openDialog;
+    var savedKeyName = CodeMirror.keyName;
+    var onKeyDown;
+    var recordedCallback;
+    var closed = true; // Start out closed, set false on second openDialog.
+    function close() {
+      closed = true;
+    }
+    // First openDialog should save callback.
+    cm.openDialog = function(template, callback, options) {
+      recordedCallback = callback;
+    }
+    // Do first openDialog.
+    helpers.doKeys(':');
+    // Second openDialog should save keyDown handler.
+    cm.openDialog = function(template, callback, options) {
+      onKeyDown = options.onKeyDown;
+      closed = false;
+    };
+    // Return the command to Vim and trigger second openDialog.
+    recordedCallback(command);
+    // The event should really use keyCode, but here just mock it out and use
+    // key and replace keyName to just return key.
+    CodeMirror.keyName = function (e) { return e.key; }
+    keys = keys.toUpperCase();
+    for (var i = 0; i < keys.length; i++) {
+      is(!closed);
+      onKeyDown({ key: keys.charAt(i) }, '', close);
+    }
+    try {
+      eq(expectedValue, cm.getValue());
+      helpers.assertCursorAt(finalPos);
+      is(closed);
+    } catch(e) {
+      throw e
+    } finally {
+      // Restore overriden functions.
+      CodeMirror.keyName = savedKeyName;
+      cm.openDialog = savedOpenDialog;
+    }
+  }, { value: initialValue });
+};
+testSubstituteConfirm('ex_substitute_confirm_emptydoc',
+    '%s/x/b/c', '', '', '', makeCursor(0, 0));
+testSubstituteConfirm('ex_substitute_confirm_nomatch',
+    '%s/x/b/c', 'ba a\nbab', 'ba a\nbab', '', makeCursor(0, 0));
+testSubstituteConfirm('ex_substitute_confirm_accept',
+    '%s/a/b/c', 'ba a\nbab', 'bb b\nbbb', 'yyy', makeCursor(1, 1));
+testSubstituteConfirm('ex_substitute_confirm_random_keys',
+    '%s/a/b/c', 'ba a\nbab', 'bb b\nbbb', 'ysdkywerty', makeCursor(1, 1));
+testSubstituteConfirm('ex_substitute_confirm_some',
+    '%s/a/b/c', 'ba a\nbab', 'bb a\nbbb', 'yny', makeCursor(1, 1));
+testSubstituteConfirm('ex_substitute_confirm_all',
+    '%s/a/b/c', 'ba a\nbab', 'bb b\nbbb', 'a', makeCursor(1, 1));
+testSubstituteConfirm('ex_substitute_confirm_accept_then_all',
+    '%s/a/b/c', 'ba a\nbab', 'bb b\nbbb', 'ya', makeCursor(1, 1));
+testSubstituteConfirm('ex_substitute_confirm_quit',
+    '%s/a/b/c', 'ba a\nbab', 'bb a\nbab', 'yq', makeCursor(0, 3));
+testSubstituteConfirm('ex_substitute_confirm_last',
+    '%s/a/b/c', 'ba a\nbab', 'bb b\nbab', 'yl', makeCursor(0, 3));
+testSubstituteConfirm('ex_substitute_confirm_oneline',
+    '1s/a/b/c', 'ba a\nbab', 'bb b\nbab', 'yl', makeCursor(0, 3));
+testSubstituteConfirm('ex_substitute_confirm_range_accept',
+    '1,2s/a/b/c', 'aa\na \na\na', 'bb\nb \na\na', 'yyy', makeCursor(1, 0));
+testSubstituteConfirm('ex_substitute_confirm_range_some',
+    '1,3s/a/b/c', 'aa\na \na\na', 'ba\nb \nb\na', 'ynyy', makeCursor(2, 0));
+testSubstituteConfirm('ex_substitute_confirm_range_all',
+    '1,3s/a/b/c', 'aa\na \na\na', 'bb\nb \nb\na', 'a', makeCursor(2, 0));
+testSubstituteConfirm('ex_substitute_confirm_range_last',
+    '1,3s/a/b/c', 'aa\na \na\na', 'bb\nb \na\na', 'yyl', makeCursor(1, 0));
 //:noh should clear highlighting of search-results but allow to resume search through n
 testVim('ex_noh_clearSearchHighlight', function(cm, vim, helpers) {
   cm.openDialog = helpers.fakeOpenDialog('match');
