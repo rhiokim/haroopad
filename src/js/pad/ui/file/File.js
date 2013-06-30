@@ -26,8 +26,6 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 		var markdown;
 		
 		markdown = fs.readFileSync(file, 'utf8');
-		
-		_update(file);
 
 		Opt.set({ markdown: markdown });
 
@@ -84,7 +82,22 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 
 	return {
 		open: function(file) {
+			_update(file);
 			_open(file);
+		},
+
+		openTmp: function(file, uid) {
+			//지정된 파일이 있는 경우
+			if (file.indexOf(uid) > -1) {
+				_update(file);
+			}
+
+				
+					_open(file);
+
+					Temporary.sync(file, uid);	
+				
+
 		},
 
 		startAutoSave: function() {

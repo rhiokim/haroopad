@@ -102,12 +102,13 @@ define([
     	options = options || {},
     	hash = file ? '#file='+ file : '';
 
+    //이미 열려 있는 파일 일 경우
     if (file && (existWin = getWindowByFile(file))) {
     	existWin.focus();
     	return;
     }
 
-    if (openning) {
+    if (openning && !file) {
     	return;
     }
 
