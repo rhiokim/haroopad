@@ -1,7 +1,5 @@
-define([
-		'file/File.tmp'
-	],
-	function(Temporary) {
+define([],
+	function() {
 		var fs = require('fs'),
 			path = require('path');
 
