@@ -50,7 +50,7 @@ requirejs([
     'viewer/Viewer',
     'ui/file/File'
   ], function(Window, Editor, Viewer, File) {
-    var html, res, file, x, y;
+    var html, res, file, uid, tmp, x, y;
     var _tid_;
 
     var orgTitle = 'Untitled';
@@ -62,6 +62,8 @@ requirejs([
 
     // file = url('#file');
     file = win._params.file;
+    tmp = win._params.tmp;
+    uid = win._params.uid;
 
     window.ee.on('file.opened', function(opt) {
 
@@ -77,13 +79,17 @@ requirejs([
     });
 
     //run with file open;
-    if (file) {
-      File.open(decodeURIComponent(file));
+    if (tmp) {
+      File.openTmp(decodeURIComponent(file), uid);
     } else {
-      Editor.on("change", delayChange);
-    }
+      if (file && !tmp) {
+        File.open(decodeURIComponent(file));
+      } else {
+        Editor.on("change", delayChange);
+      }
 
-    File.startAutoSave();
+      File.startAutoSave();
+    }
 
     window.ee.on('file.saved', function(opt) {
       Viewer.init(opt);

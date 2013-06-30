@@ -11,6 +11,10 @@ define([
 	var win = gui.Window.get(),
 		subWin;
 
+  window.ee.on('tmp.file.open', function(file, uid) {
+    WindowMgr.open(file, { uid: uid, tmp: true });
+  });
+
   window.ee.on('menu.file.new', function() {
     WindowMgr.open();
   });
@@ -172,4 +176,5 @@ define([
     Preferences.show();
   });
 
+  File.loadTemporary();
 });

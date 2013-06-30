@@ -9,6 +9,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-sloc');
   grunt.loadNpmTasks('grunt-shell');
 
   grunt.initConfig({
