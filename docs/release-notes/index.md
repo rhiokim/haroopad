@@ -1,4 +1,3 @@
-
 ## Haroopad v0.4.3
 
 Issue Number     | Description
@@ -8,10 +7,13 @@ Issue Number     | Description
 **Bugs**         | 
 #83              | Fixed vim toggling shortcut error
 #61              | Block unlimited new window test
+                 | Fixed export html
 **Enhancements** |
 #86, #70         | Enhance security
 #85              | Update major modules(platform, editor)
 #74              | Default save folder
+
+##### Github Issue tracker
 
 * [https://github.com/rhiokim/haroopad/issues?milestone=13&state=closed](https://github.com/rhiokim/haroopad/issues?milestone=13&state=closed)
 
