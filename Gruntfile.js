@@ -9,7 +9,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-replace');
-  grunt.loadNpmTasks('grunt-sloc');
   grunt.loadNpmTasks('grunt-shell');
 
   grunt.initConfig({
@@ -147,10 +146,10 @@ module.exports = function(grunt) {
     uglify: {
       pad: {
         options: {
-          mangle: {
-            except: ['jQuery', 'Backbone', '_']
-          },
-          // compress: true
+          // mangle: {
+          //   except: ['jQuery', 'Backbone', '_']
+          // },
+          // compress: false
         },
         files: {
           'build/haroopad/js/index.min.js': [

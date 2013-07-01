@@ -6,9 +6,9 @@ define([], function() {
 
 	function init() {
 		prefWin = gui.Window.open('preferences.html', {
-	        toolbar: false,
-	        show: false,
-	        width: 500,
+	        toolbar: true,
+	        show: true,
+	        width: 510,
 	        height: 300,
 	        resizable: false,
 	        position: 'center',
@@ -27,11 +27,11 @@ define([], function() {
 
 	return {
 		show: function() {
-			if (!prefWin) {
+			if (prefWin) {
+				prefWin.show();
+			} else { 
 				init();
 			}
-			
-			prefWin.show();
 		},
 
 		hide: function() {
