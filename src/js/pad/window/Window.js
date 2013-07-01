@@ -96,8 +96,12 @@ define([
 		x = win.x - window.parent.screenX + e.clientX;
 		y = win.y - window.parent.screenY + e.clientY;
 
-		if (process.platform == 'win32') {
-			y += 20;
+		switch(process.platform) {
+			case 'linux':
+				y += 26;
+			break;
+			default:
+			break;
 		}
 
 		x = (ev) ? x + $('#editor').width() : x;
