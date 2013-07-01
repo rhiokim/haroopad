@@ -147,7 +147,9 @@ module.exports = function(grunt) {
     uglify: {
       pad: {
         options: {
-          // mangle: true,
+          mangle: {
+            except: ['jQuery', 'Backbone', '_']
+          },
           // compress: true
         },
         files: {

@@ -99,8 +99,7 @@ define([
 
 	exports.open = function(file, options) {
     var existWin, newWin,
-    	options = options || {},
-    	hash = file ? '#file='+ file : '';
+    	options = options || {};
 
     //이미 열려 있는 파일 일 경우
     if (file && (existWin = getWindowByFile(file))) {
@@ -114,7 +113,7 @@ define([
 
     openning = true;
 
-		newWin = gui.Window.open('pad.html'+ hash, {
+		newWin = gui.Window.open('pad.html', {
 		    "min_width": 500,
 		    "min_height": 250,
         "toolbar": false,

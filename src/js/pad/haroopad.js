@@ -82,7 +82,7 @@ requirejs([
     if (tmp) {
       File.openTmp(decodeURIComponent(file), uid);
     } else {
-      if (file && !tmp) {
+      if (file) {
         File.open(decodeURIComponent(file));
       } else {
         Editor.on("change", delayChange);
