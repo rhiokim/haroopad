@@ -29,7 +29,7 @@ define([
 			_.each(contentDocument.styleSheets, function(item) {
 				href = item.href;
 
-				if (process.platform != 'win32') {
+				if (process.platform !== 'win32') {
 					href = href.replace('file://', '');
 				}
 
