@@ -54,9 +54,6 @@ module.exports = function(grunt) {
           "build/haroopad/css/haroopad.min.css": [
             'src/css/bootstrap.css',
             'src/css/todc-bootstrap.css',
-            // 'src/css/bootstrapSwitch.css',
-            // 'src/css/select2.css',
-            // 'src/css/font-awesome.min.css',
             'src/css/bootstrap-modal.css'
           ],
           "build/haroopad/css/viewer.min.css": [
@@ -102,12 +99,11 @@ module.exports = function(grunt) {
             '<%= vendors %>/underscore.js',
             '<%= vendors %>/backbone.js',
             '<%= vendors %>/store.js',
-            '<%= vendors %>/js-url.js',
             '<%= vendors %>/require.js'
           ],
           'build/haroopad.js': [
-            '<%= vendors %>/underscore.js',
             '<%= vendors %>/eventemitter.js',
+            '<%= vendors %>/underscore.js',
             'src/js/app/before.bin.js',
             'src/js/lib/logger.js',
             '<%= vendors %>/jquery-1.9.1.js',
@@ -116,7 +112,6 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modalmanager.js',
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/store.js',
-            '<%= vendors %>/js-url.js',
             'src/js/app/after.bin.js'
           ],
           'build/preferences.js': [
@@ -137,10 +132,11 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/lib/codemirror.js',
             '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
             '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
+            '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
             '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
-            // '<%= vendors %>/CodeMirror/mode/xml/xml.js',
-            // '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
-            // '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
+            '<%= vendors %>/CodeMirror/mode/xml/xml.js',
+            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
+            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
             '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
             '<%= vendors %>/CodeMirror/keymap/vim.js'
           ]
@@ -177,9 +173,9 @@ module.exports = function(grunt) {
         options: {},
         files: {
           'build/haroopad/js/viewer.min.js': [
+            'src/js/viewer/disable.debug.js',
             '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/highlight.pack.js',
-            'src/js/viewer/disable.debug.js',
             'src/js/viewer/main.js'
           ]
         }

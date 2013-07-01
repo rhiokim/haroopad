@@ -1,4 +1,4 @@
-function MenuBar() {
+window.MenuBar = function() {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 
@@ -19,4 +19,4 @@ function MenuBar() {
 	}
 
 	create();
-}
+};

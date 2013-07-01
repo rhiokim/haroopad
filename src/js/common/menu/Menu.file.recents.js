@@ -1,4 +1,4 @@
-MenuBarFileRecents = function() {
+window.MenuBarFileRecents = function() {
     var fs = require('fs');
 
     var path = require('path');
@@ -53,4 +53,4 @@ MenuBarFileRecents = function() {
     submenu.append(mClear);
 
     return submenu;
-}
+};
