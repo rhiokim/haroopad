@@ -1,3 +1,29 @@
+## Haroopad v0.4.3
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#27              | Safe your writing when crash
+**Bugs**         | 
+#83              | Fixed vim toggling shortcut error
+#61              | Block unlimited new window test
+                 | Fixed export html
+**Enhancements** |
+#86, #70         | Enhance security
+#85              | Update major modules(platform, editor)
+#74              | Default save folder
+
+* [https://github.com/rhiokim/haroopad/issues?milestone=13&state=closed](https://github.com/rhiokim/haroopad/issues?milestone=13&state=closed)
+
+##### Download
+> * Windows NSIS installer:[https://www.dropbox.com/s/aox3yuue3v6uvqb/haroopad-win32-v0.4.3.exe](https://www.dropbox.com/s/aox3yuue3v6uvqb/haroopad-win32-v0.4.3.exe)
+> * Mac OS X DMG: [https://www.dropbox.com/s/63jctqlh2f7czpq/haroopad-v0.4.3.dmg](https://www.dropbox.com/s/63jctqlh2f7czpq/haroopad-v0.4.3.dmg)
+> * Linux 32-bit Binary:[https://www.dropbox.com/s/l70g879ir4op0vi/haroopad-v0.4.3-i386.tar.gz](https://www.dropbox.com/s/l70g879ir4op0vi/haroopad-v0.4.3-i386.tar.gz)
+> * Linux 32-bit Debian Package:[https://www.dropbox.com/s/91sq33lxyrpgr7h/haroopad-v0.4.3-i386.deb](https://www.dropbox.com/s/91sq33lxyrpgr7h/haroopad-v0.4.3-i386.deb)
+> * Linux 64-bit Binary:[https://www.dropbox.com/s/2ddutu86563op8t/haroopad-v0.4.3-x64.tar.gz](https://www.dropbox.com/s/2ddutu86563op8t/haroopad-v0.4.3-x64.tar.gz)
+> * Linux 64-bit Debian Package:[https://www.dropbox.com/s/al771sv8idls4v0/haroopad-v0.4.3-x64.deb](https://www.dropbox.com/s/al771sv8idls4v0/haroopad-v0.4.3-x64.deb)
+
+
 ## Haroopad v0.4.2
 
 Issue Number     | Description
