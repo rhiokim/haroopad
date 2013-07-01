@@ -71,7 +71,7 @@ define([
 			_updateStore();
 
 			// newWin.window.haveParent(window);
-			newWin.window.parent = window;
+			// newWin.window.parent = window;
 
       if (config.height + top > window.screen.height) {
       	top = 0;
@@ -119,6 +119,7 @@ define([
         "toolbar": false,
         "show": false
       });
+		newWin.parent = window;
 
 		newWin._params = merge({}, options, {
 			file: file,

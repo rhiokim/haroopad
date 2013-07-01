@@ -42,7 +42,7 @@ requirejs([
 
     window.ee.on('change.markdown', function(md, options, cb) {
       cb = typeof options === 'function' ? options : cb;
-      options = typeof options === 'object' ? options : {};
+      options = typeof options === 'object' ? options : undefined;
       
       var html = Parser(md, options);
 

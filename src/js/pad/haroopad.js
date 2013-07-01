@@ -64,6 +64,7 @@ requirejs([
     file = win._params.file;
     tmp = win._params.tmp;
     uid = win._params.uid;
+    window.parent = win.parent;
 
     window.ee.on('file.opened', function(opt) {
 
