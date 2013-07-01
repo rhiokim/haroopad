@@ -1,3 +1,20 @@
+<!--
+## Haroopad v0.4.3
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#27              | Safe your writing when crash
+**Bugs**         | 
+#83              | Fixed vim toggling shortcut error
+#61              | Block unlimited new window test
+**Enhancements** |
+#86, #70         | Enhance security
+#85              | Update major modules(platform, editor)
+#74              | Default save folder
+
+-->
+
 ## Haroopad v0.4.2
 
 Issue Number     | Description

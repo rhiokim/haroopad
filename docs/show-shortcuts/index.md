@@ -32,7 +32,7 @@ CTRL + [                  | 에디터 + 뷰어 모드
 CTRL + ALT + ]            | 에디터 가로 사이즈 +5%
 CTRL + ALT + [            | 에디터 가로 사이즈 -5%
 COMMAND(CTRL) + SHIFT + L | 에디터 라인넘버 토글
-COMMAND(CTRL) + SHIFT + V | VIM 키 바인딩
+COMMAND(CTRL) + ALT + V   | VIM 키 바인딩 (v0.4.3)
 
 ##### Editing
 Shortcut                | Example        | Description
