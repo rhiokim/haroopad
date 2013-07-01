@@ -33,7 +33,9 @@ define([
 					href = href.replace('file://', '');
 				}
 
-				cssText += fs.readFileSync(href, 'utf8');
+				if (fs.existsSync(href)) {
+					cssText += fs.readFileSync(href, 'utf8');
+				}
 			});
 
 			return '<style>\n'+ cssText +'\n</style>';
