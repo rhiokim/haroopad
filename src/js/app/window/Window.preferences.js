@@ -6,7 +6,7 @@ define([], function() {
 
 	function init() {
 		prefWin = gui.Window.open('preferences.html', {
-	        toolbar: true,
+	        toolbar: false,
 	        show: true,
 	        width: 510,
 	        height: 300,
@@ -14,6 +14,7 @@ define([], function() {
 	        position: 'center',
 	        fullscreen: false
 	      });
+		prefWin.parent = window;
 
 		prefWin.on('close', function() {
 			prefWin.hide();
@@ -21,7 +22,8 @@ define([], function() {
 
 		prefWin.on('loaded', function() {
 			// prefWin.window.haveParent(window);
-			prefWin.window.parent = window;
+			
+			// prefWin.window.parent = window;
 		});
 	}
 
