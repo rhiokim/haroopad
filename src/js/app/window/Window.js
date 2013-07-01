@@ -11,6 +11,10 @@ define([
 	var win = gui.Window.get(),
 		subWin;
 
+  window.ee.on('tmp.file.open', function(file, uid) {
+    WindowMgr.open(file, { uid: uid, tmp: true });
+  });
+
   window.ee.on('menu.file.new', function() {
     WindowMgr.open();
   });
@@ -164,7 +168,7 @@ define([
     WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
-  HotKey('defmod-shift-v', function() {
+  HotKey('defmod-alt-v', function() {
     WindowMgr.actived.window.ee.emit('toggle.vim.keybind');
   });
 
@@ -172,4 +176,5 @@ define([
     Preferences.show();
   });
 
+  File.loadTemporary();
 });

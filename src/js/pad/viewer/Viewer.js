@@ -24,17 +24,23 @@ define([
 		});
 		
 		window.parent.ee.on('preferences.viewer.clickableLink', function(value) {
-			value ? viewer.allowLink() : viewer.blockLink() ;
+			viewerConfig.clickableLink = value;
+			// value ? viewer.allowLink() : viewer.blockLink() ;
 		});
 		
 		window.ee.on('print.html', function(value) {
 			viewer.print();
 		});
 
+		//linkable
+		viewer.ee.on('link', function(href) {
+			if (viewerConfig.clickableLink) {
+    		gui.Shell.openExternal(href);
+			}
+		});
 
 		viewer.setViewStyle(viewerConfig.theme || 'haroopad');
 		viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
-		viewerConfig.clickableLink ? viewer.allowLink() : viewer.blockLink() ;
 		
 		/**
 		 * delegate to parent window key mouse down event
@@ -71,8 +77,6 @@ define([
 		function update(markdown, html, editor) {
 			content = html;
 			viewer.update(content);
-
-			viewerConfig.clickableLink ? viewer.allowLink() : viewer.blockLink();
 		}
 
 		/* change markdown event handler */

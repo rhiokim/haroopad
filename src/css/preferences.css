@@ -1,5 +1,7 @@
 body {
 	margin-top: 10px;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .select2-search {

@@ -1,10 +1,10 @@
 var path = require('path'),
   fs = require('fs'),
-  userDataDir = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'] + '/.haroopad',
-  errorLog = userDataDir + '/error.md';
+  gui = require('nw.gui'),
+  errorLog = path.join(gui.App.dataPath[0], '.error.log');
 
-if (!fs.existsSync(userDataDir)) {
-  fs.mkdirSync(userDataDir);
+if (!fs.existsSync(gui.App.dataPath[0])) {
+  fs.mkdirSync(gui.App.dataPath[0]);
 }
 
 process.on('uncaughtException', function(err) {

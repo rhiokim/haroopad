@@ -17,13 +17,17 @@ define([
 					    mode: 'markdown',
 					    theme: 'solarized dark',
 					    lineNumbers: true,
+					    lineWrapping: true,
 					    electricChars: false,
 					    viewportMargin: 40,
-					    lineWrapping: true,
+					    tabSize: 2,
+			        indentUnit: 4,
+			        indentWithTabs: true,
 					    autofocus: true,
 					    workDelay: 1000,
 					    dragDrop: false,
-					    extraKeys: Keymap
+					    extraKeys: Keymap,
+  						showTrailingSpace: true
 					  });
 
 		/* initialize editor */
@@ -35,7 +39,7 @@ define([
 		
 		window.ee.on('toggle.vim.keybind', function() {
 		  var map = editor.getOption('keyMap');
-		  editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
+		  editor.setOption('keyMap', map == 'vim' ? 'default' : 'vim');
 		});
 
 		window.ee.on('show.toggle.linenum', function() {
