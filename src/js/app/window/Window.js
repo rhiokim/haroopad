@@ -168,7 +168,7 @@ define([
     WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
-  HotKey('defmod-shift-v', function() {
+  HotKey('defmod-alt-v', function() {
     WindowMgr.actived.window.ee.emit('toggle.vim.keybind');
   });
 
