@@ -50,7 +50,7 @@ define([
 	});
 
 	window.ee.on('file.opened', function(opt) {
-		win.title = orgTitle = opt.basename;
+		win.title = orgTitle = opt.basename || orgTitle;
   });
 
   window.ee.on('file.saved', function(opt) {
