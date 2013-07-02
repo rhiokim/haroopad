@@ -1,4 +1,8 @@
+var gui = require('nw.gui'),
+    win = gui.Window.get();
+        
 window.ee = new EventEmitter();
+window.parent = win.parent;
 
 if (process.platform != 'darwin') {
   MenuBar(); 
@@ -11,10 +15,6 @@ function loadCss(url) {
     link.href = url;
     document.getElementsByTagName("head")[0].appendChild(link);
 }
-
-// function haveParent(parent) {
-//   window.parent = parent;
-// }
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -57,9 +57,6 @@ requirejs([
     var edited = false,
       delayClose = false;
 
-    var gui = require('nw.gui'),
-        win = gui.Window.get();
-
     // file = url('#file');
     file = win._params.file;
     tmp = win._params.tmp;
@@ -82,7 +79,7 @@ requirejs([
     if (tmp) {
       File.openTmp(decodeURIComponent(file), uid);
     } else {
-      if (file && !tmp) {
+      if (file) {
         File.open(decodeURIComponent(file));
       } else {
         Editor.on("change", delayChange);

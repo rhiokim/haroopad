@@ -21,7 +21,7 @@ define([
 			window.clearTimeout(writeTimeout);
 			_file = Opt.get('tmp');
 
-			if (Opt.get('fileEntry') || _file) {
+			if (_file && fs.existsSync(_file)) {
 				fs.unlinkSync(_file);
 
 				TmpOpt.unset(_uid);
@@ -40,7 +40,7 @@ define([
 				window.clearTimeout(writeTimeout);
 
 				writeTimeout = window.setTimeout(function() {
-					TmpOpt.set(uid, _file);
+					TmpOpt.set(_uid, _file);
 					fs.writeFileSync(_file, Opt.get('markdown'), 'utf8');
 				}, 5000);
 			},

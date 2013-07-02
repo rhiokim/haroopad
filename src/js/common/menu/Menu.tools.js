@@ -1,4 +1,4 @@
-MenuBarTools = function () {
+window.MenuBarTools = function () {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 
@@ -30,4 +30,4 @@ MenuBarTools = function () {
         });
 
 	return new gui.MenuItem({ label: 'Tools', submenu: Tools });
-}
+};

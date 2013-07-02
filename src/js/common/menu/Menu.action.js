@@ -140,4 +140,4 @@ MenuBarAction = function () {
   );*/
 
 	return new gui.MenuItem({ label: 'Action', submenu: Action });
-}
+};

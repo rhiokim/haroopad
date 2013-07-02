@@ -41,48 +41,48 @@ requirejs([
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-    //open file with commend line
-    if (gui.App.argv.length > 0) {
-      WindowMgr.open(gui.App.argv[0]);
-    } else {
-      WindowMgr.open();
-    }
-
     window.ee.on('change.markdown', function(md, options, cb) {
-      var cb = typeof options == 'function' ? options : cb;
-      var options = typeof options == 'object' ? options : undefined;
+      cb = typeof options === 'function' ? options : cb;
+      options = typeof options === 'object' ? options : undefined;
       
       var html = Parser(md, options);
 
       cb(html);
     });
 
-    window.ee.on('posts.tumblr', function(fileInfo, options) {
+    window.ee.on('posts.tumblr', function(fileInfo, mailInfo) {
       var child = WindowMgr.actived;
       var Emails = store.get('Emails') || {};
       var addrs = Emails.addrs || [];
 
-      Mailer.setCredential(options.from, options.password);
-      Mailer.send('test', fileInfo.markdown, fileInfo.html, options.to, options.mode, function(err, response) {
+      Mailer.setCredential(mailInfo.from, mailInfo.password);
+      Mailer.send(mailInfo.title, fileInfo.markdown, fileInfo.html, mailInfo.to, mailInfo.mode, function(err, response) {
 
         if (err) {
           child.window.ee.emit('fail.post.tumblr', err);
           return;
         }
 
-        if (options.remember) {
-          addrs.push(options.to);
+        if (mailInfo.remember) {
+          addrs.push(mailInfo.to);
 
           store.set('Emails', {
-            to: options.to,
-            from: options.from,
-            mode: options.mode,
+            to: mailInfo.to,
+            from: mailInfo.from,
+            mode: mailInfo.mode,
             addrs: addrs,
-            remember: options.remember
+            remember: mailInfo.remember
           });
         }
 
         child.window.ee.emit('posted.tumblr');
       });
     })
+    
+    //open file with commend line
+    if (gui.App.argv.length > 0) {
+      WindowMgr.open(gui.App.argv[0]);
+    } else {
+      WindowMgr.open();
+    }
 });

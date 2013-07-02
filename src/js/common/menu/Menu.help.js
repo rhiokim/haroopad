@@ -1,4 +1,4 @@
-MenuBarHelp = function () {
+window.MenuBarHelp = function () {
 	var gui = require('nw.gui');
 	var shell = gui.Shell;
 	
@@ -78,4 +78,4 @@ MenuBarHelp = function () {
 	);
 
 	return new gui.MenuItem({ label: 'Help', submenu: Help });
-}
+};

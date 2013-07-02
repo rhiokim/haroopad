@@ -1,4 +1,4 @@
-MenuBarFileExports = function () {
+window.MenuBarFileExports = function () {
   var gui = require('nw.gui');
   var submenu = new gui.Menu();
 
@@ -12,4 +12,4 @@ MenuBarFileExports = function () {
   );
 
   return submenu;
-}
+};

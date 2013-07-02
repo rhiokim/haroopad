@@ -1,4 +1,4 @@
-MenuBarFile = function () {
+window.MenuBarFile = function () {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 
@@ -107,4 +107,4 @@ MenuBarFile = function () {
      */
 
 	return new gui.MenuItem({ label: 'File', submenu: File });
-}
+};

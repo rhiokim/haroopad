@@ -1,3 +1,7 @@
+var gui = require('nw.gui'),
+    win = gui.Window.get();
+
+window.parent = win.parent;
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -36,9 +40,6 @@ requirejs([
   ], function(General, Editor, Viewer, Code, Markdown, Helper, About) {
 
     $('.switch').bootstrapSwitch();
-
-    var gui = require('nw.gui'),
-        win = gui.Window.get();
 
     win.on('context.preferences', function() {
       alert('context.prefe')

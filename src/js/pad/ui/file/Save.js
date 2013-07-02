@@ -11,7 +11,8 @@ define(function() {
   	initialize: function() {
   	},
 
-  	show: function() {
+  	show: function(dir) {
+      this.$el.attr({ nwworkingdir: dir });
   	  this.$el.trigger('click');
   	},
 

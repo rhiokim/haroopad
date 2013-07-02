@@ -1,10 +1,13 @@
 define([
-		'vendors/text!tpl/modal-post-tumblr.html'
+		'vendors/text!tpl/modal-send-email.html'
 	], 
 	function(html) {
 		$('#dialogs').append(html);
 
-		var el = $('#post-tumblr-dialog');
+		var gui = require('nw.gui');
+		var shell = gui.Shell;
+
+		var el = $('#send-email-dialog');
 		var bar = el.find('.progress div.bar');
 		var postTimeout;
 
@@ -38,10 +41,11 @@ define([
 		}
 
 		var View = Backbone.View.extend({
-			el: '#post-tumblr-dialog',
+			el: '#send-email-dialog',
 
 			events: {
 				// 'click ._dont_save': 'dontSaveHandler',
+				'click a': 'clickHandler',
 				'submit form': 'postHandler',
 				'click ._cancel': 'cancelHandler'
 			},
@@ -67,10 +71,17 @@ define([
 				stop();
 			},
 
+			clickHandler: function(e) {
+				var href = $(e.target).attr('href');
+				e.preventDefault();
+				shell.openExternal(href);
+			},
+
 			postHandler: function(e) {
-				var to, from, password;
+				var title, to, from, password;
 				e.preventDefault();
 
+				title = this.$el.find('input[name=title]').val() || '';
 				to = this.$el.find('input[name=to]').val();
 				from = this.$el.find('input[name=from]').val();
 				password = this.$el.find('input[name=password]').val();
@@ -80,7 +91,14 @@ define([
 
 				progress();
 				
-				this.trigger('post', to, from, password, remember, mode);
+				this.trigger('post', {
+					title: title, 
+					to: to, 
+					from: from, 
+					password: password, 
+					remember: remember, 
+					mode: mode
+				});
 			},
 
 			error: function(msg) {
