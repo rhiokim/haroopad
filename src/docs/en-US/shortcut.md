@@ -19,7 +19,7 @@ CTRL + [                  | dual mode
 CTRL + ALT + ]            | editor width +5%
 CTRL + ALT + [            | editor width -5%
 COMMAND(CTRL) + SHIFT + L | toggle line number
-COMMAND(CTRL) + SHIFT + V | vim keyboard binding
+COMMAND(CTRL) + ALT + V   | vim keyboard binding
 
 ##### Editing
 Shortcut                | Description

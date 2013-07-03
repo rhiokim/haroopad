@@ -70,8 +70,14 @@ define([
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			// newWin.window.haveParent(window);
-			// newWin.window.parent = window;
+			newWin.resizeTo(config.width, config.height);
+
+			shadowCount++;
+
+			//윈도우 오픈 시 position 파라미터가 존재하면 위치 지정은 패스한다.
+			if (newWin._params.position) {
+				return;
+			}
 
       if (config.height + top > window.screen.height) {
       	top = 0;
@@ -85,9 +91,6 @@ define([
       top = top + 20;
   
   		newWin.moveTo(left, top);
-			newWin.resizeTo(config.width, config.height);
-
-			shadowCount++;
 		});
 	}
 
@@ -98,8 +101,10 @@ define([
 	});
 
 	exports.open = function(file, options) {
-    var existWin, newWin,
-    	options = options || {};
+    var existWin, newWin;
+
+    options = typeof file === 'object' ? file : options || {};
+    file = typeof file === 'string' ? file : undefined;
 
     //이미 열려 있는 파일 일 경우
     if (file && (existWin = getWindowByFile(file))) {
@@ -113,15 +118,15 @@ define([
 
     openning = true;
 
-		newWin = gui.Window.open('pad.html', {
+		newWin = gui.Window.open('pad.html', merge({
 		    "min_width": 500,
 		    "min_height": 250,
         "toolbar": false,
         "show": false
-      });
+      }, options));
 		newWin.parent = window;
 
-		newWin._params = merge({}, options, {
+		newWin._params = merge(options, {
 			file: file,
 			created_at: new Date().getTime()
 		});

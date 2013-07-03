@@ -2,14 +2,12 @@ define([
 		'keyboard',
 		'ui/file/File.opt',
 		'ui/dialog/Save',
-		'ui/dialog/Shortcuts',
 		'ui/dialog/Posts'
 	], 
-	function(HotKey, FileOpt, Save, Shortcuts, Posts) {
+	function(HotKey, FileOpt, Save, Posts) {
 		var dialogs;
 
 		var SaveDialog = new Save,
-				ShortcutsDialog = new Shortcuts,
 				PostsDialog = new Posts;
 
 		HotKey('shift-ctrl-space', function() {
@@ -33,7 +31,6 @@ define([
 
 		return dialogs = {
 			save: SaveDialog,
-			shortcuts: ShortcutsDialog,
 			posts: PostsDialog
 		}
 });
