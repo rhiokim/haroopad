@@ -11,10 +11,16 @@ define([
 	var win = gui.Window.get(),
 		subWin;
 
-  var path = require('path');
+  var fs = require('fs'),
+      path = require('path');
+  
   var locale = window.navigator.language;
 
   var pathDocs = path.join(process.cwd(), 'docs', locale);
+
+  if (!fs.existsSync(pathDocs)) {
+    pathDocs = path.join(process.cwd(), 'docs', 'en-US');
+  }
 
   window.ee.on('tmp.file.open', function(file, uid) {
     WindowMgr.open(file, { uid: uid, tmp: true });
