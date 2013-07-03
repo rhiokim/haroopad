@@ -176,5 +176,10 @@ define([
     Preferences.show();
   });
 
+  HotKey('shift-ctrl-space', function() {
+    console.log(process.cwd());
+    WindowMgr.open(process.cwd() +'/robots.txt', { readOnly: true });
+  });
+
   File.loadTemporary();
 });

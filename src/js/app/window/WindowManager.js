@@ -98,8 +98,10 @@ define([
 	});
 
 	exports.open = function(file, options) {
-    var existWin, newWin,
-    	options = options || {};
+    var existWin, newWin;
+
+    options = typeof file === 'object' ? file : options;
+    file = typeof file === 'string' ? file : undefined;
 
     //이미 열려 있는 파일 일 경우
     if (file && (existWin = getWindowByFile(file))) {

@@ -51,6 +51,10 @@ define([
 
 	window.ee.on('file.opened', function(opt) {
 		win.title = orgTitle = opt.basename || orgTitle;
+
+		if (win._params.readOnly) {
+			win.title += ' [Read only mode]';
+		}
   });
 
   window.ee.on('file.saved', function(opt) {

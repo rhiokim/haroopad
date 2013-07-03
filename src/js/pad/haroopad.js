@@ -50,17 +50,19 @@ requirejs([
     'viewer/Viewer',
     'ui/file/File'
   ], function(Window, Editor, Viewer, File) {
-    var html, res, file, uid, tmp, x, y;
+    var html, res, file, uid, tmp, readOnly, x, y;
     var _tid_;
 
     var orgTitle = 'Untitled';
     var edited = false,
       delayClose = false;
+    var params = win._params;
 
     // file = url('#file');
-    file = win._params.file;
-    tmp = win._params.tmp;
-    uid = win._params.uid;
+    file = params.file;
+    tmp = params.tmp;
+    uid = params.uid;
+    readOnly = params.readOnly || false;
 
     window.ee.on('file.opened', function(opt) {
 
@@ -81,6 +83,7 @@ requirejs([
     } else {
       if (file) {
         File.open(decodeURIComponent(file));
+        Editor.setOption('readOnly', readOnly);
       } else {
         Editor.on("change", delayChange);
       }

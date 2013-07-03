@@ -15,19 +15,15 @@ define([],
 			}
 
 			for(var uid in tmpFiles) {
-				fs.exists(tmpFiles[uid], function(exist) {
-					if(exist) {
-						window.ee.emit('tmp.file.open', tmpFiles[uid], uid);
-					} else {
-						delete tmpFiles[uid];
-					}
-				});
+				if (fs.existsSync(tmpFiles[uid])) {
+					window.ee.emit('tmp.file.open', tmpFiles[uid], uid);
+				} else {
+					delete tmpFiles[uid];
+				}
 			}
+
+			store.set('Temporary', tmpFiles);
 		}
-		// tmpFiles = readDir.readSync( appTmpDataPath, [ '*.md' ], readDir.ABSOLUTE_PATHS ) || [];
-		// tmpFiles.forEach(function(file, idx) {
-		// 	window.ee.emit('tmp.file.open', file);
-		// });
 
 		return {
 			save: function(file, markdown, cb) {
