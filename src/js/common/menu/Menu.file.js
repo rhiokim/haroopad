@@ -17,7 +17,6 @@ window.MenuBarFile = function () {
 	menuItem({
             label: 'New',
             click: function() {
-                // process.emit('menu.file.new');
                 window.parent.ee.emit('menu.file.new');
             }
         });

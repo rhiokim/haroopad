@@ -107,6 +107,25 @@ define([
   });
 
   /**
+   * find menu
+   */
+  window.ee.on('menu.find.start', function() {
+    WindowMgr.actived.window.ee.emit('find.start');
+  });
+  window.ee.on('menu.find.next', function() {
+    WindowMgr.actived.window.ee.emit('find.next');
+  });
+  window.ee.on('menu.find.previous', function() {
+    WindowMgr.actived.window.ee.emit('find.previous');
+  });
+  window.ee.on('menu.find.replace', function() {
+    WindowMgr.actived.window.ee.emit('find.replace');
+  });
+  window.ee.on('menu.find.replace.all', function() {
+    WindowMgr.actived.window.ee.emit('find.replace.all');
+  });
+
+  /**
    * help menu
    */
   

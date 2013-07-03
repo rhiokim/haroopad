@@ -9,9 +9,12 @@
 
   text-shadow: none;
   font-size: 0.9em;
-  font-family: AppleSDGothicNeo-Medium, "맑은고딕", '돋움', dotum, Helvetica, sans-serif, Menlo, Monaco,"lucida console", monospace;
+  font-family: Helvetica, AppleSDGothicNeo-Medium, "맑은고딕", '돋움', dotum, sans-serif, Menlo, Monaco,"lucida console", monospace;
 
-  box-shadow: 0 0 3px rgba(0,0,0,0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+
+  background: #eeeeee; /* Old browsers */
+  background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
 }
 
 .CodeMirror-dialog-top {
@@ -31,7 +34,10 @@
   width: 20em;
   color: inherit;
   font-family: monospace;*/
-  margin: 3px 0;
+  margin: 1px 0;
+  padding: 0 3px !important;
+  font-size: 12px;
+  width: 15.2em !important;
 }
 
 .CodeMirror-dialog button {
