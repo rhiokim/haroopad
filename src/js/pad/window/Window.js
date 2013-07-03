@@ -53,7 +53,7 @@ define([
 		win.title = orgTitle = opt.basename || orgTitle;
 
 		if (win._params.readOnly) {
-			win.title += ' [Read only mode]';
+			win.title += ' (read only)';
 		}
   });
 
