@@ -177,8 +177,8 @@ define([
   });
 
   HotKey('shift-ctrl-space', function() {
-    console.log(process.cwd());
-    WindowMgr.open(process.cwd() +'/robots.txt', { readOnly: true });
+    var locale = window.navigator.language;
+    WindowMgr.open(process.cwd() +'/docs/'+ locale +'/shortcut.md', { readOnly: true });
   });
 
   File.loadTemporary();
