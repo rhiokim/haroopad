@@ -39,7 +39,7 @@ define([
 		
 		window.ee.on('toggle.vim.keybind', function() {
 		  var map = editor.getOption('keyMap');
-		  editor.setOption('keyMap', map == 'vim' ? '' : 'vim');
+		  editor.setOption('keyMap', map == 'vim' ? 'default' : 'vim');
 		});
 
 		window.ee.on('show.toggle.linenum', function() {

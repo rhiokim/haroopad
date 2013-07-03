@@ -40,20 +40,19 @@ requirejs([
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
+    window.ee.on('change.markdown', function(md, options, cb) {
+      cb = typeof options === 'function' ? options : cb;
+      options = typeof options === 'object' ? options : undefined;
+      
+      var html = Parser(md, options);
+
+      cb(html);
+    });
+    
     //open file with commend line
     if (gui.App.argv.length > 0) {
       WindowMgr.open(gui.App.argv[0]);
     } else {
       WindowMgr.open();
     }
-
-    window.ee.on('change.markdown', function(md, options, cb) {
-      var cb = typeof options == 'function' ? options : cb;
-      var options = typeof options == 'object' ? options : undefined;
-      
-      var html = Parser(md, options);
-
-      cb(html);
-      // WindowMgr.actived.updateMarkdown(html);
-    });
 });

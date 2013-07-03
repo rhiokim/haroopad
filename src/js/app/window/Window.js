@@ -11,6 +11,16 @@ define([
 	var win = gui.Window.get(),
 		subWin;
 
+  var fs = require('fs'),
+      path = require('path');
+  
+  var locale = window.navigator.language;
+  var pathDocs = path.join(process.cwd(), 'docs', locale);
+
+  if (!fs.existsSync(pathDocs)) {
+    pathDocs = path.join(process.cwd(), 'docs', 'en-US');
+  }
+
   window.ee.on('tmp.file.open', function(file, uid) {
     WindowMgr.open(file, { uid: uid, tmp: true });
   });
@@ -95,7 +105,25 @@ define([
     // WindowMgr.actived.emit('action.copy.html');
     WindowMgr.actived.window.ee.emit('action.copy.html');
   });
+
+  /**
+   * help menu
+   */
   
+  window.ee.on('menu.help.about', function() {
+    WindowMgr.open(pathDocs +'/about.md', { readOnly: true, position: 'center' });
+  });
+  window.ee.on('menu.help.syntax', function() {
+    WindowMgr.open(pathDocs +'/syntax.md', { readOnly: true, position: 'center' });
+  });
+  window.ee.on('menu.help.acknowledgements', function() {
+    WindowMgr.open(pathDocs +'/acknowledgements.md', { readOnly: true, position: 'center' });
+  });
+  window.ee.on('menu.help.shortcut', function() {
+    WindowMgr.open(pathDocs +'/shortcut.md', { readOnly: true, position: 'center' });
+  });
+
+
 
   //fire by child window
   window.ee.on('file.open', function(file) {
@@ -168,12 +196,16 @@ define([
     WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
-  HotKey('defmod-shift-v', function() {
+  HotKey('defmod-alt-v', function() {
     WindowMgr.actived.window.ee.emit('toggle.vim.keybind');
   });
 
   HotKey('defmod-,', function() {
     Preferences.show();
+  });
+
+  HotKey('shift-ctrl-space', function() {
+    window.ee.emit('menu.help.shortcut');
   });
 
   File.loadTemporary();

@@ -1,4 +1,8 @@
+var gui = require('nw.gui'),
+    win = gui.Window.get();
+        
 window.ee = new EventEmitter();
+window.parent = win.parent;
 
 if (process.platform != 'darwin') {
   MenuBar(); 
@@ -11,10 +15,6 @@ function loadCss(url) {
     link.href = url;
     document.getElementsByTagName("head")[0].appendChild(link);
 }
-
-// function haveParent(parent) {
-//   window.parent = parent;
-// }
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -50,20 +50,19 @@ requirejs([
     'viewer/Viewer',
     'ui/file/File'
   ], function(Window, Editor, Viewer, File) {
-    var html, res, file, uid, tmp, x, y;
+    var html, res, file, uid, tmp, readOnly, x, y;
     var _tid_;
 
     var orgTitle = 'Untitled';
     var edited = false,
       delayClose = false;
-
-    var gui = require('nw.gui'),
-        win = gui.Window.get();
+    var params = win._params;
 
     // file = url('#file');
-    file = win._params.file;
-    tmp = win._params.tmp;
-    uid = win._params.uid;
+    file = params.file;
+    tmp = params.tmp;
+    uid = params.uid;
+    readOnly = params.readOnly || false;
 
     window.ee.on('file.opened', function(opt) {
 
@@ -82,8 +81,9 @@ requirejs([
     if (tmp) {
       File.openTmp(decodeURIComponent(file), uid);
     } else {
-      if (file && !tmp) {
+      if (file) {
         File.open(decodeURIComponent(file));
+        Editor.setOption('readOnly', readOnly);
       } else {
         Editor.on("change", delayChange);
       }

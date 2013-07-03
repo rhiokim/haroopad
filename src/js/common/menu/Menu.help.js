@@ -1,4 +1,4 @@
-MenuBarHelp = function () {
+window.MenuBarHelp = function () {
 	var gui = require('nw.gui');
 	var shell = gui.Shell;
 	
@@ -12,7 +12,8 @@ MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Haroopad Help',
 		      click: function() {
-						open('http://pad.haroopress.com/page.html');
+		      	window.ee.emit('menu.help.about');
+						// open('http://pad.haroopress.com/page.html');
 		      }
 	    })
 	);
@@ -20,7 +21,8 @@ MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Markdown Syntax Help',
 		      click: function() {
-		        open('http://pad.haroopress.com/page.html#syntax');
+		      	window.ee.emit('menu.help.syntax');
+		        // open('http://pad.haroopress.com/page.html#syntax');
 		      }
 	    })
 	);
@@ -28,7 +30,8 @@ MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Haroopad Shortcut Help',
 		      click: function() {
-		        open('http://pad.haroopress.com/page.html#show-shortcuts');
+		      	window.ee.emit('menu.help.shortcut');
+		        // open('http://pad.haroopress.com/page.html#show-shortcuts');
 		      }
 	    })
 	);
@@ -50,7 +53,8 @@ MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Acknowledgements',
 		      click: function() {
-		        open('http://pad.haroopress.com/page.html#acknowledgements');
+		      	window.ee.emit('menu.help.acknowledgements');
+		        // open('http://pad.haroopress.com/page.html#acknowledgements');
 		      }
 	    })
 	);
@@ -78,4 +82,4 @@ MenuBarHelp = function () {
 	);
 
 	return new gui.MenuItem({ label: 'Help', submenu: Help });
-}
+};

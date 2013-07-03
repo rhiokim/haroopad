@@ -29,11 +29,13 @@ define([
 			_.each(contentDocument.styleSheets, function(item) {
 				href = item.href;
 
-				if (process.platform != 'win32') {
+				if (process.platform !== 'win32') {
 					href = href.replace('file://', '');
 				}
 
-				cssText += fs.readFileSync(href, 'utf8');
+				if (fs.existsSync(href)) {
+					cssText += fs.readFileSync(href, 'utf8');
+				}
 			});
 
 			return '<style>\n'+ cssText +'\n</style>';

@@ -7,13 +7,14 @@ define([], function() {
 	function init() {
 		prefWin = gui.Window.open('preferences.html', {
 	        toolbar: false,
-	        show: false,
-	        width: 500,
+	        show: true,
+	        width: 510,
 	        height: 300,
 	        resizable: false,
 	        position: 'center',
 	        fullscreen: false
 	      });
+		prefWin.parent = window;
 
 		prefWin.on('close', function() {
 			prefWin.hide();
@@ -21,17 +22,18 @@ define([], function() {
 
 		prefWin.on('loaded', function() {
 			// prefWin.window.haveParent(window);
-			prefWin.window.parent = window;
+			
+			// prefWin.window.parent = window;
 		});
 	}
 
 	return {
 		show: function() {
-			if (!prefWin) {
+			if (prefWin) {
+				prefWin.show();
+			} else { 
 				init();
 			}
-			
-			prefWin.show();
 		},
 
 		hide: function() {
