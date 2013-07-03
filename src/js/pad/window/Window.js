@@ -4,7 +4,7 @@ define([
 		'ui/dialog/Dialogs',
 		'ui/exports/Exports',
 		'ui/splitter/Splitter'
-], function(store, HotKey, Dialogs) {
+], function(store, HotKey, Dialogs, Exports, Splitter) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -51,6 +51,10 @@ define([
 
 	window.ee.on('file.opened', function(opt) {
 		win.title = orgTitle = opt.basename || orgTitle;
+
+		if (win._params.readOnly) {
+			win.title += ' (read only)';
+		}
   });
 
   window.ee.on('file.saved', function(opt) {
@@ -142,7 +146,6 @@ define([
     }, 250); 
 
   }
-
  //  win.moveTo(url('#x'), url('#y'));
 	// win.resizeTo(config.width, config.height);
 
