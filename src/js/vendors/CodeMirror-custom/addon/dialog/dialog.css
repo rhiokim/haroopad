@@ -1,20 +1,20 @@
 .CodeMirror-dialog {
   position: absolute;
-  left: 0; right: 0;
-  background: white;
-  z-index: 15;
-  padding: .1em .8em;
-  overflow: hidden;
-  color: #333;
-
-  text-shadow: none;
+  color: #fff;
   font-size: 0.9em;
-  font-family: Helvetica, AppleSDGothicNeo-Medium, "맑은고딕", '돋움', dotum, sans-serif, Menlo, Monaco,"lucida console", monospace;
+  font-family: Arial,'Apple SD Gothic Neo','Malgun Gothic', Helvetica, 'nanumgothic', sans-serif, Menlo, Monaco, monospace;
 
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  left: 0; 
+  right: 0;
+  padding: .1em .8em;
 
-  background: #eeeeee; /* Old browsers */
-  background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+  text-shadow: 0 0 2px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 3px rgba(0,0,0,0.7);
+
+  background: linear-gradient(to bottom,  rgba(225,225,225,0.7), rgba(200,200,200,0.7)); /* W3C */
+
+  overflow: hidden;
+  z-index: 15;
 }
 
 .CodeMirror-dialog-top {
@@ -28,12 +28,6 @@
 }
 
 .CodeMirror-dialog input {
-  /*border: none;
-  outline: none;
-  background: transparent;
-  width: 20em;
-  color: inherit;
-  font-family: monospace;*/
   margin: 1px 0;
   padding: 0 3px !important;
   font-size: 12px;
@@ -41,5 +35,11 @@
 }
 
 .CodeMirror-dialog button {
-  /*font-size: 70%;*/
+  height: 21px;
+  padding-top: 3px;
+}
+
+.CodeMirror-dialog>span {
+  color: #eeffd3 !important;
+  text-shadow: 0 0 2px rgba(0,0,0,1);
 }

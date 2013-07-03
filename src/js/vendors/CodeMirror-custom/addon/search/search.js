@@ -46,7 +46,7 @@
     return isRE ? new RegExp(isRE[1], isRE[2].indexOf("i") == -1 ? "" : "i") : query;
   }
   var queryDialog =
-    'Search: <input type="text" style="width: 10em"/> <span style="color: #888">(Use /re/ syntax for regexp search)</span>';
+    'Search: <input type="text"/> <span>(Use /re/ syntax for regexp search)</span>';
   function doSearch(cm, rev) {
     var state = getSearchState(cm);
     if (state.query) return findNext(cm, rev);
@@ -80,9 +80,9 @@
   });}
 
   var replaceQueryDialog =
-    'Replace: <input type="text" style="width: 10em"/> <span style="color: #888">(Use /re/ syntax for regexp search)</span>';
+    'Replace: <input type="text"/> <span>(Use /re/ syntax for regexp search)</span>';
   var replacementQueryDialog = 'With: <input type="text" style="width: 10em"/>';
-  var doReplaceConfirm = "Replace? <button>Yes</button> <button>No</button> <button>Stop</button>";
+  var doReplaceConfirm = "Replace? <button class=\"btn btn-small\" type=\"button\">Yes</button> <button class=\"btn btn-small\" type=\"button\">No</button> <button class=\"btn btn-small\" type=\"button\">Stop</button>";
   function replace(cm, all) {
     dialog(cm, replaceQueryDialog, "Replace:", function(query) {
       if (!query) return;
