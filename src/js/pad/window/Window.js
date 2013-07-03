@@ -4,7 +4,7 @@ define([
 		'ui/dialog/Dialogs',
 		'ui/exports/Exports',
 		'ui/splitter/Splitter'
-], function(store, HotKey, Dialogs) {
+], function(store, HotKey, Dialogs, Exports, Splitter) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -146,7 +146,6 @@ define([
     }, 250); 
 
   }
-
  //  win.moveTo(url('#x'), url('#y'));
 	// win.resizeTo(config.width, config.height);
 

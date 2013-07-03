@@ -3,17 +3,21 @@ define([
 	], 
 	function(HotKey) {
 		var gui = require('nw.gui');
+		var win = gui.Window.get();
+
 		var $editor = $('#editor');
 		var $viewer = $('#haroo iframe');
 
 		var width, viewerWidth = 50;//options.get('viewerWidth');
 		var gap = 5;
-		var mode = 1;
+		var mode = win._params.mode || 0;
 
 		width = 100 - viewerWidth;
 
-		if(!mode) {
+		if(mode == 1) {
 			setModeEditor();
+		} else if (mode == -1) {
+			setModeViewer();
 		} else {
 			setModeDual();
 		}
@@ -35,6 +39,15 @@ define([
 
       // options.set('mode', 0);
       mode = 0;
+		}
+
+		function setModeViewer() {
+			// width = 100;
+			$editor.css({ width: '0%' });
+			$viewer.css({ width: '100%' });
+
+      // options.set('mode', 0);
+      mode = -1;
 		}
 
 		function setModeDual() {
