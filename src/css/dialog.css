@@ -1,0 +1,39 @@
+.CodeMirror-dialog {
+  position: absolute;
+  left: 0; right: 0;
+  background: white;
+  z-index: 15;
+  padding: .1em .8em;
+  overflow: hidden;
+  color: #333;
+
+  text-shadow: none;
+  font-size: 0.9em;
+  font-family: AppleSDGothicNeo-Medium, "맑은고딕", '돋움', dotum, Helvetica, sans-serif, Menlo, Monaco,"lucida console", monospace;
+
+  box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+.CodeMirror-dialog-top {
+  border-bottom: 1px solid #eee;
+  top: 0;
+}
+
+.CodeMirror-dialog-bottom {
+  border-top: 1px solid #eee;
+  bottom: 0;
+}
+
+.CodeMirror-dialog input {
+  /*border: none;
+  outline: none;
+  background: transparent;
+  width: 20em;
+  color: inherit;
+  font-family: monospace;*/
+  margin: 3px 0;
+}
+
+.CodeMirror-dialog button {
+  /*font-size: 70%;*/
+}
