@@ -10,9 +10,6 @@ define([
 		var SaveDialog = new Save,
 				PostsDialog = new Posts;
 
-		HotKey('shift-ctrl-space', function() {
-			dialogs.shortcuts.show();
-		});
 		HotKey('cmd-shift-t', PostsDialog.show.bind(PostsDialog));
 
 		window.ee.on('file.posts.tumblr', PostsDialog.show.bind(PostsDialog));
