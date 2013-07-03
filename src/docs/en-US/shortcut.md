@@ -1,34 +1,53 @@
 ## shortcuts
 
+GLYPH    | NAME
+---------|----------------------------------------
+&#8984;  | Command, Cmd, Clover, (formerly) Apple
+&#8997;  | Option, Opt, (Windows) Alt
+&#8679;  | Shift
+&#8963;  | Control, Ctl, Ctrl
+&#63743; | Mac OS
+
 ##### File
 
-Shortcut                  | Description
---------------------------|-------------------
-COMMAND(CTRL) + N         | new window
-COMMAND(CTRL) + S         | save
-COMMAND(CTRL) + SHIFT + S | save as
-COMMAND(CTRL) + O         | open file
-COMMAND(CTRL) + ,         | preferences
-COMMAND(CTRL) + Q         | close window
+Shortcut                       | Description
+-------------------------------|-------------------
+&#8984;(&#8963;) - N           | new window
+&#8984;(&#8963;) - S           | save
+&#8984;(&#8963;) - &#8679; - S | save as
+&#8984;(&#8963;) - O           | open file
+&#8984;(&#8963;) - ,           | preferences
+&#8984;(&#8963;) - Q           | close window
 
 ##### Window
-Shortcut                  | Description
---------------------------|-------------------
-CTRL + ]                  | editor mode
-CTRL + [                  | dual mode
-CTRL + ALT + ]            | editor width +5%
-CTRL + ALT + [            | editor width -5%
-COMMAND(CTRL) + SHIFT + L | toggle line number
-COMMAND(CTRL) + ALT + V   | vim keyboard binding
+Shortcut                       | Description
+-------------------------------|-------------------
+&#8963; - ]                    | editor mode
+&#8963; - [                    | dual mode
+&#8963; - &#8997; - ]          | editor width +5%
+&#8963; - &#8997; - [          | editor width -5%
+&#8984;(&#8963;) - &#8679; - L | toggle line number
+&#8984;(&#8963;) - &#8997; - V | vim keyboard binding
 
 ##### Editing
-Shortcut                | Description
-------------------------|-------------------
-COMMAND(CTRL) + B       | bold
-COMMAND(CTRL) + I       | italic
-COMMAND(CTRL) + L       | link
-COMMAND(CTRL) + ALT + S | strike
-COMMAND(CTRL) + ALT + O | ordered list
-COMMAND(CTRL) + ALT + U | unordered list
-COMMAND(CTRL) + ALT + I | image
-COMMAND(CTRL) + ALT + B | blockquote
+Shortcut                       | Example        | Description
+-------------------------------|:--------------:|-------------------
+&#8984;(&#8963;) - B           | `**Bold**`     | bold
+&#8984;(&#8963;) - I           | `*Italic*`     | italic
+&#8984;(&#8963;) - L           | `[link](url)`  | link
+&#8984;(&#8963;) - &#8997; - S | `~~strike~~`   | strike
+&#8984;(&#8963;) - &#8997; - O | `1. markdown`  | ordered list
+&#8984;(&#8963;) - &#8997; - U | `* haroopad`   | unordered list
+&#8984;(&#8963;) - &#8997; - I | `![]()`        | image
+&#8984;(&#8963;) - &#8997; - B | `> blockquote` | blockquote
+
+##### Finding
+Shortcut                        | Description
+--------------------------------|-------------------
+&#8984;(&#8963;) - F            | Starting search
+&#8984;(&#8963;) - G            | Find next
+&#8984;(&#8963;) - &#8679; + G  | Find previous
+&#8984; - &#8997; - F           | Replace (&#63743;)
+&#8963; - &#8679; - F           | Replace (linux, win)
+&#8984; - &#8679; - &#8997; - F | Replace all (&#63743;)
+&#8679; - &#8963; - R           | Replace all (linux, win)

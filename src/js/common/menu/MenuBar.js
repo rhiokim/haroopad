@@ -8,8 +8,9 @@ window.MenuBar = function() {
 		menu = new gui.Menu({
 		    type:   'menubar'
 		});
-
+		
 		menu.append( MenuBarFile() );
+		menu.append( MenuBarFind() );
 		menu.append( MenuBarView() );
 		menu.append( MenuBarAction() );
 		// menu.append( MenuBarTools() );
