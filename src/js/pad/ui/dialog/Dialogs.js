@@ -10,7 +10,6 @@ define([
 		var SaveDialog = new Save,
 				PostsDialog = new Posts;
 
-		HotKey('cmd-shift-t', PostsDialog.show.bind(PostsDialog));
 
 		window.ee.on('file.posts.tumblr', PostsDialog.show.bind(PostsDialog));
 		
@@ -18,13 +17,17 @@ define([
 			window.parent.ee.emit('posts.tumblr', FileOpt.toJSON(), mailInfo);
 		});
 
+		window.ee.on('posted.tumblr', PostsDialog.hide.bind(PostsDialog));
+
 		window.ee.on('fail.post.tumblr', function(err) {
 			if(err.name == 'AuthError') {
 				PostsDialog.error('Email and Password not accepted');
 			}
 		});
 
-		window.ee.on('posted.tumblr', PostsDialog.hide.bind(PostsDialog));
+		HotKey('cmd-shift-t', function() {
+			window.ee.emit('file.posts.tumblr');
+		});
 
 		return dialogs = {
 			save: SaveDialog,

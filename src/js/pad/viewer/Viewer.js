@@ -1,7 +1,8 @@
 define([
-		'store'
+		'store',
+		'viewer/Viewer.explicitStyleMaker'
 	], 
-	function(store) {
+	function(store, StyleMaker) {
 		var iframe = $('#haroo iframe')[0];
 		var viewer = iframe.contentWindow;
 		var content = '',
@@ -101,6 +102,10 @@ define([
 			 */
 			getContentDocument: function() {
 				return iframe.contentDocument;
+			},
+
+			getHTML: function() {
+				return iframe.contentDocument.body.innerHTML;
 			}
 		};
 	});

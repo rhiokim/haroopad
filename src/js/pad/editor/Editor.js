@@ -122,7 +122,7 @@ define([
 			}
 		});
 		
-		if(generalConf.enableSyncScroll) {
+		if(generalConf.enableSyncScroll !== false) {
 		  editor.on('scroll', syncScrollHandler);
 		} else {
 		  editor.off('scroll', syncScrollHandler);
