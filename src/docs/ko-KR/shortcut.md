@@ -1,34 +1,53 @@
 ## shortcuts
 
+키보드     | 명칭
+---------|----------------------------------------
+&#8984;  | Command, Cmd, Clover, (formerly) Apple
+&#8997;  | Option, Opt, (Windows) Alt
+&#8679;  | Shift
+&#8963;  | Control, Ctl, Ctrl
+&#63743; | Mac OS
+
 ##### File
 
 Shortcut                  | Description
 --------------------------|-------------------
-COMMAND(CTRL) + N         | 새로운 에디터 윈도우 생성
-COMMAND(CTRL) + S         | 파일 저장
-COMMAND(CTRL) + SHIFT + S | 새로운 이름으로 저장
-COMMAND(CTRL) + O         | 파일 불러오기
-COMMAND(CTRL) + ,         | 환경설정
-COMMAND(CTRL) + Q         | 에디터 윈도우 종료
+&#8984;(&#8963;) - N         | 새로운 에디터 윈도우 생성
+&#8984;(&#8963;) - S         | 파일 저장
+&#8984;(&#8963;) - &#8679; - S | 새로운 이름으로 저장
+&#8984;(&#8963;) - O         | 파일 불러오기
+&#8984;(&#8963;) - ,         | 환경설정
+&#8984;(&#8963;)         | 에디터 윈도우 종료
 
 ##### Window
-Shortcut                  | Description
---------------------------|-------------------
-CTRL + ]                  | 에디터 모드
-CTRL + [                  | 에디터 + 뷰어 모드
-CTRL + ALT + ]            | 에디터 가로 사이즈 +5%
-CTRL + ALT + [            | 에디터 가로 사이즈 -5%
-COMMAND(CTRL) + SHIFT + L | 에디터 라인넘버 토글
-COMMAND(CTRL) + ALT + V   | VIM 키 바인딩 (v0.4.3)
+Shortcut                       | Description
+-------------------------------|-------------------
+&#8963; - ]                    | 에디터 모드
+&#8963; - [                    | 에디터 + 뷰어 모드
+&#8963; - &#8997; - ]          | 에디터 가로 사이즈 +5%
+&#8963; - &#8997; - [          | 에디터 가로 사이즈 -5%
+&#8984;(&#8963;) - &#8679; - L | 에디터 라인넘버 토글
+&#8984;(&#8963;) - &#8997; - V | VIM 키 바인딩 (v0.4.3)
 
 ##### Editing
-Shortcut                | Example        | Description
-------------------------|:--------------:|---------
-COMMAND(CTRL) + B       | `**Bold**`     | 볼드
-COMMAND(CTRL) + I       | `*Italic*`     | 이탤릭
-COMMAND(CTRL) + L       | `[link](url)`  | 링크
-COMMAND(CTRL) + ALT + S | `~~strike~~`   | 취소선
-COMMAND(CTRL) + ALT + O | `1. markdown`  | 정렬목록
-COMMAND(CTRL) + ALT + U | `* haroopad`   | 비정렬 목록
-COMMAND(CTRL) + ALT + I | `![]()`        | 이미지
-COMMAND(CTRL) + ALT + B | `> blockquote` | 블럭쿼트
+Shortcut                       | Example        | Description
+-------------------------------|:--------------:|-------------
+&#8984;(&#8963;) - B           | `**Bold**`     | 볼드
+&#8984;(&#8963;) - I           | `*Italic*`     | 이탤릭
+&#8984;(&#8963;) - L           | `[link](url)`  | 링크
+&#8984;(&#8963;) - &#8997; - S | `~~strike~~`   | 취소선
+&#8984;(&#8963;) - &#8997; - O | `1. markdown`  | 정렬목록
+&#8984;(&#8963;) - &#8997; - U | `* haroopad`   | 비정렬 목록
+&#8984;(&#8963;) - &#8997; - I | `![]()`        | 이미지
+&#8984;(&#8963;) - &#8997; - B | `> blockquote` | 블럭쿼트
+
+##### Finding
+Shortcut                        | Description
+--------------------------------|-------------------
+&#8984;(&#8963;) - F            | Starting search
+&#8984;(&#8963;) - G            | Find next
+&#8984;(&#8963;) - &#8679; + G  | Find previous
+&#8984; - &#8997; - F           | Replace (&#63743;)
+&#8963; - &#8679; - F           | Replace
+&#8984; - &#8679; - &#8997; - F | Replace all (&#63743;)
+&#8679; - &#8963; - R           | Replace all

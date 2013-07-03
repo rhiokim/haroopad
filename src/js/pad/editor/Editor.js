@@ -47,6 +47,24 @@ define([
 			editor.setOption('lineNumbers', value);	
 		});
 
+		/* find & replace */
+		window.ee.on('find.start', function() {
+			CodeMirror.commands.find(editor);
+		});
+		window.ee.on('find.next', function() {
+			CodeMirror.commands.findNext(editor);
+		});
+		window.ee.on('find.previous', function() {
+			CodeMirror.commands.findPrev(editor);
+		});
+		window.ee.on('find.replace', function() {
+			CodeMirror.commands.replace(editor);
+		});
+		window.ee.on('find.replace.all', function() {
+			CodeMirror.commands.replaceAll(editor);
+		});
+
+
 		/* change preferences events */
 
 		window.parent.ee.on('preferences.editor.theme', function(value) {

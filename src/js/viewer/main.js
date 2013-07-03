@@ -1,6 +1,3 @@
-// Load native UI library.
-// var gui = require('nw.gui'),
-//     win = gui.Window.get();
 var _options = {
   dirname: '.'
 };
@@ -19,11 +16,6 @@ window.ondrop = function(e) {
 };
 
 function loadCss(url) {
-  // var link = document.createElement("link");
-  //     link.type = "text/css";
-  //     link.rel = "stylesheet";
-  //     link.href = url;
-  // viewStyle = document.getElementsByTagName("head")[0].appendChild(link);
   $('<link>').attr({
     type: 'text/css',
     rel: 'stylesheet',
