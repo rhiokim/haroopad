@@ -42,7 +42,7 @@ define([
 				writeTimeout = window.setTimeout(function() {
 					TmpOpt.set(_uid, _file);
 					fs.writeFileSync(_file, Opt.get('markdown'), 'utf8');
-				}, 5000);
+				}, 10000);
 			},
 
 			sync: function(file, uid) {

@@ -48,6 +48,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/vibrant-ink.css',
             '<%= vendors %>/CodeMirror/theme/xq-dark.css',
             '<%= vendors %>/CodeMirror/theme/xq-light.css',
+            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.css',
             'src/css/app.css'
           ],
           "build/haroopad/css/haroopad.min.css": [
@@ -79,6 +80,7 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.file.recents.js',
             'src/js/common/menu/Menu.file.exports.js',
             'src/js/common/menu/Menu.file.activities.js',
+            'src/js/common/menu/Menu.file.js',
             'src/js/common/menu/Menu.view.js',
             'src/js/common/menu/Menu.action.js',
             'src/js/common/menu/Menu.tools.js',
@@ -132,6 +134,9 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
             '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
             '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
+            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.js',
+            '<%= vendors %>/CodeMirror/addon/search/searchcursor.js',
+            '<%= vendors %>/CodeMirror/addon/search/search.js',
             '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
             '<%= vendors %>/CodeMirror/mode/xml/xml.js',
             '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
