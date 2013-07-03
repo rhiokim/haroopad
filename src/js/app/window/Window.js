@@ -15,7 +15,6 @@ define([
       path = require('path');
   
   var locale = window.navigator.language;
-
   var pathDocs = path.join(process.cwd(), 'docs', locale);
 
   if (!fs.existsSync(pathDocs)) {
