@@ -129,7 +129,7 @@ body > .navbar .brand:hover {
 /* ---
   post tumblr
 */
-#post-tumblr-dialog .progress {
+#send-email-dialog .progress {
   margin-bottom: 0;
   height: 10px;
 }

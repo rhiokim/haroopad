@@ -11,6 +11,7 @@ haroopad technical stack
 * store.js
 * keymage.js
 * font-awesome-more
+* markdown-css
 * highlight.js
 * underscore.js
 

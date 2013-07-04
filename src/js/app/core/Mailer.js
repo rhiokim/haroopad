@@ -47,6 +47,11 @@ define([
 			smtpTransport.sendMail(mailOptions, function(error, response){
 				cb(error, response);
 
+				if (error) {
+					smtpTransport.close();
+					return;
+				}
+
 		    window.clearTimeout(tid);
 		    tid = window.setTimeout(function() {
 		    	smtpTransport.close(); // shut down the connection pool, no more messages
