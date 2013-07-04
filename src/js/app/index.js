@@ -56,7 +56,7 @@ requirejs([
       var addrs = Emails.addrs || [];
 
       Mailer.setCredential(mailInfo.from, mailInfo.password);
-      Mailer.send(mailInfo.title, fileInfo.markdown, fileInfo.html, mailInfo.to, mailInfo.mode, function(err, response) {
+      Mailer.send(mailInfo.title, fileInfo.markdown, fileInfo.html, mailInfo.to, mailInfo.mode, fileInfo.attachments, function(err, response) {
 
         if (err) {
           child.window.ee.emit('fail.post.tumblr', err);

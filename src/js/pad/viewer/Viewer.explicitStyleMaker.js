@@ -2,7 +2,8 @@ define([
 		'ui/file/File.opt',
 		],function(FileOpt) {
 
-		var fs = require('fs');
+		var fs = require('fs'),
+				path = require('path');
 
 		var iframe = $('#haroo iframe')[0];
 		var viewer = iframe.contentWindow;
@@ -32,7 +33,7 @@ define([
 			}
 		}
 
-		function makeStylesExplicit(wrapperElem) {
+		function makeStylesExplicit() {
 		  var styleSheets, i;
 
 		  styleSheets = htmlDoc.styleSheets;
@@ -40,24 +41,90 @@ define([
 		  for (i = 0; i < styleSheets.length; i++) {
 		  	cssRules(styleSheets[i].cssRules);
 		  }
+
+		  var wrapper = $('<div>').html(iframe.contentDocument.body.innerHTML);
+		  wrapper.attr('style', $(iframe.contentDocument.body).attr('style'));
+
+		  FileOpt.set('html', wrapper[0].outerHTML);
 	  }
 
 	  function makeImageEncode() {
-	  	var i, images;
+	  	var i, img, image, images;
 
 	  	images = htmlDoc.querySelectorAll('img');
 
 	  	for (i = 0; i < images.length; i++) {
-	  		if(images[i].href.indexOf('://') < 0) {
-	  			var img = fs.readFileSync(images);
-	  			console.log(img.toString('base64'));
+	  		image = images[i];
+	  		src = image.src;
+
+	  		if(!src) {
+	  			continue;
+	  		}
+				
+				if (process.platform !== 'win32') {
+					src = src.replace('file://', '');
+				}
+	  		
+	  		if(src.indexOf('://') < 0) {
+	  			src = decodeURIComponent(src);
+	  			img = fs.readFileSync(src);
+
+	  			// image.src = 'data:image/png;base64,'+ img.toString('base64');
+	  			// image.src = 'data:image/png;base64,';
 	  		}
 	  	}
 	  }
 
+	  function attachImage() {
+	  	var i, name, img, image, images;
+	  	var attachments = [];
+
+	  	images = htmlDoc.querySelectorAll('img');
+
+	  	for (i = 0; i < images.length; i++) {
+	  		image = images[i];
+	  		src = image.src;
+
+	  		if(!src) {
+	  			continue;
+	  		}
+				
+				if (process.platform !== 'win32') {
+					src = src.replace('file://', '');
+				}
+	  		
+	  		if(src.indexOf('://') < 0) {
+	  			src = decodeURIComponent(src);
+	  			src = path.normalize(src);
+	  			name = path.basename(src);
+
+	  			// src = src.replace(' ', '\ ');
+	  			attachments.push({
+	  				fileName: name,
+	  				// streamSource: fs.createReadStream(src)
+	  				// contentType: "image/png"
+	  				filePath: src,
+	  				cid: name
+	  			});
+
+	  			// image.src = 'data:image/png;base64,'+ img.toString('base64');
+	  			// image.src = 'data:image/png;base64,';
+	  			image.src = 'cid:'+ name;
+	  		}
+	  	}
+
+	  	// attachments.push(
+    //     {   // use URL as an attachment
+    //         fileName: "license.txt",
+    //         filePath: "https://raw.github.com/andris9/Nodemailer/master/LICENSE"
+    //     });
+
+	  	FileOpt.set('attachments', attachments);
+	  }
+
 		window.ee.on('file.posts.tumblr', function() {
-			makeStylesExplicit(htmlDoc);
 			// makeImageEncode();
-			FileOpt.set('html', iframe.contentDocument.body.innerHTML);
+			attachImage();
+			makeStylesExplicit();
 		});
 });

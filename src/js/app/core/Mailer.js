@@ -26,7 +26,7 @@ define([
 		});
 	}
 
-	function send(title, text, html, to, mode, cb) {
+	function send(title, text, html, to, mode, attach, cb) {
 
 			if (to.indexOf('@tumblr.com') > -1) {
 				title = '!m '+ title;
@@ -35,6 +35,7 @@ define([
 			mailOptions.from = email;
 			mailOptions.to = to;
 			mailOptions.subject = title;
+			mailOptions.attachments = attach;
 			
 			if (mode == 'html') {
 				mailOptions.html = html;
@@ -58,9 +59,7 @@ define([
 			createTransport(email, password, service);
 		},
 
-		send: function(title, text, html, to, mode, cb) {
-			send(title, text, html, to, mode, cb);
-		}
+		send: send
 	}
 
 });
