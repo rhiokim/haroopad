@@ -24,7 +24,7 @@ function loadCss(url) {
 }
 
 function setViewStyle(style) {
-  var href = 'css/markdown/build/'+ style +'/'+ style +'.css';
+  var href = 'css/markdown/'+ style +'/'+ style +'.css';
 
   $('#view').attr({ href: href });
 
