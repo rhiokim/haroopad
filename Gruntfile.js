@@ -152,6 +152,7 @@ module.exports = function(grunt) {
     uglify: {
       pad: {
         options: {
+          mangle: false
           // mangle: {
           //   except: ['jQuery', 'Backbone', '_']
           // },
@@ -196,7 +197,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
           { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'build/haroopad/node_modules/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
-          { expand: true, cwd: 'src/css/markdown/build/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
+          { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
           { src: 'src/index.bin.html', dest: 'build/haroopad/index.html' },
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
           { src: 'src/preferences.bin.html', dest: 'build/haroopad/preferences.html' },
@@ -218,7 +219,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/tpl/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/tpl/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/code/' },
           { expand: true, cwd: 'src/css/viewer/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/viewer/' },
-          { expand: true, cwd: 'src/css/markdown/build/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/markdown/' },
+          { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/markdown/' },
           { src: 'src/pad.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/pad.html' },
           { src: 'src/viewer.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/viewer.html' },
           { src: 'src/index.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/index.html' },
@@ -237,6 +238,12 @@ module.exports = function(grunt) {
         files: [
           { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
           { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' }
+        ]
+      },
+
+      mdcss: {
+        files: [
+          { expand: true, cwd: 'lib/markdown-css/build/', src: [ '**' ], dest: 'src/css/markdown' }
         ]
       }
     },
