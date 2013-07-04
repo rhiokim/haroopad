@@ -81,6 +81,7 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.file.exports.js',
             'src/js/common/menu/Menu.file.activities.js',
             'src/js/common/menu/Menu.file.js',
+            'src/js/common/menu/Menu.find.js',
             'src/js/common/menu/Menu.view.js',
             'src/js/common/menu/Menu.action.js',
             'src/js/common/menu/Menu.tools.js',
