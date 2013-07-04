@@ -9,14 +9,15 @@ define([
 		var viewer = iframe.contentWindow;
 
 		var htmlDoc = iframe.contentDocument;
+		var htmlStyledDoc;
 
-		function cssRules(rules) {
+		function setInlineStyles(rules) {
 			var i, j, selectorMatches, styleAttr;
-
+			
 			for (i = 0; i < rules.length; i++) {
 				rule = rules[i];
 
-				selectorMatches = htmlDoc.querySelectorAll(rule.selectorText);
+				selectorMatches = htmlStyledDoc.querySelectorAll(rule.selectorText);
 
 				for (j = 0; j < selectorMatches.length; j++ ) {
 					elem = selectorMatches[j];
@@ -39,11 +40,11 @@ define([
 		  styleSheets = htmlDoc.styleSheets;
 
 		  for (i = 0; i < styleSheets.length; i++) {
-		  	cssRules(styleSheets[i].cssRules);
+		  	setInlineStyles(styleSheets[i].cssRules);
 		  }
 
-		  var wrapper = $('<div>').html(iframe.contentDocument.body.innerHTML);
-		  wrapper.attr('style', $(iframe.contentDocument.body).attr('style'));
+		  var wrapper = $('<div>').html(htmlStyledDoc.innerHTML);
+		  wrapper.attr('style', $(htmlStyledDoc.body).attr('style'));
 
 		  FileOpt.set('html', wrapper[0].outerHTML);
 	  }
@@ -79,7 +80,7 @@ define([
 	  	var i, name, img, image, images;
 	  	var attachments = [];
 
-	  	images = htmlDoc.querySelectorAll('img');
+	  	images = htmlStyledDoc.querySelectorAll('img');
 
 	  	for (i = 0; i < images.length; i++) {
 	  		image = images[i];
@@ -123,6 +124,9 @@ define([
 	  }
 
 		window.ee.on('file.posts.tumblr', function() {
+
+			htmlStyledDoc = $(htmlDoc.body).clone()[0];
+			
 			// makeImageEncode();
 			attachImage();
 			makeStylesExplicit();
