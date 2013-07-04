@@ -65,6 +65,7 @@ requirejs([
 
         if (mailInfo.remember) {
           addrs.push(mailInfo.to);
+          addrs = _.uniq(addrs);
 
           store.set('Emails', {
             to: mailInfo.to,
