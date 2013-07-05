@@ -22,9 +22,9 @@ Please help development so as to maintain I've tried Haroopad app, you feel that
 </p>
 <p style="text-align:center;">
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3SHSPHGUGYWH4" class="btn btn-large btn-primary" target="_blank">$500</a>
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=" class="btn btn-large btn-primary" target="_blank">$1000</a>
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=" class="btn btn-large btn-primary" target="_blank">$2500</a>
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=" class="btn btn-large btn-primary" target="_blank">$5000</a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7BBSAZE6F76XJ" class="btn btn-large btn-primary" target="_blank">$1000</a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KTCKCD55RXB58" class="btn btn-large btn-primary" target="_blank">$2500</a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XL3TJK5DSAA9S" class="btn btn-large btn-primary" target="_blank">$5000</a>
 </p>
 
 
