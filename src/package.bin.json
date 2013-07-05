@@ -2,7 +2,7 @@
   "main": "index.html",
   "name": "haroopad",
   "description": "instant markdown editor for cross platform",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "keywords": [ "markdown", "haroopress" ],
   "window": {
     "title": "haroopad",
@@ -16,9 +16,8 @@
   },
   "single-instance": true,
   "snapshot": "js/haroopad.bin",
-  "chromium-args" : "--disable-gpu",
   "webkit": {
-    "plugin": true
+    "plugin": false
   },
   "maintainers":[{
    "name": "Rhio Kim",
