@@ -1,7 +1,8 @@
 define([
 		// 'editor/Parser',
 		'store',
-		'editor/Editor.keymap'
+		'editor/Editor.keymap',
+		'editor/Markdown.FragmentsManager',
 	],
 	function(store, Keymap) {
 		var gui = require('nw.gui'),

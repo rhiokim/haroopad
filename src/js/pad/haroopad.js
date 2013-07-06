@@ -1,3 +1,4 @@
+/* globally for window event system */
 var gui = require('nw.gui'),
     win = gui.Window.get();
         
