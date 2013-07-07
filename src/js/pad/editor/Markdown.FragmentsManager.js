@@ -1,80 +1,121 @@
 define([],
 	function() {
+		var marked = require('marked');
+
+		var Fragments = {};
+		var _tokens = {};	//previous tokens
+		var _links = {};	//marked lexer return links
+
+		/**
+		 * compare object
+		 * @param  {[type]} obj1 [description]
+		 * @param  {[type]} obj2 [description]
+		 * @return {[type]}      [description]
+		 */
+		function compareJSON(obj1, obj2) { 
+		  var ret = {}; 
+		  for(var i in obj2) { 
+		    if(!obj1.hasOwnProperty(i) || obj2[i] !== obj1[i]) { 
+		      ret[i] = obj2[i]; 
+		    } 
+		  } 
+		  return _.isEmpty(ret); 
+		}; 
 
 		var Fragment = Backbone.Model.extend({
 			initialize: function() {
-				this.on('change:md', function() {
-					window.ee.emit('markdown.fragment.change', this.toJSON());
-				})
+				this.on('change', function() {
+					var html, token = this.toJSON();
+
+					if (_.isEmpty(token)) {
+						html = '';
+					} else {
+						token = [token];
+						token.links = _links;
+						console.log(token);
+						html = marked.parser(token);
+					}
+
+					window.ee.emit('markdown.fragment.change', this.index, html);
+				});
+			},
+
+			setIndex: function(idx) {
+				//window.ee.emit('markdown.fragment.move', this.index, idx);
+				this.index = idx;
+			},
+
+			innerFragmentType: function(type) {
+				this.innerType = type;
 			}
 		});
 
-		// var FragmentCollection = Backbone.Collection.extend({
-		// });
-
-		// var Fragments = new FragmentCollection();
-
-		var Fragments = {};
-		var _fragments = {};
-
-		//markdown fragment update
-		window.ee.on('markdown.fragment.change', function(obj) {
-			console.log(JSON.stringify(obj));
-		});
-
     window.ee.on('change.before.markdown', function(md) {
-    	var i, o, fragment, fragments = md.split('\n#');
+    	var i, j, exist, _remove = [], fragment;
+			var tokens = marked.lexer(md, marked.defaults);
+			_links = tokens.links;
 
-    	fragments = _.compact(fragments);
-    	// fragments[0] = fragments[0].substr(1, fragments[0].length);
-    	// Fragments = {};
+			if (_.isEmpty(tokens)) {
+				_.each(_tokens, function(obj) {
+					obj.clear();
+				});
+				return;
+			}
 
-  		_.each(_fragments, function(obj, key) {
+    	Fragments = {};
 
-  			for (i = 0; i < fragments.length; i++) {
+  		j = 0;
 
-  				// console.log(fragments[i] +'---'+ obj.md);
-  				if (fragments[i] === obj.get('md')) {
-	  				// Fragments[i] = obj;
-	  				Fragments[i] = obj;
+  		//이전 토큰 탐색
+  		_.each(_tokens, function(obj, key) {
 
-	  				// if (i != key) { 
-	  				// 	delete Fragments[key] ;
-	  				// };
+  			exist = false;
 
-	  				break;
-	  			}
+  			//새로운 토큰 탐색
+  			for (i = j; i < tokens.length; i++) {
+
+  				//새로운 토큰에 이전 토큰과 동일한 토큰이 있는 경우 재사용
+  				if (compareJSON(obj.toJSON(), tokens[i])) {
+  					//이전 토큰과 새로운 토큰을 결합하여 새로운 해쉬 테이블 생성
+  					Fragments[i] = obj;
+  					//모델에 인덱스를 지정해준다.
+  					Fragments[i].setIndex(i);
+
+  					exist = true;
+
+  					j++;
+  					break;
+  				}
+
+  			}
+
+  			if (!exist) {
+  				_remove.push(obj);
   			}
 
   		});
 
+  		_remove.forEach(function(obj) {
+  			obj.clear();
+  		});
 
-    	fragments.forEach(function(frag, idx) {
+  		tokens.forEach(function(token, idx) {
 
     		if(!_.has(Fragments, idx)) {
 	    		fragment = new Fragment();
-	    		fragment.set('idx', idx);
-	    		fragment.set('md', frag);
-
-	    		Fragments[idx] = fragment;	
+	    		fragment.setIndex(idx);
     		} else {
     			fragment = Fragments[idx];
-
-    			fragment.set('idx', idx);
-    			if (frag !== fragment.get('md')) {
-    				fragment.set('md', frag);
-    			}
     		}
-    	});
 
-    	_fragments = Fragments;
+    		Fragments[idx] = fragment;	
+				fragment.set(token);
 
-    	// _fragments = Fragments;
+  		});
 
-    	//hash table
-    	// InvertFragments = _.invert(Fragments);
+  		Fragments.length = tokens.length;
+    	_tokens = Fragments;
 
-    	// console.log(JSON.stringify(Fragments, null, 2));
     });
 
 	});

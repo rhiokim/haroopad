@@ -100,6 +100,28 @@ function update(contents) {
   _lazySyntaxHighlight();
 }
 
+var frags = [];
+function updateFragment(index, html) {
+  var fragEl;
+  fragEl = frags[index];
+
+  if (!fragEl) {
+    fragEl = document.createElement('haroo');
+    document.body.appendChild(fragEl);
+    
+    frags = document.querySelectorAll('haroo');
+  }
+
+  $(fragEl).html(html);
+}
+
+function moveFragment(oldIndex, newIndex) {
+  var fragEl = frags[oldIndex];
+  $(fragEl).insertBefore($(frags[newIndex]));
+    
+  frags = document.querySelectorAll('haroo');
+}
+
 /**
  * enable click event at link
  * @return {[type]} [description]
