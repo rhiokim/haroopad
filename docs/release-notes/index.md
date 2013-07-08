@@ -1,3 +1,27 @@
+## Haroopad v0.4.4
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#27              | Add Search & Replace
+**Enhancements** |
+                 | Ehancement markdown rendering performance (x??)
+								 | Editing line auto position at viewer
+                 | Change Help menu action (Mac Only)
+
+##### Github Issue tracker
+
+* [https://github.com/rhiokim/haroopad/issues?milestone=14&state=closed](https://github.com/rhiokim/haroopad/issues?milestone=14&state=closed)
+
+##### Download
+> * Windows NSIS installer:[https://www.dropbox.com/s/9nx1cnujh04hn72/haroopad-win32-v0.4.4.exe](https://www.dropbox.com/s/9nx1cnujh04hn72/haroopad-win32-v0.4.4.exe)
+> * Mac OS X DMG: [https://www.dropbox.com/s/y9uh2pcgldia1na/haroopad-v0.4.4.dmg](https://www.dropbox.com/s/y9uh2pcgldia1na/haroopad-v0.4.4.dmg)
+> * Linux 32-bit Binary:[https://www.dropbox.com/s/9i5wcml8ilzn095/haroopad-v0.4.4-i386.tar.gz](https://www.dropbox.com/s/9i5wcml8ilzn095/haroopad-v0.4.4-i386.tar.gz)
+> * Linux 32-bit Debian Package:[https://www.dropbox.com/s/ei3q0coqigbuwv8/haroopad-v0.4.4-i386.deb](https://www.dropbox.com/s/ei3q0coqigbuwv8/haroopad-v0.4.4-i386.deb)
+> * Linux 64-bit Binary: **Not support**
+> * Linux 64-bit Debian Package: **Not Support**
+
+
 ## Haroopad v0.4.3
 
 Issue Number     | Description
