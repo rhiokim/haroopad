@@ -88,19 +88,21 @@ define([
 		});
 
 		/* fire context menu event */
-		window.ee.on('context.cut', function(e) {
-		  clipboard.set(editor.getSelection());
-		  editor.replaceSelection('');
-		});
-		window.ee.on('context.copy', function() {
-		  clipboard.set(editor.getSelection());
-		});
-		window.ee.on('context.paste', function() {
-		  editor.replaceSelection(clipboard.get());
-		});
-		window.ee.on('context.select.all', function() {
-		  editor.setSelection(0, 2);
-		});
+		if (!win._params.readOnly) {
+			window.ee.on('context.cut', function(e) {
+			  clipboard.set(editor.getSelection());
+			  editor.replaceSelection('');
+			});
+			window.ee.on('context.copy', function() {
+			  clipboard.set(editor.getSelection());
+			});
+			window.ee.on('context.paste', function() {
+			  editor.replaceSelection(clipboard.get());
+			});
+			window.ee.on('context.select.all', function() {
+			  editor.setSelection(0, 2);
+			});
+		}
 
 		/**
 		 * sync scroll handler

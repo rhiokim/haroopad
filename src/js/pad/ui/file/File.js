@@ -65,21 +65,23 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 	// win.on('file.open', OpenDialog.show.bind(OpenDialog));
 	window.ee.on('file.open', OpenDialog.show.bind(OpenDialog));
 	
-	window.ee.on('file.save', function() {
-		var file = Opt.get('fileEntry');
-		if (!file) {
-			SaveDialog.show(getWorkingDir());
-		} else {
-			_save(file);
-		}
-	});
+	if (!win._params.readOnly) {
+		window.ee.on('file.save', function() {
+			var file = Opt.get('fileEntry');
+			if (!file) {
+				SaveDialog.show(getWorkingDir());
+			} else {
+				_save(file);
+			}
+		});
+
+		window.ee.on('file.save.as', SaveDialog.show.bind(SaveDialog));
+	}
 
 	window.ee.on('change.before.markdown', function(markdown) {
 		Opt.set('markdown', markdown);
 		Temporary.update();
 	});
-
-	window.ee.on('file.save.as', SaveDialog.show.bind(SaveDialog));
 
 	return {
 		open: function(file) {

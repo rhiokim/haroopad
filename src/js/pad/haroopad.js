@@ -66,14 +66,15 @@ requirejs([
     readOnly = params.readOnly || false;
 
     window.ee.on('file.opened', function(opt) {
-
       window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
         Editor.setValue(opt.markdown);
         
         Viewer.init(opt);
         window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
 
-        Editor.on("change", delayChange); 
+        if (!readOnly) {
+          Editor.on("change", delayChange); 
+        }
       });
 
     });
