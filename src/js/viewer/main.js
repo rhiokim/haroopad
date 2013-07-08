@@ -104,7 +104,8 @@ function _preventDefaultAnchor() {
  */
 function update(html) {
   var frags = $('<div>').html(html).find('>*');
-  var _frag, _frags = document.querySelectorAll('body>*');
+  var _frag, 
+  _frags = document.querySelectorAll('body>*');
   _frags = Array.prototype.slice.call(_frags, 0);
 
   //이전에 작성된 내용이 없는 경우
@@ -113,19 +114,26 @@ function update(html) {
     return;
   }
 
+  var scollTick = 0;
   //작성된 내용이 있는 경우 새로운 프레그먼트로 치환
   frags.each(function(idx, frag) {
     _frag = _frags.shift();
 
     if (!_frag) {
       var el = $(frag).appendTo(document.body);
-      $(document.body).scrollTop( el.offset().top );
+      $(document.body).scrollTop( el.offset().top - 20 );
     } else {
       if (frag.outerHTML != _frag.outerHTML) {
         var top = $(_frag).offset().top - 20;
+
+        $(_frag).hide();  //did not rendering error when call replaceWith 
         $(_frag).replaceWith(frag.outerHTML);
 
+        if(scollTick > 0) {
+          return;
+        }
         $(document.body).scrollTop( top );
+        scollTick ++;
       }
     }
   });
