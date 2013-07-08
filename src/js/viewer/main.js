@@ -149,8 +149,14 @@ function update(html) {
     });
   }
   
-  _fixImagePath();
-  _preventDefaultAnchor();
+  if (frags.find('img').length > 0) {
+    _fixImagePath();
+  }
+  
+  if (frags.find('a').length > 0) {
+    _preventDefaultAnchor();
+  }
+
   _lazySyntaxHighlight();
 }
 
