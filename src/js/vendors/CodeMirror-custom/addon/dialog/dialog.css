@@ -28,7 +28,7 @@
 }
 
 .CodeMirror-dialog input {
-  margin: 1px 0;
+  margin: 1px 0 !important;
   padding: 0 3px !important;
   font-size: 12px;
   width: 15.2em !important;
