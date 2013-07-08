@@ -121,7 +121,11 @@ function update(html) {
 
     if (!_frag) {
       var el = $(frag).appendTo(document.body);
-      $(document.body).scrollTop( el.offset().top - 20 );
+
+        if(scollTick <= 0) {
+          $(document.body).scrollTop( el.offset().top - 20 );
+          scollTick ++;
+        }
     } else {
       if (frag.outerHTML != _frag.outerHTML) {
         var top = $(_frag).offset().top - 20;
@@ -129,11 +133,10 @@ function update(html) {
         $(_frag).hide();  //did not rendering error when call replaceWith 
         $(_frag).replaceWith(frag.outerHTML);
 
-        if(scollTick > 0) {
-          return;
+        if(scollTick <= 0) {
+          $(document.body).scrollTop( top );
+          scollTick ++;
         }
-        $(document.body).scrollTop( top );
-        scollTick ++;
       }
     }
   });
