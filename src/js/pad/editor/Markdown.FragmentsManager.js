@@ -2,10 +2,13 @@ define([],
 	function() {
 		var marked = require('marked');
 
-		var Fragments = {};
-		var _tokens = {};	//previous tokens
+		var Fragments = [];
+		var _tokens = [];	//previous tokens
 		var _links = {};	//marked lexer return links
 
+		function log(obj) {
+			console.log(JSON.stringify(obj, null, 2));
+		}
 		/**
 		 * compare object
 		 * @param  {[type]} obj1 [description]
@@ -22,99 +25,49 @@ define([],
 		  return _.isEmpty(ret); 
 		}; 
 
-		var Fragment = Backbone.Model.extend({
-			initialize: function() {
-				this.on('change', function() {
-					var html, token = this.toJSON();
+		function render(token, idx) {
+			var tok;
 
-					if (_.isEmpty(token)) {
-						html = '';
-					} else {
-						token = [token];
-						token.links = _links;
-						console.log(token);
-						html = marked.parser(token);
-					}
+			tok = [ token ];
+			tok.links = _links;
 
-					window.ee.emit('markdown.fragment.change', this.index, html);
-				});
-			},
+			html = marked.parser(tok);
+			window.ee.emit('markdown.fragment.change', html, idx);
+		}
 
-			setIndex: function(idx) {
-				//window.ee.emit('markdown.fragment.move', this.index, idx);
-				this.index = idx;
-			},
-
-			innerFragmentType: function(type) {
-				this.innerType = type;
-			}
-		});
+		function move(oldIndex, newIndex) {
+			window.ee.emit('markdown.fragment.move', oldIndex, newIndex);
+		}
 
     window.ee.on('change.before.markdown', function(md) {
-    	var i, j, exist, _remove = [], fragment;
+			var i, j;
 			var tokens = marked.lexer(md, marked.defaults);
 			_links = tokens.links;
 
-			if (_.isEmpty(tokens)) {
-				_.each(_tokens, function(obj) {
-					obj.clear();
-				});
-				return;
-			}
+			var creates = [];
+			var removes = [];
+			var reuses = [];
 
-    	Fragments = {};
+			_.each(tokens, function(token, idx) {
+				
+				j = _tokens.length;
+				creates[idx] = tokens;
 
-  		j = 0;
+				for (i = 0; i < j; i++) {
 
-  		//이전 토큰 탐색
-  		_.each(_tokens, function(obj, key) {
+					if (compareJSON(token, _tokens[i])) {
+						reuses[idx] = _tokens.splice(i, 1);
+						creates[idx] = undefined;
+						break;
+					}
 
-  			exist = false;
+				}
 
-  			//새로운 토큰 탐색
-  			for (i = j; i < tokens.length; i++) {
+				// render(token, idx);
+			});
+			removes = _tokens;
 
-  				//새로운 토큰에 이전 토큰과 동일한 토큰이 있는 경우 재사용
-  				if (compareJSON(obj.toJSON(), tokens[i])) {
-  					//이전 토큰과 새로운 토큰을 결합하여 새로운 해쉬 테이블 생성
-  					Fragments[i] = obj;
-  					//모델에 인덱스를 지정해준다.
-  					Fragments[i].setIndex(i);
-
-  					exist = true;
-
-  					j++;
-  					break;
-  				}
-
-  			}
-
-  			if (!exist) {
-  				_remove.push(obj);
-  			}
-
-  		});
-
-  		_remove.forEach(function(obj) {
-  			obj.clear();
-  		});
-
-  		tokens.forEach(function(token, idx) {
-
-    		if(!_.has(Fragments, idx)) {
-	    		fragment = new Fragment();
-	    		fragment.setIndex(idx);
-    		} else {
-    			fragment = Fragments[idx];
-    		}
-
-    		Fragments[idx] = fragment;	
-				fragment.set(token);
-
-  		});
-
-  		Fragments.length = tokens.length;
-    	_tokens = Fragments;
+			_tokens = tokens;
 
     });
 

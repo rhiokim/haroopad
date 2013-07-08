@@ -59,10 +59,6 @@ function init(options) {
  * @return {[type]} [description]
  */
 function _fixImagePath() {
-  $('img').on('error', function() {
-    $(this).attr('src', './img/noimage.gif');
-  });
-
   $('img').each(function() {
     var src = $(this).attr('src');
 
@@ -77,7 +73,7 @@ var timeoutSyntaxHighlight;
 function _lazySyntaxHighlight() {
   clearTimeout(timeoutSyntaxHighlight);
 
-  timeoutSyntaxHighlight = setTimeout(function() {
+  setTimeout(function() {
     $('pre code').each(function(i, e) {
       hljs.highlightBlock(e);
     });
@@ -85,62 +81,77 @@ function _lazySyntaxHighlight() {
 }
 
 /**
- * enable click event at link
- * @return {[type]} [description]
- */
-function _preventDefaultAnchor() {
-  $('a').off('click', '**');
-
-  $('a').on('click', function(e) {
-    window.ee.emit('link', $(e.target).attr('href'));
-    e.preventDefault();
-  });
-}
-
-/**
  * update contents
  * @param  {[type]} contents [description]
  * @return {[type]}          [description]
  */
-function update(html) {
-  var frags = $('<div>').html(html).find('>*');
-  var _frag, _frags = document.querySelectorAll('body>*');
-  _frags = Array.prototype.slice.call(_frags, 0);
+function update(contents) {
+  //unregister previous anchor click event handler
+  $('a').off('click', '**');
+  $(document.body).html(contents);
 
-  //이전에 작성된 내용이 없는 경우
-  if (_frags.length <= 0) {
-    $(document.body).html(html);
+  $('img').on('error', function() {
+    $(this).attr('src', './img/noimage.gif');
+  });
+  _fixImagePath();
+  // createTOC();
+  
+  _preventDefaultAnchor();
+  _lazySyntaxHighlight();
+}
+
+var frags = [];
+function updateFragment(index, html) {
+  var fragEl;
+  fragEl = frags[index];
+
+  if (!html) {
+    $(fragEl).remove();
+    frags = document.querySelectorAll('haroo');
     return;
   }
 
-  //작성된 내용이 있는 경우 새로운 프레그먼트로 치환
-  frags.each(function(idx, frag) {
-    _frag = _frags.shift();
-
-    if (!_frag) {
-      var el = $(frag).appendTo(document.body);
-      $(document.body).scrollTop( el.offset().top );
-    } else {
-      if (frag.outerHTML != _frag.outerHTML) {
-        var top = $(_frag).offset().top - 20;
-        $(_frag).replaceWith(frag.outerHTML);
-
-        $(document.body).scrollTop( top );
-      }
-    }
-  });
-
-  //새로이 작성된 내용이 지난 작성 내용에 비해 적을 경우
-  //남아 있는 프레그먼트를 모두 제거
-  if (_frags.length > 0) {
-    _frags.forEach(function(frag, idx) {
-      $(frag).remove();
-    });
+  if (!fragEl) {
+    fragEl = document.createElement('haroo');
+    document.body.appendChild(fragEl);
+    
+    frags = document.querySelectorAll('haroo');
   }
-  
-  _fixImagePath();
-  _preventDefaultAnchor();
-  _lazySyntaxHighlight();
+
+  $(fragEl).html(html);
+}
+
+function createFragment(index) {
+  var fragEl;
+
+  $('<haroo>').insertBefore($(frags[index+1]));
+  frags = document.querySelectorAll('haroo');
+}
+
+function removeFragment(index) {
+  var fragEl;
+  fragEl = frags[index];
+
+  $(fragEl).remove();
+  frags = document.querySelectorAll('haroo');
+}
+
+function moveFragment(oldIndex, newIndex) {
+  var fragEl = frags[oldIndex];
+  $(fragEl).insertBefore($(frags[newIndex+1]));
+    
+  frags = document.querySelectorAll('haroo');
+}
+
+/**
+ * enable click event at link
+ * @return {[type]} [description]
+ */
+function _preventDefaultAnchor() {
+  $('a').on('click', function(e) {
+    window.ee.emit('link', $(e.target).attr('href'));
+    e.preventDefault();
+  });
 }
 
 /**

@@ -80,13 +80,7 @@ define([
 		}
 
 		/* change markdown event handler */
-		// window.ee.on('change.after.markdown', update);
-		window.ee.on('markdown.fragment.change', function(index, html) {
-			viewer.updateFragment(index, html);
-		});
-		window.ee.on('markdown.fragment.move', function(oldIndex, newIndex) {
-			viewer.moveFragment(oldIndex, newIndex);
-		});
+		window.ee.on('change.after.markdown', update);
 
 		/* scroll editor for sync */
 		window.ee.on('editor.scroll', function(top, per) {
