@@ -62,14 +62,6 @@ function _fixImagePath() {
   $('img').on('error', function() {
     $(this).attr('src', './img/noimage.gif');
   });
-
-  $('img').each(function() {
-    var src = $(this).attr('src');
-
-    if(src.indexOf('://') == -1) {
-      $(this).attr('src', _options.dirname +'/'+ src);
-    }
-  });
 }
 
 //for performance
@@ -78,8 +70,17 @@ function _lazySyntaxHighlight() {
   clearTimeout(timeoutSyntaxHighlight);
 
   timeoutSyntaxHighlight = setTimeout(function() {
-    $('pre code').each(function(i, e) {
-      hljs.highlightBlock(e);
+    $('pre>code').each(function(i, e) {
+
+      var codeEl = $(this);
+      var code = codeEl.html();
+      var lang = codeEl.attr('class');
+
+      if (!lang) {
+        codeEl.html(hljs.highlightAuto(code).value);
+      } else {
+        codeEl.html(hljs.highlight(lang, code).value);
+      }
     });
   }, 400);
 }
@@ -103,60 +104,92 @@ function _preventDefaultAnchor() {
  * @return {[type]}          [description]
  */
 function update(html) {
-  var frags = $('<div>').html(html).find('>*');
-  var _frag, 
-  _frags = document.querySelectorAll('body>*');
+  var wrapper = $('<div>').html(html);
+  var frags, _frag, origin;
+
+  wrapper.find('img').each(function() {
+    var src = $(this).attr('src');
+
+    if(src.indexOf('://') == -1) {
+      $(this).attr('src', _options.dirname +'/'+ src);
+    }
+  });
+
+  frags = wrapper.find('>*');
+
+  _frags = document.querySelectorAll('body>*') || [];
   _frags = Array.prototype.slice.call(_frags, 0);
 
   //이전에 작성된 내용이 없는 경우
-  if (_frags.length <= 0) {
-    $(document.body).html(html);
-    return;
-  }
+  // if (_frags.length <= 0) {
+  //   $(document.body).html(wrapper[0].innerHTML);
+  //   return;
+  // }
 
   var scollTick = 0;
   //작성된 내용이 있는 경우 새로운 프레그먼트로 치환
   frags.each(function(idx, frag) {
     _frag = _frags.shift();
 
+    //이전 프레그먼트 없는 경우 body 에 추가
     if (!_frag) {
-      var el = $(frag).appendTo(document.body);
+      // var el = $(frag).appendTo(document.body);
 
-        if(scollTick <= 0) {
-          $(document.body).scrollTop( el.offset().top - 20 );
-          scollTick ++;
-        }
+      document.body.appendChild(frag);
+      if(scollTick <= 0) {
+      }
     } else {
-      if (frag.outerHTML != _frag.outerHTML) {
-        var top = $(_frag).offset().top - 20;
 
-        $(_frag).hide();  //did not rendering error when call replaceWith 
-        $(_frag).replaceWith(frag.outerHTML);
+      //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
+      // origin = $(_frag).attr('origin');
+      origin = _frag.getAttribute('origin');
 
-        if(scollTick <= 0) {
-          $(document.body).scrollTop( top );
-          scollTick ++;
+      //origin 문자열이 없는 경우
+      if (!origin) {
+        //새로운 프레그먼트와 이전 프레그먼트가 다른 경우는 새로운 프레그먼트로 치환
+        if (frag.outerHTML != _frag.outerHTML) {
+
+          _frag.style.display = 'none';
+          document.body.insertBefore(frag, _frag);
+          document.body.removeChild(_frag);
+
+          if(scollTick <= 0) {
+          }
+        }
+      } else {
+        //origin 문자열이 있는 경우
+        if (frag.outerHTML != origin) {
+
+          _frag.style.display = 'none';
+          document.body.insertBefore(frag, _frag);
+          document.body.removeChild(_frag);
         }
       }
     }
   });
 
+  var pres = document.body.querySelectorAll('pre')
+  for (var i = 0; i < pres.length; i++) {
+    pres[i].setAttribute('origin', pres[i].outerHTML);
+  }
+  // $(document.body).find('pre').each(function(i, e) {
+  //   $(this).attr('origin', $(this)[0].outerHTML);
+  // });
+
   //새로이 작성된 내용이 지난 작성 내용에 비해 적을 경우
   //남아 있는 프레그먼트를 모두 제거
   if (_frags.length > 0) {
     _frags.forEach(function(frag, idx) {
-      $(frag).remove();
+      document.body.removeChild(frag);
+      // $(frag).remove();
     });
   }
   
-  if (frags.find('img').length > 0) {
-    _fixImagePath();
-  }
+  // if (frags.find('img').length > 0) {
+  //   _fixImagePath();
+  // }
   
-  if (frags.find('a').length > 0) {
-    _preventDefaultAnchor();
-  }
-
+  _preventDefaultAnchor();
   _lazySyntaxHighlight();
 }
 

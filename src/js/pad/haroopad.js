@@ -106,7 +106,7 @@ requirejs([
         window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
           window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
         });
-      }, 100);
+      }, 200);
     }
 
     win.focus();
