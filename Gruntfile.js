@@ -106,7 +106,7 @@ module.exports = function(grunt) {
           'build/haroopad.js': [
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/underscore.js',
-            'src/js/app/before.bin.js',
+            'src/js/pad/before.bin.js',
             'src/js/lib/logger.js',
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',
@@ -114,7 +114,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modalmanager.js',
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/store.js',
-            'src/js/app/after.bin.js'
+            'src/js/pad/after.bin.js'
           ],
           'build/preferences.js': [
             'src/js/lib/logger.js',
@@ -125,6 +125,12 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap.min.js',
             '<%= vendors %>/bootstrapSwitch.js',
             '<%= vendors %>/select2.js'
+          ],
+          'build/viewer.js': [
+            'src/js/viewer/disable.debug.js',
+            '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/highlight.pack.js',
+            'src/js/viewer/main.js',
           ],
           'build/vendors.js': [
             'build/menu.concat.js',
@@ -168,6 +174,9 @@ module.exports = function(grunt) {
           'build/haroopad/js/preferences.min.js': [
             'build/preferences.js'
           ],
+          'build/haroopad/js/viewer.min.js': [
+            'build/viewer.js'
+          ],
           'build/haroopad/js/vendors.min.js': [
             'build/vendors.js'
           ],
@@ -175,19 +184,21 @@ module.exports = function(grunt) {
             'build/codemirror.js'
           ]
         }
-      },
+      }/*,
 
       viewer: {
         options: {},
         files: {
           'build/haroopad/js/viewer.min.js': [
+            'src/js/viewer/before.bin.js',
             'src/js/viewer/disable.debug.js',
             '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/highlight.pack.js',
-            'src/js/viewer/main.js'
+            'src/js/viewer/main.js',
+            'src/js/viewer/after.bin.js'
           ]
         }
-      }
+      }*/
     },
 
     copy: {
@@ -336,7 +347,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('default', [ 'clean', 'concat:common', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'copy:node_modules', 'requirejs:index', 'requirejs:pad', 'requirejs:preferences' ]);
+  grunt.registerTask('default', [ 'clean', 'concat:common', 'concat:dist', 'uglify'/*, 'uglify:viewer'*/, 'cssmin', 'copy:main', 'copy:node_modules', 'requirejs:index', 'requirejs:pad', 'requirejs:preferences' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
   grunt.registerTask('core', [ 'clean:core', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
