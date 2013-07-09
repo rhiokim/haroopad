@@ -1,10 +1,15 @@
-html { height: 100% }
+html { 
+  height: 100% 
+}
 body {
 	padding: 20px !important;
   margin: 0 !important;
   background-color: #fff;
   font-family: Arial,'Apple SD Gothic Neo','Malgun Gothic', Helvetica, 'nanumgothic', sans-serif, Menlo, Monaco, monospace;
   font-size: .9em;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 body >:first-child {

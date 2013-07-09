@@ -2,6 +2,7 @@ var _options = {
   dirname: '.'
 };
 var viewStyle, codeStyle;
+
 window.ee = new EventEmitter();
 
 window.ondragover = function(e) { 
@@ -59,12 +60,8 @@ function init(options) {
  * @return {[type]} [description]
  */
 function _fixImagePath() {
-  $('img').each(function() {
-    var src = $(this).attr('src');
-
-    if(src.indexOf('://') == -1) {
-      $(this).attr('src', _options.dirname +'/'+ src);
-    }
+  $('img').on('error', function() {
+    $(this).attr('src', './img/noimage.gif');
   });
 }
 
@@ -73,31 +70,20 @@ var timeoutSyntaxHighlight;
 function _lazySyntaxHighlight() {
   clearTimeout(timeoutSyntaxHighlight);
 
-  setTimeout(function() {
-    $('pre code').each(function(i, e) {
-      hljs.highlightBlock(e);
+  timeoutSyntaxHighlight = setTimeout(function() {
+    $('pre>code').each(function(i, e) {
+
+      var codeEl = $(this);
+      var code = codeEl.html();
+      var lang = codeEl.attr('class');
+
+      if (!lang) {
+        codeEl.html(hljs.highlightAuto(code).value);
+      } else {
+        codeEl.html(hljs.highlight(lang, code).value);
+      }
     });
   }, 400);
-}
-
-/**
- * update contents
- * @param  {[type]} contents [description]
- * @return {[type]}          [description]
- */
-function update(contents) {
-  //unregister previous anchor click event handler
-  $('a').off('click', '**');
-  $(document.body).html(contents);
-
-  $('img').on('error', function() {
-    $(this).attr('src', './img/noimage.gif');
-  });
-  _fixImagePath();
-  // createTOC();
-  
-  _preventDefaultAnchor();
-  _lazySyntaxHighlight();
 }
 
 /**
@@ -105,10 +91,107 @@ function update(contents) {
  * @return {[type]} [description]
  */
 function _preventDefaultAnchor() {
+  $('a').off('click', '**');
+
   $('a').on('click', function(e) {
     window.ee.emit('link', $(e.target).attr('href'));
     e.preventDefault();
   });
+}
+
+/**
+ * update contents
+ * @param  {[type]} contents [description]
+ * @return {[type]}          [description]
+ */
+function update(html) {
+  var wrapper = $('<div>').html(html);
+  var i, frag, frags, _frag, origin;
+
+  __break__ = false;
+
+  wrapper.find('img').each(function() {
+    var src = $(this).attr('src');
+
+    if(src.indexOf('://') == -1) {
+      $(this).attr('src', _options.dirname +'/'+ src);
+    }
+  });
+
+  frags = wrapper.find('>*');
+
+  _frags = document.querySelectorAll('body>*') || [];
+  _frags = Array.prototype.slice.call(_frags, 0);
+
+  //이전에 작성된 내용이 없는 경우
+  // if (_frags.length <= 0) {
+  //   $(document.body).html(wrapper[0].innerHTML);
+  //   return;
+  // }
+
+  //작성된 내용이 있는 경우 새로운 프레그먼트로 치환
+  // frags.each(function(idx, frag) {
+  for(i = 0; i < frags.length; i++) {
+    frag = frags[i];
+    _frag = _frags.shift();
+
+    //이전 프레그먼트 없는 경우 body 에 추가
+    if (!_frag) {
+      // var el = $(frag).appendTo(document.body);
+
+      document.body.appendChild(frag);
+    } else {
+
+      //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
+      // origin = $(_frag).attr('origin');
+      origin = _frag.getAttribute('origin');
+
+      //origin 문자열이 없는 경우
+      if (!origin) {
+        //새로운 프레그먼트와 이전 프레그먼트가 다른 경우는 새로운 프레그먼트로 치환
+        if (frag.outerHTML != _frag.outerHTML) {
+
+          _frag.style.display = 'none';
+          document.body.insertBefore(frag, _frag);
+          document.body.removeChild(_frag);
+
+        }
+      } else {
+        //origin 문자열이 있는 경우
+        if (frag.outerHTML != origin) {
+
+          _frag.style.display = 'none';
+          document.body.insertBefore(frag, _frag);
+          document.body.removeChild(_frag);
+
+        }
+      }
+    }
+  }
+
+  var pres = document.body.querySelectorAll('pre')
+  for (i = 0; i < pres.length; i++) {
+    pres[i].setAttribute('origin', pres[i].outerHTML);
+  }
+  // $(document.body).find('pre').each(function(i, e) {
+  //   $(this).attr('origin', $(this)[0].outerHTML);
+  // });
+
+  //새로이 작성된 내용이 지난 작성 내용에 비해 적을 경우
+  //남아 있는 프레그먼트를 모두 제거
+  if (_frags.length > 0) {
+    _frags.forEach(function(frag, idx) {
+      document.body.removeChild(frag);
+      // $(frag).remove();
+    });
+  }
+  
+  // if (frags.find('img').length > 0) {
+  //   _fixImagePath();
+  // }
+
+  _preventDefaultAnchor();
+  _lazySyntaxHighlight();
 }
 
 /**

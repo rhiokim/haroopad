@@ -133,6 +133,7 @@ define([
     WindowMgr.open(pathDocs +'/about.md', { readOnly: true, position: 'center' });
   });
   window.ee.on('menu.help.syntax', function() {
+    alert(pathDocs)
     WindowMgr.open(pathDocs +'/syntax.md', { readOnly: true, position: 'center' });
   });
   window.ee.on('menu.help.acknowledgements', function() {
