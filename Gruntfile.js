@@ -235,15 +235,7 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/clean-css/lib/clean.js', dest: 'build/haroopad/node_modules/clean-css/lib/clean.js' },
           { src: 'src/node_modules/clean-css/index.js', dest: 'build/haroopad/node_modules/clean-css/index.js' },
           { src: 'src/node_modules/clean-css/package.json', dest: 'build/haroopad/node_modules/clean-css/package.json' },
-          { expand: true, cwd: 'src/node_modules/nodemailer/', src: [ '**' ], dest: 'build/haroopad/node_modules/nodemailer/' }/*,
-          { expand: true, cwd: 'src/node_modules/nodemailer/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/nodemailer/lib/' },
-          { expand: true, cwd: 'src/node_modules/nodemailer/node_modules/mailcomposer/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/nodemailer/node_modules/mailcomposer/lib' },
-          { expand: true, cwd: 'src/node_modules/nodemailer/node_modules/mailcomposer/node_modules/mime/', src: [ '**' ], dest: 'build/haroopad/node_modules/nodemailer/node_modules/mailcomposer/node_modules/mime/' },
-          { expand: true, cwd: 'src/node_modules/nodemailer/node_modules/mailcomposer/node_modules/mimelib/', src: [ '**' ], dest: 'build/haroopad/node_modules/nodemailer/node_modules/mailcomposer/node_modules/mimelib/' },
-          { src: 'src/node_modules/nodemailer/package.json', dest: 'build/haroopad/node_modules/nodemailer/package.json' },
-          { src: 'src/node_modules/nodemailer/node_modules/mailcomposer/package.json', dest: 'build/haroopad/node_modules/nodemailer/node_modules/mailcomposer/package.json' },
-          { src: 'src/node_modules/nodemailer/node_modules/mailcomposer/node_modules/mime/package.json', dest: 'build/haroopad/node_modules/nodemailer/node_modules/mailcomposer/node_modules/mime/package.json' },
-          { expand: true, cwd: 'src/node_modules/nodemailer/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/nodemailer/lib/' }*/
+          { expand: true, cwd: 'src/node_modules/nodemailer/', src: [ '**/*.js', '**/*.json', '**/*.types', '**/*.pem' ], dest: 'build/haroopad/node_modules/nodemailer/' },
         ]
       },
 
