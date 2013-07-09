@@ -92,13 +92,23 @@ function _fixImagePath() {
 //   }, 400);
 // }
 
+function htmlDecode(input){
+  var e = document.createElement('div');
+  e.innerHTML = input;
+  return e.textContent;
+}
+
 //for performance
 function _lazySyntaxHighlight(el) {
   var codeEl = el.firstElementChild;
   var code = codeEl.innerHTML;
   var lang = codeEl.className; 
 
-  lang = lang == 'js' ? 'javascript' : '';
+  lang = lang == 'js' ? 'javascript' : lang;
+
+  if (lang == 'xml') {
+    code = htmlDecode(code);
+  }
 
   try {
     if (!lang) {
@@ -159,12 +169,6 @@ function update(html) {
   _frags = document.body.querySelectorAll(':scope>*');
   _frags = Array.prototype.slice.call(_frags, 0);
 
-  // var pre, pres = document.body.querySelectorAll('pre');
-  // for (i = 0; i < pres.length; i++) {
-  //   pre = document.createElement('pre');
-  //   pre.innerHTML = pres[i].innerHTML;
-  //   pres[i].setAttribute('origin', pre.outerHTML);
-  // }
   
   //새로 생성된 pre 엘리먼트 origin attribute 에 본래 html 을 저장
   var pres = wrapper.querySelectorAll('pre');
@@ -184,10 +188,6 @@ function update(html) {
     }
   }
 
-  // wrapper.find('pre').each(function() {
-  //   this.setAttribute('origin', this.outerHTML);
-  // });
-
   var src, imgs = wrapper.querySelectorAll('img');
   for (i = 0; i < imgs.length; i++) {
     src = imgs[i].getAttribute('src');
@@ -196,21 +196,6 @@ function update(html) {
       imgs[i].setAttribute('src', _options.dirname +'/'+ src);
     }
   }
-  // wrapper.find('img').each(function() {
-  //   var src = $(this).attr('src');
-
-  //   if(src.indexOf('://') == -1) {
-  //     $(this).attr('src', _options.dirname +'/'+ src);
-  //   }
-  // });
-
-  // frags = wrapper.find('>*');
-
-  //이전에 작성된 내용이 없는 경우
-  // if (_frags.length <= 0) {
-  //   $(document.body).html(wrapper[0].innerHTML);
-  //   return;
-  // }
 
   //작성된 내용이 있는 경우 새로운 프레그먼트로 치환
   // frags.each(function(idx, frag) {
