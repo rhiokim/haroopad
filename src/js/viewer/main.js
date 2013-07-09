@@ -77,11 +77,18 @@ function _lazySyntaxHighlight() {
       var code = codeEl.html();
       var lang = codeEl.attr('class');
 
-      if (!lang) {
-        codeEl.html(hljs.highlightAuto(code).value);
-      } else {
-        codeEl.html(hljs.highlight(lang, code).value);
+      lang = lang == 'js' ? 'javascript' : lang;
+      
+      try {
+        if (!lang) {
+          codeEl.html(hljs.highlightAuto(code).value);
+        } else {
+          codeEl.html(hljs.highlight(lang, code).value);
+        }
+      } catch(e) {
+        return code;
       }
+
     });
   }, 400);
 }
