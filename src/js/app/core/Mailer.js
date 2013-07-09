@@ -41,10 +41,10 @@ define([
 		mailOptions.attachments = attach;
 		
 		if (mode == 'html') {
-			mailOptions.html = html;
+			mailOptions.html = html || '';
 		} else {
 			delete mailOptions.html;
-			mailOptions.text = text;
+			mailOptions.text = text || '';
 		}
 
 		// send mail with defined transport object
