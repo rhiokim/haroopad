@@ -37,7 +37,19 @@ define([
 			el.find('.progress').addClass('hide');
 			bar.css({ width: 0 });
 
-			el.find('.alert').removeClass('hide').html(msg);
+			el.find('.alert-block').removeClass('hide').html(msg);
+		}
+
+		function success(msg) {
+			window.clearInterval(postTimeout);
+			el.find('.progress').addClass('hide');
+			bar.css({ width: 0 });
+
+			el.find('.alert-success').removeClass('hide').html(msg);
+
+			window.setTimeout(function() {
+				el.find('.alert-success').alert('close');
+			}, 2500);
 		}
 
 		var View = Backbone.View.extend({
@@ -69,6 +81,10 @@ define([
 			hide: function() {
 				this.$el.modal('hide');
 				stop();
+			},
+
+			successHandler: function() {
+				success('Success!');
 			},
 
 			clickHandler: function(e) {

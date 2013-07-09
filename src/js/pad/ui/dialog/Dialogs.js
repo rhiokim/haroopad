@@ -17,7 +17,7 @@ define([
 			window.parent.ee.emit('posts.tumblr', FileOpt.toJSON(), mailInfo);
 		});
 
-		window.ee.on('posted.tumblr', PostsDialog.hide.bind(PostsDialog));
+		window.ee.on('posted.tumblr', PostsDialog.successHandler.bind(PostsDialog));
 
 		window.ee.on('fail.post.tumblr', function(err) {
 			if(err.name == 'AuthError') {

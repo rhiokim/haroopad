@@ -76,6 +76,11 @@ function _lazySyntaxHighlight() {
       var codeEl = $(this);
       var code = codeEl.html();
       var lang = codeEl.attr('class');
+      var done = codeEl.attr('done');
+
+      if (done == 'true') {
+        return;
+      }
 
       lang = lang == 'js' ? 'javascript' : lang;
       
@@ -88,6 +93,8 @@ function _lazySyntaxHighlight() {
       } catch(e) {
         return code;
       }
+
+      codeEl.attr('done', true);
 
     });
   }, 400);

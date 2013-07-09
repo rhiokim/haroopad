@@ -28,35 +28,39 @@ define([
 
 	function send(title, text, html, to, mode, attach, cb) {
 
-			if (to.indexOf('@tumblr.com') > -1) {
-				title = '!m '+ title;
+		if (to.indexOf('@tumblr.com') > -1) {
+			title = '!m '+ title;
+		}
+
+		html += _glo.getEmailAdvertisementHTML();
+		text += _glo.getEmailAdvertisementMD();
+
+		mailOptions.from = email;
+		mailOptions.to = to;
+		mailOptions.subject = title;
+		mailOptions.attachments = attach;
+		
+		if (mode == 'html') {
+			mailOptions.html = html;
+		} else {
+			delete mailOptions.html;
+			mailOptions.text = text;
+		}
+
+		// send mail with defined transport object
+		smtpTransport.sendMail(mailOptions, function(error, response){
+			cb(error, response);
+
+			if (error) {
+				smtpTransport.close();
+				return;
 			}
 
-			mailOptions.from = email;
-			mailOptions.to = to;
-			mailOptions.subject = title;
-			mailOptions.attachments = attach;
-			
-			if (mode == 'html') {
-				mailOptions.html = html;
-			} else {
-				mailOptions.text = text;
-			}
-
-			// send mail with defined transport object
-			smtpTransport.sendMail(mailOptions, function(error, response){
-				cb(error, response);
-
-				if (error) {
-					smtpTransport.close();
-					return;
-				}
-
-		    window.clearTimeout(tid);
-		    tid = window.setTimeout(function() {
-		    	smtpTransport.close(); // shut down the connection pool, no more messages
-		    }, 1000*60*10);
-			});
+	    window.clearTimeout(tid);
+	    tid = window.setTimeout(function() {
+	    	smtpTransport.close(); // shut down the connection pool, no more messages
+	    }, 1000*60*10);
+		});
 	}
 
 	return {
