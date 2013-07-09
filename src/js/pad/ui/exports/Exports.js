@@ -39,6 +39,9 @@ define([
 					cssText += fs.readFileSync(href, 'utf8');
 				}
 			});
+			cssText += '\n footer {position:fixed; font-size:.8em; text-align:right; bottom:0px; margin-left:-25px; height:20px; width:100%;}';
+
+			cssText = cleanCss.process(cssText);
 
 			cssText = cleanCss.process(cssText);
 
