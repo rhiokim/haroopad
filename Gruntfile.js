@@ -108,6 +108,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/underscore.js',
             'src/js/pad/before.bin.js',
             'src/js/lib/logger.js',
+            'src/js/pad/pad.common.js',
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',
             '<%= vendors %>/bootstrap.min.js',
@@ -230,7 +231,9 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/readdir/lib/readdir.js', dest: 'build/haroopad/node_modules/readdir/lib/readdir.js' },
           { src: 'src/node_modules/readdir/package.json', dest: 'build/haroopad/node_modules/readdir/package.json' },
           { src: 'src/node_modules/watch/main.js', dest: 'build/haroopad/node_modules/watch/main.js' },
-          { src: 'src/node_modules/watch/package.json', dest: 'build/haroopad/node_modules/watch/package.json' }
+          { src: 'src/node_modules/watch/package.json', dest: 'build/haroopad/node_modules/watch/package.json' },
+          { src: 'src/node_modules/clean-css/lib/clean.js', dest: 'build/haroopad/node_modules/clean-css/lib/clean.js' },
+          { src: 'src/node_modules/clean-css/package.json', dest: 'build/haroopad/node_modules/clean-css/package.json' }
         ]
       },
 
