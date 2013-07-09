@@ -2,6 +2,7 @@ var _options = {
   dirname: '.'
 };
 var viewStyle, codeStyle;
+
 window.ee = new EventEmitter();
 
 window.ondragover = function(e) { 
@@ -105,7 +106,9 @@ function _preventDefaultAnchor() {
  */
 function update(html) {
   var wrapper = $('<div>').html(html);
-  var frags, _frag, origin;
+  var i, frag, frags, _frag, origin;
+
+  __break__ = false;
 
   wrapper.find('img').each(function() {
     var src = $(this).attr('src');
@@ -126,9 +129,10 @@ function update(html) {
   //   return;
   // }
 
-  var scollTick = 0;
   //작성된 내용이 있는 경우 새로운 프레그먼트로 치환
-  frags.each(function(idx, frag) {
+  // frags.each(function(idx, frag) {
+  for(i = 0; i < frags.length; i++) {
+    frag = frags[i];
     _frag = _frags.shift();
 
     //이전 프레그먼트 없는 경우 body 에 추가
@@ -136,8 +140,6 @@ function update(html) {
       // var el = $(frag).appendTo(document.body);
 
       document.body.appendChild(frag);
-      if(scollTick <= 0) {
-      }
     } else {
 
       //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
@@ -153,8 +155,6 @@ function update(html) {
           document.body.insertBefore(frag, _frag);
           document.body.removeChild(_frag);
 
-          if(scollTick <= 0) {
-          }
         }
       } else {
         //origin 문자열이 있는 경우
@@ -163,13 +163,14 @@ function update(html) {
           _frag.style.display = 'none';
           document.body.insertBefore(frag, _frag);
           document.body.removeChild(_frag);
+
         }
       }
     }
-  });
+  }
 
   var pres = document.body.querySelectorAll('pre')
-  for (var i = 0; i < pres.length; i++) {
+  for (i = 0; i < pres.length; i++) {
     pres[i].setAttribute('origin', pres[i].outerHTML);
   }
   // $(document.body).find('pre').each(function(i, e) {
@@ -188,7 +189,7 @@ function update(html) {
   // if (frags.find('img').length > 0) {
   //   _fixImagePath();
   // }
-  
+
   _preventDefaultAnchor();
   _lazySyntaxHighlight();
 }

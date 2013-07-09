@@ -98,12 +98,13 @@ requirejs([
     });
 
     function delayChange() {
-      clearTimeout(_tid_);
+      window.clearTimeout(_tid_);
 
       window.ee.emit('change.before.markdown', Editor.getValue());
 
       _tid_ = setTimeout(function() {
         window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
+
           window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
         });
       }, 200);
