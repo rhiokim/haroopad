@@ -12,8 +12,9 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Haroopad Help',
 		      click: function() {
-		      	window.ee.emit('menu.help.about');
-						// open('http://pad.haroopress.com/page.html');
+		      	(process.platform === 'darwin') ?
+		      	window.parent.ee.emit('menu.help.about') :
+						open('http://pad.haroopress.com/page.html');
 		      }
 	    })
 	);
@@ -21,8 +22,9 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Markdown Syntax Help',
 		      click: function() {
-		      	window.ee.emit('menu.help.syntax');
-		        // open('http://pad.haroopress.com/page.html#syntax');
+		      	(process.platform === 'darwin') ?
+		      	window.parent.ee.emit('menu.help.syntax') :
+		        open('http://pad.haroopress.com/page.html#syntax');
 		      }
 	    })
 	);
@@ -30,8 +32,9 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Haroopad Shortcut Help',
 		      click: function() {
-		      	window.ee.emit('menu.help.shortcut');
-		        // open('http://pad.haroopress.com/page.html#show-shortcuts');
+		      	(process.platform === 'darwin') ?
+		      	window.parent.ee.emit('menu.help.shortcut') :
+		        open('http://pad.haroopress.com/page.html#show-shortcuts');
 		      }
 	    })
 	);
@@ -53,8 +56,9 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Acknowledgements',
 		      click: function() {
-		      	window.ee.emit('menu.help.acknowledgements');
-		        // open('http://pad.haroopress.com/page.html#acknowledgements');
+		      	(process.platform === 'darwin') ?
+		      	window.parent.ee.emit('menu.help.acknowledgements') :
+		        open('http://pad.haroopress.com/page.html#acknowledgements');
 		      }
 	    })
 	);
@@ -68,15 +72,15 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Haroopad Website',
 		      click: function() {
-						open('http://pad.haroopress.com/');
+					open('http://pad.haroopress.com/');
 		      }
 	    })
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Bug Report',
+	        label: 'User echo',
 		      click: function() {
-						open('https://github.com/rhiokim/haroopad/issues');
+					open('http://haroopad.userecho.com/');
 		      }
 	    })
 	);
@@ -87,9 +91,9 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Need a help? Me too ;-)',
+	        label: 'Boost up! Donate',
 		      click: function() {
-						open('http://pad.haroopress.com/page.html#grow-up-donate');
+					open('http://pad.haroopress.com/page.html#grow-up-donate');
 		      }
 	    })
 	);

@@ -15,7 +15,20 @@ define([
 
     var marked = require("marked");
 
-    var opt = store.get('Markdown') || {};
+    var defaults = {
+        "gfm": true,
+        "tables": true,
+        "breaks": false,
+        "pedantic": false,
+        "sanitize": false,
+        "smartLists": true,
+        "smartypants": true,
+        "silent": false,
+        "highlight": null,
+        "langPrefix": ''
+    };
+    var opt = store.get('Markdown') || defaults;
+
     marked.setOptions(opt);
     var renderer = new marked.Renderer();
 
