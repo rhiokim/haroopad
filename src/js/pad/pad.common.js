@@ -1,4 +1,4 @@
-var _glo = {
+window._glo = {
 	exportHtmlFooter: function () {
 		return ''
 			+ '<footer style="position:fixed; font-size:.8em; text-align:right; bottom:0px; margin-left:-25px; height:20px; width:100%;">'

@@ -107,7 +107,7 @@ requirejs([
 
           window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
         });
-      }, 200);
+      }, 100);
     }
 
     win.focus();

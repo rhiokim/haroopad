@@ -66,24 +66,68 @@ function _fixImagePath() {
 }
 
 //for performance
-var timeoutSyntaxHighlight;
-function _lazySyntaxHighlight() {
-  clearTimeout(timeoutSyntaxHighlight);
+// var timeoutSyntaxHighlight;
+// function _lazySyntaxHighlight2() {
+//   clearTimeout(timeoutSyntaxHighlight);
 
-  timeoutSyntaxHighlight = setTimeout(function() {
-    $('pre>code').each(function(i, e) {
+//   timeoutSyntaxHighlight = setTimeout(function() {
+//     $('pre>code').each(function(i, e) {
 
-      var codeEl = $(this);
-      var code = codeEl.html();
-      var lang = codeEl.attr('class');
+//       var codeEl = $(this);
+//       var code = codeEl.html();
+//       var lang = codeEl.attr('class');
 
-      if (!lang) {
-        codeEl.html(hljs.highlightAuto(code).value);
-      } else {
-        codeEl.html(hljs.highlight(lang, code).value);
-      }
-    });
-  }, 400);
+//       lang = lang == 'js' ? 'javascript' : '';
+
+//       try {
+//         if (!lang) {
+//           codeEl.html(hljs.highlightAuto(code).value);
+//         } else {
+//           codeEl.html(hljs.highlight(lang, code).value);
+//         }
+//       } catch(e) {
+//         return code;
+//       }
+//     });
+//   }, 400);
+// }
+
+//for performance
+function _lazySyntaxHighlight(el) {
+  var codeEl = el.firstElementChild;
+  var code = codeEl.innerHTML;
+  var lang = codeEl.className; 
+
+  lang = lang == 'js' ? 'javascript' : '';
+
+  try {
+    if (!lang) {
+      codeEl.innerHTML = hljs.highlightAuto(code).value;
+    } else {
+      codeEl.innerHTML = hljs.highlight(lang, code).value;
+    }
+  } catch(e) {
+    // return code;
+  }
+
+    // $('pre>code').each(function(i, e) {
+
+    //   var codeEl = $(this);
+    //   var code = codeEl.html();
+    //   var lang = codeEl.attr('class');
+
+    //   lang = lang == 'js' ? 'javascript' : '';
+
+    //   try {
+    //     if (!lang) {
+    //       codeEl.html(hljs.highlightAuto(code).value);
+    //     } else {
+    //       codeEl.html(hljs.highlight(lang, code).value);
+    //     }
+    //   } catch(e) {
+    //     return code;
+    //   }
+    // });
 }
 
 /**
@@ -105,23 +149,62 @@ function _preventDefaultAnchor() {
  * @return {[type]}          [description]
  */
 function update(html) {
-  var wrapper = $('<div>').html(html);
-  var i, frag, frags, _frag, origin;
+  // var wrapper = $('<div>').html(html);
+  var wrapper = document.createElement('div');
+      wrapper.innerHTML = html;
+  var i, frag, frags, _frag, origin, _origin;
 
-  __break__ = false;
+  frags = wrapper.querySelectorAll(':scope>*');
+  frags = Array.prototype.slice.call(frags, 0);
+  _frags = document.body.querySelectorAll(':scope>*');
+  _frags = Array.prototype.slice.call(_frags, 0);
 
-  wrapper.find('img').each(function() {
-    var src = $(this).attr('src');
+  // var pre, pres = document.body.querySelectorAll('pre');
+  // for (i = 0; i < pres.length; i++) {
+  //   pre = document.createElement('pre');
+  //   pre.innerHTML = pres[i].innerHTML;
+  //   pres[i].setAttribute('origin', pre.outerHTML);
+  // }
+  
+  //새로 생성된 pre 엘리먼트 origin attribute 에 본래 html 을 저장
+  var pres = wrapper.querySelectorAll('pre');
+  var _pres = document.body.querySelectorAll('pre');
+  for (i = 0; i < pres.length; i++) {
+    origin = pres[i].outerHTML;
+    pres[i].setAttribute('origin', origin);
+
+    if (_pres[i]) {
+      _origin = _pres[i].getAttribute('origin');
+
+      if (origin != _origin) {
+        _lazySyntaxHighlight(pres[i]);
+      }
+    } else {
+      _lazySyntaxHighlight(pres[i]);
+    }
+  }
+
+  // wrapper.find('pre').each(function() {
+  //   this.setAttribute('origin', this.outerHTML);
+  // });
+
+  var src, imgs = wrapper.querySelectorAll('img');
+  for (i = 0; i < imgs.length; i++) {
+    src = imgs[i].getAttribute('src');
 
     if(src.indexOf('://') == -1) {
-      $(this).attr('src', _options.dirname +'/'+ src);
+      imgs[i].setAttribute('src', _options.dirname +'/'+ src);
     }
-  });
+  }
+  // wrapper.find('img').each(function() {
+  //   var src = $(this).attr('src');
 
-  frags = wrapper.find('>*');
+  //   if(src.indexOf('://') == -1) {
+  //     $(this).attr('src', _options.dirname +'/'+ src);
+  //   }
+  // });
 
-  _frags = document.querySelectorAll('body>*') || [];
-  _frags = Array.prototype.slice.call(_frags, 0);
+  // frags = wrapper.find('>*');
 
   //이전에 작성된 내용이 없는 경우
   // if (_frags.length <= 0) {
@@ -144,10 +227,10 @@ function update(html) {
 
       //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
       // origin = $(_frag).attr('origin');
-      origin = _frag.getAttribute('origin');
+      _origin = _frag.getAttribute('origin');
 
       //origin 문자열이 없는 경우
-      if (!origin) {
+      if (!_origin) {
         //새로운 프레그먼트와 이전 프레그먼트가 다른 경우는 새로운 프레그먼트로 치환
         if (frag.outerHTML != _frag.outerHTML) {
 
@@ -157,22 +240,22 @@ function update(html) {
 
         }
       } else {
+        origin = frag.getAttribute('origin');
         //origin 문자열이 있는 경우
-        if (frag.outerHTML != origin) {
+        if (origin != _origin) {
 
           _frag.style.display = 'none';
           document.body.insertBefore(frag, _frag);
           document.body.removeChild(_frag);
 
+          // _lazySyntaxHighlight(frag);
         }
       }
     }
   }
 
-  var pres = document.body.querySelectorAll('pre')
-  for (i = 0; i < pres.length; i++) {
-    pres[i].setAttribute('origin', pres[i].outerHTML);
-  }
+
+
   // $(document.body).find('pre').each(function(i, e) {
   //   $(this).attr('origin', $(this)[0].outerHTML);
   // });
@@ -191,7 +274,7 @@ function update(html) {
   // }
 
   _preventDefaultAnchor();
-  _lazySyntaxHighlight();
+  // _lazySyntaxHighlight();
 }
 
 /**
