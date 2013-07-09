@@ -224,9 +224,10 @@ define([
     Preferences.show();
   });
 
-  HotKey('shift-ctrl-space', function() {
-    window.ee.emit('menu.help.shortcut');
-  });
+  //window, linux specify doc path error
+  // HotKey('shift-ctrl-space', function() {
+  //   window.ee.emit('menu.help.shortcut');
+  // });
 
   File.loadTemporary();
 });
