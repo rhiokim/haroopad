@@ -10,6 +10,7 @@ haroopad technical stack
 * require.js + text.js
 * store.js
 * keymage.js
+* clean-css
 * font-awesome-more
 * highlight.js
 * underscore.js
