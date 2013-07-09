@@ -2,26 +2,26 @@ define([
 		'keyboard',
 		'ui/file/File.opt',
 		'ui/dialog/Save',
-		'ui/dialog/Posts'
+		'ui/dialog/Email'
 	], 
-	function(HotKey, FileOpt, Save, Posts) {
+	function(HotKey, FileOpt, Save, Email) {
 		var dialogs;
 
 		var SaveDialog = new Save,
-				PostsDialog = new Posts;
+			EmailDialog = new Email;
 
 
-		window.ee.on('file.posts.tumblr', PostsDialog.show.bind(PostsDialog));
+		window.ee.on('file.posts.tumblr', EmailDialog.show.bind(EmailDialog));
 		
-		PostsDialog.bind('post', function(mailInfo) {
+		EmailDialog.bind('post', function(mailInfo) {
 			window.parent.ee.emit('posts.tumblr', FileOpt.toJSON(), mailInfo);
 		});
 
-		window.ee.on('posted.tumblr', PostsDialog.successHandler.bind(PostsDialog));
+		window.ee.on('posted.tumblr', EmailDialog.successHandler.bind(EmailDialog));
 
 		window.ee.on('fail.post.tumblr', function(err) {
 			if(err.name == 'AuthError') {
-				PostsDialog.error('Email and Password not accepted');
+				EmailDialog.error('Email and Password not accepted');
 			}
 		});
 
@@ -31,6 +31,6 @@ define([
 
 		return dialogs = {
 			save: SaveDialog,
-			posts: PostsDialog
+			posts: EmailDialog
 		}
 });

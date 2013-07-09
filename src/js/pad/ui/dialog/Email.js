@@ -46,9 +46,15 @@ define([
 			bar.css({ width: 0 });
 
 			el.find('.alert-success').removeClass('hide').html(msg);
+			el.find('.alert-success').addClass('in');
+			
+			el.find('button._save').button('reset');
 
 			window.setTimeout(function() {
-				el.find('.alert-success').alert('close');
+				el.find('.alert-success').removeClass('in');
+				window.setTimeout(function() {
+					el.find('.alert-success').addClass('hide');
+				}, 250);
 			}, 2500);
 		}
 
@@ -85,6 +91,7 @@ define([
 
 			successHandler: function() {
 				success('Success!');
+				this.$el.find('button._save').button('reset');
 			},
 
 			clickHandler: function(e) {
@@ -96,6 +103,8 @@ define([
 			postHandler: function(e) {
 				var title, to, from, password;
 				e.preventDefault();
+
+				el.find('button._save').button('Sending...');
 
 				title = this.$el.find('input[name=title]').val() || '';
 				to = this.$el.find('input[name=to]').val();
