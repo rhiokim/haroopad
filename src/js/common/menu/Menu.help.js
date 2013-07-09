@@ -72,15 +72,15 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Haroopad Website',
 		      click: function() {
-						open('http://pad.haroopress.com/');
+					open('http://pad.haroopress.com/');
 		      }
 	    })
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Bug Report',
+	        label: 'User echo',
 		      click: function() {
-						open('https://github.com/rhiokim/haroopad/issues');
+					open('http://haroopad.userecho.com/');
 		      }
 	    })
 	);
@@ -93,7 +93,7 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Boost up! Donate',
 		      click: function() {
-						open('http://pad.haroopress.com/page.html#grow-up-donate');
+					open('http://pad.haroopress.com/page.html#grow-up-donate');
 		      }
 	    })
 	);
