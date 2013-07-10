@@ -4,8 +4,12 @@ Issue Number     | Description
 ----------------:|-----------------------------------------------
 **New Features** |
 #27              | Add Search & Replace
+								 | Add bug report in Help menu
+								 | Add donattion in Help Menu
 **Enhancements** |
-                 | Ehancement markdown rendering performance (x??)
+#94              | **Ehancement markdown rendering performance (x??)**
+#93              | Prevent anti virus dectect
+#82              | Advertisements (export html)
 								 | Editing line auto position at viewer
                  | Change Help menu action (Mac Only)
 
@@ -18,8 +22,8 @@ Issue Number     | Description
 > * Mac OS X DMG: [https://www.dropbox.com/s/y9uh2pcgldia1na/haroopad-v0.4.4.dmg](https://www.dropbox.com/s/y9uh2pcgldia1na/haroopad-v0.4.4.dmg)
 > * Linux 32-bit Binary:[https://www.dropbox.com/s/9i5wcml8ilzn095/haroopad-v0.4.4-i386.tar.gz](https://www.dropbox.com/s/9i5wcml8ilzn095/haroopad-v0.4.4-i386.tar.gz)
 > * Linux 32-bit Debian Package:[https://www.dropbox.com/s/ei3q0coqigbuwv8/haroopad-v0.4.4-i386.deb](https://www.dropbox.com/s/ei3q0coqigbuwv8/haroopad-v0.4.4-i386.deb)
-> * Linux 64-bit Binary: **Not support**
-> * Linux 64-bit Debian Package: **Not Support**
+> * Linux 64-bit Binary: [https://www.dropbox.com/s/g10kzmzc7g6ivjz/haroopad-v0.4.4-x64.tar.gz](https://www.dropbox.com/s/g10kzmzc7g6ivjz/haroopad-v0.4.4-x64.tar.gz)
+> * Linux 64-bit Debian Package: [https://www.dropbox.com/s/k0t55oyh7nrpcuf/haroopad-v0.4.4-x64.deb](https://www.dropbox.com/s/k0t55oyh7nrpcuf/haroopad-v0.4.4-x64.deb)
 
 
 ## Haroopad v0.4.3
