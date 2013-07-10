@@ -18,7 +18,7 @@
 
     <!-- Loading Flat UI -->
     <link href="/assets/css/flat-ui.css" rel="stylesheet">
-    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="shortcut icon" href="assets/haroopad.ico">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -82,7 +82,12 @@
               <li><a href="#load-and-save">Load & Save</a></li>
               <li><a href="#open-recent-files">Open recent files</a></li>
               <li><a href="#show-shortcuts">Show shortcuts</a></li>
-              <li><a href="#exports">Exports</a></li>
+              <li>
+                <a href="#exports">Exports</a>
+                <ul>
+                  <li><a href="#export-to-pdf">Export to PDF</a></li>
+                </ul>
+              </li>
               <li>
                 <a href="#preferences">Preferences</a>
                 <ul>
@@ -104,12 +109,12 @@
               <li><a href="#">How to export my content to other services?</a></li>
               <li class="divider"></li-->
             </ul>
-            <a href="https://twitter.com/intent/tweet?original_referer=http://pad.haroopress.com/page.html&tw_p=tweetbutton&url=http://pad.haroopress.com&via=haroopad&text=블로깅, 웹메일등 웹 문서를 마크다운으로 편리하게 작성해보세요. 윈도우, 리눅스, 맥을 지원하는 하루패드는 멀티 마크다운과 다양한 확장기능을 제공" class="btn btn-primary btn-block btn-large">Share to Twitter</a>
+            <a href="https://twitter.com/intent/tweet?original_referer=http://pad.haroopress.com/page.html&tw_p=tweetbutton&url=http://pad.haroopress.com&via=haroopad&text=블로깅, 웹메일등 웹 문서를 마크다운으로 편리하게 작성해보세요. 윈도우, 리눅스, 맥을 지원하는 하루패드는 멀티 마크다운과 다양한 확장기능을 제공" class="btn btn-primary btn-block btn-large" onclick="_gaq.push(['_trackEvent', 'blog page', 'block menu', 'share to twitter']);">Share to Twitter</a>
             <!-- <a href="#" class="btn btn-primary btn-block btn-large">Share to Facebook</a> -->
-            <a href="#acknowledgements" class="btn btn-large btn-block btn-info">Acknowledgements</a>
-            <a href="#release-notes" class="btn btn-large btn-block">Release Notes</a>
-            <a href="#grow-up-donate" class="btn btn-large btn-block btn-success">Grow up Donate!</a>
-            <a class="btn btn-large btn-block disabled">Logo Design Story (comming)</a>
+            <a href="#acknowledgements" class="btn btn-large btn-block btn-info" onclick="_gaq.push(['_trackEvent', 'blog page', 'block menu', 'acknowledgements']);">Acknowledgements</a>
+            <a href="#release-notes" class="btn btn-large btn-block" onclick="_gaq.push(['_trackEvent', 'blog page', 'block menu', 'release note']);">Release Notes</a>
+            <a href="#grow-up-donate" class="btn btn-large btn-block btn-success" onclick="_gaq.push(['_trackEvent', 'blog page', 'block menu', 'donate']);">Grow up Donate!</a>
+            <a class="btn btn-large btn-block disabled" onclick="_gaq.push(['_trackEvent', 'blog page', 'logo story', 'share to twitter']);">Logo Design Story (comming)</a>
           </div>
         </div>
         <div class="span8 contents markdown haroopad">
