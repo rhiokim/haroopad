@@ -42,10 +42,7 @@ requirejs([
     $('.switch').bootstrapSwitch();
 
     win.on('context.preferences', function() {
-      alert('context.prefe')
     });
     win.on('preferences.show', function() {
-      alert('prefe.show')
     });
-
 });

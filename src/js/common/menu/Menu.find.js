@@ -17,19 +17,19 @@ window.MenuBarFind = function () {
 	menuItem({
             label: 'Find...',
             click: function() {
-                window.ee.emit('menu.find.start');
+                window.parent.ee.emit('menu.find.start');
             }
         });
 	menuItem({
             label: 'Find Next',
             click: function() {
-                window.ee.emit('menu.find.next');
+                window.parent.ee.emit('menu.find.next');
             }
         });
 	menuItem({
             label: 'Find Previous',
             click: function() {
-                window.ee.emit('menu.find.previous');
+                window.parent.ee.emit('menu.find.previous');
             }
         });
 	sepItem();
@@ -37,13 +37,13 @@ window.MenuBarFind = function () {
   menuItem({
           label: 'Replace...',
           click: function() {
-              window.ee.emit('menu.find.replace');
+              window.parent.ee.emit('menu.find.replace');
           }
       });
   menuItem({
           label: 'Replace All',
           click: function() {
-              window.ee.emit('menu.find.replace.all');
+              window.parent.ee.emit('menu.find.replace.all');
           }
       });
 

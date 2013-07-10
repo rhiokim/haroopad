@@ -11,7 +11,9 @@ define([
     var _tid_;	//for throttle
 
     var config = store.get('Editor') || {};
-    var generalConf = store.get('General') || {};
+    var generalConf = store.get('General') || {
+    	enableSyncScroll: true
+    };
 
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
@@ -124,7 +126,7 @@ define([
 			}
 		});
 		
-		if(generalConf.enableSyncScroll !== false) {
+		if(generalConf.enableSyncScroll) {
 		  editor.on('scroll', syncScrollHandler);
 		} else {
 		  editor.off('scroll', syncScrollHandler);
