@@ -106,9 +106,9 @@ function _lazySyntaxHighlight(el) {
 
   lang = lang == 'js' ? 'javascript' : lang;
 
-  if (lang == 'xml') {
-    code = htmlDecode(code);
-  }
+  // if (lang == 'xml') {
+  code = htmlDecode(code);
+  // }
 
   try {
     if (!lang) {
