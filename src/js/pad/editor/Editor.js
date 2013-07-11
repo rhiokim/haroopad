@@ -27,10 +27,52 @@ define([
 			        indentWithTabs: true,
 					    autofocus: true,
 					    workDelay: 1000,
-					    dragDrop: false,
 					    extraKeys: Keymap,
-  						showTrailingSpace: true
+  						showTrailingSpace: true,
+					    dragDrop: false,
+					    onDragEvent: function(cm, e) {
+					    	console.log(e);
+					    	var a = cm.coordsChar({ left:e.x, top: e.y });
+					    	var doc = cm.getDoc();
+					    	doc.setCursor(a);
+
+					    	e.preventDefault();
+					    	e.stop();
+					    	return;
+					    }
 					  });
+
+
+		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
+		editor.on('drop', function(doc, e) {
+			console.log('')
+    	// var type, kind, file, item, items;
+    	// var dataTransfer = e.dataTransfer;
+
+    	// items = dataTransfer.items;
+    	// files = e.dataTransfer.files;
+
+	    // for(var i = 0; i < items.length; i++) {
+	    // 	item = items[i];
+	    // 	file = files[i];
+	    // 	kind = item.kind;
+	    // 	type = item.type;
+
+	    // 	if (kind == 'file') {
+	    // 		console.log(file.path);
+	    // 		console.log(type);
+	    // 	} else if (kind == 'string') {
+	    // 		if(i == 0) {
+	    // 			// continue;
+	    // 		}
+	    // 		item.getAsString(function(str) {
+	    // 			console.log(str);
+	    // 			console.log(type);
+	    // 		});
+	    // 		// break;
+	    // 	}
+	    // }
+		});
 
 		/* initialize editor */
 		editor.setOption('theme', config.theme || 'solarized dark');

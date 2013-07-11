@@ -69,7 +69,6 @@ define([
 	});
 
 
-
 	HotKey('defmod-shift-alt-d', function() {
 		win.showDevTools();
 	});
@@ -120,13 +119,14 @@ define([
 	});
 
   window.ondragover = function(e) { 
-    e.preventDefault(); 
+    e.preventDefault();
+    console.log(e.x, e.y)
     window.parent.ee.emit('dragover', e);
     return false;
   };
 
   window.ondrop = function(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     window.parent.ee.emit('dragdrop', e);
     return false;
   };

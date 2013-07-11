@@ -7,12 +7,12 @@ window.ee = new EventEmitter();
 
 window.ondragover = function(e) { 
   e.preventDefault(); 
-  win.emit('dragover', e);
+  // win.emit('dragover', e);
   return false;
 };
 window.ondrop = function(e) { 
   e.preventDefault(); 
-  win.emit('dragdrop', e);
+  // win.emit('dragdrop', e);
   return false;
 };
 
