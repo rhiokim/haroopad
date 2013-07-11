@@ -91,6 +91,7 @@ define([
       top = top + 20;
   
   		newWin.moveTo(left, top);
+  		newWin.focus();
 		});
 	}
 

@@ -155,6 +155,10 @@ define([
     Recents.add(file);
   });
 
+  window.ee.on('file.reload', function(file, cb) {
+    File.reload(file, cb);
+  });
+
   window.ee.on('exit', function() {
     gui.App.quit();
   });

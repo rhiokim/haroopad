@@ -26,6 +26,27 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 		});
 	}
 
+  function checkChange() {
+    var path = model.get('fileEntry');
+    var mtime;
+
+    if (path) {
+      fs.stat(path, function(err, stats) {
+        mtime = model.get('mtime');
+
+        if(!mtime) {
+          model.set(stats);
+          return;
+        }
+
+        if (mtime.getTime() != stats.mtime.getTime()) {
+          model.set(stats);
+          window.ee.emit('file.update', model.get('fileEntry'));
+        }
+      });
+    }
+  }
+
 	function _open(file) {
 		var markdown;
 		
@@ -82,6 +103,8 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 		Opt.set('markdown', markdown);
 		Temporary.update();
 	});
+
+  win.on('focus', checkChange);
 
 	return {
 		open: function(file) {

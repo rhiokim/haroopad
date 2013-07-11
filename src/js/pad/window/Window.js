@@ -47,6 +47,18 @@ define([
 		close();
 	});
 
+	var reloadFile;
+	Dialogs.reload.bind('reload', function() {
+		window.parent.ee.emit('file.reload', reloadFile, function(err, data) {
+			window.ee.emit('file.reloaded', data);
+		});
+	});
+
+	window.ee.on('file.update', function(file) {
+		reloadFile = file;
+		Dialogs.reload.show(file);
+	});
+
 	window.ee.on('file.close', function() {
 		win.close();
 	});

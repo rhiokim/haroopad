@@ -5,14 +5,14 @@ var viewStyle, codeStyle;
 
 window.ee = new EventEmitter();
 
-// window.ondragover = function(e) { 
-//   e.preventDefault(); 
-//   return false;
-// };
-// window.ondrop = function(e) { 
-//   e.preventDefault(); 
-//   return false;
-// };
+window.ondragover = function(e) { 
+  e.preventDefault(); 
+  return false;
+};
+window.ondrop = function(e) { 
+  e.preventDefault(); 
+  return false;
+};
 
 function loadCss(url) {
   $('<link>').attr({
