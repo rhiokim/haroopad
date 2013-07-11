@@ -43,7 +43,7 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 
 		_update(file);
 
-		window.parent.ee.emit('file.save', Opt.get('fileEntry'), Opt.get('markdown'), function(err) {
+		window.parent.ee.emit('file.save', Opt.get('fileEntry'), Opt.get('markdown'), function(err) { 
 			window.ee.emit('file.saved', Opt.toJSON());
 		});
 	}

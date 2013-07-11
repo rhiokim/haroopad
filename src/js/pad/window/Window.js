@@ -30,6 +30,7 @@ define([
 
 	win.on('close', function() {
 		if (edited) {
+			delyClose = true;
 			Dialogs.save.show();
 			return;
 		} else {
@@ -39,6 +40,7 @@ define([
 
 	Dialogs.save.bind('save', function() {
 		delayClose = true;
+		window.ee.emit('file.save');
 	});
 
 	Dialogs.save.bind('dont-save', function() {
@@ -59,8 +61,13 @@ define([
 
   window.ee.on('file.saved', function(opt) {
 		win.title = orgTitle = opt.basename;
-		delayClose = true;
-		edited = false;	
+
+		if (delayClose) {
+			close();
+		}
+		
+		delayClose = false;
+		edited = false;
   });
 
 	window.ee.on('change.before.markdown', function(markdown, html, editor) {
