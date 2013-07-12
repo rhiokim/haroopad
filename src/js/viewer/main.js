@@ -44,13 +44,8 @@ function createTOC() {
   $(document.body).scrollspy('refresh');
 }
 
-function delegateKeydown() {
-}
-
 function init(options) {
   _options = options || { dirname: '.' };
-
-  delegateKeydown();
 }
 
 /**
@@ -157,7 +152,7 @@ function update(html) {
   // var wrapper = $('<div>').html(html);
   var wrapper = document.createElement('div');
       wrapper.innerHTML = html;
-  var i, frag, frags, _frag, origin, _origin;
+  var i, frag, frags, _frag, _frags, origin, _origin;
 
   frags = wrapper.querySelectorAll(':scope>*');
   frags = Array.prototype.slice.call(frags, 0);
@@ -221,6 +216,7 @@ function update(html) {
         }
       } else {
         origin = frag.getAttribute('origin');
+
         //origin 문자열이 있는 경우
         if (origin != _origin) {
 
@@ -268,3 +264,28 @@ function scrollTop(per) {
 
   $(window).scrollTop(top / 100 * per);
 }
+
+function replaceExternalContent(el, origin) {
+  var plugin = $(origin)[0];
+  plugin.setAttribute('origin', origin);
+  el.style.display = 'none';
+  document.body.insertBefore(plugin, el);
+  document.body.removeChild(el);
+}
+
+$(document.body).ready(function() {
+
+  $(document.body).click(function(e) {
+    var origin, el = e.target;
+
+    if (el.tagName.toUpperCase() !== 'IMG') {
+      return;
+    } 
+
+    origin = el.getAttribute('origin');
+    if (origin) {
+      replaceExternalContent(el, origin);
+    }
+  });
+
+});
