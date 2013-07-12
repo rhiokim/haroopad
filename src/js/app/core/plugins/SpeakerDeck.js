@@ -18,8 +18,8 @@ define(function() {
 		width = args[1] || _width;
 		height = args[2] || _height;
 
-		var real = '<iframe class="youtube" width="'+width+'" height="'+height+'" src="https://www.youtube.com/embed/' + key + '" frameborder="0" allowfullscreen></iframe>';
+		var real = '<iframe frameborder="0" src="https://speakerdeck.com/player/' + key + '" width="'+ width +'" height="'+ height +'"></iframe>';
 		real = escape(real);
-		return '<img src="img/plugins/yt-brand-standard-logo-630px.png" width="'+width+'" height="'+height+'" origin="'+ real +'" class="plugin" />';
+		return '<img src="img/plugins/speakerdeck.png" width="'+ width +'" height="'+  height+'" origin="'+ real +'" class="plugin" />';
 	}
 });

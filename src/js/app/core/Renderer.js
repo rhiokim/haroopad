@@ -1,5 +1,5 @@
 define([
-		'core/plugins/Plugins'
+		'core/Plugins'
 	], 
 	function(Plugins) {
 
