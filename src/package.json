@@ -1,8 +1,9 @@
 {
   "main": "index.html",
   "name": "haroopad",
-  "description": "instant markdown editor for cross platform",
-  "version": "0.4.4",
+  "comment": "Markdown editor Haroopad"
+  "description": "Haroopad is a tool for creating web-friendly document in markdown editor. You can also based on the markdown, to create Web documents, blogs, as well as e-mail, the report documents expert. And then support Windows, Linux, the Mac OS, you get the experience of editing the same document markdown in the desired platform.",
+  "version": "0.4.5",
   "keywords": [ "markdown", "haroopress" ],
   "window": {
     "title": "haroopad",
