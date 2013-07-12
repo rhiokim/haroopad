@@ -46,13 +46,8 @@ function createTOC() {
   $(document.body).scrollspy('refresh');
 }
 
-function delegateKeydown() {
-}
-
 function init(options) {
   _options = options || { dirname: '.' };
-
-  delegateKeydown();
 }
 
 /**
@@ -273,3 +268,22 @@ function scrollTop(per) {
 
   $(window).scrollTop(top / 100 * per);
 }
+
+function replaceExternalContent(el, external) {
+  el.style.display = 'none';
+  $(el).parent().html(external);
+  // window.parent.console.log($(external)[0], el)
+  // document.body.insertBefore($(external)[0], el);
+  // document.body.removeChild(el);
+}
+
+$(document.body).ready(function() {
+
+  $(document.body).click(function(e) {
+    var external = e.target.getAttribute('external');
+    if (external) {
+      replaceExternalContent(e.target, external);
+    }
+  });
+  
+});

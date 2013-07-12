@@ -13,5 +13,6 @@
 
 	//disable alert
 	root.alert = noop;
+	root.open = noop;
 
 })(window);
