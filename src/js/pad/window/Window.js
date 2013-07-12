@@ -120,7 +120,6 @@ define([
 
   window.ondragover = function(e) { 
     e.preventDefault();
-    console.log(e.x, e.y)
     window.parent.ee.emit('dragover', e);
     return false;
   };

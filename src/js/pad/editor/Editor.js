@@ -28,24 +28,15 @@ define([
 					    autofocus: true,
 					    workDelay: 1000,
 					    extraKeys: Keymap,
-  						showTrailingSpace: true,
-					    dragDrop: false,
-					    onDragEvent: function(cm, e) {
-					    	console.log(e);
-					    	var a = cm.coordsChar({ left:e.x, top: e.y });
-					    	var doc = cm.getDoc();
-					    	doc.setCursor(a);
-
-					    	e.preventDefault();
-					    	e.stop();
-					    	return;
-					    }
+  						showTrailingSpace: true/*,
+					    dragDrop: true*/
 					  });
 
 
 		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
-		editor.on('drop', function(doc, e) {
-			console.log('')
+		editor.on('drop', function(cm, e) {
+	    	e.preventDefault();
+	    	
     	// var type, kind, file, item, items;
     	// var dataTransfer = e.dataTransfer;
 
@@ -72,6 +63,14 @@ define([
 	    // 		// break;
 	    // 	}
 	    // }
+		});
+
+		editor.on('dragover', function(cm, e) {
+	    	var a = cm.coordsChar({ left:e.x, top: e.y });
+	    	var doc = cm.getDoc();
+	    	doc.setCursor(a);
+
+	    	e.preventDefault();
 		});
 
 		/* initialize editor */
