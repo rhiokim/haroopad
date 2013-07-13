@@ -1,19 +1,20 @@
 define([
 		// 'editor/Parser',
 		'store',
-		'editor/Editor.keymap'
+		'editor/Editor.keymap',
+		'editor/Editor.drop'
 	],
-	function(store, Keymap) {
+	function(store, Keymap, Drop) {
 		var gui = require('nw.gui'),
     		win = gui.Window.get(),
     		clipboard = gui.Clipboard.get();
 
-    var _tid_;	//for throttle
+	    var _tid_;	//for throttle
 
-    var config = store.get('Editor') || {};
-    var generalConf = store.get('General') || {
-    	enableSyncScroll: true
-    };
+	    var config = store.get('Editor') || {};
+	    var generalConf = store.get('General') || {
+	    	enableSyncScroll: true
+	    };
 
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
@@ -23,8 +24,8 @@ define([
 					    electricChars: false,
 					    viewportMargin: 40,
 					    tabSize: 2,
-			        indentUnit: 4,
-			        indentWithTabs: true,
+				        indentUnit: 4,
+				        indentWithTabs: true,
 					    autofocus: true,
 					    workDelay: 1000,
 					    extraKeys: Keymap,
@@ -34,36 +35,7 @@ define([
 
 
 		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
-		editor.on('drop', function(cm, e) {
-	    	e.preventDefault();
-	    	
-    	// var type, kind, file, item, items;
-    	// var dataTransfer = e.dataTransfer;
-
-    	// items = dataTransfer.items;
-    	// files = e.dataTransfer.files;
-
-	    // for(var i = 0; i < items.length; i++) {
-	    // 	item = items[i];
-	    // 	file = files[i];
-	    // 	kind = item.kind;
-	    // 	type = item.type;
-
-	    // 	if (kind == 'file') {
-	    // 		console.log(file.path);
-	    // 		console.log(type);
-	    // 	} else if (kind == 'string') {
-	    // 		if(i == 0) {
-	    // 			// continue;
-	    // 		}
-	    // 		item.getAsString(function(str) {
-	    // 			console.log(str);
-	    // 			console.log(type);
-	    // 		});
-	    // 		// break;
-	    // 	}
-	    // }
-		});
+		editor.on('drop', Drop);
 
 		editor.on('dragover', function(cm, e) {
 	    	var a = cm.coordsChar({ left:e.x, top: e.y });

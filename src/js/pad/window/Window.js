@@ -118,17 +118,17 @@ define([
 	  return false;
 	});
 
-  window.ondragover = function(e) { 
-    e.preventDefault();
-    window.parent.ee.emit('dragover', e);
-    return false;
-  };
+  // window.ondragover = function(e) { 
+  //   e.preventDefault();
+  //   window.parent.ee.emit('dragover', e);
+  //   return false;
+  // };
 
-  window.ondrop = function(e) {
-    e.preventDefault();
-    window.parent.ee.emit('dragdrop', e);
-    return false;
-  };
+  // window.ondrop = function(e) {
+  //   e.preventDefault();
+  //   window.parent.ee.emit('dragdrop', e);
+  //   return false;
+  // };
 
   var resizeTimeout;
   window.onresize = function(e) {
