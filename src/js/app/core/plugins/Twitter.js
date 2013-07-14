@@ -18,8 +18,10 @@ define(function() {
 		width = args[1] || _width;
 		height = args[2] || _height;
 
-		var real = '<iframe class="youtube" width="'+width+'" height="'+height+'" src="https://www.youtube.com/embed/' + key + '" frameborder="0" allowfullscreen></iframe>';
-		real = escape(real);
-		return '<img src="img/plugins/youtube.jpg" width="'+width+'" height="'+height+'" origin="'+ real +'" class="plugin" />';
+
+		// loadTweet(key)
+		var url = 'http://syndication.twimg.com/tweets.json?ids='+ key +'&lang=en&callback=aaa&suppress_response_codes=true';
+		url = escape(url);
+		return '<script type="application/json" src="'+ url +'"></script>';
 	}
 });

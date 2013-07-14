@@ -11,15 +11,16 @@ define(function() {
 
 	return function(args) {
 		var _width = '100%';
-		var _height = '315px';
+		var _height = '281';
 
 		args = args.split(' ');
 		key = args[0];
 		width = args[1] || _width;
 		height = args[2] || _height;
 
-		var real = '<iframe class="youtube" width="'+width+'" height="'+height+'" src="https://www.youtube.com/embed/' + key + '" frameborder="0" allowfullscreen></iframe>';
+		var real = '<iframe src="http://player.vimeo.com/video/'+ key +'?title=0&amp;byline=0&amp;portrait=0&amp;color=bb2323" width="'+ width +'" height="'+ height +'" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 		real = escape(real);
-		return '<img src="img/plugins/youtube.jpg" width="'+width+'" height="'+height+'" origin="'+ real +'" class="plugin" />';
+		return '<img src="img/plugins/vimeo.jpg" width="'+width+'" height="'+height+'" origin="'+ real +'" class="plugin" />';
 	}
+
 });

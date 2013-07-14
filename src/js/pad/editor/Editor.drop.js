@@ -1,36 +1,38 @@
 define([
-		'editor/Editor.drop.mimes'
-	], function(MIMES) {
+		'editor/Editor.drop.file',
+		'editor/Editor.drop.string'
+	], function(FILE, STRING) {
+		var path = require('path');
+
 
 	function Drop(cm, e) {
-    	var type, kind, file, item, items;
+    	var kind, items;
     	var dataTransfer = e.dataTransfer;
 
     	e.preventDefault();
 
+		function dropCallback(res) {
+	    	cm.replaceSelection(res);
+		}
+
     	items = dataTransfer.items;
-    	files = e.dataTransfer.files;
+    	files = dataTransfer.files;
 
-	    for(var i = 0; i < items.length; i++) {
-	    	item = items[i];
-	    	file = files[i];
-	    	kind = item.kind;
-	    	type = item.type;
+    	kind = dataTransfer.types;
 
-	    	if (kind == 'file') {
-	    		console.log(file.path);
-	    		console.log(type);
-	    	} else if (kind == 'string') {
-	    		if(i == 0) {
-	    			// continue;
-	    		}
-	    		item.getAsString(function(str) {
-	    			console.log(str);
-	    			console.log(type);
-	    		});
-	    		// break;
-	    	}
-	    }
+    	if (kind == "Files") {
+			console.log(files)
+			console.log(files.length)
+    	} else {
+			var text = e.dataTransfer.getData('text/plain');
+			var url = e.dataTransfer.getData('text/uri-list');
+
+			if (url) {
+				STRING.uri(url, dropCallback);
+			} else {
+				return dropCallback(text);
+			}
+    	}
 	}
 
 	return Drop;

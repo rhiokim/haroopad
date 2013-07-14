@@ -273,6 +273,9 @@ function replaceExternalContent(el, origin) {
   document.body.removeChild(el);
 }
 
+function aaa() {
+  alert('aa')
+}
 $(document.body).ready(function() {
 
   $(document.body).click(function(e) {
