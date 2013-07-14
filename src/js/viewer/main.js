@@ -60,6 +60,7 @@ function init(options) {
 function _fixImagePath() {
   $('img').on('error', function() {
     $(this).attr('src', './img/noimage.gif');
+    $(this).attr('title', 'It is not possible to display image does not exist in that location.');
   });
 }
 
