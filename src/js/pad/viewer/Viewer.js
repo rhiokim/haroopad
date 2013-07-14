@@ -4,7 +4,7 @@ define([
 	], 
 	function(store, StyleMaker) {
 		var iframe = $('#haroo iframe')[0];
-		var viewer = iframe.contentWindow;
+		var _viewer = iframe.contentWindow;
 		var content = '',
 			options;
 
@@ -17,11 +17,11 @@ define([
 		// var config = option.toJSON();
 
 		window.parent.ee.on('preferences.viewer.theme', function(value) {
-			viewer.setViewStyle(value);
+			_viewer.setViewStyle(value);
 		});
 
 		window.parent.ee.on('preferences.code.theme', function(value) {
-			viewer.setCodeStyle(value);
+			_viewer.setCodeStyle(value);
 		});
 		
 		window.parent.ee.on('preferences.viewer.clickableLink', function(value) {
@@ -30,23 +30,23 @@ define([
 		});
 		
 		window.ee.on('print.html', function(value) {
-			viewer.print();
+			_viewer.print();
 		});
 
 		//linkable
-		viewer.ee.on('link', function(href) {
+		_viewer.ee.on('link', function(href) {
 			if (viewerConfig.clickableLink) {
     		gui.Shell.openExternal(href);
 			}
 		});
 
-		viewer.setViewStyle(viewerConfig.theme || 'haroopad');
-		viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
+		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');
+		_viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
 		
 		/**
 		 * delegate to parent window key mouse down event
 		 */
-		viewer.addEventListener('keydown', function(e) {
+		_viewer.addEventListener('keydown', function(e) {
 
 	    var evt = document.createEvent("Events");
 		    evt.initEvent("keydown", true, true);
@@ -66,7 +66,7 @@ define([
 		/**
 		 * delegate right mouse down event
 		 */
-		viewer.addEventListener('contextmenu', function(ev) {
+		_viewer.addEventListener('contextmenu', function(ev) {
 			$(document.body).trigger('contextmenu', [ev]);
 		}.bind(this), false);
 
@@ -77,7 +77,7 @@ define([
 
 		function update(markdown, html, editor) {
 			content = html;
-			viewer.update(content);
+			_viewer.update(content);
 		}
 
 		/* change markdown event handler */
@@ -85,13 +85,13 @@ define([
 
 		/* scroll editor for sync */
 		window.ee.on('editor.scroll', function(top, per) {
-			viewer.scrollTop(top * 100 / per);
+			_viewer.scrollTop(top * 100 / per);
 		});
 
 		return {
 			init: function(opt) {
 				options = opt;
-				viewer.init(options);
+				_viewer.init(options);
 			},
 
 			update: update,
