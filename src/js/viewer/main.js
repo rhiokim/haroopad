@@ -183,7 +183,7 @@ function update(html) {
   for (i = 0; i < imgs.length; i++) {
     src = imgs[i].getAttribute('src');
 
-    if(src.indexOf('://') == -1) {
+    if(src.indexOf('//') == -1 && !/^\//.test(src)) {
       imgs[i].setAttribute('src', _options.dirname +'/'+ src);
     }
   }
@@ -250,7 +250,7 @@ function update(html) {
   //   _fixImagePath();
   // }
 
-  _preventDefaultAnchor();
+  // _preventDefaultAnchor();
   // _lazySyntaxHighlight();
 }
 
@@ -274,22 +274,24 @@ function replaceExternalContent(el, origin) {
   document.body.removeChild(el);
 }
 
-function aaa() {
-  alert('aa')
-}
 $(document.body).ready(function() {
 
   $(document.body).click(function(e) {
     var origin, el = e.target;
+    e.preventDefault();
 
-    if (el.tagName.toUpperCase() !== 'IMG') {
-      return;
-    } 
-
-    origin = el.getAttribute('origin');
-    if (origin) {
-      replaceExternalContent(el, origin);
+    switch(el.tagName.toUpperCase()) {
+      case 'IMG' :
+        origin = el.getAttribute('origin');
+        if (origin) {
+          replaceExternalContent(el, origin);
+        }
+      break;
+      case 'A' :
+        window.ee.emit('link',el.getAttribute('href'));
+      break;
     }
+    
   });
 
 });

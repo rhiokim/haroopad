@@ -3,8 +3,9 @@ define([
 	], function(SITES) {
 
 		function URI(str, cb) {
-			var domain = url('domain', str);
-			var res = SITES[domain](str) || str;
+			var hostname = url('hostname', str);
+			var site = SITES[hostname];
+			var res = site ? site(str) : '['+ str +']('+ str +')' ;
 
 			cb(res);
 		}

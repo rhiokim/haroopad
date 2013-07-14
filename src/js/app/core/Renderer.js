@@ -12,7 +12,7 @@ define([
 			if (!plugin) {
   				return '<p>['+ name +':'+ args +']</p>';
 			}
-
+			
 			return plugin(args);
 		}
 

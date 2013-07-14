@@ -21,8 +21,7 @@ define([
     	kind = dataTransfer.types;
 
     	if (kind == "Files") {
-			console.log(files)
-			console.log(files.length)
+			FILE(files, dropCallback);
     	} else {
 			var text = e.dataTransfer.getData('text/plain');
 			var url = e.dataTransfer.getData('text/uri-list');

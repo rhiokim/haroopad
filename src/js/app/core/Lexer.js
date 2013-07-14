@@ -19,7 +19,7 @@ define([
     var lexer = new marked.Lexer(defaults);
 
     var customRules = {
-    	plugin: /^ *\[([^\:\]]+):([^\]]+)\] *\n*/
+    	plugin: /^ *\[([^\:\]]+):([^\]\/]+)\] *\n*/
     }
 
 	function merge(obj) {
@@ -39,7 +39,6 @@ define([
 	  return obj;
 	}
     lexer.rules = merge({}, lexer.rules, customRules);
-    // console.log(JSON.stringify(lexer.rules, null, 2))
 
     return lexer;
 });

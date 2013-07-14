@@ -8,18 +8,20 @@ define(function() {
 	    .replace(/"/g, '&quot;')
 	    .replace(/'/g, '&#39;');
 	}
-
+	
 	return function(args) {
-		var key, origin = [];
+		var key, file, origin = [];
 		args = args.split(' ');
 		key = args[0];
+		file = args[1];
 
-		origin.push('tweet');
+		origin.push('gist');
 		origin.concat(args);
 
-		var real = '<img src="img/__json_proxy.png" onload="getTweet(this, \''
+		var real = '<img src="img/__json_proxy.png" onload="getGist(this, \''
 			+ key 
 			+ '\''
+			+ (file ? ', \''+ file +'\'' : '')
 			+ ');"/>';
 
 		return '<p origin="'+ escape(origin.join('-')) +'">'+ real +'</p>';
