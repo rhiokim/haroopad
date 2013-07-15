@@ -175,6 +175,7 @@ MenuBarAction = function () {
       type: 'separator'
     })
   );
+  
   Action.append(
     new gui.MenuItem({
       label: 'Comment',
