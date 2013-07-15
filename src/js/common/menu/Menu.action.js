@@ -53,6 +53,12 @@ MenuBarAction = function () {
       enabled: false
     })
   );
+  Action.append(
+    new gui.MenuItem({
+      label: 'Header',
+      submenu: MenuBarActionHeader()
+    })
+  );
 	Action.append(
     new gui.MenuItem({
       label: 'Strong                 **',

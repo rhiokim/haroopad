@@ -111,6 +111,24 @@ define([
   window.ee.on('menu.action.copy.html', function() {
     WindowMgr.actived.window.ee.emit('action.copy.html');
   });
+  window.ee.on('menu.action.h1', function() {
+    WindowMgr.actived.window.ee.emit('action.h1');
+  });
+  window.ee.on('menu.action.h2', function() {
+    WindowMgr.actived.window.ee.emit('action.h2');
+  });
+  window.ee.on('menu.action.h3', function() {
+    WindowMgr.actived.window.ee.emit('action.h3');
+  });
+  window.ee.on('menu.action.h4', function() {
+    WindowMgr.actived.window.ee.emit('action.h4');
+  });
+  window.ee.on('menu.action.h5', function() {
+    WindowMgr.actived.window.ee.emit('action.h5');
+  });
+  window.ee.on('menu.action.h6', function() {
+    WindowMgr.actived.window.ee.emit('action.h6');
+  });
   window.ee.on('menu.action.strong', function() {
     WindowMgr.actived.window.ee.emit('action.strong');
   });

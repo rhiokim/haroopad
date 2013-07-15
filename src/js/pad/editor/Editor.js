@@ -89,6 +89,24 @@ define([
 			editor.setOption('autoCloseBrackets', value);
 		});
 
+		window.ee.on('action.h1', function() {
+			CodeMirror.commands.markdownH1(editor);
+		});
+		window.ee.on('action.h2', function() {
+			CodeMirror.commands.markdownH2(editor);
+		});
+		window.ee.on('action.h3', function() {
+			CodeMirror.commands.markdownH3(editor);
+		});
+		window.ee.on('action.h4', function() {
+			CodeMirror.commands.markdownH4(editor);
+		});
+		window.ee.on('action.h5', function() {
+			CodeMirror.commands.markdownH5(editor);
+		});
+		window.ee.on('action.h6', function() {
+			CodeMirror.commands.markdownH6(editor);
+		});
 		window.ee.on('action.strong', function() {
 			CodeMirror.commands.markdownBold(editor);
 		});
