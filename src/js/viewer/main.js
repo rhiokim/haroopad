@@ -167,20 +167,27 @@ function update(html) {
 
   
   //새로 생성된 pre 엘리먼트 origin attribute 에 본래 html 을 저장
-  var pres = wrapper.querySelectorAll('pre');
-  var _pres = document.body.querySelectorAll('pre');
+  var pre, pres = wrapper.querySelectorAll('pre');
+  var _pre, _pres = document.body.querySelectorAll('pre');
   for (i = 0; i < pres.length; i++) {
-    origin = pres[i].outerHTML;
-    pres[i].setAttribute('origin', origin);
+    pre = pres[i];
+    _pre = _pres[i];
 
-    if (_pres[i]) {
-      _origin = _pres[i].getAttribute('origin');
+    if (!pre.firstElementChild || pre.firstElementChild.tagName.toUpperCase() !== 'code') {
+      continue;
+    }
+
+    origin = pre.outerHTML;
+    pre.setAttribute('origin', origin);
+
+    if (_pre) {
+      _origin = _pre.getAttribute('origin');
 
       if (origin != _origin) {
-        _lazySyntaxHighlight(pres[i]);
+        _lazySyntaxHighlight(pre);
       }
     } else {
-      _lazySyntaxHighlight(pres[i]);
+      _lazySyntaxHighlight(pre);
     }
   }
 
