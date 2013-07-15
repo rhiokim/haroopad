@@ -68,7 +68,7 @@ window.MenuBarView = function () {
 
 	View.append(
 		new gui.MenuItem({
-		  label: 'Enter full screen',
+		  label: 'Enter Full screen',
 		  click: function() {
 			window.parent.ee.emit('menu.view.fullscreen');
 		  }

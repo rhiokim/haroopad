@@ -73,6 +73,10 @@ define([
 		win.showDevTools();
 	});
 
+	HotKey('defmod-enter', function() {
+		window.ee.emit('view.fullscreen');
+	});
+
   window.addEventListener('keydown', function(e) {
 
     var evt = document.createEvent("Events");
@@ -145,6 +149,18 @@ define([
     }, 250); 
 
   }
+
+  window.ee.on('view.fullscreen', function() {
+  	var isFull = win.isFullscreen;
+
+  	if (isFull) {
+  		win.leaveFullscreen();
+  	} else {
+  		/* codemirror redraw delay bug */
+  		document.querySelector('.CodeMirror-gutters').style.height = '2000px';
+  		win.enterFullscreen();
+  	}
+  });
  //  win.moveTo(url('#x'), url('#y'));
 	// win.resizeTo(config.width, config.height);
 

@@ -89,40 +89,58 @@ define([
 			editor.setOption('autoCloseBrackets', value);
 		});
 
-		window.parent.ee.on('menu.action.strong', function() {
+		window.ee.on('action.h1', function() {
+			CodeMirror.commands.markdownH1(editor);
+		});
+		window.ee.on('action.h2', function() {
+			CodeMirror.commands.markdownH2(editor);
+		});
+		window.ee.on('action.h3', function() {
+			CodeMirror.commands.markdownH3(editor);
+		});
+		window.ee.on('action.h4', function() {
+			CodeMirror.commands.markdownH4(editor);
+		});
+		window.ee.on('action.h5', function() {
+			CodeMirror.commands.markdownH5(editor);
+		});
+		window.ee.on('action.h6', function() {
+			CodeMirror.commands.markdownH6(editor);
+		});
+		window.ee.on('action.strong', function() {
 			CodeMirror.commands.markdownBold(editor);
 		});
-		window.parent.ee.on('menu.action.emphasize', function() {
+		window.ee.on('action.emphasize', function() {
 			CodeMirror.commands.markdownItalic(editor);
 		});
-		window.parent.ee.on('menu.action.inlinecode', function() {
+		window.ee.on('action.inlinecode', function() {
 			CodeMirror.commands.markdownInlineCode(editor);
 		});
-		window.parent.ee.on('menu.action.link', function() {
+		window.ee.on('action.link', function() {
 			CodeMirror.commands.markdownLink(editor);
 		});
-		window.parent.ee.on('menu.action.strikethrough', function() {
+		window.ee.on('action.strikethrough', function() {
 			CodeMirror.commands.markdownStrike(editor);
 		});
-		window.parent.ee.on('menu.action.image', function() {
+		window.ee.on('action.image', function() {
 			CodeMirror.commands.markdownImage(editor);
 		});
-		window.parent.ee.on('menu.action.blockquote', function() {
+		window.ee.on('action.blockquote', function() {
 			CodeMirror.commands.markdownBlockQuote(editor);
 		});
-		window.parent.ee.on('menu.action.orderlist', function() {
+		window.ee.on('action.orderlist', function() {
 			CodeMirror.commands.markdownOrderedList(editor);
 		});
-		window.parent.ee.on('menu.action.unorderlist', function() {
+		window.ee.on('action.unorderlist', function() {
 			CodeMirror.commands.markdownUnOrderedList(editor);
 		});
-		window.parent.ee.on('menu.action.fencedcode', function() {
+		window.ee.on('action.fencedcode', function() {
 			CodeMirror.commands.markdownFencedCode(editor);
 		});
-		window.parent.ee.on('menu.action.table', function() {
+		window.ee.on('action.table', function() {
 			CodeMirror.commands.markdownTable(editor);
 		});
-		window.parent.ee.on('menu.action.comment', function() {
+		window.ee.on('action.comment', function() {
 			CodeMirror.commands.markdownComment(editor);
 		});
 
