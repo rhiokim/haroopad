@@ -99,6 +99,10 @@ define([
     // WindowMgr.actived.emit('view.minus5.width');
     WindowMgr.actived.window.ee.emit('view.minus5.width');
   });
+
+  window.ee.on('menu.view.fullscreen', function() {
+    WindowMgr.actived.window.ee.emit('view.fullscreen');
+  });
   
 
   window.ee.on('menu.action.copy.html', function() {

@@ -150,100 +150,40 @@
 
   CodeMirror.commands.markdownBold = function(cm) {
     action('bold', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('**'+ cm.getSelection() +'**');
-    // pos.ch += 2;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownItalic = function(cm) {
     action('italic', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('*'+ cm.getSelection() +'*');
-    // pos.ch += 1;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownInlineCode = function(cm) {
     action('code', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('*'+ cm.getSelection() +'*');
-    // pos.ch += 1;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownLink = function(cm) {
     action('link', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('['+ cm.getSelection() +'](http://)');
-    // pos.ch += 1;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownStrike = function(cm) {
     action('strike', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('~~'+ cm.getSelection() +'~~');
-    // pos.ch += 2;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownImage = function(cm) {
     action('image', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('!['+ cm.getSelection() +'](http://)');
-    // pos.ch += 2;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownBlockQuote = function(cm) {
     action('quote', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '> ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownUnOrderedList = function(cm) {
     action('unordered-list', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '* ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownOrderedList = function(cm) {
     action('ordered-list', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '1. ' + text);
-    // cm.focus();
   };
 
   CodeMirror.commands.markdownFencedCode = function(cm) {
     action('fenced-code', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '* ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownTable = function(cm) {
     action('table', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '1. ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownComment = function(cm) {
     action('comment', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '1. ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();
