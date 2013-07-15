@@ -89,6 +89,43 @@ define([
 			editor.setOption('autoCloseBrackets', value);
 		});
 
+		window.parent.ee.on('menu.action.strong', function() {
+			CodeMirror.commands.markdownBold(editor);
+		});
+		window.parent.ee.on('menu.action.emphasize', function() {
+			CodeMirror.commands.markdownItalic(editor);
+		});
+		window.parent.ee.on('menu.action.inlinecode', function() {
+			CodeMirror.commands.markdownInlineCode(editor);
+		});
+		window.parent.ee.on('menu.action.link', function() {
+			CodeMirror.commands.markdownLink(editor);
+		});
+		window.parent.ee.on('menu.action.strikethrough', function() {
+			CodeMirror.commands.markdownStrike(editor);
+		});
+		window.parent.ee.on('menu.action.image', function() {
+			CodeMirror.commands.markdownImage(editor);
+		});
+		window.parent.ee.on('menu.action.blockquote', function() {
+			CodeMirror.commands.markdownBlockQuote(editor);
+		});
+		window.parent.ee.on('menu.action.orderlist', function() {
+			CodeMirror.commands.markdownOrderedList(editor);
+		});
+		window.parent.ee.on('menu.action.unorderlist', function() {
+			CodeMirror.commands.markdownUnOrderedList(editor);
+		});
+		window.parent.ee.on('menu.action.fencedcode', function() {
+			CodeMirror.commands.markdownFencedCode(editor);
+		});
+		window.parent.ee.on('menu.action.table', function() {
+			CodeMirror.commands.markdownTable(editor);
+		});
+		window.parent.ee.on('menu.action.comment', function() {
+			CodeMirror.commands.markdownComment(editor);
+		});
+
 		/* fire context menu event */
 		if (!win._params.readOnly) {
 			window.ee.on('context.cut', function(e) {

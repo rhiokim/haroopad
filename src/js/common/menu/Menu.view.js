@@ -60,6 +60,20 @@ window.MenuBarView = function () {
 		      }
 	    })
 	);
+	View.append(
+		new gui.MenuItem({
+			type: 'separator'
+		})
+	);
+
+	View.append(
+		new gui.MenuItem({
+		  label: 'Enter full screen',
+		  click: function() {
+			window.parent.ee.emit('menu.view.fullscreen');
+		  }
+		})
+	);
 
 	return new gui.MenuItem({ label: 'View', submenu: View });
 };
