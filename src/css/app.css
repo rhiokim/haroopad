@@ -211,3 +211,8 @@ body > .navbar .brand:hover {
 .CodeMirror-lines {
   padding: 15px 0 35px 0;
 }
+
+/* fixed broken cursor pos */
+.CodeMirror-lines pre {
+  white-space: pre;
+}
