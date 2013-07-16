@@ -102,6 +102,61 @@ define([
 			editor.setOption('autoCloseBrackets', value);
 		});
 
+		window.ee.on('action.h1', function() {
+			CodeMirror.commands.markdownH1(editor);
+		});
+		window.ee.on('action.h2', function() {
+			CodeMirror.commands.markdownH2(editor);
+		});
+		window.ee.on('action.h3', function() {
+			CodeMirror.commands.markdownH3(editor);
+		});
+		window.ee.on('action.h4', function() {
+			CodeMirror.commands.markdownH4(editor);
+		});
+		window.ee.on('action.h5', function() {
+			CodeMirror.commands.markdownH5(editor);
+		});
+		window.ee.on('action.h6', function() {
+			CodeMirror.commands.markdownH6(editor);
+		});
+		window.ee.on('action.strong', function() {
+			CodeMirror.commands.markdownBold(editor);
+		});
+		window.ee.on('action.emphasize', function() {
+			CodeMirror.commands.markdownItalic(editor);
+		});
+		window.ee.on('action.inlinecode', function() {
+			CodeMirror.commands.markdownInlineCode(editor);
+		});
+		window.ee.on('action.link', function() {
+			CodeMirror.commands.markdownLink(editor);
+		});
+		window.ee.on('action.strikethrough', function() {
+			CodeMirror.commands.markdownStrike(editor);
+		});
+		window.ee.on('action.image', function() {
+			CodeMirror.commands.markdownImage(editor);
+		});
+		window.ee.on('action.blockquote', function() {
+			CodeMirror.commands.markdownBlockQuote(editor);
+		});
+		window.ee.on('action.orderlist', function() {
+			CodeMirror.commands.markdownOrderedList(editor);
+		});
+		window.ee.on('action.unorderlist', function() {
+			CodeMirror.commands.markdownUnOrderedList(editor);
+		});
+		window.ee.on('action.fencedcode', function() {
+			CodeMirror.commands.markdownFencedCode(editor);
+		});
+		window.ee.on('action.table', function() {
+			CodeMirror.commands.markdownTable(editor);
+		});
+		window.ee.on('action.comment', function() {
+			CodeMirror.commands.markdownComment(editor);
+		});
+
 		/* fire context menu event */
 		if (!win._params.readOnly) {
 			window.ee.on('context.cut', function(e) {

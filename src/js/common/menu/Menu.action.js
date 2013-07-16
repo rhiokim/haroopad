@@ -9,13 +9,13 @@ MenuBarAction = function () {
         window.parent.ee.emit('menu.action.copy.html');
       }
     })
-	);/*
+	);
 	Action.append(
 		new gui.MenuItem({
       type: 'separator'
   	})
 	);
-	
+	/*
 	Action.append(
     new gui.MenuItem({
       label: 'Insert',
@@ -44,100 +44,152 @@ MenuBarAction = function () {
 		new gui.MenuItem({
       type: 'separator'
   	})
-	);
+	);*/
 
+
+  Action.append(
+    new gui.MenuItem({
+      label: 'John Gruber Markdown',
+      enabled: false
+    })
+  );
+  Action.append(
+    new gui.MenuItem({
+      label: 'Header',
+      submenu: MenuBarActionHeader()
+    })
+  );
 	Action.append(
     new gui.MenuItem({
-      label: 'Strong',
+      label: 'Strong ................ **',
       click: function() {
-        win.emit('action.strong');
+        window.parent.ee.emit('menu.action.strong');
       }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Emphasize',
+      label: 'Emphasize .......... *',
       click: function() {
-        win.emit('action.emphasize');
+        window.parent.ee.emit('menu.action.emphasize');
       }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Inline Code',
+      label: 'Inline Code ......... `',
       click: function() {
-        win.emit('action.inline.code');
+        window.parent.ee.emit('menu.action.inlinecode');
       }
     })
   );
-	Action.append(
+  Action.append(
     new gui.MenuItem({
-      label: 'Fenced Code',
+      label: 'Image ................. ![]()',
       click: function() {
-        win.emit('action.fenced.code');
+        window.parent.ee.emit('menu.action.image');
       }
     })
   );
-	Action.append(
+  Action.append(
     new gui.MenuItem({
-      label: 'Strikethrough',
+      label: 'Link .................... []()',
       click: function() {
-        win.emit('action.strikethrough');
+        window.parent.ee.emit('menu.action.link');
       }
     })
   );
-	Action.append(
-		new gui.MenuItem({
+  Action.append(
+    new gui.MenuItem({
+      label: 'Blockquote ......... >',
+      click: function() {
+        window.parent.ee.emit('menu.action.blockquote');
+      }
+    })
+  );
+  Action.append(
+    new gui.MenuItem({
+      label: 'Ordered List ....... 1.',
+      click: function() {
+        window.parent.ee.emit('menu.action.orderlist');
+      }
+    })
+  );
+  Action.append(
+    new gui.MenuItem({
+      label: 'Un Ordered List .. -',
+      click: function() {
+        window.parent.ee.emit('menu.action.unorderlist');
+      }
+    })
+  );
+  Action.append(
+    new gui.MenuItem({
       type: 'separator'
-  	})
-	);
+    })
+  );
 
-	Action.append(
+
+  Action.append(
     new gui.MenuItem({
-      label: 'Image',
+      label: 'Github Flavored Markdown',
+      enabled: false
+    })
+  );
+  Action.append(
+    new gui.MenuItem({
+      label: 'Fenced Code ....... ```',
       click: function() {
-        win.emit('action.image');
+        window.parent.ee.emit('menu.action.fencedcode');
       }
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Link',
+      label: 'Strikethrough ...... ~~',
       click: function() {
-        win.emit('action.link');
+        window.parent.ee.emit('menu.action.strikethrough');
       }
     })
   );
-	Action.append(
-		new gui.MenuItem({
-      type: 'separator'
-  	})
-	);
-
 	Action.append(
     new gui.MenuItem({
       label: 'Table',
       click: function() {
-        win.emit('action.table');
+        window.parent.ee.emit('menu.action.table');
       }
     })
   );
-	Action.append(
+	// Action.append(
+ //    new gui.MenuItem({
+ //      label: 'Table Row',
+ //      click: function() {
+ //        window.parent.ee.emit('menu.action.table.row');
+ //      }
+ //    })
+ //  );
+	// Action.append(
+ //    new gui.MenuItem({
+ //      label: 'Table Cell',
+ //      click: function() {
+ //        window.parent.ee.emit('menu.action.table.cell');
+ //      }
+ //    })
+ //  );
+  Action.append(
     new gui.MenuItem({
-      label: 'Table Row',
+      type: 'separator'
+    })
+  );
+  
+  Action.append(
+    new gui.MenuItem({
+      label: 'Comment ............ <!-- -->',
       click: function() {
-        win.emit('action.table.row');
+        window.parent.ee.emit('menu.action.comment');
       }
     })
   );
-	Action.append(
-    new gui.MenuItem({
-      label: 'Table Cell',
-      click: function() {
-        win.emit('action.table.cell');
-      }
-    })
-  );*/
 
 	return new gui.MenuItem({ label: 'Action', submenu: Action });
 };
