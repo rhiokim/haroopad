@@ -1,8 +1,8 @@
 {
   "main": "index.html",
   "name": "haroopad",
-  "description": "instant markdown editor for cross platform",
-  "version": "0.4.4",
+  "description": "The next document processor (markdown-base)",
+  "version": "0.4.5",
   "keywords": [ "markdown", "haroopress" ],
   "window": {
     "title": "haroopad",

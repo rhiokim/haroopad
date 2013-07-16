@@ -28,7 +28,7 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>nw.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>haroopad App</string>
+			<string>The next document processor (markdown-base)</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
