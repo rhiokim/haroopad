@@ -116,6 +116,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modalmanager.js',
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/store.js',
+            '<%= vendors %>/js-url.js',
             'src/js/pad/after.bin.js'
           ],
           'build/preferences.js': [
