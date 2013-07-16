@@ -1,3 +1,33 @@
+## Haroopad v0.4.5
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#27              | Add action menus for markdown
+#100             | Registering the File Types Your App Supports [Mac] 
+**Bugs**         |
+#109             | Fixed new window focus error 
+#107             | Fixed pre>code conflict inline pre tag
+#105             | When close, confirm dialog! 
+#104             | Disable code block auto html escape 
+**Enhancements** |
+#99              | Ubuntu package information 
+#51              | Opened file monitoring
+
+##### Github Issue tracker
+
+* [https://github.com/rhiokim/haroopad/issues?milestone=15&page=1&state=closed](https://github.com/rhiokim/haroopad/issues?milestone=15&page=1&state=closed)
+
+<!--
+##### Download
+> * Windows NSIS installer:[https://www.dropbox.com/s/htt1d23vwbg2jkm/haroopad-win32-v0.4.5.exe](https://www.dropbox.com/s/htt1d23vwbg2jkm/haroopad-win32-v0.4.5.exe)
+> * Mac OS X DMG: [https://www.dropbox.com/s/0zq8lblf5bn8dpo/haroopad-v0.4.5.dmg](https://www.dropbox.com/s/0zq8lblf5bn8dpo/haroopad-v0.4.5.dmg)
+> * Linux 32-bit Binary:[https://www.dropbox.com/s/51ehqczuvcla8fc/haroopad-v0.4.5_i386.tar.gz](https://www.dropbox.com/s/51ehqczuvcla8fc/haroopad-v0.4.5_i386.tar.gz)
+> * Linux 32-bit Debian Package:[https://www.dropbox.com/s/997h0nbzth6zdrm/haroopad-v0.4.5-i386.deb](https://www.dropbox.com/s/997h0nbzth6zdrm/haroopad-v0.4.5-i386.deb)
+> * Linux 64-bit Binary: [https://www.dropbox.com/s/zghlhy909clmgtx/haroopad-v0.4.5_amd64.tar.gz](https://www.dropbox.com/s/zghlhy909clmgtx/haroopad-v0.4.5_amd64.tar.gz)
+> * Linux 64-bit Debian Package: [https://www.dropbox.com/s/gsaagmjxnreyxwf/haroopad-v0.4.5_amd64.deb](https://www.dropbox.com/s/gsaagmjxnreyxwf/haroopad-v0.4.5_amd64.deb)
+-->
+
 ## Haroopad v0.4.4
 
 Issue Number     | Description
