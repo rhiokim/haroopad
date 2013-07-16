@@ -7,12 +7,10 @@ window.ee = new EventEmitter();
 
 window.ondragover = function(e) { 
   e.preventDefault(); 
-  win.emit('dragover', e);
   return false;
 };
 window.ondrop = function(e) { 
   e.preventDefault(); 
-  win.emit('dragdrop', e);
   return false;
 };
 
@@ -62,6 +60,7 @@ function init(options) {
 function _fixImagePath() {
   $('img').on('error', function() {
     $(this).attr('src', './img/noimage.gif');
+    $(this).attr('title', 'It is not possible to display image does not exist in that location.');
   });
 }
 
@@ -105,10 +104,7 @@ function _lazySyntaxHighlight(el) {
   var lang = codeEl.className; 
 
   lang = lang == 'js' ? 'javascript' : lang;
-
-  if (lang == 'xml') {
-    code = htmlDecode(code);
-  }
+  code = htmlDecode(code);
 
   try {
     if (!lang) {
