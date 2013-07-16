@@ -99,18 +99,18 @@ function htmlDecode(input){
 
 //for performance
 function _lazySyntaxHighlight(el) {
-  var codeEl = el.firstElementChild;
-  var code = codeEl.innerHTML;
-  var lang = codeEl.className; 
+  // var codeEl = el.firstElementChild;
+  var code = el.innerHTML;
+  var lang = el.className; 
 
   lang = lang == 'js' ? 'javascript' : lang;
   code = htmlDecode(code);
 
   try {
     if (!lang) {
-      codeEl.innerHTML = hljs.highlightAuto(code).value;
+      el.innerHTML = hljs.highlightAuto(code).value;
     } else {
-      codeEl.innerHTML = hljs.highlight(lang, code).value;
+      el.innerHTML = hljs.highlight(lang, code).value;
     }
   } catch(e) {
     // return code;
@@ -167,27 +167,26 @@ function update(html) {
 
   
   //새로 생성된 pre 엘리먼트 origin attribute 에 본래 html 을 저장
-  var pre, pres = wrapper.querySelectorAll('pre');
-  var _pre, _pres = document.body.querySelectorAll('pre');
-  for (i = 0; i < pres.length; i++) {
-    pre = pres[i];
-    _pre = _pres[i];
+  var code, codes = wrapper.querySelectorAll('pre>code');
+  var _code, _codes = document.body.querySelectorAll('pre>code');
+  codes = Array.prototype.slice.call(codes, 0);
+  _codes = Array.prototype.slice.call(_codes, 0);
+  
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    _code = _codes[i];
 
-    if (!pre.firstElementChild || pre.firstElementChild.tagName.toUpperCase() !== 'code') {
-      continue;
-    }
+    origin = code.parentElement.outerHTML;
+    code.setAttribute('origin', origin);
 
-    origin = pre.outerHTML;
-    pre.setAttribute('origin', origin);
-
-    if (_pre) {
-      _origin = _pre.getAttribute('origin');
+    if (_code) {
+      _origin = _code.parentElement.getAttribute('origin');
 
       if (origin != _origin) {
-        _lazySyntaxHighlight(pre);
+        _lazySyntaxHighlight(code);
       }
     } else {
-      _lazySyntaxHighlight(pre);
+      _lazySyntaxHighlight(code);
     }
   }
 
