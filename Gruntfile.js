@@ -84,6 +84,7 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.find.js',
             'src/js/common/menu/Menu.view.js',
             'src/js/common/menu/Menu.action.js',
+            'src/js/common/menu/Menu.action.header.js',
             'src/js/common/menu/Menu.tools.js',
             'src/js/common/menu/Menu.tools.post.js',
             'src/js/common/menu/Menu.tools.presentation.js',
