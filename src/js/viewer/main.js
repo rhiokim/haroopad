@@ -44,13 +44,8 @@ function createTOC() {
   $(document.body).scrollspy('refresh');
 }
 
-function delegateKeydown() {
-}
-
 function init(options) {
   _options = options || { dirname: '.' };
-
-  delegateKeydown();
 }
 
 /**
@@ -158,7 +153,7 @@ function update(html) {
   // var wrapper = $('<div>').html(html);
   var wrapper = document.createElement('div');
       wrapper.innerHTML = html;
-  var i, frag, frags, _frag, origin, _origin,
+  var i, frag, frags, _frag, _frags, origin, _origin,
       code, codes, _code, _codes;
 
   frags = wrapper.querySelectorAll(':scope>*');
@@ -196,7 +191,7 @@ function update(html) {
   for (i = 0; i < imgs.length; i++) {
     src = imgs[i].getAttribute('src');
 
-    if(src.indexOf('://') == -1) {
+    if(src.indexOf('//') == -1 && !/^\//.test(src)) {
       imgs[i].setAttribute('src', _options.dirname +'/'+ src);
     }
   }
@@ -230,6 +225,7 @@ function update(html) {
         }
       } else {
         origin = frag.getAttribute('origin');
+
         //origin 문자열이 있는 경우
         if (origin != _origin) {
 
@@ -262,7 +258,7 @@ function update(html) {
   //   _fixImagePath();
   // }
 
-  _preventDefaultAnchor();
+  // _preventDefaultAnchor();
   // _lazySyntaxHighlight();
 }
 
@@ -277,3 +273,33 @@ function scrollTop(per) {
 
   $(window).scrollTop(top / 100 * per);
 }
+
+function replaceExternalContent(el, origin) {
+  var plugin = $(origin)[0];
+  plugin.setAttribute('origin', origin);
+  el.style.display = 'none';
+  document.body.insertBefore(plugin, el);
+  document.body.removeChild(el);
+}
+
+$(document.body).ready(function() {
+
+  $(document.body).click(function(e) {
+    var origin, el = e.target;
+    e.preventDefault();
+
+    switch(el.tagName.toUpperCase()) {
+      case 'IMG' :
+        origin = el.getAttribute('origin');
+        if (origin) {
+          replaceExternalContent(el, origin);
+        }
+      break;
+      case 'A' :
+        window.ee.emit('link',el.getAttribute('href'));
+      break;
+    }
+    
+  });
+
+});
