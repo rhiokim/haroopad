@@ -99,18 +99,18 @@ function htmlDecode(input){
 
 //for performance
 function _lazySyntaxHighlight(el) {
-  var codeEl = el.firstElementChild;
-  var code = codeEl.innerHTML;
-  var lang = codeEl.className; 
+  // var codeEl = el.firstElementChild;
+  var code = el.innerHTML;
+  var lang = el.className; 
 
   lang = lang == 'js' ? 'javascript' : lang;
   code = htmlDecode(code);
 
   try {
     if (!lang) {
-      codeEl.innerHTML = hljs.highlightAuto(code).value;
+      el.innerHTML = hljs.highlightAuto(code).value;
     } else {
-      codeEl.innerHTML = hljs.highlight(lang, code).value;
+      el.innerHTML = hljs.highlight(lang, code).value;
     }
   } catch(e) {
     // return code;
@@ -158,36 +158,37 @@ function update(html) {
   // var wrapper = $('<div>').html(html);
   var wrapper = document.createElement('div');
       wrapper.innerHTML = html;
-  var i, frag, frags, _frag, origin, _origin;
+  var i, frag, frags, _frag, origin, _origin,
+      code, codes, _code, _codes;
 
   frags = wrapper.querySelectorAll(':scope>*');
   frags = Array.prototype.slice.call(frags, 0);
+  
   _frags = document.body.querySelectorAll(':scope>*');
   _frags = Array.prototype.slice.call(_frags, 0);
 
-  
   //새로 생성된 pre 엘리먼트 origin attribute 에 본래 html 을 저장
-  var pre, pres = wrapper.querySelectorAll('pre');
-  var _pre, _pres = document.body.querySelectorAll('pre');
-  for (i = 0; i < pres.length; i++) {
-    pre = pres[i];
-    _pre = _pres[i];
+  codes = wrapper.querySelectorAll('pre>code');
+  codes = Array.prototype.slice.call(codes, 0);
 
-    if (!pre.firstElementChild || pre.firstElementChild.tagName.toUpperCase() !== 'code') {
-      continue;
-    }
+  _codes = document.body.querySelectorAll('pre>code');
+  _codes = Array.prototype.slice.call(_codes, 0);
+  
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    _code = _codes[i];
 
-    origin = pre.outerHTML;
-    pre.setAttribute('origin', origin);
+    origin = code.parentElement.outerHTML;
+    code.setAttribute('origin', origin);
 
-    if (_pre) {
-      _origin = _pre.getAttribute('origin');
+    if (_code) {
+      _origin = _code.parentElement.getAttribute('origin');
 
       if (origin != _origin) {
-        _lazySyntaxHighlight(pre);
+        _lazySyntaxHighlight(code);
       }
     } else {
-      _lazySyntaxHighlight(pre);
+      _lazySyntaxHighlight(code);
     }
   }
 
