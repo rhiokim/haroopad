@@ -1,4 +1,9 @@
+/* globally for window event system */
+var gui = require('nw.gui'),
+    win = gui.Window.get();
+        
 window.ee = new EventEmitter();
+window.parent = win.parent;
 
 if (process.platform != 'darwin') {
   MenuBar(); 
@@ -11,10 +16,6 @@ function loadCss(url) {
     link.href = url;
     document.getElementsByTagName("head")[0].appendChild(link);
 }
-
-// function haveParent(parent) {
-//   window.parent = parent;
-// }
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -50,61 +51,67 @@ requirejs([
     'viewer/Viewer',
     'ui/file/File'
   ], function(Window, Editor, Viewer, File) {
-    var html, res, file, uid, tmp, x, y;
+    var html, res, file, uid, tmp, readOnly, x, y;
     var _tid_;
 
     var orgTitle = 'Untitled';
     var edited = false,
       delayClose = false;
-
-    var gui = require('nw.gui'),
-        win = gui.Window.get();
+    var params = win._params;
 
     // file = url('#file');
-    file = win._params.file;
-    tmp = win._params.tmp;
-    uid = win._params.uid;
+    file = params.file;
+    tmp = params.tmp;
+    uid = params.uid;
+    readOnly = params.readOnly || false;
 
     window.ee.on('file.opened', function(opt) {
-
       window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
         Editor.setValue(opt.markdown);
         
         Viewer.init(opt);
         window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
 
-        Editor.on("change", delayChange); 
+        if (!readOnly) {
+          Editor.on("change", delayChange); 
+        }
       });
 
     });
 
-    //run with file open;
-    if (tmp) {
-      File.openTmp(decodeURIComponent(file), uid);
-    } else {
-      if (file && !tmp) {
-        File.open(decodeURIComponent(file));
-      } else {
-        Editor.on("change", delayChange);
-      }
-
-      File.startAutoSave();
-    }
+    window.ee.on('file.reloaded', function(md) {
+      Editor.setValue(md);
+    });
 
     window.ee.on('file.saved', function(opt) {
       Viewer.init(opt);
     });
 
     function delayChange() {
-      clearTimeout(_tid_);
+      window.clearTimeout(_tid_);
 
       window.ee.emit('change.before.markdown', Editor.getValue());
 
       _tid_ = setTimeout(function() {
         window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
+
           window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
         });
-      }, 300);
+      }, 100);
+    }
+
+    //run with file open;
+    if (tmp) {
+      File.openTmp(decodeURIComponent(file), uid);
+    } else {
+      if (file) {
+        File.open(decodeURIComponent(file));
+        Editor.setOption('readOnly', readOnly);
+      } else {
+        Editor.on("change", delayChange);
+      }
+
+      File.startAutoSave();
     }
 
     win.focus();

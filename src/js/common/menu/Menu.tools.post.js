@@ -1,4 +1,4 @@
-MenuBarToolsPost = function () {
+window.MenuBarToolsPost = function () {
   var gui = require('nw.gui');
   var submenu = new gui.Menu();
 
@@ -20,4 +20,4 @@ MenuBarToolsPost = function () {
   );
 
   return submenu;
-}
+};

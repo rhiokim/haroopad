@@ -1,4 +1,4 @@
-MenuBarFile = function () {
+window.MenuBarFile = function () {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 
@@ -17,7 +17,6 @@ MenuBarFile = function () {
 	menuItem({
             label: 'New',
             click: function() {
-                // process.emit('menu.file.new');
                 window.parent.ee.emit('menu.file.new');
             }
         });
@@ -107,4 +106,4 @@ MenuBarFile = function () {
      */
 
 	return new gui.MenuItem({ label: 'File', submenu: File });
-}
+};

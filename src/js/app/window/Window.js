@@ -11,6 +11,16 @@ define([
 	var win = gui.Window.get(),
 		subWin;
 
+  var fs = require('fs'),
+      path = require('path');
+  
+  var locale = window.navigator.language;
+  var pathDocs = path.join(process.cwd(), 'docs', locale);
+
+  if (!fs.existsSync(pathDocs)) {
+    pathDocs = path.join(process.cwd(), 'docs', 'en-US');
+  }
+
   window.ee.on('tmp.file.open', function(file, uid) {
     WindowMgr.open(file, { uid: uid, tmp: true });
   });
@@ -89,13 +99,110 @@ define([
     // WindowMgr.actived.emit('view.minus5.width');
     WindowMgr.actived.window.ee.emit('view.minus5.width');
   });
-  
 
-  window.ee.on('menu.action.copy.html', function() {
-    // WindowMgr.actived.emit('action.copy.html');
-    WindowMgr.actived.window.ee.emit('action.copy.html');
+  window.ee.on('menu.view.fullscreen', function() {
+    WindowMgr.actived.window.ee.emit('view.fullscreen');
   });
   
+
+  /**
+   * action menu
+   */
+  window.ee.on('menu.action.copy.html', function() {
+    WindowMgr.actived.window.ee.emit('action.copy.html');
+  });
+  window.ee.on('menu.action.h1', function() {
+    WindowMgr.actived.window.ee.emit('action.h1');
+  });
+  window.ee.on('menu.action.h2', function() {
+    WindowMgr.actived.window.ee.emit('action.h2');
+  });
+  window.ee.on('menu.action.h3', function() {
+    WindowMgr.actived.window.ee.emit('action.h3');
+  });
+  window.ee.on('menu.action.h4', function() {
+    WindowMgr.actived.window.ee.emit('action.h4');
+  });
+  window.ee.on('menu.action.h5', function() {
+    WindowMgr.actived.window.ee.emit('action.h5');
+  });
+  window.ee.on('menu.action.h6', function() {
+    WindowMgr.actived.window.ee.emit('action.h6');
+  });
+  window.ee.on('menu.action.strong', function() {
+    WindowMgr.actived.window.ee.emit('action.strong');
+  });
+  window.ee.on('menu.action.emphasize', function() {
+    WindowMgr.actived.window.ee.emit('action.emphasize');
+  });
+  window.ee.on('menu.action.inlinecode', function() {
+    WindowMgr.actived.window.ee.emit('action.inlinecode');
+  });
+  window.ee.on('menu.action.image', function() {
+    WindowMgr.actived.window.ee.emit('action.image');
+  });
+  window.ee.on('menu.action.link', function() {
+    WindowMgr.actived.window.ee.emit('action.link');
+  });
+  window.ee.on('menu.action.blockquote', function() {
+    WindowMgr.actived.window.ee.emit('action.blockquote');
+  });
+  window.ee.on('menu.action.orderlist', function() {
+    WindowMgr.actived.window.ee.emit('action.orderlist');
+  });
+  window.ee.on('menu.action.unorderlist', function() {
+    WindowMgr.actived.window.ee.emit('action.unorderlist');
+  });
+  window.ee.on('menu.action.fencedcode', function() {
+    WindowMgr.actived.window.ee.emit('action.fencedcode');
+  });
+  window.ee.on('menu.action.strikethrough', function() {
+    WindowMgr.actived.window.ee.emit('action.strikethrough');
+  });
+  window.ee.on('menu.action.table', function() {
+    WindowMgr.actived.window.ee.emit('action.table');
+  });
+  window.ee.on('menu.action.comment', function() {
+    WindowMgr.actived.window.ee.emit('action.comment');
+  });
+
+  /**
+   * find menu
+   */
+  window.ee.on('menu.find.start', function() {
+    WindowMgr.actived.window.ee.emit('find.start');
+  });
+  window.ee.on('menu.find.next', function() {
+    WindowMgr.actived.window.ee.emit('find.next');
+  });
+  window.ee.on('menu.find.previous', function() {
+    WindowMgr.actived.window.ee.emit('find.previous');
+  });
+  window.ee.on('menu.find.replace', function() {
+    WindowMgr.actived.window.ee.emit('find.replace');
+  });
+  window.ee.on('menu.find.replace.all', function() {
+    WindowMgr.actived.window.ee.emit('find.replace.all');
+  });
+
+  /**
+   * help menu
+   */
+  
+  window.ee.on('menu.help.about', function() {
+    WindowMgr.open(pathDocs +'/about.md', { readOnly: true, position: 'center' });
+  });
+  window.ee.on('menu.help.syntax', function() {
+    WindowMgr.open(pathDocs +'/syntax.md', { readOnly: true, position: 'center' });
+  });
+  window.ee.on('menu.help.acknowledgements', function() {
+    WindowMgr.open(pathDocs +'/acknowledgements.md', { readOnly: true, position: 'center' });
+  });
+  window.ee.on('menu.help.shortcut', function() {
+    WindowMgr.open(pathDocs +'/shortcut.md', { readOnly: true, position: 'center' });
+  });
+
+
 
   //fire by child window
   window.ee.on('file.open', function(file) {
@@ -106,6 +213,10 @@ define([
   window.ee.on('file.save', function(file, markdown, cb) {
     File.save(file, markdown, cb);
     Recents.add(file);
+  });
+
+  window.ee.on('file.reload', function(file, cb) {
+    File.reload(file, cb);
   });
 
   window.ee.on('exit', function() {
@@ -175,6 +286,11 @@ define([
   HotKey('defmod-,', function() {
     Preferences.show();
   });
+
+  //window, linux specify doc path error
+  // HotKey('shift-ctrl-space', function() {
+  //   window.ee.emit('menu.help.shortcut');
+  // });
 
   File.loadTemporary();
 });

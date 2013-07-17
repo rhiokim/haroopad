@@ -1,34 +1,34 @@
 define([
 		'exports'
-	],
-	function(exports) {
+], function(exports) {
 
 	var gui = require('nw.gui');
 
 	var windows = {},
-			openning = false,
-			realCount = 0,
-			shadowCount = 0,
-			gapX = 0, gapY = 0;
+		openning = false,
+		realCount = 0,
+		shadowCount = 0,
+		gapX = 0,
+		gapY = 0;
 
 	var config = store.get('Window') || {};
-	var top = config.y, left = config.x;
+	var top = config.y,
+		left = config.x;
 
 	function merge(obj) {
-	  var i = 1
-	    , target
-	    , key;
+		var i = 1,
+			target, key;
 
-	  for (; i < arguments.length; i++) {
-	    target = arguments[i];
-	    for (key in target) {
-	      if (Object.prototype.hasOwnProperty.call(target, key)) {
-	        obj[key] = target[key];
-	      }
-	    }
-	  }
+		for (; i < arguments.length; i++) {
+			target = arguments[i];
+			for (key in target) {
+				if (Object.prototype.hasOwnProperty.call(target, key)) {
+					obj[key] = target[key];
+				}
+			}
+		}
 
-	  return obj;
+		return obj;
 	}
 
 	function _updateStore() {
@@ -36,7 +36,7 @@ define([
 	}
 
 	function getWindowByFile(file) {
-		for(var prop in windows) {
+		for (var prop in windows) {
 			if (windows[prop]._params.file == file) {
 				return windows[prop];
 			}
@@ -52,7 +52,7 @@ define([
 		realCount++;
 
 		newWin.on('closed', function() {
-			for(var prop in windows) {
+			for (var prop in windows) {
 				if (prop == newWin._params.created_at) {
 					windows[prop] = null;
 					delete windows[prop];
@@ -70,58 +70,64 @@ define([
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			// newWin.window.haveParent(window);
-			newWin.window.parent = window;
-
-      if (config.height + top > window.screen.height) {
-      	top = 0;
-      }
-
-      if (config.width + left > window.screen.width) {
-      	left = 0;
-      }
-
-    	left = left + 20;
-      top = top + 20;
-  
-  		newWin.moveTo(left, top);
 			newWin.resizeTo(config.width, config.height);
 
 			shadowCount++;
+
+			//윈도우 오픈 시 position 파라미터가 존재하면 위치 지정은 패스한다.
+			if (newWin._params.position) {
+				return;
+			}
+
+			if (config.height + top > window.screen.height) {
+				top = 0;
+			}
+
+			if (config.width + left > window.screen.width) {
+				left = 0;
+			}
+
+			left = left + 20;
+			top = top + 20;
+
+			newWin.moveTo(left, top);
+			newWin.focus();
 		});
 	}
 
 	process.on('actived', function(child) {
 		exports.actived = child;
 
-    openning = false;
+		openning = false;
 	});
 
 	exports.open = function(file, options) {
-    var existWin, newWin,
-    	options = options || {},
-    	hash = file ? '#file='+ file : '';
+		var existWin, newWin;
 
-    //이미 열려 있는 파일 일 경우
-    if (file && (existWin = getWindowByFile(file))) {
-    	existWin.focus();
-    	return;
-    }
+		options = typeof file === 'object' ? file : options || {};
+		file = typeof file === 'string' ? file : undefined;
 
-    if (openning && !file) {
-    	return;
-    }
+		//이미 열려 있는 파일 일 경우
+		if (file && (existWin = getWindowByFile(file))) {
+			existWin.focus();
+			return;
+		}
 
-    openning = true;
+		if (openning && !file) {
+			return;
+		}
 
-		newWin = gui.Window.open('pad.html'+ hash, {
-		    "min_width": 500,
-		    "min_height": 250,
-        "toolbar": false,
-        "show": false
-      });
+		openning = true;
 
-		newWin._params = merge({}, options, {
+		newWin = gui.Window.open('pad.html', merge({
+			"min_width": 500,
+			"min_height": 250,
+			"toolbar": false,
+			"show": false
+		}, options));
+		newWin.parent = window;
+
+		newWin._params = merge(options, {
 			file: file,
 			created_at: new Date().getTime()
 		});

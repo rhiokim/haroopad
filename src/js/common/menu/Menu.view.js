@@ -1,4 +1,4 @@
-MenuBarView = function () {
+window.MenuBarView = function () {
 	var gui = require('nw.gui');
 	var View = new gui.Menu();
 
@@ -60,6 +60,20 @@ MenuBarView = function () {
 		      }
 	    })
 	);
+	View.append(
+		new gui.MenuItem({
+			type: 'separator'
+		})
+	);
+
+	View.append(
+		new gui.MenuItem({
+		  label: 'Enter Full screen',
+		  click: function() {
+			window.parent.ee.emit('menu.view.fullscreen');
+		  }
+		})
+	);
 
 	return new gui.MenuItem({ label: 'View', submenu: View });
-}
+};

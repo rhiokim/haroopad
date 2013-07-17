@@ -1,0 +1,45 @@
+.CodeMirror-dialog {
+  position: absolute;
+  color: #fff;
+  font-size: 0.9em;
+  font-family: Arial,'Apple SD Gothic Neo','Malgun Gothic', Helvetica, 'nanumgothic', sans-serif, Menlo, Monaco, monospace;
+
+  left: 0; 
+  right: 0;
+  padding: .1em .8em;
+
+  text-shadow: 0 0 2px rgba(0, 0, 0, 1);
+  box-shadow: 0 0 3px rgba(0,0,0,0.7);
+
+  background: linear-gradient(to bottom,  rgba(225,225,225,0.7), rgba(200,200,200,0.7)); /* W3C */
+
+  overflow: hidden;
+  z-index: 15;
+}
+
+.CodeMirror-dialog-top {
+  border-bottom: 1px solid #eee;
+  top: 0;
+}
+
+.CodeMirror-dialog-bottom {
+  border-top: 1px solid #eee;
+  bottom: 0;
+}
+
+.CodeMirror-dialog input {
+  margin: 1px 0 !important;
+  padding: 0 3px !important;
+  font-size: 12px;
+  width: 15.2em !important;
+}
+
+.CodeMirror-dialog button {
+  height: 21px;
+  padding-top: 3px;
+}
+
+.CodeMirror-dialog>span {
+  color: #eeffd3 !important;
+  text-shadow: 0 0 2px rgba(0,0,0,1);
+}

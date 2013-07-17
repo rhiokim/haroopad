@@ -4,7 +4,7 @@ define([
 		'ui/dialog/Dialogs',
 		'ui/exports/Exports',
 		'ui/splitter/Splitter'
-], function(store, HotKey, Dialogs) {
+], function(store, HotKey, Dialogs, Exports, Splitter) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -30,6 +30,7 @@ define([
 
 	win.on('close', function() {
 		if (edited) {
+			delyClose = true;
 			Dialogs.save.show();
 			return;
 		} else {
@@ -39,10 +40,23 @@ define([
 
 	Dialogs.save.bind('save', function() {
 		delayClose = true;
+		window.ee.emit('file.save');
 	});
 
 	Dialogs.save.bind('dont-save', function() {
 		close();
+	});
+
+	var reloadFile;
+	Dialogs.reload.bind('reload', function() {
+		window.parent.ee.emit('file.reload', reloadFile, function(err, data) {
+			window.ee.emit('file.reloaded', data);
+		});
+	});
+
+	window.ee.on('file.update', function(file) {
+		reloadFile = file;
+		Dialogs.reload.show(file);
 	});
 
 	window.ee.on('file.close', function() {
@@ -50,13 +64,22 @@ define([
 	});
 
 	window.ee.on('file.opened', function(opt) {
-		win.title = orgTitle = opt.basename;
+		win.title = orgTitle = opt.basename || orgTitle;
+
+		if (win._params.readOnly) {
+			win.title += ' (read only)';
+		}
   });
 
   window.ee.on('file.saved', function(opt) {
 		win.title = orgTitle = opt.basename;
-		delayClose = true;
-		edited = false;	
+
+		if (delayClose) {
+			close();
+		}
+		
+		delayClose = false;
+		edited = false;
   });
 
 	window.ee.on('change.before.markdown', function(markdown, html, editor) {
@@ -65,9 +88,12 @@ define([
 	});
 
 
-
 	HotKey('defmod-shift-alt-d', function() {
 		win.showDevTools();
+	});
+
+	HotKey('defmod-enter', function() {
+		window.ee.emit('view.fullscreen');
 	});
 
   window.addEventListener('keydown', function(e) {
@@ -115,17 +141,17 @@ define([
 	  return false;
 	});
 
-  window.ondragover = function(e) { 
-    e.preventDefault(); 
-    window.parent.ee.emit('dragover', e);
-    return false;
-  };
+  // window.ondragover = function(e) { 
+  //   e.preventDefault();
+  //   window.parent.ee.emit('dragover', e);
+  //   return false;
+  // };
 
-  window.ondrop = function(e) {
-    e.preventDefault(); 
-    window.parent.ee.emit('dragdrop', e);
-    return false;
-  };
+  // window.ondrop = function(e) {
+  //   e.preventDefault();
+  //   window.parent.ee.emit('dragdrop', e);
+  //   return false;
+  // };
 
   var resizeTimeout;
   window.onresize = function(e) {
@@ -143,6 +169,17 @@ define([
 
   }
 
+  window.ee.on('view.fullscreen', function() {
+  	var isFull = win.isFullscreen;
+
+  	if (isFull) {
+  		win.leaveFullscreen();
+  	} else {
+  		/* codemirror redraw delay bug */
+  		document.querySelector('.CodeMirror-gutters').style.height = '2000px';
+  		win.enterFullscreen();
+  	}
+  });
  //  win.moveTo(url('#x'), url('#y'));
 	// win.resizeTo(config.width, config.height);
 

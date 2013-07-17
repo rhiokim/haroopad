@@ -1,17 +1,19 @@
 define([
 		'keyboard',
 		'ui/dialog/Save',
-		'ui/dialog/Shortcuts'
+		'ui/dialog/Reload'/*,
+		'ui/dialog/Shortcuts'*/
 	], 
-	function(HotKey, Save, Shortcuts) {
+	function(HotKey, Save, Reload/*, Shortcuts*/) {
 		var dialogs;
 
-		HotKey('shift-ctrl-space', function() {
-			dialogs.shortcuts.show();
-		});
+		// HotKey('shift-ctrl-space', function() {
+		// 	dialogs.shortcuts.show();
+		// });
 
 		return dialogs = {
 			save: new Save,
-			shortcuts: new Shortcuts
+			reload: new Reload/*,
+			shortcuts: new Shortcuts*/
 		}
 });

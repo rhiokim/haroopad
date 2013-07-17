@@ -1,4 +1,4 @@
-function MenuBar() {
+window.MenuBar = function() {
 	var gui = require('nw.gui'),
 			win = gui.Window.get();
 
@@ -8,8 +8,9 @@ function MenuBar() {
 		menu = new gui.Menu({
 		    type:   'menubar'
 		});
-
+		
 		menu.append( MenuBarFile() );
+		menu.append( MenuBarFind() );
 		menu.append( MenuBarView() );
 		menu.append( MenuBarAction() );
 		// menu.append( MenuBarTools() );
@@ -19,4 +20,4 @@ function MenuBar() {
 	}
 
 	create();
-}
+};
