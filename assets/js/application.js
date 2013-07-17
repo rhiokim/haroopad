@@ -1,8 +1,7 @@
 function setStarrre() {
 	var text = $('h1, h2, h3, h4, h5, h6')[0].innerText || '';
-	$('#shareme').html('');
 	$('#shareme').attr('data-url', window.location.href);
-	$('#shareme').attr('data-text', text +' via Haroopad - The next document processor');
+	$('#shareme').attr('data-text', text);
   $('#shareme').sharrre({
 	  share: {
 	    googlePlus: true,
@@ -46,18 +45,29 @@ function loadPost(file) {
   });
 }
 
+var __timeout;
+
 $(document).ready(function() {
   var file;
+  var prevHash;
+  
+  window.setInterval(function() {
+  	if (prevHash && prevHash != window.location.href) {
+    	window.location.href =  $(this).attr('href');
+    	window.location.reload();
+    	window.clearInterval(__timeout);
+    	return;
+  	}
+
+  	prevHash = window.location.href;
+  }, 10);
 
   $('.share a').click(function(e) {
     file = $(this).attr('href');
+    e.preventDefault();
 
-    if(file.indexOf('#') < 0) {
-      e.preventDefault();
-      return;
-    } else {
-      loadPost(file);
-    }
+    window.location.replace($(this).attr('href'));
+    window.reload();
   });
 
   file = url('#');
