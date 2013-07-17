@@ -1,63 +1,24 @@
 define([
+    'core/Lexer',
+    'core/Renderer'
   ],
-  function() {
-    // var opt = {
-    //   gfm: true,
-    //   tables: true,
-    //   breaks: false,
-    //   pedantic: false,
-    //   sanitize: false,
-    //   smartLists: true,
-    //   smartypants: true,
-    //   silent: false,
-    //   langPrefix: 'language-'
-    // };
-
-    var marked = require("marked");
-
-    var defaults = {
-        "gfm": true,
-        "tables": true,
-        "breaks": false,
-        "pedantic": false,
-        "sanitize": false,
-        "smartLists": true,
-        "smartypants": true,
-        "silent": false,
-        "highlight": null,
-        "langPrefix": ''
-    };
-    var opt = store.get('Markdown') || defaults;
-
-    marked.setOptions(opt);
-    var renderer = new marked.Renderer();
+  function(Lexer, Renderer) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
-    // renderer.blockcode = function(code, lang) {
-    //   var res;
-    //   if(!lang) {
-    //     return code;
-    //   }
 
-    //   switch(lang) {
-    //     case 'js':
-    //       lang = 'javascript';
-    //     break;
-    //   }
+    var marked = require("marked");
+    
+    var opt = store.get('Markdown') || Lexer.options;
 
-    //   try {
-    //     res = hljs.highlight(lang, code).value;
-    //   } catch(e) {
-
-    //   } finally {
-    //     return res || code;
-    //   }
-    // };
+    // marked.setOptions(opt);
 
     var parse = function(src, options) {
-      options = options || marked.defaults;
-      return marked.parser(marked.lexer(src, options), options, renderer);
+      if (options) {
+        Lexer.options = options;
+      }
+      var tokens = Lexer.lex(src);
+      return marked.parser(tokens, Lexer.options, Renderer);
     }
 
     window.ee.on('preferences.markdown.gfm', function(value) {

@@ -28,8 +28,12 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>markdown</string>
 			<key>CFBundleTypeName</key>
-			<string>Markdown</string>
-			<key>CFBundleTypeOSTypes</key>
+			<string>The next document processor (markdown-base)</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
 			<array>
 				<string></string>
 			</array>

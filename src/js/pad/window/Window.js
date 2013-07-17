@@ -88,9 +88,12 @@ define([
 	});
 
 
-
 	HotKey('defmod-shift-alt-d', function() {
 		win.showDevTools();
+	});
+
+	HotKey('defmod-enter', function() {
+		window.ee.emit('view.fullscreen');
 	});
 
   window.addEventListener('keydown', function(e) {
@@ -138,17 +141,17 @@ define([
 	  return false;
 	});
 
-  window.ondragover = function(e) { 
-    e.preventDefault(); 
-    window.parent.ee.emit('dragover', e);
-    return false;
-  };
+  // window.ondragover = function(e) { 
+  //   e.preventDefault();
+  //   window.parent.ee.emit('dragover', e);
+  //   return false;
+  // };
 
-  window.ondrop = function(e) {
-    e.preventDefault(); 
-    window.parent.ee.emit('dragdrop', e);
-    return false;
-  };
+  // window.ondrop = function(e) {
+  //   e.preventDefault();
+  //   window.parent.ee.emit('dragdrop', e);
+  //   return false;
+  // };
 
   var resizeTimeout;
   window.onresize = function(e) {
@@ -165,6 +168,18 @@ define([
     }, 250); 
 
   }
+
+  window.ee.on('view.fullscreen', function() {
+  	var isFull = win.isFullscreen;
+
+  	if (isFull) {
+  		win.leaveFullscreen();
+  	} else {
+  		/* codemirror redraw delay bug */
+  		document.querySelector('.CodeMirror-gutters').style.height = '2000px';
+  		win.enterFullscreen();
+  	}
+  });
  //  win.moveTo(url('#x'), url('#y'));
 	// win.resizeTo(config.width, config.height);
 
