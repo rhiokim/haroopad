@@ -21,9 +21,7 @@ define([], function() {
 		});
 
 		prefWin.on('loaded', function() {
-			// prefWin.window.haveParent(window);
-			
-			// prefWin.window.parent = window;
+			prefWin.focus();
 		});
 	}
 

@@ -30,6 +30,7 @@ define([
 
 	win.on('close', function() {
 		if (edited) {
+			delyClose = true;
 			Dialogs.save.show();
 			return;
 		} else {
@@ -39,10 +40,23 @@ define([
 
 	Dialogs.save.bind('save', function() {
 		delayClose = true;
+		window.ee.emit('file.save');
 	});
 
 	Dialogs.save.bind('dont-save', function() {
 		close();
+	});
+
+	var reloadFile;
+	Dialogs.reload.bind('reload', function() {
+		window.parent.ee.emit('file.reload', reloadFile, function(err, data) {
+			window.ee.emit('file.reloaded', data);
+		});
+	});
+
+	window.ee.on('file.update', function(file) {
+		reloadFile = file;
+		Dialogs.reload.show(file);
 	});
 
 	window.ee.on('file.close', function() {
@@ -59,8 +73,13 @@ define([
 
   window.ee.on('file.saved', function(opt) {
 		win.title = orgTitle = opt.basename;
-		delayClose = true;
-		edited = false;	
+
+		if (delayClose) {
+			close();
+		}
+		
+		delayClose = false;
+		edited = false;
   });
 
 	window.ee.on('change.before.markdown', function(markdown, html, editor) {
@@ -122,17 +141,17 @@ define([
 	  return false;
 	});
 
-  window.ondragover = function(e) { 
-    e.preventDefault(); 
-    window.parent.ee.emit('dragover', e);
-    return false;
-  };
+  // window.ondragover = function(e) { 
+  //   e.preventDefault();
+  //   window.parent.ee.emit('dragover', e);
+  //   return false;
+  // };
 
-  window.ondrop = function(e) {
-    e.preventDefault(); 
-    window.parent.ee.emit('dragdrop', e);
-    return false;
-  };
+  // window.ondrop = function(e) {
+  //   e.preventDefault();
+  //   window.parent.ee.emit('dragdrop', e);
+  //   return false;
+  // };
 
   var resizeTimeout;
   window.onresize = function(e) {

@@ -79,19 +79,9 @@ requirejs([
 
     });
 
-    //run with file open;
-    if (tmp) {
-      File.openTmp(decodeURIComponent(file), uid);
-    } else {
-      if (file) {
-        File.open(decodeURIComponent(file));
-        Editor.setOption('readOnly', readOnly);
-      } else {
-        Editor.on("change", delayChange);
-      }
-
-      File.startAutoSave();
-    }
+    window.ee.on('file.reloaded', function(md) {
+      Editor.setValue(md);
+    });
 
     window.ee.on('file.saved', function(opt) {
       Viewer.init(opt);
@@ -108,6 +98,20 @@ requirejs([
           window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
         });
       }, 100);
+    }
+
+    //run with file open;
+    if (tmp) {
+      File.openTmp(decodeURIComponent(file), uid);
+    } else {
+      if (file) {
+        File.open(decodeURIComponent(file));
+        Editor.setOption('readOnly', readOnly);
+      } else {
+        Editor.on("change", delayChange);
+      }
+
+      File.startAutoSave();
     }
 
     win.focus();

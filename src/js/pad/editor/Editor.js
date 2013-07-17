@@ -1,19 +1,20 @@
 define([
 		// 'editor/Parser',
 		'store',
-		'editor/Editor.keymap'
+		'editor/Editor.keymap',
+		'editor/Editor.drop'
 	],
-	function(store, Keymap) {
+	function(store, Keymap, Drop) {
 		var gui = require('nw.gui'),
     		win = gui.Window.get(),
     		clipboard = gui.Clipboard.get();
 
-    var _tid_;	//for throttle
+	    var _tid_;	//for throttle
 
-    var config = store.get('Editor') || {};
-    var generalConf = store.get('General') || {
-    	enableSyncScroll: true
-    };
+	    var config = store.get('Editor') || {};
+	    var generalConf = store.get('General') || {
+	    	enableSyncScroll: true
+	    };
 
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 					    mode: 'markdown',
@@ -23,14 +24,26 @@ define([
 					    electricChars: false,
 					    viewportMargin: 40,
 					    tabSize: 2,
-			        indentUnit: 4,
-			        indentWithTabs: true,
+				        indentUnit: 4,
+				        indentWithTabs: true,
 					    autofocus: true,
 					    workDelay: 1000,
-					    dragDrop: false,
 					    extraKeys: Keymap,
-  						showTrailingSpace: true
+  						showTrailingSpace: true/*,
+					    dragDrop: true*/
 					  });
+
+
+		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
+		editor.on('drop', Drop);
+
+		editor.on('dragover', function(cm, e) {
+	    	var a = cm.coordsChar({ left:e.x, top: e.y });
+	    	var doc = cm.getDoc();
+	    	doc.setCursor(a);
+
+	    	e.preventDefault();
+		});
 
 		/* initialize editor */
 		editor.setOption('theme', config.theme || 'solarized dark');
