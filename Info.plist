@@ -26,17 +26,21 @@
 				<string>*</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>nw.icns</string>
+			<string>markdown</string>
 			<key>CFBundleTypeName</key>
-			<string>haroopad App</string>
+			<string>The next document processor (markdown-base)</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.intel.nw.app</string>
+				<string></string>
 			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSIsAppleDefaultForType</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>CFBundleTypeName</key>
@@ -53,6 +57,8 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>node-webkit</string>
+	<key>CFBundleGetInfoString</key>
+	<string>© Rhio Kim, 2013</string>
 	<key>CFBundleIconFile</key>
 	<string>nw.icns</string>
 	<key>CFBundleURLTypes</key>
@@ -68,7 +74,7 @@
 		</dict>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>haroopad</string>
+	<string>com.haroopress.pad</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -92,29 +98,63 @@
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>md</string>
+					<string>markdown</string>
+					<string>mdown</string>
+					<string>markdn</string>
+					<string>mkd</string>
+					<string>mkdn</string>
+					<string>mdwn</string>
+					<string>mdtxt</string>
+					<string>mdtext</string>
+					<string>mdml</string>
+				</array>
+			</dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>com.pkware.zip-archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>haroopad App</string>
+			<string>Markdown</string>
 			<key>UTTypeIconFile</key>
-			<string>nw.icns</string>
+			<string>markdown</string>
 			<key>UTTypeIdentifier</key>
-			<string>haroopad</string>
-			<key>UTTypeReferenceURL</key>
-			<string>https://haroopress.com/haroopad</string>
+			<string>net.daringfireball.markdown</string>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>com.apple.ostype</key>
-				<string>haroopad</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>nw</string>
+					<string>md</string>
+					<string>markdown</string>
+					<string>mdown</string>
+					<string>markdn</string>
+					<string>mkd</string>
+					<string>mkdn</string>
+					<string>mdwn</string>
+					<string>mdtxt</string>
+					<string>mdtext</string>
+					<string>mdml</string>
 				</array>
-				<key>public.mime-type</key>
-				<string>application/x-node-webkit-app</string>
 			</dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.pkware.zip-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Markdown</string>
+			<key>UTTypeIconFile</key>
+			<string>markdown</string>
+			<key>UTTypeIdentifier</key>
+			<string>net.daringfireball.markdown</string>
 		</dict>
 	</array>
 </dict>

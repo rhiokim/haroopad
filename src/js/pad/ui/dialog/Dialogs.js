@@ -2,13 +2,15 @@ define([
 		'keyboard',
 		'ui/file/File.opt',
 		'ui/dialog/Save',
+		'ui/dialog/Reload',
 		'ui/dialog/Email'
 	], 
-	function(HotKey, FileOpt, Save, Email) {
+	function(HotKey, FileOpt, Save, Reload, Email) {
 		var dialogs;
 
 		var SaveDialog = new Save,
-			EmailDialog = new Email;
+			EmailDialog = new Email,
+			ReloadDialog = new Reload;
 
 
 		window.ee.on('file.posts.tumblr', EmailDialog.show.bind(EmailDialog));
@@ -31,6 +33,7 @@ define([
 
 		return dialogs = {
 			save: SaveDialog,
-			posts: EmailDialog
+			reload: ReloadDialog,
+			email: EmailDialog
 		}
 });

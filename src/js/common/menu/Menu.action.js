@@ -53,9 +53,15 @@ MenuBarAction = function () {
       enabled: false
     })
   );
+  Action.append(
+    new gui.MenuItem({
+      label: 'Header',
+      submenu: MenuBarActionHeader()
+    })
+  );
 	Action.append(
     new gui.MenuItem({
-      label: 'Strong                 **',
+      label: 'Strong ................ **',
       click: function() {
         window.parent.ee.emit('menu.action.strong');
       }
@@ -63,7 +69,7 @@ MenuBarAction = function () {
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Emphasize           *',
+      label: 'Emphasize .......... *',
       click: function() {
         window.parent.ee.emit('menu.action.emphasize');
       }
@@ -71,7 +77,7 @@ MenuBarAction = function () {
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Inline Code          `',
+      label: 'Inline Code ......... `',
       click: function() {
         window.parent.ee.emit('menu.action.inlinecode');
       }
@@ -79,7 +85,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Image                 ![]()',
+      label: 'Image ................. ![]()',
       click: function() {
         window.parent.ee.emit('menu.action.image');
       }
@@ -87,7 +93,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Link                    []()',
+      label: 'Link .................... []()',
       click: function() {
         window.parent.ee.emit('menu.action.link');
       }
@@ -95,7 +101,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Blockquote          >',
+      label: 'Blockquote ......... >',
       click: function() {
         window.parent.ee.emit('menu.action.blockquote');
       }
@@ -103,7 +109,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Ordered List        1.',
+      label: 'Ordered List ....... 1.',
       click: function() {
         window.parent.ee.emit('menu.action.orderlist');
       }
@@ -111,7 +117,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Un Ordered List   -',
+      label: 'Un Ordered List .. -',
       click: function() {
         window.parent.ee.emit('menu.action.unorderlist');
       }
@@ -132,7 +138,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Fenced Code       ```',
+      label: 'Fenced Code ....... ```',
       click: function() {
         window.parent.ee.emit('menu.action.fencedcode');
       }
@@ -140,7 +146,7 @@ MenuBarAction = function () {
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Strikethrough      ~~',
+      label: 'Strikethrough ...... ~~',
       click: function() {
         window.parent.ee.emit('menu.action.strikethrough');
       }
@@ -175,9 +181,10 @@ MenuBarAction = function () {
       type: 'separator'
     })
   );
+  
   Action.append(
     new gui.MenuItem({
-      label: 'Comment',
+      label: 'Comment ............ <!-- -->',
       click: function() {
         window.parent.ee.emit('menu.action.comment');
       }

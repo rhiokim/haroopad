@@ -6,32 +6,3 @@ window._glo = {
 			+ '</footer>'
 	}
 };
-
-function toggleFullScreen(el) {
-  // https://developer.mozilla.org/en-US/docs/DOM/Using_fullscreen_mode
-  var doc = document;
-  var isFull = doc.fullScreen || doc.mozFullScreen || doc.webkitFullScreen;
-  var request = function() {
-    if (el.requestFullScreen) {
-      el.requestFullScreen();
-    } else if (el.mozRequestFullScreen) {
-      el.mozRequestFullScreen();
-    } else if (el.webkitRequestFullScreen) {
-      el.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-    }
-  };
-  var cancel = function() {
-    if (doc.cancelFullScreen) {
-      doc.cancelFullScreen();
-    } else if (doc.mozCancelFullScreen) {
-      doc.mozCancelFullScreen();
-    } else if (doc.webkitCancelFullScreen) {
-      doc.webkitCancelFullScreen();
-    }
-  };
-  if (!isFull) {
-    request();
-  } else if (cancel) {
-    cancel();
-  }
-}

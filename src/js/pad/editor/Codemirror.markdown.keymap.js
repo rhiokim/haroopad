@@ -104,7 +104,56 @@
                                  + '|        |        |');
       }
 
+      var headerMap = {
+          '1': '#',
+          '2': '##',
+          '3': '###',
+          '4': '####',
+          '5': '#####',
+          '6': '######'
+        };
+      var toggleHeader = function(depth) {
+        var startPoint = cm.getCursor('start');
+        var endPoint = cm.getCursor('end');
+        var h, repl = /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/;
+
+        var text = cm.getLine(startPoint.line);
+
+        if (repl.test(text)) {
+          h = text.replace(repl, '$1');
+          text = text.replace(repl, '$2'); 
+
+          if (h == headerMap[depth]) {
+            cm.setLine(startPoint.line, text);
+            cm.focus();
+            return;
+          }
+        }
+        
+        text = headerMap[depth] +' '+ text;
+        cm.setLine(startPoint.line, text);
+        cm.focus();
+      }
+
       switch (name) {
+        case 'h1':
+          toggleHeader(1);
+          break;
+        case 'h2':
+          toggleHeader(2);
+          break;
+        case 'h3':
+          toggleHeader(3);
+          break;
+        case 'h4':
+          toggleHeader(4);
+          break;
+        case 'h5':
+          toggleHeader(5);
+          break;
+        case 'h6':
+          toggleHeader(6);
+          break;
         case 'bold':
           replaceSelection('**');
           break;
@@ -148,102 +197,60 @@
       }
     };
 
+  CodeMirror.commands.markdownH1 = function(cm) {
+    action('h1', cm);
+  };
+  CodeMirror.commands.markdownH2 = function(cm) {
+    action('h2', cm);
+  };
+  CodeMirror.commands.markdownH3 = function(cm) {
+    action('h3', cm);
+  };
+  CodeMirror.commands.markdownH4 = function(cm) {
+    action('h4', cm);
+  };
+  CodeMirror.commands.markdownH5 = function(cm) {
+    action('h5', cm);
+  };
+  CodeMirror.commands.markdownH6 = function(cm) {
+    action('h6', cm);
+  };
   CodeMirror.commands.markdownBold = function(cm) {
     action('bold', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('**'+ cm.getSelection() +'**');
-    // pos.ch += 2;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownItalic = function(cm) {
     action('italic', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('*'+ cm.getSelection() +'*');
-    // pos.ch += 1;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownInlineCode = function(cm) {
     action('code', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('*'+ cm.getSelection() +'*');
-    // pos.ch += 1;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownLink = function(cm) {
     action('link', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('['+ cm.getSelection() +'](http://)');
-    // pos.ch += 1;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownStrike = function(cm) {
     action('strike', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('~~'+ cm.getSelection() +'~~');
-    // pos.ch += 2;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownImage = function(cm) {
     action('image', cm);
-    // var pos = cm.getCursor('end');
-    
-    // cm.replaceSelection('!['+ cm.getSelection() +'](http://)');
-    // pos.ch += 2;
-    // cm.setCursor(pos);
-    // cm.focus();
   };
   CodeMirror.commands.markdownBlockQuote = function(cm) {
     action('quote', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '> ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownUnOrderedList = function(cm) {
     action('unordered-list', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '* ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownOrderedList = function(cm) {
     action('ordered-list', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '1. ' + text);
-    // cm.focus();
   };
 
   CodeMirror.commands.markdownFencedCode = function(cm) {
     action('fenced-code', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '* ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownTable = function(cm) {
     action('table', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '1. ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownComment = function(cm) {
     action('comment', cm);
-    // var pos = cm.getCursor('start');
-    // var text = cm.getLine(pos.line);
-    // cm.setLine(pos.line, '1. ' + text);
-    // cm.focus();
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();

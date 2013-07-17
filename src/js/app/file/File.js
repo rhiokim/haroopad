@@ -1,4 +1,6 @@
-define([],
+define([
+	],
+
 	function() {
 		var fs = require('fs'),
 			path = require('path');
@@ -31,6 +33,10 @@ define([],
 			},
 			
 			open: function(file, cb) {
+				fs.readFile(file, 'utf8', cb);
+			},
+
+			reload: function(file, cb) {
 				fs.readFile(file, 'utf8', cb);
 			},
 

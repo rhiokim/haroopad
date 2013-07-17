@@ -1,34 +1,34 @@
 define([
 		'exports'
-	],
-	function(exports) {
+], function(exports) {
 
 	var gui = require('nw.gui');
 
 	var windows = {},
-			openning = false,
-			realCount = 0,
-			shadowCount = 0,
-			gapX = 0, gapY = 0;
+		openning = false,
+		realCount = 0,
+		shadowCount = 0,
+		gapX = 0,
+		gapY = 0;
 
 	var config = store.get('Window') || {};
-	var top = config.y, left = config.x;
+	var top = config.y,
+		left = config.x;
 
 	function merge(obj) {
-	  var i = 1
-	    , target
-	    , key;
+		var i = 1,
+			target, key;
 
-	  for (; i < arguments.length; i++) {
-	    target = arguments[i];
-	    for (key in target) {
-	      if (Object.prototype.hasOwnProperty.call(target, key)) {
-	        obj[key] = target[key];
-	      }
-	    }
-	  }
+		for (; i < arguments.length; i++) {
+			target = arguments[i];
+			for (key in target) {
+				if (Object.prototype.hasOwnProperty.call(target, key)) {
+					obj[key] = target[key];
+				}
+			}
+		}
 
-	  return obj;
+		return obj;
 	}
 
 	function _updateStore() {
@@ -36,7 +36,7 @@ define([
 	}
 
 	function getWindowByFile(file) {
-		for(var prop in windows) {
+		for (var prop in windows) {
 			if (windows[prop]._params.file == file) {
 				return windows[prop];
 			}
@@ -52,7 +52,7 @@ define([
 		realCount++;
 
 		newWin.on('closed', function() {
-			for(var prop in windows) {
+			for (var prop in windows) {
 				if (prop == newWin._params.created_at) {
 					windows[prop] = null;
 					delete windows[prop];
@@ -79,51 +79,52 @@ define([
 				return;
 			}
 
-      if (config.height + top > window.screen.height) {
-      	top = 0;
-      }
+			if (config.height + top > window.screen.height) {
+				top = 0;
+			}
 
-      if (config.width + left > window.screen.width) {
-      	left = 0;
-      }
+			if (config.width + left > window.screen.width) {
+				left = 0;
+			}
 
-    	left = left + 20;
-      top = top + 20;
-  
-  		newWin.moveTo(left, top);
+			left = left + 20;
+			top = top + 20;
+
+			newWin.moveTo(left, top);
+			newWin.focus();
 		});
 	}
 
 	process.on('actived', function(child) {
 		exports.actived = child;
 
-    openning = false;
+		openning = false;
 	});
 
 	exports.open = function(file, options) {
-    var existWin, newWin;
+		var existWin, newWin;
 
-    options = typeof file === 'object' ? file : options || {};
-    file = typeof file === 'string' ? file : undefined;
+		options = typeof file === 'object' ? file : options || {};
+		file = typeof file === 'string' ? file : undefined;
 
-    //이미 열려 있는 파일 일 경우
-    if (file && (existWin = getWindowByFile(file))) {
-    	existWin.focus();
-    	return;
-    }
+		//이미 열려 있는 파일 일 경우
+		if (file && (existWin = getWindowByFile(file))) {
+			existWin.focus();
+			return;
+		}
 
-    if (openning && !file) {
-    	return;
-    }
+		if (openning && !file) {
+			return;
+		}
 
-    openning = true;
+		openning = true;
 
 		newWin = gui.Window.open('pad.html', merge({
-		    "min_width": 500,
-		    "min_height": 250,
-        "toolbar": false,
-        "show": false
-      }, options));
+			"min_width": 500,
+			"min_height": 250,
+			"toolbar": false,
+			"show": false
+		}, options));
 		newWin.parent = window;
 
 		newWin._params = merge(options, {
