@@ -153,6 +153,11 @@ blockquote p {
     text-align: center;
 }
 
+.demo-headline._haroopad {
+    padding: 50px 0 30px;
+    text-align: center;
+}
+
 /* starrre */
 
 #example5{
