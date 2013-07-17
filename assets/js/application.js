@@ -1,5 +1,8 @@
 function setStarrre() {
+	var text = $('h1, h2, h3, h4, h5, h6')[0].innerText || '';
+	$('#shareme').html('');
 	$('#shareme').attr('data-url', window.location.href);
+	$('#shareme').attr('data-text', text +' via Haroopad - The next document processor');
   $('#shareme').sharrre({
 	  share: {
 	    googlePlus: true,
