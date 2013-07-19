@@ -181,14 +181,13 @@ define([
   	}
   });
 
-  Dialogs.upgrade.bind('download.haroopad', function() {
-  	window.parent.ee.emit('download.haroopad');
+  /* update haroopad */
+  window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
+	Notifier.notify('Do you want to <a href="#" data-href="download.haroopad">download</a> new version?', 'Update Haroopad v'+ newVersion, undefined, 10000);
   });
 
-  process.on('update.haroopad', function(currVersion, newVersion) {
-  	Dialogs.upgrade.show();
+  /* up to date haroopad */
+  window.ee.on('up.to.date.haroopad', function(version) {
+	Notifier.notify('Haroopad <strong>v'+ version +'</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
   });
- //  win.moveTo(url('#x'), url('#y'));
-	// win.resizeTo(config.width, config.height);
-
 });

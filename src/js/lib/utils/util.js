@@ -1,4 +1,4 @@
-exports.getPlatformName = function  () {
+function getPlatformName() {
 	var names = {
 		'win32': 'windows',
 		'darwin': 'mac',

@@ -250,6 +250,15 @@ define([
     WindowMgr.actived.window.ee.emit('action.copy.html');
   });
 
+
+  /* process event */
+  process.on('update.haroopad', function(currVersion, newVersion) {
+    WindowMgr.actived.window.ee.emit('update.haroopad', currVersion, newVersion);
+  });
+  process.on('up.to.date.haroopad', function(currVersion) {
+    WindowMgr.actived.window.ee.emit('up.to.date.haroopad', currVersion);
+  });
+
   HotKey('defmod-n', function() {
     WindowMgr.open();
   });

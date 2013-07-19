@@ -1,8 +1,7 @@
 define([
 		'utils/AppConfig'
 	], function(AppConfig) {
-		var http = require('http'),
-			util = require('./js/app/utils/util');
+		var http = require('http');
 
 		var gui = require('nw.gui');
 
@@ -10,29 +9,37 @@ define([
 		var url = info.upgrade,
 			currVersion = AppConfig.version;
 
-		function upgrade(newVersion) {
+		function upgrade(newVersion, force) {
 			if (currVersion == newVersion) {
+				if (force) process.emit('up.to.date.haroopad', currVersion);
 				return;
 			}
 
 			process.emit('update.haroopad', currVersion, newVersion);
 		}
 
-		window.ee.on('download.haroopad', function() {
-			alert(util.getPlatformName())
-			gui.Shell.openExternal(serverInfo.download[util.getPlatformName()]);
-		});
+		function check(force) {
+			http.get(url, function(res) {
+				res.on("data", function(chunk) {
+					try {
+						serverInfo = JSON.parse(chunk);
 
-		http.get(url, function(res) {
-			res.on("data", function(chunk) {
-				try {
-					serverInfo = JSON.parse(chunk);
-
-					upgrade(serverInfo.version);
-				} catch(e) {
-					serverInfo = {};
-				}
+						upgrade(serverInfo.version, force);
+					} catch(e) {
+						serverInfo = {};
+					}
+				});
+			}).on('error', function(e) {
 			});
-		}).on('error', function(e) {
+		}
+
+		window.ee.on('check.version', function(force) {
+			check(force);
 		});
+
+		window.ee.on('download.haroopad', function() {
+			gui.Shell.openExternal(serverInfo.download[getPlatformName()]);
+		});
+
+		check();
 	});
