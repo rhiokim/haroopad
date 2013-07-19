@@ -1,0 +1,10 @@
+{
+	"version": "0.4.5",
+	"news": "http://pad.haroopress.com",
+	"download": {
+		"windows": "http://pad.haroopress.com/user.html#download",
+		"linux": "http://pad.haroopress.com/user.html#download",
+		"darwin": "http://pad.haroopress.com/user.html#download"
+	},
+	"platform": [ "windows", "darwin", "linux" ]
+}
