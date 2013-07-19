@@ -180,6 +180,14 @@ define([
   		win.enterFullscreen();
   	}
   });
+
+  Dialogs.upgrade.bind('download.haroopad', function() {
+  	window.parent.ee.emit('download.haroopad');
+  });
+
+  process.on('update.haroopad', function(currVersion, newVersion) {
+  	Dialogs.upgrade.show();
+  });
  //  win.moveTo(url('#x'), url('#y'));
 	// win.resizeTo(config.width, config.height);
 
