@@ -1,6 +1,6 @@
 ## Shortcuts
 
-하루패드는 크로스플랫폼을 지원하기 때문에 단축키를 이용할 때 유의해야 한다. 각 운영체제마다 특수키(Window, Command) 를 이용하는 경우는 **Ctrl** 키로 대체된다.
+하루패드는 크로스플랫폼을 지원하기 때문에 단축키를 이용할 때 유의해야 한다. 아래 단축키에 대한 설명은 맥을 기준으로 설명되고 있고 운영체제마다 특수키(Command)의 경우는 **&#8963; (Ctrl)** 키로 대체된다.
 
 
 ## shortcuts
@@ -27,14 +27,35 @@ Shortcut                       | Description
 ##### Window
 Shortcut                       | Description
 -------------------------------|-------------------
-&#8963; - ]                    | editor mode
-&#8963; - [                    | dual mode
+&#8679; - &#8963; - ]          | editor mode
+&#8679; - &#8963; - [          | dual mode
 &#8963; - &#8997; - ]          | editor width +5%
 &#8963; - &#8997; - [          | editor width -5%
 &#8984;(&#8963;) - &#8679; - L | toggle line number
 &#8984;(&#8963;) - &#8997; - V | vim keyboard binding
 
 ##### Editing
+ Shortcut                      | Description
+-------------------------------|---------------------
+&#8984;(&#8963;) - A           | Select All
+&#8984;(&#8963;) - D           | Delete Line
+&#8984;(&#8963;) - Z           | Undo
+&#8679; - &#8984;(&#8963;) - Z | Redo
+&#8984;(&#8963;) - Y           | Redo
+&#8984;(&#8963;) - Up          |  Go to Doc Start
+&#8984;(&#8963;) - End         | Go to Doc End
+&#8984;(&#8963;) - Down        | Go to Doc End
+&#8997; - Left                 | Go to Group Left
+&#8997; - Right                | Go to Group Right
+&#8984;(&#8963;) - Left        | Go to Line Start
+&#8984;(&#8963;) - Right       | Go to Line End
+&#8997; - Backspace            | Delete Group before
+&#8963; - &#8997; - Backspace  | Delete Group after
+&#8997; - Delete               | Delete Group after
+&#8984;(&#8963;) - [           | Indent less
+&#8984;(&#8963;) - ]           | Indent
+
+##### Markdown Editing
 Shortcut                       | Example        | Description
 -------------------------------|:--------------:|-------------------
 &#8984;(&#8963;) - B           | `**Bold**`     | bold
