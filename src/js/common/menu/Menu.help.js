@@ -91,6 +91,14 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
+	        label: 'Check for update...',
+		      click: function() {
+		      	window.parent.ee.emit('check.version', true);
+		      }
+	    })
+	);
+	Help.append(
+	    new gui.MenuItem({
 	        label: 'Boost up! Donate',
 		      click: function() {
 					open('http://pad.haroopress.com/page.html#grow-up-donate');

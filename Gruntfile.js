@@ -97,6 +97,7 @@ module.exports = function(grunt) {
         files: {
           'build/index.js': [
             'src/js/lib/logger.js',
+            'src/js/lib/global.js',
             'build/menu.concat.js',
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/underscore.js',
@@ -109,6 +110,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/underscore.js',
             'src/js/pad/before.bin.js',
             'src/js/lib/logger.js',
+            'src/js/lib/global.js',
             'src/js/pad/pad.common.js',
             '<%= vendors %>/jquery-1.9.1.js',
             '<%= vendors %>/backbone.js',
@@ -117,6 +119,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/store.js',
             '<%= vendors %>/js-url.js',
+            '<%= vendors %>/notifier.js',
             'src/js/pad/after.bin.js'
           ],
           'build/preferences.js': [

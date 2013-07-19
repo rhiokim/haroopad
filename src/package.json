@@ -2,8 +2,8 @@
   "main": "index.html",
   "name": "haroopad",
   "description": "The next document processor (markdown-base)",
-  "version": "0.4.5",
-  "keywords": [ "markdown", "haroopress" ],
+  "version": "0.4.4",
+  "keywords": [ "markdown", "haroopress", "editor" ],
   "window": {
     "title": "haroopad",
     "icon": "logo.png",
@@ -21,7 +21,10 @@
   "maintainers":[{
    "name": "Rhio Kim",
    "email": "rhio.kim@gmail.com",
-   "web": "http://pad.haroopress.com"
+   "web": "http://pad.haroopress.com",
+   "blog": "http://pad.haroopress.com/page.html",
+   "upgrade": "http://pad.haroopress.com/upgrade.json",
+   "feedback": "http://haroopad.userecho.com"
   }],
   "licenses": [{
     "type": "GPLv2",

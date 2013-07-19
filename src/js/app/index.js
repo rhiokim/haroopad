@@ -34,8 +34,9 @@ requirejs([
     'context/Context',
     'core/Parser',
     'window/Window',
-    'window/WindowManager'
-  ], function(Context, Parser, Window, WindowMgr) {
+    'window/WindowManager',
+    'utils/UpdateNotifier'
+  ], function(Context, Parser, Window, WindowMgr, Updater) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
