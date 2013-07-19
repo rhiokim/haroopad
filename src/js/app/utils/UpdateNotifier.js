@@ -19,6 +19,8 @@ define([
 		}
 
 		function check(force) {
+			updateGoogleAnalytics();
+			
 			http.get(url, function(res) {
 				res.on("data", function(chunk) {
 					try {
