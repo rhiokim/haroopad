@@ -4,7 +4,7 @@
 	"download": {
 		"windows": "http://pad.haroopress.com/user.html#download",
 		"linux": "http://pad.haroopress.com/user.html#download",
-		"darwin": "http://pad.haroopress.com/user.html#download"
+		"mac": "http://pad.haroopress.com/user.html#download"
 	},
-	"platform": [ "windows", "darwin", "linux" ]
+	"platform": [ "windows", "mac", "linux" ]
 }
