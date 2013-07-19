@@ -86,8 +86,8 @@ define([
 			setModeDual();
 		}
 
-		HotKey('ctrl-]', setModeEditor);
-		HotKey('ctrl-[', setModeDual);
+		HotKey('shift-ctrl-]', setModeEditor);
+		HotKey('shift-ctrl-[', setModeDual);
 		HotKey('ctrl-\\', resetMode);
 
 		HotKey('ctrl-alt-]', setPlus5Width);
