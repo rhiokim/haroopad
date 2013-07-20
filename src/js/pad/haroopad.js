@@ -114,7 +114,7 @@ requirejs([
       File.startAutoSave();
     }
 
-    win.focus();
+    window.focus();
     win.on('focus', function() {
       process.emit('actived', win);
     });

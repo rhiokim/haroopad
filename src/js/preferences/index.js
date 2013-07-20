@@ -42,7 +42,7 @@ requirejs([
     $('.switch').bootstrapSwitch();
 
     window.focus();
-    
+
     win.on('context.preferences', function() {
     });
     win.on('preferences.show', function() {
