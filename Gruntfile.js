@@ -146,13 +146,14 @@ module.exports = function(grunt) {
             'build/preferences.r.js',
             'src/js/preferences/after.pref.js'
           ],
-          'build/haroopad/js/preferences.vendors.min.js': [
+          'build/preferences.vendors.js': [
             '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/underscore.min.js',
             '<%= vendors %>/backbone.min.js',
             '<%= vendors %>/require.min.js',
             '<%= vendors %>/bootstrap.min.js',
-            'build/preferences.js'
+            '<%= vendors %>/bootstrapSwitch.js',
+            '<%= vendors %>/select2.js'
           ]
         }
       },
@@ -268,10 +269,8 @@ module.exports = function(grunt) {
       },
       preferences: {
         files: {
-          'build/preferences.js': [
-            '<%= vendors %>/bootstrapSwitch.js',
-            '<%= vendors %>/select2.js',
-            'src/js/lib/logger.js'
+          'build/haroopad/js/preferences.vendors.min.js': [
+            'build/preferences.vendors.js'
           ],
           'build/preferences.modules.min.js': [
             'build/preferences.modules.js'

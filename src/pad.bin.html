@@ -2,7 +2,7 @@
 <html lang="en"> 
 <head>
   <meta charset="utf-8" />
-  <title>haroopad</title>
+  <title>Haroopad - The next document processor</title>
   
   <link rel="stylesheet" href="css/codemirror.min.css">
   <link rel="stylesheet" href="css/haroopad.min.css">
@@ -10,7 +10,7 @@
 <body>
   
   <div id="editor"><textarea id="code" name="code"></textarea></div>
-  <div id="haroo"><iframe src="viewer.html"></iframe></div>
+  <div id="haroo"><iframe src="viewer.html" onload="start()"></iframe></div>
 
   <div id="fields">
     <input class="hide" id="openFile" type="file" />
@@ -25,11 +25,14 @@
       </div>
     </div>
   </div>
+  <div id="notifier"></div>
 </body>
 <script src="js/pad.vendors.min.js"></script>
 <script src="js/codemirror.min.js"></script>
 
 <script>
-  pad.apply(this, [this, document]);
+  function start() {
+    pad.apply(this, [this, document]);
+  }
 </script>
 </html>
