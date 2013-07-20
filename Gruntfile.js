@@ -72,7 +72,7 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      common: {
+      menu: {
         files: {
           'build/menu.concat.js': [
             'src/js/common/menu/MenuBar.js',
@@ -93,6 +93,90 @@ module.exports = function(grunt) {
           ]
         }
       },
+      app: {
+        files: {
+          'build/app.modules.js': [
+            'src/js/app/before.app.js',
+            // 'src/js/lib/logger.js',
+            'src/js/lib/utils/util.js',
+            'build/menu.concat.js',
+            'build/app.r.js',
+            'src/js/app/after.app.js'
+          ],
+          'build/app.vendors.js': [
+            '<%= vendors %>/eventemitter.js',
+            '<%= vendors %>/underscore.min.js',
+            '<%= vendors %>/backbone.min.js',
+            '<%= vendors %>/store.js',
+            '<%= vendors %>/require.min.js'
+          ]
+        }
+      },
+      pad: {
+        files: {
+          'build/pad.modules.js': [
+            'src/js/pad/before.pad.js',
+            // 'src/js/lib/logger.js',
+            'src/js/lib/utils/util.js',
+            'src/js/pad/pad.common.js',
+            'build/menu.concat.js',
+            'build/pad.r.js',
+            'src/js/pad/after.pad.js'
+          ],
+          'build/pad.vendors.js': [
+            '<%= vendors %>/eventemitter.js',
+            '<%= vendors %>/underscore.min.js',
+            '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/backbone.min.js',
+            '<%= vendors %>/bootstrap.min.js',
+            '<%= vendors %>/bootstrap-modalmanager.js',
+            '<%= vendors %>/bootstrap-modal.js',
+            '<%= vendors %>/store.js',
+            '<%= vendors %>/js-url.js',
+            '<%= vendors %>/notifier.js',
+            '<%= vendors %>/require.min.js'
+          ]
+        }
+      },
+      preferences: {
+        files: {
+          'build/preferences.modules.js': [
+            'src/js/preferences/before.pref.js',
+            // 'src/js/lib/logger.js',
+            'build/preferences.r.js',
+            'src/js/preferences/after.pref.js'
+          ],
+          'build/haroopad/js/preferences.vendors.min.js': [
+            '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/underscore.min.js',
+            '<%= vendors %>/backbone.min.js',
+            '<%= vendors %>/require.min.js',
+            '<%= vendors %>/bootstrap.min.js',
+            'build/preferences.js'
+          ]
+        }
+      },
+      snapshot: {
+        files: {
+          'build/haroopad.min.js': [
+            'build/app.modules.min.js',
+            'build/pad.modules.min.js',
+            'build/preferences.modules.min.js'
+          ]
+        }
+      },
+      viewer: {
+        files: {
+          'build/haroopad/js/viewer.min.js': [
+            '<%= vendors %>/eventemitter.js',
+            '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/highlight.pack.js',
+            'build/viewer.js'
+          ]
+        }
+      }/*,
+
+
       dist: {
         files: {
           'build/index.js': [
@@ -158,57 +242,93 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/keymap/vim.js'
           ]
         }
-      }
+      }*/
     },
 
     uglify: {
+      app: {
+        files: {
+          'build/haroopad/js/app.vendors.min.js': [
+            'build/app.vendors.js'
+          ],
+          'build/app.modules.min.js': [
+            'build/app.modules.js'
+          ]
+        }
+      },
       pad: {
-        options: {
-          mangle: false
-          // mangle: {
-          //   except: ['jQuery', 'Backbone', '_']
-          // },
-          // compress: false
-        },
         files: {
-          'build/haroopad/js/index.min.js': [
-            'build/index.js'
+          'build/haroopad/js/pad.vendors.min.js': [
+            'build/pad.vendors.js'
           ],
-          'build/haroopad.min.js': [
-            'build/haroopad.js'
-          ],
-          'build/haroopad/js/preferences.min.js': [
-            'build/preferences.js'
-          ],
-          'build/haroopad/js/viewer.min.js': [
-            'build/viewer.js'
-          ],
-          'build/haroopad/js/vendors.min.js': [
-            'build/vendors.js'
-          ],
-          'build/haroopad/js/codemirror.min.js': [
-            'build/codemirror.js'
+          'build/pad.modules.min.js': [
+            'build/pad.modules.js'
           ]
         }
-      }/*,
-
+      },
+      preferences: {
+        files: {
+          'build/preferences.js': [
+            '<%= vendors %>/bootstrapSwitch.js',
+            '<%= vendors %>/select2.js',
+            'src/js/lib/logger.js'
+          ],
+          'build/preferences.modules.min.js': [
+            'build/preferences.modules.js'
+          ]
+        }
+      },
       viewer: {
-        options: {},
         files: {
-          'build/haroopad/js/viewer.min.js': [
-            'src/js/viewer/before.bin.js',
+          'build/viewer.js': [
             'src/js/viewer/disable.debug.js',
-            '<%= vendors %>/jquery-1.9.1.min.js',
-            '<%= vendors %>/highlight.pack.js',
-            'src/js/viewer/main.js',
-            'src/js/viewer/after.bin.js'
+            'src/js/viewer/DynamicContents.js',
+            'src/js/viewer/main.js'
           ]
         }
-      }*/
+      },
+      codemirror: {
+        files: {
+          'build/haroopad/js/codemirror.min.js': [
+            '<%= vendors %>/CodeMirror/lib/codemirror.js',
+            '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
+            '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
+            '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
+            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.js',
+            '<%= vendors %>/CodeMirror/addon/search/searchcursor.js',
+            '<%= vendors %>/CodeMirror-custom/addon/search/search.js',
+            '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
+            '<%= vendors %>/CodeMirror/mode/xml/xml.js',
+            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
+            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
+            '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
+            '<%= vendors %>/CodeMirror/keymap/vim.js'
+          ]
+        }
+      }
     },
 
     copy: {
       main: {
+        files: [
+          { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
+          { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
+          // { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'build/haroopad/node_modules/' },
+          { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
+          { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
+          { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
+          { src: 'src/index.bin.html', dest: 'build/haroopad/index.html' },
+          { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
+          { src: 'src/preferences.bin.html', dest: 'build/haroopad/preferences.html' },
+          { src: 'src/viewer.bin.html', dest: 'build/haroopad/viewer.html' },
+          { src: 'src/package.bin.json', dest: 'build/haroopad/package.json' },
+          { src: 'src/logo.png', dest: 'build/haroopad/logo.png' },
+          { src: 'src/css/keys.css', dest: 'build/haroopad/css/keys.css' },
+          { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' }
+        ]
+      },
+
+      main2: {
         files: [
           { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
@@ -300,6 +420,12 @@ module.exports = function(grunt) {
         command: './lib/nwsnapshot --extra_code ./build/haroopad.min.js ./build/haroopad/js/haroopad.bin'
       },
 
+
+      /* v8 heap snapshot for protect source */
+      bin: {
+        command: './lib/nwsnapshot --extra_code ./build/haroopad.min.js ./build/haroopad/js/haroopad.bin'
+      },
+
       deploy: {
         command: 'cp -R ./build/haroopad.app /Applications'
       }
@@ -333,7 +459,17 @@ module.exports = function(grunt) {
         }
       },
 
-      pad: {
+      app: {
+        options: {
+          name: 'index',
+          baseUrl: 'src/js/app',
+          mainConfigFile: 'src/js/app/index.js',
+          out: 'build/app.r.js',
+          preserveLicenseComments: false
+        }
+      },
+
+      pad2: {
         options: {
           name: 'haroopad',
           baseUrl: "src/js/pad",
@@ -343,12 +479,32 @@ module.exports = function(grunt) {
         }
       },
 
-      preferences: {
+      pad: {
+        options: {
+          name: 'haroopad',
+          baseUrl: "src/js/pad",
+          mainConfigFile: "src/js/pad/haroopad.js",
+          out: "build/pad.r.js",
+          preserveLicenseComments: false
+        }
+      },
+
+      preferences2: {
         options: {
           name: 'index',
           baseUrl: "src/js/preferences",
           mainConfigFile: "src/js/preferences/index.js",
           out: "build/haroopad/js/preferences.modules.js",
+          preserveLicenseComments: false
+        }
+      },
+
+      preferences: {
+        options: {
+          name: 'index',
+          baseUrl: "src/js/preferences",
+          mainConfigFile: "src/js/preferences/index.js",
+          out: "build/preferences.r.js",
           preserveLicenseComments: false
         }
       }
@@ -360,4 +516,12 @@ module.exports = function(grunt) {
   grunt.registerTask('core', [ 'clean:core', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:ss_darwin', 'copy:build', 'replace:info', 'shell:exec' ]);
+
+  grunt.registerTask('cp', [ 'copy:main2', 'copy:node_modules' ]);
+  grunt.registerTask('app', [ 'requirejs:app', 'concat:app', 'uglify:app' ]);
+  grunt.registerTask('pad', [ 'requirejs:pad', 'concat:pad', 'uglify:pad' ]);
+  grunt.registerTask('prf', [ 'requirejs:preferences', 'concat:preferences', 'uglify:preferences' ]);
+  grunt.registerTask('viewer', [ 'uglify:viewer', 'concat:viewer' ]);
+  grunt.registerTask('codemirror', [ 'uglify:codemirror' ]);
+  grunt.registerTask('d2', [ 'clean', 'cp', 'cssmin', 'concat:menu', 'app', 'pad', 'prf', 'viewer', 'codemirror', 'concat:snapshot', 'shell:bin' ]);
 };
