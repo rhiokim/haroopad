@@ -85,6 +85,14 @@ window.MenuBarHelp = function () {
 	    })
 	);
 	Help.append(
+	    new gui.MenuItem({
+	        label: 'Twitter',
+		      click: function() {
+					open('https://twitter.com/haroopad');
+		      }
+	    })
+	);
+	Help.append(
 		new gui.MenuItem({
       type: 'separator'
   	})
