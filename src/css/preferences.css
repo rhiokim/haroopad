@@ -19,3 +19,8 @@ body {
 	margin-top: -5px;
 	margin-bottom: -3px;
 }
+
+#about-tab hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
