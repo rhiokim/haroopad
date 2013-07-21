@@ -8,6 +8,20 @@ function getPlatformName() {
 	return names[process.platform];
 }
 
+function getExecPath() {
+	switch(getPlatformName()) {
+		case 'windows':
+			return process.cwd();
+		break;
+		case 'mac':
+			return process.cwd();
+		break;
+		case 'linux':
+			return process.cwd();
+		break;
+	}
+}
+
 function updateGoogleAnalytics() {
 	var iframe = document.getElementById('__google');
 
