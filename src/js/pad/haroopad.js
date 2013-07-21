@@ -114,13 +114,24 @@ requirejs([
       File.startAutoSave();
     }
 
-    win.focus();
+    win.show();
+    window.focus();
     win.on('focus', function() {
       process.emit('actived', win);
     });
 
-    setTimeout(function() {
-      process.emit('actived', win);
-      win.show();
-    }, 10);
+    // setTimeout(function() {
+    //   process.emit('actived', win);
+    // }, 10);
+
+    $("#notifier").click(function(e) {
+      var tagName = e.target.tagName.toUpperCase();
+
+      switch(tagName) {
+        case 'A' :
+          window.parent.ee.emit($(e.target).data('href'));
+          e.preventDefault();
+        break;
+      }
+    });
 });

@@ -334,6 +334,9 @@
       </div>
     </div>
   </div>
-  <script src="js/preferences.min.js" data-main="js/preferences.modules"></script>
+  <script src="js/preferences.vendors.min.js"></script>
+  <script>
+    pref.apply(this, [this, document]);
+  </script>
 </body>
 </html>

@@ -200,5 +200,10 @@ define([
 		  editor.off('scroll', syncScrollHandler);
 		}
 
+		var gutters = document.querySelector('.CodeMirror-gutters')
+		window.onresize = function() {
+  			gutters.style.height = '3000px';
+		}
+
 		return editor;
 });
