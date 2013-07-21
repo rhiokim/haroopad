@@ -114,15 +114,15 @@ requirejs([
       File.startAutoSave();
     }
 
-    win.show();
-    window.focus();
     win.on('focus', function() {
       process.emit('actived', win);
     });
 
-    // setTimeout(function() {
-    //   process.emit('actived', win);
-    // }, 10);
+    setTimeout(function() {
+      process.emit('actived', win);
+      win.show();
+      window.focus();
+    }, 10);
 
     $("#notifier").click(function(e) {
       var tagName = e.target.tagName.toUpperCase();
