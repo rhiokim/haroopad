@@ -67,7 +67,7 @@ $(document).ready(function() {
     e.preventDefault();
 
     window.location.replace($(this).attr('href'));
-    window.reload();
+    // window.reload();
   });
 
   file = url('#');
