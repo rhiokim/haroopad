@@ -14,12 +14,7 @@ define([
   var fs = require('fs'),
       path = require('path');
   
-  var locale = window.navigator.language;
-  var pathDocs = path.join(process.cwd(), 'docs', locale);
-
-  if (!fs.existsSync(pathDocs)) {
-    pathDocs = path.join(process.cwd(), 'docs', 'en-US');
-  }
+  var pathDocs = getDocsPath();
 
   window.ee.on('tmp.file.open', function(file, uid) {
     WindowMgr.open(file, { uid: uid, tmp: true });
@@ -248,6 +243,15 @@ define([
   window.ee.on('context.copy.html', function(e) {
     // WindowMgr.actived.emit('action.copy.html');
     WindowMgr.actived.window.ee.emit('action.copy.html');
+  });
+
+
+  /* process event */
+  process.on('update.haroopad', function(currVersion, newVersion) {
+    WindowMgr.actived.window.ee.emit('update.haroopad', currVersion, newVersion);
+  });
+  process.on('up.to.date.haroopad', function(currVersion) {
+    WindowMgr.actived.window.ee.emit('up.to.date.haroopad', currVersion);
   });
 
   HotKey('defmod-n', function() {

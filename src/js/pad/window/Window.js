@@ -169,6 +169,10 @@ define([
 
   }
 
+  win.on('enter-fullscreen', function() {
+	document.querySelector('.CodeMirror-gutters').style.height = '3000px';
+  });
+  
   window.ee.on('view.fullscreen', function() {
   	var isFull = win.isFullscreen;
 
@@ -176,11 +180,18 @@ define([
   		win.leaveFullscreen();
   	} else {
   		/* codemirror redraw delay bug */
-  		document.querySelector('.CodeMirror-gutters').style.height = '2000px';
+  		// document.querySelector('.CodeMirror-gutters').style.height = '3000px';
   		win.enterFullscreen();
   	}
   });
- //  win.moveTo(url('#x'), url('#y'));
-	// win.resizeTo(config.width, config.height);
 
+  /* update haroopad */
+  window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
+	Notifier.notify('Do you want to <a href="#" data-href="download.haroopad">download</a> new version?', 'Update Haroopad v'+ newVersion, undefined, 10000);
+  });
+
+  /* up to date haroopad */
+  window.ee.on('up.to.date.haroopad', function(version) {
+	Notifier.notify('Haroopad <strong>v'+ version +'</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
+  });
 });
