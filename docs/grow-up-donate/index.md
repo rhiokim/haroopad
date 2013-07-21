@@ -32,6 +32,9 @@ Please help development so as to maintain I've tried Haroopad app, you feel that
 
 **TOP Donator**
 
-| name    | box  |
-|---------|------|
-| rhiokim | Ωbox |
+| name       | box  |
+|:----------:|------|
+| Okjungsoo  | $25  |
+| kjunine    | $10  |
+
+Thank you so much for your donation.
