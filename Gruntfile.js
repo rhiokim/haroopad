@@ -99,6 +99,7 @@ module.exports = function(grunt) {
             'src/js/app/before.app.js',
             // 'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
+            'src/js/lib/utils/package.info.js',
             'build/menu.concat.js',
             'build/app.r.js',
             'src/js/app/after.app.js'
