@@ -191,7 +191,7 @@ define([
     WindowMgr.open(pathDocs +'/syntax.md', { readOnly: true, position: 'center' });
   });
   window.ee.on('menu.help.acknowledgements', function() {
-    WindowMgr.open(pathDocs +'/acknowledgements.md', { readOnly: true, position: 'center' });
+    WindowMgr.open(pathDocs +'/../acknowledgements.md', { readOnly: true, position: 'center' });
   });
   window.ee.on('menu.help.shortcut', function() {
     WindowMgr.open(pathDocs +'/shortcut.md', { readOnly: true, position: 'center' });
