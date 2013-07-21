@@ -1,3 +1,9 @@
+var path = require('path');
+var languageTable = [
+	'en-US',
+	'ko-KR'
+];
+
 function getPlatformName() {
 	var names = {
 		'win32': 'windows',
@@ -6,6 +12,27 @@ function getPlatformName() {
 	};
 
 	return names[process.platform];
+}
+
+function getExecPath() {
+	switch(getPlatformName()) {
+		case 'windows':
+			return process.cwd();//path.dirname(process.execPath);
+		break;
+		case 'mac':
+			return process.cwd();
+		break;
+		case 'linux':
+			return path.dirname(process.execPath);
+		break;
+	}
+}
+
+function getDocsPath() {
+	var locale = window.navigator.language;
+	locale = languageTable.indexOf(locale) < 0 ? 'en-US': locale ;
+
+	return path.join(getExecPath(), 'docs', locale);
 }
 
 function updateGoogleAnalytics() {

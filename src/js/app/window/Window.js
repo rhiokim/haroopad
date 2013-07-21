@@ -14,12 +14,7 @@ define([
   var fs = require('fs'),
       path = require('path');
   
-  var locale = window.navigator.language;
-  var pathDocs = path.join(process.cwd(), 'docs', locale);
-
-  if (!fs.existsSync(pathDocs)) {
-    pathDocs = path.join(process.cwd(), 'docs', 'en-US');
-  }
+  var pathDocs = getDocsPath();
 
   window.ee.on('tmp.file.open', function(file, uid) {
     WindowMgr.open(file, { uid: uid, tmp: true });
