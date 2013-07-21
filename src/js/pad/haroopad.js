@@ -114,7 +114,6 @@ requirejs([
       File.startAutoSave();
     }
 
-    win.focus();
     win.on('focus', function() {
       process.emit('actived', win);
     });
@@ -122,5 +121,17 @@ requirejs([
     setTimeout(function() {
       process.emit('actived', win);
       win.show();
+      window.focus();
     }, 10);
+
+    $("#notifier").click(function(e) {
+      var tagName = e.target.tagName.toUpperCase();
+
+      switch(tagName) {
+        case 'A' :
+          window.parent.ee.emit($(e.target).data('href'));
+          e.preventDefault();
+        break;
+      }
+    });
 });

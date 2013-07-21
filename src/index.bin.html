@@ -4,7 +4,11 @@
   <meta charset="utf-8" />
   <title>haroopad</title>
 
-  <script src="js/index.min.js" data-main="js/index.modules"></script>
+  <script src="js/app.vendors.min.js"></script>
 </head>
-<body></body>
+<body>
+	<script>
+  	app.apply(this, [this, document]);
+	</script>
+</body>
 </html>

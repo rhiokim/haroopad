@@ -16,6 +16,11 @@ define([
 
 		// var config = option.toJSON();
 
+		function update(markdown, html, editor) {
+			content = html;
+			_viewer.update(content);
+		}
+
 		window.parent.ee.on('preferences.viewer.theme', function(value) {
 			_viewer.setViewStyle(value);
 		});
@@ -33,15 +38,13 @@ define([
 			_viewer.print();
 		});
 
-		//linkable
-		_viewer.ee.on('link', function(href) {
-			if (viewerConfig.clickableLink) {
-    		gui.Shell.openExternal(href);
-			}
-		});
+		/* change markdown event handler */
+		window.ee.on('change.after.markdown', update);
 
-		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');
-		_viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
+		/* scroll editor for sync */
+		window.ee.on('editor.scroll', function(top, per) {
+			_viewer.scrollTop(top * 100 / per);
+		});
 		
 		/**
 		 * delegate to parent window key mouse down event
@@ -75,18 +78,19 @@ define([
 			clipboard.set(content, 'text');
 		});
 
-		function update(markdown, html, editor) {
-			content = html;
-			_viewer.update(content);
+		_viewer.onload = function() {
+			alert('text')
 		}
 
-		/* change markdown event handler */
-		window.ee.on('change.after.markdown', update);
-
-		/* scroll editor for sync */
-		window.ee.on('editor.scroll', function(top, per) {
-			_viewer.scrollTop(top * 100 / per);
+		//linkable
+		_viewer.ee.on('link', function(href) {
+			if (viewerConfig.clickableLink) {
+    		gui.Shell.openExternal(href);
+			}
 		});
+
+		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');
+		_viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
 
 		return {
 			init: function(opt) {
