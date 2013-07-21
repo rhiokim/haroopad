@@ -1,3 +1,30 @@
+## Haroopad v0.4.6
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#118             | Add twitter link at help menu
+#115             | Embed help documents 
+#114             | Add version information at About tab in preference dialog
+#113             | Add haroopad update notification
+**Bugs**         |
+**Enhancements** |
+#116             | Fixed line number area redraw UI when window resize
+#110             | Remove text, txt registry (window)
+
+##### Github Issue tracker
+
+* [https://github.com/rhiokim/haroopad/issues?milestone=16&page=1&state=closed](https://github.com/rhiokim/haroopad/issues?milestone=16&page=1&state=closed)
+
+##### Download
+> * Windows NSIS installer:[https://www.dropbox.com/s/519t4mw956bpm09/haroopad-v0.4.6-i386.msi](https://www.dropbox.com/s/519t4mw956bpm09/haroopad-v0.4.6-i386.msi)
+> * Mac OS X DMG: [https://www.dropbox.com/s/8mckh2mk9c8jig8/haroopad-v0.4.6.dmg](https://www.dropbox.com/s/8mckh2mk9c8jig8/haroopad-v0.4.6.dmg)
+> * Linux 32-bit Binary:[https://www.dropbox.com/s/po2abm69zlwx6j6/haroopad-v0.4.6_i386.tar.gz)
+> * Linux 32-bit Debian Package:[https://www.dropbox.com/s/kml9e6kifvg5xt5/haroopad-v0.4.6-i386.deb](https://www.dropbox.com/s/kml9e6kifvg5xt5/haroopad-v0.4.6-i386.deb)
+> * Linux 64-bit Binary: [https://www.dropbox.com/s/l2ogw9y89x9wrw6/haroopad-v0.4.6_amd64.tar.gz](https://www.dropbox.com/s/l2ogw9y89x9wrw6/haroopad-v0.4.6_amd64.tar.gz)
+> * Linux 64-bit Debian Package: [https://www.dropbox.com/s/9qo76wzp4uneysj/haroopad-v0.4.6_amd64.deb](https://www.dropbox.com/s/9qo76wzp4uneysj/haroopad-v0.4.6_amd64.deb)
+
+
 ## Haroopad v0.4.5
 
 Issue Number     | Description
