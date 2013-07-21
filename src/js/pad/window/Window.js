@@ -169,6 +169,10 @@ define([
 
   }
 
+  win.on('enter-fullscreen', function() {
+	document.querySelector('.CodeMirror-gutters').style.height = '3000px';
+  });
+  
   window.ee.on('view.fullscreen', function() {
   	var isFull = win.isFullscreen;
 
@@ -176,7 +180,7 @@ define([
   		win.leaveFullscreen();
   	} else {
   		/* codemirror redraw delay bug */
-  		document.querySelector('.CodeMirror-gutters').style.height = '2000px';
+  		// document.querySelector('.CodeMirror-gutters').style.height = '3000px';
   		win.enterFullscreen();
   	}
   });
