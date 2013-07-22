@@ -65,6 +65,7 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 		_update(file);
 
 		window.parent.ee.emit('file.save', Opt.get('fileEntry'), Opt.get('markdown'), function(err) { 
+			Opt.set(fs.statSync(Opt.get('fileEntry')));
 			window.ee.emit('file.saved', Opt.toJSON());
 		});
 	}
