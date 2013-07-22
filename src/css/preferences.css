@@ -11,3 +11,16 @@ body {
 .select2-results {
 	max-height: 175px;
 }
+
+#about-tab h1,
+#about-tab h2,
+#about-tab h3,
+#about-tab h4 {
+	margin-top: -5px;
+	margin-bottom: -3px;
+}
+
+#about-tab hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

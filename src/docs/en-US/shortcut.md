@@ -22,14 +22,35 @@ Shortcut                       | Description
 ##### Window
 Shortcut                       | Description
 -------------------------------|-------------------
-&#8963; - ]                    | editor mode
-&#8963; - [                    | dual mode
+&#8679; - &#8963; - ]          | editor mode
+&#8679; - &#8963; - [          | dual mode
 &#8963; - &#8997; - ]          | editor width +5%
 &#8963; - &#8997; - [          | editor width -5%
 &#8984;(&#8963;) - &#8679; - L | toggle line number
 &#8984;(&#8963;) - &#8997; - V | vim keyboard binding
 
 ##### Editing
+ Shortcut                      | Description
+-------------------------------|---------------------
+&#8984;(&#8963;) - A           | Select All
+&#8984;(&#8963;) - D           | Delete Line
+&#8984;(&#8963;) - Z           | Undo
+&#8679; - &#8984;(&#8963;) - Z | Redo
+&#8984;(&#8963;) - Y           | Redo
+&#8984;(&#8963;) - Up          |  Go to Doc Start
+&#8984;(&#8963;) - End         | Go to Doc End
+&#8984;(&#8963;) - Down        | Go to Doc End
+&#8997; - Left                 | Go to Group Left
+&#8997; - Right                | Go to Group Right
+&#8984;(&#8963;) - Left        | Go to Line Start
+&#8984;(&#8963;) - Right       | Go to Line End
+&#8997; - Backspace            | Delete Group before
+&#8963; - &#8997; - Backspace  | Delete Group after
+&#8997; - Delete               | Delete Group after
+&#8984;(&#8963;) - [           | Indent less
+&#8984;(&#8963;) - ]           | Indent
+
+##### Markdown Editing
 Shortcut                       | Example        | Description
 -------------------------------|:--------------:|-------------------
 &#8984;(&#8963;) - B           | `**Bold**`     | bold

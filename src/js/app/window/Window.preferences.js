@@ -20,9 +20,8 @@ define([], function() {
 			prefWin.hide();
 		});
 
-		prefWin.on('loaded', function() {
-			prefWin.focus();
-		});
+		// prefWin.on('loaded', function() {
+		// });
 	}
 
 	return {

@@ -12,9 +12,10 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Haroopad Help',
 		      click: function() {
-		      	(process.platform === 'darwin') ?
-		      	window.parent.ee.emit('menu.help.about') :
-						open('http://pad.haroopress.com/page.html');
+		      	window.parent.ee.emit('menu.help.about')
+		    //   	(process.platform === 'win32') ?
+		    //   	window.parent.ee.emit('menu.help.about') :
+						// open('http://pad.haroopress.com/page.html');
 		      }
 	    })
 	);
@@ -22,9 +23,10 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Markdown Syntax Help',
 		      click: function() {
-		      	(process.platform === 'darwin') ?
-		      	window.parent.ee.emit('menu.help.syntax') :
-		        open('http://pad.haroopress.com/page.html#syntax');
+		      	window.parent.ee.emit('menu.help.syntax')
+		      	// (process.platform === 'win32') ?
+		      	// window.parent.ee.emit('menu.help.syntax') :
+		       //  open('http://pad.haroopress.com/page.html#syntax');
 		      }
 	    })
 	);
@@ -32,9 +34,10 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Haroopad Shortcut Help',
 		      click: function() {
-		      	(process.platform === 'darwin') ?
-		      	window.parent.ee.emit('menu.help.shortcut') :
-		        open('http://pad.haroopress.com/page.html#show-shortcuts');
+		      	window.parent.ee.emit('menu.help.shortcut')
+		      	// (process.platform === 'darwin') ?
+		      	// window.parent.ee.emit('menu.help.shortcut') :
+		       //  open('http://pad.haroopress.com/page.html#show-shortcuts');
 		      }
 	    })
 	);
@@ -56,9 +59,10 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Acknowledgements',
 		      click: function() {
-		      	(process.platform === 'darwin') ?
-		      	window.parent.ee.emit('menu.help.acknowledgements') :
-		        open('http://pad.haroopress.com/page.html#acknowledgements');
+		      	window.parent.ee.emit('menu.help.acknowledgements')
+		      	// (process.platform === 'darwin') ?
+		      	// window.parent.ee.emit('menu.help.acknowledgements') :
+		       //  open('http://pad.haroopress.com/page.html#acknowledgements');
 		      }
 	    })
 	);
@@ -85,9 +89,25 @@ window.MenuBarHelp = function () {
 	    })
 	);
 	Help.append(
+	    new gui.MenuItem({
+	        label: 'Twitter',
+		      click: function() {
+					open('https://twitter.com/haroopad');
+		      }
+	    })
+	);
+	Help.append(
 		new gui.MenuItem({
       type: 'separator'
   	})
+	);
+	Help.append(
+	    new gui.MenuItem({
+	        label: 'Check for update...',
+		      click: function() {
+		      	window.parent.ee.emit('check.version', true);
+		      }
+	    })
 	);
 	Help.append(
 	    new gui.MenuItem({

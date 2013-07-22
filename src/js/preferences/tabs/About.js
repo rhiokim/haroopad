@@ -11,6 +11,7 @@ define([
 			},
 
 			initialize: function() {
+				this.$el.find('#version').text(global.package.version)
 			},
 
 			clickHandler: function(e) {
