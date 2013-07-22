@@ -17,13 +17,13 @@ function getPlatformName() {
 function getExecPath() {
 	switch(getPlatformName()) {
 		case 'windows':
-			return path.dirname(process.execPath);
+			return process.cwd();//path.dirname(process.execPath);
 		break;
 		case 'mac':
 			return process.cwd();
 		break;
 		case 'linux':
-			return path.dirname(process.execPath);
+			return process.cwd();//path.dirname(process.execPath);
 		break;
 	}
 }
