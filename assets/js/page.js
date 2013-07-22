@@ -51,26 +51,26 @@ $(document).ready(function() {
   var file;
   var prevHash;
   
-  window.setInterval(function() {
-  	if (prevHash && prevHash != window.location.hash) {
-    	// window.location.href =  $(this).attr('href');
-    	window.location.reload();
-    	window.clearInterval(__timeout);
-    	return;
-  	}
+  // window.setInterval(function() {
+  // 	if (prevHash && prevHash != window.location.hash) {
+  //   	// window.location.href =  $(this).attr('href');
+  //   	window.location.reload();
+  //   	window.clearInterval(__timeout);
+  //   	return;
+  // 	}
 
-  	prevHash = window.location.hash;
-  }, 10);
+  // 	prevHash = window.location.hash;
+  // }, 10);
 
-  $('.share a').click(function(e) {
-    file = $(this).attr('href');
-    e.preventDefault();
+  // $('.share a').click(function(e) {
+  //   file = $(this).attr('href');
+  //   e.preventDefault();
 
-    window.location.replace($(this).attr('href'));
-    // window.reload();
-  });
+  //   window.location.replace($(this).attr('href'));
+  //   // window.reload();
+  // });
 
-  file = url('#');
+  file = url('?f');
 
   if(file) {
     loadPost(file);
