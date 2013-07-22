@@ -167,3 +167,20 @@ blockquote p {
     float:left;
     width:60px;
 }
+
+/* up coming feature */
+#upcoming {
+    background-color: #2980B9; color:#fff;
+}
+#upcoming h1 {
+    opacity: 0.8; filter: alpha(opacity=80);
+}
+#upcoming h3 {
+    margin-bottom: 15px;
+}
+#upcoming p {
+    color: #ededed;
+}
+#upcoming a {
+    color:#F1C40F;
+}
