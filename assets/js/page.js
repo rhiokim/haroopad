@@ -52,14 +52,14 @@ $(document).ready(function() {
   var prevHash;
   
   window.setInterval(function() {
-  	if (prevHash && prevHash != window.location.href) {
-    	window.location.href =  $(this).attr('href');
+  	if (prevHash && prevHash != window.location.hash) {
+    	// window.location.href =  $(this).attr('href');
     	window.location.reload();
     	window.clearInterval(__timeout);
     	return;
   	}
 
-  	prevHash = window.location.href;
+  	prevHash = window.location.hash;
   }, 10);
 
   $('.share a').click(function(e) {
