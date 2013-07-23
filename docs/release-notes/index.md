@@ -1,3 +1,28 @@
+## Haroopad v0.4.7
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+**Bugs**         |
+#122             | Fixed display BundleName error on mac
+#119             | Fixed file change monitoring error
+#                | Fixed applicatin name error on Linux 64bit
+**Enhancements** |
+#116             | Package enhance on mac
+#                | Change Documentation path into package
+
+##### Github Issue tracker
+
+* [https://github.com/rhiokim/haroopad/issues?milestone=21&page=1&state=closed](https://github.com/rhiokim/haroopad/issues?milestone=16&page=1&state=closed)
+
+##### Download
+> * Windows NSIS installer:[https://www.dropbox.com/s/3w33sjiy02jgi6v/haroopad-v0.4.7-i386.msi](https://www.dropbox.com/s/3w33sjiy02jgi6v/haroopad-v0.4.7-i386.msi)
+> * Mac OS X DMG: [https://www.dropbox.com/s/fsdjhjpkn3wp9vr/haroopad-v0.4.7.dmg](https://www.dropbox.com/s/fsdjhjpkn3wp9vr/haroopad-v0.4.7.dmg)
+> * Linux 32-bit Binary:[https://www.dropbox.com/s/cr48rby6ido2c4m/haroopad-v0.4.7_i386.tar.gz](https://www.dropbox.com/s/cr48rby6ido2c4m/haroopad-v0.4.7_i386.tar.gz)
+> * Linux 32-bit Debian Package:[https://www.dropbox.com/s/k3gyfrevjr6lkgq/haroopad-v0.4.7-i386.deb](https://www.dropbox.com/s/k3gyfrevjr6lkgq/haroopad-v0.4.7-i386.deb)
+> * Linux 64-bit Binary: [https://www.dropbox.com/s/00ml48vr205wco7/haroopad-v0.4.7_amd64.tar.gz](https://www.dropbox.com/s/00ml48vr205wco7/haroopad-v0.4.7_amd64.tar.gz)
+> * Linux 64-bit Debian Package: [https://www.dropbox.com/s/wjh8kajme4qsvin/haroopad-v0.4.7_amd64.deb](https://www.dropbox.com/s/wjh8kajme4qsvin/haroopad-v0.4.7_amd64.deb)
+
 ## Haroopad v0.4.6
 
 Issue Number     | Description
