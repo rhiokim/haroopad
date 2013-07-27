@@ -2,7 +2,7 @@ define([
 		'file/File.model'
 	],
 
-	function(File) {
+	function(FileModel) {
 		var fs = require('fs'),
 			path = require('path');
 
@@ -34,8 +34,13 @@ define([
 			},
 			
 			open: function(fileEntry) {
-				// fs.readFile(file, 'utf8', cb);
-				return new File(fileEntry);
+				var file = new FileModel();
+
+				if (fileEntry) {	
+					file.load(fileEntry);
+				}
+
+				return file;
 			},
 
 			reload: function(file, cb) {

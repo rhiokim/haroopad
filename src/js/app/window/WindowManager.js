@@ -66,14 +66,16 @@ define([
 			}
 		});
 
+		/* open file */
 		newWin.on('file.open', function(fileEntry) {
 			var file = File.open(fileEntry);
 
-			if (!newWin.file) {
-				newWin.file = file;
-				newWin.emit('file.opened', file);
-			}
-			// newWin.emit('file.opened', file);
+			// if (!newWin.file.get('fileEntry') && !newWin.file.get('markdown')) {
+			// 	newWin.file = file;
+			// 	newWin.emit('file.opened', file);
+			// } else {
+				open(file);
+			// }
 		});
 
 		//window instance delivery to child window
@@ -85,9 +87,9 @@ define([
 			shadowCount++;
 
 			//윈도우 오픈 시 position 파라미터가 존재하면 위치 지정은 패스한다.
-			if (newWin._params.position) {
-				return;
-			}
+			// if (newWin._params.position) {
+			// 	return;
+			// }
 
 			if (config.height + top > window.screen.height) {
 				top = 0;
@@ -105,7 +107,7 @@ define([
 		});
 	}
 
-	function open(file/*, options*/) {
+	function open(file) {
 		var /*existWin, */newWin;
 
 		// options = typeof file === 'object' ? file : options || {};
@@ -130,8 +132,7 @@ define([
 			"show": false
 		});
 		newWin.parent = window;
-
-		newWin.file = file;
+		newWin.file = file || File.open();
 		newWin.created_at = new Date().getTime();
 		// newWin._params = merge(options, {
 		// 	file: file,

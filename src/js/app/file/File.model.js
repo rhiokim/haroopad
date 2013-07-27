@@ -20,24 +20,32 @@ define(function() {
       readOnly: false
     },
 
-    initialize: function(fileEntry) {
+    initialize: function() {
+    },
+
+    load: function(fileEntry) {
       var md = open(fileEntry), 
           stat = fs.statSync(fileEntry);
 
-      this.update(fileEntry);
-
       this.set(stat);
-      this.set('markdown', md);
-    },
-
-    update: function(fileEntry) {
       this.set({
+        'markdown': md,
         'fileEntry': fileEntry,
         'extname': path.extname(fileEntry) || '.md',
         'dirname': path.dirname(fileEntry),
         'basename': path.basename(fileEntry),
         'updated_at': new Date
-      })
+      });
+    },
+
+    refresh: function() {
+      var stat,
+          fileEntry = this.get('fileEntry');
+
+      if (fileEntry) {
+        stat = fs.statSync(fileEntry);
+        this.set(stat); 
+      }
     },
 
     checkUpdate: function() {

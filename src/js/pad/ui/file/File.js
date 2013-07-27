@@ -22,46 +22,46 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 		return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 	}
 
-	function _update(file) {
-		Opt.set({
-			'fileEntry': file,
-			'extname': path.extname(file) || '.md',
-			'dirname': path.dirname(file),
-			'basename': path.basename(file),
-			'updated_at': new Date
-		});
-	}
+	// function _update(file) {
+	// 	Opt.set({
+	// 		'fileEntry': file,
+	// 		'extname': path.extname(file) || '.md',
+	// 		'dirname': path.dirname(file),
+	// 		'basename': path.basename(file),
+	// 		'updated_at': new Date
+	// 	});
+	// }
 
-  function checkChange() {
-    var path = model.get('fileEntry');
-    var mtime;
+  // function checkChange() {
+  //   var path = model.get('fileEntry');
+  //   var mtime;
 
-    if (path) {
-      fs.stat(path, function(err, stats) {
-        mtime = model.get('mtime');
+  //   if (path) {
+  //     fs.stat(path, function(err, stats) {
+  //       mtime = model.get('mtime');
 
-        if(!mtime) {
-          model.set(stats);
-          return;
-        }
+  //       if(!mtime) {
+  //         model.set(stats);
+  //         return;
+  //       }
 
-        if (mtime.getTime() != stats.mtime.getTime()) {
-          model.set(stats);
-          window.ee.emit('file.update', model.get('fileEntry'));
-        }
-      });
-    }
-  }
+  //       if (mtime.getTime() != stats.mtime.getTime()) {
+  //         model.set(stats);
+  //         window.ee.emit('file.update', model.get('fileEntry'));
+  //       }
+  //     });
+  //   }
+  // }
 
-	function _open(file) {
-		var markdown;
+	// function _open(file) {
+	// 	var markdown;
 		
-		markdown = fs.readFileSync(file, 'utf8');
+	// 	markdown = fs.readFileSync(file, 'utf8');
 
-		Opt.set({ markdown: markdown });
+	// 	Opt.set({ markdown: markdown });
 
-		window.ee.emit('file.opened', Opt.toJSON(), markdown);
-	}
+	// 	window.ee.emit('file.opened', Opt.toJSON(), markdown);
+	// }
 
 	function _save(file) {
 		if (!path.extname(file)) {
@@ -83,7 +83,7 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 	 ***************************/
 	// win.on('file.open', OpenDialog.show.bind(OpenDialog));
 	
-	if (nw.file && !nw.file.get('readOnly')) {
+	if (!nw.file.get('readOnly')) {
 		window.ee.on('file.save', function() {
 			var file = Opt.get('fileEntry');
 			if (!file) {
@@ -98,16 +98,16 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 
 	window.ee.on('change.before.markdown', function(markdown) {
 		Opt.set('markdown', markdown);
-		Temporary.update();
+		// Temporary.update();
 	});
 
-  	nw.on('focus', checkChange);
+  	// nw.on('focus', checkChange);
 
 	return {
-		open: function(file) {
-			_update(file);
-			_open(file);
-		},
+		// open: function(file) {
+		// 	_update(file);
+		// 	_open(file);
+		// },
 
 		openTmp: function(file, uid) {
 			//지정된 파일이 있는 경우

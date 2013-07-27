@@ -66,12 +66,9 @@ requirejs([
     // uid = params.uid;
     // readOnly = params.readOnly || false;
 
-    if (!file) {
-      Editor.on("change", delayChange);
-    }
-
     nw.on('file.opened', function(file) {
       var opt = file.toJSON();
+
       window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
         Editor.setValue(opt.markdown);
         
@@ -83,6 +80,17 @@ requirejs([
         }
       });
     });
+
+    /* change by external application */
+    nw.file.on('change:mtime', function() {
+      window.ee.emit('file.update', nw.file.get('fileEntry'));
+    });
+
+    if (!file.get('fileEntry')) {
+      Editor.on("change", delayChange);
+    } else {
+      nw.emit('file.opened', file);
+    }
 
     // window.ee.on('file.opened', function(opt) {
     //   window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
@@ -134,6 +142,7 @@ requirejs([
     // }
 
     nw.on('focus', function() {
+      nw.file.refresh();
       process.emit('actived', nw);
     });
 

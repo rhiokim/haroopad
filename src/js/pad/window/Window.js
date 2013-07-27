@@ -63,13 +63,21 @@ define([
 		win.close();
 	});
 
-	window.ee.on('file.opened', function(opt) {
-		win.title = orgTitle = opt.basename || orgTitle;
+	nw.on('file.opened', function(file) {
+		var opt = file.toJSON();
+		nw.title = orgTitle = opt.basename || orgTitle;
 
-		if (win._params.readOnly) {
-			win.title += ' (read only)';
+		if (opt.readOnly) {
+			nw.title += ' (read only)';
 		}
-  });
+	});
+	// window.ee.on('file.opened', function(opt) {
+	// 	win.title = orgTitle = opt.basename || orgTitle;
+
+	// 	if (win._params.readOnly) {
+	// 		win.title += ' (read only)';
+	// 	}
+ //  	});
 
   window.ee.on('file.saved', function(opt) {
 		win.title = orgTitle = opt.basename;
