@@ -1,6 +1,7 @@
 define([
-		'exports'
-], function(exports) {
+	'exports',
+	'file/File'
+], function(exports, File) {
 
 	var gui = require('nw.gui');
 
@@ -35,25 +36,24 @@ define([
 		config = store.get('Window') || {};
 	}
 
-	function getWindowByFile(file) {
-		for (var prop in windows) {
-			if (windows[prop]._params.file == file) {
-				return windows[prop];
-			}
-		}
+	// function getWindowByFile(file) {
+	// 	for (var prop in windows) {
+	// 		if (windows[prop]._params.file == file) {
+	// 			return windows[prop];
+	// 		}
+	// 	}
 
-		return;
-	}
+	// 	return;
+	// }
 
 	function _add(newWin) {
-		exports.actived = windows[newWin._params.created_at] = newWin;
+		exports.actived = windows[newWin.created_at] = newWin;
 
-		// console.log()
 		realCount++;
 
 		newWin.on('closed', function() {
 			for (var prop in windows) {
-				if (prop == newWin._params.created_at) {
+				if (prop == newWin.created_at) {
 					windows[prop] = null;
 					delete windows[prop];
 					realCount--;
@@ -64,6 +64,16 @@ define([
 					return;
 				}
 			}
+		});
+
+		newWin.on('file.open', function(fileEntry) {
+			var file = File.open(fileEntry);
+
+			if (!newWin.file) {
+				newWin.file = file;
+				newWin.emit('file.opened', file);
+			}
+			// newWin.emit('file.opened', file);
 		});
 
 		//window instance delivery to child window
@@ -95,46 +105,50 @@ define([
 		});
 	}
 
+	function open(file/*, options*/) {
+		var /*existWin, */newWin;
+
+		// options = typeof file === 'object' ? file : options || {};
+		// file = typeof file === 'string' ? file : undefined;
+
+		//이미 열려 있는 파일 일 경우
+		// if (file && (existWin = getWindowByFile(file))) {
+		// 	existWin.focus();
+		// 	return;
+		// }
+
+		// if (openning && !file) {
+		// 	return;
+		// }
+
+		// openning = true;
+
+		newWin = gui.Window.open('pad.html', {
+			"min_width": 500,
+			"min_height": 250,
+			"toolbar": false,
+			"show": false
+		});
+		newWin.parent = window;
+
+		newWin.file = file;
+		newWin.created_at = new Date().getTime();
+		// newWin._params = merge(options, {
+		// 	file: file,
+		// 	created_at: new Date().getTime()
+		// });
+
+		_add(newWin);
+
+		return newWin;
+	}
+
 	process.on('actived', function(child) {
 		exports.actived = child;
 
 		openning = false;
 	});
 
-	exports.open = function(file, options) {
-		var existWin, newWin;
-
-		options = typeof file === 'object' ? file : options || {};
-		file = typeof file === 'string' ? file : undefined;
-
-		//이미 열려 있는 파일 일 경우
-		if (file && (existWin = getWindowByFile(file))) {
-			existWin.focus();
-			return;
-		}
-
-		if (openning && !file) {
-			return;
-		}
-
-		openning = true;
-
-		newWin = gui.Window.open('pad.html', merge({
-			"min_width": 500,
-			"min_height": 250,
-			"toolbar": false,
-			"show": false
-		}, options));
-		newWin.parent = window;
-
-		newWin._params = merge(options, {
-			file: file,
-			created_at: new Date().getTime()
-		});
-
-		_add(newWin);
-
-		return newWin;
-	}
+	exports.open = open;
 
 });

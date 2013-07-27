@@ -141,17 +141,6 @@ define([
 	  return false;
 	});
 
-  // window.ondragover = function(e) { 
-  //   e.preventDefault();
-  //   window.parent.ee.emit('dragover', e);
-  //   return false;
-  // };
-
-  // window.ondrop = function(e) {
-  //   e.preventDefault();
-  //   window.parent.ee.emit('dragdrop', e);
-  //   return false;
-  // };
 
   var resizeTimeout;
   window.onresize = function(e) {
@@ -193,5 +182,9 @@ define([
   /* up to date haroopad */
   window.ee.on('up.to.date.haroopad', function(version) {
 	Notifier.notify('Haroopad <strong>v'+ version +'</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
+  });
+
+  HotKey('defmod-o', function() {
+    window.ee.emit('menu.file.open');
   });
 });

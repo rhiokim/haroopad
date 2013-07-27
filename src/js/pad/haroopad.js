@@ -1,9 +1,9 @@
 /* globally for window event system */
-var gui = require('nw.gui'),
-    win = gui.Window.get();
-        
+var gui = require('nw.gui');
+
+window.nw = gui.Window.get();
 window.ee = new EventEmitter();
-window.parent = win.parent;
+window.parent = nw.parent;
 
 if (process.platform != 'darwin') {
   MenuBar(); 
@@ -51,33 +51,52 @@ requirejs([
     'viewer/Viewer',
     'ui/file/File'
   ], function(Window, Editor, Viewer, File) {
-    var html, res, file, uid, tmp, readOnly, x, y;
+    // var html, res, file, uid, tmp, readOnly, x, y;
     var _tid_;
 
-    var orgTitle = 'Untitled';
-    var edited = false,
-      delayClose = false;
-    var params = win._params;
+    // var orgTitle = 'Untitled';
+    // var edited = false,
+    //   delayClose = false;
+    // var params = nw._params;
+    var file = nw.file;
 
     // file = url('#file');
-    file = params.file;
-    tmp = params.tmp;
-    uid = params.uid;
-    readOnly = params.readOnly || false;
+    // file = params.file;
+    // tmp = params.tmp;
+    // uid = params.uid;
+    // readOnly = params.readOnly || false;
 
-    window.ee.on('file.opened', function(opt) {
+    if (!file) {
+      Editor.on("change", delayChange);
+    }
+
+    nw.on('file.opened', function(file) {
+      var opt = file.toJSON();
       window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
         Editor.setValue(opt.markdown);
         
         Viewer.init(opt);
         window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
 
-        if (!readOnly) {
+        if (!opt.readOnly) {
           Editor.on("change", delayChange); 
         }
       });
-
     });
+
+    // window.ee.on('file.opened', function(opt) {
+    //   window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
+    //     Editor.setValue(opt.markdown);
+        
+    //     Viewer.init(opt);
+    //     window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+
+    //     if (!readOnly) {
+    //       Editor.on("change", delayChange); 
+    //     }
+    //   });
+
+    // });
 
     window.ee.on('file.reloaded', function(md) {
       Editor.setValue(md);
@@ -101,26 +120,26 @@ requirejs([
     }
 
     //run with file open;
-    if (tmp) {
-      File.openTmp(decodeURIComponent(file), uid);
-    } else {
-      if (file) {
-        File.open(decodeURIComponent(file));
-        Editor.setOption('readOnly', readOnly);
-      } else {
-        Editor.on("change", delayChange);
-      }
+    // if (tmp) {
+    //   File.openTmp(decodeURIComponent(file), uid);
+    // } else {
+    //   if (file) {
+    //     File.open(decodeURIComponent(file));
+    //     Editor.setOption('readOnly', readOnly);
+    //   } else {
+    //     Editor.on("change", delayChange);
+    //   }
 
-      File.startAutoSave();
-    }
+    //   File.startAutoSave();
+    // }
 
-    win.on('focus', function() {
-      process.emit('actived', win);
+    nw.on('focus', function() {
+      process.emit('actived', nw);
     });
 
     setTimeout(function() {
-      process.emit('actived', win);
-      win.show();
+      process.emit('actived', nw);
+      nw.show();
       window.focus();
     }, 10);
 

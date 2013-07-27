@@ -9,8 +9,14 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 	var fs = require('fs'),
 		path = require('path');
 
-	var gui = require('nw.gui'),
-			win = gui.Window.get();
+	/* file open */
+	window.ee.on('menu.file.open', OpenDialog.show.bind(OpenDialog));
+
+	/* open dialog fire change event */
+	OpenDialog.on('file.open', function(file) {
+		window.nw.emit('file.open', file);
+	});
+
 
 	function getWorkingDir() {
 		return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
@@ -70,24 +76,14 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 		});
 	}
 
-	Opt.bind('change', function() {
-		// console.log(arguments)
-	});
-
-	//open dialog fire change event
-	OpenDialog.on('file.open', function(file) {
-		window.parent.ee.emit('file.open', file);
-	});
-
 	SaveDialog.on('file.save', _save);
 
 	/***************************
 	 * node-webkit window event
 	 ***************************/
 	// win.on('file.open', OpenDialog.show.bind(OpenDialog));
-	window.ee.on('file.open', OpenDialog.show.bind(OpenDialog));
 	
-	if (!win._params.readOnly) {
+	if (nw.file && !nw.file.get('readOnly')) {
 		window.ee.on('file.save', function() {
 			var file = Opt.get('fileEntry');
 			if (!file) {
@@ -105,7 +101,7 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 		Temporary.update();
 	});
 
-  win.on('focus', checkChange);
+  	nw.on('focus', checkChange);
 
 	return {
 		open: function(file) {

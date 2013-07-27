@@ -25,8 +25,7 @@ define([
   });
 
   window.ee.on('menu.file.open', function() {
-    WindowMgr.actived.window.ee.emit('file.open');
-    // WindowMgr.actived.emit('file.open');
+    WindowMgr.actived.window.ee.emit('menu.file.open');
   });
 
   window.ee.on('menu.file.recents', function(file) {
@@ -38,27 +37,22 @@ define([
   });
 
   window.ee.on('menu.file.save', function() {
-  	// WindowMgr.actived.emit('file.save');
     WindowMgr.actived.window.ee.emit('file.save');
   });
 
   window.ee.on('menu.file.save.as', function() {
-  	// WindowMgr.actived.emit('file.save.as');
     WindowMgr.actived.window.ee.emit('file.save.as');
   });
 
   window.ee.on('menu.file.close', function() {
-    // WindowMgr.actived.emit('file.close');
     WindowMgr.actived.window.ee.emit('file.close');
   });
 
   window.ee.on('menu.file.exports.html', function() {
-    // WindowMgr.actived.emit('file.exports.html');
     WindowMgr.actived.window.ee.emit('file.exports.html');
   });
 
   window.ee.on('menu.print.html', function() {
-    // WindowMgr.actived.emit('print.html');
     WindowMgr.actived.window.ee.emit('print.html');
   });
 
@@ -76,22 +70,18 @@ define([
 
 
   window.ee.on('menu.view.mode.toggle', function() {
-    // WindowMgr.actived.emit('view.mode.toggle');
     WindowMgr.actived.window.ee.emit('view.mode.toggle');
   });
 
   window.ee.on('menu.show.toggle.linenum', function() {
-    // WindowMgr.actived.emit('show.toggle.linenum');
     WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
   window.ee.on('menu.view.plus5.width', function() {
-    // WindowMgr.actived.emit('view.plus5.width');
     WindowMgr.actived.window.ee.emit('view.plus5.width');
   });
 
   window.ee.on('menu.view.minus5.width', function() {
-    // WindowMgr.actived.emit('view.minus5.width');
     WindowMgr.actived.window.ee.emit('view.minus5.width');
   });
 
@@ -222,26 +212,21 @@ define([
    * context function
    */
   window.ee.on('context.cut', function(e) {
-    // WindowMgr.actived.emit('context.cut', e);
     WindowMgr.actived.window.ee.emit('context.cut', e);
   });
   window.ee.on('context.copy', function(e) {
-    // WindowMgr.actived.emit('context.copy');
     WindowMgr.actived.window.ee.emit('context.copy');
   });
   window.ee.on('context.paste', function(e) {
-    // WindowMgr.actived.emit('context.paste');
     WindowMgr.actived.window.ee.emit('context.paste');
   });
   window.ee.on('context.select.all', function(e) {
-    // WindowMgr.actived.emit('context.select.all');
     WindowMgr.actived.window.ee.emit('context.select.all');
   });
   window.ee.on('context.preferences', function(e) {
     Preferences.show();
   });
   window.ee.on('context.copy.html', function(e) {
-    // WindowMgr.actived.emit('action.copy.html');
     WindowMgr.actived.window.ee.emit('action.copy.html');
   });
 
@@ -258,9 +243,9 @@ define([
     WindowMgr.open();
   });
 
-  HotKey('defmod-o', function() {
-    WindowMgr.actived.window.ee.emit('file.open');
-  });
+  // HotKey('defmod-o', function() {
+  //   window.ee.emit('menu.file.open');
+  // });
 
   HotKey('defmod-s', function() {
     WindowMgr.actived.window.ee.emit('file.save');

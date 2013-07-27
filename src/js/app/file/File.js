@@ -1,7 +1,8 @@
 define([
+		'file/File.model'
 	],
 
-	function() {
+	function(File) {
 		var fs = require('fs'),
 			path = require('path');
 
@@ -32,8 +33,9 @@ define([
 				fs.writeFile(file, markdown, 'utf8', cb);
 			},
 			
-			open: function(file, cb) {
-				fs.readFile(file, 'utf8', cb);
+			open: function(fileEntry) {
+				// fs.readFile(file, 'utf8', cb);
+				return new File(fileEntry);
 			},
 
 			reload: function(file, cb) {
