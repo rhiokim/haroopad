@@ -42,7 +42,7 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  alert('Oops! Haroopad is crash :-(');
+  alert('Oops! pad is crash :-(');
 };
 
 requirejs([

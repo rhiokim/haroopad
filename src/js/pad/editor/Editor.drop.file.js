@@ -1,12 +1,11 @@
 define([
-		'ui/file/File.opt'
-	], function(FileOpt) {
+	], function() {
 		var path = require('path');
 		var dirname;
 
 		var types = {
 			'image': function(name, url) {
-				dirname = FileOpt.get('dirname');
+				dirname = nw.file.get('dirname');
 
 				if (dirname) {
 					url = url.replace(dirname, '.');

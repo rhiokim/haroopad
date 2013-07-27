@@ -1,12 +1,25 @@
 define([
-    'parse'
-    ], function(parse) {
+    'parse',
+    'file/File.tmp.opt'
+    ], function(parse, TmpOpt) {
 
   var fs = require('fs-extra'),
-      path = require('path');
+      path = require('path'),
+      base62 = require('base62');
+  var gui = require('nw.gui');
+
+  var appTmpDataPath = gui.App.dataPath[0];
 
   function open(fileEntry) {
     return fs.readFileSync(fileEntry, 'utf8');
+  }
+
+  function unique() {
+    return base62.encode(parseInt(Math.random() * 100000000000000000));
+  }
+
+  function getTmpFile(uid) {
+    return path.join(appTmpDataPath, '.tmp', uid);
   }
 
   var Model = Backbone.Model.extend({
@@ -24,9 +37,23 @@ define([
 
     initialize: function() {
       this.on('change:markdown', function() {
-        var html = parse(this.get('markdown'));
+        var md = this.get('markdown');
+        var html = parse(md);
+
         this.set('html', html);
+
+        window.clearTimeout(this._writeTimeout);
+
+        this._writeTimeout = window.setTimeout(function() {
+          fs.writeFileSync(this._tmpFile, md, 'utf8');
+          TmpOpt.add(this._uid);
+        }.bind(this), 10000);
       });
+
+      this._uid = unique();
+      this._tmpFile = getTmpFile(this._uid);
+
+      this.set('tmp', this._uid);
     },
 
     load: function(fileEntry, silent) {

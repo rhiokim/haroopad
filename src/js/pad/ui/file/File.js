@@ -1,11 +1,9 @@
 define([
-		// 'ui/file/File.opt',
-		'ui/file/File.tmp',
 		'ui/file/Open',
 		'ui/file/Save'
 ],
 
-function(Temporary, OpenDialog, SaveDialog) {
+function(OpenDialog, SaveDialog) {
 	var fs = require('fs'),
 		path = require('path');
 
@@ -107,25 +105,25 @@ function(Temporary, OpenDialog, SaveDialog) {
 
   	// nw.on('focus', checkChange);
 
-	return {
+	// return {
 		// open: function(file) {
 		// 	_update(file);
 		// 	_open(file);
 		// },
 
-		openTmp: function(file, uid) {
-			//지정된 파일이 있는 경우
-			if (file.indexOf(uid) < 0) {
-				_update(file);
-			}
+		// openTmp: function(file, uid) {
+		// 	//지정된 파일이 있는 경우
+		// 	if (file.indexOf(uid) < 0) {
+		// 		_update(file);
+		// 	}
 				
-			_open(file);
+		// 	_open(file);
 
-			Temporary.sync(file, uid);	
-		},
+		// 	Temporary.sync(file, uid);	
+		// },
 
-		startAutoSave: function() {
-			Temporary.create();
-		}
-	}
+		// startAutoSave: function() {
+		// 	Temporary.create();
+		// }
+	// }
 });
