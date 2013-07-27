@@ -195,4 +195,12 @@ define([
   HotKey('defmod-o', function() {
     window.ee.emit('menu.file.open');
   });
+
+  HotKey('defmod-s', function() {
+    window.ee.emit('menu.file.save');
+  });
+
+  HotKey('defmod-shift-s', function() {
+    window.ee.emit('menu.file.save.as');
+  });
 });

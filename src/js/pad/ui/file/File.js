@@ -1,26 +1,45 @@
 define([
-		'ui/file/File.opt',
+		// 'ui/file/File.opt',
 		'ui/file/File.tmp',
 		'ui/file/Open',
 		'ui/file/Save'
 ],
 
-function(Opt, Temporary, OpenDialog, SaveDialog) {
+function(Temporary, OpenDialog, SaveDialog) {
 	var fs = require('fs'),
 		path = require('path');
+
+	function getWorkingDir() {
+		return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+	}
 
 	/* file open */
 	window.ee.on('menu.file.open', OpenDialog.show.bind(OpenDialog));
 
 	/* open dialog fire change event */
 	OpenDialog.on('file.open', function(file) {
-		window.nw.emit('file.open', file);
+		nw.emit('file.open', file);
 	});
 
+	/* exist file save */
+	if (!nw.file.get('readOnly')) {
+		window.ee.on('menu.file.save', function() {
+			var file = nw.file.get('fileEntry');
+			if (!file) {
+				SaveDialog.show(getWorkingDir());
+			} else {
+				nw.emit('file.save');
+			}
+		});
 
-	function getWorkingDir() {
-		return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+		window.ee.on('menu.file.save.as', SaveDialog.show.bind(SaveDialog));
 	}
+
+	/* new file save */
+	SaveDialog.on('file.save', function(file) {
+		nw.emit('file.save', file);
+	});
+
 
 	// function _update(file) {
 	// 	Opt.set({
@@ -63,43 +82,28 @@ function(Opt, Temporary, OpenDialog, SaveDialog) {
 	// 	window.ee.emit('file.opened', Opt.toJSON(), markdown);
 	// }
 
-	function _save(file) {
-		if (!path.extname(file)) {
-			file += '.md';
-		}
+	// function _save(file) {
+	// 	if (!path.extname(file)) {
+	// 		file += '.md';
+	// 	}
 
-		_update(file);
+	// 	_update(file);
 
-		window.parent.ee.emit('file.save', Opt.get('fileEntry'), Opt.get('markdown'), function(err) { 
-			Opt.set(fs.statSync(Opt.get('fileEntry')));
-			window.ee.emit('file.saved', Opt.toJSON());
-		});
-	}
-
-	SaveDialog.on('file.save', _save);
+	// 	window.parent.ee.emit('file.save', Opt.get('fileEntry'), Opt.get('markdown'), function(err) { 
+	// 		Opt.set(fs.statSync(Opt.get('fileEntry')));
+	// 		window.ee.emit('file.saved', Opt.toJSON());
+	// 	});
+	// }
 
 	/***************************
 	 * node-webkit window event
 	 ***************************/
 	// win.on('file.open', OpenDialog.show.bind(OpenDialog));
 	
-	if (!nw.file.get('readOnly')) {
-		window.ee.on('file.save', function() {
-			var file = Opt.get('fileEntry');
-			if (!file) {
-				SaveDialog.show(getWorkingDir());
-			} else {
-				_save(file);
-			}
-		});
-
-		window.ee.on('file.save.as', SaveDialog.show.bind(SaveDialog));
-	}
-
-	window.ee.on('change.before.markdown', function(markdown) {
-		Opt.set('markdown', markdown);
+	// window.ee.on('change.before.markdown', function(markdown) {
+		// nw.file.set('markdown', markdown);
 		// Temporary.update();
-	});
+	// });
 
   	// nw.on('focus', checkChange);
 

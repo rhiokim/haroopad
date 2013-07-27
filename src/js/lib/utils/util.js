@@ -4,6 +4,10 @@ var languageTable = [
 	'ko-KR'
 ];
 
+function getWorkingDir() {
+	return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+}
+
 function getPlatformName() {
 	var names = {
 		'win32': 'windows',

@@ -1,4 +1,6 @@
-define(function() {
+define([
+    'parse'
+    ], function(parse) {
 
   var fs = require('fs-extra'),
       path = require('path');
@@ -21,13 +23,19 @@ define(function() {
     },
 
     initialize: function() {
+      this.on('change:markdown', function() {
+        var html = parse(this.get('markdown'));
+        this.set('html', html);
+      });
     },
 
-    load: function(fileEntry) {
+    load: function(fileEntry, silent) {
       var md = open(fileEntry), 
           stat = fs.statSync(fileEntry);
 
-      this.set(stat);
+      silent = silent ? silent : {} ;
+
+      this.set(stat, silent);
       this.set({
         'markdown': md,
         'fileEntry': fileEntry,
@@ -35,7 +43,7 @@ define(function() {
         'dirname': path.dirname(fileEntry),
         'basename': path.basename(fileEntry),
         'updated_at': new Date
-      });
+      }, silent);
     },
 
     refresh: function() {
@@ -46,6 +54,16 @@ define(function() {
         stat = fs.statSync(fileEntry);
         this.set(stat); 
       }
+    },
+
+    save: function(fileEntry) {
+      if (!path.extname(fileEntry)) {
+        fileEntry += '.md';
+      }
+
+      fs.writeFileSync(fileEntry, this.get('markdown'), 'utf8');
+
+      this.load(fileEntry, { silent: true });
     },
 
     checkUpdate: function() {

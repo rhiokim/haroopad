@@ -66,6 +66,21 @@ requirejs([
     // uid = params.uid;
     // readOnly = params.readOnly || false;
 
+
+    function delayChange() {
+      window.clearTimeout(_tid_);
+
+      // window.ee.emit('change.before.markdown', Editor.getValue());
+
+      _tid_ = setTimeout(function() {
+          nw.file.set('markdown', Editor.getValue());
+          window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
+
+            window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+          });
+      }, 100);
+    }
+
     nw.on('file.opened', function(file) {
       var opt = file.toJSON();
 
@@ -79,6 +94,10 @@ requirejs([
           Editor.on("change", delayChange); 
         }
       });
+    });
+
+    nw.file.on('change:html', function() {
+       window.ee.emit('change.after.markdown', nw.file.get('markdown'), nw.file.get('html'), Editor);
     });
 
     /* change by external application */
@@ -113,19 +132,6 @@ requirejs([
     window.ee.on('file.saved', function(opt) {
       Viewer.init(opt);
     });
-
-    function delayChange() {
-      window.clearTimeout(_tid_);
-
-      window.ee.emit('change.before.markdown', Editor.getValue());
-
-      _tid_ = setTimeout(function() {
-        window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
-
-          window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
-        });
-      }, 100);
-    }
 
     //run with file open;
     // if (tmp) {

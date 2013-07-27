@@ -37,11 +37,11 @@ define([
   });
 
   window.ee.on('menu.file.save', function() {
-    WindowMgr.actived.window.ee.emit('file.save');
+    WindowMgr.actived.window.ee.emit('menu.file.save');
   });
 
   window.ee.on('menu.file.save.as', function() {
-    WindowMgr.actived.window.ee.emit('file.save.as');
+    WindowMgr.actived.window.ee.emit('menu.file.save.as');
   });
 
   window.ee.on('menu.file.close', function() {
@@ -247,13 +247,13 @@ define([
   //   window.ee.emit('menu.file.open');
   // });
 
-  HotKey('defmod-s', function() {
-    WindowMgr.actived.window.ee.emit('file.save');
-  });
+  // HotKey('defmod-s', function() {
+  //   WindowMgr.actived.window.ee.emit('file.save');
+  // });
 
-  HotKey('defmod-shift-s', function() {
-    WindowMgr.actived.window.ee.emit('file.save.as');
-  });
+  // HotKey('defmod-shift-s', function() {
+  //   WindowMgr.actived.window.ee.emit('file.save.as');
+  // });
 
   HotKey('defmod-q', function() {
     gui.App.quit();

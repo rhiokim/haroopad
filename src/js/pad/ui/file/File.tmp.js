@@ -4,11 +4,11 @@ define([
 	], function(Opt, TmpOpt) {
 
 		var fs = require('fs'),
-				path = require('path'),
-				base62 = require('base62');
+			path = require('path'),
+			base62 = require('base62');
 
 		var gui = require('nw.gui'),
-				win = gui.Window.get();
+			win = gui.Window.get();
 
 		var _uid, _file, writeTimeout;
 		var appTmpDataPath = gui.App.dataPath[0];
