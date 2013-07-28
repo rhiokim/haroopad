@@ -64,6 +64,9 @@ define([
       if (!this.get('tmp')) {
         this._uid = unique();
         this._tmpFile = getTmpFile(this._uid);
+      } else {
+        this._tmpFile = this.get('fileEntry');
+        this._uid = path.basename(this._tmpFile);
       }
     },
 
@@ -123,7 +126,11 @@ define([
 
     close: function() {
       window.clearTimeout(this._writeTimeout);
-      fs.removeSync(this._tmpFile);
+      
+      if (fs.existsSync(this._tmpFile)) {
+        fs.removeSync(this._tmpFile);
+      }
+
       TmpOpt.remove(this._uid);
     }/*,
 

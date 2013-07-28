@@ -1,23 +1,17 @@
 define([
-		'file/File.model'
+		'file/File.model',
+		'file/File.tmp.opt'
 	],
 
-	function(FileModel) {
+	function(FileModel, TmpOpt) {
 		var fs = require('fs-extra'),
 			path = require('path');
 
 		var gui = require('nw.gui'),
 			win = gui.Window.get();
 
-		function getTempFiles() {
-			var tmp = store.get('Temporary') || {};
-
-			tmp = tmp.file || [];
-			return tmp;
-		}
-
 		function checkTemporary() {
-			var tmp = getTempFiles(),
+			var tmp = TmpOpt.get('files'),
 				tmpFile,
 				appTmpDataPath = path.join(gui.App.dataPath[0], '.tmp');
 
@@ -32,7 +26,8 @@ define([
 						// file.loadTmp(tmpFile);
 					window.ee.emit('tmp.file.open', file);
 				} else {
-					tmp.splice(idx,1);
+					TmpOpt.remove(uid);
+					// tmp.splice(idx, 1);
 				}
 			});
 
