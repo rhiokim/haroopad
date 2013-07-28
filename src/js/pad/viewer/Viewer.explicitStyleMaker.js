@@ -1,6 +1,6 @@
 define([
-		'ui/file/File.opt',
-		],function(FileOpt) {
+		// 'ui/file/File.opt',
+		],function(/*FileOpt*/) {
 
 		var fs = require('fs'),
 				path = require('path');
@@ -46,7 +46,8 @@ define([
 		  var wrapper = $('<div>').html(htmlStyledDoc.innerHTML);
 		  wrapper.attr('style', $(htmlStyledDoc.body).attr('style'));
 
-		  FileOpt.set('html', wrapper[0].outerHTML);
+		  // FileOpt.set('html', wrapper[0].outerHTML);
+		  nw.file.set('html', wrapper[0].outerHTML);
 	  }
 
 	  function makeImageEncode() {
@@ -120,7 +121,8 @@ define([
     //         filePath: "https://raw.github.com/andris9/Nodemailer/master/LICENSE"
     //     });
 
-	  	FileOpt.set('attachments', attachments);
+	  	// FileOpt.set('attachments', attachments);
+	  	nw.file.set('attachments', attachments);
 	  }
 
 		window.ee.on('file.posts.tumblr', function() {

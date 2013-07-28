@@ -158,7 +158,7 @@ define([
 		});
 
 		/* fire context menu event */
-		if (!win._params.readOnly) {
+		if (nw.file && !nw.file.get('readOnly')) {
 			window.ee.on('context.cut', function(e) {
 			  clipboard.set(editor.getSelection());
 			  editor.replaceSelection('');

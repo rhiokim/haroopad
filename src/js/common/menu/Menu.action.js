@@ -56,12 +56,14 @@ MenuBarAction = function () {
   Action.append(
     new gui.MenuItem({
       label: 'Header',
+      icon: 'img/menu/header.png',
       submenu: MenuBarActionHeader()
     })
   );
 	Action.append(
     new gui.MenuItem({
       label: 'Strong ................ **',
+      icon: 'img/menu/bold.png',
       click: function() {
         window.parent.ee.emit('menu.action.strong');
       }
@@ -70,6 +72,7 @@ MenuBarAction = function () {
 	Action.append(
     new gui.MenuItem({
       label: 'Emphasize .......... *',
+      icon: 'img/menu/italic.png',
       click: function() {
         window.parent.ee.emit('menu.action.emphasize');
       }
@@ -86,6 +89,7 @@ MenuBarAction = function () {
   Action.append(
     new gui.MenuItem({
       label: 'Image ................. ![]()',
+      // icon: 'img/menu/image.png',
       click: function() {
         window.parent.ee.emit('menu.action.image');
       }
@@ -118,6 +122,7 @@ MenuBarAction = function () {
   Action.append(
     new gui.MenuItem({
       label: 'Un Ordered List .. -',
+      // icon: 'img/menu/unorder.png',
       click: function() {
         window.parent.ee.emit('menu.action.unorderlist');
       }

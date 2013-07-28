@@ -10,7 +10,7 @@ define([
 
 		var width, viewerWidth = 50;//options.get('viewerWidth');
 		var gap = 5;
-		var mode = win._params.mode || 0;
+		var mode = 0;
 
 		width = 100 - viewerWidth;
 

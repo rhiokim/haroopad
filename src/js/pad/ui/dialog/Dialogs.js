@@ -1,11 +1,11 @@
 define([
 		'keyboard',
-		'ui/file/File.opt',
+		// 'ui/file/File.opt',
 		'ui/dialog/Save',
 		'ui/dialog/Reload',
 		'ui/dialog/Email'
 	], 
-	function(HotKey, FileOpt, Save, Reload, Email) {
+	function(HotKey, /*FileOpt,*/ Save, Reload, Email) {
 		var dialogs;
 
 		var SaveDialog = new Save,
@@ -16,7 +16,7 @@ define([
 		window.ee.on('file.posts.tumblr', EmailDialog.show.bind(EmailDialog));
 		
 		EmailDialog.bind('post', function(mailInfo) {
-			window.parent.ee.emit('posts.tumblr', FileOpt.toJSON(), mailInfo);
+			window.parent.ee.emit('posts.tumblr', nw.file.toJSON(), mailInfo);
 		});
 
 		window.ee.on('posted.tumblr', EmailDialog.successHandler.bind(EmailDialog));
