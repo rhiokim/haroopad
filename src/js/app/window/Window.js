@@ -175,18 +175,25 @@ define([
    */
   
   window.ee.on('menu.help.about', function() {
-    WindowMgr.open(pathDocs +'/about.md', { readOnly: true, position: 'center' });
+    var file = File.open(pathDocs +'/about.md');
+        file.set('readOnly', true);
+    WindowMgr.open(file);
   });
   window.ee.on('menu.help.syntax', function() {
-    WindowMgr.open(pathDocs +'/syntax.md', { readOnly: true, position: 'center' });
+    var file = File.open(pathDocs +'/syntax.md');
+        file.set('readOnly', true);
+    WindowMgr.open(file);
   });
   window.ee.on('menu.help.acknowledgements', function() {
-    WindowMgr.open(pathDocs +'/../acknowledgements.md', { readOnly: true, position: 'center' });
+    var file = File.open(pathDocs +'/../acknowledgements.md');
+        file.set('readOnly', true);
+    WindowMgr.open(file);
   });
   window.ee.on('menu.help.shortcut', function() {
-    WindowMgr.open(pathDocs +'/shortcut.md', { readOnly: true, position: 'center' });
+    var file = File.open(pathDocs +'/shortcut.md');
+        file.set('readOnly', true);
+    WindowMgr.open(file);
   });
-
 
 
   //fire by child window
