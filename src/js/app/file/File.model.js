@@ -53,12 +53,9 @@ define([
       });
 
       this.on('change:fileEntry', function() {
-        this.set({
-          'extname': path.extname(fileEntry) || '.md',
-          'dirname': path.dirname(fileEntry),
-          'basename': path.basename(fileEntry),
-          'updated_at': new Date
-        });
+        var fileEntry = this.get('fileEntry');
+
+        this.update(fileEntry);
       });
 
       if (!this.get('tmp')) {
@@ -67,6 +64,11 @@ define([
       } else {
         this._tmpFile = this.get('fileEntry');
         this._uid = path.basename(this._tmpFile);
+      }
+
+      if (this.get('fileEntry')) {
+        this.trigger('change:fileEntry');
+        this.load();
       }
     },
 
@@ -81,19 +83,19 @@ define([
       this.set(stat, silent);
     },
 
-    loadTmp: function(uid, silent) {
-      var fileEntry = getTmpFile(uid);
-      var md = open(fileEntry);
+    // loadTmp: function(uid, silent) {
+    //   var fileEntry = getTmpFile(uid);
+    //   var md = open(fileEntry);
 
-      this._uid = uid;
-      this._tmpFile = fileEntry;
+    //   this._uid = uid;
+    //   this._tmpFile = fileEntry;
 
-      this.set({
-        'markdown': md,
-        'tmp': true,
-        'fileEntry': fileEntry
-      }, silent);
-    },
+    //   this.set({
+    //     'markdown': md,
+    //     'tmp': true,
+    //     'fileEntry': fileEntry
+    //   }, silent);
+    // },
 
     reload: function(silent) {
       var fileEntry = this.get('fileEntry');
@@ -114,14 +116,31 @@ define([
       }
     },
 
+    update: function(fileEntry) {
+      this.set({
+        'fileEntry': fileEntry,
+        'extname': path.extname(fileEntry) || '.md',
+        'dirname': path.dirname(fileEntry),
+        'basename': path.basename(fileEntry),
+        'updated_at': new Date
+      });
+    },
+
     save: function(fileEntry) {
+      var stat;
+      fileEntry = fileEntry || this.get('fileEntry');
+
       if (!path.extname(fileEntry)) {
         fileEntry += '.md';
       }
 
       fs.writeFileSync(fileEntry, this.get('markdown'), 'utf8');
+      stat = fs.statSync(fileEntry);
 
-      this.load(fileEntry, { silent: true });
+      this.update(fileEntry);
+      this.set(stat, { silent: true });
+
+      this.trigger('saved');
     },
 
     close: function() {

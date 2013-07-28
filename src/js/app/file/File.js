@@ -23,15 +23,11 @@ define([
 				tmpFile = path.join(appTmpDataPath, uid);
 				if (fs.existsSync(tmpFile)) {
 					var file = new FileModel({ fileEntry: tmpFile, tmp: true });
-						// file.loadTmp(tmpFile);
 					window.ee.emit('tmp.file.open', file);
 				} else {
 					TmpOpt.remove(uid);
-					// tmp.splice(idx, 1);
 				}
 			});
-
-			// store.set('Temporary', { files: tmp });
 		}
 
 		var fileApp = {

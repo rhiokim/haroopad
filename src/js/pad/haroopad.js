@@ -83,7 +83,8 @@ requirejs([
 
     nw.on('file.opened', function(file) {
       var opt;
-      file.load();
+     
+      // file.load();
       opt = file.toJSON();
 
       Editor.setValue(opt.markdown);
@@ -93,6 +94,10 @@ requirejs([
 
       if (!opt.readOnly) {
         Editor.on('change', delayChange);
+      }
+
+      if (opt.html) {
+        file.trigger('change:html');
       }
 
       /* change by external application */
@@ -112,8 +117,8 @@ requirejs([
       // });
     });
 
-    nw.file.on('change:html', function() {
-       window.ee.emit('change.after.markdown', nw.file.get('markdown'), nw.file.get('html'), Editor);
+    file.on('change:html', function() {
+       window.ee.emit('change.after.markdown', file.get('markdown'), file.get('html'), Editor);
     });
 
     if (!file.get('fileEntry')) {
@@ -142,8 +147,10 @@ requirejs([
       nw.file.trigger('change:markdown');
     });
 
-    window.ee.on('file.saved', function(opt) {
+    nw.file.on('saved', function() {
+      var opt = nw.file.toJSON();
       Viewer.init(opt);
+      nw.emit('file.saved', opt);
     });
 
     //run with file open;

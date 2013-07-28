@@ -22,11 +22,11 @@ function(OpenDialog, SaveDialog) {
 	/* exist file save */
 	if (!nw.file.get('readOnly')) {
 		window.ee.on('menu.file.save', function() {
-			var file = nw.file.get('fileEntry');
-			if (!file) {
+			var fileEntry = nw.file.get('fileEntry');
+			if (!fileEntry) {
 				SaveDialog.show(getWorkingDir());
 			} else {
-				nw.emit('file.save');
+				nw.file.save(fileEntry);
 			}
 		});
 
@@ -34,8 +34,9 @@ function(OpenDialog, SaveDialog) {
 	}
 
 	/* new file save */
-	SaveDialog.on('file.save', function(file) {
-		nw.emit('file.save', file);
+	SaveDialog.on('file.save', function(fileEntry) {
+		nw.file.save(fileEntry);
+		// nw.emit('file.save', file);
 	});
 
 

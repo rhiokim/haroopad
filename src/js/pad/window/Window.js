@@ -6,8 +6,7 @@ define([
 		'ui/splitter/Splitter'
 ], function(store, HotKey, Dialogs, Exports, Splitter) {
 	var gui = require('nw.gui');
-	var win = gui.Window.get(),
-		subWin;
+	var win = gui.Window.get();
 
 	var orgTitle = 'Untitled';
 	var edited = false,
@@ -40,7 +39,7 @@ define([
 
 	Dialogs.save.bind('save', function() {
 		delayClose = true;
-		window.ee.emit('file.save');
+		window.ee.emit('menu.file.save');
 	});
 
 	Dialogs.save.bind('dont-save', function() {
@@ -66,7 +65,12 @@ define([
 
 	nw.on('file.opened', function(file) {
 		var opt = file.toJSON();
-		nw.title = orgTitle = opt.basename || orgTitle;
+
+		if (opt.tmp) {
+			nw.title = 'Restored (writen at '+ opt.ctime +')';
+		} else {
+			nw.title = orgTitle = opt.basename || orgTitle;	
+		}
 
 		if (opt.readOnly) {
 			nw.title += ' (read only)';
@@ -80,7 +84,7 @@ define([
 	// 	}
  //  	});
 
-  window.ee.on('file.saved', function(opt) {
+	nw.on('file.saved', function(opt) {
 		win.title = orgTitle = opt.basename;
 
 		if (delayClose) {
@@ -89,7 +93,7 @@ define([
 		
 		delayClose = false;
 		edited = false;
-  });
+	});
 
 	window.ee.on('change.before.markdown', function(markdown, html, editor) {
 		win.title = orgTitle + ' (edited)';

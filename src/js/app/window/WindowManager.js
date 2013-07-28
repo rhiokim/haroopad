@@ -80,13 +80,6 @@ define([
 			// }
 		});
 
-		/* save file */
-		newWin.on('file.save', function(fileEntry) {
-			fileEntry = fileEntry || newWin.file.get('fileEntry');
-
-			newWin.file.save(fileEntry);
-		});
-
 		//window instance delivery to child window
 		newWin.once('loaded', function() {
 			_updateStore();
