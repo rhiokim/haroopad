@@ -52,6 +52,8 @@ define([
 		realCount++;
 
 		newWin.on('closed', function() {
+			newWin.file.close();
+			
 			for (var prop in windows) {
 				if (prop == newWin.created_at) {
 					windows[prop] = null;

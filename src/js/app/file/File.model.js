@@ -48,7 +48,7 @@ define([
           this._writeTimeout = window.setTimeout(function() {
             fs.writeFileSync(this._tmpFile, md, 'utf8');
             TmpOpt.add(this._uid);
-          }.bind(this), 10000);
+          }.bind(this), 5000);
         }
       });
 
@@ -60,6 +60,11 @@ define([
           'updated_at': new Date
         });
       });
+
+      if (!this.get('tmp')) {
+        this._uid = unique();
+        this._tmpFile = getTmpFile(this._uid);
+      }
     },
 
     load: function(silent) {
@@ -114,6 +119,12 @@ define([
       fs.writeFileSync(fileEntry, this.get('markdown'), 'utf8');
 
       this.load(fileEntry, { silent: true });
+    },
+
+    close: function() {
+      window.clearTimeout(this._writeTimeout);
+      fs.removeSync(this._tmpFile);
+      TmpOpt.remove(this._uid);
     }/*,
 
     checkUpdate: function() {

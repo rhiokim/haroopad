@@ -28,7 +28,7 @@ define([
 			_.forEach(tmp, function(uid, idx) {
 				tmpFile = path.join(appTmpDataPath, uid);
 				if (fs.existsSync(tmpFile)) {
-					var file = new FileModel({ fileEntry: tmpFile });
+					var file = new FileModel({ fileEntry: tmpFile, tmp: true });
 						// file.loadTmp(tmpFile);
 					window.ee.emit('tmp.file.open', file);
 				} else {
@@ -36,7 +36,7 @@ define([
 				}
 			});
 
-			store.set('Temporary', { files: tmp });
+			// store.set('Temporary', { files: tmp });
 		}
 
 		var fileApp = {

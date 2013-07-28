@@ -10,6 +10,10 @@ define([
 		}
 
 		var Model = Backbone.Model.extend({
+			defaults: {
+				files: []
+			},
+
 			initialize: function() {
 				var opt = localStorage.getItem('Temporary');
 
@@ -21,7 +25,8 @@ define([
 					this.set(JSON.parse(opt));
 					temps = this.get('files') || [];
 				} else {
-					store.set('Temporary', { files: [] });
+					this.set(this.defaults);
+					store.set('Temporary', this.toJSON());
 				}
 			},
 
@@ -29,13 +34,26 @@ define([
 				if (temps.indexOf(uid) === -1) {
 					temps.push(uid);
 
-					this.set('files', temps);
+					this.set({ files: temps });
+
+					this.trigger('change');
+				}
+			},
+
+			remove: function(uid) {
+				var idx = temps.indexOf(uid);
+				if (idx > -1) {
+					temps.splice(idx, 1);
+					this.set({ files: temps });
+					this.trigger('change');
 				}
 			},
 
 			clearAll: function() {
 				temps.length = 0;
 				this.set('files', []);
+
+				this.trigger('change');
 			}
 			//TODO : remove recent file item
 		});
