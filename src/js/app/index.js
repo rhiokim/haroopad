@@ -1,7 +1,11 @@
 // for Memory leak detect
 process.setMaxListeners(0);
 
+var gui = require('nw.gui');
+
+window.nw = gui.Window.get();
 window.ee = new EventEmitter();
+
 MenuBar(); 
 
 //fixed text.js error on node-webkit
@@ -17,7 +21,8 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    keyboard: '../vendors/keymage'
+    keyboard: '../vendors/keymage',
+    parse: 'core/Parser'
   },
   config: {
     text: {
@@ -27,28 +32,28 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  alert('Oops! Haroopad is crash :-(');
+  alert('Oops! app is crash :-(');
 };
 
 requirejs([
     'context/Context',
-    'core/Parser',
+    // 'core/Parser',
     'window/Window',
     'window/WindowManager',
     'utils/UpdateNotifier'
-  ], function(Context, Parser, Window, WindowMgr, Updater) {
+  ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-    window.ee.on('change.markdown', function(md, options, cb) {
-      cb = typeof options === 'function' ? options : cb;
-      options = typeof options === 'object' ? options : undefined;
+    // window.ee.on('change.markdown', function(md, options, cb) {
+    //   cb = typeof options === 'function' ? options : cb;
+    //   options = typeof options === 'object' ? options : undefined;
       
-      var html = Parser(md, options);
+    //   var html = Parser(md, options);
 
-      cb(html);
-    });
+    //   cb(html);
+    // });
     
     //open file with commend line
     if (gui.App.argv.length > 0) {

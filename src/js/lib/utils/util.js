@@ -4,6 +4,10 @@ var languageTable = [
 	'ko-KR'
 ];
 
+function getWorkingDir() {
+	return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+}
+
 function getPlatformName() {
 	var names = {
 		'win32': 'windows',
@@ -23,7 +27,7 @@ function getExecPath() {
 			return process.cwd();
 		break;
 		case 'linux':
-			return path.dirname(process.execPath);
+			return process.cwd();//path.dirname(process.execPath);
 		break;
 	}
 }
