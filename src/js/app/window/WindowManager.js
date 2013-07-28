@@ -1,6 +1,7 @@
 define([
-		'exports'
-], function(exports) {
+	'exports',
+	'file/File'
+], function(exports, File) {
 
 	var gui = require('nw.gui');
 
@@ -35,25 +36,26 @@ define([
 		config = store.get('Window') || {};
 	}
 
-	function getWindowByFile(file) {
-		for (var prop in windows) {
-			if (windows[prop]._params.file == file) {
-				return windows[prop];
-			}
-		}
+	// function getWindowByFile(file) {
+	// 	for (var prop in windows) {
+	// 		if (windows[prop]._params.file == file) {
+	// 			return windows[prop];
+	// 		}
+	// 	}
 
-		return;
-	}
+	// 	return;
+	// }
 
 	function _add(newWin) {
-		exports.actived = windows[newWin._params.created_at] = newWin;
+		exports.actived = windows[newWin.created_at] = newWin;
 
-		// console.log()
 		realCount++;
 
 		newWin.on('closed', function() {
+			newWin.file.close();
+			
 			for (var prop in windows) {
-				if (prop == newWin._params.created_at) {
+				if (prop == newWin.created_at) {
 					windows[prop] = null;
 					delete windows[prop];
 					realCount--;
@@ -66,6 +68,18 @@ define([
 			}
 		});
 
+		/* open file */
+		newWin.on('file.open', function(fileEntry) {
+			var file = File.open(fileEntry);
+
+			// if (!newWin.file.get('fileEntry') && !newWin.file.get('markdown')) {
+			// 	newWin.file = file;
+			// 	newWin.emit('file.opened', file);
+			// } else {
+				open(file);
+			// }
+		});
+
 		//window instance delivery to child window
 		newWin.once('loaded', function() {
 			_updateStore();
@@ -75,9 +89,9 @@ define([
 			shadowCount++;
 
 			//윈도우 오픈 시 position 파라미터가 존재하면 위치 지정은 패스한다.
-			if (newWin._params.position) {
-				return;
-			}
+			// if (newWin._params.position) {
+			// 	return;
+			// }
 
 			if (config.height + top > window.screen.height) {
 				top = 0;
@@ -95,46 +109,49 @@ define([
 		});
 	}
 
+	function open(file) {
+		var /*existWin, */newWin;
+
+		// options = typeof file === 'object' ? file : options || {};
+		// file = typeof file === 'string' ? file : undefined;
+
+		//이미 열려 있는 파일 일 경우
+		// if (file && (existWin = getWindowByFile(file))) {
+		// 	existWin.focus();
+		// 	return;
+		// }
+
+		// if (openning && !file) {
+		// 	return;
+		// }
+
+		// openning = true;
+
+		newWin = gui.Window.open('pad.html', {
+			"min_width": 500,
+			"min_height": 250,
+			"toolbar": false,
+			"show": false
+		});
+		newWin.parent = window;
+		newWin.file = file || File.open();
+		newWin.created_at = new Date().getTime();
+		// newWin._params = merge(options, {
+		// 	file: file,
+		// 	created_at: new Date().getTime()
+		// });
+
+		_add(newWin);
+
+		return newWin;
+	}
+
 	process.on('actived', function(child) {
 		exports.actived = child;
 
 		openning = false;
 	});
 
-	exports.open = function(file, options) {
-		var existWin, newWin;
-
-		options = typeof file === 'object' ? file : options || {};
-		file = typeof file === 'string' ? file : undefined;
-
-		//이미 열려 있는 파일 일 경우
-		if (file && (existWin = getWindowByFile(file))) {
-			existWin.focus();
-			return;
-		}
-
-		if (openning && !file) {
-			return;
-		}
-
-		openning = true;
-
-		newWin = gui.Window.open('pad.html', merge({
-			"min_width": 500,
-			"min_height": 250,
-			"toolbar": false,
-			"show": false
-		}, options));
-		newWin.parent = window;
-
-		newWin._params = merge(options, {
-			file: file,
-			created_at: new Date().getTime()
-		});
-
-		_add(newWin);
-
-		return newWin;
-	}
+	exports.open = open;
 
 });

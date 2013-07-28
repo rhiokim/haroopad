@@ -6,8 +6,7 @@ define([
 		'ui/splitter/Splitter'
 ], function(store, HotKey, Dialogs, Exports, Splitter) {
 	var gui = require('nw.gui');
-	var win = gui.Window.get(),
-		subWin;
+	var win = gui.Window.get();
 
 	var orgTitle = 'Untitled';
 	var edited = false,
@@ -40,7 +39,7 @@ define([
 
 	Dialogs.save.bind('save', function() {
 		delayClose = true;
-		window.ee.emit('file.save');
+		window.ee.emit('menu.file.save');
 	});
 
 	Dialogs.save.bind('dont-save', function() {
@@ -49,9 +48,10 @@ define([
 
 	var reloadFile;
 	Dialogs.reload.bind('reload', function() {
-		window.parent.ee.emit('file.reload', reloadFile, function(err, data) {
-			window.ee.emit('file.reloaded', data);
-		});
+		window.ee.emit('reload');
+		// window.parent.ee.emit('file.reload', reloadFile, function(err, data) {
+		// 	window.ee.emit('file.reloaded', data);
+		// });
 	});
 
 	window.ee.on('file.update', function(file) {
@@ -63,15 +63,28 @@ define([
 		win.close();
 	});
 
-	window.ee.on('file.opened', function(opt) {
-		win.title = orgTitle = opt.basename || orgTitle;
+	nw.on('file.opened', function(file) {
+		var opt = file.toJSON();
 
-		if (win._params.readOnly) {
-			win.title += ' (read only)';
+		if (opt.tmp) {
+			nw.title = 'Restored (writen at '+ opt.ctime +')';
+		} else {
+			nw.title = orgTitle = opt.basename || orgTitle;	
 		}
-  });
 
-  window.ee.on('file.saved', function(opt) {
+		if (opt.readOnly) {
+			nw.title += ' (read only)';
+		}
+	});
+	// window.ee.on('file.opened', function(opt) {
+	// 	win.title = orgTitle = opt.basename || orgTitle;
+
+	// 	if (win._params.readOnly) {
+	// 		win.title += ' (read only)';
+	// 	}
+ //  	});
+
+	nw.on('file.saved', function(opt) {
 		win.title = orgTitle = opt.basename;
 
 		if (delayClose) {
@@ -80,7 +93,7 @@ define([
 		
 		delayClose = false;
 		edited = false;
-  });
+	});
 
 	window.ee.on('change.before.markdown', function(markdown, html, editor) {
 		win.title = orgTitle + ' (edited)';
@@ -141,17 +154,6 @@ define([
 	  return false;
 	});
 
-  // window.ondragover = function(e) { 
-  //   e.preventDefault();
-  //   window.parent.ee.emit('dragover', e);
-  //   return false;
-  // };
-
-  // window.ondrop = function(e) {
-  //   e.preventDefault();
-  //   window.parent.ee.emit('dragdrop', e);
-  //   return false;
-  // };
 
   var resizeTimeout;
   window.onresize = function(e) {
@@ -193,5 +195,17 @@ define([
   /* up to date haroopad */
   window.ee.on('up.to.date.haroopad', function(version) {
 	Notifier.notify('Haroopad <strong>v'+ version +'</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
+  });
+
+  HotKey('defmod-o', function() {
+    window.ee.emit('menu.file.open');
+  });
+
+  HotKey('defmod-s', function() {
+    window.ee.emit('menu.file.save');
+  });
+
+  HotKey('defmod-shift-s', function() {
+    window.ee.emit('menu.file.save.as');
   });
 });
