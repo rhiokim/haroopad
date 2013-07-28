@@ -80,7 +80,6 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.file.recents.js',
             'src/js/common/menu/Menu.file.exports.js',
             'src/js/common/menu/Menu.file.activities.js',
-            'src/js/common/menu/Menu.file.js',
             'src/js/common/menu/Menu.find.js',
             'src/js/common/menu/Menu.view.js',
             'src/js/common/menu/Menu.action.js',
@@ -270,7 +269,26 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/readdir/package.json', dest: 'build/haroopad/node_modules/readdir/package.json' },
           { src: 'src/node_modules/clean-css/lib/clean.js', dest: 'build/haroopad/node_modules/clean-css/lib/clean.js' },
           { src: 'src/node_modules/clean-css/index.js', dest: 'build/haroopad/node_modules/clean-css/index.js' },
-          { src: 'src/node_modules/clean-css/package.json', dest: 'build/haroopad/node_modules/clean-css/package.json' }
+          { src: 'src/node_modules/clean-css/package.json', dest: 'build/haroopad/node_modules/clean-css/package.json' },
+
+          { expand: true, cwd: 'src/node_modules/fs-extra/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/fs-extra/lib/' },
+          { src: 'src/node_modules/fs-extra/package.json', dest: 'build/haroopad/node_modules/fs-extra/package.json' },
+
+          { src: 'src/node_modules/graceful-fs/package.json', dest: 'build/haroopad/node_modules/graceful-fs/package.json' },
+          { src: 'src/node_modules/graceful-fs/graceful-fs.js', dest: 'build/haroopad/node_modules/graceful-fs/graceful-fs.js' },
+          { src: 'src/node_modules/graceful-fs/polyfills.js', dest: 'build/haroopad/node_modules/graceful-fs/polyfills.js' },
+
+          { src: 'src/node_modules/jsonfile/package.json', dest: 'build/haroopad/node_modules/jsonfile/package.json' },
+          { expand: true, cwd: 'src/node_modules/jsonfile/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/jsonfile/lib/' },
+
+          { src: 'src/node_modules/mkdirp/package.json', dest: 'build/haroopad/node_modules/mkdirp/package.json' },
+          { src: 'src/node_modules/mkdirp/index.js', dest: 'build/haroopad/node_modules/mkdirp/index.js' },
+
+          { src: 'src/node_modules/ncp/package.json', dest: 'build/haroopad/node_modules/ncp/package.json' },
+          { expand: true, cwd: 'src/node_modules/ncp/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/ncp/lib/' },
+
+          { src: 'src/node_modules/rimraf/package.json', dest: 'build/haroopad/node_modules/rimraf/package.json' },
+          { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' }
         ]
       },
 
