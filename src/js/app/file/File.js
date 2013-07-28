@@ -3,52 +3,53 @@ define([
 	],
 
 	function(FileModel) {
-		var fs = require('fs'),
+		var fs = require('fs-extra'),
 			path = require('path');
 
 		var gui = require('nw.gui'),
 			win = gui.Window.get();
 
+		function getTempFiles() {
+			var tmp = store.get('Temporary') || {};
+
+			tmp = tmp.file || [];
+			return tmp;
+		}
+
 		function checkTemporary() {
-			var tmpFiles = store.get('Temporary'),
-			appTmpDataPath = path.join(gui.App.dataPath[0], '.tmp');
+			var tmp = getTempFiles(),
+				tmpFile,
+				appTmpDataPath = path.join(gui.App.dataPath[0], '.tmp');
 
 			if (!fs.existsSync(appTmpDataPath)) {
 			  fs.mkdirSync(appTmpDataPath);
 			}
 
-			for(var uid in tmpFiles) {
-				if (fs.existsSync(tmpFiles[uid])) {
-					window.ee.emit('tmp.file.open', tmpFiles[uid], uid);
+			_.forEach(tmp, function(uid, idx) {
+				tmpFile = path.join(appTmpDataPath, uid);
+				if (fs.existsSync(tmpFile)) {
+					var file = new FileModel({ fileEntry: tmpFile });
+						// file.loadTmp(tmpFile);
+					window.ee.emit('tmp.file.open', file);
 				} else {
-					delete tmpFiles[uid];
+					tmp.splice(idx,1);
 				}
-			}
+			});
 
-			store.set('Temporary', tmpFiles);
+			store.set('Temporary', { files: tmp });
 		}
 
-		return {
-			save: function(file, markdown, cb) {
-				fs.writeFile(file, markdown, 'utf8', cb);
-			},
-			
+		var fileApp = {
 			open: function(fileEntry) {
-				var file = new FileModel();
-
-				if (fileEntry) {	
-					file.load(fileEntry);
-				}
+				var file = new FileModel({ fileEntry: fileEntry });
 
 				return file;
-			},
-
-			reload: function(file, cb) {
-				fs.readFile(file, 'utf8', cb);
 			},
 
 			loadTemporary: function() {
 				checkTemporary();
 			}
 		}
+
+		return fileApp;
 });

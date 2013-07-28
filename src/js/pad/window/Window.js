@@ -49,9 +49,10 @@ define([
 
 	var reloadFile;
 	Dialogs.reload.bind('reload', function() {
-		window.parent.ee.emit('file.reload', reloadFile, function(err, data) {
-			window.ee.emit('file.reloaded', data);
-		});
+		window.ee.emit('reload');
+		// window.parent.ee.emit('file.reload', reloadFile, function(err, data) {
+		// 	window.ee.emit('file.reloaded', data);
+		// });
 	});
 
 	window.ee.on('file.update', function(file) {

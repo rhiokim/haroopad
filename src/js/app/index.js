@@ -1,7 +1,11 @@
 // for Memory leak detect
 process.setMaxListeners(0);
 
+var gui = require('nw.gui');
+
+window.nw = gui.Window.get();
 window.ee = new EventEmitter();
+
 MenuBar(); 
 
 //fixed text.js error on node-webkit

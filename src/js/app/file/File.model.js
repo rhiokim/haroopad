@@ -42,35 +42,58 @@ define([
 
         this.set('html', html);
 
-        window.clearTimeout(this._writeTimeout);
+        if (!this.get('tmp')) {
+          window.clearTimeout(this._writeTimeout);
 
-        this._writeTimeout = window.setTimeout(function() {
-          fs.writeFileSync(this._tmpFile, md, 'utf8');
-          TmpOpt.add(this._uid);
-        }.bind(this), 10000);
+          this._writeTimeout = window.setTimeout(function() {
+            fs.writeFileSync(this._tmpFile, md, 'utf8');
+            TmpOpt.add(this._uid);
+          }.bind(this), 10000);
+        }
       });
 
-      this._uid = unique();
-      this._tmpFile = getTmpFile(this._uid);
-
-      this.set('tmp', this._uid);
+      this.on('change:fileEntry', function() {
+        this.set({
+          'extname': path.extname(fileEntry) || '.md',
+          'dirname': path.dirname(fileEntry),
+          'basename': path.basename(fileEntry),
+          'updated_at': new Date
+        });
+      });
     },
 
-    load: function(fileEntry, silent) {
+    load: function(silent) {
+      var fileEntry = this.get('fileEntry');
       var md = open(fileEntry), 
           stat = fs.statSync(fileEntry);
 
       silent = silent ? silent : {} ;
 
+      this.set({ markdown: md }, silent);
       this.set(stat, silent);
+    },
+
+    loadTmp: function(uid, silent) {
+      var fileEntry = getTmpFile(uid);
+      var md = open(fileEntry);
+
+      this._uid = uid;
+      this._tmpFile = fileEntry;
+
       this.set({
         'markdown': md,
-        'fileEntry': fileEntry,
-        'extname': path.extname(fileEntry) || '.md',
-        'dirname': path.dirname(fileEntry),
-        'basename': path.basename(fileEntry),
-        'updated_at': new Date
+        'tmp': true,
+        'fileEntry': fileEntry
       }, silent);
+    },
+
+    reload: function(silent) {
+      var fileEntry = this.get('fileEntry');
+      var md = open(fileEntry);
+
+      silent = silent ? silent : {} ;
+
+      this.set({ markdown: md }, silent);
     },
 
     refresh: function() {
@@ -91,7 +114,7 @@ define([
       fs.writeFileSync(fileEntry, this.get('markdown'), 'utf8');
 
       this.load(fileEntry, { silent: true });
-    },
+    }/*,
 
     checkUpdate: function() {
       var fileEntry = this.get('fileEntry');
@@ -112,7 +135,7 @@ define([
           }
         });
       }
-    }
+    }*/
   });
 
   return Model;

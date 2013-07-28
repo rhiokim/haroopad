@@ -70,39 +70,50 @@ requirejs([
     function delayChange() {
       window.clearTimeout(_tid_);
 
-      // window.ee.emit('change.before.markdown', Editor.getValue());
+      window.ee.emit('change.before.markdown', Editor.getValue());
 
       _tid_ = setTimeout(function() {
           nw.file.set('markdown', Editor.getValue());
-          window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
+          // window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
 
-            window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
-          });
+          //   window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+          // });
       }, 100);
     }
 
     nw.on('file.opened', function(file) {
-      var opt = file.toJSON();
+      var opt;
+      file.load();
+      opt = file.toJSON();
 
-      window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
-        Editor.setValue(opt.markdown);
-        
-        Viewer.init(opt);
-        window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+      Editor.setValue(opt.markdown);
+      Viewer.init(opt);
 
-        if (!opt.readOnly) {
-          Editor.on("change", delayChange); 
-        }
+      // window.ee.emit('change.after.markdown', opt.markdown, opt.html, Editor);
+
+      if (!opt.readOnly) {
+        Editor.on('change', delayChange);
+      }
+
+      /* change by external application */
+      file.on('change:mtime', function() {
+        window.ee.emit('file.update', nw.file.get('fileEntry'));
       });
+
+      // window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
+      //   Editor.setValue(opt.markdown);
+        
+      //   Viewer.init(opt);
+      //   window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+
+      //   if (!opt.readOnly) {
+      //     Editor.on("change", delayChange); 
+      //   }
+      // });
     });
 
     nw.file.on('change:html', function() {
        window.ee.emit('change.after.markdown', nw.file.get('markdown'), nw.file.get('html'), Editor);
-    });
-
-    /* change by external application */
-    nw.file.on('change:mtime', function() {
-      window.ee.emit('file.update', nw.file.get('fileEntry'));
     });
 
     if (!file.get('fileEntry')) {
@@ -125,8 +136,10 @@ requirejs([
 
     // });
 
-    window.ee.on('file.reloaded', function(md) {
-      Editor.setValue(md);
+    window.ee.on('reload', function() {
+      nw.file.reload({ silent: true });
+      Editor.setValue(nw.file.get('markdown'));
+      nw.file.trigger('change:markdown');
     });
 
     window.ee.on('file.saved', function(opt) {
