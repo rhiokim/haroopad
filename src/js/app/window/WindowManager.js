@@ -54,10 +54,10 @@ define([
 		realCount++;
 
 		newWin.on('closed', function() {
-			newWin.file.close();
+			this.file.close();
 			
 			for (var prop in windows) {
-				if (prop == newWin.created_at) {
+				if (prop == this.created_at) {
 					windows[prop] = null;
 					delete windows[prop];
 					realCount--;
@@ -86,7 +86,7 @@ define([
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			newWin.resizeTo(config.width, config.height);
+			this.resizeTo(config.width, config.height);
 
 			shadowCount++;
 
@@ -106,8 +106,8 @@ define([
 			left = left + 20;
 			top = top + 20;
 
-			newWin.moveTo(left, top);
-			newWin.focus();
+			this.moveTo(left, top);
+			this.focus();
 		});
 	}
 

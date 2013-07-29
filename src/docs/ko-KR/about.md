@@ -11,10 +11,24 @@
 ### 주요기능
 
 * 크로스 플랫폼을 지원
-* 멀티 마크다운과 확장 기능을 제공
-* HTML, PDF 로 손쉽게 출력
-* 에디터, 라이브 뷰어, 코드 스타일등의 다양한 테마를 지원
-* 외부 콘텐츠(로컬 파일, 웹 콘텐츠)를 손쉽게 포함
+  - Window
+  - Mac OS X
+  - Linux 32/64
+* 멀티 마크다운을 지원
+	- Gitub Flavored Markdown
+	- Smartpants
+* 에디팅 테마를 지원
+	- Solaraized Dark & Light 등 20 여가지의 테마
+	- CodeMirror 기반
+* 라이브 뷰 테마를 지원
+	- less 를 기반으로 한 7 가지의 테마
+	- [markdown-css](https//github.com/rhiokim/markdown-css) 프로젝트 기반
+* 코드 문법 하이라이팅 스타일을 지원
+	- 52 가지의 언어에 대한 문법 강조를 지원
+	- Solaraized, Tomorrow 등 26 가지의 스타일
+	- highlight.js 기반
+* Vim 키 바인딩을 지원
+* PDF, HTML 출력 지원
 
 ### 0.5 버젼에 출시될 기능
 

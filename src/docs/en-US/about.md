@@ -11,10 +11,20 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
 ### Main features
 
 * Support cross platform
-* Multi markdown & extensions
-* Easy Publishing
-* Custom themes & skins
-* Easy import contents
+  - Window
+  - Mac OS X
+  - Linux 32/64
+* MultiMarkdown (GFM) & extensions
+	- Gitub Flavored Markdown
+	- Smartpants
+* Theme for editing
+	- Solaraized Dark & Light based CodeMirror
+* Live Preview themes
+	- 7 themes based [markdown-css](https//github.com/rhiokim/markdown-css)
+* Syntax Highlighting
+	- 52 languages & 26 styles based highlight.js
+* Vim Key-binding
+* Export to PDF, HTML
 
 ### Upcoming features
 
