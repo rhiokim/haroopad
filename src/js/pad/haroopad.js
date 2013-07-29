@@ -142,12 +142,12 @@ requirejs([
     // });
 
     window.ee.on('reload', function() {
-      nw.file.reload({ silent: true });
-      Editor.setValue(nw.file.get('markdown'));
-      nw.file.trigger('change:markdown');
+      file.reload({ silent: true });
+      Editor.setValue(file.get('markdown'));
+      file.trigger('change:markdown');
     });
 
-    nw.file.on('saved', function() {
+    file.on('saved', function() {
       var opt = nw.file.toJSON();
       Viewer.init(opt);
       nw.emit('file.saved', opt);
