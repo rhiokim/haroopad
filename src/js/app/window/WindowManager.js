@@ -118,7 +118,7 @@ define([
 		//이미 열려 있는 파일 일 경우
 		var existWin = getWindowByFile(fileEntry);
 
-		if (existWin) {
+		if (fileEntry && existWin) {
 			existWin.focus();
 			return;
 		}

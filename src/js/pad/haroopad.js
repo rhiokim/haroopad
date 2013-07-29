@@ -175,7 +175,7 @@ requirejs([
     setTimeout(function() {
       process.emit('actived', nw);
       nw.show();
-      window.focus();
+      nw.focus();
     }, 10);
 
     $("#notifier").click(function(e) {
