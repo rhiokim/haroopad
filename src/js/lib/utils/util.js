@@ -16,7 +16,7 @@ function compareVersions(nstr, ostr) {
 	// 0.2.3 0.3.4
 	if( nv.major > ov.major ) return true;
 	if( nv.major == ov.major && nv.minor > ov.minor) return true;
-	if( nv.major == ov.major && nv.minor == ov.minor && nv.patch >= ov.patch) return true;
+	if( nv.major == ov.major && nv.minor == ov.minor && nv.patch > ov.patch) return true;
 
 	return false;
 }
