@@ -1,6 +1,6 @@
 ## Release Haroopad 0.4.8
 
-![](./images/1st-logo.png)
+![](images/1st-logo.png)
 
 **Haroopad** is a document processor for creating web-friendly document in markdown editor.
 
@@ -12,8 +12,8 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
 
 ### Concepts
 
-![](./images/MarkdownDocumentIcon_128x128x32.png '')
-![](./images/MarkdownDocumentIcon_Gray_128x128x32.png '')
+![](images/MarkdownDocumentIcon_128x128x32.png '')
+![](images/MarkdownDocumentIcon_Gray_128x128x32.png '')
 
 1. Anywhere readable document
 2. Anywhere writable document
@@ -32,7 +32,7 @@ Future versions (0.5.x) or later, and will feature a variety that can not be exp
 
 ### Main Features / 0.4.7
 
-![](./images/release-v0.4.8.png)
+![](images/release-v0.4.8.png)
 
 * Support cross platform
   - Window
@@ -53,9 +53,9 @@ Future versions (0.5.x) or later, and will feature a variety that can not be exp
 ### Up Coming Features / 0.5
 
 * Send email
-  - ![](./images/sending-email.png)
+  - ![](images/sending-email.png)
 * Post to tumblr
-  - ![](./images/post-to-tumblr.png)
+  - ![](images/post-to-tumblr.png)
 
 ### Download & Install
 
