@@ -1,4 +1,4 @@
-## Release Haroopad 0.4.8
+## First official release v0.4.8
 
 ![](images/1st-logo.png)
 

@@ -1,4 +1,4 @@
-# Haroopad
+# Haroopad - The next document processor
 
 **Haroopad** is a document processor for creating web-friendly document in markdown editor.
 
