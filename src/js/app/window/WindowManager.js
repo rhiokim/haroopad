@@ -112,8 +112,10 @@ define([
 	}
 
 	function open(file) {
-		var newWin;
-		var fileEntry = file && file.get('fileEntry');
+		var fileEntry, newWin;
+
+		file = (typeof file === 'string') ? File.open(file) : file;
+		fileEntry = file && file.get('fileEntry');
 
 		//이미 열려 있는 파일 일 경우
 		var existWin = getWindowByFile(fileEntry);
