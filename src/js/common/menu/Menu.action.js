@@ -56,14 +56,14 @@ MenuBarAction = function () {
   Action.append(
     new gui.MenuItem({
       label: 'Header',
-      icon: 'img/menu/header.png',
+      // icon: 'img/menu/header.png',
       submenu: MenuBarActionHeader()
     })
   );
 	Action.append(
     new gui.MenuItem({
       label: 'Strong ................ **',
-      icon: 'img/menu/bold.png',
+      // icon: 'img/menu/bold.png',
       click: function() {
         window.parent.ee.emit('menu.action.strong');
       }
@@ -72,7 +72,7 @@ MenuBarAction = function () {
 	Action.append(
     new gui.MenuItem({
       label: 'Emphasize .......... *',
-      icon: 'img/menu/italic.png',
+      // icon: 'img/menu/italic.png',
       click: function() {
         window.parent.ee.emit('menu.action.emphasize');
       }
