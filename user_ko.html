@@ -1,0 +1,703 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Haroopad - The next documant processor (base markdown)</title>
+    <meta name="description" content="Haroopad, is a document processor for creating web-friendly document in markdown editor. You can also based on the mark-down, to create Web documents, blogs, as well as e-mail, the report documents expert. You can then support Windows, Linux, the Mac OS, you get the experience of editing the same document markdown in the desired platform.">
+    <meta name="author" content="Rhio Kim">
+    <meta name="keywords" content="markdown, editor, haroopad, haroopress" /><link rel="image_src" href="https://pad.haroopress.com/assets/images/logo-small.png" />
+
+    <meta name="generator" content="sublime text" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="Haroopad is a document processor for creating web-friendly document in markdown editor">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://pad.haroopress.com">
+    <meta property="og:image" content="http://pad.haroopress.com/assets/images/logo-small.png">
+    <meta property="og:site_name" content="Haroopad">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="http://pad.haroopress.com">
+    <meta name="twitter:title" content="Haroopad is a document processor for creating web-friendly document in markdown editor">
+    <meta name="twitter:description" content="Haroopad is a document processor for creating web-friendly document in markdown editor.  You can also based on the markdown, to create Web documents, blogs, as well as e-mail, the report documents expert.  And then support Windows, Linux, the Mac OS, you get the experience of editing the same document markdown in the desired platform.">
+    <meta name="twitter:image" content="http://pad.haroopress.com/assets/images/logo-small.png">
+    <meta name="twitter:creator" content="@haroopad">
+
+    <meta name="description" content="Haroopad is a document processor for creating web-friendly document in markdown editor.  You can also based on the markdown, to create Web documents, blogs, as well as e-mail, the report documents expert.  And then support Windows, Linux, the Mac OS, you get the experience of editing the same document markdown in the desired platform.">
+    <link rel="image_src" href="http://pad.haroopress.com/assets/images/logo-small.png" />
+
+    <!-- Loading Bootstrap -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/themes/default/default.css" rel="stylesheet">
+    <link href="assets/css/themes/light/light.css" rel="stylesheet">
+    <link href="assets/css/themes/dark/dark.css" rel="stylesheet">
+    <link href="assets/css/themes/bar/bar.css" rel="stylesheet">
+    <link href="assets/css/themes/flat/flat.css" rel="stylesheet">
+    <link href="assets/css/nivo-slider.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="assets/css/flat-ui.css" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/haroopad.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+    <div style="background-color: #1ABC9C;">
+      <div class="container">
+        <div class="navbar navbar-clouds" style="margin-top: 25px;">
+          <div class="navbar-inner">
+            <div class="container">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                  <li>
+                    <img src="assets/images/logo-small.png" class="logo"/>
+                  </li>
+                  <li>
+                    <a href="#features">
+                      Features
+                      <span class="navbar-unread">1</span>
+                    </a>
+                    <!-- <ul>
+                      <li><a href="#">Seamless on Cross Platform</a></li>
+                      <li><a href="#">MultiMarkdown + Extensions</a></li>
+                      <li><a href="#">Easy Import Contents</a></li>
+                      <li><a href="#">Themes, Skin, Components</a></li>
+                      <li><a href="#">Social Stream</a></li>
+                      <li><a href="#">Easy Publishing</a></li>
+                    </ul> --> <!-- /Sub menu -->
+                  </li>
+                  <li>
+                    <a href="#download">
+                      Download
+                      <span class="navbar-unread">1</span>
+                    </a>
+                    <ul>
+                      <li><a href="https://www.dropbox.com/s/498tpv91tso9ccy/haroopad-v0.4.8-i386.msi" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'window']);" target="_blank">Window 7, 8 (32bit)</a></li>
+                      <li><a href="https://www.dropbox.com/s/1atxt755y0wkffa/haroopad-v0.4.8.dmg" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'mac']);" target="_blank">Mac OS (32bit)</a></li>
+                      <li><a href="https://www.dropbox.com/s/eieqz1qag3lg76e/haroopad-v0.4.8_i386.tar.gz" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'linux32bin']);" target="_blank">Linux Binary (32bit)</a></li>
+                      <li><a href="https://www.dropbox.com/s/g4c4yp5kp42rnu3/haroopad-v0.4.8-i386.deb" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'linux32deb']);" target="_blank">Linux Debian Package (32bit)</a></li>
+                      <li><a href="https://www.dropbox.com/s/k020giml8xl5qm8/haroopad-v0.4.8_amd64.tar.gz" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'linux64bin']);" target="_blank">Linux Binary (64bit)</a></li>
+                      <li><a href="https://www.dropbox.com/s/seyaly8n1tyl5b4/haroopad-v0.4.8_amd64.deb" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'linux64deb']);" target="_blank">Linux Debian Package (64bit)</a></li>
+                    </ul> <!-- /Sub menu -->
+                  </li>
+                  <li>
+                    <a href="#support">
+                      Support
+                      <span class="navbar-unread">new</span>
+                    </a>
+                    <ul>
+                      <li><a href="/page.html" onclick="_gaq.push(['_trackEvent', 'user page', 'navi', 'manual']);">Menual</a></li>
+                      <li><a href="https://github.com/rhiokim/haroopad/issues" target="_blank">Issue Tracker</a></li>
+                      <li><a href="http://haroopad.userecho.com" onclick="_gaq.push(['_trackEvent', 'user page', 'navi', 'userecho']);" target="_blank">User Echo</a></li>
+                      <li><a href="page.html#faq" onclick="_gaq.push(['_trackEvent', 'user page', 'navi', 'faq']);">FAQ</a></li>
+                    </ul> <!-- /Sub menu -->
+                  </li>
+                  <!-- <li>
+                    <a href="#social">
+                      Social
+                      <span class="navbar-unread">1</span>
+                    </a>
+                  </li> -->
+                  <li>
+                    <a href="#credits">
+                      Credits
+                      <span class="navbar-unread">1</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="page.html">
+                      Blog
+                      <span class="navbar-unread">3</span>
+                    </a>
+                  </li>
+                </ul>
+              </div><!--/.nav-collapse -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="span12 intro">
+            <div class="header-intro">
+              <span class="header-desc">
+                <span class="frame" style="">
+                  <h2>하루패드<img src="assets/images/beta.png"></h2>
+                  <p>는 새로운 문서 도구로 웹 친화적인 문서 작성을 위한 마크다운 에디터입니다.</p>
+
+                  <p>
+                    마크다운을 기반으로 
+                    웹 문서, 블로그, 메일뿐만 아니라 전문가적인 리포팅 문서를 작성할 수도 있습니다.
+                  </p>
+                  <p>
+                    윈도우, 리눅스, 맥 운영체제를 지원하여 여러분이 원하는 플랫폼에서 동일한 마크다운 문서편집 경험을 얻을 수 있습니다. 
+                  </p>
+                  <br/>
+                  <p>
+                    <a href="page.html#markdown" class="btn btn-large">Markdown?</a>
+                    <a href="page.html" class="btn btn-large btn-info">Learn Haroopad <span class="fui-eye-24"></span></a>
+                  </p>
+                </span>
+              </span>
+              <div class="header-img">
+                <img src="assets/images/platforms.png" alt="platforms" >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a name="features"></a>
+    </div>
+    <div class="rule-b" style="margin-top: -35px;">
+      <i></i>
+    </div>
+
+    <div class="container">
+      <h1 class="demo-panel-title page-header">Main Features</h1>
+      <div class="row demo-tiles">
+        <div class="span1">
+          <img alt="" src="assets/images/illustrations/compass.png" style="width:52px; height:52px;" class="pull-right"/>
+        </div>
+        <div class="span5">
+          <h4>크로스 플랫폼 지원</h4>
+          <strong>하루패드</strong>는 윈도우 7/8(32bit), 맥(32bit), 리눅스(Ubuntu 32, 64bit) 환경에서 동일한 편집 환경을 제공합니다.
+        </div>
+        <div class="span1">
+          <img alt="" src="assets/images/illustrations/colors.png" style="width:52px; height:52px;" class="pull-right"/>
+        </div>
+        <div class="span5">
+          <h4>멀티 마크다운과 확장기능</h4>
+          멀티 마크다운과 확장 문법은 <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">마크다운 표준 문법</a> 이외에 모던한 문서 편집에 필요한 경량 마크업을 추가로 제공합니다.
+        </div>
+      </div>
+      <div class="row demo-tiles">
+        <div class="span1">
+          <img alt="" src="assets/images/illustrations/map.png" style="width:52px; height:52px;" class="pull-right"/>
+        </div>
+        <div class="span5">
+          <h4>다양한 포맷 변환 지원 <small>(예정)</small></h4>
+          PDF, HTML, 위키, EPUB, ReStructured Text, RTF 등으로 변환 출력이 가능하여 마크다운으로 작성한 글을 다양한 스크린에서 볼 수 있습니다.
+        </div>
+        <div class="span1">
+          <img alt="" src="assets/images/illustrations/retina.png" style="width:52px; height:52px;" class="pull-right"/>
+        </div>
+        <div class="span5">
+          <h4>테마 기능 지원</h4>
+          현대적인 에디팅 테마, 마크다운 테마 그리고 코드 구문 강조 기능을 제공하여 내 문서를 더욱 강력하고 가독성이 뛰어난 문서로 만들 수 있습니다.
+        </div>
+      </div>
+      <div class="row demo-tiles">
+        <div class="span1">
+          <img alt="" src="assets/images/illustrations/calendar.png" style="width:52px; height:52px;" class="pull-right"/>
+        </div>
+        <div class="span5">
+          <h4>손쉬운 콘텐츠 임베딩 <small>(예정)</small></h4>
+          언젠가부터 우리가 생산하는 대부분의 기록은 유튜브, 블로그, 슬라이드쉐어, 플리커와 같은 곳에 저장되어 있습니다. 이런 콘텐츠를 내 문서에 손쉽게 추가할 수 있습니다.
+        </div>
+        <div class="span1">
+          <img alt="" src="assets/images/illustrations/share.png" style="width:52px; height:52px;" class="pull-right"/>
+        </div>
+        <div class="span5">
+          <h4>블로깅과 메일링 지원 <small>(예정)</small></h4>
+          하루패드는 작성된 문서를 보이는 그대로 메일로 보내거나 워드프레스, 텀블러와 같은 콘텐츠 관리 시스템으로 퍼블리싱을 지원합니다.
+        </div>
+      </div>
+        
+      <a name="download"></a>
+      <div class="rule"><i></i></div>
+
+      <!--h1 class="demo-panel-title page-header">Service Plan</h1>
+      <div class="row demo-tiles">
+        <div class="span3">
+          <div class="tile">
+            <img class="tile-image big-illustration" alt="" src="assets/images/illustrations/compass.png" />
+            <h3 class="tile-title">App is Free</h3>
+            <p>커뮤니티 사용자들에게는 제한이 없음</p>
+            <a class="btn btn-large btn-block" href="#">Free</a>
+          </div>
+        </div>
+
+        <div class="span3">
+          <div class="tile">
+            <img class="tile-image" alt="" src="assets/images/illustrations/infinity.png" />
+            <h3 class="tile-title">Plugin & Component</h3>
+            <p>컴포넌트, 플러그인을 이용해 좀더 강력한 문서 도구로 활용</p>
+            <a class="btn btn-large btn-block" href="#">Free</a>
+          </div>
+        </div>
+
+        <div class="span3">
+          <div class="tile">
+            <img class="tile-image" alt="" src="assets/images/illustrations/colors.png" />
+            <h3 class="tile-title">Cloud Service</h3>
+            <p>기업형 문서 도구, 스토리지 사용 무제한</p>
+            <a class="btn btn-primary btn-large btn-block" href="#">Get Pro</a>
+          </div>
+        </div>
+
+        <div class="span3">
+          <div class="tile tile-hot">
+            <img class="tile-image big-illustration" alt="" src="assets/images/illustrations/share.png" />
+            <h3 class="tile-title">Expert Publishing</h3>
+            <p>전문가 문서 작성을 위한 커스터마이징 및 교육 플랜</p>
+            <a class="btn btn-primary btn-large btn-block" href="#">Get Pro</a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="rule"><i></i></div-->
+
+      <!-- <h1 class="demo-panel-title page-header">Downloads</h1> -->
+      <div id="download-area" class="row" style="text-align: center; margin-top:30px">
+        <div class="span4">
+          <img src="assets/images/windows-8-logo.jpg" width="160" class="demo-tiles">
+          </br>
+          <h4>window</h4>
+          <span><a href="https://www.dropbox.com/s/498tpv91tso9ccy/haroopad-v0.4.8-i386.msi" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'window']);" target="_blank">v0.4.8-i386.msi</a> (32bit)</span>
+        </div>
+        <div class="span4">
+          <img src="assets/images/Apple2.png" width="138" class="demo-tiles">
+          </br>
+          <h4>mac</h4>
+          <span><a href="https://www.dropbox.com/s/1atxt755y0wkffa/haroopad-v0.4.8.dmg" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'mac']);" target="_blank">v0.4.8.dmg</a> (32bit)</span>
+        </div>
+        <div class="span4">
+          <img src="assets/images/Ubuntu_logo_copyleft_1.svg.png" width="160" class="demo-tiles">
+          </br>
+          <h4>linux</h4>
+          <span><a href="https://www.dropbox.com/s/eieqz1qag3lg76e/haroopad-v0.4.8_i386.tar.gz" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'linux32bin']);" target="_blank">v0.4.8_i386.tar.gz</a> / <a href="https://www.dropbox.com/s/g4c4yp5kp42rnu3/haroopad-v0.4.8-i386.deb" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'linux32deb']);" target="_blank">v0.4.8-i386.deb</a></span><br/>
+          <span><a href="https://www.dropbox.com/s/k020giml8xl5qm8/haroopad-v0.4.8_amd64.tar.gz" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'linux64bin']);" target="_blank">v0.4.8_amd64.tar.gz</a> / <a href="https://www.dropbox.com/s/seyaly8n1tyl5b4/haroopad-v0.4.8_amd64.deb" onclick="_gaq.push(['_trackEvent', 'user page', 'download', 'linux64deb']);" target="_blank">v0.4.8_amd64.deb</a></span>
+        </div>
+
+        <a name="support"></a>
+      </div>
+
+      <div class="rule-b"><i></i></div>
+
+      <h1 class="demo-panel-title page-header">Support</h1>
+      <div class="row demo-tiles">
+        <div class="span12">
+          <div class="row">
+            <div class="span2">
+              <h5>Usage</h5>
+            </div>
+            <div class="span5">
+              <ul>
+                <li>
+                  <a href="page.html#editing-markdown" onclick="_gaq.push(['_trackEvent', 'user page', 'section', 'link1']);">Editing Markdown & Multimarkdown</a>
+                </li>
+                <li>
+                  <a href="page.html#load-and-save" onclick="_gaq.push(['_trackEvent', 'user page', 'section', 'link2']);">Load & Save</a>
+                </li>
+                <!-- <li>
+                  <a href="page.html#publishing-sharing">Publishing & Sharing</a>
+                </li> -->
+                <li>
+                  <a href="page.html#configuration-viewer" onclick="_gaq.push(['_trackEvent', 'user page', 'section', 'link3']);">Configuration Viewer</a>
+                </li>
+              </ul>
+            </div>
+            <div class="span5">
+              <ul>
+                <li>
+                  <a href="page.html#preferences" onclick="_gaq.push(['_trackEvent', 'user page', 'section', 'link4']);">Preferences</a>
+                </li>
+                <li>
+                  <a href="page.html#show-shortcuts" onclick="_gaq.push(['_trackEvent', 'user page', 'section', 'link5']);">Show Shortcuts</a>
+                </li>
+                <li>
+                  <a href="page.html#configuration-editor" onclick="_gaq.push(['_trackEvent', 'user page', 'section', 'link6']);">Configuration Editor</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <br/>
+          <p class="text-center">
+            <a href="https://twitter.com/intent/tweet?original_referer=http://pad.haroopress.com&tw_p=tweetbutton&text=via @haroopad %23feedback" class="btn btn-large btn-success" target="_blank" data-placement="bottom" data-original-title="<p>많은 피드백은 오픈소스를 성장시킵니다. 트윗을 날려주시면 실시간으로 반응합니다. :-)</p>"><span class="fui-bubble-24"></span> Feedback! <!-- 사용해 보니 어떠세요? --></a>
+            <a href="http://haroopad.userecho.com" class="btn btn-large btn-danger" target="_blank" data-placement="bottom" data-original-title="<p>사용하시다가 발생한 오류나 불편/개선 사항은 언제든지 haroopad.userecho.com 에 남겨주세요.:-)</p>"><span class="fui-eye-24"></span> Bug Reporting <!-- 오류나 불편사항 있으세요? --></a>
+          </p>
+        </div>
+        <!-- <div class="span12">
+          <div class="row">
+            <div class="span2">
+              <h5>FAQ</h5>
+            </div>
+            <div class="span5">
+              <ul>
+                <li>
+                  <a href="page.html#">How to import my external contents?</a>
+                </li>
+                <li>
+                  <a href="page.html#">How to export my content to other services?</a>
+                </li>
+              </ul>
+            </div>
+            <div class="span5">
+              <ul>
+                <li>
+                  <a href="page.html#">How can save my documents to blog?</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+        <!--div class="span12">
+          <div class="row">
+            <div class="span2">
+              <h5>Hacking</h5>
+            </div>
+            <div class="span5">
+              <ul>
+                <li>
+                  <a href="page.html#customizing-theme">Customizing my theme</a>
+                </li>
+                <li>
+                  <a href="page.html#">Create addon, component</a>
+                </li>
+              </ul>
+            </div>
+            <div class="span5">
+              <ul>
+                <li>
+                  <a href="page.html#">Preferences</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div-->
+        <div class="span12">
+          <div class="row">
+            <div class="span2">
+            </div>
+            <div class="span10">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div id="upcoming" style="">
+    <div class="rule" style=""><i></i></div>
+    <div class="container">
+      <h1 class="demo-panel-title page-header" style="">Up Coming Features</h1>
+      <div class="row demo-tiles">
+        <div class="span12">
+          <h3>가독성이 뛰어난 메일 보내기 기능</h3>
+        </div>
+        <div class="span4">
+          <p>
+          본래 <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" style="">마크다운</a>은 메일 작성 시 버릇처럼 사용하는 표현식에서 착안해 만들어졌습니다.</p>
+
+          <p>#, **, -, > 등의 기호는 텍스트 위주의 메일에서 좀더 나은 가독성을 위해서
+            경량의 표현식을 갖은 마크다운은 실제 메일에서 사용되는 경우는 극히 드뭅니다.</p>
+
+          <p>그래서 하루패드에서는 이런 점을 감안해 마크다운 문서가 변환되 표현되는 문서 그대로를
+            메일로 보낼 수 있는 기능을 곧 출시할 예정입니다.</p>
+
+          <p>이젠 메일을 작성할 때 위지윅의 불편함을 덜고 가독성이 더 뛰어난 메일을 
+            하루패드에서 보내보세요. </p>
+
+          <p> 메일을 통해 보내는 사람과 받는 사람이 같은 생각을 할 수 있게 될 것입니다.:-)</p>
+        </div>
+        <div class="span8">
+          <img src="/assets/images/sending-email.png" />
+        </div>
+      </div>
+      <div class="row demo-tiles">
+        <div class="span12">
+          <h3>메일 기능에서 착안된 블로그 포스팅</h3>
+        </div>
+        <div class="span4">
+
+          <p>마크다운은 웹과 매우 친화적인 경량의 텍스트 문서를 위한 마크업입니다.</p>
+          
+          <p>Github 를 통해 널리 알려진 마크다운 포맷은 메일뿐만 아니라 블로그, 개발문서, 위키 등에도 많이 활용될 수 있게 되었습니다.
+          </p>
+
+          <p>마크다운은 자체로의 표현법보다 HTML 로 변환되었을 때 더욱 강력합니다.</p>
+          
+          <p>이러한 확장성을 이용해 마크다운을 지원하는 텀블러 블로깅 기능을 내장했습니다. 하루패드에서 
+          이젠 블로깅도 가능합니다. 참조 <a href="http://www.tumblr.com/docs/en/email_publishing" target="_blank">"메일을 이용한 포스팅"</a>
+          </p>
+
+          <p>향후 좀더 많은 블로그 시스템과의 연동 계획도 가지고 있습니다.</p>
+        </div>
+        <div class="span8">
+          <img src="/assets/images/post-to-tumblr.png" />
+        </div>
+      </div>
+      <div class="text-center">
+        <iframe src="http://player.vimeo.com/video/70762354?title=0&amp;byline=0&amp;portrait=0" width="770" height="433" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+      </div>
+    </div>
+    <div class="rule-b" style="margin"><i></i></div>
+  </div>
+
+    <div class="container">
+      <h1 class="demo-panel-title page-header">More features coming</h1>
+      <div class="row demo-tiles">
+        <div class="span2">
+          <img src="/assets/images/Haroopad-Circle-150.png" style="padding-top:50px"/>
+        </div>
+        <div class="span6">
+          <h3>Vision</h3>
+          <p>
+            하루패드의 목표는 단순합니다. <strong>웹 친화적인 문서 편집 도구</strong>입니다.
+          </p>
+          
+          <p>
+            앞으로 문서는 파일 형태의 문서보다 웹에 저장된 디지털 콘텐츠를 바탕으로 작성되는 웹 문서가 더욱 많아질 것입니다. 
+          </p>
+          <p>
+            더불어 오프라인 문서에서 어려운 Semantic 과 HTML5 의 표현력을 그대로 문서에 내포할 수 있게 됩니다.
+          </p>
+
+          <p>
+            하루패드는 기존의 컨텐츠 메니지먼트 시스템과의 연계와 더불어 클라우드 시스템과의 연동, 소셜라이징, 협업등은 기본으로 문서 편집의 새로운 영역에 연구와 개발을 진행할 예정입니다.
+          </p>
+          <p class="text-warning">
+            하루패드 앱을 사용해 보고 편리하고 유용하다 생각되신다면 개발이 유지될 수 있도록 도와주세요.
+          </p>
+          <strong>알림!</strong> <u>기부에 참여해 주신 모든 분들께는 앞으로 출시 예정인 베타뿐만 아니라 1.0버젼 라이센스도 무료로 제공될 예정입니다.</u>
+        </div>
+        <div class="span4">
+          <h3>Donation</h3>
+          <!-- <p>
+            기부는 <strong>Paypal</strong> 로 이루어집니다.
+          </p> -->
+          <p>
+            <strong>"하루패드"</strong>의 개발자의 노고와 발전 가능성에 투자하기
+          </p>
+          <p>
+            <!-- <a href="https://twitter.com/intent/tweet?original_referer=http://pad.haroopress.com/page.html&tw_p=tweetbutton&text=하루패드 유용하게 쓸께요. @haroopad 고마워요!. 언제 커피어(or 비어) 한잔해요. 제가 살께요.:-) %23coffeeWithYou" class="btn btn-large btn-block btn-warning">커피(or 비어) 한잔 후원하기 :-)</a> -->
+            <a href="https://twitter.com/intent/tweet?original_referer=http://pad.haroopress.com/page.html&tw_p=tweetbutton&text=하루패드 유용하게 쓸께요. @haroopad 고마워요!. 언제 커피(or 비어) 한잔해요. 제가 살께요.:-) %23coffeeWithYou" class="btn btn-large btn-block btn-warning" onclick="_gaq.push(['_trackEvent', 'user page', 'donate', 'coffee']);">커피(or 비어) 한잔 후원하기 :-)</a>
+          </p>
+
+          <br/>
+          <p>
+            그리고 <strong>페이팔</strong> 후원하기.
+          </p>
+          <p>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=F7A6CN8KBMF7J" class="btn btn-large btn-primary" target="_blank" onclick="_gaq.push(['_trackEvent', 'user page', 'donate', '$5']);">$5</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FFZRJ6QVASMZJ" class="btn btn-large btn-primary" target="_blank" onclick="_gaq.push(['_trackEvent', 'user page', 'donate', '$10']);">$10</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FEFMLNAMJQJ86" class="btn btn-large btn-primary" target="_blank" onclick="_gaq.push(['_trackEvent', 'user page', 'donate', '$25']);">$25</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4VXMBSMX2CFM6" class="btn btn-large btn-primary" target="_blank" onclick="_gaq.push(['_trackEvent', 'user page', 'donate', '$50']);">$50</a>
+          </p>
+          <p>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=88WE6QJEYGLW2" class="btn btn-large btn-primary" target="_blank" onclick="_gaq.push(['_trackEvent', 'user page', 'donate', '$100']);">$100</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y6K5XFSNLTQRE" class="btn btn-large btn-primary" target="_blank" onclick="_gaq.push(['_trackEvent', 'user page', 'donate', '$200']);">$200</a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3SHSPHGUGYWH4" class="btn btn-large btn-primary" target="_blank" onclick="_gaq.push(['_trackEvent', 'user page', 'donate', '$500']);">$500</a>
+          </p>
+
+          <p>
+            그리고 <strong>Gittip</strong> 으로 후원하기.
+          </p>
+          
+          <p>
+            <iframe style="border: 0; margin: 0; padding: 0;"
+        src="https://www.gittip.com/rhio.kim/widget.html"
+        width="48pt" height="22pt"></iframe>
+          </p>
+        </div>
+        
+        <div class="offset2 span10">
+        </div>
+        <a name="social"></a>
+
+      </div>
+
+      <div class="rule"><i></i></div>
+
+      <!-- <h1 class="demo-panel-title page-header">Social Actions</h1> -->
+      <div class="row demo-tiles">
+        <!-- <div class="span4">
+          <blockquote class="twitter-tweet"><p>하루패드는 마크다운을 지원하고 크로스 플랫폼을 지원하는 웹 진화적인 문서 편집도구에요.앞으로 마크다운과 웹 기술을 이용한 유용한 편집도구가 될께요.</p>&mdash; haroopad (@haroopad) <a href="https://twitter.com/haroopad/status/337257711827841024">May 22, 2013</a></blockquote>
+        </div>
+        <div class="span4">
+          <blockquote class="twitter-tweet"><p>하루패드는 마크다운을 지원하고 크로스 플랫폼을 지원하는 웹 진화적인 문서 편집도구에요.앞으로 마크다운과 웹 기술을 이용한 유용한 편집도구가 될께요.</p>&mdash; haroopad (@haroopad) <a href="https://twitter.com/haroopad/status/337257711827841024">May 22, 2013</a></blockquote>
+        </div>
+        <div class="span4">
+          <blockquote class="twitter-tweet"><p>하루패드는 마크다운을 지원하고 크로스 플랫폼을 지원하는 웹 진화적인 문서 편집도구에요.앞으로 마크다운과 웹 기술을 이용한 유용한 편집도구가 될께요.</p>&mdash; haroopad (@haroopad) <a href="https://twitter.com/haroopad/status/337257711827841024">May 22, 2013</a></blockquote>
+        </div>
+        <div class="span6">
+          <blockquote class="twitter-tweet"><p>윈도우에서 멀티 마크다운 지원하는 에디터가 없어서 불편했는데 단비같네요.기대할께용~ <a href="https://twitter.com/search/%23하루패드">#하루패드</a></p>&mdash; search2.0 (@mklove81) <a href="https://twitter.com/mklove81/status/337259877418278914">May 22, 2013</a></blockquote>
+        </div>
+        <div class="span6">
+          <blockquote class="twitter-tweet"><p>윈도우에서 멀티 마크다운 지원하는 에디터가 없어서 불편했는데 단비같네요.기대할께용~ <a href="https://twitter.com/search/%23하루패드">#하루패드</a></p>&mdash; search2.0 (@mklove81) <a href="https://twitter.com/mklove81/status/337259877418278914">May 22, 2013</a></blockquote>
+        </div> -->
+        <div class="span12">
+          <h3>Special thanks</h3>
+          <ul class="thumbnails">
+            <li class="span2">
+              <div class="thumbnail">
+                <img src="https://si0.twimg.com/profile_images/1690552089/image_bigger.jpg" alt="">
+                <p class="text-center">
+                  <a href="http://twitter.com/soomtong" target="_blank">
+                    @soomtong
+                  </a>
+                </p>
+              </div>
+            </li>
+            <li class="span2">
+              <div class="thumbnail">
+                <img src="https://si0.twimg.com/profile_images/1268622044/fantalon_grayscale_full_bigger.png" alt="">
+                <p class="text-center">
+                  <a href="http://twitter.com/fantalon" target="_blank">
+                    @fantalon
+                  </a>
+                </p>
+              </div>
+            </li>
+            <li class="span2">
+              <div class="thumbnail">
+                <img src="https://si0.twimg.com/profile_images/1860100222/____5_bigger.jpg" alt="">
+                <p class="text-center">
+                  <a href="http://twitter.com/insanehong" target="_blank">
+                    @insanehong
+                  </a>
+                </p>
+              </div>
+            </li>
+            <li class="span2">
+              <div class="thumbnail">
+                <img src="https://si0.twimg.com/profile_images/1509166051/profile_image_bigger.jpg" alt="">
+                <p class="text-center">
+                  <a href="http://twitter.com/r2fresh" target="_blank">
+                    @r2fresh</a>
+                </p>
+              </div>
+            </li>
+            <li class="span2">
+              <div class="thumbnail">
+                <img src="https://si0.twimg.com/profile_images/1104822057/41717_1407487919_1584_q_bigger.jpg" alt="">
+                <p class="text-center">
+                  <a href="http://twitter.com/raccoonyy" target="_blank">
+                    @raccoonyy
+                  </a>
+                </p>
+              </div>
+            </li>
+            <li class="span2">
+              <div class="thumbnail">
+                <img src="https://si0.twimg.com/profile_images/2398976996/9nmqu8qcr4h9dhguqyz4_bigger.png" alt="">
+                <p class="text-center">
+                  <a href="http://twitter.com/semtlnori" target="_blank">
+                    @semtlnori
+                  </a>
+                </p>
+              </div>
+            </li>
+            <li class="span2">
+              <div class="thumbnail">
+                <img src="https://si0.twimg.com/profile_images/3270491568/fad800226206db8b8a668d81dddf3b6d_bigger.jpeg" alt="">
+                <p class="text-center">
+                  <a href="http://twitter.com/whdvl" target="_blank">
+                    @whdvl
+                  </a>
+                </p>
+              </div>
+            </li>
+            <li class="span10">
+              <div class="thumbnail text-center">
+                <img src="/assets/images/logo-small.png" alt="" style="display:inline-block;">
+                <img src="https://si0.twimg.com/profile_images/1131488552/b0042375_49b78b8496a8f_copy_bigger.jpg" alt="" style="display:inline-block;">
+                <p class="text-center">
+                  Thank you for your contributions.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+        
+      <a name="credits"></a>
+    </div>
+
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="span7">
+            <h3 class="footer-title">Subscribe</h3>
+            <p>Do you like this freebie? Want to get more stuff like this?<br/>
+              Subscribe to haroopad news and updates to stay tuned on easy and nice documentation.<br/>
+              Go to: <a href="http://pad.haroopress.com" target="_blank">pad.haroopress.com</a>, Twitter: <a href="https://twitter.com/haroopad" target="_blank">@haroopad</a>
+            </p>
+
+            <p class="pvl">
+              <ul style="list-style-type:none; margin: 0;">
+                <li class="google pull-left">
+                  <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+                  <g:plusone size="medium"></g:plusone>
+                </li>
+                <li class="pull-left">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="http://pad.haroopress.com" data-text="" data-via="haroopress" data-hashtags="">Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </li>
+                <li class="facebook pull-left">
+                  <div id="fb-root"></div>
+                  <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) {return;}
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));</script>
+                  <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-href="http://pad.haroopress.com"></div>
+                </li>
+              </ul>
+            </p>
+
+            <a class="footer-brand" href="http://pad.haroopress.com" target="_blank">
+              <!-- <img src="images/footer/logo.png" alt="Designmodo.com" /> -->
+            </a>
+          </div> <!-- /span7 -->
+
+          <div class="span5">
+            <div class="footer-banner">
+              <h3 class="footer-title">Think about Haroopad</h3>
+              <ul>
+                <li>Markdown & Multimarkdown</li>
+                <li>Cloud Based Documentation & CMS</li>
+                <li>Seemless Documentation Experience</li>
+              </ul>
+              <h3 class="footer-title">Contacts</h3>
+              <a href="mailto:rhio.kim+haroopad@gmail.com">rhio.kim@gmail.com</a>, <a href="https://twitter.com/haroopad" target="_blank">@haroopad</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Load JS here for greater good =============================-->
+    <!--[if lt IE 8]>
+      <script src="assets/js/icon-font-ie7.js"></script>
+      <script src="assets/js/icon-font-ie7-24.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-31231507-3']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>
