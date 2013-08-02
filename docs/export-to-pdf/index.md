@@ -4,7 +4,7 @@
 
 ![](http://wwwimages.adobe.com/www.adobe.com/downloadcenter/images/reader/reader_128.jpg)
 
-컴퓨터에서 PDF 문서를 볼 수 있다면 이미 설치되어 있다. 설치되지 않았다면  http://get.adobe.com/kr/reader 에서 무료로 얻을 수 있으니 다운로드 후 설치하자.
+컴퓨터에서 PDF 문서를 볼 수 있다면 이미 설치되어 있다. 설치되지 않았다면  http://get.adobe.com/reader 에서 무료로 얻을 수 있으니 다운로드 후 설치하자.
 
 설치가 완료되었다면 마크다운 문서를 불러와 PDF 로 저장해보자.
 
