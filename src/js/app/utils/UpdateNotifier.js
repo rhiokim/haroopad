@@ -9,8 +9,9 @@ define([
 		var url = info.upgrade,
 			currVersion = AppConfig.version;
 
-		function upgrade(newVersion, force) {
-			if (currVersion == newVersion) {
+		function updateCheck(newVersion, force) {
+			if (!compareVersions(newVersion, currVersion)) {
+			// if (currVersion == newVersion) {
 				if (force) process.emit('up.to.date.haroopad', currVersion);
 				return;
 			}
@@ -26,7 +27,7 @@ define([
 					try {
 						serverInfo = JSON.parse(chunk);
 
-						upgrade(serverInfo.version, force);
+						updateCheck(serverInfo.version, force);
 					} catch(e) {
 						serverInfo = {};
 					}

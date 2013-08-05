@@ -172,6 +172,8 @@ define([
 			window.ee.on('context.select.all', function() {
 			  editor.setSelection(0, 2);
 			});
+		} else {
+			editor.setOption('readOnly', true);
 		}
 
 		/**
