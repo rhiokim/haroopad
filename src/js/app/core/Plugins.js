@@ -5,8 +5,9 @@ define([
 		'core/plugins/SlideShare',
 		'core/plugins/SpeakerDeck',
 		'core/plugins/Gist',
-		'core/plugins/SoundCloud'
-	], function(Youtube, Vimeo, Twitter, SlideShare, SpeakerDeck, Gist, SoundCloud) {
+		'core/plugins/SoundCloud',
+		'core/plugins/Map.Google'
+	], function(Youtube, Vimeo, Twitter, SlideShare, SpeakerDeck, Gist, SoundCloud, Gmap) {
 
 	return {
 		youtube: Youtube,
@@ -16,6 +17,7 @@ define([
 		slideshare: SlideShare,
 		speakerdeck: SpeakerDeck,
 		gist: Gist,
-		soundcloud: SoundCloud 
+		soundcloud: SoundCloud,
+		gmap: Gmap 
 	};
 });
