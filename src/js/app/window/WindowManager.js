@@ -1,11 +1,13 @@
 define([
 	'exports',
-	'file/File'
-], function(exports, File) {
+	'file/File',
+	'file/Recents'
+], function(exports, File, Recents) {
 
 	var gui = require('nw.gui');
 
 	var windows = {},
+		windowsByFile = {},
 		openning = false,
 		realCount = 0,
 		shadowCount = 0,
@@ -16,35 +18,35 @@ define([
 	var top = config.y,
 		left = config.x;
 
-	function merge(obj) {
-		var i = 1,
-			target, key;
+	// function merge(obj) {
+	// 	var i = 1,
+	// 		target, key;
 
-		for (; i < arguments.length; i++) {
-			target = arguments[i];
-			for (key in target) {
-				if (Object.prototype.hasOwnProperty.call(target, key)) {
-					obj[key] = target[key];
-				}
-			}
-		}
+	// 	for (; i < arguments.length; i++) {
+	// 		target = arguments[i];
+	// 		for (key in target) {
+	// 			if (Object.prototype.hasOwnProperty.call(target, key)) {
+	// 				obj[key] = target[key];
+	// 			}
+	// 		}
+	// 	}
 
-		return obj;
-	}
+	// 	return obj;
+	// }
 
 	function _updateStore() {
 		config = store.get('Window') || {};
 	}
 
-	// function getWindowByFile(file) {
-	// 	for (var prop in windows) {
-	// 		if (windows[prop]._params.file == file) {
-	// 			return windows[prop];
-	// 		}
-	// 	}
+	function getWindowByFile(name) {
+		for (var prop in windows) {
+			if (windows[prop].file.get('fileEntry') == name) {
+				return windows[prop];
+			}
+		}
 
-	// 	return;
-	// }
+		return;
+	}
 
 	function _add(newWin) {
 		exports.actived = windows[newWin.created_at] = newWin;
@@ -52,10 +54,10 @@ define([
 		realCount++;
 
 		newWin.on('closed', function() {
-			newWin.file.close();
+			this.file.close();
 			
 			for (var prop in windows) {
-				if (prop == newWin.created_at) {
+				if (prop == this.created_at) {
 					windows[prop] = null;
 					delete windows[prop];
 					realCount--;
@@ -72,19 +74,19 @@ define([
 		newWin.on('file.open', function(fileEntry) {
 			var file = File.open(fileEntry);
 
-			// if (!newWin.file.get('fileEntry') && !newWin.file.get('markdown')) {
-			// 	newWin.file = file;
-			// 	newWin.emit('file.opened', file);
-			// } else {
-				open(file);
-			// }
+			open(file);
+			Recents.add(fileEntry);
+		});
+
+		newWin.on('file.saved', function(fileEntry) {
+			Recents.add(fileEntry);
 		});
 
 		//window instance delivery to child window
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			newWin.resizeTo(config.width, config.height);
+			this.resizeTo(config.width, config.height);
 
 			shadowCount++;
 
@@ -104,28 +106,24 @@ define([
 			left = left + 20;
 			top = top + 20;
 
-			newWin.moveTo(left, top);
-			newWin.focus();
+			this.moveTo(left, top);
+			this.focus();
 		});
 	}
 
 	function open(file) {
-		var /*existWin, */newWin;
+		var fileEntry, newWin;
 
-		// options = typeof file === 'object' ? file : options || {};
-		// file = typeof file === 'string' ? file : undefined;
+		file = (typeof file === 'string') ? File.open(file) : file;
+		fileEntry = file && file.get('fileEntry');
 
 		//이미 열려 있는 파일 일 경우
-		// if (file && (existWin = getWindowByFile(file))) {
-		// 	existWin.focus();
-		// 	return;
-		// }
+		var existWin = getWindowByFile(fileEntry);
 
-		// if (openning && !file) {
-		// 	return;
-		// }
-
-		// openning = true;
+		if (fileEntry && existWin) {
+			existWin.focus();
+			return;
+		}
 
 		newWin = gui.Window.open('pad.html', {
 			"min_width": 500,
@@ -136,11 +134,7 @@ define([
 		newWin.parent = window;
 		newWin.file = file || File.open();
 		newWin.created_at = new Date().getTime();
-		// newWin._params = merge(options, {
-		// 	file: file,
-		// 	created_at: new Date().getTime()
-		// });
-
+		
 		_add(newWin);
 
 		return newWin;
