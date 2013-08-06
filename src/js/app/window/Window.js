@@ -17,8 +17,8 @@ define([
   
   var pathDocs = getDocsPath();
 
-  window.ee.on('tmp.file.open', function(file, uid) {
-    WindowMgr.open(file, { uid: uid, tmp: true });
+  window.ee.on('tmp.file.open', function(file) {
+    WindowMgr.open(file);
   });
 
   window.ee.on('menu.file.new', function() {
@@ -30,6 +30,7 @@ define([
   });
 
   window.ee.on('menu.file.recents', function(file) {
+    var file = File.open(file);
     WindowMgr.open(file);
   });
 
@@ -202,15 +203,15 @@ define([
 
 
   //fire by child window
-  window.ee.on('file.open', function(file) {
-    WindowMgr.open(file);
-    Recents.add(file);
-  });
+  // window.ee.on('file.open', function(file) {
+  //   WindowMgr.open(file);
+  //   Recents.add(file);
+  // });
   //fire by child window
-  window.ee.on('file.save', function(file, markdown, cb) {
-    File.save(file, markdown, cb);
-    Recents.add(file);
-  });
+  // window.ee.on('file.save', function(file, markdown, cb) {
+  //   File.save(file, markdown, cb);
+  //   Recents.add(file);
+  // });
 
   // window.ee.on('file.reload', function(file, cb) {
   //   File.reload(file, cb);
