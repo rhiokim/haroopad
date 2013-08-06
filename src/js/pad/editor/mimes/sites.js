@@ -1,4 +1,11 @@
 define(function() {
+	var gmapType = {
+		'm': 'roadmap',
+		'h': 'hybrid',
+		'k': 'satellite',
+		't': 'terrain'
+	}
+
 	function linkText(str) {
 		return '['+ str +']('+ str +')';
 	}
@@ -43,6 +50,22 @@ define(function() {
 					+ key 
 					+ (file ? ' '+ file : '')
 					+']';
+		},
+		'maps.google.com': function(str) {
+			var center = url('?q', str);
+			var zoom = url('?z', str);
+			var hl = url('?hl', str);
+			var type = url('?t', str);
+
+			return '[gmap:'
+					+ center
+					+ ' 500'
+					+ ' 250'
+					+ ' '+ (zoom || 11)
+					+ ' '+ (gmapType[type] || 'roadmap')
+					+ ' '+ (hl || 'en')
+					+ ']';
+
 		}
 	};
 });
