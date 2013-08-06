@@ -111,8 +111,8 @@ define([
 				from = this.$el.find('input[name=from]').val();
 				password = this.$el.find('input[name=password]').val();
 				remember = this.$el.find('input[name=remember]').is(':checked');
-				mode = this.$el.find('button[name=markdown]').hasClass('active');
-				mode = mode ? 'md' : 'html';
+				mode = this.$el.find('button[name=html]').hasClass('active');
+				mode = mode ? 'html' : 'md';
 
 				progress();
 				
