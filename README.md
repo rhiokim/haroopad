@@ -1,116 +1,48 @@
-## why?
+# Haroopad - The next document processor
 
-## haroopad?
-하루패드는 마크다운 에디터로 크로스 플랫폼에서 동일한 에디팅과 뷰잉을 지원합니다.
+**Haroopad** is a document processor for creating web-friendly document in markdown editor.
 
-특히 마크다운 포맷의 고유의 기능을 잘 살려 원하는 에디팅 테마와 뷰어 테마를 제공하여 경량의 마크다운 문서가 고품질의 문서로 출력해줍니다.
+You can also based on the markdown, to create Web documents, blogs, as well as e-mail, the report documents expert.
 
-멀티 마크다운을 기본적으로 지원하고 그에 더불어 하루패드만의 확장 마크다운을 지원합니다. 이 확장 마크다운은 온라인 환경에 의존하는 오픈 컨텐츠 미디어(유튜브, 슬라이드쉐어, 트윗등을)를 손쉽게 문서내에 포함시킬 수 있습니다. 
+And then support Windows, Linux, the Mac OS, you get the experience of editing the same document markdown in the desired platform.
 
-하루패드를 사용하여 새로운 문서 편집의 경험을 느껴보세요.
+![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-* [official site](http://pad.haroopress.com)
-* [official repository](https://github.com/rhiokim/haroopad)
+### Main features
 
-## features
-* cross platform markdown editor
-	- support Window, Linux, Mac OS
-* support multi-markdown
-* editor theme, syntax highlight, markdown theme
-* vim key binding
-* auto publishing to sites(tumblr, github)
+* Support cross platform
+  - Window
+  - Mac OS X
+  - Linux 32/64
+* MultiMarkdown (GFM) & extensions
+	- Gitub Flavored Markdown
+	- Smartpants
+* Theme for editing
+	- Solaraized Dark & Light based CodeMirror
+* Live Preview themes
+	- 7 themes based [markdown-css](https//github.com/rhiokim/markdown-css)
+* Syntax Highlighting
+	- 52 languages & 26 styles based highlight.js
+* Vim Key-binding
+* Export to PDF, HTML
 
-## example
+### Upcoming features
 
-**header**
+* Send email
+* Post to tumblr
 
-## This is an H2
-### This is an H3
-#### This is an H4
-##### This is an H5
-###### This is an H6
+### And more?
 
+Official site : [http://pad.haroopress.com][haroopad]
+Blog & Manual : [http://pad.haroopress.com/page.html][blog]
+User echo : [http://haroopad.userecho.com][userecho]
 
-**blockquote**
+Don't forget to check Preferences, lots of useful options are there.
 
-> ## This is a H2.
-> 
-> 1.   This is the first list item.
-> 2.   This is the second list item.
-> 
-> Here's some example code:
-> 
-> ```js
-> function syntaxHighlight() {
->   return true;
-> }
-> ```
+Follow official social account [@haroopad](https://twitter.com/haroopad) and developer [@rhiokim](https://twitter.com/rhiokim) on Twitter for the latest news.
 
-**list**
+For feedback, use the menu `Help` - `User Echo`
 
-* li1
-	- li1-1
-   - li1-2
-     * li-2-1
-     * li-2-2
-       1. li-2-2-1
-       2. li-2-2-2
-
-** Image **
-
-![](http://placekitten.com/g/160/180)
-![](http://placekitten.com/g/160/180)
-![](http://placekitten.com/g/160/180)
-
-**Syntax highlighting**
-
-`code`
-
-```js
-function syntaxHighlight() {
-  var name = 'haroopad';
-}
-```
-
-```xml
-<html>
- <head>
-   <title>haroopad example</title>
- </head>
- <body>
-   <span class="text-info">cross-platform markdown editor</span>
- </body>
-</html>
-```
-
-```css
-body {
-	font-size: 1em;
-}
-```
-
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
-```
-
-**GFM style table**
-
-name | age | gender
----|---|---|
-rhio | 33 | male
-edina | 28 | female
-jedi | 44 | robot
-
-
-**URL autolinking**
-
-* http://pad.haroopress.com
-
-**Multiple underscores in words**
-
-perform_complicated_task
-do_this_and_do_that_and_another_thing
-
-
+[haroopad]: http://pad.haroopress.com
+[blog]: http://pad.haroopress.com/page.html
+[userecho]: http://haroopad.userecho.com
