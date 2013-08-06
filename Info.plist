@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>haroopad</string>
+	<string>Haroopad</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -28,31 +28,15 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>markdown</string>
 			<key>CFBundleTypeName</key>
-			<string>The next document processor (markdown-base)</string>
+			<string>Markdown</string>
 			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
+			<string>Editor</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string></string>
 			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>LSIsAppleDefaultForType</key>
 			<true/>
-		</dict>
-		<dict>
-			<key>CFBundleTypeName</key>
-			<string>Folder</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>fold</string>
-			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSHandlerRank</key>
-			<string>None</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -79,6 +63,8 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>@@title</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

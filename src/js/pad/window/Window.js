@@ -101,9 +101,9 @@ define([
 	});
 
 
-	// HotKey('defmod-shift-alt-d', function() {
-	// 	win.showDevTools();
-	// });
+	HotKey('defmod-shift-alt-d', function() {
+		win.showDevTools();
+	});
 
 	HotKey('defmod-enter', function() {
 		window.ee.emit('view.fullscreen');
