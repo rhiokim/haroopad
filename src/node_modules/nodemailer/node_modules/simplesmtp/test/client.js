@@ -80,6 +80,25 @@ exports["Secure server"] = {
         client.on("end", function(){
             test.done();
         });
+    },
+
+    "Unsecure client should have timeout": function(test){
+        var client = simplesmtp.connect(PORT_NUMBER, false, {
+            secureConnection: false
+        });
+
+        client.once("idle", function(){
+            test.ok(false);
+        });
+
+        client.on("error", function(err){
+            test.equal(err.code, "ETIMEDOUT");
+            client.close();
+        });
+
+        client.on("end", function(){
+            test.done();
+        });
     }
 };
 

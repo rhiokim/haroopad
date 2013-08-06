@@ -38,7 +38,7 @@ requirejs.onError = function (e) {
 requirejs([
     'context/Context',
     // 'core/Parser',
-    'core/Mailer',
+    'mail/Mailer',
     'window/Window',
     'window/WindowManager',
     'utils/UpdateNotifier'

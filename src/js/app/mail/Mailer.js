@@ -17,7 +17,7 @@ define([
 
 	function createTransport(email, password, service) {
 		// create reusable transport method (opens pool of SMTP connections)
-		smtpTransport = nodemailer.createTransport("SMTP",{
+		smtpTransport = nodemailer.createTransport("SMTP", {
 		    service: service || "Gmail",
 		    auth: {
 		        user: email,
@@ -48,7 +48,7 @@ define([
 		}
 
 		// send mail with defined transport object
-		smtpTransport.sendMail(mailOptions, function(error, response){
+		smtpTransport.sendMail(mailOptions, function(error, response) {
 			cb(error, response);
 
 			if (error) {
@@ -56,10 +56,10 @@ define([
 				return;
 			}
 
-	    window.clearTimeout(tid);
-	    tid = window.setTimeout(function() {
-	    	smtpTransport.close(); // shut down the connection pool, no more messages
-	    }, 1000*60*10);
+		    window.clearTimeout(tid);
+		    tid = window.setTimeout(function() {
+		    	smtpTransport.close(); // shut down the connection pool, no more messages
+		    }, 1000 * 60 * 10);
 		});
 	}
 

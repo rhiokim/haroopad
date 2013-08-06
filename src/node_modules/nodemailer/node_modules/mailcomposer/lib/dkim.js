@@ -17,7 +17,7 @@ module.exports.sha256 = sha256;
  * @memberOf dkimsign
  * @param {String} email Full e-mail source complete with headers and body to sign
  * @param {Object} options DKIM options
- * @param {String} [options.headerFieldNames="from:to:cc:subject"] Header fields to sign
+ * @param {String} [options.headerFieldNames="from:to:cc:subject"] Header fields to sign
  * @param {String} options.privateKey DKMI private key
  * @param {String} options.domainName Domain name to use for signing (ie: "domain.com")
  * @param {String} options.keySelector Selector for the DKMI public key (ie. "dkim" if you have set up a TXT record for "dkim._domainkey.domain.com")
@@ -25,12 +25,12 @@ module.exports.sha256 = sha256;
  * @return {String} Signed DKIM-Signature header field for prepending
  */
 function DKIMSign(email, options){
-    options = options || {};
+    options = options || {};
     email = (email || "").toString("utf-8");
 
     var match = email.match(/^\r?\n|(?:\r?\n){2}/),
-        headers = match && email.substr(0, match.index) || "",
-        body = match && email.substr(match.index + match[0].length) || email;
+        headers = match && email.substr(0, match.index) || "",
+        body = match && email.substr(match.index + match[0].length) || email;
 
     // all listed fields from RFC4871 #5.5
     // Some prociders do not like Message-Id, Date, Bounces-To and Return-Path
@@ -137,7 +137,7 @@ var DKIMCanonicalizer = {
      * @return {String} Canonicalized headers
      */
     relaxedHeaders: function(headers, fieldNames){
-        var includedFields = (fieldNames || "").toLowerCase().
+        var includedFields = (fieldNames || "").toLowerCase().
                                 split(":").
                                 map(function(field){
                                     return field.trim();

@@ -507,7 +507,12 @@ SMTPServerConnection.prototype._onCommandAUTH = function(payload){
             this._handleAuthPlain(payload);
             break;
         case "LOGIN":
-            this._handleAuthLogin();
+            var username = payload.shift();     
+            if (username) {
+                username = username.trim();
+                this.authentication.state = "AUTHENTICATING";
+            }
+            this._handleAuthLogin( username);
             break;
     }
 };

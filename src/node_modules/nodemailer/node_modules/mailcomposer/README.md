@@ -97,7 +97,7 @@ The output for such a script (the contents for "test.eml") would look like:
 
 ### Add custom headers
 
-Headers can be added with `mailcomposer.addHeader(key, value)`
+Headers can be added with `mailcomposer.addHeader(key, value[, formatted])` where `formatted` indicates if the value should be kept as is. If the value is missing or falsy, header value is sanitized and folded. If true, the value is passed to output as is.
 
     var mailcomposer = new MailComposer();
     mailcomposer.addHeader("x-mailer", "Nodemailer 1.0");

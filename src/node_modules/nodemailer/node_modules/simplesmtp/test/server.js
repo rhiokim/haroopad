@@ -302,6 +302,33 @@ exports["Require AUTH"] = {
             test.done();
         });
     },
+    "AUTH LOGIN Login with username": function(test){
+        var cmds = ["EHLO FOO", "STARTTLS", "EHLO FOO", 
+                    "AUTH LOGIN " + new Buffer("andris").toString("base64"),
+                    new Buffer("test").toString("base64")];
+        runClientMockup(PORT_NUMBER, "localhost", cmds, function(resp){
+            test.equal("2",resp.toString("utf-8").trim().substr(0,1));
+            test.done();
+        });
+    },
+    "AUTH LOGIN Login with username - invalid username": function(test){
+        var cmds = ["EHLO FOO", "STARTTLS", "EHLO FOO", 
+                    "AUTH LOGIN " + new Buffer("inv").toString("base64"),
+                    new Buffer("test").toString("base64")];
+        runClientMockup(PORT_NUMBER, "localhost", cmds, function(resp){
+            test.equal("5",resp.toString("utf-8").trim().substr(0,1));
+            test.done();
+        });
+    },
+    "AUTH LOGIN Login with username - invalid password": function(test){
+        var cmds = ["EHLO FOO", "STARTTLS", "EHLO FOO", 
+                    "AUTH LOGIN " + new Buffer("andris").toString("base64"),
+                    new Buffer("inv").toString("base64")];
+        runClientMockup(PORT_NUMBER, "localhost", cmds, function(resp){
+            test.equal("5",resp.toString("utf-8").trim().substr(0,1));
+            test.done();
+        });
+    },
     "AUTH PLAIN": function(test){
         var cmds = ["EHLO FOO", "STARTTLS", "EHLO FOO", "AUTH PLAIN"];
         runClientMockup(PORT_NUMBER, "localhost", cmds, function(resp){

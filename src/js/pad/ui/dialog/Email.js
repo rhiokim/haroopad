@@ -69,6 +69,7 @@ define([
 			},
 
 			initialize: function() {
+				this.$('[data-toggle=tooltip]').tooltip({ html: true });
 			},
 
 			show: function() {

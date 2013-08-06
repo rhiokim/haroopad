@@ -324,6 +324,6 @@ var punycode = new function Punycode() {
 module.exports = function(address){
     return address.replace(/((?:https?:\/\/)?.*\@)?([^\/]*)/, function(o, start, domain){
         var domainParts = domain.split(/\./).map(punycode.ToASCII);
-        return (start || "") + domainParts.join(".");
+        return (start || "") + domainParts.join(".");
     });
 };

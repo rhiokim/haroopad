@@ -19,15 +19,15 @@ module.exports = openUrlStream;
  * @return {Stream} Stream for the URL contents
  */
 function openUrlStream(url, options){
-    options = options || {};
+    options = options || {};
     var urlparts = urllib.parse(url),
         urloptions = {
             host: urlparts.hostname,
             port: urlparts.port || (urlparts.protocol=="https:"?443:80),
-            path: urlparts.path || urlparts.pathname,
+            path: urlparts.path || urlparts.pathname,
             method: "GET",
             headers: {
-                "User-Agent": options.userAgent || "mailcomposer"
+                "User-Agent": options.userAgent || "mailcomposer"
             },
             agent: false
         },
@@ -42,7 +42,7 @@ function openUrlStream(url, options){
     }
 
     request = client.request(urloptions, function(response) {
-        if((response.statusCode || 0).toString().charAt(0) != "2"){
+        if((response.statusCode || 0).toString().charAt(0) != "2"){
             stream.emit("error", "Invalid status code " + (response.statusCode || 0));
             return;
         }
