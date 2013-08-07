@@ -11,7 +11,7 @@ define([
 	      'Cmd-L': 'markdownLink',
 	      'Cmd-Alt-S': 'markdownStrike',
 	      'Cmd-Alt-O': 'markdownOrderedList',
-	      'Cmd-Alt-U': 'markdownUnorderedList',
+	      'Cmd-Alt-U': 'markdownUnOrderedList',
 	      'Cmd-Alt-I': 'markdownImage',
 	      'Cmd-Alt-B': 'markdownBlockQuote'
 	    };
@@ -23,7 +23,7 @@ define([
 	      'Ctrl-L': 'markdownLink',
 	      'Ctrl-Alt-S': 'markdownStrike',
 	      'Ctrl-Alt-O': 'markdownOrderedList',
-	      'Ctrl-Alt-U': 'markdownUnorderedList',
+	      'Ctrl-Alt-U': 'markdownUnOrderedList',
 	      'Ctrl-Alt-I': 'markdownImage',
 	      'Ctrl-Alt-B': 'markdownBlockQuote'
 	    };
