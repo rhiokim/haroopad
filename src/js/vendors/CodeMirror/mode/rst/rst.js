@@ -36,9 +36,11 @@ CodeMirror.defineMode('rst-base', function (config) {
     var TAIL = "(?:\\s*|\\W|$)",
         rx_TAIL = new RegExp(format('^{0}', TAIL));
 
-    var NAME = "(?:[^\\W\\d_](?:[\\w\\+\\.\\-:]*[^\\W_])?)",
+    var NAME =
+        "(?:[^\\W\\d_](?:[\\w!\"#$%&'()\\*\\+,\\-\\.\/:;<=>\\?]*[^\\W_])?)",
         rx_NAME = new RegExp(format('^{0}', NAME));
-    var NAME_WWS = "(?:[^\\W\\d_](?:[\\w\\s\\+\\.\\-:]*[^\\W_])?)";
+    var NAME_WWS =
+        "(?:[^\\W\\d_](?:[\\w\\s!\"#$%&'()\\*\\+,\\-\\.\/:;<=>\\?]*[^\\W_])?)";
     var REF_NAME = format('(?:{0}|`{1}`)', NAME, NAME_WWS);
 
     var TEXT1 = "(?:[^\\s\\|](?:[^\\|]*[^\\s\\|])?)";
@@ -480,7 +482,9 @@ CodeMirror.defineMode('rst-base', function (config) {
         },
 
         innerMode: function (state) {
-            return {state: state.ctx.local, mode: state.ctx.mode};
+            return state.tmp ? {state: state.tmp.local, mode: state.tmp.mode}
+                 : state.ctx ? {state: state.ctx.local, mode: state.ctx.mode}
+                             : null;
         },
 
         token: function (stream, state) {
@@ -494,6 +498,14 @@ CodeMirror.defineMode('rst-base', function (config) {
 
 CodeMirror.defineMode('rst', function (config, options) {
 
+    var rx_strong = /^\*\*[^\*\s](?:[^\*]*[^\*\s])?\*\*/;
+    var rx_emphasis = /^\*[^\*\s](?:[^\*]*[^\*\s])?\*/;
+    var rx_literal = /^``[^`\s](?:[^`]*[^`\s])``/;
+
+    var rx_number = /^(?:[\d]+(?:[\.,]\d+)*)/;
+    var rx_positive = /^(?:\s\+[\d]+(?:[\.,]\d+)*)/;
+    var rx_negative = /^(?:\s\-[\d]+(?:[\.,]\d+)*)/;
+
     var rx_uri_protocol = "[Hh][Tt][Tt][Pp][Ss]?://";
     var rx_uri_domain = "(?:[\\d\\w.-]+)\\.(?:\\w{2,6})";
     var rx_uri_path = "(?:/[\\d\\w\\#\\%\\&\\-\\.\\,\\/\\:\\=\\?\\~]+)*";
@@ -501,33 +513,32 @@ CodeMirror.defineMode('rst', function (config, options) {
         rx_uri_protocol + rx_uri_domain + rx_uri_path
     );
 
-    var rx_strong = /^\*\*[^\*\s](?:[^\*]*[^\*\s])?\*\*(\s+|$)/;
-    var rx_emphasis = /^[^\*]\*[^\*\s](?:[^\*]*[^\*\s])?\*(\s+|$)/;
-    var rx_literal = /^``[^`\s](?:[^`]*[^`\s])``(\s+|$)/;
-
-    var rx_number = /^(?:[\d]+(?:[\.,]\d+)*)/;
-    var rx_positive = /^(?:\s\+[\d]+(?:[\.,]\d+)*)/;
-    var rx_negative = /^(?:\s\-[\d]+(?:[\.,]\d+)*)/;
-
     var overlay = {
         token: function (stream) {
 
-            if (stream.match(rx_uri)) return 'link';
-            if (stream.match(rx_strong)) return 'strong';
-            if (stream.match(rx_emphasis)) return 'em';
-            if (stream.match(rx_literal)) return 'string-2';
-            if (stream.match(rx_number)) return 'number';
-            if (stream.match(rx_positive)) return 'positive';
-            if (stream.match(rx_negative)) return 'negative';
+            if (stream.match(rx_strong) && stream.match (/\W+|$/, false))
+                return 'strong';
+            if (stream.match(rx_emphasis) && stream.match (/\W+|$/, false))
+                return 'em';
+            if (stream.match(rx_literal) && stream.match (/\W+|$/, false))
+                return 'string-2';
+            if (stream.match(rx_number))
+                return 'number';
+            if (stream.match(rx_positive))
+                return 'positive';
+            if (stream.match(rx_negative))
+                return 'negative';
+            if (stream.match(rx_uri))
+                return 'link';
 
             while (stream.next() != null) {
-                if (stream.match(rx_uri, false)) break;
                 if (stream.match(rx_strong, false)) break;
                 if (stream.match(rx_emphasis, false)) break;
                 if (stream.match(rx_literal, false)) break;
                 if (stream.match(rx_number, false)) break;
                 if (stream.match(rx_positive, false)) break;
                 if (stream.match(rx_negative, false)) break;
+                if (stream.match(rx_uri, false)) break;
             }
 
             return null;

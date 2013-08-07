@@ -192,6 +192,7 @@ body > .navbar .brand:hover {
   padding-right: 10px;
   margin-bottom: 10px;
   border-top: 0;
+  line-height: 1.40em;
 }
 
 .CodeMirror-lines {
