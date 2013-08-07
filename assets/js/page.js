@@ -1,7 +1,7 @@
 function setStarrre() {
 	var text = $('h1, h2, h3, h4, h5, h6')[0].innerText || '';
 	$('#shareme').attr('data-url', window.location.href);
-	$('#shareme').attr('data-text', text);
+	$('#shareme').attr('data-text', text +'\n'+ window.title);
   $('#shareme').sharrre({
 	  share: {
 	    googlePlus: true,

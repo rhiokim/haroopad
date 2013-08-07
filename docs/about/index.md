@@ -33,9 +33,9 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
 
 ### And more?
 
-Official site : [http://pad.haroopress.com][haroopad]
-Blog & Manual : [http://pad.haroopress.com/page.html][blog]
-User echo : [http://haroopad.userecho.com][userecho]
+* Official site : [http://pad.haroopress.com][haroopad]
+* Blog & Manual : [http://pad.haroopress.com/page.html][blog]
+* User echo : [http://haroopad.userecho.com][userecho]
 
 Don't forget to check Preferences, lots of useful options are there.
 
