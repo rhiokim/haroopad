@@ -32,6 +32,7 @@ Shortcut                       | Description
 &#8963; - &#8997; - ]          | editor width +5%
 &#8963; - &#8997; - [          | editor width -5%
 &#8984;(&#8963;) - &#8679; - L | toggle line number
+&#8984;(&#8963;) - Enter       | toggle fullscreen
 &#8984;(&#8963;) - &#8997; - V | vim keyboard binding
 
 ##### Editing
