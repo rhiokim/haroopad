@@ -103,7 +103,8 @@ CodeMirror.defineMode("css-base", function(config, parserConfig) {
     startState: function(base) {
       return {tokenize: tokenBase,
               baseIndent: base || 0,
-              stack: []};
+              stack: [],
+              lastToken: null};
     },
 
     token: function(stream, state) {
@@ -163,7 +164,7 @@ CodeMirror.defineMode("css-base", function(config, parserConfig) {
       var context = state.stack[state.stack.length-1];
       if (style == "variable") {
         if (type == "variable-definition") state.stack.push("propertyValue");
-        return "variable-2";
+        return state.lastToken = "variable-2";
       } else if (style == "property") {
         var word = stream.current().toLowerCase();
         if (context == "propertyValue") {
@@ -251,7 +252,6 @@ CodeMirror.defineMode("css-base", function(config, parserConfig) {
       // Push/pop context stack
       if (type == "{") {
         if (context == "@media" || context == "@mediaType") {
-          state.stack.pop();
           state.stack[state.stack.length-1] = "@media{";
         }
         else {
@@ -260,8 +260,7 @@ CodeMirror.defineMode("css-base", function(config, parserConfig) {
         }
       }
       else if (type == "}") {
-        var lastState = state.stack[state.stack.length - 1];
-        if (lastState == "interpolation") style = "operator";
+        if (context == "interpolation") style = "operator";
         state.stack.pop();
         if (context == "propertyValue") state.stack.pop();
       }
@@ -269,26 +268,44 @@ CodeMirror.defineMode("css-base", function(config, parserConfig) {
       else if (type == "@media") state.stack.push("@media");
       else if (type == "@import") state.stack.push("@import");
       else if (context == "@media" && /\b(keyword|attribute)\b/.test(style))
-        state.stack.push("@mediaType");
-      else if (context == "@mediaType" && stream.current() == ",") state.stack.pop();
-      else if (context == "@mediaType" && type == "(") state.stack.push("@mediaType(");
-      else if (context == "@mediaType(" && type == ")") state.stack.pop();
-      else if ((context == "rule" || context == "block") && type == ":") state.stack.push("propertyValue");
+        state.stack[state.stack.length-1] = "@mediaType";
+      else if (context == "@mediaType" && stream.current() == ",")
+        state.stack[state.stack.length-1] = "@media";
+      else if (type == "(") {
+        if (context == "@media" || context == "@mediaType") {
+          // Make sure @mediaType is used to avoid error on {
+          state.stack[state.stack.length-1] = "@mediaType";
+          state.stack.push("@mediaType(");
+        }
+      }
+      else if (type == ")") {
+        if (context == "propertyValue" && state.stack[state.stack.length-2] == "@mediaType(") {
+          // In @mediaType( without closing ; after propertyValue
+          state.stack.pop();
+          state.stack.pop();
+        }
+        else if (context == "@mediaType(") {
+          state.stack.pop();
+        }
+      }
+      else if (type == ":" && state.lastToken == "property") state.stack.push("propertyValue");
       else if (context == "propertyValue" && type == ";") state.stack.pop();
       else if (context == "@import" && type == ";") state.stack.pop();
-      return style;
+
+      return state.lastToken = style;
     },
 
     indent: function(state, textAfter) {
       var n = state.stack.length;
       if (/^\}/.test(textAfter))
-        n -= state.stack[state.stack.length-1] == "propertyValue" ? 2 : 1;
+        n -= state.stack[n-1] == "propertyValue" ? 2 : 1;
       return state.baseIndent + n * indentUnit;
     },
 
     electricChars: "}",
     blockCommentStart: "/*",
-    blockCommentEnd: "*/"
+    blockCommentEnd: "*/",
+    fold: "brace"
   };
 });
 
@@ -384,15 +401,15 @@ CodeMirror.defineMode("css-base", function(config, parserConfig) {
     "text-decoration-color", "text-decoration-line", "text-decoration-skip",
     "text-decoration-style", "text-emphasis", "text-emphasis-color",
     "text-emphasis-position", "text-emphasis-style", "text-height",
-    "text-indent", "text-justify", "text-outline", "text-shadow",
-    "text-space-collapse", "text-transform", "text-underline-position",
+    "text-indent", "text-justify", "text-outline", "text-overflow", "text-shadow",
+    "text-size-adjust", "text-space-collapse", "text-transform", "text-underline-position",
     "text-wrap", "top", "transform", "transform-origin", "transform-style",
     "transition", "transition-delay", "transition-duration",
     "transition-property", "transition-timing-function", "unicode-bidi",
     "vertical-align", "visibility", "voice-balance", "voice-duration",
     "voice-family", "voice-pitch", "voice-range", "voice-rate", "voice-stress",
     "voice-volume", "volume", "white-space", "widows", "width", "word-break",
-    "word-spacing", "word-wrap", "z-index",
+    "word-spacing", "word-wrap", "z-index", "zoom",
     // SVG-specific
     "clip-path", "clip-rule", "mask", "enable-background", "filter", "flood-color",
     "flood-opacity", "lighting-color", "stop-color", "stop-opacity", "pointer-events",

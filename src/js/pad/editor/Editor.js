@@ -33,7 +33,6 @@ define([
 					    dragDrop: true*/
 					  });
 
-
 		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
 		editor.on('drop', Drop);
 
@@ -51,7 +50,7 @@ define([
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', config.insertFourSpace ? 4 : 2);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters || true);
-		
+
 		window.ee.on('toggle.vim.keybind', function() {
 		  var map = editor.getOption('keyMap');
 		  editor.setOption('keyMap', map == 'vim' ? 'default' : 'vim');
