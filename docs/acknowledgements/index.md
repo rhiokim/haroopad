@@ -1,4 +1,4 @@
-##### 하루패드는 다음과 같은 오픈소스를 사용하고 있다.
+## Acknowledgements
 
 * * *
   
@@ -479,3 +479,10 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
+* * *
+
+**js url**
+
+MIT licensed
+
+Copyright (C) 2011-2012 Websanova http://www.websanova.com

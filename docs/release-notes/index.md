@@ -1,3 +1,22 @@
+## Haroopad v0.4.8
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+**Bugs**         |
+#122             | Fixed focused window
+**Enhancements** |
+                 | Update Documents & Refactoring for next step
+
+##### Download
+> * Windows NSIS installer:[https://www.dropbox.com/s/498tpv91tso9ccy/haroopad-v0.4.8-i386.msi](https://www.dropbox.com/s/498tpv91tso9ccy/haroopad-v0.4.8-i386.msi)
+> * Mac OS X DMG: [https://www.dropbox.com/s/1atxt755y0wkffa/haroopad-v0.4.8.dmg](https://www.dropbox.com/s/1atxt755y0wkffa/haroopad-v0.4.8.dmg)
+> * Linux 32-bit Binary:[https://www.dropbox.com/s/eieqz1qag3lg76e/haroopad-v0.4.8_i386.tar.gz](https://www.dropbox.com/s/eieqz1qag3lg76e/haroopad-v0.4.8_i386.tar.gz)
+> * Linux 32-bit Debian Package:[https://www.dropbox.com/s/g4c4yp5kp42rnu3/haroopad-v0.4.8-i386.deb](https://www.dropbox.com/s/g4c4yp5kp42rnu3/haroopad-v0.4.8-i386.deb)
+> * Linux 64-bit Binary: [https://www.dropbox.com/s/k020giml8xl5qm8/haroopad-v0.4.8_amd64.tar.gz](https://www.dropbox.com/s/k020giml8xl5qm8/haroopad-v0.4.8_amd64.tar.gz)
+> * Linux 64-bit Debian Package: [https://www.dropbox.com/s/seyaly8n1tyl5b4/haroopad-v0.4.8_amd64.deb](https://www.dropbox.com/s/seyaly8n1tyl5b4/haroopad-v0.4.8_amd64.deb)
+
+
 ## Haroopad v0.4.7
 
 Issue Number     | Description
