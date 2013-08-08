@@ -136,6 +136,11 @@ define([
 
 		x = (ev) ? x + $('#editor').width() : x;
 
+		//fixed #135
+		if (win.isFullscreen) {
+			y -= 20;
+		}
+
 		if (ev) {
 			window.parent.ee.emit('popup.context.viewer', x, y);
 		} else {
