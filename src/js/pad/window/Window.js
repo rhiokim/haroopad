@@ -138,7 +138,16 @@ define([
 
 		//fixed #135
 		if (win.isFullscreen) {
-			y -= 20;
+
+			switch (process.platform) {
+				case 'win32':
+					y -= 49;
+					x -= 7;
+					break;
+				default:
+					y -= 20;
+					break;
+			}
 		}
 
 		if (ev) {
