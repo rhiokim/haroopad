@@ -217,7 +217,7 @@ define([
 		window.ee.emit('view.fullscreen');
 	});
 
-	HotKey('defmod-esc', function() {
+	HotKey('esc esc', function() {
 		if (win.isFullscreen) {
 			win.leaveFullscreen();
 		}
