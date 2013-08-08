@@ -128,7 +128,7 @@ define([
 
 		switch (process.platform) {
 			case 'linux':
-				y += 26;
+				y += 28;
 				break;
 			default:
 				break;
@@ -143,6 +143,9 @@ define([
 				case 'win32':
 					y -= 49;
 					x -= 7;
+					break;
+				case 'linux':
+					y -= 28;
 					break;
 				default:
 					y -= 20;
