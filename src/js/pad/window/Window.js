@@ -67,7 +67,7 @@ define([
 		var opt = file.toJSON();
 
 		if (opt.tmp) {
-			nw.title = 'Restored (writen at ' + opt.ctime + ')';
+			nw.title = 'Restored (written at ' + opt.ctime + ')';
 		} else {
 			nw.title = orgTitle = opt.basename || orgTitle;
 		}
@@ -192,6 +192,9 @@ define([
 	window.ee.on('up.to.date.haroopad', function(version) {
 		Notifier.notify('Haroopad <strong>v' + version + '</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
 	});
+
+	/* */
+	// Notifier.notify('How do you feel about haroopad? <a href="#" data-href="tweet-feel">feel</a>', 'Feel', undefined, 10000);
 
 	HotKey('defmod-shift-alt-d', function() {
 		win.showDevTools();

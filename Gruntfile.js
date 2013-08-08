@@ -78,6 +78,7 @@ module.exports = function(grunt) {
             'src/js/common/menu/MenuBar.js',
             'src/js/common/menu/Menu.file.js',
             'src/js/common/menu/Menu.file.recents.js',
+            'src/js/common/menu/Menu.file.send.js',
             'src/js/common/menu/Menu.file.exports.js',
             'src/js/common/menu/Menu.file.activities.js',
             'src/js/common/menu/Menu.find.js',

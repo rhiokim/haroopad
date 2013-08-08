@@ -125,7 +125,7 @@ define([
 	  	nw.file.set('attachments', attachments);
 	  }
 
-		window.ee.on('file.posts.tumblr', function() {
+		window.ee.on('menu.file.send.email', function() {
 
 			htmlStyledDoc = $(htmlDoc.body).clone()[0];
 			

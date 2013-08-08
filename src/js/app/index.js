@@ -56,7 +56,7 @@ requirejs([
     //   cb(html);
     // });
 
-    window.ee.on('posts.tumblr', function(fileInfo, mailInfo) {
+    window.ee.on('send.email', function(fileInfo, mailInfo) {
       var child = WindowMgr.actived;
       var Emails = store.get('Emails') || {};
       var addrs = Emails.addrs || [];
@@ -65,7 +65,7 @@ requirejs([
       Mailer.send(mailInfo.title, fileInfo.markdown, fileInfo.html, mailInfo.to, mailInfo.mode, fileInfo.attachments, function(err, response) {
 
         if (err) {
-          child.window.ee.emit('fail.post.tumblr', err);
+          child.window.ee.emit('fail.send.email', err);
           return;
         }
 
@@ -82,7 +82,7 @@ requirejs([
           });
         }
 
-        child.window.ee.emit('posted.tumblr');
+        child.window.ee.emit('sent.email');
       });
     })
     

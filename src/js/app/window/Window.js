@@ -54,8 +54,8 @@ define([
     WindowMgr.actived.window.ee.emit('file.exports.html');
   });
 
-  window.ee.on('menu.file.posts.tumblr', function() {
-    WindowMgr.actived.window.ee.emit('file.posts.tumblr');
+  window.ee.on('menu.file.send.email', function() {
+    WindowMgr.actived.window.ee.emit('menu.file.send.email');
   });
 
   window.ee.on('menu.print.html', function() {
