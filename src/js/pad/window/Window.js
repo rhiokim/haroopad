@@ -185,7 +185,7 @@ define([
 
 	/* update haroopad */
 	window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
-		Notifier.notify('Do you want to <a href="#" data-href="download.haroopad">download</a> new version?', 'Update Haroopad v' + newVersion, undefined, 10000);
+		Notifier.notify('Looking for the latest version? <a href="#" data-href="release.note.haroopad">release note</a>, <a href="#" data-href="download.haroopad">download</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
 	});
 
 	/* up to date haroopad */
