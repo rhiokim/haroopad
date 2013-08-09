@@ -128,7 +128,7 @@ define([
 
 		switch (process.platform) {
 			case 'linux':
-				y += 26;
+				y += 28;
 				break;
 			default:
 				break;
@@ -138,7 +138,19 @@ define([
 
 		//fixed #135
 		if (win.isFullscreen) {
-			y -= 20;
+
+			switch (process.platform) {
+				case 'win32':
+					y -= 49;
+					x -= 7;
+					break;
+				case 'linux':
+					y -= 28;
+					break;
+				default:
+					y -= 20;
+					break;
+			}
 		}
 
 		if (ev) {
@@ -205,7 +217,7 @@ define([
 		window.ee.emit('view.fullscreen');
 	});
 
-	HotKey('defmod-esc', function() {
+	HotKey('esc esc', function() {
 		if (win.isFullscreen) {
 			win.leaveFullscreen();
 		}
