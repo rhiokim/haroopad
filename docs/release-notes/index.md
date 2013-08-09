@@ -268,7 +268,7 @@ New Features    | Description
 
 * The first public beta
 	- Basic figure for instant markdown editor
-	- Support multi-markdown
+	- Support GFM
 	- Support Window, Mac OS X, Linux
 	- Custom Themes for editor and live viewer
 	- Export to only HTML

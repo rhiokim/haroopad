@@ -38,9 +38,10 @@ Future versions (0.5.x) or later, and will feature a variety that can not be exp
   - Window
   - Mac OS X
   - Linux 32/64
-* MultiMarkdown (GFM) & extensions
-	- Gitub Flavored Markdown
-	- Smartpants
+* Github Flavored Markdown
+	- Fenced Code Block
+	- Table
+	- Smartypants
 * Theme for editing
 	- Solaraized Dark & Light based CodeMirror
 * Live Preview themes

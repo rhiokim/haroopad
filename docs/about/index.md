@@ -14,9 +14,10 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
   - Window
   - Mac OS X
   - Linux 32/64
-* MultiMarkdown (GFM) & extensions
-	- Gitub Flavored Markdown
-	- Smartpants
+* Github Flavored Markdown
+	- Fenced Code Block
+	- Table
+	- Smartypants
 * Theme for editing
 	- Solaraized Dark & Light based CodeMirror
 * Live Preview themes
