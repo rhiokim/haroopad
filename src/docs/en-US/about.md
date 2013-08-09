@@ -14,15 +14,18 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
   - Window
   - Mac OS X
   - Linux 32/64
-* MultiMarkdown (GFM) & extensions
-	- Gitub Flavored Markdown
-	- Smartpants
+* [Gitub Flavored Markdown](http://github.github.com/github-flavored-markdown/) & extensions
+	- Syntax highlighting
+	- Table
+	- URL autolinking
+	- Strikethrough
+	- Smartypants
 * Theme for editing
-	- Solaraized Dark & Light based CodeMirror
+	- Solaraized Dark & Light based on CodeMirror
 * Live Preview themes
 	- 7 themes based [markdown-css](https//github.com/rhiokim/markdown-css)
 * Syntax Highlighting
-	- 52 languages & 26 styles based highlight.js
+	- 52 languages & 26 styles based on highlight.js
 * Vim Key-binding
 * Export to PDF, HTML
 

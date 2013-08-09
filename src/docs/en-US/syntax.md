@@ -136,7 +136,7 @@ Here’s an example of reference links in action:
 
     Contact to <example@example.com>.
 
-# Multi Markdown (GFM)
+# Github Flavored Markdown
 
 > ref: https://help.github.com/articles/github-flavored-markdown
 
