@@ -499,6 +499,24 @@ testCM("bookmarkInsertLeft", function(cm) {
   eqPos(bl.find(), Pos(0, 1));
 }, {value: "abcdef"});
 
+testCM("bookmarkCursor", function(cm) {
+  var pos01 = cm.cursorCoords(Pos(0, 1)), pos11 = cm.cursorCoords(Pos(1, 1)),
+      pos20 = cm.cursorCoords(Pos(2, 0)), pos30 = cm.cursorCoords(Pos(3, 0)),
+      pos41 = cm.cursorCoords(Pos(4, 1));
+  cm.setBookmark(Pos(0, 1), {widget: document.createTextNode("←"), insertLeft: true});
+  cm.setBookmark(Pos(2, 0), {widget: document.createTextNode("←"), insertLeft: true});
+  cm.setBookmark(Pos(1, 1), {widget: document.createTextNode("→")});
+  cm.setBookmark(Pos(3, 0), {widget: document.createTextNode("→")});
+  var new01 = cm.cursorCoords(Pos(0, 1)), new11 = cm.cursorCoords(Pos(1, 1)),
+      new20 = cm.cursorCoords(Pos(2, 0)), new30 = cm.cursorCoords(Pos(3, 0));
+  is(new01.left == pos01.left && new01.top == pos01.top, "at left, middle of line");
+  is(new11.left > pos11.left && new11.top == pos11.top, "at right, middle of line");
+  is(new20.left == pos20.left && new20.top == pos20.top, "at left, empty line");
+  is(new30.left > pos30.left && new30.top == pos30.top, "at right, empty line");
+  cm.setBookmark(Pos(4, 0), {widget: document.createTextNode("→")});
+  is(cm.cursorCoords(Pos(4, 1)).left > pos41.left, "single-char bug");
+}, {value: "foo\nbar\n\n\nx\ny"});
+
 testCM("getAllMarks", function(cm) {
   addDoc(cm, 10, 10);
   var m1 = cm.setBookmark(Pos(0, 2));
@@ -822,6 +840,17 @@ testCM("wrappingInlineWidget", function(cm) {
   eq(curR.top, cur1.top);
   eq(curR.bottom, cur1.bottom);
 }, {value: "1 2 3 xxx 4", lineWrapping: true});
+
+testCM("changedInlineWidget", function(cm) {
+  cm.setSize("10em");
+  var w = document.createElement("span");
+  w.innerHTML = "x";
+  var m = cm.markText(Pos(0, 4), Pos(0, 5), {replacedWith: w});
+  w.innerHTML = "and now the widget is really really long all of a sudden and a scrollbar is needed";
+  m.changed();
+  var hScroll = byClassName(cm.getWrapperElement(), "CodeMirror-hscrollbar")[0];
+  is(hScroll.scrollWidth > hScroll.clientWidth);
+}, {value: "hello there"});
 
 testCM("inlineWidget", function(cm) {
   var w = cm.setBookmark(Pos(0, 2), {widget: document.createTextNode("uu")});
