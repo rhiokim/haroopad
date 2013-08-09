@@ -1,6 +1,7 @@
 {
 	"version": "0.4.8",
 	"news": "http://pad.haroopress.com",
+  "release": "http://pad.haroopress.com/page.html?f=release-notes",
 	"download": {
 		"windows": "http://pad.haroopress.com/user.html#download",
 		"linux": "http://pad.haroopress.com/user.html#download",
