@@ -7,8 +7,11 @@ window.MenuBarFileRecents = function() {
     var gui = require('nw.gui');
     var submenu = new gui.Menu();
 
-    var recents = store.get('Recents') || { files:[] };
+    var recents = store.get('Recents') || {
+        files: []
+    };
     recents = recents && recents.files;
+    recents.reverse();
 
     var mClear = new gui.MenuItem({
         label: 'Clear all',
@@ -32,19 +35,19 @@ window.MenuBarFileRecents = function() {
             if (res) {
                 submenu.append(
                     new gui.MenuItem({
-                    label: name,
-                    tooltip: prop,
-                    click: function() {
-                        window.parent.ee.emit('menu.file.recents', this.tooltip);
-                    }
-                }));
+                        label: name,
+                        tooltip: prop,
+                        click: function() {
+                            window.parent.ee.emit('menu.file.recents', this.tooltip);
+                        }
+                    }));
             }
         }
 
         submenu.append(
             new gui.MenuItem({
-            type: 'separator'
-        }));
+                type: 'separator'
+            }));
 
     } else {
         mClear.enabled = false;

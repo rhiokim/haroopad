@@ -48,7 +48,6 @@ function getTweet(el, id) {
             hasStats = parent.querySelectorAll('.footer .stats-narrow')[0];
             // hasStats = parent.find('.footer .stats-narrow')[0];
 
-            alert(hasStats);
             if (!hasStats) {
                 parent.querySelectorAll('.footer')[0].remove();
             }
