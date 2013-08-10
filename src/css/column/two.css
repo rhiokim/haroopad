@@ -8,3 +8,7 @@ body {
 h1, h2 {
 	-webkit-column-span: all;
 }
+
+table {
+	-webkit-column-break-inside: avoid;
+}
