@@ -78,8 +78,8 @@ define([
 			Recents.add(fileEntry);
 		});
 
-		newWin.on('file.saved', function(fileEntry) {
-			Recents.add(fileEntry);
+		newWin.on('file.saved', function(file) {
+			Recents.add(file.fileEntry);
 		});
 
 		//window instance delivery to child window
