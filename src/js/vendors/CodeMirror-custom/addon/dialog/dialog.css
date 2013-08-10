@@ -17,12 +17,12 @@
   z-index: 15;
 }
 
-.CodeMirror-dialog-top {
+.CodeMirror-dialog-bottom {
   border-bottom: 1px solid #eee;
   top: 0;
 }
 
-.CodeMirror-dialog-bottom {
+.CodeMirror-dialog-top {
   border-top: 1px solid #eee;
   bottom: 0;
 }

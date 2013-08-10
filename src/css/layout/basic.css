@@ -20,6 +20,14 @@ header, footer {
   -webkit-order: 2;
   display: -webkit-flex;
   -webkit-flex-flow: row;
+  
+  position: absolute;
+  margin-bottom: 21px;
+
+  bottom:0;
+  top:0;
+  left:0;
+  right:0;
 }
   
 #main > article > #editor {
@@ -40,27 +48,6 @@ header, footer {
   border: 0;
   overflow-y: auto;
 }
-
-.panel{ 
-  position: absolute;
-  margin-bottom: 21px;
-
-  bottom:0;
-  top:0;
-  left:0;
-  right:0;
-}
-/*
-.panel:target{
-  display:block;
-
-  margin-bottom: 40px;
-
-  bottom:0;
-  top:0;
-  left:0;
-  right:0;
-}*/
 
 #main > nav {
    -webkit-flex: 1 6 0%;
