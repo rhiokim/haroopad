@@ -6,60 +6,67 @@ define([
 	],
 	function(store, Keymap, Drop) {
 		var gui = require('nw.gui'),
-    		win = gui.Window.get(),
-    		clipboard = gui.Clipboard.get();
+			win = gui.Window.get(),
+			clipboard = gui.Clipboard.get();
 
-	    var _tid_;	//for throttle
+		var _tid_; //for throttle
 
-	    var config = store.get('Editor') || {};
-	    var generalConf = store.get('General') || {
-	    	enableSyncScroll: true
-	    };
+		var config = store.get('Editor') || {
+			displayLineNumber: true,
+			autoPairCharacters: true,
+			theme: 'solarized dark'
+		};
+		var generalConf = store.get('General') || {
+			enableSyncScroll: true
+		};
 
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-					    mode: 'markdown',
-					    theme: 'solarized dark',
-					    lineNumbers: true,
-					    lineWrapping: true,
-					    electricChars: false,
-					    viewportMargin: 40,
-					    tabSize: 2,
-				        indentUnit: 4,
-				        indentWithTabs: true,
-					    autofocus: true,
-					    workDelay: 1000,
-					    extraKeys: Keymap,
-  						showTrailingSpace: true/*,
+			mode: 'markdown',
+			// theme: 'solarized dark',
+			lineNumbers: true,
+			lineWrapping: true,
+			electricChars: false,
+			viewportMargin: 40,
+			tabSize: 2,
+			indentUnit: 4,
+			indentWithTabs: true,
+			autofocus: true,
+			workDelay: 1000,
+			extraKeys: Keymap,
+			showTrailingSpace: true
+			/*,
 					    dragDrop: true*/
-					  });
-
+		});
 
 		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
 		editor.on('drop', Drop);
 
 		editor.on('dragover', function(cm, e) {
-	    	var a = cm.coordsChar({ left:e.x, top: e.y });
-	    	var doc = cm.getDoc();
-	    	doc.setCursor(a);
+			var a = cm.coordsChar({
+				left: e.x,
+				top: e.y
+			});
+			var doc = cm.getDoc();
+			doc.setCursor(a);
 
-	    	e.preventDefault();
+			e.preventDefault();
 		});
 
 		/* initialize editor */
-		editor.setOption('theme', config.theme || 'solarized dark');
-		editor.setOption('lineNumbers', config.displayLineNumber || true);
+		editor.setOption('theme', config.theme);
+		editor.setOption('lineNumbers', config.displayLineNumber);
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', config.insertFourSpace ? 4 : 2);
-		editor.setOption('autoCloseBrackets', config.autoPairCharacters || true);
-		
+		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
+
 		window.ee.on('toggle.vim.keybind', function() {
-		  var map = editor.getOption('keyMap');
-		  editor.setOption('keyMap', map == 'vim' ? 'default' : 'vim');
+			var map = editor.getOption('keyMap');
+			editor.setOption('keyMap', map == 'vim' ? 'default' : 'vim');
 		});
 
 		window.ee.on('show.toggle.linenum', function() {
-			var value = editor.getOption('lineNumbers') ? false : true;
-			editor.setOption('lineNumbers', value);	
+			var value = !editor.getOption('lineNumbers');
+			editor.setOption('lineNumbers', value);
 		});
 
 		/* find & replace */
@@ -97,7 +104,7 @@ define([
 		window.parent.ee.on('preferences.editor.insertFourSpace', function(value) {
 			editor.setOption('tabSize', value ? 4 : 2);
 		});
-		
+
 		window.parent.ee.on('preferences.editor.autoPairCharacters', function(value) {
 			editor.setOption('autoCloseBrackets', value);
 		});
@@ -158,32 +165,35 @@ define([
 		});
 
 		/* fire context menu event */
-		if (!win._params.readOnly) {
+		if (nw.file && !nw.file.get('readOnly')) {
 			window.ee.on('context.cut', function(e) {
-			  clipboard.set(editor.getSelection());
-			  editor.replaceSelection('');
+				clipboard.set(editor.getSelection());
+				editor.replaceSelection('');
 			});
 			window.ee.on('context.copy', function() {
-			  clipboard.set(editor.getSelection());
+				clipboard.set(editor.getSelection());
 			});
 			window.ee.on('context.paste', function() {
-			  editor.replaceSelection(clipboard.get());
+				editor.replaceSelection(clipboard.get());
 			});
 			window.ee.on('context.select.all', function() {
-			  editor.setSelection(0, 2);
+				editor.setSelection(0, 2);
 			});
+		} else {
+			editor.setOption('readOnly', true);
 		}
 
 		/**
 		 * sync scroll handler
 		 * @return {[type]} [description]
 		 */
+
 		function syncScrollHandler() {
-		  var scrollInfo = editor.getScrollInfo();
-		  var top = scrollInfo.top;
-		  var per = scrollInfo.height - scrollInfo.clientHeight;
-		
-		  window.ee.emit('editor.scroll', top, per);
+			var scrollInfo = editor.getScrollInfo();
+			var top = scrollInfo.top;
+			var per = scrollInfo.height - scrollInfo.clientHeight;
+
+			window.ee.emit('editor.scroll', top, per);
 		}
 
 		window.parent.ee.on('preferences.general.enableSyncScroll', function(value) {
@@ -194,11 +204,17 @@ define([
 			}
 		});
 
-		if(generalConf.enableSyncScroll) {
-		  editor.on('scroll', syncScrollHandler);
+		if (generalConf.enableSyncScroll) {
+			editor.on('scroll', syncScrollHandler);
 		} else {
-		  editor.off('scroll', syncScrollHandler);
+			editor.off('scroll', syncScrollHandler);
+		}
+
+
+		var gutters = document.querySelector('.CodeMirror-gutters')
+		window.onresize = function() {
+			gutters.style.height = '5000px';
 		}
 
 		return editor;
-});
+	});

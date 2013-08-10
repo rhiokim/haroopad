@@ -3,6 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <title>haroopad</title>
+  
+<!-- for develop -->
+  <script src="js/vendors/keymage.js"></script>
+  <script>
+    keymage('defmod-esc', function() {
+      var gui = require("nw.gui");
+      var win = gui.Window.get();
+      win.showDevTools();
+    });
+  </script>
+<!-- for develop -->
 
   <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans:bold"/> -->
   <!-- Included CSS Files (Compressed) -->
@@ -11,8 +22,12 @@
   <link rel="stylesheet" href="css/bootstrap-modal.css">
   
   <link rel="stylesheet" href="js/vendors/CodeMirror/lib/codemirror.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/theme/3024-day.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/theme/3024-night.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/ambiance-mobile.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/ambiance.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/theme/base16-dark.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/theme/base16-light.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/blackboard.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/cobalt.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/eclipse.css">
@@ -25,6 +40,7 @@
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/night.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/rubyblue.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/solarized.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/theme/tomorrow-night-eighties.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/twilight.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/vibrant-ink.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/xq-dark.css">
@@ -32,7 +48,6 @@
   <link rel="stylesheet" href="js/vendors/CodeMirror-custom/addon/dialog/dialog.css">
   <link rel="stylesheet" href="css/app.css">
 
-  <script src="js/lib/logger.js"></script>
   <script src="js/pad/pad.common.js"></script>
 
   <script src="js/vendors/eventemitter.js"></script>
@@ -46,6 +61,7 @@
   <script src="js/vendors/bootstrap-modal.js"></script>
   <script src="js/vendors/store.js"></script>
   <script src="js/vendors/js-url.js"></script>
+  <script src="js/vendors/notifier.js"></script>
   <script src="js/vendors/require.js"></script>
 
   <script src="js/common/menu/MenuBar.js"></script>
@@ -101,6 +117,7 @@
       </div>
     </div>
   </div>
+  <div id="notifier"></div>
 
 </body>
 </html>

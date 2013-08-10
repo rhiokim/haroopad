@@ -58,12 +58,6 @@ window.MenuBarFile = function () {
           // enabled: false,
           submenu: MenuBarFileExports()
       });
-	// menuItem({
- //            label: 'Activity stream',
- //            enabled: false,
- //            submenu: MenuBarFileActivities()
- //        });
-  sepItem();
   
   menuItem({
             label: 'Print...',
@@ -71,6 +65,11 @@ window.MenuBarFile = function () {
                 window.parent.ee.emit('menu.print.html');
             }
         });
+	// menuItem({
+ //            label: 'Activity stream',
+ //            enabled: false,
+ //            submenu: MenuBarFileActivities()
+ //        });
     // File.append(
     //     new gui.MenuItem({
     //         label: 'Print Markdown',
@@ -85,6 +84,13 @@ window.MenuBarFile = function () {
           label: 'Preferences',
           click: function() {
               window.parent.ee.emit('menu.preferences.show');
+          }
+      });
+  sepItem();
+  menuItem({
+          label: 'Quit',
+          click: function() {
+            gui.App.closeAllWindows()();
           }
       });
     /*
