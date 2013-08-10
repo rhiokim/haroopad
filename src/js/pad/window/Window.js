@@ -205,10 +205,6 @@ define([
 		Notifier.notify('Haroopad <strong>v' + version + '</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
 	});
 
-	HotKey('defmod-shift-alt-d', function() {
-		win.showDevTools();
-	});
-
 	HotKey('defmod-enter', function() {
 		window.ee.emit('view.fullscreen');
 	});
