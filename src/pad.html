@@ -46,6 +46,7 @@
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/xq-dark.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/xq-light.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror-custom/addon/dialog/dialog.css">
+  <link rel="stylesheet" href="css/layout/basic.css">
   <link rel="stylesheet" href="css/app.css">
 
   <script src="js/pad/pad.common.js"></script>
@@ -98,11 +99,29 @@
   </script>
 </head>
 <body>
-  
-  <div id="editor"><textarea id="code" name="code"></textarea></div>
-  <!-- <div id="spliter"></div> -->
-  <!-- <div id="haroo"><article></article></div> -->
-  <div id="haroo"><iframe src="viewer.html" nwdisable nwfaketop></iframe></div>
+
+  <header class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <p class="text-center">header</p>
+    </div>
+  </header>
+  <section id="main">
+    <article class="panel">
+      <section id="editor">
+        <textarea id="code" name="code"></textarea>
+      </section>
+      <section id="haroo">
+        <iframe src="viewer.html" nwdisable nwfaketop></iframe>
+      </section>
+    </article>
+    <nav></nav>
+    <aside></aside>
+  </section>
+  <footer class="navbar navbar-fixed-bottom">
+    <div class="navbar-inner">
+      <p class="text-center">Copyright (c) Haroo Studio</p>
+    </div>
+  </footer>
 
   <div id="fields">
     <input class="hide" id="openFile" type="file" />

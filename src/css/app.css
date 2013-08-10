@@ -7,22 +7,20 @@
 :: Page Name 1
 :: Page Name 2
 */
-html, body { height:100% }
 body {
-	margin: 0;
   font-family: Droid Sans, Arial, sans-serif;
   line-height: 1.5;
   overflow-y: hidden;
   background: url('../img/linen.png');
   -webkit-user-select: none;
-  user-select: none;
 }
+
 
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
 
-#editor {
+/*#editor {
 	width: 50%;
 	height: 100%;
 	float: left;
@@ -52,7 +50,7 @@ body {
   display: inline-block;
   background: #000;
   cursor: ew-resize;
-}
+}*/
 
 #code {
   display: none;
@@ -189,8 +187,8 @@ body > .navbar .brand:hover {
 .CodeMirror {
   height: 100%;
   /*padding-left: 10px;*/
-  padding-right: 10px;
-  margin-bottom: 10px;
+  /*padding-right: 10px;*/
+  /*margin-bottom: 10px;*/
   border-top: 0;
   line-height: 1.40em;
 }

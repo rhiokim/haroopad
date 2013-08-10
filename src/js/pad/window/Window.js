@@ -3,7 +3,7 @@ define([
 	'keyboard',
 	'ui/dialog/Dialogs',
 	'ui/exports/Exports',
-	'ui/splitter/Splitter'
+	// 'ui/splitter/Splitter'
 ], function(store, HotKey, Dialogs, Exports, Splitter) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
