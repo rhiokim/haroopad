@@ -5,6 +5,8 @@ Issue Number     | Description
 **New Features** |
 #131             | Add 5 new themes
 **Bugs**         |
+#146             | Fixed recently file list blank error
+#145             | Fixed disabling "Auto pair characters"
 #140             | Fixed Context menu positon error on Window
 #135             | Fixed Context menu positon in fullscreen mode.
 #134             | Add shortcuts for escape fullscreen mode
