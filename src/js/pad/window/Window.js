@@ -117,7 +117,7 @@ define([
 
 	}, false);
 
-	$(document.body).bind('contextmenu', function(e, ev) {
+	$('#editor').bind('contextmenu', function(e, ev) {
 		var x, y;
 		e.preventDefault();
 
