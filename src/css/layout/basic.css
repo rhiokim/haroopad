@@ -5,7 +5,10 @@ body {
   padding: 0;
 }
  
-header, footer {
+header{
+   display: block;
+}
+footer {
    display: block;
 }
 
@@ -20,7 +23,7 @@ header, footer {
   -webkit-order: 2;
   display: -webkit-flex;
   -webkit-flex-flow: row;
-  
+
   position: absolute;
   margin-bottom: 21px;
 
@@ -58,6 +61,17 @@ header, footer {
    -webkit-flex: 1 6 0%;
    -webkit-order: 3;
 }
+footer .btn {
+  margin-top: 0 !important;
+}
+footer .btn-group {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+footer #spaceCount {
+  margin-right: 2px;
+}
 
 .navbar-fixed-top {
   top: -31px !important;
@@ -65,4 +79,8 @@ header, footer {
 
 .navbar-fixed-bottom {
   bottom: -10px !important;
+}
+
+.navbar-inner {
+   padding: 1px 7px 0 7px !important;
 }
