@@ -1,0 +1,23 @@
+
+footer {
+   display: block;
+}
+footer .btn {
+  margin-top: 0 !important;
+}
+footer .btn-group {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+footer #spaceCount, footer #columnCount {
+  margin-right: 2px;
+}
+
+footer .navbar .btn#preference {
+  padding: 2px 5px;
+}
+
+.navbar-fixed-bottom {
+  bottom: -10px !important;
+}
