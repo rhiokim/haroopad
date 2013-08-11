@@ -95,7 +95,7 @@ window.MenuBarFile = function () {
   menuItem({
           label: 'Quit',
           click: function() {
-            gui.App.quit();
+            gui.App.closeAllWindows()();
           }
       });
     /*

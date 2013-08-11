@@ -14,9 +14,12 @@
   - Window
   - Mac OS X
   - Linux 32/64
-* 멀티 마크다운을 지원
-	- Gitub Flavored Markdown
-	- Smartpants
+* Github Flavord Markdown 을 지원
+	- 구문강조
+	- 테이블
+	- URL 자동 링크
+	- 취소선
+	- Smartypants
 * 에디팅 테마를 지원
 	- Solaraized Dark & Light 등 20 여가지의 테마
 	- CodeMirror 기반

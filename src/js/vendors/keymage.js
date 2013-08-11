@@ -3,8 +3,11 @@
 //
 // (c) 2012 Alexander Solovyov
 // under terms of ISC License
+
 (function(define, undefined) {
 define(function() {
+    var VERSION = '1.0.1';
+
     // Defining all keys
     var MODPROPS = ['shiftKey', 'ctrlKey', 'altKey', 'metaKey'];
     var MODS = {
@@ -293,7 +296,7 @@ define(function() {
         if (!scope) {
             i = currentScope.lastIndexOf('.');
             scope = currentScope.slice(i + 1);
-            currentScope = currentScope.slice(0, i);
+            currentScope = i == -1 ? '' : currentScope.slice(0, i);
             return scope;
         }
 
@@ -302,6 +305,7 @@ define(function() {
         return scope;
     };
 
+    keymage.version = VERSION;
 
     window.addEventListener('keydown', dispatch, false);
 
