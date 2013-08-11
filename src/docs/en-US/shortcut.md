@@ -16,6 +16,7 @@ Shortcut                       | Description
 &#8984;(&#8963;) - S           | save
 &#8984;(&#8963;) - &#8679; - S | save as
 &#8984;(&#8963;) - O           | open file
+&#8984;(&#8963;) - &#8679; - E | sending email
 &#8984;(&#8963;) - ,           | preferences
 &#8984;(&#8963;) - Q           | close window
 
