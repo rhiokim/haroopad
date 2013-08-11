@@ -75,10 +75,6 @@ footer {
   line-height: 1.40em;
 }
 
-.CodeMirror-lines {
-  padding: 15px 0 35px 0;
-}
-
 /* fixed broken cursor pos */
 .CodeMirror-lines pre {
   white-space: pre;
