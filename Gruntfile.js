@@ -276,7 +276,7 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/clean-css/lib/clean.js', dest: 'build/haroopad/node_modules/clean-css/lib/clean.js' },
           { src: 'src/node_modules/clean-css/index.js', dest: 'build/haroopad/node_modules/clean-css/index.js' },
           { src: 'src/node_modules/clean-css/package.json', dest: 'build/haroopad/node_modules/clean-css/package.json' },
-          { expand: true, cwd: 'src/node_modules/nodemailer/', src: [ '**/*.js', '**/*.json', '**/*.types', '**/*.pem' ], dest: 'build/haroopad/node_modules/nodemailer/' }
+          { expand: true, cwd: 'src/node_modules/nodemailer/', src: [ '**/*.js', '**/*.json', '**/*.types', '**/*.pem' ], dest: 'build/haroopad/node_modules/nodemailer/' },
 
           { expand: true, cwd: 'src/node_modules/fs-extra/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/fs-extra/lib/' },
           { src: 'src/node_modules/fs-extra/package.json', dest: 'build/haroopad/node_modules/fs-extra/package.json' },
