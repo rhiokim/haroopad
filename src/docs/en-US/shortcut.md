@@ -29,7 +29,6 @@ Shortcut                       | Description
 &#8984;(&#8963;) - &#8679; - L | toggle line number
 &#8984;(&#8963;) - Enter       | toggle fullscreen #1
 &#8984;(&#8963;) - F11         | toggle fullscreen #2
-Double ESC                     | escape fullscreen
 &#8984;(&#8963;) - &#8997; - V | vim keyboard binding
 
 ##### Editing

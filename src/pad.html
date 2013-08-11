@@ -3,6 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <title>haroopad</title>
+  
+<!-- for develop -->
+  <script src="js/vendors/keymage.js"></script>
+  <script>
+    keymage('defmod-esc', function() {
+      var gui = require("nw.gui");
+      var win = gui.Window.get();
+      win.showDevTools();
+    });
+  </script>
+<!-- for develop -->
 
   <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans:bold"/> -->
   <!-- Included CSS Files (Compressed) -->

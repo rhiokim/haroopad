@@ -78,8 +78,8 @@ define([
 			Recents.add(fileEntry);
 		});
 
-		newWin.on('file.saved', function(fileEntry) {
-			Recents.add(fileEntry);
+		newWin.on('file.saved', function(file) {
+			Recents.add(file.fileEntry);
 		});
 
 		//window instance delivery to child window
@@ -127,7 +127,7 @@ define([
 
 		newWin = gui.Window.open('pad.html', {
 			"min_width": 500,
-			"min_height": 250,
+			"min_height": 400,
 			"toolbar": false,
 			"show": false
 		});

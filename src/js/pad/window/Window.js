@@ -197,19 +197,12 @@ define([
 
 	/* update haroopad */
 	window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
-		Notifier.notify('Do you want to <a href="#" data-href="download.haroopad">download</a> new version?', 'Update Haroopad v' + newVersion, undefined, 10000);
+		Notifier.notify('Looking for the latest version? <a href="#" data-href="release.note.haroopad">release note</a>, <a href="#" data-href="download.haroopad">download</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
 	});
 
 	/* up to date haroopad */
 	window.ee.on('up.to.date.haroopad', function(version) {
 		Notifier.notify('Haroopad <strong>v' + version + '</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
-	});
-
-	/* */
-	// Notifier.notify('How do you feel about haroopad? <a href="#" data-href="tweet-feel">feel</a>', 'Feel', undefined, 10000);
-
-	HotKey('defmod-shift-alt-d', function() {
-		win.showDevTools();
 	});
 
 	HotKey('defmod-enter', function() {

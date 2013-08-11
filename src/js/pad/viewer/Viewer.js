@@ -79,7 +79,6 @@ define([
 		});
 
 		_viewer.onload = function() {
-			alert('text')
 		}
 
 		//linkable
