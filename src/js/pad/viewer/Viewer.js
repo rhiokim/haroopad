@@ -70,7 +70,7 @@ define([
 		 * delegate right mouse down event
 		 */
 		_viewer.addEventListener('contextmenu', function(ev) {
-			$(document.body).trigger('contextmenu', [ev]);
+			$('#editor').trigger('contextmenu', [ev]);
 		}.bind(this), false);
 
 		/* copy html to clipboard */

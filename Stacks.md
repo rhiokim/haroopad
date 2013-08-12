@@ -1,5 +1,4 @@
 # haroopad stack
-haroopad technical stack
 
 ## front-end
 * codemirror
@@ -11,7 +10,6 @@ haroopad technical stack
 * store.js
 * keymage.js
 * clean-css
-* font-awesome-more
 * markdown-css
 * highlight.js
 * underscore.js
@@ -29,7 +27,6 @@ haroopad technical stack
 * node-webkit
 
 ## html5
-* PouchDB based on IndexedDB in the browser
 
 ## technical specification
 * less
