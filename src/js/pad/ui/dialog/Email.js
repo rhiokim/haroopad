@@ -14,13 +14,15 @@ define([
 		function progress() {
 			var per = 0;
 			el.find('.progress').removeClass('hide');
-			el.find('.alert').addClass('hide')
+			el.find('.alert').addClass('hide');
 			window.clearInterval(postTimeout);
 
 			postTimeout = window.setInterval(function() {
 				per += 1.7;
 
-				if (per > 100) { per = 0 }
+				if (per > 100) { 
+					per = 0;
+				}
 
 				bar.css({ width: per+'%' });
 			}, 300);
@@ -131,13 +133,11 @@ define([
 				error(msg);
 			},
 
-			cancelHandler: function() {
-				this.hide();
+			cancelHandler: function(e) {
+				e.preventDefault();
+
 				stop();
-			},
-			
-			dontSaveHandler: function() {
-				this.trigger('dont-save');
+				this.trigger('cancel');
 				this.hide();
 			}
 		});

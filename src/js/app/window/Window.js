@@ -30,8 +30,9 @@ define([
   });
 
   window.ee.on('menu.file.recents', function(file) {
-    var file = File.open(file);
-    WindowMgr.open(file);
+    var fileObj = File.open(file);
+    Recents.add(file);
+    WindowMgr.open(fileObj);
   });
 
   window.ee.on('menu.file.recents.clear', function() {

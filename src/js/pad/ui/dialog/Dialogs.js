@@ -18,6 +18,10 @@ define([
 		EmailDialog.bind('post', function(mailInfo) {
 			window.parent.ee.emit('send.email', nw.file.toJSON(), mailInfo);
 		});
+		
+		EmailDialog.bind('cancel', function() {
+			window.parent.ee.emit('cancel.send.email');
+		});
 
 		window.ee.on('sent.email', EmailDialog.successHandler.bind(EmailDialog));
 
@@ -27,7 +31,7 @@ define([
 			}
 		});
 
-		HotKey('cmd-shift-t', function() {
+		HotKey('defmod-shift-e', function() {
 			window.ee.emit('menu.file.send.email');
 		});
 
