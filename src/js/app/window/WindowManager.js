@@ -127,7 +127,7 @@ define([
 
 		newWin = gui.Window.open('pad.html', {
 			"min_width": 500,
-			"min_height": 250,
+			"min_height": 400,
 			"toolbar": false,
 			"show": false
 		});

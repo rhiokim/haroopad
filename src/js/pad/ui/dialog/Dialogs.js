@@ -27,7 +27,7 @@ define([
 			}
 		});
 
-		HotKey('cmd-shift-t', function() {
+		HotKey('cmd-shift-e', function() {
 			window.ee.emit('menu.file.send.email');
 		});
 
