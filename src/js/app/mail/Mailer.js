@@ -31,8 +31,10 @@ define([
 		if (to.indexOf('@tumblr.com') > -1) {
 			title = '!m '+ title;
 		} else {
-			html += _glo.getEmailAdvertisementHTML();
-			text += _glo.getEmailAdvertisementMD();
+			var adStr = _glo.getEmailAdvertisementHTML();
+			html += adStr;
+			text += adStr;
+			// text += _glo.getEmailAdvertisementMD();
 		}
 
 		mailOptions.from = email;
