@@ -1,4 +1,4 @@
-## Haroopad v0.4.9 (upcoming)
+## Haroopad v0.4.9
 
 Issue Number     | Description
 ----------------:|-----------------------------------------------
@@ -22,17 +22,14 @@ Issue Number     | Description
 
 * https://github.com/rhiokim/haroopad/issues?milestone=23&page=1&state=closed
 
-<!--
-
 ##### Download
 
-> * Windows NSIS installer: https://www.dropbox.com/s/tka88058kws5wrl/haroopad-v0.4.9-i386.msi
+> * Windows MSI installer: https://www.dropbox.com/s/tka88058kws5wrl/haroopad-v0.4.9-i386.msi
 > * Mac OS X DMG: https://www.dropbox.com/s/cmgr27ocwkz8jvv/haroopad-v0.4.9.dmg
 > * Linux 32-bit Binary: https://www.dropbox.com/s/ftbyys0leu1ia6w/haroopad-v0.4.9_i386.tar.gz
 > * Linux 32-bit Debian Package: https://www.dropbox.com/s/yxecp3j36bf89t1/haroopad-v0.4.9-i386.deb
 > * Linux 64-bit Binary: https://www.dropbox.com/s/vebgfulty6ralzd/haroopad-v0.4.9_amd64.tar.gz
 > * Linux 64-bit Debian Package: https://www.dropbox.com/s/brakb4fr3rpbk63/haroopad-v0.4.9_amd64.deb
--->
 
 ## Haroopad v0.4.8
 
@@ -45,7 +42,7 @@ Issue Number     | Description
                  | Update Documents & Refactoring for next step
 
 ##### Download
-> * Windows NSIS installer:[https://www.dropbox.com/s/498tpv91tso9ccy/haroopad-v0.4.8-i386.msi](https://www.dropbox.com/s/498tpv91tso9ccy/haroopad-v0.4.8-i386.msi)
+> * Windows MSI installer:[https://www.dropbox.com/s/498tpv91tso9ccy/haroopad-v0.4.8-i386.msi](https://www.dropbox.com/s/498tpv91tso9ccy/haroopad-v0.4.8-i386.msi)
 > * Mac OS X DMG: [https://www.dropbox.com/s/1atxt755y0wkffa/haroopad-v0.4.8.dmg](https://www.dropbox.com/s/1atxt755y0wkffa/haroopad-v0.4.8.dmg)
 > * Linux 32-bit Binary:[https://www.dropbox.com/s/eieqz1qag3lg76e/haroopad-v0.4.8_i386.tar.gz](https://www.dropbox.com/s/eieqz1qag3lg76e/haroopad-v0.4.8_i386.tar.gz)
 > * Linux 32-bit Debian Package:[https://www.dropbox.com/s/g4c4yp5kp42rnu3/haroopad-v0.4.8-i386.deb](https://www.dropbox.com/s/g4c4yp5kp42rnu3/haroopad-v0.4.8-i386.deb)
