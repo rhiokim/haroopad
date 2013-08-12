@@ -42,7 +42,6 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  console.log(e)
   alert('Oops! pad is crash :-(');
 };
 
