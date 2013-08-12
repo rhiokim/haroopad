@@ -23,4 +23,5 @@ header .btn-group + .btn-group {
 }
 .navbar-fixed-top .navbar-inner {
   min-height: 25px;
+  magin-bottom: 2px;
 }
