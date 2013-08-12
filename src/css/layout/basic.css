@@ -28,10 +28,10 @@ body {
   -webkit-flex-flow: row;
 
   position: absolute;
+  margin-top: 40px;
   margin-left: 130px;
   margin-right: 37px;
   margin-bottom: 21px;
-  margin-top: 27px;
 
   bottom:0;
   top:0;
