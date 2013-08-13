@@ -63,6 +63,8 @@ define([
 		    	transport.close(); // shut down the connection pool, no more messages
 		    }, 1000 * 60 * 10);
 		});
+
+		updateGoogleAnalytics('sending_email');
 	}
 
 	window.ee.on('cancel.send.email', function() {
