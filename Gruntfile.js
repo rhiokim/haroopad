@@ -30,8 +30,12 @@ module.exports = function(grunt) {
         files: {
           "build/haroopad/css/codemirror.min.css": [
             '<%= vendors %>/CodeMirror/lib/codemirror.css',
+            '<%= vendors %>/CodeMirror/theme/3024-day.css',
+            '<%= vendors %>/CodeMirror/theme/3024-night.css',
             '<%= vendors %>/CodeMirror/theme/ambiance-mobile.css',
             '<%= vendors %>/CodeMirror/theme/ambiance.css',
+            '<%= vendors %>/CodeMirror/theme/base16-dark.css',
+            '<%= vendors %>/CodeMirror/theme/base16-light.css',
             '<%= vendors %>/CodeMirror/theme/blackboard.css',
             '<%= vendors %>/CodeMirror/theme/cobalt.css',
             '<%= vendors %>/CodeMirror/theme/eclipse.css',
@@ -44,6 +48,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/night.css',
             '<%= vendors %>/CodeMirror/theme/rubyblue.css',
             '<%= vendors %>/CodeMirror/theme/solarized.css',
+            '<%= vendors %>/CodeMirror/theme/tomorrow-night-eighties.css',
             '<%= vendors %>/CodeMirror/theme/twilight.css',
             '<%= vendors %>/CodeMirror/theme/vibrant-ink.css',
             '<%= vendors %>/CodeMirror/theme/xq-dark.css',

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../addon/hint/show-hint.css">
     <script src="../addon/hint/xml-hint.js"></script>
     <script src="../mode/xml/xml.js"></script>
+    <script src="../mode/markdown/markdown.js"></script>
     <link rel="stylesheet" href="../doc/docs.css">
     <style type="text/css">
       .CodeMirror { border: 1px solid #eee; }
@@ -67,7 +68,7 @@
         var cur = cm.getCursor();
         if (!pred || pred()) setTimeout(function() {
           if (!cm.state.completionActive)
-            CodeMirror.showHint(cm, CodeMirror.xmlHint, {schemaInfo: tags, completeSingle: false});
+            CodeMirror.showHint(cm, CodeMirror.hint.xml, {schemaInfo: tags, completeSingle: false});
         }, 100);
         return CodeMirror.Pass;
       }
@@ -89,7 +90,7 @@
       }
 
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        mode: "xml",
+        mode: "markdown",
         lineNumbers: true,
         extraKeys: {
           "'<'": completeAfter,
@@ -97,7 +98,7 @@
           "' '": completeIfInTag,
           "'='": completeIfInTag,
           "Ctrl-Space": function(cm) {
-            CodeMirror.showHint(cm, CodeMirror.xmlHint, {schemaInfo: tags});
+            CodeMirror.showHint(cm, CodeMirror.hint.xml, {schemaInfo: tags});
           }
         }
       });

@@ -9,9 +9,10 @@ define([
 	      'Cmd-B': 'markdownBold',
 	      'Cmd-I': 'markdownItalic',
 	      'Cmd-L': 'markdownLink',
-	      'Cmd-Alt-S': 'markdownStrike',
+	      'Cmd-U': 'markdownStrike',
+	      'Cmd-K': 'markdownInlineCode',
 	      'Cmd-Alt-O': 'markdownOrderedList',
-	      'Cmd-Alt-U': 'markdownUnorderedList',
+	      'Cmd-Alt-U': 'markdownUnOrderedList',
 	      'Cmd-Alt-I': 'markdownImage',
 	      'Cmd-Alt-B': 'markdownBlockQuote'
 	    };
@@ -21,9 +22,10 @@ define([
 	      'Ctrl-B': 'markdownBold',
 	      'Ctrl-I': 'markdownItalic',
 	      'Ctrl-L': 'markdownLink',
+	      'Ctrl-K': 'markdownInlineCode',
 	      'Ctrl-Alt-S': 'markdownStrike',
 	      'Ctrl-Alt-O': 'markdownOrderedList',
-	      'Ctrl-Alt-U': 'markdownUnorderedList',
+	      'Ctrl-Alt-U': 'markdownUnOrderedList',
 	      'Ctrl-Alt-I': 'markdownImage',
 	      'Ctrl-Alt-B': 'markdownBlockQuote'
 	    };

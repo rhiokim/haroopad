@@ -44,5 +44,9 @@ define([
 			gui.Shell.openExternal(serverInfo.download[getPlatformName()]);
 		});
 
+		window.ee.on('release.note.haroopad', function() {
+			gui.Shell.openExternal(serverInfo.release);
+		});
+
 		check();
 	});

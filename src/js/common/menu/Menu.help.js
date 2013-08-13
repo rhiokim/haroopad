@@ -26,7 +26,7 @@ window.MenuBarHelp = function () {
 		      	window.parent.ee.emit('menu.help.syntax')
 		      	// (process.platform === 'win32') ?
 		      	// window.parent.ee.emit('menu.help.syntax') :
-		       //  open('http://pad.haroopress.com/page.html#syntax');
+		       //  open('http://pad.haroopress.com/page.html?f=syntax');
 		      }
 	    })
 	);
@@ -37,7 +37,7 @@ window.MenuBarHelp = function () {
 		      	window.parent.ee.emit('menu.help.shortcut')
 		      	// (process.platform === 'darwin') ?
 		      	// window.parent.ee.emit('menu.help.shortcut') :
-		       //  open('http://pad.haroopress.com/page.html#show-shortcuts');
+		       //  open('http://pad.haroopress.com/page.html?f=show-shortcuts');
 		      }
 	    })
 	);
@@ -51,7 +51,7 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Release Notes',
 		      click: function() {
-		        open('http://pad.haroopress.com/page.html#release-notes');
+		        open('http://pad.haroopress.com/page.html?f=release-notes');
 		      }
 	    })
 	);
@@ -62,7 +62,7 @@ window.MenuBarHelp = function () {
 		      	window.parent.ee.emit('menu.help.acknowledgements')
 		      	// (process.platform === 'darwin') ?
 		      	// window.parent.ee.emit('menu.help.acknowledgements') :
-		       //  open('http://pad.haroopress.com/page.html#acknowledgements');
+		       //  open('http://pad.haroopress.com/page.html?f=acknowledgements');
 		      }
 	    })
 	);
@@ -113,7 +113,7 @@ window.MenuBarHelp = function () {
 	    new gui.MenuItem({
 	        label: 'Boost up! Donate',
 		      click: function() {
-					open('http://pad.haroopress.com/page.html#grow-up-donate');
+					open('http://pad.haroopress.com/page.html?f=grow-up-donate');
 		      }
 	    })
 	);

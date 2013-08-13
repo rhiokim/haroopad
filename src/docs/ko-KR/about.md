@@ -14,9 +14,12 @@
   - Window
   - Mac OS X
   - Linux 32/64
-* 멀티 마크다운을 지원
-	- Gitub Flavored Markdown
-	- Smartpants
+* Github Flavord Markdown 을 지원
+	- 구문강조
+	- 테이블
+	- URL 자동 링크
+	- 취소선
+	- Smartypants
 * 에디팅 테마를 지원
 	- Solaraized Dark & Light 등 20 여가지의 테마
 	- CodeMirror 기반
@@ -37,9 +40,9 @@
 
 ### 추가 정보
 
-공식 사이트 : [http://pad.haroopress.com][haroopad]
-공식 블로그 및 메뉴얼 : [http://pad.haroopress.com/page.html][blog]
-사용자 에코 시스템 : [http://haroopad.userecho.com][userecho]
+* 공식 사이트 : [http://pad.haroopress.com][haroopad]
+* 공식 블로그 및 메뉴얼 : [http://pad.haroopress.com/page.html][blog]
+* 사용자 에코 시스템 : [http://haroopad.userecho.com][userecho]
 
 하루패드 트위터 계정과 [@haroopad](https://twitter.com/haroopad) 개발자 계정  [@rhiokim](https://twitter.com/rhiokim) 을 팔로윙하고 최신 소식을 들으세요.
 
