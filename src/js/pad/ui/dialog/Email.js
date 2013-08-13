@@ -132,6 +132,10 @@ define([
 				});
 			},
 
+			pushHandler: function(e) {
+				
+			},
+
 			error: function(msg) {
 				error(msg);
 			},

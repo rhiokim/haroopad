@@ -33,6 +33,9 @@ define([
 
 		window.parent.ee.on('preferences.viewer.theme', function(value) {
 			_viewer.setViewStyle(value);
+			setTimeout(function() {
+				StyleMaker.generateInlineStyle();
+			}, 500);
 		});
 
 		window.parent.ee.on('preferences.code.theme', function(value) {

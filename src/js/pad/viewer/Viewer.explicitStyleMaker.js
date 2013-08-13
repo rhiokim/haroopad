@@ -144,8 +144,7 @@ define([
 		nw.file.set('attachments', attachments);
 	}
 
-	window.ee.on('menu.file.send.email', function() {
-
+	function generateInlineStyle() {
 		// htmlStyledDoc = $(htmlDoc.documentElement).clone()[0];
 		htmlStyledDoc = document.createElement('html');
 		htmlStyledDoc.innerHTML = htmlDoc.documentElement.innerHTML;
@@ -154,5 +153,11 @@ define([
 		// makeImageEncode();
 		attachImage();
 		makeStylesExplicit();
-	});
+	}
+
+	window.ee.on('menu.file.send.email', generateInlineStyle);
+
+	return {
+		generateInlineStyle: generateInlineStyle
+	}
 });
