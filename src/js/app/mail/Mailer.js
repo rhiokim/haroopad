@@ -4,7 +4,7 @@ define([
 	var nodemailer = require("nodemailer");
 
 	// create reusable transport method (opens pool of SMTP connections)
-	var email, smtpTransport, tid;
+	var email, transport, tid;
 
 	// setup e-mail data with unicode symbols
 	var mailOptions = {
@@ -17,7 +17,7 @@ define([
 
 	function createTransport(email, password, service) {
 		// create reusable transport method (opens pool of SMTP connections)
-		smtpTransport = nodemailer.createTransport("SMTP", {
+		transport = nodemailer.createTransport("SMTP", {
 		    service: service || "Gmail",
 		    auth: {
 		        user: email,
@@ -50,20 +50,24 @@ define([
 		}
 
 		// send mail with defined transport object
-		smtpTransport.sendMail(mailOptions, function(error, response) {
+		transport.sendMail(mailOptions, function(error, response) {
 			cb(error, response);
 
 			if (error) {
-				smtpTransport.close();
+				transport.close();
 				return;
 			}
 
 		    window.clearTimeout(tid);
 		    tid = window.setTimeout(function() {
-		    	smtpTransport.close(); // shut down the connection pool, no more messages
+		    	transport.close(); // shut down the connection pool, no more messages
 		    }, 1000 * 60 * 10);
 		});
 	}
+
+	window.ee.on('cancle.send.email', function() {
+		transport.close();
+	});
 
 	return {
 		setCredential: function(email, password, service) {

@@ -13,6 +13,7 @@ define([
 
 		function progress() {
 			var per = 0;
+			el.find('#isSent').addClass('hide');
 			el.find('.progress').removeClass('hide');
 			el.find('.alert').addClass('hide');
 			window.clearInterval(postTimeout);
@@ -32,6 +33,7 @@ define([
 			window.clearInterval(postTimeout);
 			el.find('.progress').addClass('hide');
 			bar.css({ width: 0 });
+			el.find('button._save').button('reset');
 		}
 
 		function error(msg) {
@@ -47,17 +49,17 @@ define([
 			el.find('.progress').addClass('hide');
 			bar.css({ width: 0 });
 
-			el.find('.alert-success').removeClass('hide').html(msg);
-			el.find('.alert-success').addClass('in');
+			el.find('#isSent').removeClass('hide').html(msg);
+			el.find('#isSent').addClass('in');
 			
 			el.find('button._save').button('reset');
 
-			window.setTimeout(function() {
-				el.find('.alert-success').removeClass('in');
-				window.setTimeout(function() {
-					el.find('.alert-success').addClass('hide');
-				}, 250);
-			}, 2500);
+			// window.setTimeout(function() {
+			// 	el.find('#isSent').removeClass('in');
+			// 	window.setTimeout(function() {
+			// 		el.find('#isSent').addClass('hide');
+			// 	}, 250);
+			// }, 10000);
 		}
 
 		var View = Backbone.View.extend({
@@ -67,7 +69,7 @@ define([
 				// 'click ._dont_save': 'dontSaveHandler',
 				'click a': 'clickHandler',
 				'submit form': 'postHandler',
-				'click ._cancel': 'cancelHandler'
+				'click ._close': 'closeHandler'
 			},
 
 			initialize: function() {
@@ -93,8 +95,7 @@ define([
 			},
 
 			successHandler: function() {
-				success('Success!');
-				this.$el.find('button._save').button('reset');
+				success('- Sent!');
 			},
 
 			clickHandler: function(e) {
@@ -107,7 +108,7 @@ define([
 				var title, to, from, password;
 				e.preventDefault();
 
-				el.find('button._save').button('Sending...');
+				el.find('button._save').button('loading');
 
 				title = this.$el.find('input[name=title]').val() || '';
 				to = this.$el.find('input[name=to]').val();
@@ -133,7 +134,7 @@ define([
 				error(msg);
 			},
 
-			cancelHandler: function(e) {
+			closeHandler: function(e) {
 				e.preventDefault();
 
 				stop();

@@ -2,7 +2,7 @@
   <form name="send-email" class="form-horizontal">
   <div class="modal-header">
     <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
-    <h4>Sending email</h4>
+    <h4>Sending email <small id="isSent" class="text-success hide fade in">- Sent</small></h4>
   </div>
   <div class="modal-body">
 
@@ -47,13 +47,13 @@
     <div class="pull-left">
       <label class="checkbox">
         <input type="checkbox" name="remember">
-        <span class="text-info">Remember email</span> <i class="icon-info-sign" data-toggle="tooltip" data-placement="top" title="<span text='text-error'>Never will not be saved your password.</span>"></i>
+        <span class="text-info">Remember email</span> <i class="icon-info-sign" data-toggle="tooltip" data-placement="top" title="The password will not be saved."></i>
       </label>
     </div>
     <!-- <a href="#" class="btn btn-danger pull-left _dont_save">Dont's Save</a> -->
-    <button href="#" class="btn _cancel">Cancel</button>
+    <button href="#" class="btn _close">Close</button>
     <!-- <a href="#" class="btn btn-primary _save">Post</a> -->
-    <button type="submit" class="btn btn-primary _save" data-loading-text="Sending...">Post</button>
+    <button type="submit" class="btn btn-primary _save" data-loading-text="Sending...">Send</button>
   </div>
   </form>
 </div>

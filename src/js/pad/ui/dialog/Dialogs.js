@@ -27,7 +27,7 @@ define([
 
 		window.ee.on('fail.send.email', function(err) {
 			if(err.name == 'AuthError') {
-				EmailDialog.error('Email and Password not accepted');
+				EmailDialog.error('Email and Password not accepted.');
 			}
 		});
 
