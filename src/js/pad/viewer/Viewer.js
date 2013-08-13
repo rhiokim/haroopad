@@ -16,9 +16,19 @@ define([
 
 		// var config = option.toJSON();
 
+		function setTitle() {
+			var viewerDoc = iframe.contentDocument.body;
+			var el = viewerDoc.querySelectorAll('h1, h2, h3, h4, h5, h6')[0];
+			var title = (el && el.innerText) || '';
+
+			nw.file.set({ title: title }, { silent: true });
+		}
+
 		function update(markdown, html, editor) {
 			content = html;
 			_viewer.update(content);
+
+			setTitle();
 		}
 
 		window.parent.ee.on('preferences.viewer.theme', function(value) {

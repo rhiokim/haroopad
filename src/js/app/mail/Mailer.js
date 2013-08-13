@@ -67,7 +67,7 @@ define([
 
 	window.ee.on('cancel.send.email', function() {
 	    window.clearTimeout(tid);
-		transport.close();
+		transport && transport.close();
 	});
 
 	return {

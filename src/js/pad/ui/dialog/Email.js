@@ -76,8 +76,10 @@ define([
 				this.$('[data-toggle=tooltip]').tooltip({ html: true });
 			},
 
-			show: function() {
+			show: function(file) {
 				var Emails = store.get('Emails') || {};
+
+				this.$el.find('input[name=title]').val(file.title);
 
 				this.$el.find('input[name=to]').val(Emails.to || '');
 				this.$el.find('input[name=from]').val(Emails.from || '');

@@ -66,7 +66,7 @@ define([
 		// FileOpt.set('html', wrapper[0].outerHTML);
 
 		// nw.file.set('html', wrapper[0].outerHTML);
-		nw.file.set({ html: wrapper.outerHTML}, { silent: true });
+		nw.file.set({ styledHTML: wrapper.outerHTML }, { silent: true });
 	}
 
 	function makeImageEncode() {

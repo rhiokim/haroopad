@@ -32,7 +32,7 @@ define([
 		});
 
 		HotKey('defmod-shift-e', function() {
-			window.ee.emit('menu.file.send.email');
+			window.ee.emit('menu.file.send.email', nw.file.toJSON());
 		});
 
 		return dialogs = {
