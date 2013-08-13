@@ -2,7 +2,7 @@
   "main": "index.html",
   "name": "haroopad",
   "description": "The Next Document processor based on Markdown",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "keywords": [ "markdown", "haroopress", "editor" ],
   "window": {
     "title": "haroopad",

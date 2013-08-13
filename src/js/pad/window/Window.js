@@ -1,9 +1,9 @@
 define([
-		'store',
-		'keyboard',
-		'ui/dialog/Dialogs',
-		'ui/exports/Exports',
-		'ui/splitter/Splitter'
+	'store',
+	'keyboard',
+	'ui/dialog/Dialogs',
+	'ui/exports/Exports',
+	'ui/splitter/Splitter'
 ], function(store, HotKey, Dialogs, Exports, Splitter) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
@@ -16,7 +16,7 @@ define([
 
 	function close() {
 		win.hide();
-		
+
 		config.x = win.x;
 		config.y = win.y;
 		config.width = win.width;
@@ -67,9 +67,9 @@ define([
 		var opt = file.toJSON();
 
 		if (opt.tmp) {
-			nw.title = 'Restored (writen at '+ opt.ctime +')';
+			nw.title = 'Restored (writen at ' + opt.ctime + ')';
 		} else {
-			nw.title = orgTitle = opt.basename || orgTitle;	
+			nw.title = orgTitle = opt.basename || orgTitle;
 		}
 
 		if (opt.readOnly) {
@@ -82,7 +82,7 @@ define([
 	// 	if (win._params.readOnly) {
 	// 		win.title += ' (read only)';
 	// 	}
- //  	});
+	//  	});
 
 	nw.on('file.saved', function(opt) {
 		win.title = orgTitle = opt.basename;
@@ -90,7 +90,7 @@ define([
 		if (delayClose) {
 			close();
 		}
-		
+
 		delayClose = false;
 		edited = false;
 	});
@@ -100,112 +100,134 @@ define([
 		edited = true;
 	});
 
+	window.addEventListener('keydown', function(e) {
 
-	// HotKey('defmod-shift-alt-d', function() {
-	// 	win.showDevTools();
-	// });
+		var evt = document.createEvent("Events");
+		evt.initEvent("keydown", true, true);
 
-	HotKey('defmod-enter', function() {
-		window.ee.emit('view.fullscreen');
-	});
+		evt.view = e.view;
+		evt.altKey = e.altKey;
+		evt.ctrlKey = e.ctrlKey;
+		evt.shiftKey = e.shiftKey;
+		evt.metaKey = e.metaKey;
+		evt.keyCode = e.keyCode;
+		evt.charCode = e.charCode;
 
-  window.addEventListener('keydown', function(e) {
+		window.parent.dispatchEvent(evt);
 
-    var evt = document.createEvent("Events");
-      evt.initEvent("keydown", true, true);
-
-      evt.view = e.view;
-      evt.altKey = e.altKey;
-      evt.ctrlKey = e.ctrlKey;
-      evt.shiftKey = e.shiftKey;
-      evt.metaKey = e.metaKey;
-      evt.keyCode = e.keyCode;
-      evt.charCode = e.charCode;
-
-      window.parent.dispatchEvent(evt);
-
-  }, false);
+	}, false);
 
 	$(document.body).bind('contextmenu', function(e, ev) {
 		var x, y;
 		e.preventDefault();
-		
+
 		e = (ev) ? ev : e;
 
 		x = win.x - window.parent.screenX + e.clientX;
 		y = win.y - window.parent.screenY + e.clientY;
 
-		switch(process.platform) {
+		switch (process.platform) {
 			case 'linux':
-				y += 26;
-			break;
+				y += 28;
+				break;
 			default:
-			break;
+				break;
 		}
 
 		x = (ev) ? x + $('#editor').width() : x;
+
+		//fixed #135
+		if (win.isFullscreen) {
+
+			switch (process.platform) {
+				case 'win32':
+					y -= 49;
+					x -= 7;
+					break;
+				case 'linux':
+					y -= 28;
+					break;
+				default:
+					y -= 20;
+					break;
+			}
+		}
 
 		if (ev) {
 			window.parent.ee.emit('popup.context.viewer', x, y);
 		} else {
 			window.parent.ee.emit('popup.context.editor', x, y);
 		}
-		
-	  return false;
+
+		return false;
 	});
 
 
-  var resizeTimeout;
-  window.onresize = function(e) {
+	var resizeTimeout;
+	window.onresize = function(e) {
 
-    clearTimeout(resizeTimeout);
+		clearTimeout(resizeTimeout);
 
-    resizeTimeout = setTimeout(function() {
-	  	config.width = win.width;
-	  	config.height = win.height;
-	  	config.x = win.x;
-	  	config.y = win.y;
+		resizeTimeout = setTimeout(function() {
+			config.width = win.width;
+			config.height = win.height;
+			config.x = win.x;
+			config.y = win.y;
 
-	  	store.set('Window', config);
-    }, 250); 
+			store.set('Window', config);
+		}, 250);
 
-  }
+	}
 
-  win.on('enter-fullscreen', function() {
-	document.querySelector('.CodeMirror-gutters').style.height = '3000px';
-  });
-  
-  window.ee.on('view.fullscreen', function() {
-  	var isFull = win.isFullscreen;
+	win.on('enter-fullscreen', function() {
+		document.querySelector('.CodeMirror-gutters').style.height = '3000px';
+	});
 
-  	if (isFull) {
-  		win.leaveFullscreen();
-  	} else {
-  		/* codemirror redraw delay bug */
-  		// document.querySelector('.CodeMirror-gutters').style.height = '3000px';
-  		win.enterFullscreen();
-  	}
-  });
+	window.ee.on('view.fullscreen', function() {
+		var isFull = win.isFullscreen;
 
-  /* update haroopad */
-  window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
-	Notifier.notify('Do you want to <a href="#" data-href="download.haroopad">download</a> new version?', 'Update Haroopad v'+ newVersion, undefined, 10000);
-  });
+		if (isFull) {
+			win.leaveFullscreen();
+		} else {
+			/* codemirror redraw delay bug */
+			// document.querySelector('.CodeMirror-gutters').style.height = '3000px';
+			win.enterFullscreen();
+		}
+	});
 
-  /* up to date haroopad */
-  window.ee.on('up.to.date.haroopad', function(version) {
-	Notifier.notify('Haroopad <strong>v'+ version +'</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
-  });
+	/* update haroopad */
+	window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
+		Notifier.notify('Looking for the latest version? <a href="#" data-href="release.note.haroopad">release note</a>, <a href="#" data-href="download.haroopad">download</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
+	});
 
-  HotKey('defmod-o', function() {
-    window.ee.emit('menu.file.open');
-  });
+	/* up to date haroopad */
+	window.ee.on('up.to.date.haroopad', function(version) {
+		Notifier.notify('Haroopad <strong>v' + version + '</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
+	});
 
-  HotKey('defmod-s', function() {
-    window.ee.emit('menu.file.save');
-  });
+	HotKey('defmod-enter', function() {
+		window.ee.emit('view.fullscreen');
+	});
 
-  HotKey('defmod-shift-s', function() {
-    window.ee.emit('menu.file.save.as');
-  });
+	HotKey('defmod-f11', function() {
+		window.ee.emit('view.fullscreen');
+	});
+
+	HotKey('esc esc', function() {
+		if (win.isFullscreen) {
+			win.leaveFullscreen();
+		}
+	});
+
+	HotKey('defmod-o', function() {
+		window.ee.emit('menu.file.open');
+	});
+
+	HotKey('defmod-s', function() {
+		window.ee.emit('menu.file.save');
+	});
+
+	HotKey('defmod-shift-s', function() {
+		window.ee.emit('menu.file.save.as');
+	});
 });

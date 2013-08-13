@@ -27,6 +27,8 @@ Shortcut                       | Description
 &#8963; - &#8997; - ]          | editor width +5%
 &#8963; - &#8997; - [          | editor width -5%
 &#8984;(&#8963;) - &#8679; - L | toggle line number
+&#8984;(&#8963;) - Enter       | toggle fullscreen #1
+&#8984;(&#8963;) - F11         | toggle fullscreen #2
 &#8984;(&#8963;) - &#8997; - V | vim keyboard binding
 
 ##### Editing
@@ -56,7 +58,8 @@ Shortcut                       | Example        | Description
 &#8984;(&#8963;) - B           | `**Bold**`     | bold
 &#8984;(&#8963;) - I           | `*Italic*`     | italic
 &#8984;(&#8963;) - L           | `[link](url)`  | link
-&#8984;(&#8963;) - &#8997; - S | `~~strike~~`   | strike
+&#8984;(&#8963;) - U           | `~~strike~~`   | strikethrough
+&#8984;(&#8963;) - K           | `\`strike\``   | Inline code
 &#8984;(&#8963;) - &#8997; - O | `1. markdown`  | ordered list
 &#8984;(&#8963;) - &#8997; - U | `* haroopad`   | unordered list
 &#8984;(&#8963;) - &#8997; - I | `![]()`        | image

@@ -5,13 +5,14 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>haroopad</string>
+	<string>Haroopad</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>md</string>
+				<string>mmd</string>
 				<string>markdown</string>
 				<string>mdown</string>
 				<string>markdn</string>
@@ -21,38 +22,19 @@
 				<string>mdtxt</string>
 				<string>mdtext</string>
 				<string>mdml</string>
-				<string>text</string>
-				<string>txt</string>
-				<string>*</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>markdown</string>
+			<string>markdown.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>The next document processor (markdown-base)</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string></string>
-			</array>
+			<string>Markdown Document</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>net.daringfireball.markdown</string>
+			</array>
 			<key>LSIsAppleDefaultForType</key>
 			<true/>
-		</dict>
-		<dict>
-			<key>CFBundleTypeName</key>
-			<string>Folder</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>fold</string>
-			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSHandlerRank</key>
-			<string>None</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -79,6 +61,8 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>@@title</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.productivity</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -103,6 +87,7 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>md</string>
+					<string>mmd</string>
 					<string>markdown</string>
 					<string>mdown</string>
 					<string>markdn</string>
@@ -119,9 +104,9 @@
 				<string>com.pkware.zip-archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Markdown</string>
+			<string>Markdown Document</string>
 			<key>UTTypeIconFile</key>
-			<string>markdown</string>
+			<string>markdown.icns</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.daringfireball.markdown</string>
 		</dict>
@@ -134,6 +119,7 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>md</string>
+					<string>mmd</string>
 					<string>markdown</string>
 					<string>mdown</string>
 					<string>markdn</string>
@@ -150,9 +136,9 @@
 				<string>com.pkware.zip-archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Markdown</string>
+			<string>Markdown Document</string>
 			<key>UTTypeIconFile</key>
-			<string>markdown</string>
+			<string>markdown.icns</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.daringfireball.markdown</string>
 		</dict>
