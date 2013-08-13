@@ -16,7 +16,8 @@ requirejs.config({
   paths: {
     // tpl: '../../tpl',
     vendors: '../vendors',
-    store: '../vendors/store'
+    store: '../vendors/store',
+    keyboard: '../vendors/keymage'
   },
   config: {
     text: {
@@ -30,6 +31,7 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
+    'keyboard',
     'tabs/General',
     'tabs/Editor',
     'tabs/Viewer',
@@ -37,11 +39,17 @@ requirejs([
     'tabs/Markdown',
     'tabs/Helper',
     'tabs/About'
-  ], function(General, Editor, Viewer, Code, Markdown, Helper, About) {
+  ], function(HotKey, General, Editor, Viewer, Code, Markdown, Helper, About) {
 
     $('.switch').bootstrapSwitch();
+    HotKey('esc', function() {
+      win.close();
+    });
 
-    window.focus();
+    setTimeout(function() {
+      win.show();
+      win.focus();
+    }, 10);
 
     win.on('context.preferences', function() {
     });
