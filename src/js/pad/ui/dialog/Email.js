@@ -69,7 +69,8 @@ define([
 				// 'click ._dont_save': 'dontSaveHandler',
 				'click a': 'clickHandler',
 				'submit form': 'postHandler',
-				'click ._close': 'closeHandler'
+				'click ._close': 'closeHandler',
+				'keypress input[name=to]': 'keypressHandler'
 			},
 
 			initialize: function() {
@@ -130,6 +131,18 @@ define([
 					remember: remember, 
 					mode: mode
 				});
+			},
+
+			keypressHandler: function(e) {
+				var to = this.$el.find('input[name=to]').val();
+
+				if (to.indexOf('@tumblr.co') > -1) {
+					this.$el.find('button[name=html]').removeClass('active');
+					this.$el.find('button[name=markdown]').addClass('active');
+				} else {
+					this.$el.find('button[name=markdown]').removeClass('active');
+					this.$el.find('button[name=html]').addClass('active');
+				}
 			},
 
 			pushHandler: function(e) {
