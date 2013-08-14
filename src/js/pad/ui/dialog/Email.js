@@ -90,6 +90,7 @@ define([
 				this.$el.find('input[name=to]').data({ source: Emails.addrs });
 
 				this.$el.modal('show');
+				this.keypressHandler();
 			},
 
 			hide: function() {
