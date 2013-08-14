@@ -13,7 +13,7 @@ var _glo = {
 
 	getEmailAdvertisementMD: function() {
 		return ''
-			+ '\n----------------------  \n'
+			+ '\n* * * * * * * *  \n'
 			+ '\t> **Tip**  \n'
 			+ '\t> Haroopad - The Next Document processor based on Markdown  \n'
 			+ '\t> [Download Haroopad](http://pad.haroopress.com/user.html#download)  \n';

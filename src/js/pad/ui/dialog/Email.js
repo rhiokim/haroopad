@@ -79,8 +79,9 @@ define([
 
 			show: function(file) {
 				var Emails = store.get('Emails') || {};
+				var title = file && file.title;
 
-				this.$el.find('input[name=title]').val(file.title);
+				this.$el.find('input[name=title]').val(title || '');
 
 				this.$el.find('input[name=to]').val(Emails.to || '');
 				this.$el.find('input[name=from]').val(Emails.from || '');

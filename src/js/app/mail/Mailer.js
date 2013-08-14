@@ -26,29 +26,7 @@ define([
 		});
 	}
 
-	function send(title, text, html, to, mode, attach, cb) {
-
-		if (to.indexOf('@tumblr.com') > -1) {
-			title = '!m '+ title;
-		} else {
-			var adStr = _glo.getEmailAdvertisementHTML();
-			html += adStr;
-			text += adStr;
-			// text += _glo.getEmailAdvertisementMD();
-		}
-
-		mailOptions.from = email;
-		mailOptions.to = to;
-		mailOptions.subject = title;
-		mailOptions.attachments = attach;
-		
-		if (mode == 'html') {
-			mailOptions.html = html || '';
-			updateGoogleAnalytics('posting_tumblr');
-		} else {
-			delete mailOptions.html;
-			mailOptions.text = text || '';
-		}
+	function send(cb) {
 
 		// send mail with defined transport object
 		transport.sendMail(mailOptions, function(error, response) {
@@ -74,11 +52,43 @@ define([
 	});
 
 	return {
-		setCredential: function(email, password, service) {
-			createTransport(email, password, service);
+		setCredential: function(mailInfo) {
+			createTransport(mailInfo.from, mailInfo.password);
 		},
 
-		send: send
+		send: function(mailInfo, fileInfo, next) {
+			// mailInfo.title, fileInfo.markdown, fileInfo.styledHTML, mailInfo.to, mailInfo.mode, fileInfo.attachments
+			var subject = mailInfo.title;
+			var to = mailInfo.to;
+			var mode = mailInfo.mode;
+			var html = fileInfo.styledHTML;
+			var text = fileInfo.markdown;
+
+			if (to.indexOf('@tumblr.com') > -1) {
+				if (mode == 'md') {
+					subject = '!m '+ subject;
+					updateGoogleAnalytics('posting_tumblr');
+				}
+			} else {
+				html += _glo.getEmailAdvertisementHTML();
+				text += _glo.getEmailAdvertisementMD();
+			}
+
+			if (mode == 'html') {
+				delete mailOptions.text;
+				mailOptions.html = html || '';
+			} else {
+				delete mailOptions.html;
+				mailOptions.text = text || '';
+			}
+
+			mailOptions.from = mailInfo.from;
+			mailOptions.to = to;
+			mailOptions.subject = subject;
+			mailOptions.attachments = mailInfo.attachements;
+
+			send(next);
+		}
 	}
 
 });
