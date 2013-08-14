@@ -44,6 +44,7 @@ define([
 		
 		if (mode == 'html') {
 			mailOptions.html = html || '';
+			updateGoogleAnalytics('posting_tumblr');
 		} else {
 			delete mailOptions.html;
 			mailOptions.text = text || '';
