@@ -15,8 +15,6 @@ define([], function() {
 	}
 
 	function check(force) {
-		updateGoogleAnalytics('active_user');
-		
 		http.get(url, function(res) {
 			res.on("data", function(chunk) {
 				try {

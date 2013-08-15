@@ -105,6 +105,7 @@ module.exports = function(grunt) {
             // 'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
             'src/js/app/app.common.js',
+            'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
             'build/menu.concat.js',
             'build/app.r.js',

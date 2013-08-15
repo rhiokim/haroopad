@@ -49,4 +49,6 @@ requirejs([
 
     win.show();
     win.focus();
+
+    global._gaq.push('haroopad.preferences', 'init', '');
 });
