@@ -1,52 +1,46 @@
-define([
-		'utils/AppConfig'
-	], function(AppConfig) {
-		var http = require('http');
+define([], function() {
+	var http = require('http'),
 
-		var gui = require('nw.gui');
+		manifest = gui.App.manifest,
+		url = manifest.upgrade,
+		currVersion = manifest.version;
 
-		var info = AppConfig.maintainers[0];
-		var url = info.upgrade,
-			currVersion = AppConfig.version;
-
-		function updateCheck(newVersion, force) {
-			if (!compareVersions(newVersion, currVersion)) {
-			// if (currVersion == newVersion) {
-				if (force) process.emit('up.to.date.haroopad', currVersion);
-				return;
-			}
-
-			process.emit('update.haroopad', currVersion, newVersion);
+	function updateCheck(newVersion, force) {
+		if (!compareVersions(newVersion, currVersion)) {
+			if (force) process.emit('up.to.date.haroopad', currVersion);
+			return;
 		}
 
-		function check(force) {
-			updateGoogleAnalytics('active_user');
-			
-			http.get(url, function(res) {
-				res.on("data", function(chunk) {
-					try {
-						serverInfo = JSON.parse(chunk);
+		process.emit('update.haroopad', currVersion, newVersion);
+	}
 
-						updateCheck(serverInfo.version, force);
-					} catch(e) {
-						serverInfo = {};
-					}
-				});
-			}).on('error', function(e) {
+	function check(force) {
+		updateGoogleAnalytics('active_user');
+		
+		http.get(url, function(res) {
+			res.on("data", function(chunk) {
+				try {
+					serverInfo = JSON.parse(chunk);
+
+					updateCheck(serverInfo.version, force);
+				} catch(e) {
+					serverInfo = {};
+				}
 			});
-		}
+		}).on('error', function(e) {});
+	}
 
-		window.ee.on('check.version', function(force) {
-			check(force);
-		});
-
-		window.ee.on('download.haroopad', function() {
-			gui.Shell.openExternal(serverInfo.download[getPlatformName()]);
-		});
-
-		window.ee.on('release.note.haroopad', function() {
-			gui.Shell.openExternal(serverInfo.release);
-		});
-
-		check();
+	window.ee.on('check.version', function(force) {
+		check(force);
 	});
+
+	window.ee.on('download.haroopad', function() {
+		gui.Shell.openExternal(serverInfo.download[getPlatformName()]);
+	});
+
+	window.ee.on('release.note.haroopad', function() {
+		gui.Shell.openExternal(serverInfo.release);
+	});
+
+	check();
+});
