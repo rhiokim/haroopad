@@ -18,6 +18,11 @@ body {
   user-select: none;
 }
 
+form {
+  margin: 0;
+  padding: 0;
+}
+
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
@@ -120,6 +125,15 @@ body > .navbar .brand:hover {
 #haroo ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(255,0,0,0.4); 
 }
+
+/* ---
+  post tumblr
+*/
+#send-email-dialog .progress {
+  margin-bottom: 0;
+  height: 10px;
+}
+
 
 /* -----------------------------------------
    Preferences

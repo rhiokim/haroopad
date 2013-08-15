@@ -99,6 +99,7 @@ function(OpenDialog, SaveDialog) {
 	 ***************************/
 	// win.on('file.open', OpenDialog.show.bind(OpenDialog));
 	
+
 	// window.ee.on('change.before.markdown', function(markdown) {
 		// nw.file.set('markdown', markdown);
 		// Temporary.update();

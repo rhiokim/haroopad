@@ -1,7 +1,8 @@
 define([
-		'store'
+		'store',
+		'viewer/Viewer.explicitStyleMaker'
 	], 
-	function(store) {
+	function(store, StyleMaker) {
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
 		var content = '',
@@ -69,7 +70,7 @@ define([
 		 * delegate right mouse down event
 		 */
 		_viewer.addEventListener('contextmenu', function(ev) {
-			$(document.body).trigger('contextmenu', [ev]);
+			$('#editor').trigger('contextmenu', [ev]);
 		}.bind(this), false);
 
 		/* copy html to clipboard */
@@ -104,6 +105,10 @@ define([
 			 */
 			getContentDocument: function() {
 				return iframe.contentDocument;
+			},
+
+			getHTML: function() {
+				return iframe.contentDocument.body.innerHTML;
 			}
 		};
 	});
