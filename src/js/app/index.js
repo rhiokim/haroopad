@@ -37,32 +37,22 @@ requirejs.onError = function (e) {
 
 requirejs([
     'context/Context',
-    // 'core/Parser',
     'mail/Mailer',
     'window/Window',
     'window/WindowManager',
     'utils/UpdateNotifier'
-  ], function(Context/*, Parser*/, Mailer, Window, WindowMgr, Updater) {
+  ], function(Context, Mailer, Window, WindowMgr, Updater) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
-
-    // window.ee.on('change.markdown', function(md, options, cb) {
-    //   cb = typeof options === 'function' ? options : cb;
-    //   options = typeof options === 'object' ? options : undefined;
-      
-    //   var html = Parser(md, options);
-
-    //   cb(html);
-    // });
 
     window.ee.on('send.email', function(fileInfo, mailInfo) {
       var child = WindowMgr.actived;
       var Emails = store.get('Emails') || {};
       var addrs = Emails.addrs || [];
 
-      Mailer.setCredential(mailInfo.from, mailInfo.password);
-      Mailer.send(mailInfo.title, fileInfo.markdown, fileInfo.html, mailInfo.to, mailInfo.mode, fileInfo.attachments, function(err, response) {
+      Mailer.setCredential(mailInfo);
+      Mailer.send(mailInfo, fileInfo, function(err, response) {
 
         if (err) {
           child.window.ee.emit('fail.send.email', err);

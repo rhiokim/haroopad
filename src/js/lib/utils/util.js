@@ -56,7 +56,7 @@ function getDocsPath() {
 	return path.join(getExecPath(), 'docs', locale);
 }
 
-function updateGoogleAnalytics() {
+function updateGoogleAnalytics(name) {
 	var iframe = document.getElementById('__google');
 
 	if (!iframe) {
@@ -64,7 +64,7 @@ function updateGoogleAnalytics() {
 		iframe.id = '__google';
 	}
 
-	iframe.src = 'http://pad.haroopress.com/assets/google_active_user.html';
+	iframe.src = 'http://pad.haroopress.com/assets/google_'+ name +'.html';
 
 	document.body.appendChild(iframe);
 }

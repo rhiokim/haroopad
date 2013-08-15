@@ -3,7 +3,7 @@
  */
 .markdown {
   padding: 20px;
-  font-size: 0.9em;
+  font-size: 1em;
 }
 .markdown a {
   text-decoration: none;
@@ -63,7 +63,6 @@
 }
 .markdown p {
   margin: 1em 0;
-  line-height: 1.6em;
 }
 .markdown ol {
   list-style-type: decimal;

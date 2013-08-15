@@ -27,12 +27,12 @@ define([
 
 		window.ee.on('fail.send.email', function(err) {
 			if(err.name == 'AuthError') {
-				EmailDialog.error('Email and Password not accepted');
+				EmailDialog.error('Email and Password not accepted.');
 			}
 		});
 
 		HotKey('defmod-shift-e', function() {
-			window.ee.emit('menu.file.send.email');
+			window.ee.emit('menu.file.send.email', nw.file.toJSON());
 		});
 
 		return dialogs = {

@@ -12,7 +12,7 @@ define(function() {
   	},
 
   	show: function(dir) {
-      this.$el.attr({ nwworkingdir: dir });
+      // this.$el.attr({ nwworkingdir: dir });
   	  this.$el.trigger('click');
   	},
 

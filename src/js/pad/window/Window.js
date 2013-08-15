@@ -14,14 +14,26 @@ define([
 
 	var config = store.get('Window') || {};
 
+	if (config.isFullscreen) {
+		setTimeout(function() {
+			win.enterFullscreen();
+		}, 50);
+	} else {
+		nw.resizeTo(config.width, config.height);
+	}
+
 	function close() {
 		win.hide();
 
-		config.x = win.x;
-		config.y = win.y;
-		config.width = win.width;
-		config.height = win.height;
+		if (!win.isFullscreen) {
+			config.width = win.width;
+			config.height = win.height;
+			config.x = win.x;
+			config.y = win.y;
+		}
+
 		config.zoom = win.zoom;
+		config.isFullscreen = win.isFullscreen;
 		store.set('Window', config);
 
 		win.close(true);

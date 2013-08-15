@@ -4,7 +4,7 @@ define([
 	var nodemailer = require("nodemailer");
 
 	// create reusable transport method (opens pool of SMTP connections)
-	var email, smtpTransport, tid;
+	var email, transport, tid;
 
 	// setup e-mail data with unicode symbols
 	var mailOptions = {
@@ -17,7 +17,7 @@ define([
 
 	function createTransport(email, password, service) {
 		// create reusable transport method (opens pool of SMTP connections)
-		smtpTransport = nodemailer.createTransport("SMTP", {
+		transport = nodemailer.createTransport("SMTP", {
 		    service: service || "Gmail",
 		    auth: {
 		        user: email,
@@ -26,49 +26,69 @@ define([
 		});
 	}
 
-	function send(title, text, html, to, mode, attach, cb) {
-
-		if (to.indexOf('@tumblr.com') > -1) {
-			title = '!m '+ title;
-		} else {
-			html += _glo.getEmailAdvertisementHTML();
-			text += _glo.getEmailAdvertisementMD();
-		}
-
-		mailOptions.from = email;
-		mailOptions.to = to;
-		mailOptions.subject = title;
-		mailOptions.attachments = attach;
-		
-		if (mode == 'html') {
-			mailOptions.html = html || '';
-		} else {
-			delete mailOptions.html;
-			mailOptions.text = text || '';
-		}
+	function send(cb) {
 
 		// send mail with defined transport object
-		smtpTransport.sendMail(mailOptions, function(error, response) {
+		transport.sendMail(mailOptions, function(error, response) {
 			cb(error, response);
 
 			if (error) {
-				smtpTransport.close();
+				transport.close();
 				return;
 			}
 
 		    window.clearTimeout(tid);
 		    tid = window.setTimeout(function() {
-		    	smtpTransport.close(); // shut down the connection pool, no more messages
+		    	transport.close(); // shut down the connection pool, no more messages
 		    }, 1000 * 60 * 10);
 		});
+
+		updateGoogleAnalytics('sending_email');
 	}
 
+	window.ee.on('cancel.send.email', function() {
+	    window.clearTimeout(tid);
+		transport && transport.close();
+	});
+
 	return {
-		setCredential: function(email, password, service) {
-			createTransport(email, password, service);
+		setCredential: function(mailInfo) {
+			createTransport(mailInfo.from, mailInfo.password);
 		},
 
-		send: send
+		send: function(mailInfo, fileInfo, next) {
+			// mailInfo.title, fileInfo.markdown, fileInfo.styledHTML, mailInfo.to, mailInfo.mode, fileInfo.attachments
+			var subject = mailInfo.title;
+			var to = mailInfo.to;
+			var mode = mailInfo.mode;
+			var html = fileInfo.styledHTML;
+			var text = fileInfo.markdown;
+
+			if (to.indexOf('@tumblr.com') > -1) {
+				if (mode == 'md') {
+					subject = '!m '+ subject;
+					updateGoogleAnalytics('posting_tumblr');
+				}
+			} else {
+				html += _glo.getEmailAdvertisementHTML();
+				text += _glo.getEmailAdvertisementMD();
+			}
+
+			if (mode == 'html') {
+				delete mailOptions.text;
+				mailOptions.html = html || '';
+			} else {
+				delete mailOptions.html;
+				mailOptions.text = text || '';
+			}
+
+			mailOptions.from = mailInfo.from;
+			mailOptions.to = to;
+			mailOptions.subject = subject;
+			mailOptions.attachments = mailInfo.attachements;
+
+			send(next);
+		}
 	}
 
 });
