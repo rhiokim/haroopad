@@ -31,7 +31,7 @@ define([
 			changeViewStyle: function(e) {
 				options.set({ theme: e.val });
 
-				global._gaq.push('haroopad.preferences', 'view', e.val);
+    		global._gaq.push('haroopad.preferences', 'style', e.val);
 			},
 
 			clickableLink: function(e) {

@@ -68,6 +68,7 @@ define([
 				if (mode == 'md') {
 					subject = '!m '+ subject;
 				}
+				
 				global._gaq.push('haroopad.file', 'tumblr', '');
 			} else {
 				html += _glo.getEmailAdvertisementHTML();

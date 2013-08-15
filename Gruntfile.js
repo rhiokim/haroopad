@@ -126,7 +126,6 @@ module.exports = function(grunt) {
             'src/js/pad/before.pad.js',
             // 'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
-            'src/js/lib/utils/analytics.js',
             'src/js/pad/pad.common.js',
             'build/menu.concat.js',
             'build/pad.r.js',

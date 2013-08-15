@@ -105,6 +105,8 @@ define([
 			top = top + 20;
 
 			this.moveTo(left, top);
+
+			global._gaq.push('haroopad.window', 'new', String(realCount));
 		});
 	}
 
