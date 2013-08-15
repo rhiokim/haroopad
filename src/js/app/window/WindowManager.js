@@ -86,8 +86,6 @@ define([
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			this.resizeTo(config.width, config.height);
-
 			shadowCount++;
 
 			//윈도우 오픈 시 position 파라미터가 존재하면 위치 지정은 패스한다.
