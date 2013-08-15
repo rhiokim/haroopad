@@ -1,4 +1,6 @@
 global._gaq = {
+	instance: null,
+
 	init: function(next) {
 		var cw, iframe, wrapper,
 				html = '<iframe src="about:blank" id="__google" nwdisable nwfaketop></iframe>';
@@ -23,3 +25,4 @@ global._gaq = {
 		global._gaq.instance && global._gaq.instance.push(arr);
 	}
 };
+

@@ -50,5 +50,5 @@ requirejs([
     win.show();
     win.focus();
 
-    global._gaq.push('haroopad', 'preferences', 'open');
+    global._gaq.push('haroopad.preferences', 'init', '');
 });
