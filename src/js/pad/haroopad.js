@@ -172,12 +172,6 @@ requirejs([
       process.emit('actived', nw);
     });
 
-    setTimeout(function() {
-      process.emit('actived', nw);
-      nw.show();
-      nw.focus();
-    }, 10);
-
     $("#notifier").click(function(e) {
       var tagName = e.target.tagName.toUpperCase();
 
@@ -188,4 +182,8 @@ requirejs([
         break;
       }
     });
+
+    nw.show();
+    nw.focus();
+    process.emit('actived', nw);
 });

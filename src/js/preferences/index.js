@@ -42,17 +42,11 @@ requirejs([
   ], function(HotKey, General, Editor, Viewer, Code, Markdown, Helper, About) {
 
     $('.switch').bootstrapSwitch();
+    
     HotKey('esc', function() {
       win.close();
     });
 
-    setTimeout(function() {
-      win.show();
-      win.focus();
-    }, 10);
-
-    win.on('context.preferences', function() {
-    });
-    win.on('preferences.show', function() {
-    });
+    win.show();
+    win.focus();
 });
