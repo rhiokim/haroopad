@@ -46,6 +46,8 @@ requirejs([
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
+    _gaq.init();
+
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
     //   options = typeof options === 'object' ? options : undefined;
