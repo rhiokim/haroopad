@@ -43,7 +43,7 @@ define([
 		    }, 1000 * 60 * 10);
 		});
 
-		updateGoogleAnalytics('sending_email');
+		global._gaq.push('haroopad.file', 'email', '');
 	}
 
 	window.ee.on('cancel.send.email', function() {
@@ -67,8 +67,8 @@ define([
 			if (to.indexOf('@tumblr.com') > -1) {
 				if (mode == 'md') {
 					subject = '!m '+ subject;
-					updateGoogleAnalytics('posting_tumblr');
 				}
+				global._gaq.push('haroopad.file', 'tumblr', '');
 			} else {
 				html += _glo.getEmailAdvertisementHTML();
 				text += _glo.getEmailAdvertisementMD();
