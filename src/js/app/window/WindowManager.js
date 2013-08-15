@@ -76,10 +76,14 @@ define([
 
 			open(file);
 			Recents.add(fileEntry);
+
+			global._gaq.push('haroopad.file', 'open', '');
 		});
 
 		newWin.on('file.saved', function(file) {
 			Recents.add(file.fileEntry);
+
+			global._gaq.push('haroopad.file', 'save', '');
 		});
 
 		//window instance delivery to child window
@@ -105,8 +109,6 @@ define([
 			top = top + 20;
 
 			this.moveTo(left, top);
-
-			global._gaq.push('haroopad.window', 'new', String(realCount));
 		});
 	}
 
