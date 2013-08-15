@@ -7,8 +7,8 @@
   "window": {
     "title": "haroopad",
     "icon": "logo.png",
-    "toolbar": false,
-    "show": false,
+    "toolbar": true,
+    "show": true,
     "width": 1024,
     "height": 600,
     "min_width": 500,
@@ -18,12 +18,12 @@
   "webkit": {
     "plugin": false
   },
+  "upgrade": "http://pad.haroopress.com/upgrade.json",
   "maintainers":[{
    "name": "Rhio Kim",
    "email": "rhio.kim@gmail.com",
    "web": "http://pad.haroopress.com",
    "blog": "http://pad.haroopress.com/page.html",
-   "upgrade": "http://pad.haroopress.com/upgrade.json",
    "feedback": "http://haroopad.userecho.com"
   }],
   "licenses": [{

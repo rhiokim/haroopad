@@ -28,6 +28,7 @@ define([], function() {
 		show: function() {
 			if (prefWin) {
 				prefWin.show();
+				prefWin.focus();
 			} else { 
 				init();
 			}

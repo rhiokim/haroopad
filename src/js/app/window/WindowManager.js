@@ -105,7 +105,6 @@ define([
 			top = top + 20;
 
 			this.moveTo(left, top);
-			this.focus();
 		});
 	}
 
