@@ -195,6 +195,11 @@ define([
 		document.querySelector('.CodeMirror-gutters').style.height = '3000px';
 	});
 
+	win.on('leave-fullscreen', function() {
+		config.isFullscreen = win.isFullscreen;
+		store.set('Window', config);
+	});
+
 	window.ee.on('view.fullscreen', function() {
 		var isFull = win.isFullscreen;
 
