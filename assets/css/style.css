@@ -121,8 +121,12 @@ blockquote p {
 .carousel-caption {
     background-color: rgba(26, 188, 156, 0.79)
 }
-.carousel .carousel-tontrol a {
+.carousel a.carousel-control {
+    opacity: 0.1;
     text-decoration: none;
+}
+.carousel a:hover.carousel-control {
+    opacity: 0.9;
 }
 
 .navbar-clouds .navbar-inner {
