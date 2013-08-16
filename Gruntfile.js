@@ -102,6 +102,7 @@ module.exports = function(grunt) {
           'build/app.modules.js': [
             'src/js/app/before.app.js',
             // 'src/js/lib/logger.js',
+            'src/js/app/app.common.js',
             'src/js/lib/utils/util.js',
             'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
