@@ -52,6 +52,9 @@
   <link rel="stylesheet" href="css/layout/footer.css">
   <link rel="stylesheet" href="css/layout/l-side.css">
   <link rel="stylesheet" href="css/layout/r-side.css">
+
+  <link rel="stylesheet" href="css/layout/aside.css">
+
   <link rel="stylesheet" href="css/app.css">
 
   <script src="js/pad/pad.common.js"></script>
@@ -59,6 +62,9 @@
   <script src="js/vendors/eventemitter.js"></script>
   <script src="js/vendors/underscore.js"></script>
   <script src="js/vendors/highlight.pack.js"></script>
+
+  <script src="js/vendors/layout/classie.js"></script>
+  <script src="js/vendors/layout/qmenu.js"></script>
 
   <script src="js/vendors/jquery-1.9.1.js"></script>
   <script src="js/vendors/backbone.js"></script>
@@ -69,6 +75,7 @@
   <script src="js/vendors/js-url.js"></script>
   <script src="js/vendors/notifier.js"></script>
   <script src="js/vendors/require.js"></script>
+
 
   <script src="js/common/menu/MenuBar.js"></script>
   <script src="js/common/menu/Menu.file.js"></script>
@@ -104,7 +111,6 @@
   </script>
 </head>
 <body>
-
   <header class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div id="editControls" style="margin-bottom:2px;">
@@ -146,9 +152,40 @@
           <a class="btn" data-role="subscript" href="#"><i class="icon-subscript"></i></a>
           <a class="btn" data-role="superscript" href="#"><i class="icon-superscript"></i></a>
         </div>
+        <div class="btn-group pull-right">
+          <a class="btn" data-role="config" href="#"><i class="icon-tasks"></i></a>
+        </div>
+
+        <ul id="gn-menu" class="gn-menu-main">
+          <nav class="gn-menu-wrapper">
+            <div class="gn-scroller">
+              <ul class="gn-menu">
+                <li>
+                  <a class="gn-icon gn-icon-download">Downloads</a>
+                  <ul class="gn-submenu">
+                    <li><a class="gn-icon gn-icon-illustrator">Vector Illustrations</a></li>
+                    <li><a class="gn-icon gn-icon-photoshop">Photoshop files</a></li>
+                  </ul>
+                </li>
+                <li><a class="gn-icon gn-icon-cog">Settings</a></li>
+                <li><a class="gn-icon gn-icon-help">Help</a></li>
+                <li>
+                  <a class="gn-icon gn-icon-archive">Archives</a>
+                  <ul class="gn-submenu">
+                    <li><a class="gn-icon gn-icon-article">Articles</a></li>
+                    <li><a class="gn-icon gn-icon-pictures">Images</a></li>
+                    <li><a class="gn-icon gn-icon-videos">Videos</a></li>
+                    <li><a class="gn-icon"></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!-- /gn-scroller -->
+          </nav>
+        </ul>
       </div>
     </div>
   </header>
+
   <section id="main">
     <article class="panel">
       <section id="editor">
@@ -159,8 +196,10 @@
       </section>
     </article>
     <nav>bbb</nav>
-    <aside>aaa</aside>
+    <aside>
+    </aside>
   </section>
+
   <footer class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="navbar-inner">
       <span id="lineCount" class="pull-left">Line 112</span>, 
@@ -214,6 +253,10 @@
     </div>
   </div>
   <div id="notifier"></div>
-
+  <script>
+    // new mlPushMenu( document.getElementById( 'mp-menu' ), document.body );
+    new gnMenu( document.getElementById( 'editControls' ) );
+    
+  </script>
 </body>
 </html>

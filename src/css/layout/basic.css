@@ -29,8 +29,9 @@ body {
 
   position: absolute;
   margin-top: 32px;
+  /* nav, aside 
   margin-left: 130px;
-  margin-right: 37px;
+  margin-right: 37px;*/
   margin-bottom: 21px;
 
   bottom:0;
@@ -59,5 +60,5 @@ body {
 }
 
 .navbar-inner {
-   padding: 1px 7px 0 7px !important;
+   padding: 1px 3px 0 3px !important;
 }
