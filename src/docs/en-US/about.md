@@ -10,6 +10,9 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
 
 ### Main features
 
+* Sending email (New Features)
+	- Sending beautiful email
+	- Posting to Tumblr
 * Support cross platform
   - Window
   - Mac OS X
