@@ -102,7 +102,9 @@ module.exports = function(grunt) {
           'build/app.modules.js': [
             'src/js/app/before.app.js',
             // 'src/js/lib/logger.js',
+            'src/js/app/app.common.js',
             'src/js/lib/utils/util.js',
+            'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
             'build/menu.concat.js',
             'build/app.r.js',
@@ -357,7 +359,7 @@ module.exports = function(grunt) {
       },
 
       deploy: {
-        command: 'cp -R ./build/haroopad.app /Applications'
+        command: 'rm -rf /Applications/haroopad.app; cp -R ./build/haroopad.app /Applications'
       }
     },
 

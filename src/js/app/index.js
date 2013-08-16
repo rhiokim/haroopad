@@ -46,6 +46,10 @@ requirejs([
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
+    global._gaq.init(function(_gaq) {
+      _gaq.push('haroopad', 'command', 'exec');
+    });
+
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
     //   options = typeof options === 'object' ? options : undefined;
