@@ -359,7 +359,7 @@ module.exports = function(grunt) {
       },
 
       deploy: {
-        command: 'cp -R ./build/haroopad.app /Applications'
+        command: 'rm -rf /Applications/haroopad.app; cp -R ./build/haroopad.app /Applications'
       }
     },
 
