@@ -3,19 +3,15 @@
 Issue Number     | Description
 ----------------:|-----------------------------------------------
 **New Features** |
-#131             | Add 5 new themes
+                | **Sending email or Posting to tumblr** <span class="label label-important"> New!</span>
+#146             | **Copy to HTML** shortcut
+                 | Add shortcut to toggle fullscreen ([Shortcuts](http://pad.haroopress.com/page.html?f=show-shortcuts))
 **Bugs**         |
-#146             | Fixed recently file list blank error
-#145             | Fixed disabling "Auto pair characters"
-#140             | Fixed Context menu positon error on Window
-#135             | Fixed Context menu positon in fullscreen mode.
-#134             | Add shortcuts for escape fullscreen mode
-#136             | Fixed donation link
+#145             | **\[a:b\]\(\)** - markdown parsing error
+#151             | Drag and Drop on dock icon
 **Enhancements** |
-#141             | Enhancement close app logic
-#131             | Update codemirror 3.15
-#127             | file open (CLI)
-#137             | Fixed dont's run in ubuntu 13.04 (libudev.so.0 problem)
+#141             | Remember fullscreen mode
+#131             | Remember directory path that lastest opened file
 
 
 ##### Github Issue tracker
@@ -24,12 +20,12 @@ Issue Number     | Description
 
 ##### Download
 
-> * Windows MSI installer: https://www.dropbox.com/s/tka88058kws5wrl/haroopad-v0.4.9-i386.msi
-> * Mac OS X DMG: https://www.dropbox.com/s/cmgr27ocwkz8jvv/haroopad-v0.4.9.dmg
-> * Linux 32-bit Binary: https://www.dropbox.com/s/ftbyys0leu1ia6w/haroopad-v0.4.9_i386.tar.gz
-> * Linux 32-bit Debian Package: https://www.dropbox.com/s/yxecp3j36bf89t1/haroopad-v0.4.9-i386.deb
-> * Linux 64-bit Binary: https://www.dropbox.com/s/vebgfulty6ralzd/haroopad-v0.4.9_amd64.tar.gz
-> * Linux 64-bit Debian Package: https://www.dropbox.com/s/brakb4fr3rpbk63/haroopad-v0.4.9_amd64.deb
+> * Windows MSI installer: https://www.dropbox.com/s/n9dqix5fjujv701/haroopad-v0.5.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/p8419o0wtqlr1s6/haroopad-v0.5.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/kldpurazcmt480o/haroopad-v0.5.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/d5uzi4khsbzk8ex/haroopad-v0.5.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/db0y2rl5do0wg4r/haroopad-v0.5.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/s9r8n5mqorqpcg1/haroopad-v0.5.0_amd64.deb
 
 
 ## Haroopad v0.4.9
