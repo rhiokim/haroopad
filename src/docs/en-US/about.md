@@ -1,10 +1,10 @@
 # Haroopad
 
-**Haroopad** is a document processor for creating web-friendly document in markdown editor.
+**Haroopad** is a markdown enabled document processor for creating web-friendly documents.
 
-You can also based on the markdown, to create Web documents, blogs, as well as e-mail, the report documents expert.
+You can author various formats of documents such as blog article, slide, presentation, report, and e-mail as if experts did.
 
-And then support Windows, Linux, the Mac OS, you get the experience of editing the same document markdown in the desired platform.
+Haroopad gives you same experiences in editing regardless of the platform you are working on. It runs on all three major operating systems—Windows, Mac OS X, and Linux.
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
