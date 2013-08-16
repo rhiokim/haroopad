@@ -2,7 +2,8 @@ define([
 	], function() {
 		var gui = require('nw.gui');
 		var shell = gui.Shell;
-		var manifest = gui.App.manifest;
+		// var manifest = gui.App.manifest;
+		var manifest = global.package;
 
 		var AboutTabView = Backbone.View.extend({
 			el: '#about-tab',
