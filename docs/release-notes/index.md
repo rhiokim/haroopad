@@ -16,7 +16,7 @@ Issue Number     | Description
 
 ##### Github Issue tracker
 
-* https://github.com/rhiokim/haroopad/issues?milestone=23&page=1&state=closed
+* https://github.com/rhiokim/haroopad/issues?milestone=4&state=closed
 
 ##### Download
 
