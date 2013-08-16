@@ -1,7 +1,7 @@
 define([], function() {
 	var http = require('http'),
-
-		manifest = gui.App.manifest,
+	
+		manifest = global.package;//gui.App.manifest,
 		url = manifest.upgrade,
 		currVersion = manifest.version;
 
