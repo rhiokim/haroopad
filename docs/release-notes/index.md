@@ -12,6 +12,7 @@ Issue Number     | Description
 **Enhancements** |
 #141             | Remember fullscreen mode
 #131             | Remember directory path that lastest opened file
+#                | Set markdown document icon on Mac
 
 
 ##### Github Issue tracker
