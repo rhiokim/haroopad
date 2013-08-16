@@ -1,3 +1,37 @@
+## Haroopad v0.5.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#131             | Add 5 new themes
+**Bugs**         |
+#146             | Fixed recently file list blank error
+#145             | Fixed disabling "Auto pair characters"
+#140             | Fixed Context menu positon error on Window
+#135             | Fixed Context menu positon in fullscreen mode.
+#134             | Add shortcuts for escape fullscreen mode
+#136             | Fixed donation link
+**Enhancements** |
+#141             | Enhancement close app logic
+#131             | Update codemirror 3.15
+#127             | file open (CLI)
+#137             | Fixed dont's run in ubuntu 13.04 (libudev.so.0 problem)
+
+
+##### Github Issue tracker
+
+* https://github.com/rhiokim/haroopad/issues?milestone=23&page=1&state=closed
+
+##### Download
+
+> * Windows MSI installer: https://www.dropbox.com/s/tka88058kws5wrl/haroopad-v0.4.9-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/cmgr27ocwkz8jvv/haroopad-v0.4.9.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/ftbyys0leu1ia6w/haroopad-v0.4.9_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/yxecp3j36bf89t1/haroopad-v0.4.9-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/vebgfulty6ralzd/haroopad-v0.4.9_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/brakb4fr3rpbk63/haroopad-v0.4.9_amd64.deb
+
+
 ## Haroopad v0.4.9
 
 Issue Number     | Description
