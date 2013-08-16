@@ -22,6 +22,7 @@ define([
 	      'Ctrl-B': 'markdownBold',
 	      'Ctrl-I': 'markdownItalic',
 	      'Ctrl-L': 'markdownLink',
+	      'Ctrl-U': 'markdownStrike',
 	      'Ctrl-K': 'markdownInlineCode',
 	      'Ctrl-Alt-S': 'markdownStrike',
 	      'Ctrl-Alt-O': 'markdownOrderedList',
