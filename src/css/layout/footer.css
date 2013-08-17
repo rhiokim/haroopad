@@ -12,7 +12,7 @@ footer .btn-group {
   padding-top: 0 !important;
 }
 
-footer #spaceCount, footer #columnCount {
+footer #indentation, footer #columnCount {
   margin-right: 2px;
 }
 

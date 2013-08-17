@@ -27,9 +27,9 @@ define([
 			lineWrapping: true,
 			electricChars: false,
 			viewportMargin: 40,
-			tabSize: 2,
-			indentUnit: 4,
-			indentWithTabs: true,
+	        // tabSize: 8,
+	        // indentUnit: 8,
+	        // indentWithTabs: true,
 			autofocus: true,
 			workDelay: 1000,
 			extraKeys: Keymap,
@@ -56,7 +56,7 @@ define([
 		editor.setOption('theme', config.theme);
 		editor.setOption('lineNumbers', config.displayLineNumber);
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
-		editor.setOption('tabSize', config.insertFourSpace ? 4 : 2);
+		// editor.setOption('tabSize', config.insertFourSpace ? 4 : 2);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
 		window.ee.on('toggle.vim.keybind', function() {
