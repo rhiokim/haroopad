@@ -38,3 +38,13 @@ footer .dropdown-menu li > a {
 footer .dropdown-menu li > a i {
 	left: 3px;
 }
+
+footer #lineCount,
+footer #wordCount,
+footer #cursorActivity {
+  margin-right: 8px;
+}
+
+footer #elementsInfo {
+  margin-top: 3px;
+}
