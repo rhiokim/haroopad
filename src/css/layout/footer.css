@@ -21,3 +21,20 @@ footer .navbar .btn#preference {
 .navbar-fixed-bottom {
   bottom: -10px !important;
 }
+
+footer .dropdown-menu {
+	min-width: 130px;
+	padding: 0 0 3px 0;
+}
+
+footer .dropdown-menu .divider {
+	margin: 1px 0;
+}
+
+footer .dropdown-menu li > a {
+	padding: 0 10px 0 20px;
+}
+
+footer .dropdown-menu li > a i {
+	left: 3px;
+}

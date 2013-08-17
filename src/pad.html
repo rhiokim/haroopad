@@ -76,7 +76,6 @@
   <script src="js/vendors/notifier.js"></script>
   <script src="js/vendors/require.js"></script>
 
-
   <script src="js/common/menu/MenuBar.js"></script>
   <script src="js/common/menu/Menu.file.js"></script>
   <script src="js/common/menu/Menu.file.recents.js"></script>
@@ -111,9 +110,9 @@
   </script>
 </head>
 <body>
-  <header class="navbar navbar-fixed-top">
+  <header id="editControls" class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-      <div id="editControls" style="margin-bottom:2px;">
+      <div style="margin-bottom:2px;">
         <div class="btn-group">
           <a class="btn" data-role="undo" href="#"><i class="icon-undo"></i></a>
           <a class="btn" data-role="redo" href="#"><i class="icon-repeat"></i></a>
@@ -156,33 +155,34 @@
           <a class="btn" data-role="config" href="#"><i class="icon-tasks"></i></a>
         </div>
 
-        <ul id="gn-menu" class="gn-menu-main">
-          <nav class="gn-menu-wrapper">
-            <div class="gn-scroller">
-              <ul class="gn-menu">
-                <li>
-                  <a class="gn-icon gn-icon-download">Downloads</a>
-                  <ul class="gn-submenu">
-                    <li><a class="gn-icon gn-icon-illustrator">Vector Illustrations</a></li>
-                    <li><a class="gn-icon gn-icon-photoshop">Photoshop files</a></li>
-                  </ul>
-                </li>
-                <li><a class="gn-icon gn-icon-cog">Settings</a></li>
-                <li><a class="gn-icon gn-icon-help">Help</a></li>
-                <li>
-                  <a class="gn-icon gn-icon-archive">Archives</a>
-                  <ul class="gn-submenu">
-                    <li><a class="gn-icon gn-icon-article">Articles</a></li>
-                    <li><a class="gn-icon gn-icon-pictures">Images</a></li>
-                    <li><a class="gn-icon gn-icon-videos">Videos</a></li>
-                    <li><a class="gn-icon"></a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div><!-- /gn-scroller -->
-          </nav>
-        </ul>
       </div>
+      
+      <ul id="gn-menu" class="gn-menu-main">
+        <nav class="gn-menu-wrapper">
+          <div class="gn-scroller">
+            <ul class="gn-menu">
+              <li>
+                <a class="gn-icon gn-icon-download">Downloads</a>
+                <ul class="gn-submenu">
+                  <li><a class="gn-icon gn-icon-illustrator">Vector Illustrations</a></li>
+                  <li><a class="gn-icon gn-icon-photoshop">Photoshop files</a></li>
+                </ul>
+              </li>
+              <li><a class="gn-icon gn-icon-cog">Settings</a></li>
+              <li><a class="gn-icon gn-icon-help">Help</a></li>
+              <li>
+                <a class="gn-icon gn-icon-archive">Archives</a>
+                <ul class="gn-submenu">
+                  <li><a class="gn-icon gn-icon-article">Articles</a></li>
+                  <li><a class="gn-icon gn-icon-pictures">Images</a></li>
+                  <li><a class="gn-icon gn-icon-videos">Videos</a></li>
+                  <li><a class="gn-icon"></a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /gn-scroller -->
+        </nav>
+      </ul>
     </div>
   </header>
 
@@ -227,7 +227,7 @@
           <li class="divider"></li>
           <li><a tabindex="-1" href="#">Tab with: 2</a></li>
           <li><a tabindex="-1" href="#">Tab with: 3</a></li>
-          <li><a tabindex="-1" href="#">Tab with: 4</a></li>
+          <li><a tabindex="-1" href="#"><i class="icon-ok"></i> Tab with: 4</a></li>
           <li><a tabindex="-1" href="#">Tab with: 5</a></li>
           <li><a tabindex="-1" href="#">Tab with: 6</a></li>
           <li><a tabindex="-1" href="#">Tab with: 7</a></li>
