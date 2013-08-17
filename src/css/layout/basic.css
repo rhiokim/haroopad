@@ -28,7 +28,7 @@ body {
   -webkit-flex-flow: row;
 
   position: absolute;
-  margin-top: 32px;
+  /*margin-top: 32px;*/
   /* nav, aside 
   margin-left: 130px;
   margin-right: 37px;*/
@@ -60,5 +60,5 @@ body {
 }
 
 .navbar-inner {
-   padding: 1px 3px 0 3px !important;
+   padding: 1px 3px 0 6px !important;
 }
