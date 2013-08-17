@@ -49,7 +49,8 @@ requirejs([
   'window/Window',
   'editor/Editor',
   'viewer/Viewer',
-  'ui/file/File'
+  'ui/file/File',
+  'ui/footer/Footer'
 ], function(Window, Editor, Viewer, File) {
   // var html, res, file, uid, tmp, readOnly, x, y;
   var _tid_;
