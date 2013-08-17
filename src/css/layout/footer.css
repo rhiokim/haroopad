@@ -1,7 +1,9 @@
 
 footer {
    display: block;
+  font-size: .87em;
 }
+
 footer .btn {
   margin-top: 0 !important;
 }
@@ -43,8 +45,10 @@ footer #lineCount,
 footer #wordCount,
 footer #cursorActivity {
   margin-right: 8px;
+  color: #fff;
 }
 
 footer #elementsInfo {
   margin-top: 3px;
+  color: #fff;
 }

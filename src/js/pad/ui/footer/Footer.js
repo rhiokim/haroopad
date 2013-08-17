@@ -18,9 +18,12 @@ define([
 			Editor.on('update', this.updateHandler.bind(this));
 			Editor.on('cursorActivity', this.cursorActivity.bind(this));
 
-			this.$('#elementsInfo').tooltip({
+			this.$('#elementsInfo').popover({
 				html: true,
-				title: 'header: 43<br/>'
+				title: 'aaa',
+				// trigger: 'hover',
+				placement: 'top',
+				content: 'header: 43<br/>'
 						+ 'boild: 14<br/>'
 						+ 'italic: 3<br/>'
 						+ 'blockquote: 3<br/>'
