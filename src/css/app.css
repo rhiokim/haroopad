@@ -84,3 +84,7 @@ body {
 .CodeMirror-lines pre {
   white-space: pre;
 }
+
+.CodeMirror .cm-em {
+  font-style: normal;
+}
