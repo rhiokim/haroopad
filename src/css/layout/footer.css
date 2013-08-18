@@ -53,10 +53,12 @@ footer #elementsInfo {
   color: #fff;
 }
 
-footer #indentation .dropdown-menu a.active i {
+footer #indentation .dropdown-menu a.active i,
+footer #columnCount .dropdown-menu a.active i {
   display: block;
 }
 
-footer #indentation .dropdown-menu a i {
+footer #indentation .dropdown-menu a i,
+footer #columnCount .dropdown-menu a i {
   display: none;
 }

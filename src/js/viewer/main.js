@@ -5,12 +5,12 @@ var viewStyle, codeStyle;
 
 window.ee = new EventEmitter();
 
-window.ondragover = function(e) { 
-  e.preventDefault(); 
+window.ondragover = function(e) {
+  e.preventDefault();
   return false;
 };
-window.ondrop = function(e) { 
-  e.preventDefault(); 
+window.ondrop = function(e) {
+  e.preventDefault();
   return false;
 };
 
@@ -23,9 +23,11 @@ function loadCss(url) {
 }
 
 function setViewStyle(style) {
-  var href = 'css/markdown/'+ style +'/'+ style +'.css';
+  var href = 'css/markdown/' + style + '/' + style + '.css';
 
-  $('#view').attr({ href: href });
+  $('#view').attr({
+    href: href
+  });
 
   $(document.body).removeClass();
   $(document.body).addClass('markdown');
@@ -33,8 +35,20 @@ function setViewStyle(style) {
 }
 
 function setCodeStyle(style) {
-  var href = 'css/code/'+ style +'.css';
-  $('#code').attr({ href: href });
+  var href = 'css/code/' + style + '.css';
+  $('#code').attr({
+    href: href
+  });
+}
+
+function setColumn(count) {
+  var href,
+    count = count || 'single';
+    
+  href = 'css/column/' + count + '.css';
+  $('#column').attr({
+    href: href
+  });
 }
 
 function createTOC() {
@@ -45,13 +59,16 @@ function createTOC() {
 }
 
 function init(options) {
-  _options = options || { dirname: '.' };
+  _options = options || {
+    dirname: '.'
+  };
 }
 
 /**
  * for fix image path
  * @return {[type]} [description]
  */
+
 function _fixImagePath() {
   $('img').on('error', function() {
     $(this).attr('src', './img/noimage.gif');
@@ -86,17 +103,18 @@ function _fixImagePath() {
 //   }, 400);
 // }
 
-function htmlDecode(input){
+function htmlDecode(input) {
   var e = document.createElement('div');
   e.innerHTML = input;
   return e.textContent;
 }
 
 //for performance
+
 function _lazySyntaxHighlight(el) {
   // var codeEl = el.firstElementChild;
   var code = el.innerHTML;
-  var lang = el.className; 
+  var lang = el.className;
 
   lang = lang == 'js' ? 'javascript' : lang;
   code = htmlDecode(code);
@@ -107,34 +125,35 @@ function _lazySyntaxHighlight(el) {
     } else {
       el.innerHTML = hljs.highlight(lang, code).value;
     }
-  } catch(e) {
+  } catch (e) {
     // return code;
   }
 
-    // $('pre>code').each(function(i, e) {
+  // $('pre>code').each(function(i, e) {
 
-    //   var codeEl = $(this);
-    //   var code = codeEl.html();
-    //   var lang = codeEl.attr('class');
+  //   var codeEl = $(this);
+  //   var code = codeEl.html();
+  //   var lang = codeEl.attr('class');
 
-    //   lang = lang == 'js' ? 'javascript' : '';
+  //   lang = lang == 'js' ? 'javascript' : '';
 
-    //   try {
-    //     if (!lang) {
-    //       codeEl.html(hljs.highlightAuto(code).value);
-    //     } else {
-    //       codeEl.html(hljs.highlight(lang, code).value);
-    //     }
-    //   } catch(e) {
-    //     return code;
-    //   }
-    // });
+  //   try {
+  //     if (!lang) {
+  //       codeEl.html(hljs.highlightAuto(code).value);
+  //     } else {
+  //       codeEl.html(hljs.highlight(lang, code).value);
+  //     }
+  //   } catch(e) {
+  //     return code;
+  //   }
+  // });
 }
 
 /**
  * enable click event at link
  * @return {[type]} [description]
  */
+
 function _preventDefaultAnchor() {
   $('a').off('click', '**');
 
@@ -149,16 +168,17 @@ function _preventDefaultAnchor() {
  * @param  {[type]} contents [description]
  * @return {[type]}          [description]
  */
+
 function update(html) {
   // var wrapper = $('<div>').html(html);
   var wrapper = document.createElement('div');
-      wrapper.innerHTML = html;
+  wrapper.innerHTML = html;
   var i, frag, frags, _frag, _frags, origin, _origin,
-      code, codes, _code, _codes;
+    code, codes, _code, _codes;
 
   frags = wrapper.querySelectorAll(':scope>*');
   frags = Array.prototype.slice.call(frags, 0);
-  
+
   _frags = document.body.querySelectorAll(':scope>*');
   _frags = Array.prototype.slice.call(_frags, 0);
 
@@ -168,7 +188,7 @@ function update(html) {
 
   _codes = document.body.querySelectorAll('pre>code');
   _codes = Array.prototype.slice.call(_codes, 0);
-  
+
   for (i = 0; i < codes.length; i++) {
     code = codes[i];
     _code = _codes[i];
@@ -191,14 +211,14 @@ function update(html) {
   for (i = 0; i < imgs.length; i++) {
     src = imgs[i].getAttribute('src');
 
-    if(src.indexOf('//') == -1 && !/^\//.test(src)) {
-      imgs[i].setAttribute('src', _options.dirname +'/'+ src);
+    if (src.indexOf('//') == -1 && !/^\//.test(src)) {
+      imgs[i].setAttribute('src', _options.dirname + '/' + src);
     }
   }
 
   //작성된 내용이 있는 경우 새로운 프레그먼트로 치환
   // frags.each(function(idx, frag) {
-  for(i = 0; i < frags.length; i++) {
+  for (i = 0; i < frags.length; i++) {
     frag = frags[i];
     _frag = _frags.shift();
 
@@ -253,7 +273,7 @@ function update(html) {
       // $(frag).remove();
     });
   }
-  
+
   // if (frags.find('img').length > 0) {
   //   _fixImagePath();
   // }
@@ -267,6 +287,7 @@ function update(html) {
  * @param  {[type]} per [description]
  * @return {[type]}     [description]
  */
+
 function scrollTop(per) {
   var h = $(window).height();
   var top = $(document.body).prop('clientHeight') - h;
@@ -288,18 +309,18 @@ $(document.body).ready(function() {
     var origin, el = e.target;
     e.preventDefault();
 
-    switch(el.tagName.toUpperCase()) {
-      case 'IMG' :
+    switch (el.tagName.toUpperCase()) {
+      case 'IMG':
         origin = el.getAttribute('origin');
         if (origin) {
           replaceExternalContent(el, origin);
         }
-      break;
-      case 'A' :
-        window.ee.emit('link',el.getAttribute('href'));
-      break;
+        break;
+      case 'A':
+        window.ee.emit('link', el.getAttribute('href'));
+        break;
     }
-    
+
   });
 
 });

@@ -207,17 +207,17 @@
       <span id="cursorActivity">(<span>0 : 0</span>)</span>
       <span id="elementsInfo"><i class="icon-info-sign icon-white"></i></span>
       
-      <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button>
+      <!-- <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button> -->
       <div id="columnCount" class="btn-group dropup pull-right">
         <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
           Columns
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="-1" href="#">Single</a></li>
+          <li><a tabindex="0" href="#" data-column="single" class="active"><i class="icon-ok"></i>Single</a></li>
           <li class="divider"></li>
-          <li><a tabindex="-1" href="#">Column: 2</a></li>
-          <li><a tabindex="-1" href="#">Column: 3</a></li>
+          <li><a tabindex="1" href="#" data-column="two"><i class="icon-ok"></i>Column: 2</a></li>
+          <li><a tabindex="2" href="#" data-column="three"><i class="icon-ok"></i>Column: 3</a></li>
         </ul>
       </div>
       <div id="indentation" class="btn-group dropup pull-right">
@@ -226,7 +226,7 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="0" href="#" data-using-tab><i class="icon-ok"></i>Indent Using Tabs</a></li>
+          <li><a tabindex="0" href="#" data-using-tab="true"><i class="icon-ok"></i>Indent Using Tabs</a></li>
           <li class="divider"></li>
           <li><a tabindex="1" href="#" data-tab-size="2"><i class="icon-ok"></i>Tab with: 2</a></li>
           <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i>Tab with: 3</a></li>
@@ -235,9 +235,9 @@
           <li><a tabindex="5" href="#" data-tab-size="6" class="active"><i class="icon-ok"></i>Tab with: 6</a></li>
           <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i>Tab with: 7</a></li>
           <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i>Tab with: 8</a></li>
-          <li class="divider"></li>
+          <!-- <li class="divider"></li>
           <li><a tabindex="8" href="#">Convert indentation to Spaces</a></li>
-          <li><a tabindex="9" href="#">Convert indentation to Tabs</a></li>
+          <li><a tabindex="9" href="#">Convert indentation to Tabs</a></li> -->
         </ul>
       </div>
     </div>

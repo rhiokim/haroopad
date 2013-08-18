@@ -15,4 +15,8 @@ define([
 		Editor.setOption('indentWithTabs', use);
 		// Editor.setOption('showTrailingSpace', use);
 	});
+
+	Column.on('change', function(column) {
+		window.ee.emit('change.column', column);
+	});
 });

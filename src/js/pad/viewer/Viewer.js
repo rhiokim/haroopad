@@ -38,6 +38,10 @@ define([
 			_viewer.print();
 		});
 
+		window.ee.on('change.column', function(count) {
+			_viewer.setColumn(count);
+		});
+
 		/* change markdown event handler */
 		window.ee.on('change.after.markdown', update);
 
