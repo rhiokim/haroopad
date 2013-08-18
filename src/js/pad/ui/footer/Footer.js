@@ -2,8 +2,9 @@ define([
 	'editor/Editor',
 	'ui/footer/Status',
 	'ui/footer/Column',
-	'ui/footer/Indentation'
-], function(Editor, Status, Column, Indentation) {
+	'ui/footer/Indentation',
+	'ui/footer/_Advertise'
+], function(Editor, Status, Column, Indentation, Advertise) {
 
 	Indentation.on('change', function(tabSize) {
 		Editor.setOption('tabSize', tabSize);

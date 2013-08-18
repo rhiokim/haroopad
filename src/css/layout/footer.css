@@ -8,8 +8,9 @@ footer .btn {
   margin-top: 0 !important;
 }
 footer .btn-group {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+  /*margin-top: 0 !important;*/
+  /*padding-top: 0 !important;*/
+  margin: 0 1px !important;
 }
 
 footer #indentation, footer #columnCount {
@@ -59,10 +60,10 @@ footer #elementsInfo div.popover {
 footer div.popover hr {
   margin: 5px 0;
 }
-footer .popover-content {
+footer #elementsInfo .popover-content {
   padding: 5px 10px;
 }
-footer .popover-title {
+footer #elementsInfo .popover-title {
   padding: 4px 10px;
   font-size: 13px;
 }
@@ -75,4 +76,8 @@ footer #columnCount .dropdown-menu a.active i {
 footer #indentation .dropdown-menu a i,
 footer #columnCount .dropdown-menu a i {
   display: none;
+}
+
+footer #donate-btn .popover {
+  min-width: 290px;
 }
