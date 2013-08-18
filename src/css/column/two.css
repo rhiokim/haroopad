@@ -12,3 +12,7 @@ h1, h2 {
 table {
 	-webkit-column-break-inside: avoid;
 }
+
+p {
+	word-break: break-all;
+}
