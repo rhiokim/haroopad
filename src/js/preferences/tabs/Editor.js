@@ -40,6 +40,8 @@ define([
 
 			changeTheme: function(e) {
 				options.set({ theme: e.val });
+
+    		global._gaq.push('haroopad.preferences', 'theme', e.val);
 			},
 
 			displayLineNumber: function(e) {

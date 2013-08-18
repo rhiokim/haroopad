@@ -12,6 +12,7 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>md</string>
+				<string>mmd</string>
 				<string>markdown</string>
 				<string>mdown</string>
 				<string>markdn</string>
@@ -21,19 +22,16 @@
 				<string>mdtxt</string>
 				<string>mdtext</string>
 				<string>mdml</string>
-				<string>text</string>
-				<string>txt</string>
-				<string>*</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>markdown</string>
+			<string>markdown.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>Markdown</string>
+			<string>Markdown Document</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string></string>
+				<string>net.daringfireball.markdown</string>
 			</array>
 			<key>LSIsAppleDefaultForType</key>
 			<true/>
@@ -89,6 +87,7 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>md</string>
+					<string>mmd</string>
 					<string>markdown</string>
 					<string>mdown</string>
 					<string>markdn</string>
@@ -105,9 +104,9 @@
 				<string>com.pkware.zip-archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Markdown</string>
+			<string>Markdown Document</string>
 			<key>UTTypeIconFile</key>
-			<string>markdown</string>
+			<string>markdown.icns</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.daringfireball.markdown</string>
 		</dict>
@@ -120,6 +119,7 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>md</string>
+					<string>mmd</string>
 					<string>markdown</string>
 					<string>mdown</string>
 					<string>markdn</string>
@@ -136,9 +136,9 @@
 				<string>com.pkware.zip-archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Markdown</string>
+			<string>Markdown Document</string>
 			<key>UTTypeIconFile</key>
-			<string>markdown</string>
+			<string>markdown.icns</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.daringfireball.markdown</string>
 		</dict>

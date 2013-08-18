@@ -39,7 +39,7 @@ Shortcut                       | Description
 &#8984;(&#8963;) - Z           | Undo
 &#8679; - &#8984;(&#8963;) - Z | Redo
 &#8984;(&#8963;) - Y           | Redo
-&#8984;(&#8963;) - Up          |  Go to Doc Start
+&#8984;(&#8963;) - Up          | Go to Doc Start
 &#8984;(&#8963;) - End         | Go to Doc End
 &#8984;(&#8963;) - Down        | Go to Doc End
 &#8997; - Left                 | Go to Group Left
@@ -55,14 +55,15 @@ Shortcut                       | Description
 ##### Markdown Editing
 Shortcut                       | Example        | Description
 -------------------------------|:--------------:|-------------------
-&#8984;(&#8963;) - B           | `**Bold**`     | bold
-&#8984;(&#8963;) - I           | `*Italic*`     | italic
-&#8984;(&#8963;) - L           | `[link](url)`  | link
-&#8984;(&#8963;) - &#8997; - S | `~~strike~~`   | strike
-&#8984;(&#8963;) - &#8997; - O | `1. markdown`  | ordered list
-&#8984;(&#8963;) - &#8997; - U | `* haroopad`   | unordered list
-&#8984;(&#8963;) - &#8997; - I | `![]()`        | image
-&#8984;(&#8963;) - &#8997; - B | `> blockquote` | blockquote
+&#8984;(&#8963;) - B           | \*\*Bold\*\*   | bold
+&#8984;(&#8963;) - I           | \*Italic\*     | italic
+&#8984;(&#8963;) - L           | \[link\](url)  | link
+&#8984;(&#8963;) - U           | \~\~strike~~   | strikethrough
+&#8984;(&#8963;) - K           | \`func`        | Inline code
+&#8984;(&#8963;) - &#8997; - O | 1. markdown    | ordered list
+&#8984;(&#8963;) - &#8997; - U | * haroopad     | unordered list
+&#8984;(&#8963;) - &#8997; - I | \!\[]()        | image
+&#8984;(&#8963;) - &#8997; - B | > blockquote   | blockquote
 
 ##### Finding
 Shortcut                        | Description
