@@ -19,4 +19,6 @@ define([
 	Column.on('change', function(column) {
 		window.ee.emit('change.column', column);
 	});
+
+	window.ee.on('dom', Status.update.bind(Status));
 });

@@ -18,21 +18,16 @@ define([
 			Editor.on('update', this.updateHandler.bind(this));
 			Editor.on('cursorActivity', this.cursorActivity.bind(this));
 
-			this.$('#elementsInfo').popover({
-				html: true,
-				title: 'Current',
-				// trigger: 'hover',
-				placement: 'top',
-				content: 'header: 43<br/>'
-						+ 'boild: 14<br/>'
-						+ 'italic: 3<br/>'
-						+ 'blockquote: 3<br/>'
-						+ 'img: 4<br/>'
-						+ 'paragraph: 332<br/>'
-						+ 'link: 72<br/>'
-						+ 'table: 3<br/>'
-						+ 'code: 8'
-			})
+			this.update({
+				header: 0,
+				paragraph: 0,
+				link: 0,
+				image: 0,
+				code: 0,
+				blockquote: 0,
+				table: 0/*,
+				page: 0*/
+			});
 		},
 
 		updateHandler: function(cm) {
@@ -47,8 +42,34 @@ define([
 			var line = humanize.numberFormat(pos.line+1, 0);
 			var word = humanize.numberFormat(pos.ch, 0);
 			this.cursorPos.text('('+ line + ' : ' + word +')');
+		},
+
+		update: function(dom) {
+			var val = '', key = '', prop;
+			// dom.page = humanize.numberFormat(dom.page, 1);
+
+			for(prop in dom) {
+				key += prop +'<br>';
+				val += '<b>'+ dom[prop] +'</b><br/>';
+			}
+
+			key = '<div class="pull-left text-right">'
+					+ key
+					+ '</div><i class="clearfix"></i>';
+			val = '<div class="pull-right text-left" style="padding-left: 5px;">'
+					+ val
+					+ '</div>';
+
+			this.$('#elementsInfo').popover('destroy');
+			this.$('#elementsInfo').popover({
+				html: true,
+				trigger: 'hover',
+				title: 'current state',
+				placement: 'top',
+				content: val+key
+			});
 		}
 	});
 
-	new Status;
+	return new Status;
 });

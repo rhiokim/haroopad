@@ -41,6 +41,10 @@ function setCodeStyle(style) {
   });
 }
 
+/**
+ * set column layout
+ * @param {[type]} count [description]
+ */
 function setColumn(count) {
   var href,
     count = count || 'single';
@@ -163,6 +167,30 @@ function _preventDefaultAnchor() {
   });
 }
 
+function countFragments(target) {
+  var header = target.querySelectorAll('h1, h2, h3, h4, h5, h6').length;
+  var img = target.querySelectorAll('img').length;
+  // var bold = target.querySelectorAll('strong').length;
+  // var italic = target.querySelectorAll('i').length;
+  var code = target.querySelectorAll('code').length;
+  // var fencedcode = code - target.querySelectorAll('pre>code').length;
+  var blockquote = target.querySelectorAll('blockquote').length;
+  var paragraph = target.querySelectorAll('p').length;
+  var link = target.querySelectorAll('a').length;
+  var table = target.querySelectorAll('table').length;
+
+  window.ee.emit('dom', {
+    header: header,
+    paragraph: paragraph,
+    link: link,
+    image: img,
+    code: code,
+    // fencedcode: fencedcode,
+    blockquote: blockquote,
+    table: table
+  });
+}
+
 /**
  * update contents
  * @param  {[type]} contents [description]
@@ -280,6 +308,8 @@ function update(html) {
 
   // _preventDefaultAnchor();
   // _lazySyntaxHighlight();
+  
+  countFragments(document.body);
 }
 
 /**

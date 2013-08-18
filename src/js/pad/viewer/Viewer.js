@@ -95,6 +95,10 @@ define([
 			}
 		});
 
+		_viewer.ee.on('dom', function(dom) {
+			window.ee.emit('dom', dom);
+		});
+
 		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');
 		_viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
 

@@ -52,6 +52,20 @@ footer #elementsInfo {
   margin-top: 3px;
   color: #fff;
 }
+footer #elementsInfo div.popover {
+  color: #000;
+}
+
+footer div.popover hr {
+  margin: 5px 0;
+}
+footer .popover-content {
+  padding: 5px 10px;
+}
+footer .popover-title {
+  padding: 4px 10px;
+  font-size: 13px;
+}
 
 footer #indentation .dropdown-menu a.active i,
 footer #columnCount .dropdown-menu a.active i {
