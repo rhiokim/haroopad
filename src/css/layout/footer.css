@@ -52,3 +52,11 @@ footer #elementsInfo {
   margin-top: 3px;
   color: #fff;
 }
+
+footer #indentation .dropdown-menu a.active i {
+  display: block;
+}
+
+footer #indentation .dropdown-menu a i {
+  display: none;
+}

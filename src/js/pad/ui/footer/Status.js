@@ -44,7 +44,7 @@ define([
 
 		cursorActivity: function(cm) {
 			var pos = cm.getCursor();
-			var line = humanize.numberFormat(pos.line, 0);
+			var line = humanize.numberFormat(pos.line+1, 0);
 			var word = humanize.numberFormat(pos.ch, 0);
 			this.cursorPos.text('('+ line + ' : ' + word +')');
 		}
