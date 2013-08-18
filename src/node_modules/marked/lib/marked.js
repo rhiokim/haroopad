@@ -24,7 +24,7 @@ var block = {
   def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,
   table: noop,
   paragraph: /^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,
-  text: /^[^\n]+/
+  text: /^[^\n]+/,
 };
 
 block.bullet = /(?:[*+-]|\d+\.)/;
@@ -460,11 +460,13 @@ var inline = {
   reflink: /^!?\[(inside)\]\s*\[([^\]]*)\]/,
   nolink: /^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,
   strong: /^__([\s\S]+?)__(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,
-  em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+  em: /^\*(.*?)\*/,//this might do weird things cause its a hell of a lot shorter now..
   code: /^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,
   br: /^ {2,}\n(?!\s*$)/,
   del: noop,
-  text: /^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/
+  text: /^[\s\S]+?(?=[\\<!\[_*`]|==| {2,}\n|$)/,
+  stronghighlight: /^==([^=]+)==/,
+  underline: /^_([^_]+)_/
 };
 
 inline._inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
@@ -569,16 +571,18 @@ InlineLexer.prototype.output = function(src) {
     , cap;
 
   while (src) {
+  
+  
     // escape
     if (cap = this.rules.escape.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       out += cap[1];
       continue;
     }
 
     // autolink
     if (cap = this.rules.autolink.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       if (cap[2] === '@') {
         text = cap[1].charAt(6) === ':'
           ? this.mangle(cap[1].substring(7))
@@ -598,7 +602,7 @@ InlineLexer.prototype.output = function(src) {
 
     // url (gfm)
     if (cap = this.rules.url.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       text = escape(cap[1]);
       href = text;
       out += '<a href="'
@@ -609,9 +613,11 @@ InlineLexer.prototype.output = function(src) {
       continue;
     }
 
+	
+	
     // tag
     if (cap = this.rules.tag.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       out += this.options.sanitize
         ? escape(cap[0])
         : cap[0];
@@ -620,7 +626,7 @@ InlineLexer.prototype.output = function(src) {
 
     // link
     if (cap = this.rules.link.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       out += this.outputLink(cap, {
         href: cap[2],
         title: cap[3]
@@ -631,7 +637,7 @@ InlineLexer.prototype.output = function(src) {
     // reflink, nolink
     if ((cap = this.rules.reflink.exec(src))
         || (cap = this.rules.nolink.exec(src))) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       link = (cap[2] || cap[1]).replace(/\s+/g, ' ');
       link = this.links[link.toLowerCase()];
       if (!link || !link.href) {
@@ -645,25 +651,43 @@ InlineLexer.prototype.output = function(src) {
 
     // strong
     if (cap = this.rules.strong.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       out += '<strong>'
         + this.output(cap[2] || cap[1])
         + '</strong>';
       continue;
     }
-
+	
     // em
     if (cap = this.rules.em.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       out += '<em>'
         + this.output(cap[2] || cap[1])
         + '</em>';
       continue;
     }
+	
+	// underline
+    if (cap = this.rules.underline.exec(src)) {
+	  src = src.substring(cap[0].length);
+      out += '<em class="underline">'
+        + this.output(cap[2] || cap[1])
+        + '</em>';
+      continue;
+    }
+	
+	// highlight
+    if (cap = this.rules.stronghighlight.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += '<strong class="highlight">'
+        + this.output(cap[2] || cap[1])
+        + '</strong>';
+      continue;
+    }
 
     // code
     if (cap = this.rules.code.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       out += '<code>'
         + escape(cap[2], true)
         + '</code>';
@@ -672,14 +696,14 @@ InlineLexer.prototype.output = function(src) {
 
     // br
     if (cap = this.rules.br.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       out += '<br>';
       continue;
     }
 
     // del (gfm)
     if (cap = this.rules.del.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       out += '<del>'
         + this.output(cap[1])
         + '</del>';
@@ -688,7 +712,7 @@ InlineLexer.prototype.output = function(src) {
 
     // text
     if (cap = this.rules.text.exec(src)) {
-      src = src.substring(cap[0].length);
+	  src = src.substring(cap[0].length);
       out += escape(this.smartypants(cap[0]));
       continue;
     }
@@ -1174,11 +1198,11 @@ marked.defaults = {
   breaks: false,
   pedantic: false,
   sanitize: false,
-  smartLists: false,
+  smartLists: true,
   silent: false,
   highlight: null,
   langPrefix: 'lang-',
-  smartypants: false
+  smartypants: true
 };
 
 /**
