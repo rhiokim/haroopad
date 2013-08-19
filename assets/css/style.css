@@ -110,53 +110,38 @@ blockquote p {
     -moz-border-radius: 0 6px 6px 6px !important;
     border-radius: 0 6px 6px 6px !important; 
 }
-/**
- * theme
- */
+
+/*********************************
+ * main page
+ *********************************/
+.intro {
+    color: #fff;
+    padding-top: 40px;
+}
+.carousel-caption {
+    background-color: rgba(26, 188, 156, 0.79)
+}
+.carousel a.carousel-control {
+    opacity: 0.1;
+    text-decoration: none;
+}
+.carousel a:hover.carousel-control {
+    opacity: 0.9;
+}
 
 .navbar-clouds .navbar-inner {
     background-color: #ECF0F1;
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 
-.intro {
-    height: 400px;
-    overflow: hidden;
-}
-
-.header-intro {
-    padding: 100px 0 0 0;
-    display: block;
-}
-
-.header-desc {
-    width: 100%; overflow: hidden; display: block;
-}
-
-.header-desc .frame {
-    float: left; width: 400px; display: block;
-}
-
-.header-desc {
-    color: #fff;
-}
-.header-desc h2 {
-    font-size: 38px;
-    line-height: 38px;
-    margin: 0 0 20px;
-}
-
-.header-img {
-    float: right;
-    margin:-310px 0;
-    display: block;
-    text-align: center;
-}
-
 .demo-headline._haroopad {
     padding: 50px 0 30px;
     text-align: center;
 }
+
+/**
+ * theme
+ */
 
 /* starrre */
 

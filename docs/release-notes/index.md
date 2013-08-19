@@ -1,3 +1,34 @@
+## Haroopad v0.5.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+                | **Sending email or Posting to tumblr** <span class="label label-important"> New!</span>
+#146             | **Copy to HTML** shortcut
+                 | Add shortcut to toggle fullscreen ([Shortcuts](http://pad.haroopress.com/page.html?f=show-shortcuts))
+**Bugs**         |
+#145             | **\[a:b\]\(\)** - markdown parsing error
+#151             | Drag and Drop on dock icon
+**Enhancements** |
+#141             | Remember fullscreen mode
+#131             | Remember directory path that lastest opened file
+#                | Set markdown document icon on Mac
+
+
+##### Github Issue tracker
+
+* https://github.com/rhiokim/haroopad/issues?milestone=4&state=closed
+
+##### Download
+
+> * Windows MSI installer: https://www.dropbox.com/s/n9dqix5fjujv701/haroopad-v0.5.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/p8419o0wtqlr1s6/haroopad-v0.5.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/kldpurazcmt480o/haroopad-v0.5.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/d5uzi4khsbzk8ex/haroopad-v0.5.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/db0y2rl5do0wg4r/haroopad-v0.5.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/s9r8n5mqorqpcg1/haroopad-v0.5.0_amd64.deb
+
+
 ## Haroopad v0.4.9
 
 Issue Number     | Description
