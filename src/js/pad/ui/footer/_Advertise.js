@@ -1,7 +1,8 @@
 define([
 	'store'
 	],function(store) {
-
+	var shell = gui.Shell;
+	
 	var _cookie = store.get('_time') || { donate : 0};
 
 	function loop() {
@@ -14,10 +15,8 @@ define([
 			store.set('_time', _cookie);
 		}
 	}
-	
+
 	$('#donate-btn>a').popover();
 
-	// window.setInterval(loop, 1000 * 60);
 	window.setInterval(loop, 1000);
-
 });
