@@ -8,20 +8,34 @@ define([
 	'ui/footer/_Share'
 ], function(store, Editor, Status, Column, Indentation, Advertise, Share) {
 	var shell = gui.Shell;
+	var editorOpt = store.get('Editor') || {};
+	var viewerOpt = store.get('Viewer') || {};
+
+	Column.set('single');
 
 	Indentation.on('change', function(tabSize) {
 		Editor.setOption('tabSize', tabSize);
 		Editor.setOption('indentUnit', tabSize);
-		Editor.setOption('indentWithTabs', true);
+
+		editorOpt.tabSize = tabSize;
+		editorOpt.indentUnit = tabSize;
+
+		store.get('Editor', editorOpt);
 	});
 
 	Indentation.on('use.tab', function(use) {
 		Editor.setOption('indentWithTabs', use);
+		editorOpt.indentWithTabs = true;
 		// Editor.setOption('showTrailingSpace', use);
+
+		store.get('Editor', editorOpt);
 	});
 
 	Column.on('change', function(column) {
 		window.ee.emit('change.column', column);
+
+		viewerOpt.column = column;
+		store.set('Viewer', viewerOpt);
 	});
 
 	Advertise.on('donate', function() {

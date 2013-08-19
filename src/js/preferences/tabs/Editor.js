@@ -35,7 +35,7 @@ define([
 			
 				options.bind('change:displayLineNumber', function(model, data) {
 					this.$el.find('input[name=displayLineNumber]').prop('checked', data);
-				}.bind(this))
+				}.bind(this));
 			},
 
 			changeTheme: function(e) {

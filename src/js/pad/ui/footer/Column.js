@@ -17,6 +17,11 @@ define(function() {
 			target.addClass('active');
 
 			this.trigger('change', column);
+		},
+
+		set: function(column) {
+			this.$('a[data-column]').removeClass('active');
+			this.$('a[data-column='+ column +']').addClass('active');
 		}
 	});
 
