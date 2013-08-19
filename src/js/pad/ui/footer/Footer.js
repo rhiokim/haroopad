@@ -24,6 +24,10 @@ define([
 		window.ee.emit('change.column', column);
 	});
 
+	Advertise.on('donate', function() {
+		shell.openExternal('http://pad.haroopress.com/page.html?f=grow-up-donate');
+	});
+
 	Share.on('click', function(service) {
 		var url;
 

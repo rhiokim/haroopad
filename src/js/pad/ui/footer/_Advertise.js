@@ -16,7 +16,28 @@ define([
 		}
 	}
 
-	$('#donate-btn>a').popover();
+	var Adver = Backbone.View.extend({
+		el: '#donate-btn',
 
-	window.setInterval(loop, 1000);
+		events: {
+			'click': 'donateHandler'
+		},
+
+		initialize: function() {
+			this.$('a[data-toggle=popover]').popover();
+
+			window.setInterval(loop, 1000);
+		},
+
+		donateHandler: function(e) {
+			e.preventDefault();
+
+			if (e.target.id == 'donate-link') {
+				this.trigger('donate');	
+			} 
+		}
+	});
+
+	return new Adver;
+
 });
