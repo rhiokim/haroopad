@@ -79,7 +79,7 @@ define([
 		var opt = file.toJSON();
 
 		if (opt.tmp) {
-			nw.title = 'Restored (writen at ' + opt.ctime + ')';
+			nw.title = 'Restored (written at ' + opt.ctime + ')';
 		} else {
 			nw.title = orgTitle = opt.basename || orgTitle;
 		}
@@ -129,7 +129,7 @@ define([
 
 	}, false);
 
-	$(document.body).bind('contextmenu', function(e, ev) {
+	$('#editor').bind('contextmenu', function(e, ev) {
 		var x, y;
 		e.preventDefault();
 

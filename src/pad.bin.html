@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <title>Haroopad - The next document processor</title>
   
-  <link rel="stylesheet" href="css/codemirror.min.css">
   <link rel="stylesheet" href="css/haroopad.min.css">
+  <link rel="stylesheet" href="css/codemirror.min.css">
 </head>
 <body>
   <header id="editControls" class="navbar navbar-fixed-top">
@@ -181,7 +181,7 @@
 
 <script>
   function start() {
-    pad.apply(this, [this, document]);
+    pad.apply(this, [global, this, document]);
   }
 </script>
 </html>

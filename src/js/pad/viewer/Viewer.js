@@ -1,8 +1,9 @@
 define([
 		'store',
-		'keyboard'
-	],
-	function(store, HotKey) {
+		'keyboard',
+		'viewer/Viewer.explicitStyleMaker'
+	], 
+	function(store, HotKey, StyleMaker) {
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
 		var content = '',
@@ -16,13 +17,26 @@ define([
 
 		// var config = option.toJSON();
 
+		function setTitle() {
+			var viewerDoc = iframe.contentDocument.body;
+			var el = viewerDoc.querySelectorAll('h1, h2, h3, h4, h5, h6')[0];
+			var title = (el && el.innerText) || '';
+
+			nw.file.set({ title: title }, { silent: true });
+		}
+
 		function update(markdown, html, editor) {
 			content = html;
 			_viewer.update(content);
+
+			setTitle();
 		}
 
 		window.parent.ee.on('preferences.viewer.theme', function(value) {
 			_viewer.setViewStyle(value);
+			setTimeout(function() {
+				StyleMaker.generateInlineStyle();
+			}, 500);
 		});
 
 		window.parent.ee.on('preferences.code.theme', function(value) {
@@ -74,7 +88,7 @@ define([
 		 * delegate right mouse down event
 		 */
 		_viewer.addEventListener('contextmenu', function(ev) {
-			$(document.body).trigger('contextmenu', [ev]);
+			$('#editor').trigger('contextmenu', [ev]);
 		}.bind(this), false);
 
 		/* copy html to clipboard */
@@ -116,6 +130,10 @@ define([
 			 */
 			getContentDocument: function() {
 				return iframe.contentDocument;
+			},
+
+			getHTML: function() {
+				return iframe.contentDocument.body.innerHTML;
 			}
 		};
 	});

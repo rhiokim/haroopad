@@ -9,7 +9,7 @@ body {
   font-size: .9em;
 
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 body >:first-child {

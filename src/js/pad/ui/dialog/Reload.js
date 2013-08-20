@@ -1,3 +1,6 @@
+/**
+ * reload changed file
+ */
 define([
 		'vendors/text!tpl/modal-changed-file.html'
 	], 

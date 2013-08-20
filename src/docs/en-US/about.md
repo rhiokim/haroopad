@@ -10,6 +10,9 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 
 ### Main features
 
+* Sending email (New Features)
+	- Sending beautiful email
+	- Posting to Tumblr
 * Support cross platform
   - Window
   - Mac OS X
