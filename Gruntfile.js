@@ -53,13 +53,18 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/vibrant-ink.css',
             '<%= vendors %>/CodeMirror/theme/xq-dark.css',
             '<%= vendors %>/CodeMirror/theme/xq-light.css',
-            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.css',
-            'src/css/app.css'
+            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.css'
           ],
           "build/haroopad/css/haroopad.min.css": [
             'src/css/bootstrap.css',
             'src/css/todc-bootstrap.css',
-            'src/css/bootstrap-modal.css'
+            'src/css/bootstrap-modal.css',
+            'src/css/layout/basic.css',
+            'src/css/layout/header.css',
+            'src/css/layout/footer.css',
+            'src/css/layout/l-side.css',
+            'src/css/layout/r-side.css',
+            'src/css/app.css'
           ],
           "build/haroopad/css/viewer.min.css": [
             'src/css/viewer.css'
@@ -69,7 +74,7 @@ module.exports = function(grunt) {
             'src/css/todc-bootstrap.css',
             'src/css/bootstrapSwitch.css',
             'src/css/select2.css',
-            'src/css/font-awesome.min.css',
+            // 'src/css/font-awesome.min.css',
             'src/css/preferences.css'
           ]
         }
@@ -101,8 +106,8 @@ module.exports = function(grunt) {
         files: {
           'build/app.modules.js': [
             'src/js/app/before.app.js',
-            // 'src/js/lib/logger.js',
-            'src/js/app/app.common.js',
+            'src/js/lib/logger.js',
+            // 'src/js/app/app.common.js',
             'src/js/lib/utils/util.js',
             'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
@@ -295,7 +300,10 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/node_modules/ncp/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/ncp/lib/' },
 
           { src: 'src/node_modules/rimraf/package.json', dest: 'build/haroopad/node_modules/rimraf/package.json' },
-          { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' }
+          { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' },
+
+          { src: 'src/node_modules/humanize/package.json', dest: 'build/haroopad/node_modules/humanize/package.json' },
+          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' }
         ]
       },
 

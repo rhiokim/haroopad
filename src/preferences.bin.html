@@ -98,6 +98,26 @@
           </div>
           <div class="span9">
             <label class="checkbox">
+              <input type="checkbox" value="" name="indentWithTabs">
+              Indent Using Tab
+
+              <div class="btn-group dropdown">
+                <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="icon-share-alt"></i> Spaces
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a tabindex="1" href="#" data-tab-size="2" class="active"><i class="icon-ok"></i> Tab width: 2</a></li>
+                  <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i> Tab width: 3</a></li>
+                  <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i> Tab width: 4</a></li>
+                  <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i> Tab width: 5</a></li>
+                  <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i> Tab width: 6</a></li>
+                  <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i> Tab width: 7</a></li>
+                  <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i> Tab width: 8</a></li>
+                </ul>
+              </div>
+            </label>
+            <label class="checkbox">
               <input type="checkbox" value="" name="displayLineNumber">
               Display line number
             </label>
@@ -106,12 +126,12 @@
               Vim key binding
             </label>
             <label class="checkbox">
-              <input type="checkbox" value="" name="insertFourSpace">
-              Insert 4 spaces insted of one tab (default: 2)
-            </label>
-            <label class="checkbox">
               <input type="checkbox" value="" name="autoPairCharacters" checked="checked">
               Auto pair characters ( [] () "" )
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" value="" name="insertFourSpace" disabled>
+              <del>Insert 4 spaces insted of one tab (default: 2)</del>
             </label>
           </div>
         </div>

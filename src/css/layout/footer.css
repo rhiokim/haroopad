@@ -22,7 +22,11 @@ footer .navbar .btn#preference {
 }
 
 .navbar-fixed-bottom {
-  bottom: -10px !important;
+  bottom: -8px !important;
+}
+
+footer .navbar-inner>div {
+  margin-top: 2px;
 }
 
 footer .dropdown-menu {
@@ -66,6 +70,9 @@ footer #elementsInfo .popover-content {
 footer #elementsInfo .popover-title {
   padding: 4px 10px;
   font-size: 13px;
+}
+footer #elementsInfo i {
+  margin-top: 0;
 }
 
 footer #indentation .dropdown-menu a.active i,

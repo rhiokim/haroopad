@@ -17,10 +17,6 @@
 
   <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans:bold"/> -->
   <!-- Included CSS Files (Compressed) -->
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/todc-bootstrap.css">
-  <link rel="stylesheet" href="css/bootstrap-modal.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
   
   <link rel="stylesheet" href="js/vendors/CodeMirror/lib/codemirror.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/3024-day.css">
@@ -47,6 +43,11 @@
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/xq-dark.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/xq-light.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror-custom/addon/dialog/dialog.css">
+  
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/todc-bootstrap.css">
+  <link rel="stylesheet" href="css/bootstrap-modal.css">
+  <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="css/layout/basic.css">
   <link rel="stylesheet" href="css/layout/header.css">
   <link rel="stylesheet" href="css/layout/footer.css">
@@ -61,10 +62,10 @@
 
   <script src="js/vendors/eventemitter.js"></script>
   <script src="js/vendors/underscore.js"></script>
-  <script src="js/vendors/highlight.pack.js"></script>
+  <!--script src="js/vendors/highlight.pack.js"></script-->
 
-  <script src="js/vendors/layout/classie.js"></script>
-  <script src="js/vendors/layout/qmenu.js"></script>
+  <!--script src="js/vendors/layout/classie.js"></script>
+  <script src="js/vendors/layout/qmenu.js"></script-->
 
   <script src="js/vendors/jquery-1.9.1.js"></script>
   <script src="js/vendors/backbone.js"></script>
@@ -202,11 +203,12 @@
 
   <footer class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="navbar-inner">
-      <span id="lineCount" class="pull-left">lines: <span>0</span></span> 
-      <span id="wordCount">words: <span>0</span></span>
-      <span id="cursorActivity">(<span>0 : 0</span>)</span>
-      <span id="elementsInfo"><i class="icon-info-sign icon-white"></i></span>
-      
+      <div class="pull-left">
+        <span id="lineCount">lines: <span>0</span></span> 
+        <span id="wordCount">words: <span>0</span></span>
+        <span id="cursorActivity">(<span>0 : 0</span>)</span>
+        <span id="elementsInfo"><i class="icon-info-sign icon-white"></i></span>
+      </div>
 
       <!-- <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button> -->
       <div id="columnCount" class="btn-group dropup pull-right">
@@ -244,7 +246,7 @@
       </div>
       <div id="shareit" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="icon-share-alt"></i> share
+          <i class="icon-share-alt icon-white"></i> share
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -257,7 +259,7 @@
         </ul>
       </div>
       <div id="donate-btn" class="btn-group pull-right">
-        <a href="#" class="btn btn-mini btn-danger" data-toggle="popover" data-trigger="click" data-placement="top" data-content="If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>" title="" data-original-title="Donate to help keep development going!" data-html="true"><i class="icon-leaf"></i> keep development</a>
+        <a href="#" class="btn btn-mini btn-danger" data-toggle="popover" data-trigger="click" data-placement="top" data-content="If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>" title="" data-original-title="Donate to help keep development going!" data-html="true"><i class="icon-leaf icon-white"></i> keep development</a>
       </div>
     </div>
   </footer>
