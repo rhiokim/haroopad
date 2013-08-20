@@ -33,6 +33,7 @@ define([
 	  }
 
 	  keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
+	  keyMaps['Shift-Tab'] = 'indentLess';
 
 	  return keyMaps;
 })

@@ -56,7 +56,8 @@ define([
 		editor.setOption('theme', config.theme);
 		editor.setOption('lineNumbers', config.displayLineNumber);
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
-		// editor.setOption('tabSize', config.insertFourSpace ? 4 : 2);
+		editor.setOption('tabSize', config.tabSize || 4);
+		editor.setOption('indentUnit', config.indentUnit || 4);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
 		window.ee.on('toggle.vim.keybind', function() {

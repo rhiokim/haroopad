@@ -6,7 +6,7 @@ define([], function() {
 
 	function init() {
 		prefWin = gui.Window.open('preferences.html', {
-	        toolbar: false,
+	        toolbar: true,
 	        show: true,
 	        width: 510,
 	        height: 300,
