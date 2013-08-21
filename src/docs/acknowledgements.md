@@ -1,4 +1,4 @@
-##### The following open source Haroopad is used.
+##### Haroopad is used the following open-source.
 
 * * *
   
