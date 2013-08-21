@@ -3,21 +3,31 @@ window.MenuBar = function() {
 			win = gui.Window.get();
 
 	var menu = MenuBar._systemMenu;
+	var platform = process.platform;
 
 	function create() {
 		menu = new gui.Menu({
 		    type:   'menubar'
 		});
 		
-		// menu.append( MenuBarFile() );
+		if (platform != 'darwin') {
+			menu.append( MenuBarFile() );
+		}
 		menu.append( MenuBarFind() );
 		menu.append( MenuBarView() );
 		menu.append( MenuBarAction() );
 		// menu.append( MenuBarTools() );
+		
+		if (platform != 'darwin') {
+			menu.append( MenuBarHelp() );
+		}
 
 		win.menu = MenuBar._systemMenu = menu;
-		win.menu.insert( MenuBarFile(), 1 );
-		win.menu.append( MenuBarHelp() );
+
+		if (platform == 'darwin') {
+			win.menu.insert( MenuBarFile(), 1 );
+			win.menu.append( MenuBarHelp() );
+		}
 	}
 
 	create();
