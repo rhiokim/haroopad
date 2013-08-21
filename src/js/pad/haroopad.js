@@ -101,6 +101,11 @@ requirejs([
       file.trigger('change:html');
     }
 
+    //temp file
+    if (opt.tmp) {
+      file.set({ fileEntry: undefined }, { silent: true });
+    }
+
     /* change by external application */
     file.on('change:mtime', function() {
       window.ee.emit('file.update', nw.file.get('fileEntry'));
