@@ -24,15 +24,27 @@ define([
 		Editor.setOption('indentWithTabs', use);
 	});
 
+	Indentation.on('click', function() {
+		Advertise.hide();
+	});
+
 	Column.on('change', function(column) {
 		window.ee.emit('change.column', column);
+	});
+
+	Column.on('click', function() {
+		Advertise.hide();
 	});
 
 	Advertise.on('donate', function() {
 		shell.openExternal('http://pad.haroopress.com/page.html?f=grow-up-donate');
 	});
 
-	Share.on('click', function(service) {
+	Share.on('click', function() {
+		Advertise.hide();
+	});
+
+	Share.on('select', function(service) {
 		var url;
 
 		switch(service) {

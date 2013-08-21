@@ -29,6 +29,10 @@ define([
 			window.setInterval(loop, 1000);
 		},
 
+		hide: function() {
+			this.$('a[data-toggle=popover]').popover('hide');
+		},
+
 		donateHandler: function(e) {
 			e.preventDefault();
 
