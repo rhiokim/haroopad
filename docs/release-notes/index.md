@@ -1,3 +1,32 @@
+## Haroopad v0.6.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#167             | Add cusor activity information
+#166             | Add current editor status (analytics elements)
+#165			       | Add Multi-column layout (not support gmail, export to pdf)
+#158			       | Add Underline(\_word\_) and Highlight(&#61;&#61;word&#61;&#61;)
+#153, #144       | Add spaces instead of tabs
+**Bugs**         |
+#172             | Fixed Attachments image when sending emal
+#160					   | Allow multiple window when dbl-clicking file open
+#138             | Fixed menu items ordering
+**Enhancements** |
+
+##### Github Issue tracker
+
+* https://github.com/rhiokim/haroopad/issues?milestone=5&state=closed
+
+##### Download
+
+> * Windows MSI installer: https://www.dropbox.com/s/a5efmje2oupzy0k/haroopad-v0.6.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/fkmsvk4fw3togp7/haroopad-v0.6.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/q1bsgtxy7pogif8/haroopad-v0.6.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/r82207grqp3vrjo/haroopad-v0.6.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/ks4w2kaix4jncy3/haroopad-v0.6.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/95ghf659ynrosy4/haroopad-v0.6.0_amd64.deb
+
 ## Haroopad v0.5.0
 
 Issue Number     | Description
