@@ -217,3 +217,13 @@ body > .navbar .brand:hover {
 .CodeMirror-lines pre {
   white-space: pre;
 }
+
+.CodeMirror .cm-em {
+  font-style: normal;
+}
+
+/* email */
+#send-email-dialog .progress {
+  height: 10px;
+  margin-bottom: 0;
+}
