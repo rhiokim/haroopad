@@ -9,14 +9,15 @@ window.MenuBar = function() {
 		    type:   'menubar'
 		});
 		
-		menu.append( MenuBarFile() );
+		// menu.append( MenuBarFile() );
 		menu.append( MenuBarFind() );
 		menu.append( MenuBarView() );
 		menu.append( MenuBarAction() );
 		// menu.append( MenuBarTools() );
-		menu.append( MenuBarHelp() );
 
 		win.menu = MenuBar._systemMenu = menu;
+		win.menu.insert( MenuBarFile(), 1 );
+		win.menu.append( MenuBarHelp() );
 	}
 
 	create();
