@@ -4,10 +4,15 @@ define(function() {
 		el: 'footer #shareit',
 
 		events: {
+			'click': 'clickHandler',
 			'click a[data-service]': 'selectService'
 		},
 
 		initialize: function() {},
+
+		clickHandler: function(e) {
+			this.trigger('click');
+		},
 
 		selectService: function(e) {
 			var target = $(e.target);
@@ -16,7 +21,7 @@ define(function() {
 			// this.$('a[data-column]').removeClass('active');
 			target.addClass('active');
 
-			this.trigger('click', service);
+			this.trigger('select', service);
 		}
 	});
 

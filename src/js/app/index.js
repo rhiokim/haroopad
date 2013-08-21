@@ -43,9 +43,6 @@ requirejs([
     'utils/UpdateNotifier'
   ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
 
-    var gui = require('nw.gui'),
-        win = gui.Window.get();
-
     global._gaq.init(function(_gaq) {
       _gaq.push('haroopad', 'command', 'exec');
     });
@@ -59,6 +56,11 @@ requirejs([
     //   cb(html);
     // });
     
+  
+    gui.App.on('open', function(cmdline) {
+      WindowMgr.open(cmdline);
+    });
+
     //open file with commend line
     if (gui.App.argv.length > 0) {
       WindowMgr.open(gui.App.argv[0]);
