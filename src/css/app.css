@@ -93,3 +93,9 @@ form {
 .CodeMirror .cm-em {
   font-style: normal;
 }
+
+/* email */
+#send-email-dialog .progress {
+  height: 10px;
+  margin-bottom: 0;
+}

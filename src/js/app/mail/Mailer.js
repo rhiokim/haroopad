@@ -86,7 +86,7 @@ define([
 			mailOptions.from = mailInfo.from;
 			mailOptions.to = to;
 			mailOptions.subject = subject;
-			mailOptions.attachments = mailInfo.attachements;
+			mailOptions.attachments = fileInfo.attachments;
 
 			send(next);
 		}
