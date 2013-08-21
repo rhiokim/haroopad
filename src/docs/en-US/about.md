@@ -31,6 +31,7 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 	- 52 languages & 26 styles based on highlight.js
 * Vim Key-binding
 * Export to PDF, HTML
+* Auto Save & Restore
 
 ### Upcoming features
 

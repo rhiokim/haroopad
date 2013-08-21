@@ -8,6 +8,7 @@ define([
 		el: 'footer .navbar-inner',
 
 		events: {
+			'mouseover #elementsInfo': 'hoverHandler'
 		},
 
 		initialize: function() {
@@ -28,6 +29,10 @@ define([
 				table: 0/*,
 				page: 0*/
 			});
+		},
+
+		hoverHandler: function(e) {
+			this.trigger('hover');
 		},
 
 		updateHandler: function(cm) {

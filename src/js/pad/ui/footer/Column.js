@@ -4,10 +4,15 @@ define(function() {
 		el: 'footer #columnCount',
 
 		events: {
+			'click': 'clickHandler',
 			'click a[data-column]': 'changeColumn'
 		},
 
 		initialize: function() {},
+
+		clickHandler: function(e) {
+			this.trigger('click');
+		},
 
 		changeColumn: function(e) {
 			var target = $(e.target);

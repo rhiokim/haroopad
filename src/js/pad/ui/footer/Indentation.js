@@ -4,11 +4,16 @@ define(function() {
 		el: 'footer #indentation',
 
 		events: {
+			'click': 'clickHandler',
 			'click a[data-tab-size]': 'changeTabSize',
 			'click a[data-using-tab]': 'toggleIndentUsingTab'
 		},
 
 		initialize: function() {
+		},
+		
+		clickHandler: function(e) {
+			this.trigger('click');
 		},
 
 		selectTabSize: function(size) {

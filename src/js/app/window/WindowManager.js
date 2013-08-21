@@ -113,7 +113,7 @@ define([
 	}
 
 	function open(file) {
-		var fileEntry, newWin;
+		var fileEntry, newWin, activedWin = exports.actived;
 
 		file = (typeof file === 'string') ? File.open(file) : file;
 		fileEntry = file && file.get('fileEntry');
@@ -125,6 +125,16 @@ define([
 			existWin.focus();
 			return;
 		}
+
+		//TODO
+		// if (activedWin) {
+		// 	var fo = activedWin.file.toJSON();
+
+		// 	if (fo.fileEntry === undefined && fo.markdown === undefined) {
+		// 		activedWin.file.set(file.toJSON());
+		// 		return;
+		// 	}
+		// }
 
 		newWin = gui.Window.open('pad.html', {
 			"min_width": 500,
