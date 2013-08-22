@@ -76,17 +76,19 @@ define([
 
 			open(file);
 			Recents.add(fileEntry);
+
+			global._gaq.push('haroopad.file', 'open', '');
 		});
 
 		newWin.on('file.saved', function(file) {
 			Recents.add(file.fileEntry);
+
+			global._gaq.push('haroopad.file', 'save', '');
 		});
 
 		//window instance delivery to child window
 		newWin.once('loaded', function() {
 			_updateStore();
-
-			this.resizeTo(config.width, config.height);
 
 			shadowCount++;
 
@@ -107,12 +109,11 @@ define([
 			top = top + 20;
 
 			this.moveTo(left, top);
-			this.focus();
 		});
 	}
 
 	function open(file) {
-		var fileEntry, newWin;
+		var fileEntry, newWin, activedWin = exports.actived;
 
 		file = (typeof file === 'string') ? File.open(file) : file;
 		fileEntry = file && file.get('fileEntry');
@@ -124,6 +125,16 @@ define([
 			existWin.focus();
 			return;
 		}
+
+		//TODO
+		// if (activedWin) {
+		// 	var fo = activedWin.file.toJSON();
+
+		// 	if (fo.fileEntry === undefined && fo.markdown === undefined) {
+		// 		activedWin.file.set(file.toJSON());
+		// 		return;
+		// 	}
+		// }
 
 		newWin = gui.Window.open('pad.html', {
 			"min_width": 500,

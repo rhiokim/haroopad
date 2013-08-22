@@ -9,7 +9,8 @@ define([
 	      'Cmd-B': 'markdownBold',
 	      'Cmd-I': 'markdownItalic',
 	      'Cmd-L': 'markdownLink',
-	      'Cmd-Alt-S': 'markdownStrike',
+	      'Cmd-U': 'markdownStrike',
+	      'Cmd-K': 'markdownInlineCode',
 	      'Cmd-Alt-O': 'markdownOrderedList',
 	      'Cmd-Alt-U': 'markdownUnOrderedList',
 	      'Cmd-Alt-I': 'markdownImage',
@@ -21,6 +22,8 @@ define([
 	      'Ctrl-B': 'markdownBold',
 	      'Ctrl-I': 'markdownItalic',
 	      'Ctrl-L': 'markdownLink',
+	      'Ctrl-U': 'markdownStrike',
+	      'Ctrl-K': 'markdownInlineCode',
 	      'Ctrl-Alt-S': 'markdownStrike',
 	      'Ctrl-Alt-O': 'markdownOrderedList',
 	      'Ctrl-Alt-U': 'markdownUnOrderedList',
@@ -30,6 +33,7 @@ define([
 	  }
 
 	  keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
+	  keyMaps['Shift-Tab'] = 'indentLess';
 
 	  return keyMaps;
 })

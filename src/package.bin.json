@@ -2,7 +2,7 @@
   "main": "index.html",
   "name": "haroopad",
   "description": "The Next Document processor based on Markdown",
-  "version": "0.4.9",
+  "version": "0.6.0",
   "keywords": [ "markdown", "haroopress", "editor" ],
   "window": {
     "title": "haroopad",
@@ -19,12 +19,12 @@
   "webkit": {
     "plugin": false
   },
+  "upgrade": "http://pad.haroopress.com/upgrade.json",
   "maintainers":[{
    "name": "Rhio Kim",
    "email": "rhio.kim@gmail.com",
    "web": "http://pad.haroopress.com",
    "blog": "http://pad.haroopress.com/page.html",
-   "upgrade": "http://pad.haroopress.com/upgrade.json",
    "feedback": "http://haroopad.userecho.com"
   }],
   "licenses": [{

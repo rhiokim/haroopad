@@ -1,6 +1,8 @@
 .DS_Store
 *.log
 *.swp
+*.iml
+.idea
 
 build
 haroopad.app
