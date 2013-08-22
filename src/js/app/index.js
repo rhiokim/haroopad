@@ -58,7 +58,27 @@ requirejs([
     
   
     gui.App.on('open', function(cmdline) {
-      WindowMgr.open(cmdline);
+      var file, os = getPlatformName();
+
+      switch(os) {
+        case 'windows':
+          cmdline = cmdline.split('"');
+          cmdline.pop();
+          
+          file = cmdline[cmdline.length-1];
+        break;
+        case 'mac':
+          file = cmdline;
+        break;
+        case 'linux':
+          cmdline = cmdline.split(' ');
+          cmdline.shift();
+
+          file = cmdline.join(' ');
+        break;
+      }
+      
+      WindowMgr.open(file);
     });
 
     //open file with commend line
