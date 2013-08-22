@@ -5,7 +5,7 @@ Issue Number     | Description
 **New Features** |
 #167             | Add cusor activity information
 #166             | Add current editor status (analytics elements)
-#165			       | Add Multi-column layout (not support gmail, export to pdf)
+#165			       | Add Multi-column layout (idea by @andrwj)
 #158			       | Add Underline(\_word\_) and Highlight(&#61;&#61;word&#61;&#61;)
 #153, #144       | Add spaces instead of tabs
 **Bugs**         |
