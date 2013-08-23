@@ -17,6 +17,15 @@ body>h6:before {
   display: inline;
   color: #dbdbdb;
 }
+/*
+body>h1:after,
+body>h2:after,
+body>h3:after,
+body>h4:after,
+body>h5:after,
+body>h6:after {
+  content: "";
+}*/
 body>h2:before {
   content: "## ";
 }
