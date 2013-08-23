@@ -1,10 +1,10 @@
 # About
 
-**Haroopad** is a document processor for creating web-friendly document in markdown editor.
+**Haroopad** is a markdown enabled document processor for creating web-friendly documents.
 
-You can also based on the markdown, to create Web documents, blogs, as well as e-mail, the report documents expert.
+You can author various formats of documents such as blog article, slide, presentation, report, and e-mail as if experts did.
 
-And then support Windows, Linux, the Mac OS, you get the experience of editing the same document markdown in the desired platform.
+Haroopad gives you same experiences in editing regardless of the platform you are working on. It runs on all three major operating systems—Windows, Mac OS X, and Linux.
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
@@ -14,6 +14,10 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
   - Window
   - Mac OS X
   - Linux 32/64
+* Sending email
+	- Sending beautiful email
+	- Posting to Tumblr
+	- Publishing into Evernote
 * Github Flavored Markdown
 	- Fenced Code Block
 	- Table
@@ -24,13 +28,19 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
 	- 7 themes based [markdown-css](https//github.com/rhiokim/markdown-css)
 * Syntax Highlighting
 	- 52 languages & 26 styles based highlight.js
+* Column(2,3) layout document ==(new)==
+* Tab to spaces ==(new)==
+* Document state information ==(new)==
 * Vim Key-binding
 * Export to PDF, HTML
+* Auto Save and Restore
 
+<!--
 ### Upcoming features
 
 * Send email
 * Post to tumblr
+-->
 
 ### And more?
 

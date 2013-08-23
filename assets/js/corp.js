@@ -30,13 +30,12 @@ function setStarrre() {
 }
 
 function loadPost(file) {
-  var dir = 'docs/'+ file.replace('#', '') +'/';
+  var dir = 'corp/'+ file.replace('#', '') +'/';
   file = dir +'index.md';
 
   $.ajax({
     url: file
   }).done(function(data) {
-    // var str = marked(data);
     var str = parse(data);
     str = str.replace(/src=\"images/g, 'src="'+ dir +'images');
     $('.contents').html(str);
@@ -52,30 +51,11 @@ $(document).ready(function() {
   var file;
   var prevHash;
   
-  // window.setInterval(function() {
-  // 	if (prevHash && prevHash != window.location.hash) {
-  //   	// window.location.href =  $(this).attr('href');
-  //   	window.location.reload();
-  //   	window.clearInterval(__timeout);
-  //   	return;
-  // 	}
-
-  // 	prevHash = window.location.hash;
-  // }, 10);
-
-  // $('.share a').click(function(e) {
-  //   file = $(this).attr('href');
-  //   e.preventDefault();
-
-  //   window.location.replace($(this).attr('href'));
-  //   // window.reload();
-  // });
-
   file = url('?f');
 
   if(file) {
     loadPost(file);
   } else {
-    loadPost('about');
+    loadPost('member');
   }
 });

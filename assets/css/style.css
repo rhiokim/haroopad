@@ -169,3 +169,20 @@ blockquote p {
 #upcoming a {
     color:#F1C40F;
 }
+
+/**
+ * custom markdown style
+ */
+
+.markdown em.underline {
+  font-style: normal;
+  text-decoration: underline;
+}
+.markdown strong.highlight {
+  font-style: normal;
+  background-color: #fdffb6;
+  -webkit-box-shadow: #fdffb6 0 0 5px;
+  -moz-box-shadow: #fdffb6 0 0 5px;
+  box-shadow: #fdffb6 0 0 5px;
+  font-weight: normal;
+}
