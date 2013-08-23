@@ -5,14 +5,11 @@
   "version": "0.6.1",
   "keywords": [ "markdown", "haroopress", "editor" ],
   "window": {
-    "title": "haroopad",
     "icon": "logo.png",
     "toolbar": false,
     "show": false,
-    "width": 1024,
-    "height": 600,
     "min_width": 500,
-    "min_height": 400
+    "min_height": 250
   },
   "single-instance": true,
   "snapshot": "js/haroopad.bin",

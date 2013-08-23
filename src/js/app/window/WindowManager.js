@@ -136,12 +136,7 @@ define([
 		// 	}
 		// }
 
-		newWin = gui.Window.open('pad.html', {
-			"min_width": 500,
-			"min_height": 250,
-			"toolbar": false,
-			"show": false
-		});
+		newWin = gui.Window.open('pad.html', gui.App.manifest.window);
 		newWin.parent = window;
 		newWin.file = file || File.open();
 		newWin.created_at = new Date().getTime();
