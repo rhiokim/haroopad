@@ -75,11 +75,13 @@ footer #elementsInfo i {
   margin-top: 0;
 }
 
+footer #documentConfig .dropdown-menu a.active i,
 footer #indentation .dropdown-menu a.active i,
 footer #columnCount .dropdown-menu a.active i {
   display: block;
 }
 
+footer #documentConfig .dropdown-menu a i,
 footer #indentation .dropdown-menu a i,
 footer #columnCount .dropdown-menu a i {
   display: none;
