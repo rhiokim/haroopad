@@ -62,7 +62,6 @@
 
   <script src="js/vendors/eventemitter.js"></script>
   <script src="js/vendors/underscore.js"></script>
-  <!--script src="js/vendors/highlight.pack.js"></script-->
 
   <!--script src="js/vendors/layout/classie.js"></script>
   <script src="js/vendors/layout/qmenu.js"></script-->
@@ -211,7 +210,14 @@
       </div>
 
       <!-- <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button> -->
-      <div id="columnCount" class="btn-group dropup pull-right">
+      <div id="documentConfig" class="btn-group dropup pull-right">
+        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-cog icon-white"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i>Show Document Outline</a></li>
+        </ul>
+      </div><div id="columnCount" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
           Columns
           <span class="caret"></span>

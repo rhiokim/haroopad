@@ -2,6 +2,7 @@ var _options = {
   dirname: '.'
 };
 var viewStyle, codeStyle;
+var contentElements;
 
 window.ee = new EventEmitter();
 
@@ -53,6 +54,41 @@ function setColumn(count) {
   $('#column').attr({
     href: href
   });
+}
+
+/**
+ * set toc style
+ */
+function showOutline() {
+  var href;
+    
+  href = 'css/viewer-toc/default.css';
+  $('#toc').attr({
+    href: href
+  });
+}
+
+function hideOutline() {
+  $('#toc').removeAttr('href');
+}
+
+function showOnlyTOC() {
+  // var elArr = document.body.querySelectorAll(':scope>*');
+  // elArr = Array.prototype.slice.call(elArr, 0);
+  
+  // contentElements = elArr.filter(function(el) {
+  //   return !/^H[1-6]/.test(el.tagName);
+  // });
+
+  // contentElements.forEach(function(el) {
+  //   el.style.display = 'none';
+  // });  
+}
+
+function showAllContent() {alert('all show')
+  contentElements.forEach(function(el) {
+    el.style.display = '';
+  });  
 }
 
 function createTOC() {
