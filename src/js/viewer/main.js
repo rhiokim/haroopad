@@ -14,14 +14,16 @@ window.ondrop = function(e) {
   var i = 0, file, fArr, ext;
 
   for (i; i < e.dataTransfer.files.length; ++i) {
-    file = e.dataTransfer.files[i].path;
-    fArr = file.split('.');
-    ext = fArr[fArr.length-1];
 
-    if (ext.toLowerCase() === 'css') {
-      loadCustom(file);
-      $(document.body).addClass('custom');
-    }
+    ee.emit('drop', e.dataTransfer.files[i]);
+    // file = e.dataTransfer.files[i].path;
+    // fArr = file.split('.');
+    // ext = fArr[fArr.length-1];
+
+    // if (ext.toLowerCase() === 'css') {
+    //   loadCustom(file);
+    //   $(document.body).addClass('custom');
+    // }
   }
   e.preventDefault();
 };
@@ -53,9 +55,11 @@ function setCodeStyle(style) {
   });
 }
 
-function loadCustom(file) {
+function loadCustomCSS(style) {
+  $(document.body).addClass('custom');
+
   $('#custom').attr({
-    href: file +'?'+ new Date().getTime()
+    href: style +'?'+ new Date().getTime()
   });
 }
 

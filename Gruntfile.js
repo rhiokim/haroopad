@@ -226,7 +226,7 @@ module.exports = function(grunt) {
           'build/viewer.js': [
             'src/js/viewer/disable.debug.js',
             'src/js/viewer/DynamicContents.js',
-            'src/js/viewer/dragdrop.js'
+            'src/js/viewer/dragdrop.js',
             'src/js/viewer/main.js'
           ]
         }
@@ -349,6 +349,14 @@ module.exports = function(grunt) {
       mdcss: {
         files: [
           { expand: true, cwd: 'lib/markdown-css/build/', src: [ '**' ], dest: 'src/css/markdown' }
+        ]
+      },
+
+      mdsass: {
+        files: [
+          { expand: true, cwd: 'lib/node-sass/', src: [ 'package.json', 'sass.js' ], dest: 'src/node_modules/node-sass' },
+          { src: 'lib/node-sass/build/Release/binding.node', dest: 'src/node_modules/node-sass/build/Release/binding.node'},
+          { expand: true, cwd: 'lib/node-sass/lib/', src: [ '**' ], dest: 'src/node_modules/node-sass/lib/' }
         ]
       }
     },

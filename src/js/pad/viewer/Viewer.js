@@ -1,8 +1,13 @@
 define([
 		'store',
-		'keyboard'
+		'keyboard',
+		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey) {
+	function(store, HotKey, DragDrop) {
+		var fs = require('fs');
+		var path = require('path');
+		var sass = require('node-sass');
+
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
 		var content = '',
@@ -101,6 +106,39 @@ define([
 
 		_viewer.ee.on('dom', function(dom) {
 			window.ee.emit('dom', dom);
+		});
+
+		/**
+		 * drop in viewer
+		 * @param  {[type]} fileObject [description]
+		 * @return {[type]}            [description]
+		 */
+		_viewer.ee.on('drop', function(fileObject) {
+			var file = fileObject.path;
+			var ext = path.extname(file);
+
+			switch (ext) {
+				case '.scss':
+					var dir = path.dirname(file);
+					var name = path.basename(file);
+					var _name = dir +'/.haroopad-'+ name;
+					_name = _name.replace(ext, '.css');
+
+					sass.render({
+						file: file,
+						success: function(css) {
+							fs.writeFile(path.join(_name), css, 'utf8', function(err) {
+								_viewer.loadCustomCSS(_name);
+							});
+						},
+						includePaths: [ dir ],
+    					outputStyle: 'compressed'
+					});
+				break;
+				case '.css':
+					_viewer.loadCustomCSS(file);
+				break;
+			}
 		});
 
 		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');
