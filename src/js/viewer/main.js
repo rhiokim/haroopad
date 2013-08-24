@@ -20,6 +20,7 @@ window.ondrop = function(e) {
 
     if (ext.toLowerCase() === 'css') {
       loadCustom(file);
+      $(document.body).addClass('custom');
     }
   }
   e.preventDefault();

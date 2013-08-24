@@ -105,9 +105,6 @@
   <script src="js/vendors/CodeMirror/mode/htmlmixed/htmlmixed.js"></script>
   <script src="js/vendors/CodeMirror/mode/markdown/markdown.js"></script>
   <script src="js/vendors/CodeMirror/keymap/vim.js"></script>
-  <script>
-    requirejs(['js/pad/haroopad']);
-  </script>
 </head>
 <body>
   <header id="editControls" class="navbar navbar-fixed-top">
@@ -192,7 +189,7 @@
         <textarea id="code" name="code"></textarea>
       </section>
       <section id="haroo">
-        <iframe src="viewer.html" nwdisable nwfaketop></iframe>
+        <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
       </section>
     </article>
     <nav>bbb</nav>
@@ -287,4 +284,9 @@
   </div>
   <div id="notifier"></div>
 </body>
+<script>
+  function start() {
+    requirejs(['js/pad/haroopad']);
+  }
+</script>
 </html>
