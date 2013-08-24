@@ -226,6 +226,7 @@ module.exports = function(grunt) {
           'build/viewer.js': [
             'src/js/viewer/disable.debug.js',
             'src/js/viewer/DynamicContents.js',
+            'src/js/viewer/dragdrop.js'
             'src/js/viewer/main.js'
           ]
         }

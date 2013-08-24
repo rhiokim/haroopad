@@ -11,8 +11,18 @@ window.ondragover = function(e) {
   return false;
 };
 window.ondrop = function(e) {
+  var i = 0, file, fArr, ext;
+
+  for (i; i < e.dataTransfer.files.length; ++i) {
+    file = e.dataTransfer.files[i].path;
+    fArr = file.split('.');
+    ext = fArr[fArr.length-1];
+
+    if (ext.toLowerCase() === 'css') {
+      loadCustom(file);
+    }
+  }
   e.preventDefault();
-  return false;
 };
 
 function loadCss(url) {
@@ -39,6 +49,12 @@ function setCodeStyle(style) {
   var href = 'css/code/' + style + '.css';
   $('#code').attr({
     href: href
+  });
+}
+
+function loadCustom(file) {
+  $('#custom').attr({
+    href: file +'?'+ new Date().getTime()
   });
 }
 
