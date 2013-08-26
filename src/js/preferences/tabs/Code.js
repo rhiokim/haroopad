@@ -31,7 +31,7 @@ define([
 			changeCodeStyle: function(e) {
 				options.set({ theme: e.val });
 
-    		global._gaq.push('haroopad.preferences', 'code', e.val);
+    			global._gaq.push('haroopad.preferences', 'code', e.val);
 			},
 
 			displayLineNumber: function(e) {

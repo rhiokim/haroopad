@@ -28,6 +28,7 @@
       <li><a href="#general-tab" data-toggle="tab">General</a></li>
       <li><a href="#editor-tab" data-toggle="tab">Editor</a></li>
       <li><a href="#viewer-tab" data-toggle="tab">Viewer</a></li>
+      <li><a href="#custom-tab" data-toggle="tab">Custom</a></li>
       <li><a href="#code-tab" data-toggle="tab">Code</a></li>
       <!-- <li><a href="#tab4" data-toggle="tab">Add-ons</a></li>
       <li><a href="#tab5" data-toggle="tab">Export</a></li> -->
@@ -156,8 +157,8 @@
           <div class="span3 text-right">
             <strong>Themes :</strong>
           </div>
-          <div class="span9">
-            <select class="select2 span10" name="viewStyle">
+          <div class="span8">
+            <select class="select2 span12" name="viewStyle">
               <option value="clearness">Clearness</option>
               <option value="clearness-dark">Clearness Dark</option>
               <option value="node-dark">Node Dark</option>
@@ -211,6 +212,34 @@
             </label>
           </div>
         </div-->
+      </div>
+
+      <div id="custom-tab" class="tab-pane">
+        <div class="row-fluid">
+          <div class="span3 text-right">
+            <strong>Your Themes :</strong>
+          </div>
+          <div class="span8">
+            <select class="select2 span12" name="customTheme">
+              <option></option>
+            </select>
+            <!-- <input name="customTheme" tabindex="-1"/> -->
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span3 text-right">
+            <strong>Directory :</strong>
+          </div>
+          <div class="span9">
+            <input class="hide" id="openCustomTheme" type="file" nwdirectory />
+            <!-- <input id="custom-theme-path" class="span12" type="text" readonly/> -->
+            <div class="input-append">
+              <input id="custom-theme-path" class="span10" type="text" readonly>
+              <button id="custom-theme-open" class="btn" type="button">...</button>
+              <button id="custom-theme-reload" class="btn" type="button">Reload</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id="code-tab" class="tab-pane">
