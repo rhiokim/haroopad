@@ -18,6 +18,7 @@ define([
 
 		var viewerConfig = store.get('Viewer') || {};
 		var codeConfig = store.get('Code') || {};
+		var customConfig = store.get('Custom') || {};
 
 		// var config = option.toJSON();
 
@@ -37,6 +38,10 @@ define([
 		window.parent.ee.on('preferences.viewer.clickableLink', function(value) {
 			viewerConfig.clickableLink = value;
 			// value ? viewer.allowLink() : viewer.blockLink() ;
+		});
+
+		window.parent.ee.on('preferences.custom.theme', function(theme) {
+			_viewer.loadCustomCSS(theme.path);
 		});
 
 		window.ee.on('print.html', function(value) {
@@ -143,6 +148,10 @@ define([
 
 		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');
 		_viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
+
+		if (customConfig.theme) {
+			_viewer.loadCustomCSS(customConfig.theme.path);
+		}
 
 		return {
 			init: function(opt) {

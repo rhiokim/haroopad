@@ -4,7 +4,7 @@ define([
 		var readdir = require('readdir');
 		var path = require('path');
 
-		var config = options.toJSON();
+		var config = options.toJSON() || {};
 
 		options.bind('change', function(model) {
 			var prop, en,
@@ -17,14 +17,16 @@ define([
 		});
 
 		function loadCSSFiles(dir) {
-			var csses = readdir.readSync(dir, [ '*.css' ]);
-			var themes = [];
+			var csses = readdir.readSync(dir, [ '*.css' ], readdir.ABSOLUTE_PATHS + readdir.CASELESS_SORT);
+			var name, themes = {};
 
 			csses.forEach(function(css, idx) {
-				themes.push({
+				name = path.basename(css);
+				themes[name] = {
 					id: idx,
-					text: path.basename(css)
-				});
+					name: path.basename(css),
+					path: css
+				}
 			});
 
 			return themes;
@@ -41,12 +43,13 @@ define([
 			},
 
 			initialize: function() {
-				this.$('select[name=customTheme]').select2({
-                	placeholder: "Select Your Theme",
-				});//.select2("val", config.theme);
-
 				this.setPath(config.themeDir);
 				this.setThemeData(config.themes || []);
+
+				this.$('select[name=customTheme]').select2({
+                	placeholder: "Select Your Theme",
+				}).select2("val", config.theme && config.theme.name);
+
 			},
 
 			clearOptions: function() {
@@ -61,13 +64,14 @@ define([
 			},
 
 			setThemeData: function(themes) {
-				var option;
+				var prop, option, item;
 
-				themes.forEach(function(item) {
-					option = $('<option>').attr('value', item.text).text(item.text);
+				for(prop in themes) {
+					items = themes[prop];
+
+					option = $('<option>').attr('value', prop).text(prop);
 					this.$('select[name=customTheme]').append(option);
-				});
-
+				}
 
 				this.$('select[name=customTheme]').select2({
                 	placeholder: "Select Your Theme",
@@ -94,7 +98,7 @@ define([
 			},
 
 			reloadThemes: function(e) {
-				var dir = config.themeDir;
+				var dir = options.get('themeDir');
 				var themes = loadCSSFiles(dir);
 				
 				options.set({ themes: themes });
@@ -104,7 +108,8 @@ define([
 			},
 
 			changeCustomTheme: function(e) {
-				options.set({ theme: e.val });
+				var themes = options.get('themes');
+				options.set({ theme: themes[e.val] });
 
     			global._gaq.push('haroopad.preferences', 'change.custom.theme', e.val);
 			}
