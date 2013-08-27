@@ -41,7 +41,8 @@ define([
 		});
 
 		window.parent.ee.on('preferences.custom.theme', function(theme) {
-			_viewer.loadCustomCSS(theme.path);
+			var css = (theme && theme.path) || '';
+			_viewer.loadCustomCSS(css);
 		});
 
 		window.ee.on('print.html', function(value) {

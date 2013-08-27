@@ -21,10 +21,10 @@ define([
 			var name, themes = {};
 
 			csses.forEach(function(css, idx) {
-				name = path.basename(css);
+				name = path.basename(css).replace('.css','');
 				themes[name] = {
 					id: idx,
-					name: path.basename(css),
+					name: name,
 					path: css
 				}
 			});
@@ -49,12 +49,13 @@ define([
 				this.$('select[name=customTheme]').select2({
                 	placeholder: "Select Your Theme",
 				}).select2("val", config.theme && config.theme.name);
-
 			},
 
 			clearOptions: function() {
 				var blankOpt = $('<option>').text('');
+				var clearOpt = $('<option>').attr('name', 'not-select').text('Not Select');
 				this.$('select[name=customTheme]').empty().append(blankOpt);
+				this.$('select[name=customTheme]').append(clearOpt);
 			},
 
 			setPath: function(dir) {
@@ -65,6 +66,8 @@ define([
 
 			setThemeData: function(themes) {
 				var prop, option, item;
+
+				this.clearOptions();
 
 				for(prop in themes) {
 					items = themes[prop];
@@ -103,12 +106,19 @@ define([
 				
 				options.set({ themes: themes });
 
-				this.clearOptions();
 				this.setThemeData(themes);
 			},
 
 			changeCustomTheme: function(e) {
 				var themes = options.get('themes');
+				var el = $(e.target);
+
+				//not select theme
+				if (el.attr('name') == 'not-select') {
+					options.set({ theme: {} });
+					return;
+				}
+
 				options.set({ theme: themes[e.val] });
 
     			global._gaq.push('haroopad.preferences', 'change.custom.theme', e.val);
