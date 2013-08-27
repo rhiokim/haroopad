@@ -52,6 +52,10 @@ define([
 			_viewer.print();
 		});
 
+		window.ee.on('change.column', function(count) {
+			_viewer.setColumn(count);
+		});
+
 		/* change markdown event handler */
 		window.ee.on('change.after.markdown', update);
 
@@ -103,6 +107,10 @@ define([
 			if (viewerConfig.clickableLink) {
 				gui.Shell.openExternal(href);
 			}
+		});
+
+		_viewer.ee.on('dom', function(dom) {
+			window.ee.emit('dom', dom);
 		});
 
 		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');

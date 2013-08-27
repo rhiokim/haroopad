@@ -22,7 +22,8 @@ global._gaq = {
 
 	push: function(cate, action, label) {
 		var arr = [ '_trackEvent', cate, action, label ];
-		global._gaq.instance && global._gaq.instance.push(arr);
+
+		!window.dev && global._gaq.instance && global._gaq.instance.push(arr);
 	}
 };
 
