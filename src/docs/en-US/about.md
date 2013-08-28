@@ -10,6 +10,9 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 
 ### Main features
 
+* Custom Style (new)
+  - Style based on CSS & SASS(sass-lang.com)
+* Outline View (new)
 * Support cross platform
   - Window
   - Mac OS X
@@ -29,6 +32,8 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 * Vim Key-binding
 * Export to PDF, HTML
 * Auto Save & Restore
+* Tab to Spaces
+* Column Layout
 
 ### Upcoming features
 
