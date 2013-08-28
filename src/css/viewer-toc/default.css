@@ -1,5 +1,17 @@
 body>* {
-	display: none;
+	/*display: none;*/
+
+	opacity: .5;
+	line-height: 1;
+	-webkit-transform: scale(.6);
+	margin-top: 1px !important;
+	margin-bottom: 1px !important;
+	margin-left: -101px !important;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+
+	-webkit-margin-before: -5px !important;
+	-webkit-margin-after: -5px !important;
 }
 
 body:before {
@@ -43,9 +55,14 @@ body>h6:before {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 1px 0 !important;
+	/*margin-top: 20px 0 !important;*/
+	margin: 10px 0 !important;
 	padding: 0 !important;
 	display: block !important;
+
+	opacity: 1;
+	line-height: inherit;
+	-webkit-transform: scale(1);
 }
 
 h1 {
@@ -77,5 +94,11 @@ h5 {
 h6 {
 	font-size: 12px !important;
 	-webkit-transition: font-size .3s;
+}
+
+
+table {
+	display: inline-table !important;
+	margin-left: -38px !important;
 }
 
