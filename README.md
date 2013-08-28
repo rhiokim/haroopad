@@ -10,6 +10,9 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
 
 ### Main features
 
+* Custom Theme
+  - Style based on CSS & SASS(sass-lang.com)
+* Outline View
 * Supports cross platform
   - Window
   - Mac OS X
@@ -23,13 +26,15 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
 	- 7 themes based [markdown-css](https//github.com/rhiokim/markdown-css)
 * Syntax Highlighting
 	- 52 languages & 26 styles based highlight.js
+* Sending email with Rendered Markdown and Applied CSS
+* External Posting & Publishing
+	- Tumblr
+	- Evernote
 * Vim Key-binding
 * Export to PDF, HTML
+* Colum(Single, Two and Three) Layout View
+* Tab to Spaces for Indentation
 
-### Upcoming features
-
-* Send email
-* Post to tumblr
 
 ### And more?
 
