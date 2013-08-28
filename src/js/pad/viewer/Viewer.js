@@ -6,7 +6,7 @@ define([
 	function(store, HotKey, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
-		var sass = require('node-sass');
+		// var sass = require('node-sass');
 
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
@@ -140,23 +140,23 @@ define([
 			var ext = path.extname(file);
 
 			switch (ext) {
-				case '.scss':
-					var dir = path.dirname(file);
-					var name = path.basename(file);
-					var _name = path.join(dir, name);
-					_name = _name.replace(ext, '.css');
+				// case '.scss':
+				// 	var dir = path.dirname(file);
+				// 	var name = path.basename(file);
+				// 	var _name = path.join(dir, name);
+				// 	_name = _name.replace(ext, '.css');
 
-					sass.render({
-						file: file,
-						success: function(css) {
-							fs.writeFile(path.join(_name), css, 'utf8', function(err) {
-								_viewer.loadCustomCSS(_name);
-							});
-						},
-						includePaths: [ dir ],
-    					outputStyle: 'compressed'
-					});
-				break;
+				// 	sass.render({
+				// 		file: file,
+				// 		success: function(css) {
+				// 			fs.writeFile(path.join(_name), css, 'utf8', function(err) {
+				// 				_viewer.loadCustomCSS(_name);
+				// 			});
+				// 		},
+				// 		includePaths: [ dir ],
+    // 					outputStyle: 'compressed'
+				// 	});
+				// break;
 				case '.css':
 					_viewer.loadCustomCSS(file);
 				break;

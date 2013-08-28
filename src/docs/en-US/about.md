@@ -10,9 +10,9 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 
 ### Main features
 
-* Custom Style (new)
-  - Style based on CSS & SASS(sass-lang.com)
-* Outline View (new)
+* Custom Theme ==(new)==
+  - Style based on CSS(Cascading Style Sheet)
+* Outline View ==(new)==
 * Support cross platform
   - Window
   - Mac OS X
