@@ -1,4 +1,4 @@
-##### Haroopad uses the following open-sources
+##### Haroopad is used the following open-source.
 
 * * *
   
@@ -338,3 +338,9 @@ Copyright (c) 2009-2013 Jeremy Ashkenas, DocumentCloud (MIT)
 **Nodemailer**
 
 Copyright (c) 2011-2012 Andris Reinman (MIT)
+
+* * *
+
+** _undercore_ & &#61;&#61;highlight&#61;&#61; **
+
+@b3ngr33nlr's PR to chjj/marked - http://deallocatedbytes.com/#new-features-for-marked-

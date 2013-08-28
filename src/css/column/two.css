@@ -1,0 +1,24 @@
+body {
+	column-count: 2;
+	column-gap: 40px;
+	column-rule: 1px dashed #ababab;
+	column-fill: auto;
+	-webkit-column-count: 2;
+	-webkit-column-gap: 40px;
+	-webkit-column-rule: 1px dashed #ababab;
+	-webkit-column-fill: auto;
+}
+
+h1, h2 {
+	column-span: all;
+	-webkit-column-span: all;
+}
+
+table {
+	column-break-inside: avoid;
+	-webkit-column-break-inside: avoid;
+}
+
+p, li {
+	word-break: break-all;
+}

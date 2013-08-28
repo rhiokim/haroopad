@@ -2,37 +2,47 @@
   "main": "index.html",
   "name": "haroopad",
   "description": "The Next Document processor based on Markdown",
-  "version": "0.5.0",
-  "keywords": [ "markdown", "haroopress", "editor" ],
+  "version": "0.6.1",
+  "keywords": [
+    "markdown",
+    "haroopress",
+    "editor"
+  ],
   "window": {
-    "title": "haroopad",
     "icon": "logo.png",
     "toolbar": false,
     "show": false,
-    "width": 1024,
-    "height": 600,
     "min_width": 500,
-    "min_height": 400
+    "min_height": 250
   },
   "single-instance": true,
   "webkit": {
     "plugin": false
   },
   "upgrade": "http://pad.haroopress.com/upgrade.json",
-  "maintainers":[{
-   "name": "Rhio Kim",
-   "email": "rhio.kim@gmail.com",
-   "web": "http://pad.haroopress.com",
-   "blog": "http://pad.haroopress.com/page.html",
-   "feedback": "http://haroopad.userecho.com"
-  }],
-  "licenses": [{
-    "type": "GPLv2",
-    "url": "http://www.example.com/licenses/gpl.html"
-  }],
+  "maintainers": [
+    {
+      "name": "Rhio Kim",
+      "email": "rhio.kim@gmail.com",
+      "web": "http://pad.haroopress.com",
+      "blog": "http://pad.haroopress.com/page.html",
+      "feedback": "http://haroopad.userecho.com"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "GPLv2",
+      "url": "http://www.example.com/licenses/gpl.html"
+    }
+  ],
   "bugs": "https://github.com/rhiokim/haroopad/issues",
-  "repositories": [{
-    "type": "git", 
-    "url": "git@github.com:rhiokim/haroopad.git"
-  }]
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:rhiokim/haroopad.git"
+    }
+  ],
+  "devDependencies": {
+    "humanize": "0.0.8"
+  }
 }

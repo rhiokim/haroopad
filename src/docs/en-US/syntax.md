@@ -1,4 +1,4 @@
-# Standard Markdown
+## Standard Markdown
 
 * \\   backslash
 * \`   backtick
@@ -15,128 +15,171 @@
 
 ##### HEADERS
 
-    This is an H1
-    =============
-    
-    This is an H2
-    -------------
+```markdown
+This is an H1
+=============
+
+This is an H2
+-------------
+```
 
 Any number of underlining =’s or -’s will work.
 
-    # This is an H1
-    
-    ## This is an H2
-    
-    ###### This is an H6
+```markdown
+# This is an H1
+
+## This is an H2
+
+###### This is an H6
+```
 
 ##### BLOCKQUOTES
-    > This is the first level of quoting.
-    >
-    > > This is nested blockquote.
-    >
-    > Back to the first level.
+
+```markdown
+> This is the first level of quoting.
+>
+> > This is nested blockquote.
+>
+> Back to the first level.
+```
 
 Blockquotes can contain other Markdown elements, including headers, lists, and code blocks:
 
-    > ## This is a header.
-    > 
-    > 1.   This is the first list item.
-    > 2.   This is the second list item.
-    > 
-    > Here's some example code:
-    > 
-    >     return shell_exec("echo $input | $markdown_script");
+```markdown
+> ## This is a header.
+> 
+> 1.   This is the first list item.
+> 2.   This is the second list item.
+> 
+> Here's some example code:
+> 
+>     return shell_exec("echo $input | $markdown_script");
+```
 
 ##### LISTS
-    *   Red
-    *   Green
-    *   Blue
+
+```markdown
+*   Red
+*   Green
+*   Blue
+```
 
 is equivalent to:
 
-    +   Red
-    +   Green
-    +   Blue
+```markdown
++   Red
++   Green
++   Blue
+```
 
 and:
 
-    -   Red
-    -   Green
-    -   Blue
+```
+-   Red
+-   Green
+-   Blue
+```
 
 Ordered lists use numbers followed by periods:
 
-    1.  Bird
-    2.  McHale
-    3.  Parish
+```
+1.  Bird
+2.  McHale
+3.  Parish
+```
 
 ##### CODE BLOCKS
-    
+
+```markdown
     This is a normal paragraph:
     
         This is a code block.
+```
         
 One level of indentation — 4 spaces or 1 tab — is removed from each line of the code block. For example, this:
-    
+
+```markdown
     Here is an example of AppleScript:
     
         tell application "Foo"
             beep
         end tell
+```
 
 ##### HORIZONTAL RULES
-    * * *
-    
-    ***
-    
-    *****
-    
-    - - -
-    
-    ---------------------------------------
+
+```markdown
+* * *
+
+***
+
+*****
+
+- - -
+
+---------------------------------------
+```
 
 ##### LINKS
-    This is [an example](http://example.com/ "Title") inline link.
-    
-    [This link](http://example.net/) has no title attribute.
+
+```markdown
+This is [an example](http://example.com/ "Title") inline link.
+
+[This link](http://example.net/) has no title attribute.
+```
     
 Here’s an example of reference links in action:
 
-    I get 10 times more traffic from [Google][] than from
-    [Yahoo][] or [MSN][].
-    
-      [google]: http://google.com/        "Google"
-      [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
-      [msn]:    http://search.msn.com/    "MSN Search"
+```markdown
+I get 10 times more traffic from [Google][] than from
+[Yahoo][] or [MSN][].
+
+  [google]: http://google.com/        "Google"
+  [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
+  [msn]:    http://search.msn.com/    "MSN Search"
+```
 
 ##### EMPHASIS
 
-    *single asterisks*
-    
-    _single underscores_
-    
-    **double asterisks**
-    
-    __double underscores__
+```markdown
+*single asterisks*
+
+_single underscores_  (not support in haroopad)
+
+**double asterisks**
+
+__double underscores__
+```
 
 ##### CODE
 
-    Use the `printf()` function.
+```markdown
+Use the `printf()` function.
+```
+
+Use the `printf()` function.
 
 ##### IMAGES
 
-    ![Alt text](/path/to/img.jpg)
-    
-    ![Alt text](/path/to/img.jpg "Optional title")
+```markdown
+![Alt text](/path/to/img.jpg)
 
-    ![Alt text][id]
-    [id]: /path/to/img.jpg "Optional title"
+![Alt text](/path/to/img.jpg "Optional title")
+
+![Alt text][id]
+[id]: /path/to/img.jpg "Optional title"
+```
 
 ##### EMAIL
 
-    Contact to <example@example.com>.
+```markdown
+Contact to <example@example.com>.
+```
 
-# Github Flavored Markdown
+Contact to <example@example.com>.
+
+
+## Github Flavored Markdown
 
 > ref: https://help.github.com/articles/github-flavored-markdown
 
@@ -144,10 +187,10 @@ Here’s an example of reference links in action:
 
 The next paragraph contains two phrases separated by a single newline character
 
-    Haroopad
-    The next document processor
-
-**becomes**
+```markdown
+Haroopad  
+The next document processor
+```
 
 Haroopad  
 The next document processor
@@ -156,10 +199,10 @@ The next document processor
 
 It is not reasonable to italicize just part of a word, especially when you're dealing with code and names often appear with multiple underscores. Therefore, GFM ignores multiple underscores in words.
 
-    perform_complicated_task
-    do_this_and_do_that_and_another_thing
-
-**becomes**
+```markdown
+perform_complicated_task
+do_this_and_do_that_and_another_thing
+```
 
 perform_complicated_task
 do_this_and_do_that_and_another_thing
@@ -190,3 +233,24 @@ markdown = Redcarpet.new("Hello World!")
 puts markdown.to_html
 ```
 
+## Extras (only haroopad)
+
+> Experimental since v0.6.0
+
+##### Highlight
+
+**Highlight** (and highlights, highlighting, etc.) may refer to:
+
+```markdown
+Syntax ==highlighting==, **display of text** in different colors and/or fonts, depending upon its meaning in context (e.g. different parts of speech in a sentence, or ==function==  vs. ==variables names== in computer source code)
+```
+
+Syntax ==highlighting==, **display of text** in different colors and/or fonts, depending upon its meaning in context (e.g. different parts of speech in a sentence, or ==function== vs. ==variables names== in computer source code)
+
+##### Underline
+
+```markdown
+An _underline_, also called an underscore is one or more horizontal lines immediately below a portion of writing.
+```
+
+An _underline_, also called an underscore is one or more _horizontal lines_ immediately below a portion of writing.
