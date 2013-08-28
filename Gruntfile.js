@@ -310,9 +310,8 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' },
 
           { src: 'src/node_modules/humanize/package.json', dest: 'build/haroopad/node_modules/humanize/package.json' },
-          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' },
+          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' }
 
-          { expand: true, cwd: 'src/node_modules/node-sass/', src: [ '**' ], dest: 'build/haroopad/node_modules/node-sass/' }
         ]
       },
 
