@@ -10,14 +10,17 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 
 ### Main features
 
+* Custom Theme ==(new)==
+  - Style based on CSS & SASS(sass-lang.com)
+* Outline View ==(new)==
 * Support cross platform
   - Window
   - Mac OS X
   - Linux 32/64
-* Sending email
-	- Sending beautiful email
-	- Posting to Tumblr
-	- Publishing into Evernote
+* Sending email with Rendered Markdown and Applied CSS
+* External Posting & Publishing
+	- Tumblr
+	- Evernote
 * Github Flavored Markdown
 	- Fenced Code Block
 	- Table
@@ -28,12 +31,13 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 	- 7 themes based [markdown-css](https//github.com/rhiokim/markdown-css)
 * Syntax Highlighting
 	- 52 languages & 26 styles based highlight.js
-* Column(2,3) layout document ==(new)==
-* Tab to spaces ==(new)==
-* Document state information ==(new)==
+* Colum(Single, Two and Three) Layout View
+* Tab to Spaces for Indentation
+* Document state information
 * Vim Key-binding
 * Export to PDF, HTML
 * Auto Save and Restore
+
 
 <!--
 ### Upcoming features
