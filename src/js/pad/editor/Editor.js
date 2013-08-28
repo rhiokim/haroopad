@@ -22,20 +22,14 @@ define([
 
 		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 			mode: 'markdown',
-			// theme: 'solarized dark',
 			lineNumbers: true,
 			lineWrapping: true,
 			electricChars: false,
 			viewportMargin: 40,
-	        // tabSize: 8,
-	        // indentUnit: 8,
-	        // indentWithTabs: true,
 			autofocus: true,
 			workDelay: 1000,
 			extraKeys: Keymap,
 			showTrailingSpace: true
-			/*,
-					    dragDrop: true*/
 		});
 
 		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
@@ -59,6 +53,71 @@ define([
 		editor.setOption('tabSize', config.tabSize || 4);
 		editor.setOption('indentUnit', config.indentUnit || 4);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
+
+		/**
+		 * sync scroll handler
+		 * @return {[type]} [description]
+		 */
+
+		function syncScrollHandler() {
+			var scrollInfo = editor.getScrollInfo();
+			var top = scrollInfo.top;
+			var per = scrollInfo.height - scrollInfo.clientHeight;
+
+			window.ee.emit('editor.scroll', top, per);
+		}
+
+		if (generalConf.enableSyncScroll) {
+			editor.on('scroll', syncScrollHandler);
+		} else {
+			editor.off('scroll', syncScrollHandler);
+		}
+
+
+		/* change theme */
+		function changeTheme(value) {
+			editor.setOption('theme', value);
+		}
+
+		/* toggle line number */
+		function toggleLineNumber(value) {
+			editor.setOption('lineNumbers', value);
+		}
+
+		/* toggle vim key binding */
+		function toggleVim(value) {
+			editor.setOption('keyMap', value ? 'vim' : 'default');
+		}
+
+		/* toggle auto pair char */
+		function toggleAutoPairChar(value) {
+			editor.setOption('autoCloseBrackets', value);
+		}
+
+		/* toggle sync scroll */
+		function toggleSyncScroll(value) {
+			if (value) {
+				editor.on('scroll', syncScrollHandler);
+			} else {
+				editor.off('scroll', syncScrollHandler);
+			}
+		}
+
+		window.parent.ee.on('preferences.general.enableSyncScroll', toggleSyncScroll);
+
+		window.parent.ee.on('preferences.editor.theme', changeTheme);
+		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
+		window.parent.ee.on('preferences.editor.vimKeyBinding', toggleVim);
+		window.parent.ee.on('preferences.editor.autoPairCharacters', toggleAutoPairChar);
+
+		nw.on('destroy', function() {
+			window.parent.ee.off('preferences.general.enableSyncScroll', toggleSyncScroll);
+
+			window.parent.ee.off('preferences.editor.theme', changeTheme);
+			window.parent.ee.off('preferences.editor.displayLineNumber', toggleLineNumber);
+			window.parent.ee.off('preferences.editor.vimKeyBinding', toggleVim);
+			window.parent.ee.off('preferences.editor.autoPairCharacters', toggleAutoPairChar);
+		});
 
 		window.ee.on('toggle.vim.keybind', function() {
 			var map = editor.getOption('keyMap');
@@ -85,29 +144,6 @@ define([
 		});
 		window.ee.on('find.replace.all', function() {
 			CodeMirror.commands.replaceAll(editor);
-		});
-
-
-		/* change preferences events */
-
-		window.parent.ee.on('preferences.editor.theme', function(value) {
-			editor.setOption('theme', value);
-		});
-
-		window.parent.ee.on('preferences.editor.displayLineNumber', function(value) {
-			editor.setOption('lineNumbers', value);
-		});
-
-		window.parent.ee.on('preferences.editor.vimKeyBinding', function(value) {
-			editor.setOption('keyMap', value ? 'vim' : 'default');
-		});
-
-		window.parent.ee.on('preferences.editor.insertFourSpace', function(value) {
-			editor.setOption('tabSize', value ? 4 : 2);
-		});
-
-		window.parent.ee.on('preferences.editor.autoPairCharacters', function(value) {
-			editor.setOption('autoCloseBrackets', value);
 		});
 
 		window.ee.on('action.h1', function() {
@@ -182,33 +218,6 @@ define([
 			});
 		} else {
 			editor.setOption('readOnly', true);
-		}
-
-		/**
-		 * sync scroll handler
-		 * @return {[type]} [description]
-		 */
-
-		function syncScrollHandler() {
-			var scrollInfo = editor.getScrollInfo();
-			var top = scrollInfo.top;
-			var per = scrollInfo.height - scrollInfo.clientHeight;
-
-			window.ee.emit('editor.scroll', top, per);
-		}
-
-		window.parent.ee.on('preferences.general.enableSyncScroll', function(value) {
-			if (value) {
-				editor.on('scroll', syncScrollHandler);
-			} else {
-				editor.off('scroll', syncScrollHandler);
-			}
-		});
-
-		if (generalConf.enableSyncScroll) {
-			editor.on('scroll', syncScrollHandler);
-		} else {
-			editor.off('scroll', syncScrollHandler);
 		}
 
 

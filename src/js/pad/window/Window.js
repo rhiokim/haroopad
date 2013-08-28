@@ -23,6 +23,8 @@ define([
 	}
 
 	function close() {
+		nw.emit('destory');
+		
 		win.hide();
 
 		if (!win.isFullscreen) {

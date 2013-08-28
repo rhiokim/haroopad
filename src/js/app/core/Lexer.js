@@ -8,7 +8,7 @@ define([
         "tables": true,
         "breaks": false,
         "pedantic": false,
-        "sanitize": false,
+        "sanitize": true,
         "smartLists": true,
         "smartypants": true,
         "silent": false,

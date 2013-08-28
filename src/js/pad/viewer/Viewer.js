@@ -27,22 +27,38 @@ define([
 			_viewer.update(content);
 		}
 
-		window.parent.ee.on('preferences.viewer.theme', function(value) {
+		/* change editor theme */
+		function changeTheme(value) {
 			_viewer.setViewStyle(value);
-		});
+		}
 
-		window.parent.ee.on('preferences.code.theme', function(value) {
+		/* change syntax highlight theme */
+		function changeCodeTheme(value) {
 			_viewer.setCodeStyle(value);
-		});
+		}
 
-		window.parent.ee.on('preferences.viewer.clickableLink', function(value) {
+		/* change clickable link */
+		function changeClickableLink(value) {
 			viewerConfig.clickableLink = value;
-			// value ? viewer.allowLink() : viewer.blockLink() ;
-		});
+		}
 
-		window.parent.ee.on('preferences.custom.theme', function(theme) {
+		/* change custom theme */
+		function changeCustomTheme(theme) {
 			var css = (theme && theme.path) || '';
 			_viewer.loadCustomCSS(css);
+		}
+
+		window.parent.ee.on('preferences.viewer.theme', changeTheme);
+		window.parent.ee.on('preferences.viewer.theme', changeCodeTheme);
+		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
+		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
+
+		/* window close */
+		nw.on('destory', function() {
+			window.parent.ee.off('preferences.viewer.theme', changeTheme);
+			window.parent.ee.off('preferences.viewer.theme', changeCodeTheme);
+			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
+			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
 		});
 
 		window.ee.on('print.html', function(value) {
@@ -127,7 +143,7 @@ define([
 				case '.scss':
 					var dir = path.dirname(file);
 					var name = path.basename(file);
-					var _name = dir +'/.haroopad-'+ name;
+					var _name = path.join(dir, name);
 					_name = _name.replace(ext, '.css');
 
 					sass.render({
