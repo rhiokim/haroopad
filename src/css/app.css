@@ -7,6 +7,11 @@ body {
   -webkit-user-select: none;
 }
 
+form {
+  margin: 0;
+  padding: 0;
+}
+
 /* -----------------------------------------
    custom scroll
 ----------------------------------------- */
@@ -87,4 +92,10 @@ body {
 
 .CodeMirror .cm-em {
   font-style: normal;
+}
+
+/* email */
+#send-email-dialog .progress {
+  height: 10px;
+  margin-bottom: 0;
 }
