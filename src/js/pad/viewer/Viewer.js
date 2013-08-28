@@ -38,13 +38,12 @@ define([
 			setTitle();
 		}
 
-		setTimeout(function() {
-			StyleMaker.generateInlineStyle();
-		}, 500);
-
 		/* change editor theme */
 		function changeTheme(value) {
 			_viewer.setViewStyle(value);
+			setTimeout(function() {
+				StyleMaker.generateInlineStyle();
+			}, 500);
 		}
 		
 		/* change syntax highlight theme */
