@@ -5,7 +5,7 @@ Issue Number     | Description
 ----------------:|-----------------------------------------------
 **New Features** |
 #174             | ==Added== Outlie View
-#177, #130       | ==Added== Custom Theme based on CSS & SASS
+#177, #130       | ==Added== Custom Theme based on CSS
 #159, #143       | ==Added== Link application for markdown doc on Linux
 **Bugs**         |
 #168             | Fixed Favicon when pressing Alt+Tab

@@ -1,18 +1,10 @@
 # Custom Theme
 
-0.7 버젼부터 추가된 하루패드의 사용자 테마 기능은 매우 심플하면서 전문가스러움을 한꺼번에 추가되었다.
+0.7 버젼부터 추가된 하루패드의 사용자 테마 기능은 매우 심플 개발되었다.
 
 * CSS
-* SASS(sass-lang.com)
 
 CSS 는 일반적으로 HTML과 함께 쓰이는 문서 스타일을 지정하기 위한 언어로 하루패드의 모든 테마들도 모두 CSS 로 정의하고 있다.
-
-SASS 는 좀더 프로그램적인 CSS 를 위한 스크립팅 언어로 중간에 인터프리터에 의해서 결과는 CSS 로 반환됩니다. 
-
-쉽게는 변수를 사용하거나 재 사용이 가능한 스타일등 다양한 구문을 제공해 효과적인 스타일 시트를 작성할 수 있게 합니다.
-
-> Sass (Syntactically Awesome Stylesheets) is a stylesheet language initially designed by Hampton Catlin and developed by Nathan Weizenbaum.[1][2] After its initial versions, Nathan Weizenbaum and Chris Eppstein have continued to extend Sass with SassScript, a simple scripting language used in Sass files.
-> <small>- wikipedia</small>
 
 ## 하루패드 테마 작성
 
