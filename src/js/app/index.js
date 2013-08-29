@@ -87,9 +87,10 @@ requirejs([
       });
     })
     
-  
-    var file, os = getPlatformName();
+    var os = getPlatformName();
     gui.App.on('open', function(cmdline) {
+      var file;
+
       switch(os) {
         case 'windows':
           //"z:\Works\haroopad\" --original-process-start-time=1302223754723848
@@ -118,7 +119,8 @@ requirejs([
 
     //open file with commend line
     if (gui.App.argv.length > 0) {
-
+      var file;
+      
       switch(os) {
         case 'windows':
           file = gui.App.argv[0];
