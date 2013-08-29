@@ -92,4 +92,4 @@ requirejs([
     } else {
       WindowMgr.open();
     }
-});}
+});
