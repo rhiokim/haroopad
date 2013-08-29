@@ -36,14 +36,9 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 * Vim Key-binding
 * Export to PDF, HTML
 * Auto Save & Restore
-<<<<<<< HEAD
-* Colum(Single, Two and Three) Layout View
-* Tab to Spaces for Indentation
-=======
 * Document state information
 * Tab or Spaces for Indentation
 * Colum(Single, Two and Three) Layout View
->>>>>>> release/v0.6.1
 
 ### Upcoming features
 

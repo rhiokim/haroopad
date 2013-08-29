@@ -123,4 +123,4 @@ requirejs([
     } else {
       WindowMgr.open();
     }
-});}
+});
