@@ -93,10 +93,15 @@ requirejs([
 
       switch(os) {
         case 'windows':
-          cmdline = cmdline.split('"');
-          cmdline.pop();
+          //"z:\Works\haroopad\" --original-process-start-time=1302223754723848
+          //"z:\Works\haroopad\" --original-process-start-time=1302223754723848 "z:\Works\filename.ext"
           
-          file = cmdline[cmdline.length-1];
+          if (cmdline.split(' ') >= 3) {
+            cmdline = cmdline.split('"');
+            cmdline.pop();
+            
+            file = cmdline[cmdline.length-1];
+          }
         break;
         case 'mac':
           file = cmdline;
@@ -118,4 +123,4 @@ requirejs([
     } else {
       WindowMgr.open();
     }
-});
+});}
