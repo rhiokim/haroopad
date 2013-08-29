@@ -11,7 +11,7 @@ And then support Windows, Linux, the Mac OS, you get the experience of editing t
 ### Main features
 
 * Custom Theme
-  - Style based on CSS & SASS(sass-lang.com)
+  - Style based on CSS
 * Outline View
 * Supports cross platform
   - Window
