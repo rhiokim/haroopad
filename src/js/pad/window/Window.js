@@ -253,4 +253,12 @@ define([
 	HotKey('defmod-shift-s', function() {
 		window.ee.emit('menu.file.save.as');
 	});
+
+	HotKey('defmod-w', function() {
+		nw.emit('close');
+	});
+
+	HotKey('defmod-f4', function() {
+		nw.emit('close');
+	});
 });
