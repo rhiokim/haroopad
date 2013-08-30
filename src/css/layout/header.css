@@ -1,0 +1,27 @@
+header{
+   display: none;
+  /*top: -31px !important;*/
+}
+
+header .btn-small [class^="icon-"] {
+  font-size: 14px;
+	min-height: 26px;
+}
+header .btn-toolbar {
+	margin: -1px 0 0;
+}
+header .btn-group {
+	margin-top: 1px;
+}
+
+header .btn-group + .btn-group {
+	margin-left: 5px;
+}
+
+.navbar-fixed-top button {
+  padding: 2px 5px !important;
+}
+.navbar-fixed-top .navbar-inner {
+  min-height: 25px;
+  magin-bottom: 2px;
+}

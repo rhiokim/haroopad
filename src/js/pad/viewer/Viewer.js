@@ -1,15 +1,16 @@
 define([
-		'store'
-	], 
-	function(store) {
+		'store',
+		'keyboard'
+	],
+	function(store, HotKey) {
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
 		var content = '',
 			options;
 
 		var gui = require('nw.gui'),
-				clipboard = gui.Clipboard.get();
-		
+			clipboard = gui.Clipboard.get();
+
 		var viewerConfig = store.get('Viewer') || {};
 		var codeConfig = store.get('Code') || {};
 
@@ -27,14 +28,18 @@ define([
 		window.parent.ee.on('preferences.code.theme', function(value) {
 			_viewer.setCodeStyle(value);
 		});
-		
+
 		window.parent.ee.on('preferences.viewer.clickableLink', function(value) {
 			viewerConfig.clickableLink = value;
 			// value ? viewer.allowLink() : viewer.blockLink() ;
 		});
-		
+
 		window.ee.on('print.html', function(value) {
 			_viewer.print();
+		});
+
+		window.ee.on('change.column', function(count) {
+			_viewer.setColumn(count);
 		});
 
 		/* change markdown event handler */
@@ -44,24 +49,24 @@ define([
 		window.ee.on('editor.scroll', function(top, per) {
 			_viewer.scrollTop(top * 100 / per);
 		});
-		
+
 		/**
 		 * delegate to parent window key mouse down event
 		 */
 		_viewer.addEventListener('keydown', function(e) {
 
-	    var evt = document.createEvent("Events");
-		    evt.initEvent("keydown", true, true);
+			var evt = document.createEvent("Events");
+			evt.initEvent("keydown", true, true);
 
-		    evt.view = e.view;
-		    evt.altKey = e.altKey;
-		    evt.ctrlKey = e.ctrlKey;
-		    evt.shiftKey = e.shiftKey;
-		    evt.metaKey = e.metaKey;
-		    evt.keyCode = e.keyCode;
-		    evt.charCode = e.charCode;
+			evt.view = e.view;
+			evt.altKey = e.altKey;
+			evt.ctrlKey = e.ctrlKey;
+			evt.shiftKey = e.shiftKey;
+			evt.metaKey = e.metaKey;
+			evt.keyCode = e.keyCode;
+			evt.charCode = e.charCode;
 
-		    window.parent.dispatchEvent(evt);
+			window.parent.dispatchEvent(evt);
 
 		}, false);
 
@@ -77,14 +82,21 @@ define([
 			clipboard.set(content, 'text');
 		});
 
-		_viewer.onload = function() {
-		}
+		HotKey('defmod-alt-c', function() {
+			window.ee.emit('action.copy.html');
+		});
+
+		_viewer.onload = function() {}
 
 		//linkable
 		_viewer.ee.on('link', function(href) {
 			if (viewerConfig.clickableLink) {
-    		gui.Shell.openExternal(href);
+				gui.Shell.openExternal(href);
 			}
+		});
+
+		_viewer.ee.on('dom', function(dom) {
+			window.ee.emit('dom', dom);
 		});
 
 		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');
@@ -99,7 +111,7 @@ define([
 			update: update,
 
 			/**
-			 * for html exporting 
+			 * for html exporting
 			 * @return {[type]} [description]
 			 */
 			getContentDocument: function() {

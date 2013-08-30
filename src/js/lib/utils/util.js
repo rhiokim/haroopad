@@ -55,16 +55,3 @@ function getDocsPath() {
 
 	return path.join(getExecPath(), 'docs', locale);
 }
-
-function updateGoogleAnalytics() {
-	var iframe = document.getElementById('__google');
-
-	if (!iframe) {
-		iframe = document.createElement('iframe');
-		iframe.id = '__google';
-	}
-
-	iframe.src = 'http://pad.haroopress.com/assets/google_active_user.html';
-
-	document.body.appendChild(iframe);
-}

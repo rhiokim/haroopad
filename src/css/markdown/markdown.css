@@ -3,7 +3,6 @@
  */
 .markdown {
   padding: 20px;
-  font-size: 0.9em;
 }
 .markdown a {
   text-decoration: none;
@@ -63,7 +62,7 @@
 }
 .markdown p {
   margin: 1em 0;
-  line-height: 1.6em;
+  word-wrap: break-word;
 }
 .markdown ol {
   list-style-type: decimal;
@@ -140,4 +139,20 @@
 }
 .markdown table tr td > :last-child {
   margin-bottom: 0;
+}
+.markdown {
+  /* custom rule for haroopad */
+
+}
+.markdown em.underline {
+  font-style: normal;
+  text-decoration: underline;
+}
+.markdown strong.highlight {
+  font-style: normal;
+  background-color: #fdffb6;
+  -webkit-box-shadow: #fdffb6 0 0 5px;
+  -moz-box-shadow: #fdffb6 0 0 5px;
+  box-shadow: #fdffb6 0 0 5px;
+  font-weight: normal;
 }
