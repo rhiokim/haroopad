@@ -24,7 +24,7 @@
 
 .CodeMirror-dialog-bottom {
   border-top: 1px solid #eee;
-  bottom: 0;
+  bottom: 21px;
 }
 
 .CodeMirror-dialog input {

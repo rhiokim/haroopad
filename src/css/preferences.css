@@ -1,7 +1,20 @@
+html, body {
+	/*height: 100%;*/
+	margin: 0 auto;
+	padding: 0;
+}
 body {
 	margin-top: 10px;
-  -webkit-user-select: none;
   user-select: none;
+  -webkit-user-select: none;
+}
+
+hr {
+	margin: 10px 0;
+}
+
+.nav {
+	margin-bottom: 10px;
 }
 
 .select2-search {
@@ -20,7 +33,24 @@ body {
 	margin-bottom: -3px;
 }
 
-#about-tab hr {
-	margin-top: 10px;
-	margin-bottom: 10px;
+.tab-content {
+	overflow: visible;
+}
+
+.dropdown-menu {
+	padding: 6px 0;
+	min-width: 100px;
+}
+.dropdown-menu li > a {
+	padding: 0 10px 0 24px;
+}
+.dropdown-menu li > a.active i {
+	display: block;
+}
+.dropdown-menu li > a i {
+	display: none;
+}
+
+label.checkbox {
+	margin-bottom: 0;
 }
