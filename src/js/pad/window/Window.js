@@ -261,4 +261,8 @@ define([
 	HotKey('defmod-f4', function() {
 		nw.emit('close');
 	});
+
+	
+	window.ondragover = function(e) { e.preventDefault(); return false };
+	window.ondrop = function(e) { e.preventDefault(); return false };
 });
