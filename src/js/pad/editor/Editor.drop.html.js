@@ -9,7 +9,7 @@ define([], function() {
 		hr_char:    "-",      // hr style
 		indnt_str:  "    ",   // indentation string
 		bold_char:  "*",      // char used for strong
-		emph_char:  "_",      // char used for em
+		emph_char:  "*",      // char used for em
 		gfm_del:    true,     // ~~strikeout~~ for <del>strikeout</del>
 		gfm_tbls:   true,     // markdown-extra tables
 		tbl_edges:  false,    // show side edges on tables
