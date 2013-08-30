@@ -21,6 +21,10 @@ img.plugin {
   border-radius: 3px;
 }
 
+iframe {
+  border: 0;
+}
+
 
 /**
  * spinner

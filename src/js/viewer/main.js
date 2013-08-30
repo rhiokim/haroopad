@@ -222,10 +222,10 @@ function update(html) {
     _code = _codes[i];
 
     origin = code.parentElement.outerHTML;
-    code.setAttribute('origin', origin);
+    code.setAttribute('data-origin', origin);
 
     if (_code) {
-      _origin = _code.parentElement.getAttribute('origin');
+      _origin = _code.parentElement.getAttribute('data-origin');
 
       if (origin != _origin) {
         _lazySyntaxHighlight(code);
@@ -259,7 +259,7 @@ function update(html) {
 
       //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
       // origin = $(_frag).attr('origin');
-      _origin = _frag.getAttribute('origin');
+      _origin = _frag.getAttribute('data-origin');
 
       //origin 문자열이 없는 경우
       if (!_origin) {
@@ -272,7 +272,7 @@ function update(html) {
 
         }
       } else {
-        origin = frag.getAttribute('origin');
+        origin = frag.getAttribute('data-origin');
 
         //origin 문자열이 있는 경우
         if (origin != _origin) {

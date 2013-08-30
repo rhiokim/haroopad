@@ -14,7 +14,7 @@ define(function() {
 	//     .replace(/'/g, '&#39;');
 	// }
 
-	return function(args) {
+	return function(name, args) {
 		//refs https://developers.google.com/maps/documentation/staticmaps/index
 		args = args.split(' ');
 		key = args[0];
@@ -32,8 +32,11 @@ define(function() {
 			sensor: true
 		};
 
+		var origin = '['+ name +':'+ args +']';
+			origin = escape(origin);
+
 		var real = qs.stringify(o);
-		return '<img src="http://maps.googleapis.com/maps/api/staticmap?'+ real +'" origin="'+ real +'"/>';
+		return '<img data-origin="'+ origin +'" src="http://maps.googleapis.com/maps/api/staticmap?'+ real +'"/>';
 	}
 
 });

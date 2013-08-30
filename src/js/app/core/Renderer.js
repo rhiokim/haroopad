@@ -13,7 +13,7 @@ define([
   				return '<p>['+ name +':'+ args +']</p>';
 			}
 			
-			return plugin(args);
+			return plugin(name, args);
 		}
 
 		return renderer;

@@ -51,6 +51,27 @@ define(function() {
 					+ (file ? ' '+ file : '')
 					+']';
 		},
+		'jsfiddle.net': function(str) {
+			var file, key = url('path', str);
+			var frag = key.split('/');
+
+			key = frag.length > 2 ? frag[2] : frag[1];
+
+			return '[jsfiddle:'+ key +']';
+		},
+		'codepen.io': function(str) {
+			var file, user, key = url('path', str);
+			var frag = key.split('/');
+
+			user = frag[1];
+			key = frag[3];
+			// key = frag.length > 2 ? frag[2] : frag[1];
+
+			return '[codepen:'
+					+ key 
+					+ (user ? ' '+ user : '')
+					+']';
+		},
 		'maps.google.com': function(str) {
 			var center = url('?q', str);
 			var zoom = url('?z', str);

@@ -19,8 +19,8 @@ define([
     var lexer = new marked.Lexer(defaults);
 
     var customRules = {
-    	// plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(:] *\n*/
-    	plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(] */
+        plugin: /^ *\[([^\:\]]+):([^\]]+)\] *\n*/
+        // plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(] */
     }
 
 	function merge(obj) {
