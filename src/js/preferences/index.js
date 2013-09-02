@@ -35,11 +35,12 @@ requirejs([
     'tabs/General',
     'tabs/Editor',
     'tabs/Viewer',
+    'tabs/Custom',
     'tabs/Code',
     'tabs/Markdown',
     'tabs/Helper',
     'tabs/About'
-  ], function(HotKey, General, Editor, Viewer, Code, Markdown, Helper, About) {
+  ], function(HotKey, General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
 
     $('.switch').bootstrapSwitch();
     

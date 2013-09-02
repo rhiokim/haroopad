@@ -4,7 +4,7 @@ define([
 
 		var humanize = require('humanize');
 
-	var Status = Backbone.View.extend({
+	var State = Backbone.View.extend({
 		el: 'footer .navbar-inner',
 
 		events: {
@@ -54,6 +54,11 @@ define([
 			// dom.page = humanize.numberFormat(dom.page, 1);
 
 			for(prop in dom) {
+
+				if (dom[prop] == 0) {
+					continue;
+				}
+
 				key += prop +'<br>';
 				val += '<b>'+ dom[prop] +'</b><br/>';
 			}
@@ -76,5 +81,5 @@ define([
 		}
 	});
 
-	return new Status;
+	return new State;
 });

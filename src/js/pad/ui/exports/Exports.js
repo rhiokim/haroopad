@@ -30,6 +30,8 @@ define([
 
 			_.each(contentDocument.styleSheets, function(item) {
 				href = item.href;
+				href = href.split('?')[0];
+				href = decodeURIComponent(href);
 
 				if (process.platform !== 'win32') {
 					href = href.replace('file://', '');
