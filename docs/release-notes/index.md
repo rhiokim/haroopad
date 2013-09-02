@@ -7,11 +7,13 @@ Issue Number     | Description
 #174             | ==Added== Outlie View
 #177, #130       | ==Added== Custom Theme based on CSS
 #159, #143       | ==Added== Link application for markdown doc on Linux
+#180             | ==Added== Sending email when keypress enter in dialog
 **Bugs**         |
 #168             | Fixed Favicon when pressing Alt+Tab
 #160             | Fixed Allow multiple instance of Haroopad to open (Win, Linux)
 **Enhancements** |
 #175             | Enhanced current state document (remove 0 state)
+#182             | Enhanced Sending email when keypress enter
 
 ##### Github Issue tracker
 
