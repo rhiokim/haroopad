@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html> 
 <head>
   <meta charset="utf-8" />
   <title>Haroopad - The next document processor</title>
@@ -8,9 +8,165 @@
   <link rel="stylesheet" href="css/haroopad.min.css">
 </head>
 <body>
-  
-  <div id="editor"><textarea id="code" name="code"></textarea></div>
-  <div id="haroo"><iframe src="viewer.html" onload="start()"></iframe></div>
+  <header id="editControls" class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div style="margin-bottom:2px;">
+        <div class="btn-group">
+          <a class="btn" data-role="undo" href="#"><i class="icon-undo"></i></a>
+          <a class="btn" data-role="redo" href="#"><i class="icon-repeat"></i></a>
+        </div>
+        <!-- <div class='btn-group'>
+          <a class='btn' data-role='cut' href='#'><i class='icon-cut'></i></a>
+          <a class='btn' data-role='copy' href='#'><i class='icon-copy'></i></a>
+          <a class='btn' data-role='paste' href='#'><i class='icon-paste'></i></a>
+        </div> -->
+        <div class="btn-group">
+          <a class="btn" data-role="bold" href="#"><b>Bold</b></a>
+          <a class="btn" data-role="italic" href="#"><em>Italic</em></a>
+          <a class="btn" data-role="underline" href="#"><u><b>U</b></u></a>
+          <a class="btn" data-role="strikeThrough" href="#"><strike>abc</strike></a>
+        </div>
+        <div class="btn-group">
+          <a class="btn" data-role="justifyLeft" href="#"><i class="icon-align-left"></i></a>
+          <a class="btn" data-role="justifyCenter" href="#"><i class="icon-align-center"></i></a>
+          <a class="btn" data-role="justifyRight" href="#"><i class="icon-align-right"></i></a>
+          <a class="btn" data-role="justifyFull" href="#"><i class="icon-align-justify"></i></a>
+        </div>
+        <div class="btn-group">
+          <a class="btn" data-role="indent" href="#"><i class="icon-indent-right"></i></a>
+          <a class="btn" data-role="outdent" href="#"><i class="icon-indent-left"></i></a>
+        </div>
+        <div class="btn-group">
+          <a class="btn" data-role="insertUnorderedList" href="#"><i class="icon-list-ul"></i></a>
+          <a class="btn" data-role="insertOrderedList" href="#"><i class="icon-list-ol"></i></a>
+        </div>
+        <div class="btn-group">
+          <a class="btn" data-role="h1" href="#">h<sup>1</sup></a>
+          <a class="btn" data-role="h2" href="#">h<sup>2</sup></a>
+          <a class="btn" data-role="p" href="#">p</a>
+        </div>
+        <div class="btn-group">
+          <a class="btn" data-role="subscript" href="#"><i class="icon-subscript"></i></a>
+          <a class="btn" data-role="superscript" href="#"><i class="icon-superscript"></i></a>
+        </div>
+        <div class="btn-group pull-right">
+          <a class="btn" data-role="config" href="#"><i class="icon-tasks"></i></a>
+        </div>
+
+      </div>
+
+      <ul id="gn-menu" class="gn-menu-main">
+        <nav class="gn-menu-wrapper">
+          <div class="gn-scroller">
+            <ul class="gn-menu">
+              <li>
+                <a class="gn-icon gn-icon-download">Downloads</a>
+                <ul class="gn-submenu">
+                  <li><a class="gn-icon gn-icon-illustrator">Vector Illustrations</a></li>
+                  <li><a class="gn-icon gn-icon-photoshop">Photoshop files</a></li>
+                </ul>
+              </li>
+              <li><a class="gn-icon gn-icon-cog">Settings</a></li>
+              <li><a class="gn-icon gn-icon-help">Help</a></li>
+              <li>
+                <a class="gn-icon gn-icon-archive">Archives</a>
+                <ul class="gn-submenu">
+                  <li><a class="gn-icon gn-icon-article">Articles</a></li>
+                  <li><a class="gn-icon gn-icon-pictures">Images</a></li>
+                  <li><a class="gn-icon gn-icon-videos">Videos</a></li>
+                  <li><a class="gn-icon"></a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /gn-scroller -->
+        </nav>
+      </ul>
+    </div>
+  </header>
+
+  <section id="main">
+    <article class="panel">
+      <section id="editor">
+        <textarea id="code" name="code"></textarea>
+      </section>
+      <section id="haroo">
+        <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
+      </section>
+    </article>
+    <nav>bbb</nav>
+    <aside>
+    </aside>
+  </section>
+
+  <footer class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="navbar-inner">
+      <div class="pull-left">
+        <span id="lineCount">lines: <span>0</span></span> 
+        <span id="wordCount">words: <span>0</span></span>
+        <span id="cursorActivity">(<span>0 : 0</span>)</span>
+        <span id="elementsInfo"><i class="icon-info-sign icon-white"></i></span>
+      </div>
+
+      <!-- <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button> -->
+      <div id="documentConfig" class="btn-group dropup pull-right">
+        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-cog icon-white"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i>Show Document Outline</a></li>
+        </ul>
+      </div><div id="columnCount" class="btn-group dropup pull-right">
+        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+          Columns
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="0" href="#" data-column="single" class="active"><i class="icon-ok"></i>Single</a></li>
+          <li class="divider"></li>
+          <li><a tabindex="1" href="#" data-column="two"><i class="icon-ok"></i>Column: 2</a></li>
+          <li><a tabindex="2" href="#" data-column="three"><i class="icon-ok"></i>Column: 3</a></li>
+        </ul>
+      </div>
+      <div id="indentation" class="btn-group dropup pull-right">
+        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+          Spaces
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="0" href="#"><span class="label label-warning">Experimental</span></a></li>
+          <li><a tabindex="0" href="#" data-using-tab="true"><i class="icon-ok"></i>Indent Using Tabs</a></li>
+          <li class="divider"></li>
+          <li><a tabindex="1" href="#" data-tab-size="2"><i class="icon-ok"></i>Tab with: 2</a></li>
+          <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i>Tab with: 3</a></li>
+          <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i>Tab with: 4</a></li>
+          <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i>Tab with: 5</a></li>
+          <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i>Tab with: 6</a></li>
+          <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i>Tab with: 7</a></li>
+          <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i>Tab with: 8</a></li>
+          <!-- <li class="divider"></li>
+          <li><a tabindex="8" href="#">Convert indentation to Spaces</a></li>
+          <li><a tabindex="9" href="#">Convert indentation to Tabs</a></li> -->
+        </ul>
+      </div>
+      <div id="shareit" class="btn-group dropup pull-right">
+        <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-share-alt icon-white"></i> share
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="0" href="#" data-service="twitter">Twitter</a></li>
+          <li><a tabindex="1" href="#" data-service="facebook">Facebook</a></li>
+          <li><a tabindex="2" href="#" data-service="google">Google+</a></li>
+          <li><a tabindex="3" href="#" data-service="hackernews">HN Vote</a></li>
+          <li><a tabindex="4" href="#" data-service="digg">Digg</a></li>
+          <li><a tabindex="5" href="#" data-service="linkedin">Linked In</a></li>
+        </ul>
+      </div>
+      <div id="donate-btn" class="btn-group pull-right">
+        <a href="#" class="btn btn-mini btn-danger" data-toggle="popover" data-trigger="click" data-placement="top" data-content="If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>" title="" data-original-title="Donate to help keep development going!" data-html="true"><i class="icon-leaf icon-white"></i> keep development</a>
+      </div>
+    </div>
+  </footer>
 
   <div id="fields">
     <input class="hide" id="openFile" type="file" />

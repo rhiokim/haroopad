@@ -16,7 +16,8 @@ requirejs.config({
   paths: {
     // tpl: '../../tpl',
     vendors: '../vendors',
-    store: '../vendors/store'
+    store: '../vendors/store',
+    keyboard: '../vendors/keymage'
   },
   config: {
     text: {
@@ -30,21 +31,25 @@ requirejs.onError = function (e) {
 };
 
 requirejs([
+    'keyboard',
     'tabs/General',
     'tabs/Editor',
     'tabs/Viewer',
+    'tabs/Custom',
     'tabs/Code',
     'tabs/Markdown',
     'tabs/Helper',
     'tabs/About'
-  ], function(General, Editor, Viewer, Code, Markdown, Helper, About) {
+  ], function(HotKey, General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
 
     $('.switch').bootstrapSwitch();
-
-    window.focus();
-
-    win.on('context.preferences', function() {
+    
+    HotKey('esc', function() {
+      win.close();
     });
-    win.on('preferences.show', function() {
-    });
+
+    win.show();
+    win.focus();
+
+    global._gaq.push('haroopad.preferences', 'init', '');
 });

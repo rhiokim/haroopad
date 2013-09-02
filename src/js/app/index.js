@@ -43,8 +43,9 @@ requirejs([
     'utils/UpdateNotifier'
   ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
 
-    var gui = require('nw.gui'),
-        win = gui.Window.get();
+    global._gaq.init(function(_gaq) {
+      _gaq.push('haroopad', 'command', 'exec');
+    });
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
@@ -55,9 +56,53 @@ requirejs([
     //   cb(html);
     // });
     
+    var os = getPlatformName();
+    gui.App.on('open', function(cmdline) {
+      var file;
+
+      switch(os) {
+        case 'windows':
+          //"z:\Works\haroopad\" --original-process-start-time=1302223754723848
+          //"z:\Works\haroopad\" --original-process-start-time=1302223754723848 "z:\Works\filename.ext"
+          
+          if (cmdline.split('"').length >= 5) {
+            cmdline = cmdline.split('"');
+            cmdline.pop();
+            
+            file = cmdline.pop();
+          }
+        break;
+        case 'mac':
+          file = cmdline;
+        break;
+        case 'linux':
+          cmdline = cmdline.split(' ');
+          cmdline.shift();
+
+          file = cmdline.join(' ');
+        break;
+      }
+      
+      WindowMgr.open(file);
+    });
+
     //open file with commend line
     if (gui.App.argv.length > 0) {
-      WindowMgr.open(gui.App.argv[0]);
+      var file;
+      
+      switch(os) {
+        case 'windows':
+          file = gui.App.argv[0];
+        break;
+        case 'mac':
+          file = gui.App.argv[0];
+        break;
+        case 'linux':
+          file = gui.App.fullArgv.join(' ');  //it's bug
+        break;
+      }
+
+      WindowMgr.open(file);
     } else {
       WindowMgr.open();
     }

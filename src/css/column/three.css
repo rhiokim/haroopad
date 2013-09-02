@@ -1,0 +1,18 @@
+body {
+	-webkit-column-count: 3;
+	-webkit-column-gap: 40px;
+	-webkit-column-rule: 1px dashed #343434;
+	-webkit-column-fill: auto;
+}
+
+h1, h2 {
+	-webkit-column-span: all;
+}
+
+table {
+	-webkit-column-break-inside: avoid;
+}
+
+p, li {
+	word-break: break-all;
+}

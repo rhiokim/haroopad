@@ -29,8 +29,9 @@ define([
   });
 
   window.ee.on('menu.file.recents', function(file) {
-    var file = File.open(file);
-    WindowMgr.open(file);
+    var fileObj = File.open(file);
+    Recents.add(file);
+    WindowMgr.open(fileObj);
   });
 
   window.ee.on('menu.file.recents.clear', function() {
@@ -84,6 +85,10 @@ define([
 
   window.ee.on('menu.view.minus5.width', function() {
     WindowMgr.actived.window.ee.emit('view.minus5.width');
+  });
+
+  window.ee.on('menu.view.doc.outline', function() {
+    WindowMgr.actived.window.ee.emit('menu.view.doc.outline');
   });
 
   window.ee.on('menu.view.fullscreen', function() {

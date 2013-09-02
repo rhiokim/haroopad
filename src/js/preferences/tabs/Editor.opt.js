@@ -16,7 +16,10 @@ define([
 				displayLineNumber: true,
 				vimKeyBinding: false,
 				insertFourSpace: false,
-				autoPairCharacters: true
+				autoPairCharacters: true,
+				tabSize: 4,
+				indentUnit: 4,
+				indentWithTabs: false
 			},
 
 			initialize: function() {

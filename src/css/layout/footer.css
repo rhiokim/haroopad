@@ -1,0 +1,92 @@
+
+footer {
+   display: block;
+  font-size: .87em;
+}
+
+footer .btn {
+  margin-top: 0 !important;
+}
+footer .btn-group {
+  /*margin-top: 0 !important;*/
+  /*padding-top: 0 !important;*/
+  margin: 0 1px !important;
+}
+
+footer #indentation, footer #columnCount {
+  margin-right: 2px;
+}
+
+footer .navbar .btn#preference {
+  padding: 2px 5px;
+}
+
+.navbar-fixed-bottom {
+  bottom: -8px !important;
+}
+
+footer .navbar-inner>div {
+  margin-top: 2px;
+}
+
+footer .dropdown-menu {
+	min-width: 130px;
+	padding: 0 0 3px 0;
+}
+
+footer .dropdown-menu .divider {
+	margin: 1px 0;
+}
+
+footer .dropdown-menu li > a {
+	padding: 0 10px 0 20px;
+}
+
+footer .dropdown-menu li > a i {
+	left: 3px;
+}
+
+footer #lineCount,
+footer #wordCount,
+footer #cursorActivity {
+  margin-right: 8px;
+  color: #fff;
+}
+
+footer #elementsInfo {
+  margin-top: 3px;
+  color: #fff;
+}
+footer #elementsInfo div.popover {
+  color: #000;
+}
+
+footer div.popover hr {
+  margin: 5px 0;
+}
+footer #elementsInfo .popover-content {
+  padding: 5px 10px;
+}
+footer #elementsInfo .popover-title {
+  padding: 4px 10px;
+  font-size: 13px;
+}
+footer #elementsInfo i {
+  margin-top: 0;
+}
+
+footer #documentConfig .dropdown-menu a.active i,
+footer #indentation .dropdown-menu a.active i,
+footer #columnCount .dropdown-menu a.active i {
+  display: block;
+}
+
+footer #documentConfig .dropdown-menu a i,
+footer #indentation .dropdown-menu a i,
+footer #columnCount .dropdown-menu a i {
+  display: none;
+}
+
+footer #donate-btn .popover {
+  min-width: 290px;
+}

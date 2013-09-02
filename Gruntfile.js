@@ -53,13 +53,19 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/vibrant-ink.css',
             '<%= vendors %>/CodeMirror/theme/xq-dark.css',
             '<%= vendors %>/CodeMirror/theme/xq-light.css',
-            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.css',
-            'src/css/app.css'
+            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.css'
           ],
           "build/haroopad/css/haroopad.min.css": [
             'src/css/bootstrap.css',
             'src/css/todc-bootstrap.css',
-            'src/css/bootstrap-modal.css'
+            'src/css/bootstrap-modal.css',
+            'src/css/layout/basic.css',
+            'src/css/layout/header.css',
+            'src/css/layout/footer.css',
+            'src/css/layout/l-side.css',
+            'src/css/layout/r-side.css',
+            'src/css/layout/aside.css',
+            'src/css/app.css'
           ],
           "build/haroopad/css/viewer.min.css": [
             'src/css/viewer.css'
@@ -69,7 +75,7 @@ module.exports = function(grunt) {
             'src/css/todc-bootstrap.css',
             'src/css/bootstrapSwitch.css',
             'src/css/select2.css',
-            'src/css/font-awesome.min.css',
+            // 'src/css/font-awesome.min.css',
             'src/css/preferences.css'
           ]
         }
@@ -101,8 +107,10 @@ module.exports = function(grunt) {
         files: {
           'build/app.modules.js': [
             'src/js/app/before.app.js',
-            // 'src/js/lib/logger.js',
+            'src/js/lib/logger.js',
+            // 'src/js/app/app.common.js',
             'src/js/lib/utils/util.js',
+            'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
             'build/menu.concat.js',
             'build/app.r.js',
@@ -219,6 +227,7 @@ module.exports = function(grunt) {
           'build/viewer.js': [
             'src/js/viewer/disable.debug.js',
             'src/js/viewer/DynamicContents.js',
+            'src/js/viewer/dragdrop.js',
             'src/js/viewer/main.js'
           ]
         }
@@ -252,6 +261,8 @@ module.exports = function(grunt) {
           // { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'build/haroopad/node_modules/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
+          { expand: true, cwd: 'src/css/column/', src: [ '**' ], dest: 'build/haroopad/css/column/' },
+          { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad/css/viewer-toc/' },
           { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
           { src: 'src/index.bin.html', dest: 'build/haroopad/index.html' },
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
@@ -293,7 +304,11 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/node_modules/ncp/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/ncp/lib/' },
 
           { src: 'src/node_modules/rimraf/package.json', dest: 'build/haroopad/node_modules/rimraf/package.json' },
-          { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' }
+          { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' },
+
+          { src: 'src/node_modules/humanize/package.json', dest: 'build/haroopad/node_modules/humanize/package.json' },
+          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' }
+
         ]
       },
 
@@ -307,7 +322,9 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/tpl/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/tpl/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/code/' },
           { expand: true, cwd: 'src/css/viewer/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/viewer/' },
+          { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/viewer-toc/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/markdown/' },
+          { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/code/' },
           { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
           { src: 'src/pad.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/pad.html' },
           { src: 'src/viewer.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/viewer.html' },
@@ -335,6 +352,14 @@ module.exports = function(grunt) {
         files: [
           { expand: true, cwd: 'lib/markdown-css/build/', src: [ '**' ], dest: 'src/css/markdown' }
         ]
+      },
+
+      mdsass: {
+        files: [
+          { expand: true, cwd: 'lib/node-sass/', src: [ 'package.json', 'sass.js' ], dest: 'src/node_modules/node-sass' },
+          { src: 'lib/node-sass/build/Release/binding.node', dest: 'src/node_modules/node-sass/build/Release/binding.node'},
+          { expand: true, cwd: 'lib/node-sass/lib/', src: [ '**' ], dest: 'src/node_modules/node-sass/lib/' }
+        ]
       }
     },
 
@@ -357,7 +382,7 @@ module.exports = function(grunt) {
       },
 
       deploy: {
-        command: 'cp -R ./build/haroopad.app /Applications'
+        command: 'rm -rf /Applications/haroopad.app; cp -R ./build/haroopad.app /Applications'
       }
     },
 
