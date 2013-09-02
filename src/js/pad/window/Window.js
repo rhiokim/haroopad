@@ -23,6 +23,8 @@ define([
 	}
 
 	function close() {
+		nw.emit('destory');
+		
 		win.hide();
 
 		if (!win.isFullscreen) {
@@ -251,4 +253,16 @@ define([
 	HotKey('defmod-shift-s', function() {
 		window.ee.emit('menu.file.save.as');
 	});
+
+	HotKey('defmod-w', function() {
+		nw.emit('close');
+	});
+
+	HotKey('defmod-f4', function() {
+		nw.emit('close');
+	});
+
+	
+	window.ondragover = function(e) { e.preventDefault(); return false };
+	window.ondrop = function(e) { e.preventDefault(); return false };
 });

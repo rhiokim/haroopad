@@ -10,6 +10,9 @@
 
 ### 주요기능
 
+* 사용자 스타일 ==(신규기능)==
+  - CSS(Cascading Style Sheet)을 기반으로 한 손쉬운 테마제작
+* 개요보기 기능 ==(신규기능)==
 * 크로스 플랫폼을 지원
   - Window
   - Mac OS X
@@ -25,7 +28,7 @@
 	- CodeMirror 기반
 * 라이브 뷰 테마를 지원
 	- less 를 기반으로 한 7 가지의 테마
-	- [markdown-css](https//github.com/rhiokim/markdown-css) 프로젝트 기반
+	- [markdown-css](https://github.com/rhiokim/markdown-css) 프로젝트 기반
 * 코드 문법 하이라이팅 스타일을 지원
 	- 52 가지의 언어에 대한 문법 강조를 지원
 	- Solaraized, Tomorrow 등 26 가지의 스타일
@@ -33,6 +36,8 @@
 * Vim 키 바인딩을 지원
 * PDF, HTML 출력 지원
 * 자동 임시저장 및 복원
+* 들여쓰기 탭과 스페이스 지원
+* 2,3 단 컬럼 레이아웃 지원
 
 ### 0.5 버젼에 출시될 기능
 
