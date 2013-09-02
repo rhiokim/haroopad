@@ -70,7 +70,8 @@ define([
 				'click a': 'clickHandler',
 				'submit form': 'postHandler',
 				'click ._close': 'closeHandler',
-				'keypress input[name=to]': 'keypressHandler'
+				'keypress input[name=to]': 'keypressHandler',
+				'keypress form': 'submitHandler'
 			},
 
 			initialize: function() {
@@ -107,6 +108,13 @@ define([
 				var href = $(e.target).attr('href');
 				e.preventDefault();
 				shell.openExternal(href);
+			},
+
+			submitHandler: function(e) {
+				if (e.keyCode === 13) {
+				this.$('button[type=submit]').trigger('click');
+				e.preventDefault();
+				}
 			},
 
 			postHandler: function(e) {
