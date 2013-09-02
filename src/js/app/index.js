@@ -56,19 +56,20 @@ requirejs([
     //   cb(html);
     // });
     
-  
-    var file, os = getPlatformName();
+    var os = getPlatformName();
     gui.App.on('open', function(cmdline) {
+      var file;
+
       switch(os) {
         case 'windows':
           //"z:\Works\haroopad\" --original-process-start-time=1302223754723848
           //"z:\Works\haroopad\" --original-process-start-time=1302223754723848 "z:\Works\filename.ext"
           
-          if (cmdline.split(' ').length >= 3) {
+          if (cmdline.split('"').length >= 5) {
             cmdline = cmdline.split('"');
             cmdline.pop();
             
-            file = cmdline[cmdline.length-1];
+            file = cmdline.pop();
           }
         break;
         case 'mac':
@@ -87,7 +88,8 @@ requirejs([
 
     //open file with commend line
     if (gui.App.argv.length > 0) {
-
+      var file;
+      
       switch(os) {
         case 'windows':
           file = gui.App.argv[0];

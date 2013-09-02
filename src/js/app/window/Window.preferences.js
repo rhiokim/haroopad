@@ -12,6 +12,7 @@ define([
 	        show: true,
 	        width: 510,
 	        height: 300,
+    			icon: "logo.png",
 	        resizable: false,
 	        position: 'center',
 	        fullscreen: false
