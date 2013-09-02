@@ -1,4 +1,3 @@
-<!--
 ## Haroopad v0.7.0
 
 Issue Number     | Description
@@ -28,7 +27,7 @@ Issue Number     | Description
 > * Linux 32-bit Debian Package: https://www.dropbox.com/s/pgum0b1dirko2lk/haroopad-v0.7.0-i386.deb
 > * Linux 64-bit Binary: https://www.dropbox.com/s/z9qc6e04rm0th0e/haroopad-v0.7.0_amd64.tar.gz
 > * Linux 64-bit Debian Package: https://www.dropbox.com/s/8kopt6ndr4zkkj8/haroopad-v0.7.0_amd64.deb
--->
+
 
 ## Haroopad v0.6.0
 
