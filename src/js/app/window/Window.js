@@ -92,6 +92,10 @@ define([
     WindowMgr.actived.window.ee.emit('view.minus5.width');
   });
 
+  window.ee.on('menu.view.doc.outline', function() {
+    WindowMgr.actived.window.ee.emit('menu.view.doc.outline');
+  });
+
   window.ee.on('menu.view.fullscreen', function() {
     WindowMgr.actived.window.ee.emit('view.fullscreen');
   });

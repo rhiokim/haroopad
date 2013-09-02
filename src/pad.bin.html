@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html> 
 <head>
   <meta charset="utf-8" />
   <title>Haroopad - The next document processor</title>
@@ -108,7 +108,14 @@
       </div>
 
       <!-- <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button> -->
-      <div id="columnCount" class="btn-group dropup pull-right">
+      <div id="documentConfig" class="btn-group dropup pull-right">
+        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-cog icon-white"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i>Show Document Outline</a></li>
+        </ul>
+      </div><div id="columnCount" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
           Columns
           <span class="caret"></span>
