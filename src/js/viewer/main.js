@@ -85,7 +85,7 @@ function showOutline() {
     
   href = 'css/viewer-toc/default.css';
   $('#toc').attr({
-    href: href
+    href: href +'?'+ new Date().getTime()
   });
 }
 
