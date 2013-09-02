@@ -2,6 +2,7 @@ var _options = {
   dirname: '.'
 };
 var viewStyle, codeStyle;
+var contentElements;
 
 window.ee = new EventEmitter();
 
@@ -10,8 +11,21 @@ window.ondragover = function(e) {
   return false;
 };
 window.ondrop = function(e) {
+  var i = 0, file, fArr, ext;
+
+  for (i; i < e.dataTransfer.files.length; ++i) {
+
+    ee.emit('drop', e.dataTransfer.files[i]);
+    // file = e.dataTransfer.files[i].path;
+    // fArr = file.split('.');
+    // ext = fArr[fArr.length-1];
+
+    // if (ext.toLowerCase() === 'css') {
+    //   loadCustom(file);
+    //   $(document.body).addClass('custom');
+    // }
+  }
   e.preventDefault();
-  return false;
 };
 
 function loadCss(url) {
@@ -41,6 +55,14 @@ function setCodeStyle(style) {
   });
 }
 
+function loadCustomCSS(style) {
+  $(document.body).addClass('custom');
+
+  $('#custom').attr({
+    href: style +'?'+ new Date().getTime()
+  });
+}
+
 /**
  * set column layout
  * @param {[type]} count [description]
@@ -53,6 +75,41 @@ function setColumn(count) {
   $('#column').attr({
     href: href
   });
+}
+
+/**
+ * set toc style
+ */
+function showOutline() {
+  var href;
+    
+  href = 'css/viewer-toc/default.css';
+  $('#toc').attr({
+    href: href +'?'+ new Date().getTime()
+  });
+}
+
+function hideOutline() {
+  $('#toc').removeAttr('href');
+}
+
+function showOnlyTOC() {
+  // var elArr = document.body.querySelectorAll(':scope>*');
+  // elArr = Array.prototype.slice.call(elArr, 0);
+  
+  // contentElements = elArr.filter(function(el) {
+  //   return !/^H[1-6]/.test(el.tagName);
+  // });
+
+  // contentElements.forEach(function(el) {
+  //   el.style.display = 'none';
+  // });  
+}
+
+function showAllContent() {alert('all show')
+  contentElements.forEach(function(el) {
+    el.style.display = '';
+  });  
 }
 
 function createTOC() {

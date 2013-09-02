@@ -17,7 +17,9 @@ Shortcut                       | Description
 &#8984;(&#8963;) - &#8679; - S | save as
 &#8984;(&#8963;) - O           | open file
 &#8984;(&#8963;) - ,           | preferences
-&#8984;(&#8963;) - Q           | close window
+&#8984;(&#8963;) - W           | close window
+&#8984;(&#8963;) - F4          | close window
+&#8984;(&#8963;) - Q           | quit haroopad
 
 ##### Window
 Shortcut                       | Description
