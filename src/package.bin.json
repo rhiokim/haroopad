@@ -2,17 +2,14 @@
   "main": "index.html",
   "name": "haroopad",
   "description": "The Next Document processor based on Markdown",
-  "version": "0.4.9",
+  "version": "0.7.0",
   "keywords": [ "markdown", "haroopress", "editor" ],
   "window": {
-    "title": "haroopad",
     "icon": "logo.png",
     "toolbar": false,
     "show": false,
-    "width": 1024,
-    "height": 600,
-    "min_width": 500,
-    "min_height": 400
+    "min_width": 550,
+    "min_height": 250
   },
   "single-instance": true,
   "snapshot": "js/haroopad.bin",

@@ -1,4 +1,6 @@
-define([], function() {
+define([
+		'window/WindowManager'
+	], function(WindowMgr) {
 	var gui = require('nw.gui'),
 		win = gui.Window.get();
 
@@ -10,6 +12,7 @@ define([], function() {
 	        show: true,
 	        width: 510,
 	        height: 300,
+    			icon: "logo.png",
 	        resizable: false,
 	        position: 'center',
 	        fullscreen: false
@@ -18,6 +21,12 @@ define([], function() {
 
 		prefWin.on('close', function() {
 			prefWin.hide();
+			WindowMgr.actived.focus();
+		});
+
+		prefWin.on('loaded', function() {
+			prefWin.focus();
+			prefWin.window.focus();
 		});
 
 		// prefWin.on('loaded', function() {

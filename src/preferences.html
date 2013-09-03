@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8" />
   <title>preferences</title>
@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/todc-bootstrap.css">
   <link rel="stylesheet" href="css/bootstrapSwitch.css">
   <link rel="stylesheet" href="css/select2.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="css/preferences.css">
 
   <script src="js/lib/logger.js"></script>
@@ -28,6 +28,7 @@
       <li><a href="#general-tab" data-toggle="tab">General</a></li>
       <li><a href="#editor-tab" data-toggle="tab">Editor</a></li>
       <li><a href="#viewer-tab" data-toggle="tab">Viewer</a></li>
+      <li><a href="#custom-tab" data-toggle="tab">Custom</a></li>
       <li><a href="#code-tab" data-toggle="tab">Code</a></li>
       <!-- <li><a href="#tab4" data-toggle="tab">Add-ons</a></li>
       <li><a href="#tab5" data-toggle="tab">Export</a></li> -->
@@ -112,6 +113,26 @@
           </div>
           <div class="span9">
             <label class="checkbox">
+              <input type="checkbox" value="" name="indentWithTabs">
+              Indent Using Tab
+
+				      <div class="btn-group dropdown">
+				        <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+				          <i class="icon-share-alt"></i> Spaces
+				          <span class="caret"></span>
+				        </a>
+				        <ul class="dropdown-menu">
+                  <li><a tabindex="1" href="#" data-tab-size="2" class="active"><i class="icon-ok"></i> Tab width: 2</a></li>
+                  <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i> Tab width: 3</a></li>
+                  <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i> Tab width: 4</a></li>
+                  <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i> Tab width: 5</a></li>
+                  <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i> Tab width: 6</a></li>
+                  <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i> Tab width: 7</a></li>
+				          <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i> Tab width: 8</a></li>
+				        </ul>
+				      </div>
+            </label>
+            <label class="checkbox">
               <input type="checkbox" value="" name="displayLineNumber">
               Display line number
             </label>
@@ -120,12 +141,12 @@
               Vim key binding
             </label>
             <label class="checkbox">
-              <input type="checkbox" value="" name="insertFourSpace">
-              Insert 4 spaces insted of one tab (default: 2)
-            </label>
-            <label class="checkbox">
               <input type="checkbox" value="" name="autoPairCharacters" checked="checked">
               Auto pair characters ( [] () "" )
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" value="" name="insertFourSpace" disabled>
+              <del style="font-size: 11px" class="muted">Insert 4 spaces insted of one tab (default: 2)</del>
             </label>
           </div>
         </div>
@@ -136,8 +157,8 @@
           <div class="span3 text-right">
             <strong>Themes :</strong>
           </div>
-          <div class="span9">
-            <select class="select2 span10" name="viewStyle">
+          <div class="span8">
+            <select class="select2 span12" name="viewStyle">
               <option value="clearness">Clearness</option>
               <option value="clearness-dark">Clearness Dark</option>
               <option value="node-dark">Node Dark</option>
@@ -160,6 +181,10 @@
               <input type="checkbox" value="" name="clickableLink">
               Make links clickable in Editor view
             </label>
+            <!--label class="checkbox">
+              <input type="checkbox" value="" name="clickableLink">
+              Use Emoticon <a href="http://www.emoji-cheat-sheet.com/" target="_blank">[?]</a> <span class="label label-important">new</span>
+            </label-->
           </div>
         </div>
             
@@ -191,6 +216,37 @@
             </label>
           </div>
         </div-->
+      </div>
+
+      <div id="custom-tab" class="tab-pane">
+        <div class="row-fluid">
+          <div class="span3 text-right">
+            <strong>Themes :</strong>
+          </div>
+          <div class="span8">
+            <select class="select2 span12" name="customTheme">
+              <option></option>
+            </select>
+            <!-- <input name="customTheme" tabindex="-1"/> -->
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span3 text-right">
+            <strong>Directory :</strong>
+          </div>
+          <div class="span9">
+            <input class="hide" id="openCustomTheme" type="file" placeholder="Choose your directory" nwdirectory />
+            <!-- <input id="custom-theme-path" class="span12" type="text" readonly/> -->
+            <div class="input-append">
+              <input id="custom-theme-path" style="width:214px;" type="text" readonly>
+              <button id="custom-theme-open" class="btn" type="button">...</button>
+              <button id="custom-theme-reload" class="btn" type="button">Reload</button>
+            </div>
+          </div>
+          <div class="span8" style="margin-left: 130px;">
+            <span class="label label-info">New!</span> <span class="text-warning" style="font-size:12px">This theme applies to Live Preview, Exporting HTML/PDF and Sending Email(Evernote, Tumblr) export.</span>
+          </div>
+        </div>
       </div>
 
       <div id="code-tab" class="tab-pane">
