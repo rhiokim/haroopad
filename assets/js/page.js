@@ -1,3 +1,15 @@
+var supportLanuages = [ 'en', 'ko' ];
+var language = window.navigator.language || window.navigator.userLanguage;
+    language = language.substr(0,2);
+
+/**
+ * Setup default language
+ */
+language = (_.indexOf(supportLanuages, language) === -1) ? 'ko' : language;
+
+/**
+ * Social button in blog article
+ */
 function setStarrre() {
 	var text = $('h1, h2, h3, h4, h5, h6')[0].innerText || '';
 	$('#shareme').attr('data-url', window.location.href);
@@ -30,13 +42,12 @@ function setStarrre() {
 }
 
 function loadPost(file) {
-  var dir = 'docs/'+ file.replace('#', '') +'/';
+  var dir = 'docs/'+ language +'/'+ file.replace('#', '') +'/';
   file = dir +'index.md';
 
   $.ajax({
     url: file
   }).done(function(data) {
-    // var str = marked(data);
     var str = parse(data);
     str = str.replace(/src=\"images/g, 'src="'+ dir +'images');
     $('.contents').html(str);
@@ -52,25 +63,6 @@ $(document).ready(function() {
   var file;
   var prevHash;
   
-  // window.setInterval(function() {
-  // 	if (prevHash && prevHash != window.location.hash) {
-  //   	// window.location.href =  $(this).attr('href');
-  //   	window.location.reload();
-  //   	window.clearInterval(__timeout);
-  //   	return;
-  // 	}
-
-  // 	prevHash = window.location.hash;
-  // }, 10);
-
-  // $('.share a').click(function(e) {
-  //   file = $(this).attr('href');
-  //   e.preventDefault();
-
-  //   window.location.replace($(this).attr('href'));
-  //   // window.reload();
-  // });
-
   file = url('?f');
 
   if(file) {

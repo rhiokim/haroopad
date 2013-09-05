@@ -1,0 +1,42 @@
+@import url(http://fonts.googleapis.com/css?family=Vollkorn:400italic,400,700);
+
+.custom {
+	font-family: 'Vollkorn', sans-serif;
+	text-shadow: 1px 1px 1px #111;
+	background-color: #efefef;
+}
+
+.custom p, 
+.custom blockquote, 
+.custom h1, 
+.custom h2, 
+.custom h3, 
+.custom h4, 
+.custom h5, 
+.custom h6, 
+.custom li, 
+.custom pre, 
+.custom dl, 
+.custom dt {
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
+}
+.custom h1, 
+.custom h2, 
+.custom h3, 
+.custom h4, 
+.custom h5, 
+.custom h6 {
+	color: #eb2c6c;
+}
+
+.custom p {
+	font-size: 15px;
+}
+
+.custom pre>code {
+	text-shadow: none;
+}
+
+a {
+	-webkit-transition: all .2s ease-in-out; 
+}
