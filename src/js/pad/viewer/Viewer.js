@@ -49,14 +49,14 @@ define([
 		}
 
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
-		window.parent.ee.on('preferences.viewer.theme', changeCodeTheme);
+		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
 		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
 
 		/* window close */
 		nw.on('destory', function() {
 			window.parent.ee.off('preferences.viewer.theme', changeTheme);
-			window.parent.ee.off('preferences.viewer.theme', changeCodeTheme);
+			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
 			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
 		});
