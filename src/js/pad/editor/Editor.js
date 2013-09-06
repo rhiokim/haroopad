@@ -211,7 +211,7 @@ define([
 				clipboard.set(editor.getSelection());
 			});
 			window.ee.on('context.paste', function() {
-				editor.replaceSelection(clipboard.get());
+				editor.replaceSelection(clipboard.get('text'));
 			});
 			window.ee.on('context.select.all', function() {
 				editor.setSelection(0, 2);
