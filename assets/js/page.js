@@ -10,10 +10,9 @@ language = (_.indexOf(supportLanuages, language) === -1) ? 'ko' : language;
 /**
  * Social button in blog article
  */
-function setStarrre() {
-	var text = $('h1, h2, h3, h4, h5, h6')[0].innerText || '';
+function setStarrre(title) {
 	$('#shareme').attr('data-url', window.location.href);
-	$('#shareme').attr('data-text', text +'\n\nHaroopad - The Next Document processor based on Markdown');
+	$('#shareme').attr('data-text', title);
   $('#shareme').sharrre({
 	  share: {
 	    googlePlus: true,
@@ -52,8 +51,11 @@ function loadPost(file) {
     str = str.replace(/src=\"images/g, 'src="'+ dir +'images');
     $('.contents').html(str);
 
+	var title = $('h1, h2, h3, h4, h5, h6')[0].innerText || '';
+	title += ' | Haroopad - The Next Document processor based on Markdown'
+	window.document.title = title;
 
-  	setStarrre();
+  	setStarrre(title.replace(' | ', '\n\n')+ '\n#markdown #haroopad');
   });
 }
 
@@ -70,4 +72,14 @@ $(document).ready(function() {
   } else {
     loadPost('about');
   }
+
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'haroopad'; // required: replace example with your forum shortname
+
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
 });
