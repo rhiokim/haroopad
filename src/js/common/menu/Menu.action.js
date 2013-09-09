@@ -4,7 +4,7 @@ MenuBarAction = function () {
 
 	Action.append(
     new gui.MenuItem({
-      label: 'Copy HTML',
+      label: i18n.t('insert.copy-html'),
       click: function() {
         window.parent.ee.emit('menu.action.copy.html');
       }
@@ -55,14 +55,14 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Header',
+      label: i18n.t('insert.header'),
       // icon: 'img/menu/header.png',
       submenu: MenuBarActionHeader()
     })
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Strong ................ **',
+      label: i18n.t('insert.bold'),
       // icon: 'img/menu/bold.png',
       click: function() {
         window.parent.ee.emit('menu.action.strong');
@@ -71,7 +71,7 @@ MenuBarAction = function () {
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Emphasize .......... *',
+      label: i18n.t('insert.italic'),
       // icon: 'img/menu/italic.png',
       click: function() {
         window.parent.ee.emit('menu.action.emphasize');
@@ -80,7 +80,7 @@ MenuBarAction = function () {
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Inline Code ......... `',
+      label: i18n.t('insert.inline-code'),
       click: function() {
         window.parent.ee.emit('menu.action.inlinecode');
       }
@@ -88,7 +88,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Image ................. ![]()',
+      label: i18n.t('insert.image'),
       // icon: 'img/menu/image.png',
       click: function() {
         window.parent.ee.emit('menu.action.image');
@@ -97,7 +97,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Link .................... []()',
+      label: i18n.t('insert.link'),
       click: function() {
         window.parent.ee.emit('menu.action.link');
       }
@@ -105,7 +105,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Blockquote ......... >',
+      label: i18n.t('insert.blockquote'),
       click: function() {
         window.parent.ee.emit('menu.action.blockquote');
       }
@@ -113,7 +113,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Ordered List ....... 1.',
+      label: i18n.t('insert.ordered-list'),
       click: function() {
         window.parent.ee.emit('menu.action.orderlist');
       }
@@ -121,10 +121,34 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Un Ordered List .. -',
+      label: i18n.t('insert.unordered-list'),
       // icon: 'img/menu/unorder.png',
       click: function() {
         window.parent.ee.emit('menu.action.unorderlist');
+      }
+    })
+  );
+  Action.append(
+    new gui.MenuItem({
+      type: 'separator'
+    })
+  );
+  
+  Action.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.section-break'),
+      // icon: 'img/menu/unorder.png',
+      click: function() {
+        window.parent.ee.emit('menu.action.horizontal');
+      }
+    })
+  );
+  Action.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.page-break'),
+      // icon: 'img/menu/unorder.png',
+      click: function() {
+        window.parent.ee.emit('menu.action.horizontal2');
       }
     })
   );
@@ -143,7 +167,7 @@ MenuBarAction = function () {
   );
   Action.append(
     new gui.MenuItem({
-      label: 'Fenced Code ....... ```',
+      label: i18n.t('insert.fenced-code'),
       click: function() {
         window.parent.ee.emit('menu.action.fencedcode');
       }
@@ -151,7 +175,7 @@ MenuBarAction = function () {
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Strikethrough ...... ~~',
+      label: i18n.t('insert.strikethrough'),
       click: function() {
         window.parent.ee.emit('menu.action.strikethrough');
       }
@@ -159,7 +183,7 @@ MenuBarAction = function () {
   );
 	Action.append(
     new gui.MenuItem({
-      label: 'Table',
+      label: i18n.t('insert.table'),
       click: function() {
         window.parent.ee.emit('menu.action.table');
       }
@@ -189,12 +213,12 @@ MenuBarAction = function () {
   
   Action.append(
     new gui.MenuItem({
-      label: 'Comment ............ <!-- -->',
+      label: i18n.t('insert.comment'),
       click: function() {
         window.parent.ee.emit('menu.action.comment');
       }
     })
   );
 
-	return new gui.MenuItem({ label: 'Action', submenu: Action });
+	return new gui.MenuItem({ label: i18n.t('insert.name'), submenu: Action });
 };

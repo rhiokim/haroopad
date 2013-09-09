@@ -1,0 +1,18 @@
+{
+    "file": {
+      "name": "파일",
+      "new": "새로운 문서",
+      "open": "열기...",
+      "open-recent": "최근 파일",
+      "save": "저장",
+      "save-as": "새이름으로 저장",
+      "close": "닫기",
+      "sending": "보내기",
+      "sending-email": "이메일",
+      "exports": "출력...",
+      "export-to-html": "HTML",
+      "print": "인쇄...",
+      "preferences": "환경설정",
+      "quit": "종료"
+    }
+}

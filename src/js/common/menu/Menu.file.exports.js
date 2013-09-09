@@ -4,7 +4,7 @@ window.MenuBarFileExports = function () {
 
   submenu.append(
     new gui.MenuItem({
-        label: 'HTML',
+        label: i18n.t('file.export-to-html'),
         click: function() {
           window.parent.ee.emit('menu.file.exports.html');
         }

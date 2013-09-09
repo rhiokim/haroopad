@@ -4,7 +4,7 @@ window.MenuBarView = function () {
 
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Toggle Live Preview',
+	        label: i18n.t('view.toggle-live-view'),
 		      click: function() {
 		      	window.parent.ee.emit('menu.view.mode.toggle');
 		      }
@@ -25,7 +25,7 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Toggle Line Number',
+	        label: i18n.t('view.toggle-line-number'),
 		      click: function() {
 		        window.parent.ee.emit('menu.show.toggle.linenum');
 		      }
@@ -46,7 +46,7 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Live Viewer width +5%',
+	        label: i18n.t('view.live-view-width-plus-5'),
 		      click: function() {
 		        window.parent.ee.emit('menu.view.plus5.width');
 		      }
@@ -54,10 +54,21 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Live Viewer width -5%',
+	        label: i18n.t('view.live-view-width-minus-5'),
 		      click: function() {
 		        window.parent.ee.emit('menu.view.minus5.width');
 		      }
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+          type: 'separator'
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: i18n.t('view.column'),
+      		submenu: MenuBarViewColumn()	
 	    })
 	);
 	View.append(
@@ -68,12 +79,12 @@ window.MenuBarView = function () {
 
 	View.append(
 		new gui.MenuItem({
-		  label: 'Enter Full screen',
+		  label: i18n.t('view.enter-full-screen'),
 		  click: function() {
 			window.parent.ee.emit('menu.view.fullscreen');
 		  }
 		})
 	);
 
-	return new gui.MenuItem({ label: 'View', submenu: View });
+	return new gui.MenuItem({ label: i18n.t('view.name'), submenu: View });
 };

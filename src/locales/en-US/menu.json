@@ -1,0 +1,80 @@
+{
+    "file": {
+      "name": "File",
+      "new": "New",
+      "open": "Open...",
+      "open-recent": "Open Recent",
+      "clear-all": "Clear All",
+      "save": "Save",
+      "save-as": "Save As",
+      "close": "Close",
+      "sending": "Sending",
+      "sending-email": "Email",
+      "exports": "Export...",
+      "export-to-html": "HTML",
+      "print": "Print...",
+      "preferences": "Preferences",
+      "quit": "Quit"
+    },
+    "find": {
+      "name": "Find",
+      "find": "Find...",
+      "find-next": "Find Next",
+      "find-previous": "Find Previous",
+      "replace": "Replace...",
+      "replace-all": "Replace All"
+    },
+    "view": {
+      "name": "View",
+      "toggle-live-view": "Toggle Live View",  
+      "toggle-line-number": "Toggle Line Number",  
+      "live-view-width-plus-5": "Live View Width +5%",  
+      "live-view-width-minus-5": "Live View Width -5%",  
+      "column": "Column Layout",  
+      "column-single": "Single",  
+      "column-two": "Two",  
+      "column-three": "Three",  
+      "enter-full-screen": "Enter Full Screen"
+    },
+    "insert": {
+      "name": "Insert",
+      "copy-html": "Copy HTML",
+      "header": "Header",
+      "bold": "Strong ................ **",
+      "italic": "Emphasize .......... *",
+      "inline-code": "Inline Code ......... `",
+      "image": "Image ................. ![]()",
+      "link": "Link .................... []()",
+      "blockquote": "Blockquote ......... >",
+      "ordered-list": "Ordered List ....... 1.",
+      "unordered-list": "Un Ordered List .. -",
+      "section-break": "Section Break",
+      "page-break": "Page Break",
+      "fenced-code": "Fenced Code ....... ```",
+      "strikethrough": "Strikethrough ...... ~~",
+      "table": "Table",
+      "comment": "Comment ............ <!-- -->"
+      },
+    "tool": {
+      "name": "Tool"
+      },
+    "window": {
+      "name": "Window",
+      "minimize": "Minimize",
+      "close": "Close",
+      "bring-all-to-front": "Bring All to Front"
+      },
+    "help": {
+      "name": "Help",
+      "haroopad-help": "Haroopad Help",
+      "markdown-syntax-help": "Markdown Syntax Help",
+      "haroopad-shortcut-help": "Haroopad Short Help",
+      "release-notes": "Release Notes",
+      "acknowledgements": "Acknowlegements",
+      "haroopad-website": "Haroopad Website",
+      "user-echo": "User Echo",
+      "twitter": "Twitter",
+      "check-for-update": "Check for Update",
+      "boost-up-donate": "Boost up! Donate"
+    }
+}

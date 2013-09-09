@@ -6,7 +6,14 @@ var gui = require('nw.gui');
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 
-MenuBar(); 
+var i18n = require('i18next');
+i18n.init({
+  lng: "ko-KR",
+  ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
+}, function() {
+  MenuBar(); 
+});
+
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -55,7 +62,6 @@ requirejs([
 
     //   cb(html);
     // });
-    
     var os = getPlatformName();
     gui.App.on('open', function(cmdline) {
       var file;

@@ -1,0 +1,22 @@
+{
+    "author": "Jan Muehlemann"
+  , "name": "i18next.yaml"
+  , "version": "1.6.0"
+  , "contributors": [ 
+    { "name": "Jan Muehlemann", "email": "jan.muehlemann@gmail.com" }
+  ]
+  , "private": false
+  , "main": "./index.js"
+  , "engines": {
+        "node": ">= v0.6.15"
+    }
+  , "dependencies": {
+      "js-yaml": ">= 0.0.1"
+  }
+  , "devDependencies": {
+      "mocha": ">= 0.0.1"
+    , "expect.js": ">= 0.0.1"
+  }
+  , "scripts" : { 
+      "test" : "mocha" } 
+}

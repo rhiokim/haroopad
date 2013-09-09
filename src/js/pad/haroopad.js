@@ -5,6 +5,12 @@ window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 window.parent = nw.parent;
 
+i18n.init({
+  lng: "en-US",
+  getAsync: false, 
+  ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
+});
+
 if (process.platform != 'darwin') {
   MenuBar();
 }
@@ -66,6 +72,11 @@ requirejs([
   // tmp = params.tmp;
   // uid = params.uid;
   // readOnly = params.readOnly || false;
+
+
+
+
+  // i18n.loadNamespace('menu', function() { alert('')/* loaded */ });
 
 
   function delayChange() {

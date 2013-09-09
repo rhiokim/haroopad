@@ -191,6 +191,12 @@ define([
 		window.ee.on('action.unorderlist', function() {
 			CodeMirror.commands.markdownUnOrderedList(editor);
 		});
+		window.ee.on('action.horizontal', function() {
+			CodeMirror.commands.markdownHorizontal(editor);
+		});
+		window.ee.on('action.horizontal2', function() {
+			CodeMirror.commands.markdownHorizontal2(editor);
+		});
 		window.ee.on('action.fencedcode', function() {
 			CodeMirror.commands.markdownFencedCode(editor);
 		});

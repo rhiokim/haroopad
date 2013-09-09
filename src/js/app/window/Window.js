@@ -91,6 +91,10 @@ define([
     WindowMgr.actived.window.ee.emit('menu.view.doc.outline');
   });
 
+  window.ee.on('menu.view.column.change', function(count) {
+    WindowMgr.actived.window.ee.emit('change.column', count);
+  });
+
   window.ee.on('menu.view.fullscreen', function() {
     WindowMgr.actived.window.ee.emit('view.fullscreen');
   });
@@ -143,6 +147,12 @@ define([
   });
   window.ee.on('menu.action.unorderlist', function() {
     WindowMgr.actived.window.ee.emit('action.unorderlist');
+  });
+  window.ee.on('menu.action.horizontal', function() {
+    WindowMgr.actived.window.ee.emit('action.horizontal');
+  });
+  window.ee.on('menu.action.horizontal2', function() {
+    WindowMgr.actived.window.ee.emit('action.horizontal2');
   });
   window.ee.on('menu.action.fencedcode', function() {
     WindowMgr.actived.window.ee.emit('action.fencedcode');
