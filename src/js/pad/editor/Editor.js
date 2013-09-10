@@ -5,6 +5,8 @@ define([
 		'editor/Editor.drop'
 	],
 	function(store, Keymap, Drop) {
+		var moment = require('moment');
+
 		var gui = require('nw.gui'),
 			win = gui.Window.get(),
 			clipboard = gui.Clipboard.get();
@@ -181,6 +183,7 @@ define([
 		});
 		window.ee.on('action.image', function() {
 			CodeMirror.commands.markdownImage(editor);
+
 		});
 		window.ee.on('action.blockquote', function() {
 			CodeMirror.commands.markdownBlockQuote(editor);
@@ -199,6 +202,15 @@ define([
 		});
 		window.ee.on('action.comment', function() {
 			CodeMirror.commands.markdownComment(editor);
+		});
+
+		window.ee.on('insert.toc', function() {
+		});
+		window.ee.on('insert.date', function() {
+			editor.replaceSelection(moment().format('dddd, MMMM Do YYYY'));
+		});
+		window.ee.on('insert.filename', function() {
+			editor.replaceSelection(nw.file.get('basename'));
 		});
 
 		/* fire context menu event */

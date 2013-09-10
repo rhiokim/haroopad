@@ -4,6 +4,14 @@ window.MenuBarFileExports = function () {
 
   submenu.append(
     new gui.MenuItem({
+      label: 'Copy to Clipboard',
+      click: function() {
+        window.parent.ee.emit('menu.action.copy.html');
+      }
+    })
+  );
+  submenu.append(
+    new gui.MenuItem({
         label: 'HTML',
         click: function() {
           window.parent.ee.emit('menu.file.exports.html');

@@ -13,7 +13,7 @@ p {
 }
 
 body:before {
-	content: "OUTLINE";
+	content: "Table Of Contents";
     color: #ababab;
 }
 
