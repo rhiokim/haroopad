@@ -181,13 +181,13 @@
         case 'table':
             addTable();
           break;
-        case 'horizontal':
+        case 'section-break':
             var pos = cm.getCursor();
                 pos.line += 2;
             cm.replaceSelection('\n- - -\n');
             cm.setCursor(pos);
           break;
-        case 'horizontal2':
+        case 'page-break':
             var pos = cm.getCursor();
                 pos.line += 2;
             cm.replaceSelection('\n* * *\n');
@@ -254,11 +254,11 @@
   CodeMirror.commands.markdownOrderedList = function(cm) {
     action('ordered-list', cm);
   };
-  CodeMirror.commands.markdownHorizontal = function(cm) {
-    action('horizontal', cm);
+  CodeMirror.commands.markdownSectionBreak = function(cm) {
+    action('section-break', cm);
   };
-  CodeMirror.commands.markdownHorizontal2 = function(cm) {
-    action('horizontal2', cm);
+  CodeMirror.commands.markdownPageBreak = function(cm) {
+    action('page-break', cm);
   };
 
   CodeMirror.commands.markdownFencedCode = function(cm) {

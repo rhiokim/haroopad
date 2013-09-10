@@ -85,8 +85,9 @@
   <script src="js/common/menu/Menu.find.js"></script>
   <script src="js/common/menu/Menu.view.column.js"></script>
   <script src="js/common/menu/Menu.view.js"></script>
-  <script src="js/common/menu/Menu.action.js"></script>
-  <script src="js/common/menu/Menu.action.header.js"></script>
+  <script src="js/common/menu/Menu.insert.js"></script>
+  <script src="js/common/menu/Menu.insert.section.js"></script>
+  <script src="js/common/menu/Menu.insert.header.js"></script>
   <script src="js/common/menu/Menu.tools.js"></script>
   <script src="js/common/menu/Menu.tools.post.js"></script>
   <script src="js/common/menu/Menu.tools.presentation.js"></script>
@@ -215,6 +216,7 @@
         </a>
         <ul class="dropdown-menu">
           <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i>Show Document Outline</a></li>
+          <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i>Show TOC</a></li>
         </ul>
       </div><div id="columnCount" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
@@ -255,6 +257,8 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
+          <li><a tabindex="-1" href="#">It's Promotion</a></li>
+          <li class="divider"></li>
           <li><a tabindex="0" href="#" data-service="twitter">Twitter</a></li>
           <li><a tabindex="1" href="#" data-service="facebook">Facebook</a></li>
           <li><a tabindex="2" href="#" data-service="google">Google+</a></li>

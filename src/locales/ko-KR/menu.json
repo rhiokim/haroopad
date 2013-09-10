@@ -1,6 +1,6 @@
 {
     "file": {
-      "name": "파일",
+      "name": "File",
       "new": "새로운 문서",
       "open": "열기",
       "open-recent": "최근 파일",
@@ -17,7 +17,7 @@
       "quit": "종료"
     },
     "find": {
-      "name": "검색",
+      "name": "Find",
       "find": "찾기...",
       "find-next": "다음 찾기",
       "find-previous": "이전 찾기",
@@ -25,7 +25,7 @@
       "replace-all": "모두 치환"
     },
     "view": {
-      "name": "보기",
+      "name": "View",
       "toggle-live-view": "라이브 뷰 토글",  
       "toggle-line-number": "라인 넘버 토글",  
       "live-view-width-plus-5": "라이브 뷰 가로 사이즈 +5%",  
@@ -37,7 +37,9 @@
       "enter-full-screen": "전체화면 모드"
     },
     "insert": {
-      "name": "삽입",
+      "name": "Insert",
+      "date-time": "날짜와 시간",
+      "filename": "파일 이름",
       "copy-html": "HTML 복사",
       "header": "제목",
       "bold": "볼드 ................ **",
@@ -48,8 +50,8 @@
       "blockquote": "인용구 ......... >",
       "ordered-list": "정렬 목록 ....... 1.",
       "unordered-list": "비정렬 목록 .. -",
-      "section-break": "섹션 나누기",
-      "page-break": "페이지 나누기",
+      "section-break": "섹션 나누기 .... - - -",
+      "page-break": "페이지 나누기 ....... * * *",
       "fenced-code": "팬스 코드 블럭 ....... ```",
       "strikethrough": "취소선 ...... ~~",
       "table": "테이블",
@@ -59,13 +61,13 @@
       "name": "Tool"
       },
     "window": {
-      "name": "윈도우",
+      "name": "Window",
       "minimize": "최소화",
       "close": "닫기",
       "bring-all-to-front": "가장 앞으로 가져오기"
       },
     "help": {
-      "name": "도움말",
+      "name": "Help",
       "haroopad-help": "하루패드 도움말",
       "markdown-syntax-help": "마크다운 구문 도움말",
       "haroopad-shortcut-help": "하루패드 단축키 도움말",
