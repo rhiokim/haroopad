@@ -24,7 +24,7 @@ MenuBarInsert = function () {
  //  );
   Insert.append(
     new gui.MenuItem({
-      label: 'Date & Time',
+      label: i18n.t('insert.date-time'),
       // icon: 'img/menu/unorder.png',
       click: function() {
         window.parent.ee.emit('menu.insert.date');
@@ -33,7 +33,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Filename',
+      label: i18n.t('insert.filename'),
       // icon: 'img/menu/unorder.png',
       click: function() {
         window.parent.ee.emit('menu.insert.filename');

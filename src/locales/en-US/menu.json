@@ -12,6 +12,7 @@
       "sending-email": "Email",
       "exports": "Export...",
       "export-to-html": "HTML",
+      "copy-html": "Copy HTML",
       "print": "Print...",
       "preferences": "Preferences",
       "quit": "Quit"
