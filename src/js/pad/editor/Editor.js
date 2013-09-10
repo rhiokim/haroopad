@@ -204,6 +204,13 @@ define([
 			CodeMirror.commands.markdownComment(editor);
 		});
 
+		window.ee.on('insert.page.break', function() {
+			CodeMirror.commands.markdownPageBreak(editor);
+		});
+		window.ee.on('insert.section.break', function() {
+			CodeMirror.commands.markdownSectionBreak(editor);
+		});
+
 		window.ee.on('insert.toc', function() {
 		});
 		window.ee.on('insert.date', function() {

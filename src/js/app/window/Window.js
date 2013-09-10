@@ -144,6 +144,12 @@ define([
   window.ee.on('menu.insert.unorderlist', function() {
     WindowMgr.actived.window.ee.emit('action.unorderlist');
   });
+  window.ee.on('menu.insert.page.break', function() {
+    WindowMgr.actived.window.ee.emit('insert.page.break');
+  });
+  window.ee.on('menu.insert.section.break', function() {
+    WindowMgr.actived.window.ee.emit('insert.section.break');
+  });
   window.ee.on('menu.insert.fencedcode', function() {
     WindowMgr.actived.window.ee.emit('action.fencedcode');
   });

@@ -2,26 +2,26 @@ MenuBarInsert = function () {
   var gui = require('nw.gui');
   var Insert = new gui.Menu();
 
-	Insert.append(
-    new gui.MenuItem({
-      label: 'Sections',
-      submenu: MenuBarInsertSection()
-    })
-	);
-  Insert.append(
-    new gui.MenuItem({
-      label: 'Table Of Content',
-      // icon: 'img/menu/unorder.png',
-      click: function() {
-        window.parent.ee.emit('menu.insert.toc');
-      }
-    })
-  );
-  Insert.append(
-    new gui.MenuItem({
-      type: 'separator'
-    })
-  );
+	// Insert.append(
+ //    new gui.MenuItem({
+ //      label: 'Sections',
+ //      submenu: MenuBarInsertSection()
+ //    })
+	// );
+ //  Insert.append(
+ //    new gui.MenuItem({
+ //      label: 'Table Of Content',
+ //      // icon: 'img/menu/unorder.png',
+ //      click: function() {
+ //        window.parent.ee.emit('menu.insert.toc');
+ //      }
+ //    })
+ //  );
+ //  Insert.append(
+ //    new gui.MenuItem({
+ //      type: 'separator'
+ //    })
+ //  );
   Insert.append(
     new gui.MenuItem({
       label: 'Date & Time',
