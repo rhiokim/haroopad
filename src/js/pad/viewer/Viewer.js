@@ -49,14 +49,14 @@ define([
 		}
 
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
-		window.parent.ee.on('preferences.viewer.theme', changeCodeTheme);
+		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
 		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
 
 		/* window close */
 		nw.on('destory', function() {
 			window.parent.ee.off('preferences.viewer.theme', changeTheme);
-			window.parent.ee.off('preferences.viewer.theme', changeCodeTheme);
+			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
 			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
 		});
@@ -111,6 +111,9 @@ define([
 
 		window.ee.on('menu.view.doc.outline', function(show) {
 			show ? _viewer.showOutline() : _viewer.hideOutline();
+		});
+		window.ee.on('menu.view.doc.toc', function(show) {
+			show ? _viewer.showTOC() : _viewer.hideTOC();
 		});
 
 		HotKey('defmod-alt-c', function() {
