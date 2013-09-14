@@ -131,6 +131,32 @@ define([
 			editor.setOption('lineNumbers', value);
 		});
 
+		/* edit */
+		if (nw.file && !nw.file.get('readOnly')) {
+			window.ee.on('menu.edit.undo', function() {
+				editor.undo();
+			});
+			window.ee.on('menu.edit.redo', function() {
+				editor.redo();
+			});
+			window.ee.on('menu.edit.cut', function() {
+				clipboard.set(editor.getSelection());
+				editor.replaceSelection('');
+			});
+			window.ee.on('menu.edit.copy', function() {
+				clipboard.set(editor.getSelection());
+			});
+			window.ee.on('menu.edit.paste', function() {
+				editor.replaceSelection(clipboard.get());
+			});
+			window.ee.on('menu.edit.delete', function() {
+				editor.replaceSelection('');
+			});
+			window.ee.on('menu.edit.selectall', function() {
+		        editor.setSelection({line:0, ch:0}, {line:editor.lineCount(), ch:0});
+			});
+		}
+
 		/* find & replace */
 		window.ee.on('find.start', function() {
 			CodeMirror.commands.find(editor);
@@ -238,8 +264,11 @@ define([
 			window.ee.on('context.paste', function() {
 				editor.replaceSelection(clipboard.get());
 			});
-			window.ee.on('context.select.all', function() {
-				editor.setSelection(0, 2);
+			window.ee.on('context.delete', function() {
+				editor.replaceSelection('');
+			});
+			window.ee.on('context.selectall', function() {
+		        editor.setSelection({line:0, ch:0}, {line:editor.lineCount(), ch:0});
 			});
 		} else {
 			editor.setOption('readOnly', true);

@@ -19,6 +19,7 @@
   "webkit": {
     "plugin": false
   },
+  "no-edit-menu": true,
   "upgrade": "http://pad.haroopress.com/upgrade.json",
   "maintainers": [
     {

@@ -38,23 +38,31 @@ define([
 				window.ee.emit('context.paste');
 			} 
 		});
+		mDelete = menuItem({ 
+			label: 'Delete',
+			click: function() {
+				window.ee.emit('context.delete');
+			}
+		});
 		mSelectAll = menuItem({ 
 			label: 'Select All',
 			click: function() {
-				window.ee.emit('context.select.all');
+				window.ee.emit('context.selectall');
 			}
 		});
 		
 		Context.append(mCut);
 		Context.append(mCopy);
 		Context.append(mPaste);
+		Context.append(mDelete);
+		Context.append(mSelectAll);
 		// Context.append(mSelectAll);
 
 		Context.append(sepItem());
 
 		mSearch = menuItem({ 
 			label: 'Search with ...',
-      enabled: false,
+      		enabled: false,
 			submenu: Search
 		});
 
