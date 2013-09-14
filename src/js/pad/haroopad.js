@@ -5,10 +5,16 @@ window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 window.parent = nw.parent;
 
+// i18n.init({
+//   lng: "en-US",
+//   getAsync: false, 
+//   ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
+// });
+
 i18n.init({
-  lng: "en-US",
-  getAsync: false, 
-  ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
+  lng: getLang(),
+  getAsync: false,
+  ns: { namespaces: [ 'pad' ], defaultNs: 'pad' }
 });
 
 if (process.platform != 'darwin') {
@@ -74,6 +80,7 @@ requirejs([
   // readOnly = params.readOnly || false;
 
 
+  $('body').i18n(); 
 
 
   // i18n.loadNamespace('menu', function() { alert('')/* loaded */ });

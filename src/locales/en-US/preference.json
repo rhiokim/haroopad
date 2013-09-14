@@ -1,4 +1,6 @@
 {
+	"title": "Preference",
+	
 	"tab": {
 		"general": "General",
 		"editor": "Editor",
@@ -11,7 +13,7 @@
 
 	"general": {
 		"general": "General",
-		"enableSyncScroll": "에디터 스크롤 동기화 사용"
+		"enableSyncScroll": "Enable Sync Scroll"
 	},
 
 	"editor": {
@@ -62,7 +64,7 @@
 		"developer": "Developer",
 		"special-thanks": "Special Thanks",
 		"icon": "ICON",
-		"description": "Haroopad <small>마크다운을 기반으로 한 문서도구</small>",
-		"donate-msg": "하루패드가 유용하다면 개발이 유지되고 성장할 수 있도록 도와주세요."
+		"description": "Haroopad <small>The next document process</small>",
+		"donate-msg": "If you like haroopad, donate to help growing up"
 	}
 }

@@ -46,15 +46,9 @@ define([
 				this.setPath(config.themeDir);
 				this.setThemeData(config.themes || []);
 
-			    i18n.init({
-			      lng: 'ko-KR',
-			      // getAsync: false,
-			      ns: { namespaces: [ 'preference' ], defaultNs: 'preference' }
-			    }, function(t) {
-					this.$('select[name=customTheme]').select2({
-	                	placeholder: t('custom.select-theme')
-					}).select2("val", config.theme && config.theme.name);
-    			});
+				this.$('select[name=customTheme]').select2({
+                	placeholder: i18n.t('custom.select-theme')
+				}).select2("val", config.theme && config.theme.name);
 			},
 
 			clearOptions: function() {

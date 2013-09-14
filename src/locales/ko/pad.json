@@ -1,6 +1,4 @@
 {
-	"title": "",
-	
 	"footer": {
 		"lines": "줄",
 		"words": "단어수"
@@ -34,12 +32,12 @@
 	},
 
 	"promotion": {
-		"desc": "하루패드를 공유해주세요."
+		"desc": "하루패드를 공유해주세요.",
+
 	},
 
 	"donate": {
 		"label": "기부",
-		"title": "하루패드는 더 많은 아이디어가 있어요.",
-		"desc": "하루패드가 유용하다면 개발이 유지되고 성장할 수 있도록 도와주세요. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>기부하러 하기</a>"
+		"desc": "If you feel that is useful, donate to help keep development going."
 	}
 }
