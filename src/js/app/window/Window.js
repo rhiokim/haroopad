@@ -64,6 +64,32 @@ define([
 
 
   /**
+   * edit
+   */
+  window.ee.on('menu.edit.undo', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.undo');
+  });
+  window.ee.on('menu.edit.redo', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.redo');
+  });
+  window.ee.on('menu.edit.cut', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.cut');
+  });
+  window.ee.on('menu.edit.copy', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.copy');
+  });
+  window.ee.on('menu.edit.paste', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.paste');
+  });
+  window.ee.on('menu.edit.delete', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.delete');
+  });
+  window.ee.on('menu.edit.selectall', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.selectall');
+  });
+
+
+  /**
    * tools menu event
    */
   window.ee.on('tools.presentation', function(theme) {
@@ -248,8 +274,11 @@ define([
   window.ee.on('context.paste', function(e) {
     WindowMgr.actived.window.ee.emit('context.paste');
   });
-  window.ee.on('context.select.all', function(e) {
-    WindowMgr.actived.window.ee.emit('context.select.all');
+  window.ee.on('context.delete', function(e) {
+    WindowMgr.actived.window.ee.emit('context.delete');
+  });
+  window.ee.on('context.selectall', function(e) {
+    WindowMgr.actived.window.ee.emit('context.selectall');
   });
   window.ee.on('context.preferences', function(e) {
     Preferences.show();
