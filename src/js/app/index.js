@@ -8,7 +8,8 @@ window.ee = new EventEmitter();
 
 var i18n = require('i18next');
 i18n.init({
-  lng: "ko-KR",
+  // lng: "ko-KR",
+  lng: getLang(),
   ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
 }, function() {
   MenuBar(); 

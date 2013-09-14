@@ -49,9 +49,13 @@ function getExecPath() {
 	}
 }
 
-function getDocsPath() {
+function getLang() {
 	var locale = window.navigator.language;
 	locale = languageTable.indexOf(locale) < 0 ? 'en-US': locale ;
 
-	return path.join(getExecPath(), 'docs', locale);
+	return locale;
+}
+
+function getDocsPath() {
+	return path.join(getExecPath(), 'docs', getLang());
 }

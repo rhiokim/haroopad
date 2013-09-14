@@ -1,0 +1,68 @@
+{
+	"tab": {
+		"general": "일반",
+		"editor": "에디터",
+		"viewer": "뷰어",
+		"custom": "사용자",
+		"code": "코드",
+		"markdown": "마크다운",
+		"about": "하루패드"
+	},
+
+	"general": {
+		"general": "일반",
+		"enableSyncScroll": "에디터 스크롤 동기화 사용"
+	},
+
+	"editor": {
+		"general": "일반",
+		"spaces": "공백문자",
+		"tab-width": "탭 사이즈",
+		"indent-use-tab": "들여쓰기 시 탭을 사용",
+		"display-line-number": "줄번호 표시",
+		"vim-key-binding": "Vim 키 바인딩 사용",
+		"auto-pair-char": "자동 블럭 완성 사용",
+		"insert-four-space": "하나의 탭을 4개의 공백 문자 사용"
+	},
+
+	"viewer": {
+		"general": "일반",
+		"themes": "테마",
+		"clickable-link": "링크 클릭 사용하도록 설정"
+	},
+
+	"custom": {
+		"themes": "테마",
+		"reload": "업데이트",
+		"directory": "디렉토리",
+		"select-theme": "테마를 선택해주세요.",
+		"description": "이 테마는 라이브 뷰에 적용되며, HTML과 PDF 출력 그리고 이메일 전송(에버노트, 텀블러)할 때에도 그대로 반영됩니다."
+	},
+
+	"code": {
+		"general": "일반",
+		"themes": "테마",
+		"show-line-number": "코드 구문 강조에서 줄번호 사용"
+	},
+
+	"markdown": {
+		"enable-gfm": "Github Flavord Markdown 사용",
+		"sanitize-desc": "HTML 사용",
+		"gfm-line-breaks": "Github Flavord Markdown 개행 사용",
+		"gfm-table": "Github Flavord Markdown 테이블 사용",
+		"smarty-list": "표준 마크다운보다 더 나은 스마트 리스트 사용",
+		"smarty-pants": "기호 및 텍스트 대체 항목 사용"
+	},
+
+	"about": {
+		"donate": "기부하기",
+		"mean": "<strong>Haroo</strong> 는 한국어로 \"하루\"를 의미합니다.",
+		"version": "버젼",
+		"official-site": "공식사이트",
+		"developer": "개발자",
+		"special-thanks": "감사합니다.",
+		"icon": "아이콘",
+		"description": "하루패드 <small>마크다운을 기반으로 한 문서도구</small>",
+		"donate-msg": "하루패드가 유용하다면 개발이 유지되고 성장할 수 있도록 도와주세요."
+	}
+}

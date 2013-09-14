@@ -3,6 +3,7 @@ var gui = require('nw.gui'),
 
 window.parent = win.parent;
 
+
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
 
@@ -44,6 +45,14 @@ requirejs([
 
     $('.switch').bootstrapSwitch();
     
+    i18n.init({
+      lng: 'ko-KR',
+      getAsync: false,
+      ns: { namespaces: [ 'preference' ], defaultNs: 'preference' }
+    });
+
+    $('body').i18n(); 
+
     HotKey('esc', function() {
       win.close();
     });
