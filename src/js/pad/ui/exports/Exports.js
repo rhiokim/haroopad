@@ -8,6 +8,7 @@ define([
 			os = require('os'),
 			cleanCss = require('clean-css');
 		var gui = require('nw.gui');
+		var manifest = global.package;
 
 		var res;
 		
@@ -24,6 +25,10 @@ define([
 			}
 		}
 
+		function getGenerator() {
+			return manifest.name +' '+ manifest.version;
+		}
+
 		function getStyleSheets() {
 			var href, cssText = '';
 			var contentDocument = Viewer.getContentDocument();
@@ -32,19 +37,18 @@ define([
 				href = item.href;
 				href = href.split('?')[0];
 				href = decodeURIComponent(href);
+				href = href.replace('file:///', '');
 
-				if (process.platform !== 'win32') {
-					href = href.replace('file://', '');
+				if (getPlatformName() !== 'windows') {
+					href = '/' + href;
 				}
 
 				if (fs.existsSync(href)) {
 					cssText += fs.readFileSync(href, 'utf8');
 				}
 			});
+			
 			cssText += '\n footer {position:fixed; font-size:.8em; text-align:right; bottom:0px; margin-left:-25px; height:20px; width:100%;}';
-
-			cssText = cleanCss.process(cssText);
-
 			cssText = cleanCss.process(cssText);
 
 			return cssText;
@@ -86,7 +90,8 @@ define([
 			res = res.replace('@@body', getBodyHtml());
 			res = res.replace('</body>', getFooterHtml() +'\n</body>');
 			res = res.replace('@@title', getTitle());
-			res = res.replace('@@author', os.hostname());
+			res = res.replace('@@generator', getGenerator());
+			// res = res.replace('@@author', os.hostname());
 
 			$("#exportHTML").trigger("click");
 			$("#exportHTML").on('change', saveHandler);
