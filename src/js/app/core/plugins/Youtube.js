@@ -10,7 +10,7 @@ define(function() {
 	}
 
 	var _width = '100%';
-	var _height = '315px';
+	var _height = '315';
 
 	return function(name, args) {
 		args = args.split(' ');

@@ -88,8 +88,20 @@ function showOutline() {
     href: href +'?'+ new Date().getTime()
   });
 }
+function showTOC() {
+  var href;
+    
+  href = 'css/viewer-toc/only-toc.css';
+  $('#toc').attr({
+    href: href +'?'+ new Date().getTime()
+  });
+}
 
 function hideOutline() {
+  $('#toc').removeAttr('href');
+}
+
+function hideTOC() {
   $('#toc').removeAttr('href');
 }
 
