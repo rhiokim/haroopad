@@ -72,6 +72,30 @@ define(function() {
 					+ (user ? ' '+ user : '')
 					+']';
 		},
+		'jsbin.com': function(str) {
+			var rev, key = url('path', str);
+			var frag = key.split('/');
+
+			rev = frag[2];
+			key = frag[1];
+
+			return '[jsbin:'
+					+ key 
+					+ (rev ? ' '+ rev : '')
+					+']';
+		},
+		'www.slideshare.net': function(str) {
+			var file, user, key = url('path', str);
+			var frag = key.split('/');
+
+			user = frag[1];
+			key = frag[2];
+
+			return '[slideshare:'
+					+ key 
+					+ (user ? ' '+ user : '')
+					+']';
+		},
 		'maps.google.com': function(str) {
 			var center = url('?q', str);
 			var zoom = url('?z', str);

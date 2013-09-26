@@ -54,3 +54,28 @@ function getTweet(el, id) {
         }
     });
 }
+
+function getSlideShare(el, user, id) {
+    loading(el.parentElement);
+
+    $.ajax({
+        url: 'http://www.slideshare.net/api/oembed/2',
+        data: {
+            url: 'http://www.slideshare.net/'+ user +'/'+ id,
+            format: 'json'
+        },
+        dataType: 'jsonp',
+        success: function(slideshow) {
+            var parent, hasStats;
+            parent = el.parentElement;
+
+            parent.innerHTML = slideshow['html'];
+            // hasStats = parent.querySelectorAll('.footer .stats-narrow')[0];
+            // hasStats = parent.find('.footer .stats-narrow')[0];
+
+            // if (!hasStats) {
+            //     parent.querySelectorAll('.footer')[0].remove();
+            // }
+        }
+    });
+}

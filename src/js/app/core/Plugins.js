@@ -7,9 +7,10 @@ define([
 		'core/plugins/Gist',
 		'core/plugins/SoundCloud',
 		'core/plugins/JSFiddle',
+		'core/plugins/JSBin',
 		'core/plugins/CodePen',
 		'core/plugins/Map.Google'
-	], function(Youtube, Vimeo, Twitter, SlideShare, SpeakerDeck, Gist, SoundCloud, JSFiddle, CodePen, Gmap) {
+	], function(Youtube, Vimeo, Twitter, SlideShare, SpeakerDeck, Gist, SoundCloud, JSFiddle, JSBin, CodePen, Gmap) {
 
 	return {
 		youtube: Youtube,
@@ -21,6 +22,7 @@ define([
 		gist: Gist,
 		soundcloud: SoundCloud,
 		jsfiddle: JSFiddle,
+		jsbin: JSBin,
 		codepen: CodePen,
 		gmap: Gmap 
 	};
