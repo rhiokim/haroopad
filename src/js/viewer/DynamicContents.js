@@ -79,3 +79,27 @@ function getSlideShare(el, user, id) {
         }
     });
 }
+
+function getFlickr(el, user, id) {
+    loading(el.parentElement);
+
+    $.ajax({
+        url: 'http://www.flickr.com/services/oembed.json',
+        data: {
+            url: 'http://www.flickr.com/photos/'+ user +'/'+ id
+        },
+        dataType: 'jsonp',
+        success: function(photo) {
+            var parent, hasStats;
+            parent = el.parentElement;
+
+            parent.innerHTML = '<img src="'+ photo['url'] +'">';
+            // hasStats = parent.querySelectorAll('.footer .stats-narrow')[0];
+            // hasStats = parent.find('.footer .stats-narrow')[0];
+
+            // if (!hasStats) {
+            //     parent.querySelectorAll('.footer')[0].remove();
+            // }
+        }
+    });
+}
