@@ -260,6 +260,24 @@ function countFragments(target) {
   });
 }
 
+function drawEmbedContents(target) {
+  var url, embed, embeds = target.querySelectorAll('.oembed');
+  embeds = Array.prototype.slice.call(embeds, 0);
+
+  for (i = 0; i < embeds.length; i++) {
+    embed = embeds[i];
+    url = embed.getAttribute('href');
+    props = embed.getAttribute('props');
+
+    $(embed).oembed(url, {
+      includeHandle: false,
+      embedMethod: 'fill'
+    });
+
+    embed.removeAttribute('class');
+  }
+}
+
 /**
  * update contents
  * @param  {[type]} contents [description]
@@ -356,8 +374,6 @@ function update(html) {
     }
   }
 
-
-
   // $(document.body).find('pre').each(function(i, e) {
   //   $(this).attr('origin', $(this)[0].outerHTML);
   // });
@@ -379,6 +395,7 @@ function update(html) {
   // _lazySyntaxHighlight();
   
   countFragments(document.body);
+  drawEmbedContents(document.body);
 }
 
 /**
