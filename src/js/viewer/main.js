@@ -260,19 +260,20 @@ function countFragments(target) {
   });
 }
 
+var ebdOpt = {
+        includeHandle: false,
+        embedMethod: 'fill'
+      };
 function drawEmbedContents(target) {
   var url, embed, embeds = target.querySelectorAll('.oembed');
   embeds = Array.prototype.slice.call(embeds, 0);
 
   for (i = 0; i < embeds.length; i++) {
+    ebdOpt.ebdOpt = {};
     embed = embeds[i];
     url = embed.getAttribute('href');
-    props = embed.getAttribute('props');
 
-    $(embed).oembed(url, {
-      includeHandle: false,
-      embedMethod: 'fill'
-    });
+    $(embed).oembed(url, ebdOpt);
 
     embed.removeAttribute('class');
   }

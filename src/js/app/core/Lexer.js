@@ -20,7 +20,7 @@ define([
 
     var customRules = {
         plugin: /^ *\[([^\:\]]+):([^\]]+)\] *\n*/,
-        oembed: /^@?\[(inside)\]\(href\)/
+        oembed: /^@\[(inside)\]\(href\)/
         // plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(] */
     }
     

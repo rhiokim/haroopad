@@ -193,7 +193,7 @@
             var meta = {};
             data.query = !data.query || {};
 
-            if (data.query.results == null) {
+            if (!data.query.results || !data.query.results.meta) {
               data.query.results = {
                 "meta": []
               };
@@ -338,10 +338,28 @@
         container.replaceWith(oembedData.code);
         break;
       case "fill":
+        var iframe, ebdOpt;
+
         if (typeof oembedData.code == 'string') {
           oembedData.code = oembedData.code.replace('="//', '="http://');
         }
         container.html(oembedData.code);
+        iframe = $('iframe', container);
+        iframe.width('100%');
+
+        ebdOpt = container.data('props');
+
+        if (ebdOpt) {
+          ebdOpt = decodeURIComponent(ebdOpt);
+          ebdOpt = JSON.parse(ebdOpt);
+        }
+
+        if (ebdOpt.width) {
+          iframe.width(ebdOpt.width);
+        }
+        if (ebdOpt.height) {
+          iframe.height(ebdOpt.height);
+        }
         break;
       case "append":
         container.wrap('<p class="oembedall-container"></p>');
