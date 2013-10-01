@@ -926,8 +926,8 @@
         height: '600'
       }
     }),
-    new $.fn.oembed.OEmbedProvider("jsfiddle", "rich", ["jsfiddle.net/[^/]+/?"], "http://jsfiddle.net/$1/embedded/result,js,resources,html,css/?", {
-      templateRegex: /.*net\/([^\/]+).*/,
+    new $.fn.oembed.OEmbedProvider("jsfiddle", "rich", ["jsfiddle.net/[^/]+/?"], "http://jsfiddle.net/$1/$2/embedded/result,js,resources,html,css/?", {
+      templateRegex: /.*net\/([^\/]+)\/([^\/]+).*/,
       embedtag: {
         tag: 'iframe',
         width: '100%',
