@@ -342,9 +342,10 @@
 
         if (typeof oembedData.code == 'string') {
           oembedData.code = oembedData.code.replace('="//', '="http://');
+          oembedData.code = oembedData.code.replace("='//", "='http://");
         }
         container.html(oembedData.code);
-        iframe = $('iframe', container);
+        iframe = container.children();
         iframe.width('100%');
 
         ebdOpt = container.data('props');
@@ -543,6 +544,9 @@
         height: '349'
       }
     }),
+    new $.fn.oembed.OEmbedProvider("ted", "video", ["ted\\.com/talks/.+"], 'http://www.ted.com/talks/oembed', {
+      useYQL: 'json'
+    }),
 
     //new $.fn.oembed.OEmbedProvider("youtube", "video", ["youtube\\.com/watch.+v=[\\w-]+&?", "youtu\\.be/[\\w-]+"], 'http://www.youtube.com/oembed', {useYQL:'json'}), 
     //new $.fn.oembed.OEmbedProvider("youtubeiframe", "video", ["youtube.com/embed"],  "$1?wmode=transparent",
@@ -674,7 +678,7 @@
     }),
     new $.fn.oembed.OEmbedProvider("animoto", "video", ["animoto.com/play/.+"], "http://animoto.com/services/oembed"),
     new $.fn.oembed.OEmbedProvider("hulu", "video", ["hulu\\.com/watch/.*"], "http://www.hulu.com/api/oembed.json"),
-    new $.fn.oembed.OEmbedProvider("ustream", "video", ["ustream\\.tv/recorded/.*"], "http://www.ustream.tv/oembed", {
+    new $.fn.oembed.OEmbedProvider("ustream", "video", ["ustream\\.tv/.*"], "http://www.ustream.tv/oembed", {
       useYQL: 'json'
     }),
     new $.fn.oembed.OEmbedProvider("videojug", "video", ["videojug\\.com/(film|payer|interview).*"], "http://www.videojug.com/oembed.json", {
@@ -887,6 +891,7 @@
       templateData: function(data) {
         if (!data.parse) return false;
         var text = data.parse['text']['*'].replace(/href="\/wiki/g, 'href="http://en.wikipedia.org/wiki');
+        text = text.replace(/="\/\//g, '="http://');
         return '<div id="content"><h3><a class="nav-link" href="http://en.wikipedia.org/wiki/' + data.parse['displaytitle'] + '">' + data.parse['displaytitle'] + '</a></h3>' + text + '</div>';
       }
     }),
@@ -929,8 +934,8 @@
         height: '300'
       }
     }),
-    new $.fn.oembed.OEmbedProvider("jsbin", "rich", ["jsbin.com/.+"], "http://jsbin.com/$1/?", {
-      templateRegex: /.*com\/([^\/]+).*/,
+    new $.fn.oembed.OEmbedProvider("jsbin", "rich", ["jsbin.com/.+"], "http://jsbin.com/$1/$2/?", {
+      templateRegex: /.*com\/([^\/]+)\/([0-9]+).*/,
       embedtag: {
         tag: 'iframe',
         width: '100%',
@@ -1061,13 +1066,14 @@
         height: 600
       }
     }),
-    new $.fn.oembed.OEmbedProvider("kickstarter", "rich", ["kickstarter\\.com/projects/.+"], "$1/widget/card.html", {
-      templateRegex: /([^\?]+).*/,
-      embedtag: {
-        tag: 'iframe',
-        width: '220',
-        height: 380
-      }
+    new $.fn.oembed.OEmbedProvider("kickstarter", "rich", ["kickstarter\\.com/projects/.+"], "http://www.kickstarter.com/services/oembed", {
+      // templateRegex: /([^\?]+).*/,
+      // embedtag: {
+      //   tag: 'iframe',
+      //   width: '480',
+      //   height: 360
+      // }
+      useYQL: 'json'
     }),
 
     new $.fn.oembed.OEmbedProvider("amazon", "rich", ["amzn.com/B+", "amazon.com.*/(B\\S+)($|\\/.*)"], "http://rcm.amazon.com/e/cm?t=_APIKEY_&o=1&p=8&l=as1&asins=$1&ref=qf_br_asin_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr", {

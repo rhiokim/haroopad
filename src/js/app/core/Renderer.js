@@ -27,6 +27,11 @@ define([
 
 		renderer.oembed = function(caption, href, props) {
 			var key, value, tmp = {};
+
+			if (!href) {
+				return '';
+			}
+
 			props = !props ? '' : props ;
 
 			if (props) {
