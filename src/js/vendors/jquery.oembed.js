@@ -191,13 +191,17 @@
           var result;
           if (embedProvider.yql.xpath && embedProvider.yql.xpath == '//meta|//title|//link') {
             var meta = {};
-            data.query = !data.query || {};
+
+            if(!data.query) {
+              data.query = {};
+            }
 
             if (!data.query.results || !data.query.results.meta) {
               data.query.results = {
                 "meta": []
               };
             }
+
             for (var i = 0, l = data.query.results.meta.length; i < l; i++) {
               var name = data.query.results.meta[i].name || data.query.results.meta[i].property || null;
               if (name == null) continue;
@@ -338,15 +342,15 @@
         container.replaceWith(oembedData.code);
         break;
       case "fill":
-        var iframe, ebdOpt;
+        var child, ebdOpt;
 
         if (typeof oembedData.code == 'string') {
           oembedData.code = oembedData.code.replace('="//', '="http://');
           oembedData.code = oembedData.code.replace("='//", "='http://");
         }
         container.html(oembedData.code);
-        iframe = container.children();
-        iframe.width('100%');
+        child = container.children();
+        child.width('100%');
 
         ebdOpt = container.data('props');
 
@@ -354,13 +358,8 @@
           ebdOpt = decodeURIComponent(ebdOpt);
           ebdOpt = JSON.parse(ebdOpt);
         }
-
-        if (ebdOpt.width) {
-          iframe.width(ebdOpt.width);
-        }
-        if (ebdOpt.height) {
-          iframe.height(ebdOpt.height);
-        }
+        
+        child.css(ebdOpt);
         break;
       case "append":
         container.wrap('<p class="oembedall-container"></p>');
@@ -763,6 +762,7 @@
     }),
     new $.fn.oembed.OEmbedProvider("photobucket", "photo", ["photobucket\\.com/(albums|groups)/.+"], "http://photobucket.com/oembed/"),
     new $.fn.oembed.OEmbedProvider("instagram", "photo", ["instagr\\.?am(\\.com)?/.+"], "http://api.instagram.com/oembed"),
+    new $.fn.oembed.OEmbedProvider("path", "photo", ["path.com/p/.+"], "http://api.path.com/oembed"),
     //new $.fn.oembed.OEmbedProvider("yfrog", "photo", ["yfrog\\.(com|ru|com\\.tr|it|fr|co\\.il|co\\.uk|com\\.pl|pl|eu|us)/.+"], "http://www.yfrog.com/api/oembed",{useYQL:"json"}),
     new $.fn.oembed.OEmbedProvider("SmugMug", "photo", ["smugmug.com/[-.\\w@]+/.+"], "http://api.smugmug.com/services/oembed/"),
 
@@ -964,7 +964,7 @@
       embedtag: {
         tag: 'iframe',
         width: '368px',
-        height: 'auto'
+        height: '310px'
       }
     }),
 
@@ -1107,7 +1107,8 @@
         from: 'htmlstring',
         datareturn: function(results) {
           if (!results.result) return false;
-          return '<pre style="background-color:000;">' + results.result + '</div>';
+          results.result = results.result.replace('#ffffff', '');
+          return '<pre><code>' + results.result + '</code></pre>';
         }
       }
     }),
@@ -1122,7 +1123,7 @@
         datareturn: function(results) {
           if (!results['og:title'] && results['title'] && results['description']) results['og:title'] = results['title'];
           if (!results['og:title'] && !results['title']) return false;
-          var code = $('<p/>');
+          var code = $('<div style="border:1px solid #dfdfdf;padding:5px; display:inline-block;">');
           if (results['og:video']) {
             var embed = $('<embed src="' + results['og:video'] + '"/>');
             embed
@@ -1133,17 +1134,21 @@
             if (results['og:video:height']) embed.attr('height', results['og:video:height']);
             code.append(embed);
           } else if (results['og:image']) {
-            var img = $('<img src="' + results['og:image'] + '">');
+            var div = $('<div style="float:left; margin-right:5px; width:64px;">');
+            var img = $('<a href="' + results['og:url'] + '"><img src="' + results['og:image'] + '"></a>');
+            div.append(img);
             img.css('max-height', settings.maxHeight || 'auto').css('max-width', settings.maxWidth || 'auto');
             if (results['og:image:width']) img.attr('width', results['og:image:width']);
             if (results['og:image:height']) img.attr('height', results['og:image:height']);
-            code.append(img);
+            code.append(div);
           }
-          if (results['og:title']) code.append('<b>' + results['og:title'] + '</b><br/>');
+          if (results['og:title']) code.append('<b><a href="' + results['og:url'] + '">' + results['og:title'] + '</a></b><br/>');
           if (results['og:description'])
             code.append(results['og:description'] + '<br/>');
           else if (results['description'])
             code.append(results['description'] + '<br/>');
+
+          code.append($('<i style="clear:both;">'));
           return code;
         }
       }
