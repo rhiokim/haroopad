@@ -19,7 +19,7 @@ define([
     var lexer = new marked.Lexer(defaults);
 
     var customRules = {
-        plugin: /^ *\[([^\:\]]+):([^\]]+)\] *\n*/,
+        // plugin: /^ *\[([^\:\]]+):([^\]]+)\] *\n*/,
         oembed: /^@\[(inside)\]\(href\)/
         // plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(] */
     }

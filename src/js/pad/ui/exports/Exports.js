@@ -54,9 +54,34 @@ define([
 			return cssText;
 		}
 
+		function _replaceOriginalEmbed(html) {
+			var str, type, provider, oembededs = contentDocument.body.querySelectorAll('.oembeded');
+  			oembededs = Array.prototype.slice.call(oembededs, 0);
+
+			_.each(oembededs, function(node) {
+				str = node.getAttribute('data-replace');
+				type = node.getAttribute('data-type');
+				provider = node.getAttribute('data-provider');
+
+				switch(provider) {
+					case 'twitter':
+						html = html.replace(node.innerHTML, str);
+					break;
+				}
+			});
+
+			console.log(html)
+			return html;
+		}
+
 		function getBodyHtml() {
+			var res = '';
+
 			contentDocument = Viewer.getContentDocument();
-			return contentDocument.body.outerHTML;
+
+			res = _replaceOriginalEmbed(contentDocument.body.outerHTML);
+
+			return res;
 		}
 
 		function getTitle() {

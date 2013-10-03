@@ -162,12 +162,15 @@
 
   function success(oembedData, externalUrl, container) {
     $('#jqoembeddata').data(externalUrl, oembedData.code);
-    settings.beforeEmbed.call(container, oembedData);
-    settings.onEmbed.call(container, oembedData);
-    settings.afterEmbed.call(container, oembedData);
+    settings.beforeEmbed.call(container, oembedData, externalUrl);
+    settings.onEmbed.call(container, oembedData, externalUrl);
+    settings.afterEmbed.call(container, oembedData, externalUrl);
   }
 
   function embedCode(container, externalUrl, embedProvider) {
+    container.attr('data-type', embedProvider.type);
+    container.attr('data-provider', embedProvider.name);
+
     if ($('#jqoembeddata').data(externalUrl) != undefined && embedProvider.embedtag.tag != 'iframe') {
       var oembedData = {
         code: $('#jqoembeddata').data(externalUrl)
@@ -410,14 +413,14 @@
     alt += oembedData.author_name ? ' - ' + oembedData.author_name : '';
     alt += oembedData.provider_name ? ' - ' + oembedData.provider_name : '';
     if (oembedData.url) {
-      code = '<div><a href="' + url + '" target=\'_blank\'><img src="' + oembedData.url + '" alt="' + alt + '"/></a></div>';
+      code = '<a href="' + url + '" target=\'_blank\'><img src="' + oembedData.url + '" alt="' + alt + '"/></a>';
     } else if (oembedData.thumbnail_url) {
       var newURL = oembedData.thumbnail_url.replace('_s', '_b');
-      code = '<div><a href="' + url + '" target=\'_blank\'><img src="' + newURL + '" alt="' + alt + '"/></a></div>';
+      code = '<a href="' + url + '" target=\'_blank\'><img src="' + newURL + '" alt="' + alt + '"/></a>';
     } else {
-      code = '<div>Error loading this picture</div>';
+      code = '<span>Error loading this picture</span>';
     }
-    if (oembedData.html) code += "<div>" + oembedData.html + "</div>";
+    if (oembedData.html) code += "<p>" + oembedData.html + "</p>";
     return code;
   };
 
@@ -1123,7 +1126,8 @@
         datareturn: function(results) {
           if (!results['og:title'] && results['title'] && results['description']) results['og:title'] = results['title'];
           if (!results['og:title'] && !results['title']) return false;
-          var code = $('<div style="border:1px solid #dfdfdf;padding:5px; display:inline-block;">');
+
+          var code = $('<div style="border:1px solid #dfdfdf;padding:5px; margin:5px 10px; display:inline-block;">');
           if (results['og:video']) {
             var embed = $('<embed src="' + results['og:video'] + '"/>');
             embed
@@ -1134,13 +1138,20 @@
             if (results['og:video:height']) embed.attr('height', results['og:video:height']);
             code.append(embed);
           } else if (results['og:image']) {
-            var div = $('<div style="float:left; margin-right:5px; width:64px;">');
-            var img = $('<a href="' + results['og:url'] + '"><img src="' + results['og:image'] + '"></a>');
+            // var div = $('<div style="float:left; margin-right:5px;"/>');
+            var div = $('<figure/>');
+            var img = $('<a href="' + results['og:url'] + '"><img src="' + results['og:image'] + '"></a><br/>');
+            var caption = $('<figcaption>');
+            caption.append('<b><a href="' + results['og:url'] + '">' + results['og:title'] + '</a></b><br/>');
+            caption.append((results['og:description'] || results['description'] || '') + '<br/>');
             div.append(img);
+            div.append(caption);
             img.css('max-height', settings.maxHeight || 'auto').css('max-width', settings.maxWidth || 'auto');
             if (results['og:image:width']) img.attr('width', results['og:image:width']);
             if (results['og:image:height']) img.attr('height', results['og:image:height']);
+
             code.append(div);
+            return code;
           }
           if (results['og:title']) code.append('<b><a href="' + results['og:url'] + '">' + results['og:title'] + '</a></b><br/>');
           if (results['og:description'])
