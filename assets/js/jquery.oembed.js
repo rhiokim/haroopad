@@ -410,17 +410,23 @@
 
   $.fn.oembed.getPhotoCode = function(url, oembedData) {
     var code, alt = oembedData.title ? oembedData.title : '';
-    alt += oembedData.author_name ? ' - ' + oembedData.author_name : '';
-    alt += oembedData.provider_name ? ' - ' + oembedData.provider_name : '';
+              alt += oembedData.author_name ? ' - ' + oembedData.author_name : '';
+              alt += oembedData.provider_name ? ' - ' + oembedData.provider_name : '';
+    
+    code = '<figure>';
+    
     if (oembedData.url) {
-      code = '<a href="' + url + '" target=\'_blank\'><img src="' + oembedData.url + '" alt="' + alt + '"/></a>';
+      code += '<a href="' + url + '" target="_blank"><img src="' + oembedData.url + '" alt="' + alt + '"/></a>';
     } else if (oembedData.thumbnail_url) {
       var newURL = oembedData.thumbnail_url.replace('_s', '_b');
-      code = '<a href="' + url + '" target=\'_blank\'><img src="' + newURL + '" alt="' + alt + '"/></a>';
+      code += '<a href="' + url + '" target="_blank"><img src="' + newURL + '" alt="' + alt + '"/></a>';
     } else {
-      code = '<span>Error loading this picture</span>';
+      code += '<span>Error loading this picture</span>';
     }
-    if (oembedData.html) code += "<p>" + oembedData.html + "</p>";
+    code += '<figcaption>['+ oembedData.provider_name +' - '+ oembedData.title +']</figcaption>';
+    code += '</figure>'
+
+    if (oembedData.html) code = oembedData.html;
     return code;
   };
 
