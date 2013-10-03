@@ -70,7 +70,6 @@ define([
 				}
 			});
 
-			console.log(html)
 			return html;
 		}
 
