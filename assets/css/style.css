@@ -11,6 +11,13 @@ footer a {
   font-weight: 700; 
 }
 
+figure {
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+}
+
 .footer-banner {
 	background-color: #8E44AD !important;
 	color: white !important;
