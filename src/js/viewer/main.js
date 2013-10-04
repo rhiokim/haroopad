@@ -260,6 +260,7 @@ function countFragments(target) {
   });
 }
 
+var _embedTimeout;
 var ebdOpt = {
         includeHandle: false,
         embedMethod: 'fill',
@@ -406,9 +407,15 @@ function update(html) {
   // _lazySyntaxHighlight();
   
   countFragments(document.body);
-  drawEmbedContents(document.body);
-}
 
+  if (_embedTimeout) { 
+    window.clearTimeout(_embedTimeout);
+  }
+  
+  _embedTimeout = window.setTimeout(function() {
+    drawEmbedContents(document.body);
+  }, 1000);
+}
 /**
  * sync scroll position
  * @param  {[type]} per [description]
@@ -422,32 +429,32 @@ function scrollTop(per) {
   $(window).scrollTop(top / 100 * per);
 }
 
-function replaceExternalContent(el, origin) {
-  var plugin = $(origin)[0];
-  plugin.setAttribute('origin', origin);
-  el.style.display = 'none';
-  document.body.insertBefore(plugin, el);
-  document.body.removeChild(el);
-}
+// function replaceExternalContent(el, origin) {
+//   var plugin = $(origin)[0];
+//   plugin.setAttribute('origin', origin);
+//   el.style.display = 'none';
+//   document.body.insertBefore(plugin, el);
+//   document.body.removeChild(el);
+// }
 
-$(document.body).ready(function() {
+// $(document.body).ready(function() {
 
-  $(document.body).click(function(e) {
-    var origin, el = e.target;
-    e.preventDefault();
+//   $(document.body).click(function(e) {
+//     var origin, el = e.target;
+//     e.preventDefault();
 
-    switch (el.tagName.toUpperCase()) {
-      case 'IMG':
-        origin = el.getAttribute('origin');
-        if (origin) {
-          replaceExternalContent(el, origin);
-        }
-        break;
-      case 'A':
-        window.ee.emit('link', el.getAttribute('href'));
-        break;
-    }
+//     switch (el.tagName.toUpperCase()) {
+//       case 'IMG':
+//         origin = el.getAttribute('origin');
+//         if (origin) {
+//           replaceExternalContent(el, origin);
+//         }
+//         break;
+//       case 'A':
+//         window.ee.emit('link', el.getAttribute('href'));
+//         break;
+//     }
 
-  });
+//   });
 
-});
+// });

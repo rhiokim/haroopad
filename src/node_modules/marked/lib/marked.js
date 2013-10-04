@@ -361,16 +361,16 @@ Lexer.prototype.token = function(src, top) {
     }
 
      // oembed
-    if (cap = this.rules.oembed.exec(src)) {
-      src = src.substring(cap[0].length);
-      this.tokens.push({
-        type: 'oembed',
-        caption: cap[1],
-        href: cap[2],
-        props: cap[3],
-      });
-      continue;
-    }
+    // if (cap = this.rules.oembed.exec(src)) {
+    //   src = src.substring(cap[0].length);
+    //   this.tokens.push({
+    //     type: 'oembed',
+    //     caption: cap[1],
+    //     href: cap[2],
+    //     props: cap[3],
+    //   });
+    //   continue;
+    // }
 
      // plugin
     // if (cap = this.rules.plugin.exec(src)) {
@@ -537,7 +537,7 @@ inline.breaks = merge({}, inline.gfm, {
  * Inline Lexer & Compiler
  */
 
-function InlineLexer(links, options) {
+function InlineLexer(links, options, renderer) {
   this.options = options || marked.defaults;
   this.links = links;
   this.rules = inline.normal;
@@ -558,6 +558,7 @@ function InlineLexer(links, options) {
   }
 
   this.emojiTemplate = getEmojiTemplate(options);
+  this.renderer = renderer;
 }
 
 /**
@@ -767,17 +768,18 @@ InlineLexer.prototype.outputLink = function(cap, link) {
       + this.output(cap[1])
       + '</a>';
   } else {
-    return '<img src="'
-      + escape(link.href)
-      + '" alt="'
-      + escape(cap[1])
-      + '"'
-      + (link.title
-      ? ' title="'
-      + escape(link.title)
-      + '"'
-      : '')
-      + '>';
+    return this.renderer.image(cap, escape(link.href), link.title);
+    // return '<img src="'
+    //   + escape(link.href)
+    //   + '" alt="'
+    //   + escape(cap[1])
+    //   + '"'
+    //   + (link.title
+    //   ? ' title="'
+    //   + escape(link.title)
+    //   + '"'
+    //   : '')
+    //   + '>';
   }
 };
 
@@ -871,6 +873,19 @@ InlineLexer.prototype.mangle = function(text) {
 function Renderer(options) {
   this.options = options || {};
 }
+Renderer.prototype.image = function(cap, url, props) {
+  return '<img src="'
+      + url
+      + '" alt="'
+      + escape(cap[1])
+      + '"'
+      + (props
+      ? ' title="'
+      + escape(props)
+      + '"'
+      : '')
+      + '>';
+};
 Renderer.prototype.blockcode = function(code, lang) {
   if (!lang) {
     return '<pre><code>' + escape(code, true) + '\n</code></pre>';
@@ -956,7 +971,7 @@ Parser.parse = function(src, options, renderer) {
  */
 
 Parser.prototype.parse = function(src) {
-  this.inline = new InlineLexer(src.links, this.options);
+  this.inline = new InlineLexer(src.links, this.options, this.renderer);
   this.tokens = src.reverse();
 
   var out = '';
@@ -994,7 +1009,7 @@ Parser.prototype.parseText = function() {
     body += '\n' + this.next().text;
   }
 
-  return this.inline.output(body);
+  return this.inline.output(body, this.renderer);
 };
 
 /**
@@ -1113,9 +1128,9 @@ Parser.prototype.tok = function() {
         + this.parseText()
         + '</p>\n';
     }
-    case 'oembed': {
-      return renderer.oembed(this.token.caption, this.token.href, this.token.props);
-    }
+    // case 'oembed': {
+    //   return renderer.oembed(this.token.caption, this.token.href, this.token.props);
+    // }
   }
 };
 
