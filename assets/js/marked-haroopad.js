@@ -60,11 +60,26 @@ lexer.rules = merge({}, lexer.rules, customRules);
 
 
 var renderer = new marked.Renderer();
-    renderer.oembed = function(caption, href, props) {
+renderer.image = function(cap, href, props) {
       var key, value, tmp = {};
+      var imgPattern = /[^\s]+(\.(jpg|png|gif|bmp|jpeg))$/i;
 
       if (!href) {
         return '';
+      }
+
+      if (imgPattern.test(href)) {
+        return '<img src="'
+            + href
+            + '" alt="'
+            + escape(cap[1])
+            + '"'
+            + (props
+            ? ' title="'
+            + escape(props)
+            + '"'
+            : '')
+            + '>';
       }
 
       props = !props ? '' : props ;
@@ -78,8 +93,8 @@ var renderer = new marked.Renderer();
         props = JSON.stringify(tmp);
         props = encodeURIComponent(props);
       }
-      return '<p href="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed">loading...</p>';
-    };
+      return '<p href="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed"></p>';
+    }
 
 var Lexer = lexer;
 var Renderer = renderer;

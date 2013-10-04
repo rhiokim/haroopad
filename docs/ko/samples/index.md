@@ -8,13 +8,13 @@ Palvin was born in [Budapest](http://en.wikipedia.org/wiki/Budapest). At an earl
 
 ## Modeling career
 
-@[](http://weheartit.com/entry/80091383/ 'width:240px,float:right')
+![](http://weheartit.com/entry/80091383/ 'width:240px,float:right')
 
 **Palvin** was discovered on the streets of Budapest in 2006 at the age of 13. She shot her first editorial that year for Spur Magazine. Palvin subsequently moved to Asia where she continued a steady stream of bookings. Since then, Palvin has been on the cover of [L'Officiel](http://en.wikipedia.org/wiki/L%27Officiel), [Vogue Russia](http://en.wikipedia.org/wiki/Vogue_(Magazine)), [Glamour Hungary](http://en.wikipedia.org/wiki/Glamour_(magazine)) and Jalouse Magazine, and has modeled for [Armani Exchange](http://en.wikipedia.org/wiki/Armani_Exchange), [H&M](http://en.wikipedia.org/wiki/H%26M), [Victoria's Secret](http://en.wikipedia.org/wiki/Victoria%27s_Secret), and Pull and Bear. In February 2012, she became an ambassador for L'Oreal Paris.
 
 Her runway debut was as an exclusive for Prada during Milan Fashion Week in February 2010.
 
-@[](http://weheartit.com/entry/59145761 'width:150px,float:left')
+![](http://weheartit.com/entry/59145761 'width:150px,float:left')
 
 Palvin has also walked for Louis Vuitton, Miu Miu, Nina Ricci, Emanuel Ungaro, Christopher Kane, Julien MacDonald, Jeremy Scott, Vivienne Westwood, Etro, and opened the pre-Fall 2011 Chanel show. In 2012, she walked in the Victoria's Secret Fashion Show.
 
@@ -29,11 +29,11 @@ Palvin will appear in the 2014 film [Hercules: The Thracian Wars](http://en.wiki
 
 A tribute to beautiful Barbara Palvin in HD. I hope she becomes the new VS angel. Song is What a Surprise by The Plastics Revolution. 
 
-@[](http://www.youtube.com/watch?v=XalAnLIM73M 'width:476px')
+![](http://www.youtube.com/watch?v=XalAnLIM73M 'width:476px')
 
 **sound colud**
 
-@[](https://soundcloud.com/wearethehangoverclub/a-d-e-barbara-palvin-ft-franky)
+![](https://soundcloud.com/wearethehangoverclub/a-d-e-barbara-palvin-ft-franky)
 
 Written by A.D.E and Franky Frank.  
 Produced by Mask Man  
@@ -42,27 +42,27 @@ http://www.hangoverclub.co.uk
 
 ### instagram photos
 
-@[](http://instagram.com/p/e3F-4fnAZS/)
+![](http://instagram.com/p/e3F-4fnAZS/)
 
-@[](http://instagram.com/p/eMpVUoHAXg/)
+![](http://instagram.com/p/eMpVUoHAXg/)
 
-@[](http://t.co/RMaqe4tq9t)
+![](http://t.co/RMaqe4tq9t)
 
-@[](http://t.co/DtxgmpQWFv)
+![](http://t.co/DtxgmpQWFv)
 
-@[](http://t.co/KJVOHRb4TF)
+![](http://t.co/KJVOHRb4TF)
 
-@[](http://instagram.com/p/d7k8RLHAVU/)
+![](http://instagram.com/p/d7k8RLHAVU/)
 
-@[](http://instagram.com/p/drgMV6HAZ4/)
+![](http://instagram.com/p/drgMV6HAZ4/)
 
-@[](http://instagram.com/p/YnelxlnAXt/)
+![](http://instagram.com/p/YnelxlnAXt/)
  
 ### twitter
 
-@[](https://twitter.com/nat_ntz/status/380421947265675264)
+![](https://twitter.com/nat_ntz/status/380421947265675264)
 
-@[](https://twitter.com/BarbaraPalvin/status/384442493678653440)
+![](https://twitter.com/BarbaraPalvin/status/384442493678653440)
 
 ## External links
 
@@ -81,13 +81,13 @@ Palvin was born in [Budapest](http://en.wikipedia.org/wiki/Budapest). At an earl
 
 ## Modeling career
 
-@[](http://weheartit.com/entry/80091383/ 'width:240px,float:right')
+![](http://weheartit.com/entry/80091383/ 'width:240px,float:right')
 
 **Palvin** was discovered on the streets of Budapest in 2006 at the age of 13. She shot her first editorial that year for Spur Magazine. Palvin subsequently moved to Asia where she continued a steady stream of bookings. Since then, Palvin has been on the cover of [L'Officiel](http://en.wikipedia.org/wiki/L%27Officiel), [Vogue Russia](http://en.wikipedia.org/wiki/Vogue_(Magazine)), [Glamour Hungary](http://en.wikipedia.org/wiki/Glamour_(magazine)) and Jalouse Magazine, and has modeled for [Armani Exchange](http://en.wikipedia.org/wiki/Armani_Exchange), [H&M](http://en.wikipedia.org/wiki/H%26M), [Victoria's Secret](http://en.wikipedia.org/wiki/Victoria%27s_Secret), and Pull and Bear. In February 2012, she became an ambassador for L'Oreal Paris.
 
 Her runway debut was as an exclusive for Prada during Milan Fashion Week in February 2010.
 
-@[](http://weheartit.com/entry/59145761 'width:150px,float:left')
+![](http://weheartit.com/entry/59145761 'width:150px,float:left')
 
 Palvin has also walked for Louis Vuitton, Miu Miu, Nina Ricci, Emanuel Ungaro, Christopher Kane, Julien MacDonald, Jeremy Scott, Vivienne Westwood, Etro, and opened the pre-Fall 2011 Chanel show. In 2012, she walked in the Victoria's Secret Fashion Show.
 
@@ -102,11 +102,11 @@ Palvin will appear in the 2014 film [Hercules: The Thracian Wars](http://en.wiki
 
 A tribute to beautiful Barbara Palvin in HD. I hope she becomes the new VS angel. Song is What a Surprise by The Plastics Revolution. 
 
-@[](http://www.youtube.com/watch?v=XalAnLIM73M 'width:476px')
+![](http://www.youtube.com/watch?v=XalAnLIM73M 'width:476px')
 
 **sound colud**
 
-@[](https://soundcloud.com/wearethehangoverclub/a-d-e-barbara-palvin-ft-franky)
+![](https://soundcloud.com/wearethehangoverclub/a-d-e-barbara-palvin-ft-franky)
 
 Written by A.D.E and Franky Frank.  
 Produced by Mask Man  
@@ -115,27 +115,27 @@ http://www.hangoverclub.co.uk
 
 ### instagram photos
 
-@[](http://instagram.com/p/e3F-4fnAZS/)
+![](http://instagram.com/p/e3F-4fnAZS/)
 
-@[](http://instagram.com/p/eMpVUoHAXg/)
+![](http://instagram.com/p/eMpVUoHAXg/)
 
-@[](http://t.co/RMaqe4tq9t)
+![](http://t.co/RMaqe4tq9t)
 
-@[](http://t.co/DtxgmpQWFv)
+![](http://t.co/DtxgmpQWFv)
 
-@[](http://t.co/KJVOHRb4TF)
+![](http://t.co/KJVOHRb4TF)
 
-@[](http://instagram.com/p/d7k8RLHAVU/)
+![](http://instagram.com/p/d7k8RLHAVU/)
 
-@[](http://instagram.com/p/drgMV6HAZ4/)
+![](http://instagram.com/p/drgMV6HAZ4/)
 
-@[](http://instagram.com/p/YnelxlnAXt/)
+![](http://instagram.com/p/YnelxlnAXt/)
  
 ### twitter
 
-@[](https://twitter.com/nat_ntz/status/380421947265675264)
+![](https://twitter.com/nat_ntz/status/380421947265675264)
 
-@[](https://twitter.com/BarbaraPalvin/status/384442493678653440)
+![](https://twitter.com/BarbaraPalvin/status/384442493678653440)
 
 ## External links
 

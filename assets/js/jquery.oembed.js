@@ -353,7 +353,7 @@
         }
         container.html(oembedData.code);
         child = container.children();
-        child.width('100%');
+        child.width('auto');
 
         ebdOpt = container.data('props');
 
@@ -1132,6 +1132,9 @@
         datareturn: function(results) {
           if (!results['og:title'] && results['title'] && results['description']) results['og:title'] = results['title'];
           if (!results['og:title'] && !results['title']) return false;
+          if (!results['description']) {
+            return $('<small style="color:#afafaf;line-height:14px">&gt; This site does not support <a href="http://oembed.com/" target="_blank">oEmbed</a> and <a href="http://ogp.me/" target="_blank">Open Graph protocol</a>.<br/>&gt; <a href="http://pad.haroopress.com/page.html?f=open-media" target="_blank">You can get here more provider information</a></small>');
+          }
 
           var code = $('<div style="border:1px solid #dfdfdf;padding:5px; margin:5px 10px; display:inline-block;">');
           if (results['og:video']) {
