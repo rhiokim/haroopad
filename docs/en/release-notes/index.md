@@ -1,3 +1,31 @@
+## Haroopad v0.8.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#190             | ==Added== Change Action Menu -> Insert
+#184             | ==Added== Show only TOC
+#174             | ==Added== oEmbed & Open Graph support
+**Bugs**         |
+#196             | Fixed style when export html (Window)
+#186             | Fixed Immediately apply theme when change style in preferences window
+**Enhancements** |
+#182             | Enhanced Sending email when keypress enter
+
+##### Github Issue tracker
+
+* https://github.com/rhiokim/haroopad/issues?milestone=27&state=closed
+
+
+##### Download
+
+> * Windows MSI https://www.dropbox.com/s/7wd2v7azol57vk7/haroopad-v0.8.0-i386-rc0.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/av8g9dipawryymc/haroopad-v0.8.0-rc0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/loq6lm3cofsm3op/haroopad-v0.8.0_i386-rc0.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/uxdwkzaeps0y1sw/haroopad-v0.8.0-i386-rc0.deb
+> * Linux 64-bit Binary: 
+> * Linux 64-bit Debian Package: 
+
 ## Haroopad v0.7.0
 
 Issue Number     | Description
