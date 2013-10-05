@@ -262,6 +262,10 @@ define([
 		nw.emit('close');
 	});
 
+	HotKey('defmod-alt-e', function() {
+		window.ee.emit('file.exports.html');
+	});
+
 	
 	window.ondragover = function(e) { e.preventDefault(); return false };
 	window.ondrop = function(e) { e.preventDefault(); return false };
