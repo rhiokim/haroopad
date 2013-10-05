@@ -437,24 +437,24 @@ function scrollTop(per) {
 //   document.body.removeChild(el);
 // }
 
-// $(document.body).ready(function() {
+$(document.body).ready(function() {
 
-//   $(document.body).click(function(e) {
-//     var origin, el = e.target;
-//     e.preventDefault();
+  $(document.body).click(function(e) {
+    var origin, el = e.target;
+    e.preventDefault();
 
-//     switch (el.tagName.toUpperCase()) {
+    switch (el.tagName.toUpperCase()) {
 //       case 'IMG':
 //         origin = el.getAttribute('origin');
 //         if (origin) {
 //           replaceExternalContent(el, origin);
 //         }
 //         break;
-//       case 'A':
-//         window.ee.emit('link', el.getAttribute('href'));
-//         break;
-//     }
+      case 'A':
+        window.ee.emit('link', el.getAttribute('href'));
+        break;
+    }
 
-//   });
+  });
 
-// });
+});
