@@ -147,7 +147,12 @@ define([
 				clipboard.set(editor.getSelection());
 			});
 			window.ee.on('menu.edit.paste', function() {
+	            var pos = editor.getCursor();
+	            var str = clipboard.get();
+	            pos.ch += str.length;
+	            
 				editor.replaceSelection(clipboard.get());
+	            editor.setCursor(pos);
 			});
 			window.ee.on('menu.edit.delete', function() {
 				editor.replaceSelection('');
