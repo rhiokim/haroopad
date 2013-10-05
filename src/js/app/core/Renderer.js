@@ -1,7 +1,7 @@
 define([
-		'core/Plugins'
+		// 'core/Plugins'
 	], 
-	function(Plugins) {
+	function(/*Plugins*/) {
 
 		var marked = require('marked');
 		var renderer = new marked.Renderer();
@@ -15,36 +15,36 @@ define([
 	                + '    </span>'
 	                + '</span>';
 
-		renderer.plugin = function(name, args) {
-			var plugin = Plugins[name.toLowerCase()];
+		// renderer.plugin = function(name, args) {
+		// 	var plugin = Plugins[name.toLowerCase()];
 
-			if (!plugin) {
-  				return '<p>['+ name +':'+ args +']</p>';
-			}
+		// 	if (!plugin) {
+  // 				return '<p>['+ name +':'+ args +']</p>';
+		// 	}
 			
-			return plugin(name, args);
-		}
+		// 	return plugin(name, args);
+		// }
 
-		renderer.oembed = function(caption, href, props) {
-			var key, value, tmp = {};
+		// renderer.oembed = function(caption, href, props) {
+		// 	var key, value, tmp = {};
 
-			if (!href) {
-				return '';
-			}
+		// 	if (!href) {
+		// 		return '';
+		// 	}
 
-			props = !props ? '' : props ;
+		// 	props = !props ? '' : props ;
 
-			if (props) {
-				props = props.split(',');
-				props.forEach(function(prop) {
-					prop = prop.split(':');
-					tmp[prop[0]] = prop[1];
-				});
-				props = JSON.stringify(tmp);
-				props = encodeURIComponent(props);
-			}
-			return '<p href="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
-		}
+		// 	if (props) {
+		// 		props = props.split(',');
+		// 		props.forEach(function(prop) {
+		// 			prop = prop.split(':');
+		// 			tmp[prop[0]] = prop[1];
+		// 		});
+		// 		props = JSON.stringify(tmp);
+		// 		props = encodeURIComponent(props);
+		// 	}
+		// 	return '<p href="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
+		// }
 
 		renderer.image = function(cap, href, props) {
 			var key, value, tmp = {};
@@ -80,7 +80,7 @@ define([
 				props = encodeURIComponent(props);
 			}
 			return '<p href="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
-		}
+		};
 
 		return renderer;
 });

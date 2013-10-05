@@ -131,7 +131,7 @@ module.exports = function(grunt) {
         files: {
           'build/pad.modules.js': [
             'src/js/pad/before.pad.js',
-            // 'src/js/lib/logger.js',
+            'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
             'src/js/pad/pad.common.js',
             'build/menu.concat.js',
@@ -186,6 +186,7 @@ module.exports = function(grunt) {
           'build/haroopad/js/viewer.min.js': [
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/jquery.oembed.js',
             '<%= vendors %>/highlight.pack.js',
             'build/viewer.js'
           ]
@@ -309,7 +310,10 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' },
 
           { src: 'src/node_modules/humanize/package.json', dest: 'build/haroopad/node_modules/humanize/package.json' },
-          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' }
+          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' },
+
+          { src: 'src/node_modules/moment/package.json', dest: 'build/haroopad/node_modules/moment/package.json' },
+          { src: 'src/node_modules/moment/moment.js', dest: 'build/haroopad/node_modules/moment/moment.js' }
 
         ]
       },
