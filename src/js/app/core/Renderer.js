@@ -80,7 +80,7 @@ define([
 				props = encodeURIComponent(props);
 			}
 			return '<p href="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
-		}
+		};
 
 		return renderer;
 });
