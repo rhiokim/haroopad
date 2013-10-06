@@ -97,8 +97,12 @@ define([
   });
 
 
-  window.ee.on('menu.view.mode.toggle', function() {
-    WindowMgr.actived.window.ee.emit('view.mode.toggle');
+  // window.ee.on('menu.view.mode.toggle', function() {
+  //   WindowMgr.actived.window.ee.emit('view.mode.toggle');
+  // });
+
+  window.ee.on('menu.view.mode', function(layout) {
+    WindowMgr.actived.window.ee.emit('menu.view.mode', layout);
   });
 
   window.ee.on('menu.show.toggle.linenum', function() {

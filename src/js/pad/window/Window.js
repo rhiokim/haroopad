@@ -2,9 +2,8 @@ define([
 	'store',
 	'keyboard',
 	'ui/dialog/Dialogs',
-	'ui/exports/Exports',
-	'ui/splitter/Splitter'
-], function(store, HotKey, Dialogs, Exports, Splitter) {
+	'ui/exports/Exports'
+], function(store, HotKey, Dialogs, Exports) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
 
