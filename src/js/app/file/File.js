@@ -13,7 +13,7 @@ define([
 		function checkTemporary() {
 			var tmp = TmpOpt.get('files'),
 				tmpFile,
-				appTmpDataPath = path.join(gui.App.dataPath[0], '.tmp');
+				appTmpDataPath = path.join(gui.App.dataPath, '.tmp');
 
 			if (!fs.existsSync(appTmpDataPath)) {
 			  fs.mkdirSync(appTmpDataPath);

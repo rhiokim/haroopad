@@ -181,6 +181,18 @@
         case 'table':
             addTable();
           break;
+        case 'section-break':
+            var pos = cm.getCursor();
+                pos.line += 2;
+            cm.replaceSelection('\n- - -\n');
+            cm.setCursor(pos);
+          break;
+        case 'page-break':
+            var pos = cm.getCursor();
+                pos.line += 2;
+            cm.replaceSelection('\n* * *\n');
+            cm.setCursor(pos);
+          break;
         case 'quote':
         case 'unordered-list':
         case 'ordered-list':
@@ -241,6 +253,12 @@
   };
   CodeMirror.commands.markdownOrderedList = function(cm) {
     action('ordered-list', cm);
+  };
+  CodeMirror.commands.markdownSectionBreak = function(cm) {
+    action('section-break', cm);
+  };
+  CodeMirror.commands.markdownPageBreak = function(cm) {
+    action('page-break', cm);
   };
 
   CodeMirror.commands.markdownFencedCode = function(cm) {

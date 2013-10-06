@@ -94,6 +94,7 @@ define([
 			evt.charCode = e.charCode;
 
 			window.parent.dispatchEvent(evt);
+			window.dispatchEvent(evt);
 
 		}, false);
 
@@ -111,6 +112,9 @@ define([
 
 		window.ee.on('menu.view.doc.outline', function(show) {
 			show ? _viewer.showOutline() : _viewer.hideOutline();
+		});
+		window.ee.on('menu.view.doc.toc', function(show) {
+			show ? _viewer.showTOC() : _viewer.hideTOC();
 		});
 
 		HotKey('defmod-alt-c', function() {

@@ -87,14 +87,16 @@ module.exports = function(grunt) {
         files: {
           'build/menu.concat.js': [
             'src/js/common/menu/MenuBar.js',
+            'src/js/common/menu/Menu.edit.js',
             'src/js/common/menu/Menu.file.js',
             'src/js/common/menu/Menu.file.recents.js',
             'src/js/common/menu/Menu.file.exports.js',
             'src/js/common/menu/Menu.file.activities.js',
             'src/js/common/menu/Menu.find.js',
             'src/js/common/menu/Menu.view.js',
-            'src/js/common/menu/Menu.action.js',
-            'src/js/common/menu/Menu.action.header.js',
+            'src/js/common/menu/Menu.insert.js',
+            'src/js/common/menu/Menu.insert.section.js',
+            'src/js/common/menu/Menu.insert.header.js',
             'src/js/common/menu/Menu.tools.js',
             'src/js/common/menu/Menu.tools.post.js',
             'src/js/common/menu/Menu.tools.presentation.js',

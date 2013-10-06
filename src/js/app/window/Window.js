@@ -68,6 +68,32 @@ define([
 
 
   /**
+   * edit
+   */
+  window.ee.on('menu.edit.undo', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.undo');
+  });
+  window.ee.on('menu.edit.redo', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.redo');
+  });
+  window.ee.on('menu.edit.cut', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.cut');
+  });
+  window.ee.on('menu.edit.copy', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.copy');
+  });
+  window.ee.on('menu.edit.paste', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.paste');
+  });
+  window.ee.on('menu.edit.delete', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.delete');
+  });
+  window.ee.on('menu.edit.selectall', function() {
+    WindowMgr.actived.window.ee.emit('menu.edit.selectall');
+  });
+
+
+  /**
    * tools menu event
    */
   window.ee.on('tools.presentation', function(theme) {
@@ -75,8 +101,12 @@ define([
   });
 
 
-  window.ee.on('menu.view.mode.toggle', function() {
-    WindowMgr.actived.window.ee.emit('view.mode.toggle');
+  // window.ee.on('menu.view.mode.toggle', function() {
+  //   WindowMgr.actived.window.ee.emit('view.mode.toggle');
+  // });
+
+  window.ee.on('menu.view.mode', function(layout) {
+    WindowMgr.actived.window.ee.emit('menu.view.mode', layout);
   });
 
   window.ee.on('menu.show.toggle.linenum', function() {
@@ -101,64 +131,79 @@ define([
   
 
   /**
-   * action menu
+   * insert menu
    */
-  window.ee.on('menu.action.copy.html', function() {
+  window.ee.on('menu.insert.copy.html', function() {
     WindowMgr.actived.window.ee.emit('action.copy.html');
   });
-  window.ee.on('menu.action.h1', function() {
+  window.ee.on('menu.insert.h1', function() {
     WindowMgr.actived.window.ee.emit('action.h1');
   });
-  window.ee.on('menu.action.h2', function() {
+  window.ee.on('menu.insert.h2', function() {
     WindowMgr.actived.window.ee.emit('action.h2');
   });
-  window.ee.on('menu.action.h3', function() {
+  window.ee.on('menu.insert.h3', function() {
     WindowMgr.actived.window.ee.emit('action.h3');
   });
-  window.ee.on('menu.action.h4', function() {
+  window.ee.on('menu.insert.h4', function() {
     WindowMgr.actived.window.ee.emit('action.h4');
   });
-  window.ee.on('menu.action.h5', function() {
+  window.ee.on('menu.insert.h5', function() {
     WindowMgr.actived.window.ee.emit('action.h5');
   });
-  window.ee.on('menu.action.h6', function() {
+  window.ee.on('menu.insert.h6', function() {
     WindowMgr.actived.window.ee.emit('action.h6');
   });
-  window.ee.on('menu.action.strong', function() {
+  window.ee.on('menu.insert.strong', function() {
     WindowMgr.actived.window.ee.emit('action.strong');
   });
-  window.ee.on('menu.action.emphasize', function() {
+  window.ee.on('menu.insert.emphasize', function() {
     WindowMgr.actived.window.ee.emit('action.emphasize');
   });
-  window.ee.on('menu.action.inlinecode', function() {
+  window.ee.on('menu.insert.inlinecode', function() {
     WindowMgr.actived.window.ee.emit('action.inlinecode');
   });
-  window.ee.on('menu.action.image', function() {
+  window.ee.on('menu.insert.image', function() {
     WindowMgr.actived.window.ee.emit('action.image');
   });
-  window.ee.on('menu.action.link', function() {
+  window.ee.on('menu.insert.link', function() {
     WindowMgr.actived.window.ee.emit('action.link');
   });
-  window.ee.on('menu.action.blockquote', function() {
+  window.ee.on('menu.insert.blockquote', function() {
     WindowMgr.actived.window.ee.emit('action.blockquote');
   });
-  window.ee.on('menu.action.orderlist', function() {
+  window.ee.on('menu.insert.orderlist', function() {
     WindowMgr.actived.window.ee.emit('action.orderlist');
   });
-  window.ee.on('menu.action.unorderlist', function() {
+  window.ee.on('menu.insert.unorderlist', function() {
     WindowMgr.actived.window.ee.emit('action.unorderlist');
   });
-  window.ee.on('menu.action.fencedcode', function() {
+  window.ee.on('menu.insert.page.break', function() {
+    WindowMgr.actived.window.ee.emit('insert.page.break');
+  });
+  window.ee.on('menu.insert.section.break', function() {
+    WindowMgr.actived.window.ee.emit('insert.section.break');
+  });
+  window.ee.on('menu.insert.fencedcode', function() {
     WindowMgr.actived.window.ee.emit('action.fencedcode');
   });
-  window.ee.on('menu.action.strikethrough', function() {
+  window.ee.on('menu.insert.strikethrough', function() {
     WindowMgr.actived.window.ee.emit('action.strikethrough');
   });
-  window.ee.on('menu.action.table', function() {
+  window.ee.on('menu.insert.table', function() {
     WindowMgr.actived.window.ee.emit('action.table');
   });
-  window.ee.on('menu.action.comment', function() {
+  window.ee.on('menu.insert.comment', function() {
     WindowMgr.actived.window.ee.emit('action.comment');
+  });
+  window.ee.on('menu.insert.toc', function() {
+    WindowMgr.actived.window.ee.emit('insert.toc');
+  });
+  window.ee.on('menu.insert.date', function() {
+    WindowMgr.actived.window.ee.emit('insert.date');
+  });
+  window.ee.on('menu.insert.filename', function() {
+    WindowMgr.actived.window.ee.emit('insert.filename');
   });
 
   /**
@@ -237,8 +282,11 @@ define([
   window.ee.on('context.paste', function(e) {
     WindowMgr.actived.window.ee.emit('context.paste');
   });
-  window.ee.on('context.select.all', function(e) {
-    WindowMgr.actived.window.ee.emit('context.select.all');
+  window.ee.on('context.delete', function(e) {
+    WindowMgr.actived.window.ee.emit('context.delete');
+  });
+  window.ee.on('context.selectall', function(e) {
+    WindowMgr.actived.window.ee.emit('context.selectall');
   });
   window.ee.on('context.preferences', function(e) {
     Preferences.show();
