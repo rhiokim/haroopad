@@ -94,6 +94,7 @@ define([
 			evt.charCode = e.charCode;
 
 			window.parent.dispatchEvent(evt);
+			window.dispatchEvent(evt);
 
 		}, false);
 

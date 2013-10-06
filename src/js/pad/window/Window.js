@@ -2,9 +2,8 @@ define([
 	'store',
 	'keyboard',
 	'ui/dialog/Dialogs',
-	'ui/exports/Exports',
-	'ui/splitter/Splitter'
-], function(store, HotKey, Dialogs, Exports, Splitter) {
+	'ui/exports/Exports'
+], function(store, HotKey, Dialogs, Exports) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
 
@@ -260,6 +259,10 @@ define([
 
 	HotKey('defmod-f4', function() {
 		nw.emit('close');
+	});
+
+	HotKey('defmod-alt-e', function() {
+		window.ee.emit('file.exports.html');
 	});
 
 	
