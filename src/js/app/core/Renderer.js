@@ -74,7 +74,7 @@ define([
 				props = props.split(',');
 				props.forEach(function(prop) {
 					prop = prop.split(':');
-					tmp[prop[0]] = prop[1];
+					tmp[prop[0].trim()] = prop[1].trim();
 				});
 				props = JSON.stringify(tmp);
 				props = encodeURIComponent(props);
