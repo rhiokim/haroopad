@@ -134,6 +134,10 @@ define([
 			window.ee.emit('dom', dom);
 		});
 
+		_viewer.ee.on('title', function(title) {
+			nw.file.set('title', title);
+		});
+
 		/**
 		 * drop in viewer
 		 * @param  {[type]} fileObject [description]
