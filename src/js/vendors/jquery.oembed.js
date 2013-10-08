@@ -353,7 +353,7 @@
         }
         container.html(oembedData.code);
         child = container.children();
-        child.width('auto');
+        // child.width('auto');
 
         ebdOpt = container.data('props');
 
