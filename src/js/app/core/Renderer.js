@@ -74,12 +74,15 @@ define([
 				props = props.split(',');
 				props.forEach(function(prop) {
 					prop = prop.split(':');
-					tmp[prop[0].trim()] = prop[1].trim();
+
+					if (prop[0] && prop[1]) {
+						tmp[prop[0].trim()] = prop[1].trim();
+					}
 				});
 				props = JSON.stringify(tmp);
 				props = encodeURIComponent(props);
 			}
-			return '<p href="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
+			return '<p data-url="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
 		};
 
 		return renderer;

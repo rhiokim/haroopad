@@ -413,18 +413,18 @@
               alt += oembedData.author_name ? ' - ' + oembedData.author_name : '';
               alt += oembedData.provider_name ? ' - ' + oembedData.provider_name : '';
     
-    code = '<figure>';
+    code = '<span>';
     
     if (oembedData.url) {
-      code += '<a href="' + url + '" target="_blank"><img src="' + oembedData.url + '" alt="' + alt + '"/></a>';
+      code += '<a href="' + url + '" target="_blank"><img src="' + oembedData.url + '" alt="' + alt + '"/></a><br/>';
     } else if (oembedData.thumbnail_url) {
       var newURL = oembedData.thumbnail_url.replace('_s', '_b');
-      code += '<a href="' + url + '" target="_blank"><img src="' + newURL + '" alt="' + alt + '"/></a>';
+      code += '<a href="' + url + '" target="_blank"><img src="' + newURL + '" alt="' + alt + '"/></a><br/>';
     } else {
       code += '<span>Error loading this picture</span>';
     }
-    code += '<figcaption>['+ oembedData.provider_name +' - '+ oembedData.title +']</figcaption>';
-    code += '</figure>'
+    code += '<span>['+ oembedData.provider_name +' - '+ oembedData.title +']</span>';
+    code += '</span>'
 
     if (oembedData.html) code = oembedData.html;
     return code;
@@ -1132,7 +1132,7 @@
             return $('<small style="color:#afafaf;line-height:14px">&gt; This site does not support <a href="http://oembed.com/" target="_blank">oEmbed</a> and <a href="http://ogp.me/" target="_blank">Open Graph protocol</a>.<br/>&gt; <a href="http://pad.haroopress.com/page.html?f=open-media" target="_blank">You can get here more provider information</a></small>');
           }
 
-          var code = $('<div style="border:1px solid #dfdfdf;padding:5px; margin:5px 10px; display:inline-block;">');
+          var code = $('<span style="border:1px solid #dfdfdf;padding:5px; margin:5px 10px; display:inline-block;">');
           if (results['og:video']) {
             var embed = $('<embed src="' + results['og:video'] + '"/>');
             embed
@@ -1144,9 +1144,9 @@
             code.append(embed);
           } else if (results['og:image']) {
             // var div = $('<div style="float:left; margin-right:5px;"/>');
-            var div = $('<figure/>');
+            var div = $('<span/>');
             var img = $('<a href="' + results['og:url'] + '" target="_blank"><img src="' + results['og:image'] + '"></a><br/>');
-            var caption = $('<figcaption>');
+            var caption = $('<span>');
             caption.append('<b><a href="' + results['og:url'] + '" target="_blank">' + results['og:title'] + '</a></b><br/>');
             caption.append((results['og:description'] || results['description'] || '') + '<br/>');
             div.append(img);

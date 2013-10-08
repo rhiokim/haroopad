@@ -265,7 +265,7 @@ var ebdOpt = {
         includeHandle: false,
         embedMethod: 'fill',
         afterEmbed: function(oembedData, externalUrl) {
-          this[0].setAttribute('data-origin-url', externalUrl);
+          // this[0].setAttribute('data-origin-url', externalUrl);
           if (typeof oembedData.code == 'string') {
             this[0].setAttribute('data-replace', oembedData.code);
           }
@@ -281,7 +281,7 @@ function drawEmbedContents(target) {
   for (i = 0; i < embeds.length; i++) {
     ebdOpt.ebdOpt = {};
     embed = embeds[i];
-    url = embed.getAttribute('href');
+    url = embed.getAttribute('data-url');
 
     $(embed).oembed(url, ebdOpt);
 
@@ -349,6 +349,9 @@ function update(html) {
     frag = frags[i];
     _frag = _frags.shift();
 
+    origin = frag.outerHTML;
+    frag.setAttribute('data-origin', origin);
+
     //이전 프레그먼트 없는 경우 body 에 추가
     if (!_frag) {
       // var el = $(frag).appendTo(document.body);
@@ -364,6 +367,7 @@ function update(html) {
       if (!_origin) {
         //새로운 프레그먼트와 이전 프레그먼트가 다른 경우는 새로운 프레그먼트로 치환
         if (frag.outerHTML != _frag.outerHTML) {
+        // if (frag.textContent != _frag.textContent) {
 
           _frag.style.display = 'none';
           document.body.insertBefore(frag, _frag);
@@ -371,7 +375,7 @@ function update(html) {
 
         }
       } else {
-        origin = frag.getAttribute('data-origin');
+        // origin = frag.getAttribute('data-origin');
 
         //origin 문자열이 있는 경우
         if (origin != _origin) {
