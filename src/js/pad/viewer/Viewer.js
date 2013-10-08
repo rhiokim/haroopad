@@ -106,7 +106,7 @@ define([
 		}.bind(this), false);
 
 		/* copy html to clipboard */
-		window.ee.on('action.copy.html', function() {
+		window.ee.on('menu.file.exports.clipboard', function() {
 			clipboard.set(content, 'text');
 		});
 
@@ -118,7 +118,7 @@ define([
 		});
 
 		HotKey('defmod-alt-c', function() {
-			window.ee.emit('action.copy.html');
+			window.ee.emit('menu.file.exports.clipboard');
 		});
 
 		_viewer.onload = function() {}
@@ -132,6 +132,10 @@ define([
 
 		_viewer.ee.on('dom', function(dom) {
 			window.ee.emit('dom', dom);
+		});
+
+		_viewer.ee.on('title', function(title) {
+			nw.file.set('title', title);
 		});
 
 		/**
