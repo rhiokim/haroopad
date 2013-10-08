@@ -6,7 +6,7 @@ window.MenuBarFileExports = function () {
     new gui.MenuItem({
       label: 'Clipboard',
       click: function() {
-        window.parent.ee.emit('menu.action.copy.html');
+        window.parent.ee.emit('menu.file.exports.clipboard');
       }
     })
   );

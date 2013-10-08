@@ -50,6 +50,9 @@ define([
     WindowMgr.actived.window.ee.emit('file.close');
   });
 
+  window.ee.on('menu.file.exports.clipboard', function() {
+    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard');
+  });
   window.ee.on('menu.file.exports.html', function() {
     WindowMgr.actived.window.ee.emit('file.exports.html');
   });
@@ -129,9 +132,6 @@ define([
   /**
    * insert menu
    */
-  window.ee.on('menu.insert.copy.html', function() {
-    WindowMgr.actived.window.ee.emit('action.copy.html');
-  });
   window.ee.on('menu.insert.h1', function() {
     WindowMgr.actived.window.ee.emit('action.h1');
   });
