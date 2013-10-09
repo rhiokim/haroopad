@@ -46,7 +46,7 @@ define([
 				props = JSON.stringify(tmp);
 				props = encodeURIComponent(props);
 			}
-			return '<p href="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
+			return '<p data-url="'+ href +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
 		}
 
 		// renderer.image = function(cap, href, props) {

@@ -83,21 +83,23 @@ define([
 		}
 
 		function getBodyHtml() {
-			var res = '';
-
 			contentDocument = Viewer.getContentDocument();
 
 			shadow = document.createElement('body');
 			shadow.style.display = 'none';
 			shadow.setAttribute('class', contentDocument.body.getAttribute('class'));
-			shadow.innerHTML = contentDocument.body.outerHTML;
+			shadow.innerHTML = contentDocument.getElementById('root').innerHTML;
 
 			_replaceOriginalEmbed();
 			_removeDataProperties();
 
 			shadow.removeAttribute('style');
 
-			return shadow.outerHTML;
+			return shadow.innerHTML;
+		}
+
+		function getBodyClass() {
+			return shadow.getAttribute('class');
 		}
 
 		function getTitle() {
@@ -130,7 +132,8 @@ define([
 
 			res = html.replace('@@style', getStyleSheets());
 			res = res.replace('@@body', getBodyHtml());
-			res = res.replace('</body>', getFooterHtml() +'\n</body>');
+			res = res.replace('@@class', getBodyClass());
+			res = res.replace('@@footer', getFooterHtml());
 			res = res.replace('@@title', title);
 			res = res.replace('@@generator', getGenerator());
 			// res = res.replace('@@author', os.hostname());
