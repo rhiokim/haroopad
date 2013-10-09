@@ -8,25 +8,19 @@ define(function() {
 	    .replace(/"/g, '&quot;')
 	    .replace(/'/g, '&#39;');
 	}
-	
+
+	var _width = '100%';
+	var _height = '300px';
+
 	return function(name, args) {
-		var key, file;
 		args = args.split(' ');
 		key = args[0];
-		file = args[1];
-
+		width = args[1] || _width;
+		height = args[2] || _height;
 
 		var origin = '['+ name +':'+ args +']';
 			origin = escape(origin);
-		// origin.push('gist');
-		// origin.concat(args);
 
-		var real = '<img src="img/__json_proxy.png" onload="getGist(this, \''
-			+ key 
-			+ '\''
-			+ (file ? ', \''+ file +'\'' : '')
-			+ ');"/>';
-
-		return '<p data-origin="'+ origin +'">'+ real +'</p>';
+		return '<iframe data-origin="'+ origin +'" style="width:'+ width +'; height:'+ height +';" src="http://jsfiddle.net/'+ key +'/embedded/js,resources,html,css,result/light/"></iframe>';
 	}
 });
