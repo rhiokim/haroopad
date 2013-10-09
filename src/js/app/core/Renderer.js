@@ -51,12 +51,11 @@ define([
 	
 		renderer.math = function(text, display) {
 			if (display) {
-				return '<p data-type="math/tex" data-mode="'+ display
-					+ '" class="mathjax">$$'
+				return '<p class="mathjax">$$'
 					+ text
 					+ '$$</p>';
 			} else {
-				return '<span data-type="math/tex" class="mathjax">$'
+				return '<span class="mathjax">$'
 					+ text
 					+ '$</span>';
 			}

@@ -124,7 +124,7 @@ define([
 			save(file);
 
 			saveEl.off('change', saveHandler);
-			saveEl.val("");
+			saveEl.val('');
 		}
 
 		window.ee.on('file.exports.html', function() {
@@ -139,7 +139,7 @@ define([
 			// res = res.replace('@@author', os.hostname());
 
       		saveEl.attr('nwsaveas', title );
-			saveEl.trigger("click");
+			saveEl.trigger('click');
 			saveEl.on('change', saveHandler);
 			/**
 			 * 1. get html
