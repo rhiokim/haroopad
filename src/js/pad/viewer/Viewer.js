@@ -44,7 +44,7 @@ define([
 			setTimeout(function() {
 				StyleMaker.generateInlineStyle();
 			}, 500);
-		});
+		}
 
 		/* change syntax highlight theme */
 		function changeCodeTheme(value) {
