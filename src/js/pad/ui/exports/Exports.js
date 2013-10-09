@@ -8,6 +8,8 @@ define([
 			os = require('os'),
 			cleanCss = require('clean-css');
 		var gui = require('nw.gui');
+		var manifest = global.package;
+		var saveEl = $("#exportHTML");
 
 		var res;
 		
@@ -24,6 +26,10 @@ define([
 			}
 		}
 
+		function getGenerator() {
+			return manifest.name +' '+ manifest.version;
+		}
+
 		function getStyleSheets() {
 			var href, cssText = '';
 			var contentDocument = Viewer.getContentDocument();
@@ -32,40 +38,44 @@ define([
 				href = item.href;
 				href = href.split('?')[0];
 				href = decodeURIComponent(href);
+				href = href.replace('file:///', '');
 
-				if (process.platform !== 'win32') {
-					href = href.replace('file://', '');
+				if (getPlatformName() !== 'windows') {
+					href = '/' + href;
 				}
 
 				if (fs.existsSync(href)) {
 					cssText += fs.readFileSync(href, 'utf8');
 				}
 			});
+			
 			cssText += '\n footer {position:fixed; font-size:.8em; text-align:right; bottom:0px; margin-left:-25px; height:20px; width:100%;}';
-
-			cssText = cleanCss.process(cssText);
-
 			cssText = cleanCss.process(cssText);
 
 			return cssText;
 		}
 
 		function getBodyHtml() {
+			var mdBody;
 			contentDocument = Viewer.getContentDocument();
-			return contentDocument.body.outerHTML;
+			mdBody = contentDocument.getElementById('root');
+			return mdBody.innerHTML;
+		}
+
+		function getBodyClass() {
+			return contentDocument.body.getAttribute('class');
 		}
 
 		function getTitle() {
-			var contentDocument = Viewer.getContentDocument();
-			var h1, h2
-			h1 = contentDocument.querySelectorAll('body>h1');
+			var title = nw.file.get('title');
+			var basename = nw.file.get('basename');
+			var extname = nw.file.get('extname');
+			
+			title = basename ? basename.replace(extname, '') : title;
+			title = title || 'Untitled';
+			title += '.html';
 
-			if (!h1[0]) {
-				h2 = contentDocument.querySelectorAll('body>h2');
-				return (h2[0]) ? h2[0].innerHTML : 'Untitle';
-			} else {
-				return h1[0].innerHTML;
-			}
+			return title;
 		}
 
 		function getFooterHtml() {
@@ -77,19 +87,24 @@ define([
 
 			save(file);
 
-			$("#exportHTML").off('change', saveHandler);
-			$("#exportHTML").val("");
+			saveEl.off('change', saveHandler);
+			saveEl.val("");
 		}
 
 		window.ee.on('file.exports.html', function() {
+			var title = getTitle();
+
 			res = html.replace('@@style', getStyleSheets());
 			res = res.replace('@@body', getBodyHtml());
-			res = res.replace('</body>', getFooterHtml() +'\n</body>');
-			res = res.replace('@@title', getTitle());
-			res = res.replace('@@author', os.hostname());
+			res = res.replace('@@class', getBodyClass());
+			res = res.replace('@@footer', getFooterHtml());
+			res = res.replace('@@title', title);
+			res = res.replace('@@generator', getGenerator());
+			// res = res.replace('@@author', os.hostname());
 
-			$("#exportHTML").trigger("click");
-			$("#exportHTML").on('change', saveHandler);
+      		saveEl.attr('nwsaveas', title );
+			saveEl.trigger("click");
+			saveEl.on('change', saveHandler);
 			/**
 			 * 1. get html
 			 * 2. load template

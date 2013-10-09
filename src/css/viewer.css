@@ -2,8 +2,8 @@ html {
   height: 100% 
 }
 body {
-  padding: 5px 20px !important;
   margin: 0 !important;
+  padding: 5px 20px !important;
   background-color: #fff;
   font-family: Arial,'Apple SD Gothic Neo','Malgun Gothic', Helvetica, 'nanumgothic', sans-serif, Menlo, Monaco, monospace;
   font-size: .9em;
