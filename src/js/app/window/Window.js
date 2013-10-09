@@ -195,8 +195,8 @@ define([
   window.ee.on('menu.insert.toc', function() {
     WindowMgr.actived.window.ee.emit('insert.toc');
   });
-  window.ee.on('menu.insert.date', function() {
-    WindowMgr.actived.window.ee.emit('insert.date');
+  window.ee.on('menu.insert.date', function(format) {
+    WindowMgr.actived.window.ee.emit('insert.date', format);
   });
   window.ee.on('menu.insert.filename', function() {
     WindowMgr.actived.window.ee.emit('insert.filename');

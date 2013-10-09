@@ -244,8 +244,8 @@ define([
 
 		window.ee.on('insert.toc', function() {
 		});
-		window.ee.on('insert.date', function() {
-			editor.replaceSelection(moment().format('dddd, MMMM Do YYYY'));
+		window.ee.on('insert.date', function(format) {
+			editor.replaceSelection(moment().format(format));
 		});
 		window.ee.on('insert.filename', function() {
 			editor.replaceSelection(nw.file.get('basename'));

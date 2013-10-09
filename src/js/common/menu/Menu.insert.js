@@ -25,10 +25,11 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: 'Date & Time',
+      submenu: MenuBarInsertDate()
       // icon: 'img/menu/unorder.png',
-      click: function() {
-        window.parent.ee.emit('menu.insert.date');
-      }
+      // click: function() {
+      //   window.parent.ee.emit('menu.insert.date');
+      // }
     })
   );
   Insert.append(
