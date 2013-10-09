@@ -289,18 +289,18 @@ function drawMathJax() {
 
 var _embedTimeout;
 var ebdOpt = {
-        includeHandle: false,
-        embedMethod: 'fill',
-        afterEmbed: function(oembedData, externalUrl) {
-          // this[0].setAttribute('data-origin-url', externalUrl);
-          if (typeof oembedData.code == 'string') {
-            this[0].setAttribute('data-replace', oembedData.code);
-          }
-        },
-        onProviderNotFound: function(url) {
-          this.html('<a href="http://pad.haroopress.com/page.html?f=open-media">이 주소는 콘텐츠 스마트 임베딩을 지원하지 않습니다.</a>');
-        }
-      };
+  includeHandle: false,
+  embedMethod: 'fill',
+  afterEmbed: function(oembedData, externalUrl) {
+    // this[0].setAttribute('data-origin-url', externalUrl);
+    if (typeof oembedData.code == 'string') {
+      this[0].setAttribute('data-replace', oembedData.code);
+    }
+  },
+  onProviderNotFound: function(url) {
+    this.html('<a href="http://pad.haroopress.com/page.html?f=open-media">이 주소는 콘텐츠 스마트 임베딩을 지원하지 않습니다.</a>');
+  }
+};
 function drawEmbedContents(target) {
   var url, embed, embeds = target.querySelectorAll('.oembed');
   embeds = Array.prototype.slice.call(embeds, 0);
