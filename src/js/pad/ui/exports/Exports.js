@@ -56,8 +56,14 @@ define([
 		}
 
 		function getBodyHtml() {
+			var mdBody;
 			contentDocument = Viewer.getContentDocument();
-			return contentDocument.body.outerHTML;
+			mdBody = contentDocument.getElementById('root');
+			return mdBody.innerHTML;
+		}
+
+		function getBodyClass() {
+			return contentDocument.body.getAttribute('class');
 		}
 
 		function getTitle() {
@@ -90,7 +96,8 @@ define([
 
 			res = html.replace('@@style', getStyleSheets());
 			res = res.replace('@@body', getBodyHtml());
-			res = res.replace('</body>', getFooterHtml() +'\n</body>');
+			res = res.replace('@@class', getBodyClass());
+			res = res.replace('@@footer', getFooterHtml());
 			res = res.replace('@@title', title);
 			res = res.replace('@@generator', getGenerator());
 			// res = res.replace('@@author', os.hostname());
