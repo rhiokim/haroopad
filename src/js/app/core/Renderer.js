@@ -17,6 +17,21 @@ define([
 			return plugin(args);
 		}
 		*/
+	
+		renderer.math = function(text, display) {
+			if (display) {
+				return '<p data-type="math/tex" data-mode="'+ display
+					+ '" data-origin="'
+					+ text
+					+ '" class="mathjax">$$'
+					+ text
+					+ '$$</p>';
+			} else {
+				return '<span data-type="math/tex" class="mathjax">$'
+					+ text
+					+ '$</span>';
+			}
+		}
 
 		return renderer;
 });

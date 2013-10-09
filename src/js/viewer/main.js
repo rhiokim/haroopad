@@ -265,6 +265,31 @@ function countFragments(target) {
   window.ee.emit('title', headers[0] && headers[0].innerHTML);
 }
 
+function processMathJax(target) {
+  var mathEl = document.createElement('div');
+  mathEl.innerHTML = target.innerHTML;
+
+  MathJax.Hub.Queue(
+    ["Typeset", MathJax.Hub, mathEl],
+    [function() {
+      target.innerHTML = mathEl.innerHTML;
+      target.removeAttribute('class');
+    }]
+  );
+}
+
+function drawMathJax() {
+  var i, math = _md_body.querySelectorAll('.mathjax');
+  math = Array.prototype.slice.call(math, 0);
+
+  for (i = 0; i < math.length; i++) {
+console.log(i);
+    processMathJax(math[i]);
+  }
+
+  // processMathJax(str);
+}
+
 /**
  * update contents
  * @param  {[type]} contents [description]
@@ -384,6 +409,7 @@ function update(html) {
   // _lazySyntaxHighlight();
   
   countFragments(_md_body);
+  drawMathJax();
 }
 
 /**
