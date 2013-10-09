@@ -5,7 +5,8 @@ define(function() {
 
 		events: {
 			'click': 'clickHandler',
-			'click a[data-exec=outline]': 'toggleOutline'
+			'click a[data-exec=outline]': 'toggleOutline',
+			'click a[data-exec=toc]': 'toggleTOC'
 		},
 
 		initialize: function() {},
@@ -21,7 +22,17 @@ define(function() {
 			show = !show;
 			show ? target.addClass('active') : target.removeClass('active') ;
 
-			this.trigger('toggle', show);
+			this.trigger('outline', show);
+		},
+
+		toggleTOC: function(e) {
+			var target = $(e.target);
+			var show = target.hasClass('active');
+
+			show = !show;
+			show ? target.addClass('active') : target.removeClass('active') ;
+
+			this.trigger('toc', show);
 		},
 
 		set: function(show) {

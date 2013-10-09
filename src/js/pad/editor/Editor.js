@@ -5,6 +5,8 @@ define([
 		'editor/Editor.drop'
 	],
 	function(store, Keymap, Drop) {
+		var moment = require('moment');
+
 		var gui = require('nw.gui'),
 			win = gui.Window.get(),
 			clipboard = gui.Clipboard.get();
@@ -129,6 +131,37 @@ define([
 			editor.setOption('lineNumbers', value);
 		});
 
+		/* edit */
+		if (nw.file && !nw.file.get('readOnly')) {
+			window.ee.on('menu.edit.undo', function() {
+				editor.undo();
+			});
+			window.ee.on('menu.edit.redo', function() {
+				editor.redo();
+			});
+			window.ee.on('menu.edit.cut', function() {
+				clipboard.set(editor.getSelection());
+				editor.replaceSelection('');
+			});
+			window.ee.on('menu.edit.copy', function() {
+				clipboard.set(editor.getSelection());
+			});
+			window.ee.on('menu.edit.paste', function() {
+	            var pos = editor.getCursor();
+	            var str = clipboard.get();
+	            pos.ch += str.length;
+	            
+				editor.replaceSelection(clipboard.get());
+	            editor.setCursor(pos);
+			});
+			window.ee.on('menu.edit.delete', function() {
+				editor.replaceSelection('');
+			});
+			window.ee.on('menu.edit.selectall', function() {
+		        editor.setSelection({line:0, ch:0}, {line:editor.lineCount(), ch:0});
+			});
+		}
+
 		/* find & replace */
 		window.ee.on('find.start', function() {
 			CodeMirror.commands.find(editor);
@@ -181,6 +214,7 @@ define([
 		});
 		window.ee.on('action.image', function() {
 			CodeMirror.commands.markdownImage(editor);
+
 		});
 		window.ee.on('action.blockquote', function() {
 			CodeMirror.commands.markdownBlockQuote(editor);
@@ -201,6 +235,22 @@ define([
 			CodeMirror.commands.markdownComment(editor);
 		});
 
+		window.ee.on('insert.page.break', function() {
+			CodeMirror.commands.markdownPageBreak(editor);
+		});
+		window.ee.on('insert.section.break', function() {
+			CodeMirror.commands.markdownSectionBreak(editor);
+		});
+
+		window.ee.on('insert.toc', function() {
+		});
+		window.ee.on('insert.date', function(format) {
+			editor.replaceSelection(moment().format(format));
+		});
+		window.ee.on('insert.filename', function() {
+			editor.replaceSelection(nw.file.get('basename'));
+		});
+
 		/* fire context menu event */
 		if (nw.file && !nw.file.get('readOnly')) {
 			window.ee.on('context.cut', function(e) {
@@ -213,8 +263,11 @@ define([
 			window.ee.on('context.paste', function() {
 				editor.replaceSelection(clipboard.get());
 			});
-			window.ee.on('context.select.all', function() {
-				editor.setSelection(0, 2);
+			window.ee.on('context.delete', function() {
+				editor.replaceSelection('');
+			});
+			window.ee.on('context.selectall', function() {
+		        editor.setSelection({line:0, ch:0}, {line:editor.lineCount(), ch:0});
 			});
 		} else {
 			editor.setOption('readOnly', true);

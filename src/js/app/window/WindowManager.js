@@ -34,6 +34,13 @@ define([
 	// 	return obj;
 	// }
 
+	/* only for mac */
+	gui.App.on('reopen', function() {
+		if (!realCount) {
+			open();
+		}
+	});
+
 	function _updateStore() {
 		config = store.get('Window') || {};
 	}
@@ -62,7 +69,7 @@ define([
 					delete windows[prop];
 					realCount--;
 
-					if (!realCount) {
+					if (!realCount && getPlatformName() != 'mac') {
 						window.ee.emit('exit');
 					}
 					return;

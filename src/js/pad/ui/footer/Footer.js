@@ -55,10 +55,16 @@ define([
 		Advertise.hide();
 	});
 
-	Document.on('toggle', function(show) {
+	Document.on('outline', function(show) {
 		window.ee.emit('menu.view.doc.outline', show);
 
 		global._gaq.push('haroopad', 'set outline view', show);
+	});
+
+	Document.on('toc', function(show) {
+		window.ee.emit('menu.view.doc.toc', show);
+
+		global._gaq.push('haroopad', 'set toc view', show);
 	});
 
 	Share.on('click', function() {
