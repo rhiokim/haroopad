@@ -362,6 +362,17 @@ module.exports = function(grunt) {
           { src: 'lib/node-sass/build/Release/binding.node', dest: 'src/node_modules/node-sass/build/Release/binding.node'},
           { expand: true, cwd: 'lib/node-sass/lib/', src: [ '**' ], dest: 'src/node_modules/node-sass/lib/' }
         ]
+      },
+
+      mdmathjax: {
+        files: [
+          { expand: true, cwd: 'lib/MathJax/config/', src: [ '**' ], dest: 'src/js/vendors/MathJax/config/' },
+          { expand: true, cwd: 'lib/MathJax/extensions/', src: [ '**' ], dest: 'src/js/vendors/MathJax/extensions/' },
+          { expand: true, cwd: 'lib/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'src/js/vendors/MathJax/fonts/HTML-CSS/TeX/woff/' },
+          { expand: true, cwd: 'lib/MathJax/images/', src: [ '**' ], dest: 'src/js/vendors/MathJax/images/' },
+          { expand: true, cwd: 'lib/MathJax/jax/', src: [ '**' ], dest: 'src/js/vendors/MathJax/jax/' },
+          { expand: true, flatten: true, src: [ 'lib/MathJax/*' ], dest: 'src/js/vendors/MathJax/', filter: 'isFile'}
+        ]
       }
     },
 
