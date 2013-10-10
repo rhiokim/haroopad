@@ -15,12 +15,12 @@ define([
 			clipboard.set(cm.getSelection());
 		}
 		function paste(cm) {
-            var pos = cm.getCursor();
+            // var pos = cm.getCursor();
             var str = clipboard.get();
-            pos.ch += str.length;
+            // pos.ch += str.length;
             
-			cm.replaceSelection(clipboard.get());
-            cm.setCursor(pos);
+			cm.replaceSelection(str);
+            cm.setCursor(cm.getCursor());
 		}
 
 	  if (/Mac/.test(navigator.platform)) {
