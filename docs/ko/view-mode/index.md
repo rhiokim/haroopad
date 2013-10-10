@@ -10,15 +10,11 @@
 
 ![](images/002.png)
 
-단축키 : Ctrl(COMMAND) - Alt - 1
-
 ### 리버스모드(reverse)
 
 역방향 모드이다. 에디터 영역과 라이브 뷰 영역이 바뀌어 표시된다.
 
 ![](images/003.png)
-
-단축키 : Ctrl(COMMAND) - Alt - 2
 
 ### 에디터 모드
 
@@ -26,12 +22,17 @@
 
 ![](images/004.png)
 
-단축키 : Ctrl(COMMAND) - Alt - 3
-
 ### 뷰 모드
 
 편집이 불가능하고 현재 문서를 전체화면으로 보고 싶을 때 이용하면 좋다.
 
 ![](images/005.png)
 
-단축키 : Ctrl(COMMAND) - Alt - 4
+### 단축키
+
+| 단축키                   | 설명            |
+|-------------------------|----------------|
+| Ctrl(COMMAND) - Alt - 1 | 에디터 : 뷰어 모드 |
+| Ctrl(COMMAND) - Alt - 2 | 뷰어 : 에디터 모드 |
+| Ctrl(COMMAND) - Alt - 3 | 에디터 모드       |
+| Ctrl(COMMAND) - Alt - 4 | 뷰모드           |

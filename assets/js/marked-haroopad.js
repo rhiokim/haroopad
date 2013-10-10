@@ -59,6 +59,7 @@ function merge(obj) {
 lexer.rules = merge({}, lexer.rules, customRules);
 
 
+var loading = '<span class="spinner"></span>';
 var renderer = new marked.Renderer();
     renderer.oembed = function(caption, href, props) {
       var key, value, link, tmp = {};
@@ -84,7 +85,7 @@ var renderer = new marked.Renderer();
 
       link = '<a href="href" target="_blank">'+ (caption?caption:href) +'</a>';
 
-      return '<p data-url="'+ href +'" data-props="'+ props +'" class="oembed">'+ link  +'</p>';
+      return '<p data-url="'+ href +'" data-props="'+ props +'" class="oembed">'+ link +' '+ loading +'</p>';
     }
 
 var Lexer = lexer;
