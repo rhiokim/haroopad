@@ -1,12 +1,12 @@
 define([
 		'store',
 		'keyboard',
+		'viewer/Viewer.explicitStyleMaker',
 		'viewer/Viewer.dragdrop'
-	],
-	function(store, HotKey, DragDrop) {
+	], 
+	function(store, HotKey, StyleMaker, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
-		// var sass = require('node-sass');
 
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
@@ -22,14 +22,28 @@ define([
 
 		// var config = option.toJSON();
 
+		function setTitle() {
+			var viewerDoc = iframe.contentDocument.body;
+			var el = viewerDoc.querySelectorAll('h1, h2, h3, h4, h5, h6')[0];
+			var title = (el && el.innerText) || '';
+
+			nw.file.set({ title: title }, { silent: true });
+		}
+
 		function update(markdown, html, editor) {
 			content = html;
 			_viewer.update(content);
+
+			setTitle();
 		}
 
 		/* change editor theme */
 		function changeTheme(value) {
 			_viewer.setViewStyle(value);
+
+			setTimeout(function() {
+				StyleMaker.generateInlineStyle();
+			}, 500);
 		}
 
 		/* change syntax highlight theme */
@@ -102,7 +116,7 @@ define([
 		 * delegate right mouse down event
 		 */
 		_viewer.addEventListener('contextmenu', function(ev) {
-			$(document.body).trigger('contextmenu', [ev]);
+			$('#editor').trigger('contextmenu', [ev]);
 		}.bind(this), false);
 
 		/* copy html to clipboard */
@@ -192,6 +206,10 @@ define([
 			 */
 			getContentDocument: function() {
 				return iframe.contentDocument;
+			},
+
+			getHTML: function() {
+				return iframe.contentDocument.body.innerHTML;
 			}
 		};
 	});

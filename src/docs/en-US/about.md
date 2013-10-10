@@ -13,6 +13,9 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 * Custom Theme ==(new)==
   - Style based on CSS(Cascading Style Sheet)
 * Outline View ==(new)==
+* Sending email
+	- Sending beautiful email
+	- Posting to Tumblr
 * Support cross platform
   - Window
   - Mac OS X

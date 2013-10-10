@@ -1,4 +1,3 @@
-
 ## shortcuts
 
 GLYPH    | NAME

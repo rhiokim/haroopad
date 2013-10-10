@@ -90,6 +90,7 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.edit.js',
             'src/js/common/menu/Menu.file.js',
             'src/js/common/menu/Menu.file.recents.js',
+            'src/js/common/menu/Menu.file.send.js',
             'src/js/common/menu/Menu.file.exports.js',
             'src/js/common/menu/Menu.file.activities.js',
             'src/js/common/menu/Menu.find.js',
@@ -112,6 +113,7 @@ module.exports = function(grunt) {
             'src/js/lib/logger.js',
             // 'src/js/app/app.common.js',
             'src/js/lib/utils/util.js',
+            'src/js/app/app.common.js',
             'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
             'build/menu.concat.js',
@@ -289,6 +291,7 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/clean-css/lib/clean.js', dest: 'build/haroopad/node_modules/clean-css/lib/clean.js' },
           { src: 'src/node_modules/clean-css/index.js', dest: 'build/haroopad/node_modules/clean-css/index.js' },
           { src: 'src/node_modules/clean-css/package.json', dest: 'build/haroopad/node_modules/clean-css/package.json' },
+          { expand: true, cwd: 'src/node_modules/nodemailer/', src: [ '**/*.js', '**/*.json', '**/*.types', '**/*.pem' ], dest: 'build/haroopad/node_modules/nodemailer/' },
 
           { expand: true, cwd: 'src/node_modules/fs-extra/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/fs-extra/lib/' },
           { src: 'src/node_modules/fs-extra/package.json', dest: 'build/haroopad/node_modules/fs-extra/package.json' },

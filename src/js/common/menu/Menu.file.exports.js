@@ -18,11 +18,6 @@ window.MenuBarFileExports = function () {
         }
     })
   );
-  // submenu.append(
-  //   new gui.MenuItem({
-  //       label: 'PDF'
-  //   })
-  // );
 
   return submenu;
 };

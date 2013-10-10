@@ -1,0 +1,57 @@
+<div id="send-email-dialog" class="modal hide fade" data-width="400">
+  <form name="send-email" class="form-horizontal">
+  <div class="modal-header">
+    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
+    <h4>Sending email <small id="isSent" class="text-success hide fade in">- Sent</small></h4>
+  </div>
+  <div class="modal-body">
+
+    <div class="alert alert-block hide fade in">
+      message
+    </div>
+
+    <p class="help-block">
+      <div class="input-prepend">
+        <!-- <span class="add-on"><i class="icon-envelope"></i></span> -->
+        <input class="span3" name="title" type="text" placeholder="Title..." required>
+      </div>
+      <div class="btn-group input-append" data-toggle="buttons-radio">
+        <button type="button" name="html" class="btn btn-small active">HTML</button>
+        <button type="button" name="markdown" class="btn btn-small">Markdown</button>
+      </div>
+    </p>
+
+    <span class="help-block">TO: Reciver or <a href="http://www.tumblr.com/docs/en/email_publishing#how" target="_blank">Tumblr email [?]</a>, 
+      <a href="http://blog.evernote.com/blog/2013/07/19/quick-tip-emailing-into-evernote-plus-email-tips/" target="_blank">Evernote email [?]</a>. </span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-envelope"></i></span>
+      <input class="span3" name="to" type="email" data-provide="typeahead" data-items="4" placeholder="Reciver's email address" required>
+    </div>
+
+    <span class="help-block">FROM:</span> 
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-envelope"></i></span>
+      <input class="span3" name="from" type="email" placeholder="Your gmail address" required>
+    </div>
+    <div class="input-append">
+      <input type="password" name="password" class="input-small" placeholder="Password" required>
+    </div>
+    
+    <div class="progress progress-striped active hide" style="margin-top: 10px;">
+      <div class="bar"></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="pull-left">
+      <label class="checkbox">
+        <input type="checkbox" name="remember">
+        <span class="text-info">Remember email</span> <i class="icon-info-sign" data-toggle="tooltip" data-placement="top" title="The password will not be saved."></i>
+      </label>
+    </div>
+    <!-- <a href="#" class="btn btn-danger pull-left _dont_save">Dont's Save</a> -->
+    <button href="#" class="btn _close">Close</button>
+    <!-- <a href="#" class="btn btn-primary _save">Post</a> -->
+    <button type="submit" class="btn btn-primary _save" data-loading-text="Sending...">Send</button>
+  </div>
+  </form>
+</div>

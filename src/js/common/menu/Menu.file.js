@@ -52,9 +52,14 @@ window.MenuBarFile = function () {
           }
       });
   sepItem();
-  
+
   menuItem({
-          label: 'Export',
+          label: 'Sending...',
+          submenu: MenuBarFileSend()
+      });
+
+  menuItem({
+          label: 'Export to...',
           // enabled: false,
           submenu: MenuBarFileExports()
       });

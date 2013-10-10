@@ -37,11 +37,11 @@ requirejs.onError = function (e) {
 
 requirejs([
     'context/Context',
-    // 'core/Parser',
+    'mail/Mailer',
     'window/Window',
     'window/WindowManager',
     'utils/UpdateNotifier'
-  ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
+  ], function(Context, Mailer, Window, WindowMgr, Updater) {
 
     global._gaq.init(function(_gaq) {
       _gaq.push('haroopad', 'command', 'exec');
@@ -53,8 +53,39 @@ requirejs([
       
     //   var html = Parser(md, options);
 
-    //   cb(html);
-    // });
+    global._gaq.init(function(_gaq) {
+      _gaq.push('haroopad', 'init', '');
+    });
+
+    window.ee.on('send.email', function(fileInfo, mailInfo) {
+      var child = WindowMgr.actived;
+      var Emails = store.get('Emails') || {};
+      var addrs = Emails.addrs || [];
+
+      Mailer.setCredential(mailInfo);
+      Mailer.send(mailInfo, fileInfo, function(err, response) {
+
+        if (err) {
+          child.window.ee.emit('fail.send.email', err);
+          return;
+        }
+
+        if (mailInfo.remember) {
+          addrs.push(mailInfo.to);
+          addrs = _.uniq(addrs);
+
+          store.set('Emails', {
+            to: mailInfo.to,
+            from: mailInfo.from,
+            mode: mailInfo.mode,
+            addrs: addrs,
+            remember: mailInfo.remember
+          });
+        }
+
+        child.window.ee.emit('sent.email');
+      });
+    })
     
     var os = getPlatformName();
     gui.App.on('open', function(cmdline) {
