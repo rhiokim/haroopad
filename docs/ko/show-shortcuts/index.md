@@ -22,6 +22,7 @@ Shortcut                       | Description
 &#8984;(&#8963;) - &#8679; - S | save as
 &#8984;(&#8963;) - O           | open file
 &#8984;(&#8963;) - &#8679; - E | sending email
+&#8984;(&#8963;) - &#8997; - R | export html
 &#8984;(&#8963;) - ,           | preferences
 &#8984;(&#8963;) - Q           | close window
 
@@ -37,6 +38,10 @@ Shortcut                       | Description
 &#8984;(&#8963;) - F11         | toggle fullscreen #2
 Double ESC                     | escape fullscreen
 &#8984;(&#8963;) - &#8997; - V | vim keyboard binding
+&#8984;(&#8963;) - &#8679; - 1 | editor : viewer mode
+&#8984;(&#8963;) - &#8679; - 2 | viewer : editor mode
+&#8984;(&#8963;) - &#8679; - 3 | editor mode
+&#8984;(&#8963;) - &#8679; - 4 | viewer mode
 
 ##### Editing
  Shortcut                      | Description
@@ -46,7 +51,7 @@ Double ESC                     | escape fullscreen
 &#8984;(&#8963;) - Z           | Undo
 &#8679; - &#8984;(&#8963;) - Z | Redo
 &#8984;(&#8963;) - Y           | Redo
-&#8984;(&#8963;) - Up          |  Go to Doc Start
+&#8984;(&#8963;) - Up          | Go to Doc Start
 &#8984;(&#8963;) - End         | Go to Doc End
 &#8984;(&#8963;) - Down        | Go to Doc End
 &#8997; - Left                 | Go to Group Left

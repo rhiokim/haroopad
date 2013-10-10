@@ -3,14 +3,21 @@
 Issue Number     | Description
 ----------------:|-----------------------------------------------
 **New Features** |
+#208             | ==Added== OLE Object Drag & Drop support
+#203             | ==Added== Editor and View Mode
+#200             | ==Added== Smart Embedding Rich Media Contents
+#192             | ==Added== Add shortcut for "Export to HTML"
 #190             | ==Added== Change Action Menu -> Insert
 #184             | ==Added== Show only TOC
 #174             | ==Added== oEmbed & Open Graph support
+#128             | ==Added== Set Default filename when save, save as, export html
 **Bugs**         |
 #196             | Fixed style when export html (Window)
+#195             | Fixed Conflicted Shortcut at Vim Mode
 #186             | Fixed Immediately apply theme when change style in preferences window
 **Enhancements** |
 #182             | Enhanced Sending email when keypress enter
+#181             | White space should be excluded from the number of characters.
 
 ##### Github Issue tracker
 

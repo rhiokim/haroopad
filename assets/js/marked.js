@@ -361,16 +361,16 @@ Lexer.prototype.token = function(src, top) {
     }
 
      // oembed
-    // if (cap = this.rules.oembed.exec(src)) {
-    //   src = src.substring(cap[0].length);
-    //   this.tokens.push({
-    //     type: 'oembed',
-    //     caption: cap[1],
-    //     href: cap[2],
-    //     props: cap[3],
-    //   });
-    //   continue;
-    // }
+    if (cap = this.rules.oembed.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'oembed',
+        caption: cap[1],
+        href: cap[2],
+        props: cap[3],
+      });
+      continue;
+    }
 
      // plugin
     // if (cap = this.rules.plugin.exec(src)) {
@@ -1128,9 +1128,9 @@ Parser.prototype.tok = function() {
         + this.parseText()
         + '</p>\n';
     }
-    // case 'oembed': {
-    //   return renderer.oembed(this.token.caption, this.token.href, this.token.props);
-    // }
+    case 'oembed': {
+      return renderer.oembed(this.token.caption, this.token.href, this.token.props);
+    }
   }
 };
 
