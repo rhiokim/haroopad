@@ -79,33 +79,31 @@ function loadPost(file) {
 }
 
 var ebdOpt = {
-	includeHandle: false,
-	embedMethod: 'fill',
-	afterEmbed: function(oembedData, externalUrl) {
-		this[0].setAttribute('data-origin-url', externalUrl);
-		if (typeof oembedData.code == 'string') {
-			this[0].setAttribute('data-replace', oembedData.code);
-		}
-	},
-	onProviderNotFound: function(url) {
-		this.html('<a href="http://pad.haroopress.com/page.html?f=open-media">이 주소는 콘텐츠 스마트 임베딩을 지원하지 않습니다.</a>');
-	}
+  includeHandle: false,
+  embedMethod: 'fill',
+  afterEmbed: function(oembedData, externalUrl) {
+    if (typeof oembedData.code == 'string') {
+      this.attr('data-replace', oembedData.code);
+    }
+  },
+  onProviderNotFound: function(url) {
+    this.html('<a href="http://pad.haroopress.com/page.html?f=open-media">이 주소는 콘텐츠 스마트 임베딩을 지원하지 않습니다.</a>');
+  }
 };
-
 function drawEmbedContents(target) {
-	var url, embed, embeds = target.querySelectorAll('.oembed');
-	embeds = Array.prototype.slice.call(embeds, 0);
+  var url, embed, embeds = target.querySelectorAll('.oembed');
+  embeds = Array.prototype.slice.call(embeds, 0);
 
-	for (i = 0; i < embeds.length; i++) {
-		ebdOpt.ebdOpt = {};
-		embed = embeds[i];
-		url = embed.getAttribute('href');
+  for (i = 0; i < embeds.length; i++) {
+    ebdOpt.ebdOpt = {};
+    embed = embeds[i];
+    url = embed.getAttribute('data-url');
 
-		$(embed).oembed(url, ebdOpt);
+    $(embed).oembed(url, ebdOpt);
 
-		embed.removeAttribute('class');
-		embed.setAttribute('class', 'oembeded');
-	}
+    embed.removeAttribute('class');
+    embed.setAttribute('class', 'oembeded');
+  }
 }
 
 var __timeout;
