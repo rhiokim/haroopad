@@ -244,9 +244,11 @@ define([
 		});
 		window.ee.on('insert.date', function(format) {
 			editor.replaceSelection(moment().format(format));
+       		editor.setCursor(editor.getCursor());
 		});
 		window.ee.on('insert.filename', function() {
 			editor.replaceSelection(nw.file.get('basename'));
+       		editor.setCursor(editor.getCursor());
 		});
 
 		/* fire context menu event */
