@@ -28,7 +28,7 @@ define([
 			props = !props ? '' : props ;
 
 			if (props) {
-				props = props.split(',');
+				props = props.split(';');
 				props.forEach(function(prop) {
 					prop = prop.split(':');
 
