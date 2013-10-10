@@ -294,7 +294,8 @@ var ebdOpt = {
   afterEmbed: function(oembedData, externalUrl) {
     // this[0].setAttribute('data-origin-url', externalUrl);
     if (typeof oembedData.code == 'string') {
-      this[0].setAttribute('data-replace', oembedData.code);
+      // this[0].setAttribute('data-replace', oembedData.code);
+      this.attr('data-replace', oembedData.code);
     }
   },
   onProviderNotFound: function(url) {

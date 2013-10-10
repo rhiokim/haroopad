@@ -6,14 +6,7 @@ define([
 		var marked = require('marked');
 		var renderer = new marked.Renderer();
 
-		var loading = '<span class="bubblingG">'
-	                + '    <span id="bubblingG_1">'
-	                + '    </span>'
-	                + '    <span id="bubblingG_2">'
-	                + '    </span>'
-	                + '    <span id="bubblingG_3">'
-	                + '    </span>'
-	                + '</span>';
+       	var loading = '<span class="spinner"></span>';
 
 		// renderer.plugin = function(name, args) {
 		// 	var plugin = Plugins[name.toLowerCase()];
@@ -26,7 +19,7 @@ define([
 		// }
 
 		renderer.oembed = function(caption, href, props) {
-			var key, value, tmp = {};
+			var key, value, link, tmp = {};
 
 			if (!href) {
 				return '';
@@ -46,7 +39,10 @@ define([
 				props = JSON.stringify(tmp);
 				props = encodeURIComponent(props);
 			}
-			return '<p data-url="'+ href +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
+
+			link = '<a href="href" target="_blank">'+ (caption?caption:href) +'</a>';
+
+			return '<p data-url="'+ href +'" data-props="'+ props +'" class="oembed">'+ link + ' '+ loading +'</p>';
 		}
 	
 		renderer.math = function(text, display) {
