@@ -360,18 +360,6 @@ Lexer.prototype.token = function(src, top) {
       continue;
     }
 
-     // oembed
-    if (cap = this.rules.oembed.exec(src)) {
-      src = src.substring(cap[0].length);
-      this.tokens.push({
-        type: 'oembed',
-        caption: cap[1],
-        href: cap[2],
-        props: cap[3],
-      });
-      continue;
-    }
-
      // plugin
     // if (cap = this.rules.plugin.exec(src)) {
     //   src = src.substring(cap[0].length);
@@ -464,7 +452,7 @@ Lexer.prototype.token = function(src, top) {
  */
 
 var inline = {
-  escape: /^\\([=\\`*{}\[\]()#+\-.!_>])/,
+  escape: /^\\([\\`*{}\[\]()#+\-.!_>=])/,
   autolink: /^<([^ >]+(@|:\/)[^ >]+)>/,
   url: noop,
   tag: /^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,
@@ -476,7 +464,6 @@ var inline = {
   code: /^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,
   br: /^ {2,}\n(?!\s*$)/,
   del: noop,
-  emoji: noop,
   text: /^[\s\S]+?(?=[\\<!\[_*`]|==| {2,}\n|$)/,
   stronghighlight: /^==([^=]+)==/,
   underline: /^_([^_]+)_/
@@ -517,9 +504,8 @@ inline.gfm = merge({}, inline.normal, {
   escape: replace(inline.escape)('])', '~|])')(),
   url: /^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,
   del: /^~~(?=\S)([\s\S]*?\S)~~/,
-  emoji: /^:([A-Za-z0-9_\-\+]+?):/,
   text: replace(inline.text)
-    (']|', ':~]|')
+    (']|', '~]|')
     ('|', '|https?://|')
     ()
 });
@@ -537,7 +523,7 @@ inline.breaks = merge({}, inline.gfm, {
  * Inline Lexer & Compiler
  */
 
-function InlineLexer(links, options, renderer) {
+function InlineLexer(links, options) {
   this.options = options || marked.defaults;
   this.links = links;
   this.rules = inline.normal;
@@ -556,9 +542,6 @@ function InlineLexer(links, options, renderer) {
   } else if (this.options.pedantic) {
     this.rules = inline.pedantic;
   }
-
-  this.emojiTemplate = getEmojiTemplate(options);
-  this.renderer = renderer;
 }
 
 /**
@@ -727,13 +710,6 @@ InlineLexer.prototype.output = function(src) {
       continue;
     }
 
-    // emoji (gfm)
-    if (cap = this.rules.emoji.exec(src)) {
-      src = src.substring(cap[0].length);
-      out += this.emoji(cap[1]);
-      continue;
-    }
-
     // text
     if (cap = this.rules.text.exec(src)) {
     src = src.substring(cap[0].length);
@@ -768,60 +744,18 @@ InlineLexer.prototype.outputLink = function(cap, link) {
       + this.output(cap[1])
       + '</a>';
   } else {
-    return this.renderer.image(cap, escape(link.href), link.title);
-    // return '<img src="'
-    //   + escape(link.href)
-    //   + '" alt="'
-    //   + escape(cap[1])
-    //   + '"'
-    //   + (link.title
-    //   ? ' title="'
-    //   + escape(link.title)
-    //   + '"'
-    //   : '')
-    //   + '>';
+    return '<img src="'
+      + escape(link.href)
+      + '" alt="'
+      + escape(cap[1])
+      + '"'
+      + (link.title
+      ? ' title="'
+      + escape(link.title)
+      + '"'
+      : '')
+      + '>';
   }
-};
-
-/**
- * Emoji Transformations
- */
-
-function emojiDefaultTemplate(emoji) {
-  return '<img src="'
-    + 'img/emoji/'
-    + encodeURIComponent(emoji)
-    + '.png"'
-    + ' alt=":'
-    + escape(emoji)
-    + ':"'
-    + ' title=":'
-    + escape(emoji)
-    + ':"'
-    + ' class="emoji" align="absmiddle" height="20" width="20">';
-}
-
-function getEmojiTemplate(options) {
-  if (options.emoji) {
-    if (typeof options.emoji === 'function') {
-      return options.emoji;
-    }
-
-    if (typeof options.emoji === 'string') {
-      var emojiSplit = options.emoji.split(/\{emoji\}/g);
-      return function(emoji) {
-        return emojiSplit.join(emoji);
-      }
-    }
-  }
-  return emojiDefaultTemplate;
-}
-
-InlineLexer.prototype.emojiTemplate = emojiDefaultTemplate;
-InlineLexer.prototype.emoji = function (name) {
-  if (!this.options.emoji) return ':' + name + ':';
-
-  return this.emojiTemplate(name);
 };
 
 /**
@@ -873,19 +807,6 @@ InlineLexer.prototype.mangle = function(text) {
 function Renderer(options) {
   this.options = options || {};
 }
-Renderer.prototype.image = function(cap, url, props) {
-  return '<img src="'
-      + url
-      + '" alt="'
-      + escape(cap[1])
-      + '"'
-      + (props
-      ? ' title="'
-      + escape(props)
-      + '"'
-      : '')
-      + '>';
-};
 Renderer.prototype.blockcode = function(code, lang) {
   if (!lang) {
     return '<pre><code>' + escape(code, true) + '\n</code></pre>';
@@ -971,7 +892,7 @@ Parser.parse = function(src, options, renderer) {
  */
 
 Parser.prototype.parse = function(src) {
-  this.inline = new InlineLexer(src.links, this.options, this.renderer);
+  this.inline = new InlineLexer(src.links, this.options);
   this.tokens = src.reverse();
 
   var out = '';
@@ -1009,7 +930,7 @@ Parser.prototype.parseText = function() {
     body += '\n' + this.next().text;
   }
 
-  return this.inline.output(body, this.renderer);
+  return this.inline.output(body);
 };
 
 /**
@@ -1040,7 +961,7 @@ Parser.prototype.tok = function() {
     }
     case 'table': {
       var body = ''
-        , heading
+        , heading = ''
         , i
         , row
         , cell
@@ -1128,9 +1049,6 @@ Parser.prototype.tok = function() {
         + this.parseText()
         + '</p>\n';
     }
-    case 'oembed': {
-      return renderer.oembed(this.token.caption, this.token.href, this.token.props);
-    }
   }
 };
 
@@ -1191,7 +1109,7 @@ function marked(src, opt, callback) {
       opt = null;
     }
 
-    opt = merge({}, marked.defaults, opt || {});
+    opt = opt ? merge({}, marked.defaults, opt) : marked.defaults;
 
     var highlight = opt.highlight
       , tokens
@@ -1276,7 +1194,6 @@ marked.setOptions = function(opt) {
 
 marked.defaults = {
   gfm: true,
-  emoji: false,
   tables: true,
   breaks: false,
   pedantic: false,
