@@ -43,7 +43,7 @@
     return this.each(function() {
 
       var container = $(this),
-        resourceURL = (url && (!url.indexOf('http://') || !url.indexOf('https://'))) ? url : container.attr("href"),
+        resourceURL = (url && (!url.indexOf('http://') || !url.indexOf('https://'))) ? url : container.attr("data-url"),
         provider;
 
       if (embedAction) {
@@ -338,7 +338,7 @@
   /* Public functions */
   $.fn.oembed.insertCode = function(container, embedMethod, oembedData) {
     if (oembedData === null) return;
-    if (embedMethod == 'auto' && container.attr("href") !== null) embedMethod = 'append';
+    if (embedMethod == 'auto' && container.attr("data-url") !== null) embedMethod = 'append';
     else if (embedMethod == 'auto') embedMethod = 'replace';
     switch (embedMethod) {
       case "replace":
@@ -350,8 +350,19 @@
         if (typeof oembedData.code == 'string') {
           oembedData.code = oembedData.code.replace('="//', '="http://');
           oembedData.code = oembedData.code.replace("='//", "='http://");
+
+          container.html(oembedData.code);
+        } else {
+          var html;
+
+          try {
+            html = oembedData.code[0].outerHTML;
+          } catch (e) {
+            html = '<small style="color:#afafaf;line-height:14px">&gt; This site does not support <a href="http://oembed.com/" target="_blank">oEmbed</a> and <a href="http://ogp.me/" target="_blank">Open Graph protocol</a>.<br/>&gt; <a href="http://pad.haroopress.com/page.html?f=open-media" target="_blank">You can get here more provider information</a></small>';
+          }
+          container.html(html);
         }
-        container.html(oembedData.code);
+        
         child = container.children();
         // child.width('auto');
 
@@ -413,7 +424,7 @@
               alt += oembedData.author_name ? ' - ' + oembedData.author_name : '';
               alt += oembedData.provider_name ? ' - ' + oembedData.provider_name : '';
     
-    code = '<span>';
+    code = '<span class="oembed_photo">';
     
     if (oembedData.url) {
       code += '<a href="' + url + '" target="_blank"><img src="' + oembedData.url + '" alt="' + alt + '"/></a><br/>';
