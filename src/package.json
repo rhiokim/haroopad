@@ -17,7 +17,7 @@
   },
   "single-instance": true,
   "webkit": {
-    "plugin": false
+    "plugin": true
   },
   "upgrade": "http://pad.haroopress.com/upgrade.json",
   "maintainers": [
