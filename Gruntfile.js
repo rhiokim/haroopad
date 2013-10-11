@@ -151,6 +151,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/store.js',
             '<%= vendors %>/js-url.js',
+            '<%= vendors %>/reMarked.js',
             '<%= vendors %>/notifier.js',
             '<%= vendors %>/require.min.js'
           ]
