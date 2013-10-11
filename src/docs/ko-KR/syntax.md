@@ -228,6 +228,30 @@ do_this_and_do_that_and_another_thing
 웹 문서를 작성하다보면 링크는 매우 자주 등장하기 마련이다. 그때마다 '[]()' 기호를 작성하지 않고 자동으로 
 링크 주소를 인식해 링크 형태로 변경해준다.
 
+##### 테이블
+
+마크다운에서 테이블은 행과 열을 나눌 수 있고 하이픈(-)을 통해서 헤더와 바디를 구분지어 줄 수 있다. 
+또한 정렬을 위해서는 콜론(:)을 이용해 아래의 예시와 같이 정렬 방향 끝에 한번만 마킹해주면 된다.
+
+좌측 정렬   : `|:------|`
+우측 정렬   : `|------:|`
+가운데 정렬 : `|:-----:|`
+
+
+```markdown
+| name  | age | gender    | money  |
+|-------|:---:|-----------|-------:|
+| rhio  | 384 | robot     | $3,000 |
+| haroo | .3  | bird      | $430   |
+| jedi  | ?   | undefined | $0     |
+```
+
+| name  | age | gender    | money  |
+|-------|:---:|-----------|-------:|
+| rhio  | 384 | robot     | $3,000 |
+| haroo | .3  | bird      | $430   |
+| jedi  | ?   | undefined | $0     |
+
 ##### 팬스 코드블럭
 
 일반적인 코드 블럭은 4개의 공백 혹은 1개의 탭을 입력해야 하지만 팬스 코드블럭은 처음과 끝에 'backtic' 3개로 이뤄진
@@ -235,7 +259,7 @@ do_this_and_do_that_and_another_thing
 
 예시:
 
-```
+```js
 function test() {
   console.log("notice the blank line before this function?");
 }
@@ -276,3 +300,29 @@ An _underline_, also called an underscore is one or more horizontal lines immedi
 ```
 
 An _underline_, also called an underscore is one or more _horizontal lines_ immediately below a portion of writing.
+
+##### Embedding
+
+웹 문서를 작성하다 보면 비디오, 음악을 포함한 다양한 온라인 콘텐츠를 이용하기 마련이다.  이에 경량의 문법을 이용하는 마크다운의 특성을 유지하고 기존의 마크다운 사용자 경험에 크게 벗어나지 않으며 강력한 웹 콘텐츠를 문서내에 쉽게 추가할 수 있도록 새로운 문법을 추가하였다.
+
+```markdown
+@[하루패드 비메오 동영상](https://vimeo.com/70762354 'float:left;width:400px')
+
+**하루패드**는 웹 친화적인 문서를 작성하기 위한 마크다운 에디터입니다. 
+
+여러분은 간단한 마크다운 문법을 이용해 웹 문서를 생성하거나 블로그, 이메일 그리고 복잡한 리포트 문서를 작성할 수 있습니다. 
+
+그리고 하루패드는 윈도우, 리눅스, 맥을 지원하여 여러분이 원하는 플랫폼에서 똑같은 문서 편집 경험을 얻을 수 있습니다.
+
+![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
+```
+
+@[하루패드 비메오 동영상](https://vimeo.com/70762354 'float:left;width:400px')
+
+**하루패드**는 웹 친화적인 문서를 작성하기 위한 마크다운 에디터입니다. 
+
+여러분은 간단한 마크다운 문법을 이용해 웹 문서를 생성하거나 블로그, 이메일 그리고 복잡한 리포트 문서를 작성할 수 있습니다. 
+
+그리고 하루패드는 윈도우, 리눅스, 맥을 지원하여 여러분이 원하는 플랫폼에서 똑같은 문서 편집 경험을 얻을 수 있습니다.
+
+![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)

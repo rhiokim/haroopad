@@ -344,3 +344,9 @@ Copyright (c) 2011-2012 Tim Wood (MIT)
 **jquery oembed plugin**
 
 Copyright (c) 2009 Richard Chamorro (MIT)
+
+* * * 
+
+**reMarked.js**
+
+Copyright (c) https://github.com/leeoniya/reMarked.js (MIT)
