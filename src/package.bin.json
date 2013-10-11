@@ -14,9 +14,8 @@
   "single-instance": true,
   "snapshot": "js/haroopad.bin",
   "webkit": {
-    "plugin": false
+    "plugin": true
   },
-  "no-edit-menu": true,
   "upgrade": "http://pad.haroopress.com/upgrade.json",
   "maintainers":[{
    "name": "Rhio Kim",

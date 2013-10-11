@@ -147,12 +147,10 @@ define([
 				clipboard.set(editor.getSelection());
 			});
 			window.ee.on('menu.edit.paste', function() {
-	            var pos = editor.getCursor();
 	            var str = clipboard.get();
-	            pos.ch += str.length;
 	            
-				editor.replaceSelection(clipboard.get());
-	            editor.setCursor(pos);
+				editor.replaceSelection(str);
+           		editor.setCursor(editor.getCursor());
 			});
 			window.ee.on('menu.edit.delete', function() {
 				editor.replaceSelection('');
@@ -244,11 +242,13 @@ define([
 
 		window.ee.on('insert.toc', function() {
 		});
-		window.ee.on('insert.date', function() {
-			editor.replaceSelection(moment().format('dddd, MMMM Do YYYY'));
+		window.ee.on('insert.date', function(format) {
+			editor.replaceSelection(moment().format(format));
+       		editor.setCursor(editor.getCursor());
 		});
 		window.ee.on('insert.filename', function() {
 			editor.replaceSelection(nw.file.get('basename'));
+       		editor.setCursor(editor.getCursor());
 		});
 
 		/* fire context menu event */
