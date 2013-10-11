@@ -40,7 +40,7 @@ define([
 				props = encodeURIComponent(props);
 			}
 
-			link = '<a href="href" target="_blank">'+ (caption?caption:href) +'</a>';
+			link = '<a href="'+ href +'" target="_blank">'+ (caption?caption:href) +'</a>';
 
 			return '<p data-url="'+ href +'" data-props="'+ props +'" class="oembed">'+ link + ' '+ loading +'</p>';
 		}
