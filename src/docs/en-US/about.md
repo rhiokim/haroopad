@@ -49,10 +49,13 @@ Haroopad gives you the same editing experience regardless of the platform you ar
   - Style based on CSS(Cascading Style Sheet)
 * Outline View - v0.7
 
-### Upcoming features
+### Upcoming Features
 
-* Send email
-* Post to tumblr
+* Table Of Contents `[TOC]`
+* Footnotes
+* Mathematics (LaTex)
+	- $ ..... $ (Inline) 
+	- $$ ... $$ (Block)
 
 ### And more?
 
