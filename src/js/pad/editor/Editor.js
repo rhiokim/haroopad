@@ -199,7 +199,7 @@ define([
 			CodeMirror.commands.replaceAll(editor);
 		});
 
-		window.ee.on('action.h1', function() {
+		window.ee.on('action.h1', function() {alert('')
 			CodeMirror.commands.markdownH1(editor);
 
     	global._gaq.push('haroopad.insert', 'markdown', 'h1');
