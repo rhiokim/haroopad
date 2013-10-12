@@ -50,6 +50,7 @@ requirejs([
   'editor/Editor',
   'viewer/Viewer',
   'ui/file/File',
+  'ui/layout/Layout',
   'ui/footer/Footer'
 ], function(Window, Editor, Viewer, File) {
   // var html, res, file, uid, tmp, readOnly, x, y;

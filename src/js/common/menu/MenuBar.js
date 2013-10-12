@@ -13,9 +13,10 @@ window.MenuBar = function() {
 		if (platform != 'darwin') {
 			menu.append( MenuBarFile() );
 		}
+		// menu.append( MenuBarEdit() );
 		menu.append( MenuBarFind() );
+		menu.append( MenuBarInsert() );
 		menu.append( MenuBarView() );
-		menu.append( MenuBarAction() );
 		// menu.append( MenuBarTools() );
 		
 		if (platform != 'darwin') {

@@ -1,3 +1,6 @@
+var _doc,
+    _body,
+    _md_body;
 var _options = {
   dirname: '.'
 };
@@ -43,9 +46,9 @@ function setViewStyle(style) {
     href: href
   });
 
-  $(document.body).removeClass();
-  $(document.body).addClass('markdown');
-  $(document.body).addClass(style);
+  $(_body).removeClass();
+  $(_body).addClass('markdown');
+  $(_body).addClass(style);
 }
 
 function setCodeStyle(style) {
@@ -56,7 +59,7 @@ function setCodeStyle(style) {
 }
 
 function loadCustomCSS(style) {
-  $(document.body).addClass('custom');
+  $(_body).addClass('custom');
 
   $('#custom').attr({
     href: style +'?'+ new Date().getTime()
@@ -88,8 +91,20 @@ function showOutline() {
     href: href +'?'+ new Date().getTime()
   });
 }
+function showTOC() {
+  var href;
+    
+  href = 'css/viewer-toc/only-toc.css';
+  $('#toc').attr({
+    href: href +'?'+ new Date().getTime()
+  });
+}
 
 function hideOutline() {
+  $('#toc').removeAttr('href');
+}
+
+function hideTOC() {
   $('#toc').removeAttr('href');
 }
 
@@ -106,17 +121,17 @@ function showOnlyTOC() {
   // });  
 }
 
-function showAllContent() {alert('all show')
+function showAllContent() {
   contentElements.forEach(function(el) {
     el.style.display = '';
   });  
 }
 
 function createTOC() {
-  var toc = generateTOC($(document.body)[0]);
-  $(document.body).prepend('<div id="toc"></div>');
+  var toc = generateTOC(_body);
+  $(_body).prepend('<div id="toc"></div>');
   $('#toc').html(toc);
-  $(document.body).scrollspy('refresh');
+  $(_body).scrollspy('refresh');
 }
 
 function init(options) {
@@ -225,27 +240,60 @@ function _preventDefaultAnchor() {
 }
 
 function countFragments(target) {
-  var header = target.querySelectorAll('h1, h2, h3, h4, h5, h6').length;
-  var img = target.querySelectorAll('img').length;
+  var headers = target.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  var imgs = target.querySelectorAll('img');
   // var bold = target.querySelectorAll('strong').length;
   // var italic = target.querySelectorAll('i').length;
-  var code = target.querySelectorAll('code').length;
+  var codes = target.querySelectorAll('code');
   // var fencedcode = code - target.querySelectorAll('pre>code').length;
-  var blockquote = target.querySelectorAll('blockquote').length;
-  var paragraph = target.querySelectorAll('p').length;
-  var link = target.querySelectorAll('a').length;
-  var table = target.querySelectorAll('table').length;
+  var blockquotes = target.querySelectorAll('blockquote');
+  var paragraphs = target.querySelectorAll('p');
+  var links = target.querySelectorAll('a');
+  var tables = target.querySelectorAll('table');
 
   window.ee.emit('dom', {
-    header: header,
-    paragraph: paragraph,
-    link: link,
-    image: img,
-    code: code,
+    header: headers.length,
+    paragraph: paragraphs.length,
+    link: links.length,
+    image: imgs.length,
+    code: codes.length,
     // fencedcode: fencedcode,
-    blockquote: blockquote,
-    table: table
+    blockquote: blockquotes.length,
+    table: tables.length
   });
+
+  window.ee.emit('title', headers[0] && headers[0].innerHTML);
+}
+
+var _embedTimeout;
+var ebdOpt = {
+  includeHandle: false,
+  embedMethod: 'fill',
+  afterEmbed: function(oembedData, externalUrl) {
+    // this[0].setAttribute('data-origin-url', externalUrl);
+    if (typeof oembedData.code == 'string') {
+      // this[0].setAttribute('data-replace', oembedData.code);
+      this.attr('data-replace', oembedData.code);
+    }
+  },
+  onProviderNotFound: function(url) {
+    this.html('<a href="http://pad.haroopress.com/page.html?f=open-media">이 주소는 콘텐츠 스마트 임베딩을 지원하지 않습니다.</a>');
+  }
+};
+function drawEmbedContents(target) {
+  var url, embed, embeds = target.querySelectorAll('.oembed');
+  embeds = Array.prototype.slice.call(embeds, 0);
+
+  for (i = 0; i < embeds.length; i++) {
+    ebdOpt.ebdOpt = {};
+    embed = embeds[i];
+    url = embed.getAttribute('data-url');
+
+    $(embed).oembed(url, ebdOpt);
+
+    embed.removeAttribute('class');
+    embed.setAttribute('class', 'oembeded');
+  }
 }
 
 /**
@@ -264,14 +312,14 @@ function update(html) {
   frags = wrapper.querySelectorAll(':scope>*');
   frags = Array.prototype.slice.call(frags, 0);
 
-  _frags = document.body.querySelectorAll(':scope>*');
+  _frags = _md_body.querySelectorAll(':scope>*');
   _frags = Array.prototype.slice.call(_frags, 0);
 
   //새로 생성된 pre 엘리먼트 origin attribute 에 본래 html 을 저장
   codes = wrapper.querySelectorAll('pre>code');
   codes = Array.prototype.slice.call(codes, 0);
 
-  _codes = document.body.querySelectorAll('pre>code');
+  _codes = _md_body.querySelectorAll('pre>code');
   _codes = Array.prototype.slice.call(_codes, 0);
 
   for (i = 0; i < codes.length; i++) {
@@ -279,10 +327,10 @@ function update(html) {
     _code = _codes[i];
 
     origin = code.parentElement.outerHTML;
-    code.setAttribute('origin', origin);
+    code.setAttribute('data-origin', origin);
 
     if (_code) {
-      _origin = _code.parentElement.getAttribute('origin');
+      _origin = _code.parentElement.getAttribute('data-origin');
 
       if (origin != _origin) {
         _lazySyntaxHighlight(code);
@@ -307,44 +355,46 @@ function update(html) {
     frag = frags[i];
     _frag = _frags.shift();
 
+    origin = frag.outerHTML;
+    frag.setAttribute('data-origin', origin);
+
     //이전 프레그먼트 없는 경우 body 에 추가
     if (!_frag) {
       // var el = $(frag).appendTo(document.body);
 
-      document.body.appendChild(frag);
+      _md_body.appendChild(frag);
     } else {
 
       //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
       // origin = $(_frag).attr('origin');
-      _origin = _frag.getAttribute('origin');
+      _origin = _frag.getAttribute('data-origin');
 
       //origin 문자열이 없는 경우
       if (!_origin) {
         //새로운 프레그먼트와 이전 프레그먼트가 다른 경우는 새로운 프레그먼트로 치환
         if (frag.outerHTML != _frag.outerHTML) {
+        // if (frag.textContent != _frag.textContent) {
 
           _frag.style.display = 'none';
-          document.body.insertBefore(frag, _frag);
-          document.body.removeChild(_frag);
+          _md_body.insertBefore(frag, _frag);
+          _md_body.removeChild(_frag);
 
         }
       } else {
-        origin = frag.getAttribute('origin');
+        // origin = frag.getAttribute('data-origin');
 
         //origin 문자열이 있는 경우
         if (origin != _origin) {
 
           _frag.style.display = 'none';
-          document.body.insertBefore(frag, _frag);
-          document.body.removeChild(_frag);
+          _md_body.insertBefore(frag, _frag);
+          _md_body.removeChild(_frag);
 
           // _lazySyntaxHighlight(frag);
         }
       }
     }
   }
-
-
 
   // $(document.body).find('pre').each(function(i, e) {
   //   $(this).attr('origin', $(this)[0].outerHTML);
@@ -354,7 +404,7 @@ function update(html) {
   //남아 있는 프레그먼트를 모두 제거
   if (_frags.length > 0) {
     _frags.forEach(function(frag, idx) {
-      document.body.removeChild(frag);
+      _md_body.removeChild(frag);
       // $(frag).remove();
     });
   }
@@ -366,9 +416,16 @@ function update(html) {
   // _preventDefaultAnchor();
   // _lazySyntaxHighlight();
   
-  countFragments(document.body);
-}
+  countFragments(_md_body);
 
+  if (_embedTimeout) { 
+    window.clearTimeout(_embedTimeout);
+  }
+  
+  _embedTimeout = window.setTimeout(function() {
+    drawEmbedContents(document.body);
+  }, 1000);
+}
 /**
  * sync scroll position
  * @param  {[type]} per [description]
@@ -377,32 +434,35 @@ function update(html) {
 
 function scrollTop(per) {
   var h = $(window).height();
-  var top = $(document.body).prop('clientHeight') - h;
+  var top = $(_body).prop('clientHeight') - h;
 
   $(window).scrollTop(top / 100 * per);
 }
 
-function replaceExternalContent(el, origin) {
-  var plugin = $(origin)[0];
-  plugin.setAttribute('origin', origin);
-  el.style.display = 'none';
-  document.body.insertBefore(plugin, el);
-  document.body.removeChild(el);
-}
+// function replaceExternalContent(el, origin) {
+//   var plugin = $(origin)[0];
+//   plugin.setAttribute('origin', origin);
+//   el.style.display = 'none';
+//   document.body.insertBefore(plugin, el);
+//   document.body.removeChild(el);
+// }
 
-$(document.body).ready(function() {
+$(_body).ready(function() {
+  _doc = document,
+  _body = _doc.body,
+  _md_body = _doc.getElementById('root');
 
-  $(document.body).click(function(e) {
+  $(_body).click(function(e) {
     var origin, el = e.target;
     e.preventDefault();
 
     switch (el.tagName.toUpperCase()) {
-      case 'IMG':
-        origin = el.getAttribute('origin');
-        if (origin) {
-          replaceExternalContent(el, origin);
-        }
-        break;
+//       case 'IMG':
+//         origin = el.getAttribute('origin');
+//         if (origin) {
+//           replaceExternalContent(el, origin);
+//         }
+//         break;
       case 'A':
         window.ee.emit('link', el.getAttribute('href'));
         break;

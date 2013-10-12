@@ -34,6 +34,13 @@ define([
 	// 	return obj;
 	// }
 
+	/* only for mac */
+	// gui.App.on('reopen', function() {
+	// 	if (!realCount) {
+	// 		open();
+	// 	}
+	// });
+
 	function _updateStore() {
 		config = store.get('Window') || {};
 	}
@@ -62,7 +69,7 @@ define([
 					delete windows[prop];
 					realCount--;
 
-					if (!realCount) {
+					if (!realCount/* && getPlatformName() != 'mac'*/) {
 						window.ee.emit('exit');
 					}
 					return;
@@ -76,14 +83,10 @@ define([
 
 			open(file);
 			Recents.add(fileEntry);
-
-			global._gaq.push('haroopad.file', 'open', '');
 		});
 
 		newWin.on('file.saved', function(file) {
 			Recents.add(file.fileEntry);
-
-			global._gaq.push('haroopad.file', 'save', '');
 		});
 
 		//window instance delivery to child window

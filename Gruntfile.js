@@ -87,6 +87,7 @@ module.exports = function(grunt) {
         files: {
           'build/menu.concat.js': [
             'src/js/common/menu/MenuBar.js',
+            'src/js/common/menu/Menu.edit.js',
             'src/js/common/menu/Menu.file.js',
             'src/js/common/menu/Menu.file.recents.js',
             'src/js/common/menu/Menu.file.send.js',
@@ -94,8 +95,12 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.file.activities.js',
             'src/js/common/menu/Menu.find.js',
             'src/js/common/menu/Menu.view.js',
-            'src/js/common/menu/Menu.action.js',
-            'src/js/common/menu/Menu.action.header.js',
+            'src/js/common/menu/Menu.view.mode.js',
+            'src/js/common/menu/Menu.view.column.js',
+            'src/js/common/menu/Menu.insert.js',
+            'src/js/common/menu/Menu.insert.section.js',
+            'src/js/common/menu/Menu.insert.header.js',
+            'src/js/common/menu/Menu.insert.date.js',
             'src/js/common/menu/Menu.tools.js',
             'src/js/common/menu/Menu.tools.post.js',
             'src/js/common/menu/Menu.tools.presentation.js',
@@ -131,7 +136,7 @@ module.exports = function(grunt) {
         files: {
           'build/pad.modules.js': [
             'src/js/pad/before.pad.js',
-            // 'src/js/lib/logger.js',
+            'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
             'src/js/pad/pad.common.js',
             'build/menu.concat.js',
@@ -148,6 +153,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/store.js',
             '<%= vendors %>/js-url.js',
+            '<%= vendors %>/reMarked.js',
             '<%= vendors %>/notifier.js',
             '<%= vendors %>/require.min.js'
           ]
@@ -186,6 +192,7 @@ module.exports = function(grunt) {
           'build/haroopad/js/viewer.min.js': [
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/jquery.oembed.js',
             '<%= vendors %>/highlight.pack.js',
             'build/viewer.js'
           ]
@@ -228,7 +235,7 @@ module.exports = function(grunt) {
         files: {
           'build/viewer.js': [
             'src/js/viewer/disable.debug.js',
-            'src/js/viewer/DynamicContents.js',
+            // 'src/js/viewer/DynamicContents.js',
             'src/js/viewer/dragdrop.js',
             'src/js/viewer/main.js'
           ]
@@ -310,7 +317,10 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' },
 
           { src: 'src/node_modules/humanize/package.json', dest: 'build/haroopad/node_modules/humanize/package.json' },
-          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' }
+          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' },
+
+          { src: 'src/node_modules/moment/package.json', dest: 'build/haroopad/node_modules/moment/package.json' },
+          { src: 'src/node_modules/moment/moment.js', dest: 'build/haroopad/node_modules/moment/moment.js' }
 
         ]
       },

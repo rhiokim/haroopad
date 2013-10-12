@@ -5,6 +5,8 @@ define([
 		'editor/Editor.drop'
 	],
 	function(store, Keymap, Drop) {
+		var moment = require('moment');
+
 		var gui = require('nw.gui'),
 			win = gui.Window.get(),
 			clipboard = gui.Clipboard.get();
@@ -75,32 +77,47 @@ define([
 
 
 		/* change theme */
+
 		function changeTheme(value) {
 			editor.setOption('theme', value);
+
+			global._gaq.push('haroopad.preferences', 'theme', value);
 		}
 
 		/* toggle line number */
+
 		function toggleLineNumber(value) {
 			editor.setOption('lineNumbers', value);
+
+			global._gaq.push('haroopad.preferences', 'editor', 'lineNumbers: ' + value);
 		}
 
 		/* toggle vim key binding */
+
 		function toggleVim(value) {
 			editor.setOption('keyMap', value ? 'vim' : 'default');
+
+			global._gaq.push('haroopad.preferences', 'editor', 'vim: ' + value);
 		}
 
 		/* toggle auto pair char */
+
 		function toggleAutoPairChar(value) {
 			editor.setOption('autoCloseBrackets', value);
+
+			global._gaq.push('haroopad.preferences', 'editor', 'autoCloseBrackets: ' + value);
 		}
 
 		/* toggle sync scroll */
+
 		function toggleSyncScroll(value) {
 			if (value) {
 				editor.on('scroll', syncScrollHandler);
 			} else {
 				editor.off('scroll', syncScrollHandler);
 			}
+
+			global._gaq.push('haroopad.preferences', 'editor', 'syncScroll: ' + value);
 		}
 
 		window.parent.ee.on('preferences.general.enableSyncScroll', toggleSyncScroll);
@@ -121,13 +138,49 @@ define([
 
 		window.ee.on('toggle.vim.keybind', function() {
 			var map = editor.getOption('keyMap');
-			editor.setOption('keyMap', map == 'vim' ? 'default' : 'vim');
+			// map == 'vim' ? 'default' : 'vim';
+			toggleVim(map != 'vim')
 		});
 
 		window.ee.on('show.toggle.linenum', function() {
 			var value = !editor.getOption('lineNumbers');
-			editor.setOption('lineNumbers', value);
+			toggleLineNumber(value);
 		});
+
+		/* edit */
+		if (nw.file && !nw.file.get('readOnly')) {
+			window.ee.on('menu.edit.undo', function() {
+				editor.undo();
+			});
+			window.ee.on('menu.edit.redo', function() {
+				editor.redo();
+			});
+			window.ee.on('menu.edit.cut', function() {
+				clipboard.set(editor.getSelection());
+				editor.replaceSelection('');
+			});
+			window.ee.on('menu.edit.copy', function() {
+				clipboard.set(editor.getSelection());
+			});
+			window.ee.on('menu.edit.paste', function() {
+				var str = clipboard.get();
+
+				editor.replaceSelection(str);
+				editor.setCursor(editor.getCursor());
+			});
+			window.ee.on('menu.edit.delete', function() {
+				editor.replaceSelection('');
+			});
+			window.ee.on('menu.edit.selectall', function() {
+				editor.setSelection({
+					line: 0,
+					ch: 0
+				}, {
+					line: editor.lineCount(),
+					ch: 0
+				});
+			});
+		}
 
 		/* find & replace */
 		window.ee.on('find.start', function() {
@@ -148,57 +201,123 @@ define([
 
 		window.ee.on('action.h1', function() {
 			CodeMirror.commands.markdownH1(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'h1');
 		});
 		window.ee.on('action.h2', function() {
 			CodeMirror.commands.markdownH2(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'h2');
 		});
 		window.ee.on('action.h3', function() {
 			CodeMirror.commands.markdownH3(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'h3');
 		});
 		window.ee.on('action.h4', function() {
 			CodeMirror.commands.markdownH4(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'h4');
 		});
 		window.ee.on('action.h5', function() {
 			CodeMirror.commands.markdownH5(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'h5');
 		});
 		window.ee.on('action.h6', function() {
 			CodeMirror.commands.markdownH6(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'h6');
 		});
 		window.ee.on('action.strong', function() {
 			CodeMirror.commands.markdownBold(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'strong');
 		});
 		window.ee.on('action.emphasize', function() {
 			CodeMirror.commands.markdownItalic(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'emphasize');
 		});
 		window.ee.on('action.inlinecode', function() {
 			CodeMirror.commands.markdownInlineCode(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'inlinecode');
 		});
 		window.ee.on('action.link', function() {
 			CodeMirror.commands.markdownLink(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'link');
 		});
 		window.ee.on('action.strikethrough', function() {
 			CodeMirror.commands.markdownStrike(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'strikethrough');
 		});
 		window.ee.on('action.image', function() {
 			CodeMirror.commands.markdownImage(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'image');
+
 		});
 		window.ee.on('action.blockquote', function() {
 			CodeMirror.commands.markdownBlockQuote(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'blockquote');
 		});
 		window.ee.on('action.orderlist', function() {
 			CodeMirror.commands.markdownOrderedList(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'orderlist');
 		});
 		window.ee.on('action.unorderlist', function() {
 			CodeMirror.commands.markdownUnOrderedList(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'unorderlist');
 		});
 		window.ee.on('action.fencedcode', function() {
 			CodeMirror.commands.markdownFencedCode(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'fencedcode');
 		});
 		window.ee.on('action.table', function() {
 			CodeMirror.commands.markdownTable(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'table');
 		});
 		window.ee.on('action.comment', function() {
 			CodeMirror.commands.markdownComment(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'comment');
+		});
+
+		window.ee.on('insert.page.break', function() {
+			CodeMirror.commands.markdownPageBreak(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'page break');
+		});
+		window.ee.on('insert.section.break', function() {
+			CodeMirror.commands.markdownSectionBreak(editor);
+
+    	global._gaq.push('haroopad.insert', 'markdown', 'section break');
+		});
+
+		window.ee.on('insert.toc', function() {
+    	global._gaq.push('haroopad.insert', 'TOC', '');
+		});
+
+		window.ee.on('insert.date', function(format) {
+			editor.replaceSelection(moment().format(format));
+			editor.setCursor(editor.getCursor());
+
+    	global._gaq.push('haroopad.insert', 'datetime', format);
+		});
+
+		window.ee.on('insert.filename', function() {
+			editor.replaceSelection(nw.file.get('basename'));
+			editor.setCursor(editor.getCursor());
+
+    	global._gaq.push('haroopad.insert', 'filename', '');
 		});
 
 		/* fire context menu event */
@@ -211,10 +330,19 @@ define([
 				clipboard.set(editor.getSelection());
 			});
 			window.ee.on('context.paste', function() {
-				editor.replaceSelection(clipboard.get());
+				editor.replaceSelection(clipboard.get('text'));
 			});
-			window.ee.on('context.select.all', function() {
-				editor.setSelection(0, 2);
+			window.ee.on('context.delete', function() {
+				editor.replaceSelection('');
+			});
+			window.ee.on('context.selectall', function() {
+				editor.setSelection({
+					line: 0,
+					ch: 0
+				}, {
+					line: editor.lineCount(),
+					ch: 0
+				});
 			});
 		} else {
 			editor.setOption('readOnly', true);
