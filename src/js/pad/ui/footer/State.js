@@ -37,10 +37,11 @@ define([
 
 		updateHandler: function(cm) {
 			var lineCnt = cm.lineCount();
+			var wordCnt = cm.getValue().length || 0;
 			var line = humanize.numberFormat(lineCnt, 0);
-			var word = humanize.numberFormat(cm.getValue().length, 0);
+			var word = humanize.numberFormat(wordCnt - lineCnt + 1, 0);
 			this.lineCount.text(line);
-			this.wordCount.text(word - lineCnt + 1);
+			this.wordCount.text(word);
 		},
 
 		cursorActivity: function(cm) {
