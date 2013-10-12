@@ -194,9 +194,13 @@ define([
 
 	win.on('enter-fullscreen', function() {
 		document.querySelector('.CodeMirror-gutters').style.height = '3000px';
+
+  	global._gaq.push('haroopad.window', 'fullscreen', 'true');
 	});
 
 	win.on('leave-fullscreen', function() {
+
+  	global._gaq.push('haroopad.window', 'fullscreen', 'false');
 		// config.isFullscreen = win.isFullscreen;
 		// store.set('Window', config);
 	});
@@ -263,6 +267,8 @@ define([
 
 	HotKey('defmod-alt-e', function() {
 		window.ee.emit('file.exports.html');
+
+  	global._gaq.push('haroopad.file', 'exports', 'html');
 	});
 
 	
