@@ -42,12 +42,16 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/elegant.css',
             '<%= vendors %>/CodeMirror/theme/erlang-dark.css',
             '<%= vendors %>/CodeMirror/theme/lesser-dark.css',
+            '<%= vendors %>/CodeMirror/theme/mbo.css',
             '<%= vendors %>/CodeMirror/theme/midinight.css',
             '<%= vendors %>/CodeMirror/theme/monokai.css',
             '<%= vendors %>/CodeMirror/theme/neat.css',
             '<%= vendors %>/CodeMirror/theme/night.css',
+            '<%= vendors %>/CodeMirror/theme/paraiso-dark.css',
+            '<%= vendors %>/CodeMirror/theme/paraiso-light.css',
             '<%= vendors %>/CodeMirror/theme/rubyblue.css',
             '<%= vendors %>/CodeMirror/theme/solarized.css',
+            '<%= vendors %>/CodeMirror/theme/the-matrix.css',
             '<%= vendors %>/CodeMirror/theme/tomorrow-night-eighties.css',
             '<%= vendors %>/CodeMirror/theme/twilight.css',
             '<%= vendors %>/CodeMirror/theme/vibrant-ink.css',
@@ -374,7 +378,12 @@ module.exports = function(grunt) {
         files: [
           { expand: true, cwd: 'lib/highlight.js/src/styles/', src: [ '**' ], dest: 'src/css/code/' },
           { src: 'lib/highlight.js/highlight.pack.js', dest: 'src/js/vendors/highlight.pack.js'}
+        ]
+      },
 
+      mdcodemirror: {
+        files: [
+          { expand: true, cwd: 'lib/codemirror/', src: [ '**' ], dest: 'src/js/vendors/CodeMirror/' }
         ]
       }
     },
