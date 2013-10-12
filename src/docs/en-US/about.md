@@ -8,7 +8,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Feature (v0.8)==
+### ==New Features (v0.8)==
 
 * Embedding Rich Media Contents
 	- Video, Audio, 3D, Text, Open Graph and oEmbed
