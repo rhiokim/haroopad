@@ -16,12 +16,12 @@ window.MenuBarView = function () {
             submenu: MenuBarViewMode()
 	    })
 	);
-	View.append(
-	    new gui.MenuItem({
-	        label: 'Column Layout',
-            submenu: MenuBarViewColumn()
-	    })
-	);
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Column Layout',
+ //            submenu: MenuBarViewColumn()
+	//     })
+	// );
 	// View.append(
 	//     new gui.MenuItem({
 	//         label: 'Reset Mode',
