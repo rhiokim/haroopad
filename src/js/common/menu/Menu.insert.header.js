@@ -46,7 +46,7 @@ window.MenuBarInsertHeader = function () {
     new gui.MenuItem({
         label: 'H6   ######',
         click: function() {
-          window.parent.ee.emit('menu.action.h6');
+          window.parent.ee.emit('menu.insert.h6');
         }
     })
   );
