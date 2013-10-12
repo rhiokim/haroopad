@@ -4,10 +4,13 @@ Issue Number     | Description
 ----------------:|-----------------------------------------------
 **New Features** |
 #208             | ==Added== OLE Object Drag & Drop support
-#203             | ==Added== Editor and View Mode
-#200             | ==Added== Smart Embedding Rich Media Contents
+#203             | ==Added== **Editor and View Mode**
+#200             | ==Added== **Smart Embedding Rich Media Contents**
 #192             | ==Added== Add shortcut for "Export to HTML"
-#190             | ==Added== Change Action Menu -> Insert
+#190             | ==Added== **Change Action Menu -> Insert**
+                 | ==Added== **Insert Date & Time**
+                 | ==Added== **Insert Horizontal Line (Page & Section Break - -  - and \* \* \*)**
+                 | ==Added== **Insert Filename**
 #184             | ==Added== Show only TOC
 #174             | ==Added== oEmbed & Open Graph support
 #128             | ==Added== Set Default filename when save, save as, export html
@@ -23,15 +26,14 @@ Issue Number     | Description
 
 * https://github.com/rhiokim/haroopad/issues?milestone=27&state=closed
 
-
 ##### Download
 
-> * Windows MSI https://www.dropbox.com/s/7wd2v7azol57vk7/haroopad-v0.8.0-i386-rc0.msi
-> * Mac OS X DMG: https://www.dropbox.com/s/av8g9dipawryymc/haroopad-v0.8.0-rc0.dmg
-> * Linux 32-bit Binary: https://www.dropbox.com/s/loq6lm3cofsm3op/haroopad-v0.8.0_i386-rc0.tar.gz
-> * Linux 32-bit Debian Package: https://www.dropbox.com/s/uxdwkzaeps0y1sw/haroopad-v0.8.0-i386-rc0.deb
-> * Linux 64-bit Binary: 
-> * Linux 64-bit Debian Package: 
+> * Windows MSI https://www.dropbox.com/s/2j55edvc0qqpo0l/haroopad-v0.8.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/upivzqnpzocc5b0/haroopad-v0.8.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/l1t4ceize4047jn/haroopad-v0.8.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/kmrh3u52b97tzyo/haroopad-v0.8.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/jrbksg1vvoy0jm1/haroopad-v0.8.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/6zm9cln6tt8gl1u/haroopad-v0.8.0_amd64.deb
 
 ## Haroopad v0.7.0
 
