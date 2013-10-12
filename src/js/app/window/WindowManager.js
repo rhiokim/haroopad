@@ -83,14 +83,10 @@ define([
 
 			open(file);
 			Recents.add(fileEntry);
-
-			global._gaq.push('haroopad.file', 'open', '');
 		});
 
 		newWin.on('file.saved', function(file) {
 			Recents.add(file.fileEntry);
-
-			global._gaq.push('haroopad.file', 'save', '');
 		});
 
 		//window instance delivery to child window
