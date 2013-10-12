@@ -8,7 +8,7 @@ define([
       base62 = require('base62');
   var gui = require('nw.gui');
 
-  var appTmpDataPath = gui.App.dataPath[0];
+  var appTmpDataPath = gui.App.dataPath;
 
   function open(fileEntry) {
     return fs.readFileSync(fileEntry, 'utf8');

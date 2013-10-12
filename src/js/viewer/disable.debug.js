@@ -1,6 +1,7 @@
 // production
 (function(root) {
-	
+	if (window.dev) return;
+
 	function noop(x){return x;}
 	
 	// disable debug

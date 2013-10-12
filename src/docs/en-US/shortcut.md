@@ -1,3 +1,4 @@
+
 ## shortcuts
 
 GLYPH    | NAME
@@ -16,12 +17,19 @@ Shortcut                       | Description
 &#8984;(&#8963;) - S           | save
 &#8984;(&#8963;) - &#8679; - S | save as
 &#8984;(&#8963;) - O           | open file
+&#8984;(&#8963;) - &#8679; - E | sending email
+&#8984;(&#8963;) - &#8997; - E | export html
+&#8984;(&#8963;) - &#8997; - C | copy to clipboard
 &#8984;(&#8963;) - ,           | preferences
 &#8984;(&#8963;) - Q           | close window
 
-##### Window
+##### View
 Shortcut                       | Description
 -------------------------------|-------------------
+&#8984;(&#8963;) - &#8679; - 1 | (editor : viewer) mode
+&#8984;(&#8963;) - &#8679; - 2 | (viewer : editor) mode
+&#8984;(&#8963;) - &#8679; - 3 | editor mode
+&#8984;(&#8963;) - &#8679; - 4 | viewer mode
 &#8679; - &#8963; - ]          | editor mode
 &#8679; - &#8963; - [          | dual mode
 &#8963; - &#8997; - ]          | editor width +5%
@@ -29,6 +37,7 @@ Shortcut                       | Description
 &#8984;(&#8963;) - &#8679; - L | toggle line number
 &#8984;(&#8963;) - Enter       | toggle fullscreen #1
 &#8984;(&#8963;) - F11         | toggle fullscreen #2
+Double ESC                     | escape fullscreen
 &#8984;(&#8963;) - &#8997; - V | vim keyboard binding
 
 ##### Editing
@@ -58,12 +67,15 @@ Shortcut                       | Example        | Description
 &#8984;(&#8963;) - B           | \*\*Bold\*\*   | bold
 &#8984;(&#8963;) - I           | \*Italic\*     | italic
 &#8984;(&#8963;) - L           | \[link\](url)  | link
-&#8984;(&#8963;) - U           | \~\~strike~~   | strikethrough
-&#8984;(&#8963;) - K           | \`func`        | Inline code
+&#8984;(&#8963;) - Y           | \_underline_   | underline
+&#8984;(&#8963;) - K           | \`code`        | inline code
+&#8984;(&#8963;) - &#8997; - S | \~~strike~~   | strike
+&#8984;(&#8963;) - &#8997; - H | \==highlight== | highlight
 &#8984;(&#8963;) - &#8997; - O | 1. markdown    | ordered list
 &#8984;(&#8963;) - &#8997; - U | * haroopad     | unordered list
 &#8984;(&#8963;) - &#8997; - I | \!\[]()        | image
-&#8984;(&#8963;) - &#8997; - B | > blockquote   | blockquote
+&#8984;(&#8963;) - &#8997; - Enter | \- \- \-   | section break
+&#8984;(&#8963;) - &#8997; - `     | \* \* \*   | page break
 
 ##### Finding
 Shortcut                        | Description

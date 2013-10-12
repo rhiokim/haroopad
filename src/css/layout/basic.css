@@ -39,19 +39,53 @@ body {
   left:0;
   right:0;
 }
-  
-#main > article > #editor {
+
+#main>article.layout0 > #editor {
   height: 100%;
   -webkit-flex: 1 0 50%;
   -webkit-order: 1;
 }
-  
-#main > article > #haroo {
+#main>article.layout0 > #haroo {
   height: 100%;
   -webkit-flex: 1 0 50%;
   -webkit-order: 2;
 }
-  
+
+#main>article.layout1 > #editor {
+  height: 100%;
+  -webkit-flex: 1 0 50%;
+  -webkit-order: 2;
+}
+#main>article.layout1 > #haroo {
+  height: 100%;
+  -webkit-flex: 1 0 50%;
+  -webkit-order: 1;
+}
+
+#main>article.layout2 > #editor {
+  height: 100%;
+  -webkit-flex: 1 0 100%;
+  -webkit-order: 1;
+}
+#main>article.layout2 > #haroo {
+  height: 100%;
+  display: none;
+  -webkit-flex: 0 0 0%;
+  -webkit-order: 0;
+}
+
+#main>article.layout3 > #editor {
+  height: 100%;
+  display: none;
+  -webkit-flex: 0 0 0%;
+  -webkit-order: 0;
+}
+#main>article.layout3 > #haroo {
+  height: 100%;
+  -webkit-flex: 1 0 100%;
+  -webkit-order: 1;
+}
+
 #main > article > #haroo > iframe {
   width: 100%;
   height: 100%;

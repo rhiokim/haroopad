@@ -157,11 +157,17 @@
         case 'bold':
           replaceSelection('**');
           break;
+        case 'highlight':
+          replaceSelection('==');
+          break;
         case 'strike':
           replaceSelection('~~', '~~');
           break;
         case 'italic':
           replaceSelection('*');
+          break;
+        case 'underline':
+          replaceSelection('_');
           break;
         case 'code':
           replaceSelection('`');
@@ -180,6 +186,18 @@
           break;
         case 'table':
             addTable();
+          break;
+        case 'section-break':
+            var pos = cm.getCursor();
+                pos.line += 2;
+            cm.replaceSelection('\n- - -\n');
+            cm.setCursor(pos);
+          break;
+        case 'page-break':
+            var pos = cm.getCursor();
+                pos.line += 2;
+            cm.replaceSelection('\n* * *\n');
+            cm.setCursor(pos);
           break;
         case 'quote':
         case 'unordered-list':
@@ -218,8 +236,14 @@
   CodeMirror.commands.markdownBold = function(cm) {
     action('bold', cm);
   };
+  CodeMirror.commands.markdownHighlight = function(cm) {
+    action('highlight', cm);
+  };
   CodeMirror.commands.markdownItalic = function(cm) {
     action('italic', cm);
+  };
+  CodeMirror.commands.markdownUnderline = function(cm) {
+    action('underline', cm);
   };
   CodeMirror.commands.markdownInlineCode = function(cm) {
     action('code', cm);
@@ -241,6 +265,12 @@
   };
   CodeMirror.commands.markdownOrderedList = function(cm) {
     action('ordered-list', cm);
+  };
+  CodeMirror.commands.markdownSectionBreak = function(cm) {
+    action('section-break', cm);
+  };
+  CodeMirror.commands.markdownPageBreak = function(cm) {
+    action('page-break', cm);
   };
 
   CodeMirror.commands.markdownFencedCode = function(cm) {

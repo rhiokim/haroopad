@@ -4,7 +4,7 @@ define([
 
 		var humanize = require('humanize');
 
-	var Status = Backbone.View.extend({
+	var State = Backbone.View.extend({
 		el: 'footer .navbar-inner',
 
 		events: {
@@ -36,8 +36,10 @@ define([
 		},
 
 		updateHandler: function(cm) {
-			var line = humanize.numberFormat(cm.lineCount(), 0);
-			var word = humanize.numberFormat(cm.getValue().length, 0);
+			var lineCnt = cm.lineCount();
+			var wordCnt = cm.getValue().length || 0;
+			var line = humanize.numberFormat(lineCnt, 0);
+			var word = humanize.numberFormat(wordCnt - lineCnt + 1, 0);
 			this.lineCount.text(line);
 			this.wordCount.text(word);
 		},
@@ -54,6 +56,11 @@ define([
 			// dom.page = humanize.numberFormat(dom.page, 1);
 
 			for(prop in dom) {
+
+				if (dom[prop] == 0) {
+					continue;
+				}
+
 				key += prop +'<br>';
 				val += '<b>'+ dom[prop] +'</b><br/>';
 			}
@@ -76,5 +83,5 @@ define([
 		}
 	});
 
-	return new Status;
+	return new State;
 });
