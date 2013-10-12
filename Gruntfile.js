@@ -368,6 +368,14 @@ module.exports = function(grunt) {
           { src: 'lib/node-sass/build/Release/binding.node', dest: 'src/node_modules/node-sass/build/Release/binding.node'},
           { expand: true, cwd: 'lib/node-sass/lib/', src: [ '**' ], dest: 'src/node_modules/node-sass/lib/' }
         ]
+      },
+
+      mdhighlight: {
+        files: [
+          { expand: true, cwd: 'lib/highlight.js/src/styles/', src: [ '**' ], dest: 'src/css/code/' },
+          { src: 'lib/highlight.js/highlight.pack.js', dest: 'src/js/vendors/highlight.pack.js'}
+
+        ]
       }
     },
 
