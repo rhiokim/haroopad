@@ -115,5 +115,5 @@ define([
 		window.ee.on('view.plus5.width', setPlus5Width);
 		window.ee.on('view.minus5.width', setMinus5Width);
 
-		window.ee.on('view.mode.toggle', toggle);
+		// window.ee.on('view.mode.toggle', toggle);
 	});

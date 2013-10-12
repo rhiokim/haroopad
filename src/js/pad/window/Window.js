@@ -2,9 +2,8 @@ define([
 	'store',
 	'keyboard',
 	'ui/dialog/Dialogs',
-	'ui/exports/Exports',
-	'ui/splitter/Splitter'
-], function(store, HotKey, Dialogs, Exports, Splitter) {
+	'ui/exports/Exports'
+], function(store, HotKey, Dialogs, Exports) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
 
@@ -23,6 +22,8 @@ define([
 	}
 
 	function close() {
+		nw.emit('destory');
+		
 		win.hide();
 
 		if (!win.isFullscreen) {
@@ -193,9 +194,13 @@ define([
 
 	win.on('enter-fullscreen', function() {
 		document.querySelector('.CodeMirror-gutters').style.height = '3000px';
+
+  	global._gaq.push('haroopad.window', 'fullscreen', 'true');
 	});
 
 	win.on('leave-fullscreen', function() {
+
+  	global._gaq.push('haroopad.window', 'fullscreen', 'false');
 		// config.isFullscreen = win.isFullscreen;
 		// store.set('Window', config);
 	});
@@ -251,4 +256,22 @@ define([
 	HotKey('defmod-shift-s', function() {
 		window.ee.emit('menu.file.save.as');
 	});
+
+	HotKey('defmod-w', function() {
+		nw.emit('close');
+	});
+
+	HotKey('defmod-f4', function() {
+		nw.emit('close');
+	});
+
+	HotKey('defmod-alt-e', function() {
+		window.ee.emit('file.exports.html');
+
+  	global._gaq.push('haroopad.file', 'exports', 'html');
+	});
+
+	
+	window.ondragover = function(e) { e.preventDefault(); return false };
+	window.ondrop = function(e) { e.preventDefault(); return false };
 });

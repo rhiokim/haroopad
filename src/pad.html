@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8" />
   <title>haroopad</title>
@@ -58,11 +58,12 @@
 
   <link rel="stylesheet" href="css/app.css">
 
+  <script src="js/lib/logger.js"></script>
+  <script src="js/lib/utils/util.js"></script>
   <script src="js/pad/pad.common.js"></script>
 
   <script src="js/vendors/eventemitter.js"></script>
   <script src="js/vendors/underscore.js"></script>
-  <!--script src="js/vendors/highlight.pack.js"></script-->
 
   <!--script src="js/vendors/layout/classie.js"></script>
   <script src="js/vendors/layout/qmenu.js"></script-->
@@ -74,10 +75,12 @@
   <script src="js/vendors/bootstrap-modal.js"></script>
   <script src="js/vendors/store.js"></script>
   <script src="js/vendors/js-url.js"></script>
+  <script src="js/vendors/reMarked.js"></script>
   <script src="js/vendors/notifier.js"></script>
   <script src="js/vendors/require.js"></script>
 
   <script src="js/common/menu/MenuBar.js"></script>
+  <script src="js/common/menu/Menu.edit.js"></script>
   <script src="js/common/menu/Menu.file.js"></script>
   <script src="js/common/menu/Menu.file.recents.js"></script>
   <script src="js/common/menu/Menu.file.send.js"></script>
@@ -85,8 +88,12 @@
   <script src="js/common/menu/Menu.file.activities.js"></script>
   <script src="js/common/menu/Menu.find.js"></script>
   <script src="js/common/menu/Menu.view.js"></script>
-  <script src="js/common/menu/Menu.action.js"></script>
-  <script src="js/common/menu/Menu.action.header.js"></script>
+  <script src="js/common/menu/Menu.view.mode.js"></script>
+  <script src="js/common/menu/Menu.view.column.js"></script>
+  <script src="js/common/menu/Menu.insert.js"></script>
+  <script src="js/common/menu/Menu.insert.section.js"></script>
+  <script src="js/common/menu/Menu.insert.header.js"></script>
+  <script src="js/common/menu/Menu.insert.date.js"></script>
   <script src="js/common/menu/Menu.tools.js"></script>
   <script src="js/common/menu/Menu.tools.post.js"></script>
   <script src="js/common/menu/Menu.tools.presentation.js"></script>
@@ -107,9 +114,6 @@
   <script src="js/vendors/CodeMirror/mode/htmlmixed/htmlmixed.js"></script>
   <script src="js/vendors/CodeMirror/mode/markdown/markdown.js"></script>
   <script src="js/vendors/CodeMirror/keymap/vim.js"></script>
-  <script>
-    requirejs(['js/pad/haroopad']);
-  </script>
 </head>
 <body>
   <header id="editControls" class="navbar navbar-fixed-top">
@@ -189,12 +193,12 @@
   </header>
 
   <section id="main">
-    <article class="panel">
+    <article class="panel layout0">
       <section id="editor">
         <textarea id="code" name="code"></textarea>
       </section>
       <section id="haroo">
-        <iframe src="viewer.html" nwdisable nwfaketop></iframe>
+        <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
       </section>
     </article>
     <nav>bbb</nav>
@@ -212,7 +216,15 @@
       </div>
 
       <!-- <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button> -->
-      <div id="columnCount" class="btn-group dropup pull-right">
+      <div id="documentConfig" class="btn-group dropup pull-right">
+        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-cog icon-white"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i>Show Document Outline</a></li>
+          <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i>Show TOC</a></li>
+        </ul>
+      </div><div id="columnCount" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
           Columns
           <span class="caret"></span>
@@ -251,6 +263,8 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
+          <li><a tabindex="-1" href="#">It's Promotion</a></li>
+          <li class="divider"></li>
           <li><a tabindex="0" href="#" data-service="twitter">Twitter</a></li>
           <li><a tabindex="1" href="#" data-service="facebook">Facebook</a></li>
           <li><a tabindex="2" href="#" data-service="google">Google+</a></li>
@@ -280,4 +294,9 @@
   </div>
   <div id="notifier"></div>
 </body>
+<script>
+  function start() {
+    requirejs(['js/pad/haroopad']);
+  }
+</script>
 </html>

@@ -2,10 +2,10 @@
   var path = require('path'),
   fs = require('fs'),
   gui = require('nw.gui'),
-  errorLog = path.join(gui.App.dataPath[0], '.error.log');
+  errorLog = path.join(gui.App.dataPath, '.error.log');
 
-  if (!fs.existsSync(gui.App.dataPath[0])) {
-    fs.mkdirSync(gui.App.dataPath[0]);
+  if (!fs.existsSync(gui.App.dataPath)) {
+    fs.mkdirSync(gui.App.dataPath);
   }
 
   process.on('uncaughtException', function(err) {

@@ -1,12 +1,13 @@
 define([
 	'store',
 	'editor/Editor',
-	'ui/footer/Status',
+	'ui/footer/State',
 	'ui/footer/Column',
 	'ui/footer/Indentation',
+	'ui/footer/Document',
 	'ui/footer/_Advertise',
 	'ui/footer/_Share'
-], function(store, Editor, Status, Column, Indentation, Advertise, Share) {
+], function(store, Editor, State, Column, Indentation, Document, Advertise, Share) {
 	var shell = gui.Shell;
 	var editorOpt = store.get('Editor') || {};
 
@@ -15,7 +16,7 @@ define([
 	Indentation.selectTabSize(editorOpt.tabSize || 4);
 	Indentation.checkUseTab(editorOpt.indentWithTabs);
 
-	Status.on('hover', function() {
+	State.on('hover', function() {
 		global._gaq.push('haroopad', 'show current state', '');
 	});
 
@@ -48,6 +49,22 @@ define([
 
 	Advertise.on('donate', function() {
 		shell.openExternal('http://pad.haroopress.com/page.html?f=grow-up-donate');
+	});
+
+	Document.on('click', function() {
+		Advertise.hide();
+	});
+
+	Document.on('outline', function(show) {
+		window.ee.emit('menu.view.doc.outline', show);
+
+		global._gaq.push('haroopad', 'set outline view', show);
+	});
+
+	Document.on('toc', function(show) {
+		window.ee.emit('menu.view.doc.toc', show);
+
+		global._gaq.push('haroopad', 'set toc view', show);
 	});
 
 	Share.on('click', function() {
@@ -93,5 +110,5 @@ define([
 		url && shell.openExternal(url);
 	});
 
-	window.ee.on('dom', Status.update.bind(Status));
+	window.ee.on('dom', State.update.bind(State));
 });

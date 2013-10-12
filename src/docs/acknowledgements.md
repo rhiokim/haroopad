@@ -1,4 +1,4 @@
-##### Haroopad uses the following open-sources
+##### Haroopad is used the following open-source.
 
 * * *
   
@@ -9,9 +9,9 @@ Copyright (c) 2012 The Chromium Authors
 
 * * *
 
-**codemirror** by **Marijn Haverbeke** (MIT)  
+**codemirror** by **Marijn Haverbeke** 
 
-Copyright (C) 2013 by Marijn Haverbeke <marijnh@gmail.com>
+Copyright (C) 2013 by Marijn Haverbeke <marijnh@gmail.com> (MIT) 
 
 * * *
 
@@ -257,25 +257,7 @@ MIT License
 
 -----------
 
-Copyright (c) 2010-2011, The Dojo Foundation
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Copyright (c) 2010-2011, The Dojo Foundation (MIT)
 
 * * *
 
@@ -339,8 +321,32 @@ Copyright (c) 2009-2013 Jeremy Ashkenas, DocumentCloud (MIT)
 
 Copyright (c) 2011-2012 Andris Reinman (MIT)
 
+* * * 
+
+**EventEmitter.js**
+
+Copyright (c) 2011-2013 Oliver Caldwell (MIT)
+
 * * *
 
 ** _undercore_ & &#61;&#61;highlight&#61;&#61; **
 
 @b3ngr33nlr's PR to chjj/marked - http://deallocatedbytes.com/#new-features-for-marked-
+
+* * * 
+
+**moment.js**
+
+Copyright (c) 2011-2012 Tim Wood (MIT)
+
+* * * 
+
+**jquery oembed plugin**
+
+Copyright (c) 2009 Richard Chamorro (MIT)
+
+* * * 
+
+**reMarked.js**
+
+Copyright (c) https://github.com/leeoniya/reMarked.js (MIT)
