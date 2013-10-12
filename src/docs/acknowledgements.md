@@ -207,10 +207,6 @@ Apache License
 Copyright 2013 jQuery Foundation and other contributors (MIT)
 http://jquery.com/
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 * * *
 
 **backbone.js**
@@ -264,21 +260,15 @@ MIT License
 Copyright (c) 2010-2011, The Dojo Foundation (MIT)
 
 * * *
-<<<<<<< HEAD
 
-=======
->>>>>>> develop
 **store.js**
 
 Copyright (c) 2010-2013 Marcus Westin (MIT)
 
 * * *
 
-<<<<<<< HEAD
 **keymage.js**
 
-=======
->>>>>>> develop
 Copyright (c) 2012, Alexander Solovyov <alexander@solovyov.net> (MIT)
 
 * * *
@@ -348,3 +338,9 @@ Copyright (c) 2011-2013 Oliver Caldwell (MIT)
 **moment.js**
 
 Copyright (c) 2011-2012 Tim Wood (MIT)
+
+* * * 
+
+**reMarked.js**
+
+Copyright (c) https://github.com/leeoniya/reMarked.js (MIT)

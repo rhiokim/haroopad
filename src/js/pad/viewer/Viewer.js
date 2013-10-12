@@ -44,22 +44,31 @@ define([
 			setTimeout(function() {
 				StyleMaker.generateInlineStyle();
 			}, 500);
+  			
+  			global._gaq.push('haroopad.preferences', 'style', value);
 		}
 
 		/* change syntax highlight theme */
 		function changeCodeTheme(value) {
 			_viewer.setCodeStyle(value);
+
+			global._gaq.push('haroopad.preferences', 'code', value);
 		}
 
 		/* change clickable link */
 		function changeClickableLink(value) {
 			viewerConfig.clickableLink = value;
+
+			global._gaq.push('haroopad.preferences', 'viewer', 'changeClickableLink: '+ value);
 		}
 
 		/* change custom theme */
 		function changeCustomTheme(theme) {
 			var css = (theme && theme.path) || '';
 			_viewer.loadCustomCSS(css);
+
+
+			global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
 		}
 
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
@@ -77,6 +86,8 @@ define([
 
 		window.ee.on('print.html', function(value) {
 			_viewer.print();
+
+    	global._gaq.push('haroopad.file', 'print', '');
 		});
 
 		window.ee.on('change.column', function(count) {
