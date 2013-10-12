@@ -388,3 +388,9 @@ Copyright (c) 2011-2013 Oliver Caldwell (MIT)
 **moment.js**
 
 Copyright (c) 2011-2012 Tim Wood (MIT)
+
+* * * 
+
+**reMarked.js**
+
+Copyright (c) https://github.com/leeoniya/reMarked.js (MIT)

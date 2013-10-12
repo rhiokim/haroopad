@@ -17,7 +17,7 @@ global._gaq = {
 		cw.onload = function() {
 			next(cw._gaq);
 			global._gaq.instance = cw._gaq;
-		}
+		};
 	},
 
 	push: function(cate, action, label) {

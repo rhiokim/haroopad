@@ -36,6 +36,8 @@ define([
     var fileObj = File.open(file);
     Recents.add(file);
     WindowMgr.open(fileObj);
+
+    global._gaq.push('haroopad.file', 'open', 'recents item');
   });
 
   window.ee.on('menu.file.recents.clear', function() {
