@@ -19,6 +19,7 @@ define([
 
 			events: {
 				'change select[name=theme]': 'changeTheme',
+				'change select[name=fontSize]': 'changeFontSize',
 				'click input[name=displayLineNumber]': 'displayLineNumber',
 				'click input[name=vimKeyBinding]': 'vimKeyBinding',
 				'click input[name=insertFourSpace]': 'insertFourSpace',
@@ -29,6 +30,7 @@ define([
 
 			initialize: function() {
 				this.$el.find('select[name=theme]').select2().select2("val", config.theme);
+				this.$el.find('select[name=fontSize]').select2().select2("val", config.fontSize);
 				
 				this.$el.find('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
 				this.$el.find('input[name=vimKeyBinding]').prop('checked', config.vimKeyBinding);
@@ -47,6 +49,10 @@ define([
 
 			changeTheme: function(e) {
 				options.set({ theme: e.val });
+			},
+
+			changeFontSize: function(e) {
+				options.set({ fontSize: e.val });
 			},
 
 			displayLineNumber: function(e) {

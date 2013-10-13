@@ -39,6 +39,18 @@ function loadCss(url) {
   }).appendTo('head');
 }
 
+function setStyle(property, value) {
+  document.querySelector('#root').style[property] = value;
+}
+
+function setFontSize(size) {
+  setStyle('fontSize', size +'px');
+}
+
+function setFontFamily(name) {
+  // setStyle('fontFamily', name);
+}
+
 function setViewStyle(style) {
   var href = 'css/markdown/' + style + '/' + style + '.css';
 

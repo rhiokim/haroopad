@@ -22,19 +22,34 @@ define([
 
 		// var config = option.toJSON();
 
+
 		function update(markdown, html, editor) {
 			content = html;
 			_viewer.update(content);
 		}
 
 		/* change editor theme */
+
 		function changeTheme(value) {
 			_viewer.setViewStyle(value);
 
-  		global._gaq.push('haroopad.preferences', 'style', value);
+			global._gaq.push('haroopad.preferences', 'style', value);
+		}
+
+		function changeFontSize(value) {
+			_viewer.setFontSize(value);
+
+			global._gaq.push('haroopad.preferences', 'fontSize', value);
+		}
+
+		function changeFontFamily(value) {
+			_viewer.setFontFamily(value);
+
+			global._gaq.push('haroopad.preferences', 'fontFamily', value);
 		}
 
 		/* change syntax highlight theme */
+
 		function changeCodeTheme(value) {
 			_viewer.setCodeStyle(value);
 
@@ -42,13 +57,15 @@ define([
 		}
 
 		/* change clickable link */
+
 		function changeClickableLink(value) {
 			viewerConfig.clickableLink = value;
 
-			global._gaq.push('haroopad.preferences', 'viewer', 'changeClickableLink: '+ value);
+			global._gaq.push('haroopad.preferences', 'viewer', 'changeClickableLink: ' + value);
 		}
 
 		/* change custom theme */
+
 		function changeCustomTheme(theme) {
 			var css = (theme && theme.path) || '';
 			_viewer.loadCustomCSS(css);
@@ -58,6 +75,8 @@ define([
 		}
 
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
+		window.parent.ee.on('preferences.viewer.fontSize', changeFontSize);
+		window.parent.ee.on('preferences.viewer.fontFamily', changeFontFamily);
 		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
 		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
@@ -65,6 +84,8 @@ define([
 		/* window close */
 		nw.on('destory', function() {
 			window.parent.ee.off('preferences.viewer.theme', changeTheme);
+			window.parent.ee.off('preferences.viewer.fontSize', changeFontSize);
+			window.parent.ee.off('preferences.viewer.fontFamily', changeFontFamily);
 			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
 			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
@@ -73,7 +94,7 @@ define([
 		window.ee.on('print.html', function(value) {
 			_viewer.print();
 
-    	global._gaq.push('haroopad.file', 'print', '');
+			global._gaq.push('haroopad.file', 'print', '');
 		});
 
 		window.ee.on('change.column', function(count) {
@@ -132,6 +153,15 @@ define([
 			window.ee.emit('menu.file.exports.clipboard');
 		});
 
+		HotKey('defmod-alt-.', function() {
+			viewerConfig.fontSize++;
+			changeFontSize(viewerConfig.fontSize);
+		});
+		HotKey('defmod-alt-,', function() {
+			viewerConfig.fontSize--;
+			changeFontSize(viewerConfig.fontSize);
+		});
+
 		_viewer.onload = function() {}
 
 		//linkable
@@ -173,16 +203,18 @@ define([
 				// 			});
 				// 		},
 				// 		includePaths: [ dir ],
-    // 					outputStyle: 'compressed'
+				// 					outputStyle: 'compressed'
 				// 	});
 				// break;
 				case '.css':
 					_viewer.loadCustomCSS(file);
-				break;
+					break;
 			}
 		});
 
 		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');
+		_viewer.setFontSize(viewerConfig.fontSize);
+		_viewer.setFontFamily(viewerConfig.fontFamily);
 		_viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
 
 		if (customConfig.theme) {

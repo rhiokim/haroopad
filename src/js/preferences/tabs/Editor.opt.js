@@ -19,7 +19,9 @@ define([
 				autoPairCharacters: true,
 				tabSize: 4,
 				indentUnit: 4,
-				indentWithTabs: false
+				indentWithTabs: false,
+				fontSize: 13,
+				fontFamily: undefined
 			},
 
 			initialize: function() {
