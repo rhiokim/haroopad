@@ -287,6 +287,13 @@ module.exports = function(grunt) {
         ]
       },
 
+      libs: {
+        files: [
+          { expand: true, cwd: 'src/js/vendors/MathJax/', src: [ '**' ], dest: 'build/libs/MathJax/' },
+          { expand: true, cwd: 'lib/gemoji/images/emoji/', src: [ '**' ], dest: 'build/libs/emoji/' }
+        ]
+      },
+
       node_modules: {
         files: [
           { src: 'src/node_modules/base62/base62.js', dest: 'build/haroopad/node_modules/base62/base62.js' },
@@ -359,7 +366,9 @@ module.exports = function(grunt) {
         files: [
           { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
           { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
-          { src: 'lib/markdown.icns', dest: 'build/haroopad.app/Contents/Resources/markdown.icns' }
+          { src: 'lib/markdown.icns', dest: 'build/haroopad.app/Contents/Resources/markdown.icns' },
+
+          { expand: true, cwd: 'build/libs/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/libs/' }
         ]
       },
 
@@ -480,7 +489,7 @@ module.exports = function(grunt) {
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  grunt.registerTask('cp', [ 'copy:main', 'copy:node_modules' ]);
+  grunt.registerTask('cp', [ 'copy:main', 'copy:libs', 'copy:node_modules' ]);
   grunt.registerTask('app', [ 'requirejs:app', 'concat:app', 'uglify:app' ]);
   grunt.registerTask('pad', [ 'requirejs:pad', 'concat:pad', 'uglify:pad' ]);
   grunt.registerTask('prf', [ 'requirejs:preferences', 'concat:preferences', 'uglify:preferences' ]);
