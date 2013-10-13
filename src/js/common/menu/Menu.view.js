@@ -73,10 +73,22 @@ window.MenuBarView = function () {
 	    })
 	);
 	View.append(
-		new gui.MenuItem({
-			type: 'separator'
-		})
+	    new gui.MenuItem({
+          type: 'separator'
+	    })
 	);
+
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Zoom',
+ //            submenu: MenuBarViewZoom()
+	//     })
+	// );
+	// View.append(
+	// 	new gui.MenuItem({
+	// 		type: 'separator'
+	// 	})
+	// );
 
 	View.append(
 		new gui.MenuItem({
