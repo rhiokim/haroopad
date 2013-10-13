@@ -2,7 +2,7 @@
   "main": "index.html",
   "name": "haroopad",
   "description": "The Next Document processor based on Markdown",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "keywords": [ "markdown", "haroopress", "editor" ],
   "window": {
     "icon": "logo.png",
@@ -14,9 +14,8 @@
   "single-instance": true,
   "snapshot": "js/haroopad.bin",
   "webkit": {
-    "plugin": false
+    "plugin": true
   },
-  "no-edit-menu": true,
   "upgrade": "http://pad.haroopress.com/upgrade.json",
   "maintainers":[{
    "name": "Rhio Kim",

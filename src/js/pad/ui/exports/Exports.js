@@ -75,13 +75,14 @@ define([
 		}
 
 		function getBodyHtml() {
-			var res = '';
-
+			var mdBody;
 			contentDocument = Viewer.getContentDocument();
+			mdBody = contentDocument.getElementById('root');
+			return mdBody.innerHTML;
+		}
 
-			res = _replaceOriginalEmbed(contentDocument.body.outerHTML);
-
-			return res;
+		function getBodyClass() {
+			return contentDocument.body.getAttribute('class');
 		}
 
 		function getTitle() {
@@ -114,7 +115,8 @@ define([
 
 			res = html.replace('@@style', getStyleSheets());
 			res = res.replace('@@body', getBodyHtml());
-			res = res.replace('</body>', getFooterHtml() +'\n</body>');
+			res = res.replace('@@class', getBodyClass());
+			res = res.replace('@@footer', getFooterHtml());
 			res = res.replace('@@title', title);
 			res = res.replace('@@generator', getGenerator());
 			// res = res.replace('@@author', os.hostname());
