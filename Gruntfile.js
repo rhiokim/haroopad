@@ -100,6 +100,7 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.view.js',
             'src/js/common/menu/Menu.view.mode.js',
             'src/js/common/menu/Menu.view.column.js',
+            'src/js/common/menu/Menu.view.zoom.js',
             'src/js/common/menu/Menu.insert.js',
             'src/js/common/menu/Menu.insert.section.js',
             'src/js/common/menu/Menu.insert.header.js',
@@ -108,6 +109,7 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.tools.post.js',
             'src/js/common/menu/Menu.tools.presentation.js',
             'src/js/common/menu/Menu.tools.send.js',
+            'src/js/common/menu/Menu.share.js',
             'src/js/common/menu/Menu.help.js'
           ]
         }

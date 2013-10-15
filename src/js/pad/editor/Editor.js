@@ -1,10 +1,11 @@
 define([
 		// 'editor/Parser',
+		'keyboard',
 		'store',
 		'editor/Editor.keymap',
 		'editor/Editor.drop'
 	],
-	function(store, Keymap, Drop) {
+	function(HotKey, store, Keymap, Drop) {
 		var moment = require('moment');
 
 		var gui = require('nw.gui'),
@@ -33,6 +34,9 @@ define([
 			extraKeys: Keymap,
 			showTrailingSpace: true
 		});
+		
+		var CodeMirrorElement = document.querySelector('.CodeMirror'),
+			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters');
 
 		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
 		editor.on('drop', Drop);
@@ -49,6 +53,10 @@ define([
 		});
 
 		/* initialize editor */
+		function setFontSize(value) {
+			CodeMirrorElement.style.fontSize = value + 'px';
+		}
+		setFontSize(config.fontSize);
 		editor.setOption('theme', config.theme);
 		editor.setOption('lineNumbers', config.displayLineNumber);
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
@@ -77,15 +85,20 @@ define([
 
 
 		/* change theme */
-
 		function changeTheme(value) {
 			editor.setOption('theme', value);
 
 			global._gaq.push('haroopad.preferences', 'theme', value);
 		}
 
-		/* toggle line number */
+		/* change font size */
+		function changeFontSize(value) {
+			document.querySelector('.CodeMirror').style.fontSize = value + 'px';
 
+			global._gaq.push('haroopad.preferences', 'fontSize', value);
+		}
+
+		/* toggle line number */
 		function toggleLineNumber(value) {
 			editor.setOption('lineNumbers', value);
 
@@ -93,7 +106,6 @@ define([
 		}
 
 		/* toggle vim key binding */
-
 		function toggleVim(value) {
 			editor.setOption('keyMap', value ? 'vim' : 'default');
 
@@ -126,6 +138,7 @@ define([
 		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
 		window.parent.ee.on('preferences.editor.vimKeyBinding', toggleVim);
 		window.parent.ee.on('preferences.editor.autoPairCharacters', toggleAutoPairChar);
+		window.parent.ee.on('preferences.editor.fontSize', changeFontSize);
 
 		nw.on('destroy', function() {
 			window.parent.ee.off('preferences.general.enableSyncScroll', toggleSyncScroll);
@@ -349,10 +362,18 @@ define([
 		}
 
 
-		var gutters = document.querySelector('.CodeMirror-gutters')
 		window.onresize = function() {
-			gutters.style.height = '5000px';
+			CodeMirrorGutters.style.height = '5000px';
 		}
+
+		HotKey('defmod-shift-.', function() {
+			config.fontSize++;
+			setFontSize(config.fontSize);
+		});
+		HotKey('defmod-shift-,', function() {
+			config.fontSize--;
+			setFontSize(config.fontSize);
+		});
 
 		return editor;
 	});
