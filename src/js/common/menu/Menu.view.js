@@ -43,6 +43,14 @@ window.MenuBarView = function () {
 		      }
 	    })
 	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Toggle Vim Mode',
+		      click: function() {
+		        window.parent.ee.emit('menu.view.toggle.vim');
+		      }
+	    })
+	);
 	// View.append(
 	//     new gui.MenuItem({
 	//         label: 'Toggle Word Count',

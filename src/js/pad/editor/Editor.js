@@ -154,6 +154,9 @@ define([
 			// map == 'vim' ? 'default' : 'vim';
 			toggleVim(map != 'vim')
 		});
+		window.ee.on('menu.view.toggle.vim', function() {
+			window.ee.emit('toggle.vim.keybind');
+		});
 
 		window.ee.on('show.toggle.linenum', function() {
 			var value = !editor.getOption('lineNumbers');

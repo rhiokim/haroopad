@@ -118,6 +118,10 @@ define([
     WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
+  window.ee.on('menu.view.toggle.vim', function() {
+    WindowMgr.actived.window.ee.emit('menu.view.toggle.vim');
+  });
+
   window.ee.on('menu.view.plus5.width', function() {
     WindowMgr.actived.window.ee.emit('view.plus5.width');
   });
