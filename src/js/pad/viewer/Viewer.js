@@ -153,11 +153,11 @@ define([
 			window.ee.emit('menu.file.exports.clipboard');
 		});
 
-		HotKey('defmod-alt-.', function() {
+		HotKey('defmod-shift-.', function() {
 			viewerConfig.fontSize++;
 			changeFontSize(viewerConfig.fontSize);
 		});
-		HotKey('defmod-alt-,', function() {
+		HotKey('defmod-shift-,', function() {
 			viewerConfig.fontSize--;
 			changeFontSize(viewerConfig.fontSize);
 		});

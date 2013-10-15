@@ -366,11 +366,11 @@ define([
 			CodeMirrorGutters.style.height = '5000px';
 		}
 
-		HotKey('defmod-shift-.', function() {
+		HotKey('defmod-alt-.', function() {
 			config.fontSize++;
 			setFontSize(config.fontSize);
 		});
-		HotKey('defmod-shift-,', function() {
+		HotKey('defmod-alt-,', function() {
 			config.fontSize--;
 			setFontSize(config.fontSize);
 		});
