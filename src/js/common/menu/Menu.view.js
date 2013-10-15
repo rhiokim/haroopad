@@ -85,6 +85,19 @@ window.MenuBarView = function () {
           type: 'separator'
 	    })
 	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Font Size',
+		      click: function() {
+		        window.parent.ee.emit('menu.view.minus5.width');
+		      }
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+          type: 'separator'
+	    })
+	);
 
 	// View.append(
 	//     new gui.MenuItem({
