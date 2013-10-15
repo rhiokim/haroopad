@@ -4,8 +4,9 @@ define([
 		'core/plugins/Twitter',
 		'core/plugins/SlideShare',
 		'core/plugins/SpeakerDeck',
-		'core/plugins/Gist'
-	], function(Youtube, Vimeo, Twitter, SlideShare, SpeakerDeck, Gist) {
+		'core/plugins/Gist',
+		'core/plugins/SoundCloud'
+	], function(Youtube, Vimeo, Twitter, SlideShare, SpeakerDeck, Gist, SoundCloud) {
 
 	return {
 		youtube: Youtube,
@@ -14,6 +15,7 @@ define([
 		twitter: Twitter,
 		slideshare: SlideShare,
 		speakerdeck: SpeakerDeck,
-		gist: Gist 
+		gist: Gist,
+		soundcloud: SoundCloud 
 	};
 });

@@ -1,9 +1,9 @@
 define([
-	'editor/Editor.drop.file',
-	'editor/Editor.drop.string'
-], function(FILE, STRING) {
-
-	var path = require('path');
+		'editor/Editor.drop.file',
+		'editor/Editor.drop.string',
+		'editor/Editor.drop.html'
+	], function(FILE, STRING, HTML) {
+		var path = require('path');
 
 	function Drop(cm, e) {
 		var kind, items;
@@ -25,9 +25,12 @@ define([
 		} else {
 			var text = e.dataTransfer.getData('text/plain');
 			var url = e.dataTransfer.getData('text/uri-list');
+			var html = e.dataTransfer.getData('text/html');
 
-			if (url) {
+			if (url && html) {
 				STRING.uri(url, dropCallback);
+			} else if (!url && html) {
+				return dropCallback(HTML(html));
 			} else {
 				return dropCallback(text);
 			}

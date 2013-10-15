@@ -19,6 +19,10 @@ define([
   window.ee.on('tmp.file.open', function(file) {
     WindowMgr.open(file);
   });
+  
+  window.ee.on('drop.file.open', function(file) {
+    WindowMgr.open(file);
+  });
 
   window.ee.on('menu.file.new', function() {
     WindowMgr.open();
