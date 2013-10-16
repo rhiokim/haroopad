@@ -54,7 +54,7 @@ window.MenuBarFile = function () {
   sepItem();
   
   menuItem({
-          label: 'Export',
+          label: 'Exports',
           // enabled: false,
           submenu: MenuBarFileExports()
       });

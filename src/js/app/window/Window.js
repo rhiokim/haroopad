@@ -56,9 +56,18 @@ define([
     WindowMgr.actived.window.ee.emit('file.close');
   });
 
-  window.ee.on('menu.file.exports.clipboard', function() {
-    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard');
+  window.ee.on('menu.file.exports.clipboard.plain', function() {
+    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.plain');
   });
+
+  window.ee.on('menu.file.exports.clipboard.styled', function() {
+    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.styled');
+  });
+
+  window.ee.on('menu.file.exports.clipboard.haroopad', function() {
+    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.haroopad');
+  });
+
   window.ee.on('menu.file.exports.html', function() {
     WindowMgr.actived.window.ee.emit('file.exports.html');
   });

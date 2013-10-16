@@ -142,7 +142,13 @@ define([
 		}.bind(this), false);
 
 		/* copy html to clipboard */
-		window.ee.on('menu.file.exports.clipboard', function() {
+		window.ee.on('menu.file.exports.clipboard.plain', function() {
+			clipboard.set(content, 'text');
+		});
+		window.ee.on('menu.file.exports.clipboard.styled', function() {
+			clipboard.set(content, 'text');
+		});
+		window.ee.on('menu.file.exports.clipboard.haroopad', function() {
 			clipboard.set(content, 'text');
 		});
 
@@ -170,7 +176,7 @@ define([
 		});
 
 		HotKey('defmod-alt-c', function() {
-			window.ee.emit('menu.file.exports.clipboard');
+			window.ee.emit('menu.file.exports.clipboard.plain');
 		});
 
 		HotKey('defmod-shift-.', function() {
