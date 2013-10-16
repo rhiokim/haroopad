@@ -165,6 +165,10 @@ define([
 			changeFontSize(viewerConfig.fontSize);
 		});
 
+		HotKey('defmod-p', function() {
+			window.ee.emit('print.viewer');
+		});
+
 		HotKey('defmod-alt-c', function() {
 			window.ee.emit('menu.file.exports.clipboard');
 		});
