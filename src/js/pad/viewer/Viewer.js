@@ -95,7 +95,7 @@ define([
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
 		});
 
-		window.ee.on('print.html', function(value) {
+		window.ee.on('print.viewer', function(value) {
 			_viewer.print();
 
 			global._gaq.push('haroopad.file', 'print', '');

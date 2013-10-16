@@ -63,8 +63,12 @@ define([
     WindowMgr.actived.window.ee.emit('file.exports.html');
   });
 
-  window.ee.on('menu.print.html', function() {
-    WindowMgr.actived.window.ee.emit('print.html');
+  window.ee.on('menu.print.editor', function() {
+    WindowMgr.actived.window.ee.emit('print.editor');
+  });
+
+  window.ee.on('menu.print.viewer', function() {
+    WindowMgr.actived.window.ee.emit('print.viewer');
   });
 
   window.ee.on('menu.preferences.show', function() {
