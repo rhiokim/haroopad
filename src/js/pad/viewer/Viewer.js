@@ -16,7 +16,11 @@ define([
 		var gui = require('nw.gui'),
 			clipboard = gui.Clipboard.get();
 
+		var MIN_FONT_SIZE = 9;
+		var MAX_FONT_SIZE = 30;
+
 		var viewerConfig = store.get('Viewer') || {};
+			viewerConfig.fontSize = Number(viewerConfig.fontSize);
 		var codeConfig = store.get('Code') || {};
 		var customConfig = store.get('Custom') || {};
 
@@ -149,17 +153,27 @@ define([
 			show ? _viewer.showTOC() : _viewer.hideTOC();
 		});
 
+		window.ee.on('menu.view.viewer.font.size', function(value) {
+			viewerConfig.fontSize += value;
+
+			if (MIN_FONT_SIZE > viewerConfig.fontSize || MAX_FONT_SIZE < viewerConfig.fontSize) {
+
+				viewerConfig.fontSize -= value;
+				return;
+			}
+
+			changeFontSize(viewerConfig.fontSize);
+		});
+
 		HotKey('defmod-alt-c', function() {
 			window.ee.emit('menu.file.exports.clipboard');
 		});
 
 		HotKey('defmod-shift-.', function() {
-			viewerConfig.fontSize++;
-			changeFontSize(viewerConfig.fontSize);
+			window.ee.emit('menu.view.viewer.font.size', 1);
 		});
 		HotKey('defmod-shift-,', function() {
-			viewerConfig.fontSize--;
-			changeFontSize(viewerConfig.fontSize);
+			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
 
 		_viewer.onload = function() {}

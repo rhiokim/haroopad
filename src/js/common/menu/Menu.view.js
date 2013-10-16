@@ -88,9 +88,7 @@ window.MenuBarView = function () {
 	View.append(
 	    new gui.MenuItem({
 	        label: 'Font Size',
-		      click: function() {
-		        window.parent.ee.emit('menu.view.minus5.width');
-		      }
+            submenu: MenuBarViewFont()
 	    })
 	);
 	View.append(

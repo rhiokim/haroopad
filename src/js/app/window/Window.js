@@ -134,12 +134,12 @@ define([
     WindowMgr.actived.window.ee.emit('menu.view.doc.outline');
   });
 
-  window.ee.on('menu.view.zoomin', function() {
-    WindowMgr.actived.window.ee.emit('menu.view.zoomin');
+  window.ee.on('menu.view.editor.font.size', function(value) {
+    WindowMgr.actived.window.ee.emit('menu.view.editor.font.size', value);
   });
 
-  window.ee.on('menu.view.zoomout', function() {
-    WindowMgr.actived.window.ee.emit('menu.view.zoomout');
+  window.ee.on('menu.view.viewer.font.size', function(value) {
+    WindowMgr.actived.window.ee.emit('menu.view.viewer.font.size', value);
   });
 
   window.ee.on('menu.view.fullscreen', function() {
