@@ -397,5 +397,30 @@ define([
 			window.ee.emit('menu.view.editor.font.size', -1);
 		});
 
+		HotKey('shift-ctrl-1', function() {
+			window.ee.emit('insert.date', 'l');
+		});
+		HotKey('shift-ctrl-2', function() {
+			window.ee.emit('insert.date', 'L');
+		});
+		HotKey('shift-ctrl-3', function() {
+			window.ee.emit('insert.date', 'll');
+		});
+		HotKey('shift-ctrl-4', function() {
+			window.ee.emit('insert.date', 'LL');
+		});
+		HotKey('shift-ctrl-5', function() {
+			window.ee.emit('insert.date', 'lll');
+		});
+		HotKey('shift-ctrl-6', function() {
+			window.ee.emit('insert.date', 'LLL');
+		});
+		HotKey('shift-ctrl-7', function() {
+			window.ee.emit('insert.date', 'llll');
+		});
+		HotKey('shift-ctrl-8', function() {
+			window.ee.emit('insert.date', 'LLLL');
+		});
+
 		return editor;
 	});
