@@ -18,6 +18,7 @@ window.MenuBar = function() {
 		menu.append( MenuBarInsert() );
 		menu.append( MenuBarView() );
 		// menu.append( MenuBarTools() );
+		// menu.append( MenuBarShare() );
 		
 		if (platform != 'darwin') {
 			menu.append( MenuBarHelp() );
