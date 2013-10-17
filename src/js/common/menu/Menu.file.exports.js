@@ -24,14 +24,14 @@ window.MenuBarFileExports = function () {
       }
     })
   );
-  submenu.append(
-    new gui.MenuItem({
-      label: 'Haroopad Style HTML',
-      click: function() {
-        window.parent.ee.emit('menu.file.exports.clipboard.haroopad');
-      }
-    })
-  );
+  // submenu.append(
+  //   new gui.MenuItem({
+  //     label: 'Haroopad Style HTML',
+  //     click: function() {
+  //       window.parent.ee.emit('menu.file.exports.clipboard.haroopad');
+  //     }
+  //   })
+  // );
   submenu.append(
       new gui.MenuItem({
           type: 'separator'

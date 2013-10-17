@@ -1,10 +1,11 @@
 define([
 		'store',
 		'keyboard',
+		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.explicitStyleMaker',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, StyleMaker, DragDrop) {
+	function(store, HotKey, inlineStyle, StyleMaker, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 		// var sass = require('node-sass');
