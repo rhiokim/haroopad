@@ -1,6 +1,6 @@
 var _doc,
-    _body,
-    _md_body;
+  _body,
+  _md_body;
 var _options = {
   dirname: '.'
 };
@@ -14,7 +14,8 @@ window.ondragover = function(e) {
   return false;
 };
 window.ondrop = function(e) {
-  var i = 0, file, fArr, ext;
+  var i = 0,
+    file, fArr, ext;
 
   for (i; i < e.dataTransfer.files.length; ++i) {
 
@@ -74,7 +75,7 @@ function loadCustomCSS(style) {
   $(_body).addClass('custom');
 
   $('#custom').attr({
-    href: style +'?'+ new Date().getTime()
+    href: style + '?' + new Date().getTime()
   });
 }
 
@@ -82,10 +83,11 @@ function loadCustomCSS(style) {
  * set column layout
  * @param {[type]} count [description]
  */
+
 function setColumn(count) {
   var href,
     count = count || 'single';
-    
+
   href = 'css/column/' + count + '.css';
   $('#column').attr({
     href: href
@@ -95,20 +97,22 @@ function setColumn(count) {
 /**
  * set toc style
  */
+
 function showOutline() {
   var href;
-    
+
   href = 'css/viewer-toc/default.css';
   $('#toc').attr({
-    href: href +'?'+ new Date().getTime()
+    href: href + '?' + new Date().getTime()
   });
 }
+
 function showTOC() {
   var href;
-    
+
   href = 'css/viewer-toc/only-toc.css';
   $('#toc').attr({
-    href: href +'?'+ new Date().getTime()
+    href: href + '?' + new Date().getTime()
   });
 }
 
@@ -123,7 +127,7 @@ function hideTOC() {
 function showOnlyTOC() {
   // var elArr = document.body.querySelectorAll(':scope>*');
   // elArr = Array.prototype.slice.call(elArr, 0);
-  
+
   // contentElements = elArr.filter(function(el) {
   //   return !/^H[1-6]/.test(el.tagName);
   // });
@@ -136,7 +140,7 @@ function showOnlyTOC() {
 function showAllContent() {
   contentElements.forEach(function(el) {
     el.style.display = '';
-  });  
+  });
 }
 
 function createTOC() {
@@ -282,9 +286,7 @@ var ebdOpt = {
   includeHandle: false,
   embedMethod: 'fill',
   afterEmbed: function(oembedData, externalUrl) {
-    // this[0].setAttribute('data-origin-url', externalUrl);
     if (typeof oembedData.code == 'string') {
-      // this[0].setAttribute('data-replace', oembedData.code);
       this.attr('data-replace', oembedData.code);
     }
   },
@@ -468,7 +470,7 @@ function scrollTop(per) {
 //   document.body.removeChild(el);
 // }
 
-$(_body).ready(function() {
+$(document.body).ready(function() {
   _doc = document,
   _body = _doc.body,
   _md_body = _doc.getElementById('root');
@@ -478,12 +480,6 @@ $(_body).ready(function() {
     e.preventDefault();
 
     switch (el.tagName.toUpperCase()) {
-//       case 'IMG':
-//         origin = el.getAttribute('origin');
-//         if (origin) {
-//           replaceExternalContent(el, origin);
-//         }
-//         break;
       case 'A':
         window.ee.emit('link', el.getAttribute('href'));
         break;
