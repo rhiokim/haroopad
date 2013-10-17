@@ -100,6 +100,8 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.view.js',
             'src/js/common/menu/Menu.view.mode.js',
             'src/js/common/menu/Menu.view.column.js',
+            'src/js/common/menu/Menu.view.zoom.js',
+            'src/js/common/menu/Menu.view.font.js',
             'src/js/common/menu/Menu.insert.js',
             'src/js/common/menu/Menu.insert.section.js',
             'src/js/common/menu/Menu.insert.header.js',
@@ -108,6 +110,7 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.tools.post.js',
             'src/js/common/menu/Menu.tools.presentation.js',
             'src/js/common/menu/Menu.tools.send.js',
+            'src/js/common/menu/Menu.share.js',
             'src/js/common/menu/Menu.help.js'
           ]
         }
@@ -138,7 +141,7 @@ module.exports = function(grunt) {
         files: {
           'build/pad.modules.js': [
             'src/js/pad/before.pad.js',
-            // 'src/js/lib/logger.js',
+            'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
             'src/js/pad/pad.common.js',
             'build/menu.concat.js',
@@ -194,6 +197,7 @@ module.exports = function(grunt) {
           'build/haroopad/js/viewer.min.js': [
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/jquery.oembed.js',
             '<%= vendors %>/highlight.pack.js',
             'build/viewer.js'
           ]

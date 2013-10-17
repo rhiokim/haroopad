@@ -56,15 +56,28 @@ define([
     WindowMgr.actived.window.ee.emit('file.close');
   });
 
-  window.ee.on('menu.file.exports.clipboard', function() {
-    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard');
+  window.ee.on('menu.file.exports.clipboard.plain', function() {
+    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.plain');
   });
+
+  window.ee.on('menu.file.exports.clipboard.styled', function() {
+    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.styled');
+  });
+
+  window.ee.on('menu.file.exports.clipboard.haroopad', function() {
+    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.haroopad');
+  });
+
   window.ee.on('menu.file.exports.html', function() {
     WindowMgr.actived.window.ee.emit('file.exports.html');
   });
 
-  window.ee.on('menu.print.html', function() {
-    WindowMgr.actived.window.ee.emit('print.html');
+  window.ee.on('menu.print.editor', function() {
+    WindowMgr.actived.window.ee.emit('print.editor');
+  });
+
+  window.ee.on('menu.print.viewer', function() {
+    WindowMgr.actived.window.ee.emit('print.viewer');
   });
 
   window.ee.on('menu.preferences.show', function() {
@@ -118,6 +131,10 @@ define([
     WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
+  window.ee.on('menu.view.toggle.vim', function() {
+    WindowMgr.actived.window.ee.emit('menu.view.toggle.vim');
+  });
+
   window.ee.on('menu.view.plus5.width', function() {
     WindowMgr.actived.window.ee.emit('view.plus5.width');
   });
@@ -128,6 +145,14 @@ define([
 
   window.ee.on('menu.view.doc.outline', function() {
     WindowMgr.actived.window.ee.emit('menu.view.doc.outline');
+  });
+
+  window.ee.on('menu.view.editor.font.size', function(value) {
+    WindowMgr.actived.window.ee.emit('menu.view.editor.font.size', value);
+  });
+
+  window.ee.on('menu.view.viewer.font.size', function(value) {
+    WindowMgr.actived.window.ee.emit('menu.view.viewer.font.size', value);
   });
 
   window.ee.on('menu.view.fullscreen', function() {

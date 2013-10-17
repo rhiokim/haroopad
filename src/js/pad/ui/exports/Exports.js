@@ -10,6 +10,7 @@ define([
 		var gui = require('nw.gui');
 		var manifest = global.package;
 		var saveEl = $("#exportHTML");
+		var shadow;
 
 		var res;
 		
@@ -55,34 +56,50 @@ define([
 			return cssText;
 		}
 
-		function _replaceOriginalEmbed(html) {
-			var str, type, provider, oembededs = contentDocument.body.querySelectorAll('.oembeded');
-  			oembededs = Array.prototype.slice.call(oembededs, 0);
+		function _replaceOriginalEmbed() {
+			var str, type, provider, 
+				tweets = shadow.querySelectorAll('[data-provider=twitter]');
+	  			tweets = Array.prototype.slice.call(tweets, 0);
 
-			_.each(oembededs, function(node) {
-				str = node.getAttribute('data-replace');
-				type = node.getAttribute('data-type');
-				provider = node.getAttribute('data-provider');
-
-				switch(provider) {
-					case 'twitter':
-						html = html.replace(node.innerHTML, str);
-					break;
-				}
+			_.each(tweets, function(tweet) {
+				tweet.innerHTML = tweet.getAttribute('data-replace');
 			});
+		}
 
-			return html;
+		function _removeDataProperties() {
+			var frags, attrs;
+
+			frags = shadow.querySelectorAll(':scope>*');
+			frags = Array.prototype.slice.call(frags, 0);
+
+			_.each(frags, function(el) {
+				el.removeAttribute('data-url');
+				el.removeAttribute('data-prop');
+				el.removeAttribute('data-replace');
+				el.removeAttribute('data-type');
+				el.removeAttribute('data-provider');
+				el.removeAttribute('data-origin');
+			});
 		}
 
 		function getBodyHtml() {
-			var mdBody;
 			contentDocument = Viewer.getContentDocument();
-			mdBody = contentDocument.getElementById('root');
-			return mdBody.innerHTML;
+
+			shadow = document.createElement('body');
+			shadow.style.display = 'none';
+			shadow.setAttribute('class', contentDocument.body.getAttribute('class'));
+			shadow.innerHTML = contentDocument.getElementById('root').innerHTML;
+
+			_replaceOriginalEmbed();
+			_removeDataProperties();
+
+			shadow.removeAttribute('style');
+
+			return shadow.innerHTML;
 		}
 
 		function getBodyClass() {
-			return contentDocument.body.getAttribute('class');
+			return shadow.getAttribute('class');
 		}
 
 		function getTitle() {

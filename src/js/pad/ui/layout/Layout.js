@@ -91,10 +91,18 @@ define([
 		});
 
 		HotKey('shift-ctrl-]', function() {
-			setLayout('editor');
+			if (_layout == 'layout0') {
+				setLayout('editor');	
+			} else if (_layout == 'layout3') {
+				window.ee.emit('view.reset.mode');
+			}
 		});
 		HotKey('shift-ctrl-[', function() {
-			setLayout('viewer');
+			if (_layout == 'layout2') {
+				window.ee.emit('view.reset.mode');
+			} else if (_layout == 'layout0') {
+				setLayout('viewer');
+			}
 		});
 
 		HotKey('ctrl-alt-]', right5);

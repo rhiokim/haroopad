@@ -40,6 +40,18 @@ function loadCss(url) {
   }).appendTo('head');
 }
 
+function setStyle(property, value) {
+  document.querySelector('#root').style[property] = value;
+}
+
+function setFontSize(size) {
+  setStyle('fontSize', size +'px');
+}
+
+function setFontFamily(name) {
+  // setStyle('fontFamily', name);
+}
+
 function setViewStyle(style) {
   var href = 'css/markdown/' + style + '/' + style + '.css';
 
@@ -274,30 +286,44 @@ var ebdOpt = {
   includeHandle: false,
   embedMethod: 'fill',
   afterEmbed: function(oembedData, externalUrl) {
-    this[0].setAttribute('data-origin-url', externalUrl);
     if (typeof oembedData.code == 'string') {
-      this[0].setAttribute('data-replace', oembedData.code);
+      this.attr('data-replace', oembedData.code);
     }
   },
   onProviderNotFound: function(url) {
     this.html('<a href="http://pad.haroopress.com/page.html?f=open-media">이 주소는 콘텐츠 스마트 임베딩을 지원하지 않습니다.</a>');
   }
 };
+var spinner = document.createElement('span');
 
 function drawEmbedContents(target) {
   var url, embed, embeds = target.querySelectorAll('.oembed');
   embeds = Array.prototype.slice.call(embeds, 0);
 
   for (i = 0; i < embeds.length; i++) {
-    ebdOpt.ebdOpt = {};
     embed = embeds[i];
-    url = embed.getAttribute('href');
 
-    $(embed).oembed(url, ebdOpt);
-
-    embed.removeAttribute('class');
-    embed.setAttribute('class', 'oembeded');
+    spinner = embed.appendChild(spinner);
+    spinner.setAttribute('class', 'spinner');
   }
+
+  if (_embedTimeout) { 
+    window.clearTimeout(_embedTimeout);
+  }
+  
+  _embedTimeout = window.setTimeout(function() {
+    for (i = 0; i < embeds.length; i++) {
+      ebdOpt.ebdOpt = {};
+      embed = embeds[i];
+
+      url = embed.firstElementChild.getAttribute('href');
+
+      $(embed).oembed(url, ebdOpt);
+
+      embed.removeAttribute('class');
+      embed.setAttribute('class', 'oembeded');
+    }
+  }, 1000);
 }
 
 /**
@@ -359,6 +385,9 @@ function update(html) {
     frag = frags[i];
     _frag = _frags.shift();
 
+    origin = frag.outerHTML;
+    frag.setAttribute('data-origin', origin);
+
     //이전 프레그먼트 없는 경우 body 에 추가
     if (!_frag) {
       // var el = $(frag).appendTo(document.body);
@@ -374,6 +403,7 @@ function update(html) {
       if (!_origin) {
         //새로운 프레그먼트와 이전 프레그먼트가 다른 경우는 새로운 프레그먼트로 치환
         if (frag.outerHTML != _frag.outerHTML) {
+        // if (frag.textContent != _frag.textContent) {
 
           _frag.style.display = 'none';
           _md_body.insertBefore(frag, _frag);
@@ -381,7 +411,7 @@ function update(html) {
 
         }
       } else {
-        origin = frag.getAttribute('data-origin');
+        // origin = frag.getAttribute('data-origin');
 
         //origin 문자열이 있는 경우
         if (origin != _origin) {
@@ -415,16 +445,9 @@ function update(html) {
 
   // _preventDefaultAnchor();
   // _lazySyntaxHighlight();
-
+  
   countFragments(_md_body);
-
-  if (_embedTimeout) {
-    window.clearTimeout(_embedTimeout);
-  }
-
-  _embedTimeout = window.setTimeout(function() {
-    drawEmbedContents(document.body);
-  }, 1000);
+  drawEmbedContents(document.body);
 }
 /**
  * sync scroll position
@@ -439,13 +462,13 @@ function scrollTop(per) {
   $(window).scrollTop(top / 100 * per);
 }
 
-function replaceExternalContent(el, origin) {
-  var plugin = $(origin)[0];
-  plugin.setAttribute('origin', origin);
-  el.style.display = 'none';
-  _md_body.insertBefore(plugin, el);
-  _md_body.removeChild(el);
-}
+// function replaceExternalContent(el, origin) {
+//   var plugin = $(origin)[0];
+//   plugin.setAttribute('origin', origin);
+//   el.style.display = 'none';
+//   document.body.insertBefore(plugin, el);
+//   document.body.removeChild(el);
+// }
 
 $(document.body).ready(function() {
   _doc = document,
@@ -457,12 +480,6 @@ $(document.body).ready(function() {
     e.preventDefault();
 
     switch (el.tagName.toUpperCase()) {
-      //       case 'IMG':
-      //         origin = el.getAttribute('origin');
-      //         if (origin) {
-      //           replaceExternalContent(el, origin);
-      //         }
-      //         break;
       case 'A':
         window.ee.emit('link', el.getAttribute('href'));
         break;
