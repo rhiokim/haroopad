@@ -1,9 +1,10 @@
 define([
 		'store',
 		'keyboard',
+		'viewer/Viewer.explicitStyleMaker',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, DragDrop) {
+	function(store, HotKey, StyleMaker, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 		// var sass = require('node-sass');
@@ -36,6 +37,10 @@ define([
 
 		function changeTheme(value) {
 			_viewer.setViewStyle(value);
+
+			window.setTimeout(function() {
+				StyleMaker.generateInlineStyle();
+			}, 1000);
 
 			global._gaq.push('haroopad.preferences', 'style', value);
 		}
@@ -143,9 +148,6 @@ define([
 
 		/* copy html to clipboard */
 		window.ee.on('menu.file.exports.clipboard.plain', function() {
-			clipboard.set(content, 'text');
-		});
-		window.ee.on('menu.file.exports.clipboard.styled', function() {
 			clipboard.set(content, 'text');
 		});
 		window.ee.on('menu.file.exports.clipboard.haroopad', function() {
