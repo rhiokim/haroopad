@@ -292,20 +292,36 @@ var ebdOpt = {
     this.html('<a href="http://pad.haroopress.com/page.html?f=open-media">이 주소는 콘텐츠 스마트 임베딩을 지원하지 않습니다.</a>');
   }
 };
+var spinner = document.createElement('span');
+
 function drawEmbedContents(target) {
   var url, embed, embeds = target.querySelectorAll('.oembed');
   embeds = Array.prototype.slice.call(embeds, 0);
 
   for (i = 0; i < embeds.length; i++) {
-    ebdOpt.ebdOpt = {};
     embed = embeds[i];
-    url = embed.getAttribute('data-url');
 
-    $(embed).oembed(url, ebdOpt);
-
-    embed.removeAttribute('class');
-    embed.setAttribute('class', 'oembeded');
+    spinner = embed.appendChild(spinner);
+    spinner.setAttribute('class', 'spinner');
   }
+
+  if (_embedTimeout) { 
+    window.clearTimeout(_embedTimeout);
+  }
+  
+  _embedTimeout = window.setTimeout(function() {
+    for (i = 0; i < embeds.length; i++) {
+      ebdOpt.ebdOpt = {};
+      embed = embeds[i];
+
+      url = embed.firstElementChild.getAttribute('href');
+
+      $(embed).oembed(url, ebdOpt);
+
+      embed.removeAttribute('class');
+      embed.setAttribute('class', 'oembeded');
+    }
+  }, 1000);
 }
 
 /**
@@ -429,14 +445,7 @@ function update(html) {
   // _lazySyntaxHighlight();
   
   countFragments(_md_body);
-
-  if (_embedTimeout) { 
-    window.clearTimeout(_embedTimeout);
-  }
-  
-  _embedTimeout = window.setTimeout(function() {
-    drawEmbedContents(document.body);
-  }, 1000);
+  drawEmbedContents(document.body);
 }
 /**
  * sync scroll position
