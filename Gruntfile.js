@@ -141,7 +141,7 @@ module.exports = function(grunt) {
         files: {
           'build/pad.modules.js': [
             'src/js/pad/before.pad.js',
-            // 'src/js/lib/logger.js',
+            'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
             'src/js/pad/pad.common.js',
             'build/menu.concat.js',
@@ -197,6 +197,7 @@ module.exports = function(grunt) {
           'build/haroopad/js/viewer.min.js': [
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/jquery.oembed.js',
             '<%= vendors %>/highlight.pack.js',
             'build/viewer.js'
           ]

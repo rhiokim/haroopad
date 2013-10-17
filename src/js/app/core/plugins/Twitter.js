@@ -9,19 +9,19 @@ define(function() {
 	    .replace(/'/g, '&#39;');
 	}
 
-	return function(args) {
-		var key, origin = [];
+	return function(name, args) {
+		var key;
 		args = args.split(' ');
 		key = args[0];
 
-		origin.push('tweet');
-		origin.concat(args);
+		var origin = '['+ name +':'+ args +']';
+			origin = escape(origin);
 
 		var real = '<img src="img/__json_proxy.png" onload="getTweet(this, \''
 			+ key 
 			+ '\''
 			+ ');"/>';
 
-		return '<p origin="'+ escape(origin.join('-')) +'">'+ real +'</p>';
+		return '<p data-origin="'+ origin +'">'+ real +'</p>';
 	}
 });

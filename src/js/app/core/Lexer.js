@@ -19,8 +19,29 @@ define([
     var lexer = new marked.Lexer(defaults);
 
     var customRules = {
-    	// plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(:] *\n*/
-    	plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(] */
+        // plugin: /^ *\[([^\:\]]+):([^\]]+)\] *\n*/,
+        oembed: /^@\[(inside)\]\(href\)/
+        // plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(] */
+    }
+    
+    var _inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
+    var _href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;
+
+    customRules.oembed = replace(customRules.oembed)
+      ('inside', _inside)
+      ('href', _href)
+      ();
+
+    function replace(regex, opt) {
+      regex = regex.source;
+      opt = opt || '';
+      return function self(name, val) {
+        if (!name) return new RegExp(regex, opt);
+        val = val.source || val;
+        val = val.replace(/(^|[^\[])\^/g, '$1');
+        regex = regex.replace(name, val);
+        return self;
+      };
     }
 
 	function merge(obj) {
@@ -39,6 +60,7 @@ define([
 
 	  return obj;
 	}
+
     lexer.rules = merge({}, lexer.rules, customRules);
 
     return lexer;
