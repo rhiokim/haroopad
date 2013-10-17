@@ -348,8 +348,6 @@
         var child, ebdOpt;
 
         ebdOpt = container[0].querySelector('a').getAttribute('data-props');
-        console.log(container[0].querySelector('a'), ebdOpt)
-        // ebdOpt = container.data('props');
 
         if (typeof oembedData.code == 'string') {
           oembedData.code = oembedData.code.replace('="//', '="http://');
@@ -367,9 +365,6 @@
           container.html(html);
         }
         
-        // child.width('auto');
-
-
         if (ebdOpt) {
           ebdOpt = decodeURIComponent(ebdOpt);
           ebdOpt = JSON.parse(ebdOpt);
