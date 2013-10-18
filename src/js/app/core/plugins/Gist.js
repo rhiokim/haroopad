@@ -9,14 +9,17 @@ define(function() {
 	    .replace(/'/g, '&#39;');
 	}
 	
-	return function(args) {
-		var key, file, origin = [];
+	return function(name, args) {
+		var key, file;
 		args = args.split(' ');
 		key = args[0];
 		file = args[1];
 
-		origin.push('gist');
-		origin.concat(args);
+
+		var origin = '['+ name +':'+ args +']';
+			origin = escape(origin);
+		// origin.push('gist');
+		// origin.concat(args);
 
 		var real = '<img src="img/__json_proxy.png" onload="getGist(this, \''
 			+ key 
@@ -24,6 +27,6 @@ define(function() {
 			+ (file ? ', \''+ file +'\'' : '')
 			+ ');"/>';
 
-		return '<p origin="'+ escape(origin.join('-')) +'">'+ real +'</p>';
+		return '<p data-origin="'+ origin +'">'+ real +'</p>';
 	}
 });

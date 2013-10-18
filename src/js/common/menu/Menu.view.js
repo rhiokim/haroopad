@@ -43,6 +43,14 @@ window.MenuBarView = function () {
 		      }
 	    })
 	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Toggle Vim Mode',
+		      click: function() {
+		        window.parent.ee.emit('menu.view.toggle.vim');
+		      }
+	    })
+	);
 	// View.append(
 	//     new gui.MenuItem({
 	//         label: 'Toggle Word Count',
@@ -73,10 +81,33 @@ window.MenuBarView = function () {
 	    })
 	);
 	View.append(
-		new gui.MenuItem({
-			type: 'separator'
-		})
+	    new gui.MenuItem({
+          type: 'separator'
+	    })
 	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Font Size',
+            submenu: MenuBarViewFont()
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+          type: 'separator'
+	    })
+	);
+
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Zoom',
+ //            submenu: MenuBarViewZoom()
+	//     })
+	// );
+	// View.append(
+	// 	new gui.MenuItem({
+	// 		type: 'separator'
+	// 	})
+	// );
 
 	View.append(
 		new gui.MenuItem({

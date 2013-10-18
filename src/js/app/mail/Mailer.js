@@ -57,11 +57,11 @@ define([
 		},
 
 		send: function(mailInfo, fileInfo, next) {
-			// mailInfo.title, fileInfo.markdown, fileInfo.styledHTML, mailInfo.to, mailInfo.mode, fileInfo.attachments
+			// mailInfo.title, fileInfo.markdown, fileInfo.emailHTML, mailInfo.to, mailInfo.mode, fileInfo.attachments
 			var subject = mailInfo.title;
 			var to = mailInfo.to;
 			var mode = mailInfo.mode;
-			var html = fileInfo.styledHTML;
+			var html = fileInfo.emailHTML;
 			var text = fileInfo.markdown;
 
 			if (to.indexOf('@tumblr.com') > -1) {

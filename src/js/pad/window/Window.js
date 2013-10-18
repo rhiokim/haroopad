@@ -23,7 +23,7 @@ define([
 
 	function close() {
 		nw.emit('destory');
-		
+
 		win.hide();
 
 		if (!win.isFullscreen) {
@@ -195,12 +195,12 @@ define([
 	win.on('enter-fullscreen', function() {
 		document.querySelector('.CodeMirror-gutters').style.height = '3000px';
 
-  	global._gaq.push('haroopad.window', 'fullscreen', 'true');
+		global._gaq.push('haroopad.window', 'fullscreen', 'true');
 	});
 
 	win.on('leave-fullscreen', function() {
 
-  	global._gaq.push('haroopad.window', 'fullscreen', 'false');
+		global._gaq.push('haroopad.window', 'fullscreen', 'false');
 		// config.isFullscreen = win.isFullscreen;
 		// store.set('Window', config);
 	});
@@ -227,6 +227,10 @@ define([
 	/* up to date haroopad */
 	window.ee.on('up.to.date.haroopad', function(version) {
 		Notifier.notify('Haroopad <strong>v' + version + '</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
+	});
+
+	window.ee.on('print.editor', function() {
+		// TODO print after popup window
 	});
 
 	HotKey('defmod-enter', function() {
@@ -268,10 +272,16 @@ define([
 	HotKey('defmod-alt-e', function() {
 		window.ee.emit('file.exports.html');
 
-  	global._gaq.push('haroopad.file', 'exports', 'html');
+		global._gaq.push('haroopad.file', 'exports', 'html');
 	});
 
-	
-	window.ondragover = function(e) { e.preventDefault(); return false };
-	window.ondrop = function(e) { e.preventDefault(); return false };
+
+	window.ondragover = function(e) {
+		e.preventDefault();
+		return false
+	};
+	window.ondrop = function(e) {
+		e.preventDefault();
+		return false
+	};
 });
