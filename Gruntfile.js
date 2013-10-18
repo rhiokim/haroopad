@@ -101,6 +101,7 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.view.mode.js',
             'src/js/common/menu/Menu.view.column.js',
             'src/js/common/menu/Menu.view.zoom.js',
+            'src/js/common/menu/Menu.view.font.js',
             'src/js/common/menu/Menu.insert.js',
             'src/js/common/menu/Menu.insert.section.js',
             'src/js/common/menu/Menu.insert.header.js',
@@ -157,6 +158,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/store.js',
             '<%= vendors %>/js-url.js',
+            '<%= vendors %>/reMarked.js',
             '<%= vendors %>/notifier.js',
             '<%= vendors %>/require.min.js'
           ]

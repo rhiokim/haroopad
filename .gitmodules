@@ -16,3 +16,6 @@
 [submodule "lib/markdown-css"]
 	path = lib/markdown-css
 	url = git@github.com:rhiokim/markdown-css.git
+[submodule "lib/LaTeX2HTML5"]
+	path = lib/LaTeX2HTML5
+	url = git@github.com:Mathapedia/LaTeX2HTML5.git

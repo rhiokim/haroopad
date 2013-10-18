@@ -347,6 +347,8 @@
       case "fill":
         var child, ebdOpt;
 
+        ebdOpt = container[0].querySelector('a').getAttribute('data-props');
+
         if (typeof oembedData.code == 'string') {
           oembedData.code = oembedData.code.replace('="//', '="http://');
           oembedData.code = oembedData.code.replace("='//", "='http://");
@@ -363,16 +365,12 @@
           container.html(html);
         }
         
-        child = container.children();
-        // child.width('auto');
-
-        ebdOpt = container.data('props');
-
         if (ebdOpt) {
           ebdOpt = decodeURIComponent(ebdOpt);
           ebdOpt = JSON.parse(ebdOpt);
         }
         
+        child = container.children();
         child.css(ebdOpt);
         break;
       case "append":

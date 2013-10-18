@@ -37,7 +37,7 @@ define([
 			},
 
 			changeFontSize: function(e) {
-				options.set({ fontSize: e.val });
+				options.set({ fontSize: Number(e.val) });
 			},
 
 			changeFontFamily: function(e) {

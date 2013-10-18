@@ -52,7 +52,7 @@ define([
 			},
 
 			changeFontSize: function(e) {
-				options.set({ fontSize: e.val });
+				options.set({ fontSize: Number(e.val) });
 			},
 
 			displayLineNumber: function(e) {

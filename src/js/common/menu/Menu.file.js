@@ -54,15 +54,22 @@ window.MenuBarFile = function () {
   sepItem();
   
   menuItem({
-          label: 'Export',
+          label: 'Exports',
           // enabled: false,
           submenu: MenuBarFileExports()
       });
   
+  // menuItem({
+  //           label: 'Print Markdown',
+  //           click: function() {
+  //               window.parent.ee.emit('menu.print.editor');
+  //           }
+  //       });
+  
   menuItem({
             label: 'Print...',
             click: function() {
-                window.parent.ee.emit('menu.print.html');
+                window.parent.ee.emit('menu.print.viewer');
             }
         });
 	// menuItem({

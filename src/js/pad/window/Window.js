@@ -229,6 +229,10 @@ define([
 		Notifier.notify('Haroopad <strong>v' + version + '</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
 	});
 
+	window.ee.on('print.editor', function() {
+		// TODO print after popup window
+	});
+
 	HotKey('defmod-enter', function() {
 		window.ee.emit('view.fullscreen');
 	});

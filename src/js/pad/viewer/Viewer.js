@@ -1,9 +1,11 @@
 define([
 		'store',
 		'keyboard',
+		'viewer/Viewer.inlineStyle',
+		'viewer/Viewer.explicitStyleMaker',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, DragDrop) {
+	function(store, HotKey, inlineStyle, StyleMaker, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 		// var sass = require('node-sass');
@@ -16,7 +18,11 @@ define([
 		var gui = require('nw.gui'),
 			clipboard = gui.Clipboard.get();
 
+		var MIN_FONT_SIZE = 9;
+		var MAX_FONT_SIZE = 30;
+
 		var viewerConfig = store.get('Viewer') || {};
+			viewerConfig.fontSize = Number(viewerConfig.fontSize);
 		var codeConfig = store.get('Code') || {};
 		var customConfig = store.get('Custom') || {};
 
@@ -32,6 +38,10 @@ define([
 
 		function changeTheme(value) {
 			_viewer.setViewStyle(value);
+
+			window.setTimeout(function() {
+				StyleMaker.generateInlineStyle();
+			}, 1000);
 
 			global._gaq.push('haroopad.preferences', 'style', value);
 		}
@@ -91,7 +101,7 @@ define([
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
 		});
 
-		window.ee.on('print.html', function(value) {
+		window.ee.on('print.viewer', function(value) {
 			_viewer.print();
 
 			global._gaq.push('haroopad.file', 'print', '');
@@ -138,7 +148,10 @@ define([
 		}.bind(this), false);
 
 		/* copy html to clipboard */
-		window.ee.on('menu.file.exports.clipboard', function() {
+		window.ee.on('menu.file.exports.clipboard.plain', function() {
+			clipboard.set(content, 'text');
+		});
+		window.ee.on('menu.file.exports.clipboard.haroopad', function() {
 			clipboard.set(content, 'text');
 		});
 
@@ -149,17 +162,31 @@ define([
 			show ? _viewer.showTOC() : _viewer.hideTOC();
 		});
 
-		HotKey('defmod-alt-c', function() {
-			window.ee.emit('menu.file.exports.clipboard');
+		window.ee.on('menu.view.viewer.font.size', function(value) {
+			viewerConfig.fontSize += value;
+
+			if (MIN_FONT_SIZE > viewerConfig.fontSize || MAX_FONT_SIZE < viewerConfig.fontSize) {
+
+				viewerConfig.fontSize -= value;
+				return;
+			}
+
+			changeFontSize(viewerConfig.fontSize);
 		});
 
-		HotKey('defmod-alt-.', function() {
-			viewerConfig.fontSize++;
-			changeFontSize(viewerConfig.fontSize);
+		HotKey('defmod-p', function() {
+			window.ee.emit('print.viewer');
 		});
-		HotKey('defmod-alt-,', function() {
-			viewerConfig.fontSize--;
-			changeFontSize(viewerConfig.fontSize);
+
+		HotKey('defmod-alt-c', function() {
+			window.ee.emit('menu.file.exports.clipboard.plain');
+		});
+
+		HotKey('defmod-shift-.', function() {
+			window.ee.emit('menu.view.viewer.font.size', 1);
+		});
+		HotKey('defmod-shift-,', function() {
+			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
 
 		_viewer.onload = function() {}
