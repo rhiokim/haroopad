@@ -318,8 +318,11 @@ define([
   window.ee.on('context.preferences', function(e) {
     Preferences.show();
   });
+  window.ee.on('context.copy', function(e) {
+    WindowMgr.actived.window.ee.emit('context.copy');
+  });
   window.ee.on('context.copy.html', function(e) {
-    WindowMgr.actived.window.ee.emit('action.copy.html');
+    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.plain');
   });
 
 

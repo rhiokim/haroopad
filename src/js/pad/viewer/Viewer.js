@@ -182,6 +182,10 @@ define([
 			window.ee.emit('menu.file.exports.clipboard.plain');
 		});
 
+		HotKey('defmod-shift-alt-c', function() {
+			window.ee.emit('menu.file.exports.clipboard.styled');
+		});
+
 		HotKey('defmod-shift-.', function() {
 			window.ee.emit('menu.view.viewer.font.size', 1);
 		});
