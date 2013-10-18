@@ -1,5 +1,5 @@
 MathJax.Hub.Config({
-  showProcessingMessages: false,
+  showProcessingMessages: true,
   tex2jax: {
     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
     displayMath: [ ['$$','$$'], ["\\[","\\]"] ]

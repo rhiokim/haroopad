@@ -39,7 +39,7 @@ define([
 				href = item.href;
 
 				if (!href) {
-					cssText += item.innerHTML;
+					cssText += item.ownerNode.innerHTML;
 					return;
 				}
 				
