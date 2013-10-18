@@ -27,7 +27,7 @@ define([],
 		// Context.append(mCopy);
 
 		mCopyHTML = menuItem({ 
-			label: 'Copy HTML', 
+			label: 'Copy Plain HTML', 
 			click: function() {
 		  	window.ee.emit('context.copy.html');
 			} 
