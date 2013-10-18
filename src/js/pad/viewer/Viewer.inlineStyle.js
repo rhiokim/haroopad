@@ -11,7 +11,7 @@ define([
 	var viewer = iframe.contentWindow;
 
 	var htmlDoc = iframe.contentDocument;
-	var htmlStyledDoc;
+	var shadow = document.createElement('html');
 
 	function setInlineStyles(rules) {
 		var i, j, selectorMatches, styleAttr;
@@ -19,7 +19,7 @@ define([
 		for (i = 0; i < rules.length; i++) {
 			rule = rules[i];
 
-			selectorMatches = htmlStyledDoc.querySelectorAll(rule.selectorText);
+			selectorMatches = shadow.querySelectorAll(rule.selectorText);
 
 			for (j = 0; j < selectorMatches.length; j++) {
 				elem = selectorMatches[j];
@@ -36,8 +36,38 @@ define([
 		}
 	}
 
+	function _replaceOriginalEmbed() {
+		var str, type, provider, 
+			tweets = shadow.querySelectorAll('[data-provider=twitter]');
+  			tweets = Array.prototype.slice.call(tweets, 0);
+
+		_.each(tweets, function(tweet) {
+			tweet.innerHTML = tweet.getAttribute('data-replace');
+		});
+	}
+
+	function _removeDataProperties() {
+		var frags, attrs, dataAttr = /^data-/;
+
+		frags = shadow.querySelectorAll('#root>*');
+		frags = Array.prototype.slice.call(frags, 0);
+
+		_.each(frags, function(el) {
+			attrs = el.attributes;
+
+			el.removeAttribute('class');
+			el.removeAttribute('data-url');
+			el.removeAttribute('data-prop');
+			el.removeAttribute('data-replace');
+			el.removeAttribute('data-type');
+			el.removeAttribute('data-provider');
+			el.removeAttribute('data-origin');
+		});
+	}
+
 	function makeStylesExplicit() {
 		var styleSheets, i;
+		var wrapper = document.createElement('div');
 
 		styleSheets = htmlDoc.styleSheets;
 
@@ -45,16 +75,17 @@ define([
 			setInlineStyles(styleSheets[i].cssRules);
 		}
 
-		var wrapper = document.createElement('div');
-		wrapper.innerHTML = htmlStyledDoc.querySelector('#root').innerHTML;
-		wrapper.setAttribute('style', htmlStyledDoc.lastElementChild.getAttribute('style'));
+		_replaceOriginalEmbed();
+		_removeDataProperties();
+
+		wrapper.innerHTML = shadow.querySelector('#root').innerHTML;
+		wrapper.setAttribute('style', shadow.lastElementChild.getAttribute('style'));
 
 		nw.file.set({ styledHTML: wrapper.outerHTML }, { silent: true });
 	}
 
 	function generateInlineStyle() {
-		htmlStyledDoc = document.createElement('html');
-		htmlStyledDoc.innerHTML = htmlDoc.documentElement.innerHTML;
+		shadow.innerHTML = htmlDoc.documentElement.innerHTML;
 
 		makeStylesExplicit();
 	}

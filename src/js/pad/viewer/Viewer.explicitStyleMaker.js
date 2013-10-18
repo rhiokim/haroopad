@@ -121,11 +121,6 @@ define([
 		makeStylesExplicit();
 	}
 
-	window.ee.on('menu.file.exports.clipboard.styled', function() {
-		generateInlineStyle();
-		clipboard.set(nw.file.get('styledHTML'), 'text');
-	});
-
 	return {
 		generateInlineStyle: generateInlineStyle
 	}
