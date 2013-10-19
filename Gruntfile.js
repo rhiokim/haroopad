@@ -291,8 +291,8 @@ module.exports = function(grunt) {
 
       libs: {
         files: [
-          { expand: true, cwd: 'src/js/vendors/MathJax/', src: [ '**' ], dest: 'build/libs/MathJax/' },
-          { expand: true, cwd: 'lib/gemoji/images/emoji/', src: [ '**' ], dest: 'build/libs/emoji/' }
+          { expand: true, cwd: 'src/js/vendors/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' },
+          { expand: true, cwd: 'lib/gemoji/images/emoji/', src: [ '**' ], dest: 'build/lib/emoji/' }
         ]
       },
 

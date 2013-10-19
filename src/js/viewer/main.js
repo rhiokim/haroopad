@@ -507,7 +507,15 @@ $(document.body).ready(function() {
         window.ee.emit('link', el.getAttribute('href'));
         break;
     }
-
   });
+
+  // MathJax.Hub.Config({
+  //   showProcessingMessages: true,
+  //   tex2jax: {
+  //     inlineMath: [ ['$$$','$$$'], ["\\(","\\)"] ],
+  //     displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+  //   }
+  // });
+  // MathJax.Hub.config.menuSettings.renderer = 'HTML-CSS'; //'SVG', 'NativeMML'
 
 });

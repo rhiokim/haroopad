@@ -51,9 +51,9 @@ define([
 					+ text
 					+ '$$</p>';
 			} else {
-				return '<span class="mathjax">$'
+				return '<span class="mathjax">$$$'
 					+ text
-					+ '$</span>';
+					+ '$$$</span>';
 			}
 		}
 

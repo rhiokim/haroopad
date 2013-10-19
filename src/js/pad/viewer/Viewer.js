@@ -8,7 +8,6 @@ define([
 	function(store, HotKey, inlineStyle, StyleMaker, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
-		// var sass = require('node-sass');
 
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;

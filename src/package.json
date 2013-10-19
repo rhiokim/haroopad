@@ -19,6 +19,9 @@
   "webkit": {
     "plugin": true
   },
+  "mathjax": {
+    "path": "../lib/MathJax"
+    },
   "upgrade": "http://pad.haroopress.com/upgrade.json",
   "maintainers": [
     {

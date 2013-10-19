@@ -41,7 +41,7 @@ function getExecPath() {
 			return process.cwd();//path.dirname(process.execPath);
 		break;
 		case 'mac':
-			return process.cwd();
+			return path.join(process.execPath, '../../../../../');
 		break;
 		case 'linux':
 			return process.cwd();//path.dirname(process.execPath);
@@ -53,5 +53,5 @@ function getDocsPath() {
 	var locale = window.navigator.language;
 	locale = languageTable.indexOf(locale) < 0 ? 'en-US': locale ;
 
-	return path.join(getExecPath(), 'docs', locale);
+	return path.join(process.cwd(), 'docs', locale);
 }
