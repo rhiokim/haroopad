@@ -40,7 +40,8 @@ requirejs([
     // 'core/Parser',
     'window/Window',
     'window/WindowManager',
-    'utils/UpdateNotifier'
+    'utils/UpdateNotifier',
+    'math/Math'
   ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
 
     global._gaq.init(function(_gaq) {

@@ -21,9 +21,10 @@ define([
 		var MAX_FONT_SIZE = 30;
 
 		var viewerConfig = store.get('Viewer') || {};
-			viewerConfig.fontSize = Number(viewerConfig.fontSize);
+				viewerConfig.fontSize = Number(viewerConfig.fontSize);
 		var codeConfig = store.get('Code') || {};
 		var customConfig = store.get('Custom') || {};
+		var generalConfig = store.get('General') || {};
 
 		// var config = option.toJSON();
 
@@ -205,6 +206,14 @@ define([
 			window.ee.emit('dom', dom);
 		});
 
+		/*
+		 * Math rendering event proxy
+		 * viewer.html -> Viewer.js -> index.html -> math/Math.js -> Rendering
+		 */
+		_viewer.ee.on('math', function(target, cb) {
+			window.parent.ee.emit('math', target, cb);
+		})
+
 		_viewer.ee.on('title', function(title) {
 			nw.file.set('title', title);
 		});
@@ -249,6 +258,10 @@ define([
 
 		if (customConfig.theme) {
 			_viewer.loadCustomCSS(customConfig.theme.path);
+		}
+
+		if (generalConfig.enableMath) {
+			// _viewer.initMath(getExecPath());
 		}
 
 		return {
