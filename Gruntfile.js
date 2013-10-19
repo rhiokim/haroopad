@@ -415,7 +415,7 @@ module.exports = function(grunt) {
 
     shell: {
       cpLib: {
-        command: 'cp -R lib/nw.app build/haroopad.app'
+        command: 'cp -R lib/node-webkit.app build/haroopad.app'
       },
 
       cpZipSrc: {
