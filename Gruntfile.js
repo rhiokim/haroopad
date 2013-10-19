@@ -291,8 +291,8 @@ module.exports = function(grunt) {
 
       libs: {
         files: [
-          { expand: true, cwd: 'src/js/vendors/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' },
-          { expand: true, cwd: 'lib/gemoji/images/emoji/', src: [ '**' ], dest: 'build/lib/emoji/' }
+          { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' },
+          // { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/emoji/', src: [ '**' ], dest: 'build/lib/emoji/' }
         ]
       },
 
@@ -390,12 +390,12 @@ module.exports = function(grunt) {
 
       mdmathjax: {
         files: [
-          { expand: true, cwd: 'lib/MathJax/config/', src: [ '**' ], dest: 'src/js/vendors/MathJax/config/' },
-          { expand: true, cwd: 'lib/MathJax/extensions/', src: [ '**' ], dest: 'src/js/vendors/MathJax/extensions/' },
-          { expand: true, cwd: 'lib/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'src/js/vendors/MathJax/fonts/HTML-CSS/TeX/woff/' },
-          { expand: true, cwd: 'lib/MathJax/images/', src: [ '**' ], dest: 'src/js/vendors/MathJax/images/' },
-          { expand: true, cwd: 'lib/MathJax/jax/', src: [ '**' ], dest: 'src/js/vendors/MathJax/jax/' },
-          { expand: true, flatten: true, src: [ 'lib/MathJax/*' ], dest: 'src/js/vendors/MathJax/', filter: 'isFile'}
+          { expand: true, cwd: 'lib/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/config/' },
+          { expand: true, cwd: 'lib/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/extensions/' },
+          { expand: true, cwd: 'lib/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/fonts/HTML-CSS/TeX/woff/' },
+          { expand: true, cwd: 'lib/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/images/' },
+          { expand: true, cwd: 'lib/MathJax/jax/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/' },
+          { expand: true, flatten: true, src: [ 'lib/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/', filter: 'isFile'}
         ]
       },
       
