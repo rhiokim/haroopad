@@ -58,7 +58,9 @@ requirejs([
   ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
 
     global._gaq.init(function(_gaq) {
-      _gaq.push('haroopad', 'command', 'exec');
+      if(_gaq) {
+        _gaq.push('haroopad', 'command', 'exec');
+      }
     });
 
     // window.ee.on('change.markdown', function(md, options, cb) {

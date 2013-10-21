@@ -19,17 +19,18 @@ define(function() {
   	},
 
     /* it does not work exactly */
-    setDefault: function(dir) {
-      var f = new File(dir +'/Untitled.md', 'Untitled.md');
-      var files = new FileList();
-      files.append(f);
+    setDefault: function(file) {
+      // var f = new File(dir +'/Untitled.md', 'Untitled.md');
+      // var files = new FileList();
+      // files.append(f);
 
-      this.$el[0].files = files;
+      // this.$el[0].files = files;
+      this.$el.attr('nwsaveas', file || 'Untitled.md' );
     },
 
-  	show: function(dir) {
-      // this.$el.attr({ nwworkingdir: dir });
-      // this.setDefault(dir);
+  	show: function(dir, file) {
+      this.$el.attr({ nwworkingdir: dir });
+      this.setDefault(file);
 
   	  this.$el.trigger('click');
   	},

@@ -59,10 +59,17 @@ window.MenuBarFile = function () {
           submenu: MenuBarFileExports()
       });
   
+  // menuItem({
+  //           label: 'Print Markdown',
+  //           click: function() {
+  //               window.parent.ee.emit('menu.print.editor');
+  //           }
+  //       });
+  
   menuItem({
             label: i18n.t('file.print'),
             click: function() {
-                window.parent.ee.emit('menu.print.html');
+                window.parent.ee.emit('menu.print.viewer');
             }
         });
 	// menuItem({

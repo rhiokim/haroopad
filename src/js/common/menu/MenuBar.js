@@ -10,14 +10,15 @@ window.MenuBar = function() {
 		    type:   'menubar'
 		});
 		
-		// if (platform != 'darwin') {
+		if (platform != 'darwin') {
 			menu.append( MenuBarFile() );
-		// }
-		menu.append( MenuBarEdit() );
-		menu.append( MenuBarInsert() );
+		}
+		// menu.append( MenuBarEdit() );
 		menu.append( MenuBarFind() );
+		menu.append( MenuBarInsert() );
 		menu.append( MenuBarView() );
 		// menu.append( MenuBarTools() );
+		// menu.append( MenuBarShare() );
 		
 		if (platform != 'darwin') {
 			menu.append( MenuBarHelp() );
@@ -26,7 +27,7 @@ window.MenuBar = function() {
 		win.menu = MenuBar._systemMenu = menu;
 
 		if (platform == 'darwin') {
-			// win.menu.insert( MenuBarFile(), 1 );
+			win.menu.insert( MenuBarFile(), 1 );
 			win.menu.append( MenuBarHelp() );
 		}
 	}

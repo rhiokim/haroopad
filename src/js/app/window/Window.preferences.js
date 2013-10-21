@@ -11,7 +11,7 @@ define([
 	        toolbar: false,
 	        show: true,
 	        width: 510,
-	        height: 300,
+	        height: 320,
     			icon: "logo.png",
 	        resizable: false,
 	        position: 'center',

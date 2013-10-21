@@ -1,7 +1,7 @@
-body>* {
+#root>* {
 	display: none;
 
-	opacity: .6;
+	/*opacity: .6;*/
 	line-height: 1;
 	font-size:.7em;
 	margin-top: 1px !important;
@@ -17,12 +17,12 @@ body:before {
     color: #ababab;
 }
 
-body>h1:before,
-body>h2:before,
-body>h3:before,
-body>h4:before,
-body>h5:before,
-body>h6:before {
+#root>h1:before,
+#root>h2:before,
+#root>h3:before,
+#root>h4:before,
+#root>h5:before,
+#root>h6:before {
   content: "# ";
   display: inline;
   color: #dbdbdb;
@@ -36,19 +36,19 @@ body>h5:after,
 body>h6:after {
   content: "";
 }*/
-body>h2:before {
+#root>h2:before {
   content: "## ";
 }
-body>h3:before {
+#root>h3:before {
   content: "### ";
 }
-body>h4:before {
+#root>h4:before {
   content: "#### ";
 }
-body>h5:before {
+#root>h5:before {
   content: "##### ";
 }
-body>h6:before {
+#root>h6:before {
   content: "###### ";
 }
 

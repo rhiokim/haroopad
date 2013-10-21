@@ -2,14 +2,26 @@ window.MenuBarView = function () {
 	var gui = require('nw.gui');
 	var View = new gui.Menu();
 
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Toggle Live Preview',
+	// 	      click: function() {
+	// 	      	window.parent.ee.emit('menu.view.mode.toggle');
+	// 	      }
+	//     })
+	// );
 	View.append(
 	    new gui.MenuItem({
-	        label: i18n.t('view.toggle-live-view'),
-		      click: function() {
-		      	window.parent.ee.emit('menu.view.mode.toggle');
-		      }
+	        label: i18n.t('view.mode'),
+            submenu: MenuBarViewMode()
 	    })
 	);
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Column Layout',
+ //            submenu: MenuBarViewColumn()
+	//     })
+	// );
 	// View.append(
 	//     new gui.MenuItem({
 	//         label: 'Reset Mode',
@@ -28,6 +40,14 @@ window.MenuBarView = function () {
 	        label: i18n.t('view.toggle-line-number'),
 		      click: function() {
 		        window.parent.ee.emit('menu.show.toggle.linenum');
+		      }
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: i18n.t('view.vim-mode'),
+		      click: function() {
+		        window.parent.ee.emit('menu.view.toggle.vim');
 		      }
 	    })
 	);
@@ -67,15 +87,27 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: i18n.t('view.column'),
-      		submenu: MenuBarViewColumn()	
+	        label: i18n.t('view.font-size'),
+            submenu: MenuBarViewFont()
 	    })
 	);
 	View.append(
-		new gui.MenuItem({
-			type: 'separator'
-		})
+	    new gui.MenuItem({
+          type: 'separator'
+	    })
 	);
+
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Zoom',
+ //            submenu: MenuBarViewZoom()
+	//     })
+	// );
+	// View.append(
+	// 	new gui.MenuItem({
+	// 		type: 'separator'
+	// 	})
+	// );
 
 	View.append(
 		new gui.MenuItem({

@@ -42,12 +42,16 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/elegant.css',
             '<%= vendors %>/CodeMirror/theme/erlang-dark.css',
             '<%= vendors %>/CodeMirror/theme/lesser-dark.css',
+            '<%= vendors %>/CodeMirror/theme/mbo.css',
             '<%= vendors %>/CodeMirror/theme/midinight.css',
             '<%= vendors %>/CodeMirror/theme/monokai.css',
             '<%= vendors %>/CodeMirror/theme/neat.css',
             '<%= vendors %>/CodeMirror/theme/night.css',
+            '<%= vendors %>/CodeMirror/theme/paraiso-dark.css',
+            '<%= vendors %>/CodeMirror/theme/paraiso-light.css',
             '<%= vendors %>/CodeMirror/theme/rubyblue.css',
             '<%= vendors %>/CodeMirror/theme/solarized.css',
+            '<%= vendors %>/CodeMirror/theme/the-matrix.css',
             '<%= vendors %>/CodeMirror/theme/tomorrow-night-eighties.css',
             '<%= vendors %>/CodeMirror/theme/twilight.css',
             '<%= vendors %>/CodeMirror/theme/vibrant-ink.css',
@@ -94,13 +98,19 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.file.activities.js',
             'src/js/common/menu/Menu.find.js',
             'src/js/common/menu/Menu.view.js',
+            'src/js/common/menu/Menu.view.mode.js',
+            'src/js/common/menu/Menu.view.column.js',
+            'src/js/common/menu/Menu.view.zoom.js',
+            'src/js/common/menu/Menu.view.font.js',
             'src/js/common/menu/Menu.insert.js',
             'src/js/common/menu/Menu.insert.section.js',
             'src/js/common/menu/Menu.insert.header.js',
+            'src/js/common/menu/Menu.insert.date.js',
             'src/js/common/menu/Menu.tools.js',
             'src/js/common/menu/Menu.tools.post.js',
             'src/js/common/menu/Menu.tools.presentation.js',
             'src/js/common/menu/Menu.tools.send.js',
+            'src/js/common/menu/Menu.share.js',
             'src/js/common/menu/Menu.help.js'
           ]
         }
@@ -131,7 +141,7 @@ module.exports = function(grunt) {
         files: {
           'build/pad.modules.js': [
             'src/js/pad/before.pad.js',
-            // 'src/js/lib/logger.js',
+            'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
             'src/js/pad/pad.common.js',
             'build/menu.concat.js',
@@ -148,6 +158,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modal.js',
             '<%= vendors %>/store.js',
             '<%= vendors %>/js-url.js',
+            '<%= vendors %>/reMarked.js',
             '<%= vendors %>/notifier.js',
             '<%= vendors %>/require.min.js'
           ]
@@ -186,6 +197,7 @@ module.exports = function(grunt) {
           'build/haroopad/js/viewer.min.js': [
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/jquery-1.9.1.min.js',
+            '<%= vendors %>/jquery.oembed.js',
             '<%= vendors %>/highlight.pack.js',
             'build/viewer.js'
           ]
@@ -228,7 +240,7 @@ module.exports = function(grunt) {
         files: {
           'build/viewer.js': [
             'src/js/viewer/disable.debug.js',
-            'src/js/viewer/DynamicContents.js',
+            // 'src/js/viewer/DynamicContents.js',
             'src/js/viewer/dragdrop.js',
             'src/js/viewer/main.js'
           ]
@@ -309,7 +321,10 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' },
 
           { src: 'src/node_modules/humanize/package.json', dest: 'build/haroopad/node_modules/humanize/package.json' },
-          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' }
+          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' },
+
+          { src: 'src/node_modules/moment/package.json', dest: 'build/haroopad/node_modules/moment/package.json' },
+          { src: 'src/node_modules/moment/moment.js', dest: 'build/haroopad/node_modules/moment/moment.js' }
 
         ]
       },
@@ -362,12 +377,25 @@ module.exports = function(grunt) {
           { src: 'lib/node-sass/build/Release/binding.node', dest: 'src/node_modules/node-sass/build/Release/binding.node'},
           { expand: true, cwd: 'lib/node-sass/lib/', src: [ '**' ], dest: 'src/node_modules/node-sass/lib/' }
         ]
+      },
+
+      mdhighlight: {
+        files: [
+          { expand: true, cwd: 'lib/highlight.js/src/styles/', src: [ '**' ], dest: 'src/css/code/' },
+          { src: 'lib/highlight.js/highlight.pack.js', dest: 'src/js/vendors/highlight.pack.js'}
+        ]
+      },
+
+      mdcodemirror: {
+        files: [
+          { expand: true, cwd: 'lib/codemirror/', src: [ '**' ], dest: 'src/js/vendors/CodeMirror/' }
+        ]
       }
     },
 
     shell: {
       cpLib: {
-        command: 'cp -R lib/nw.app build/haroopad.app'
+        command: 'cp -R lib/node-webkit.app build/haroopad.app'
       },
 
       cpZipSrc: {
