@@ -84,12 +84,19 @@ define([
 			global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
 		}
 
+		function enableMath(value) {
+			nw.file.trigger('change:markdown');
+
+			global._gaq.push('haroopad.preferences', 'enable math expression', value);
+		}
+
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
 		window.parent.ee.on('preferences.viewer.fontSize', changeFontSize);
 		window.parent.ee.on('preferences.viewer.fontFamily', changeFontFamily);
 		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
 		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
+		window.parent.ee.on('preferences.general.enableMath.after', enableMath);
 
 		/* window close */
 		nw.on('destory', function() {
@@ -99,6 +106,7 @@ define([
 			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
 			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
+			window.parent.ee.off('preferences.general.enableMath.after', enableMath);
 		});
 
 		window.ee.on('print.viewer', function(value) {
@@ -113,6 +121,7 @@ define([
 
 		/* change markdown event handler */
 		window.ee.on('change.after.markdown', update);
+		// nw.file.on('change:html', update)
 
 		/* scroll editor for sync */
 		window.ee.on('editor.scroll', function(top, per) {
@@ -258,10 +267,6 @@ define([
 
 		if (customConfig.theme) {
 			_viewer.loadCustomCSS(customConfig.theme.path);
-		}
-
-		if (generalConfig.enableMath) {
-			// _viewer.initMath(getExecPath());
 		}
 
 		return {

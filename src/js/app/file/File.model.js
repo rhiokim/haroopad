@@ -30,14 +30,14 @@ define([
       extname: '.md',
       dirname: undefined,
       basename: undefined,
-      markdown: undefined,
+      markdown: '',
       tmp: undefined,
       readOnly: false
     },
 
     initialize: function() {
       this.on('change:markdown', function() {
-        var md = this.get('markdown');
+        var md = this.get('markdown') || '';
         var html = parse(md);
 
         this.set('html', html);

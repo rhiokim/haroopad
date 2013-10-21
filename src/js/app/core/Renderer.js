@@ -45,8 +45,8 @@ define([
 			return '<p class="oembed">'+ link +'</p>';
 		}
 	
-		renderer.math = function(text, display) {
-			if (display) {
+		renderer.math = function(text, block) {
+			if (block) {
 				return '<p class="mathjax">$$'
 					+ text
 					+ '$$</p>';

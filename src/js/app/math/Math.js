@@ -15,6 +15,8 @@ define([], function() {
 	// 
 	// 
 
+	var config = store.get('General') || {};
+
 	function loadJs(url, cb) {
 	  var head = document.getElementsByTagName('head')[0];
 	  var script = document.createElement('script');
