@@ -10,16 +10,6 @@ body {
   display: -webkit-flex;
   -webkit-flex-flow: row;
  }
-
-#main > nav {
-   -webkit-flex: 1 6 130px;
-   -webkit-order: 1;
-}
-  
-#main > aside {
-   -webkit-flex: 1 6 37px;
-   -webkit-order: 3;
-}
  
 #main > article {
   -webkit-flex: 3 1 100%;
@@ -29,9 +19,9 @@ body {
 
   position: absolute;
   /*margin-top: 32px;*/
-  /* nav, aside 
-  margin-left: 130px;
-  margin-right: 37px;*/
+  /* nav, aside */
+  /*margin-left: 130px;*/
+  /*margin-right: 75px;*/
   margin-bottom: 21px;
 
   bottom:0;

@@ -66,8 +66,7 @@ module.exports = function(grunt) {
             'src/css/layout/basic.css',
             'src/css/layout/header.css',
             'src/css/layout/footer.css',
-            'src/css/layout/l-side.css',
-            'src/css/layout/r-side.css',
+            'src/css/layout/nav.css',
             'src/css/layout/aside.css',
             'src/css/app.css'
           ],
