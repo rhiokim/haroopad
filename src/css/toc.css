@@ -1,10 +1,28 @@
 #toc {
-   width: 300px;
-   height: 100%;
-   padding-left: 15px;
-   overflow-y: scroll;
+  width: 260px;
+  height: 100%;
+  /*padding-top: 15px;*/
+  padding-left: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 40px;
+  /*margin-bottom: 22px;*/
+  bottom: 0;
 }
 
 #toc a {
   text-shadow: 1px 1px #fff;
 }
+
+#toc ul {
+  padding: 0;
+  margin-left: 5px;
+  list-style-type: none;
+}
+
+#toc>ul {
+  margin-top: 10px;
+  height: 100%;
+}
+
+#toc>ul>li {}

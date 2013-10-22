@@ -83,5 +83,5 @@ function buildToc() {
         elementList.push(new TocElement(elt.tagName, createAnchor(elt), elt.textContent));
     });
     elementList = groupTags(elementList);
-    return '<div class="toc">\n<ul>\n' + elementList.join("") + '</ul>\n</div>\n';
+    return '<ul>\n' + elementList.join("") + '</ul>\n';
 }
