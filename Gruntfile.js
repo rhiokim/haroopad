@@ -68,6 +68,7 @@ module.exports = function(grunt) {
             'src/css/layout/footer.css',
             'src/css/layout/nav.css',
             'src/css/layout/aside.css',
+            'src/css/layout/toc.css',
             'src/css/app.css'
           ],
           "build/haroopad/css/viewer.min.css": [
@@ -323,7 +324,13 @@ module.exports = function(grunt) {
           { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' },
 
           { src: 'src/node_modules/moment/package.json', dest: 'build/haroopad/node_modules/moment/package.json' },
-          { src: 'src/node_modules/moment/moment.js', dest: 'build/haroopad/node_modules/moment/moment.js' }
+          { src: 'src/node_modules/moment/moment.js', dest: 'build/haroopad/node_modules/moment/moment.js' },
+
+          { src: 'src/node_modules/stringex/package.json', dest: 'build/haroopad/node_modules/stringex/package.json' },
+          { expand: true, cwd: 'src/node_modules/stringex/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/stringex/lib/' },
+
+          { src: 'src/node_modules/stringex/package.json', dest: 'build/haroopad/node_modules/moment/package.json' },
+          { src: 'src/node_modules/stringex/moment.js', dest: 'build/haroopad/node_modules/moment/moment.js' }
 
         ]
       },
