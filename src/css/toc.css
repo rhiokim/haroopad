@@ -1,8 +1,8 @@
 #toc {
-  width: 260px;
+  width: 270px;
   height: 100%;
   /*padding-top: 15px;*/
-  padding-left: 15px;
+  padding-left: 5px;
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: 40px;
@@ -12,6 +12,10 @@
 
 #toc a {
   text-shadow: 1px 1px #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 #toc ul {

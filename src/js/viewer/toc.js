@@ -19,7 +19,7 @@ TocElement.prototype.childrenToString = function() {
 TocElement.prototype.toString = function() {
     var result = "<li>";
     if(this.anchor && this.text) {
-        result += '<a href="#' + this.anchor + '">' + this.text + '</a>';
+        result += '<a href="#' + this.anchor + '" title="'+ this.text +'">' + this.text + '</a>';
     }
     result += this.childrenToString() + "</li>\n";
     return result;
