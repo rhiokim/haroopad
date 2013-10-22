@@ -291,7 +291,7 @@ module.exports = function(grunt) {
 
       node_modules: {
         files: [
-          { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Resources/node_modules/'}
+          { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/node_modules/'}
           // { src: 'src/node_modules/base62/base62.js', dest: 'build/haroopad/node_modules/base62/base62.js' },
           // { src: 'src/node_modules/base62/package.json', dest: 'build/haroopad/node_modules/base62/package.json' },
           // { src: 'src/node_modules/marked/lib/marked.js', dest: 'build/haroopad/node_modules/marked/lib/marked.js' },
