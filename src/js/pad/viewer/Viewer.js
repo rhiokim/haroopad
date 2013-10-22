@@ -155,13 +155,6 @@ define([
 			clipboard.set(content, 'text');
 		});
 
-		window.ee.on('menu.view.doc.outline', function(show) {
-			show ? _viewer.showOutline() : _viewer.hideOutline();
-		});
-		window.ee.on('menu.view.doc.toc', function(show) {
-			show ? _viewer.showTOC() : _viewer.hideTOC();
-		});
-
 		window.ee.on('menu.view.viewer.font.size', function(value) {
 			viewerConfig.fontSize += value;
 
