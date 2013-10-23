@@ -451,7 +451,7 @@ function update(html) {
   drawEmbedContents(document.body);
   // generateTOC();
   
-  window.ee.emit('toc', buildToc());
+  window.ee.emit('rendered', document);
 }
 /**
  * sync scroll position

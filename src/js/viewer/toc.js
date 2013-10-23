@@ -63,7 +63,7 @@ function buildToc() {
     var anchorList = {};
     function createAnchor(element) {
         var id = element.id || element.textContent || 'title';
-        var anchor = id;
+        var anchor = id.trim();
         var index = 0;
         if (anchorList.hasOwnProperty(anchor)) {
             anchor = id + '-' + (++index);
@@ -80,7 +80,8 @@ function buildToc() {
     headers = Array.prototype.slice.call(headers, 0);
 
     headers.forEach(function(elt) {
-        elementList.push(new TocElement(elt.tagName, createAnchor(elt), elt.textContent));
+        elt.id = elt.textContent.toLowerCase();
+        elementList.push(new TocElement(elt.tagName, createAnchor(elt), elt.id));
     });
     elementList = groupTags(elementList);
     return '<ul>\n' + elementList.join("") + '</ul>\n';
