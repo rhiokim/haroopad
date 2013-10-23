@@ -12,6 +12,7 @@ define([
 		var toc = $('#toc');
 		var isShow = false;
 		var previewContentsElt = undefined;
+		var mdSectionList = [];
 
 		// Transform flat list of TocElement into a tree
 		function groupTags(array, level) {
@@ -69,8 +70,9 @@ define([
 		    var headers = container.querySelectorAll('h1, h2, h3, h4, h5, h6');
 		    headers = Array.prototype.slice.call(headers, 0);
 
-		    headers.forEach(function(elt) {
-		        elementList.push(new TocElement(elt.tagName, createAnchor(elt), elt.textContent));
+		    headers.forEach(function(elt, idx) {
+		    	elt.setAttribute('data-idx', idx);
+	        elementList.push(new TocElement(elt.tagName, createAnchor(elt), elt.textContent));
 		    });
 		    elementList = groupTags(elementList);
 		    return '<ul>\n' + elementList.join("") + '</ul>\n';
@@ -78,6 +80,30 @@ define([
 
 		function updateToc() {
 			var str = buildToc(_viewerDoc.getElementById('root'));
+			var doc = nw.editor.getDoc();
+			var height = 0, offset = 0;
+			var gap = 18;
+			mdSectionList = [];
+
+			doc.eachLine(function(line) {
+
+				if (line.styles[2] == 'header') {
+					if (line.height > 18) {
+						gap += -(18 - line.height);
+					}
+					mdSectionList.push({
+						top: height - gap,
+						info: line
+					});
+
+					if (line.height > 18) {
+						gap += (18 - line.height);
+					}
+				}
+				height += line.height;
+
+			});
+
 			toc.html(str);
 		}
 
@@ -117,13 +143,17 @@ define([
 	      	hash = el.getAttribute('href').replace('#', '');
 	      	target = _viewerDoc.getElementById(hash);
 
-	      	console.log($(target).offset().top)
-
-	      	$(_viewerDoc.body).animate({
+	      	$(_viewerDoc.body).stop().animate({
 	          scrollTop: $(target).offset().top - 20
 	        }, 500);
 
-	      	console.log(el.getAttribute('href'))
+	      	var idx = $(target).data('idx');
+	      	var line = mdSectionList[idx];
+	      	
+	        $('.CodeMirror-scroll').stop().animate({
+	        	scrollTop: line.top
+	        }, 500);
+
         break;
 	    }
 		});
