@@ -1,11 +1,12 @@
 define([
 		'store',
 		'keyboard',
+		'toc/TOC',
 		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.explicitStyleMaker',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, inlineStyle, StyleMaker, DragDrop) {
+	function(store, HotKey, TOC, inlineStyle, StyleMaker, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 		// var sass = require('node-sass');
@@ -31,6 +32,7 @@ define([
 
 		function update(markdown, html, editor) {
 			content = html;
+
 			_viewer.update(content);
 		}
 

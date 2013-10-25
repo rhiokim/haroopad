@@ -8,6 +8,7 @@ define([
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
 		var _viewerDoc = iframe.contentDocument;
+		var _md_body = _viewerDoc.getElementById('root')
 		var aside = $('#main > aside');
 		var toc = $('#toc');
 		var isShow = false;
@@ -49,6 +50,7 @@ define([
 		// Build the TOC
 		function buildToc(container) {
 		    var anchorList = {};
+		    var toc = '';
 		    function createAnchor(element) {
 		        var id = element.id || element.textContent || 'title';
 		        		id = id.toLowerCase();
@@ -67,7 +69,7 @@ define([
 
 		    var elementList = [];
 
-		    var headers = container.querySelectorAll('h1, h2, h3, h4, h5, h6');
+		    var headers = container.querySelectorAll(':scope>h1, :scope>h2, :scope>h3, :scope>h4, :scope>h5, :scope>h6');
 		    headers = Array.prototype.slice.call(headers, 0);
 
 		    headers.forEach(function(elt, idx) {
@@ -75,18 +77,21 @@ define([
 	        elementList.push(new TocElement(elt.tagName, createAnchor(elt), elt.textContent));
 		    });
 		    elementList = groupTags(elementList);
-		    return '<ul>\n' + elementList.join("") + '</ul>\n';
+
+		    toc = '<ul>\n' + elementList.join("") + '</ul>\n';
+		    nw.file.set({ toc: toc });
+
+		    return toc;
 		}
 
 		function updateToc() {
-			var str = buildToc(_viewerDoc.getElementById('root'));
+			var str = nw.file.get('toc');
 			var doc = nw.editor.getDoc();
 			var height = 0, offset = 0;
 			var gap = 18;
 			mdSectionList = [];
 
 			doc.eachLine(function(line) {
-
 				if (line.styles[2] == 'header') {
 					if (line.height > 18) {
 						gap += -(18 - line.height);
@@ -108,9 +113,13 @@ define([
 		}
 
 		_viewer.ee.on('rendered', function() {
+			var toc = buildToc(_md_body);
+
 			if (isShow) {
 				updateToc();
 			}
+
+			_viewer.renderTOC(toc);
 		});
 
 		window.ee.on('menu.view.doc.outline', function(show) {
@@ -149,7 +158,7 @@ define([
 
 	      	var idx = $(target).data('idx');
 	      	var line = mdSectionList[idx];
-	      	
+
 	        $('.CodeMirror-scroll').stop().animate({
 	        	scrollTop: line.top
 	        }, 500);
@@ -157,4 +166,8 @@ define([
         break;
 	    }
 		});
+
+		return {
+			build: buildToc
+		}
 });

@@ -255,6 +255,17 @@ function _lazySyntaxHighlight(el) {
 //   });
 // }
 
+function renderTOC(toc) {
+  var tocPattern = /^\[(TOC|toc)\] *$/
+  var paragraphs = _md_body.querySelectorAll('p');
+  paragraphs = Array.prototype.slice.call(paragraphs, 0);
+
+  paragraphs.forEach(function(paragraph) {
+    if (tocPattern.test(paragraph.textContent)) {
+      paragraph.innerHTML = toc;
+    }
+  });
+}
 
 function countFragments(target) {
   var headers = target.querySelectorAll('h1, h2, h3, h4, h5, h6');
