@@ -90,7 +90,7 @@ body {
 }
 
 .CodeMirror-wrap .CodeMirror-code pre {
-  word-break: break-word;
+  /*word-break: break-word;
   white-space: inherit;
-  word-wrap: break-word;
+  word-wrap: break-word;*/
 }
