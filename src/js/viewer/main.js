@@ -32,33 +32,6 @@ window.ondrop = function(e) {
   e.preventDefault();
 };
 
-function initMath(src) {
-  var script, head;
-
-  src = src + 'Libraries/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-
-  loadJs(src, function() {
-    MathJax.Hub.Config({
-      showProcessingMessages: true,
-      tex2jax: {
-        inlineMath: [ ['$$$','$$$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
-      }
-    });
-    MathJax.Hub.config.menuSettings.renderer = 'HTML-CSS'; //'SVG', 'NativeMML'
-  });
-}
-
-function loadJs(url, cb) {
-  var head = document.getElementsByTagName('head')[0];
-  var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = url;
-      script.onload = cb;
-
-   head.appendChild(script);
-}
-
 function loadCss(url) {
   $('<link>').attr({
     type: 'text/css',

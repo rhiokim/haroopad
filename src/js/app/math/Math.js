@@ -1,20 +1,5 @@
 define([], function() {
 
-	// process.emit('math', function(target, cb) {
-	//   var mathEl = document.createElement('div');
-	//   mathEl.innerHTML = target.innerHTML;
-
-	//   MathJax.Hub.Queue(
-	//     ["Typeset", MathJax.Hub, mathEl],
-	//     [function() {
-	//       target.innerHTML = mathEl.innerHTML;
-	//       target.removeAttribute('class');
-	//     }]
-	//   );
-	// });
-	// 
-	// 
-
 	var config = store.get('General') || {};
 
 	function loadJs(url, cb) {
