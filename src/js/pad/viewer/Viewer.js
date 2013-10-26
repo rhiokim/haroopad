@@ -34,6 +34,7 @@ define([
 			content = html;
 
 			_viewer.update(content);
+			_viewer.updateTOC(TOC.build());
 		}
 
 		/* change editor theme */

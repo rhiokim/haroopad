@@ -267,6 +267,16 @@ function renderTOC(toc) {
   });
 }
 
+function updateTOC(toc) {
+  var tocEls = _md_body.querySelectorAll('.toc');
+  tocEls = Array.prototype.slice.call(tocEls, 0);
+
+  tocEls.forEach(function(tocEl) {  
+    tocEl.style.display = 'none';
+    tocEl.parentElement.innerHTML = toc;
+  });
+}
+
 function countFragments(target) {
   var headers = target.querySelectorAll('h1, h2, h3, h4, h5, h6');
   var imgs = target.querySelectorAll('img');

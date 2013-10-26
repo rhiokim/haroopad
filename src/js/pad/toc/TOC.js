@@ -48,7 +48,7 @@ define([
 		}
 
 		// Build the TOC
-		function buildToc(container) {
+		function buildToc() {
 		    var anchorList = {};
 		    var toc = '';
 		    function createAnchor(element) {
@@ -58,9 +58,9 @@ define([
 		        		id = stringEx.toUrl(id);
 		        var anchor = id.trim();
 		        var index = 0;
-		        if (anchorList.hasOwnProperty(anchor)) {
-		            anchor = id + '-' + (++index);
-		        }
+            while (anchorList.hasOwnProperty(anchor)) {
+                anchor = id + "-" + (++index);
+            }
 		        anchorList[anchor] = true;
 		        // Update the id of the element
 		        element.id = anchor;
@@ -69,7 +69,7 @@ define([
 
 		    var elementList = [];
 
-		    var headers = container.querySelectorAll(':scope>h1, :scope>h2, :scope>h3, :scope>h4, :scope>h5, :scope>h6');
+		    var headers = _md_body.querySelectorAll(':scope>h1, :scope>h2, :scope>h3, :scope>h4, :scope>h5, :scope>h6');
 		    headers = Array.prototype.slice.call(headers, 0);
 
 		    headers.forEach(function(elt, idx) {
@@ -78,7 +78,7 @@ define([
 		    });
 		    elementList = groupTags(elementList);
 
-		    toc = '<ul>\n' + elementList.join("") + '</ul>\n';
+		    toc = '<ul class="toc">\n' + elementList.join("") + '</ul>\n';
 		    nw.file.set({ toc: toc });
 
 		    return toc;
@@ -87,18 +87,22 @@ define([
 		function updateToc() {
 			var str = nw.file.get('toc');
 			var doc = nw.editor.getDoc();
-			var height = 0, offset = 0;
+			var height = 0, over = 0, lineCnt = 0;
 			var gap = 18;
 			mdSectionList = [];
 
 			doc.eachLine(function(line) {
-				if (line.styles[2] == 'header') {
+				lineCnt += (line.height / 18);
+
+				if (line.styles && line.styles[2] == 'header') {
 					if (line.height > 18) {
-						gap += -(18 - line.height);
+						over += (line.height / 18 - 1);
 					}
+
 					mdSectionList.push({
-						top: height - gap,
-						info: line
+						over: over,
+						info: line,
+						num: lineCnt
 					});
 
 					if (line.height > 18) {
@@ -113,13 +117,17 @@ define([
 		}
 
 		_viewer.ee.on('rendered', function() {
-			var toc = buildToc(_md_body);
+			var toc = buildToc();
 
 			if (isShow) {
 				updateToc();
 			}
 
 			_viewer.renderTOC(toc);
+		});
+
+		window.addEventListener('resize', function(e){
+		  updateToc();
 		});
 
 		window.ee.on('menu.view.doc.outline', function(show) {
@@ -156,11 +164,14 @@ define([
 	          scrollTop: $(target).offset().top - 20
 	        }, 500);
 
+					var doc = nw.editor.getDoc();
 	      	var idx = $(target).data('idx');
 	      	var line = mdSectionList[idx];
 
+	      	console.log(line.num, line.over);
+
 	        $('.CodeMirror-scroll').stop().animate({
-	        	scrollTop: line.top
+	        	scrollTop: line.num * 18 - (line.over * 18)
 	        }, 500);
 
         break;
