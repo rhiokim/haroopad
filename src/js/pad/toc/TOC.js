@@ -87,30 +87,17 @@ define([
 		function updateToc() {
 			var str = nw.file.get('toc');
 			var doc = nw.editor.getDoc();
-			var height = 0, over = 0, lineCnt = 0;
-			var gap = 18;
+			var i = 1, y = 0;
 			mdSectionList = [];
 
 			doc.eachLine(function(line) {
-				lineCnt += (line.height / 18);
-
 				if (line.styles && line.styles[2] == 'header') {
-					if (line.height > 18) {
-						over += (line.height / 18 - 1);
-					}
-
 					mdSectionList.push({
-						over: over,
-						info: line,
-						num: lineCnt
+						y: y,
+						info: line
 					});
-
-					if (line.height > 18) {
-						gap += (18 - line.height);
-					}
 				}
-				height += line.height;
-
+				y += line.height;
 			});
 
 			toc.html(str);
@@ -126,8 +113,14 @@ define([
 			_viewer.renderTOC(toc);
 		});
 
+		var resizeTimeout;
 		window.addEventListener('resize', function(e){
-		  updateToc();
+			clearTimeout(resizeTimeout);
+
+			resizeTimeout = window.setTimeout(function() {
+				nw.editor.refresh();
+		  	updateToc();
+			}, 1000);
 		});
 
 		window.ee.on('menu.view.doc.outline', function(show) {
@@ -164,14 +157,11 @@ define([
 	          scrollTop: $(target).offset().top - 20
 	        }, 500);
 
-					var doc = nw.editor.getDoc();
-	      	var idx = $(target).data('idx');
+	      	var idx = target.getAttribute('data-idx');
 	      	var line = mdSectionList[idx];
 
-	      	console.log(line.num, line.over);
-
 	        $('.CodeMirror-scroll').stop().animate({
-	        	scrollTop: line.num * 18 - (line.over * 18)
+	        	scrollTop: line.y - 18
 	        }, 500);
 
         break;

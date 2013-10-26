@@ -38,6 +38,7 @@ define([
 			extraKeys: Keymap,
 			showTrailingSpace: true
 		});
+		editor.refresh();
 
 		var CodeMirrorElement = document.querySelector('.CodeMirror'),
 			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters');
