@@ -88,3 +88,9 @@ body {
 .CodeMirror .cm-em {
   font-style: normal;
 }
+
+.CodeMirror-wrap .CodeMirror-code pre {
+  /*word-break: break-word;
+  white-space: inherit;
+  word-wrap: break-word;*/
+}
