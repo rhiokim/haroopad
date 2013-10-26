@@ -15,7 +15,6 @@ define([
 				theme: 'solarized dark',
 				displayLineNumber: true,
 				vimKeyBinding: false,
-				insertFourSpace: false,
 				autoPairCharacters: true,
 				tabSize: 4,
 				indentUnit: 4,
