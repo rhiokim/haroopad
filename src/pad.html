@@ -55,10 +55,10 @@
   <link rel="stylesheet" href="css/layout/basic.css">
   <link rel="stylesheet" href="css/layout/header.css">
   <link rel="stylesheet" href="css/layout/footer.css">
-  <link rel="stylesheet" href="css/layout/l-side.css">
-  <link rel="stylesheet" href="css/layout/r-side.css">
+  <link rel="stylesheet" href="css/layout/nav.css">
 
   <link rel="stylesheet" href="css/layout/aside.css">
+  <link rel="stylesheet" href="css/toc.css">
 
   <link rel="stylesheet" href="css/app.css">
 
@@ -199,6 +199,7 @@
   </header>
 
   <section id="main">
+    <nav></nav>
     <article class="panel layout0">
       <section id="editor">
         <textarea id="code" name="code"></textarea>
@@ -207,8 +208,13 @@
         <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
       </section>
     </article>
-    <nav>bbb</nav>
     <aside>
+      <header>
+        <h5>Table of Contents</h5>
+      </header>
+      <div id="toc">
+      </div>
+      <footer></footer>
     </aside>
   </section>
 

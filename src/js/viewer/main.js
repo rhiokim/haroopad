@@ -246,12 +246,34 @@ function _lazySyntaxHighlight(el) {
  * @return {[type]} [description]
  */
 
-function _preventDefaultAnchor() {
-  $('a').off('click', '**');
+// function _preventDefaultAnchor() {
+//   $('a').off('click', '**');
 
-  $('a').on('click', function(e) {
-    window.ee.emit('link', $(e.target).attr('href'));
-    e.preventDefault();
+//   $('a').on('click', function(e) {
+//     window.ee.emit('link', $(e.target).attr('href'));
+//     e.preventDefault();
+//   });
+// }
+
+function renderTOC(toc) {
+  var tocPattern = /^\[(TOC|toc)\] *$/
+  var paragraphs = _md_body.querySelectorAll('p');
+  paragraphs = Array.prototype.slice.call(paragraphs, 0);
+
+  paragraphs.forEach(function(paragraph) {
+    if (tocPattern.test(paragraph.textContent)) {
+      paragraph.innerHTML = toc;
+    }
+  });
+}
+
+function updateTOC(toc) {
+  var tocEls = _md_body.querySelectorAll('.toc');
+  tocEls = Array.prototype.slice.call(tocEls, 0);
+
+  tocEls.forEach(function(tocEl) {  
+    tocEl.style.display = 'none';
+    tocEl.parentElement.innerHTML = toc;
   });
 }
 
@@ -429,6 +451,9 @@ function update(html) {
   
   countFragments(_md_body);
   drawEmbedContents(document.body);
+  // generateTOC();
+  
+  window.ee.emit('rendered', document);
 }
 /**
  * sync scroll position

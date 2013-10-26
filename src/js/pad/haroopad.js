@@ -49,10 +49,11 @@ requirejs([
   'window/Window',
   'editor/Editor',
   'viewer/Viewer',
+  'toc/TOC',
   'ui/file/File',
   'ui/layout/Layout',
   'ui/footer/Footer'
-], function(Window, Editor, Viewer, File) {
+], function(Window, Editor, Viewer, TOC, File) {
   // var html, res, file, uid, tmp, readOnly, x, y;
   var _tid_;
 

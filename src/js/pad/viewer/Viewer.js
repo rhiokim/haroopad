@@ -1,11 +1,12 @@
 define([
 		'store',
 		'keyboard',
+		'toc/TOC',
 		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.explicitStyleMaker',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, inlineStyle, StyleMaker, DragDrop) {
+	function(store, HotKey, TOC, inlineStyle, StyleMaker, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 		// var sass = require('node-sass');
@@ -31,7 +32,9 @@ define([
 
 		function update(markdown, html, editor) {
 			content = html;
+
 			_viewer.update(content);
+			_viewer.updateTOC(TOC.build());
 		}
 
 		/* change editor theme */
@@ -153,13 +156,6 @@ define([
 		});
 		window.ee.on('menu.file.exports.clipboard.haroopad', function() {
 			clipboard.set(content, 'text');
-		});
-
-		window.ee.on('menu.view.doc.outline', function(show) {
-			show ? _viewer.showOutline() : _viewer.hideOutline();
-		});
-		window.ee.on('menu.view.doc.toc', function(show) {
-			show ? _viewer.showTOC() : _viewer.hideTOC();
 		});
 
 		window.ee.on('menu.view.viewer.font.size', function(value) {
