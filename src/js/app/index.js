@@ -2,8 +2,7 @@
 process.setMaxListeners(0);
 
 //add node main module path
-var execPath = process.execPath.split('Frameworks/node-webkit')[0];
-process.mainModule.paths = [execPath +'Libraries/node_modules'].concat(process.mainModule.paths);
+process.mainModule.paths = [getExecPath() +'Libraries/.node_modules'].concat(process.mainModule.paths);
 
 var gui = require('nw.gui');
 
@@ -46,12 +45,6 @@ requirejs([
     'window/WindowManager',
     'utils/UpdateNotifier'
   ], function(Context, Mailer, Window, WindowMgr, Updater) {
-
-    global._gaq.init(function(_gaq) {
-      if(_gaq) {
-        _gaq.push('haroopad', 'command', 'exec');
-      }
-    });
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;

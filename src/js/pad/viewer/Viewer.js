@@ -92,6 +92,14 @@ define([
 			global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
 		}
 
+		function enableMath(value) {
+			_viewer.empty();
+			
+			nw.file.trigger('change:markdown');
+
+			global._gaq.push('haroopad.preferences', 'enable math expression', value);
+		}
+
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
 		window.parent.ee.on('preferences.viewer.fontSize', changeFontSize);
 		window.parent.ee.on('preferences.viewer.fontFamily', changeFontFamily);
