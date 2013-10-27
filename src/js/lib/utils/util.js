@@ -44,7 +44,7 @@ function getExecPath() {
 			return process.cwd();
 		break;
 		case 'linux':
-			return process.cwd();//path.dirname(process.execPath);
+			return path.join(process.execPath, '../');
 		break;
 	}
 }
