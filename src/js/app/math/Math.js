@@ -31,7 +31,8 @@ define([], function() {
       showProcessingMessages: true,
       tex2jax: {
         inlineMath: [ ['$$$','$$$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      	processEscapes: true
       }
     });
     MathJax.Hub.config.menuSettings.renderer = 'HTML-CSS'; //'SVG', 'NativeMML'

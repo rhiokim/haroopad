@@ -85,6 +85,8 @@ define([
 		}
 
 		function enableMath(value) {
+			_viewer.empty();
+			
 			nw.file.trigger('change:markdown');
 
 			global._gaq.push('haroopad.preferences', 'enable math expression', value);

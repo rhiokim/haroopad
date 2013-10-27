@@ -349,6 +349,10 @@ function drawEmbedContents(target) {
   }, 1000);
 }
 
+function empty() {
+  _md_body.innerHTML = '';
+}
+
 /**
  * update contents
  * @param  {[type]} contents [description]
