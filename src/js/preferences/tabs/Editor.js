@@ -22,7 +22,6 @@ define([
 				'change select[name=fontSize]': 'changeFontSize',
 				'click input[name=displayLineNumber]': 'displayLineNumber',
 				'click input[name=vimKeyBinding]': 'vimKeyBinding',
-				'click input[name=insertFourSpace]': 'insertFourSpace',
 				'click input[name=indentWithTabs]': 'indentWithTabs',
 				'click a[data-tab-size]': 'setTabsize',
 				'click input[name=autoPairCharacters]': 'autoPairCharacters'
@@ -34,7 +33,6 @@ define([
 				
 				this.$el.find('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
 				this.$el.find('input[name=vimKeyBinding]').prop('checked', config.vimKeyBinding);
-				this.$el.find('input[name=insertFourSpace]').prop('checked', config.insertFourSpace);
 				this.$el.find('input[name=autoPairCharacters]').prop('checked', config.autoPairCharacters);
 				this.$el.find('input[name=indentWithTabs]').prop('checked', config.indentWithTabs);
 
@@ -63,11 +61,6 @@ define([
 			vimKeyBinding: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('vimKeyBinding', bool);
-			},
-
-			insertFourSpace: function(e) {
-				var bool = $(e.target).is(':checked');
-				options.set('insertFourSpace', bool);
 			},
 
 			indentWithTabs: function(e) {
