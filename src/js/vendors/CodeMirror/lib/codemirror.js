@@ -1387,7 +1387,8 @@ window.CodeMirror = (function() {
       display.scroller.scrollLeft = display.scrollbarH.scrollLeft = doc.scrollLeft = newScrollPos.scrollLeft;
       alignHorizontally(cm);
       if (op.scrollToPos)
-        scrollPosIntoView(cm, clipPos(cm.doc, op.scrollToPos), op.scrollToPosMargin);
+        scrollPosIntoView(cm, clipPos(cm.doc, op.scrollToPos.from),
+                          clipPos(cm.doc, op.scrollToPos.to), op.scrollToPos.margin);
     } else if (newScrollPos) {
       scrollCursorIntoView(cm);
     }
@@ -2638,7 +2639,7 @@ window.CodeMirror = (function() {
   // SCROLLING
 
   function scrollCursorIntoView(cm) {
-    var coords = scrollPosIntoView(cm, cm.doc.sel.head, cm.options.cursorScrollMargin);
+    var coords = scrollPosIntoView(cm, cm.doc.sel.head, null, cm.options.cursorScrollMargin);
     if (!cm.state.focused) return;
     var display = cm.display, box = getRect(display.sizer), doScroll = null;
     if (coords.top + box.top < 0) doScroll = true;
@@ -2655,11 +2656,15 @@ window.CodeMirror = (function() {
     }
   }
 
-  function scrollPosIntoView(cm, pos, margin) {
+  function scrollPosIntoView(cm, pos, end, margin) {
     if (margin == null) margin = 0;
     for (;;) {
       var changed = false, coords = cursorCoords(cm, pos);
-      var scrollPos = calculateScrollPos(cm, coords.left, coords.top - margin, coords.left, coords.bottom + margin);
+      var endCoords = !end || end == pos ? coords : cursorCoords(cm, end);
+      var scrollPos = calculateScrollPos(cm, Math.min(coords.left, endCoords.left),
+                                         Math.min(coords.top, endCoords.top) - margin,
+                                         Math.max(coords.left, endCoords.left),
+                                         Math.max(coords.bottom, endCoords.bottom) + margin);
       var startTop = cm.doc.scrollTop, startLeft = cm.doc.scrollLeft;
       if (scrollPos.scrollTop != null) {
         setScrollTop(cm, scrollPos.scrollTop);
@@ -2754,7 +2759,7 @@ window.CodeMirror = (function() {
       for (var i = Math.floor(indentation / tabSize); i; --i) {pos += tabSize; indentString += "\t";}
     if (pos < indentation) indentString += spaceStr(indentation - pos);
 
-    if (indentString != curSpaceString)
+    if (indentString != curSpaceString || doc.sel.head.line == n && doc.sel.head.ch < curSpaceString.length)
       replaceRange(cm.doc, indentString, Pos(n, 0), Pos(n, curSpaceString.length), "+input");
     line.stateAfter = null;
   }
@@ -3177,17 +3182,23 @@ window.CodeMirror = (function() {
               clientHeight: scroller.clientHeight - co, clientWidth: scroller.clientWidth - co};
     },
 
-    scrollIntoView: operation(null, function(pos, margin) {
-      if (typeof pos == "number") pos = Pos(pos, 0);
+    scrollIntoView: operation(null, function(range, margin) {
+      if (range == null) range = {from: this.doc.sel.head, to: null};
+      else if (typeof range == "number") range = {from: Pos(range, 0), to: null};
+      else if (range.from == null) range = {from: range, to: null};
+      if (!range.to) range.to = range.from;
       if (!margin) margin = 0;
-      var coords = pos;
 
-      if (!pos || pos.line != null) {
-        this.curOp.scrollToPos = pos ? clipPos(this.doc, pos) : this.doc.sel.head;
-        this.curOp.scrollToPosMargin = margin;
-        coords = cursorCoords(this, this.curOp.scrollToPos);
+      var coords = range;
+      if (range.from.line != null) {
+        this.curOp.scrollToPos = {from: range.from, to: range.to, margin: margin};
+        coords = {from: cursorCoords(this, range.from),
+                  to: cursorCoords(this, range.to)};
       }
-      var sPos = calculateScrollPos(this, coords.left, coords.top - margin, coords.right, coords.bottom + margin);
+      var sPos = calculateScrollPos(this, Math.min(coords.from.left, coords.to.left),
+                                    Math.min(coords.from.top, coords.to.top) - margin,
+                                    Math.max(coords.from.right, coords.to.right),
+                                    Math.max(coords.from.bottom, coords.to.bottom) + margin);
       updateScrollPos(this, sPos.scrollLeft, sPos.scrollTop);
     }),
 
@@ -3839,7 +3850,9 @@ window.CodeMirror = (function() {
     if (doc.cm && !doc.cm.curOp) return operation(doc.cm, markText)(doc, from, to, options, type);
 
     var marker = new TextMarker(doc, type);
-    if (type == "range" && !posLess(from, to)) return marker;
+    if (posLess(to, from) || posEq(from, to) && type == "range" &&
+        !(options.inclusiveLeft && options.inclusiveRight))
+      return marker;
     if (options) copyObj(options, marker);
     if (marker.replacedWith) {
       marker.collapsed = true;
@@ -3955,7 +3968,9 @@ window.CodeMirror = (function() {
     if (old) for (var i = 0, nw; i < old.length; ++i) {
       var span = old[i], marker = span.marker;
       var startsBefore = span.from == null || (marker.inclusiveLeft ? span.from <= startCh : span.from < startCh);
-      if (startsBefore || marker.type == "bookmark" && span.from == startCh && (!isInsert || !span.marker.insertLeft)) {
+      if (startsBefore ||
+          (marker.inclusiveLeft && marker.inclusiveRight || marker.type == "bookmark") &&
+          span.from == startCh && (!isInsert || !span.marker.insertLeft)) {
         var endsAfter = span.to == null || (marker.inclusiveRight ? span.to >= startCh : span.to > startCh);
         (nw || (nw = [])).push({from: span.from,
                                 to: endsAfter ? null : span.to,
@@ -4473,7 +4488,7 @@ window.CodeMirror = (function() {
       return out;
     }
     return function(builder, text, style, startStyle, endStyle, title) {
-      return inner(builder, text.replace(/ {3,}/, split), style, startStyle, endStyle, title);
+      return inner(builder, text.replace(/ {3,}/g, split), style, startStyle, endStyle, title);
     };
   }
 
@@ -5891,7 +5906,7 @@ window.CodeMirror = (function() {
 
   // THE END
 
-  CodeMirror.version = "3.18.1";
+  CodeMirror.version = "3.19.1";
 
   return CodeMirror;
 })();
