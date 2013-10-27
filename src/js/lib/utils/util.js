@@ -38,7 +38,7 @@ function getPlatformName() {
 function getExecPath() {
 	switch(getPlatformName()) {
 		case 'windows':
-			return process.cwd();//path.dirname(process.execPath);
+			return path.join(process.execPath, '../');//process.cwd();
 		break;
 		case 'mac':
 			return path.join(process.execPath, '../../../../../');
