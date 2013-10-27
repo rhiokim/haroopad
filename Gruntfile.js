@@ -66,9 +66,9 @@ module.exports = function(grunt) {
             'src/css/layout/basic.css',
             'src/css/layout/header.css',
             'src/css/layout/footer.css',
-            'src/css/layout/l-side.css',
-            'src/css/layout/r-side.css',
+            'src/css/layout/nav.css',
             'src/css/layout/aside.css',
+            'src/css/layout/toc.css',
             'src/css/app.css'
           ],
           "build/haroopad/css/viewer.min.css": [
@@ -293,41 +293,41 @@ module.exports = function(grunt) {
 
       node_modules: {
         files: [
-          { src: 'src/node_modules/base62/base62.js', dest: 'build/haroopad/node_modules/base62/base62.js' },
-          { src: 'src/node_modules/base62/package.json', dest: 'build/haroopad/node_modules/base62/package.json' },
-          { src: 'src/node_modules/marked/lib/marked.js', dest: 'build/haroopad/node_modules/marked/lib/marked.js' },
-          { src: 'src/node_modules/marked/package.json', dest: 'build/haroopad/node_modules/marked/package.json' },
-          { src: 'src/node_modules/readdir/lib/readdir.js', dest: 'build/haroopad/node_modules/readdir/lib/readdir.js' },
-          { src: 'src/node_modules/readdir/package.json', dest: 'build/haroopad/node_modules/readdir/package.json' },
-          { src: 'src/node_modules/clean-css/lib/clean.js', dest: 'build/haroopad/node_modules/clean-css/lib/clean.js' },
-          { src: 'src/node_modules/clean-css/index.js', dest: 'build/haroopad/node_modules/clean-css/index.js' },
-          { src: 'src/node_modules/clean-css/package.json', dest: 'build/haroopad/node_modules/clean-css/package.json' },
-          { expand: true, cwd: 'src/node_modules/nodemailer/', src: [ '**/*.js', '**/*.json', '**/*.types', '**/*.pem' ], dest: 'build/haroopad/node_modules/nodemailer/' },
+          { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/node_modules/'}
+          // { src: 'src/node_modules/base62/base62.js', dest: 'build/haroopad/node_modules/base62/base62.js' },
+          // { src: 'src/node_modules/base62/package.json', dest: 'build/haroopad/node_modules/base62/package.json' },
+          // { src: 'src/node_modules/marked/lib/marked.js', dest: 'build/haroopad/node_modules/marked/lib/marked.js' },
+          // { src: 'src/node_modules/marked/package.json', dest: 'build/haroopad/node_modules/marked/package.json' },
+          // { src: 'src/node_modules/readdir/lib/readdir.js', dest: 'build/haroopad/node_modules/readdir/lib/readdir.js' },
+          // { src: 'src/node_modules/readdir/package.json', dest: 'build/haroopad/node_modules/readdir/package.json' },
+          // { src: 'src/node_modules/clean-css/lib/clean.js', dest: 'build/haroopad/node_modules/clean-css/lib/clean.js' },
+          // { src: 'src/node_modules/clean-css/index.js', dest: 'build/haroopad/node_modules/clean-css/index.js' },
+          // { src: 'src/node_modules/clean-css/package.json', dest: 'build/haroopad/node_modules/clean-css/package.json' },
 
-          { expand: true, cwd: 'src/node_modules/fs-extra/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/fs-extra/lib/' },
-          { src: 'src/node_modules/fs-extra/package.json', dest: 'build/haroopad/node_modules/fs-extra/package.json' },
+          // { expand: true, cwd: 'src/node_modules/fs-extra/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/fs-extra/lib/' },
+          // { src: 'src/node_modules/fs-extra/package.json', dest: 'build/haroopad/node_modules/fs-extra/package.json' },
 
-          { src: 'src/node_modules/graceful-fs/package.json', dest: 'build/haroopad/node_modules/graceful-fs/package.json' },
-          { src: 'src/node_modules/graceful-fs/graceful-fs.js', dest: 'build/haroopad/node_modules/graceful-fs/graceful-fs.js' },
-          { src: 'src/node_modules/graceful-fs/polyfills.js', dest: 'build/haroopad/node_modules/graceful-fs/polyfills.js' },
+          // { src: 'src/node_modules/graceful-fs/package.json', dest: 'build/haroopad/node_modules/graceful-fs/package.json' },
+          // { src: 'src/node_modules/graceful-fs/graceful-fs.js', dest: 'build/haroopad/node_modules/graceful-fs/graceful-fs.js' },
+          // { src: 'src/node_modules/graceful-fs/polyfills.js', dest: 'build/haroopad/node_modules/graceful-fs/polyfills.js' },
 
-          { src: 'src/node_modules/jsonfile/package.json', dest: 'build/haroopad/node_modules/jsonfile/package.json' },
-          { expand: true, cwd: 'src/node_modules/jsonfile/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/jsonfile/lib/' },
+          // { src: 'src/node_modules/jsonfile/package.json', dest: 'build/haroopad/node_modules/jsonfile/package.json' },
+          // { expand: true, cwd: 'src/node_modules/jsonfile/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/jsonfile/lib/' },
 
-          { src: 'src/node_modules/mkdirp/package.json', dest: 'build/haroopad/node_modules/mkdirp/package.json' },
-          { src: 'src/node_modules/mkdirp/index.js', dest: 'build/haroopad/node_modules/mkdirp/index.js' },
+          // { src: 'src/node_modules/mkdirp/package.json', dest: 'build/haroopad/node_modules/mkdirp/package.json' },
+          // { src: 'src/node_modules/mkdirp/index.js', dest: 'build/haroopad/node_modules/mkdirp/index.js' },
 
-          { src: 'src/node_modules/ncp/package.json', dest: 'build/haroopad/node_modules/ncp/package.json' },
-          { expand: true, cwd: 'src/node_modules/ncp/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/ncp/lib/' },
+          // { src: 'src/node_modules/ncp/package.json', dest: 'build/haroopad/node_modules/ncp/package.json' },
+          // { expand: true, cwd: 'src/node_modules/ncp/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/ncp/lib/' },
 
-          { src: 'src/node_modules/rimraf/package.json', dest: 'build/haroopad/node_modules/rimraf/package.json' },
-          { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' },
+          // { src: 'src/node_modules/rimraf/package.json', dest: 'build/haroopad/node_modules/rimraf/package.json' },
+          // { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' },
 
-          { src: 'src/node_modules/humanize/package.json', dest: 'build/haroopad/node_modules/humanize/package.json' },
-          { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' },
+          // { src: 'src/node_modules/humanize/package.json', dest: 'build/haroopad/node_modules/humanize/package.json' },
+          // { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' },
 
-          { src: 'src/node_modules/moment/package.json', dest: 'build/haroopad/node_modules/moment/package.json' },
-          { src: 'src/node_modules/moment/moment.js', dest: 'build/haroopad/node_modules/moment/moment.js' }
+          // { src: 'src/node_modules/moment/package.json', dest: 'build/haroopad/node_modules/moment/package.json' },
+          // { src: 'src/node_modules/moment/moment.js', dest: 'build/haroopad/node_modules/moment/moment.js' }
 
         ]
       },
@@ -398,7 +398,7 @@ module.exports = function(grunt) {
 
     shell: {
       cpLib: {
-        command: 'cp -R lib/nw.app build/haroopad.app'
+        command: 'cp -R lib/node-webkit.app build/haroopad.app'
       },
 
       cpZipSrc: {

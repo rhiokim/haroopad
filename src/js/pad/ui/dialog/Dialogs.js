@@ -13,7 +13,9 @@ define([
 			ReloadDialog = new Reload;
 
 
-		window.ee.on('menu.file.send.email', EmailDialog.show.bind(EmailDialog));
+		window.ee.on('menu.file.send.email', function() {
+			EmailDialog.show(nw.file.toJSON());
+		});
 		
 		EmailDialog.bind('post', function(mailInfo) {
 			window.parent.ee.emit('send.email', nw.file.toJSON(), mailInfo);
@@ -32,7 +34,7 @@ define([
 		});
 
 		HotKey('defmod-shift-e', function() {
-			window.ee.emit('menu.file.send.email', nw.file.toJSON());
+			window.ee.emit('menu.file.send.email');
 		});
 
 		return dialogs = {
