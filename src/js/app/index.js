@@ -2,8 +2,7 @@
 process.setMaxListeners(0);
 
 //add node main module path
-var execPath = process.execPath.split('Frameworks/node-webkit')[0];
-process.mainModule.paths = [execPath +'Libraries/.node_modules'].concat(process.mainModule.paths);
+process.mainModule.paths = [getExecPath() +'Libraries/.node_modules'].concat(process.mainModule.paths);
 
 var gui = require('nw.gui');
 
