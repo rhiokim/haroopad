@@ -1,4 +1,5 @@
 var supportLanuages = ['en', 'ko'];
+var _md_body;
 var language = window.navigator.language || window.navigator.userLanguage;
 language = language.substr(0, 2);
 
@@ -67,6 +68,7 @@ function loadPost(file) {
 	}).done(function(data) {
 		var str = parse(data);
 		str = str.replace(/src=\"images/g, 'src="' + dir + 'images');
+		
 		$('.contents').html(str);
 
 		var title = $('h1, h2, h3, h4, h5, h6')[0].innerText || '';
@@ -74,6 +76,7 @@ function loadPost(file) {
 		window.document.title = title;
 
 		drawEmbedContents($('.contents')[0]);
+		drawMathJax();
 		setStarrre(title.replace(' | ', '\n\n') + '\n#markdown #haroopad');
 	});
 }
@@ -103,6 +106,28 @@ function drawEmbedContents(target) {
 
     embed.removeAttribute('class');
     embed.setAttribute('class', 'oembeded');
+  }
+}
+
+
+function processMathJax(target, cb) {
+  var mathEl = document.createElement('div');
+  mathEl.innerHTML = target.innerHTML;
+
+  MathJax.Hub.Queue(
+    ["Typeset", MathJax.Hub, mathEl],
+    [function() {
+      target.innerHTML = mathEl.innerHTML;
+      target.removeAttribute('class');
+    }],
+    [cb]
+  );
+}
+function drawMathJax() {
+  var i, math = $('.contents .mathjax');
+
+  for (i = 0; i < math.length; i++) {
+    processMathJax(math[i]);
   }
 }
 

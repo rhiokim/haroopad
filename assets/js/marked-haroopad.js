@@ -8,7 +8,8 @@ var defaults = {
   "smartypants": true,
   "silent": false,
   "highlight": null,
-  "langPrefix": ''
+  "langPrefix": '',
+  "mathjax": true
 };
 
 var lexer = new marked.Lexer(defaults);
@@ -86,7 +87,19 @@ var renderer = new marked.Renderer();
       link = '<a href="href" target="_blank">'+ (caption?caption:href) +'</a>';
 
       return '<p data-url="'+ href +'" data-props="'+ props +'" class="oembed">'+ link +' '+ loading +'</p>';
-    }
+    };
+
+    renderer.math = function(text, block) {
+      if (block) {
+        return '<p class="mathjax">$$'
+          + text
+          + '$$</p>';
+      } else {
+        return '<span class="mathjax">$$$'
+          + text
+          + '$$$</span>';
+      }
+    };
 
 var Lexer = lexer;
 var Renderer = renderer;

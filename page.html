@@ -227,6 +227,17 @@
     <script src="/assets/js/marked.js"></script>
     <script src="/assets/js/marked-haroopad.js"></script>
     <script src="/assets/js/js-url.min.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        showProcessingMessages: false,
+        tex2jax: {
+          inlineMath: [ ['$$$','$$$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        }
+      });
+      MathJax.Hub.config.menuSettings.renderer = 'HTML-CSS'; //'SVG', 'NativeMML'
+    </script>
+    <script type="text/javascript" src="/assets/js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script src="/assets/js/page.js"></script>
     <!--script src="/assets/js/jquery.nivo.slider.js"></script>
     <script src="/assets/js/application.js"></script-->

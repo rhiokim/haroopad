@@ -14,6 +14,8 @@
 
 ## MathJax
 
+![](http://www.mathjax.org/wp-content/themes/mathjax/images/logo.gif)
+
 사실 상 표준인 LaTeX 는 이미 많은 영역에서 활용되고 있습니다. MathJax 도 LaTeX 을 웹에서 자유롭게 사용할 수 있도록 자바스크립트로 라이브러리화 한 것입니다.
 
 > MathJax is an open source JavaScript display engine for mathematics that works in all browsers. <cite>via http://www.mathjax.org/</cite>
@@ -21,6 +23,8 @@
 이 라이브러리는 이미 많은 서비스와 마크다운 에디터에서 활용되어지고 있습니다.
 
 ## 하루패드에서는...
+
+![](http://pad.haroopress.com/assets/images/logo-small.png)
 
 하루패드에서는 마크다운을 이용해 이 구문을 손쉽게 표현할 수 있도록 지원합니다.
 
@@ -52,11 +56,11 @@ $$
 
 **결과**
 
-이 구문은 $$$\sqrt{3x-1}+(1+x)^2$$$ 인라인 표기법 입니다.
+> 이 구문은 $$$\sqrt{3x-1}+(1+x)^2$$$ 인라인 표기법 입니다.
 
-아래의 구문은 블럭으로 표현됩니다.
+> 아래의 구문은 블럭으로 표현됩니다.
 
-$$
+> $$
 \sqrt{3x-1}+(1+x)^2
 $$
 

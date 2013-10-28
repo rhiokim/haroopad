@@ -23,8 +23,9 @@ var block = {
   html: /^ *(?:comment|closed|closing) *(?:\n{2,}|\s*$)/,
   def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,
   table: noop,
-  paragraph: /^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,
+  paragraph: /^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def|math))+)\n*/,
   text: /^[^\n]+/,
+  math: /^ *(\${2,2}) *([\s\S]+?)\s*\1 *(?:\n+|$)/
 };
 
 block.bullet = /(?:[*+-]|\d+\.)/;
@@ -57,6 +58,7 @@ block.paragraph = replace(block.paragraph)
   ('blockquote', block.blockquote)
   ('tag', '<' + block._tag)
   ('def', block.def)
+  ('math', block.math)
   ();
 
 /**
@@ -88,6 +90,7 @@ block.tables = merge({}, block.gfm, {
   nptable: /^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,
   table: /^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/
 });
+
 
 /**
  * Block Lexer
@@ -186,6 +189,19 @@ Lexer.prototype.token = function(src, top) {
         text: cap[3]
       });
       continue;
+    }
+
+    // math
+
+    if (this.options.mathjax) {
+      if (cap = this.rules.math.exec(src)) {
+        src = src.substring(cap[0].length);
+        this.tokens.push({
+          type: 'math',
+          text: cap[2]
+        });
+        continue;
+      }
     }
 
     // heading
@@ -371,7 +387,7 @@ Lexer.prototype.token = function(src, top) {
       });
       continue;
     }
-    
+
     // def
     if (top && (cap = this.rules.def.exec(src))) {
       src = src.substring(cap[0].length);
@@ -453,7 +469,7 @@ Lexer.prototype.token = function(src, top) {
  */
 
 var inline = {
-  escape: /^\\([=\\`*{}\[\]()#+\-.!_>])/,
+  escape: /^\\([=\\`*{}\[\]()#$+\-.!_>])/,
   autolink: /^<([^ >]+(@|:\/)[^ >]+)>/,
   url: noop,
   tag: /^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,
@@ -466,9 +482,10 @@ var inline = {
   br: /^ {2,}\n(?!\s*$)/,
   del: noop,
   emoji: noop,
-  text: /^[\s\S]+?(?=[\\<!\[_*`]|==| {2,}\n|$)/,
+  text: /^[\s\S]+?(?=[\\<!\[_*`$]|==| {2,}\n|$)/,
   stronghighlight: /^==([^=]+)==/,
-  underline: /^_([^_]+)_/
+  underline: /^_([^_]+)_/,
+  math: /^\$\$\$\s*([\s\S]*?[^\$])\s*\$\$\$(?!\$)/ //FIXME: what if inline math contains `$`?
 };
 
 inline._inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
@@ -700,6 +717,15 @@ InlineLexer.prototype.output = function(src) {
       continue;
     }
 
+    // math
+    if (this.options.mathjax) {
+      if (cap = this.rules.math.exec(src)) {
+        src = src.substring(cap[0].length);
+        out += this.renderer.math(cap[1]);
+        continue;
+      }
+    }
+
     // br
     if (cap = this.rules.br.exec(src)) {
     src = src.substring(cap[0].length);
@@ -927,9 +953,7 @@ Renderer.prototype.tablecell = function(content, flags) {
     ? '<' + type + ' align="' + flags.align + '">' : '<' + type + '>';
   return tag + content + '</' + type + '>\n';
 };
-// Renderer.prototype.plugin = function(name, text) {
-//   return '<p>['+ name +':'+ text +']</p>';
-// };
+
 
 /**
  * Parsing & Compiling
@@ -1026,6 +1050,9 @@ Parser.prototype.tok = function() {
     // }
     case 'code': {
       return renderer.blockcode(this.token.text, this.token.lang);
+    }
+    case 'math': {
+      return renderer.math(this.token.text, 'display');
     }
     case 'table': {
       var body = ''
@@ -1274,7 +1301,8 @@ marked.defaults = {
   silent: false,
   highlight: null,
   langPrefix: 'lang-',
-  smartypants: true
+  smartypants: true,
+  mathjax: false
 };
 
 /**
