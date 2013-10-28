@@ -326,3 +326,31 @@ An _underline_, also called an underscore is one or more _horizontal lines_ imme
 그리고 하루패드는 윈도우, 리눅스, 맥을 지원하여 여러분이 원하는 플랫폼에서 똑같은 문서 편집 경험을 얻을 수 있습니다.
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
+
+##### 수학 표기법(Mathematics Expression)
+
+하루패드에서 수학 표현식은 MathJax 를 기반으로 LaTeX 구문을 렌더링합니다. 달러 사인 `$` 을 이용해 구문의 블럭을 지정해주면 됩니다.
+
+방식은 2가지 방식을 지원합니다. 인라인 `$$$..$$$` 과 블럭 `$$..$$` 방식입니다.
+
+**사용예시**
+
+```
+이것은 x의 제곱을 나타내는 $$$x^2$$$ 인라인 방식의 표현법입니다.
+```
+
+**결과**
+
+이것은 x의 제곱을 나타내는 $$$x^2$$$ 인라인 방식의 표현법입니다.
+
+다음은 블럭 방식입니다.
+
+**사용예시**
+
+```
+다음은 블럭 방식의 표현법입니다.
+
+$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$
+```
