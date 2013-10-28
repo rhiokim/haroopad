@@ -14,7 +14,6 @@ GLYPH    | NAME
 &#63743; | Mac OS
 
 ##### File
-
 Shortcut                       | Description
 -------------------------------|-------------------
 &#8984;(&#8963;) - N           | new window
@@ -25,6 +24,7 @@ Shortcut                       | Description
 &#8984;(&#8963;) - &#8997; - E | export html
 &#8984;(&#8963;) - &#8997; - C | copy to clipboard
 &#8984;(&#8963;) - ,           | preferences
+&#8984;(&#8963;) - P           | print
 &#8984;(&#8963;) - Q           | close window
 
 ##### View
@@ -43,6 +43,11 @@ Shortcut                       | Description
 &#8984;(&#8963;) - F11         | toggle fullscreen #2
 Double ESC                     | escape fullscreen
 &#8984;(&#8963;) - &#8997; - V | vim keyboard binding
+&#8984; - &#8997; - .          | editor font size +1px
+&#8984; - &#8997; - ,          | editor font size -1px
+&#8984; - &#8679; - .          | viewer font size +1px
+&#8984; - &#8679; - ,          | viewer font size -1px
+
 
 ##### Editing
  Shortcut                      | Description
@@ -64,6 +69,18 @@ Double ESC                     | escape fullscreen
 &#8997; - Delete               | Delete Group after
 &#8984;(&#8963;) - [           | Indent less
 &#8984;(&#8963;) - ]           | Indent
+
+##### Inserting
+ Shortcut                      | Description
+-------------------------------|---------------------
+&#8679; - &#8963; - 1          | 10/7/2013
+&#8679; - &#8963; - 2          | 10/07/2013
+&#8679; - &#8963; - 3          | October 17 2013
+&#8679; - &#8963; - 4          | Oct 17 2013
+&#8679; - &#8963; - 5          | October 17 2013 3:17 AM
+&#8679; - &#8963; - 6          | Oct 17 2013 3:17 AM
+&#8679; - &#8963; - 7          | Thursday, October 17 2013 3:17 AM
+&#8679; - &#8963; - 8          | Thu, Oct 17 2013 3:17 AM
 
 ##### Markdown Editing
 Shortcut                       | Example        | Description
