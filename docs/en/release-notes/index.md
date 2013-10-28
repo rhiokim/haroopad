@@ -1,3 +1,33 @@
+## Haroopad v0.9.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#10              | ==Added== **Mathematical Expression** based on MathJax
+#63, #212        | ==Added== Font Size Option
+#183             | ==Added== Copy inline styled html for WYSWIG
+#214             | ==Added== Shortcuts for inserting date & time
+#215             | ==Added== Toggle Vim-mode menu
+#217             | ==Added== Shortcut for Print
+**Bugs**         |
+#196             | Set email title when seding email using by clicking menu item
+**Enhancements** |
+#209             | Enhance embeded contents look when sending email
+
+
+##### Github Issue tracker
+
+* https://github.com/rhiokim/haroopad/issues?milestone=29&state=closed
+
+##### Download
+
+> * Windows MSI https://www.dropbox.com/s/uhagga4dpf3pqsv/haroopad-v0.9.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/a9z6qr5mt9y16ap/haroopad-v0.9.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/jnnhzwfrc7o4r05/haroopad-v0.9.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/kli6khbzds8hh4l/haroopad-v0.9.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/hhnq8ty40c169wd/haroopad-v0.9.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/njpzetygyoports/haroopad-v0.9.0_amd64.deb
+
 ## Haroopad v0.8.0
 
 Issue Number     | Description
