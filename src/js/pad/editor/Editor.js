@@ -40,7 +40,8 @@ define([
 		});
 
 		var CodeMirrorElement = document.querySelector('.CodeMirror'),
-			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters');
+			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters'),
+			CodeMirrorCode = document.querySelector('.CodeMirror-code');
 
 		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
 		editor.on('drop', Drop);
@@ -61,6 +62,9 @@ define([
 		function setFontSize(value) {
 			CodeMirrorElement.style.fontSize = value + 'px';
 		}
+		//TODO: Fix me
+		CodeMirrorElement.style.fontFamily = 'Menlo, "Segoe UI", "Malgun Gothic", AppleSDGothicNeo-Regular !important';
+		
 		setFontSize(config.fontSize);
 		editor.setOption('theme', config.theme);
 		editor.setOption('lineNumbers', config.displayLineNumber);
