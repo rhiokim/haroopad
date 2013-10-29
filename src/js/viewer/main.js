@@ -358,7 +358,7 @@ function update(html) {
     frag = frags[i];
     _frag = _frags.shift();
 
-    origin = frag.textContent;
+    origin = frag.outerHTML;
     frag.setAttribute('data-origin', origin);
 
     //이전 프레그먼트 없는 경우 body 에 추가
