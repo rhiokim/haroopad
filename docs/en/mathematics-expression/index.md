@@ -6,7 +6,9 @@
 
 ## What is LaTeX?
 
-> LaTeX 소프트웨어는 LaTeX Project Public License(LPPL)로 제공되는 자유 소프트웨어이다. 현재, Mac OS X과 Solaris 등의 UNIX, Linux와 BSD 계열 OS 등의 UNIX 호환 OS, Microsoft Windows 등 다양한 OS에서 사용할 수 있다. <cite>via http://ko.wikipedia.org/wiki/LaTeX</cite>
+> LaTeX은 문서 작성 도구의 일종으로, 논문이나 출판물 등의 특수 형식 문서를 작성하는 데 쓰이는 시스템이다. LaTeX은 TeX의 확장성을 염두에 둔 개선판이다. TeX의 최초 개발자는 도널드 크누스로, 자신이 프로그래밍에 대한 책을 쓰려다 보니 적당한 조판 시스템이 없어 개발했다고 한다. 
+
+> 보통 이를 Typesetting(타입세팅) 시스템이라 부르는데 MS 워드처럼 WYSIWYG(What You See Is What You Get)방식으로 문서를 작성하는 것과 반대로 마치 프로그래밍을 하듯 (혹은 마크업 랭귀지로 문서를 작성하듯이) 문서 작성을 하는 과정을 의미한다(WYSIWYM: What You See Is What You Mean).  <cite>via http://mirror.enha.kr/wiki/LaTeX</cite>
 
 ![](http://upload.wikimedia.org/wikipedia/commons/thumb/7/78/LaTeX_diagram.svg/400px-LaTeX_diagram.svg.png)
 
@@ -16,17 +18,25 @@
 
 ![](http://www.mathjax.org/wp-content/themes/mathjax/images/logo.gif)
 
-사실 상 표준인 LaTeX 는 이미 많은 영역에서 활용되고 있습니다. MathJax 도 LaTeX 을 웹에서 자유롭게 사용할 수 있도록 자바스크립트로 라이브러리화 한 것입니다.
+MathJax 도 LaTeX 을 적용해 웹에서 수학 기호나 수식을 사용할 수 있도록 자바스크립트 라이브러리화 한 것입니다.
 
 > MathJax is an open source JavaScript display engine for mathematics that works in all browsers. <cite>via http://www.mathjax.org/</cite>
 
-이 라이브러리는 이미 많은 서비스와 마크다운 에디터에서 활용되어지고 있습니다.
+이 라이브러리는 또한 많은 서비스와 마크다운 에디터에서 활용되어지고 있습니다.
 
 ## 하루패드에서는...
 
 ![](http://pad.haroopress.com/assets/images/logo-small.png)
 
 하루패드에서는 마크다운을 이용해 이 구문을 손쉽게 표현할 수 있도록 지원합니다.
+
+==하루패드에서 수학 표현식 기능은 기본적으로 **비활성화**되어 있습니다.==
+
+### 옵션
+
+옵션은 환경설정(Preference) 윈도우 > 일반(General Tab)탭에 > ==Enable Mathematics Expression== 을 체크 상태로 바꾸면 활성화 됩니다.
+
+![](images/001.png)
 
 **LaTeX**
 
@@ -71,6 +81,7 @@ $$
 * http://www.latex-project.org/
 * http://www.mathjax.org/
 * http://ko.wikipedia.org/wiki/LaTeX
+* http://mirror.enha.kr/wiki/LaTeX
 
 [1]: http://www.w3.org/Math/
 [2]: http://www.mathjax.org/

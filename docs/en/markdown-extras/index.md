@@ -29,6 +29,7 @@ row2        | 456
 
 하지만 한가지 문제가 있다면 서비스 종속적인 내용들도 함께 포함하고 있다는 것인데 Emoji, Issue, Task, Refeneces 와 같은 것들이 그렇다.  이런 것들은 표준 마크다운까지의 경계를 넘어서 서비스의 편의를 위한 **확장 마크다운**이다.
 
+<!--
 #### Extras Markdown (Plugins)
 
 과거와는 달리 **기록** 이라는 것을 통해 생산된 텍스트, 이미지, 오디오, 영상등의 매체는 디지털화되어 온라인 상에 저장한다.
@@ -48,6 +49,6 @@ row2        | 456
 ![](images/002.png)
 
 이런 방식을 통해 유튜브, 플리커, 슬라이드 쉐어등과 같이 온라인 콘텐츠를 문서에 첨부 하는 것이 간단해 진다.  더 많은 확장 구문은 [여기](http://haroopress.com/post/support-plugins/)를 참고하세요.
-
+-->
 
 [gruber]: http://en.wikipedia.org/wiki/John_Gruber
