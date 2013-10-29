@@ -22,7 +22,7 @@ define([
 			autoPairCharacters: true,
 			theme: 'solarized dark'
 		};
-		config.fontSize = Number(config.fontSize);
+		config.fontSize = Number(config.fontSize || 13);
 		var generalConf = store.get('General') || {
 			enableSyncScroll: true
 		};
