@@ -62,16 +62,28 @@ define([
 		function setFontSize(value) {
 			CodeMirrorElement.style.fontSize = value + 'px';
 		}
-		//TODO: Fix me
-		CodeMirrorElement.style.fontFamily = 'Menlo, "Segoe UI", "Malgun Gothic", AppleSDGothicNeo-Regular !important';
 		
-		setFontSize(config.fontSize);
 		editor.setOption('theme', config.theme);
 		editor.setOption('lineNumbers', config.displayLineNumber);
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', config.tabSize || 4);
 		editor.setOption('indentUnit', config.indentUnit || 4);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
+
+		//TODO FIXME
+		function setFontFmaily() {
+			var all = document.styleSheets,
+			    s = all[all.length - 1],
+			    l = s.cssRules.length;
+
+			if (s.insertRule) {
+			    s.insertRule(".CodeMirror { font-family: Menlo, Monaco, 'Andale Mono','lucida console','Courier New', monospace, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular !important; }", l);
+			}
+			// CodeMirrorElement.style.fontFamily = "Monaco, Menlo, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular";
+		}
+
+		setFontSize(config.fontSize);
+		setFontFmaily();
 
 		/**
 		 * sync scroll handler
