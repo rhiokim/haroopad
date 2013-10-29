@@ -236,96 +236,31 @@ define([
 			CodeMirror.commands.replaceAll(editor);
 		});
 
-		window.ee.on('action.h1', function() {
-			CodeMirror.commands.markdownH1(editor);
+		window.ee.on('menu.insert.markdown', function(tag) {
+			switch(tag) {
+				case 'h1': CodeMirror.commands.markdownH1(editor); break;
+				case 'h2': CodeMirror.commands.markdownH2(editor); break;
+				case 'h3': CodeMirror.commands.markdownH3(editor); break;
+				case 'h4': CodeMirror.commands.markdownH4(editor); break;
+				case 'h5': CodeMirror.commands.markdownH5(editor); break;
+				case 'h6': CodeMirror.commands.markdownH6(editor); break;
 
-			global._gaq.push('haroopad.insert', 'markdown', 'h1');
-		});
-		window.ee.on('action.h2', function() {
-			CodeMirror.commands.markdownH2(editor);
+				case 'strong': CodeMirror.commands.markdownBold(editor); break;
+				case 'i': CodeMirror.commands.markdownItalic(editor); break;
+				case 'code': CodeMirror.commands.markdownInlineCode(editor); break;
+				case 'a': CodeMirror.commands.markdownLink(editor); break;
+				case 'del': CodeMirror.commands.markdownStrike(editor); break;
+				case 'image': CodeMirror.commands.markdownImage(editor); break;
+				case 'blockquote': CodeMirror.commands.markdownBlockQuote(editor); break;
+				case 'ol': CodeMirror.commands.markdownOrderedList(editor); break;
+				case 'li': CodeMirror.commands.markdownUnOrderedList(editor); break;
+				case 'precode': CodeMirror.commands.markdownFencedCode(editor); break;
+				case 'table': CodeMirror.commands.markdownTable(editor); break;
+				case 'comment': CodeMirror.commands.markdownComment(editor); break;
+				case 'embed': CodeMirror.commands.markdownEmbed(editor); break;
+			}
 
-			global._gaq.push('haroopad.insert', 'markdown', 'h2');
-		});
-		window.ee.on('action.h3', function() {
-			CodeMirror.commands.markdownH3(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'h3');
-		});
-		window.ee.on('action.h4', function() {
-			CodeMirror.commands.markdownH4(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'h4');
-		});
-		window.ee.on('action.h5', function() {
-			CodeMirror.commands.markdownH5(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'h5');
-		});
-		window.ee.on('action.h6', function() {
-			CodeMirror.commands.markdownH6(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'h6');
-		});
-		window.ee.on('action.strong', function() {
-			CodeMirror.commands.markdownBold(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'strong');
-		});
-		window.ee.on('action.emphasize', function() {
-			CodeMirror.commands.markdownItalic(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'emphasize');
-		});
-		window.ee.on('action.inlinecode', function() {
-			CodeMirror.commands.markdownInlineCode(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'inlinecode');
-		});
-		window.ee.on('action.link', function() {
-			CodeMirror.commands.markdownLink(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'link');
-		});
-		window.ee.on('action.strikethrough', function() {
-			CodeMirror.commands.markdownStrike(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'strikethrough');
-		});
-		window.ee.on('action.image', function() {
-			CodeMirror.commands.markdownImage(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'image');
-
-		});
-		window.ee.on('action.blockquote', function() {
-			CodeMirror.commands.markdownBlockQuote(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'blockquote');
-		});
-		window.ee.on('action.orderlist', function() {
-			CodeMirror.commands.markdownOrderedList(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'orderlist');
-		});
-		window.ee.on('action.unorderlist', function() {
-			CodeMirror.commands.markdownUnOrderedList(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'unorderlist');
-		});
-		window.ee.on('action.fencedcode', function() {
-			CodeMirror.commands.markdownFencedCode(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'fencedcode');
-		});
-		window.ee.on('action.table', function() {
-			CodeMirror.commands.markdownTable(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'table');
-		});
-		window.ee.on('action.comment', function() {
-			CodeMirror.commands.markdownComment(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'comment');
+			global._gaq.push('haroopad.insert', 'markdown', tag);
 		});
 
 		window.ee.on('insert.page.break', function() {
@@ -395,6 +330,25 @@ define([
 		});
 		HotKey('defmod-alt-,', function() {
 			window.ee.emit('menu.view.editor.font.size', -1);
+		});
+
+		HotKey('defmod-1', function() {
+			window.ee.emit('menu.insert.markdown', 'h1');
+		});
+		HotKey('defmod-2', function() {
+			window.ee.emit('menu.insert.markdown', 'h2');
+		});
+		HotKey('defmod-3', function() {
+			window.ee.emit('menu.insert.markdown', 'h3');
+		});
+		HotKey('defmod-4', function() {
+			window.ee.emit('menu.insert.markdown', 'h4');
+		});
+		HotKey('defmod-5', function() {
+			window.ee.emit('menu.insert.markdown', 'h5');
+		});
+		HotKey('defmod-6', function() {
+			window.ee.emit('menu.insert.markdown', 'h6');
 		});
 
 		HotKey('shift-ctrl-1', function() {

@@ -181,6 +181,9 @@
         case 'image':
           replaceSelection('![', '](http://)');
           break;
+        case 'embed':
+          replaceSelection('@[', '](http://)');
+          break;
         case 'fenced-code':
           replaceSelection('```\n', '\n```');
           break;
@@ -281,6 +284,9 @@
   };
   CodeMirror.commands.markdownComment = function(cm) {
     action('comment', cm);
+  };
+  CodeMirror.commands.markdownEmbed = function(cm) {
+    action('embed', cm);
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();
