@@ -332,24 +332,24 @@ define([
 			window.ee.emit('menu.view.editor.font.size', -1);
 		});
 
-		HotKey('defmod-1', function() {
-			window.ee.emit('menu.insert.markdown', 'h1');
-		});
-		HotKey('defmod-2', function() {
-			window.ee.emit('menu.insert.markdown', 'h2');
-		});
-		HotKey('defmod-3', function() {
-			window.ee.emit('menu.insert.markdown', 'h3');
-		});
-		HotKey('defmod-4', function() {
-			window.ee.emit('menu.insert.markdown', 'h4');
-		});
-		HotKey('defmod-5', function() {
-			window.ee.emit('menu.insert.markdown', 'h5');
-		});
-		HotKey('defmod-6', function() {
-			window.ee.emit('menu.insert.markdown', 'h6');
-		});
+		// HotKey('defmod-1', function() {
+		// 	window.ee.emit('menu.insert.markdown', 'h1');
+		// });
+		// HotKey('defmod-2', function() {
+		// 	window.ee.emit('menu.insert.markdown', 'h2');
+		// });
+		// HotKey('defmod-3', function() {
+		// 	window.ee.emit('menu.insert.markdown', 'h3');
+		// });
+		// HotKey('defmod-4', function() {
+		// 	window.ee.emit('menu.insert.markdown', 'h4');
+		// });
+		// HotKey('defmod-5', function() {
+		// 	window.ee.emit('menu.insert.markdown', 'h5');
+		// });
+		// HotKey('defmod-6', function() {
+		// 	window.ee.emit('menu.insert.markdown', 'h6');
+		// });
 
 		HotKey('shift-ctrl-1', function() {
 			window.ee.emit('insert.date', 'l');

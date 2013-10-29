@@ -182,7 +182,7 @@
           replaceSelection('![', '](http://)');
           break;
         case 'embed':
-          replaceSelection('@[', '](http://)');
+          replaceSelection('@[](', ')');
           break;
         case 'fenced-code':
           replaceSelection('```\n', '\n```');
