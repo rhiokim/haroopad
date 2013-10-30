@@ -1,3 +1,26 @@
+
+## Haroopad v0.9.1 - ==hotfix==
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**Bugs**         |
+#227             | Fixed relative image path
+
+
+##### Github Issue tracker
+
+* https://github.com/rhiokim/haroopad/issues/227
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/1d2gwcdiypyw8cx/haroopad-v0.9.1-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/virlns1wo817ci5/haroopad-v0.9.1.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/ayqin4fevcllvms/haroopad-v0.9.1_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/iqlq7zirnr0ogvw/haroopad-v0.9.1-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/wwwq1zeaodt0gfd/haroopad-v0.9.1_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/16weidzgl3ln9pq/haroopad-v0.9.1_amd64.deb
+
+
 ## Haroopad v0.9.0
 
 Issue Number     | Description
