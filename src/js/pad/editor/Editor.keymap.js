@@ -25,11 +25,18 @@ define([
 
 	  if (/Mac/.test(navigator.platform)) {
 	    keyMaps = {
+	    	'Cmd-1': 'markdownH1',
+	    	'Cmd-2': 'markdownH2',
+	    	'Cmd-3': 'markdownH3',
+	    	'Cmd-4': 'markdownH4',
+	    	'Cmd-5': 'markdownH5',
+	    	'Cmd-6': 'markdownH6',
 	      'Cmd-B': 'markdownBold',
 	      'Cmd-I': 'markdownItalic',
 	      'Cmd-L': 'markdownLink',
 	      'Cmd-Y': 'markdownUnderline',
 	      'Cmd-K': 'markdownInlineCode',
+	      'Cmd-E': 'markdownEmbed',
 	      'Cmd-Alt-S': 'markdownStrike',
 	      'Cmd-Alt-H': 'markdownHighlight',
 	      'Cmd-Alt-O': 'markdownOrderedList',
@@ -46,11 +53,18 @@ define([
 
 	  } else {
 	    keyMaps = {
+	    	'Ctrl-1': 'markdownH1',
+	    	'Ctrl-2': 'markdownH2',
+	    	'Ctrl-3': 'markdownH3',
+	    	'Ctrl-4': 'markdownH4',
+	    	'Ctrl-5': 'markdownH5',
+	    	'Ctrl-6': 'markdownH6',
 	      'Ctrl-B': 'markdownBold',
 	      'Ctrl-I': 'markdownItalic',
 	      'Ctrl-L': 'markdownLink',
 	      'Ctrl-Y': 'markdownUnderline',
 	      'Ctrl-K': 'markdownInlineCode',
+	      'Ctrl-E': 'markdownEmbed',
 	      'Ctrl-Alt-S': 'markdownStrike',
 	      'Ctrl-Alt-H': 'markdownHighlight',
 	      'Ctrl-Alt-O': 'markdownOrderedList',

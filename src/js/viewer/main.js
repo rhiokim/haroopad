@@ -373,37 +373,6 @@ function update(html) {
   _frags = _md_body.querySelectorAll(':scope>*');
   _frags = Array.prototype.slice.call(_frags, 0);
 
-  // 작성된 내용이 있는 경우 새로운 프레그먼트로 치환
-  // for (i = 0; i < frags.length; i++) {
-  i = 0;
-  limit = frags.length;
-  while (i < limit) {
-    frag = frags[i];
-    _frag = _frags.shift();
-
-    origin = frag.textContent;
-    frag.setAttribute('data-origin', origin);
-
-    //이전 프레그먼트 없는 경우 body 에 추가
-    if (!_frag) {
-      _md_body.appendChild(frag);
-    } else {
-
-      //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
-      _origin = _frag.getAttribute('data-origin');
-
-      //origin 문자열이 있는 경우
-      if (origin != _origin) {
-        _frag.style.display = 'none';
-        _md_body.insertBefore(frag, _frag);
-        _md_body.removeChild(_frag);
-
-        // _frags = [_frag].concat(_frags);
-      }
-    }
-    i++;
-  }
-
   //새로 생성된 pre 엘리먼트 origin attribute 에 본래 html 을 저장
   codes = wrapper.querySelectorAll('pre>code');
   codes = Array.prototype.slice.call(codes, 0);
@@ -428,7 +397,7 @@ function update(html) {
       _lazySyntaxHighlight(code);
     }
   }
-
+  
   var src, imgs = wrapper.querySelectorAll('img');
   for (i = 0; i < imgs.length; i++) {
     src = imgs[i].getAttribute('src');
@@ -436,6 +405,37 @@ function update(html) {
     if (src.indexOf('//') == -1 && !/^\//.test(src)) {
       imgs[i].setAttribute('src', _options.dirname + '/' + src);
     }
+  }
+
+  // 작성된 내용이 있는 경우 새로운 프레그먼트로 치환
+  // for (i = 0; i < frags.length; i++) {
+  i = 0;
+  limit = frags.length;
+  while (i < limit) {
+    frag = frags[i];
+    _frag = _frags.shift();
+
+    origin = frag.outerHTML;
+    frag.setAttribute('data-origin', origin);
+
+    //이전 프레그먼트 없는 경우 body 에 추가
+    if (!_frag) {
+      _md_body.appendChild(frag);
+    } else {
+
+      //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
+      _origin = _frag.getAttribute('data-origin');
+
+      //origin 문자열이 있는 경우
+      if (origin != _origin) {
+        _frag.style.display = 'none';
+        _md_body.insertBefore(frag, _frag);
+        _md_body.removeChild(_frag);
+
+        // _frags = [_frag].concat(_frags);
+      }
+    }
+    i++;
   }
 
   //새로이 작성된 내용이 지난 작성 내용에 비해 적을 경우

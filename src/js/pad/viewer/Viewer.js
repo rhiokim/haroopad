@@ -21,7 +21,7 @@ define([
 		var MAX_FONT_SIZE = 30;
 
 		var viewerConfig = store.get('Viewer') || {};
-				viewerConfig.fontSize = Number(viewerConfig.fontSize);
+			viewerConfig.fontSize = Number(viewerConfig.fontSize || 15);
 		var codeConfig = store.get('Code') || {};
 		var customConfig = store.get('Custom') || {};
 		var generalConfig = store.get('General') || {};
