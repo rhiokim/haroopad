@@ -350,6 +350,40 @@ function update(html) {
   _frags = _md_body.querySelectorAll(':scope>*');
   _frags = Array.prototype.slice.call(_frags, 0);
 
+  //새로 생성된 pre 엘리먼트 origin attribute 에 본래 html 을 저장
+  codes = wrapper.querySelectorAll('pre>code');
+  codes = Array.prototype.slice.call(codes, 0);
+
+  _codes = _md_body.querySelectorAll('pre>code');
+  _codes = Array.prototype.slice.call(_codes, 0);
+
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    _code = _codes[i];
+
+    origin = code.parentElement.outerHTML;
+    code.setAttribute('data-origin', origin);
+
+    if (_code) {
+      _origin = _code.parentElement.getAttribute('data-origin');
+
+      if (origin != _origin) {
+        _lazySyntaxHighlight(code);
+      }
+    } else {
+      _lazySyntaxHighlight(code);
+    }
+  }
+  
+  var src, imgs = wrapper.querySelectorAll('img');
+  for (i = 0; i < imgs.length; i++) {
+    src = imgs[i].getAttribute('src');
+
+    if (src.indexOf('//') == -1 && !/^\//.test(src)) {
+      imgs[i].setAttribute('src', _options.dirname + '/' + src);
+    }
+  }
+
   // 작성된 내용이 있는 경우 새로운 프레그먼트로 치환
   // for (i = 0; i < frags.length; i++) {
   i = 0;
@@ -379,40 +413,6 @@ function update(html) {
       }
     }
     i++;
-  }
-
-  //새로 생성된 pre 엘리먼트 origin attribute 에 본래 html 을 저장
-  codes = wrapper.querySelectorAll('pre>code');
-  codes = Array.prototype.slice.call(codes, 0);
-
-  _codes = _md_body.querySelectorAll('pre>code');
-  _codes = Array.prototype.slice.call(_codes, 0);
-
-  for (i = 0; i < codes.length; i++) {
-    code = codes[i];
-    _code = _codes[i];
-
-    origin = code.parentElement.outerHTML;
-    code.setAttribute('data-origin', origin);
-
-    if (_code) {
-      _origin = _code.parentElement.getAttribute('data-origin');
-
-      if (origin != _origin) {
-        _lazySyntaxHighlight(code);
-      }
-    } else {
-      _lazySyntaxHighlight(code);
-    }
-  }
-
-  var src, imgs = wrapper.querySelectorAll('img');
-  for (i = 0; i < imgs.length; i++) {
-    src = imgs[i].getAttribute('src');
-
-    if (src.indexOf('//') == -1 && !/^\//.test(src)) {
-      imgs[i].setAttribute('src', _options.dirname + '/' + src);
-    }
   }
 
   //새로이 작성된 내용이 지난 작성 내용에 비해 적을 경우
