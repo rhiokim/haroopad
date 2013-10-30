@@ -62,6 +62,7 @@ requirejs([
   'editor/Editor',
   'viewer/Viewer',
   'ui/file/File',
+  'ui/layout/Layout',
   'ui/footer/Footer'
 ], function(Window, Editor, Viewer, File) {
   // var html, res, file, uid, tmp, readOnly, x, y;
@@ -93,11 +94,11 @@ requirejs([
 
     _tid_ = setTimeout(function() {
       nw.file.set('markdown', Editor.getValue());
-      // window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
 
-      //   window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
-      // });
-    }, 100);
+      window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
+        window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+      });
+    }, 210);
   }
 
   nw.on('file.opened', function(file) {

@@ -5,7 +5,7 @@ define([],
       	win = gui.Window.get();
 		var Context = new gui.Menu();
 
-		var mCopy, mCopyHTML, mPreferences;
+		var mCopy, mCopyHTML, mCopyStyledHTML, mPreferences;
 
 		function menuItem(options) {
 			return new gui.MenuItem(options);
@@ -27,12 +27,20 @@ define([],
 		// Context.append(mCopy);
 
 		mCopyHTML = menuItem({ 
-			label: 'Copy HTML', 
+			label: 'Copy Plain HTML', 
 			click: function() {
 		  	window.ee.emit('context.copy.html');
 			} 
 		});
+
+		mCopyStyledHTML = menuItem({
+      label: 'Copy Styled HTML',
+      click: function() {
+        window.parent.ee.emit('menu.file.exports.clipboard.styled');
+      }
+    });
 		Context.append(mCopyHTML);
+		Context.append(mCopyStyledHTML);
 		Context.append(sepItem());
 
 		mPreferences = menuItem({

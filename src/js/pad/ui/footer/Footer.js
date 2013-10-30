@@ -67,6 +67,10 @@ define([
 		global._gaq.push('haroopad', 'set toc view', show);
 	});
 
+	Document.on('fullscreen', function(show) {
+		window.ee.emit('view.fullscreen', show);
+	});
+
 	Share.on('click', function() {
 		Advertise.hide();
 	});

@@ -96,8 +96,6 @@ define([
 
 				this.setPath(dir);
 				this.setThemeData(themes);
-
-    			global._gaq.push('haroopad.preferences', 'change.custom.dir', '');
 			},
 
 			reloadThemes: function(e) {
@@ -120,8 +118,6 @@ define([
 				}
 
 				options.set({ theme: themes[e.val] });
-
-    			global._gaq.push('haroopad.preferences', 'change.custom.theme', e.val);
 			}
 		});
 

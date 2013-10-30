@@ -19,19 +19,30 @@ define([
 
 			events: {
 				'change select[name=viewStyle]': 'changeViewStyle',
+				'change select[name=fontSize]': 'changeFontSize',
+				'change select[name=fontFamily]': 'changeFontFamily',
 				'click input[name=clickableLink]': 'clickableLink'	
 			},
 
 			initialize: function() {
 				this.$el.find('select[name=viewStyle]').select2().select2("val", config.theme);
+				this.$el.find('select[name=fontSize]').select2().select2("val", config.fontSize);
+				this.$el.find('select[name=fontFamily]').select2().select2("val", config.fontFamily);
 				
 				this.$el.find('input[name=clickableLink]').prop('checked', config.clickableLink);
 			},
 
 			changeViewStyle: function(e) {
 				options.set({ theme: e.val });
+			},
 
-    		global._gaq.push('haroopad.preferences', 'style', e.val);
+			changeFontSize: function(e) {
+				options.set({ fontSize: Number(e.val) });
+			},
+
+			changeFontFamily: function(e) {
+				var font = e.val.split(' ').join('+');
+				options.set({ fontFamily: e.val });
 			},
 
 			clickableLink: function(e) {

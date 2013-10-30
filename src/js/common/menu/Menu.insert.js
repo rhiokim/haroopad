@@ -25,10 +25,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.date-time'),
-      // icon: 'img/menu/unorder.png',
-      click: function() {
-        window.parent.ee.emit('menu.insert.date');
-      }
+      submenu: MenuBarInsertDate()
     })
   );
   Insert.append(
@@ -95,7 +92,7 @@ MenuBarInsert = function () {
       label: i18n.t('insert.bold'),
       // icon: 'img/menu/bold.png',
       click: function() {
-        window.parent.ee.emit('menu.insert.strong');
+        window.parent.ee.emit('menu.insert.markdown', 'strong');
       }
     })
   );
@@ -104,7 +101,7 @@ MenuBarInsert = function () {
       label: i18n.t('insert.italic'),
       // icon: 'img/menu/italic.png',
       click: function() {
-        window.parent.ee.emit('menu.insert.emphasize');
+        window.parent.ee.emit('menu.insert.markdown', 'i');
       }
     })
   );
@@ -112,7 +109,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: i18n.t('insert.inline-code'),
       click: function() {
-        window.parent.ee.emit('menu.insert.inlinecode');
+        window.parent.ee.emit('menu.insert.markdown', 'code');
       }
     })
   );
@@ -121,7 +118,7 @@ MenuBarInsert = function () {
       label: i18n.t('insert.image'),
       // icon: 'img/menu/image.png',
       click: function() {
-        window.parent.ee.emit('menu.insert.image');
+        window.parent.ee.emit('menu.insert.markdown', 'image');
       }
     })
   );
@@ -129,7 +126,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: i18n.t('insert.link'),
       click: function() {
-        window.parent.ee.emit('menu.insert.link');
+        window.parent.ee.emit('menu.insert.markdown', 'a');
       }
     })
   );
@@ -137,7 +134,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: i18n.t('insert.blockquote'),
       click: function() {
-        window.parent.ee.emit('menu.insert.blockquote');
+        window.parent.ee.emit('menu.insert.markdown', 'blockquote');
       }
     })
   );
@@ -145,7 +142,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: i18n.t('insert.ordered-list'),
       click: function() {
-        window.parent.ee.emit('menu.insert.orderlist');
+        window.parent.ee.emit('menu.insert.markdown', 'ol');
       }
     })
   );
@@ -154,7 +151,7 @@ MenuBarInsert = function () {
       label: i18n.t('insert.unordered-list'),
       // icon: 'img/menu/unorder.png',
       click: function() {
-        window.parent.ee.emit('menu.insert.unorderlist');
+        window.parent.ee.emit('menu.insert.markdown', 'li');
       }
     })
   );
@@ -195,7 +192,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: i18n.t('insert.fenced-code'),
       click: function() {
-        window.parent.ee.emit('menu.insert.fencedcode');
+        window.parent.ee.emit('menu.insert.markdown', 'precode');
       }
     })
   );
@@ -203,7 +200,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: i18n.t('insert.strikethrough'),
       click: function() {
-        window.parent.ee.emit('menu.insert.strikethrough');
+        window.parent.ee.emit('menu.insert.markdown', 'del');
       }
     })
   );
@@ -211,7 +208,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: i18n.t('insert.table'),
       click: function() {
-        window.parent.ee.emit('menu.insert.table');
+        window.parent.ee.emit('menu.insert.markdown', 'table');
       }
     })
   );
@@ -239,9 +236,17 @@ MenuBarInsert = function () {
   
   Insert.append(
     new gui.MenuItem({
-      label: i18n.t('insert.comment'),
+      label: 'Embed .................... @[]()',
       click: function() {
-        window.parent.ee.emit('menu.insert.comment');
+        window.parent.ee.emit('menu.insert.markdown', 'embed');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: 'Comment ............ <!-- -->',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'comment');
       }
     })
   );
