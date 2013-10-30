@@ -6,13 +6,17 @@ Issue Number     | Description
 #10              | ==Added== **Mathematical Expression** based on MathJax
 #63, #212        | ==Added== Font Size Option
 #183             | ==Added== Copy inline styled html for WYSWIG
-#214             | ==Added== Shortcuts for inserting date & time
 #215             | ==Added== Toggle Vim-mode menu
+#214             | ==Added== Shortcuts for inserting date & time
 #217             | ==Added== Shortcut for Print
+#                | ==Added== Shortcut for Header 
 **Bugs**         |
-#196             | Set email title when seding email using by clicking menu item
+#196             | Fixed Auto Set email title
+#                | Fixed Hidden Edit menu
+#                | Fixed Tabindex into save modal dialog when close window
 **Enhancements** |
 #209             | Enhance embeded contents look when sending email
+#                | Change font-family priorty `Malgun Gothic > Arial` in editor, viewer (only Hangul)
 
 
 ##### Github Issue tracker
