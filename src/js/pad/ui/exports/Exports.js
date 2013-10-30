@@ -9,6 +9,8 @@ define([
 			cleanCss = require('clean-css');
 		var gui = require('nw.gui');
 		var manifest = global.package;
+		var saveEl = $("#exportHTML");
+		var shadow;
 
 		var res;
 		
@@ -54,46 +56,62 @@ define([
 			return cssText;
 		}
 
-		function _replaceOriginalEmbed(html) {
-			var str, type, provider, oembededs = contentDocument.body.querySelectorAll('.oembeded');
-  			oembededs = Array.prototype.slice.call(oembededs, 0);
+		function _replaceOriginalEmbed() {
+			var str, type, provider, 
+				tweets = shadow.querySelectorAll('[data-provider=twitter]');
+	  			tweets = Array.prototype.slice.call(tweets, 0);
 
-			_.each(oembededs, function(node) {
-				str = node.getAttribute('data-replace');
-				type = node.getAttribute('data-type');
-				provider = node.getAttribute('data-provider');
-
-				switch(provider) {
-					case 'twitter':
-						html = html.replace(node.innerHTML, str);
-					break;
-				}
+			_.each(tweets, function(tweet) {
+				tweet.innerHTML = tweet.getAttribute('data-replace');
 			});
+		}
 
-			return html;
+		function _removeDataProperties() {
+			var frags, attrs;
+
+			frags = shadow.querySelectorAll(':scope>*');
+			frags = Array.prototype.slice.call(frags, 0);
+
+			_.each(frags, function(el) {
+				el.removeAttribute('data-url');
+				el.removeAttribute('data-prop');
+				el.removeAttribute('data-replace');
+				el.removeAttribute('data-type');
+				el.removeAttribute('data-provider');
+				el.removeAttribute('data-origin');
+			});
 		}
 
 		function getBodyHtml() {
-			var res = '';
-
 			contentDocument = Viewer.getContentDocument();
 
-			res = _replaceOriginalEmbed(contentDocument.body.outerHTML);
+			shadow = document.createElement('body');
+			shadow.style.display = 'none';
+			shadow.setAttribute('class', contentDocument.body.getAttribute('class'));
+			shadow.innerHTML = contentDocument.getElementById('root').innerHTML;
 
-			return res;
+			_replaceOriginalEmbed();
+			_removeDataProperties();
+
+			shadow.removeAttribute('style');
+
+			return shadow.innerHTML;
+		}
+
+		function getBodyClass() {
+			return shadow.getAttribute('class');
 		}
 
 		function getTitle() {
-			var contentDocument = Viewer.getContentDocument();
-			var h1, h2
-			h1 = contentDocument.querySelectorAll('body>h1');
+			var title = nw.file.get('title');
+			var basename = nw.file.get('basename');
+			var extname = nw.file.get('extname');
+			
+			title = basename ? basename.replace(extname, '') : title;
+			title = title || 'Untitled';
+			title += '.html';
 
-			if (!h1[0]) {
-				h2 = contentDocument.querySelectorAll('body>h2');
-				return (h2[0]) ? h2[0].innerHTML : 'Untitle';
-			} else {
-				return h1[0].innerHTML;
-			}
+			return title;
 		}
 
 		function getFooterHtml() {
@@ -105,20 +123,24 @@ define([
 
 			save(file);
 
-			$("#exportHTML").off('change', saveHandler);
-			$("#exportHTML").val("");
+			saveEl.off('change', saveHandler);
+			saveEl.val("");
 		}
 
 		window.ee.on('file.exports.html', function() {
+			var title = getTitle();
+
 			res = html.replace('@@style', getStyleSheets());
 			res = res.replace('@@body', getBodyHtml());
-			res = res.replace('</body>', getFooterHtml() +'\n</body>');
-			res = res.replace('@@title', getTitle());
+			res = res.replace('@@class', getBodyClass());
+			res = res.replace('@@footer', getFooterHtml());
+			res = res.replace('@@title', title);
 			res = res.replace('@@generator', getGenerator());
 			// res = res.replace('@@author', os.hostname());
 
-			$("#exportHTML").trigger("click");
-			$("#exportHTML").on('change', saveHandler);
+      		saveEl.attr('nwsaveas', title );
+			saveEl.trigger("click");
+			saveEl.on('change', saveHandler);
 			/**
 			 * 1. get html
 			 * 2. load template

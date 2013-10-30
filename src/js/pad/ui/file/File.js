@@ -30,7 +30,20 @@ define([
 				}
 			});
 
-			window.ee.on('menu.file.save.as', SaveDialog.show.bind(SaveDialog));
+			window.ee.on('menu.file.save.as', function() {
+				var fileName,
+						extname = nw.file.get('extname'),
+						basename = nw.file.get('basename');
+
+				if (!basename) {
+					window.ee.emit('menu.file.save');
+					return;
+				}
+				
+				fileName = basename.replace(extname, ' copy'+ extname);
+				
+				SaveDialog.show(nw.file.get('dirname'), fileName);
+			});
 		}
 
 		/* new file save */

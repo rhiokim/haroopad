@@ -2,8 +2,8 @@ html {
   height: 100% 
 }
 body {
-  padding: 5px 20px !important;
   margin: 0 !important;
+  padding: 5px 20px !important;
   background-color: #fff;
   font-family: Arial,'Apple SD Gothic Neo','Malgun Gothic', Helvetica, 'nanumgothic', sans-serif, Menlo, Monaco, monospace;
   font-size: .9em;
@@ -36,69 +36,48 @@ figure {
   -webkit-margin-end: 0;
 }
 
+.oembeded .oembed_photo{
+  display: inline-block;
+}
+
 /**
  * spinner
  */
 
-.bubblingG {
-  text-align: center;
-  width:48px;
-  height:30px;
+.spinner {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-bottom: -.1em;
+
+    border: 2px solid rgba(0,0,0,0.5);
+    border-top-color: transparent;
+    border-radius: 100%;
+
+    -webkit-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+ }
+ 
+.spinner:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -6px;
+    left: 0px;
+    
+    border: 4px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.5);
+    
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
-.bubblingG span {
-  display: inline-block;
-  vertical-align: middle;
-  width: 6px;
-  height: 6px;
-  margin: 15px auto;
-  background: #B6D600;
-  -webkit-border-radius: 30px;
-  -webkit-animation: bubblingG 0.6s infinite alternate;
+@-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
 }
 
-#bubblingG_1 {
-  -webkit-animation-delay: 0s;
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
-
-#bubblingG_2 {
-  -webkit-animation-delay: 0.18s;
-}
-
-#bubblingG_3 {
-  -webkit-animation-delay: 0.36s;
-}
-
-@-webkit-keyframes bubblingG {
-  0% {
-    width: 6px;
-    height: 6px;
-    background-color:#B6D600;
-    -webkit-transform: translateY(0);
-  }
-
-  100% {
-    width: 14px;
-    height: 14px;
-    background-color:#FFFFFF;
-    -webkit-transform: translateY(-13px);
-  }
-
-}
-
-@keyframes bubblingG {
-  0% {
-    width: 6px;
-    height: 6px;
-    background-color:#B6D600;
-    transform: translateY(0);
-  }
-
-  100% {
-    width: 14px;
-    height: 14px;
-    background-color:#FFFFFF;
-    transform: translateY(-13px);
-  }
-}
-

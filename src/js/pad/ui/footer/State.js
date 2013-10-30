@@ -36,8 +36,10 @@ define([
 		},
 
 		updateHandler: function(cm) {
-			var line = humanize.numberFormat(cm.lineCount(), 0);
-			var word = humanize.numberFormat(cm.getValue().length, 0);
+			var lineCnt = cm.lineCount();
+			var wordCnt = cm.getValue().length || 0;
+			var line = humanize.numberFormat(lineCnt, 0);
+			var word = humanize.numberFormat(wordCnt - lineCnt + 1, 0);
 			this.lineCount.text(line);
 			this.wordCount.text(word);
 		},

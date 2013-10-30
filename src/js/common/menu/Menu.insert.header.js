@@ -6,7 +6,7 @@ window.MenuBarInsertHeader = function () {
     new gui.MenuItem({
         label: 'H1   #',
         click: function() {
-          window.parent.ee.emit('menu.action.h1');
+          window.parent.ee.emit('menu.insert.markdown', 'h1');
         }
     })
   );
@@ -14,7 +14,7 @@ window.MenuBarInsertHeader = function () {
     new gui.MenuItem({
         label: 'H2   ##',
         click: function() {
-          window.parent.ee.emit('menu.action.h2');
+          window.parent.ee.emit('menu.insert.markdown', 'h2');
         }
     })
   );
@@ -22,7 +22,7 @@ window.MenuBarInsertHeader = function () {
     new gui.MenuItem({
         label: 'H3   ###',
         click: function() {
-          window.parent.ee.emit('menu.action.h3');
+          window.parent.ee.emit('menu.insert.markdown', 'h3');
         }
     })
   );
@@ -30,7 +30,7 @@ window.MenuBarInsertHeader = function () {
     new gui.MenuItem({
         label: 'H4   ####',
         click: function() {
-          window.parent.ee.emit('menu.action.h4');
+          window.parent.ee.emit('menu.insert.markdown', 'h4');
         }
     })
   );
@@ -38,7 +38,7 @@ window.MenuBarInsertHeader = function () {
     new gui.MenuItem({
         label: 'H5   #####',
         click: function() {
-          window.parent.ee.emit('menu.action.h5');
+          window.parent.ee.emit('menu.insert.markdown', 'h5');
         }
     })
   );
@@ -46,7 +46,7 @@ window.MenuBarInsertHeader = function () {
     new gui.MenuItem({
         label: 'H6   ######',
         click: function() {
-          window.parent.ee.emit('menu.action.h6');
+          window.parent.ee.emit('menu.insert.markdown', 'h6');
         }
     })
   );

@@ -2,17 +2,24 @@
 
 **Haroopad** is a markdown enabled document processor for creating web-friendly documents.
 
-You can author various formats of documents such as blog article, slide, presentation, report, and e-mail as if experts did.
+You can author professional-looking documents of various formats: blog posts, slides, presentations, reports, email and more.
 
-Haroopad gives you same experiences in editing regardless of the platform you are working on. It runs on all three major operating systems—Windows, Mac OS X, and Linux.
+Haroopad gives you the same editing experience regardless of the platform you are working on. It runs on all three major operating systems—Windows, Mac OS X, and Linux.
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### Main features
+### ==New Features (v0.9)==
 
-* Custom Theme ==(new)==
-  - Style based on CSS(Cascading Style Sheet)
-* Outline View ==(new)==
+* Mathematics Expression
+	- Inline Expression: `$$$...$$$`
+	- Block Expression: `$$...$$`
+* Font Size
+	- Editor and Viewer font size control using Preference Window & Shortcuts
+* Styled HTML copy to clipboard
+* Update Shortcuts for Print, Inserting Date & Time
+
+### Main Features
+
 * Support cross platform
   - Window
   - Mac OS X
@@ -29,6 +36,19 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 	- 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
 * Syntax Highlighting
 	- 52 languages & 26 styles based on highlight.js
+* Custom Theme
+  - Style based on CSS(Cascading Style Sheet)
+* Outline View
+* Embedding Rich Media Contents - v0.8
+	- Video, Audio, 3D, Text, Open Graph and oEmbed
+	- About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
+	- Drag & Drop support
+* Display Mode - v0.8
+	- Default(Editor:Viewer), Reverse(Viewer:Editor), Only Editor, Only Viewer (View > Mode)
+* Insert Current Date & Time - v0.8
+	- Various Format support (Insert > Date & Time)
+* HTML to Markdown - v0.8
+	- Drag & Drop your selected text on Web Browser
 * Vim Key-binding
 * Export to PDF, HTML
 * Auto Save & Restore
@@ -36,10 +56,10 @@ Haroopad gives you same experiences in editing regardless of the platform you ar
 * Tab or Spaces for Indentation
 * Colum(Single, Two and Three) Layout View
 
-### Upcoming features
+### Upcoming Features
 
-* Send email
-* Post to tumblr
+* Table Of Contents `[TOC]`
+* Footnotes
 
 ### And more?
 

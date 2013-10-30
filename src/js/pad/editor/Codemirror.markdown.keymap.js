@@ -157,11 +157,17 @@
         case 'bold':
           replaceSelection('**');
           break;
+        case 'highlight':
+          replaceSelection('==');
+          break;
         case 'strike':
           replaceSelection('~~', '~~');
           break;
         case 'italic':
           replaceSelection('*');
+          break;
+        case 'underline':
+          replaceSelection('_');
           break;
         case 'code':
           replaceSelection('`');
@@ -174,6 +180,9 @@
           break;
         case 'image':
           replaceSelection('![', '](http://)');
+          break;
+        case 'embed':
+          replaceSelection('@[](', ')');
           break;
         case 'fenced-code':
           replaceSelection('```\n', '\n```');
@@ -230,8 +239,14 @@
   CodeMirror.commands.markdownBold = function(cm) {
     action('bold', cm);
   };
+  CodeMirror.commands.markdownHighlight = function(cm) {
+    action('highlight', cm);
+  };
   CodeMirror.commands.markdownItalic = function(cm) {
     action('italic', cm);
+  };
+  CodeMirror.commands.markdownUnderline = function(cm) {
+    action('underline', cm);
   };
   CodeMirror.commands.markdownInlineCode = function(cm) {
     action('code', cm);
@@ -269,6 +284,9 @@
   };
   CodeMirror.commands.markdownComment = function(cm) {
     action('comment', cm);
+  };
+  CodeMirror.commands.markdownEmbed = function(cm) {
+    action('embed', cm);
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();

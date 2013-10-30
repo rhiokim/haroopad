@@ -25,10 +25,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: 'Date & Time',
-      // icon: 'img/menu/unorder.png',
-      click: function() {
-        window.parent.ee.emit('menu.insert.date');
-      }
+      submenu: MenuBarInsertDate()
     })
   );
   Insert.append(
@@ -95,7 +92,7 @@ MenuBarInsert = function () {
       label: 'Strong ................ **',
       // icon: 'img/menu/bold.png',
       click: function() {
-        window.parent.ee.emit('menu.insert.strong');
+        window.parent.ee.emit('menu.insert.markdown', 'strong');
       }
     })
   );
@@ -104,7 +101,7 @@ MenuBarInsert = function () {
       label: 'Emphasize .......... *',
       // icon: 'img/menu/italic.png',
       click: function() {
-        window.parent.ee.emit('menu.insert.emphasize');
+        window.parent.ee.emit('menu.insert.markdown', 'i');
       }
     })
   );
@@ -112,7 +109,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: 'Inline Code ......... `',
       click: function() {
-        window.parent.ee.emit('menu.insert.inlinecode');
+        window.parent.ee.emit('menu.insert.markdown', 'code');
       }
     })
   );
@@ -121,7 +118,7 @@ MenuBarInsert = function () {
       label: 'Image ................. ![]()',
       // icon: 'img/menu/image.png',
       click: function() {
-        window.parent.ee.emit('menu.insert.image');
+        window.parent.ee.emit('menu.insert.markdown', 'image');
       }
     })
   );
@@ -129,7 +126,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: 'Link .................... []()',
       click: function() {
-        window.parent.ee.emit('menu.insert.link');
+        window.parent.ee.emit('menu.insert.markdown', 'a');
       }
     })
   );
@@ -137,7 +134,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: 'Blockquote ......... >',
       click: function() {
-        window.parent.ee.emit('menu.insert.blockquote');
+        window.parent.ee.emit('menu.insert.markdown', 'blockquote');
       }
     })
   );
@@ -145,7 +142,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: 'Ordered List ....... 1.',
       click: function() {
-        window.parent.ee.emit('menu.insert.orderlist');
+        window.parent.ee.emit('menu.insert.markdown', 'ol');
       }
     })
   );
@@ -154,7 +151,7 @@ MenuBarInsert = function () {
       label: 'Un Ordered List .. -',
       // icon: 'img/menu/unorder.png',
       click: function() {
-        window.parent.ee.emit('menu.insert.unorderlist');
+        window.parent.ee.emit('menu.insert.markdown', 'li');
       }
     })
   );
@@ -198,7 +195,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: 'Fenced Code ....... ```',
       click: function() {
-        window.parent.ee.emit('menu.insert.fencedcode');
+        window.parent.ee.emit('menu.insert.markdown', 'precode');
       }
     })
   );
@@ -206,7 +203,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: 'Strikethrough ...... ~~',
       click: function() {
-        window.parent.ee.emit('menu.insert.strikethrough');
+        window.parent.ee.emit('menu.insert.markdown', 'del');
       }
     })
   );
@@ -214,7 +211,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: 'Table',
       click: function() {
-        window.parent.ee.emit('menu.insert.table');
+        window.parent.ee.emit('menu.insert.markdown', 'table');
       }
     })
   );
@@ -242,9 +239,17 @@ MenuBarInsert = function () {
   
   Insert.append(
     new gui.MenuItem({
+      label: 'Embed .................... @[]()',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'embed');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
       label: 'Comment ............ <!-- -->',
       click: function() {
-        window.parent.ee.emit('menu.insert.comment');
+        window.parent.ee.emit('menu.insert.markdown', 'comment');
       }
     })
   );

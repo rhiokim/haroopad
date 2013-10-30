@@ -78,18 +78,19 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     type = tp; content = cont;
     return style;
   }
-
   function jsTokenBase(stream, state) {
     var ch = stream.next();
     if (ch == '"' || ch == "'")
       return chain(stream, state, jsTokenString(ch));
+    else if (ch == "." && stream.match(/^\d+(?:[eE][+\-]?\d+)?/))
+      return ret("number", "number");
     else if (/[\[\]{}\(\),;\:\.]/.test(ch))
       return ret(ch);
     else if (ch == "0" && stream.eat(/x/i)) {
       stream.eatWhile(/[\da-f]/i);
       return ret("number", "number");
     }
-    else if (/\d/.test(ch) || ch == "-" && stream.eat(/\d/)) {
+    else if (/\d/.test(ch)) {
       stream.match(/^\d*(?:\.\d*)?(?:[eE][+\-]?\d+)?/);
       return ret("number", "number");
     }
@@ -102,7 +103,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
         return ret("comment", "comment");
       }
       else if (state.lastType == "operator" || state.lastType == "keyword c" ||
-               /^[\[{}\(,;:]$/.test(state.lastType)) {
+               state.lastType == "sof" || /^[\[{}\(,;:]$/.test(state.lastType)) {
         nextUntilUnescaped(stream, "/");
         stream.eatWhile(/[gimy]/); // 'y' is "sticky" option in Mozilla
         return ret("regexp", "string-2");
@@ -409,7 +410,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     startState: function(basecolumn) {
       return {
         tokenize: jsTokenBase,
-        lastType: null,
+        lastType: "sof",
         cc: [],
         lexical: new JSLexical((basecolumn || 0) - indentUnit, 0, "block", false),
         localVars: parserConfig.localVars,

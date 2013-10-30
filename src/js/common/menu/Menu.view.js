@@ -2,14 +2,26 @@ window.MenuBarView = function () {
 	var gui = require('nw.gui');
 	var View = new gui.Menu();
 
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Toggle Live Preview',
+	// 	      click: function() {
+	// 	      	window.parent.ee.emit('menu.view.mode.toggle');
+	// 	      }
+	//     })
+	// );
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Toggle Live Preview',
-		      click: function() {
-		      	window.parent.ee.emit('menu.view.mode.toggle');
-		      }
+	        label: 'Mode',
+            submenu: MenuBarViewMode()
 	    })
 	);
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Column Layout',
+ //            submenu: MenuBarViewColumn()
+	//     })
+	// );
 	// View.append(
 	//     new gui.MenuItem({
 	//         label: 'Reset Mode',
@@ -28,6 +40,14 @@ window.MenuBarView = function () {
 	        label: 'Toggle Line Number',
 		      click: function() {
 		        window.parent.ee.emit('menu.show.toggle.linenum');
+		      }
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Toggle Vim Mode',
+		      click: function() {
+		        window.parent.ee.emit('menu.view.toggle.vim');
 		      }
 	    })
 	);
@@ -61,10 +81,33 @@ window.MenuBarView = function () {
 	    })
 	);
 	View.append(
-		new gui.MenuItem({
-			type: 'separator'
-		})
+	    new gui.MenuItem({
+          type: 'separator'
+	    })
 	);
+	View.append(
+	    new gui.MenuItem({
+	        label: 'Font Size',
+            submenu: MenuBarViewFont()
+	    })
+	);
+	View.append(
+	    new gui.MenuItem({
+          type: 'separator'
+	    })
+	);
+
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: 'Zoom',
+ //            submenu: MenuBarViewZoom()
+	//     })
+	// );
+	// View.append(
+	// 	new gui.MenuItem({
+	// 		type: 'separator'
+	// 	})
+	// );
 
 	View.append(
 		new gui.MenuItem({

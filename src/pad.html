@@ -31,12 +31,16 @@
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/elegant.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/erlang-dark.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/lesser-dark.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/theme/mbo.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/midnight.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/monokai.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/neat.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/night.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/theme/paraiso-dark.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/theme/paraiso-light.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/rubyblue.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/solarized.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/theme/the-matrix.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/tomorrow-night-eighties.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/twilight.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/vibrant-ink.css">
@@ -58,6 +62,7 @@
 
   <link rel="stylesheet" href="css/app.css">
 
+  <script src="js/lib/logger.js"></script>
   <script src="js/lib/utils/util.js"></script>
   <script src="js/pad/pad.common.js"></script>
 
@@ -74,6 +79,7 @@
   <script src="js/vendors/bootstrap-modal.js"></script>
   <script src="js/vendors/store.js"></script>
   <script src="js/vendors/js-url.js"></script>
+  <script src="js/vendors/reMarked.js"></script>
   <script src="js/vendors/notifier.js"></script>
   <script src="js/vendors/require.js"></script>
 
@@ -85,13 +91,19 @@
   <script src="js/common/menu/Menu.file.activities.js"></script>
   <script src="js/common/menu/Menu.find.js"></script>
   <script src="js/common/menu/Menu.view.js"></script>
+  <script src="js/common/menu/Menu.view.mode.js"></script>
+  <script src="js/common/menu/Menu.view.column.js"></script>
+  <script src="js/common/menu/Menu.view.zoom.js"></script>
+  <script src="js/common/menu/Menu.view.font.js"></script>
   <script src="js/common/menu/Menu.insert.js"></script>
   <script src="js/common/menu/Menu.insert.section.js"></script>
   <script src="js/common/menu/Menu.insert.header.js"></script>
+  <script src="js/common/menu/Menu.insert.date.js"></script>
   <script src="js/common/menu/Menu.tools.js"></script>
   <script src="js/common/menu/Menu.tools.post.js"></script>
   <script src="js/common/menu/Menu.tools.presentation.js"></script>
   <script src="js/common/menu/Menu.tools.send.js"></script>
+  <script src="js/common/menu/Menu.share.js"></script>
   <script src="js/common/menu/Menu.help.js"></script>
 
   <script src="js/vendors/CodeMirror/lib/codemirror.js"></script>
@@ -187,7 +199,7 @@
   </header>
 
   <section id="main">
-    <article class="panel">
+    <article class="panel layout0">
       <section id="editor">
         <textarea id="code" name="code"></textarea>
       </section>
@@ -217,6 +229,7 @@
         <ul class="dropdown-menu">
           <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i>Show Document Outline</a></li>
           <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i>Show TOC</a></li>
+          <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i>Fullscreen</a></li>
         </ul>
       </div><div id="columnCount" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
