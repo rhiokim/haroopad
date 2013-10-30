@@ -23,7 +23,7 @@ define([
 		var MAX_FONT_SIZE = 30;
 
 		var viewerConfig = store.get('Viewer') || {};
-			viewerConfig.fontSize = Number(viewerConfig.fontSize);
+			viewerConfig.fontSize = Number(viewerConfig.fontSize || 15);
 		var codeConfig = store.get('Code') || {};
 		var customConfig = store.get('Custom') || {};
 
@@ -85,6 +85,14 @@ define([
 
 
 			global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
+		}
+
+		function enableMath(value) {
+			_viewer.empty();
+			
+			nw.file.trigger('change:markdown');
+
+			global._gaq.push('haroopad.preferences', 'enable math expression', value);
 		}
 
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
