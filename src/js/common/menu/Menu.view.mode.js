@@ -4,7 +4,7 @@ window.MenuBarViewMode = function () {
 
   submenu.append(
     new gui.MenuItem({
-        label: 'Editor  : Viewer',
+        label: i18n.t('view.mode-e-v'),
         click: function() {
           window.parent.ee.emit('menu.view.mode', 'default');
         }
@@ -12,7 +12,7 @@ window.MenuBarViewMode = function () {
   );
   submenu.append(
     new gui.MenuItem({
-        label: 'Viewer : Editor',
+        label: i18n.t('view.mode-v-e'),
         click: function() {
           window.parent.ee.emit('menu.view.mode', 'reverse');
         }
@@ -20,7 +20,7 @@ window.MenuBarViewMode = function () {
   );
   submenu.append(
     new gui.MenuItem({
-        label: 'Editor',
+        label: i18n.t('view.mode-editor'),
         click: function() {
           window.parent.ee.emit('menu.view.mode', 'editor');
         }
@@ -28,7 +28,7 @@ window.MenuBarViewMode = function () {
   );
   submenu.append(
     new gui.MenuItem({
-        label: 'Viewer',
+        label: i18n.t('view.mode-viewer'),
         click: function() {
           window.parent.ee.emit('menu.view.mode', 'viewer');
         }

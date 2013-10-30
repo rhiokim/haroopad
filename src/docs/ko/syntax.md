@@ -317,7 +317,7 @@ An _underline_, also called an underscore is one or more _horizontal lines_ imme
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 ```
 
-@[하루패드 비메오 동영상](https://vimeo.com/70762354 'float:left;width:400px')
+@[하루패드 비메오 동영상](https://vimeo.com/70762354 'float:left;width:300px;height:300px;margin-right:10px')
 
 **하루패드**는 웹 친화적인 문서를 작성하기 위한 마크다운 에디터입니다. 
 

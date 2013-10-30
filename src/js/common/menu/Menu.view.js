@@ -12,7 +12,7 @@ window.MenuBarView = function () {
 	// );
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Mode',
+	        label: i18n.t('view.mode'),
             submenu: MenuBarViewMode()
 	    })
 	);
@@ -45,7 +45,7 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Toggle Vim Mode',
+	        label: i18n.t('view.vim-mode'),
 		      click: function() {
 		        window.parent.ee.emit('menu.view.toggle.vim');
 		      }
@@ -87,7 +87,7 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Font Size',
+	        label: i18n.t('view.font-size'),
             submenu: MenuBarViewFont()
 	    })
 	);

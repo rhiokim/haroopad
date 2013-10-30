@@ -4,7 +4,7 @@ window.MenuBarFileExports = function () {
 
   submenu.append(
     new gui.MenuItem({
-      label: 'Clipboard',
+      label: i18n.t('file.copy-html'),
       enabled: false
     })
   );

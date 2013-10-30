@@ -17,16 +17,6 @@
       "preferences": "Preferences",
       "quit": "Quit"
     },
-    "edit": {
-      "name": "Edit",
-      "undo": "Undo",
-      "redo": "Redo",
-      "cut": "Cut",
-      "copy": "Copy",
-      "paste": "Paste",
-      "delete": "Delete",
-      "select-all": "Select All"
-    },
     "find": {
       "name": "Find",
       "find": "Find...",
@@ -37,6 +27,11 @@
     },
     "view": {
       "name": "View",
+      "mode": "Mode",
+      "mode-e-v": "Editor : Viewer",
+      "mode-v-e": "Viewer : Editor",
+      "mode-editor": "Editor",
+      "mode-viewer": "Viewer",
       "toggle-live-view": "Toggle Live View",  
       "toggle-line-number": "Toggle Line Number",  
       "live-view-width-plus-5": "Live View Width +5%",  
@@ -45,6 +40,10 @@
       "column-single": "Single",  
       "column-two": "Two",  
       "column-three": "Three",  
+      "font-size": "Font Size",  
+      "font-size-editor": "Editor Font Size",
+      "font-size-viewer": "Viewer Font Size",
+      "vim-mode": "Toggle VIM Mode",  
       "enter-full-screen": "Enter Full Screen"
     },
     "insert": {
