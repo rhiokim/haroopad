@@ -1,6 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Tauri);
-
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic);
 /*---------------------------------------------------
     LESS Elements 0.9
   ---------------------------------------------------
@@ -9,58 +7,75 @@
   ---------------------------------------------------*/
 /**
  * https://github.com/rhiokim/markdown-css
- * solarized-light style
  * made by rhio.kim
- * powered by http://ethanschoonover.com/solarized
  */
-.haroopad {
+.wood {
   padding: 20px;
-  color: #222222;
+  color: #ffffff;
   font-size: 15px;
-  font-family: 'Roboto Condensed', 'Tauri', "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
-  background: #ffffff;
+  font-family: 'PT Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  background-image: url('wood.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
   -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
 }
-.haroopad a {
-  color: #3269a0;
+.wood a {
+  color: #83ebff;
 }
-.haroopad a:hover {
-  color: #4183c4;
+.wood a:hover {
+  color: #b6f3ff;
 }
-.haroopad h2 {
+.wood h1,
+.wood h2,
+.wood h3,
+.wood h4,
+.wood h5 {
+  font-weight: 400;
+  color: #e6e6e6;
+  letter-spacing: -1px;
+}
+.wood h2 {
   border-bottom: 1px solid #e6e6e6;
   line-height: 1.7em;
 }
-.haroopad h6 {
+.wood h6 {
   color: #777;
 }
-.haroopad hr {
+.wood hr {
   border: 1px solid #e6e6e6;
 }
-.haroopad p > code {
-  font-family: Consolas, Inconsolata, Courier, monospace;
-  color: #BD006A;
+.wood p {
+  line-height: 19px;
 }
-.haroopad pre > code {
+.wood p > code {
+  font-family: 'PT Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  color: #B5FA7F;
+  font-size: .9em;
+}
+.wood pre > code {
   font-size: 1em;
-  font-family: Consolas, Inconsolata, Courier, monospace;
+  font-family: 'PT Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   letter-spacing: -1px;
-  font-weight: bold;
+  font-weight: normal;
+  text-shadow: none;
 }
-.haroopad blockquote {
+.wood blockquote {
   border-left: 4px solid #e6e6e6;
   padding: 0 15px;
   font-style: italic;
+  color: #B5FA7F;
 }
-.haroopad table {
-  background-color: #fafafa;
+.wood table {
+  background-color: #474747;
 }
-.haroopad table tr th,
-.haroopad table tr td {
-  border: 1px solid #e6e6e6;
+.wood table tr th,
+.wood table tr td {
+  border: 1px solid #333333;
 }
-.haroopad table tr:nth-child(2n) {
-  background-color: #f2f2f2;
+.wood table tr:nth-child(2n) {
+  background-color: #404040;
 }
 /**
  * after less

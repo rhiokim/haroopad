@@ -1,6 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Tauri);
-
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
 /*---------------------------------------------------
     LESS Elements 0.9
   ---------------------------------------------------
@@ -9,57 +7,74 @@
   ---------------------------------------------------*/
 /**
  * https://github.com/rhiokim/markdown-css
- * solarized-light style
  * made by rhio.kim
- * powered by http://ethanschoonover.com/solarized
  */
-.haroopad {
+.wood-ri {
   padding: 20px;
-  color: #222222;
+  color: #000000;
   font-size: 15px;
-  font-family: 'Roboto Condensed', 'Tauri', "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
-  background: #ffffff;
+  font-family: 'Lato', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  background-image: url('wood.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
   -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7);
 }
-.haroopad a {
-  color: #3269a0;
+.wood-ri a {
+  color: #004794;
 }
-.haroopad a:hover {
-  color: #4183c4;
+.wood-ri a:hover {
+  color: #005fc7;
 }
-.haroopad h2 {
+.wood-ri h1,
+.wood-ri h2,
+.wood-ri h3,
+.wood-ri h4,
+.wood-ri h5 {
+  font-weight: 400;
+  color: #000000;
+  letter-spacing: -1px;
+}
+.wood-ri h2 {
   border-bottom: 1px solid #e6e6e6;
   line-height: 1.7em;
 }
-.haroopad h6 {
+.wood-ri h6 {
   color: #777;
 }
-.haroopad hr {
+.wood-ri hr {
   border: 1px solid #e6e6e6;
 }
-.haroopad p > code {
-  font-family: Consolas, Inconsolata, Courier, monospace;
-  color: #BD006A;
+.wood-ri p {
+  line-height: 19px;
 }
-.haroopad pre > code {
+.wood-ri p > code {
+  font-family: 'Lato', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  color: #130079;
+  font-size: .9em;
+}
+.wood-ri pre > code {
   font-size: 1em;
-  font-family: Consolas, Inconsolata, Courier, monospace;
+  font-family: 'Lato', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   letter-spacing: -1px;
-  font-weight: bold;
+  font-weight: normal;
+  text-shadow: none;
 }
-.haroopad blockquote {
-  border-left: 4px solid #e6e6e6;
+.wood-ri blockquote {
+  border-left: 4px solid #ffffff;
   padding: 0 15px;
   font-style: italic;
+  color: #130079;
 }
-.haroopad table {
+.wood-ri table {
   background-color: #fafafa;
 }
-.haroopad table tr th,
-.haroopad table tr td {
+.wood-ri table tr th,
+.wood-ri table tr td {
   border: 1px solid #e6e6e6;
 }
-.haroopad table tr:nth-child(2n) {
+.wood-ri table tr:nth-child(2n) {
   background-color: #f2f2f2;
 }
 /**
