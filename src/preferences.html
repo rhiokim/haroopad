@@ -22,22 +22,22 @@
   <script src="js/vendors/select2.js"></script>
 </head>
 <body>
-  <div class="tabbable"> <!-- Only required for left/right tabs -->
+  <div class="tabbable tabs-left"> <!-- Only required for left/right tabs -->
 
-    <ul class="nav nav-tabs nav-tabs-google">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#about-tab" data-toggle="tab">About</a></li>
       <li><a href="#general-tab" data-toggle="tab">General</a></li>
       <li><a href="#editor-tab" data-toggle="tab">Editor</a></li>
       <li><a href="#viewer-tab" data-toggle="tab">Viewer</a></li>
       <li><a href="#custom-tab" data-toggle="tab">Custom</a></li>
       <li><a href="#code-tab" data-toggle="tab">Code</a></li>
-      <!-- <li><a href="#tab4" data-toggle="tab">Add-ons</a></li>
-      <li><a href="#tab5" data-toggle="tab">Export</a></li> -->
+      <li class="hide"><a href="#addon-tab" data-toggle="tab">Add-ons</a></li>
+      <li class="hide"><a href="#keymap-tab" data-toggle="tab">Keymap</a></li>
+      <li class="hide"><a href="#plugin-tab" data-toggle="tab">Plugin</a></li>
       <li class="hide"><a href="#markdown-tab" data-toggle="tab">Markdown</a></li>
-      <li class="active"><a href="#about-tab" data-toggle="tab">About</a></li>
     </ul>
 
     <div class="tab-content">
-
 
       <div id="general-tab" class="tab-pane">
         <div class="row-fluid">
@@ -443,53 +443,33 @@
       </div>
 
       <div id="about-tab" class="tab-pane active">
-        <div class="row-fluid">
-          <div class="span3 text-right">
-            <img src="logo.png" width="88" height="88"/>
-          </div>
-          <div class="span9">
+        <div>
+          <p>
             <h3>Haroopad <small>The next document processor</small></h3>
-            <div class="row-fluid">
-              <div class="span3">
-                Version: <br>
-                Official site:
-              </div>
-              <div class="span9">
-                <strong><span id="version" class="text-success"></span></strong> <br>
+            
+            <img src="logo.png" width="88" height="88"/> <br>
 
-                <a href="http://pad.haroopress.com" target="_blank">
-                  http://pad.haroopress.com
-                </a>
-              </div>
-              <span><b>Haroo</b> means "a day" in korean.</span>
-            </div>
-            <!-- <h3>"Haroo" means "a day" in korean.</h3> -->
-            <!-- <a href="http://pad.haroopress.com">http://pad.haroopress.com</a> -->
-          </div>
-        </div>
-        <hr>
-        <div class="row-fluid">
-          <div class="offset1 span3">
-            Programming:  <br/>
-            Special thanks: <br/>
-            Icon: </div>
-          <div class="span8">
-            <a href="https://twitter.com/rhiokim">Rhio Kim</a><br>
+            Version: <strong><span id="version" class="text-success"></span></strong> <br>
 
-            <a href="http://daringfireball.net/colophon/">John Gruber</a>, the invention of <a href="http://daringfireball.net/projects/markdown/">markdown</a> <br>
- 
-            <a href="https://twitter.com/rhiokim">Rhio Kim</a>,
-            <a href="https://twitter.com/fantalon">Fantalon</a>
-          </div>
-        </div>
-        <div class="row-fluid">
-          <div class="offset1 span10">
-            <br/>
-            <p class="text-warning">
-              If you like haroopad, <a href="http://pad.haroopress.com/page.html?f=grow-up-donate" class="btn btn-mini btn-primary" type="button">donate</a> to help keep growing up.
-            </p>
-          </div>
-          <div class="span1"></div>
+            Official site: <a href="http://pad.haroopress.com" target="_blank">
+              http://pad.haroopress.com
+            </a>
+          </p>
+
+          <p>
+            <span><b>Haroo</b> means "a day" in korean.</span>
+          </p>
+
+          <hr>
+
+          <p>
+              Programming: <a href="https://twitter.com/rhiokim">Rhio Kim</a><br>
+
+              Special thanks: <a href="http://daringfireball.net/colophon/">John Gruber</a>, the invention of <a href="http://daringfireball.net/projects/markdown/">markdown</a> <br>
+   
+              Icon: <a href="https://twitter.com/rhiokim">Rhio Kim</a>,
+              <a href="https://twitter.com/fantalon">Fantalon</a>
+          </p>
         </div>
       </div>
     </div>
