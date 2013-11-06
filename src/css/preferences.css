@@ -1,5 +1,4 @@
 html, body {
-	/*height: 100%;*/
 	margin: 0 auto;
 	padding: 0;
 }
@@ -12,10 +11,6 @@ body {
 
 hr {
 	margin: 10px 0;
-}
-
-.tab-pane>div {
-	margin-left: 120px;
 }
 
 .select2-search {
@@ -32,10 +27,6 @@ hr {
 #about-tab h4 {
 	margin-top: -5px;
 	margin-bottom: -3px;
-}
-
-.tab-content {
-	overflow: visible;
 }
 
 .dropdown-menu {
