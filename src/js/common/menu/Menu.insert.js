@@ -239,9 +239,25 @@ MenuBarInsert = function () {
   
   Insert.append(
     new gui.MenuItem({
-      label: 'Embed .................... @[]()',
+      label: 'Embed ................ @[]()',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'embed');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: 'Math (Block) ........ $$',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'math-block');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: 'Math (Inline) ........ $$$',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'math-inline');
       }
     })
   );

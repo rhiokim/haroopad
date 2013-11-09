@@ -157,8 +157,11 @@
         case 'bold':
           replaceSelection('**');
           break;
-        case 'math':
-          replaceSelection('$$');
+        case 'math-block':
+          replaceSelection('$$\n', '\n$$');
+          break;
+        case 'math-line':
+          replaceSelection('$$\n', '\n$$');
           break;
         case 'highlight':
           replaceSelection('==');
@@ -291,8 +294,11 @@
   CodeMirror.commands.markdownEmbed = function(cm) {
     action('embed', cm);
   };
-  CodeMirror.commands.markdownMath = function(cm) {
-    action('math', cm);
+  CodeMirror.commands.markdownMathBlock = function(cm) {
+    action('math-block', cm);
+  };
+  CodeMirror.commands.markdownMathInline = function(cm) {
+    action('math-line', cm);
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();
