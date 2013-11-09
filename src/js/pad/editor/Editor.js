@@ -27,7 +27,7 @@ define([
 			enableSyncScroll: true
 		};
 
-		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 			mode: 'markdown',
 			lineNumbers: true,
 			lineWrapping: true,
