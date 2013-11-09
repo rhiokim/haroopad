@@ -157,6 +157,9 @@
         case 'bold':
           replaceSelection('**');
           break;
+        case 'math':
+          replaceSelection('$$');
+          break;
         case 'highlight':
           replaceSelection('==');
           break;
@@ -287,6 +290,9 @@
   };
   CodeMirror.commands.markdownEmbed = function(cm) {
     action('embed', cm);
+  };
+  CodeMirror.commands.markdownMath = function(cm) {
+    action('math', cm);
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();
