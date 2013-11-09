@@ -22,3 +22,9 @@
 [submodule "lib/At.js"]
 	path = lib/At.js
 	url = git@github.com:ichord/At.js.git
+[submodule "lib/simptip"]
+	path = lib/simptip
+	url = git@github.com:arashmanteghi/simptip.git
+[submodule "lib/ionicons"]
+	path = lib/ionicons
+	url = git@github.com:driftyco/ionicons.git
