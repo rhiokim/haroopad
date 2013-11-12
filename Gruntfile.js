@@ -57,6 +57,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/vibrant-ink.css',
             '<%= vendors %>/CodeMirror/theme/xq-dark.css',
             '<%= vendors %>/CodeMirror/theme/xq-light.css',
+            '<%= vendors %>/CodeMirror/addon/hint/show-hint.css',
             '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.css'
           ],
           "build/haroopad/css/haroopad.min.css": [

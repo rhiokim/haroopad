@@ -41,7 +41,7 @@ function getExecPath() {
 			return path.join(process.execPath, '../');//process.cwd();
 		break;
 		case 'mac':
-			return process.cwd();
+			return path.join(process.execPath, '../../../../../');
 		break;
 		case 'linux':
 			return path.join(process.execPath, '../');

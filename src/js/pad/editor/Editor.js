@@ -39,11 +39,33 @@ define([
 			showTrailingSpace: true
 		});
 
+
+		// requirejs([ 'editor/Editor.emoji' ]);
+
+		var CodeMirrorElement = document.querySelector('.CodeMirror'),
+			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters'),
+			CodeMirrorCode = document.querySelector('.CodeMirror-code');
+
+		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
+		editor.on('drop', Drop);
+
+		editor.on('dragover', function(cm, e) {
+			var a = cm.coordsChar({
+				left: e.x,
+				top: e.y
+			});
+			var doc = cm.getDoc();
+			doc.setCursor(a);
+
+			e.preventDefault();
+		});
+
+		//auto completion end signal
 		CodeMirror.on(editor, 'endCompletion', function(cm) {
 			var cur = cm.getCursor();
 			var token = cm.getTokenAt(cur);
 			var md = token.string;
-			console.log(md)
+
 			switch(md) {
 			  case '##':
 			  case '###':
@@ -85,28 +107,8 @@ define([
 			  break;
 			}
 		});
-		// requirejs([ 'editor/Editor.emoji' ]);
-
-		var CodeMirrorElement = document.querySelector('.CodeMirror'),
-			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters'),
-			CodeMirrorCode = document.querySelector('.CodeMirror-code');
-
-		//ref: http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#functionstringcallback
-		editor.on('drop', Drop);
-
-		editor.on('dragover', function(cm, e) {
-			var a = cm.coordsChar({
-				left: e.x,
-				top: e.y
-			});
-			var doc = cm.getDoc();
-			doc.setCursor(a);
-
-			e.preventDefault();
-		});
 
 		/* initialize editor */
-
 		function setFontSize(value) {
 			CodeMirrorElement.style.fontSize = value + 'px';
 		}
