@@ -1,4 +1,4 @@
-(function() {
+define([], function() {
 
     function getState(cm, pos) {
       pos = pos || cm.getCursor('start');
@@ -296,4 +296,5 @@
     cm.redo();
     cm.focus();
   };
-})();
+  
+});

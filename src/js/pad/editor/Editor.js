@@ -39,6 +39,54 @@ define([
 			showTrailingSpace: true
 		});
 
+		CodeMirror.on(editor, 'endCompletion', function(cm) {
+			var cur = cm.getCursor();
+			var token = cm.getTokenAt(cur);
+			var md = token.string;
+			console.log(md)
+			switch(md) {
+			  case '##':
+			  case '###':
+			  case '####':
+			  case '#####':
+			  case '######':
+			    cm.replaceSelection(' ');
+			    cm.setCursor(cur);
+			  break;
+			  case '`':
+			  case '*':
+			  case '**':
+			  case '~~':
+			  case '$$$':
+			    cm.replaceSelection(md);
+			    cm.setCursor(cur);
+			  break;
+			  case '```':
+			    cm.replaceSelection('\n\n'+ md);
+			    cur.line++;
+			    cm.setCursor(cur);
+			  break;
+			  case '$$':
+			    cm.replaceSelection('\n\n'+ md);
+			    cur.line++;
+			    cm.setCursor(cur);
+			  break;
+			  case '()':
+			    cur.ch--;
+			    cm.setCursor(cur);
+			  break;
+			  case '* * *':
+			  case '- - -':
+			    cm.replaceSelection('\n\n');
+			    cur.line += 2;
+			    cm.setCursor(cur);
+			  break;
+			  default:
+			  break;
+			}
+		});
+		// requirejs([ 'editor/Editor.emoji' ]);
+
 		var CodeMirrorElement = document.querySelector('.CodeMirror'),
 			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters'),
 			CodeMirrorCode = document.querySelector('.CodeMirror-code');

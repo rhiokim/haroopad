@@ -1,5 +1,6 @@
 define([
-		'editor/Codemirror.markdown.keymap'
+		'editor/Codemirror.markdown.keymap',
+		'editor/Codemirror.markdown.hint',
 	],
 	function() {
 		var keyMaps;
@@ -79,6 +80,14 @@ define([
 	      'Ctrl-V': paste
 	    };
 	  }
+
+	  keyMaps["'#'"] = 'markdownAutoComplete';
+	  keyMaps["'!'"] = 'markdownAutoComplete';
+	  keyMaps["'`'"] = 'markdownAutoComplete';
+	  keyMaps["'$'"] = 'markdownAutoComplete';
+	  keyMaps["'*'"] = 'markdownAutoComplete';
+	  keyMaps["'~'"] = 'markdownAutoComplete';
+	  keyMaps["'-'"] = 'markdownAutoComplete';
 
 	  keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
 	  keyMaps['Shift-Tab'] = 'indentLess';
