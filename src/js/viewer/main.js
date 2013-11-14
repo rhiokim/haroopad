@@ -326,18 +326,23 @@ function drawEmbedContents(target) {
   }, 1000);
 }
 
+function empty() {
+  _md_body.innerHTML = '';
+}
+
 /**
  * update contents
  * @param  {[type]} contents [description]
  * @return {[type]}          [description]
  */
 
+var wrapper = document.createElement('div');
 function update(html) {
   // var wrapper = $('<div>').html(html);
-  var wrapper = document.createElement('div');
-  wrapper.innerHTML = html;
-  var i, frag, frags, _frag, _frags, origin, _origin,
+  var i, j, limit, frag, frags, _frag, _frags, origin, _origin,
     code, codes, _code, _codes;
+
+  wrapper.innerHTML = html;
 
   frags = wrapper.querySelectorAll(':scope>*');
   frags = Array.prototype.slice.call(frags, 0);
@@ -369,7 +374,7 @@ function update(html) {
       _lazySyntaxHighlight(code);
     }
   }
-
+  
   var src, imgs = wrapper.querySelectorAll('img');
   for (i = 0; i < imgs.length; i++) {
     src = imgs[i].getAttribute('src');
@@ -379,9 +384,11 @@ function update(html) {
     }
   }
 
-  //작성된 내용이 있는 경우 새로운 프레그먼트로 치환
-  // frags.each(function(idx, frag) {
-  for (i = 0; i < frags.length; i++) {
+  // 작성된 내용이 있는 경우 새로운 프레그먼트로 치환
+  // for (i = 0; i < frags.length; i++) {
+  i = 0;
+  limit = frags.length;
+  while (i < limit) {
     frag = frags[i];
     _frag = _frags.shift();
 
@@ -390,45 +397,23 @@ function update(html) {
 
     //이전 프레그먼트 없는 경우 body 에 추가
     if (!_frag) {
-      // var el = $(frag).appendTo(document.body);
-
       _md_body.appendChild(frag);
     } else {
 
       //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
-      // origin = $(_frag).attr('origin');
       _origin = _frag.getAttribute('data-origin');
 
-      //origin 문자열이 없는 경우
-      if (!_origin) {
-        //새로운 프레그먼트와 이전 프레그먼트가 다른 경우는 새로운 프레그먼트로 치환
-        if (frag.outerHTML != _frag.outerHTML) {
-        // if (frag.textContent != _frag.textContent) {
+      //origin 문자열이 있는 경우
+      if (origin != _origin) {
+        _frag.style.display = 'none';
+        _md_body.insertBefore(frag, _frag);
+        _md_body.removeChild(_frag);
 
-          _frag.style.display = 'none';
-          _md_body.insertBefore(frag, _frag);
-          _md_body.removeChild(_frag);
-
-        }
-      } else {
-        // origin = frag.getAttribute('data-origin');
-
-        //origin 문자열이 있는 경우
-        if (origin != _origin) {
-
-          _frag.style.display = 'none';
-          _md_body.insertBefore(frag, _frag);
-          _md_body.removeChild(_frag);
-
-          // _lazySyntaxHighlight(frag);
-        }
+        // _frags = [_frag].concat(_frags);
       }
     }
+    i++;
   }
-
-  // $(document.body).find('pre').each(function(i, e) {
-  //   $(this).attr('origin', $(this)[0].outerHTML);
-  // });
 
   //새로이 작성된 내용이 지난 작성 내용에 비해 적을 경우
   //남아 있는 프레그먼트를 모두 제거

@@ -1,6 +1,9 @@
 // for Memory leak detect
 process.setMaxListeners(0);
 
+//add node main module path
+process.mainModule.paths = [getExecPath() +'Libraries/.node_modules'].concat(process.mainModule.paths);
+
 var gui = require('nw.gui');
 
 window.nw = gui.Window.get();
@@ -42,12 +45,6 @@ requirejs([
     'window/WindowManager',
     'utils/UpdateNotifier'
   ], function(Context, Mailer, Window, WindowMgr, Updater) {
-
-    global._gaq.init(function(_gaq) {
-      if(_gaq) {
-        _gaq.push('haroopad', 'command', 'exec');
-      }
-    });
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;

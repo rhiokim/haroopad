@@ -8,18 +8,15 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.8)==
+### ==New Features (v0.9)==
 
-* Embedding Rich Media Contents
-	- Video, Audio, 3D, Text, Open Graph and oEmbed
-	- About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
-	- Drag & Drop support
-* Display Mode
-	- Default(Editor:Viewer), Reverse(Viewer:Editor), Only Editor, Only Viewer (View > Mode)
-* Insert Current Date & Time
-	- Various Format support (Insert > Date & Time)
-* HTML to Markdown
-	- Drag & Drop your selected text on Web Browser
+* Mathematics Expression
+	- Inline Expression: `$$$...$$$`
+	- Block Expression: `$$...$$`
+* Font Size
+	- Editor and Viewer font size control using Preference Window & Shortcuts
+* Styled HTML copy to clipboard
+* Update Shortcuts for Print, Inserting Date & Time
 
 ### Main Features
 
@@ -39,23 +36,30 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 	- 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
 * Syntax Highlighting
 	- 52 languages & 26 styles based on highlight.js
+* Custom Theme
+  - Style based on CSS(Cascading Style Sheet)
+* Outline View
+* Embedding Rich Media Contents - v0.8
+	- Video, Audio, 3D, Text, Open Graph and oEmbed
+	- About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
+	- Drag & Drop support
+* Display Mode - v0.8
+	- Default(Editor:Viewer), Reverse(Viewer:Editor), Only Editor, Only Viewer (View > Mode)
+* Insert Current Date & Time - v0.8
+	- Various Format support (Insert > Date & Time)
+* HTML to Markdown - v0.8
+	- Drag & Drop your selected text on Web Browser
 * Vim Key-binding
 * Export to PDF, HTML
 * Auto Save & Restore
 * Document state information
 * Tab or Spaces for Indentation
 * Colum(Single, Two and Three) Layout View
-* Custom Theme - v0.7
-  - Style based on CSS(Cascading Style Sheet)
-* Outline View - v0.7
 
 ### Upcoming Features
 
 * Table Of Contents `[TOC]`
 * Footnotes
-* Mathematics (LaTex)
-	- $ ..... $ (Inline) 
-	- $$ ... $$ (Block)
 
 ### And more?
 

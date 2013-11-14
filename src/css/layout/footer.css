@@ -48,6 +48,7 @@ footer .dropdown-menu li > a i {
 
 footer #lineCount,
 footer #wordCount,
+footer #paraCount,
 footer #cursorActivity {
   margin-right: 8px;
   color: #fff;
