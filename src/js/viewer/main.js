@@ -255,8 +255,13 @@ function _lazySyntaxHighlight(el) {
 //   });
 // }
 
+/**
+ * initial render TOC
+ * @param  {[type]} toc [description]
+ * @return {[type]}     [description]
+ */
 function renderTOC(toc) {
-  var tocPattern = /^\[(TOC|toc)\] *$/
+  var tocPattern = /^\[(TOC|toc)\] *$/;
   var paragraphs = _md_body.querySelectorAll('p');
   paragraphs = Array.prototype.slice.call(paragraphs, 0);
 
@@ -267,6 +272,11 @@ function renderTOC(toc) {
   });
 }
 
+/**
+ * dynamic update TOC
+ * @param  {[type]} toc [description]
+ * @return {[type]}     [description]
+ */
 function updateTOC(toc) {
   var tocEls = _md_body.querySelectorAll('.toc');
   tocEls = Array.prototype.slice.call(tocEls, 0);
@@ -457,7 +467,7 @@ function update(html) {
   drawEmbedContents(document.body);
   // generateTOC();
   
-  window.ee.emit('rendered', document);
+  window.ee.emit('rendered', _md_body);
 }
 /**
  * sync scroll position

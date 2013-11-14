@@ -14,6 +14,7 @@ define([
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
 		var content = '',
+			_toc = '',
 			options;
 
 		var gui = require('nw.gui'),
@@ -34,7 +35,15 @@ define([
 			content = html;
 
 			_viewer.update(content);
-			_viewer.updateTOC(TOC.build());
+
+			_toc = TOC.get();
+
+			_viewer.updateTOC(_toc);
+
+			//update TOC in file model
+			content = content.replace(/^\<p\>\[(TOC|toc)\]\<\/p\>$/gm, '<p>\n'+ _toc +'\n</p>');
+
+			nw.file.set({ 'html': content }, { silent: true });
 		}
 
 		/* change editor theme */
@@ -162,6 +171,7 @@ define([
 		window.ee.on('menu.file.exports.clipboard.plain', function() {
 			clipboard.set(content, 'text');
 		});
+
 		window.ee.on('menu.file.exports.clipboard.haroopad', function() {
 			clipboard.set(content, 'text');
 		});
@@ -187,12 +197,13 @@ define([
 		});
 
 		HotKey('defmod-shift-alt-c', function() {
-			window.ee.emit('menu.file.exports.clipboard.styled');
+			window.ee.emit('menu.file.exports.clipboard.haroopad');
 		});
 
 		HotKey('defmod-shift-.', function() {
 			window.ee.emit('menu.view.viewer.font.size', 1);
 		});
+
 		HotKey('defmod-shift-,', function() {
 			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
@@ -224,23 +235,6 @@ define([
 			var ext = path.extname(file);
 
 			switch (ext) {
-				// case '.scss':
-				// 	var dir = path.dirname(file);
-				// 	var name = path.basename(file);
-				// 	var _name = path.join(dir, name);
-				// 	_name = _name.replace(ext, '.css');
-
-				// 	sass.render({
-				// 		file: file,
-				// 		success: function(css) {
-				// 			fs.writeFile(path.join(_name), css, 'utf8', function(err) {
-				// 				_viewer.loadCustomCSS(_name);
-				// 			});
-				// 		},
-				// 		includePaths: [ dir ],
-				// 					outputStyle: 'compressed'
-				// 	});
-				// break;
 				case '.css':
 					_viewer.loadCustomCSS(file);
 					break;
