@@ -88,6 +88,7 @@ define([
 	  keyMaps["'*'"] = 'markdownAutoComplete';
 	  keyMaps["'~'"] = 'markdownAutoComplete';
 	  keyMaps["'-'"] = 'markdownAutoComplete';
+	  keyMaps["'@'"] = 'markdownAutoComplete';
 
 	  keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
 	  keyMaps['Shift-Tab'] = 'indentLess';
