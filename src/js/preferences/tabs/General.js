@@ -18,13 +18,27 @@ define([
 			el: '#general-tab',
 
 			events: {
+				'click input[name=enableAutoComplete]': 'enableAutoComplete',	
+				'click input[name=enableMath]': 'enableMath',	
 				'click input[name=enableSyncScroll]': 'enableSyncScroll',	
-				'click input[name=playKeypressSound]': 'playKeypressSound'	
+				'click input[name=playKeypressSound]': 'playKeypressSound'
 			},
 
 			initialize: function() {
+				this.$el.find('input[name=enableAutoComplete]').prop('checked', config.enableAutoComplete);
+				this.$el.find('input[name=enableMath]').prop('checked', config.enableMath);
 				this.$el.find('input[name=enableSyncScroll]').prop('checked', config.enableSyncScroll);
 				this.$el.find('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
+			},
+
+			enableAutoComplete: function(e) {
+				var bool = $(e.target).is(':checked');
+				options.set('enableAutoComplete', bool);
+			},
+
+			enableMath: function(e) {
+				var bool = $(e.target).is(':checked');
+				options.set('enableMath', bool);
 			},
 
 			enableSyncScroll: function(e) {

@@ -24,7 +24,9 @@ define([
 		};
 		config.fontSize = Number(config.fontSize || 13);
 		var generalConf = store.get('General') || {
-			enableSyncScroll: true
+			enableSyncScroll: true,
+			playKeypressSound: false,
+			enableAutoComplete: false
 		};
 
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -35,7 +37,6 @@ define([
 			viewportMargin: 40,
 			autofocus: true,
 			workDelay: 1000,
-			extraKeys: Keymap,
 			showTrailingSpace: true
 		});
 
@@ -112,13 +113,6 @@ define([
 		function setFontSize(value) {
 			CodeMirrorElement.style.fontSize = value + 'px';
 		}
-		
-		editor.setOption('theme', config.theme);
-		editor.setOption('lineNumbers', config.displayLineNumber);
-		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
-		editor.setOption('tabSize', config.tabSize || 4);
-		editor.setOption('indentUnit', config.indentUnit || 4);
-		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
 		//TODO FIXME
 		function setFontFmaily() {
@@ -131,9 +125,6 @@ define([
 			}
 			// CodeMirrorElement.style.fontFamily = "Monaco, Menlo, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular";
 		}
-
-		setFontSize(config.fontSize);
-		setFontFmaily();
 
 		/**
 		 * sync scroll handler
@@ -207,7 +198,24 @@ define([
 			global._gaq.push('haroopad.preferences', 'editor', 'syncScroll: ' + value);
 		}
 
+		function toggleAutoComplete(value) {
+			var keyMap = value ? Keymap.markdown : Keymap.defaults;
+			editor.setOption('extraKeys', keyMap);
+		}
+		
+		editor.setOption('theme', config.theme);
+		editor.setOption('lineNumbers', config.displayLineNumber);
+		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
+		editor.setOption('tabSize', config.tabSize || 4);
+		editor.setOption('indentUnit', config.indentUnit || 4);
+		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
+
+		toggleAutoComplete(generalConf.enableAutoComplete);
+		setFontSize(config.fontSize);
+		setFontFmaily();
+
 		window.parent.ee.on('preferences.general.enableSyncScroll', toggleSyncScroll);
+		window.parent.ee.on('preferences.general.enableAutoComplete', toggleAutoComplete);
 
 		window.parent.ee.on('preferences.editor.theme', changeTheme);
 		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
