@@ -68,7 +68,9 @@
       "fenced-code": "Fenced Code ....... ```",
       "strikethrough": "Strikethrough ...... ~~",
       "table": "Table",
-      "comment": "Comment ............ <!-- -->"
+      "comment": "Comment ............ <!-- -->",
+      "highlight": "Highlight .................... ==",
+      "underline": "Underline .................... _"
       },
     "tool": {
       "name": "Tool"

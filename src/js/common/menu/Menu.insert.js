@@ -242,7 +242,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Highlight .................... ==',
+      label: i18n.t('insert.highlight'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'highlight');
       }
@@ -250,7 +250,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Underline .................... _',
+      label: i18n.t('insert.underline'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'u');
       }
