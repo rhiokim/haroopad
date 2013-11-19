@@ -1,7 +1,7 @@
 var path = require('path');
 var languageTable = [
-	'en-US',
-	'ko-KR'
+	'en',
+	'ko'
 ];
 
 function asVersion(str) {
@@ -49,9 +49,13 @@ function getExecPath() {
 	}
 }
 
-function getDocsPath() {
+function getLang() {
 	var locale = window.navigator.language;
-	locale = languageTable.indexOf(locale) < 0 ? 'en-US': locale ;
+	locale = languageTable.indexOf(locale) < 0 ? 'en': locale ;
 
-	return path.join(process.cwd(), 'docs', locale);
+	return locale;
+}
+
+function getDocsPath() {
+	return path.join(getExecPath(), 'docs', getLang());
 }

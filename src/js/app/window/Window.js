@@ -150,7 +150,6 @@ define([
   window.ee.on('menu.view.editor.font.size', function(value) {
     WindowMgr.actived.window.ee.emit('menu.view.editor.font.size', value);
   });
-
   window.ee.on('menu.view.viewer.font.size', function(value) {
     WindowMgr.actived.window.ee.emit('menu.view.viewer.font.size', value);
   });

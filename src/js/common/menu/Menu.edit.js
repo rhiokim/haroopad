@@ -15,13 +15,13 @@ window.MenuBarEdit = function () {
   }
 
 	menuItem({
-            label: 'Undo',
+            label: i18n.t('edit.undo'),
             click: function() {
                 window.parent.ee.emit('menu.edit.undo');
             }
         });
 	menuItem({
-            label: 'Redo',
+            label: i18n.t('edit.redo'),
             click: function() {
                 window.parent.ee.emit('menu.edit.redo');
             }
@@ -29,39 +29,39 @@ window.MenuBarEdit = function () {
   sepItem();
 
   menuItem({
-            label: 'Cut',
+            label: i18n.t('edit.cut'),
             click: function() {
                 window.parent.ee.emit('menu.edit.cut');
             }
         });
 
   menuItem({
-            label: 'Copy',
+            label: i18n.t('edit.copy'),
             click: function() {
                 window.parent.ee.emit('menu.edit.copy');
             }
         });
 
   menuItem({
-            label: 'Paste',
+            label: i18n.t('edit.paste'),
             click: function() {
                 window.parent.ee.emit('menu.edit.paste');
             }
         });
 
   menuItem({
-            label: 'Delete',
+            label: i18n.t('edit.delete'),
             click: function() {
                 window.parent.ee.emit('menu.edit.delete');
             }
         });
 
   menuItem({
-            label: 'Select All',
+            label: i18n.t('edit.select-all'),
             click: function() {
                 window.parent.ee.emit('menu.edit.selectall');
             }
         });
 	
-	return new gui.MenuItem({ label: 'Edit', submenu: Edit });
+	return new gui.MenuItem({ label: i18n.t('edit.name'), submenu: Edit });
 };

@@ -1,0 +1,45 @@
+{
+	"title": "",
+	
+	"footer": {
+		"lines": "lines",
+		"words": "words"
+	},
+	
+	"share": "Share",
+	"state": {
+		"label": "Elements",
+		"image": "Image",
+		"header": "Header",
+		"link": "Link",
+		"table": "Table",
+		"paragraph": "Paragraph",
+		"code": "Code",
+		"blockquote": "Blockquote"
+	},
+
+	"config": {
+		"toc": "Table of Content",
+		"outline": "Outline",
+		"tab": "Tab with",
+		"usetab": "Indent Using Tab",
+		"experimental": "Experimental",
+		"spaces": "Spaces",
+		"column": {
+			"label": "Column",
+			"one": "Signle",
+			"two": "Two Column",
+			"three": "Three Column"
+		}
+	},
+
+	"promotion": {
+		"desc": "Please Share!"
+	},
+
+	"donate": {
+		"label": "Donate",
+		"title": "Donate to help keep development going!",
+		"desc": "If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>"
+	}
+}
