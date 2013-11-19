@@ -13,6 +13,7 @@
 
 	"general": {
 		"general": "General",
+		"enableMath": "Enable Mathematics Expression",
 		"enableSyncScroll": "Enable Sync Scroll"
 	},
 
