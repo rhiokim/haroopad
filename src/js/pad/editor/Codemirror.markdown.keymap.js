@@ -161,13 +161,13 @@
           replaceSelection('$$\n', '\n$$');
           break;
         case 'math-line':
-          replaceSelection('$$\n', '\n$$');
+          replaceSelection('$$$');
           break;
         case 'highlight':
           replaceSelection('==');
           break;
         case 'strike':
-          replaceSelection('~~', '~~');
+          replaceSelection('~~');
           break;
         case 'italic':
           replaceSelection('*');
