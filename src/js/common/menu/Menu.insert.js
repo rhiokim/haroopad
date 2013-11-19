@@ -236,6 +236,28 @@ MenuBarInsert = function () {
   
   Insert.append(
     new gui.MenuItem({
+      label: 'Haroopad Flavored Markdown',
+      enabled: false
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: 'Highlight .................... ==',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'highlight');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: 'Underline .................... _',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'u');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
       label: i18n.t('insert.embed'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'embed');
