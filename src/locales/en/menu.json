@@ -11,8 +11,11 @@
       "sending": "Sending",
       "sending-email": "Email",
       "exports": "Export...",
+      "export-to-file": "File",
       "export-to-html": "HTML",
-      "copy-html": "Copy HTML",
+      "copy-to-clipboard": "Clipboard",
+      "plain-html": "Plain HTML",
+      "styled-html": "Styled HTML",
       "print": "Print...",
       "preferences": "Preferences",
       "quit": "Quit"

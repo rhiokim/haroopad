@@ -236,7 +236,7 @@ MenuBarInsert = function () {
   
   Insert.append(
     new gui.MenuItem({
-      label: 'Embed .................... @[]()',
+      label: i18n.t('insert.embed'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'embed');
       }
@@ -244,7 +244,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Comment ............ <!-- -->',
+      label: i18n.t('insert.comment'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'comment');
       }

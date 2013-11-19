@@ -11,8 +11,11 @@
       "sending": "보내기",
       "sending-email": "이메일",
       "exports": "출력",
+      "export-to-file": "파일로 출력",
       "export-to-html": "HTML",
-      "copy-html": "HTML 복사하기",
+      "copy-to-clipboard": "클립보드",
+      "plain-html": "순수 HTML",
+      "styled-html": "스타일 HTML",
       "print": "인쇄",
       "preferences": "환경설정",
       "quit": "종료"
@@ -64,6 +67,7 @@
       "page-break": "페이지 나누기 ....... * * *",
       "fenced-code": "팬스 코드 블럭 ....... ```",
       "strikethrough": "취소선 ...... ~~",
+      "embed": "임베딩 .................... @[]()",
       "table": "테이블",
       "comment": "주석 ............ <!-- -->"
       },
