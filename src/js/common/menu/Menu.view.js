@@ -12,7 +12,7 @@ window.MenuBarView = function () {
 	// );
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Mode',
+	        label: i18n.t('view.mode'),
             submenu: MenuBarViewMode()
 	    })
 	);
@@ -37,7 +37,7 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Toggle Line Number',
+	        label: i18n.t('view.toggle-line-number'),
 		      click: function() {
 		        window.parent.ee.emit('menu.show.toggle.linenum');
 		      }
@@ -45,7 +45,7 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Toggle Vim Mode',
+	        label: i18n.t('view.vim-mode'),
 		      click: function() {
 		        window.parent.ee.emit('menu.view.toggle.vim');
 		      }
@@ -66,7 +66,7 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Live Viewer width +5%',
+	        label: i18n.t('view.live-view-width-plus-5'),
 		      click: function() {
 		        window.parent.ee.emit('menu.view.plus5.width');
 		      }
@@ -74,7 +74,7 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Live Viewer width -5%',
+	        label: i18n.t('view.live-view-width-minus-5'),
 		      click: function() {
 		        window.parent.ee.emit('menu.view.minus5.width');
 		      }
@@ -87,7 +87,7 @@ window.MenuBarView = function () {
 	);
 	View.append(
 	    new gui.MenuItem({
-	        label: 'Font Size',
+	        label: i18n.t('view.font-size'),
             submenu: MenuBarViewFont()
 	    })
 	);
@@ -111,12 +111,12 @@ window.MenuBarView = function () {
 
 	View.append(
 		new gui.MenuItem({
-		  label: 'Enter Full screen',
+		  label: i18n.t('view.enter-full-screen'),
 		  click: function() {
 			window.parent.ee.emit('menu.view.fullscreen');
 		  }
 		})
 	);
 
-	return new gui.MenuItem({ label: 'View', submenu: View });
+	return new gui.MenuItem({ label: i18n.t('view.name'), submenu: View });
 };

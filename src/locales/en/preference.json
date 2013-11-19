@@ -1,0 +1,70 @@
+{
+	"title": "Preference",
+	
+	"tab": {
+		"general": "General",
+		"editor": "Editor",
+		"viewer": "Viewer",
+		"custom": "Custom",
+		"code": "Code",
+		"markdown": "Markdown",
+		"about": "About"
+	},
+
+	"general": {
+		"general": "General",
+		"enableSyncScroll": "Enable Sync Scroll"
+	},
+
+	"editor": {
+		"general": "General",
+		"spaces": "Spaces",
+		"tab-width": "Tab with",
+		"indent-use-tab": "Indent Use Tab",
+		"display-line-number": "Show Line Number",
+		"vim-key-binding": "Vim Key Binding",
+		"auto-pair-char": "Auto Pair Characters",
+		"insert-four-space": "Insert 4 Spaces Instead of on Tab"
+	},
+
+	"viewer": {
+		"general": "General",
+		"themes": "Themes",
+		"clickable-link": "Make Links Clickable in Live Previewer"
+	},
+
+	"custom": {
+		"themes": "General",
+		"reload": "Reload",
+		"directory": "Directory",
+		"select-theme": "Select Your Theme",
+		"description": "This theme applies to Live Preview, Exporting HTML/PDF and Sending Email(Evernote, Tumblr) export."
+	},
+
+	"code": {
+		"general": "General",
+		"themes": "Themes",
+		"show-line-number": "Show Line Number at Syntax Highlight"
+	},
+
+	"markdown": {
+		"enable-gfm": "Use Github Flavord Markdown",
+		"sanitize-desc": "Use HTML",
+		"gfm-line-breaks": "User Github Flavord Markdown' Line Break",
+		"gfm-table": "Use Github Flavord Markdown' Table",
+		"smarty-list": "표준 마크다운보다 더 나은 스마트 리스트 사용",
+		"smarty-pants": "기호 및 텍스트 대체 항목 사용"
+	},
+
+	"about": {
+		"donate": "Donate",
+		"mean": "<strong>Haroo</strong> means \"A Day\" in Korean",
+		"version": "Version",
+		"official-site": "Offical Site",
+		"developer": "Developer",
+		"special-thanks": "Special Thanks",
+		"icon": "ICON",
+		"description": "Haroopad <small>The next document process</small>",
+		"donate-msg": "If you like haroopad, donate to help growing up"
+	}
+}
