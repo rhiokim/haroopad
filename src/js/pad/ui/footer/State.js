@@ -28,9 +28,9 @@ define([
 		},
 
 		initialize: function() {
-			this.lineCount = this.$('#lineCount>span');
-			this.wordCount = this.$('#wordCount>span');
-			// this.paraCount = this.$('#paraCount>span');
+			this.lineCount = this.$('#lineCount ._cnt');
+			this.wordCount = this.$('#wordCount ._cnt');
+			// this.paraCount = this.$('#paraCount ._cnt');
 			this.cursorPos = this.$('#cursorActivity');
 
 			Editor.on('update', this.updateHandler.bind(this));
@@ -82,7 +82,7 @@ define([
 					continue;
 				}
 
-				key += prop +'<br>';
+				key += i18n.t('state.'+ prop) +'<br>';
 				val += '<b>'+ dom[prop] +'</b><br/>';
 			}
 
@@ -97,7 +97,7 @@ define([
 			this.$('#elementsInfo').popover({
 				html: true,
 				trigger: 'hover',
-				title: 'current state',
+				title: i18n.t('state.label'),
 				placement: 'top',
 				content: val+key
 			});

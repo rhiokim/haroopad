@@ -4,7 +4,7 @@ window.MenuBarViewFont = function () {
 
   submenu.append(
     new gui.MenuItem({
-        label: 'Editor Font Size + 1px',
+        label: i18n.t('view.font-size-editor')+ ' + 1px',
         click: function() {
           window.parent.ee.emit('menu.view.editor.font.size', 1);
         }
@@ -12,7 +12,7 @@ window.MenuBarViewFont = function () {
   );
   submenu.append(
     new gui.MenuItem({
-        label: 'Editor Font Size - 1px',
+        label: i18n.t('view.font-size-editor')+ ' - 1px',
         click: function() {
           window.parent.ee.emit('menu.view.editor.font.size', -1);
         }
@@ -25,7 +25,7 @@ window.MenuBarViewFont = function () {
   );
   submenu.append(
     new gui.MenuItem({
-        label: 'Viewer Font Size + 1px',
+        label: i18n.t('view.font-size-viewer')+ ' + 1px',
         click: function() {
           window.parent.ee.emit('menu.view.viewer.font.size', 1);
         }
@@ -33,7 +33,7 @@ window.MenuBarViewFont = function () {
   );
   submenu.append(
     new gui.MenuItem({
-        label: 'Viewer Font Size - 1px',
+        label: i18n.t('view.font-size-viewer')+ ' - 1px',
         click: function() {
           window.parent.ee.emit('menu.view.viewer.font.size', -1);
         }

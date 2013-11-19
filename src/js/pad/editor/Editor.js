@@ -323,7 +323,9 @@ define([
 				case 'i': CodeMirror.commands.markdownItalic(editor); break;
 				case 'code': CodeMirror.commands.markdownInlineCode(editor); break;
 				case 'a': CodeMirror.commands.markdownLink(editor); break;
+				case 'u': CodeMirror.commands.markdownUnderline(editor); break;
 				case 'del': CodeMirror.commands.markdownStrike(editor); break;
+				case 'highlight': CodeMirror.commands.markdownHighlight(editor); break;
 				case 'image': CodeMirror.commands.markdownImage(editor); break;
 				case 'blockquote': CodeMirror.commands.markdownBlockQuote(editor); break;
 				case 'ol': CodeMirror.commands.markdownOrderedList(editor); break;

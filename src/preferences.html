@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>preferences</title>
+  <title></title>
 
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/todc-bootstrap.css">
@@ -12,9 +12,12 @@
   <link rel="stylesheet" href="css/preferences.css">
 
   <script src="js/lib/logger.js"></script>
+  <script src="js/lib/utils/util.js"></script>
   <script src="js/vendors/jquery-1.9.1.js"></script>
   <script src="js/vendors/underscore.js"></script>
   <script src="js/vendors/backbone.js"></script>
+  <script src="js/vendors/backbone.js"></script>
+  <script src="js/vendors/i18next-1.6.3.js"></script>
   <script src="js/vendors/require.js"></script>
 
   <script src="js/vendors/bootstrap.min.js"></script>
@@ -25,15 +28,15 @@
   <div class="tabbable"> <!-- Only required for left/right tabs -->
 
     <ul class="nav nav-tabs nav-tabs-google">
-      <li><a href="#general-tab" data-toggle="tab">General</a></li>
-      <li><a href="#editor-tab" data-toggle="tab">Editor</a></li>
-      <li><a href="#viewer-tab" data-toggle="tab">Viewer</a></li>
-      <li><a href="#custom-tab" data-toggle="tab">Custom</a></li>
-      <li><a href="#code-tab" data-toggle="tab">Code</a></li>
+      <li><a href="#general-tab" data-toggle="tab" data-i18n="tab.general"></a></li>
+      <li><a href="#editor-tab" data-toggle="tab" data-i18n="tab.editor"></a></li>
+      <li><a href="#viewer-tab" data-toggle="tab" data-i18n="tab.viewer"></a></li>
+      <li><a href="#custom-tab" data-toggle="tab" data-i18n="tab.custom"></a></li>
+      <li><a href="#code-tab" data-toggle="tab" data-i18n="tab.code"></a></li>
       <!-- <li><a href="#tab4" data-toggle="tab">Add-ons</a></li>
       <li><a href="#tab5" data-toggle="tab">Export</a></li> -->
-      <li class="hide"><a href="#markdown-tab" data-toggle="tab">Markdown</a></li>
-      <li class="active"><a href="#about-tab" data-toggle="tab">About</a></li>
+      <li class="hide"><a href="#markdown-tab" data-toggle="tab" data-i18n="tab.markdown">Markdown</a></li>
+      <li class="active"><a href="#about-tab" data-toggle="tab" data-i18n="tab.about">About</a></li>
     </ul>
 
     <div class="tab-content">
@@ -42,7 +45,7 @@
       <div id="general-tab" class="tab-pane">
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>General :</strong>
+            <strong data-i18n="general.general">General</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
@@ -55,7 +58,7 @@
             </label>
             <label class="checkbox">
               <input type="checkbox" value="" name="enableSyncScroll" checked="checked">
-              Enable sync scroll
+              <span data-i18n="general.enableSyncScroll">Enable sync scroll</span>
             </label>
             <!-- <label class="checkbox">
               <input type="checkbox" value="" name="playKeypressSound">
@@ -77,7 +80,7 @@
       <div id="editor-tab" class="tab-pane">
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>Themes :</strong>
+            <strong data-i18n="editor.themes">Themes</strong> :
           </div>
           <div class="span9">
             <select class="select2 span10" name="theme">
@@ -145,40 +148,40 @@
 
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>General :</strong>
+            <strong data-i18n="editor.general">General</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
               <input type="checkbox" value="" name="indentWithTabs">
-              Indent Using Tab
+              <span data-i18n="editor.indent-use-tab">Indent Using Tab</span>
 
 				      <div class="btn-group dropdown">
 				        <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-				          <i class="icon-share-alt"></i> Spaces
+				          <i class="icon-share-alt"></i> <span data-i18n="editor.spaces">Spaces</span>
 				          <span class="caret"></span>
 				        </a>
 				        <ul class="dropdown-menu">
-                  <li><a tabindex="1" href="#" data-tab-size="2" class="active"><i class="icon-ok"></i> Tab width: 2</a></li>
-                  <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i> Tab width: 3</a></li>
-                  <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i> Tab width: 4</a></li>
-                  <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i> Tab width: 5</a></li>
-                  <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i> Tab width: 6</a></li>
-                  <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i> Tab width: 7</a></li>
-				          <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i> Tab width: 8</a></li>
+                  <li><a tabindex="1" href="#" data-tab-size="2" class="active"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 2</a></li>
+                  <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 3</a></li>
+                  <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 4</a></li>
+                  <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 5</a></li>
+                  <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 6</a></li>
+                  <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 7</a></li>
+				          <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 8</a></li>
 				        </ul>
 				      </div>
             </label>
             <label class="checkbox">
               <input type="checkbox" value="" name="displayLineNumber">
-              Display line number
+              <span data-i18n="editor.display-line-number">Display line number</span>
             </label>
             <label class="checkbox">
               <input type="checkbox" value="" name="vimKeyBinding">
-              Vim key binding
+              <span data-i18n="editor.vim-key-binding">Vim key binding</span>
             </label>
             <label class="checkbox">
               <input type="checkbox" value="" name="autoPairCharacters" checked="checked">
-              Auto pair characters ( [] () "" )
+              <span data-i18n="editor.auto-pair-char">Auto pair characters</span> <code>[]</code>, <code>()</code>, <code>""</code>
             </label>
           </div>
         </div>
@@ -187,7 +190,7 @@
       <div id="viewer-tab" class="tab-pane">
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>Themes :</strong>
+            <strong data-i18n="viewer.themes">Themes</strong> :
           </div>
           <div class="span8">
             <select class="select2 span12" name="viewStyle">
@@ -237,12 +240,12 @@
 
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>General :</strong>
+            <strong data-i18n="viewer.general">General</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
               <input type="checkbox" value="" name="clickableLink">
-              Make links clickable in Editor view
+              <span data-i18n="viewer.clickable-link">Make links clickable in Editor view</span>
             </label>
             <!--label class="checkbox">
               <input type="checkbox" value="" name="clickableLink">
@@ -284,7 +287,7 @@
       <div id="custom-tab" class="tab-pane">
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>Themes :</strong>
+            <strong data-i18n="custom.themes">Themes</strong> :
           </div>
           <div class="span8">
             <select class="select2 span12" name="customTheme">
@@ -295,7 +298,7 @@
         </div>
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>Directory :</strong>
+            <strong data-i18n="custom.directory">Directory</strong> :
           </div>
           <div class="span9">
             <input class="hide" id="openCustomTheme" type="file" placeholder="Choose your directory" nwdirectory />
@@ -303,11 +306,11 @@
             <div class="input-append">
               <input id="custom-theme-path" style="width:214px;" type="text" readonly>
               <button id="custom-theme-open" class="btn" type="button">...</button>
-              <button id="custom-theme-reload" class="btn" type="button">Reload</button>
+              <button id="custom-theme-reload" class="btn" type="button" data-i18n="custom.reload">Reload</button>
             </div>
           </div>
           <div class="span8" style="margin-left: 130px;">
-            <span class="label label-info">New!</span> <span class="text-warning" style="font-size:12px">This theme applies to Live Preview, Exporting HTML/PDF and Sending Email(Evernote, Tumblr) export.</span>
+            <span class="label label-info">New!</span> <span class="text-warning" style="font-size:12px" data-i18n="custom.description">This theme applies to Live Preview, Exporting HTML/PDF and Sending Email(Evernote, Tumblr) export.</span>
           </div>
         </div>
       </div>
@@ -315,7 +318,7 @@
       <div id="code-tab" class="tab-pane">
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>Themes :</strong>
+            <strong data-i18n="code.themes">Themes</strong> :
           </div>
           <div class="span9">
             <select class="select2 span10" name="codeStyle">
@@ -359,12 +362,12 @@
 
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>General :</strong>
+            <strong data-i18n="code.general">General</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
               <input type="checkbox" disabled name="diplayLineNumber">
-              <span class="muted">Show line number at syntax highlight</span>
+              <span class="muted" data-i18n="code.show-line-number">Show line number at syntax highlight</span>
             </label>
           </div>
         </div>
@@ -373,12 +376,12 @@
       <div id="markdown-tab" class="tab-pane">
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>GFM :</strong>
+            <strong>GFM</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
               <input type="checkbox" value="" name="gfm" checked="checked">
-              Enable github flavored markdown [<a href="http://github.github.com/github-flavored-markdown/">?</a>]
+              <span data-i18n="markdown.enable-gfm">Enable github flavored markdown</span> [<a href="http://github.github.com/github-flavored-markdown/">?</a>]
             </label>
           </div>
         </div>
@@ -395,56 +398,56 @@
         </div> -->
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>Sanitize :</strong>
+            <strong>Sanitize</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
               <input type="checkbox" value="" name="sanitize" checked="checked">
-              Ignore any HTML that has been input.
+              <span data-i18n="markdown.sanitize-desc">Ignore any HTML that has been input.</span>
             </label>
           </div>
         </div>
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>Tables :</strong>
+            <strong>Tables</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
               <input type="checkbox" value="" name="tables" checked="checked">
-              Enable GFM tables.
+              <span data-i18n="markdown.gfm-table">Enable GFM tables.</span>
             </label>
           </div>
         </div>
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>Breaks :</strong>
+            <strong>Breaks</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
               <input type="checkbox" value="" name="breaks">
-              Enable GFM line breaks
+              <span data-i18n="markdown.gfm-line-breaks">Enable GFM line breaks</span>
             </label>
           </div>
         </div>
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>SmartLists :</strong>
+            <strong>SmartLists</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
               <input type="checkbox" value="" name="smartLists" checked="checked">
-              Use smarter list behavior than the original markdown.
+              <span data-i18n="markdown.smart-list">Use smarter list behavior than the original markdown.</span>
             </label>
           </div>
         </div>
         <div class="row-fluid">
           <div class="span3 text-right">
-            <strong>SmartyPants :</strong>
+            <strong>SmartyPants</strong> :
           </div>
           <div class="span9">
             <label class="checkbox">
               <input type="checkbox" value="" name="smartypants">
-              Use "smart" typograhic punctuation [<a href="http://daringfireball.net/projects/smartypants/">?</a>]
+              <span data-i18n="markdown.smarty-pants">Use "smart" typograhic punctuation</span> [<a href="http://daringfireball.net/projects/smartypants/">?</a>]
             </label>
           </div>
         </div>
@@ -456,11 +459,11 @@
             <img src="logo.png" width="88" height="88"/>
           </div>
           <div class="span9">
-            <h3>Haroopad <small>The next document processor</small></h3>
+            <h3 data-i18n="[html]about.description"></h3>
             <div class="row-fluid">
               <div class="span3">
-                Version: <br>
-                Official site:
+                <span data-i18n="about.version"></span>: <br>
+                <span data-i18n="about.official-site"></span>:
               </div>
               <div class="span9">
                 <strong><span id="version" class="text-success"></span></strong> <br>
@@ -469,18 +472,16 @@
                   http://pad.haroopress.com
                 </a>
               </div>
-              <span><b>Haroo</b> means "a day" in korean.</span>
+              <span data-i18n="[html]about.mean"></span>
             </div>
-            <!-- <h3>"Haroo" means "a day" in korean.</h3> -->
-            <!-- <a href="http://pad.haroopress.com">http://pad.haroopress.com</a> -->
           </div>
         </div>
         <hr>
         <div class="row-fluid">
           <div class="offset1 span3">
-            Programming:  <br/>
-            Special thanks: <br/>
-            Icon: </div>
+            <span data-i18n="about.developer">Developer</span>:  <br/>
+            <span data-i18n="about.special-thanks">Special thanks</span>: <br/>
+            <span data-i18n="about.icon">Icon</span>: </div>
           <div class="span8">
             <a href="https://twitter.com/rhiokim">Rhio Kim</a><br>
 
@@ -493,8 +494,8 @@
         <div class="row-fluid">
           <div class="offset1 span10">
             <br/>
-            <p class="text-warning">
-              If you like haroopad, <a href="http://pad.haroopress.com/page.html?f=grow-up-donate" class="btn btn-mini btn-primary" type="button">donate</a> to help keep growing up.
+            <p class="text-warning" >
+              <span data-i18n="about.donate-msg">If you like haroopad, donate to help keep growing up.</span> <a href="http://pad.haroopress.com/page.html?f=grow-up-donate" class="btn btn-mini btn-primary" type="button" data-i18n="about.donate"></a>
             </p>
           </div>
           <div class="span1"></div>
