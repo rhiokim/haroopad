@@ -13,6 +13,8 @@
 
 	"general": {
 		"general": "일반",
+		"enableAutoComplete": "마크다운 자동완성 사용",
+		"enableMath": "수학 표현식 사용",
 		"enableSyncScroll": "에디터 스크롤 동기화 사용"
 	},
 
