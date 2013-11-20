@@ -75,6 +75,12 @@ define([
 			},
 
 			initialize: function() {
+				this.$('input[name=title]').attr('placeholder', i18n.t('email.title'));
+				this.$('input[name=to]').attr('placeholder', i18n.t('email.reciver'));
+				this.$('input[name=from]').attr('placeholder', i18n.t('email.yours'));
+				this.$('input[name=password]').attr('placeholder', i18n.t('email.password'));
+				this.$('#secure').attr('title', i18n.t('email.secure'));
+				
 				this.$('[data-toggle=tooltip]').tooltip({ html: true });
 			},
 

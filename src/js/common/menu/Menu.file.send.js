@@ -4,7 +4,7 @@ window.MenuBarFileSend = function () {
 
   submenu.append(
     new gui.MenuItem({
-        label: 'Email',
+        label: i18n.t('file.sending-email'),
         click: function() {
           window.parent.ee.emit('menu.file.send.email');
         }

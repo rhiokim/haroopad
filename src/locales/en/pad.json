@@ -1,0 +1,63 @@
+{
+	"title": "",
+	
+	"footer": {
+		"lines": "lines",
+		"words": "words"
+	},
+	
+	"share": "Share",
+	"state": {
+		"label": "Elements",
+		"image": "Image",
+		"header": "Header",
+		"link": "Link",
+		"table": "Table",
+		"paragraph": "Paragraph",
+		"code": "Code",
+		"blockquote": "Blockquote"
+	},
+
+	"config": {
+		"toc": "Table of Content",
+		"outline": "Outline",
+		"tab": "Tab with",
+		"usetab": "Indent Using Tab",
+		"experimental": "Experimental",
+		"spaces": "Spaces",
+		"column": {
+			"label": "Column",
+			"one": "Signle",
+			"two": "Two Column",
+			"three": "Three Column"
+		}
+	},
+
+	"promotion": {
+		"desc": "Please Share!"
+	},
+
+	"donate": {
+		"label": "Donate",
+		"title": "Donate to help keep development going!",
+		"desc": "If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>"
+	},
+
+	"email": {
+		"title": "Sending email",
+		"to": "TO",
+		"from": "FROM",
+		"reciver": "Insert reciver's email address",
+		"html": "HTML",
+		"markdown": "Markdown",
+		"close": "Close",
+		"send": "Send",
+		"sent": "Sent",
+		"remember": "Remember email",
+		"password": "Password",
+		"secure": "The password will not be saved.",
+		"yours": "Insert your Gmail address",
+		"evernote": "Evernote",
+		"tumblr": "Tumblr"
+	}
+}
