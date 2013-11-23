@@ -13,6 +13,7 @@ define([
 			},
 
 			initialize: function() {
+				this.$el.i18n();
 			},
 
 			show: function(file) {
