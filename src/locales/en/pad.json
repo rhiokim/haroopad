@@ -41,5 +41,16 @@
 		"label": "Donate",
 		"title": "Donate to help keep development going!",
 		"desc": "If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>"
+	},
+
+	"dialog": {
+		"save-change": "Do you want to save the changes made to the document?",
+		"cancel": "Cancel",
+		"dont-save": "Don't Save",
+		"save": "Save",
+		"yes": "Yes",
+		"no": "No",
+
+		"changed-file": "has been changed by another application. <br/>Do you want reload?"
 	}
 }

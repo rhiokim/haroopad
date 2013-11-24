@@ -41,5 +41,16 @@
 		"label": "기부",
 		"title": "하루패드는 더 많은 아이디어가 있어요.",
 		"desc": "하루패드가 유용하다면 개발이 유지되고 성장할 수 있도록 도와주세요. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>기부하러 하기</a>"
+	},
+
+	"dialog": {
+		"save-change": "문서에 변경사항이 있어요. 저장할까요?",
+		"cancel": "취소",
+		"dont-save": "저장않음",
+		"save": "저장",
+		"yes": "예",
+		"no": "아니오",
+
+		"changed-file": "다른 애플리케이션에 의해서 파일이 변경되었어요. <br/>문서를 새로고침 할까요?"
 	}
 }
