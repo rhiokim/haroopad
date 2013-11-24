@@ -93,5 +93,15 @@
       "twitter": "Twitter",
       "check-for-update": "Check for Update",
       "boost-up-donate": "Boost up! Donate"
+    },
+
+    "edit": {
+      "cut": "Cut",
+      "copy": "Copy",
+      "paste": "Paste",
+      "delete": "Delete",
+      "select-all": "Select All",
+      "copy-html": "Copy Plain HTML",
+      "copy-styled-html": "Copy Styled HTML"
     }
 }
