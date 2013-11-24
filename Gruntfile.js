@@ -383,7 +383,7 @@ module.exports = function(grunt) {
       mdhighlight: {
         files: [
           { expand: true, cwd: 'lib/highlight.js/src/styles/', src: [ '**' ], dest: 'src/css/code/' },
-          { src: 'lib/highlight.js/highlight.pack.js', dest: 'src/js/vendors/highlight.pack.js'}
+          { src: 'lib/highlight.js/build/highlight.pack.js', dest: 'src/js/vendors/highlight.pack.js'}
         ]
       },
 
