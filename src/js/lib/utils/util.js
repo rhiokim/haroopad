@@ -41,7 +41,7 @@ function getExecPath() {
 			return path.join(process.execPath, '../');//process.cwd();
 		break;
 		case 'mac':
-			return process.cwd();
+			return path.join(process.execPath, '../../../../../');
 		break;
 		case 'linux':
 			return path.join(process.execPath, '../');
@@ -57,5 +57,21 @@ function getLang() {
 }
 
 function getDocsPath() {
-	return path.join(getExecPath(), 'docs', getLang());
+	return path.join(process.cwd(), 'docs', getLang());
+}
+
+function merge(obj) {
+	var i = 1,
+		target, key;
+
+	for (; i < arguments.length; i++) {
+		target = arguments[i];
+		for (key in target) {
+			if (Object.prototype.hasOwnProperty.call(target, key)) {
+				obj[key] = target[key];
+			}
+		}
+	}
+
+	return obj;
 }

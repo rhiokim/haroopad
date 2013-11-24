@@ -59,5 +59,16 @@
 		"yours": "Insert your Gmail address",
 		"evernote": "Evernote",
 		"tumblr": "Tumblr"
+	},
+		
+	"dialog": {
+		"save-change": "Do you want to save the changes made to the document?",
+		"cancel": "Cancel",
+		"dont-save": "Don't Save",
+		"save": "Save",
+		"yes": "Yes",
+		"no": "No",
+
+		"changed-file": "has been changed by another application. <br/>Do you want reload?"
 	}
 }
