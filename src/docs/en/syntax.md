@@ -258,6 +258,27 @@ markdown = Redcarpet.new("Hello World!")
 puts markdown.to_html
 ```
 
+
+##### Table of Contents
+
+A table of contents, usually headed simply "Contents" and abbreviated informally as TOC, is a list of the parts of a book or document organized in the order in which the parts appear.
+
+It will generate a table of content that you can insert `[TOC]` at the top of your markdown file.
+
+```
+[TOC]
+
+# Header 1
+Content 1
+
+## Header 2
+Content 2
+```
+
+**example**
+
+[TOC]
+
 ## Extras (only haroopad)
 
 > Experimental since v0.6.0
