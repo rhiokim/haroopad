@@ -29,5 +29,5 @@ window.MenuBarTools = function () {
             submenu: MenuBarToolsPresentation()
         });
 
-	return new gui.MenuItem({ label: 'Tools', submenu: Tools });
+	return new gui.MenuItem({ label: i18n.t('tool.name'), submenu: Tools });
 };
