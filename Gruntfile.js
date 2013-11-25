@@ -160,6 +160,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/js-url.js',
             '<%= vendors %>/reMarked.js',
             '<%= vendors %>/notifier.js',
+            '<%= vendors %>/i18next-1.6.3.js',
             '<%= vendors %>/require.min.js'
           ]
         }
@@ -358,6 +359,12 @@ module.exports = function(grunt) {
         ]
       },
 
+      lang: {
+        files: [
+          { expand: true, cwd: 'src/locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
+        ]
+      },
+
       build: {
         files: [
           { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
@@ -472,7 +479,7 @@ module.exports = function(grunt) {
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  grunt.registerTask('cp', [ 'copy:main', 'copy:node_modules' ]);
+  grunt.registerTask('cp', [ 'copy:main', 'copy:node_modules', 'copy:lang' ]);
   grunt.registerTask('app', [ 'requirejs:app', 'concat:app', 'uglify:app' ]);
   grunt.registerTask('pad', [ 'requirejs:pad', 'concat:pad', 'uglify:pad' ]);
   grunt.registerTask('prf', [ 'requirejs:preferences', 'concat:preferences', 'uglify:preferences' ]);

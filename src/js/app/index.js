@@ -11,6 +11,7 @@ window.ee = new EventEmitter();
 
 i18n.init({
   lng: getLang(),
+  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
   getAsync: false,
   ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
 });

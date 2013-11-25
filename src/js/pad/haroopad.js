@@ -5,15 +5,10 @@ window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 window.parent = nw.parent;
 
-// i18n.init({
-//   lng: "en-US",
-//   getAsync: false, 
-//   ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
-// });
-
 i18n.init({
   lng: getLang(),
-  getAsync: false,
+  // getAsync: false,
+  resGetPath: 'locales/__lng__/__ns__.json',
   ns: { namespaces: [ 'pad' ], defaultNs: 'pad' }
 });
 
