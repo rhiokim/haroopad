@@ -120,7 +120,6 @@ module.exports = function(grunt) {
           'build/app.modules.js': [
             'src/js/app/before.app.js',
             'src/js/lib/logger.js',
-            // 'src/js/app/app.common.js',
             'src/js/lib/utils/util.js',
             'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
@@ -131,8 +130,10 @@ module.exports = function(grunt) {
           'build/app.vendors.js': [
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/underscore.min.js',
+            '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/backbone.min.js',
             '<%= vendors %>/store.js',
+            '<%= vendors %>/i18next-1.6.3.min.js',
             '<%= vendors %>/require.min.js'
           ]
         }
@@ -160,7 +161,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/js-url.js',
             '<%= vendors %>/reMarked.js',
             '<%= vendors %>/notifier.js',
-            '<%= vendors %>/i18next-1.6.3.js',
+            '<%= vendors %>/i18next-1.6.3.min.js',
             '<%= vendors %>/require.min.js'
           ]
         }
@@ -170,6 +171,7 @@ module.exports = function(grunt) {
           'build/preferences.modules.js': [
             'src/js/preferences/before.pref.js',
             // 'src/js/lib/logger.js',
+            'src/js/lib/utils/util.js',
             'build/preferences.r.js',
             'src/js/preferences/after.pref.js'
           ],
@@ -177,6 +179,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/underscore.min.js',
             '<%= vendors %>/backbone.min.js',
+            '<%= vendors %>/i18next-1.6.3.min.js',
             '<%= vendors %>/require.min.js',
             '<%= vendors %>/bootstrap.min.js',
             '<%= vendors %>/bootstrapSwitch.js',
