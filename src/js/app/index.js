@@ -12,18 +12,12 @@ window.ee = new EventEmitter();
 i18n.init({
   lng: getLang(),
   getAsync: false,
+  fallbackLng: false,
+  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
   ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
+}, function() {
+  MenuBar(); 
 });
-MenuBar(); 
-// var i18n = require('i18next');
-// i18n.init({
-//   // lng: "ko-KR",
-//   lng: getLang(),
-//   ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
-// }, function() {
-//   MenuBar(); 
-// });
-
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
