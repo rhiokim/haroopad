@@ -8,15 +8,14 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](../../logo.png)
 
-### ==New Features (v0.9)==
+### ==New Features (v0.10)==
 
-* Mathematics Expression
-	- Inline Expression: `$$$...$$$`
-	- Block Expression: `$$...$$`
-* Font Size
-	- Editor and Viewer font size control using Preference Window & Shortcuts
-* Styled HTML copy to clipboard
-* Update Shortcuts for Print, Inserting Date & Time
+* `[TOC]` 문법 추가
+	- 문서의 목차를 문서에 손쉽게 포함할 수 있습니다.
+* 마크다운 자동완성 기능
+	- 마크다운 문법의 자동완성을 이용해 문서의 작성의 효율을 높힐 수 있습니다.
+* 다국어 지원
+	- 현재는 영어와 한글만 지원하지만 지원 언어를 늘려갈 계획입니다. (시스템에 지정한 지역으로 자동으로 설정됩니다.)
 
 ### Main Features
 
@@ -39,6 +38,11 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Custom Theme
   - Style based on CSS(Cascading Style Sheet)
 * Outline View
+* Mathematics Expression
+	- Inline Expression: `$$$...$$$`
+	- Block Expression: `$$...$$`
+* Font Size
+	- Editor and Viewer font size control using Preference Window & Shortcuts
 * Embedding Rich Media Contents - v0.8
 	- Video, Audio, 3D, Text, Open Graph and oEmbed
 	- About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
@@ -51,6 +55,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 	- Drag & Drop your selected text on Web Browser
 * Vim Key-binding
 * Export to PDF, HTML
+* Styled HTML copy to clipboard for WYSIWYG editors
 * Auto Save & Restore
 * Document state information
 * Tab or Spaces for Indentation

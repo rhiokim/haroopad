@@ -20,12 +20,9 @@ define(function() {
 
     /* it does not work exactly */
     setDefault: function(file) {
-      // var f = new File(dir +'/Untitled.md', 'Untitled.md');
-      // var files = new FileList();
-      // files.append(f);
+      file = file || ( nw.file.get('title') || 'Untitled' ) + '.md';
 
-      // this.$el[0].files = files;
-      this.$el.attr('nwsaveas', file || 'Untitled.md' );
+      this.$el.attr('nwsaveas', file);
     },
 
   	show: function(dir, file) {

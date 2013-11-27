@@ -4,11 +4,6 @@
   <meta charset="utf-8" />
   <title>haroopad</title>
   <script>var dev = true;</script>
-  <script src="js/lib/logger.js"></script>
-
-  <script src="js/lib/utils/util.js"></script>
-  <script src="js/lib/utils/analytics.js"></script>
-  <script src="js/lib/utils/package.info.js"></script>
   <script src="js/vendors/jquery-1.9.1.js"></script>
   <script src="js/vendors/eventemitter.js"></script>
   <script src="js/vendors/underscore.js"></script>
@@ -16,6 +11,12 @@
   <script src="js/vendors/store.js"></script>
   <script src="js/vendors/i18next-1.6.3.js"></script>
   <script src="js/vendors/require.js"></script>
+
+  
+  <script src="js/lib/logger.js"></script>
+  <script src="js/lib/utils/util.js"></script>
+  <script src="js/lib/utils/analytics.js"></script>
+  <script src="js/lib/utils/package.info.js"></script>
   
   <script src="js/common/menu/MenuBar.js"></script>
   <script src="js/common/menu/Menu.edit.js"></script>
@@ -40,9 +41,10 @@
   <script src="js/common/menu/Menu.tools.send.js"></script>
   <script src="js/common/menu/Menu.share.js"></script>
   <script src="js/common/menu/Menu.help.js"></script>
+</head>
+<body>
   <script>
     requirejs(['js/app/index']);
   </script>
-</head>
-<body></body>
+</body>
 </html>
