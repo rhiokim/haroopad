@@ -21,31 +21,31 @@ define([
 		}
 
 		mCut = menuItem({ 
-			label: 'Cut',
+			label: i18n.t('edit.cut'),
 			click: function() {
 				window.ee.emit('context.cut');
 			} 
 		});
-		mCopy = menuItem({ 
-			label: 'Copy',
+		mCopy = menuItem({
+			label: i18n.t('edit.copy'),
 			click: function() {
 				window.ee.emit('context.copy');
 			} 
 		});
-		mPaste = menuItem({ 
-			label: 'Paste',
+		mPaste = menuItem({
+			label: i18n.t('edit.paste'),
 			click: function() {
 				window.ee.emit('context.paste');
 			} 
 		});
 		mDelete = menuItem({ 
-			label: 'Delete',
+			label: i18n.t('edit.delete'),
 			click: function() {
 				window.ee.emit('context.delete');
 			}
 		});
 		mSelectAll = menuItem({ 
-			label: 'Select All',
+			label: i18n.t('edit.select-all'),
 			click: function() {
 				window.ee.emit('context.selectall');
 			}
@@ -81,7 +81,7 @@ define([
 		});
 
 		mPreferences = menuItem({
-			label: 'Preferences',
+			label: i18n.t('file.preferences'),
 			click: function() {
 		  	window.ee.emit('context.preferences');
 			}

@@ -121,7 +121,6 @@ module.exports = function(grunt) {
           'build/app.modules.js': [
             'src/js/app/before.app.js',
             'src/js/lib/logger.js',
-            // 'src/js/app/app.common.js',
             'src/js/lib/utils/util.js',
             'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
@@ -132,8 +131,10 @@ module.exports = function(grunt) {
           'build/app.vendors.js': [
             '<%= vendors %>/eventemitter.js',
             '<%= vendors %>/underscore.min.js',
+            '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/backbone.min.js',
             '<%= vendors %>/store.js',
+            '<%= vendors %>/i18next-1.6.3.min.js',
             '<%= vendors %>/require.min.js'
           ]
         }
@@ -161,6 +162,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/js-url.js',
             '<%= vendors %>/reMarked.js',
             '<%= vendors %>/notifier.js',
+            '<%= vendors %>/i18next-1.6.3.min.js',
             '<%= vendors %>/require.min.js'
           ]
         }
@@ -170,6 +172,7 @@ module.exports = function(grunt) {
           'build/preferences.modules.js': [
             'src/js/preferences/before.pref.js',
             // 'src/js/lib/logger.js',
+            'src/js/lib/utils/util.js',
             'build/preferences.r.js',
             'src/js/preferences/after.pref.js'
           ],
@@ -177,6 +180,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/jquery-1.9.1.min.js',
             '<%= vendors %>/underscore.min.js',
             '<%= vendors %>/backbone.min.js',
+            '<%= vendors %>/i18next-1.6.3.min.js',
             '<%= vendors %>/require.min.js',
             '<%= vendors %>/bootstrap.min.js',
             '<%= vendors %>/bootstrapSwitch.js',
@@ -361,6 +365,12 @@ module.exports = function(grunt) {
         ]
       },
 
+      lang: {
+        files: [
+          { expand: true, cwd: 'src/locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
+        ]
+      },
+
       build: {
         files: [
           { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
@@ -386,7 +396,7 @@ module.exports = function(grunt) {
       mdhighlight: {
         files: [
           { expand: true, cwd: 'lib/highlight.js/src/styles/', src: [ '**' ], dest: 'src/css/code/' },
-          { src: 'lib/highlight.js/highlight.pack.js', dest: 'src/js/vendors/highlight.pack.js'}
+          { src: 'lib/highlight.js/build/highlight.pack.js', dest: 'src/js/vendors/highlight.pack.js'}
         ]
       },
 
@@ -475,7 +485,7 @@ module.exports = function(grunt) {
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  grunt.registerTask('cp', [ 'copy:main', 'copy:node_modules' ]);
+  grunt.registerTask('cp', [ 'copy:main', 'copy:node_modules', 'copy:lang' ]);
   grunt.registerTask('app', [ 'requirejs:app', 'concat:app', 'uglify:app' ]);
   grunt.registerTask('pad', [ 'requirejs:pad', 'concat:pad', 'uglify:pad' ]);
   grunt.registerTask('prf', [ 'requirejs:preferences', 'concat:preferences', 'uglify:preferences' ]);
