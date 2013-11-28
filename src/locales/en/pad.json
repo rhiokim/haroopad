@@ -21,6 +21,7 @@
 	"config": {
 		"toc": "Table of Content",
 		"outline": "Outline",
+		"fullscreen": "Fullscreen",
 		"tab": "Tab with",
 		"usetab": "Indent Using Tab",
 		"experimental": "Experimental",
