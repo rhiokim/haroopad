@@ -82,22 +82,29 @@ define([
 				this.$('#secure').attr('title', i18n.t('email.secure'));
 				
 				this.$('[data-toggle=tooltip]').tooltip({ html: true });
+
+				this.$el.on('shown', function() {
+					$(this).find('input[name=title]').focus();
+				});
+				this.$el.on('hidden', function() {
+					nw.editor.focus();
+				});
 			},
 
 			show: function(file) {
 				var Emails = store.get('Emails') || {};
 				var title = file && file.title;
 
-				this.$el.find('input[name=title]').val(title || '');
+				this.$('input[name=title]').val(title || '');
 
 				this.$el.find('input[name=to]').val(Emails.to || '');
 				this.$el.find('input[name=from]').val(Emails.from || '');
 
 				this.$el.find('input[name=remember]').attr('checked', Emails.remember);
-				// this.$el.find('button[name=remember]').attr('checked', Emails.remember);
 				this.$el.find('input[name=to]').data({ source: Emails.addrs });
 
 				this.$el.modal('show');
+
 				this.keypressHandler();
 			},
 
