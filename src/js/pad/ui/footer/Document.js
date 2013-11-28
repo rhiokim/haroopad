@@ -31,7 +31,7 @@ define(function() {
 			var show = target.hasClass('active');
 
 			show = !show;
-			show ? target.addClass('active') : target.removeClass('active') ;
+			// show ? target.addClass('active') : target.removeClass('active') ;
 
 			this.trigger('toc', show);
 		},
@@ -41,7 +41,7 @@ define(function() {
 			var show = target.hasClass('active');
 
 			show = !show;
-			show ? target.addClass('active') : target.removeClass('active') ;
+			// show ? target.addClass('active') : target.removeClass('active') ;
 
 			this.trigger('fullscreen', show);
 		},

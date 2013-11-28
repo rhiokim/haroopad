@@ -49,7 +49,7 @@ requirejs([
   'window/Window',
   'editor/Editor',
   'viewer/Viewer',
-  'toc/TOC',
+  'ui/toc/TOC',
   'ui/file/File',
   'ui/layout/Layout',
   'ui/footer/Footer'

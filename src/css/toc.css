@@ -1,4 +1,4 @@
-#toc {
+#toc-content {
   width: 270px;
   height: 100%;
   /*padding-top: 15px;*/
@@ -10,7 +10,7 @@
   bottom: 0;
 }
 
-#toc a {
+#toc-content a {
   text-shadow: 1px 1px #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -18,15 +18,15 @@
   display: block;
 }
 
-#toc ul {
+#toc-content ul {
   padding: 0;
   margin-left: 5px;
   list-style-type: none;
 }
 
-#toc>ul {
+#toc-content>ul {
   margin-top: 10px;
   height: 100%;
 }
 
-#toc>ul>li {}
+#toc-content>ul>li {}
