@@ -21,6 +21,7 @@ define([
 				'click input[name=enableAutoComplete]': 'enableAutoComplete',	
 				'click input[name=enableMath]': 'enableMath',	
 				'click input[name=enableSyncScroll]': 'enableSyncScroll',	
+				'click input[name=enableLastFileRestore]': 'enableLastFileRestore',
 				'click input[name=playKeypressSound]': 'playKeypressSound'
 			},
 
@@ -28,6 +29,7 @@ define([
 				this.$el.find('input[name=enableAutoComplete]').prop('checked', config.enableAutoComplete);
 				this.$el.find('input[name=enableMath]').prop('checked', config.enableMath);
 				this.$el.find('input[name=enableSyncScroll]').prop('checked', config.enableSyncScroll);
+				this.$el.find('input[name=enableLastFileRestore]').prop('checked', config.enableLastFileRestore);
 				this.$el.find('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
 			},
 
@@ -44,6 +46,11 @@ define([
 			enableSyncScroll: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('enableSyncScroll', bool);
+			},
+
+			enableLastFileRestore: function(e) {
+				var bool = $(e.target).is(':checked');
+				options.set('enableLastFileRestore', bool);
 			},
 
 			playKeypressSound: function(e) {

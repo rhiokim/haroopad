@@ -15,31 +15,9 @@ define([
 		gapY = 0;
 
 	var config = store.get('Window') || {};
+	var generalOpt = store.get('General');
 	var top = config.y,
 		left = config.x;
-
-	// function merge(obj) {
-	// 	var i = 1,
-	// 		target, key;
-
-	// 	for (; i < arguments.length; i++) {
-	// 		target = arguments[i];
-	// 		for (key in target) {
-	// 			if (Object.prototype.hasOwnProperty.call(target, key)) {
-	// 				obj[key] = target[key];
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return obj;
-	// }
-
-	/* only for mac */
-	// gui.App.on('reopen', function() {
-	// 	if (!realCount) {
-	// 		open();
-	// 	}
-	// });
 
 	function _updateStore() {
 		config = store.get('Window') || {};

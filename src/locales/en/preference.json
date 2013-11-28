@@ -15,7 +15,8 @@
 		"general": "General",
 		"enableAutoComplete": "Enable Markdown Auto Completion",
 		"enableMath": "Enable Mathematics Expression",
-		"enableSyncScroll": "Enable Sync Scroll"
+		"enableSyncScroll": "Enable Sync Scroll",
+		"enableLastFileRestore": "Enable Last File Restore"
 	},
 
 	"editor": {
