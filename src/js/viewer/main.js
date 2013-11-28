@@ -498,13 +498,17 @@ $(document.body).ready(function() {
   _md_body = _doc.getElementById('root');
 
   $(_body).click(function(e) {
-    var origin, el = e.target;
-    e.preventDefault();
+    var origin, href, el = e.target;
 
     switch (el.tagName.toUpperCase()) {
       case 'A':
-        window.ee.emit('link', el.getAttribute('href'));
-        break;
+        href = el.getAttribute('href') || '';
+
+        if (href.charAt(0) !== '#') {
+          e.preventDefault();
+          window.ee.emit('link', href);
+        }
+      break;
     }
 
   });
