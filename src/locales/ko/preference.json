@@ -14,7 +14,8 @@
 	"general": {
 		"general": "일반",
 		"enableMath": "수학 표현식 사용",
-		"enableSyncScroll": "에디터 스크롤 동기화 사용"
+		"enableSyncScroll": "에디터 스크롤 동기화 사용",
+		"enableLastFileRestore": "마지막 편집 파일 복원 사용"
 	},
 
 	"editor": {

@@ -5,7 +5,8 @@ define([
 			defaults: {
 				enableMath: false,
 				enableSyncScroll: true,
-				playKeypressSound: false
+				playKeypressSound: false,
+				enableLastFileRestore: true
 			},
 
 			// localStorage: new Backbone.LocalStorage('General'),
