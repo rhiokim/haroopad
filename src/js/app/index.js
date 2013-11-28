@@ -54,14 +54,6 @@ requirejs([
     'utils/UpdateNotifier'
   ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
 
-    // window.ee.on('change.markdown', function(md, options, cb) {
-    //   cb = typeof options === 'function' ? options : cb;
-    //   options = typeof options === 'object' ? options : undefined;
-      
-    //   var html = Parser(md, options);
-
-    //   cb(html);
-    // });
     var os = getPlatformName();
     gui.App.on('open', function(cmdline) {
       var file;

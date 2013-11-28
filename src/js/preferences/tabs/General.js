@@ -18,18 +18,25 @@ define([
 			el: '#general-tab',
 
 			events: {
-				'click input[name=enableSyncScroll]': 'enableSyncScroll',	
-				'click input[name=playKeypressSound]': 'playKeypressSound'	
+				'click input[name=enableSyncScroll]': 'enableSyncScroll',
+				'click input[name=enableLastFileRestore]': 'enableLastFileRestore',
+				'click input[name=playKeypressSound]': 'playKeypressSound'
 			},
 
 			initialize: function() {
 				this.$el.find('input[name=enableSyncScroll]').prop('checked', config.enableSyncScroll);
+				this.$el.find('input[name=enableLastFileRestore]').prop('checked', config.enableLastFileRestore);
 				this.$el.find('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
 			},
 
 			enableSyncScroll: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('enableSyncScroll', bool);
+			},
+
+			enableLastFileRestore: function(e) {
+				var bool = $(e.target).is(':checked');
+				options.set('enableLastFileRestore', bool);
 			},
 
 			playKeypressSound: function(e) {
