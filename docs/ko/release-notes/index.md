@@ -1,3 +1,60 @@
+
+## Haroopad v0.9.1 - ==hotfix==
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**Bugs**         |
+#227             | Fixed relative image path
+
+
+##### Github Issue tracker
+
+* https://github.com/rhiokim/haroopad/issues/227
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/1d2gwcdiypyw8cx/haroopad-v0.9.1-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/virlns1wo817ci5/haroopad-v0.9.1.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/ayqin4fevcllvms/haroopad-v0.9.1_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/iqlq7zirnr0ogvw/haroopad-v0.9.1-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/wwwq1zeaodt0gfd/haroopad-v0.9.1_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/16weidzgl3ln9pq/haroopad-v0.9.1_amd64.deb
+
+
+## Haroopad v0.9.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#10              | ==Added== **Mathematical Expression** based on MathJax
+#63, #212        | ==Added== Font Size Option
+#183             | ==Added== Copy inline styled html for WYSWIG
+#215             | ==Added== Toggle Vim-mode menu
+#214             | ==Added== Shortcuts for inserting date & time
+#217             | ==Added== Shortcut for Print
+#                | ==Added== Shortcut for Header 
+**Bugs**         |
+#196             | Fixed Auto Set email title
+#                | Fixed Hidden Edit menu
+#                | Fixed Tabindex into save modal dialog when close window
+**Enhancements** |
+#209             | Enhance embeded contents look when sending email
+#                | Change font-family priorty `Malgun Gothic > Arial` in editor, viewer (only Hangul)
+
+
+##### Github Issue tracker
+
+* https://github.com/rhiokim/haroopad/issues?milestone=29&state=closed
+
+##### Download
+
+> * Windows MSI https://www.dropbox.com/s/uhagga4dpf3pqsv/haroopad-v0.9.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/a9z6qr5mt9y16ap/haroopad-v0.9.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/jnnhzwfrc7o4r05/haroopad-v0.9.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/kli6khbzds8hh4l/haroopad-v0.9.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/hhnq8ty40c169wd/haroopad-v0.9.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/njpzetygyoports/haroopad-v0.9.0_amd64.deb
+
 ## Haroopad v0.8.0
 
 Issue Number     | Description

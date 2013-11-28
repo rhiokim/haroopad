@@ -43,3 +43,28 @@ Simply use `@[]()` syntax to link to external resources
 @[](http://www.youtube.com/watch?v=jo_B4LTHi3I)
 
 @[](http://www.flickr.com/photos/bees/2362225867/ 'width:300px')
+
+
+### Mathematics Expression
+
+Haroopad uses MathJax to render LaTeX. You can use triple dollar sign (`$$$..$$$`) to delimit inline equations, and double dollars (`$$..$$`) for blocks
+
+**example**
+
+```
+The *Gamma function* satisfying $$$\Gamma(n) = (n-1)!\quad\forall
+n\in\mathbb N$$$ is via through the Euler integral
+
+$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$
+```
+
+**become**
+
+The *Gamma function* satisfying $$$\Gamma(n) = (n-1)!\quad\forall
+n\in\mathbb N$$$ is via through the Euler integral
+
+$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$
