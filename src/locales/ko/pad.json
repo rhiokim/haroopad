@@ -21,6 +21,7 @@
 	"config": {
 		"toc": "목차보기",
 		"outline": "개요보기",
+		"fullscreen": "전체화면",
 		"tab": "들여쓰기",
 		"usetab": "탭으로 들여쓰기",
 		"experimental": "실험기능",

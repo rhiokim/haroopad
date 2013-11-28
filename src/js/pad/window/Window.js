@@ -6,6 +6,7 @@ define([
 ], function(store, HotKey, Dialogs, Exports) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
+	var moment = require('moment');
 
 	var orgTitle = 'Untitled';
 	var edited = false,
@@ -80,7 +81,7 @@ define([
 		var opt = file.toJSON();
 
 		if (opt.tmp) {
-			nw.title = 'Restored (written at ' + opt.ctime + ')';
+			nw.title = 'Restored (writen at ' + moment(opt.ctime).format('LLL') + ')';
 		} else {
 			nw.title = orgTitle = opt.basename || orgTitle;
 		}
@@ -275,6 +276,12 @@ define([
 		global._gaq.push('haroopad.file', 'exports', 'html');
 	});
 
+	HotKey('defmod-q', function() {
+		var generalOpt = store.get('General');
+		if (generalOpt.enableLastFileRestore === false) {
+			window.parent.ee.emit('clear.lastfiles');
+		}
+	});
 
 	window.ondragover = function(e) {
 		e.preventDefault();
