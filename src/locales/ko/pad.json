@@ -1,9 +1,14 @@
 {
 	"title": "",
+	"experimental": "베타",
 	
 	"footer": {
 		"lines": "줄",
 		"words": "단어수"
+	},
+
+	"toc": {
+		"name": "목차"	
 	},
 	
 	"share": "공유",
