@@ -50,10 +50,11 @@ requirejs([
   'editor/Editor',
   'viewer/Viewer',
   'ui/toc/TOC',
+  'ui/markdown-help/MarkdownHelp',
   'ui/file/File',
   'ui/layout/Layout',
   'ui/footer/Footer'
-], function(Window, Editor, Viewer, TOC, File) {
+], function(Window, Editor, Viewer, TOC, MarkdownHelp, File) {
   var _tid_;
   var file = nw.file;
 

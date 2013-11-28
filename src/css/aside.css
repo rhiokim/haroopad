@@ -1,4 +1,4 @@
-#toc-content {
+#toc-content, #md-help-content {
   width: 270px;
   height: 100%;
   /*padding-top: 15px;*/
@@ -8,6 +8,12 @@
   margin-top: 40px;
   /*margin-bottom: 22px;*/
   bottom: 0;
+}
+
+@media (min-width: 720px) {
+  #md-help-content {
+    width: 350px;
+  }
 }
 
 #toc-content a {

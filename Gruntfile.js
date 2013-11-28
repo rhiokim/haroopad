@@ -68,7 +68,7 @@ module.exports = function(grunt) {
             'src/css/layout/footer.css',
             'src/css/layout/nav.css',
             'src/css/layout/aside.css',
-            'src/css/layout/toc.css',
+            'src/css/aside.css',
             'src/css/app.css'
           ],
           "build/haroopad/css/viewer.min.css": [
