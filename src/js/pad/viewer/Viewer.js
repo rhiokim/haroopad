@@ -1,7 +1,7 @@
 define([
 		'store',
 		'keyboard',
-		'toc/TOC',
+		'ui/toc/TOC',
 		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.explicitStyleMaker',
 		'viewer/Viewer.dragdrop'

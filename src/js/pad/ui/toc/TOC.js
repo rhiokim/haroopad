@@ -1,6 +1,6 @@
 define([
 	'keyboard',
-	'toc/TocElement'
+	'ui/toc/TocElement'
 ], function(HotKey, TocElement) {
 
 	var stringEx = require('stringex');
@@ -9,8 +9,8 @@ define([
 	var _viewer = iframe.contentWindow;
 	var _viewerDoc = iframe.contentDocument;
 	var _md_body = _viewerDoc.getElementById('root')
-	var aside = $('#main > aside');
-	var toc = $('#toc');
+	var tocEl = $('#main > aside#toc');
+	var tocContentEl = tocEl.find('#toc-content');
 	var isShow = false;
 	var previewContentsElt = undefined;
 	var mdSectionList = [];
@@ -104,7 +104,7 @@ define([
 			y += line.height;
 		});
 
-		toc.html(str);
+		tocContentEl.html(str);
 	}
 
 	_viewer.ee.on('rendered', function() {
@@ -132,10 +132,10 @@ define([
 	});
 	window.ee.on('menu.view.toggle.toc', function() {
 		if (!isShow) {
-			aside.stop().fadeIn(200);
+			tocEl.stop().fadeIn(200);
 			updateToc();
 		} else {
-			aside.stop().fadeOut(100);
+			tocEl.stop().fadeOut(100);
 		}
 
 		isShow = !isShow;
@@ -145,7 +145,7 @@ define([
 		window.ee.emit('menu.view.toggle.toc', !isShow);
 	});
 
-	$('#toc').click(function(e) {
+	tocEl.click(function(e) {
 		var el = e.target,
 			hash, target,
 			tag = el.tagName;
