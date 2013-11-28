@@ -14,9 +14,8 @@
 
 ![](assets/images/member/andrwj.png)
 > ### Document Assistant
-> Front-end developer, a man reading aloud books, gaining weight, have a jolly big belly.  
+> Front-end developer
 > <a href="http://twitter.com/andrwj" target="_blank">@andrwj</a>, <a href="http://andrwj.com" target="_blank">andrwj.com</a>  
-> brain science, semantic, front-end
 
 ### Beta Tester
 
