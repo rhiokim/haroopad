@@ -130,19 +130,19 @@ define([
 	window.ee.on('menu.view.doc.outline', function(show) {
 		show ? _viewer.showOutline() : _viewer.hideOutline();
 	});
-	window.ee.on('menu.view.doc.toc', function(show) {
-		if (show) {
+	window.ee.on('menu.view.toggle.toc', function() {
+		if (!isShow) {
 			aside.stop().fadeIn(200);
 			updateToc();
 		} else {
 			aside.stop().fadeOut(100);
 		}
 
-		isShow = show;
+		isShow = !isShow;
 	});
 
 	HotKey('defmod-shift-t', function() {
-		window.ee.emit('menu.view.doc.toc', !isShow);
+		window.ee.emit('menu.view.toggle.toc', !isShow);
 	});
 
 	$('#toc').click(function(e) {

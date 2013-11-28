@@ -47,6 +47,7 @@
       "font-size-editor": "Editor Font Size",
       "font-size-viewer": "Viewer Font Size",
       "vim-mode": "Toggle VIM Mode",  
+      "toggle-toc": "Toggle Table Of Content",  
       "enter-full-screen": "Enter Full Screen"
     },
     "insert": {
