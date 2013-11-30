@@ -45,6 +45,18 @@ requirejs.onError = function(e) {
   alert('Oops! pad is crash :-(');
 };
 
+i18n.init({
+  lng: getLang(),
+  getAsync: false,
+  fallbackLng: false,
+  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
+  ns: { namespaces: [ 'pad' ], defaultNs: 'pad' }
+}, function() {
+  if (process.platform != 'darwin') {
+    MenuBar();
+  }
+});
+
 requirejs([
   'window/Window',
   'editor/Editor',
