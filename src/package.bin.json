@@ -16,6 +16,7 @@
   "webkit": {
     "plugin": true
   },
+  "chromium-args": "--disable-threaded-animation",
   "upgrade": "http://pad.haroopress.com/upgrade.json",
   "maintainers":[{
    "name": "Rhio Kim",
