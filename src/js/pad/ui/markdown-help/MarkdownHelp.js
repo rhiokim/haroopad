@@ -44,6 +44,8 @@ define([
 				popWin.on('loaded', function() {
 					popWin.focus();
 				});
+
+				this.toggle();
 			}
 		});
 
