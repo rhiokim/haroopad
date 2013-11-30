@@ -50,7 +50,7 @@ function getExecPath() {
 }
 
 function getLang() {
-	var locale = window.navigator.language;
+	var locale = window.navigator.language.split('-')[0];
 	locale = languageTable.indexOf(locale) < 0 ? 'en': locale ;
 
 	return locale;
