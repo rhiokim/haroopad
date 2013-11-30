@@ -31,7 +31,7 @@ define([
 			},
 
 			openWindow: function(e) {
-				e.preventDefault();
+				e && e.preventDefault();
 
 				popWin = gui.Window.open('app://root/html/markdown-help.html', {
 					title: 'Markdown Syntax Help',
@@ -45,7 +45,7 @@ define([
 					popWin.focus();
 				});
 
-				this.toggle();
+				this.hide();
 			}
 		});
 
@@ -53,5 +53,9 @@ define([
 
 		HotKey('defmod-shift-h', function() {
 			view.toggle();
+		});
+
+		window.ee.on('menu.help.syntax', function() {
+			view.openWindow();
 		});
 });

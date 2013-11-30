@@ -214,9 +214,11 @@ define([
     WindowMgr.open(file);
   });
   window.ee.on('menu.help.syntax', function() {
-    var file = File.open(pathDocs +'/syntax.md');
-        file.set('readOnly', true);
-    WindowMgr.open(file);
+    // var file = File.open(pathDocs +'/syntax.md');
+    //     file.set('readOnly', true);
+    // WindowMgr.open(file);
+    
+    WindowMgr.actived.window.ee.emit('menu.help.syntax');
   });
   window.ee.on('menu.help.acknowledgements', function() {
     var file = File.open(pathDocs +'/../acknowledgements.md');
