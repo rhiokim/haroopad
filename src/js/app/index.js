@@ -9,7 +9,15 @@ var gui = require('nw.gui');
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 
-MenuBar(); 
+i18n.init({
+  lng: getLang(),
+  getAsync: false,
+  fallbackLng: false,
+  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
+  ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
+}, function() {
+  MenuBar(); 
+});
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -46,15 +54,6 @@ requirejs([
     'utils/UpdateNotifier'
   ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
 
-    // window.ee.on('change.markdown', function(md, options, cb) {
-    //   cb = typeof options === 'function' ? options : cb;
-    //   options = typeof options === 'object' ? options : undefined;
-      
-    //   var html = Parser(md, options);
-
-    //   cb(html);
-    // });
-    
     var os = getPlatformName();
     gui.App.on('open', function(cmdline) {
       var file;

@@ -62,10 +62,6 @@
 
   <link rel="stylesheet" href="css/app.css">
 
-  <script src="js/lib/logger.js"></script>
-  <script src="js/lib/utils/util.js"></script>
-  <script src="js/pad/pad.common.js"></script>
-
   <script src="js/vendors/eventemitter.js"></script>
   <script src="js/vendors/underscore.js"></script>
 
@@ -81,8 +77,13 @@
   <script src="js/vendors/js-url.js"></script>
   <script src="js/vendors/reMarked.js"></script>
   <script src="js/vendors/notifier.js"></script>
+  <script src="js/vendors/i18next-1.6.3.js"></script>
   <script src="js/vendors/require.js"></script>
 
+  <script src="js/lib/logger.js"></script>
+  <script src="js/lib/utils/util.js"></script>
+  <script src="js/pad/pad.common.js"></script>
+  
   <script src="js/common/menu/MenuBar.js"></script>
   <script src="js/common/menu/Menu.edit.js"></script>
   <script src="js/common/menu/Menu.file.js"></script>
@@ -90,6 +91,7 @@
   <script src="js/common/menu/Menu.file.exports.js"></script>
   <script src="js/common/menu/Menu.file.activities.js"></script>
   <script src="js/common/menu/Menu.find.js"></script>
+  <script src="js/common/menu/Menu.view.column.js"></script>
   <script src="js/common/menu/Menu.view.js"></script>
   <script src="js/common/menu/Menu.view.mode.js"></script>
   <script src="js/common/menu/Menu.view.column.js"></script>
@@ -215,8 +217,9 @@
   <footer class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="navbar-inner">
       <div class="pull-left">
-        <span id="lineCount">lines: <span>0</span></span> 
-        <span id="wordCount">words: <span>0</span></span>
+        <span id="lineCount"><span data-i18n="footer.lines">lines</span>: <span class="_cnt">0</span></span> 
+        <span id="wordCount"><span data-i18n="footer.words">words</span>: <span class="_cnt">0</span></span>
+        <!-- <span id="paraCount"><span data-i18n="footer.paragraph">paragraph</span>: <span class="_cnt">0</span></span> -->
         <span id="cursorActivity">(<span>0 : 0</span>)</span>
         <span id="elementsInfo"><i class="icon-info-sign icon-white"></i></span>
       </div>
@@ -227,38 +230,38 @@
           <i class="icon-cog icon-white"></i>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i>Show Document Outline</a></li>
-          <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i>Show TOC</a></li>
-          <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i>Fullscreen</a></li>
+          <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i><span data-i18n="config.outline">Show Document Outline</span></a></li>
+          <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i><span data-i18n="config.toc">Show TOC</span></a></li>
+          <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i><span data-i18n="config.fullscreen"></span></a></li>
         </ul>
       </div><div id="columnCount" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
-          Columns
+          <span data-i18n="config.column.label">Columns</span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="0" href="#" data-column="single" class="active"><i class="icon-ok"></i>Single</a></li>
+          <li><a tabindex="0" href="#" data-column="single" class="active"><i class="icon-ok"></i><span data-i18n="config.column.one">Single</span></a></li>
           <li class="divider"></li>
-          <li><a tabindex="1" href="#" data-column="two"><i class="icon-ok"></i>Column: 2</a></li>
-          <li><a tabindex="2" href="#" data-column="three"><i class="icon-ok"></i>Column: 3</a></li>
+          <li><a tabindex="1" href="#" data-column="two"><i class="icon-ok"></i><span data-i18n="config.column.two">Column: 2</span></a></li>
+          <li><a tabindex="2" href="#" data-column="three"><i class="icon-ok"></i><span data-i18n="config.column.three">Column: 3</span></a></li>
         </ul>
       </div>
       <div id="indentation" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
-          Spaces
+          <span data-i18n="config.spaces">Spaces</span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="0" href="#"><span class="label label-warning">Experimental</span></a></li>
-          <li><a tabindex="0" href="#" data-using-tab="true"><i class="icon-ok"></i>Indent Using Tabs</a></li>
+          <li><a tabindex="0" href="#"><span class="label label-warning"><span data-i18n="config.experimental">Experimental</span></span></a></li>
+          <li><a tabindex="0" href="#" data-using-tab="true"><i class="icon-ok"></i><span data-i18n="config.usetab">Indent Using Tabs</span></a></li>
           <li class="divider"></li>
-          <li><a tabindex="1" href="#" data-tab-size="2"><i class="icon-ok"></i>Tab with: 2</a></li>
-          <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i>Tab with: 3</a></li>
-          <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i>Tab with: 4</a></li>
-          <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i>Tab with: 5</a></li>
-          <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i>Tab with: 6</a></li>
-          <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i>Tab with: 7</a></li>
-          <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i>Tab with: 8</a></li>
+          <li><a tabindex="1" href="#" data-tab-size="2"><i class="icon-ok"></i><span data-i18n="config.tab">Tab with</span>: 2</a></li>
+          <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i><span data-i18n="config.tab">Tab with</span>: 3</a></li>
+          <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i><span data-i18n="config.tab">Tab with</span>: 4</a></li>
+          <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i><span data-i18n="config.tab">Tab with</span>: 5</a></li>
+          <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i><span data-i18n="config.tab">Tab with</span>: 6</a></li>
+          <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i><span data-i18n="config.tab">Tab with</span>: 7</a></li>
+          <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i><span data-i18n="config.tab">Tab with</span>: 8</a></li>
           <!-- <li class="divider"></li>
           <li><a tabindex="8" href="#">Convert indentation to Spaces</a></li>
           <li><a tabindex="9" href="#">Convert indentation to Tabs</a></li> -->
@@ -266,11 +269,11 @@
       </div>
       <div id="shareit" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="icon-share-alt icon-white"></i> share
+          <i class="icon-share-alt icon-white"></i> <span data-i18n="share">share</span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="-1" href="#">It's Promotion</a></li>
+          <li><a tabindex="-1" href="#" data-i18n="promotion.desc">It's Promotion</a></li>
           <li class="divider"></li>
           <li><a tabindex="0" href="#" data-service="twitter">Twitter</a></li>
           <li><a tabindex="1" href="#" data-service="facebook">Facebook</a></li>
@@ -281,7 +284,7 @@
         </ul>
       </div>
       <div id="donate-btn" class="btn-group pull-right">
-        <a href="#" class="btn btn-mini btn-danger" data-toggle="popover" data-trigger="click" data-placement="top" data-content="If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>" title="" data-original-title="Donate to help keep development going!" data-html="true"><i class="icon-leaf icon-white"></i> keep development</a>
+        <a href="#" class="btn btn-mini btn-danger" data-toggle="popover" data-trigger="click" data-placement="top" data-html="true"><i class="icon-leaf icon-white"></i> <span data-i18n="donate.label">keep development</span></a>
       </div>
     </div>
   </footer>

@@ -150,7 +150,6 @@ define([
   window.ee.on('menu.view.editor.font.size', function(value) {
     WindowMgr.actived.window.ee.emit('menu.view.editor.font.size', value);
   });
-
   window.ee.on('menu.view.viewer.font.size', function(value) {
     WindowMgr.actived.window.ee.emit('menu.view.viewer.font.size', value);
   });
@@ -166,48 +165,12 @@ define([
   window.ee.on('menu.insert.markdown', function(tag) {
     WindowMgr.actived.window.ee.emit('menu.insert.markdown', tag);
   });
-  // window.ee.on('menu.insert.strong', function() {
-  //   WindowMgr.actived.window.ee.emit('action.strong');
-  // });
-  // window.ee.on('menu.insert.emphasize', function() {
-  //   WindowMgr.actived.window.ee.emit('action.emphasize');
-  // });
-  // window.ee.on('menu.insert.inlinecode', function() {
-  //   WindowMgr.actived.window.ee.emit('action.inlinecode');
-  // });
-  // window.ee.on('menu.insert.image', function() {
-  //   WindowMgr.actived.window.ee.emit('action.image');
-  // });
-  // window.ee.on('menu.insert.link', function() {
-  //   WindowMgr.actived.window.ee.emit('action.link');
-  // });
-  // window.ee.on('menu.insert.blockquote', function() {
-  //   WindowMgr.actived.window.ee.emit('action.blockquote');
-  // });
-  // window.ee.on('menu.insert.orderlist', function() {
-  //   WindowMgr.actived.window.ee.emit('action.orderlist');
-  // });
-  // window.ee.on('menu.insert.unorderlist', function() {
-  //   WindowMgr.actived.window.ee.emit('action.unorderlist');
-  // });
   window.ee.on('menu.insert.page.break', function() {
     WindowMgr.actived.window.ee.emit('insert.page.break');
   });
   window.ee.on('menu.insert.section.break', function() {
     WindowMgr.actived.window.ee.emit('insert.section.break');
   });
-  // window.ee.on('menu.insert.fencedcode', function() {
-  //   WindowMgr.actived.window.ee.emit('action.fencedcode');
-  // });
-  // window.ee.on('menu.insert.strikethrough', function() {
-  //   WindowMgr.actived.window.ee.emit('action.strikethrough');
-  // });
-  // window.ee.on('menu.insert.table', function() {
-  //   WindowMgr.actived.window.ee.emit('action.table');
-  // });
-  // window.ee.on('menu.insert.comment', function() {
-  //   WindowMgr.actived.window.ee.emit('action.comment');
-  // });
   window.ee.on('menu.insert.toc', function() {
     WindowMgr.actived.window.ee.emit('insert.toc');
   });
@@ -261,22 +224,6 @@ define([
         file.set('readOnly', true);
     WindowMgr.open(file);
   });
-
-
-  //fire by child window
-  // window.ee.on('file.open', function(file) {
-  //   WindowMgr.open(file);
-  //   Recents.add(file);
-  // });
-  //fire by child window
-  // window.ee.on('file.save', function(file, markdown, cb) {
-  //   File.save(file, markdown, cb);
-  //   Recents.add(file);
-  // });
-
-  // window.ee.on('file.reload', function(file, cb) {
-  //   File.reload(file, cb);
-  // });
 
   window.ee.on('exit', function() {
     gui.App.quit();

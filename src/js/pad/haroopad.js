@@ -5,18 +5,6 @@ window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 window.parent = nw.parent;
 
-if (process.platform != 'darwin') {
-  MenuBar();
-}
-
-function loadCss(url) {
-  var link = document.createElement("link");
-  link.type = "text/css";
-  link.rel = "stylesheet";
-  link.href = url;
-  document.getElementsByTagName("head")[0].appendChild(link);
-}
-
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
 
@@ -65,21 +53,10 @@ requirejs([
   'ui/layout/Layout',
   'ui/footer/Footer'
 ], function(Window, Editor, Viewer, File) {
-  // var html, res, file, uid, tmp, readOnly, x, y;
   var _tid_;
-
-  // var orgTitle = 'Untitled';
-  // var edited = false,
-  //   delayClose = false;
-  // var params = nw._params;
   var file = nw.file;
 
-  // file = url('#file');
-  // file = params.file;
-  // tmp = params.tmp;
-  // uid = params.uid;
-  // readOnly = params.readOnly || false;
-
+  $('body').i18n(); 
 
   function delayChange() {
     window.clearTimeout(_tid_);
@@ -98,7 +75,6 @@ requirejs([
   nw.on('file.opened', function(file) {
     var opt;
 
-    // file.load();
     opt = file.toJSON();
 
     Editor.setValue(opt.markdown);

@@ -4,7 +4,8 @@ define([
 		var Model = Backbone.Model.extend({
 			defaults: {
 				enableSyncScroll: true,
-				playKeypressSound: false
+				playKeypressSound: false,
+				enableLastFileRestore: true
 			},
 
 			// localStorage: new Backbone.LocalStorage('General'),

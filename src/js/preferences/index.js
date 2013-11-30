@@ -3,6 +3,14 @@ var gui = require('nw.gui'),
 
 window.parent = win.parent;
 
+i18n.init({
+  lng: getLang(),
+  getAsync: false,
+  fallbackLng: false,
+  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
+  ns: { namespaces: [ 'preference' ], defaultNs: 'preference' }
+});
+    
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
 
@@ -27,7 +35,7 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  alert('Oops! preferences is crash :-(');
+  alert('Oops! Preferences dialog is crash :-(');
 };
 
 requirejs([
@@ -44,6 +52,9 @@ requirejs([
 
     $('.switch').bootstrapSwitch();
     
+    $('body').i18n(); 
+    document.title = i18n.t('title');
+
     HotKey('esc', function() {
       win.close();
     });

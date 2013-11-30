@@ -47,7 +47,7 @@ define([
 				this.setThemeData(config.themes || []);
 
 				this.$('select[name=customTheme]').select2({
-                	placeholder: "Select Your Theme",
+                	placeholder: i18n.t('custom.select-theme')
 				}).select2("val", config.theme && config.theme.name);
 			},
 

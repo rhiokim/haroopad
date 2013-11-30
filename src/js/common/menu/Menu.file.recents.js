@@ -14,7 +14,7 @@ window.MenuBarFileRecents = function() {
     recents.reverse();
 
     var mClear = new gui.MenuItem({
-        label: 'Clear all',
+        label: i18n.t('file.clear-all'),
         click: function() {
             while (submenu.items.length - 2) {
                 submenu.removeAt(0);

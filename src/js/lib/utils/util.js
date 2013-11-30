@@ -1,7 +1,7 @@
 var path = require('path');
 var languageTable = [
-	'en-US',
-	'ko-KR'
+	'en',
+	'ko'
 ];
 
 function asVersion(str) {
@@ -41,7 +41,7 @@ function getExecPath() {
 			return path.join(process.execPath, '../');//process.cwd();
 		break;
 		case 'mac':
-			return process.cwd();
+			return path.join(process.execPath, '../../../../../');
 		break;
 		case 'linux':
 			return path.join(process.execPath, '../');
@@ -49,9 +49,37 @@ function getExecPath() {
 	}
 }
 
-function getDocsPath() {
+function getLang() {
 	var locale = window.navigator.language;
-	locale = languageTable.indexOf(locale) < 0 ? 'en-US': locale ;
+	locale = languageTable.indexOf(locale) < 0 ? 'en': locale ;
 
-	return path.join(getExecPath(), 'docs', locale);
+	return locale;
+}
+
+function getDocsPath() {
+	return path.join(process.cwd(), 'docs', getLang());
+}
+
+function loadCss(url) {
+  var link = document.createElement("link");
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  link.href = url;
+  document.getElementsByTagName("head")[0].appendChild(link);
+}
+
+function merge(obj) {
+	var i = 1,
+		target, key;
+
+	for (; i < arguments.length; i++) {
+		target = arguments[i];
+		for (key in target) {
+			if (Object.prototype.hasOwnProperty.call(target, key)) {
+				obj[key] = target[key];
+			}
+		}
+	}
+
+	return obj;
 }

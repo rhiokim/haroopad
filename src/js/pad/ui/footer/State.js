@@ -4,6 +4,22 @@ define([
 
 		var humanize = require('humanize');
 
+		function _count () {
+		    var doc = nw.editor.getDoc();
+		    var trimmed = doc.getValue();
+
+		    /**
+		     * Most of the performance improvements are based on the works of @epmatsw.
+		     *
+		     * @see <http://goo.gl/SWOLB>
+		     */
+
+		    return {
+		      paragraphs: trimmed ? (trimmed.match(/\n+/g) || []).length + 1 : 0,
+		      words: trimmed ? (trimmed.replace(/['";:,.?¿\-!¡]+/g, '').match(/\S+/g) || []).length : 0
+		    }
+		  }
+
 	var State = Backbone.View.extend({
 		el: 'footer .navbar-inner',
 
@@ -12,8 +28,9 @@ define([
 		},
 
 		initialize: function() {
-			this.lineCount = this.$('#lineCount>span');
-			this.wordCount = this.$('#wordCount>span');
+			this.lineCount = this.$('#lineCount ._cnt');
+			this.wordCount = this.$('#wordCount ._cnt');
+			// this.paraCount = this.$('#paraCount ._cnt');
 			this.cursorPos = this.$('#cursorActivity');
 
 			Editor.on('update', this.updateHandler.bind(this));
@@ -36,12 +53,16 @@ define([
 		},
 
 		updateHandler: function(cm) {
+			var count = _count();
 			var lineCnt = cm.lineCount();
 			var wordCnt = cm.getValue().length || 0;
 			var line = humanize.numberFormat(lineCnt, 0);
-			var word = humanize.numberFormat(wordCnt - lineCnt + 1, 0);
+			var word = humanize.numberFormat(count.words, 0);
+
+
 			this.lineCount.text(line);
 			this.wordCount.text(word);
+			// this.paraCount.text(count.paragraphs);
 		},
 
 		cursorActivity: function(cm) {
@@ -61,7 +82,7 @@ define([
 					continue;
 				}
 
-				key += prop +'<br>';
+				key += i18n.t('state.'+ prop) +'<br>';
 				val += '<b>'+ dom[prop] +'</b><br/>';
 			}
 
@@ -76,9 +97,10 @@ define([
 			this.$('#elementsInfo').popover({
 				html: true,
 				trigger: 'hover',
-				title: 'current state',
+				title: i18n.t('state.label'),
 				placement: 'top',
-				content: val+key
+				content: val+key,
+				animation: false
 			});
 		}
 	});
