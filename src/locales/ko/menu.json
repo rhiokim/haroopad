@@ -47,6 +47,7 @@
       "font-size-editor": "에디터 폰트 사이즈",
       "font-size-viewer": "뷰어 폰트 사이즈",
       "vim-mode": "VIM 키 모드",  
+      "toggle-toc": "목차 보기 토글",  
       "enter-full-screen": "전체화면 모드"
     },
     "insert": {

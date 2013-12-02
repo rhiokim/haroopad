@@ -1,0 +1,7 @@
+
+#main > nav {
+   -webkit-flex: 1 6 130px;
+   -webkit-order: 1;
+   background-color: #fff;
+   display: none;
+}

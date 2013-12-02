@@ -1,20 +1,20 @@
-header{
+body > header{
    display: none;
   /*top: -31px !important;*/
 }
 
-header .btn-small [class^="icon-"] {
+body > header .btn-small [class^="icon-"] {
   font-size: 14px;
 	min-height: 26px;
 }
-header .btn-toolbar {
+body > header .btn-toolbar {
 	margin: -1px 0 0;
 }
-header .btn-group {
+body > header .btn-group {
 	margin-top: 1px;
 }
 
-header .btn-group + .btn-group {
+body > header .btn-group + .btn-group {
 	margin-left: 5px;
 }
 
