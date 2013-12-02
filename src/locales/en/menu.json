@@ -96,6 +96,9 @@
     },
 
     "edit": {
+      "name": "Edit",
+      "undo": "Undo",
+      "redo": "Redo",
       "cut": "Cut",
       "copy": "Copy",
       "paste": "Paste",

@@ -25,8 +25,8 @@ define([
 
 		initialize: function() {
 			this.$('a[data-toggle=popover]').popover({
-				content: i18n.t('donate.desc'),
-				title: i18n.t('donate.title'),//"If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>"
+				content: i18n.t('pad:donate.desc'),
+				title: i18n.t('pad:donate.title'),//"If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>"
 				animation: false
 			});
 

@@ -1,14 +1,15 @@
 var gui = require('nw.gui'),
     win = gui.Window.get();
+var fs = require('fs');
+var lng = getLang();
 
 window.parent = win.parent;
 
 i18n.init({
-  lng: getLang(),
-  getAsync: false,
-  fallbackLng: false,
-  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
-  ns: { namespaces: [ 'preference' ], defaultNs: 'preference' }
+  lng: lng
+}, function() {
+  i18n.addResourceBundle(lng, 'preference', global.locales['preference']);
+  i18n.setDefaultNamespace('preference');
 });
     
 //fixed text.js error on node-webkit
@@ -53,6 +54,7 @@ requirejs([
     $('.switch').bootstrapSwitch();
     
     $('body').i18n(); 
+
     document.title = i18n.t('title');
 
     HotKey('esc', function() {

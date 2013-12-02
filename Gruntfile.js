@@ -123,6 +123,7 @@ module.exports = function(grunt) {
             'src/js/lib/utils/util.js',
             'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
+            'src/js/lib/i18n.js',
             'build/menu.concat.js',
             'build/app.r.js',
             'src/js/app/after.app.js'

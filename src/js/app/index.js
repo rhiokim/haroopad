@@ -4,19 +4,21 @@ process.setMaxListeners(0);
 //add node main module path
 process.mainModule.paths = [getExecPath() +'Libraries/.node_modules'].concat(process.mainModule.paths);
 
-var gui = require('nw.gui');
+var lng = getLang();
+
+global.gui = gui = require('nw.gui');
+global.top = window;
 
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 
 i18n.init({
-  lng: getLang(),
-  getAsync: false,
-  fallbackLng: false,
-  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
-  ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
+  lng: lng
 }, function() {
-  MenuBar(); 
+  i18n.addResourceBundle(lng, 'menu', global.locales['menu']);
+  i18n.setDefaultNamespace('menu');
+
+  MenuBar();
 });
 
 //fixed text.js error on node-webkit

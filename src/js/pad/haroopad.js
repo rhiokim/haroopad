@@ -1,9 +1,25 @@
 /* globally for window event system */
 var gui = require('nw.gui');
+var fs = require('fs');
+var lng = getLang();
 
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 window.parent = nw.parent;
+
+i18n.init({
+  lng: lng
+}, function() {
+
+  i18n.addResourceBundle(lng, 'menu', global.locales['menu']);
+  i18n.addResourceBundle(lng, 'pad', global.locales['pad']);
+
+  i18n.setDefaultNamespace('menu');
+
+  if (process.platform != 'darwin') {
+    MenuBar();
+  }
+});
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -32,18 +48,6 @@ requirejs.config({
 requirejs.onError = function(e) {
   alert('Oops! pad is crash :-(');
 };
-
-i18n.init({
-  lng: getLang(),
-  getAsync: false,
-  fallbackLng: false,
-  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
-  ns: { namespaces: [ 'pad' ], defaultNs: 'pad' }
-}, function() {
-  if (process.platform != 'darwin') {
-    MenuBar();
-  }
-});
 
 requirejs([
   'window/Window',
