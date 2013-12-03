@@ -39,12 +39,12 @@ i18n.init({
   fallbackLng: false,
   resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
   ns: { namespaces: [ 'pad' ], defaultNs: 'pad' }
-});
-
-if (process.platform != 'darwin') {
+}, function() {
+  if (process.platform != 'darwin') {
     MenuBar();
   }
-  
+});
+
 requirejs([
   'window/Window',
   'editor/Editor',

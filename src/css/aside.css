@@ -11,6 +11,10 @@
 }
 
 @media (min-width: 720px) {
+  aside#md-help > header {
+    width: 335px;
+  }
+
   #md-help-content {
     width: 350px;
   }

@@ -7,7 +7,7 @@
 <!-- for develop -->
   <script src="js/vendors/keymage.js"></script>
   <script>
-    keymage('defmod-esc', function() {
+    keymage('esc esc', function() {
       var gui = require("nw.gui");
       var win = gui.Window.get();
       win.showDevTools();
@@ -220,7 +220,8 @@
     </aside>
     <aside id="md-help">
       <header>
-        <h5><span data-i18n="markdown.name">Markdown Syntax Help</span></h5>
+        <h5 class="pull-left"><span data-i18n="markdown.name">Markdown Syntax Help</span></h5>
+        <a href="html/markdown-help.html" target="md-help" class="btn btn-mini btn-primary pull-right" data-exec="link"><i class="icon-white icon-share"></i></a>
       </header>
       <div id="md-help-content">
       </div>

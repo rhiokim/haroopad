@@ -37,6 +37,7 @@ Shortcut            | Description
 ^ - ⎇ - [          | editor width -5%
 &#8984;(^) - ⇧ - L  | toggle line number
 &#8984;(^) - ⇧ - T  | toggle table of content
+&#8984;(^) - ⇧ - H  | toggle markdown helper
 &#8984;(^) - Enter  | toggle fullscreen #1
 &#8984;(^) - F11    | toggle fullscreen #2
 Double ESC          | escape fullscreen
