@@ -68,12 +68,12 @@
       "page-break": "Page Break .......... * * *",
       "fenced-code": "Fenced Code ....... ```",
       "strikethrough": "Strikethrough ...... ~~",
-      "embed": "Embedding .................... @[]()",
-      "toc": "TOC .................... [TOC]",
+      "embed": "Embedding .......... @[]()",
+      "toc": "TOC ..................... [TOC]",
       "table": "Table",
-      "comment": "Comment ............ <!-- -->",
-      "highlight": "Highlight .................... ==",
-      "underline": "Underline .................... _"
+      "comment": "Comment ............. <!-- -->",
+      "highlight": "Highlight ............. ==",
+      "underline": "Underline ............. _"
       },
     "tool": {
       "name": "Tool"
