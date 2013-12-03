@@ -39,20 +39,22 @@ i18n.init({
   fallbackLng: false,
   resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
   ns: { namespaces: [ 'pad' ], defaultNs: 'pad' }
-});
-
-if (process.platform != 'darwin') {
+}, function() {
+  if (process.platform != 'darwin') {
     MenuBar();
   }
-  
+});
+
 requirejs([
   'window/Window',
   'editor/Editor',
   'viewer/Viewer',
+  'ui/toc/TOC',
+  'ui/markdown-help/MarkdownHelp',
   'ui/file/File',
   'ui/layout/Layout',
   'ui/footer/Footer'
-], function(Window, Editor, Viewer, File) {
+], function(Window, Editor, Viewer, TOC, MarkdownHelp, File) {
   var _tid_;
   var file = nw.file;
 

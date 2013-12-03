@@ -39,6 +39,7 @@ define([
 			workDelay: 1000,
 			showTrailingSpace: true
 		});
+		editor.refresh();
 
 
 		// requirejs([ 'editor/Editor.emoji' ]);
@@ -136,7 +137,7 @@ define([
 			var top = scrollInfo.top;
 			var per = scrollInfo.height - scrollInfo.clientHeight;
 
-			window.ee.emit('editor.scroll', top, per);
+			// window.ee.emit('editor.scroll', top, per);
 		}
 
 		if (generalConf.enableSyncScroll) {

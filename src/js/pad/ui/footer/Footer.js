@@ -62,7 +62,7 @@ define([
 	});
 
 	Document.on('toc', function(show) {
-		window.ee.emit('menu.view.doc.toc', show);
+		window.ee.emit('menu.view.toggle.toc', show);
 
 		global._gaq.push('haroopad', 'set toc view', show);
 	});

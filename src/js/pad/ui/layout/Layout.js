@@ -37,6 +37,8 @@ define([
 			$pad.removeClass(_layout);
 			$pad.addClass(layout);
 
+			nw.editor.refresh();
+			
 			_layout = layout;
 
     	global._gaq.push('haroopad.view', 'mode', layout);
@@ -56,6 +58,8 @@ define([
 				$editor.css('-webkit-flex', '1 0 '+ (100-_offset) +'%');
 				$viewer.css('-webkit-flex', '1 0 '+ _offset +'%');
 			}
+
+			nw.editor.refresh();
 		}
 
 		function left5() {
@@ -72,6 +76,8 @@ define([
 				$editor.css('-webkit-flex', '1 0 '+ (100-_offset) +'%');
 				$viewer.css('-webkit-flex', '1 0 '+ _offset +'%');
 			}
+
+			nw.editor.refresh();
 		}
 
 		HotKey('defmod-alt-1', function() {
