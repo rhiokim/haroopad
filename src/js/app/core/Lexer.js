@@ -2,6 +2,7 @@ define([
 	], 
 	function() {
 	var marked = require("marked");
+    var config = store.get('General') || {};
 	
     var defaults = {
         "gfm": true,
@@ -13,7 +14,8 @@ define([
         "smartypants": true,
         "silent": false,
         "highlight": null,
-        "langPrefix": ''
+        "langPrefix": '',
+        "mathjax": config.enableMath
     };
 
     var lexer = new marked.Lexer(defaults);
@@ -62,6 +64,11 @@ define([
 	}
 
     lexer.rules = merge({}, lexer.rules, customRules);
+
+    window.ee.on('preferences.general.enableMath', function(value) {
+        lexer.options.mathjax = value;
+        window.ee.emit('preferences.general.enableMath.after', value);
+    })
 
     return lexer;
 });

@@ -99,8 +99,8 @@ define([
 				trigger: 'hover',
 				title: i18n.t('pad:state.label'),
 				placement: 'top',
-				content: val+key,
-				animation: false
+				content: val+key/*,
+				animation: false*/
 			});
 		}
 	});
