@@ -57,7 +57,7 @@ function getLang() {
 }
 
 function getDocsPath() {
-	return path.join(process.cwd(), 'docs', getLang());
+	return path.join(getExecPath(), 'Libraries/.docs', getLang());
 }
 
 function loadCss(url) {

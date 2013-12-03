@@ -55,10 +55,10 @@
   <link rel="stylesheet" href="css/layout/basic.css">
   <link rel="stylesheet" href="css/layout/header.css">
   <link rel="stylesheet" href="css/layout/footer.css">
-  <link rel="stylesheet" href="css/layout/l-side.css">
-  <link rel="stylesheet" href="css/layout/r-side.css">
+  <link rel="stylesheet" href="css/layout/nav.css">
 
   <link rel="stylesheet" href="css/layout/aside.css">
+  <link rel="stylesheet" href="css/aside.css">
 
   <link rel="stylesheet" href="css/app.css">
 
@@ -201,6 +201,7 @@
   </header>
 
   <section id="main">
+    <nav></nav>
     <article class="panel layout0">
       <section id="editor">
         <textarea id="code" name="code"></textarea>
@@ -209,8 +210,22 @@
         <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
       </section>
     </article>
-    <nav>bbb</nav>
-    <aside>
+    <aside id="toc">
+      <header>
+        <h5><span data-i18n="toc.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span></h5>
+      </header>
+      <div id="toc-content">
+      </div>
+      <footer></footer>
+    </aside>
+    <aside id="md-help">
+      <header>
+        <h5 class="pull-left"><span data-i18n="markdown.name">Markdown Syntax Help</span></h5>
+        <a href="html/markdown-help.html" target="md-help" class="btn btn-mini btn-primary pull-right" data-exec="link"><i class="icon-white icon-share"></i></a>
+      </header>
+      <div id="md-help-content">
+      </div>
+      <footer></footer>
     </aside>
   </section>
 

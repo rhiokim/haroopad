@@ -7,6 +7,30 @@ window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 window.parent = nw.parent;
 
+//fixed text.js error on node-webkit
+require.nodeRequire = require;
+
+/**
+ * require.js 환경 설정
+ */
+requirejs.config({
+  baseUrl: 'js/pad',
+  waitSeconds: 30,
+  locale: 'ko-kr',
+  paths: {
+    tpl: '../../tpl',
+    vendors: '../vendors',
+    text: '../vendors/text',
+    store: '../vendors/store',
+    keyboard: '../vendors/keymage'
+  },
+  config: {
+    text: {
+      env: 'xhr'
+    }
+  }
+});
+
 i18n.init({
   lng: lng
 }, function() {
@@ -20,42 +44,16 @@ i18n.init({
     MenuBar();
   }
 
-  //fixed text.js error on node-webkit
-  require.nodeRequire = require;
-
-  /**
-   * require.js 환경 설정
-   */
-  requirejs.config({
-    baseUrl: 'js/pad',
-    waitSeconds: 30,
-    locale: 'ko-kr',
-    paths: {
-      tpl: '../../tpl',
-      vendors: '../vendors',
-      text: '../vendors/text',
-      store: '../vendors/store',
-      keyboard: '../vendors/keymage'
-    },
-    config: {
-      text: {
-        env: 'xhr'
-      }
-    }
-  });
-
-  requirejs.onError = function(e) {
-    alert('Oops! pad is crash :-(');
-  };
-
   requirejs([
     'window/Window',
     'editor/Editor',
     'viewer/Viewer',
+    'ui/toc/TOC',
+    'ui/markdown-help/MarkdownHelp',
     'ui/file/File',
     'ui/layout/Layout',
     'ui/footer/Footer'
-  ], function(Window, Editor, Viewer, File) {
+  ], function(Window, Editor, Viewer, TOC, MarkdownHelp, File) {
     var _tid_;
     var file = nw.file;
 

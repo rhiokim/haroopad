@@ -1,9 +1,14 @@
 {
 	"title": "",
+	"experimental": "experimental",
 	
 	"footer": {
 		"lines": "lines",
 		"words": "words"
+	},
+	
+	"toc": {
+		"name": "Table Of Contents"	
 	},
 	
 	"share": "Share",
