@@ -9,7 +9,6 @@ define([
 	function(store, HotKey, TOC, inlineStyle, StyleMaker, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
-		// var sass = require('node-sass');
 
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
@@ -27,6 +26,7 @@ define([
 			viewerConfig.fontSize = Number(viewerConfig.fontSize || 15);
 		var codeConfig = store.get('Code') || {};
 		var customConfig = store.get('Custom') || {};
+		var generalConfig = store.get('General') || {};
 
 		// var config = option.toJSON();
 
@@ -110,6 +110,7 @@ define([
 		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
 		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
+		window.parent.ee.on('preferences.general.enableMath.after', enableMath);
 
 		/* window close */
 		nw.on('destory', function() {
@@ -119,6 +120,7 @@ define([
 			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
 			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
+			window.parent.ee.off('preferences.general.enableMath.after', enableMath);
 		});
 
 		window.ee.on('print.viewer', function(value) {
@@ -133,6 +135,7 @@ define([
 
 		/* change markdown event handler */
 		window.ee.on('change.after.markdown', update);
+		// nw.file.on('change:html', update)
 
 		/* scroll editor for sync */
 		window.ee.on('editor.scroll', function(top, per) {
@@ -220,6 +223,14 @@ define([
 		_viewer.ee.on('dom', function(dom) {
 			window.ee.emit('dom', dom);
 		});
+
+		/*
+		 * Math rendering event proxy
+		 * viewer.html -> Viewer.js -> index.html -> math/Math.js -> Rendering
+		 */
+		_viewer.ee.on('math', function(target, cb) {
+			window.parent.ee.emit('math', target, cb);
+		})
 
 		_viewer.ee.on('title', function(title) {
 			nw.file.set('title', title);

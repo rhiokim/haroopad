@@ -48,11 +48,11 @@ requirejs.onError = function (e) {
 
 requirejs([
     'context/Context',
-    // 'core/Parser',
     'window/Window',
     'window/WindowManager',
-    'utils/UpdateNotifier'
-  ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
+    'utils/UpdateNotifier',
+    'math/Math'
+  ], function(Context, Window, WindowMgr, Updater) {
 
     var os = getPlatformName();
     gui.App.on('open', function(cmdline) {

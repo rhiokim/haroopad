@@ -100,6 +100,7 @@ Shortcut                     | Example        | Description
 &#8984;(^) - ⎇ - O          | 1. markdown    | 정렬목록
 &#8984;(^) - ⎇ - U          | * haroopad     | 비정렬 목록
 &#8984;(^) - ⎇ - I          | \!\[]()        | 이미지
+&#8984;(^) - ⎇ - M          | $$math$$       | 수학
 &#8984;(^) - ⎇ - B          | > blockquote   | 블럭쿼트
 &#8984;(^) - ⎇ - Enter      | \- \- \-   | section break
 &#8984;(^) - ⎇ - `          | \* \* \*   | page break

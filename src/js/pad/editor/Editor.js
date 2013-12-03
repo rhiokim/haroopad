@@ -277,6 +277,8 @@ define([
 				case 'table': CodeMirror.commands.markdownTable(editor); break;
 				case 'comment': CodeMirror.commands.markdownComment(editor); break;
 				case 'embed': CodeMirror.commands.markdownEmbed(editor); break;
+				case 'math-inline': CodeMirror.commands.markdownMathInline(editor); break;
+				case 'math-block': CodeMirror.commands.markdownMathBlock(editor); break;
 				case 'toc': CodeMirror.commands.markdownTOC(editor); break;
 			}
 
