@@ -38,6 +38,7 @@ define([
 			extraKeys: Keymap,
 			showTrailingSpace: true
 		});
+		editor.refresh();
 
 		var CodeMirrorElement = document.querySelector('.CodeMirror'),
 			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters'),
@@ -95,7 +96,7 @@ define([
 			var top = scrollInfo.top;
 			var per = scrollInfo.height - scrollInfo.clientHeight;
 
-			window.ee.emit('editor.scroll', top, per);
+			// window.ee.emit('editor.scroll', top, per);
 		}
 
 		if (generalConf.enableSyncScroll) {

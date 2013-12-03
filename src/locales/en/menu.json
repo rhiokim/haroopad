@@ -47,6 +47,7 @@
       "font-size-editor": "Editor Font Size",
       "font-size-viewer": "Viewer Font Size",
       "vim-mode": "Toggle VIM Mode",  
+      "toggle-toc": "Toggle Table Of Content",  
       "enter-full-screen": "Enter Full Screen"
     },
     "insert": {
@@ -67,10 +68,11 @@
       "page-break": "Page Break .......... * * *",
       "fenced-code": "Fenced Code ....... ```",
       "strikethrough": "Strikethrough ...... ~~",
+      "embed": "Embedding .......... @[]()",
       "table": "Table",
-      "comment": "Comment ............ <!-- -->",
-      "highlight": "Highlight .................... ==",
-      "underline": "Underline .................... _",
+      "comment": "Comment ............. <!-- -->",
+      "highlight": "Highlight ............. ==",
+      "underline": "Underline ............. _"
       "math-block": "Math (Block) ........ $$",
       "math-inline": "Math (Inline) ........ $$$"
       },

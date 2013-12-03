@@ -28,3 +28,6 @@
 [submodule "lib/ionicons"]
 	path = lib/ionicons
 	url = git@github.com:driftyco/ionicons.git
+[submodule "lib/bootstrap-social"]
+	path = lib/bootstrap-social
+	url = git@github.com:lipis/bootstrap-social.git
