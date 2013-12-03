@@ -51,7 +51,8 @@ requirejs([
     'mail/Mailer',
     'window/Window',
     'window/WindowManager',
-    'utils/UpdateNotifier'
+    'utils/UpdateNotifier',
+    'math/Math'
   ], function(Context, Mailer, Window, WindowMgr, Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {

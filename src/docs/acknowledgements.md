@@ -202,6 +202,16 @@ Apache License
    
 * * *
 
+**MathJax** 
+
+http://www.mathjax.org/
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+* * *
+
 **jQuery** 
 
 Copyright 2013 jQuery Foundation and other contributors (MIT)

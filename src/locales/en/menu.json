@@ -73,6 +73,8 @@
       "comment": "Comment ............. <!-- -->",
       "highlight": "Highlight ............. ==",
       "underline": "Underline ............. _"
+      "math-block": "Math (Block) ........ $$",
+      "math-inline": "Math (Inline) ........ $$$"
       },
     "tool": {
       "name": "Tool"
