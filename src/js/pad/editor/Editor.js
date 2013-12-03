@@ -25,8 +25,7 @@ define([
 		config.fontSize = Number(config.fontSize || 13);
 		var generalConf = store.get('General') || {
 			enableSyncScroll: true,
-			playKeypressSound: false,
-			enableAutoComplete: false
+			playKeypressSound: false
 		};
 
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -81,6 +80,7 @@ define([
 			  case '*':
 			  case '**':
 			  case '~~':
+			  case '==':
 			  case '$$$':
 			    cm.replaceSelection(md);
 			    cm.setCursor(cur);
@@ -211,7 +211,7 @@ define([
 		editor.setOption('indentUnit', config.indentUnit || 4);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
-		toggleAutoComplete(generalConf.enableAutoComplete);
+		toggleAutoComplete(generalConf.enableAutoComplete || true);
 		setFontSize(config.fontSize);
 		setFontFmaily();
 

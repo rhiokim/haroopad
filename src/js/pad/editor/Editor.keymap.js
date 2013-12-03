@@ -93,6 +93,7 @@ define([
 			"'$'": 'markdownAutoComplete',
 			"'*'": 'markdownAutoComplete',
 			"'~'": 'markdownAutoComplete',
+			"'='": 'markdownAutoComplete',
 			"'-'": 'markdownAutoComplete',
 			"'@'": 'markdownAutoComplete'
 		}

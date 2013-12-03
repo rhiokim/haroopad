@@ -5,7 +5,7 @@ define([
 			defaults: {
 				enableSyncScroll: true,
 				playKeypressSound: false,
-				enableAutoComplete: false,
+				enableAutoComplete: true,
 				enableLastFileRestore: true
 			},
 
