@@ -135,6 +135,10 @@ define([
     WindowMgr.actived.window.ee.emit('menu.view.toggle.vim');
   });
 
+  window.ee.on('menu.view.toggle.toc', function() {
+    WindowMgr.actived.window.ee.emit('menu.view.toggle.toc');
+  });
+
   window.ee.on('menu.view.plus5.width', function() {
     WindowMgr.actived.window.ee.emit('view.plus5.width');
   });
@@ -204,26 +208,43 @@ define([
    * help menu
    */
   
-  window.ee.on('menu.help.about', function() {
-    var file = File.open(pathDocs +'/about.md');
-        file.set('readOnly', true);
+  window.ee.on('menu.help.doc', function(doc) {
+    var file;
+
+    switch(doc) {
+      case 'about':
+        file = pathDocs +'/about.md';
+      break;
+      case 'shortcut':
+        file = pathDocs +'/shortcut.md';
+      break;
+      case 'acknowledgements':
+        file = pathDocs +'/../acknowledgements.md';
+      break;
+    } 
+
+    file = File.open(file);
+    file.set('readOnly', true);
+
     WindowMgr.open(file);
   });
   window.ee.on('menu.help.syntax', function() {
-    var file = File.open(pathDocs +'/syntax.md');
-        file.set('readOnly', true);
-    WindowMgr.open(file);
+    // var file = File.open(pathDocs +'/syntax.md');
+    //     file.set('readOnly', true);
+    // WindowMgr.open(file);
+    
+    WindowMgr.actived.window.ee.emit('menu.help.syntax');
   });
-  window.ee.on('menu.help.acknowledgements', function() {
-    var file = File.open(pathDocs +'/../acknowledgements.md');
-        file.set('readOnly', true);
-    WindowMgr.open(file);
-  });
-  window.ee.on('menu.help.shortcut', function() {
-    var file = File.open(pathDocs +'/shortcut.md');
-        file.set('readOnly', true);
-    WindowMgr.open(file);
-  });
+  // window.ee.on('menu.help.acknowledgements', function() {
+  //   var file = File.open(pathDocs +'/../acknowledgements.md');
+  //       file.set('readOnly', true);
+  //   WindowMgr.open(file);
+  // });
+  // window.ee.on('menu.help.shortcut', function() {
+  //   var file = File.open(pathDocs +'/shortcut.md');
+  //       file.set('readOnly', true);
+  //   WindowMgr.open(file);
+  // });
 
   window.ee.on('exit', function() {
     gui.App.quit();

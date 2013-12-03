@@ -68,7 +68,7 @@ module.exports = function(grunt) {
             'src/css/layout/footer.css',
             'src/css/layout/nav.css',
             'src/css/layout/aside.css',
-            'src/css/layout/toc.css',
+            'src/css/aside.css',
             'src/css/app.css'
           ],
           "build/haroopad/css/viewer.min.css": [
@@ -281,7 +281,8 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
           { expand: true, cwd: 'src/css/column/', src: [ '**' ], dest: 'build/haroopad/css/column/' },
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad/css/viewer-toc/' },
-          { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
+          // { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
+          { expand: true, cwd: 'src/html/', src: [ '**' ], dest: 'build/haroopad/html/' },
           { src: 'src/index.bin.html', dest: 'build/haroopad/index.html' },
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
           { src: 'src/preferences.bin.html', dest: 'build/haroopad/preferences.html' },
@@ -347,7 +348,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/viewer-toc/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/markdown/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/code/' },
-          { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
+          // { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
           { src: 'src/pad.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/pad.html' },
           { src: 'src/viewer.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/viewer.html' },
           { src: 'src/index.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/index.html' },
@@ -365,6 +366,12 @@ module.exports = function(grunt) {
       lang: {
         files: [
           { expand: true, cwd: 'src/locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
+        ]
+      },
+
+      docs: {
+        files: [
+          { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.docs/' }
         ]
       },
 
@@ -482,7 +489,7 @@ module.exports = function(grunt) {
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  grunt.registerTask('cp', [ 'copy:main', 'copy:node_modules', 'copy:lang' ]);
+  grunt.registerTask('cp', [ 'copy:main', 'copy:node_modules', 'copy:docs', 'copy:lang' ]);
   grunt.registerTask('app', [ 'requirejs:app', 'concat:app', 'uglify:app' ]);
   grunt.registerTask('pad', [ 'requirejs:pad', 'concat:pad', 'uglify:pad' ]);
   grunt.registerTask('prf', [ 'requirejs:preferences', 'concat:preferences', 'uglify:preferences' ]);
