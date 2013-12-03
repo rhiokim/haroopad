@@ -94,6 +94,7 @@ Shortcut                     | Example        | Description
 &#8984;(^) - Y               | \_underline_   | 밑줄
 &#8984;(^) - K               | \`code`        | 인라인 코드
 &#8984;(^) - E               | @\[]()         | 임베드
+&#8984;(^) - T               | [TOC]          | 목차
 &#8984;(^) - ⎇ - S          | \~\~strike~~   | 취소선
 &#8984;(^) - ⎇ - H          | \==highlight== | 하이라이팅
 &#8984;(^) - ⎇ - O          | 1. markdown    | 정렬목록

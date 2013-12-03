@@ -277,6 +277,7 @@ define([
 				case 'table': CodeMirror.commands.markdownTable(editor); break;
 				case 'comment': CodeMirror.commands.markdownComment(editor); break;
 				case 'embed': CodeMirror.commands.markdownEmbed(editor); break;
+				case 'toc': CodeMirror.commands.markdownTOC(editor); break;
 			}
 
 			global._gaq.push('haroopad.insert', 'markdown', tag);

@@ -104,6 +104,10 @@
                                  + '|        |        |');
       }
 
+      var addTOC = function() {
+        cm.replaceSelection('\n[TOC]\n\n');
+      }
+
       var headerMap = {
           '1': '#',
           '2': '##',
@@ -171,6 +175,9 @@
           break;
         case 'code':
           replaceSelection('`');
+          break;
+        case 'toc':
+          addTOC();
           break;
         case 'comment':
           replaceSelection('<!--', '-->');
@@ -287,6 +294,9 @@
   };
   CodeMirror.commands.markdownEmbed = function(cm) {
     action('embed', cm);
+  };
+  CodeMirror.commands.markdownTOC = function(cm) {
+    action('toc', cm);
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();

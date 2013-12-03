@@ -68,6 +68,8 @@
       "page-break": "Page Break .......... * * *",
       "fenced-code": "Fenced Code ....... ```",
       "strikethrough": "Strikethrough ...... ~~",
+      "embed": "Embedding .................... @[]()",
+      "toc": "TOC .................... [TOC]",
       "table": "Table",
       "comment": "Comment ............ <!-- -->",
       "highlight": "Highlight .................... ==",
