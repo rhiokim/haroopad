@@ -68,18 +68,18 @@
     "page-break": "Page Break .......... * * *",
     "fenced-code": "Fenced Code ....... ```",
     "strikethrough": "Strikethrough ...... ~~",
-    "embed": "Embedding .................... @[]()",
-    "toc": "TOC .................... [TOC]",
+    "embed": "Embedding ........... @[]()",
+    "toc": "Table of Content ... [TOC]",
     "table": "Table",
-    "comment": "Comment ............ <!-- -->",
-    "highlight": "Highlight .................... ==",
-    "underline": "Underline .................... _",
-    "math-block": "Math (Block) ........ $$",
-    "math-inline": "Math (Inline) ........ $$$"
-  },
+    "comment": "Comment ............. <!-- -->",
+    "highlight": "Highlight .............. ==",
+    "underline": "Underline .............. _",
+    "math-block": "Math (Block) ......... $$",
+    "math-inline": "Math (Inline) ......... $$$"
+    },
   "tool": {
     "name": "Tool"
-  },
+    },
   "window": {
     "name": "Window",
     "minimize": "Minimize",
