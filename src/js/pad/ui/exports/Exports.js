@@ -1,6 +1,6 @@
 define([
 		'viewer/Viewer',
-		'vendors/text!tpl/exports.html'
+		'text!tpl/exports.html'
 	],
 	function(Viewer, html) {
 		var fs = require('fs'),

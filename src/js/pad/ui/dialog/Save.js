@@ -1,5 +1,5 @@
 define([
-		'vendors/text!tpl/modal-save.html'
+		'text!tpl/modal-save.html'
 	], 
 	function(html) {
 		$('#dialogs').append(html);
