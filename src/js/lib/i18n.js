@@ -30,7 +30,7 @@
 	}
 
 	init({
-	  lng: getLang(),
+	  lng: 'ko',
 	  path: getExecPath() +'/Libraries/.locales/',
 	  ns: [ 'menu', 'pad', 'preference' ]
 	});
