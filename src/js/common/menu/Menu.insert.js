@@ -266,6 +266,22 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
+      label: i18n.t('insert.math-block'),
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'math-block');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.math-inline'),
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'math-inline');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
       label: i18n.t('insert.comment'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'comment');
