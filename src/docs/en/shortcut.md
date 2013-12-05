@@ -95,6 +95,7 @@ Shortcut                     | Example        | Description
 &#8984;(^) - Y               | \_underline_   | underline
 &#8984;(^) - K               | \`code`        | inline code
 &#8984;(^) - E               | @\[]()         | embed
+&#8984;(^) - T               | [TOC]          | table of content
 &#8984;(^) - ⎇ - S          | \~~strike~~    | strike
 &#8984;(^) - ⎇ - H          | \==highlight== | highlight
 &#8984;(^) - ⎇ - O          | 1. markdown    | ordered list

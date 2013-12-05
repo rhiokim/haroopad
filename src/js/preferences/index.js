@@ -1,66 +1,69 @@
 var gui = require('nw.gui'),
     win = gui.Window.get();
+var fs = require('fs');
+var lng = getLang();
 
 window.parent = win.parent;
 
 i18n.init({
-  lng: getLang(),
-  getAsync: false,
-  fallbackLng: false,
-  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
-  ns: { namespaces: [ 'preference' ], defaultNs: 'preference' }
-});
+  lng: lng
+}, function() {
+  i18n.addResourceBundle(lng, 'preference', global.locales['preference']);
+  i18n.setDefaultNamespace('preference');
     
-//fixed text.js error on node-webkit
-require.nodeRequire = require;
+  //fixed text.js error on node-webkit
+  require.nodeRequire = require;
 
-/**
- * require.js 환경 설정
- */
-requirejs.config({
-  baseUrl: 'js/preferences',
-  waitSeconds: 30,
-  locale: 'ko-kr',
-  paths: {
-    // tpl: '../../tpl',
-    vendors: '../vendors',
-    store: '../vendors/store',
-    keyboard: '../vendors/keymage'
-  },
-  config: {
-    text: {
-      env: 'xhr'
+  /**
+   * require.js 환경 설정
+   */
+  requirejs.config({
+    baseUrl: 'js/preferences',
+    waitSeconds: 30,
+    locale: 'ko-kr',
+    paths: {
+      // tpl: '../../tpl',
+      vendors: '../vendors',
+      store: '../vendors/store',
+      keyboard: '../vendors/keymage'
+    },
+    config: {
+      text: {
+        env: 'xhr'
+      }
     }
-  }
-});
+  });
 
-requirejs.onError = function (e) {
-  alert('Oops! Preferences dialog is crash :-(');
-};
+  requirejs.onError = function (e) {
+    alert('Oops! Preferences dialog is crash :-(');
+  };
 
-requirejs([
-    'keyboard',
-    'tabs/General',
-    'tabs/Editor',
-    'tabs/Viewer',
-    'tabs/Custom',
-    'tabs/Code',
-    'tabs/Markdown',
-    'tabs/Helper',
-    'tabs/About'
-  ], function(HotKey, General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
+  requirejs([
+      'keyboard',
+      'tabs/General',
+      'tabs/Editor',
+      'tabs/Viewer',
+      'tabs/Custom',
+      'tabs/Code',
+      'tabs/Markdown',
+      'tabs/Helper',
+      'tabs/About'
+    ], function(HotKey, General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
 
-    $('.switch').bootstrapSwitch();
-    
-    $('body').i18n(); 
-    document.title = i18n.t('title');
+      $('.switch').bootstrapSwitch();
+      
+      $('body').i18n(); 
 
-    HotKey('esc', function() {
-      win.close();
-    });
+      document.title = i18n.t('title');
 
-    win.show();
-    win.focus();
+      HotKey('esc', function() {
+        win.close();
+      });
 
-    global._gaq.push('haroopad.preferences', 'init', '');
+      win.show();
+      win.focus();
+
+      global._gaq.push('haroopad.preferences', 'init', '');
+  });
+
 });

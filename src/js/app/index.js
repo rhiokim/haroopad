@@ -4,20 +4,13 @@ process.setMaxListeners(0);
 //add node main module path
 process.mainModule.paths = [getExecPath() +'Libraries/.node_modules'].concat(process.mainModule.paths);
 
-var gui = require('nw.gui');
+var lng = getLang();
+
+global.gui = gui = require('nw.gui');
+global.top = window;
 
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
-
-i18n.init({
-  lng: getLang(),
-  getAsync: false,
-  fallbackLng: false,
-  resGetPath: getExecPath() +'Libraries/.locales/__lng__/__ns__.json',
-  ns: { namespaces: [ 'menu' ], defaultNs: 'menu' }
-}, function() {
-  MenuBar(); 
-});
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -46,7 +39,15 @@ requirejs.onError = function (e) {
   alert('Oops! app is crash :-(');
 };
 
-requirejs([
+i18n.init({
+  lng: lng
+}, function() {
+  i18n.addResourceBundle(lng, 'menu', global.locales['menu']);
+  i18n.setDefaultNamespace('menu');
+
+  MenuBar();
+
+  requirejs([
     'context/Context',
     'mail/Mailer',
     'window/Window',
@@ -103,7 +104,6 @@ requirejs([
         case 'windows':
           //"z:\Works\haroopad\" --original-process-start-time=1302223754723848
           //"z:\Works\haroopad\" --original-process-start-time=1302223754723848 "z:\Works\filename.ext"
-          
           if (cmdline.split('"').length >= 5) {
             cmdline = cmdline.split('"');
             cmdline.pop();
@@ -121,9 +121,10 @@ requirejs([
           file = cmdline.join(' ');
         break;
       }
-      
+        
       WindowMgr.open(file);
     });
+
 
     //open file with commend line
     if (gui.App.argv.length > 0) {
@@ -145,4 +146,6 @@ requirejs([
     } else {
       WindowMgr.open();
     }
+  });
+
 });

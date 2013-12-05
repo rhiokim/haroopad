@@ -6,11 +6,11 @@
 	var fs = require('fs');
 	var path = require('path');
 
-	var locales = global.locales = {};
+	var lng, url, locales = global.locales = {};
 
 	function load(ns) {
 		var res, file;
-		file = ns +'.json'
+		file = ns +'.json';
 
 		res = fs.readFileSync(path.join(url, file), 'utf8');
 		res = JSON.parse(res);

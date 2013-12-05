@@ -74,7 +74,14 @@
 		"save": "Save",
 		"yes": "Yes",
 		"no": "No",
-
 		"changed-file": "has been changed by another application. <br/>Do you want reload?"
+	},
+
+	"upgrade": {
+		"uptodate": "You're up to date!",
+		"message": "Looking for the latest version?",
+		"note": "Release note",
+		"download": "Download",
+		"newest": "Haroopad ${version} is currently the newest version available."
 	}
 }
