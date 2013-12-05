@@ -51,6 +51,7 @@
 
 	"email": {
 		"title": "Sending email",
+		"subject": "Insert Subject",
 		"to": "TO",
 		"from": "FROM",
 		"reciver": "Insert reciver's email address",
