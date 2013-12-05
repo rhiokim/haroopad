@@ -6,6 +6,7 @@ define([
 				enableMath: false,
 				enableSyncScroll: true,
 				playKeypressSound: false,
+				enableAutoComplete: true,
 				enableLastFileRestore: true
 			},
 

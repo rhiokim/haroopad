@@ -24,7 +24,8 @@ define([
 		};
 		config.fontSize = Number(config.fontSize || 13);
 		var generalConf = store.get('General') || {
-			enableSyncScroll: true
+			enableSyncScroll: true,
+			playKeypressSound: false
 		};
 
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -35,10 +36,12 @@ define([
 			viewportMargin: 40,
 			autofocus: true,
 			workDelay: 1000,
-			extraKeys: Keymap,
 			showTrailingSpace: true
 		});
 		editor.refresh();
+
+
+		// requirejs([ 'editor/Editor.emoji' ]);
 
 		var CodeMirrorElement = document.querySelector('.CodeMirror'),
 			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters'),
@@ -58,18 +61,59 @@ define([
 			e.preventDefault();
 		});
 
-		/* initialize editor */
+		//auto completion end signal
+		CodeMirror.on(editor, 'endCompletion', function(cm) {
+			var cur = cm.getCursor();
+			var token = cm.getTokenAt(cur);
+			var md = token.string;
 
+			switch(md) {
+			  case '##':
+			  case '###':
+			  case '####':
+			  case '#####':
+			  case '######':
+			    cm.replaceSelection(' ');
+			    cm.setCursor(cur);
+			  break;
+			  case '`':
+			  case '*':
+			  case '**':
+			  case '~~':
+			  case '==':
+			  case '$$$':
+			    cm.replaceSelection(md);
+			    cm.setCursor(cur);
+			  break;
+			  case '```':
+			    cm.replaceSelection('\n\n'+ md);
+			    cur.line++;
+			    cm.setCursor(cur);
+			  break;
+			  case '$$':
+			    cm.replaceSelection('\n\n'+ md);
+			    cur.line++;
+			    cm.setCursor(cur);
+			  break;
+			  case '()':
+			    cur.ch--;
+			    cm.setCursor(cur);
+			  break;
+			  case '* * *':
+			  case '- - -':
+			    cm.replaceSelection('\n\n');
+			    cur.line += 2;
+			    cm.setCursor(cur);
+			  break;
+			  default:
+			  break;
+			}
+		});
+
+		/* initialize editor */
 		function setFontSize(value) {
 			CodeMirrorElement.style.fontSize = value + 'px';
 		}
-		
-		editor.setOption('theme', config.theme);
-		editor.setOption('lineNumbers', config.displayLineNumber);
-		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
-		editor.setOption('tabSize', config.tabSize || 4);
-		editor.setOption('indentUnit', config.indentUnit || 4);
-		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
 		//TODO FIXME
 		function setFontFmaily() {
@@ -82,9 +126,6 @@ define([
 			}
 			// CodeMirrorElement.style.fontFamily = "Monaco, Menlo, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular";
 		}
-
-		setFontSize(config.fontSize);
-		setFontFmaily();
 
 		/**
 		 * sync scroll handler
@@ -158,7 +199,24 @@ define([
 			global._gaq.push('haroopad.preferences', 'editor', 'syncScroll: ' + value);
 		}
 
+		function toggleAutoComplete(value) {
+			var keyMap = value ? Keymap.markdown : Keymap.defaults;
+			editor.setOption('extraKeys', keyMap);
+		}
+		
+		editor.setOption('theme', config.theme);
+		editor.setOption('lineNumbers', config.displayLineNumber);
+		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
+		editor.setOption('tabSize', config.tabSize || 4);
+		editor.setOption('indentUnit', config.indentUnit || 4);
+		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
+
+		toggleAutoComplete(generalConf.enableAutoComplete || true);
+		setFontSize(config.fontSize);
+		setFontFmaily();
+
 		window.parent.ee.on('preferences.general.enableSyncScroll', toggleSyncScroll);
+		window.parent.ee.on('preferences.general.enableAutoComplete', toggleAutoComplete);
 
 		window.parent.ee.on('preferences.editor.theme', changeTheme);
 		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
