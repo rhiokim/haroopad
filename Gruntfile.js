@@ -15,6 +15,8 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('./src/package.json'),
 
     vendors: 'src/js/vendors',
+    build: 'build',
+    dist: 'dists/<%= pkg.version %>',
     
     clean: {
       build: [ 'build/*' ],
@@ -23,7 +25,44 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-      compress: {
+      pad: {
+        files: {
+          "build/haroopad/css/haroopad.min.css": [
+            'src/css/bootstrap.css',
+            'src/css/todc-bootstrap.css',
+            'src/css/bootstrap-modal.css',
+            'src/css/layout/basic.css',
+            'src/css/layout/header.css',
+            'src/css/layout/footer.css',
+            'src/css/layout/nav.css',
+            'src/css/layout/aside.css',
+            'src/css/aside.css',
+            'src/css/app.css'
+          ]
+        }
+      },
+
+      preferences: {
+        files: {
+          "build/haroopad/css/preferences.min.css": [
+            'src/css/bootstrap.css',
+            'src/css/todc-bootstrap.css',
+            'src/css/bootstrapSwitch.css',
+            'src/css/select2.css',
+            'src/css/preferences.css'
+          ]
+        }
+      },
+
+      viewer: {
+        files: {
+          "build/haroopad/css/viewer.min.css": [
+            'src/css/viewer.css'
+          ]
+        }
+      },
+
+      codemirror: {
         options: {
           keepSpecialComments: 0
         },
@@ -59,38 +98,148 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/xq-light.css',
             '<%= vendors %>/CodeMirror/addon/hint/show-hint.css',
             '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.css'
-          ],
-          "build/haroopad/css/haroopad.min.css": [
-            'src/css/bootstrap.css',
-            'src/css/todc-bootstrap.css',
-            'src/css/bootstrap-modal.css',
-            'src/css/layout/basic.css',
-            'src/css/layout/header.css',
-            'src/css/layout/footer.css',
-            'src/css/layout/nav.css',
-            'src/css/layout/aside.css',
-            'src/css/aside.css',
-            'src/css/app.css'
-          ],
-          "build/haroopad/css/viewer.min.css": [
-            'src/css/viewer.css'
-          ],
-          "build/haroopad/css/preferences.min.css": [
-            'src/css/bootstrap.css',
-            'src/css/todc-bootstrap.css',
-            'src/css/bootstrapSwitch.css',
-            'src/css/select2.css',
-            // 'src/css/font-awesome.min.css',
-            'src/css/preferences.css'
           ]
         }
       }
     },
 
     concat: {
+      app: {
+        files: {
+          '<%= build %>/app.js': [
+            'src/js/app/before.app.js',
+            '<%= build%>/app.common.min.js',
+            '<%= build%>/menu.min.js',
+            '<%= build%>/app.r.min.js',
+            'src/js/app/after.app.js'
+          ]
+        }
+      },
+
+      appVendors: {
+        files: {
+          '<%= build %>/haroopad/js/app.vendors.min.js': [
+            '<%= vendors %>/jquery/jquery.min.js',
+            '<%= vendors %>/eventEmitter/EventEmitter.min.js',
+            '<%= vendors %>/underscore/underscore-min.js',
+            '<%= vendors %>/backbone/backbone-min.js',
+            '<%= vendors %>/store.js/store.min.js',
+            '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
+            '<%= vendors %>/requirejs/require.min.js'
+          ]
+        }
+      },
+
+      pad: {
+        files: {
+          '<%= build %>/pad.js': [
+            'src/js/pad/before.pad.js',
+            '<%= build%>/pad.common.min.js',
+            '<%= build%>/menu.min.js',
+            '<%= build%>/pad.r.min.js',
+            'src/js/pad/after.pad.js'
+          ]
+        }
+      },
+
+      padVendors: {
+        files: {
+          '<%= build %>/haroopad/js/pad.vendors.min.js': [
+            '<%= vendors %>/jquery/jquery.min.js',
+            '<%= vendors %>/eventEmitter/EventEmitter.min.js',
+            '<%= vendors %>/underscore/underscore-min.js',
+            '<%= vendors %>/backbone/backbone-min.js',
+            '<%= vendors %>/bootstrap.min.js',
+            '<%= vendors %>/bootstrap-modal/js/bootstrap-modalmanager.min.js',
+            '<%= vendors %>/bootstrap-modal/js/bootstrap-modal.min.js',
+            '<%= vendors %>/store.js/store.min.js',
+            '<%= vendors %>/reMarked.js/reMarked.min.js',
+            '<%= vendors %>/notifer.js/notifier.min.js',
+            '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
+            '<%= vendors %>/requirejs/require.min.js'
+          ]
+        }
+      },
+
+      preferences: {
+        files: {
+          '<%= build %>/preferences.js': [
+            'src/js/preferences/before.preferences.js',
+            '<%= build%>/preferences.common.min.js',
+            '<%= build%>/preferences.r.min.js',
+            'src/js/preferences/after.preferences.js'
+          ]
+        }
+      },
+
+      preferencesVendors: {
+        files: {
+          '<%= build %>/haroopad/js/preferences.vendors.min.js': [
+            '<%= vendors %>/jquery/jquery.min.js',
+            '<%= vendors %>/underscore/underscore-min.js',
+            '<%= vendors %>/backbone/backbone-min.js',
+            '<%= vendors %>/bootstrap.min.js',
+            '<%= vendors %>/select2/select2.min.js',
+            '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
+            '<%= vendors %>/requirejs/require.min.js'
+          ]
+        }
+      },
+
+      viewer: {
+        files: {
+          '<%= build %>/haroopad/js/viewer.min.js': [
+            '<%= vendors %>/eventEmitter/EventEmitter.min.js',
+            '<%= vendors %>/jquery/jquery.min.js',
+            '<%= vendors %>/jquery-oembed-all/jquery.oembed.min.js',
+            '<%= vendors %>/highlightjs/highlight.pack.js',
+            '<%= build %>/viewer.min.js'
+          ]
+        }
+      },
+
+      snapshot: {
+        files: {
+          '<%= build %>/haroopad.min.js': [
+            '<%= build %>/app.js',
+            '<%= build %>/pad.js',
+            '<%= build %>/preferences.js'
+          ]
+        }
+      }
+    },
+
+    uglify: {
+      preBuiltLibs: {
+        files: {
+          '<%= vendors %>/requirejs/require.min.js': [ 
+            '<%= vendors %>/requirejs/require.js' 
+          ],
+
+          /* pad */
+          '<%= vendors %>/bootstrap-modal/js/bootstrap-modal.min.js': [ 
+            '<%= vendors %>/bootstrap-modal/js/bootstrap-modal.js' 
+          ],
+          '<%= vendors %>/bootstrap-modal/js/bootstrap-modalmanager.min.js': [ 
+            '<%= vendors %>/bootstrap-modal/js/bootstrap-modalmanager.js' 
+          ],
+          '<%= vendors %>/reMarked.js/reMarked.min.js': [ 
+            '<%= vendors %>/reMarked.js/reMarked.js' 
+          ],
+          '<%= vendors %>/notifer.js/notifier.min.js': [ 
+            '<%= vendors %>/notifer.js/notifier.js' 
+          ],
+
+          /* viewer */
+          '<%= vendors %>/jquery-oembed-all/jquery.oembed.min.js': [ 
+            '<%= vendors %>/jquery-oembed-all/jquery.oembed.js' 
+          ],
+        }
+      },
+
       menu: {
         files: {
-          'build/menu.concat.js': [
+          '<%= build %>/menu.min.js': [
             'src/js/common/menu/MenuBar.js',
             'src/js/common/menu/Menu.edit.js',
             'src/js/common/menu/Menu.file.js',
@@ -116,142 +265,83 @@ module.exports = function(grunt) {
           ]
         }
       },
-      app: {
+
+      appCommon: {
+        options: {
+          width: 80,
+          mangle: false
+        },
         files: {
-          'build/app.modules.js': [
-            'src/js/app/before.app.js',
+          '<%= build %>/app.common.min.js': [
             'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
             'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
-            'src/js/lib/i18n.js',
-            'build/menu.concat.js',
-            'build/app.r.js',
-            'src/js/app/after.app.js'
-          ],
-          'build/app.vendors.js': [
-            '<%= vendors %>/eventemitter.js',
-            '<%= vendors %>/underscore.min.js',
-            '<%= vendors %>/jquery-1.9.1.min.js',
-            '<%= vendors %>/backbone.min.js',
-            '<%= vendors %>/store.js',
-            '<%= vendors %>/i18next-1.6.3.min.js',
-            '<%= vendors %>/require.min.js'
+            'src/js/lib/i18n.js'
           ]
         }
       },
-      pad: {
+
+      appR: {
         files: {
-          'build/pad.modules.js': [
-            'src/js/pad/before.pad.js',
+          '<%= build %>/app.r.min.js': [
+            '<%= build %>/app.r.js'
+          ]
+        }
+      },
+
+      padCommon: {
+        options: {
+          width: 80,
+          mangle: false
+        },
+        files: {
+          '<%= build %>/pad.common.min.js': [
             'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
-            'src/js/pad/pad.common.js',
-            'build/menu.concat.js',
-            'build/pad.r.js',
-            'src/js/pad/after.pad.js'
-          ],
-          'build/pad.vendors.js': [
-            '<%= vendors %>/eventemitter.js',
-            '<%= vendors %>/underscore.min.js',
-            '<%= vendors %>/jquery-1.9.1.min.js',
-            '<%= vendors %>/backbone.min.js',
-            '<%= vendors %>/bootstrap.min.js',
-            '<%= vendors %>/bootstrap-modalmanager.js',
-            '<%= vendors %>/bootstrap-modal.js',
-            '<%= vendors %>/store.js',
-            '<%= vendors %>/js-url.js',
-            '<%= vendors %>/reMarked.js',
-            '<%= vendors %>/notifier.js',
-            '<%= vendors %>/i18next-1.6.3.min.js',
-            '<%= vendors %>/require.min.js'
+            'src/js/pad/pad.common.js'
           ]
         }
       },
-      preferences: {
-        files: {
-          'build/preferences.modules.js': [
-            'src/js/preferences/before.pref.js',
-            // 'src/js/lib/logger.js',
-            'src/js/lib/utils/util.js',
-            'build/preferences.r.js',
-            'src/js/preferences/after.pref.js'
-          ],
-          'build/preferences.vendors.js': [
-            '<%= vendors %>/jquery-1.9.1.min.js',
-            '<%= vendors %>/underscore.min.js',
-            '<%= vendors %>/backbone.min.js',
-            '<%= vendors %>/i18next-1.6.3.min.js',
-            '<%= vendors %>/require.min.js',
-            '<%= vendors %>/bootstrap.min.js',
-            '<%= vendors %>/bootstrapSwitch.js',
-            '<%= vendors %>/select2.js'
-          ]
-        }
-      },
-      snapshot: {
-        files: {
-          'build/haroopad.min.js': [
-            'build/app.modules.min.js',
-            'build/pad.modules.min.js',
-            'build/preferences.modules.min.js'
-          ]
-        }
-      },
-      viewer: {
-        files: {
-          'build/haroopad/js/viewer.min.js': [
-            '<%= vendors %>/eventemitter.js',
-            '<%= vendors %>/jquery-1.9.1.min.js',
-            '<%= vendors %>/jquery.oembed.js',
-            '<%= vendors %>/highlight.pack.js',
-            'build/viewer.js'
-          ]
-        }
-      }
-    },
 
-    uglify: {
-      app: {
+      padR: {
         files: {
-          'build/haroopad/js/app.vendors.min.js': [
-            'build/app.vendors.js'
-          ],
-          'build/app.modules.min.js': [
-            'build/app.modules.js'
+          '<%= build %>/pad.r.min.js': [
+            '<%= build %>/pad.r.js'
           ]
         }
       },
-      pad: {
+
+      preferencesCommon: {
+        options: {
+          width: 80,
+          mangle: false
+        },
         files: {
-          'build/haroopad/js/pad.vendors.min.js': [
-            'build/pad.vendors.js'
-          ],
-          'build/pad.modules.min.js': [
-            'build/pad.modules.js'
+          '<%= build %>/preferences.common.min.js': [
+            'src/js/lib/logger.js',
+            'src/js/lib/utils/util.js'
           ]
         }
       },
-      preferences: {
+
+      preferencesR: {
         files: {
-          'build/haroopad/js/preferences.vendors.min.js': [
-            'build/preferences.vendors.js'
-          ],
-          'build/preferences.modules.min.js': [
-            'build/preferences.modules.js'
+          '<%= build %>/preferences.r.min.js': [
+            '<%= build %>/preferences.r.js'
           ]
         }
       },
+
       viewer: {
         files: {
-          'build/viewer.js': [
+          '<%= build %>/viewer.min.js': [
             'src/js/viewer/disable.debug.js',
-            // 'src/js/viewer/DynamicContents.js',
-            // 'src/js/viewer/dragdrop.js',
             'src/js/viewer/main.js'
           ]
         }
       },
+
       codemirror: {
         files: {
           'build/haroopad/js/codemirror.min.js': [
@@ -280,12 +370,10 @@ module.exports = function(grunt) {
         files: [
           { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
-          // { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'build/haroopad/node_modules/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
           { expand: true, cwd: 'src/css/column/', src: [ '**' ], dest: 'build/haroopad/css/column/' },
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad/css/viewer-toc/' },
-          // { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
           { expand: true, cwd: 'src/html/', src: [ '**' ], dest: 'build/haroopad/html/' },
           { src: 'src/index.bin.html', dest: 'build/haroopad/index.html' },
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
@@ -298,68 +386,18 @@ module.exports = function(grunt) {
         ]
       },
 
-      libs: {
-        files: [
-          { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' },
-          // { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/emoji/', src: [ '**' ], dest: 'build/lib/emoji/' }
-        ]
-      },
-
-      node_modules: {
-        files: [
-          { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.node_modules/'}
-          // { src: 'src/node_modules/base62/base62.js', dest: 'build/haroopad/node_modules/base62/base62.js' },
-          // { src: 'src/node_modules/base62/package.json', dest: 'build/haroopad/node_modules/base62/package.json' },
-          // { src: 'src/node_modules/marked/lib/marked.js', dest: 'build/haroopad/node_modules/marked/lib/marked.js' },
-          // { src: 'src/node_modules/marked/package.json', dest: 'build/haroopad/node_modules/marked/package.json' },
-          // { src: 'src/node_modules/readdir/lib/readdir.js', dest: 'build/haroopad/node_modules/readdir/lib/readdir.js' },
-          // { src: 'src/node_modules/readdir/package.json', dest: 'build/haroopad/node_modules/readdir/package.json' },
-          // { src: 'src/node_modules/clean-css/lib/clean.js', dest: 'build/haroopad/node_modules/clean-css/lib/clean.js' },
-          // { src: 'src/node_modules/clean-css/index.js', dest: 'build/haroopad/node_modules/clean-css/index.js' },
-          // { src: 'src/node_modules/clean-css/package.json', dest: 'build/haroopad/node_modules/clean-css/package.json' },
-
-          // { expand: true, cwd: 'src/node_modules/fs-extra/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/fs-extra/lib/' },
-          // { src: 'src/node_modules/fs-extra/package.json', dest: 'build/haroopad/node_modules/fs-extra/package.json' },
-
-          // { src: 'src/node_modules/graceful-fs/package.json', dest: 'build/haroopad/node_modules/graceful-fs/package.json' },
-          // { src: 'src/node_modules/graceful-fs/graceful-fs.js', dest: 'build/haroopad/node_modules/graceful-fs/graceful-fs.js' },
-          // { src: 'src/node_modules/graceful-fs/polyfills.js', dest: 'build/haroopad/node_modules/graceful-fs/polyfills.js' },
-
-          // { src: 'src/node_modules/jsonfile/package.json', dest: 'build/haroopad/node_modules/jsonfile/package.json' },
-          // { expand: true, cwd: 'src/node_modules/jsonfile/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/jsonfile/lib/' },
-
-          // { src: 'src/node_modules/mkdirp/package.json', dest: 'build/haroopad/node_modules/mkdirp/package.json' },
-          // { src: 'src/node_modules/mkdirp/index.js', dest: 'build/haroopad/node_modules/mkdirp/index.js' },
-
-          // { src: 'src/node_modules/ncp/package.json', dest: 'build/haroopad/node_modules/ncp/package.json' },
-          // { expand: true, cwd: 'src/node_modules/ncp/lib/', src: [ '**' ], dest: 'build/haroopad/node_modules/ncp/lib/' },
-
-          // { src: 'src/node_modules/rimraf/package.json', dest: 'build/haroopad/node_modules/rimraf/package.json' },
-          // { src: 'src/node_modules/rimraf/rimraf.js', dest: 'build/haroopad/node_modules/rimraf/rimraf.js' },
-
-          // { src: 'src/node_modules/humanize/package.json', dest: 'build/haroopad/node_modules/humanize/package.json' },
-          // { src: 'src/node_modules/humanize/humanize.js', dest: 'build/haroopad/node_modules/humanize/humanize.js' },
-
-          // { src: 'src/node_modules/moment/package.json', dest: 'build/haroopad/node_modules/moment/package.json' },
-          // { src: 'src/node_modules/moment/moment.js', dest: 'build/haroopad/node_modules/moment/moment.js' }
-
-        ]
-      },
-
       debug: {
         files: [
           { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/img/' },
           { expand: true, flatten: true, src: [ 'src/css/*' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/', filter:'isFile' },
           { expand: true, cwd: 'src/js/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/js/' },
-          // { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/node_modules/' },
           { expand: true, cwd: 'src/tpl/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/tpl/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/code/' },
           { expand: true, cwd: 'src/css/viewer/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/viewer/' },
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/viewer-toc/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/markdown/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/code/' },
-          // { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
           { src: 'src/pad.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/pad.html' },
           { src: 'src/viewer.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/viewer.html' },
           { src: 'src/index.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/index.html' },
@@ -374,6 +412,27 @@ module.exports = function(grunt) {
         ]
       },
 
+      build: {
+        files: [
+          { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
+          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
+          { src: 'lib/markdown.icns', dest: 'build/haroopad.app/Contents/Resources/markdown.icns' },
+
+          { expand: true, cwd: 'build/libs/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/libs/' }
+        ]
+      },
+
+      libs: {
+        files: [
+          { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' }
+        ]
+      },
+
+      node_modules: {
+        files: [
+          { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.node_modules/'}
+        ]
+      },
       lang: {
         files: [
           { expand: true, cwd: 'src/locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
@@ -386,51 +445,40 @@ module.exports = function(grunt) {
         ]
       },
 
-      build: {
+      /* vendors */
+      btmodal: {
         files: [
-          { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
-          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
-          { src: 'lib/markdown.icns', dest: 'build/haroopad.app/Contents/Resources/markdown.icns' },
-
-          { expand: true, cwd: 'build/libs/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/libs/' }
+          { expand: true, cwd: '<%= vendors %>/bootstrap-modal/css/', src: [ '**' ], dest: 'src/css/' }
         ]
       },
 
-      mdcss: {
+      mkdcss: {
         files: [
-          { expand: true, cwd: 'lib/markdown-css/build/', src: [ '**' ], dest: 'src/css/markdown' }
+          { expand: true, cwd: '<%= vendors %>/markdown-css/build/', src: [ '**' ], dest: 'src/css/markdown' }
         ]
       },
 
-      mdsass: {
+      mathjax: {
         files: [
-          { expand: true, cwd: 'lib/node-sass/', src: [ 'package.json', 'sass.js' ], dest: 'src/node_modules/node-sass' },
-          { src: 'lib/node-sass/build/Release/binding.node', dest: 'src/node_modules/node-sass/build/Release/binding.node'},
-          { expand: true, cwd: 'lib/node-sass/lib/', src: [ '**' ], dest: 'src/node_modules/node-sass/lib/' }
-        ]
-      },
-
-      mdmathjax: {
-        files: [
-          { expand: true, cwd: 'lib/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/config/' },
-          { expand: true, cwd: 'lib/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/extensions/' },
-          { expand: true, cwd: 'lib/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/fonts/HTML-CSS/TeX/woff/' },
-          { expand: true, cwd: 'lib/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/images/' },
-          { expand: true, cwd: 'lib/MathJax/jax/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/' },
-          { expand: true, flatten: true, src: [ 'lib/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/', filter: 'isFile'}
+          { expand: true, cwd: '<%= vendors %>/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/config/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/extensions/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/fonts/HTML-CSS/TeX/woff/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/images/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/' },
+          { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/', filter: 'isFile'}
         ]
       },
       
-      mdhighlight: {
+      highlightjs: {
         files: [
-          { expand: true, cwd: 'lib/highlight.js/src/styles/', src: [ '**' ], dest: 'src/css/code/' },
-          { src: 'lib/highlight.js/build/highlight.pack.js', dest: 'src/js/vendors/highlight.pack.js'}
+          { expand: true, cwd: '<%= vendors %>/highlightjs/styles/', src: [ '**' ], dest: 'src/css/code/' }
         ]
       },
-
-      mdcodemirror: {
+      
+      select2: {
         files: [
-          { expand: true, cwd: 'lib/codemirror/', src: [ '**' ], dest: 'src/js/vendors/CodeMirror/' }
+          { src: '<%= vendors %>/select2/select2.png', dest: 'src/css/select2.png' },
+          { src: '<%= vendors %>/select2/select2.css', dest: 'src/css/select2.css' }
         ]
       }
     },
@@ -488,9 +536,9 @@ module.exports = function(grunt) {
 
       pad: {
         options: {
-          name: 'haroopad',
+          name: 'index',
           baseUrl: "src/js/pad",
-          mainConfigFile: "src/js/pad/haroopad.js",
+          mainConfigFile: "src/js/pad/index.js",
           out: "build/pad.r.js",
           preserveLicenseComments: false
         }
@@ -507,17 +555,45 @@ module.exports = function(grunt) {
       }
     }
   });
-
+  
+  /* deploy to Application directory */
   grunt.registerTask('deploy', [ 'shell:deploy']);
-  grunt.registerTask('core', [ 'clean:core', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
-  grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
+
+  /* luanch mac app */
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  grunt.registerTask('cp', [ 'copy:main', 'copy:libs', 'copy:node_modules', 'copy:docs', 'copy:lang' ]);
-  grunt.registerTask('app', [ 'requirejs:app', 'concat:app', 'uglify:app' ]);
-  grunt.registerTask('pad', [ 'requirejs:pad', 'concat:pad', 'uglify:pad' ]);
-  grunt.registerTask('prf', [ 'requirejs:preferences', 'concat:preferences', 'uglify:preferences' ]);
-  grunt.registerTask('viewer', [ 'uglify:viewer', 'concat:viewer' ]);
+  grunt.registerTask('nwlibs', [ 'copy:libs', 'copy:node_modules', 'copy:docs', 'copy:lang' ])
+
+  grunt.registerTask('cp', [ 'copy:main', 'nwlibs' ]);
+
+  /* codemirror */
   grunt.registerTask('codemirror', [ 'uglify:codemirror' ]);
-  grunt.registerTask('default', [ 'clean', 'cp', 'cssmin', 'concat:menu', 'app', 'pad', 'prf', 'viewer', 'codemirror', 'concat:snapshot', 'shell:bin' ]);
+
+  /* snapshot */
+  grunt.registerTask('snapshot', [ 'concat:snapshot', 'shell:bin' ]);
+
+  /* pre built */
+  grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs' ]);
+
+  /* css */
+  grunt.registerTask('css', [ 'cssmin:pad', 'cssmin:preferences', 'cssmin:viewer', 'cssmin:codemirror' ]);
+
+  /* app */
+  grunt.registerTask('app', [ 'concat:appVendors', 'uglify:appCommon', 'requirejs:app', 'uglify:appR', 'concat:app' ]);
+
+  /* pad */
+  grunt.registerTask('pad', [ 'concat:padVendors', 'uglify:padCommon', 'requirejs:pad', 'uglify:padR', 'concat:pad' ]);
+
+  /* preference */
+  grunt.registerTask('preferences', [ 'concat:preferencesVendors', 'uglify:preferencesCommon', 'requirejs:preferences', 'uglify:preferencesR', 'concat:preferences' ]);
+
+  /* viewer */
+  grunt.registerTask('viewer', [ 'uglify:viewer', 'concat:viewer' ]);
+
+  /* uglify */
+  grunt.registerTask('menu', [ 'uglify:menu' ]);
+
+  /* pkg */
+  grunt.registerTask('default', [ 'clean', 'cp', 'menu', 'css', 'codemirror' ]);
+  grunt.registerTask('pkg2', [ 'app', 'pad', 'preferences', 'viewer', 'snapshot' ]);
 };

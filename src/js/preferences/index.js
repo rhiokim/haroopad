@@ -14,22 +14,23 @@ i18n.init({
   //fixed text.js error on node-webkit
   require.nodeRequire = require;
 
-/**
- * require.js 환경 설정
- */
-requirejs.config({
-  baseUrl: 'js/preferences',
-  waitSeconds: 30,
-  locale: 'ko-kr',
-  paths: {
-    // tpl: '../../tpl',
-    vendors: '../vendors',
-    store: '../vendors/store.js/store',
-    keyboard: '../vendors/keymage/keymage'
-  },
-  config: {
-    text: {
-      env: 'xhr'
+  /**
+   * require.js 환경 설정
+   */
+  requirejs.config({
+    baseUrl: 'js/preferences',
+    waitSeconds: 30,
+    locale: 'ko-kr',
+    paths: {
+      // tpl: '../../tpl',
+      vendors: '../vendors',
+      store: '../vendors/store.js/store',
+      keyboard: '../vendors/keymage/keymage'
+    },
+    config: {
+      text: {
+        env: 'xhr'
+      }
     }
   });
 

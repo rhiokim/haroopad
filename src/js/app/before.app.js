@@ -2,4 +2,4 @@
  * start bin
  * for v8 snapshot
  */
-function app(window, document) {
+function app(global, window, document) {

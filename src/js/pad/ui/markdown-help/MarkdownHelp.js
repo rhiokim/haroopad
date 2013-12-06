@@ -1,6 +1,6 @@
 define([
 		'keyboard',
-		'text!tpl/markdown-help.html'
+		'txt!tpl/markdown-help.html'
 	], 
 	function(HotKey, html) {
 		$('#md-help #md-help-content').append(html);
