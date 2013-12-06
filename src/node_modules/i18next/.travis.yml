@@ -1,0 +1,14 @@
+before_script: "npm install --dev"
+
+language: node_js
+node_js:
+  - 0.6
+  - 0.8
+
+branches:
+  only:
+    - master
+
+notifications:
+  email:
+    - jan.muehlemann@gmail.com

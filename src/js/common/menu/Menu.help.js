@@ -10,9 +10,9 @@ window.MenuBarHelp = function () {
 
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Haroopad Help',
+	        label: i18n.t('help.haroopad-help'),
 		      click: function() {
-		      	window.parent.ee.emit('menu.help.about')
+		      	window.parent.ee.emit('menu.help.doc', 'about');
 		    //   	(process.platform === 'win32') ?
 		    //   	window.parent.ee.emit('menu.help.about') :
 						// open('http://pad.haroopress.com/page.html');
@@ -21,9 +21,9 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Markdown Syntax Help',
+	        label: i18n.t('help.markdown-syntax-help'),
 		      click: function() {
-		      	window.parent.ee.emit('menu.help.syntax')
+		      	window.parent.ee.emit('menu.help.syntax');
 		      	// (process.platform === 'win32') ?
 		      	// window.parent.ee.emit('menu.help.syntax') :
 		       //  open('http://pad.haroopress.com/page.html?f=syntax');
@@ -32,9 +32,9 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Haroopad Shortcut Help',
+	        label: i18n.t('help.haroopad-shortcut-help'),
 		      click: function() {
-		      	window.parent.ee.emit('menu.help.shortcut')
+		      	window.parent.ee.emit('menu.help.doc', 'shortcut');
 		      	// (process.platform === 'darwin') ?
 		      	// window.parent.ee.emit('menu.help.shortcut') :
 		       //  open('http://pad.haroopress.com/page.html?f=show-shortcuts');
@@ -49,7 +49,7 @@ window.MenuBarHelp = function () {
 
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Release Notes',
+	        label: i18n.t('help.release-notes'),
 		      click: function() {
 		        open('http://pad.haroopress.com/page.html?f=release-notes');
 		      }
@@ -57,9 +57,9 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Acknowledgements',
+	        label: i18n.t('help.acknowledgements'),
 		      click: function() {
-		      	window.parent.ee.emit('menu.help.acknowledgements')
+		      	window.parent.ee.emit('menu.help.doc', 'acknowledgements')
 		      	// (process.platform === 'darwin') ?
 		      	// window.parent.ee.emit('menu.help.acknowledgements') :
 		       //  open('http://pad.haroopress.com/page.html?f=acknowledgements');
@@ -74,7 +74,7 @@ window.MenuBarHelp = function () {
 
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Haroopad Website',
+	        label: i18n.t('help.haroopad-website'),
 		      click: function() {
 					open('http://pad.haroopress.com/');
 		      }
@@ -82,7 +82,7 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'User echo',
+	        label: i18n.t('help.user-echo'),
 		      click: function() {
 					open('http://haroopad.userecho.com/');
 		      }
@@ -90,7 +90,7 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Twitter',
+	        label: i18n.t('help.twitter'),
 		      click: function() {
 					open('https://twitter.com/haroopad');
 		      }
@@ -103,7 +103,7 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Check for update...',
+	        label: i18n.t('help.check-for-update'),
 		      click: function() {
 		      	window.parent.ee.emit('check.version', true);
 		      }
@@ -111,12 +111,12 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: 'Boost up! Donate',
+	        label: i18n.t('help.boost-up-donate'),
 		      click: function() {
 					open('http://pad.haroopress.com/page.html?f=grow-up-donate');
 		      }
 	    })
 	);
 
-	return new gui.MenuItem({ label: 'Help', submenu: Help });
+	return new gui.MenuItem({ label: i18n.t('help.name'), submenu: Help });
 };

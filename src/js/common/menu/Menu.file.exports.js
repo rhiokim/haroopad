@@ -4,13 +4,13 @@ window.MenuBarFileExports = function () {
 
   submenu.append(
     new gui.MenuItem({
-      label: 'Clipboard',
+      label: i18n.t('file.copy-to-clipboard'),
       enabled: false
     })
   );
   submenu.append(
     new gui.MenuItem({
-      label: 'Plain HTML',
+      label: i18n.t('file.plain-html'),
       click: function() {
         window.parent.ee.emit('menu.file.exports.clipboard.plain');
       }
@@ -18,7 +18,7 @@ window.MenuBarFileExports = function () {
   );
   submenu.append(
     new gui.MenuItem({
-      label: 'Styled HTML',
+      label: i18n.t('file.styled-html'),
       click: function() {
         window.parent.ee.emit('menu.file.exports.clipboard.styled');
       }
@@ -39,13 +39,13 @@ window.MenuBarFileExports = function () {
   );
   submenu.append(
     new gui.MenuItem({
-      label: 'File',
+      label: i18n.t('file.export-to-file'),
       enabled: false
     })
   );
   submenu.append(
     new gui.MenuItem({
-        label: 'HTML',
+        label: i18n.t('file.export-to-html'),
         click: function() {
           window.parent.ee.emit('menu.file.exports.html');
         }

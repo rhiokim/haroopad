@@ -1,0 +1,12 @@
+{
+  "name": "highlightjs",
+  "repo": "components/highlightjs",
+  "version": "7.5.0",
+  "main": "highlight.pack.js",
+  "scripts": [
+    "highlight.pack.js"
+  ],
+  "files": [
+    "styles/default.css"
+  ]
+}

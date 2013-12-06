@@ -1,0 +1,14 @@
+{
+  "name": "jquery-oembed-all",
+  "homepage": "https://github.com/starfishmod/jquery-oembed-all",
+  "_release": "9bab01eb8d",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9bab01eb8d1df39f63cbc84440b43930ade4f2db"
+  },
+  "_source": "git@github.com:starfishmod/jquery-oembed-all.git",
+  "_target": "*",
+  "_originalSource": "git@github.com:starfishmod/jquery-oembed-all.git",
+  "_direct": true
+}

@@ -14,7 +14,7 @@ define([
 	var shadow = document.createElement('html');
 
 	function setInlineStyles(rules) {
-		var i, j, selectorMatches, styleAttr;
+		var i, j, elem, selectorMatches, styleAttr;
 
 		for (i = 0; i < rules.length; i++) {
 			rule = rules[i];

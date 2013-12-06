@@ -15,38 +15,38 @@ window.MenuBarFile = function () {
   }
 
 	menuItem({
-            label: 'New',
+            label: i18n.t('file.new'),
             click: function() {
                 window.parent.ee.emit('menu.file.new');
             }
         });
 	menuItem({
-            label: 'Open',
+            label: i18n.t('file.open'),
             click: function() {
                 window.parent.ee.emit('menu.file.open');
             }
         });
 	menuItem({
-            label: 'Open Recent',
+            label: i18n.t('file.open-recent'),
             submenu: MenuBarFileRecents()
         });
 	sepItem();
 	
   menuItem({
-          label: 'Save',
+          label: i18n.t('file.save'),
           click: function() {
               window.parent.ee.emit('menu.file.save');
           }
       });
   menuItem({
-          label: 'Save As',
+          label: i18n.t('file.save-as'),
           click: function() {
               window.parent.ee.emit('menu.file.save.as');
           }
       });
 
   menuItem({
-          label: 'Close',
+          label: i18n.t('file.close'),
           click: function() {
               window.parent.ee.emit('menu.file.close');
           }
@@ -59,7 +59,7 @@ window.MenuBarFile = function () {
       });
 
   menuItem({
-          label: 'Export to...',
+          label: i18n.t('file.exports'),
           // enabled: false,
           submenu: MenuBarFileExports()
       });
@@ -72,7 +72,7 @@ window.MenuBarFile = function () {
   //       });
   
   menuItem({
-            label: 'Print...',
+            label: i18n.t('file.print'),
             click: function() {
                 window.parent.ee.emit('menu.print.viewer');
             }
@@ -93,14 +93,14 @@ window.MenuBarFile = function () {
 
   sepItem();
   menuItem({
-          label: 'Preferences',
+          label: i18n.t('file.preferences'),
           click: function() {
               window.parent.ee.emit('menu.preferences.show');
           }
       });
   sepItem();
   menuItem({
-          label: 'Quit',
+          label: i18n.t('file.quit'),
           click: function() {
             gui.App.closeAllWindows()();
           }
@@ -123,5 +123,5 @@ window.MenuBarFile = function () {
 	);
      */
 
-	return new gui.MenuItem({ label: 'File', submenu: File });
+	return new gui.MenuItem({ label: i18n.t('file.name'), submenu: File });
 };

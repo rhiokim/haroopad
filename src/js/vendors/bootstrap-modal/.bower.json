@@ -1,0 +1,15 @@
+{
+  "name": "bootstrap-modal",
+  "homepage": "https://github.com/jschr/bootstrap-modal",
+  "version": "2.1.0",
+  "_release": "2.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.1.0",
+    "commit": "02b6c6bfe15c1d49e198dbddd35cd4e74722d689"
+  },
+  "_source": "git://github.com/jschr/bootstrap-modal.git",
+  "_target": "~2.1.0",
+  "_originalSource": "bootstrap-modal",
+  "_direct": true
+}

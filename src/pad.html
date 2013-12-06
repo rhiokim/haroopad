@@ -5,9 +5,9 @@
   <title>haroopad</title>
   
 <!-- for develop -->
-  <script src="js/vendors/keymage.js"></script>
+  <script src="js/vendors/keymage/keymage.js"></script>
   <script>
-    keymage('defmod-esc', function() {
+    keymage('esc esc', function() {
       var gui = require("nw.gui");
       var win = gui.Window.get();
       win.showDevTools();
@@ -46,6 +46,7 @@
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/vibrant-ink.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/xq-dark.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror/theme/xq-light.css">
+  <link rel="stylesheet" href="js/vendors/CodeMirror/addon/hint/show-hint.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror-custom/addon/dialog/dialog.css">
   
   <link rel="stylesheet" href="css/bootstrap.css">
@@ -55,34 +56,30 @@
   <link rel="stylesheet" href="css/layout/basic.css">
   <link rel="stylesheet" href="css/layout/header.css">
   <link rel="stylesheet" href="css/layout/footer.css">
-  <link rel="stylesheet" href="css/layout/l-side.css">
-  <link rel="stylesheet" href="css/layout/r-side.css">
+  <link rel="stylesheet" href="css/layout/nav.css">
 
   <link rel="stylesheet" href="css/layout/aside.css">
+  <link rel="stylesheet" href="css/aside.css">
 
   <link rel="stylesheet" href="css/app.css">
+
+  <script src="js/vendors/jquery/jquery.js"></script>
+  <script src="js/vendors/eventEmitter/EventEmitter.js"></script>
+  <script src="js/vendors/underscore/underscore.js"></script>
+  <script src="js/vendors/backbone/backbone.js"></script>
+  <script src="js/vendors/bootstrap.min.js"></script>
+  <script src="js/vendors/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+  <script src="js/vendors/bootstrap-modal/js/bootstrap-modal.js"></script>
+  <script src="js/vendors/store.js/store.js"></script>
+  <script src="js/vendors/reMarked.js/reMarked.js"></script>
+  <script src="js/vendors/notifer.js/notifier.js"></script>
+  <script src="js/vendors/i18next/release/i18next-1.7.1.js"></script>
+  <script src="js/vendors/requirejs/require.js"></script>
 
   <script src="js/lib/logger.js"></script>
   <script src="js/lib/utils/util.js"></script>
   <script src="js/pad/pad.common.js"></script>
-
-  <script src="js/vendors/eventemitter.js"></script>
-  <script src="js/vendors/underscore.js"></script>
-
-  <!--script src="js/vendors/layout/classie.js"></script>
-  <script src="js/vendors/layout/qmenu.js"></script-->
-
-  <script src="js/vendors/jquery-1.9.1.js"></script>
-  <script src="js/vendors/backbone.js"></script>
-  <script src="js/vendors/bootstrap.min.js"></script>
-  <script src="js/vendors/bootstrap-modalmanager.js"></script>
-  <script src="js/vendors/bootstrap-modal.js"></script>
-  <script src="js/vendors/store.js"></script>
-  <script src="js/vendors/js-url.js"></script>
-  <script src="js/vendors/reMarked.js"></script>
-  <script src="js/vendors/notifier.js"></script>
-  <script src="js/vendors/require.js"></script>
-
+  
   <script src="js/common/menu/MenuBar.js"></script>
   <script src="js/common/menu/Menu.edit.js"></script>
   <script src="js/common/menu/Menu.file.js"></script>
@@ -91,6 +88,7 @@
   <script src="js/common/menu/Menu.file.exports.js"></script>
   <script src="js/common/menu/Menu.file.activities.js"></script>
   <script src="js/common/menu/Menu.find.js"></script>
+  <script src="js/common/menu/Menu.view.column.js"></script>
   <script src="js/common/menu/Menu.view.js"></script>
   <script src="js/common/menu/Menu.view.mode.js"></script>
   <script src="js/common/menu/Menu.view.column.js"></script>
@@ -108,13 +106,14 @@
   <script src="js/common/menu/Menu.help.js"></script>
 
   <script src="js/vendors/CodeMirror/lib/codemirror.js"></script>
+  <script src="js/vendors/CodeMirror/addon/hint/show-hint.js"></script>
+  <script src="js/vendors/CodeMirror-custom/addon/hint/markdown-hint.js"></script>
   <script src="js/vendors/CodeMirror/addon/edit/continuelist.js"></script>
   <script src="js/vendors/CodeMirror/addon/edit/closebrackets.js"></script>
   <script src="js/vendors/CodeMirror/addon/edit/trailingspace.js"></script>
   <script src="js/vendors/CodeMirror-custom/addon/dialog/dialog.js"></script>
   <script src="js/vendors/CodeMirror/addon/search/searchcursor.js"></script>
   <script src="js/vendors/CodeMirror-custom/addon/search/search.js"></script>
-  <script src="js/pad/editor/Codemirror.markdown.keymap.js"></script>
   <script src="js/vendors/CodeMirror/addon/mode/overlay.js"></script>
   <script src="js/vendors/CodeMirror/mode/xml/xml.js"></script>
   <script src="js/vendors/CodeMirror/mode/gfm/gfm.js"></script>
@@ -200,6 +199,7 @@
   </header>
 
   <section id="main">
+    <nav></nav>
     <article class="panel layout0">
       <section id="editor">
         <textarea id="code" name="code"></textarea>
@@ -208,16 +208,31 @@
         <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
       </section>
     </article>
-    <nav>bbb</nav>
-    <aside>
+    <aside id="toc">
+      <header>
+        <h5><span data-i18n="toc.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span></h5>
+      </header>
+      <div id="toc-content">
+      </div>
+      <footer></footer>
+    </aside>
+    <aside id="md-help">
+      <header>
+        <h5 class="pull-left"><span data-i18n="markdown.name">Markdown Syntax Help</span></h5>
+        <a href="html/markdown-help.html" target="md-help" class="btn btn-mini btn-primary pull-right" data-exec="link"><i class="icon-white icon-share"></i></a>
+      </header>
+      <div id="md-help-content">
+      </div>
+      <footer></footer>
     </aside>
   </section>
 
   <footer class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="navbar-inner">
       <div class="pull-left">
-        <span id="lineCount">lines: <span>0</span></span> 
-        <span id="wordCount">words: <span>0</span></span>
+        <span id="lineCount"><span data-i18n="pad:footer.lines">lines</span>: <span class="_cnt">0</span></span> 
+        <span id="wordCount"><span data-i18n="pad:footer.words">words</span>: <span class="_cnt">0</span></span>
+        <!-- <span id="paraCount"><span data-i18n="pad:footer.paragraph">paragraph</span>: <span class="_cnt">0</span></span> -->
         <span id="cursorActivity">(<span>0 : 0</span>)</span>
         <span id="elementsInfo"><i class="icon-info-sign icon-white"></i></span>
       </div>
@@ -228,37 +243,38 @@
           <i class="icon-cog icon-white"></i>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i>Show Document Outline</a></li>
-          <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i>Show TOC</a></li>
+          <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i><span data-i18n="pad:config.outline">Show Document Outline</span></a></li>
+          <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i><span data-i18n="pad:config.toc">Show TOC</span></a></li>
+          <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i><span data-i18n="pad:config.fullscreen"></span></a></li>
         </ul>
       </div><div id="columnCount" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
-          Columns
+          <span data-i18n="pad:config.column.label">Columns</span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="0" href="#" data-column="single" class="active"><i class="icon-ok"></i>Single</a></li>
+          <li><a tabindex="0" href="#" data-column="single" class="active"><i class="icon-ok"></i><span data-i18n="pad:config.column.one">Single</span></a></li>
           <li class="divider"></li>
-          <li><a tabindex="1" href="#" data-column="two"><i class="icon-ok"></i>Column: 2</a></li>
-          <li><a tabindex="2" href="#" data-column="three"><i class="icon-ok"></i>Column: 3</a></li>
+          <li><a tabindex="1" href="#" data-column="two"><i class="icon-ok"></i><span data-i18n="pad:config.column.two">Column: 2</span></a></li>
+          <li><a tabindex="2" href="#" data-column="three"><i class="icon-ok"></i><span data-i18n="pad:config.column.three">Column: 3</span></a></li>
         </ul>
       </div>
       <div id="indentation" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
-          Spaces
+          <span data-i18n="pad:config.spaces">Spaces</span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="0" href="#"><span class="label label-warning">Experimental</span></a></li>
-          <li><a tabindex="0" href="#" data-using-tab="true"><i class="icon-ok"></i>Indent Using Tabs</a></li>
+          <li><a tabindex="0" href="#"><span class="label label-warning"><span data-i18n="pad:config.experimental">Experimental</span></span></a></li>
+          <li><a tabindex="0" href="#" data-using-tab="true"><i class="icon-ok"></i><span data-i18n="pad:config.usetab">Indent Using Tabs</span></a></li>
           <li class="divider"></li>
-          <li><a tabindex="1" href="#" data-tab-size="2"><i class="icon-ok"></i>Tab with: 2</a></li>
-          <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i>Tab with: 3</a></li>
-          <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i>Tab with: 4</a></li>
-          <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i>Tab with: 5</a></li>
-          <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i>Tab with: 6</a></li>
-          <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i>Tab with: 7</a></li>
-          <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i>Tab with: 8</a></li>
+          <li><a tabindex="1" href="#" data-tab-size="2"><i class="icon-ok"></i><span data-i18n="pad:config.tab">Tab with</span>: 2</a></li>
+          <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i><span data-i18n="pad:config.tab">Tab with</span>: 3</a></li>
+          <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i><span data-i18n="pad:config.tab">Tab with</span>: 4</a></li>
+          <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i><span data-i18n="pad:config.tab">Tab with</span>: 5</a></li>
+          <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i><span data-i18n="pad:config.tab">Tab with</span>: 6</a></li>
+          <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i><span data-i18n="pad:config.tab">Tab with</span>: 7</a></li>
+          <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i><span data-i18n="pad:config.tab">Tab with</span>: 8</a></li>
           <!-- <li class="divider"></li>
           <li><a tabindex="8" href="#">Convert indentation to Spaces</a></li>
           <li><a tabindex="9" href="#">Convert indentation to Tabs</a></li> -->
@@ -266,11 +282,11 @@
       </div>
       <div id="shareit" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="icon-share-alt icon-white"></i> share
+          <i class="icon-share-alt icon-white"></i> <span data-i18n="pad:share">share</span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a tabindex="-1" href="#">It's Promotion</a></li>
+          <li><a tabindex="-1" href="#" data-i18n="pad:promotion.desc">It's Promotion</a></li>
           <li class="divider"></li>
           <li><a tabindex="0" href="#" data-service="twitter">Twitter</a></li>
           <li><a tabindex="1" href="#" data-service="facebook">Facebook</a></li>
@@ -281,7 +297,7 @@
         </ul>
       </div>
       <div id="donate-btn" class="btn-group pull-right">
-        <a href="#" class="btn btn-mini btn-danger" data-toggle="popover" data-trigger="click" data-placement="top" data-content="If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>" title="" data-original-title="Donate to help keep development going!" data-html="true"><i class="icon-leaf icon-white"></i> keep development</a>
+        <a href="#" class="btn btn-mini btn-danger" data-toggle="popover" data-trigger="click" data-placement="top" data-html="true"><i class="icon-leaf icon-white"></i> <span data-i18n="pad:donate.label">keep development</span></a>
       </div>
     </div>
   </footer>
@@ -303,7 +319,7 @@
 </body>
 <script>
   function start() {
-    requirejs(['js/pad/haroopad']);
+    requirejs(['js/pad/index']);
   }
 </script>
 </html>

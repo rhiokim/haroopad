@@ -1,6 +1,6 @@
 window.MenuBar = function() {
 	var gui = require('nw.gui'),
-			win = gui.Window.get();
+		win = gui.Window.get();
 
 	var menu = MenuBar._systemMenu;
 	var platform = process.platform;
@@ -12,8 +12,8 @@ window.MenuBar = function() {
 		
 		if (platform != 'darwin') {
 			menu.append( MenuBarFile() );
+			menu.append( MenuBarEdit() );
 		}
-		// menu.append( MenuBarEdit() );
 		menu.append( MenuBarFind() );
 		menu.append( MenuBarInsert() );
 		menu.append( MenuBarView() );
