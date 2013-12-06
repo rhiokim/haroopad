@@ -94,6 +94,12 @@ form {
   font-style: normal;
 }
 
+.CodeMirror-wrap .CodeMirror-code pre {
+  /*word-break: break-word;
+  white-space: inherit;
+  word-wrap: break-word;*/
+}
+
 /* email */
 #send-email-dialog .progress {
   height: 10px;

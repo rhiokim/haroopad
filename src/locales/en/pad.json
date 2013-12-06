@@ -49,6 +49,25 @@
 		"desc": "If you feel that is useful, donate to help keep development going. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donate</a>"
 	},
 
+	"email": {
+		"title": "Sending email",
+		"subject": "Insert Subject",
+		"to": "TO",
+		"from": "FROM",
+		"reciver": "Insert reciver's email address",
+		"html": "HTML",
+		"markdown": "Markdown",
+		"close": "Close",
+		"send": "Send",
+		"sent": "Sent",
+		"remember": "Remember email",
+		"password": "Password",
+		"secure": "The password will not be saved.",
+		"yours": "Insert your Gmail address",
+		"evernote": "Evernote",
+		"tumblr": "Tumblr"
+	},
+		
 	"dialog": {
 		"save-change": "Do you want to save the changes made to the document?",
 		"cancel": "Cancel",

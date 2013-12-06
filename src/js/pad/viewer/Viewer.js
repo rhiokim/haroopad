@@ -44,6 +44,7 @@ define([
 			_viewer.update(content);
 
 			setTitle();
+			
 			_toc = TOC.get();
 
 			_viewer.updateTOC(_toc);

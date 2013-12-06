@@ -49,6 +49,25 @@
 		"desc": "하루패드가 유용하다면 개발이 유지되고 성장할 수 있도록 도와주세요. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>기부하러 하기</a>"
 	},
 
+	"email": {
+		"title": "메일 보내기",
+		"subject": "메일 제목을 입력해주세요.",
+		"to": "받는사람",
+		"from": "보내는 사람",
+		"reciver": "받는 사람 메일 주소를 입력해주세요.",
+		"html": "HTML",
+		"markdown": "Markdown",
+		"close": "닫기",
+		"send": "보내기",
+		"sent": "완료",
+		"remember": "이메일 기억하기",
+		"password": "비밀번호",
+		"secure": "메일 주소를 기억합니다.",
+		"yours": "Gmail 주소를 입력해주세요.",
+		"evernote": "에버노트",
+		"tumblr": "텀블러"
+	},
+	
 	"dialog": {
 		"save-change": "문서에 변경사항이 있어요. 저장할까요?",
 		"cancel": "취소",

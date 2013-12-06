@@ -54,7 +54,7 @@ window.MenuBarFile = function () {
   sepItem();
 
   menuItem({
-          label: 'Sending...',
+          label: i18n.t('file.sending'),
           submenu: MenuBarFileSend()
       });
 
