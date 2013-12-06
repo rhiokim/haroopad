@@ -24,13 +24,13 @@ MenuBarInsert = function () {
  //  );
   Insert.append(
     new gui.MenuItem({
-      label: 'Date & Time',
+      label: i18n.t('insert.date-time'),
       submenu: MenuBarInsertDate()
     })
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Filename',
+      label: i18n.t('insert.filename'),
       // icon: 'img/menu/unorder.png',
       click: function() {
         window.parent.ee.emit('menu.insert.filename');
@@ -82,14 +82,14 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Header',
+      label: i18n.t('insert.header'),
       // icon: 'img/menu/header.png',
       submenu: MenuBarInsertHeader()
     })
   );
 	Insert.append(
     new gui.MenuItem({
-      label: 'Strong ................ **',
+      label: i18n.t('insert.bold'),
       // icon: 'img/menu/bold.png',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'strong');
@@ -98,7 +98,7 @@ MenuBarInsert = function () {
   );
 	Insert.append(
     new gui.MenuItem({
-      label: 'Emphasize .......... *',
+      label: i18n.t('insert.italic'),
       // icon: 'img/menu/italic.png',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'i');
@@ -107,7 +107,7 @@ MenuBarInsert = function () {
   );
 	Insert.append(
     new gui.MenuItem({
-      label: 'Inline Code ......... `',
+      label: i18n.t('insert.inline-code'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'code');
       }
@@ -115,7 +115,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Image ................. ![]()',
+      label: i18n.t('insert.image'),
       // icon: 'img/menu/image.png',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'image');
@@ -124,7 +124,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Link .................... []()',
+      label: i18n.t('insert.link'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'a');
       }
@@ -132,7 +132,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Blockquote ......... >',
+      label: i18n.t('insert.blockquote'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'blockquote');
       }
@@ -140,7 +140,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Ordered List ....... 1.',
+      label: i18n.t('insert.ordered-list'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'ol');
       }
@@ -148,7 +148,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Un Ordered List .. -',
+      label: i18n.t('insert.unordered-list'),
       // icon: 'img/menu/unorder.png',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'li');
@@ -162,8 +162,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Page Break .......... * * *',
-      // icon: 'img/menu/unorder.png',
+      label: i18n.t('insert.page-break'),
       click: function() {
         window.parent.ee.emit('menu.insert.page.break');
       }
@@ -171,8 +170,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Section Break ...... - - -',
-      // icon: 'img/menu/unorder.png',
+      label: i18n.t('insert.section-break'),
       click: function() {
         window.parent.ee.emit('menu.insert.section.break');
       }
@@ -183,8 +181,7 @@ MenuBarInsert = function () {
       type: 'separator'
     })
   );
-
-
+  
   Insert.append(
     new gui.MenuItem({
       label: 'Github Flavored Markdown',
@@ -193,7 +190,7 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Fenced Code ....... ```',
+      label: i18n.t('insert.fenced-code'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'precode');
       }
@@ -201,7 +198,7 @@ MenuBarInsert = function () {
   );
 	Insert.append(
     new gui.MenuItem({
-      label: 'Strikethrough ...... ~~',
+      label: i18n.t('insert.strikethrough'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'del');
       }
@@ -209,7 +206,7 @@ MenuBarInsert = function () {
   );
 	Insert.append(
     new gui.MenuItem({
-      label: 'Table',
+      label: i18n.t('insert.table'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'table');
       }
@@ -239,7 +236,37 @@ MenuBarInsert = function () {
   
   Insert.append(
     new gui.MenuItem({
-      label: 'Embed .................... @[]()',
+      label: 'Haroopad Flavored Markdown',
+      enabled: false
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.highlight'),
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'highlight');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.underline'),
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'u');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.toc'),
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'toc');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.embed'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'embed');
       }
@@ -247,12 +274,28 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
-      label: 'Comment ............ <!-- -->',
+      label: i18n.t('insert.math-block'),
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'math-block');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.math-inline'),
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'math-inline');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.comment'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'comment');
       }
     })
   );
 
-	return new gui.MenuItem({ label: 'Insert', submenu: Insert });
+	return new gui.MenuItem({ label: i18n.t('insert.name'), submenu: Insert });
 };

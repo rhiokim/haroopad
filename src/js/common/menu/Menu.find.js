@@ -15,19 +15,19 @@ window.MenuBarFind = function () {
   }
 
 	menuItem({
-            label: 'Find...',
+            label: i18n.t('find.find'),
             click: function() {
                 window.parent.ee.emit('menu.find.start');
             }
         });
 	menuItem({
-            label: 'Find Next',
+            label: i18n.t('find.find-next'),
             click: function() {
                 window.parent.ee.emit('menu.find.next');
             }
         });
 	menuItem({
-            label: 'Find Previous',
+            label: i18n.t('find.find-previous'),
             click: function() {
                 window.parent.ee.emit('menu.find.previous');
             }
@@ -35,17 +35,17 @@ window.MenuBarFind = function () {
 	sepItem();
 	
   menuItem({
-          label: 'Replace...',
+          label: i18n.t('find.replace'),
           click: function() {
               window.parent.ee.emit('menu.find.replace');
           }
       });
   menuItem({
-          label: 'Replace All',
+          label: i18n.t('find.replace-all'),
           click: function() {
               window.parent.ee.emit('menu.find.replace.all');
           }
       });
 
-	return new gui.MenuItem({ label: 'Find', submenu: Find });
+	return new gui.MenuItem({ label: i18n.t('find.name'), submenu: Find });
 };

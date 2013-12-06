@@ -1,6 +1,6 @@
 define([
 		'viewer/Viewer',
-		'vendors/text!tpl/exports.html'
+		'txt!tpl/exports.html'
 	],
 	function(Viewer, html) {
 		var fs = require('fs'),
@@ -37,6 +37,12 @@ define([
 
 			_.each(contentDocument.styleSheets, function(item) {
 				href = item.href;
+
+				if (!href) {
+					cssText += item.ownerNode.innerHTML;
+					return;
+				}
+				
 				href = href.split('?')[0];
 				href = decodeURIComponent(href);
 				href = href.replace('file:///', '');

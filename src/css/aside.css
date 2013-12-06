@@ -1,0 +1,42 @@
+#toc-content, #md-help-content {
+  width: 270px;
+  height: 100%;
+  /*padding-top: 15px;*/
+  padding-left: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 40px;
+  /*margin-bottom: 22px;*/
+  bottom: 0;
+}
+
+@media (min-width: 720px) {
+  aside#md-help > header {
+    width: 335px;
+  }
+
+  #md-help-content {
+    width: 350px;
+  }
+}
+
+#toc-content a {
+  text-shadow: 1px 1px #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+#toc-content ul {
+  padding: 0;
+  margin-left: 5px;
+  list-style-type: none;
+}
+
+#toc-content>ul {
+  margin-top: 10px;
+  height: 100%;
+}
+
+#toc-content>ul>li {}

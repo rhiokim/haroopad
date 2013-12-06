@@ -1,18 +1,19 @@
 define([
 		'store',
 		'keyboard',
+		'ui/toc/TOC',
 		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.explicitStyleMaker',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, inlineStyle, StyleMaker, DragDrop) {
+	function(store, HotKey, TOC, inlineStyle, StyleMaker, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
-		// var sass = require('node-sass');
 
 		var iframe = $('#haroo iframe')[0];
 		var _viewer = iframe.contentWindow;
 		var content = '',
+			_toc = '',
 			options;
 
 		var gui = require('nw.gui'),
@@ -25,13 +26,24 @@ define([
 			viewerConfig.fontSize = Number(viewerConfig.fontSize || 15);
 		var codeConfig = store.get('Code') || {};
 		var customConfig = store.get('Custom') || {};
+		var generalConfig = store.get('General') || {};
 
 		// var config = option.toJSON();
 
 
 		function update(markdown, html, editor) {
 			content = html;
+
 			_viewer.update(content);
+
+			_toc = TOC.get();
+
+			_viewer.updateTOC(_toc);
+
+			//update TOC in file model
+			content = content.replace(/^\<p\>\[(TOC|toc)\]\<\/p\>$/gm, '<p>\n'+ _toc +'\n</p>');
+
+			nw.file.set({ 'html': content }, { silent: true });
 		}
 
 		/* change editor theme */
@@ -98,6 +110,7 @@ define([
 		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
 		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
+		window.parent.ee.on('preferences.general.enableMath.after', enableMath);
 
 		/* window close */
 		nw.on('destory', function() {
@@ -107,6 +120,7 @@ define([
 			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
 			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
+			window.parent.ee.off('preferences.general.enableMath.after', enableMath);
 		});
 
 		window.ee.on('print.viewer', function(value) {
@@ -121,6 +135,7 @@ define([
 
 		/* change markdown event handler */
 		window.ee.on('change.after.markdown', update);
+		// nw.file.on('change:html', update)
 
 		/* scroll editor for sync */
 		window.ee.on('editor.scroll', function(top, per) {
@@ -159,15 +174,9 @@ define([
 		window.ee.on('menu.file.exports.clipboard.plain', function() {
 			clipboard.set(content, 'text');
 		});
+
 		window.ee.on('menu.file.exports.clipboard.haroopad', function() {
 			clipboard.set(content, 'text');
-		});
-
-		window.ee.on('menu.view.doc.outline', function(show) {
-			show ? _viewer.showOutline() : _viewer.hideOutline();
-		});
-		window.ee.on('menu.view.doc.toc', function(show) {
-			show ? _viewer.showTOC() : _viewer.hideTOC();
 		});
 
 		window.ee.on('menu.view.viewer.font.size', function(value) {
@@ -191,12 +200,13 @@ define([
 		});
 
 		HotKey('defmod-shift-alt-c', function() {
-			window.ee.emit('menu.file.exports.clipboard.styled');
+			window.ee.emit('menu.file.exports.clipboard.haroopad');
 		});
 
 		HotKey('defmod-shift-.', function() {
 			window.ee.emit('menu.view.viewer.font.size', 1);
 		});
+
 		HotKey('defmod-shift-,', function() {
 			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
@@ -214,6 +224,14 @@ define([
 			window.ee.emit('dom', dom);
 		});
 
+		/*
+		 * Math rendering event proxy
+		 * viewer.html -> Viewer.js -> index.html -> math/Math.js -> Rendering
+		 */
+		_viewer.ee.on('math', function(target, cb) {
+			window.parent.ee.emit('math', target, cb);
+		})
+
 		_viewer.ee.on('title', function(title) {
 			nw.file.set('title', title);
 		});
@@ -228,23 +246,6 @@ define([
 			var ext = path.extname(file);
 
 			switch (ext) {
-				// case '.scss':
-				// 	var dir = path.dirname(file);
-				// 	var name = path.basename(file);
-				// 	var _name = path.join(dir, name);
-				// 	_name = _name.replace(ext, '.css');
-
-				// 	sass.render({
-				// 		file: file,
-				// 		success: function(css) {
-				// 			fs.writeFile(path.join(_name), css, 'utf8', function(err) {
-				// 				_viewer.loadCustomCSS(_name);
-				// 			});
-				// 		},
-				// 		includePaths: [ dir ],
-				// 					outputStyle: 'compressed'
-				// 	});
-				// break;
 				case '.css':
 					_viewer.loadCustomCSS(file);
 					break;
