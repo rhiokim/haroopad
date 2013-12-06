@@ -4,127 +4,127 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
-.hljs {
+pre code {
   display: block; padding: 0.5em;
   color: #333;
   background: #f8f8ff
 }
 
-.hljs-comment,
-.hljs-template_comment,
-.diff .hljs-header,
-.hljs-javadoc {
+pre .comment,
+pre .template_comment,
+pre .diff .header,
+pre .javadoc {
   color: #998;
   font-style: italic
 }
 
-.hljs-keyword,
-.css .rule .hljs-keyword,
-.hljs-winutils,
-.javascript .hljs-title,
-.nginx .hljs-title,
-.hljs-subst,
-.hljs-request,
-.hljs-status {
+pre .keyword,
+pre .css .rule .keyword,
+pre .winutils,
+pre .javascript .title,
+pre .nginx .title,
+pre .subst,
+pre .request,
+pre .status {
   color: #333;
   font-weight: bold
 }
 
-.hljs-number,
-.hljs-hexcolor,
-.ruby .hljs-constant {
+pre .number,
+pre .hexcolor,
+pre .ruby .constant {
   color: #099;
 }
 
-.hljs-string,
-.hljs-tag .hljs-value,
-.hljs-phpdoc,
-.tex .hljs-formula {
+pre .string,
+pre .tag .value,
+pre .phpdoc,
+pre .tex .formula {
   color: #d14
 }
 
-.hljs-title,
-.hljs-id,
-.coffeescript .hljs-params,
-.scss .hljs-preprocessor {
+pre .title,
+pre .id,
+pre .coffeescript .params,
+pre .scss .preprocessor {
   color: #900;
   font-weight: bold
 }
 
-.javascript .hljs-title,
-.lisp .hljs-title,
-.clojure .hljs-title,
-.hljs-subst {
+pre .javascript .title,
+pre .lisp .title,
+pre .clojure .title,
+pre .subst {
   font-weight: normal
 }
 
-.hljs-class .hljs-title,
-.haskell .hljs-type,
-.vhdl .hljs-literal,
-.tex .hljs-command {
+pre .class .title,
+pre .haskell .type,
+pre .vhdl .literal,
+pre .tex .command {
   color: #458;
   font-weight: bold
 }
 
-.hljs-tag,
-.hljs-tag .hljs-title,
-.hljs-rules .hljs-property,
-.django .hljs-tag .hljs-keyword {
+pre .tag,
+pre .tag .title,
+pre .rules .property,
+pre .django .tag .keyword {
   color: #000080;
   font-weight: normal
 }
 
-.hljs-attribute,
-.hljs-variable,
-.lisp .hljs-body {
+pre .attribute,
+pre .variable,
+pre .lisp .body {
   color: #008080
 }
 
-.hljs-regexp {
+pre .regexp {
   color: #009926
 }
 
-.hljs-class {
+pre .class {
   color: #458;
   font-weight: bold
 }
 
-.hljs-symbol,
-.ruby .hljs-symbol .hljs-string,
-.lisp .hljs-keyword,
-.tex .hljs-special,
-.hljs-prompt {
+pre .symbol,
+pre .ruby .symbol .string,
+pre .lisp .keyword,
+pre .tex .special,
+pre .prompt {
   color: #990073
 }
 
-.hljs-built_in,
-.lisp .hljs-title,
-.clojure .hljs-built_in {
+pre .built_in,
+pre .lisp .title,
+pre .clojure .built_in {
   color: #0086b3
 }
 
-.hljs-preprocessor,
-.hljs-pragma,
-.hljs-pi,
-.hljs-doctype,
-.hljs-shebang,
-.hljs-cdata {
+pre .preprocessor,
+pre .pragma,
+pre .pi,
+pre .doctype,
+pre .shebang,
+pre .cdata {
   color: #999;
   font-weight: bold
 }
 
-.hljs-deletion {
+pre .deletion {
   background: #fdd
 }
 
-.hljs-addition {
+pre .addition {
   background: #dfd
 }
 
-.diff .hljs-change {
+pre .diff .change {
   background: #0086b3
 }
 
-.hljs-chunk {
+pre .chunk {
   color: #aaa
 }

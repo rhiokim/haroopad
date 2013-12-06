@@ -2,131 +2,131 @@
 Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine (@thingsinjars)
 */
 
-.hljs {
+pre code {
   display: block; padding: 0.5em;
   color: #000;
   background: #f8f8ff
 }
 
-.hljs-comment,
-.hljs-template_comment,
-.diff .hljs-header,
-.hljs-javadoc {
+pre .comment,
+pre .template_comment,
+pre .diff .header,
+pre .javadoc {
   color: #408080;
   font-style: italic
 }
 
-.hljs-keyword,
-.assignment,
-.hljs-literal,
-.css .rule .hljs-keyword,
-.hljs-winutils,
-.javascript .hljs-title,
-.lisp .hljs-title,
-.hljs-subst {
+pre .keyword,
+pre .assignment,
+pre .literal,
+pre .css .rule .keyword,
+pre .winutils,
+pre .javascript .title,
+pre .lisp .title,
+pre .subst {
   color: #954121;
 }
 
-.hljs-number,
-.hljs-hexcolor {
+pre .number,
+pre .hexcolor {
   color: #40a070
 }
 
-.hljs-string,
-.hljs-tag .hljs-value,
-.hljs-phpdoc,
-.tex .hljs-formula {
+pre .string,
+pre .tag .value,
+pre .phpdoc,
+pre .tex .formula {
   color: #219161;
 }
 
-.hljs-title,
-.hljs-id {
+pre .title,
+pre .id {
   color: #19469D;
 }
-.hljs-params {
+pre .params {
   color: #00F;
 }
 
-.javascript .hljs-title,
-.lisp .hljs-title,
-.hljs-subst {
+pre .javascript .title,
+pre .lisp .title,
+pre .subst {
   font-weight: normal
 }
 
-.hljs-class .hljs-title,
-.haskell .hljs-label,
-.tex .hljs-command {
+pre .class .title,
+pre .haskell .label,
+pre .tex .command {
   color: #458;
   font-weight: bold
 }
 
-.hljs-tag,
-.hljs-tag .hljs-title,
-.hljs-rules .hljs-property,
-.django .hljs-tag .hljs-keyword {
+pre .tag,
+pre .tag .title,
+pre .rules .property,
+pre .django .tag .keyword {
   color: #000080;
   font-weight: normal
 }
 
-.hljs-attribute,
-.hljs-variable,
-.instancevar,
-.lisp .hljs-body {
+pre .attribute,
+pre .variable,
+pre .instancevar,
+pre .lisp .body {
   color: #008080
 }
 
-.hljs-regexp {
+pre .regexp {
   color: #B68
 }
 
-.hljs-class {
+pre .class {
   color: #458;
   font-weight: bold
 }
 
-.hljs-symbol,
-.ruby .hljs-symbol .hljs-string,
-.ruby .hljs-symbol .hljs-keyword,
-.ruby .hljs-symbol .keymethods,
-.lisp .hljs-keyword,
-.tex .hljs-special,
-.input_number {
+pre .symbol,
+pre .ruby .symbol .string,
+pre .ruby .symbol .keyword,
+pre .ruby .symbol .keymethods,
+pre .lisp .keyword,
+pre .tex .special,
+pre .input_number {
   color: #990073
 }
 
-.builtin,
-.constructor,
-.hljs-built_in,
-.lisp .hljs-title {
+pre .builtin,
+pre .constructor,
+pre .built_in,
+pre .lisp .title {
   color: #0086b3
 }
 
-.hljs-preprocessor,
-.hljs-pragma,
-.hljs-pi,
-.hljs-doctype,
-.hljs-shebang,
-.hljs-cdata {
+pre .preprocessor,
+pre .pragma,
+pre .pi,
+pre .doctype,
+pre .shebang,
+pre .cdata {
   color: #999;
   font-weight: bold
 }
 
-.hljs-deletion {
+pre .deletion {
   background: #fdd
 }
 
-.hljs-addition {
+pre .addition {
   background: #dfd
 }
 
-.diff .hljs-change {
+pre .diff .change {
   background: #0086b3
 }
 
-.hljs-chunk {
+pre .chunk {
   color: #aaa
 }
 
-.tex .hljs-formula {
+pre .tex .formula {
   opacity: 0.5;
 }

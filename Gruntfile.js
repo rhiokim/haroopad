@@ -477,8 +477,13 @@ module.exports = function(grunt) {
       
       select2: {
         files: [
-          { src: '<%= vendors %>/select2/select2.png', dest: 'src/css/select2.png' },
-          { src: '<%= vendors %>/select2/select2.css', dest: 'src/css/select2.css' }
+          { expand: true, src: '<%= vendors %>/select2/', src: [ 'select2.png', 'select2.css' ], dest: 'src/css/' }
+        ]
+      },
+      
+      jqoembed: {
+        files: [
+          { src: '<%= vendors %>/jquery-oembed-all/jquery.omebed.css', dest: 'src/css/jquery.omebed.css' }
         ]
       }
     },
@@ -574,6 +579,13 @@ module.exports = function(grunt) {
 
   /* pre built */
   grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs' ]);
+  grunt.registerTask('prebower', [ 
+    'copy:btmodal', 
+    'copy:mkdcss', 
+    'copy:mathjax', 
+    'copy:highlightjs',
+    'copy:select2',
+    'copy:jqoembed' ]);
 
   /* css */
   grunt.registerTask('css', [ 'cssmin:pad', 'cssmin:preferences', 'cssmin:viewer', 'cssmin:codemirror' ]);

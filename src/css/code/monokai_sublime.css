@@ -4,99 +4,99 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
 */
 
-.hljs {
+pre code {
   display: block;
   padding: 0.5em;
   background: #23241f;
 }
-.hljs-tag,
-.hljs {
+pre .tag,
+pre code {
   color: #f8f8f2;
 }
-.hljs-keyword,
-.hljs-function,
-.hljs-literal,
-.hljs-change,
-.hljs-winutils,
-.hljs-flow,
-.lisp .hljs-title,
-.clojure .hljs-built_in,
-.nginx .hljs-title,
-.tex .hljs-special {
+pre .keyword,
+pre .function,
+pre .literal,
+pre .change,
+pre .winutils,
+pre .flow,
+pre .lisp .title,
+pre .clojure .built_in,
+pre .nginx .title,
+pre .tex .special {
   color: #66d9ef;
 }
-.hljs-variable,
-.hljs-params {
+pre .variable,
+pre .params {
   color: #fd9720;
 }
-.hljs-constant {
+pre .constant {
   color: #66d9ef;
 }
-.hljs-title,
-.hljs-class .hljs-title,
-.css .hljs-class {
+pre .title,
+pre .class .title,
+pre .css .class {
   color: #a6e22e;
 }
-.hljs-attribute,
-.hljs-symbol,
-.hljs-symbol .hljs-string,
-.hljs-tag .hljs-title,
-.hljs-value,
-.css .hljs-tag {
+pre .attribute,
+pre .symbol,
+pre .symbol .string,
+pre .tag .title,
+pre .value,
+pre .css .tag {
   color: #f92672;
 }
-.hljs-number,
-.hljs-preprocessor,
-.hljs-pragma,
-.hljs-regexp {
+pre .number,
+pre .preprocessor,
+pre .pragma,
+pre .regexp {
   color: #ae81ff;
 }
-.hljs-tag .hljs-value,
-.hljs-string,
-.css .hljs-id,
-.hljs-subst,
-.haskell .hljs-type,
-.ruby .hljs-class .hljs-parent,
-.hljs-built_in,
-.sql .hljs-aggregate,
-.django .hljs-template_tag,
-.django .hljs-variable,
-.smalltalk .hljs-class,
-.django .hljs-filter .hljs-argument,
-.smalltalk .hljs-localvars,
-.smalltalk .hljs-array,
-.hljs-attr_selector,
-.hljs-pseudo,
-.hljs-addition,
-.hljs-stream,
-.hljs-envvar,
-.apache .hljs-tag,
-.apache .hljs-cbracket,
-.tex .hljs-command,
-.hljs-prompt {
+pre .tag .value,
+pre .string,
+pre .css .id,
+pre .subst,
+pre .haskell .type,
+pre .ruby .class .parent,
+pre .built_in,
+pre .sql .aggregate,
+pre .django .template_tag,
+pre .django .variable,
+pre .smalltalk .class,
+pre .django .filter .argument,
+pre .smalltalk .localvars,
+pre .smalltalk .array,
+pre .attr_selector,
+pre .pseudo,
+pre .addition,
+pre .stream,
+pre .envvar,
+pre .apache .tag,
+pre .apache .cbracket,
+pre .tex .command,
+pre .prompt {
   color: #e6db74;
 }
-.hljs-comment,
-.hljs-javadoc,
-.java .hljs-annotation,
-.python .hljs-decorator,
-.hljs-template_comment,
-.hljs-pi,
-.hljs-doctype,
-.hljs-deletion,
-.hljs-shebang,
-.apache .hljs-sqbracket,
-.tex .hljs-formula {
+pre .comment,
+pre .javadoc,
+pre .java .annotation,
+pre .python .decorator,
+pre .template_comment,
+pre .pi,
+pre .doctype,
+pre .deletion,
+pre .shebang,
+pre .apache .sqbracket,
+pre .tex .formula {
   color: #75715e;
 }
-.coffeescript .javascript,
-.javascript .xml,
-.tex .hljs-formula {
+pre .coffeescript .javascript,
+pre .javascript .xml,
+pre .tex .formula {
   opacity: 0.5;
 }
-.xml .javascript,
-.xml .vbscript,
-.xml .css,
-.xml .hljs-cdata {
+pre .xml .javascript,
+pre .xml .vbscript,
+pre .xml .css,
+pre .xml .cdata {
   opacity: 0.5;
 }

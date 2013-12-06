@@ -6,128 +6,128 @@ Version: 1.0
 Date: 2013-04-02
 */
 
-.hljs {
+pre code {
   display: block; padding: 0.5em;
   background: #eee;
 }
 
-.hljs-header,
-.hljs-decorator,
-.hljs-annotation {
+pre .header,
+pre .decorator,
+pre .annotation {
   color: #000077;
 }
 
-.hljs-horizontal_rule,
-.hljs-link_url,
-.hljs-emphasis,
-.hljs-attribute {
+pre .horizontal_rule,
+pre .link_url,
+pre .emphasis,
+pre .attribute {
   color: #070;
 }
 
-.hljs-emphasis {
+pre .emphasis {
   font-style: italic;
 }
 
-.hljs-link_label,
-.hljs-strong,
-.hljs-value,
-.hljs-string,
-.scss .hljs-value .hljs-string {
+pre .link_label,
+pre .strong,
+pre .value,
+pre .string,
+pre .scss .value .string {
   color: #d14;
 }
 
-.hljs-strong {
+pre .strong {
   font-weight: bold;
 }
 
-.hljs-blockquote,
-.hljs-comment {
+pre .blockquote,
+pre .comment {
   color: #998;
   font-style: italic;
 }
 
-.asciidoc .hljs-title,
-.hljs-function .hljs-title {
+pre .asciidoc .title,
+pre .function .title {
   color: #900;
 }
 
-.hljs-class {
+pre .class {
   color: #458;
 }
 
-.hljs-id,
-.hljs-pseudo,
-.hljs-constant,
-.hljs-hexcolor {
+pre .id,
+pre .pseudo,
+pre .constant,
+pre .hexcolor {
   color: teal;
 }
 
-.hljs-variable {
+pre .variable {
   color: #336699;
 }
 
-.hljs-bullet, 
-.hljs-javadoc {
+pre .bullet, 
+pre .javadoc {
   color: #997700;
 }
 
-.hljs-pi,
-.hljs-doctype {
+pre .pi,
+pre .doctype {
   color: #3344bb;
 }
 
-.hljs-code,
-.hljs-number {
+pre .code,
+pre .number {
   color: #099;
 }
 
-.hljs-important {
+pre .important {
   color: #f00;
 }
 
-.smartquote,
-.hljs-label {
+pre .smartquote,
+pre .label {
   color: #970;
 }
 
-.hljs-preprocessor,
-.hljs-pragma {
+pre .preprocessor,
+pre .pragma {
   color: #579;
 }
 
-.hljs-reserved,
-.hljs-keyword,
-.scss .hljs-value {
+pre .reserved,
+pre .keyword,
+pre .scss .value {
   color: #000;
 }
 
-.hljs-regexp {
+pre .regexp {
   background-color: #fff0ff;
   color: #880088;
 }
 
-.hljs-symbol {
+pre .symbol {
   color: #990073;
 }
 
-.hljs-symbol .hljs-string {
+pre .symbol .string {
   color: #a60;
 }
 
-.hljs-tag {
+pre .tag {
   color: #007700;
 }
 
-.hljs-at_rule,
-.hljs-at_rule .hljs-keyword {
+pre .at_rule,
+pre .at_rule .keyword {
   color: #088;
 }
 
-.hljs-at_rule .hljs-preprocessor {
+pre .at_rule .preprocessor {
   color: #808;
 }
 
-.scss .hljs-tag,
-.scss .hljs-attribute {
+pre .scss .tag,
+pre .scss .attribute {
   color: #339;
 }

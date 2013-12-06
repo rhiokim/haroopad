@@ -20,7 +20,7 @@
 	overflow-y: scroll;
 }
 
-@media (max-width: 499px) {
+@media (max-width: 979px) {
 	.modal-open.page-overflow .page-container .navbar-fixed-top,
 	.modal-open.page-overflow .page-container .navbar-fixed-bottom  {
 		overflow-y: visible;
@@ -122,7 +122,7 @@
 	}
 }
 
-@media (max-width: 499px) {
+@media (max-width: 979px) {
 	.modal, 
 	.modal.container,
 	.modal.modal-overflow 	{

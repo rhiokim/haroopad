@@ -4,179 +4,179 @@ Railscasts-like style (c) Visoft, Inc. (Damien White)
 
 */
 
-.hljs {
+pre code {
   display: block;
   padding: 0.5em;
   background: #232323;
   color: #E6E1DC;
 }
 
-.hljs-comment,
-.hljs-template_comment,
-.hljs-javadoc,
-.hljs-shebang {
+pre .comment,
+pre .template_comment,
+pre .javadoc,
+pre .shebang {
   color: #BC9458;
   font-style: italic;
 }
 
-.hljs-keyword,
-.ruby .hljs-function .hljs-keyword,
-.hljs-request,
-.hljs-status,
-.nginx .hljs-title,
-.method,
-.hljs-list .hljs-title {
+pre .keyword,
+pre .ruby .function .keyword,
+pre .request,
+pre .status,
+pre .nginx .title,
+pre .method,
+pre .list .title {
   color: #C26230;
 }
 
-.hljs-string,
-.hljs-number,
-.hljs-regexp,
-.hljs-tag .hljs-value,
-.hljs-cdata,
-.hljs-filter .hljs-argument,
-.hljs-attr_selector,
-.apache .hljs-cbracket,
-.hljs-date,
-.tex .hljs-command,
-.markdown .hljs-link_label {
+pre .string,
+pre .number,
+pre .regexp,
+pre .tag .value,
+pre .cdata,
+pre .filter .argument,
+pre .attr_selector,
+pre .apache .cbracket,
+pre .date,
+pre .tex .command,
+pre .markdown .link_label {
   color: #A5C261;
 }
 
-.hljs-subst {
+pre .subst {
   color: #519F50;
 }
 
-.hljs-tag,
-.hljs-tag .hljs-keyword,
-.hljs-tag .hljs-title,
-.hljs-doctype,
-.hljs-sub .hljs-identifier,
-.hljs-pi,
-.input_number {
+pre .tag,
+pre .tag .keyword,
+pre .tag .title,
+pre .doctype,
+pre .sub .identifier,
+pre .pi,
+pre .input_number {
   color: #E8BF6A;
 }
 
-.hljs-identifier {
+pre .identifier {
   color: #D0D0FF;
 }
 
-.hljs-class .hljs-title,
-.haskell .hljs-type,
-.smalltalk .hljs-class,
-.hljs-javadoctag,
-.hljs-yardoctag,
-.hljs-phpdoc {
+pre .class .title,
+pre .haskell .type,
+pre .smalltalk .class,
+pre .javadoctag,
+pre .yardoctag,
+pre .phpdoc {
   text-decoration: none;
 }
 
-.hljs-constant {
+pre .constant {
   color: #DA4939;
 }
 
 
-.hljs-symbol,
-.hljs-built_in,
-.ruby .hljs-symbol .hljs-string,
-.ruby .hljs-symbol .hljs-identifier,
-.markdown .hljs-link_url,
-.hljs-attribute {
+pre .symbol,
+pre .built_in,
+pre .ruby .symbol .string,
+pre .ruby .symbol .identifier,
+pre .markdown .link_url,
+pre .attribute {
   color: #6D9CBE;
 }
 
-.markdown .hljs-link_url {
+pre .markdown .link_url {
   text-decoration: underline;
 }
 
 
 
-.hljs-params,
-.hljs-variable,
-.clojure .hljs-attribute {
+pre .params,
+pre .variable,
+pre .clojure .attribute {
   color: #D0D0FF;
 }
 
-.css .hljs-tag,
-.hljs-rules .hljs-property,
-.hljs-pseudo,
-.tex .hljs-special {
+pre .css .tag,
+pre .rules .property,
+pre .pseudo,
+pre .tex .special {
   color: #CDA869;
 }
 
-.css .hljs-class {
+pre .css .class {
   color: #9B703F;
 }
 
-.hljs-rules .hljs-keyword {
+pre .rules .keyword {
   color: #C5AF75;
 }
 
-.hljs-rules .hljs-value {
+pre .rules .value {
   color: #CF6A4C;
 }
 
-.css .hljs-id {
+pre .css .id {
   color: #8B98AB;
 }
 
-.hljs-annotation,
-.apache .hljs-sqbracket,
-.nginx .hljs-built_in {
+pre .annotation,
+pre .apache .sqbracket,
+pre .nginx .built_in {
   color: #9B859D;
 }
 
-.hljs-preprocessor,
-.hljs-preprocessor *,
-.hljs-pragma {
+pre .preprocessor,
+pre .preprocessor *
+pre .pragma {
   color: #8996A8 !important;
 }
 
-.hljs-hexcolor,
-.css .hljs-value .hljs-number {
+pre .hexcolor,
+pre .css .value .number {
   color: #A5C261;
 }
 
-.hljs-title,
-.hljs-decorator,
-.css .hljs-function {
+pre .title,
+pre .decorator,
+pre .css .function {
   color: #FFC66D;
 }
 
-.diff .hljs-header,
-.hljs-chunk {
+pre .diff .header,
+pre .chunk {
   background-color: #2F33AB;
   color: #E6E1DC;
   display: inline-block;
   width: 100%;
 }
 
-.diff .hljs-change {
+pre .diff .change {
   background-color: #4A410D;
   color: #F8F8F8;
   display: inline-block;
   width: 100%;
 }
 
-.hljs-addition {
+pre .addition {
   background-color: #144212;
   color: #E6E1DC;
   display: inline-block;
   width: 100%;
 }
 
-.hljs-deletion {
+pre .deletion {
   background-color: #600;
   color: #E6E1DC;
   display: inline-block;
   width: 100%;
 }
 
-.coffeescript .javascript,
-.javascript .xml,
-.tex .hljs-formula,
-.xml .javascript,
-.xml .vbscript,
-.xml .css,
-.xml .hljs-cdata {
+pre .coffeescript .javascript,
+pre .javascript .xml,
+pre .tex .formula,
+pre .xml .javascript,
+pre .xml .vbscript,
+pre .xml .css,
+pre .xml .cdata {
   opacity: 0.7;
 }
