@@ -4,7 +4,7 @@
 GLYPH    | NAME
 ---------|----------------------------------------
 &#8984;  | Command, Cmd, Clover, (formerly) Apple
-⎇       | Option, Opt, (Windows) Alt
+⌥        | Option, Opt, (Windows) Alt
 ⇧        | Shift
 ^        | Control, Ctl, Ctrl
 
@@ -16,8 +16,8 @@ Shortcut                 | Description
 &#8984;(^) - ⇧ - S       | save as
 &#8984;(^) - O           | open file
 &#8984;(^) - ⇧ - E       | sending email
-&#8984;(^) - ⎇ - E      | export html
-&#8984;(^) - ⎇ - C      | copy to clipboard
+&#8984;(^) - ⌥ - E       | export html
+&#8984;(^) - ⌥ - C       | copy to clipboard
 &#8984;(^) - ,           | preferences
 &#8984;(^) - W           | close window
 &#8984;(^) - F4          | close
@@ -33,17 +33,17 @@ Shortcut            | Description
 &#8984;(^) - ⇧ - 4  | viewer mode
 ⇧ - ^ - ]           | editor mode
 ⇧ - ^ - [           | dual mode
-^ - ⎇ - ]          | editor width +5%
-^ - ⎇ - [          | editor width -5%
+^ - ⌥ - ]           | editor width +5%
+^ - ⌥ - [           | editor width -5%
 &#8984;(^) - ⇧ - L  | toggle line number
 &#8984;(^) - ⇧ - T  | toggle table of content
 &#8984;(^) - ⇧ - H  | toggle markdown helper
 &#8984;(^) - Enter  | toggle fullscreen #1
 &#8984;(^) - F11    | toggle fullscreen #2
 Double ESC          | escape fullscreen
-&#8984;(^) - ⎇ - V | vim keyboard binding
-&#8984; - ⎇ - .    | editor font size +1px
-&#8984; - ⎇ - ,    | editor font size -1px
+&#8984;(^) - ⌥ - V  | vim keyboard binding
+&#8984; - ⌥ - .     | editor font size +1px
+&#8984; - ⌥ - ,     | editor font size -1px
 &#8984; - ⇧ - .     | viewer font size +1px
 &#8984; - ⇧ - ,     | viewer font size -1px
 
@@ -59,13 +59,13 @@ Double ESC          | escape fullscreen
 &#8984;(^) - Up          | Go to Doc Start
 &#8984;(^) - End         | Go to Doc End
 &#8984;(^) - Down        | Go to Doc End
-⎇ - Left                | Go to Group Left
-⎇ - Right               | Go to Group Right
+⌥ - Left                 | Go to Group Left
+⌥ - Right                | Go to Group Right
 &#8984;(^) - Left        | Go to Line Start
 &#8984;(^) - Right       | Go to Line End
-⎇ - Backspace           | Delete Group before
-^ - ⎇ - Backspace       | Delete Group after
-⎇ - Delete              | Delete Group after
+⌥ - Backspace            | Delete Group before
+^ - ⌥ - Backspace        | Delete Group after
+⌥ - Delete               | Delete Group after
 &#8984;(^) - [           | Indent less
 &#8984;(^) - ]           | Indent
 
@@ -97,14 +97,14 @@ Shortcut                     | Example        | Description
 &#8984;(^) - K               | \`code`        | inline code
 &#8984;(^) - E               | @\[]()         | embed
 &#8984;(^) - T               | [TOC]          | table of content
-&#8984;(^) - ⎇ - S          | \~~strike~~    | strike
-&#8984;(^) - ⎇ - H          | \==highlight== | highlight
-&#8984;(^) - ⎇ - O          | 1. markdown    | ordered list
-&#8984;(^) - ⎇ - U          | * haroopad     | unordered list
-&#8984;(^) - ⎇ - I          | \!\[]()        | image
-&#8984;(^) - ⎇ - M          | $$math$$       | math
-&#8984;(^) - ⎇ - Enter      | \- \- \-       | section break
-&#8984;(^) - ⎇ - `          | \* \* \*       | page break
+&#8984;(^) - ⌥ - S           | \~~strike~~    | strike
+&#8984;(^) - ⌥ - H           | \==highlight== | highlight
+&#8984;(^) - ⌥ - O           | 1. markdown    | ordered list
+&#8984;(^) - ⌥ - U           | * haroopad     | unordered list
+&#8984;(^) - ⌥ - I           | \!\[]()        | image
+&#8984;(^) - ⌥ - M           | $$math$$       | math
+&#8984;(^) - ⌥ - Enter       | \- \- \-       | section break
+&#8984;(^) - ⌥ - `           | \* \* \*       | page break
 
 ##### Finding
 Shortcut                  | Description
@@ -112,7 +112,7 @@ Shortcut                  | Description
 &#8984;(^) - F            | Starting search
 &#8984;(^) - G            | Find next
 &#8984;(^) - ⇧ + G        | Find previous
-&#8984; - ⎇ - F          | Replace (Mac)
+&#8984; - ⌥ - F           | Replace (Mac)
 ^ - ⇧ - F                 | Replace (linux, win)
-&#8984; - ⇧ - ⎇ - F      | Replace all (Mac)
+&#8984; - ⇧ - ⌥ - F       | Replace all (Mac)
 ⇧ - ^ - R                 | Replace all (linux, win)
