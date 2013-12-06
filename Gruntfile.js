@@ -57,6 +57,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/vibrant-ink.css',
             '<%= vendors %>/CodeMirror/theme/xq-dark.css',
             '<%= vendors %>/CodeMirror/theme/xq-light.css',
+            '<%= vendors %>/CodeMirror/addon/hint/show-hint.css',
             '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.css'
           ],
           "build/haroopad/css/haroopad.min.css": [
@@ -68,7 +69,7 @@ module.exports = function(grunt) {
             'src/css/layout/footer.css',
             'src/css/layout/nav.css',
             'src/css/layout/aside.css',
-            'src/css/layout/toc.css',
+            'src/css/aside.css',
             'src/css/app.css'
           ],
           "build/haroopad/css/viewer.min.css": [
@@ -123,6 +124,7 @@ module.exports = function(grunt) {
             'src/js/lib/utils/util.js',
             'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
+            'src/js/lib/i18n.js',
             'build/menu.concat.js',
             'build/app.r.js',
             'src/js/app/after.app.js'
@@ -245,7 +247,7 @@ module.exports = function(grunt) {
           'build/viewer.js': [
             'src/js/viewer/disable.debug.js',
             // 'src/js/viewer/DynamicContents.js',
-            'src/js/viewer/dragdrop.js',
+            // 'src/js/viewer/dragdrop.js',
             'src/js/viewer/main.js'
           ]
         }
@@ -254,6 +256,8 @@ module.exports = function(grunt) {
         files: {
           'build/haroopad/js/codemirror.min.js': [
             '<%= vendors %>/CodeMirror/lib/codemirror.js',
+            '<%= vendors %>/CodeMirror/addon/hint/show-hint.js',
+            '<%= vendors %>/CodeMirror-custom/addon/hint/markdown-hint.js',
             '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
             '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
             '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
@@ -281,7 +285,8 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
           { expand: true, cwd: 'src/css/column/', src: [ '**' ], dest: 'build/haroopad/css/column/' },
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad/css/viewer-toc/' },
-          { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
+          // { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
+          { expand: true, cwd: 'src/html/', src: [ '**' ], dest: 'build/haroopad/html/' },
           { src: 'src/index.bin.html', dest: 'build/haroopad/index.html' },
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
           { src: 'src/preferences.bin.html', dest: 'build/haroopad/preferences.html' },
@@ -290,6 +295,13 @@ module.exports = function(grunt) {
           { src: 'src/logo.png', dest: 'build/haroopad/logo.png' },
           { src: 'src/css/keys.css', dest: 'build/haroopad/css/keys.css' },
           { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' }
+        ]
+      },
+
+      libs: {
+        files: [
+          { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' },
+          // { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/emoji/', src: [ '**' ], dest: 'build/lib/emoji/' }
         ]
       },
 
@@ -347,7 +359,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/viewer-toc/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/markdown/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/code/' },
-          { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
+          // { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'build/haroopad/docs/' },
           { src: 'src/pad.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/pad.html' },
           { src: 'src/viewer.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/viewer.html' },
           { src: 'src/index.html', dest: 'build/haroopad.app/Contents/Resources/app.nw/index.html' },
@@ -368,11 +380,19 @@ module.exports = function(grunt) {
         ]
       },
 
+      docs: {
+        files: [
+          { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.docs/' }
+        ]
+      },
+
       build: {
         files: [
           { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
           { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
-          { src: 'lib/markdown.icns', dest: 'build/haroopad.app/Contents/Resources/markdown.icns' }
+          { src: 'lib/markdown.icns', dest: 'build/haroopad.app/Contents/Resources/markdown.icns' },
+
+          { expand: true, cwd: 'build/libs/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/libs/' }
         ]
       },
 
@@ -390,6 +410,17 @@ module.exports = function(grunt) {
         ]
       },
 
+      mdmathjax: {
+        files: [
+          { expand: true, cwd: 'lib/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/config/' },
+          { expand: true, cwd: 'lib/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/extensions/' },
+          { expand: true, cwd: 'lib/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/fonts/HTML-CSS/TeX/woff/' },
+          { expand: true, cwd: 'lib/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/images/' },
+          { expand: true, cwd: 'lib/MathJax/jax/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/' },
+          { expand: true, flatten: true, src: [ 'lib/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/', filter: 'isFile'}
+        ]
+      },
+      
       mdhighlight: {
         files: [
           { expand: true, cwd: 'lib/highlight.js/src/styles/', src: [ '**' ], dest: 'src/css/code/' },
@@ -482,7 +513,7 @@ module.exports = function(grunt) {
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  grunt.registerTask('cp', [ 'copy:main', 'copy:node_modules', 'copy:lang' ]);
+  grunt.registerTask('cp', [ 'copy:main', 'copy:libs', 'copy:node_modules', 'copy:docs', 'copy:lang' ]);
   grunt.registerTask('app', [ 'requirejs:app', 'concat:app', 'uglify:app' ]);
   grunt.registerTask('pad', [ 'requirejs:pad', 'concat:pad', 'uglify:pad' ]);
   grunt.registerTask('prf', [ 'requirejs:preferences', 'concat:preferences', 'uglify:preferences' ]);

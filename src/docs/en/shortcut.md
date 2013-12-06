@@ -36,6 +36,8 @@ Shortcut            | Description
 ^ - ⎇ - ]          | editor width +5%
 ^ - ⎇ - [          | editor width -5%
 &#8984;(^) - ⇧ - L  | toggle line number
+&#8984;(^) - ⇧ - T  | toggle table of content
+&#8984;(^) - ⇧ - H  | toggle markdown helper
 &#8984;(^) - Enter  | toggle fullscreen #1
 &#8984;(^) - F11    | toggle fullscreen #2
 Double ESC          | escape fullscreen
@@ -93,12 +95,14 @@ Shortcut                     | Example        | Description
 &#8984;(^) - L               | \[link\](url)  | link
 &#8984;(^) - Y               | \_underline_   | underline
 &#8984;(^) - K               | \`code`        | inline code
-&#8984;(^) - E               | @\[]()         | 임베드
+&#8984;(^) - E               | @\[]()         | embed
+&#8984;(^) - T               | [TOC]          | table of content
 &#8984;(^) - ⎇ - S          | \~~strike~~    | strike
 &#8984;(^) - ⎇ - H          | \==highlight== | highlight
 &#8984;(^) - ⎇ - O          | 1. markdown    | ordered list
 &#8984;(^) - ⎇ - U          | * haroopad     | unordered list
 &#8984;(^) - ⎇ - I          | \!\[]()        | image
+&#8984;(^) - ⎇ - M          | $$math$$       | math
 &#8984;(^) - ⎇ - Enter      | \- \- \-       | section break
 &#8984;(^) - ⎇ - `          | \* \* \*       | page break
 

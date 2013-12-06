@@ -50,14 +50,14 @@ function getExecPath() {
 }
 
 function getLang() {
-	var locale = window.navigator.language;
+	var locale = window.navigator.language.split('-')[0];
 	locale = languageTable.indexOf(locale) < 0 ? 'en': locale ;
 
 	return locale;
 }
 
 function getDocsPath() {
-	return path.join(process.cwd(), 'docs', getLang());
+	return path.join(getExecPath(), 'Libraries/.docs', getLang());
 }
 
 function loadCss(url) {
@@ -66,6 +66,22 @@ function loadCss(url) {
   link.rel = "stylesheet";
   link.href = url;
   document.getElementsByTagName("head")[0].appendChild(link);
+}
+
+function merge(obj) {
+	var i = 1,
+		target, key;
+
+	for (; i < arguments.length; i++) {
+		target = arguments[i];
+		for (key in target) {
+			if (Object.prototype.hasOwnProperty.call(target, key)) {
+				obj[key] = target[key];
+			}
+		}
+	}
+
+	return obj;
 }
 
 function merge(obj) {
