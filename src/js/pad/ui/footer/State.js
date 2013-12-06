@@ -82,7 +82,7 @@ define([
 					continue;
 				}
 
-				key += i18n.t('state.'+ prop) +'<br>';
+				key += i18n.t('pad:state.'+ prop) +'<br>';
 				val += '<b>'+ dom[prop] +'</b><br/>';
 			}
 
@@ -97,7 +97,7 @@ define([
 			this.$('#elementsInfo').popover({
 				html: true,
 				trigger: 'hover',
-				title: i18n.t('state.label'),
+				title: i18n.t('pad:state.label'),
 				placement: 'top',
 				content: val+key/*,
 				animation: false*/

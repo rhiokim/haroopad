@@ -1,4 +1,4 @@
-(function() {
+define([], function() {
 
     function getState(cm, pos) {
       pos = pos || cm.getCursor('start');
@@ -104,6 +104,10 @@
                                  + '|        |        |');
       }
 
+      var addTOC = function() {
+        cm.replaceSelection('\n[TOC]\n\n');
+      }
+
       var headerMap = {
           '1': '#',
           '2': '##',
@@ -177,6 +181,9 @@
           break;
         case 'code':
           replaceSelection('`');
+          break;
+        case 'toc':
+          addTOC();
           break;
         case 'comment':
           replaceSelection('<!--', '-->');
@@ -299,6 +306,9 @@
   };
   CodeMirror.commands.markdownMathInline = function(cm) {
     action('math-line', cm);
+  }
+  CodeMirror.commands.markdownTOC = function(cm) {
+    action('toc', cm);
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();
@@ -308,4 +318,5 @@
     cm.redo();
     cm.focus();
   };
-})();
+  
+});

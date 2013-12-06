@@ -258,6 +258,14 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
+      label: i18n.t('insert.toc'),
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'toc');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
       label: i18n.t('insert.embed'),
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'embed');
