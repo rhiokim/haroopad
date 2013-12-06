@@ -20,9 +20,9 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    txt: '../vendors/text/text',
-    store: '../vendors/store.js/store',
-    keyboard: '../vendors/keymage/keymage'
+    text: '../vendors/text',
+    store: '../vendors/store',
+    keyboard: '../vendors/keymage'
   },
   config: {
     text: {
