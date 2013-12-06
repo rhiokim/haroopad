@@ -1,21 +1,9 @@
-[submodule "lib/codemirror"]
-	path = lib/codemirror
-	url = git@github.com:marijnh/CodeMirror.git
-[submodule "lib/highlight.js"]
-	path = lib/highlight.js
-	url = git@github.com:isagalaev/highlight.js.git
 [submodule "lib/gemoji"]
 	path = lib/gemoji
 	url = git@github.com:github/gemoji.git
-[submodule "lib/MathJax"]
-	path = lib/MathJax
-	url = git@github.com:mathjax/MathJax.git
 [submodule "lib/google-picker"]
 	path = lib/google-picker
 	url = git@github.com:rhiokim/google-picker.git
-[submodule "lib/markdown-css"]
-	path = lib/markdown-css
-	url = git@github.com:rhiokim/markdown-css.git
 [submodule "lib/LaTeX2HTML5"]
 	path = lib/LaTeX2HTML5
 	url = git@github.com:Mathapedia/LaTeX2HTML5.git
