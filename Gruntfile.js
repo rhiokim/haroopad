@@ -47,7 +47,6 @@ module.exports = function(grunt) {
           "build/haroopad/css/preferences.min.css": [
             'src/css/bootstrap.css',
             'src/css/todc-bootstrap.css',
-            'src/css/bootstrapSwitch.css',
             'src/css/select2.css',
             'src/css/preferences.css'
           ]
