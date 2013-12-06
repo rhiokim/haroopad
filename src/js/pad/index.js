@@ -41,7 +41,7 @@ i18n.init({
   i18n.setDefaultNamespace('menu');
 
   if (process.platform != 'darwin') {
-    parent.MenuBar();
+    MenuBar();
   }
 
   requirejs([
