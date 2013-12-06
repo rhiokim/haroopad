@@ -1,0 +1,102 @@
+@import "../lib/elements.less";
+@import "wood-ri/before";
+
+@font-size: 15px;
+@bg-color: #fff;
+@bg-image: url('wood.jpg');
+
+@base-color: #000;
+@base-size: 1em;
+@base-link-color: darken(#005FC7, 10%);
+@base-family: 'Lato', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
+@code-family: 'Lato', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif !important;
+
+@line-height: 1.7em;
+
+@base-margin: 0;
+@base-padding: 0;
+@border-color: lighten(@bg-color, 10%);
+
+@bg-color-table: darken(@bg-color, 1%);
+
+.wood-ri {
+  padding: 20px;
+  color: @base-color;
+  font-size: @font-size;
+  font-family: @base-family;
+  background-image: @bg-image;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(255,255,255,.7);
+
+  a {
+    color: @base-link-color;
+
+    &:hover {
+      color: lighten(@base-link-color, 10);
+    }
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-weight: 400;
+    color: darken(@base-color, 10%);
+    letter-spacing: -1px;
+  }
+
+  h2 {
+    border-bottom: 1px solid darken(@bg-color, 10);
+    line-height: @line-height;
+  }
+
+  h6 {
+    color: #777;
+  }
+
+  hr {
+    border:1px solid darken(@bg-color, 10);
+  }
+
+  p {
+    line-height: 19px;
+    &>code {
+      font-family: @code-family;
+      color: #130079;
+      font-size: .9em;
+    }
+  }
+
+  pre {
+    &>code {
+      font-size: 1em;
+      font-family: @code-family;
+      letter-spacing: -1px;
+      font-weight: normal;
+      text-shadow: none;
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid @border-color;
+    padding: 0 15px;
+    font-style: italic;
+    color: #130079;
+  }
+
+  table {
+    background-color: darken(@bg-color, 2%);
+
+    tr {
+      th, td {
+        border: 1px solid darken(@bg-color, 10%);
+      }
+      &:nth-child(2n) {
+        background-color: darken(@bg-color, 5%);
+      }
+    }
+  }
+}
+
+@import "haroopad/after";

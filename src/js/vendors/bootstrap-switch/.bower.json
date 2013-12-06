@@ -1,0 +1,22 @@
+{
+  "name": "bootstrap-switch",
+  "description": "Unofficial bootstrap switch",
+  "main": "static/js/bootstrap-switch.js",
+  "ignore": [
+    "examples"
+  ],
+  "dependencies": {
+    "jquery": "~1.9.0"
+  },
+  "homepage": "https://github.com/nostalgiaz/bootstrap-switch",
+  "_release": "fecbe28730",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "fecbe2873011a89c3ff5f12297fd89012cf7a80c"
+  },
+  "_source": "git://github.com/nostalgiaz/bootstrap-switch.git",
+  "_target": "*",
+  "_originalSource": "bootstrap-switch",
+  "_direct": true
+}

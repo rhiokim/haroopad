@@ -1,0 +1,245 @@
+<h2>pushState + ajax = pjax</h2>
+
+<pre><code>        .--.
+       /    \
+      ## a  a
+      (   '._)
+       |'-- |
+     _.\___/_   ___pjax___
+   ."\&gt; \Y/|&lt;'.  '._.-'
+  /  \ \_\/ /  '-' /
+  | --'\_/|/ |   _/
+  |___.-' |  |`'`
+    |     |  |
+    |    / './
+   /__./` | |
+      \   | |
+       \  | |
+       ;  | |
+       /  | |
+ jgs  |___\_.\_
+      `-"--'---'
+</code></pre>
+
+<h2>what is it?</h2>
+
+<p>pjax loads HTML from your server into the current page
+without a full reload. It's ajax with real permalinks,
+page titles, and a working back button that fully degrades.</p>
+
+<p>pjax enhances the browsing experience - nothing more.</p>
+
+<p>You can find a demo on <a href="http://pjax.heroku.com/">http://pjax.heroku.com/</a></p>
+
+<h2>three ways to pjax on the client side:</h2>
+
+<p>One. Functionally obtrusive, loading the href with ajax into data-pjax:</p>
+
+<p><code>html
+&lt;a href='/explore' data-pjax='#main'&gt;Explore&lt;/a&gt;</code></p>
+
+<p><code>js
+$('a[data-pjax]').pjax()</code></p>
+
+<p>Two. Slightly obtrusive, passing a container and binding an error handler:</p>
+
+<p><code>html
+&lt;a href='/explore' class='js-pjax'&gt;Explore&lt;/a&gt;</code></p>
+
+<p>```js
+$('.js-pjax').pjax('#main')</p>
+
+<p>$('#main').live('pjax:error', function(e, xhr, err) {
+  $('.error').text('Something went wrong: ' + err)
+})
+```</p>
+
+<p>Three. Unobtrusive, showing a 'loading' spinner:</p>
+
+<p><code>html
+&lt;div id='main'&gt;
+  &lt;div class='loader' style='display:none'&gt;&lt;img src='spin.gif'&gt;&lt;/div&gt;
+  &lt;div class='tabs'&gt;
+    &lt;a href='/explore'&gt;Explore&lt;/a&gt;
+    &lt;a href='/help'&gt;Help&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></p>
+
+<p><code>js
+$('a').pjax('#main').live('click', function(){
+  $(this).showLoader()
+})</code></p>
+
+<h2>$(link).pjax( container, options )</h2>
+
+<p>The <code>$(link).pjax()</code> function accepts a container, an options object,
+or both. The container MUST be a string selector - this is because we
+cannot persist jQuery objects using the History API between page loads.</p>
+
+<p>The options are the same as jQuery's <code>$.ajax</code> options with the
+following additions:</p>
+
+<ul>
+<li><code>container</code>      - The String selector of the container to load the
+                 reponse body. Must be a String.</li>
+<li><code>clickedElement</code> - The element that was clicked to start the pjax call.</li>
+<li><code>push</code>           - Whether to pushState the URL. Default: true (of course)</li>
+<li><code>replace</code>        - Whether to replaceState the URL. Default: false</li>
+<li><code>timeout</code>        - pjax sets this low, &lt;1s. Set this higher if using a
+                 custom error handler. It's ms, so something like
+                 <code>timeout: 2000</code></li>
+<li><code>fragment</code>       - A String selector that specifies a sub-element to
+                 be pulled out of the response HTML and inserted
+                 into the <code>container</code>. Useful if the server always returns
+                 full HTML pages.</li>
+</ul>
+
+<h2>$.pjax( options )</h2>
+
+<p>You can also just call <code>$.pjax</code> directly. It acts much like <code>$.ajax</code>, even
+returning the same thing and accepting the same options.</p>
+
+<p>The pjax-specific keys listed in the <code>$(link).pjax()</code> section work here
+as well.</p>
+
+<p>This pjax call:</p>
+
+<p><code>js
+$.pjax({
+  url: '/authors',
+  container: '#main'
+})</code></p>
+
+<p>Roughly translates into this ajax call:</p>
+
+<p><code>js
+$.ajax({
+  url: '/authors',
+  dataType: 'html',
+  beforeSend: function(xhr){
+    xhr.setRequestHeader('X-PJAX', 'true')
+  },
+  success: function(data){
+    $('#main').html(data)
+    history.pushState(null, $(data).filter('title').text(), '/authors')
+  })
+})</code></p>
+
+<h2>pjax on the server side</h2>
+
+<p>You'll want to give pjax requests a 'chrome-less' version of your page.
+That is, the page without any layout.</p>
+
+<p>As you can see in the "ajax call" example above, pjax sets a custom 'X-PJAX'
+header to 'true' when it makes an ajax request to make detecting it easy.</p>
+
+<p>In Rails, check for <code>request.headers['X-PJAX']</code>:</p>
+
+<p><code>ruby
+def my_page
+  if request.headers['X-PJAX']
+    render :layout =&gt; false
+  end
+end</code></p>
+
+<p>Or as a before filter in application controller:</p>
+
+<p>```ruby
+layout :set_layout</p>
+
+<p>private
+  def set_layout
+    if request.headers['X-PJAX']
+      false
+    else
+      "application"
+    end
+  end
+```</p>
+
+<p>Django: <a href="https://github.com/jacobian/django-pjax">https://github.com/jacobian/django-pjax</a></p>
+
+<p>Asp.Net MVC3: <a href="http://biasecurities.com/blog/2011/using-pjax-with-asp-net-mvc3/">http://biasecurities.com/blog/2011/using-pjax-with-asp-net-mvc3/</a></p>
+
+<h2>page titles</h2>
+
+<p>Your HTML should also include a <code>&lt;title&gt;</code> tag if you want page titles to work.</p>
+
+<p>When using a page fragment, pjax will check the fragment DOM element
+for a <code>title</code> or <code>data-title</code> attribute and use any value it finds.</p>
+
+<h2>events</h2>
+
+<p>pjax will fire two events on the container you've asked it to load your
+reponse body into:</p>
+
+<ul>
+<li><code>pjax:start</code> - Fired when a pjax ajax request begins.</li>
+<li><code>pjax:end</code>   - Fired when a pjax ajax request ends.</li>
+</ul>
+
+<p>This allows you to, say, display a loading indicator upon pjaxing:</p>
+
+<p><code>js
+$('a.pjax').pjax('#main')
+$('#main')
+  .on('pjax:start', function() { $('#loading').show() })
+  .on('pjax:end',   function() { $('#loading').hide() })</code></p>
+
+<p>Because these events bubble, you can also set them on the document:</p>
+
+<p><code>js
+$('a.pjax').pjax()
+$(document)
+  .on('pjax:start', function() { $('#loading').show() })
+  .on('pjax:end',   function() { $('#loading').hide() })</code></p>
+
+<p>In addition, custom events are added to complement <code>$.ajax</code>'s
+callbacks.</p>
+
+<ul>
+<li><code>pjax:beforeSend</code> - Fired before the pjax request begins. Returning
+                  false will abort the request.</li>
+<li><code>pjax:complete</code>   - Fired after the pjax request finishes.</li>
+<li><code>pjax:success</code>    - Fired after the pjax request succeeds.</li>
+<li><code>pjax:error</code>      - Fired after the pjax request fails. Returning
+                  false will prevent the the fallback redirect.</li>
+<li><code>pjax:timeout</code>    - Fired if after timeout is reached. Returning
+                  false will disable the fallback and will wait
+                  indefinitely until the response returns.</li>
+</ul>
+
+<p><strong>CAUTION</strong> Callback handlers passed to <code>$.pjax</code> <strong>cannot</strong> be persisted
+across full page reloads. Its recommended you use custom events instead.</p>
+
+<h2>browser support</h2>
+
+<p>pjax only works with browsers that support the history.pushState API.</p>
+
+<p>For a table of supported browsers see: <a href="http://caniuse.com/#search=pushstate">http://caniuse.com/#search=pushstate</a></p>
+
+<p>To check if pjax is supported, use the <code>$.support.pjax</code> boolean.</p>
+
+<p>When pjax is not supported, <code>$('a').pjax()</code> calls will do nothing (aka links
+work normally) and <code>$.pjax({url:url})</code> calls will redirect to the given URL.</p>
+
+<h2>install it</h2>
+
+<p><code>$ cd path/to/js
+$ wget https://github.com/defunkt/jquery-pjax/raw/master/jquery.pjax.js</code></p>
+
+<p>Then, in your HTML:</p>
+
+<p><code>html
+&lt;script src="path/to/js/jquery.pjax.js"&gt;&lt;/script&gt;</code></p>
+
+<p>Replace <code>path/to/js</code> with the path to your JavaScript directory,
+e.g. <code>public/javascripts</code>.</p>
+
+<h2>minimize it</h2>
+
+<p><code>curl \
+  -d output_info=compiled_code \
+  -d compilation_level=SIMPLE_OPTIMIZATIONS \
+  -d code_url=https://github.com/defunkt/jquery-pjax/raw/master/jquery.pjax.js \
+  http://closure-compiler.appspot.com/compile</code></p>

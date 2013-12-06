@@ -24,8 +24,8 @@ i18n.init({
     paths: {
       // tpl: '../../tpl',
       vendors: '../vendors',
-      store: '../vendors/store',
-      keyboard: '../vendors/keymage'
+      store: '../vendors/store.js/store',
+      keyboard: '../vendors/keymage/keymage'
     },
     config: {
       text: {
@@ -50,12 +50,11 @@ i18n.init({
       'tabs/About'
     ], function(HotKey, General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
 
-      $('.switch').bootstrapSwitch();
+      // $('.switch').bootstrapSwitch();
       
       $('body').i18n(); 
-
       document.title = i18n.t('title');
-
+    
       HotKey('esc', function() {
         win.close();
       });
