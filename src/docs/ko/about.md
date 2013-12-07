@@ -6,7 +6,7 @@
 
 그리고 하루패드는 윈도우, 리눅스, 맥을 지원하여 여러분이 원하는 플랫폼에서 똑같은 문서 편집 경험을 얻을 수 있습니다.
 
-![haroopad icon](../../logo.png)
+![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
 ### ==새로운 기능 (v0.10)==
 

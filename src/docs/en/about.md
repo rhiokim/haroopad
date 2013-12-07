@@ -6,7 +6,7 @@ You can author professional-looking documents of various formats: blog posts, sl
 
 Haroopad gives you the same editing experience regardless of the platform you are working on. It runs on all three major operating systems—Windows, Mac OS X, and Linux.
 
-![haroopad icon](../../logo.png)
+![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
 ### ==New Features (v0.10)==
 
