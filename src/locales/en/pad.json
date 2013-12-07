@@ -83,6 +83,6 @@
 		"message": "Looking for the latest version?",
 		"note": "Release note",
 		"download": "Download",
-		"newest": "Haroopad ${version} is currently the newest version available."
+		"newest": "Haroopad is currently the newest version available."
 	}
 }
