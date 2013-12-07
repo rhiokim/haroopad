@@ -1,11 +1,12 @@
 html { 
   height: 100% 
 }
+
 body {
   margin: 0 !important;
   padding: 5px 20px !important;
   background-color: #fff;
-  font-family: Arial,'Apple SD Gothic Neo','Malgun Gothic', Helvetica, 'nanumgothic', sans-serif, Menlo, Monaco, monospace;
+  font-family: "Lucida Grande", "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
   font-size: .9em;
 
   overflow-x: hidden;

@@ -1,6 +1,8 @@
+*, .btn {
+  font-family: "Lucida Grande", "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+}
 
 body {
-  font-family: Droid Sans, Arial, sans-serif;
   line-height: 1.5;
   overflow-y: hidden;
   background: url('../img/linen.png');
@@ -11,6 +13,14 @@ form {
   margin: 0;
   padding: 0;
 }
+
+/* -----------------------------------------
+  todc
+------------------------------------------*/
+.btn-group > .btn-mini {
+  font-size: 10.5px;
+}
+
 
 /* -----------------------------------------
    custom scroll

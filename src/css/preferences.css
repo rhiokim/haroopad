@@ -1,12 +1,22 @@
+*, .btn {
+  font-family: "Lucida Grande", "Segoe UI", "Apple SD Gothic Neo", "Lucida Sans Unicode", Helvetica, "Malgun Gothic", Arial, sans-serif;
+}
+
 html, body {
 	/*height: 100%;*/
 	margin: 0 auto;
 	padding: 0;
 }
+
 body {
+  font-size: 12px;
 	margin-top: 10px;
   user-select: none;
   -webkit-user-select: none;
+}
+
+span {
+  font-size: 12px;
 }
 
 hr {
