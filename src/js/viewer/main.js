@@ -208,6 +208,10 @@ function _lazySyntaxHighlight(el) {
   var code = el.innerHTML;
   var lang = el.className;
 
+  if (!lang) {
+    return;
+  }
+
   el.setAttribute('class', lang +' hljs');
 
   lang = lang == 'js' ? 'javascript' : lang;
