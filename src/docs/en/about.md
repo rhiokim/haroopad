@@ -10,12 +10,18 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ### ==New Features (v0.10)==
 
-* `[TOC]` 문법 추가
-	- 문서의 목차를 문서에 손쉽게 포함할 수 있습니다.
-* 마크다운 자동완성 기능
-	- 마크다운 문법의 자동완성을 이용해 문서의 작성의 효율을 높힐 수 있습니다.
-* 다국어 지원
-	- 현재는 영어와 한글만 지원하지만 지원 언어를 늘려갈 계획입니다. (시스템에 지정한 지역으로 자동으로 설정됩니다.)
+* Added `[TOC]` Syntax
+	- You can include a table of contents in a document.
+* Markdown Autocompletion
+	- Boost the efficiency of markdown documentation.
+* Internationalization
+	- English & Korean (System Locale)
+* Added Themes
+	- Metro Vibes, Metro Vibes Dark, Wood, Wood Ri
+* Etc
+	- Added Markdown Syntax Window.
+	- Added Option `Enable Last file restore`
+	- Improved execution speed.
 
 ### Main Features
 
