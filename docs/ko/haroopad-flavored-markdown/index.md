@@ -28,6 +28,33 @@ An _underline_, also called an underscore is one or more horizontal lines immedi
 
 An _underline_, also called an underscore is one or more _horizontal lines_ immediately below a portion of writing.
 
+### Table of Contents
+
+A table of contents, usually headed simply "Contents" and abbreviated informally as TOC, is a list of the parts of a book or document organized in the order in which the parts appear.
+
+```
+[TOC]
+
+# Chapter 1: Getting Started
+...
+
+## Introduction
+...
+
+## Next Steps
+...
+```
+
+* [Chapter 1: Getting Started]()
+	- [Introduction]()
+	- [Next Steps]()
+
+**example**
+
+TOC of this document
+
+> [TOC]
+
 ### Media Embed
 
 oEmbed is a format for allowing an embedded representation of a URL on third party sites. The simple API allows a website to display embedded content (such as photos or videos) when a user posts a link to that resource, without having to parse the resource directly.
@@ -43,28 +70,3 @@ Simply use `@[]()` syntax to link to external resources
 @[](http://www.youtube.com/watch?v=jo_B4LTHi3I)
 
 @[](http://www.flickr.com/photos/bees/2362225867/ 'width:300px')
-
-
-### Mathematics Expression
-
-Haroopad uses MathJax to render LaTeX. You can use triple dollar sign (`$$$..$$$`) to delimit inline equations, and double dollars (`$$..$$`) for blocks
-
-**example**
-
-```
-The *Gamma function* satisfying $$$\Gamma(n) = (n-1)!\quad\forall
-n\in\mathbb N$$$ is via through the Euler integral
-
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
-```
-
-**become**
-
-The *Gamma function* satisfying $$$\Gamma(n) = (n-1)!\quad\forall
-n\in\mathbb N$$$ is via through the Euler integral
-
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$

@@ -13,11 +13,9 @@ var defaults = {
 };
 
 var lexer = new marked.Lexer(defaults);
-
 var customRules = {
-    // plugin: /^ *\[([^\:\]]+):([^\]]+)\] *\n*/,
-    oembed: /^@\[(inside)\]\(href\)/
-    // plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(] */
+    oembed: /^@\[(inside)\]\(href\)/,
+    toc: /^\[(TOC|toc)\] *(?:\n+|$)/
 }
 
 var _inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
@@ -100,6 +98,10 @@ var renderer = new marked.Renderer();
           + '$$$</span>';
       }
     };
+    
+    renderer.toc = function(content) {
+      return '<p class="toc"></p>';
+    }
 
 var Lexer = lexer;
 var Renderer = renderer;

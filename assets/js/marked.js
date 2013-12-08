@@ -167,6 +167,17 @@ Lexer.prototype.token = function(src, top) {
       }
     }
 
+    // heading
+    if (cap = this.rules.heading.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'heading',
+        depth: cap[1].length,
+        text: cap[2]
+      });
+      continue;
+    }
+
     // code
     if (cap = this.rules.code.exec(src)) {
       src = src.substring(cap[0].length);
@@ -192,7 +203,6 @@ Lexer.prototype.token = function(src, top) {
     }
 
     // math
-
     if (this.options.mathjax) {
       if (cap = this.rules.math.exec(src)) {
         src = src.substring(cap[0].length);
@@ -202,17 +212,6 @@ Lexer.prototype.token = function(src, top) {
         });
         continue;
       }
-    }
-
-    // heading
-    if (cap = this.rules.heading.exec(src)) {
-      src = src.substring(cap[0].length);
-      this.tokens.push({
-        type: 'heading',
-        depth: cap[1].length,
-        text: cap[2]
-      });
-      continue;
     }
 
     // table no leading pipe (gfm)
@@ -384,6 +383,15 @@ Lexer.prototype.token = function(src, top) {
         caption: cap[1],
         href: cap[2],
         props: cap[3],
+      });
+      continue;
+    }
+
+     // toc
+    if (cap = this.rules.toc.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'toc'
       });
       continue;
     }
@@ -635,8 +643,6 @@ InlineLexer.prototype.output = function(src) {
         + '</a>';
       continue;
     }
-
-  
   
     // tag
     if (cap = this.rules.tag.exec(src)) {
@@ -1146,6 +1152,9 @@ Parser.prototype.tok = function() {
     }
     case 'oembed': {
       return renderer.oembed(this.token.caption, this.token.href, this.token.props);
+    }
+    case 'toc': {
+      return renderer.toc();
     }
   }
 };

@@ -15,7 +15,10 @@
 * 마크다운 자동완성 기능
 	- 마크다운 문법의 자동완성을 이용해 문서의 작성의 효율을 높힐 수 있습니다.
 * 다국어 지원
-	- 현재는 영어와 한글만 지원하지만 지원 언어를 늘려갈 계획입니다. (시스템에 지정한 지역으로 자동으로 설정됩니다.)
+	- 영어 (English)
+	- 한국어 (Korea)
+	- 스페인 (Español) - [davegomez](https://github.com/davegomez)
+	- 중국어 간체 (中文) - [toiletfreak](https://github.com/toiletfreak)
 * 테마 추가
 	- Metro Vibes, Metro Vibes Dark, Wood, Wood Ri
 * 기타

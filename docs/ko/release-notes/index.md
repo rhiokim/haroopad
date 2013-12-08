@@ -4,21 +4,21 @@
 Issue Number     | Description
 ----------------:|-----------------------------------------------
 **New Features** |
-#255             | ==Added== Markdown Syntax Help
-#253             | ==Added== 4 Viewer's themes
-#240             | ==Added== Math (block/inline) menu-item in Insert Menu
-#239             | ==Added== Highlight & Underline menu-item in Insert Menu
-#231             | ==Added== Markdown Autocompletion
-#224             | ==Added== Shortcut for Mathematics `Ctrl(COMMAND) + Alt + M`
-#164             | ==Added== `[TOC]` for Table of contents
-#88              | ==Added== Internationalization (English/Korean)
+#255             | ==추가== 마크다운 구문 헬프 윈도우
+#253             | ==추가== 뷰어 테마 4개
+#240             | ==추가== 삽입 메뉴에 수학 표현식(블럭/인라인) 메뉴
+#239             | ==추가== 삽입 메뉴에 하이라이팅, 밑줄 메뉴
+#231             | ==추가== 마크다운 자동완성
+#224             | ==추가== 수학관련 단축키 `Ctrl(COMMAND) + Alt + M`
+#164             | ==추가== 문서내 목차를 추가하기 위한 마크다운 스펙 `[TOC]` 
+#88              | ==추가== 국제화 (영어, 한글)
 **Bugs**         |
-#236             | Fixed Filename is not correct on window
-#230             | Fixed Word count problem
+#236             | 파일명이 축약되는 문제 해결
+#230             | 워드 개수 표시 오류 해결
 **Enhancements** |
-#260             | Keep syntax highlighting only for fenced code block, not pre blocks
-#247             | Disable last used ifle auto-open on startup
-#244             | Change the default file name when saving
+#260             | 펜스 코드 블럭에 언어를 지정하지 않을 경우 기본 코드 블럭으로만 표현
+#247             | 최근 작성하던 파일 복원 기능 옵션
+#244             | 파일 저장 시 기본 파일명 지정
 
 
 ##### Github Issue tracker

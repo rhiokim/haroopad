@@ -22,45 +22,8 @@
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XL3TJK5DSAA9S" class="btn btn-large btn-primary" target="_blank" style="color:#fff;">$5000</a>
 </p>
 
-<center><p></p>
-<h4>Top Donator</h4>
-<table>
-<thead>
-<tr>
-<th align="center">name</th>
-<th>box</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">pismute</td>
-<td>$50</td>
-</tr>
-<tr>
-<td align="center">Okjungsoo</td>
-<td>$25</td>
-</tr>
-<tr>
-<td align="center">Seung hyun paek</td>
-<td>$25</td>
-</tr>
-<tr>
-<td align="center">kjunine</td>
-<td>$10</td>
-</tr>
-<tr>
-<td align="center">geekbeast</td>
-<td>$10</td>
-</tr>
-<tr>
-<td align="center">Tobias Mücksch</td>
-<td>$10</td>
-</tr>
-<tr>
-<td align="center">krazyeom</td>
-<td>$5</td>
-</tr>
-</tbody>
-</table>
-<p>Thank you so much for your donation.</p>
-</center>
+#### Donators
+
+pismute, Okjungsoo, Seung hyun paek, kjunine, geekbeast, Tobias Mücksch, krazyeom, Joonsung Park, kim youl, Maciej Małecki, JEAN PIERRE POMMET, SUNG IL KANG, Kim Ji Heon, Soojin Kim, Sebastien Thugnet, Andrew Kim, Rodney Chupp, Svetlozar Argirov, Samuel Loup, Kwangyong Kim, Marcel Mehlmann, Jun Seop Lee, Frank Zhang, Ryan Davis, Changhwaoh, Peter Björklund, Hunchul, DIMITRIOS MAVRIDIS, HanJu Park
+
+Thank you so much for your donation.

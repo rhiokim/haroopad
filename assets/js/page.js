@@ -77,6 +77,8 @@ function loadPost(file) {
 
 		drawEmbedContents($('.contents')[0]);
 		drawMathJax();
+		drawTOC();
+
 		setStarrre(title.replace(' | ', '\n\n') + '\n#markdown #haroopad');
 	});
 }
@@ -129,6 +131,17 @@ function drawMathJax() {
   for (i = 0; i < math.length; i++) {
     processMathJax(math[i]);
   }
+}
+
+function drawTOC() {
+	var toc = buildToc();
+
+	var root = document.querySelector('div.contents');
+	var tocs = root.querySelectorAll('.toc');
+
+	_.each(tocs, function(node) {
+		node.innerHTML = toc;
+	})
 }
 
 var __timeout;
