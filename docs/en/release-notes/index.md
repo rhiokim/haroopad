@@ -4,14 +4,14 @@
 Issue Number     | Description
 ----------------:|-----------------------------------------------
 **New Features** |
-#255             | ==Added== Markdown Syntax Help
-#253             | ==Added== 4 Viewer's themes
+#255             | ==Added== **Markdown Syntax Help**
+#253             | ==Added== **4 Viewer's themes**
 #240             | ==Added== Math (block/inline) menu-item in Insert Menu
 #239             | ==Added== Highlight & Underline menu-item in Insert Menu
-#231             | ==Added== Markdown Autocompletion
+#231             | ==Added== **Markdown Autocompletion** ( !, -, =, _, *, `, ~, $, @ )
 #224             | ==Added== Shortcut for Mathematics `Ctrl(COMMAND) + Alt + M`
-#164             | ==Added== `[TOC]` for Table of contents
-#88              | ==Added== Internationalization (English/Korean)
+#164             | ==Added== **New Markdown Syntax `[TOC]`** for table of contents
+#88              | ==Added== **Internationalization** (English/Korean/Chinese/Spanish)
 **Bugs**         |
 #236             | Fixed Filename is not correct on window
 #230             | Fixed Word count problem

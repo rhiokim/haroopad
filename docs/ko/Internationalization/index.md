@@ -16,13 +16,13 @@
 
 ### Contributing
 
-1. Fork it
+1. Fork it - [git@github.com:rhiokim/haroopad-locales.git](https://github.com:rhiokim/haroopad-locales)
 2. Translate in your forked repository
 3. Commit -m "Added {Country} Translation"
 4. Write your name & email in AUTHORS.md
 5. Pull request
 
-**IMPORTANT**: By submitting a patch, you agree to allow the project owners to
+==**IMPORTANT**==: By submitting a patch, you agree to allow the project owners to
 license your work under the the terms of the MIT License.
 
 ### Contributors
