@@ -1,4 +1,4 @@
-# About
+# Haroopad
 
 **Haroopad** is a markdown enabled document processor for creating web-friendly documents.
 
@@ -8,15 +8,20 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.9)==
+### ==New Features (v0.10)==
 
-* Mathematics Expression
-	- Inline Expression: `$$$...$$$`
-	- Block Expression: `$$...$$`
-* Font Size
-	- Editor and Viewer font size control using Preference Window & Shortcuts
-* Styled HTML copy to clipboard
-* Update Shortcuts for Print, Inserting Date & Time
+* Added `[TOC]` Syntax
+	- You can include a table of contents in a document.
+* Markdown Autocompletion
+	- Boost the efficiency of markdown documentation.
+* Internationalization
+	- English & Korean (System Locale)
+* Added Themes
+	- Metro Vibes, Metro Vibes Dark, Wood, Wood Ri
+* Etc
+	- Added Markdown Syntax Window.
+	- Added Option `Enable Last file restore`
+	- Improved execution speed.
 
 ### Main Features
 
@@ -39,6 +44,11 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Custom Theme
   - Style based on CSS(Cascading Style Sheet)
 * Outline View
+* Mathematics Expression
+	- Inline Expression: `$$$...$$$`
+	- Block Expression: `$$...$$`
+* Font Size
+	- Editor and Viewer font size control using Preference Window & Shortcuts
 * Embedding Rich Media Contents - v0.8
 	- Video, Audio, 3D, Text, Open Graph and oEmbed
 	- About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
@@ -51,6 +61,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 	- Drag & Drop your selected text on Web Browser
 * Vim Key-binding
 * Export to PDF, HTML
+* Styled HTML copy to clipboard for WYSIWYG editors
 * Auto Save & Restore
 * Document state information
 * Tab or Spaces for Indentation

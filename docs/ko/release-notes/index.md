@@ -1,4 +1,40 @@
 
+## Haroopad v0.10.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#255             | ==Added== Markdown Syntax Help
+#253             | ==Added== 4 Viewer's themes
+#240             | ==Added== Math (block/inline) menu-item in Insert Menu
+#239             | ==Added== Highlight & Underline menu-item in Insert Menu
+#231             | ==Added== Markdown Autocompletion
+#224             | ==Added== Shortcut for Mathematics `Ctrl(COMMAND) + Alt + M`
+#164             | ==Added== `[TOC]` for Table of contents
+#88              | ==Added== Internationalization (English/Korean)
+**Bugs**         |
+#236             | Fixed Filename is not correct on window
+#230             | Fixed Word count problem
+**Enhancements** |
+#260             | Keep syntax highlighting only for fenced code block, not pre blocks
+#247             | Disable last used ifle auto-open on startup
+#244             | Change the default file name when saving
+
+
+##### Github Issue tracker
+
+* https://github.com/rhiokim/haroopad/issues?milestone=30&page=1&state=closed
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/xkopo54ikj4pm86/haroopad-v0.10.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/vpq1l0racrky8vp/haroopad-v0.10.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/a8nrq54hf0esauw/haroopad-v0.10.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/z0bapcxguzgh8df/haroopad-v0.10.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/g4du6i4foc4y502/haroopad-v0.10.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/6zkglx8v2j3dimx/haroopad-v0.10.0_amd64.deb
+
+
 ## Haroopad v0.9.1 - ==hotfix==
 
 Issue Number     | Description
