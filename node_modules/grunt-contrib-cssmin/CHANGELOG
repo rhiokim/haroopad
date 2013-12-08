@@ -1,3 +1,8 @@
+v0.4.2:
+  date: 2013-03-10
+  changes:
+    - Add banner option
+    - Support clean-css keepSpecialComments
 v0.4.1:
   date: 2013-02-17
   changes:
