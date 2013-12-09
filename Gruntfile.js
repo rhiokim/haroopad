@@ -190,7 +190,7 @@ module.exports = function(grunt) {
           '<%= build %>/haroopad/js/viewer.min.js': [
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/jquery/jquery.min.js',
-            '<%= vendors %>/jquery-oembed-all/jquery.oembed.min.js',
+            '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js',
             '<%= vendors %>/highlightjs/highlight.pack.js',
             '<%= build %>/viewer.min.js'
           ]
@@ -230,8 +230,8 @@ module.exports = function(grunt) {
           ],
 
           /* viewer */
-          '<%= vendors %>/jquery-oembed-all/jquery.oembed.min.js': [ 
-            '<%= vendors %>/jquery-oembed-all/jquery.oembed.js' 
+          '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js': [ 
+            '<%= vendors %>/haroopad-oembed/jquery.oembed.js' 
           ],
         }
       },
@@ -484,7 +484,7 @@ module.exports = function(grunt) {
       
       jqoembed: {
         files: [
-          { src: '<%= vendors %>/jquery-oembed-all/jquery.omebed.css', dest: 'src/css/jquery.omebed.css' }
+          { src: '<%= vendors %>/haroopad-oembed/jquery.omebed.css', dest: 'src/css/jquery.omebed.css' }
         ]
       }
     },

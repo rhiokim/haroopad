@@ -1,0 +1,14 @@
+{
+  "name": "haroopad-oembed",
+  "homepage": "https://github.com/rhiokim/haroopad-oembed",
+  "_release": "09e3c36bb8",
+  "_resolution": {
+    "type": "branch",
+    "branch": "feature/haroopad",
+    "commit": "09e3c36bb861b5013c9e1b82e0319975543c9a07"
+  },
+  "_source": "git@github.com:rhiokim/haroopad-oembed.git",
+  "_target": "feature/haroopad",
+  "_originalSource": "git@github.com:rhiokim/haroopad-oembed.git",
+  "_direct": true
+}
