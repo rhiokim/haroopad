@@ -137,7 +137,7 @@ define([
 			var top = scrollInfo.top;
 			var per = scrollInfo.height - scrollInfo.clientHeight;
 
-			// window.ee.emit('editor.scroll', top, per);
+			window.ee.emit('editor.scroll', top, per);
 		}
 
 		if (generalConf.enableSyncScroll) {
