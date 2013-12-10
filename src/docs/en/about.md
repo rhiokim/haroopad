@@ -11,7 +11,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 ### ==New Features (v0.10)==
 
 * Added `[TOC]` Syntax
-	- You can include a table of contents in a document.
+	- Now you can easily embed table of content in documents.
 * Markdown Autocompletion
 	- Boost the efficiency of markdown documentation.
 * Internationalization
