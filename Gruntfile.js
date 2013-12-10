@@ -434,9 +434,10 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.node_modules/'}
         ]
       },
-      lang: {
+      locales: {
         files: [
-          { expand: true, cwd: 'src/locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
+          { expand: true, cwd: 'lib/haroopad-locales/', src: [ '**' ], dest: 'src/locales/' },
+          { expand: true, cwd: 'lib/haroopad-locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
         ]
       },
 
@@ -568,7 +569,7 @@ module.exports = function(grunt) {
   /* luanch mac app */
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  grunt.registerTask('nwlibs', [ 'copy:libs', 'copy:node_modules', 'copy:docs', 'copy:lang' ])
+  grunt.registerTask('nwlibs', [ 'copy:libs', 'copy:node_modules', 'copy:docs', 'copy:locales' ])
 
   grunt.registerTask('cp', [ 'copy:main', 'nwlibs' ]);
 
