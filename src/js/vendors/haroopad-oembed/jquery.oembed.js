@@ -43,7 +43,7 @@
     return this.each(function() {
 
       var container = $(this),
-        resourceURL = (url && (!url.indexOf('http://') || !url.indexOf('https://'))) ? url : container.attr("href"),
+        resourceURL = (url && (!url.indexOf('http://') || !url.indexOf('https://'))) ? url : container.attr("data-url"),
         provider;
 
       if (embedAction) {
@@ -162,12 +162,15 @@
 
   function success(oembedData, externalUrl, container) {
     $('#jqoembeddata').data(externalUrl, oembedData.code);
-    settings.beforeEmbed.call(container, oembedData);
-    settings.onEmbed.call(container, oembedData);
-    settings.afterEmbed.call(container, oembedData);
+    settings.beforeEmbed.call(container, oembedData, externalUrl);
+    settings.onEmbed.call(container, oembedData, externalUrl);
+    settings.afterEmbed.call(container, oembedData, externalUrl);
   }
 
   function embedCode(container, externalUrl, embedProvider) {
+    container.attr('data-type', embedProvider.type);
+    container.attr('data-provider', embedProvider.name);
+
     if ($('#jqoembeddata').data(externalUrl) != undefined && embedProvider.embedtag.tag != 'iframe') {
       var oembedData = {
         code: $('#jqoembeddata').data(externalUrl)
@@ -335,7 +338,7 @@
   /* Public functions */
   $.fn.oembed.insertCode = function(container, embedMethod, oembedData) {
     if (oembedData === null) return;
-    if (embedMethod == 'auto' && container.attr("href") !== null) embedMethod = 'append';
+    if (embedMethod == 'auto' && container.attr("data-url") !== null) embedMethod = 'append';
     else if (embedMethod == 'auto') embedMethod = 'replace';
     switch (embedMethod) {
       case "replace":
@@ -344,21 +347,30 @@
       case "fill":
         var child, ebdOpt;
 
+        ebdOpt = container[0].querySelector('a').getAttribute('data-props');
+
         if (typeof oembedData.code == 'string') {
           oembedData.code = oembedData.code.replace('="//', '="http://');
           oembedData.code = oembedData.code.replace("='//", "='http://");
+
+          container.html(oembedData.code);
+        } else {
+          var html;
+
+          try {
+            html = oembedData.code[0].outerHTML;
+          } catch (e) {
+            html = '<small style="color:#afafaf;line-height:14px">&gt; This site does not support <a href="http://oembed.com/" target="_blank">oEmbed</a> and <a href="http://ogp.me/" target="_blank">Open Graph protocol</a>.<br/>&gt; <a href="http://pad.haroopress.com/page.html?f=open-media" target="_blank">You can get here more provider information</a></small>';
+          }
+          container.html(html);
         }
-        container.html(oembedData.code);
-        child = container.children();
-        child.width('100%');
-
-        ebdOpt = container.data('props');
-
+        
         if (ebdOpt) {
           ebdOpt = decodeURIComponent(ebdOpt);
           ebdOpt = JSON.parse(ebdOpt);
         }
         
+        child = container.children();
         child.css(ebdOpt);
         break;
       case "append":
@@ -407,17 +419,23 @@
 
   $.fn.oembed.getPhotoCode = function(url, oembedData) {
     var code, alt = oembedData.title ? oembedData.title : '';
-    alt += oembedData.author_name ? ' - ' + oembedData.author_name : '';
-    alt += oembedData.provider_name ? ' - ' + oembedData.provider_name : '';
+              alt += oembedData.author_name ? ' - ' + oembedData.author_name : '';
+              alt += oembedData.provider_name ? ' - ' + oembedData.provider_name : '';
+    
+    code = '<span class="oembed_photo">';
+    
     if (oembedData.url) {
-      code = '<div><a href="' + url + '" target=\'_blank\'><img src="' + oembedData.url + '" alt="' + alt + '"/></a></div>';
+      code += '<a href="' + url + '" target="_blank"><img src="' + oembedData.url + '" alt="' + alt + '"/></a><br/>';
     } else if (oembedData.thumbnail_url) {
       var newURL = oembedData.thumbnail_url.replace('_s', '_b');
-      code = '<div><a href="' + url + '" target=\'_blank\'><img src="' + newURL + '" alt="' + alt + '"/></a></div>';
+      code += '<a href="' + url + '" target="_blank"><img src="' + newURL + '" alt="' + alt + '"/></a><br/>';
     } else {
-      code = '<div>Error loading this picture</div>';
+      code += '<span>Error loading this picture</span>';
     }
-    if (oembedData.html) code += "<div>" + oembedData.html + "</div>";
+    code += '<span>['+ oembedData.provider_name +' - '+ oembedData.title +']</span>';
+    code += '</span>'
+
+    if (oembedData.html) code = oembedData.html;
     return code;
   };
 
@@ -428,8 +446,8 @@
 
   $.fn.oembed.getGenericCode = function(url, oembedData) {
     var title = (oembedData.title !== null) ? oembedData.title : url,
-      code = '<a href="' + url + '">' + title + '</a>';
-    if (oembedData.html) code += "<div>" + oembedData.html + "</div>";
+      code = '<a href="' + url + '" target="_blank">' + title + '</a>';
+    if (oembedData.html) code += oembedData.html;
     return code;
   };
 
@@ -867,8 +885,8 @@
       }
     }),
 
-    new $.fn.oembed.OEmbedProvider("tourwrist", "rich", ["tourwrist.com/tours/.+"], null, {
-      templateRegex: /.*tours.([\d]+).*/,
+    new $.fn.oembed.OEmbedProvider("tourwrist", "rich", ["tourwrist.com/panos/.+"], null, {
+      templateRegex: /.*panos.([\d]+).*/,
       template: function(wm, tourid) {
         setTimeout(function() {
           if (loadEmbeds) loadEmbeds();
@@ -892,21 +910,22 @@
         if (!data.parse) return false;
         var text = data.parse['text']['*'].replace(/href="\/wiki/g, 'href="http://en.wikipedia.org/wiki');
         text = text.replace(/="\/\//g, '="http://');
-        return '<div id="content"><h3><a class="nav-link" href="http://en.wikipedia.org/wiki/' + data.parse['displaytitle'] + '">' + data.parse['displaytitle'] + '</a></h3>' + text + '</div>';
+        return '<h3><a class="nav-link" href="http://en.wikipedia.org/wiki/' + data.parse['displaytitle'] + '">' + data.parse['displaytitle'] + '</a></h3>' + text;
+
       }
     }),
     new $.fn.oembed.OEmbedProvider("imdb", "rich", ["imdb.com/title/.+"], "http://www.imdbapi.com/?i=$1&callback=?", {
       templateRegex: /.*\/title\/([^\/]+).*/,
       templateData: function(data) {
         if (!data.Title) return false;
-        return '<div id="content"><h3><a class="nav-link" href="http://imdb.com/title/' + data.imdbID + '/">' + data.Title + '</a> (' + data.Year + ')</h3><p>Rating: ' + data.imdbRating + '<br/>Genre: ' + data.Genre + '<br/>Starring: ' + data.Actors + '</p></div>  <div id="view-photo-caption">' + data.Plot + '</div></div>';
+        return '<h3><a class="nav-link" href="http://imdb.com/title/' + data.imdbID + '/" target="_blank">' + data.Title + '</a> (' + data.Year + ')</h3><p>Rating: ' + data.imdbRating + '<br/>Genre: ' + data.Genre + '<br/>Starring: ' + data.Actors + '</p></div>  <div id="view-photo-caption">' + data.Plot + '</div>';
       }
     }),
     new $.fn.oembed.OEmbedProvider("livejournal", "rich", ["livejournal.com/"], "http://ljpic.seacrow.com/json/$2$4?jsonp=?", {
       templateRegex: /(http:\/\/(((?!users).)+)\.livejournal\.com|.*users\.livejournal\.com\/([^\/]+)).*/,
       templateData: function(data) {
         if (!data.username) return false;
-        return '<div><img src="' + data.image + '" align="left" style="margin-right: 1em;" /><span class="oembedall-ljuser"><a href="http://' + data.username + '.livejournal.com/profile"><img src="http://www.livejournal.com/img/userinfo.gif" alt="[info]" width="17" height="17" /></a><a href="http://' + data.username + '.livejournal.com/">' + data.username + '</a></span><br />' + data.name + '</div>';
+        return '<img src="' + data.image + '" align="left" style="margin-right: 1em;" /><span class="oembedall-ljuser"><a href="http://' + data.username + '.livejournal.com/profile" target="_blank"><img src="http://www.livejournal.com/img/userinfo.gif" alt="[info]" width="17" height="17" /></a><a href="http://' + data.username + '.livejournal.com/" target="_blank">' + data.username + '</a></span><br />' + data.name;
       }
     }),
     new $.fn.oembed.OEmbedProvider("circuitbee", "rich", ["circuitbee\\.com/circuit/view/.+"], "http://c.circuitbee.com/build/r/schematic-embed.html?id=$1", {
@@ -1002,7 +1021,7 @@
       templateRegex: /.*\/([^\/]+)\/([^\/]+).*/,
       templateData: function(data) {
         if (!data.data.html_url) return false;
-        return '<div class="oembedall-githubrepos"><ul class="oembedall-repo-stats"><li>' + data.data.language + '</li><li class="oembedall-watchers"><a title="Watchers" href="' + data.data.html_url + '/watchers">&#x25c9; ' + data.data.watchers + '</a></li>' + '<li class="oembedall-forks"><a title="Forks" href="' + data.data.html_url + '/network">&#x0265; ' + data.data.forks + '</a></li></ul><h3><a href="' + data.data.html_url + '">' + data.data.name + '</a></h3><div class="oembedall-body"><p class="oembedall-description">' + data.data.description + '</p>' + '<p class="oembedall-updated-at">Last updated: ' + data.data.pushed_at + '</p></div></div>';
+        return '<div class="oembedall-githubrepos"><ul class="oembedall-repo-stats"><li>' + data.data.language + '</li><li class="oembedall-watchers"><a title="Watchers" href="' + data.data.html_url + '/watchers" target="_blank">&#x25c9; ' + data.data.watchers + '</a></li>' + '<li class="oembedall-forks"><a title="Forks" href="' + data.data.html_url + '/network" target="_blank">&#x0265; ' + data.data.forks + '</a></li></ul><h3><a href="' + data.data.html_url + '" target="_blank">' + data.data.name + '</a></h3><div class="oembedall-body"><p class="oembedall-description">' + data.data.description + '</p>' + '<p class="oembedall-updated-at">Last updated: ' + data.data.pushed_at + '</p></div></div>';
       }
     }),
 
@@ -1010,18 +1029,18 @@
       templateRegex: /.*facebook.com\/(people\/[^\/]+\/(\d+).*|([^\/]+$))/,
       templateData: function(data) {
         if (!data.id) return false;
-        var out = '<div class="oembedall-facebook1"><div class="oembedall-facebook2"><a href="http://www.facebook.com/">facebook</a> ';
-        if (data.from) out += '<a href="http://www.facebook.com/' + data.from.id + '">' + data.from.name + '</a>';
-        else if (data.link) out += '<a href="' + data.link + '">' + data.name + '</a>';
-        else if (data.username) out += '<a href="http://www.facebook.com/' + data.username + '">' + data.name + '</a>';
-        else out += '<a href="http://www.facebook.com/' + data.id + '">' + data.name + '</a>';
+        var out = '<div class="oembedall-facebook1"><div class="oembedall-facebook2"><a href="http://www.facebook.com/" target="_blank">facebook</a> ';
+        if (data.from) out += '<a href="http://www.facebook.com/' + data.from.id + '" target="_blank">' + data.from.name + '</a>';
+        else if (data.link) out += '<a href="' + data.link + '" target="_blank">' + data.name + '</a>';
+        else if (data.username) out += '<a href="http://www.facebook.com/' + data.username + '" target="_blank">' + data.name + '</a>';
+        else out += '<a href="http://www.facebook.com/' + data.id + '" target="_blank">' + data.name + '</a>';
         out += '</div><div class="oembedall-facebookBody"><div class="contents">';
-        if (data.picture) out += '<a href="' + data.link + '"><img src="' + data.picture + '"></a>';
+        if (data.picture) out += '<a href="' + data.link + '" target="_blank"><img src="' + data.picture + '"></a>';
         else out += '<img src="https://graph.facebook.com/' + data.id + '/picture">';
-        if (data.from) out += '<a href="' + data.link + '">' + data.name + '</a>';
+        if (data.from) out += '<a href="' + data.link + '" target="_blank">' + data.name + '</a>';
         if (data.founded) out += 'Founded: <strong>' + data.founded + '</strong><br>'
         if (data.category) out += 'Category: <strong>' + data.category + '</strong><br>';
-        if (data.website) out += 'Website: <strong><a href="' + data.website + '">' + data.website + '</a></strong><br>';
+        if (data.website) out += 'Website: <strong><a href="' + data.website + '" target="_blank">' + data.website + '</a></strong><br>';
         if (data.gender) out += 'Gender: <strong>' + data.gender + '</strong><br>';
         if (data.description) out += data.description + '<br>';
         out += '</div></div>';
@@ -1034,23 +1053,18 @@
         if (!data.questions) return false;
         var q = data.questions[0];
         var body = $(q.body).text();
-        var out = '<div class="oembedall-stoqembed"><div class="oembedall-statscontainer"><div class="oembedall-statsarrow"></div><div class="oembedall-stats"><div class="oembedall-vote"><div class="oembedall-votes">' + '<span class="oembedall-vote-count-post"><strong>' + (q.up_vote_count - q.down_vote_count) + '</strong></span><div class="oembedall-viewcount">vote(s)</div></div>' + '</div><div class="oembedall-status"><strong>' + q.answer_count + '</strong>answer</div></div><div class="oembedall-views">' + q.view_count + ' view(s)</div></div>' + '<div class="oembedall-summary"><h3><a class="oembedall-question-hyperlink" href="http://stackoverflow.com/questions/' + q.question_id + '/">' + q.title + '</a></h3>' + '<div class="oembedall-excerpt">' + body.substring(0, 100) + '...</div><div class="oembedall-tags">';
+        var out = '<div class="oembedall-stoqembed"><div class="oembedall-statscontainer"><div class="oembedall-statsarrow"></div><div class="oembedall-stats"><div class="oembedall-vote"><div class="oembedall-votes">' + '<span class="oembedall-vote-count-post"><strong>' + (q.up_vote_count - q.down_vote_count) + '</strong></span><div class="oembedall-viewcount">vote(s)</div></div>' + '</div><div class="oembedall-status"><strong>' + q.answer_count + '</strong>answer</div></div><div class="oembedall-views">' + q.view_count + ' view(s)</div></div>' + '<div class="oembedall-summary"><h3><a class="oembedall-question-hyperlink" href="http://stackoverflow.com/questions/' + q.question_id + '/" target="_blank">' + q.title + '</a></h3>' + '<div class="oembedall-excerpt">' + body.substring(0, 100) + '...</div><div class="oembedall-tags">';
         for (i in q.tags)
-          out += '<a title="" class="oembedall-post-tag" href="http://stackoverflow.com/questions/tagged/' + q.tags[i] + '">' + q.tags[i] + '</a>';
-        out += '</div><div class="oembedall-fr"><div class="oembedall-user-info"><div class="oembedall-user-gravatar32"><a href="http://stackoverflow.com/users/' + q.owner.user_id + '/' + q.owner.display_name + '">' + '<img width="32" height="32" alt="" src="http://www.gravatar.com/avatar/' + q.owner.email_hash + '?s=32&amp;d=identicon&amp;r=PG"></a></div><div class="oembedall-user-details">' + '<a href="http://stackoverflow.com/users/' + q.owner.user_id + '/' + q.owner.display_name + '">' + q.owner.display_name + '</a><br><span title="reputation score" class="oembedall-reputation-score">' + q.owner.reputation + '</span></div></div></div></div></div>';
+          out += '<a title="" class="oembedall-post-tag" href="http://stackoverflow.com/questions/tagged/' + q.tags[i] + '" target="_blank">' + q.tags[i] + '</a>';
+        out += '</div><div class="oembedall-fr"><div class="oembedall-user-info"><div class="oembedall-user-gravatar32"><a href="http://stackoverflow.com/users/' + q.owner.user_id + '/' + q.owner.display_name + '" target="_blank">' + '<img width="32" height="32" alt="" src="http://www.gravatar.com/avatar/' + q.owner.email_hash + '?s=32&amp;d=identicon&amp;r=PG"></a></div><div class="oembedall-user-details">' + '<a href="http://stackoverflow.com/users/' + q.owner.user_id + '/' + q.owner.display_name + '" target="_blank">' + q.owner.display_name + '</a><br><span title="reputation score" class="oembedall-reputation-score">' + q.owner.reputation + '</span></div></div></div></div></div>';
         return out;
       }
     }),
     new $.fn.oembed.OEmbedProvider("wordpress", "rich", ["wordpress\\.com/.+", "blogs\\.cnn\\.com/.+", "techcrunch\\.com/.+", "wp\\.me/.+"], "http://public-api.wordpress.com/oembed/1.0/?for=jquery-oembed-all"),
-    new $.fn.oembed.OEmbedProvider("screenr", "rich", ["screenr\.com"], "http://www.screenr.com/embed/$1", {
-      templateRegex: /.*\/([^\/]+).*/,
-      embedtag: {
-        tag: 'iframe',
-        width: '650',
-        height: 396
-      }
+    new $.fn.oembed.OEmbedProvider("screenr", "rich", ["screenr\.com"], "http://www.screenr.com/api/oembed.json", {
+      useYQL: 'json'
     }),
-    new $.fn.oembed.OEmbedProvider("gigpans", "rich", ["gigapan\\.org/[-.\\w@]+/\\d+"], "http://gigapan.org/gigapans/$1/options/nosnapshots/iframe/flash.html", {
+    new $.fn.oembed.OEmbedProvider("gigpans", "rich", ["gigapan\\.com/[-.\\w@]+/\\d+"], "http://gigapan.org/gigapans/$1/options/nosnapshots/iframe/flash.html", {
       templateRegex: /.*\/(\d+)\/?.*/,
       embedtag: {
         tag: 'iframe',
@@ -1123,7 +1137,11 @@
         datareturn: function(results) {
           if (!results['og:title'] && results['title'] && results['description']) results['og:title'] = results['title'];
           if (!results['og:title'] && !results['title']) return false;
-          var code = $('<div style="border:1px solid #dfdfdf;padding:5px; display:inline-block;">');
+          if (!results['description']) {
+            return $('<small style="color:#afafaf;line-height:14px">&gt; This site does not support <a href="http://oembed.com/" target="_blank">oEmbed</a> and <a href="http://ogp.me/" target="_blank">Open Graph protocol</a>.<br/>&gt; <a href="http://pad.haroopress.com/page.html?f=open-media" target="_blank">You can get here more provider information</a></small>');
+          }
+
+          var code = $('<span style="border:1px solid #dfdfdf;padding:5px; margin:5px 10px; display:inline-block;">');
           if (results['og:video']) {
             var embed = $('<embed src="' + results['og:video'] + '"/>');
             embed
@@ -1134,15 +1152,22 @@
             if (results['og:video:height']) embed.attr('height', results['og:video:height']);
             code.append(embed);
           } else if (results['og:image']) {
-            var div = $('<div style="float:left; margin-right:5px; width:64px;">');
-            var img = $('<a href="' + results['og:url'] + '"><img src="' + results['og:image'] + '"></a>');
+            // var div = $('<div style="float:left; margin-right:5px;"/>');
+            var div = $('<span/>');
+            var img = $('<a href="' + results['og:url'] + '" target="_blank"><img src="' + results['og:image'] + '"></a><br/>');
+            var caption = $('<span>');
+            caption.append('<b><a href="' + results['og:url'] + '" target="_blank">' + results['og:title'] + '</a></b><br/>');
+            caption.append((results['og:description'] || results['description'] || '') + '<br/>');
             div.append(img);
+            div.append(caption);
             img.css('max-height', settings.maxHeight || 'auto').css('max-width', settings.maxWidth || 'auto');
             if (results['og:image:width']) img.attr('width', results['og:image:width']);
             if (results['og:image:height']) img.attr('height', results['og:image:height']);
+
             code.append(div);
+            return code;
           }
-          if (results['og:title']) code.append('<b><a href="' + results['og:url'] + '">' + results['og:title'] + '</a></b><br/>');
+          if (results['og:title']) code.append('<b><a href="' + results['og:url'] + '" target="_blank">' + results['og:title'] + '</a></b><br/>');
           if (results['og:description'])
             code.append(results['og:description'] + '<br/>');
           else if (results['description'])
