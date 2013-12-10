@@ -1,16 +1,21 @@
+// Haroopad language configuration
+// language : English (en)
+// author : Rhio Kim : https://github.com/rhiokim
+// author : 
+
 {
 	"title": "",
 	"experimental": "experimental",
-	
+
 	"footer": {
 		"lines": "lines",
 		"words": "words"
 	},
-	
+
 	"toc": {
-		"name": "Table Of Contents"	
+		"name": "Table Of Contents"
 	},
-	
+
 	"share": "Share",
 	"state": {
 		"label": "Elements",
@@ -67,7 +72,7 @@
 		"evernote": "Evernote",
 		"tumblr": "Tumblr"
 	},
-		
+
 	"dialog": {
 		"save-change": "Do you want to save the changes made to the document?",
 		"cancel": "Cancel",
