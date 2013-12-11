@@ -224,7 +224,7 @@ define([
 		editor.setOption('indentUnit', config.indentUnit || 4);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
-		toggleAutoComplete(generalConf.enableAutoComplete || true);
+		toggleAutoComplete(generalConf.enableAutoComplete || false);
 		setFontSize(config.fontSize);
 		setFontFmaily();
 
