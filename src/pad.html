@@ -208,18 +208,24 @@
         <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
       </section>
     </article>
-    <aside id="toc">
+    <aside id="toc" class="hide">
       <header>
-        <h5><span data-i18n="toc.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span></h5>
+        <h5 class="pull-left"><span data-i18n="toc.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span></h5>
+        <div class="btn-group pull-right">
+          <a id="close-toc" class="btn btn-mini btn-primary"><i class="icon-white icon-remove"></i></a>
+        </div>
       </header>
       <div id="toc-content">
       </div>
       <footer></footer>
     </aside>
-    <aside id="md-help">
+    <aside id="md-help" class="hide">
       <header>
         <h5 class="pull-left"><span data-i18n="markdown.name">Markdown Syntax Help</span></h5>
-        <a href="html/markdown-help.html" target="md-help" class="btn btn-mini btn-primary pull-right" data-exec="link"><i class="icon-white icon-share"></i></a>
+        <div class="btn-group pull-right">
+          <a href="html/markdown-help.html" target="md-help" class="btn btn-mini btn-primary" data-exec="link"><i class="icon-white icon-share"></i></a>
+          <a id="close-md-help" class="btn btn-mini btn-primary "><i class="icon-white icon-remove"></i></a>
+        </div>
       </header>
       <div id="md-help-content">
       </div>
@@ -245,7 +251,8 @@
         <ul class="dropdown-menu">
           <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i><span data-i18n="pad:config.outline">Show Document Outline</span></a></li>
           <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i><span data-i18n="pad:config.toc">Show TOC</span></a></li>
-          <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i><span data-i18n="pad:config.fullscreen"></span></a></li>
+          <li><a tabindex="0" href="#" data-exec="md-help"><i class="icon-ok"></i><span data-i18n="pad:config.md-help">Show Markdown Help</span></a></li>
+          <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i><span data-i18n="pad:config.fullscreen">Toggle Fullscreen</span></a></li>
         </ul>
       </div><div id="columnCount" class="btn-group dropup pull-right">
         <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
