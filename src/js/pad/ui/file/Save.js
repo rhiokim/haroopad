@@ -1,13 +1,6 @@
 define(function() {
   var view;
 
-  function setDefault() {
-    var f = new File('/path/to/file', 'name'); 
-    var files = new FileList(); 
-    files.append(f); 
-    document.getElementById('input0').files = files; 
-  }
-
   var View = Backbone.View.extend({
   	el: '#saveFile',
   	

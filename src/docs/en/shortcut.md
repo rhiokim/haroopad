@@ -46,7 +46,6 @@ Double ESC          | escape fullscreen
 &#8984; - ⇧ - .     | viewer font size +1px
 &#8984; - ⇧ - ,     | viewer font size -1px
 
-
 ##### Editing
  Shortcut                | Description
 -------------------------|---------------------
@@ -102,6 +101,7 @@ Shortcut                     | Example        | Description
 &#8984;(^) - ⌥ - U           | * haroopad     | unordered list
 &#8984;(^) - ⌥ - I           | \!\[]()        | image
 &#8984;(^) - ⌥ - M           | $$math$$       | math
+&#8984;(^) - ⌥ - B          | > blockquote    | blockquote
 &#8984;(^) - ⌥ - Enter       | \- \- \-       | section break
 &#8984;(^) - ⌥ - `           | \* \* \*       | page break
 

@@ -19,3 +19,6 @@
 [submodule "lib/bootstrap-social"]
 	path = lib/bootstrap-social
 	url = git@github.com:lipis/bootstrap-social.git
+[submodule "lib/haroopad-locales"]
+	path = lib/haroopad-locales
+	url = git@github.com:rhiokim/haroopad-locales.git

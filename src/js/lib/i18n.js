@@ -14,7 +14,7 @@
 
 		res = fs.readFileSync(path.join(url, file), 'utf8');
 		res = JSON.parse(res);
-
+			
 		locales[ns] = res;
 	}
 

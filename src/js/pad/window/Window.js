@@ -237,11 +237,11 @@ define([
 
 	HotKey('defmod-enter', function() {
 		window.ee.emit('view.fullscreen');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-f11', function() {
 		window.ee.emit('view.fullscreen');
-	});
+	}, { preventDefault: true });
 
 	HotKey('esc esc', function() {
 		if (win.isFullscreen) {
@@ -253,36 +253,36 @@ define([
 
 	HotKey('defmod-o', function() {
 		window.ee.emit('menu.file.open');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-s', function() {
 		window.ee.emit('menu.file.save');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-shift-s', function() {
 		window.ee.emit('menu.file.save.as');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-w', function() {
 		nw.emit('close');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-f4', function() {
 		nw.emit('close');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-alt-e', function() {
 		window.ee.emit('file.exports.html');
 
 		global._gaq.push('haroopad.file', 'exports', 'html');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-q', function() {
 		var generalOpt = store.get('General');
 		if (generalOpt.enableLastFileRestore === false) {
 			window.parent.ee.emit('clear.lastfiles');
 		}
-	});
+	}, { preventDefault: true });
 
 	window.ondragover = function(e) {
 		e.preventDefault();

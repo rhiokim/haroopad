@@ -25,12 +25,11 @@
       to: replaceToken ? Pos(cur.line, token.end) : cur
     };
 
-    CodeMirror.on(data, 'select', function(md, el) {
-      markdown = md;
-    });
+    // CodeMirror.on(data, 'select', function(md, el) {
+    //   markdown = md;
+    // });
 
     return data;
-
   }
 
   // CodeMirror.markdownHint = getHints; // deprecated

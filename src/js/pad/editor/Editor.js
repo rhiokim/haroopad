@@ -66,6 +66,7 @@ define([
 			var cur = cm.getCursor();
 			var token = cm.getTokenAt(cur);
 			var md = token.string;
+			var doc = cm.getDoc();
 
 			switch(md) {
 			  case '##':
@@ -73,22 +74,23 @@ define([
 			  case '####':
 			  case '#####':
 			  case '######':
-			    cm.replaceSelection(' ');
+			  	cm.replaceSelection(' ');
+			  	cur.ch++;
 			    cm.setCursor(cur);
+			    cm.replaceSelection('[Header]');
 			  break;
-			  case '`':
-			  case '*':
 			  case '**':
 			  case '~~':
 			  case '==':
 			  case '$$$':
 			    cm.replaceSelection(md);
 			    cm.setCursor(cur);
+			    cm.replaceSelection('      ');
 			  break;
 			  case '```':
-			    cm.replaceSelection('\n\n'+ md);
-			    cur.line++;
+			    cm.replaceSelection('\n'+ md);
 			    cm.setCursor(cur);
+			    cm.replaceSelection('language');
 			  break;
 			  case '$$':
 			    cm.replaceSelection('\n\n'+ md);
@@ -98,9 +100,20 @@ define([
 			  case '()':
 			    cur.ch--;
 			    cm.setCursor(cur);
+			    cm.replaceSelection('      ');
 			  break;
 			  case '* * *':
+			  case '*****':
 			  case '- - -':
+			  case '-----':
+			  case '_ _ _':
+			  case '_____':
+			  	cur.ch -= md.length;
+			  	cm.setCursor(cur);
+			    cm.replaceSelection('\n');
+			    cur.line += 1;
+			  	cur.ch += md.length;
+			  	cm.setCursor(cur);
 			    cm.replaceSelection('\n\n');
 			    cur.line += 2;
 			    cm.setCursor(cur);
@@ -137,7 +150,7 @@ define([
 			var top = scrollInfo.top;
 			var per = scrollInfo.height - scrollInfo.clientHeight;
 
-			// window.ee.emit('editor.scroll', top, per);
+			window.ee.emit('editor.scroll', top, per);
 		}
 
 		if (generalConf.enableSyncScroll) {

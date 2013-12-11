@@ -190,7 +190,7 @@ module.exports = function(grunt) {
           '<%= build %>/haroopad/js/viewer.min.js': [
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/jquery/jquery.min.js',
-            '<%= vendors %>/jquery-oembed-all/jquery.oembed.min.js',
+            '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js',
             '<%= vendors %>/highlightjs/highlight.pack.js',
             '<%= build %>/viewer.min.js'
           ]
@@ -230,8 +230,8 @@ module.exports = function(grunt) {
           ],
 
           /* viewer */
-          '<%= vendors %>/jquery-oembed-all/jquery.oembed.min.js': [ 
-            '<%= vendors %>/jquery-oembed-all/jquery.oembed.js' 
+          '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js': [ 
+            '<%= vendors %>/haroopad-oembed/jquery.oembed.js' 
           ],
         }
       },
@@ -434,9 +434,10 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.node_modules/'}
         ]
       },
-      lang: {
+      locales: {
         files: [
-          { expand: true, cwd: 'src/locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
+          { expand: true, cwd: 'lib/haroopad-locales/', src: [ '**' ], dest: 'src/locales/' },
+          { expand: true, cwd: 'lib/haroopad-locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
         ]
       },
 
@@ -484,7 +485,7 @@ module.exports = function(grunt) {
       
       jqoembed: {
         files: [
-          { src: '<%= vendors %>/jquery-oembed-all/jquery.omebed.css', dest: 'src/css/jquery.omebed.css' }
+          { src: '<%= vendors %>/haroopad-oembed/jquery.omebed.css', dest: 'src/css/jquery.omebed.css' }
         ]
       }
     },
@@ -568,7 +569,7 @@ module.exports = function(grunt) {
   /* luanch mac app */
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  grunt.registerTask('nwlibs', [ 'copy:libs', 'copy:node_modules', 'copy:docs', 'copy:lang' ])
+  grunt.registerTask('nwlibs', [ 'copy:libs', 'copy:node_modules', 'copy:docs', 'copy:locales' ])
 
   grunt.registerTask('cp', [ 'copy:main', 'nwlibs' ]);
 

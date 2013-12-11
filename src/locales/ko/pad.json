@@ -1,89 +1,89 @@
 {
-	"title": "",
-	"experimental": "베타",
-	
-	"footer": {
-		"lines": "줄",
-		"words": "단어수"
-	},
+    "title": "",
+    "experimental": "베타",
 
-	"toc": {
-		"name": "목차"	
-	},
-	
-	"share": "공유",
-	"state": {
-		"label": "문서 구성요소",
-		"image": "이미지",
-		"header": "제목",
-		"link": "링크",
-		"table": "테이블",
-		"paragraph": "문장",
-		"code": "코드",
-		"blockquote": "인용구"
-	},
+    "footer": {
+        "lines": "줄",
+        "words": "단어수"
+    },
 
-	"config": {
-		"toc": "목차보기",
-		"outline": "개요보기",
-		"fullscreen": "전체화면",
-		"tab": "들여쓰기",
-		"usetab": "탭으로 들여쓰기",
-		"experimental": "실험기능",
-		"spaces": "공백문자",
-		"column": {
-			"label": "컬럼",
-			"one": "단일",
-			"two": "이단",
-			"three": "삼단"
-		}
-	},
+    "toc": {
+        "name": "목차"
+    },
 
-	"promotion": {
-		"desc": "하루패드를 공유해주세요."
-	},
+    "share": "공유",
+    "state": {
+        "label": "문서 구성요소",
+        "image": "이미지",
+        "header": "제목",
+        "link": "링크",
+        "table": "테이블",
+        "paragraph": "문장",
+        "code": "코드",
+        "blockquote": "인용구"
+    },
 
-	"donate": {
-		"label": "기부",
-		"title": "하루패드는 더 많은 아이디어가 있어요.",
-		"desc": "하루패드가 유용하다면 개발이 유지되고 성장할 수 있도록 도와주세요. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>기부하러 하기</a>"
-	},
+    "config": {
+        "toc": "목차보기",
+        "outline": "개요보기",
+        "fullscreen": "전체화면",
+        "tab": "들여쓰기",
+        "usetab": "탭으로 들여쓰기",
+        "experimental": "실험기능",
+        "spaces": "공백문자",
+        "column": {
+            "label": "컬럼",
+            "one": "단일",
+            "two": "이단",
+            "three": "삼단"
+        }
+    },
 
-	"email": {
-		"title": "메일 보내기",
-		"subject": "메일 제목을 입력해주세요.",
-		"to": "받는사람",
-		"from": "보내는 사람",
-		"reciver": "받는 사람 메일 주소를 입력해주세요.",
-		"html": "HTML",
-		"markdown": "Markdown",
-		"close": "닫기",
-		"send": "보내기",
-		"sent": "완료",
-		"remember": "이메일 기억하기",
-		"password": "비밀번호",
-		"secure": "메일 주소를 기억합니다.",
-		"yours": "Gmail 주소를 입력해주세요.",
-		"evernote": "에버노트",
-		"tumblr": "텀블러"
-	},
-	
-	"dialog": {
-		"save-change": "문서에 변경사항이 있어요. 저장할까요?",
-		"cancel": "취소",
-		"dont-save": "저장않음",
-		"save": "저장",
-		"yes": "예",
-		"no": "아니오",
+    "promotion": {
+        "desc": "하루패드를 공유해주세요."
+    },
 
-		"changed-file": "다른 애플리케이션에 의해서 파일이 변경되었어요. <br/>문서를 새로고침 할까요?"
-	},
+    "donate": {
+        "label": "기부",
+        "title": "하루패드는 더 많은 아이디어가 있어요.",
+        "desc": "하루패드가 유용하다면 개발이 유지되고 성장할 수 있도록 도와주세요. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>기부하러 하기</a>"
+    },
 
-	"upgrade": {
-		"uptodate": "최신 버젼입니다.",
-		"message": "하루패드가 업데이트 되었어요.",
-		"note": "릴리즈 노트",
-		"download": "다운로드",
-		"newest": "현재 최신의 하루패드를 사용중입니다."
-	}
+    "email": {
+        "title": "메일 보내기",
+        "subject": "메일 제목을 입력해주세요.",
+        "to": "받는사람",
+        "from": "보내는 사람",
+        "reciver": "받는 사람 메일 주소를 입력해주세요.",
+        "html": "HTML",
+        "markdown": "Markdown",
+        "close": "닫기",
+        "send": "보내기",
+        "sent": "완료",
+        "remember": "이메일 기억하기",
+        "password": "비밀번호",
+        "secure": "메일 주소를 기억합니다.",
+        "yours": "Gmail 주소를 입력해주세요.",
+        "evernote": "에버노트",
+        "tumblr": "텀블러"
+    },
+
+    "dialog": {
+        "save-change": "문서에 변경사항이 있어요. 저장할까요?",
+        "cancel": "취소",
+        "dont-save": "저장않음",
+        "save": "저장",
+        "yes": "예",
+        "no": "아니오",
+
+        "changed-file": "다른 애플리케이션에 의해서 파일이 변경되었어요. <br/>문서를 새로고침 할까요?"
+    },
+
+    "upgrade": {
+        "uptodate": "최신 버젼입니다.",
+        "message": "하루패드가 업데이트 되었어요.",
+        "note": "릴리즈 노트",
+        "download": "다운로드",
+        "newest": "현재 최신의 하루패드를 사용중입니다."
+    }
 }
