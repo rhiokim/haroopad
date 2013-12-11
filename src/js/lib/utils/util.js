@@ -1,7 +1,8 @@
 var path = require('path');
 var languageTable = [
 	'en',
-	'ko'
+	'ko',
+	'es'
 ];
 
 function asVersion(str) {
