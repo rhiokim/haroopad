@@ -15,7 +15,9 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Markdown Autocompletion
 	- Boost the efficiency of markdown documentation.
 * Internationalization
-	- English & Korean (System Locale)
+	- English
+	- Korea (한국어)
+	- Spanish (Espanol)
 * Added Themes
 	- Metro Vibes, Metro Vibes Dark, Wood, Wood Ri
 * Etc
