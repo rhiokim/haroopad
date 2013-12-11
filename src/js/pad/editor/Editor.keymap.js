@@ -101,6 +101,7 @@ define([
 			"'~'": 'markdownAutoComplete',
 			"'='": 'markdownAutoComplete',
 			"'-'": 'markdownAutoComplete',
+			"'_'": 'markdownAutoComplete',
 			"'@'": 'markdownAutoComplete'
 		}
 		keyMapAutoCompletion = merge(keyMapAutoCompletion, keyMaps);
