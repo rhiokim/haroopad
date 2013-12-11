@@ -127,49 +127,91 @@ define([
 		}, 1000);
 	});
 
+	// tocEl.click(function(e) {
+	// 	var el = e.target,
+	// 		hash, target,
+	// 		tag = el.tagName;
+
+	// 	e.preventDefault();
+
+	// 	switch (tag) {
+	// 		case 'A':
+	// 			hash = el.getAttribute('href').replace('#', '');
+	// 			target = _viewerDoc.getElementById(hash);
+
+	// 			$(_viewerDoc.body).stop().animate({
+	// 				scrollTop: $(target).offset().top - 20
+	// 			}, 500);
+
+	// 			var idx = target.getAttribute('data-idx');
+	// 			var line = mdSectionList[idx];
+
+	// 			$('.CodeMirror-scroll').stop().animate({
+	// 				scrollTop: line.y - 18
+	// 			}, 500);
+
+	// 		break;
+	// 		case 'BUTTON':
+
+	// 		break;
+	// 	}
+	// });
+
+	var View = Backbone.View.extend({
+		el: 'aside#toc',
+		events: {
+			'click #toc-content a': 'clickHeaderHandler',
+			'click #close-toc': 'toggleTOC'
+		},
+
+		initialize: function() {},
+
+		clickHeaderHandler: function(e) {
+			var el = e.target,
+				hash, target,
+				tag = el.tagName;
+
+			e.preventDefault();
+
+			hash = el.getAttribute('href').replace('#', '');
+			target = _viewerDoc.getElementById(hash);
+
+			$(_viewerDoc.body).stop().animate({
+				scrollTop: $(target).offset().top - 20
+			}, 500);
+
+			var idx = target.getAttribute('data-idx');
+			var line = mdSectionList[idx];
+
+			$('.CodeMirror-scroll').stop().animate({
+				scrollTop: line.y - 18
+			}, 500);
+		},
+
+		toggleTOC: function() {
+			if (isShow) {
+				tocEl.addClass('hide');
+			} else {
+				tocEl.removeClass('hide');
+				updateToc();
+			}
+
+			isShow = !isShow;
+		}
+	});
+
+	view = new View;
+
+
 	window.ee.on('menu.view.doc.outline', function(show) {
 		show ? _viewer.showOutline() : _viewer.hideOutline();
 	});
 	window.ee.on('menu.view.toggle.toc', function() {
-		if (!isShow) {
-			tocEl.stop().fadeIn(200);
-			updateToc();
-		} else {
-			tocEl.stop().fadeOut(100);
-		}
-
-		isShow = !isShow;
+		view.toggleTOC();
 	});
 
 	HotKey('defmod-shift-t', function() {
 		window.ee.emit('menu.view.toggle.toc', !isShow);
-	});
-
-	tocEl.click(function(e) {
-		var el = e.target,
-			hash, target,
-			tag = el.tagName;
-
-		e.preventDefault();
-
-		switch (tag) {
-			case 'A':
-				hash = el.getAttribute('href').replace('#', '');
-				target = _viewerDoc.getElementById(hash);
-
-				$(_viewerDoc.body).stop().animate({
-					scrollTop: $(target).offset().top - 20
-				}, 500);
-
-				var idx = target.getAttribute('data-idx');
-				var line = mdSectionList[idx];
-
-				$('.CodeMirror-scroll').stop().animate({
-					scrollTop: line.y - 18
-				}, 500);
-
-				break;
-		}
 	});
 
 	return {

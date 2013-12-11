@@ -67,6 +67,12 @@ define([
 		global._gaq.push('haroopad', 'set toc view', show);
 	});
 
+	Document.on('help', function(show) {
+		// window.ee.emit('menu.help.syntax'); 
+		window.ee.emit('toggle.syntax.help');
+		global._gaq.push('haroopad', 'show markdown syntax help', '');
+	});
+
 	Document.on('fullscreen', function(show) {
 		window.ee.emit('view.fullscreen', show);
 	});

@@ -11,7 +11,8 @@ define([
 			el: '#md-help',
 
 			events: {
-				'click a[target=md-help]': 'openWindow'
+				'click a[target=md-help]': 'openWindow',
+				'click #close-md-help': 'toggle'
 			},
 
 			initialize: function() {
@@ -19,15 +20,17 @@ define([
 			},
 
 			show: function() {
-				this.$el.show();
+				this.$el.removeClass('hide');
+				isShow = true;
 			},
 
 			hide: function() {
-				this.$el.hide();
+				this.$el.addClass('hide');
+				isShow = false;
 			},
 
 			toggle: function() {
-				this.$el.toggle();
+				isShow ? this.hide() : this.show();
 			},
 
 			openWindow: function(e) {
@@ -38,8 +41,8 @@ define([
 					width: 400,
 					height: nw.height,
 					toolbar: false,
-					"min_width": 350,
-					"min_height": 300
+					min_width: 350,
+					min_height: 300
 				});
 				popWin.on('loaded', function() {
 					popWin.focus();
@@ -52,6 +55,10 @@ define([
 		view = new View;
 
 		HotKey('defmod-shift-h', function() {
+			window.ee.emit('toggle.syntax.help');
+		});
+
+		window.ee.on('toggle.syntax.help', function() {
 			view.toggle();
 		});
 

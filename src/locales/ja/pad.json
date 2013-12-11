@@ -1,7 +1,3 @@
-// Haroopad language configuration
-// language : japan (ja)
-// author : YOUR_NAME : https://github.com/YOUR_ACCOUNT
-
 {
     "title": "",
     "experimental": "experimental",
@@ -28,9 +24,9 @@
     },
 
     "config": {
-        "toc": "Table of Content",
-        "outline": "Outline",
-        "fullscreen": "Fullscreen",
+        "toc": "Show Table of Content",
+        "outline": "Show Document Outline",
+        "fullscreen": "Toggle Fullscreen",
         "tab": "Tab with",
         "usetab": "Indent Using Tab",
         "experimental": "Experimental",
@@ -40,7 +36,8 @@
             "one": "Signle",
             "two": "Two Column",
             "three": "Three Column"
-        }
+        },
+        "md-help": "Show Syntax Help"
     },
 
     "promotion": {
