@@ -1,19 +1,16 @@
-
-
-  
 #main > aside {
-	-webkit-flex: 1 6 75px;
-	-webkit-order: 3;
+	/*-webkit-flex: 1 6 75px;*/
+	/*-webkit-order: 3;*/
 	/*display: -webkit-flex;*/
-	-webkit-flex-flow: column;
+	/*-webkit-flex-flow: column;*/
 	/*background-color: rgba(255, 255, 255, 0.8);*/
 	/*position: absolute;*/
 	/*height:100%;*/
-	margin-bottom: 23px;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	z-index: 5;
+	/*margin-bottom: 23px;*/
+	/*right: 0;*/
+	/*top: 0;*/
+	/*bottom: 0;*/
+	/*z-index: 5;*/
 }
 
 #main > aside > header {

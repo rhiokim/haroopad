@@ -10,7 +10,7 @@ define([
 		var fs = require('fs');
 		var path = require('path');
 
-		var iframe = $('#haroo iframe')[0];
+		var iframe = $('#viewer iframe')[0];
 		var _viewer = iframe.contentWindow;
 		var content = '',
 			_toc = '',

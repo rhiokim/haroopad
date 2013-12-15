@@ -12,25 +12,34 @@ define([
 
 			events: {
 				'click a[target=md-help]': 'openWindow',
-				'click #close-md-help': 'toggle'
+				'click #close-md-help': 'toggle',
+				'click a': 'clickHandler'
 			},
 
 			initialize: function() {
 				this.$el.i18n();
+				this.$pel = this.$el.parent();
 			},
 
 			show: function() {
-				this.$el.removeClass('hide');
+				// this.$el.removeClass('hide');
+				this.$pel.addClass('md-help');
 				isShow = true;
 			},
 
 			hide: function() {
-				this.$el.addClass('hide');
+				// this.$el.addClass('hide');
+				this.$pel.removeClass('md-help');
 				isShow = false;
 			},
 
 			toggle: function() {
 				isShow ? this.hide() : this.show();
+			},
+
+			clickHandler: function(e) {
+				var md = $(e.target).data('md');
+				window.ee.emit('menu.insert.markdown', md);
 			},
 
 			openWindow: function(e) {

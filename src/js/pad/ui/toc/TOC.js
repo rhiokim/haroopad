@@ -5,10 +5,11 @@ define([
 
 	var stringEx = require('stringex');
 
-	var iframe = $('#haroo iframe')[0];
+	var iframe = $('#viewer iframe')[0];
 	var _viewer = iframe.contentWindow;
 	var _viewerDoc = iframe.contentDocument;
 	var _md_body = _viewerDoc.getElementById('root')
+	var $pad = $('#main');
 	var tocEl = $('#main > aside#toc');
 	var tocContentEl = tocEl.find('#toc-content');
 	var isShow = false;
@@ -190,10 +191,10 @@ define([
 
 		toggleTOC: function() {
 			if (isShow) {
-				tocEl.addClass('hide');
-			} else {
-				tocEl.removeClass('hide');
+				$pad.removeClass('toc');
 				updateToc();
+			} else {
+				$pad.addClass('toc');
 			}
 
 			isShow = !isShow;
@@ -211,7 +212,7 @@ define([
 	});
 
 	HotKey('defmod-shift-t', function() {
-		window.ee.emit('menu.view.toggle.toc', !isShow);
+		window.ee.emit('menu.view.toggle.toc');
 	});
 
 	return {

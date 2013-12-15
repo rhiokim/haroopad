@@ -7,7 +7,7 @@ define([
 	var gui = require('nw.gui'),
 		clipboard = gui.Clipboard.get();
 
-	var iframe = $('#haroo iframe')[0];
+	var iframe = $('#viewer iframe')[0];
 	var viewer = iframe.contentWindow;
 
 	var htmlDoc = iframe.contentDocument;
