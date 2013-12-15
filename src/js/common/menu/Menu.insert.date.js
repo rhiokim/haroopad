@@ -3,7 +3,7 @@ window.MenuBarInsertDate = function () {
   var submenu = new gui.Menu();
 
   var moment = require('moment');
-      moment.lang(getLang());
+      moment.lang(navigator.language.toLowerCase());
   
   var i, formats = ['L', 'l', 'LL', 'll', 'LLL', 'lll', 'LLLL', 'llll'];
 

@@ -1,9 +1,13 @@
 var path = require('path');
-var languageTable = [
-	'en',
-	'ko',
-	'es'
-];
+var languageTable = {
+	"en": 'en',
+	"ko": 'ko',
+	"es": 'es',
+	"zh": 'cn',
+	"zh-CN": 'cn',
+	"zh-HK": 'cn',
+	"zh-TW": 'cn'
+};
 
 function asVersion(str) {
 	var v = str.split(".");
@@ -51,10 +55,21 @@ function getExecPath() {
 }
 
 function getLang() {
-	var locale = window.navigator.language.split('-')[0];
-	locale = languageTable.indexOf(locale) < 0 ? 'en': locale ;
+	var locale = window.navigator.language;
+	var lang = languageTable[locale];
 
-	return locale;
+	if (lang) {
+		return lang; 
+	} else {
+		locale = locale.split('-')[0];
+		lang = languageTable[locale];
+
+		if (lang) {
+			return lang;
+		}
+	}
+
+	return 'en';
 }
 
 function getDocsPath() {
