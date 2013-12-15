@@ -56,7 +56,7 @@
         "filename": "Nombre de archivo",
         "copy-html": "Copiar HTML",
         "header": "Título",
-        "bold": "Texto fuerte ................ **",
+        "bold": "Texto reforzado ............. **",
         "italic": "Texto enfatizado ......... *",
         "inline-code": "Código en linea ........... `",
         "image": "Imagen ........................ ![]()",
@@ -97,7 +97,7 @@
         "user-echo": "Foro",
         "twitter": "Twitter",
         "check-for-update": "Buscar actualizaciones",
-        "boost-up-donate": "¡Apoya! ¡Dona"
+        "boost-up-donate": "¡Apoya! ¡Dona!"
     },
 
     "edit": {
