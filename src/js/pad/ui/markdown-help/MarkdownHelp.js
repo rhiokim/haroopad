@@ -5,6 +5,9 @@ define([
 	function(HotKey, html) {
 		$('#md-help #md-help-content').append(html);
 
+		var gui = require('nw.gui');
+		var shell = gui.Shell;
+
 		var popWin;
 		var view, isShow = false;
 		var View = Backbone.View.extend({
@@ -12,25 +15,43 @@ define([
 
 			events: {
 				'click a[target=md-help]': 'openWindow',
-				'click #close-md-help': 'toggle'
+				'click #close-md-help': 'toggle',
+				'click a': 'clickHandler'
 			},
 
 			initialize: function() {
 				this.$el.i18n();
+				this.$pel = this.$el.parent();
 			},
 
 			show: function() {
-				this.$el.removeClass('hide');
+				// this.$el.removeClass('hide');
+				this.$pel.addClass('md-help');
 				isShow = true;
 			},
 
 			hide: function() {
-				this.$el.addClass('hide');
+				// this.$el.addClass('hide');
+				this.$pel.removeClass('md-help');
 				isShow = false;
 			},
 
 			toggle: function() {
 				isShow ? this.hide() : this.show();
+			},
+
+			clickHandler: function(e) {
+				var $el = $(e.target);
+				var md = $el.data('md');
+
+				e.preventDefault();
+
+				if (!md) {
+					shell.openExternal($el.attr('href'));
+					return;
+				}
+
+				window.ee.emit('menu.insert.markdown', md);
 			},
 
 			openWindow: function(e) {
