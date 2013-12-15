@@ -3,6 +3,7 @@ define([
 	function() {
 	var marked = require("marked");
     var config = store.get('General') || {};
+    var markdown = store.get('Markdown') || {};
 	
     var defaults = {
         "gfm": true,
