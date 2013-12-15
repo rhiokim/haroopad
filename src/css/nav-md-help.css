@@ -58,7 +58,7 @@ nav#md-help {
   text-shadow: 1px 1px #000;
 }
 
-#md-help-content a {
+#md-help-content a[data-md] {
   color: #999;
 }
 
