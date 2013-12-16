@@ -30,19 +30,20 @@ define([
 
 		// var config = option.toJSON();
 
-		function setTitle() {
-			var viewerDoc = iframe.contentDocument.body;
-			var el = viewerDoc.querySelectorAll('h1, h2, h3, h4, h5, h6')[0];
-			var title = (el && el.innerText) || '';
+		// function setTitle() {
+		// 	var viewerDoc = iframe.contentDocument.body;
+		// 	var el = viewerDoc.querySelectorAll('h1, h2, h3, h4, h5, h6')[0];
+		// 	var title = (el && el.innerText) || '';
 
-			nw.file.set({ title: title }, { silent: true });
-		}
+		// 	nw.file.set({ title: title }, { silent: true });
+		// }
 
 		function update(markdown, html, editor) {
 			content = html;
 
 			setTimeout(function() {
 				_viewer.update(content);
+				// setTitle();
 			}, 1);
 		}
 
@@ -214,16 +215,26 @@ define([
 		_viewer.onload = function() {}
 
 		_viewer.ee.on('rendered', function() {
-			setTitle();
-			
-			_toc = TOC.get();
+			TOC.build();
+		});
 
+		_viewer.ee.on('change.toc', function() {
+			if (!_toc) {
+				return;
+			}
+			
+			_toc = nw.file.get('toc') || '';
 			_viewer.updateTOC(_toc);
 
-			//update TOC in file model
-			content = content.replace(/^\<p\>\[(TOC|toc)\]\<\/p\>$/gm, '<p>\n'+ _toc +'\n</p>');
+			//@TODO lazy
+			content = content.replace(/<p class="toc"><\/p>/gm, _toc);
 
 			nw.file.set({ 'html': content }, { silent: true });
+		});
+
+		//change Table of Contents by TOC module
+		nw.file.on('change:toc', function(child, toc) {
+			_viewer.updateTOC(toc);
 		});
 
 		//linkable

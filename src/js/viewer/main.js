@@ -261,22 +261,6 @@ function _lazySyntaxHighlight(el) {
 //   });
 // }
 
-/**
- * initial render TOC
- * @param  {[type]} toc [description]
- * @return {[type]}     [description]
- */
-function renderTOC(toc) {
-  var tocPattern = /^\[(TOC|toc)\] *$/;
-  var paragraphs = _md_body.querySelectorAll('p');
-  paragraphs = Array.prototype.slice.call(paragraphs, 0);
-
-  paragraphs.forEach(function(paragraph) {
-    if (tocPattern.test(paragraph.textContent)) {
-      paragraph.innerHTML = toc;
-    }
-  });
-}
 
 /**
  * dynamic update TOC
@@ -288,8 +272,7 @@ function updateTOC(toc) {
   tocEls = Array.prototype.slice.call(tocEls, 0);
 
   tocEls.forEach(function(tocEl) {  
-    tocEl.style.display = 'none';
-    tocEl.parentElement.innerHTML = toc;
+    tocEl.innerHTML = toc;
   });
 }
 
@@ -318,19 +301,6 @@ function countFragments(target) {
 
   window.ee.emit('title', headers[0] && headers[0].innerHTML);
 }
-
-// function processMathJax(target) {
-//   var mathEl = document.createElement('div');
-//   mathEl.innerHTML = target.innerHTML;
-
-//   MathJax.Hub.Queue(
-//     ["Typeset", MathJax.Hub, mathEl],
-//     [function() {
-//       target.innerHTML = mathEl.innerHTML;
-//       target.removeAttribute('class');
-//     }]
-//   );
-// }
 
 function drawMathJax() {
   var i, math = _md_body.querySelectorAll('.mathjax');
@@ -396,12 +366,12 @@ function empty() {
  * @param  {[type]} contents [description]
  * @return {[type]}          [description]
  */
-
 var wrapper = document.createElement('div');
+//@TODO initial render
 function update(html) {
-  // var wrapper = $('<div>').html(html);
   var i, j, limit, frag, frags, _frag, _frags, origin, _origin,
     code, codes, _code, _codes;
+  var changeTOC = false;
 
   wrapper.innerHTML = html;
 
@@ -459,6 +429,11 @@ function update(html) {
     //이전 프레그먼트 없는 경우 body 에 추가
     if (!_frag) {
       _md_body.appendChild(frag);
+
+      //check change toc 
+      if (/^H[1-6]/.test(frag.tagName) == true) {
+        changeTOC = true;
+      }
     } else {
 
       //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
@@ -470,7 +445,9 @@ function update(html) {
         _md_body.insertBefore(frag, _frag);
         _md_body.removeChild(_frag);
 
-        // _frags = [_frag].concat(_frags);
+        if (/^H[1-6]/.test(frag.tagName) == true) {
+          changeTOC = true;
+        }
       }
     }
     i++;
@@ -481,23 +458,19 @@ function update(html) {
   if (_frags.length > 0) {
     _frags.forEach(function(frag, idx) {
       _md_body.removeChild(frag);
-      // $(frag).remove();
     });
   }
 
-  // if (frags.find('img').length > 0) {
-  //   _fixImagePath();
-  // }
-
-  // _preventDefaultAnchor();
-  // _lazySyntaxHighlight();
+  //fire event when changed TOC
+  if (changeTOC) {
+    window.ee.emit('change.toc', undefined, _md_body);
+  }
   
   countFragments(_md_body);
   drawMathJax();
   drawEmbedContents(document.body);
-  // generateTOC();
-  
-  // window.ee.emit('rendered', _md_body);
+
+  window.ee.emit('rendered', _md_body);
 }
 /**
  * sync scroll position
@@ -512,13 +485,6 @@ function scrollTop(per) {
   $(window).scrollTop(top / 100 * per);
 }
 
-// function replaceExternalContent(el, origin) {
-//   var plugin = $(origin)[0];
-//   plugin.setAttribute('origin', origin);
-//   el.style.display = 'none';
-//   document.body.insertBefore(plugin, el);
-//   document.body.removeChild(el);
-// }
 
 $(document.body).ready(function() {
   _doc = document,
