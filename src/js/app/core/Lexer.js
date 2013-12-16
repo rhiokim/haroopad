@@ -22,9 +22,8 @@ define([
     var lexer = new marked.Lexer(defaults);
 
     var customRules = {
-        // plugin: /^ *\[([^\:\]]+):([^\]]+)\] *\n*/,
-        oembed: /^@\[(inside)\]\(href\)/
-        // plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(] */
+        oembed: /^@\[(inside)\]\(href\)/,
+        toc: /^\[(TOC|toc)\] *(?:\n+|$)/
     }
     
     var _inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;

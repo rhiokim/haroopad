@@ -49,15 +49,17 @@ define([
 	}
 
 	// Build the TOC
+	var toc = '';
 	function buildToc() {
 		var anchorList = {};
-		var toc = '';
 
 		function createAnchor(element) {
 			var id = element.id || element.textContent || 'title';
 			id = id.toLowerCase();
+			/*@TODO Critical performance issue
 			id = stringEx.toASCII(id);
 			id = stringEx.toUrl(id);
+			*/
 			var anchor = id.trim();
 			var index = 0;
 			while (anchorList.hasOwnProperty(anchor)) {
@@ -70,7 +72,6 @@ define([
 		}
 
 		var elementList = [];
-
 		var headers = _md_body.querySelectorAll(':scope>h1, :scope>h2, :scope>h3, :scope>h4, :scope>h5, :scope>h6');
 		headers = Array.prototype.slice.call(headers, 0);
 
@@ -80,83 +81,59 @@ define([
 		});
 		elementList = groupTags(elementList);
 
-		toc = '<ul class="toc">\n' + elementList.join("") + '</ul>\n';
+		toc = '<ul>\n' + elementList.join("") + '</ul>\n';
+
 		nw.file.set({
 			toc: toc
 		});
 
-		return toc;
+		if (isShow) {
+			// updateToc();
+			view.update();
+		}
 	}
 
-	function updateToc() {
-		var str = nw.file.get('toc');
-		var doc = nw.editor.getDoc();
-		var i = 1,
-			y = 0;
-		mdSectionList = [];
+	// function updateToc() {
+	// 	var str = nw.file.get('toc');
+	// 	var doc = nw.editor.getDoc();
+	// 	var i = 1,
+	// 		y = 0;
+	// 	mdSectionList = [];
 
-		doc.eachLine(function(line) {
-			if (line.styles && line.styles[2] == 'header') {
-				mdSectionList.push({
-					y: y,
-					info: line
-				});
-			}
-			y += line.height;
-		});
+	// 	doc.eachLine(function(line) {
+	// 		if (line.styles && line.styles[2] == 'header') {
+	// 			mdSectionList.push({
+	// 				y: y,
+	// 				info: line
+	// 			});
+	// 		}
+	// 		y += line.height;
+	// 	});
 
-		tocContentEl.html(str);
-	}
+	// 	tocContentEl.html(str);
+	// }
 
-	_viewer.ee.on('rendered', function() {
+	_viewer.ee.on('rendered1', function() {
 		var toc = buildToc();
 
 		if (isShow) {
-			updateToc();
+			// updateToc();
+			view.update();
 		}
 
 		_viewer.renderTOC(toc);
 	});
 
-	var resizeTimeout;
+	var buildTimeout, resizeTimeout;
 	window.addEventListener('resize', function(e) {
 		clearTimeout(resizeTimeout);
 
 		resizeTimeout = window.setTimeout(function() {
 			nw.editor.refresh();
-			updateToc();
+			// updateToc();
+			view.update();
 		}, 1000);
 	});
-
-	// tocEl.click(function(e) {
-	// 	var el = e.target,
-	// 		hash, target,
-	// 		tag = el.tagName;
-
-	// 	e.preventDefault();
-
-	// 	switch (tag) {
-	// 		case 'A':
-	// 			hash = el.getAttribute('href').replace('#', '');
-	// 			target = _viewerDoc.getElementById(hash);
-
-	// 			$(_viewerDoc.body).stop().animate({
-	// 				scrollTop: $(target).offset().top - 20
-	// 			}, 500);
-
-	// 			var idx = target.getAttribute('data-idx');
-	// 			var line = mdSectionList[idx];
-
-	// 			$('.CodeMirror-scroll').stop().animate({
-	// 				scrollTop: line.y - 18
-	// 			}, 500);
-
-	// 		break;
-	// 		case 'BUTTON':
-
-	// 		break;
-	// 	}
-	// });
 
 	var View = Backbone.View.extend({
 		el: 'aside#toc',
@@ -192,16 +169,43 @@ define([
 		toggleTOC: function() {
 			if (isShow) {
 				$pad.removeClass('toc');
-				updateToc();
+				// updateToc();
+				this.update();
 			} else {
 				$pad.addClass('toc');
 			}
 
 			isShow = !isShow;
+		},
+
+		update: function() {
+			var str = nw.file.get('toc');
+			var doc = nw.editor.getDoc();
+			var i = 1,
+				y = 0;
+			mdSectionList = [];
+
+			doc.eachLine(function(line) {
+				if (line.styles && line.styles[2] == 'header') {
+					mdSectionList.push({
+						y: y,
+						info: line
+					});
+				}
+				y += line.height;
+			});
+
+			tocContentEl.html(str);
+		},
+
+		build: function() {
+			clearTimeout(buildTimeout);
+
+			buildTimeout = window.setTimeout(function() {
+				buildToc();
+			}, 1350);
 		}
 	});
-
-	view = new View;
 
 
 	window.ee.on('menu.view.doc.outline', function(show) {
@@ -215,7 +219,5 @@ define([
 		window.ee.emit('menu.view.toggle.toc');
 	});
 
-	return {
-		get: buildToc
-	}
+	return view = new View;
 });

@@ -57,5 +57,9 @@ define([
 			}
 		}
 
+		renderer.toc = function(content) {
+		  return '<p class="toc"></p>';
+		}
+
 		return renderer;
 });

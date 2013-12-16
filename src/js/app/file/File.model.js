@@ -32,7 +32,8 @@ define([
       basename: undefined,
       markdown: '',
       tmp: undefined,
-      readOnly: false
+      readOnly: false,
+      toc: undefined
     },
 
     initialize: function() {
