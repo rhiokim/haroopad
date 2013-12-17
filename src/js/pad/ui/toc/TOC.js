@@ -3,15 +3,15 @@ define([
 	'ui/toc/TocElement'
 ], function(HotKey, TocElement) {
 
-	var stringEx = require('stringex');
+	// var stringEx = require('stringex');
 
 	var iframe = $('#viewer iframe')[0];
 	var _viewer = iframe.contentWindow;
 	var _viewerDoc = iframe.contentDocument;
-	var _md_body = _viewerDoc.getElementById('root')
+	var _md_body = _viewerDoc.getElementById('root');
 	var $pad = $('#main');
-	var tocEl = $('#main > aside#toc');
-	var tocContentEl = tocEl.find('#toc-content');
+	// var tocEl = $('#main > aside#toc');
+	// var tocContentEl = tocEl.find('#toc-content');
 	var isShow = false;
 	var previewContentsElt = undefined;
 	var mdSectionList = [];
@@ -137,6 +137,7 @@ define([
 
 	var View = Backbone.View.extend({
 		el: 'aside#toc',
+
 		events: {
 			'click #toc-content a': 'clickHeaderHandler',
 			'click #close-toc': 'toggleTOC'
@@ -170,8 +171,8 @@ define([
 			if (isShow) {
 				$pad.removeClass('toc');
 				// updateToc();
-				this.update();
 			} else {
+				this.update();
 				$pad.addClass('toc');
 			}
 
@@ -195,7 +196,8 @@ define([
 				y += line.height;
 			});
 
-			tocContentEl.html(str);
+			this.$('#toc-content').html(str);
+			// tocContentEl.html(str);
 		},
 
 		build: function() {

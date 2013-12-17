@@ -1,21 +1,31 @@
 /**
- * Table of contents
+ * 
  */
-aside#toc{/*
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.8);*/
 
-  background-color: #222;
+aside#toc{
+  position: absolute;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.75);
+
+  /*background-color: rgba(30, 30, 30, 0.8);*/
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0,0,0, 0.6);
 }
 
 
 #toc > header {
-  display: none;
+	z-index: 2;
+	color: #fff;
+	padding: 10px;
+	position: absolute;
+	width: 255px;
+  	text-shadow: 0 1px 0 #000;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(75,75,75,1)), color-stop(100%,rgba(50,50,50,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(75,75,75,1) 0%,rgba(c,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: linear-gradient(to bottom,  rgba(75,75,75,1) 0%,rgba(50,50,50,1) 100%); /* W3C */
 }
 
 #main.toc #toc {
-  width: 155px;
+  width: 130px;
 
   -webkit-transition: width 0.15s ease-out;
   transition: width 0.15s ease-out;
@@ -44,20 +54,11 @@ aside#toc{/*
   height: 100%;
   position: absolute;
   overflow: hidden;
+  z-index: 1;
 }
-/*
-#toc-content {
-  width: 270px;
-  height: 100%;
-  bottom: 0;
-  margin-top: 40px;
-  padding-left: 5px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}*/
 
 #toc-content a {
-  text-shadow: 1px 1px #000;
+	/*text-shadow: 0 1px 0 rgba(0,0,0, .5);*/
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -71,9 +72,9 @@ aside#toc{/*
 }
 
 #toc-content>ul {
-  margin-top: 10px;
+  margin-top: 30px;
   height: 100%;
 }
 
-#toc-content>ul>li {}
+#toc-content>ul {}
 

@@ -61,6 +61,7 @@
   <link rel="stylesheet" href="css/layout/aside.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/aside-toc.css">
+  <link rel="stylesheet" href="css/aside-oembed.css">
   <link rel="stylesheet" href="css/nav-md-help.css">
 
   <link rel="stylesheet" href="css/app.css">
@@ -219,11 +220,22 @@
     <aside id="viewer">
       <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
     </aside>
+    <aside id="oembed">
+      <header>
+        <h5 class="pull-left"><span data-i18n="oembed.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span></h5>
+        <div class="btn-group pull-right">
+          <a id="close-oembed" class="btn btn-mini btn-primary"><i class="icon-white icon-remove"></i></a>
+        </div>
+      </header>
+      <div id="oembed-content">
+      </div>
+      <footer></footer>
+    </aside>
     <aside id="toc">
       <header>
-        <h5 class="pull-left"><span data-i18n="toc.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span></h5>
+        <span data-i18n="toc.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span>
         <div class="btn-group pull-right">
-          <a id="close-toc" class="btn btn-mini btn-primary"><i class="icon-white icon-remove"></i></a>
+          <a id="close-toc" class="btn btn-mini btn-inverse"><i class="icon-white icon-remove"></i></a>
         </div>
       </header>
       <div id="toc-content">

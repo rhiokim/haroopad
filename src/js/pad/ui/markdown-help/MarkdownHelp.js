@@ -41,7 +41,7 @@ define([
 			},
 
 			clickHandler: function(e) {
-				var $el = $(e.target);
+				var $el = $(e.currentTarget);
 				var md = $el.data('md');
 
 				e.preventDefault();
