@@ -215,14 +215,6 @@ define([
 		_viewer.onload = function() {}
 
 		_viewer.ee.on('rendered', function() {
-			TOC.build();
-		});
-
-		_viewer.ee.on('change.toc', function() {
-			if (!_toc) {
-				return;
-			}
-			
 			_toc = nw.file.get('toc') || '';
 			_viewer.updateTOC(_toc);
 
@@ -230,6 +222,10 @@ define([
 			content = content.replace(/<p class="toc"><\/p>/gm, _toc);
 
 			nw.file.set({ 'html': content }, { silent: true });
+		});
+
+		_viewer.ee.on('change.toc', function() {
+			TOC.build();
 		});
 
 		//change Table of Contents by TOC module

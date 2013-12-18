@@ -146,17 +146,19 @@ define([
 		initialize: function() {},
 
 		clickHeaderHandler: function(e) {
-			var el = e.target,
-				hash, target,
-				tag = el.tagName;
+			var el = e.currentTarget,
+				hash, target;
 
 			e.preventDefault();
 
 			hash = el.getAttribute('href').replace('#', '');
 			target = _viewerDoc.getElementById(hash);
 
+			//TODO conflict when enabled sync scroll
+			// _viewerDoc.body.scrollTop = target.offsetTop - 20;
+
 			$(_viewerDoc.body).stop().animate({
-				scrollTop: $(target).offset().top - 20
+				scrollTop: target.offsetTop - 20
 			}, 500);
 
 			var idx = target.getAttribute('data-idx');
@@ -170,7 +172,6 @@ define([
 		toggleTOC: function() {
 			if (isShow) {
 				$pad.removeClass('toc');
-				// updateToc();
 			} else {
 				this.update();
 				$pad.addClass('toc');
@@ -197,15 +198,12 @@ define([
 			});
 
 			this.$('#toc-content').html(str);
-			// tocContentEl.html(str);
 		},
 
 		build: function() {
 			clearTimeout(buildTimeout);
 
-			buildTimeout = window.setTimeout(function() {
-				buildToc();
-			}, 1350);
+			buildTimeout = window.setTimeout(buildToc, 650);
 		}
 	});
 
@@ -218,7 +216,8 @@ define([
 	});
 
 	HotKey('defmod-shift-t', function() {
-		window.ee.emit('menu.view.toggle.toc');
+		// disable on v0.10
+		// window.ee.emit('menu.view.toggle.toc');
 	});
 
 	return view = new View;

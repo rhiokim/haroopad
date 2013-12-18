@@ -51,14 +51,15 @@ window.MenuBarView = function () {
 		      }
 	    })
 	);
-	View.append(
-	    new gui.MenuItem({
-	        label: i18n.t('view.toggle-toc'),
-		      click: function() {
-		        window.parent.ee.emit('menu.view.toggle.toc');
-		      }
-	    })
-	);
+	// disable on v0.10
+	// View.append(
+	//     new gui.MenuItem({
+	//         label: i18n.t('view.toggle-toc'),
+	// 	      click: function() {
+	// 	        window.parent.ee.emit('menu.view.toggle.toc');
+	// 	      }
+	//     })
+	// );
 	// View.append(
 	//     new gui.MenuItem({
 	//         label: 'Toggle Word Count',
