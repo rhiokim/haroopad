@@ -60,13 +60,13 @@ body {
          order: 4;
   z-index: 5;
 }
-#main > #toc { 
+#main > #toc { /*
   -webkit-flex: 1 1 auto;
   flex: 1 1  auto;
     
  -webkit-order: 5;
-         order: 5;
-  z-index: 1;
+         order: 5;*/
+  z-index: 5;
 }
 
 
@@ -116,5 +116,5 @@ body {
 }
 
 .navbar-inner {
-   padding: 1px 3px 0 6px !important;
+   padding: 1px 3px 0 3px !important;
 }

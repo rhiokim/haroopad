@@ -61,6 +61,7 @@
   <link rel="stylesheet" href="css/layout/aside.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/aside-toc.css">
+  <link rel="stylesheet" href="css/aside-oembed.css">
   <link rel="stylesheet" href="css/nav-md-help.css">
 
   <link rel="stylesheet" href="css/app.css">
@@ -219,11 +220,22 @@
     <aside id="viewer">
       <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
     </aside>
+    <aside id="oembed">
+      <header>
+        <h5 class="pull-left"><span data-i18n="oembed.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span></h5>
+        <div class="btn-group pull-right">
+          <a id="close-oembed" class="btn btn-mini btn-primary"><i class="icon-white icon-remove"></i></a>
+        </div>
+      </header>
+      <div id="oembed-content">
+      </div>
+      <footer></footer>
+    </aside>
     <aside id="toc">
       <header>
-        <h5 class="pull-left"><span data-i18n="toc.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span></h5>
+        <span data-i18n="toc.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span>
         <div class="btn-group pull-right">
-          <a id="close-toc" class="btn btn-mini btn-primary"><i class="icon-white icon-remove"></i></a>
+          <a id="close-toc" class="btn btn-mini btn-inverse"><i class="icon-white icon-remove"></i></a>
         </div>
       </header>
       <div id="toc-content">
@@ -234,7 +246,12 @@
 
   <footer class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="navbar-inner">
-      <div class="pull-left">
+      <div class="btn-group pull-left">
+        <a href="#" id="toggle-md-help" class="btn btn-mini btn-inverse dropdown-toggle">
+          <i class="icon-list-alt icon-white"></i>
+        </a>
+      </div>
+      <div id="area-status" class="pull-left">
         <span id="lineCount"><span data-i18n="pad:footer.lines">lines</span>: <span class="_cnt">0</span></span> 
         <span id="wordCount"><span data-i18n="pad:footer.words">words</span>: <span class="_cnt">0</span></span>
         <!-- <span id="paraCount"><span data-i18n="pad:footer.paragraph">paragraph</span>: <span class="_cnt">0</span></span> -->
@@ -249,7 +266,7 @@
         </a>
         <ul class="dropdown-menu">
           <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i><span data-i18n="pad:config.outline">Show Document Outline</span></a></li>
-          <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i><span data-i18n="pad:config.toc">Show TOC</span></a></li>
+          <!-- <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i><span data-i18n="pad:config.toc">Show TOC</span></a></li> -->
           <li><a tabindex="0" href="#" data-exec="md-help"><i class="icon-ok"></i><span data-i18n="pad:config.md-help">Show Markdown Help</span></a></li>
           <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i><span data-i18n="pad:config.fullscreen">Toggle Fullscreen</span></a></li>
         </ul>

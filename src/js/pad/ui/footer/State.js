@@ -24,7 +24,8 @@ define([
 		el: 'footer .navbar-inner',
 
 		events: {
-			'mouseover #elementsInfo': 'hoverHandler'
+			'mouseover #elementsInfo': 'hoverHandler',
+			'click #toggle-md-help': 'toggleMarkdownHelper'
 		},
 
 		initialize: function() {
@@ -50,6 +51,12 @@ define([
 
 		hoverHandler: function(e) {
 			this.trigger('hover');
+		},
+
+		toggleMarkdownHelper: function(e) {
+			window.ee.emit('toggle.syntax.help');
+
+			global._gaq.push('haroopad', 'toggle markdown helper', '');
 		},
 
 		updateHandler: function(cm) {

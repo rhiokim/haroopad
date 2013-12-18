@@ -3,15 +3,15 @@ define([
 	'ui/toc/TocElement'
 ], function(HotKey, TocElement) {
 
-	var stringEx = require('stringex');
+	// var stringEx = require('stringex');
 
 	var iframe = $('#viewer iframe')[0];
 	var _viewer = iframe.contentWindow;
 	var _viewerDoc = iframe.contentDocument;
-	var _md_body = _viewerDoc.getElementById('root')
+	var _md_body = _viewerDoc.getElementById('root');
 	var $pad = $('#main');
-	var tocEl = $('#main > aside#toc');
-	var tocContentEl = tocEl.find('#toc-content');
+	// var tocEl = $('#main > aside#toc');
+	// var tocContentEl = tocEl.find('#toc-content');
 	var isShow = false;
 	var previewContentsElt = undefined;
 	var mdSectionList = [];
@@ -137,6 +137,7 @@ define([
 
 	var View = Backbone.View.extend({
 		el: 'aside#toc',
+
 		events: {
 			'click #toc-content a': 'clickHeaderHandler',
 			'click #close-toc': 'toggleTOC'
@@ -145,17 +146,19 @@ define([
 		initialize: function() {},
 
 		clickHeaderHandler: function(e) {
-			var el = e.target,
-				hash, target,
-				tag = el.tagName;
+			var el = e.currentTarget,
+				hash, target;
 
 			e.preventDefault();
 
 			hash = el.getAttribute('href').replace('#', '');
 			target = _viewerDoc.getElementById(hash);
 
+			//TODO conflict when enabled sync scroll
+			// _viewerDoc.body.scrollTop = target.offsetTop - 20;
+
 			$(_viewerDoc.body).stop().animate({
-				scrollTop: $(target).offset().top - 20
+				scrollTop: target.offsetTop - 20
 			}, 500);
 
 			var idx = target.getAttribute('data-idx');
@@ -169,9 +172,8 @@ define([
 		toggleTOC: function() {
 			if (isShow) {
 				$pad.removeClass('toc');
-				// updateToc();
-				this.update();
 			} else {
+				this.update();
 				$pad.addClass('toc');
 			}
 
@@ -195,15 +197,13 @@ define([
 				y += line.height;
 			});
 
-			tocContentEl.html(str);
+			this.$('#toc-content').html(str);
 		},
 
 		build: function() {
 			clearTimeout(buildTimeout);
 
-			buildTimeout = window.setTimeout(function() {
-				buildToc();
-			}, 1350);
+			buildTimeout = window.setTimeout(buildToc, 650);
 		}
 	});
 
@@ -216,7 +216,8 @@ define([
 	});
 
 	HotKey('defmod-shift-t', function() {
-		window.ee.emit('menu.view.toggle.toc');
+		// disable on v0.10
+		// window.ee.emit('menu.view.toggle.toc');
 	});
 
 	return view = new View;

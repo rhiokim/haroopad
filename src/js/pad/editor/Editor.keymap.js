@@ -93,7 +93,7 @@ define([
 		keyMaps['Shift-Tab'] = 'indentLess';
 
 		keyMapAutoCompletion = {
-			"'#'": 'markdownAutoComplete',
+			// "'#'": 'markdownAutoComplete',
 			"'!'": 'markdownAutoComplete',
 			"'`'": 'markdownAutoComplete',
 			"'$'": 'markdownAutoComplete',

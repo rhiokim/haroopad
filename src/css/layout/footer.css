@@ -46,6 +46,10 @@ footer .dropdown-menu li > a i {
 	left: 3px;
 }
 
+footer #area-status {
+  margin-left: 3px;
+}
+
 footer #lineCount,
 footer #wordCount,
 footer #paraCount,
