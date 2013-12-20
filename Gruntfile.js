@@ -27,17 +27,23 @@ module.exports = function(grunt) {
     cssmin: {
       pad: {
         files: {
-          "build/haroopad/css/haroopad.min.css": [
+          "build/haroopad/css/pad.vendors.min.css": [
             'src/css/bootstrap.css',
             'src/css/todc-bootstrap.css',
-            'src/css/bootstrap-modal.css',
+            'src/css/bootstrap-modal.css'
+          ],
+          "build/haroopad/css/pad.layout.min.css": [
             'src/css/layout/basic.css',
             'src/css/layout/header.css',
             'src/css/layout/footer.css',
             'src/css/layout/nav.css',
-            'src/css/layout/aside.css',
+            'src/css/layout/aside.css'
+          ],
+          "build/haroopad/css/pad.style.min.css": [
             'src/css/header.css',
-            'src/css/aside.css',
+            'src/css/aside-toc.css',
+            'src/css/aside-oembed.css',
+            'src/css/nav-md-help.css',
             'src/css/app.css'
           ]
         }

@@ -10,7 +10,7 @@
   "devDependencies": {
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-cssmin": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.7.0",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-compress": "~0.5.3",
     "grunt-contrib-requirejs": "~0.4.0",

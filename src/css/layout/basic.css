@@ -30,9 +30,6 @@ body {
 #main > aside {
   width: 0;
   height: 100%;
-
-  -webkit-transition: width 0.3s ease-out;
-  transition: width 0.3s ease-out;
 }
 
 #main > #md-help { 
