@@ -53,10 +53,10 @@
     "markdown": {
         "enable-gfm": "Usar Github Flavord Markdown",
         "sanitize-desc": "Usar HTML",
-        "gfm-line-breaks": "Usar saltos de línea de Github Flavord Markdown",
-        "gfm-table": "Usar tablas de Github Flavord Markdown",
-        "smarty-list": "Usar comportamientos de lista más inteligentes que el Markdown original",
-        "smarty-pants": "Usar puntuación tipográfica \"inteligente\" para cosas como citas y guiones"
+        "gfm-line-breaks": "Usar salto de línea del Github Flavord Markdown",
+        "gfm-table": "Usar tabla del Github Flavord Markdown",
+        "smarty-list": "Mejor que el Smart List de Markdown",
+        "smarty-pants": "Uso de símbolos y sustituciones de texto"
     },
 
     "about": {

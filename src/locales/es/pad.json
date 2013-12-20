@@ -24,9 +24,9 @@
     },
 
     "config": {
-        "toc": "Mostrar la tabla de contenidos",
-        "outline": "Mostrar el esquema del documento",
-        "fullscreen": "Habilitar pantalla completa",
+        "toc": "Tabla de contenidos",
+        "outline": "Esquema",
+        "fullscreen": "Pantalla completa",
         "tab": "Ancho del tabulador",
         "usetab": "Sangrar usando el tabulador",
         "experimental": "Experimental",
@@ -36,8 +36,7 @@
             "one": "Individual",
             "two": "Dos columnas",
             "three": "Tres columnas"
-        },
-        "md-help": "Mostrar ayuda de sintaxis"
+        }
     },
 
     "promotion": {
