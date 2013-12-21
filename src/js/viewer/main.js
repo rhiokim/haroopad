@@ -317,8 +317,14 @@ var ebdOpt = {
   includeHandle: false,
   embedMethod: 'fill',
   afterEmbed: function(oembedData, externalUrl) {
+    var hasImage = this[0].querySelector('img');
+
     if (typeof oembedData.code == 'string') {
       this.attr('data-replace', oembedData.code);
+    }
+
+    if (hasImage) {
+      Echo.push(hasImage);
     }
   },
   onProviderNotFound: function(url) {
@@ -412,6 +418,9 @@ function update(html) {
 
     if (src.indexOf('//') == -1 && !/^\//.test(src)) {
       imgs[i].setAttribute('src', _options.dirname + '/' + src);
+    } else {
+      imgs[i].setAttribute('src', 'app://root/img/blank.gif');
+      imgs[i].setAttribute('data-echo', src);
     }
   }
 
@@ -470,6 +479,10 @@ function update(html) {
   drawMathJax();
   drawEmbedContents(document.body);
 
+  Echo.init({
+    offset: 10,
+    throttle: 250
+  });
   window.ee.emit('rendered', _md_body);
 }
 /**
@@ -506,4 +519,7 @@ $(document.body).ready(function() {
     }
   });
 
+  _body.addEventListener("DOMNodeInserted", function (ev) {
+    // console.log(ev.target.tagName);
+  }, false);
 });

@@ -56,6 +56,11 @@ p.toc li > a:before {
   display: inline-block;
 }
 
+img[data-echo] {
+  width: 100px;
+  height: 100px;
+}
+
 /**
  * spinner
  */
