@@ -17,7 +17,8 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Internationalization
 	- English
 	- Korea (한국어)
-	- Spanish (Espanol)
+	- Spanish (Español) - [davegomez](https://github.com/davegomez)
+	- Chinese Simplified (中文) - [toiletfreak](https://github.com/toiletfreak)
 * Added Themes
 	- Metro Vibes, Metro Vibes Dark, Wood, Wood Ri
 * Etc
@@ -71,7 +72,6 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ### Upcoming Features
 
-* Table Of Contents `[TOC]`
 * Footnotes
 
 ### And more?
