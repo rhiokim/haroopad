@@ -26,10 +26,10 @@ Shortcut                 | Description
 ##### View
 Shortcut            | Description
 --------------------|-------------------
-&#8984;(^) - ⇧ - 1  | (editor : viewer) mode
-&#8984;(^) - ⇧ - 2  | (viewer : editor) mode
-&#8984;(^) - ⇧ - 3  | editor mode
-&#8984;(^) - ⇧ - 4  | viewer mode
+&#8984;(^) - ⌥ - 1  | (editor : viewer) mode
+&#8984;(^) - ⌥ - 2  | (viewer : editor) mode
+&#8984;(^) - ⌥ - 3  | editor mode
+&#8984;(^) - ⌥ - 4  | viewer mode
 ⇧ - ^ - ]           | editor mode
 ⇧ - ^ - [           | dual mode
 ^ - ⌥ - ]           | editor width +5%
