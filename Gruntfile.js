@@ -65,6 +65,7 @@ module.exports = function(grunt) {
       viewer: {
         files: {
           "build/haroopad/css/viewer.min.css": [
+            'src/css/jquery.oembed.css',
             'src/css/viewer.css'
           ]
         }
@@ -489,13 +490,16 @@ module.exports = function(grunt) {
       
       select2: {
         files: [
-          { expand: true, src: '<%= vendors %>/select2/', src: [ 'select2.png', 'select2x2.png', 'select2.css', 'select2-boostrap.css' ], dest: 'src/css/' }
+          { src: '<%= vendors %>/select2/select2.png', dest: 'src/css/select2.png' },
+          { src: '<%= vendors %>/select2/select2x2.png', dest: 'src/css/select2x2.png' },
+          { src: '<%= vendors %>/select2/select2.css', dest: 'src/css/select2.css' },
+          { src: '<%= vendors %>/select2/select2-bootstrap.css', dest: 'src/css/select2-bootstrap.css' }
         ]
       },
       
       jqoembed: {
         files: [
-          { src: '<%= vendors %>/haroopad-oembed/jquery.omebed.css', dest: 'src/css/jquery.omebed.css' }
+          { src: '<%= vendors %>/haroopad-oembed/jquery.oembed.css', dest: 'src/css/jquery.oembed.css' }
         ]
       }
     },
