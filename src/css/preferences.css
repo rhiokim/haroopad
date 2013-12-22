@@ -23,6 +23,11 @@ hr {
 	margin: 10px 0;
 }
 
+input[type=checkbox] {
+	width: 13px;
+	height: 13px;
+}
+
 .nav {
 	margin-bottom: 10px;
 }

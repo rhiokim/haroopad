@@ -51,10 +51,12 @@ module.exports = function(grunt) {
 
       preferences: {
         files: {
-          "build/haroopad/css/preferences.min.css": [
+          "build/haroopad/css/preferences.vendors.min.css": [
             'src/css/bootstrap.css',
             'src/css/todc-bootstrap.css',
-            'src/css/select2.css',
+            'src/css/select2.css'
+          ],
+          "build/haroopad/css/preferences.style.min.css": [
             'src/css/preferences.css'
           ]
         }
@@ -376,7 +378,7 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
+          // { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
@@ -389,14 +391,14 @@ module.exports = function(grunt) {
           { src: 'src/viewer.bin.html', dest: 'build/haroopad/viewer.html' },
           { src: 'src/package.bin.json', dest: 'build/haroopad/package.json' },
           { src: 'src/logo.png', dest: 'build/haroopad/logo.png' },
-          { src: 'src/css/keys.css', dest: 'build/haroopad/css/keys.css' },
-          { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' }
+          { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' },
+          { src: 'src/css/select2x2.png', dest: 'build/haroopad/css/select2x2.png' }
         ]
       },
 
       debug: {
         files: [
-          { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
+          // { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/img/' },
           { expand: true, flatten: true, src: [ 'src/css/*' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/', filter:'isFile' },
           { expand: true, cwd: 'src/js/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/js/' },
@@ -487,7 +489,7 @@ module.exports = function(grunt) {
       
       select2: {
         files: [
-          { expand: true, src: '<%= vendors %>/select2/', src: [ 'select2.png', 'select2.css' ], dest: 'src/css/' }
+          { expand: true, src: '<%= vendors %>/select2/', src: [ 'select2.png', 'select2x2.png', 'select2.css', 'select2-boostrap.css' ], dest: 'src/css/' }
         ]
       },
       

@@ -358,3 +358,17 @@ Copyright (c) 2009 Richard Chamorro (MIT)
 **reMarked.js**
 
 Copyright (c) https://github.com/leeoniya/reMarked.js (MIT)
+
+* * *
+
+**Select2**
+
+Copyright 2012 Igor Vaynberg (Apache 2)
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+* * *
+
+**i18next**
+
+Copyright (c) 2011 Jan Mühlemann (MIT)
