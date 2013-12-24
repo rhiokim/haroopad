@@ -72,7 +72,6 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ### Upcoming Features
 
-* Table Of Contents `[TOC]`
 * Footnotes
 
 ### And more?
