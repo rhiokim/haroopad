@@ -1,0 +1,80 @@
+<h1>jRumble v1.3</h1>
+
+<p><em>by Jack Rugile - http://jackrugile.com</em></p>
+
+<p>jRumble is a <a href="http://jquery.com">jQuery</a> plugin that rumbles, vibrates, shakes, and rotates any element you choose. It's great to use as a hover effect or a way to direct attention to an element.</p>
+
+<ul>
+<li><strong>Latest Version:</strong> 1.3</li>
+<li><strong>Release Date:</strong> December 3, 2011</li>
+<li><strong>Compressed:</strong> 1.47kb</li>
+<li><strong>Uncompressed:</strong> 4.84kb</li>
+</ul>
+
+<h3>Documentation, Demos, and Discussion</h3>
+
+<p>Documentation, demos, and discussion can all be found at http://jackrugile.com/jrumble</p>
+
+<h3>Basic Usage</h3>
+
+<p>```javascript
+// Initialize jRumble on Selector
+$('#rumble-element').jrumble();</p>
+
+<p>// Start rumble on element
+$('#rumble-element').trigger('startRumble');</p>
+
+<p>// Stop rumble on element
+$('#rumble-element').trigger('stopRumble');
+```</p>
+
+<h3>Options</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>x</strong></td>
+            <td><em>2</em></td>
+            <td>Set the horizontal rumble range (pixels)</td>
+        </tr>
+        <tr>
+            <td><strong>y</strong></td>
+            <td><em>2</em></td>
+            <td>Set the vertical rumble range (pixels)</td>
+        </tr>
+        <tr>
+            <td><strong>rotation</strong></td>
+            <td><em>1</em></td>
+            <td>Set the rotation range (degrees)</td>
+        </tr>
+        <tr>
+            <td><strong>speed</strong></td>
+            <td><em>15</em></td>
+            <td>Set the speed/frequency in milliseconds between rumble movements (lower number = faster)</td>
+        </tr>                   
+        <tr>
+            <td><strong>opacity</strong></td>
+            <td><em>false</em></td>
+            <td>Activate opacity flickering while rumbling</td>
+        </tr>
+        <tr>
+            <td><strong>opacityMin</strong></td>
+            <td><em>.5</em></td>
+            <td>When the opacity option is set to true, this controls the minimum opacity while flickering</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Known Issues</h3>
+
+<ul>
+<li>For rumble elements that are position fixed/absolute, they should instead be wrapped in an element that is fixed/absolute</li>
+<li>Rotation does not work in Internet Explorer 8 and below</li>
+</ul>

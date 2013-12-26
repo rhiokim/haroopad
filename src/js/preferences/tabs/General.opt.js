@@ -3,8 +3,11 @@ define([
 	], function(store) {
 		var Model = Backbone.Model.extend({
 			defaults: {
+				enableMath: false,
 				enableSyncScroll: true,
-				playKeypressSound: false
+				playKeypressSound: false,
+				enableAutoComplete: false,
+				enableLastFileRestore: true
 			},
 
 			// localStorage: new Backbone.LocalStorage('General'),

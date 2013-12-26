@@ -1,21 +1,11 @@
 /* globally for window event system */
 var gui = require('nw.gui');
+var fs = require('fs');
+var lng = getLang();
 
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 window.parent = nw.parent;
-
-if (process.platform != 'darwin') {
-  MenuBar();
-}
-
-function loadCss(url) {
-  var link = document.createElement("link");
-  link.type = "text/css";
-  link.rel = "stylesheet";
-  link.href = url;
-  document.getElementsByTagName("head")[0].appendChild(link);
-}
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -41,177 +31,178 @@ requirejs.config({
   }
 });
 
-requirejs.onError = function(e) {
-  alert('Oops! pad is crash :-(');
-};
+i18n.init({
+  lng: lng
+}, function() {
 
-requirejs([
-  'window/Window',
-  'editor/Editor',
-  'viewer/Viewer',
-  'ui/file/File',
-  'ui/footer/Footer'
-], function(Window, Editor, Viewer, File) {
-  // var html, res, file, uid, tmp, readOnly, x, y;
-  var _tid_;
+  i18n.addResourceBundle(lng, 'menu', global.locales['menu']);
+  i18n.addResourceBundle(lng, 'pad', global.locales['pad']);
 
-  // var orgTitle = 'Untitled';
-  // var edited = false,
-  //   delayClose = false;
-  // var params = nw._params;
-  var file = nw.file;
+  i18n.setDefaultNamespace('menu');
 
-  // file = url('#file');
-  // file = params.file;
-  // tmp = params.tmp;
-  // uid = params.uid;
-  // readOnly = params.readOnly || false;
+  if (process.platform != 'darwin') {
+    parent.MenuBar();
+  }
 
+  requirejs([
+    'window/Window',
+    'editor/Editor',
+    'viewer/Viewer',
+    'ui/toc/TOC',
+    'ui/markdown-help/MarkdownHelp',
+    'ui/file/File',
+    'ui/layout/Layout',
+    'ui/footer/Footer'
+  ], function(Window, Editor, Viewer, TOC, MarkdownHelp, File) {
+    var _tid_;
+    var file = nw.file;
 
-  function delayChange() {
-    window.clearTimeout(_tid_);
+    $('body').i18n(); 
 
-    window.ee.emit('change.before.markdown', Editor.getValue());
+    function delayChange() {
+      window.clearTimeout(_tid_);
 
-    _tid_ = setTimeout(function() {
-      nw.file.set('markdown', Editor.getValue());
-      // window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
+      window.ee.emit('change.before.markdown', Editor.getValue());
 
+      _tid_ = setTimeout(function() {
+        nw.file.set('markdown', Editor.getValue());
+
+        window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
+          window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+        });
+      }, 210);
+    }
+
+    nw.on('file.opened', function(file) {
+      var opt;
+      opt = file.toJSON();
+
+      Editor.setValue(opt.markdown);
+      Viewer.init(opt);
+
+      // window.ee.emit('change.after.markdown', opt.markdown, opt.html, Editor);
+
+      if (!opt.readOnly) {
+        Editor.on('change', delayChange);
+      }
+
+      if (opt.html) {
+        file.trigger('change:html');
+      }
+
+      //temp file
+      if (opt.tmp) {
+        file.set({ fileEntry: undefined }, { silent: true });
+      }
+
+      /* change by external application */
+      file.on('change:mtime', function() {
+        window.ee.emit('file.update', nw.file.get('fileEntry'));
+      });
+
+      // window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
+      //   Editor.setValue(opt.markdown);
+
+      //   Viewer.init(opt);
       //   window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+
+      //   if (!opt.readOnly) {
+      //     Editor.on("change", delayChange); 
+      //   }
       // });
-    }, 100);
-  }
-
-  nw.on('file.opened', function(file) {
-    var opt;
-
-    // file.load();
-    opt = file.toJSON();
-
-    Editor.setValue(opt.markdown);
-    Viewer.init(opt);
-
-    // window.ee.emit('change.after.markdown', opt.markdown, opt.html, Editor);
-
-    if (!opt.readOnly) {
-      Editor.on('change', delayChange);
-    }
-
-    if (opt.html) {
-      file.trigger('change:html');
-    }
-
-    //temp file
-    if (opt.tmp) {
-      file.set({ fileEntry: undefined }, { silent: true });
-    }
-
-    /* change by external application */
-    file.on('change:mtime', function() {
-      window.ee.emit('file.update', nw.file.get('fileEntry'));
     });
 
-    // window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
-    //   Editor.setValue(opt.markdown);
+    file.on('change:html', function() {
+      window.ee.emit('change.after.markdown', file.get('markdown'), file.get('html'), Editor);
+    });
 
-    //   Viewer.init(opt);
-    //   window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+    if (!file.get('fileEntry')) {
+      Editor.on("change", delayChange);
+    } else {
+      nw.emit('file.opened', file);
+    }
 
-    //   if (!opt.readOnly) {
-    //     Editor.on("change", delayChange); 
-    //   }
+    // window.ee.on('file.opened', function(opt) {
+    //   window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
+    //     Editor.setValue(opt.markdown);
+
+    //     Viewer.init(opt);
+    //     window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
+
+    //     if (!readOnly) {
+    //       Editor.on("change", delayChange); 
+    //     }
+    //   });
+
     // });
-  });
 
-  file.on('change:html', function() {
-    window.ee.emit('change.after.markdown', file.get('markdown'), file.get('html'), Editor);
-  });
-
-  if (!file.get('fileEntry')) {
-    Editor.on("change", delayChange);
-  } else {
-    nw.emit('file.opened', file);
-  }
-
-  // window.ee.on('file.opened', function(opt) {
-  //   window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
-  //     Editor.setValue(opt.markdown);
-
-  //     Viewer.init(opt);
-  //     window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
-
-  //     if (!readOnly) {
-  //       Editor.on("change", delayChange); 
-  //     }
-  //   });
-
-  // });
-
-  window.ee.on('reload', function() {
-    file.reload({
-      silent: true
+    window.ee.on('reload', function() {
+      file.reload({
+        silent: true
+      });
+      Editor.setValue(file.get('markdown'));
+      file.trigger('change:markdown');
     });
-    Editor.setValue(file.get('markdown'));
-    file.trigger('change:markdown');
-  });
 
-  file.on('saved', function() {
-    var opt = nw.file.toJSON();
-    Viewer.init(opt);
-    nw.emit('file.saved', opt);
-  });
+    file.on('saved', function() {
+      var opt = nw.file.toJSON();
+      Viewer.init(opt);
+      nw.emit('file.saved', opt);
+    });
 
-  //run with file open;
-  // if (tmp) {
-  //   File.openTmp(decodeURIComponent(file), uid);
-  // } else {
-  //   if (file) {
-  //     File.open(decodeURIComponent(file));
-  //     Editor.setOption('readOnly', readOnly);
-  //   } else {
-  //     Editor.on("change", delayChange);
-  //   }
+    //run with file open;
+    // if (tmp) {
+    //   File.openTmp(decodeURIComponent(file), uid);
+    // } else {
+    //   if (file) {
+    //     File.open(decodeURIComponent(file));
+    //     Editor.setOption('readOnly', readOnly);
+    //   } else {
+    //     Editor.on("change", delayChange);
+    //   }
 
-  //   File.startAutoSave();
-  // }
+    //   File.startAutoSave();
+    // }
 
-  nw.on('focus', function() {
-    nw.file.refresh();
+    nw.on('focus', function() {
+      nw.file.refresh();
+      process.emit('actived', nw);
+    });
+
+    $("#notifier").click(function(e) {
+      var tagName = e.target.tagName.toUpperCase();
+
+      switch (tagName) {
+        case 'A':
+          window.parent.ee.emit($(e.target).data('href'));
+          e.preventDefault();
+          break;
+      }
+    });
+
+    /* control gui editor */
+    $('#editControls a').click(function(e) {
+      switch ($(this).data('role')) {
+        case 'h1':
+        case 'h2':
+        case 'p':
+          document.execCommand('formatBlock', false, '<' + $(this).data('role') + '>');
+          break;
+        default:
+          document.execCommand($(this).data('role'), false, null);
+          break;
+      }
+
+    });
+
+    //for aside menu
+    if (window.gnMenu) {
+      new gnMenu(document.getElementById('editControls'));
+    }
+
+    nw.show();
+    nw.focus();
     process.emit('actived', nw);
   });
 
-  $("#notifier").click(function(e) {
-    var tagName = e.target.tagName.toUpperCase();
-
-    switch (tagName) {
-      case 'A':
-        window.parent.ee.emit($(e.target).data('href'));
-        e.preventDefault();
-        break;
-    }
-  });
-
-  /* control gui editor */
-  $('#editControls a').click(function(e) {
-    switch ($(this).data('role')) {
-      case 'h1':
-      case 'h2':
-      case 'p':
-        document.execCommand('formatBlock', false, '<' + $(this).data('role') + '>');
-        break;
-      default:
-        document.execCommand($(this).data('role'), false, null);
-        break;
-    }
-
-  });
-
-  //for aside menu
-  if (window.gnMenu) {
-    new gnMenu(document.getElementById('editControls'));
-  }
-
-  nw.show();
-  nw.focus();
-  process.emit('actived', nw);
 });

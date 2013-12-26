@@ -15,24 +15,9 @@ define([
 		gapY = 0;
 
 	var config = store.get('Window') || {};
+	var generalOpt = store.get('General');
 	var top = config.y,
 		left = config.x;
-
-	// function merge(obj) {
-	// 	var i = 1,
-	// 		target, key;
-
-	// 	for (; i < arguments.length; i++) {
-	// 		target = arguments[i];
-	// 		for (key in target) {
-	// 			if (Object.prototype.hasOwnProperty.call(target, key)) {
-	// 				obj[key] = target[key];
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return obj;
-	// }
 
 	function _updateStore() {
 		config = store.get('Window') || {};
@@ -62,7 +47,7 @@ define([
 					delete windows[prop];
 					realCount--;
 
-					if (!realCount) {
+					if (!realCount/* && getPlatformName() != 'mac'*/) {
 						window.ee.emit('exit');
 					}
 					return;
@@ -76,14 +61,10 @@ define([
 
 			open(file);
 			Recents.add(fileEntry);
-
-			global._gaq.push('haroopad.file', 'open', '');
 		});
 
 		newWin.on('file.saved', function(file) {
 			Recents.add(file.fileEntry);
-
-			global._gaq.push('haroopad.file', 'save', '');
 		});
 
 		//window instance delivery to child window

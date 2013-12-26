@@ -6,53 +6,106 @@ body {
 }
 
 #main {
-  height: 100%;
-  display: -webkit-flex;
-  -webkit-flex-flow: row;
- }
-
-#main > nav {
-   -webkit-flex: 1 6 130px;
-   -webkit-order: 1;
-}
-  
-#main > aside {
-   -webkit-flex: 1 6 37px;
-   -webkit-order: 3;
-}
- 
-#main > article {
-  -webkit-flex: 3 1 100%;
-  -webkit-order: 2;
-  display: -webkit-flex;
-  -webkit-flex-flow: row;
-
   position: absolute;
-  /*margin-top: 32px;*/
-  /* nav, aside 
-  margin-left: 130px;
-  margin-right: 37px;*/
-  margin-bottom: 21px;
+  
+  width: 100%;
 
-  bottom:0;
-  top:0;
-  left:0;
-  right:0;
+  top: 0;
+  left: 0;      
+  right: 0;      
+  bottom: 24px;
+
+  /* flexbox setup */
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+
+  display: flex;
+  flex-direction: row;
+
+  overflow: hidden;
 }
-  
-#main > article > #editor {
+
+#main > nav,
+#main > article,
+#main > aside {
+  width: 0;
   height: 100%;
-  -webkit-flex: 1 0 50%;
-  -webkit-order: 1;
 }
-  
-#main > article > #haroo {
-  height: 100%;
-  -webkit-flex: 1 0 50%;
-  -webkit-order: 2;
+
+#main > #md-help { 
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+    
+ -webkit-order: 1;
+         order: 1;
+
+  z-index: 1;
 }
-  
-#main > article > #haroo > iframe {
+#main > #editor { 
+  -webkit-flex: 1 1  50%;
+  flex: 1 1  50%;
+
+ -webkit-order: 3;
+         order: 3;
+  z-index: 5;
+}
+#main > #viewer { 
+  -webkit-flex: 1 1 50%;
+  flex: 1 1 50%;
+
+ -webkit-order: 4;
+         order: 4;
+  z-index: 5;
+}
+#main > #toc { /*
+  -webkit-flex: 1 1 auto;
+  flex: 1 1  auto;
+    
+ -webkit-order: 5;
+         order: 5;*/
+  z-index: 5;
+}
+
+
+/**
+ * Perspective
+ */
+
+#main.layout0 > #editor {
+ -webkit-order: 3;
+         order: 3;
+}
+#main.layout0 > #viewer {
+ -webkit-order: 4;
+         order: 4;
+}
+
+#main.layout1 > #editor {
+ -webkit-order: 4;
+         order: 4;
+}
+#main.layout1 > #viewer {
+ -webkit-order: 3;
+         order: 3;
+}
+
+#main.layout2 > #editor {
+  -webkit-flex: 1 1 100% !important;
+  flex: 1 1 100% !important;
+}
+#main.layout2 > #viewer {
+  display: none;
+}
+
+#main.layout3 > #editor {
+  display: none;
+}
+#main.layout3 > #viewer {
+  -webkit-flex: 1 1 100% !important;
+  flex: 1 1 100% !important;
+}
+
+#main > #viewer > iframe {
   width: 100%;
   height: 100%;
   border: 0;
@@ -60,5 +113,5 @@ body {
 }
 
 .navbar-inner {
-   padding: 1px 3px 0 6px !important;
+   padding: 1px 3px 0 3px !important;
 }

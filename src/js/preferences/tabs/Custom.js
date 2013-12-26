@@ -47,7 +47,7 @@ define([
 				this.setThemeData(config.themes || []);
 
 				this.$('select[name=customTheme]').select2({
-                	placeholder: "Select Your Theme",
+                	placeholder: i18n.t('custom.select-theme')
 				}).select2("val", config.theme && config.theme.name);
 			},
 
@@ -96,8 +96,6 @@ define([
 
 				this.setPath(dir);
 				this.setThemeData(themes);
-
-    			global._gaq.push('haroopad.preferences', 'change.custom.dir', '');
 			},
 
 			reloadThemes: function(e) {
@@ -120,8 +118,6 @@ define([
 				}
 
 				options.set({ theme: themes[e.val] });
-
-    			global._gaq.push('haroopad.preferences', 'change.custom.theme', e.val);
 			}
 		});
 

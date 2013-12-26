@@ -1,4 +1,4 @@
-(function() {
+define([], function() {
 
     function getState(cm, pos) {
       pos = pos || cm.getCursor('start');
@@ -104,6 +104,10 @@
                                  + '|        |        |');
       }
 
+      var addTOC = function() {
+        cm.replaceSelection('\n[TOC]\n\n');
+      }
+
       var headerMap = {
           '1': '#',
           '2': '##',
@@ -157,14 +161,29 @@
         case 'bold':
           replaceSelection('**');
           break;
+        case 'math-block':
+          replaceSelection('$$\n', '\n$$');
+          break;
+        case 'math-line':
+          replaceSelection('$$$');
+          break;
+        case 'highlight':
+          replaceSelection('==');
+          break;
         case 'strike':
-          replaceSelection('~~', '~~');
+          replaceSelection('~~');
           break;
         case 'italic':
           replaceSelection('*');
           break;
+        case 'underline':
+          replaceSelection('_');
+          break;
         case 'code':
           replaceSelection('`');
+          break;
+        case 'toc':
+          addTOC();
           break;
         case 'comment':
           replaceSelection('<!--', '-->');
@@ -175,11 +194,26 @@
         case 'image':
           replaceSelection('![', '](http://)');
           break;
+        case 'embed':
+          replaceSelection('@[](', ')');
+          break;
         case 'fenced-code':
           replaceSelection('```\n', '\n```');
           break;
         case 'table':
             addTable();
+          break;
+        case 'section-break':
+            var pos = cm.getCursor();
+                pos.line += 2;
+            cm.replaceSelection('\n- - -\n');
+            cm.setCursor(pos);
+          break;
+        case 'page-break':
+            var pos = cm.getCursor();
+                pos.line += 2;
+            cm.replaceSelection('\n* * *\n');
+            cm.setCursor(pos);
           break;
         case 'quote':
         case 'unordered-list':
@@ -218,8 +252,14 @@
   CodeMirror.commands.markdownBold = function(cm) {
     action('bold', cm);
   };
+  CodeMirror.commands.markdownHighlight = function(cm) {
+    action('highlight', cm);
+  };
   CodeMirror.commands.markdownItalic = function(cm) {
     action('italic', cm);
+  };
+  CodeMirror.commands.markdownUnderline = function(cm) {
+    action('underline', cm);
   };
   CodeMirror.commands.markdownInlineCode = function(cm) {
     action('code', cm);
@@ -242,6 +282,12 @@
   CodeMirror.commands.markdownOrderedList = function(cm) {
     action('ordered-list', cm);
   };
+  CodeMirror.commands.markdownSectionBreak = function(cm) {
+    action('section-break', cm);
+  };
+  CodeMirror.commands.markdownPageBreak = function(cm) {
+    action('page-break', cm);
+  };
 
   CodeMirror.commands.markdownFencedCode = function(cm) {
     action('fenced-code', cm);
@@ -252,6 +298,18 @@
   CodeMirror.commands.markdownComment = function(cm) {
     action('comment', cm);
   };
+  CodeMirror.commands.markdownEmbed = function(cm) {
+    action('embed', cm);
+  };
+  CodeMirror.commands.markdownMathBlock = function(cm) {
+    action('math-block', cm);
+  };
+  CodeMirror.commands.markdownMathInline = function(cm) {
+    action('math-line', cm);
+  }
+  CodeMirror.commands.markdownTOC = function(cm) {
+    action('toc', cm);
+  };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();
     cm.focus();
@@ -260,4 +318,5 @@
     cm.redo();
     cm.focus();
   };
-})();
+  
+});

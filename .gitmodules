@@ -1,0 +1,24 @@
+[submodule "lib/gemoji"]
+	path = lib/gemoji
+	url = git@github.com:github/gemoji.git
+[submodule "lib/google-picker"]
+	path = lib/google-picker
+	url = git@github.com:rhiokim/google-picker.git
+[submodule "lib/LaTeX2HTML5"]
+	path = lib/LaTeX2HTML5
+	url = git@github.com:Mathapedia/LaTeX2HTML5.git
+[submodule "lib/At.js"]
+	path = lib/At.js
+	url = git@github.com:ichord/At.js.git
+[submodule "lib/simptip"]
+	path = lib/simptip
+	url = git@github.com:arashmanteghi/simptip.git
+[submodule "lib/ionicons"]
+	path = lib/ionicons
+	url = git@github.com:driftyco/ionicons.git
+[submodule "lib/bootstrap-social"]
+	path = lib/bootstrap-social
+	url = git@github.com:lipis/bootstrap-social.git
+[submodule "lib/haroopad-locales"]
+	path = lib/haroopad-locales
+	url = git@github.com:rhiokim/haroopad-locales.git

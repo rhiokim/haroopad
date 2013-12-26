@@ -26,7 +26,8 @@ define([
 				'click input[name=tables]': 'enableTables',	
 				'click input[name=breaks]': 'enableBreaks',	
 				'click input[name=smartLists]': 'enableSmartLists',	
-				'click input[name=smartypants]': 'enableSmartyPants'	
+				'click input[name=smartypants]': 'enableSmartyPants',	
+				'click input[name=mathjax]': 'enableMathjax'	
 			},
 
 			initialize: function() {
@@ -36,6 +37,7 @@ define([
 				this.$el.find('input[name=breaks]').prop('checked', config.breaks);
 				this.$el.find('input[name=smartLists]').prop('checked', config.smartLists);
 				this.$el.find('input[name=smartypants]').prop('checked', config.smartypants);
+				this.$el.find('input[name=mathajx]').prop('checked', config.mathjax);
 			},
 
 			clickHandler: function(e) {
@@ -72,6 +74,11 @@ define([
 			enableSmartyPants: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('smartypants', bool);
+			},
+
+			enableMathjax: function(e) {
+				var bool = $(e.target).is(':checked');
+				options.set('mathjax', bool);
 			}
 		});
 

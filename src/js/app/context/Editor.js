@@ -21,40 +21,48 @@ define([
 		}
 
 		mCut = menuItem({ 
-			label: 'Cut',
+			label: i18n.t('edit.cut'),
 			click: function() {
 				window.ee.emit('context.cut');
 			} 
 		});
-		mCopy = menuItem({ 
-			label: 'Copy',
+		mCopy = menuItem({
+			label: i18n.t('edit.copy'),
 			click: function() {
 				window.ee.emit('context.copy');
 			} 
 		});
-		mPaste = menuItem({ 
-			label: 'Paste',
+		mPaste = menuItem({
+			label: i18n.t('edit.paste'),
 			click: function() {
 				window.ee.emit('context.paste');
 			} 
 		});
-		mSelectAll = menuItem({ 
-			label: 'Select All',
+		mDelete = menuItem({ 
+			label: i18n.t('edit.delete'),
 			click: function() {
-				window.ee.emit('context.select.all');
+				window.ee.emit('context.delete');
+			}
+		});
+		mSelectAll = menuItem({ 
+			label: i18n.t('edit.select-all'),
+			click: function() {
+				window.ee.emit('context.selectall');
 			}
 		});
 		
 		Context.append(mCut);
 		Context.append(mCopy);
 		Context.append(mPaste);
+		Context.append(mDelete);
+		Context.append(mSelectAll);
 		// Context.append(mSelectAll);
 
 		Context.append(sepItem());
 
 		mSearch = menuItem({ 
 			label: 'Search with ...',
-      enabled: false,
+      		enabled: false,
 			submenu: Search
 		});
 
@@ -73,7 +81,7 @@ define([
 		});
 
 		mPreferences = menuItem({
-			label: 'Preferences',
+			label: i18n.t('file.preferences'),
 			click: function() {
 		  	window.ee.emit('context.preferences');
 			}

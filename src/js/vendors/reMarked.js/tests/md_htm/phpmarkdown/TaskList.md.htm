@@ -1,0 +1,59 @@
+<h1>TaskList</h1>
+
+<p>Code tasks are constructive comments in the code that are prefixed with a tag. Here are some examples of code tasks in ruby:</p>
+
+<pre><code># TODO: This is a todo item that needs to be done urgently!
+# BUG Something wrong is happening...
+# NOTE - This method is used for a specific reason.
+</code></pre>
+
+<p>Obviously real code tasks are a lot more constructive than the examples I gave above.</p>
+
+<p>TaskList parses code files and lists code tasks.</p>
+
+<h2>Installation</h2>
+
+<p>TaskList is provided as a gem, so the installation process is as simple as this:</p>
+
+<pre><code>% [sudo] gem install task-list
+</code></pre>
+
+<blockquote>
+  <p><strong>Note</strong>: <code>%</code> is the prompt and <code>sudo</code> (without the square brackets) is not needed if you use RVM.</p>
+</blockquote>
+
+<h2>Features:</h2>
+
+<p>As stated above, TaskList lists code tags that it finds in code passed to it. Here are the supported tags:</p>
+
+<ul>
+<li><code>TODO</code></li>
+<li><code>FIXME</code></li>
+<li><code>NOTE</code></li>
+<li><code>BUG</code></li>
+<li><code>CHANGED</code></li>
+<li><code>OPTIMIZE</code></li>
+<li><code>XXX</code></li>
+<li><code>!!!</code></li>
+</ul>
+
+<p>Also, TaskList will ignore the files that are under certain folders like <code>log</code> or <code>coverage</code>. Finally, TaskList will ignore files with certain extensions like images and SQLite databases.</p>
+
+<h2>Usage:</h2>
+
+<p>The TaskList comes with a command-line script called <code>tl</code> which takes one argument and only one argument. This argument can be one of two things:</p>
+
+<ul>
+<li>a file</li>
+<li>a folder</li>
+</ul>
+
+<p>If a file is passed, TaskList will parse this file to find code tags. On the other hand, if a folder is passed, TaskList will recursively parse all the files under that folder to find code tags. Here are some examples:</p>
+
+<pre><code>% tl task-list.rb
+% tl task-list/
+% tl task-list/task-list.rb
+% tl .
+</code></pre>
+
+<p>All the calls to <code>tl</code> shown above are valid.</p>

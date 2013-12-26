@@ -1,0 +1,96 @@
+@import "../lib/elements.less";
+@import "clearness/before";
+
+@font-size: 15px;
+@bg-color: #fff;
+
+@base-color: #737373;
+@base-size: .9em;
+@base-link-color: darken(#268bd2, 10%);
+@base-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
+@code-family: Consolas, Inconsolata, Courier, monospace;
+
+@line-height: 1.7em;
+
+@base-margin: 0;
+@base-padding: 0;
+@border-color: darken(@bg-color, 10%);
+
+@bg-color-table: darken(@bg-color, 1%);
+
+.clearness {
+  padding: 20px;
+  color: @base-color;
+  font-size: @font-size;
+  font-family: @base-family;
+  background: @bg-color;
+  -webkit-font-smoothing: antialiased;
+
+  a {
+    color: @base-link-color;
+
+    &:hover {
+      color: lighten(@base-link-color, 10%);
+    }
+  }
+
+  h1, h2, h3, h4, h5 {
+    color: #404040;
+  }
+
+  h2 {
+    border-bottom: 1px solid darken(@bg-color, 20%);
+    line-height: @line-height;
+  }
+
+  h6 {
+    color: darken(#737373, 5%);
+  }
+
+  hr {
+    border:1px solid darken(@bg-color, 10%);
+  }
+
+  pre {
+    &>code {
+      font-size: .9em;
+      font-family: @code-family;
+    }
+  }
+
+  blockquote {
+    padding: 0 15px;
+    font-style: italic;
+
+    &:before {
+      content: "\201C";
+      font-size: 40px;
+      margin-left: -20px;
+      color: #aaa;
+    }
+  }
+
+  table {
+    background-color: overlay(@bg-color, #666);
+    border-collapse: separate;
+    border-spacing: 2px;
+
+    tr {
+      th, td {
+        border: 0px;
+        padding: .2em 1em;
+      }
+      th {
+        border-bottom:1px solid darken(@bg-color, 25%);
+      }
+      td {
+        border-bottom:1px solid darken(@bg-color, 15%);
+      }
+      &:nth-child(2n) {
+        background-color: overlay(@bg-color, #a0a0a0);
+      }
+    }
+  }
+}
+
+@import "clearness/after";

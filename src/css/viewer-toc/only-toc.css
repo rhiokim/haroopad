@@ -1,0 +1,96 @@
+#root>* {
+	display: none;
+
+	/*opacity: .6;*/
+	line-height: 1;
+	font-size:.7em;
+	margin-top: 1px !important;
+	margin-bottom: 1px !important;
+}
+
+p {
+	margin: 5px 0 !important;
+}
+
+body:before {
+	content: "Table Of Contents";
+    color: #ababab;
+}
+
+#root>h1:before,
+#root>h2:before,
+#root>h3:before,
+#root>h4:before,
+#root>h5:before,
+#root>h6:before {
+  content: "# ";
+  display: inline;
+  color: #dbdbdb;
+}
+/*
+body>h1:after,
+body>h2:after,
+body>h3:after,
+body>h4:after,
+body>h5:after,
+body>h6:after {
+  content: "";
+}*/
+#root>h2:before {
+  content: "## ";
+}
+#root>h3:before {
+  content: "### ";
+}
+#root>h4:before {
+  content: "#### ";
+}
+#root>h5:before {
+  content: "##### ";
+}
+#root>h6:before {
+  content: "###### ";
+}
+
+h1, h2, h3, h4, h5, h6 {
+	/*margin-top: 20px 0 !important;*/
+	margin: 2px 0 2px 0 !important;
+	padding: 0 !important;
+	display: block !important;
+
+	opacity: 1;
+	line-height: inherit;
+	-webkit-transform: scale(1);
+}
+
+h1 {
+	font-size: 18px !important;
+	-webkit-transition: font-size .3s;
+}
+
+h2 {
+	font-size: 16px !important;
+	border-bottom: 0 !important;
+	-webkit-transition: font-size .3s;
+}
+
+h3 {
+	font-size: 15px!important;
+	-webkit-transition: font-size .3s;
+}
+
+h4 {
+	font-size: 14px !important;
+	-webkit-transition: font-size .3s;
+}
+
+h5 {
+	font-size: 13px !important;
+	-webkit-transition: font-size .3s;
+}
+
+h6 {
+	font-size: 12px !important;
+	-webkit-transition: font-size .3s;
+}
+

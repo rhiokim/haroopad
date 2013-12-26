@@ -4,7 +4,9 @@ define([
 		var Model = Backbone.Model.extend({
 			defaults: {
 				theme: 'haroopad',
-				clickableLink: false
+				clickableLink: false,
+				fontSize: 15,
+				fontFamily: undefined
 			},
 
 			// localStorage: new Backbone.LocalStorage('General'),
