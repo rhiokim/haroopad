@@ -1,6 +1,6 @@
 var _doc,
-    _body,
-    _md_body;
+  _body,
+  _md_body;
 var _options = {
   dirname: '.'
 };
@@ -14,7 +14,8 @@ window.ondragover = function(e) {
   return false;
 };
 window.ondrop = function(e) {
-  var i = 0, file, fArr, ext;
+  var i = 0,
+    file, fArr, ext;
 
   for (i; i < e.dataTransfer.files.length; ++i) {
 
@@ -37,6 +38,18 @@ function loadCss(url) {
     rel: 'stylesheet',
     href: url
   }).appendTo('head');
+}
+
+function setStyle(property, value) {
+  document.querySelector('#root').style[property] = value;
+}
+
+function setFontSize(size) {
+  setStyle('fontSize', size +'px');
+}
+
+function setFontFamily(name) {
+  // setStyle('fontFamily', name);
 }
 
 function setViewStyle(style) {
@@ -62,7 +75,7 @@ function loadCustomCSS(style) {
   $(_body).addClass('custom');
 
   $('#custom').attr({
-    href: style +'?'+ new Date().getTime()
+    href: style + '?' + new Date().getTime()
   });
 }
 
@@ -70,10 +83,11 @@ function loadCustomCSS(style) {
  * set column layout
  * @param {[type]} count [description]
  */
+
 function setColumn(count) {
   var href,
     count = count || 'single';
-    
+
   href = 'css/column/' + count + '.css';
   $('#column').attr({
     href: href
@@ -83,20 +97,22 @@ function setColumn(count) {
 /**
  * set toc style
  */
+
 function showOutline() {
   var href;
-    
+
   href = 'css/viewer-toc/default.css';
   $('#toc').attr({
-    href: href +'?'+ new Date().getTime()
+    href: href + '?' + new Date().getTime()
   });
 }
+
 function showTOC() {
   var href;
-    
+
   href = 'css/viewer-toc/only-toc.css';
   $('#toc').attr({
-    href: href +'?'+ new Date().getTime()
+    href: href + '?' + new Date().getTime()
   });
 }
 
@@ -111,7 +127,7 @@ function hideTOC() {
 function showOnlyTOC() {
   // var elArr = document.body.querySelectorAll(':scope>*');
   // elArr = Array.prototype.slice.call(elArr, 0);
-  
+
   // contentElements = elArr.filter(function(el) {
   //   return !/^H[1-6]/.test(el.tagName);
   // });
@@ -124,7 +140,7 @@ function showOnlyTOC() {
 function showAllContent() {
   contentElements.forEach(function(el) {
     el.style.display = '';
-  });  
+  });
 }
 
 function createTOC() {
@@ -192,6 +208,12 @@ function _lazySyntaxHighlight(el) {
   var code = el.innerHTML;
   var lang = el.className;
 
+  if (!lang) {
+    return;
+  }
+
+  el.setAttribute('class', lang +' hljs');
+
   lang = lang == 'js' ? 'javascript' : lang;
   code = htmlDecode(code);
 
@@ -230,12 +252,27 @@ function _lazySyntaxHighlight(el) {
  * @return {[type]} [description]
  */
 
-function _preventDefaultAnchor() {
-  $('a').off('click', '**');
+// function _preventDefaultAnchor() {
+//   $('a').off('click', '**');
 
-  $('a').on('click', function(e) {
-    window.ee.emit('link', $(e.target).attr('href'));
-    e.preventDefault();
+//   $('a').on('click', function(e) {
+//     window.ee.emit('link', $(e.target).attr('href'));
+//     e.preventDefault();
+//   });
+// }
+
+
+/**
+ * dynamic update TOC
+ * @param  {[type]} toc [description]
+ * @return {[type]}     [description]
+ */
+function updateTOC(toc) {
+  var tocEls = _md_body.querySelectorAll('.toc');
+  tocEls = Array.prototype.slice.call(tocEls, 0);
+
+  tocEls.forEach(function(tocEl) {  
+    tocEl.innerHTML = toc;
   });
 }
 
@@ -265,14 +302,22 @@ function countFragments(target) {
   window.ee.emit('title', headers[0] && headers[0].innerHTML);
 }
 
+function drawMathJax() {
+  var i, math = _md_body.querySelectorAll('.mathjax');
+  math = Array.prototype.slice.call(math, 0);
+
+  for (i = 0; i < math.length; i++) {
+    // processMathJax(math[i]);
+    window.ee.emit('math', math[i]);
+  }
+}
+
 var _embedTimeout;
 var ebdOpt = {
   includeHandle: false,
   embedMethod: 'fill',
   afterEmbed: function(oembedData, externalUrl) {
-    // this[0].setAttribute('data-origin-url', externalUrl);
     if (typeof oembedData.code == 'string') {
-      // this[0].setAttribute('data-replace', oembedData.code);
       this.attr('data-replace', oembedData.code);
     }
   },
@@ -280,20 +325,40 @@ var ebdOpt = {
     this.html('<a href="http://pad.haroopress.com/page.html?f=open-media">이 주소는 콘텐츠 스마트 임베딩을 지원하지 않습니다.</a>');
   }
 };
+var spinner = document.createElement('span');
+
 function drawEmbedContents(target) {
   var url, embed, embeds = target.querySelectorAll('.oembed');
   embeds = Array.prototype.slice.call(embeds, 0);
 
   for (i = 0; i < embeds.length; i++) {
-    ebdOpt.ebdOpt = {};
     embed = embeds[i];
-    url = embed.getAttribute('data-url');
 
-    $(embed).oembed(url, ebdOpt);
-
-    embed.removeAttribute('class');
-    embed.setAttribute('class', 'oembeded');
+    spinner = embed.appendChild(spinner);
+    spinner.setAttribute('class', 'spinner');
   }
+
+  if (_embedTimeout) { 
+    window.clearTimeout(_embedTimeout);
+  }
+  
+  _embedTimeout = window.setTimeout(function() {
+    for (i = 0; i < embeds.length; i++) {
+      ebdOpt.ebdOpt = {};
+      embed = embeds[i];
+
+      url = embed.firstElementChild.getAttribute('href');
+
+      $(embed).oembed(url, ebdOpt);
+
+      embed.removeAttribute('class');
+      embed.setAttribute('class', 'oembeded');
+    }
+  }, 1000);
+}
+
+function empty() {
+  _md_body.innerHTML = '';
 }
 
 /**
@@ -301,13 +366,14 @@ function drawEmbedContents(target) {
  * @param  {[type]} contents [description]
  * @return {[type]}          [description]
  */
-
+var wrapper = document.createElement('div');
+//@TODO initial render
 function update(html) {
-  // var wrapper = $('<div>').html(html);
-  var wrapper = document.createElement('div');
-  wrapper.innerHTML = html;
-  var i, frag, frags, _frag, _frags, origin, _origin,
+  var i, j, limit, frag, frags, _frag, _frags, origin, _origin,
     code, codes, _code, _codes;
+  var changeTOC = false;
+
+  wrapper.innerHTML = html;
 
   frags = wrapper.querySelectorAll(':scope>*');
   frags = Array.prototype.slice.call(frags, 0);
@@ -339,7 +405,7 @@ function update(html) {
       _lazySyntaxHighlight(code);
     }
   }
-
+  
   var src, imgs = wrapper.querySelectorAll('img');
   for (i = 0; i < imgs.length; i++) {
     src = imgs[i].getAttribute('src');
@@ -349,9 +415,11 @@ function update(html) {
     }
   }
 
-  //작성된 내용이 있는 경우 새로운 프레그먼트로 치환
-  // frags.each(function(idx, frag) {
-  for (i = 0; i < frags.length; i++) {
+  // 작성된 내용이 있는 경우 새로운 프레그먼트로 치환
+  // for (i = 0; i < frags.length; i++) {
+  i = 0;
+  limit = frags.length;
+  while (i < limit) {
     frag = frags[i];
     _frag = _frags.shift();
 
@@ -360,71 +428,49 @@ function update(html) {
 
     //이전 프레그먼트 없는 경우 body 에 추가
     if (!_frag) {
-      // var el = $(frag).appendTo(document.body);
-
       _md_body.appendChild(frag);
+
+      //check change toc 
+      if (/^H[1-6]/.test(frag.tagName) == true) {
+        changeTOC = true;
+      }
     } else {
 
       //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
-      // origin = $(_frag).attr('origin');
       _origin = _frag.getAttribute('data-origin');
 
-      //origin 문자열이 없는 경우
-      if (!_origin) {
-        //새로운 프레그먼트와 이전 프레그먼트가 다른 경우는 새로운 프레그먼트로 치환
-        if (frag.outerHTML != _frag.outerHTML) {
-        // if (frag.textContent != _frag.textContent) {
+      //origin 문자열이 있는 경우
+      if (origin != _origin) {
+        _frag.style.display = 'none';
+        _md_body.insertBefore(frag, _frag);
+        _md_body.removeChild(_frag);
 
-          _frag.style.display = 'none';
-          _md_body.insertBefore(frag, _frag);
-          _md_body.removeChild(_frag);
-
-        }
-      } else {
-        // origin = frag.getAttribute('data-origin');
-
-        //origin 문자열이 있는 경우
-        if (origin != _origin) {
-
-          _frag.style.display = 'none';
-          _md_body.insertBefore(frag, _frag);
-          _md_body.removeChild(_frag);
-
-          // _lazySyntaxHighlight(frag);
+        if (/^H[1-6]/.test(frag.tagName) == true) {
+          changeTOC = true;
         }
       }
     }
+    i++;
   }
-
-  // $(document.body).find('pre').each(function(i, e) {
-  //   $(this).attr('origin', $(this)[0].outerHTML);
-  // });
 
   //새로이 작성된 내용이 지난 작성 내용에 비해 적을 경우
   //남아 있는 프레그먼트를 모두 제거
   if (_frags.length > 0) {
     _frags.forEach(function(frag, idx) {
       _md_body.removeChild(frag);
-      // $(frag).remove();
     });
   }
 
-  // if (frags.find('img').length > 0) {
-  //   _fixImagePath();
-  // }
-
-  // _preventDefaultAnchor();
-  // _lazySyntaxHighlight();
-  
-  countFragments(_md_body);
-
-  if (_embedTimeout) { 
-    window.clearTimeout(_embedTimeout);
+  //fire event when changed TOC
+  if (changeTOC) {
+    window.ee.emit('change.toc', undefined, _md_body);
   }
   
-  _embedTimeout = window.setTimeout(function() {
-    drawEmbedContents(document.body);
-  }, 1000);
+  countFragments(_md_body);
+  drawMathJax();
+  drawEmbedContents(document.body);
+
+  window.ee.emit('rendered', _md_body);
 }
 /**
  * sync scroll position
@@ -439,35 +485,25 @@ function scrollTop(per) {
   $(window).scrollTop(top / 100 * per);
 }
 
-// function replaceExternalContent(el, origin) {
-//   var plugin = $(origin)[0];
-//   plugin.setAttribute('origin', origin);
-//   el.style.display = 'none';
-//   document.body.insertBefore(plugin, el);
-//   document.body.removeChild(el);
-// }
 
-$(_body).ready(function() {
+$(document.body).ready(function() {
   _doc = document,
   _body = _doc.body,
   _md_body = _doc.getElementById('root');
 
   $(_body).click(function(e) {
-    var origin, el = e.target;
-    e.preventDefault();
+    var origin, href, el = e.target;
 
     switch (el.tagName.toUpperCase()) {
-//       case 'IMG':
-//         origin = el.getAttribute('origin');
-//         if (origin) {
-//           replaceExternalContent(el, origin);
-//         }
-//         break;
       case 'A':
-        window.ee.emit('link', el.getAttribute('href'));
-        break;
-    }
+        href = el.getAttribute('href') || '';
 
+        if (href.charAt(0) !== '#') {
+          e.preventDefault();
+          window.ee.emit('link', href);
+        }
+      break;
+    }
   });
 
 });

@@ -62,9 +62,19 @@ define([
 	});
 
 	Document.on('toc', function(show) {
-		window.ee.emit('menu.view.doc.toc', show);
+		window.ee.emit('menu.view.toggle.toc', show);
 
 		global._gaq.push('haroopad', 'set toc view', show);
+	});
+
+	Document.on('help', function(show) {
+		// window.ee.emit('menu.help.syntax'); 
+		window.ee.emit('toggle.syntax.help');
+		global._gaq.push('haroopad', 'show markdown syntax help', '');
+	});
+
+	Document.on('fullscreen', function(show) {
+		window.ee.emit('view.fullscreen', show);
 	});
 
 	Share.on('click', function() {

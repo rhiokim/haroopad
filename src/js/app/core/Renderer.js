@@ -6,7 +6,7 @@ define([
 		var marked = require('marked');
 		var renderer = new marked.Renderer();
 
-       	var loading = '<span class="spinner"></span>';
+       	// var loading = '<span class="spinner"></span>';
 
 		// renderer.plugin = function(name, args) {
 		// 	var plugin = Plugins[name.toLowerCase()];
@@ -40,49 +40,26 @@ define([
 				props = encodeURIComponent(props);
 			}
 
-			link = '<a href="'+ href +'" target="_blank">'+ (caption?caption:href) +'</a>';
+			link = '<a href="'+ href +'" data-props="'+ props +'" target="_blank">'+ (caption?caption:href) +'</a>';
 
-			return '<p data-url="'+ href +'" data-props="'+ props +'" class="oembed">'+ link + ' '+ loading +'</p>';
+			return '<p class="oembed">'+ link +'</p>';
+		}
+	
+		renderer.math = function(text, block) {
+			if (block) {
+				return '<p class="mathjax">$$'
+					+ text
+					+ '$$</p>';
+			} else {
+				return '<span class="mathjax">$$$'
+					+ text
+					+ '$$$</span>';
+			}
 		}
 
-		// renderer.image = function(cap, href, props) {
-		// 	var key, value, tmp = {};
-		// 	var imgPattern = /[^\s]+(\.(jpg|png|gif|bmp|jpeg))$/i;
-
-		// 	if (!href) {
-		// 		return '';
-		// 	}
-
-		// 	if (imgPattern.test(href)) {
-		// 	  return '<img src="'
-		// 	      + href
-		// 	      + '" alt="'
-		// 	      + escape(cap[1])
-		// 	      + '"'
-		// 	      + (props
-		// 	      ? ' title="'
-		// 	      + escape(props)
-		// 	      + '"'
-		// 	      : '')
-		// 	      + '>';
-		// 	}
-
-		// 	props = !props ? '' : props ;
-
-		// 	if (props) {
-		// 		props = props.split(',');
-		// 		props.forEach(function(prop) {
-		// 			prop = prop.split(':');
-
-		// 			if (prop[0] && prop[1]) {
-		// 				tmp[prop[0].trim()] = prop[1].trim();
-		// 			}
-		// 		});
-		// 		props = JSON.stringify(tmp);
-		// 		props = encodeURIComponent(props);
-		// 	}
-		// 	return '<p data-url="'+ href +'" data-origin="'+ href +'#'+ props +'" data-props="'+ props +'" class="oembed">'+ loading +'</p>';
-		// };
+		renderer.toc = function(content) {
+		  return '<p class="toc"></p>';
+		}
 
 		return renderer;
 });

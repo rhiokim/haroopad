@@ -1,5 +1,5 @@
 define([
-		'vendors/text!tpl/modal-send-email.html'
+		'txt!tpl/modal-send-email.html'
 	], 
 	function(html) {
 		$('#dialogs').append(html);
@@ -75,23 +75,35 @@ define([
 			},
 
 			initialize: function() {
+				this.$('input[name=title]').attr('placeholder', i18n.t('pad:email.subject'));
+				this.$('input[name=to]').attr('placeholder', i18n.t('pad:email.reciver'));
+				this.$('input[name=from]').attr('placeholder', i18n.t('pad:email.yours'));
+				this.$('input[name=password]').attr('placeholder', i18n.t('pad:email.password'));
+				this.$('#secure').attr('title', i18n.t('pad:email.secure'));
+				
 				this.$('[data-toggle=tooltip]').tooltip({ html: true });
+
+				this.$el.on('shown', function() {
+					$(this).find('input[name=title]').focus();
+				});
+				this.$el.on('hidden', function() {
+					nw.editor.focus();
+				});
 			},
 
 			show: function(file) {
 				var Emails = store.get('Emails') || {};
 				var title = file && file.title;
 
-				this.$el.find('input[name=title]').val(title || '');
+				this.$('input[name=title]').val(title || '');
 
 				this.$el.find('input[name=to]').val(Emails.to || '');
 				this.$el.find('input[name=from]').val(Emails.from || '');
-
 				this.$el.find('input[name=remember]').attr('checked', Emails.remember);
-				// this.$el.find('button[name=remember]').attr('checked', Emails.remember);
 				this.$el.find('input[name=to]').data({ source: Emails.addrs });
 
 				this.$el.modal('show');
+
 				this.keypressHandler();
 			},
 

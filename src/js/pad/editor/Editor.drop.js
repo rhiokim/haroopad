@@ -28,9 +28,9 @@ define([
 			var url = e.dataTransfer.getData('text/uri-list');
 			var html = e.dataTransfer.getData('text/html');
 
-			if (url && html) {
+			if (url && html && !text) { //web image
 				STRING.uri(url, dropCallback);
-			} else if (!url && html) {
+			} else if (!url && html && text) { //web text and html
 				return dropCallback(HTML(html));
 			} else {
 				return dropCallback(text);

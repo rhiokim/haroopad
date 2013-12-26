@@ -149,10 +149,10 @@
   text-decoration: underline;
 }
 .markdown strong.highlight {
-  font-style: normal;
+  color: black;
+  padding: 0 5px;
   background-color: #fdffb6;
   -webkit-box-shadow: #fdffb6 0 0 5px;
   -moz-box-shadow: #fdffb6 0 0 5px;
   box-shadow: #fdffb6 0 0 5px;
-  font-weight: normal;
 }

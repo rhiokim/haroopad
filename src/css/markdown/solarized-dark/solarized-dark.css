@@ -13,7 +13,7 @@
   padding: 20px;
   color: #839496;
   font-size: 15px;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, Verdana, Tahoma, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   background: #002b36;
   -webkit-font-smoothing: antialiased;
 }
@@ -32,6 +32,7 @@
 }
 .solarized-dark h2 {
   border-bottom: 1px solid #005469;
+  line-height: 1.7em;
 }
 .solarized-dark h6 {
   color: #694f00;

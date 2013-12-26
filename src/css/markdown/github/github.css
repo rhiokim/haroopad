@@ -14,7 +14,7 @@
   padding: 20px;
   color: #000000;
   font-size: 15px;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, Verdana, Tahoma, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
 }
@@ -26,6 +26,7 @@
 }
 .github h2 {
   border-bottom: 1px solid #e6e6e6;
+  line-height: 1.7em;
 }
 .github h6 {
   color: #777;

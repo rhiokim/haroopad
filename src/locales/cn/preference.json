@@ -1,0 +1,73 @@
+{
+    "title": "Preference",
+
+    "tab": {
+        "general": "配置设置",
+        "editor": "修改观点",
+        "viewer": "观看观点",
+        "custom": "定制",
+        "code": "码",
+        "markdown": "Markdown",
+        "about": "关于"
+    },
+
+    "general": {
+        "general": "常规设置",
+        "enableAutoComplete": "启用自动完成",
+        "enableMath": "启用数学表达式",
+        "enableSyncScroll": "启用同步滚动",
+        "enableLastFileRestore": "启用回到最后文件"
+    },
+
+    "editor": {
+        "general": "修改观点常规设置",
+        "spaces": "空间",
+        "tab-width": "标签长度",
+        "indent-use-tab": "缩排使用 Tab",
+        "display-line-number": "显示行号",
+        "vim-key-binding": "Vim 的键绑定",
+        "auto-pair-char": "自动对字符",
+        "insert-four-space": "用它代替标签4空间"
+    },
+
+    "viewer": {
+        "general": "观看观点常规设置",
+        "themes": "更多颜色",
+        "clickable-link": "启用超链接可点击"
+    },
+
+    "custom": {
+        "themes": "自定常规设置",
+        "reload": "重装",
+        "directory": "颜色位置",
+        "select-theme": "选择颜色",
+        "description": "这个颜色为实时预览，HTML，PDF和电子邮件（Evernote的，tumblr）导出"
+    },
+
+    "code": {
+        "general": "码常规设置",
+        "themes": "颜色",
+        "show-line-number": "显示语法高亮的行号"
+    },
+
+    "markdown": {
+        "enable-gfm": "使用 Github Markdown",
+        "sanitize-desc": "使用 HTML",
+        "gfm-line-breaks": "用户 Github Markdown 换行符",
+        "gfm-table": "使用 Github Markdown 表格",
+        "smarty-list": "使用 SMART，一个更好的 Markdown 列表",
+        "smarty-pants": "使用聪明短语和符号检测"
+    },
+
+    "about": {
+        "donate": "捐赠",
+        "mean": "<strong>哈录</strong> 是韩语 \"一天\" 的翻译",
+        "version": "版本号",
+        "official-site": "官方网站",
+        "developer": "开发人员",
+        "special-thanks": "特别感谢",
+        "icon": "ICON",
+        "description": "哈录笔记<small>是未来的文档编辑器程序。</small>",
+        "donate-msg": "如果您喜欢哈录笔记，请捐赠！"
+    }
+}

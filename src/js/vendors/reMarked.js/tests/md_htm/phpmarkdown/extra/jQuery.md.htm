@@ -1,0 +1,176 @@
+<h1><a href="http://jquery.com/">jQuery</a> - New Wave JavaScript</h1>
+
+<h2>Contribution Guides</h2>
+
+<p>In the spirit of open source software development, jQuery always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly:</p>
+
+<ol>
+<li><a href="http://docs.jquery.com/Getting_Involved">Getting Involved</a></li>
+<li><a href="http://docs.jquery.com/JQuery_Core_Style_Guidelines">Core Style Guide</a></li>
+<li><a href="http://docs.jquery.com/Tips_for_jQuery_Bug_Patching">Tips For Bug Patching</a></li>
+</ol>
+
+<h2>Running the Unit Tests</h2>
+
+<p>Run the unit tests with a local server that supports PHP. No database is required. Pre-configured php local servers are available for Windows and Mac. Here are some options:</p>
+
+<ul>
+<li>Windows: <a href="http://www.wampserver.com/en/">WAMP download</a></li>
+<li>Mac: <a href="http://www.mamp.info/en/index.html">MAMP download</a></li>
+<li>Linux: <a href="https://www.linux.com/learn/tutorials/288158-easy-lamp-server-installation">Setting up LAMP</a></li>
+<li><a href="http://code.google.com/p/mongoose/">Mongoose (most platforms)</a></li>
+</ul>
+
+<h2>What you need to build your own jQuery</h2>
+
+<p>In order to build jQuery, you need to have GNU make 3.8 or later, Node.js 0.4.12 or later, and git 1.7 or later.
+(Earlier versions might work OK, but are not tested.)</p>
+
+<p>Windows users have two options:</p>
+
+<ol>
+<li>Install <a href="https://code.google.com/p/msysgit/">msysgit</a> (Full installer for official Git),
+<a href="http://gnuwin32.sourceforge.net/packages/make.htm">GNU make for Windows</a>, and a
+<a href="http://node-js.prcn.co.cc/">binary version of Node.js</a>. Make sure all three packages are installed to the same
+location (by default, this is C:\Program Files\Git).</li>
+<li>Install <a href="http://cygwin.com/">Cygwin</a> (make sure you install the git, make, and which packages), then either follow
+the <a href="https://github.com/ry/node/wiki/Building-node.js-on-Cygwin-%28Windows%29">Node.js build instructions</a> or install
+the <a href="http://node-js.prcn.co.cc/">binary version of Node.js</a>.</li>
+</ol>
+
+<p>Mac OS users should install Xcode (comes on your Mac OS install DVD, or downloadable from
+<a href="http://developer.apple.com/technologies/xcode.html">Apple's Xcode site</a>) and
+<a href="Homebrew">http://mxcl.github.com/homebrew/</a>. Once Homebrew is installed, run <code>brew install git</code> to install git,
+and <code>brew install node</code> to install Node.js.</p>
+
+<p>Linux/BSD users should use their appropriate package managers to install make, git, and node, or build from source
+if you swing that way. Easy-peasy.</p>
+
+<h2>How to build your own jQuery</h2>
+
+<p>First, clone a copy of the main jQuery git repo by running <code>git clone git://github.com/jquery/jquery.git</code>.</p>
+
+<p>Then, to get a complete, minified, jslinted version of jQuery, simply <code>cd</code> to the <code>jquery</code> directory and type
+<code>make</code>. If you don't have Node installed and/or want to make a basic, uncompressed, unlinted version of jQuery, use
+<code>make jquery</code> instead of <code>make</code>.</p>
+
+<p>The built version of jQuery will be put in the <code>dist/</code> subdirectory.</p>
+
+<p>To remove all built files, run <code>make clean</code>.</p>
+
+<h2>Building to a different directory</h2>
+
+<p>If you want to build jQuery to a directory that is different from the default location, you can specify the PREFIX
+directory: <code>make PREFIX=/home/jquery/test/ [command]</code></p>
+
+<p>With this example, the output files would end up in <code>/home/jquery/test/dist/</code>.</p>
+
+<h2>Troubleshooting</h2>
+
+<p>Sometimes, the various git repositories get into an inconsistent state where builds don't complete properly
+(usually this results in the jquery.js or jquery.min.js being 0 bytes). If this happens, run <code>make clean</code>, then
+run <code>make</code> again.</p>
+
+<h2>Git for dummies</h2>
+
+<p>As the source code is handled by the version control system Git, it's useful to know some features used.</p>
+
+<h3>Submodules</h3>
+
+<p>The repository uses submodules, which normally are handled directly by the Makefile, but sometimes you want to
+be able to work with them manually.</p>
+
+<p>Following are the steps to manually get the submodules:</p>
+
+<ol>
+<li><code>git clone https://github.com/jquery/jquery.git</code></li>
+<li><code>git submodule init</code></li>
+<li><code>git submodule update</code></li>
+</ol>
+
+<p>Or:</p>
+
+<ol>
+<li><code>git clone https://github.com/jquery/jquery.git</code></li>
+<li><code>git submodule update --init</code></li>
+</ol>
+
+<p>Or:</p>
+
+<ol>
+<li><code>git clone --recursive https://github.com/jquery/jquery.git</code></li>
+</ol>
+
+<p>If you want to work inside a submodule, it is possible, but first you need to checkout a branch:</p>
+
+<ol>
+<li><code>cd src/sizzle</code></li>
+<li><code>git checkout master</code></li>
+</ol>
+
+<p>After you've committed your changes to the submodule, you'll update the jquery project to point to the new commit,
+but remember to push the submodule changes before pushing the new jquery commit:</p>
+
+<ol>
+<li><code>cd src/sizzle</code></li>
+<li><code>git push origin master</code></li>
+<li><code>cd ..</code></li>
+<li><code>git add src/sizzle</code></li>
+<li><code>git commit</code></li>
+</ol>
+
+<p>The makefile has some targets to simplify submodule handling:</p>
+
+<h4><code>make update_submodules</code></h4>
+
+<p>checks out the commit pointed to by jquery, but merges your local changes, if any. This target is executed
+when you are doing a normal <code>make</code>.</p>
+
+<h4><code>make pull_submodules</code></h4>
+
+<p>updates the content of the submodules to what is probably the latest upstream code.</p>
+
+<h4><code>make pull</code></h4>
+
+<p>make a <code>make pull_submodules</code> and after that a <code>git pull</code>. if you have no remote tracking in your master branch, you can
+execute this command as <code>make pull REMOTE=origin BRANCH=master</code> instead.</p>
+
+<h3>cleaning</h3>
+
+<p>If you want to purge your working directory back to the status of upstream, following commands can be used (remember everything you've worked on is gone after these):</p>
+
+<ol>
+<li><code>git reset --hard upstream/master</code></li>
+<li><code>git clean -fdx</code></li>
+</ol>
+
+<h3>rebasing</h3>
+
+<p>For feature/topic branches, you should always used the <code>--rebase</code> flag to <code>git pull</code>, or if you are usually handling many temporary "to be in a github pull request" branches, run following to automate this:</p>
+
+<ul>
+<li><code>git config branch.autosetuprebase local</code> (see <code>man git-config</code> for more information)</li>
+</ul>
+
+<h3>handling merge conflicts</h3>
+
+<p>If you're getting merge conflicts when merging, instead of editing the conflicted files manually, you can use the feature
+<code>git mergetool</code>. Even though the default tool <code>xxdiff</code> looks awful/old, it's rather useful.</p>
+
+<p>Following are some commands that can be used there:</p>
+
+<ul>
+<li><code>Ctrl + Alt + M</code> - automerge as much as possible</li>
+<li><code>b</code> - jump to next merge conflict</li>
+<li><code>s</code> - change the order of the conflicted lines</li>
+<li><code>u</code> - undo an merge</li>
+<li><code>left mouse button</code> - mark a block to be the winner</li>
+<li><code>middle mouse button</code> - mark a line to be the winner</li>
+<li><code>Ctrl + S</code> - save</li>
+<li><code>Ctrl + Q</code> - quit</li>
+</ul>
+
+<h2>Questions?</h2>
+
+<p>If you have any questions, please feel free to ask on the
+<a href="http://forum.jquery.com/developing-jquery-core">Developing jQuery Core forum</a> or in #jquery on irc.freenode.net.</p>

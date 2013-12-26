@@ -2,6 +2,8 @@ define([
 	], 
 	function() {
 	var marked = require("marked");
+    var config = store.get('General') || {};
+    var markdown = store.get('Markdown') || {};
 	
     var defaults = {
         "gfm": true,
@@ -13,15 +15,15 @@ define([
         "smartypants": true,
         "silent": false,
         "highlight": null,
-        "langPrefix": ''
+        "langPrefix": '',
+        "mathjax": config.enableMath
     };
 
     var lexer = new marked.Lexer(defaults);
 
     var customRules = {
-        // plugin: /^ *\[([^\:\]]+):([^\]]+)\] *\n*/,
-        oembed: /^@\[(inside)\]\(href\)/
-        // plugin: /^ *\[([^\:\]]+):([^\]\/]+)\][^\(] */
+        oembed: /^@\[(inside)\]\(href\)/,
+        toc: /^\[(TOC|toc)\] *(?:\n+|$)/
     }
     
     var _inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
@@ -62,6 +64,11 @@ define([
 	}
 
     lexer.rules = merge({}, lexer.rules, customRules);
+
+    window.ee.on('preferences.general.enableMath', function(value) {
+        lexer.options.mathjax = value;
+        window.ee.emit('preferences.general.enableMath.after', value);
+    })
 
     return lexer;
 });

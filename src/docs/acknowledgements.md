@@ -202,6 +202,16 @@ Apache License
    
 * * *
 
+**MathJax** 
+
+http://www.mathjax.org/
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+* * *
+
 **jQuery** 
 
 Copyright 2013 jQuery Foundation and other contributors (MIT)
@@ -273,12 +283,10 @@ Copyright (c) 2012, Alexander Solovyov <alexander@solovyov.net> (MIT)
 
 * * *
 
-**font-awesome-more**
+**Ionicons**
+https://github.com/driftyco/ionicons
 
-- The Font Awesome font is licensed under the SIL Open Font License - http://scripts.sil.org/OFL
-- Font Awesome CSS, LESS, and SASS files are licensed under the MIT License - http://opensource.org/licenses/mit-license.html
-- The Font Awesome pictograms are licensed under the CC BY 3.0 License - http://creativecommons.org/licenses/by/3.0/
-- Attribution is no longer required in Font Awesome 3.0, but much appreciated: "Font Awesome by Dave Gandy - http://fortawesome.github.com/Font-Awesome"
+Ionicons is licensed under the MIT license.
 
 * * *
 
@@ -350,3 +358,17 @@ Copyright (c) 2009 Richard Chamorro (MIT)
 **reMarked.js**
 
 Copyright (c) https://github.com/leeoniya/reMarked.js (MIT)
+
+* * *
+
+**Select2**
+
+Copyright 2012 Igor Vaynberg (Apache 2)
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+* * *
+
+**i18next**
+
+Copyright (c) 2011 Jan Mühlemann (MIT)

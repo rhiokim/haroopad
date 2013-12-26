@@ -1,8 +1,8 @@
 {
   "main": "index.html",
-  "name": "haroopad",
+  "name": "Haroopad",
   "description": "The Next Document processor based on Markdown",
-  "version": "0.8.0",
+  "version": "0.10.0",
   "keywords": [ "markdown", "haroopress", "editor" ],
   "window": {
     "icon": "logo.png",
@@ -16,6 +16,7 @@
   "webkit": {
     "plugin": true
   },
+  "chromium-args": "--enable-threaded-compositing",
   "upgrade": "http://pad.haroopress.com/upgrade.json",
   "maintainers":[{
    "name": "Rhio Kim",

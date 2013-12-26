@@ -57,7 +57,6 @@ define([
 				case '.mdml':
 				case '.txt':
 				case '.text':
-				alert(entry)
     				window.parent.ee.emit('drop.file.open', entry);
 				break;
 				default:

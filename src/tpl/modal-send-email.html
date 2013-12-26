@@ -1,8 +1,8 @@
-<div id="send-email-dialog" class="modal hide fade" data-width="400">
+<div id="send-email-dialog" class="modal hide fade"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-width="450">
   <form name="send-email" class="form-horizontal">
   <div class="modal-header">
     <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> -->
-    <h4>Sending email <small id="isSent" class="text-success hide fade in">- Sent</small></h4>
+    <h4><span data-i18n="pad:email.title">Sending email</span> <small id="isSent" class="text-success hide fade in" data-i18n="pad:email.sent">Sent</small></h4>
   </div>
   <div class="modal-body">
 
@@ -16,19 +16,19 @@
         <input class="span3" name="title" type="text" placeholder="Title..." required>
       </div>
       <div class="btn-group input-append" data-toggle="buttons-radio">
-        <button type="button" name="html" class="btn btn-small active">HTML</button>
-        <button type="button" name="markdown" class="btn btn-small">Markdown</button>
+        <button type="button" name="html" class="btn btn-small active" data-i18n="pad:email.html">HTML</button>
+        <button type="button" name="markdown" class="btn btn-small" data-i18n="pad:email.markdown">Markdown</button>
       </div>
     </p>
 
-    <span class="help-block">TO: Reciver or <a href="http://www.tumblr.com/docs/en/email_publishing#how" target="_blank">Tumblr email [?]</a>, 
-      <a href="http://blog.evernote.com/blog/2013/07/19/quick-tip-emailing-into-evernote-plus-email-tips/" target="_blank">Evernote email [?]</a>. </span>
+    <span class="help-block"><span data-i18n="pad:email.to">TO</span>: <a href="http://www.tumblr.com/docs/en/email_publishing#how" target="_blank"><span data-i18n="pad:email.tumblr">Tumblr email</span> [?]</a>, 
+      <a href="http://blog.evernote.com/blog/2013/07/19/quick-tip-emailing-into-evernote-plus-email-tips/" target="_blank"><span data-i18n="pad:email.evernote">Evernote email</span> [?]</a>. </span>
     <div class="input-prepend">
       <span class="add-on"><i class="icon-envelope"></i></span>
       <input class="span3" name="to" type="email" data-provide="typeahead" data-items="4" placeholder="Reciver's email address" required>
     </div>
 
-    <span class="help-block">FROM:</span> 
+    <span class="help-block" data-i18n="pad:email.from">FROM:</span> 
     <div class="input-prepend">
       <span class="add-on"><i class="icon-envelope"></i></span>
       <input class="span3" name="from" type="email" placeholder="Your gmail address" required>
@@ -45,13 +45,13 @@
     <div class="pull-left">
       <label class="checkbox">
         <input type="checkbox" name="remember">
-        <span class="text-info">Remember email</span> <i class="icon-info-sign" data-toggle="tooltip" data-placement="top" title="The password will not be saved."></i>
+        <span class="text-info" data-i18n="pad:email.remember">Remember email</span> <i id="secure" class="icon-info-sign" data-toggle="tooltip" data-placement="top" title="The password will not be saved."></i>
       </label>
     </div>
     <!-- <a href="#" class="btn btn-danger pull-left _dont_save">Dont's Save</a> -->
-    <button href="#" class="btn _close">Close</button>
+    <button href="#" class="btn _close" data-i18n="pad:email.close">Close</button>
     <!-- <a href="#" class="btn btn-primary _save">Post</a> -->
-    <button type="submit" class="btn btn-primary _save" data-loading-text="Sending...">Send</button>
+    <button type="submit" class="btn btn-primary _save" data-loading-text="Sending..." data-i18n="pad:email.send">Send</button>
   </div>
   </form>
 </div>

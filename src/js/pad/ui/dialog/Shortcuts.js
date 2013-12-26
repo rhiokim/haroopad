@@ -1,5 +1,5 @@
 define([
-		'vendors/text!tpl/modal-shortcuts.html'
+		'text!tpl/modal-shortcuts.html'
 	], 
 	function(html, HotKey) {
 		$('#dialogs').append(html);

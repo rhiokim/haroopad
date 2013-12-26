@@ -21,7 +21,7 @@ define([
 
 		/* exist file save */
 		if (!nw.file.get('readOnly')) {
-			window.ee.on('menu.file.save', function() {
+			window.ee.on('menu.file.save', function(e) {
 				var fileEntry = nw.file.get('fileEntry');
 				if (!fileEntry) {
 					SaveDialog.show(getWorkingDir());
@@ -31,9 +31,16 @@ define([
 			});
 
 			window.ee.on('menu.file.save.as', function() {
-				var extname = nw.file.get('extname');
-				var basename = nw.file.get('basename');
-				var fileName = basename.replace(extname, ' copy'+ extname);
+				var fileName,
+						extname = nw.file.get('extname'),
+						basename = nw.file.get('basename');
+
+				if (!basename) {
+					window.ee.emit('menu.file.save');
+					return;
+				}
+				
+				fileName = basename.replace(extname, ' copy'+ extname);
 				
 				SaveDialog.show(nw.file.get('dirname'), fileName);
 			});
