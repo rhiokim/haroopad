@@ -1,4 +1,4 @@
-# Haroopad
+# 하루패드
 
 **하루패드**는 웹 친화적인 문서를 작성하기 위한 마크다운 에디터입니다. 
 
@@ -11,13 +11,14 @@
 ### ==새로운 기능 (v0.10)==
 
 * `[TOC]` 문법 추가
-	- 문서내에 목차를 손쉽게 포함할 수 있습니다.
+	- 문서의 목차를 문서에 손쉽게 포함할 수 있습니다.
 * 마크다운 자동완성 기능
 	- 마크다운 문법의 자동완성을 이용해 문서의 작성의 효율을 높힐 수 있습니다.
-* 다국어 지원 (시스템 지정 언어로 설정됩니다.)
-	- English
-	- Korea (한국어)
-	- Spanish (Espanol) 
+* 다국어 지원
+	- 영어 (English)
+	- 한국어 (Korea)
+	- 스페인 (Español) - [davegomez](https://github.com/davegomez)
+	- 중국어 간체 (中文) - [toiletfreak](https://github.com/toiletfreak)
 * 테마 추가
 	- Metro Vibes, Metro Vibes Dark, Wood, Wood Ri
 * 기타
@@ -75,7 +76,6 @@
 
 ### 곧 출시될 기능
 
-* 목차 기능 `[TOC]`
 * 각주 기능
 
 ### 추가 정보

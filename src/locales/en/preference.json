@@ -22,7 +22,7 @@
     "editor": {
         "general": "General",
         "spaces": "Spaces",
-        "tab-width": "Tab width",
+        "tab-width": "Tab with",
         "indent-use-tab": "Indent Use Tab",
         "display-line-number": "Show Line Number",
         "vim-key-binding": "Vim Key Binding",
@@ -53,10 +53,10 @@
     "markdown": {
         "enable-gfm": "Use Github Flavord Markdown",
         "sanitize-desc": "Use HTML",
-        "gfm-line-breaks": "Use Github Flavored Markdown Line Break",
-        "gfm-table": "Use Github Flavord Markdown Table",
-        "smarty-list": "Use smarter list behavior than the original markdown",
-        "smarty-pants": "Use \"smart\" typograhic punctuation for things like quotes and dashes"
+        "gfm-line-breaks": "User Github Flavord Markdown' Line Break",
+        "gfm-table": "Use Github Flavord Markdown' Table",
+        "smarty-list": "표준 마크다운보다 더 나은 스마트 리스트 사용",
+        "smarty-pants": "기호 및 텍스트 대체 항목 사용"
     },
 
     "about": {

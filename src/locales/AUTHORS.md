@@ -7,7 +7,5 @@ Rhio Kim <rhio.kim@gmail.com>
 
 # Thanks for project translation:
 
-* Korean                 : 	Rhio Kim <rhio.kim@gmail.com>
-		   					Haroopad <rhio.kim+haroopad@gmail.com>
-* Chinese                : 	Joel Haowen Tong <http://blog.joeltong.org/>
-* Latin American Spanish : 	David Gómez <dg.dave@gmail.com>
+* Korean : Rhio Kim <rhio.kim@gmail.com>
+		   Haroopad <rhio.kim+haroopad@gmail.com>

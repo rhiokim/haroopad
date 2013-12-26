@@ -44,7 +44,8 @@ kbd {
 ul {
   padding-left: 10px;
 }
-ul, li{
+
+p.toc ul, p.toc li{
   list-style-type: none;
 }
 
