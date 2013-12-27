@@ -17,28 +17,20 @@ Minimal usage:
 
 ```js
 console.log(marked('I am using __markdown__.'));
-// Outputs: <p>I am using <i>markdown</i>.</p>
+// Outputs: <p>I am using <strong>markdown</strong>.</p>
 ```
 
 Example using all options:
 
 ```js
-// Set default options except highlight which has no default
 marked.setOptions({
   gfm: true,
-  highlight: function (code, lang, callback) {
-    pygmentize({ lang: lang, format: 'html' }, code, function (err, result) {
-      if (err) return callback(err);
-      callback(null, result.toString());
-    });
-  },
   tables: true,
   breaks: false,
   pedantic: false,
   sanitize: true,
   smartLists: true,
   smartypants: false,
-  langPrefix: 'lang-'
 });
 
 // Using async version of marked
@@ -79,43 +71,6 @@ Type: `Boolean`
 Default: `true`
 
 Enable [GitHub flavored markdown][gfm].
-
-### highlight
-
-Type: `Function`
-
-A function to highlight code blocks. The function takes three arguments: code,
-lang, and callback. The above example uses async highlighting with
-[node-pygementize-bundled][pygmentize], and here is a synchronous example using
-[highlight.js][highlight] which doesn't require the callback argument:
-
-```js
-marked.setOptions({
-  highlight: function (code, lang) {
-    return hljs.highlightAuto(lang, code).value;
-  }
-});
-```
-
-#### highlight arguments
-
-`code`
-
-Type: `String`
-
-The section of code to pass to the highlighter.
-
-`lang`
-
-Type: `String`
-
-The programming language specified in the code block.
-
-`callback`
-
-Type: `String`
-
-The callback function to call when using an async highlighter.
 
 ### tables
 
@@ -163,12 +118,62 @@ Default: `false`
 
 Use "smart" typograhic punctuation for things like quotes and dashes.
 
-### langPrefix
+### renderer
 
-Type: `String`
-Default: `lang-`
+Type: `Renderer`
+Default: `new Renderer()`
 
-Set the prefix for code block classes.
+A renderer instance for rendering ast to html. Learn more on the Renderer
+section.
+
+## Renderer
+
+Renderer is a the new way for rendering tokens to html. Here is a simple
+example:
+
+```javascript
+var r = new marked.Renderer()
+r.code = function(code, lang) {
+  return highlight(lang, code).value;
+}
+
+console.log(marked(text, {renderer: r}))
+```
+
+You can control anything you want.
+
+### Block Level
+
+- code(code, language)
+- blockquote(quote)
+- html(html)
+- heading(text, level)
+- hr()
+- list(body, ordered)
+- listitem(text)
+- paragraph(text)
+- table(header, body)
+- tablerow(content)
+- tablecell(content, flags)
+
+`flags` is an object like this:
+
+```
+{
+    header: true,
+    align: 'center'
+}
+```
+
+### Span Level
+
+- strong(text)
+- em(text)
+- codespan(code)
+- br()
+- del(text)
+- link(href, title, text)
+- image(href, title, text)
 
 ### emoji
 
@@ -294,6 +299,63 @@ disadvantage in the benchmarks above.
 Along with implementing every markdown feature, marked also implements [GFM
 features][gfmf].
 
+### High level
+
+You can customize the result with a customized renderer.
+
+``` js
+var renderer = new marked.Renderer()
+
+renderer.heading = function(text, level) {
+  return '<div class="h-' + level + '">' + text + '</div>'
+}
+
+var parse = function(src, options) {
+  options = options || {};
+  options.renderer = renderer
+  return marked.parser(marked.lexer(src, options), options);
+}
+
+console.log(parse('# h1'))
+```
+
+The renderer API:
+
+```
+code: function(code, lang)
+blockquote: function(text)
+html: function(html)
+
+heading: function(text, level)
+paragraph: function(text)
+
+hr: function()
+
+list: function(contents, isOrdered)
+listitem: function(text)
+
+table: function(header, body)
+tablerow: function(content)
+tablecell: function(text, flags)
+// flags: {header: false, align: 'center'}
+```
+
+### Pro level
+
+You also have direct access to the lexer and parser if you so desire.
+
+``` js
+var tokens = marked.lexer(text, options);
+console.log(marked.parser(tokens));
+```
+
+``` js
+var lexer = new marked.Lexer(options);
+var tokens = lexer.lex(text);
+console.log(tokens);
+console.log(lexer.rules);
+```
+
 ``` bash
 $ node
 > require('marked').lexer('> i am using marked.')
@@ -333,9 +395,9 @@ node test
 
 ### Contribution and License Agreement
 
-If you contribute code to marked, you are implicitly allowing your code to be
-distributed under the MIT license. You are also implicitly verifying that all
-code is your original work. `</legalese>`
+If you contribute code to this project, you are implicitly allowing your code
+to be distributed under the MIT license. You are also implicitly verifying that
+all code is your original work. `</legalese>`
 
 ## License
 
