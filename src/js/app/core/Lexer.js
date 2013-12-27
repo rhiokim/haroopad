@@ -1,6 +1,7 @@
 define([
+    'core/Renderer'
 	], 
-	function() {
+	function(Renderer) {
 	var marked = require("marked");
     var config = store.get('General') || {};
     var markdown = store.get('Markdown') || {};
@@ -16,7 +17,8 @@ define([
         "silent": false,
         "highlight": null,
         "langPrefix": '',
-        "mathjax": config.enableMath
+        "mathjax": config.enableMath, 
+        "renderer": Renderer
     };
 
     var lexer = new marked.Lexer(defaults);

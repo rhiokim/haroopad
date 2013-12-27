@@ -1,6 +1,5 @@
 define([
-    'core/Lexer',
-    'core/Renderer'
+    'core/Lexer'
   ],
   function(Lexer, Renderer) {
 
@@ -12,13 +11,9 @@ define([
     var opt = store.get('Markdown') || Lexer.options;
 
     // marked.setOptions(opt);
-
-    var parse = function(src, options) {
-      if (options) {
-        Lexer.options = options;
-      }
+    var parse = function(src) {
       var tokens = Lexer.lex(src);
-      return marked.parser(tokens, Lexer.options, Renderer);
+      return marked.parser(tokens, Lexer.options);
     }
 
     window.ee.on('preferences.markdown.gfm', function(value) {
