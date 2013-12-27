@@ -10,6 +10,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-asciify');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('./src/package.json'),
@@ -17,6 +18,18 @@ module.exports = function(grunt) {
     vendors: 'src/js/vendors',
     build: 'build',
     dist: 'dists/<%= pkg.version %>',
+
+    asciify: { 
+      banner:{
+        text: 'Haroopad',
+
+        // Add the awesome to the console, and use the best font.
+        options:{ 
+          font:'larry3d',
+          log:true
+        }
+      }
+    },
     
     clean: {
       build: [ 'build/*' ],
@@ -622,6 +635,6 @@ module.exports = function(grunt) {
   grunt.registerTask('menu', [ 'uglify:menu' ]);
 
   /* pkg */
-  grunt.registerTask('default', [ 'clean', 'cp', 'menu', 'css', 'codemirror' ]);
+  grunt.registerTask('default', [ 'asciify', 'clean', 'cp', 'menu', 'css', 'codemirror' ]);
   grunt.registerTask('pkg2', [ 'app', 'pad', 'preferences', 'viewer', 'snapshot' ]);
 };
