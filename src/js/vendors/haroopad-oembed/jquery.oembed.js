@@ -345,29 +345,30 @@
         container.replaceWith(oembedData.code);
         break;
       case "fill":
-        var child, ebdOpt;
+        var html, child, ebdOpt;
 
         ebdOpt = container[0].querySelector('a').getAttribute('data-props');
 
         if (typeof oembedData.code == 'string') {
-          oembedData.code = oembedData.code.replace('="//', '="http://');
-          oembedData.code = oembedData.code.replace("='//", "='http://");
-
-          container.html(oembedData.code);
+          html = oembedData.code.replace('="//', '="http://');
+          html = html.replace("='//", "='http://");
         } else {
-          var html;
-
           try {
             html = oembedData.code[0].outerHTML;
           } catch (e) {
             html = '<small style="color:#afafaf;line-height:14px">&gt; This site does not support <a href="http://oembed.com/" target="_blank">oEmbed</a> and <a href="http://ogp.me/" target="_blank">Open Graph protocol</a>.<br/>&gt; <a href="http://pad.haroopress.com/page.html?f=open-media" target="_blank">You can get here more provider information</a></small>';
           }
-          container.html(html);
         }
+        container.html(html);
         
         if (ebdOpt) {
           ebdOpt = decodeURIComponent(ebdOpt);
-          ebdOpt = JSON.parse(ebdOpt);
+
+          try {
+            ebdOpt = JSON.parse(ebdOpt);
+          } catch(e) {
+            ebdOpt = {};
+          }
         }
         
         child = container.children();
