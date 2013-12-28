@@ -8,7 +8,7 @@
         "custom": "Personalización",
         "code": "Código",
         "markdown": "Markdown",
-        "about": "Acerca de"
+        "about": "Acerca"
     },
 
     "general": {
@@ -23,9 +23,9 @@
         "general": "General",
         "spaces": "Espacios",
         "tab-width": "Ancho del tabulador",
-        "indent-use-tab": "Sangrar usando el tabulador",
+        "indent-use-tab": "Indentar usando el tabulador",
         "display-line-number": "Mostrar números de línea",
-        "vim-key-binding": "Vim Key Binding",
+        "vim-key-binding": "Configuración de teclado estilo VIM",
         "auto-pair-char": "Emparejado automático de caracteres",
         "insert-four-space": "Insertar 4 espacios en lugar de un tabulador"
     },
@@ -51,23 +51,23 @@
     },
 
     "markdown": {
-        "enable-gfm": "Usar Github Flavord Markdown",
+        "enable-gfm": "Usar Markdown estilo GitHub",
         "sanitize-desc": "Usar HTML",
-        "gfm-line-breaks": "Usar saltos de línea de Github Flavord Markdown",
-        "gfm-table": "Usar tablas de Github Flavord Markdown",
-        "smarty-list": "Usar comportamientos de lista más inteligentes que el Markdown original",
-        "smarty-pants": "Usar puntuación tipográfica \"inteligente\" para cosas como citas y guiones"
+        "gfm-line-breaks": "Usar saltos de línea de Markdown estilo GitHub",
+        "gfm-table": "Usar tablas de Markdown estilo GitHub",
+        "smarty-list": "Usa los comportamientos de listas más inteligentes que el del Markdown original",
+        "smarty-pants": "Usa puntuación tipográfica \"inteligente\" para cosas como citas y guiones"
     },
 
     "about": {
         "donate": "Donar",
         "mean": "<strong>Haroo</strong> significa \"Un día\" en Coreano",
-        "version": "Versón",
+        "version": "Versión",
         "official-site": "Sitio web oficial",
         "developer": "Desarrollador",
         "special-thanks": "Agradecimientos especiales",
         "icon": "ICON",
         "description": "Haroopad <small>El próximo procesador de documentos</small>",
-        "donate-msg": "Si te gusta Haroopad, dona para ayudar a su crecimiento"
+        "donate-msg": "Si te gusta Haroopad  dona para ayudar a su crecimiento"
     }
 }

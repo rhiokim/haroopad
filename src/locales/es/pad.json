@@ -28,7 +28,7 @@
         "outline": "Mostrar el esquema del documento",
         "fullscreen": "Habilitar pantalla completa",
         "tab": "Ancho del tabulador",
-        "usetab": "Sangrar usando el tabulador",
+        "usetab": "Indentar usando el tabulador",
         "experimental": "Experimental",
         "spaces": "Espacios",
         "column": {
@@ -47,7 +47,7 @@
     "donate": {
         "label": "Donar",
         "title": "¡Dona para apoyar el desarrollo!",
-        "desc": "Si crees que es útil, dona para continuar su desarrollo. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donar</a>"
+        "desc": "Si crees que Haroopad es útil, dona para continuar su desarrollo. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donar</a>"
     },
 
     "email": {
@@ -84,6 +84,6 @@
         "message": "¿Buscas la versión más reciente?",
         "note": "Notas de la versión",
         "download": "Descargar",
-        "newest": "Haroopad esta en la versión más nueva disponible."
+        "newest": "Haroopad esta en su versión más reciente disponible."
     }
 }

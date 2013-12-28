@@ -1,7 +1,7 @@
 define([
     'core/Lexer'
   ],
-  function(Lexer, Renderer) {
+  function(Lexer) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();

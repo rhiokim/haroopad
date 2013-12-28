@@ -17,6 +17,7 @@ define([
         "silent": false,
         "highlight": null,
         "langPrefix": '',
+        "headerPrefix": '',
         "mathjax": config.enableMath, 
         "renderer": Renderer
     };
