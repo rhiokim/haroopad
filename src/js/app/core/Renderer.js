@@ -1,22 +1,9 @@
 define([
-		// 'core/Plugins'
 	], 
-	function(/*Plugins*/) {
+	function() {
 
 		var marked = require('marked');
 		var renderer = new marked.Renderer();
-
-       	// var loading = '<span class="spinner"></span>';
-
-		// renderer.plugin = function(name, args) {
-		// 	var plugin = Plugins[name.toLowerCase()];
-
-		// 	if (!plugin) {
-  // 				return '<p>['+ name +':'+ args +']</p>';
-		// 	}
-			
-		// 	return plugin(name, args);
-		// }
 
 		renderer.oembed = function(caption, href, props) {
 			var key, value, link, tmp = {};

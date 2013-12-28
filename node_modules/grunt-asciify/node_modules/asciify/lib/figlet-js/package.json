@@ -1,0 +1,23 @@
+{
+  "name": "figlet-js",
+  "version": "0.0.0",
+  "description": "Figlet is a program for making large letters out of ordinary text.",
+  "main": "figlet-node.js",
+  "scripts": {
+    "test": "nodeunit test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/scottgonzalez/figlet-js.git"
+  },
+  "author": "Scott Gonzalez",
+  "license": "MIT",
+  "readmeFilename": "readme.md",
+  "bugs": {
+    "url": "https://github.com/scottgonzalez/figlet-js/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "nodeunit": "~0.8.0"
+  }
+}

@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -10,6 +11,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-asciify');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('./src/package.json'),
@@ -17,11 +19,29 @@ module.exports = function(grunt) {
     vendors: 'src/js/vendors',
     build: 'build',
     dist: 'dists/<%= pkg.version %>',
+
+    asciify: { 
+      banner:{
+        text: 'Haroopad',
+
+        // Add the awesome to the console, and use the best font.
+        options:{ 
+          font:'larry3d',
+          log:true
+        }
+      }
+    },
     
     clean: {
       build: [ 'build/*' ],
       release: [ 'build/haroopad.app' ],
       core: [ 'build/haroopad.app' ]
+    },
+
+    jshint: {
+      all: {
+        src: ['src/js/pad/**/*.js']
+      }
     },
 
     cssmin: {
@@ -622,6 +642,6 @@ module.exports = function(grunt) {
   grunt.registerTask('menu', [ 'uglify:menu' ]);
 
   /* pkg */
-  grunt.registerTask('default', [ 'clean', 'cp', 'menu', 'css', 'codemirror' ]);
+  grunt.registerTask('default', [ 'asciify', 'clean', 'cp', 'menu', 'css', 'codemirror' ]);
   grunt.registerTask('pkg2', [ 'app', 'pad', 'preferences', 'viewer', 'snapshot' ]);
 };
