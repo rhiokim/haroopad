@@ -105,7 +105,7 @@ define([
 		}
 
 		function getBodyHtml() {
-			contentDocument = Viewer.getContentDocument();
+			var contentDocument = Viewer.getContentDocument();
 
 			shadow = document.createElement('body');
 			shadow.style.display = 'none';

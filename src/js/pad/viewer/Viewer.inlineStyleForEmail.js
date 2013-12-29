@@ -115,8 +115,8 @@ define([
 
 	function _replaceOriginalEmbed() {
 		var str, type, provider, 
-			riches = htmlStyledDoc.querySelectorAll('[data-type=rich]'),
-			videos = htmlStyledDoc.querySelectorAll('[data-type=video]');
+				riches = htmlStyledDoc.querySelectorAll('[data-type=rich]'),
+				videos = htmlStyledDoc.querySelectorAll('[data-type=video]');
 
   			riches = Array.prototype.slice.call(riches, 0);
   			videos = Array.prototype.slice.call(videos, 0);
@@ -124,6 +124,7 @@ define([
 		_.each(videos, function(video) {
 			video.innerHTML = '<blockquote>'+ video.getAttribute('data-origin') +'</blockquote>';
 		});
+		 
 		_.each(riches, function(rich) {
 			provider = rich.getAttribute('data-provider');
 
@@ -141,11 +142,27 @@ define([
 		});
 	}
 
+	/**
+	 * replace data-echo
+	 */
+	function _replaceLazyLoading() {
+		var frags, data;
+		frags = htmlStyledDoc.querySelectorAll('[data-echo]');
+		frags = Array.prototype.slice.call(frags, 0);
+
+		_.each(frags, function(frag) {
+			data = frag.getAttribute('data-echo');
+			frag.setAttribute('src', data);
+			frag.removeAttribute('data-echo');
+		});
+	}
+
 	function generateInlineStyle() {
 		htmlStyledDoc = document.createElement('html');
 		htmlStyledDoc.innerHTML = htmlDoc.documentElement.innerHTML;
 
 		_replaceOriginalEmbed();
+		_replaceLazyLoading();
 
 		attachImage();
 		makeStylesExplicit();
