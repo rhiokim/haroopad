@@ -66,7 +66,7 @@ define([
 		function _replaceOriginalEmbed() {
 			var str, type, provider, 
 				tweets = shadow.querySelectorAll('[data-provider=twitter]');
-	  			tweets = Array.prototype.slice.call(tweets, 0);
+  			tweets = Array.prototype.slice.call(tweets, 0);
 
 			_.each(tweets, function(tweet) {
 				tweet.innerHTML = tweet.getAttribute('data-replace');
@@ -89,6 +89,21 @@ define([
 			});
 		}
 
+		/**
+		 * replace data-echo
+		 */
+		function _replaceLazyLoading() {
+			var frags, data;
+			frags = shadow.querySelectorAll('[data-echo]');
+			frags = Array.prototype.slice.call(frags, 0);
+
+			_.each(frags, function(frag) {
+				data = frag.getAttribute('data-echo');
+				frag.setAttribute('src', data);
+				frag.removeAttribute('data-echo');
+			});
+		}
+
 		function getBodyHtml() {
 			contentDocument = Viewer.getContentDocument();
 
@@ -99,6 +114,7 @@ define([
 
 			_replaceOriginalEmbed();
 			_removeDataProperties();
+			_replaceLazyLoading();
 
 			shadow.removeAttribute('style');
 
