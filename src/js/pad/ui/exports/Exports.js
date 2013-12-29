@@ -65,7 +65,7 @@ define([
 
 		function _replaceOriginalEmbed() {
 			var str, type, provider, 
-				tweets = shadow.querySelectorAll('[data-provider=twitter]');
+					tweets = shadow.querySelectorAll('[data-provider=twitter]');
 	  			tweets = Array.prototype.slice.call(tweets, 0);
 
 			_.each(tweets, function(tweet) {

@@ -442,6 +442,8 @@
 
   $.fn.oembed.getRichCode = function(url, oembedData) {
     var code = oembedData.html;
+    code = code.replace('="//', '="http://');
+    code = code.replace("='//", "='http://"); 
     return code;
   };
 
