@@ -11,8 +11,6 @@ define([
 
 		var iframe = $('#viewer iframe')[0];
 		var _viewer = iframe.contentWindow;
-		var _toc = '',
-			options;
 
 		var gui = require('nw.gui'),
 			clipboard = gui.Clipboard.get();
@@ -197,10 +195,6 @@ define([
 			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
 
-		window.ee.on('init:html', function(doc, html) {
-			_viewer.html(html);
-		});
-
 		/* change markdown event handler */
 		nw.file.doc.on('change:html', function(doc, html) {
 			setTimeout(function() {
@@ -270,9 +264,8 @@ define([
 		}
 
 		return {
-			init: function(opt) {
-				options = opt;
-				_viewer.init(options);
+			init: function() {
+				_viewer.init(nw.file.toJSON());
 			},
 
 			// update: update,

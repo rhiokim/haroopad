@@ -75,7 +75,7 @@ i18n.init({
       doc = opt.doc;
 
       Editor.setValue(opt.markdown);
-      Viewer.init(opt);
+      Viewer.init();
 
       file.doc.trigger('change:html', doc, doc.html());
 

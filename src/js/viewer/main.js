@@ -151,9 +151,7 @@ function createTOC() {
 }
 
 function init(options) {
-  _options = options || {
-    dirname: '.'
-  };
+  _options = options;
 }
 
 /**
@@ -406,12 +404,13 @@ function update(wrapper) {
     }
   }
   
-  var src, imgs = wrapper.querySelectorAll('img');
+  var src, img, imgs = wrapper.querySelectorAll('img');
   for (i = 0; i < imgs.length; i++) {
-    src = imgs[i].getAttribute('src');
+    img = imgs[i];
+    src = img.getAttribute('src');
 
-    if (src.indexOf('//') == -1 && !/^\//.test(src)) {
-      imgs[i].setAttribute('src', _options.dirname + '/' + src);
+    if (src.indexOf('://') == -1 && !/^\//.test(src) && !/^[a-zA-Z]\:/.test(src)) {
+      img.setAttribute('src', _options.dirname + '/' + src);
     }
   }
 
