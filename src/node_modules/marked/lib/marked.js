@@ -391,7 +391,8 @@ Lexer.prototype.token = function(src, top) {
     if (cap = this.rules.toc.exec(src)) {
       src = src.substring(cap[0].length);
       this.tokens.push({
-        type: 'toc'
+        type: 'toc',
+        props: cap[2]
       });
       continue;
     }
@@ -1022,8 +1023,8 @@ Renderer.prototype.oembed = function(caption, href, props) {
   return '<p class="oembed">'+ link +'</p>';
 };
 
-Renderer.prototype.toc = function(content) {
-  return '<p class="toc"></p>';
+Renderer.prototype.toc = function(props) {
+  return '<p class="toc" style="'+ props +'"></p>';
 };
 
 /**
@@ -1216,7 +1217,7 @@ Parser.prototype.tok = function() {
       return this.renderer.oembed(this.token.caption, this.token.href, this.token.props);
     }
     case 'toc': {
-      return this.renderer.toc();
+      return this.renderer.toc(this.token.props);
     }
     case 'math': {
       return this.renderer.math(this.token.text, 'display');

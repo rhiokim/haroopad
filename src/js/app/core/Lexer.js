@@ -26,7 +26,7 @@ define([
 
     var customRules = {
         oembed: /^@\[(inside)\]\(href\)/,
-        toc: /^\[(TOC|toc)\] *(?:\n+|$)/
+        toc: /^\[\s*(TOC|toc)(?:\s+['"]([\s\S]*?)['"])?\s*\] *(?:\n+|$)/
     }
     
     var _inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;

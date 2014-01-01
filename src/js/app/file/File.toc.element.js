@@ -1,10 +1,11 @@
 define(function() {
 
     // TOC element description
-    function TocElement(tagName, anchor, text) {
+    function TocElement(tagName, anchor, text, index) {
         this.tagName = tagName;
         this.anchor = anchor;
         this.text = text;
+        this.index = index;
         this.children = [];
     }
     TocElement.prototype.childrenToString = function() {
@@ -21,7 +22,12 @@ define(function() {
     TocElement.prototype.toString = function() {
         var result = "<li>";
         if(this.anchor && this.text) {
+            result += '<span class="title">\n';
             result += '<a href="#' + this.anchor + '" title="'+ this.text +'">' + this.text + '</a>';
+            result += '\n</span>\n';
+            result += '<!--span class="number">\n';
+            result += this.index;
+            result += '\n</span-->\n';
         }
         result += this.childrenToString() + "</li>\n";
         return result;

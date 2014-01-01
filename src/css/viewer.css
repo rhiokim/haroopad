@@ -30,6 +30,10 @@ iframe {
   border: 0;
 }
 
+#root>ul, #root>ol {
+  display: inline-block;
+}
+
 figure {
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
@@ -39,18 +43,6 @@ figure {
 
 kbd {
   border: 1px solid #aaa; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; -moz-box-shadow: 1px 2px 2px #ddd; -webkit-box-shadow: 1px 2px 2px #ddd; box-shadow: 1px 2px 2px #ddd; background-color: #f9f9f9; background-image: -moz-linear-gradient(top, #eee, #f9f9f9, #eee); background-image: -o-linear-gradient(top, #eee, #f9f9f9, #eee); background-image: -webkit-linear-gradient(top, #eee, #f9f9f9, #eee); background-image: linear-gradient(top, #eee, #f9f9f9, #eee); padding: 1px 3px; font-family: inherit; font-size: 0.85em;
-}
-
-ul {
-  padding-left: 10px;
-}
-
-p.toc ul, p.toc li{
-  list-style-type: none;
-}
-
-p.toc li > a:before {
-  content: "• ";
 }
 
 .oembeded .oembed_photo{
@@ -97,4 +89,61 @@ p.toc li > a:before {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+/********************************************
+ * TOC
+ **********************************************/
+p.toc {
+  margin: 0 !important;
+}
+
+p.toc ul {
+  padding-left: 10px;
+}
+
+p.toc>ul {
+  padding: 10px;
+  margin: 0 10px 0 10px;
+  display: inline-block;
+  border: 1px solid #ededed;
+  border-radius: 5px;
+}
+
+p.toc ul, p.toc li{
+  list-style-type: none;
+}
+
+p.toc li {
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+p.toc li a::after {
+  content: ".";
+}
+
+p.toc li a:before {
+  content: "• ";
+}
+
+p.toc h5 {
+  /*font-family: "Essays 1743", Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;*/
+  text-transform: uppercase;
+  /*text-align: center;*/
+}
+
+p.toc .title {
+  float: left;
+  padding-right: 3px;
+  /*background: #fff;*/
+}
+
+p.toc .number {
+  margin: 0;
+  float: right;
+  padding-left: 3px;
+  background: #fff;
+  display: none;
 }

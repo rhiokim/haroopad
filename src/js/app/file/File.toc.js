@@ -65,12 +65,12 @@ define([
 
     headers.forEach(function(elt, idx) {
       elt.setAttribute('data-idx', idx);
-      elementList.push(new TocElement(elt.tagName, createAnchor(elt), elt.textContent));
+      elementList.push(new TocElement(elt.tagName, createAnchor(elt), elt.textContent, idx));
     });
 
     elementList = groupTags(elementList);
 
-    toc = '<ul>\n' + elementList.join("") + '</ul>\n';
+    toc = '<ul>\n<h5>Table of Contents</h5>\n' + elementList.join("") + '\n</ul>\n';
 
     return toc;
   }
