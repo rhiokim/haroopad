@@ -1,7 +1,8 @@
 define([
     'parse',
+    'file/File.doc',
     'file/File.tmp.opt'
-    ], function(parse, TmpOpt) {
+    ], function(parse, Doc, TmpOpt) {
 
   var fs = require('fs-extra'),
       path = require('path'),
@@ -33,15 +34,21 @@ define([
       markdown: '',
       tmp: undefined,
       readOnly: false,
-      toc: undefined
+      toc: '',
+      doc: null
     },
 
     initialize: function() {
+      this.doc = new Doc;
+      this.set('doc', this.doc);
+
       this.on('change:markdown', function() {
         var md = this.get('markdown') || '';
         var html = parse(md);
 
-        this.set('html', html);
+        this.doc.set('html', html);
+        // this.trigger('change:doc', this, this.doc);
+        // this.set('html', html);
 
         if (!this.get('tmp')) {
           window.clearTimeout(this._writeTimeout);

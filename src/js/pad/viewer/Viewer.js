@@ -1,19 +1,17 @@
 define([
 		'store',
 		'keyboard',
-		'ui/toc/TOC',
 		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.inlineStyleForEmail',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, TOC, inlineStyle, StyleForEmail, DragDrop) {
+	function(store, HotKey, inlineStyle, StyleForEmail, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 
 		var iframe = $('#viewer iframe')[0];
 		var _viewer = iframe.contentWindow;
-		var content = '',
-			_toc = '',
+		var _toc = '',
 			options;
 
 		var gui = require('nw.gui'),
@@ -37,15 +35,6 @@ define([
 
 		// 	nw.file.set({ title: title }, { silent: true });
 		// }
-
-		function update(markdown, html, editor) {
-			content = html;
-
-			setTimeout(function() {
-				_viewer.update(content);
-				// setTitle();
-			}, 1);
-		}
 
 		/* change editor theme */
 
@@ -134,10 +123,6 @@ define([
 			_viewer.setColumn(count);
 		});
 
-		/* change markdown event handler */
-		window.ee.on('change.after.markdown', update);
-		// nw.file.on('change:html', update)
-
 		/* scroll editor for sync */
 		window.ee.on('editor.scroll', function(top, per) {
 			_viewer.scrollTop(top * 100 / per);
@@ -212,25 +197,28 @@ define([
 			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
 
-		_viewer.onload = function() {}
+		window.ee.on('init:html', function(doc, html) {
+			_viewer.html(html);
+		});
+
+		/* change markdown event handler */
+		nw.file.doc.on('change:html', function(doc, html) {
+			setTimeout(function() {
+				_viewer.update(doc.dom());
+			}, 1);
+		});
 
 		_viewer.ee.on('rendered', function() {
-			_toc = nw.file.get('toc') || '';
-			_viewer.updateTOC(_toc);
+			nw.file.doc.parse();
 
-			//@TODO lazy
-			content = content.replace(/<p class="toc"><\/p>/gm, _toc);
-
-			nw.file.set({ 'html': content }, { silent: true });
-		});
-
-		_viewer.ee.on('change.toc', function() {
-			TOC.build();
-		});
-
-		//change Table of Contents by TOC module
-		nw.file.on('change:toc', function(child, toc) {
+			var toc = nw.file.doc.get('toc') || '';
 			_viewer.updateTOC(toc);
+
+			window.ee.emit('rendered');
+			//@TODO lazy
+			// content = content.replace(/<p class="toc"><\/p>/gm, _toc);
+
+			// nw.file.set({ 'html': content }, { silent: true });
 		});
 
 		//linkable
@@ -240,9 +228,9 @@ define([
 			}
 		});
 
-		_viewer.ee.on('dom', function(dom) {
-			window.ee.emit('dom', dom);
-		});
+		// _viewer.ee.on('dom', function(dom) {
+			// window.ee.emit('dom', dom);
+		// });
 
 		/*
 		 * Math rendering event proxy
@@ -252,9 +240,9 @@ define([
 			window.parent.ee.emit('math', target, cb);
 		})
 
-		_viewer.ee.on('title', function(title) {
-			nw.file.set('title', title);
-		});
+		// _viewer.ee.on('title', function(title) {
+		// 	nw.file.set('title', title);
+		// });
 
 		/**
 		 * drop in viewer
@@ -287,7 +275,7 @@ define([
 				_viewer.init(options);
 			},
 
-			update: update,
+			// update: update,
 
 			/**
 			 * for html exporting
