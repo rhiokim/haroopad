@@ -3,11 +3,11 @@ define([
     'window/Window.opt',
     'window/WindowManager',
     'window/Window.preferences',
-    'window/Window.presentation',
+    // 'window/Window.presentation',
     'window/Window.dragdrop',
     'file/File',
     'file/Recents'
-], function(HotKey, Options, WindowMgr, /*Help,*/ Preferences, Presentation, DragDrop, File, Recents) {
+], function(HotKey, Options, WindowMgr, /*Help,*/ Preferences, /*Presentation,*/ DragDrop, File, Recents) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;

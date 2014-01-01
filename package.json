@@ -6,7 +6,7 @@
   "homepage": "https://rhiokim.github.com/haroopad",
   "repository": "git://github.com/rhiokim/haroopad.git",
   "author": "rhio.kim@gmail.com",
-  "license": "GPL3",
+  "license": "GPLv2",
   "devDependencies": {
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-copy": "~0.4.1",
@@ -17,7 +17,10 @@
     "grunt-contrib-uglify": "~0.1.2",
     "grunt-replace": "~0.5.1",
     "grunt-shell": "~0.6.1",
-    "grunt": "~0.4.2"
+    "grunt": "~0.4.2",
+    "grunt-asciify": "~0.2.2",
+    "grunt-parallelize": "~1.0.0",
+    "grunt-contrib-jshint": "~0.8.0"
   },
   "deploy": {
     "docs": "../baas.io-Portal/_documentation/_docs/ko/javascript/reference",

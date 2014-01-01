@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -10,6 +11,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-asciify');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('./src/package.json'),
@@ -17,11 +19,29 @@ module.exports = function(grunt) {
     vendors: 'src/js/vendors',
     build: 'build',
     dist: 'dists/<%= pkg.version %>',
+
+    asciify: { 
+      banner:{
+        text: 'Haroopad',
+
+        // Add the awesome to the console, and use the best font.
+        options:{ 
+          font:'larry3d',
+          log:true
+        }
+      }
+    },
     
     clean: {
       build: [ 'build/*' ],
       release: [ 'build/haroopad.app' ],
       core: [ 'build/haroopad.app' ]
+    },
+
+    jshint: {
+      all: {
+        src: ['src/js/pad/**/*.js']
+      }
     },
 
     cssmin: {
@@ -51,10 +71,12 @@ module.exports = function(grunt) {
 
       preferences: {
         files: {
-          "build/haroopad/css/preferences.min.css": [
+          "build/haroopad/css/preferences.vendors.min.css": [
             'src/css/bootstrap.css',
             'src/css/todc-bootstrap.css',
-            'src/css/select2.css',
+            'src/css/select2.css'
+          ],
+          "build/haroopad/css/preferences.style.min.css": [
             'src/css/preferences.css'
           ]
         }
@@ -63,6 +85,7 @@ module.exports = function(grunt) {
       viewer: {
         files: {
           "build/haroopad/css/viewer.min.css": [
+            'src/css/jquery.oembed.css',
             'src/css/viewer.css'
           ]
         }
@@ -376,7 +399,7 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
+          // { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
           { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
@@ -389,14 +412,14 @@ module.exports = function(grunt) {
           { src: 'src/viewer.bin.html', dest: 'build/haroopad/viewer.html' },
           { src: 'src/package.bin.json', dest: 'build/haroopad/package.json' },
           { src: 'src/logo.png', dest: 'build/haroopad/logo.png' },
-          { src: 'src/css/keys.css', dest: 'build/haroopad/css/keys.css' },
-          { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' }
+          { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' },
+          { src: 'src/css/select2x2.png', dest: 'build/haroopad/css/select2x2.png' }
         ]
       },
 
       debug: {
         files: [
-          { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
+          // { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/img/' },
           { expand: true, flatten: true, src: [ 'src/css/*' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/css/', filter:'isFile' },
           { expand: true, cwd: 'src/js/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/js/' },
@@ -473,7 +496,8 @@ module.exports = function(grunt) {
           { expand: true, cwd: '<%= vendors %>/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/extensions/' },
           { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/fonts/HTML-CSS/TeX/woff/' },
           { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/images/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/jax/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/input/TeX', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/input/TeX/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/output/HTML-CSS', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/output/HTML-CSS/' },
           { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/', filter: 'isFile'}
         ]
       },
@@ -486,13 +510,16 @@ module.exports = function(grunt) {
       
       select2: {
         files: [
-          { expand: true, src: '<%= vendors %>/select2/', src: [ 'select2.png', 'select2.css' ], dest: 'src/css/' }
+          { src: '<%= vendors %>/select2/select2.png', dest: 'src/css/select2.png' },
+          { src: '<%= vendors %>/select2/select2x2.png', dest: 'src/css/select2x2.png' },
+          { src: '<%= vendors %>/select2/select2.css', dest: 'src/css/select2.css' },
+          { src: '<%= vendors %>/select2/select2-bootstrap.css', dest: 'src/css/select2-bootstrap.css' }
         ]
       },
       
       jqoembed: {
         files: [
-          { src: '<%= vendors %>/haroopad-oembed/jquery.omebed.css', dest: 'src/css/jquery.omebed.css' }
+          { src: '<%= vendors %>/haroopad-oembed/jquery.oembed.css', dest: 'src/css/jquery.oembed.css' }
         ]
       }
     },
@@ -615,6 +642,6 @@ module.exports = function(grunt) {
   grunt.registerTask('menu', [ 'uglify:menu' ]);
 
   /* pkg */
-  grunt.registerTask('default', [ 'clean', 'cp', 'menu', 'css', 'codemirror' ]);
+  grunt.registerTask('default', [ 'asciify', 'clean', 'cp', 'menu', 'css', 'codemirror' ]);
   grunt.registerTask('pkg2', [ 'app', 'pad', 'preferences', 'viewer', 'snapshot' ]);
 };

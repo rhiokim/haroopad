@@ -120,5 +120,5 @@ define([
 		url && shell.openExternal(url);
 	});
 
-	window.ee.on('dom', State.update.bind(State));
+	nw.file.doc.on('change:dom', State.update.bind(State))
 });
