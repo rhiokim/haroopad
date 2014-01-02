@@ -55,5 +55,20 @@ define([
 		  return '<p class="toc" style="'+ props +'"></p>';
 		}
 
+		renderer.hr = function(text) {
+		  switch(text.trim()) {
+		    case '-':
+		      text = 'hypen';
+		    break;
+		    case '*':
+		      text = 'asterisk';
+		    break;
+		    case '_':
+		      text = 'underscore';
+		    break;
+		  }
+		  return '<hr class="'+ text +'">\n';
+		}
+
 		return renderer;
 });
