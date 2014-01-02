@@ -79,7 +79,7 @@ define([
 			this.cursorPos.text('('+ line + ' : ' + word +')');
 		},
 
-		update: function(dom) {
+		update: function(model, dom) {
 			var val = '', key = '', prop;
 			// dom.page = humanize.numberFormat(dom.page, 1);
 

@@ -5,13 +5,8 @@ define([
 		var marked = require('marked');
 		var renderer = new marked.Renderer();
 
-		renderer.oembed = function(caption, href, props) {
-			var key, value, link, tmp = {};
-
-			if (!href) {
-				return '';
-			}
-
+		function genStyle(props) {
+			var key, value, tmp = {};
 			props = !props ? '' : props ;
 
 			if (props) {
@@ -26,6 +21,18 @@ define([
 				props = JSON.stringify(tmp);
 				props = encodeURIComponent(props);
 			}
+
+			return props
+		}
+
+		renderer.oembed = function(caption, href, props) {
+			var link;
+
+			if (!href) {
+				return '';
+			}
+
+			props = genStyle(props) ;
 
 			link = '<a href="'+ href +'" data-props="'+ props +'" target="_blank">'+ (caption?caption:href) +'</a>';
 
@@ -44,8 +51,8 @@ define([
 			}
 		}
 
-		renderer.toc = function(content) {
-		  return '<p class="toc"></p>';
+		renderer.toc = function(props) {
+		  return '<p class="toc" style="'+ props +'"></p>';
 		}
 
 		return renderer;

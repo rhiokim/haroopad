@@ -453,12 +453,6 @@ module.exports = function(grunt) {
         ]
       },
 
-      libs: {
-        files: [
-          { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' }
-        ]
-      },
-
       node_modules: {
         files: [
           { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.node_modules/'}
@@ -489,6 +483,12 @@ module.exports = function(grunt) {
           { expand: true, cwd: '<%= vendors %>/markdown-css/build/', src: [ '**' ], dest: 'src/css/markdown' }
         ]
       },
+
+      // libs: {
+      //   files: [
+      //     { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' }
+      //   ]
+      // },
 
       mathjax: {
         files: [
@@ -603,7 +603,8 @@ module.exports = function(grunt) {
   /* luanch mac app */
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  grunt.registerTask('nwlibs', [ 'copy:libs', 'copy:node_modules', 'copy:docs', 'copy:locales' ])
+  /* built-in libs for node-webkit */
+  grunt.registerTask('nwlibs', [ 'copy:mathjax', 'copy:node_modules', 'copy:docs', 'copy:locales' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'nwlibs' ]);
 
