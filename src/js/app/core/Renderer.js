@@ -57,11 +57,11 @@ define([
 
 		renderer.hr = function(text) {
 		  switch(text.trim()) {
-		    case '-':
-		      text = 'hypen';
-		    break;
 		    case '*':
-		      text = 'asterisk';
+		      text = 'page';//'asterisk';
+		    break;
+		    case '-':
+		      text = 'section';//'hypen';
 		    break;
 		    case '_':
 		      text = 'underscore';

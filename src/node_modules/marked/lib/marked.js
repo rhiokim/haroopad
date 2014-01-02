@@ -908,11 +908,11 @@ Renderer.prototype.heading = function(text, level, raw, options) {
 
 Renderer.prototype.hr = function(text) {
   switch(text.trim()) {
-    case '-':
-      text = 'hypen';
-    break;
     case '*':
-      text = 'asterisk';
+      text = 'page';//'asterisk';
+    break;
+    case '-':
+      text = 'section';//'hypen';
     break;
     case '_':
       text = 'underscore';
