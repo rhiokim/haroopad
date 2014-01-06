@@ -21,7 +21,8 @@ var block = {
   blockquote: /^( *>[^\n]+(\n[^\n]+)*\n*)+/,
   list: /^( *)(bull) [\s\S]+?(?:hr|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,
   html: /^ *(?:comment|closed|closing) *(?:\n{2,}|\s*$)/,
-  def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,
+  // def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["'(]([^\n]+)['")])? *(?:\n+|$)/,
+  def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?:\s+['"]([\s\S]*?)['"])?(?:\s+['"]([\s\S]*?)['"])? *(?:\n+|$)/,
   table: noop,
   paragraph: /^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def|math))+)\n*/,
   text: /^[^\n]+/,
@@ -403,7 +404,8 @@ Lexer.prototype.token = function(src, top) {
       src = src.substring(cap[0].length);
       this.tokens.links[cap[1].toLowerCase()] = {
         href: cap[2],
-        title: cap[3]
+        title: cap[3],
+        props: cap[4]
       };
       continue;
     }
@@ -499,7 +501,7 @@ var inline = {
 };
 
 inline._inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
-inline._href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;
+inline._href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?(?:\s+['"]([\s\S]*?)['"])?\s*/;
 
 inline.link = replace(inline.link)
   ('inside', inline._inside)
@@ -653,7 +655,8 @@ InlineLexer.prototype.output = function(src) {
     src = src.substring(cap[0].length);
       out += this.outputLink(cap, {
         href: cap[2],
-        title: cap[3]
+        title: cap[3],
+        props: cap[4]
       });
       continue;
     }
@@ -669,6 +672,7 @@ InlineLexer.prototype.output = function(src) {
         src = cap[0].substring(1) + src;
         continue;
       }
+      cap[4] = link.props || '';
       out += this.outputLink(cap, link);
       continue;
     }
@@ -768,7 +772,7 @@ InlineLexer.prototype.outputLink = function(cap, link) {
 
   return cap[0].charAt(0) !== '!'
     ? this.renderer.link(href, title, this.output(cap[1]))
-    : this.renderer.image(href, title, escape(cap[1]));
+    : this.renderer.image(href, title, escape(cap[1]), cap[4]);
 };
 
 /**
@@ -987,10 +991,13 @@ Renderer.prototype.link = function(href, title, text) {
   return out;
 };
 
-Renderer.prototype.image = function(href, title, text) {
+Renderer.prototype.image = function(href, title, text, props) {
   var out = '<img src="' + href + '" alt="' + text + '"';
   if (title) {
     out += ' title="' + title + '"';
+  }
+  if (props) {
+    out += ' style="' + props.replace(/\s+/g,';') + '"';
   }
   out += '>';
   return out;
