@@ -182,8 +182,8 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modal/js/bootstrap-modalmanager.min.js',
             '<%= vendors %>/bootstrap-modal/js/bootstrap-modal.min.js',
             '<%= vendors %>/store.js/store.min.js',
-            '<%= vendors %>/reMarked.js/reMarked.min.js',
-            '<%= vendors %>/notifer.js/notifier.min.js',
+            '<%= vendors %>/haroopad-reMarked.js/reMarked.min.js',
+            '<%= vendors %>/haroopad-notifer.js/notifier.min.js',
             '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
             '<%= vendors %>/requirejs/require.min.js'
           ]
@@ -252,11 +252,11 @@ module.exports = function(grunt) {
           '<%= vendors %>/bootstrap-modal/js/bootstrap-modalmanager.min.js': [ 
             '<%= vendors %>/bootstrap-modal/js/bootstrap-modalmanager.js' 
           ],
-          '<%= vendors %>/reMarked.js/reMarked.min.js': [ 
-            '<%= vendors %>/reMarked.js/reMarked.js' 
+          '<%= vendors %>/haroopad-reMarked.js/reMarked.min.js': [ 
+            '<%= vendors %>/haroopad-reMarked.js/reMarked.js' 
           ],
-          '<%= vendors %>/notifer.js/notifier.min.js': [ 
-            '<%= vendors %>/notifer.js/notifier.js' 
+          '<%= vendors %>/haroopad-notifer.js/notifier.min.js': [ 
+            '<%= vendors %>/haroopad-notifer.js/notifier.js' 
           ],
 
           /* viewer */
