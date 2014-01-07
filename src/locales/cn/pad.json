@@ -1,10 +1,10 @@
 {
     "title": "",
-    "experimental": "实验的",
+    "experimental": "实验性功能",
 
     "footer": {
-        "lines": "行",
-        "words": "字"
+        "lines": "行数",
+        "words": "字数"
     },
 
     "toc": {
@@ -13,76 +13,77 @@
 
     "share": "分享",
     "state": {
-        "label": "元素",
-        "image": "图像",
+        "label": "元素统计",
+        "image": "图片",
         "header": "标题",
-        "link": "超链接文本",
+        "link": "超链接",
         "table": "表格",
-        "paragraph": "段",
-        "code": "码",
-        "blockquote": "引用文字"
+        "paragraph": "段落",
+        "code": "代码",
+        "blockquote": "引用"
     },
 
     "config": {
-        "toc": "目录",
-        "outline": "提纲",
-        "fullscreen": "全屏",
-        "tab": "标签长度",
-        "usetab": "缩排使用 Tab",
-        "experimental": "实验的",
-        "spaces": "空间",
+        "toc": "显示目录",
+        "outline": "显示大纲",
+        "fullscreen": "切换全屏",
+        "tab": "Tab 宽度",
+        "usetab": "使用制表符缩进",
+        "experimental": "实验性功能",
+        "spaces": "空格",
         "column": {
-            "label": "文本列数",
-            "one": "一",
-            "two": "二",
-            "three": "三"
-        }
+            "label": "列",
+            "one": "一列",
+            "two": "二列",
+            "three": "三列"
+        },
+        "md-help": "显示语法帮助"
     },
 
     "promotion": {
-        "desc": "请交流!"
+        "desc": "Please Share!"
     },
 
     "donate": {
-        "label": "请捐赠",
-        "title": "需要更多功能？ 帮助发展!",
-        "desc": "如果您认为哈录笔记有所帮助，请请捐赠! <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>捐赠</a>"
+        "label": "捐赠",
+        "title": "支持软件发展",
+        "desc": "如果您觉得 Haroopad 对您有用，请考虑通过 <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>捐赠</a> 来支持软件的进一步发展"
     },
 
     "email": {
-        "title": "电子邮件发送",
-        "subject": "插入主题",
-        "to": "收件者",
+        "title": "发送邮件",
+        "subject": "输入主题",
+        "to": "接收者",
         "from": "发送者",
-        "reciver": "加接收者的电子邮件地址",
+        "reciver": "输入接收者的 Email 地址",
         "html": "HTML",
         "markdown": "Markdown",
         "close": "关闭",
         "send": "发送",
-        "sent": "已经发送出",
-        "remember": "记住电子邮件",
-        "password": "密码",
-        "secure": "密码不会被保存.",
-        "yours": "插入您的 Gmail 电子邮件地址",
+        "sent": "已发送",
+        "remember": "记住 Email",
+        "password": "地址",
+        "secure": "密码不会被保存",
+        "yours": "输入您的Gmail地址",
         "evernote": "Evernote",
         "tumblr": "Tumblr"
     },
 
     "dialog": {
-        "save-change": "保存更改？",
+        "save-change": "文档已修改，是否保存修改?",
         "cancel": "取消",
-        "dont-save": "不要",
+        "dont-save": "不保存",
         "save": "保存",
-        "yes": "可以",
-        "no": "不要",
-        "changed-file": "文件已经被外部修改.<br/>重装？"
+        "yes": "是",
+        "no": "否",
+        "changed-file": "内容已被其他程序修改。<br/>是否重新载入?"
     },
 
     "upgrade": {
-        "uptodate": "已经最新!",
-        "message": "找最新的版本？",
-        "note": "发行注记",
+        "uptodate": "已是最新版",
+        "message": "希望获得最新版本?",
+        "note": "发行说明",
         "download": "下载",
-        "newest": "哈录笔记已经最新!"
+        "newest": "Haroopad 目前已是最新版本，不需要更新"
     }
 }

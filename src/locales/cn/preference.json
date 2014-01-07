@@ -1,73 +1,73 @@
 {
-    "title": "Preference",
+    "title": "偏好设置",
 
     "tab": {
-        "general": "配置设置",
-        "editor": "修改观点",
-        "viewer": "观看观点",
-        "custom": "定制",
-        "code": "码",
+        "general": "通用",
+        "editor": "编辑器",
+        "viewer": "预览",
+        "custom": "自定义",
+        "code": "代码",
         "markdown": "Markdown",
         "about": "关于"
     },
 
     "general": {
-        "general": "常规设置",
-        "enableAutoComplete": "启用自动完成",
+        "general": "通用",
+        "enableAutoComplete": "启用 Markdown 自动完成",
         "enableMath": "启用数学表达式",
-        "enableSyncScroll": "启用同步滚动",
-        "enableLastFileRestore": "启用回到最后文件"
+        "enableSyncScroll": "同步滚动",
+        "enableLastFileRestore": "自动恢复上一次文件"
     },
 
     "editor": {
-        "general": "修改观点常规设置",
-        "spaces": "空间",
-        "tab-width": "标签长度",
-        "indent-use-tab": "缩排使用 Tab",
+        "general": "通用",
+        "spaces": "空格",
+        "tab-width": "Tab 宽度",
+        "indent-use-tab": "使用制表符缩进",
         "display-line-number": "显示行号",
-        "vim-key-binding": "Vim 的键绑定",
-        "auto-pair-char": "自动对字符",
-        "insert-four-space": "用它代替标签4空间"
+        "vim-key-binding": "Vim 模式",
+        "auto-pair-char": "自动符号配对",
+        "insert-four-space": "插入 4 个空格代替制表符"
     },
 
     "viewer": {
-        "general": "观看观点常规设置",
-        "themes": "更多颜色",
-        "clickable-link": "启用超链接可点击"
+        "general": "通用",
+        "themes": "主题",
+        "clickable-link": "超链接可点击"
     },
 
     "custom": {
-        "themes": "自定常规设置",
-        "reload": "重装",
-        "directory": "颜色位置",
-        "select-theme": "选择颜色",
-        "description": "这个颜色为实时预览，HTML，PDF和电子邮件（Evernote的，tumblr）导出"
+        "themes": "通用",
+        "reload": "重新载入",
+        "directory": "目录",
+        "select-theme": "选择主题",
+        "description": "主题将应用于：实时预览、导出为 HTML/PDF、发送 Email (Evernote, Tumblr)"
     },
 
     "code": {
-        "general": "码常规设置",
-        "themes": "颜色",
-        "show-line-number": "显示语法高亮的行号"
+        "general": "通用",
+        "themes": "主题",
+        "show-line-number": "显示行号"
     },
 
     "markdown": {
-        "enable-gfm": "使用 Github Markdown",
+        "enable-gfm": "使用 Github Flavord Markdown (GFM)",
         "sanitize-desc": "使用 HTML",
-        "gfm-line-breaks": "用户 Github Markdown 换行符",
-        "gfm-table": "使用 Github Markdown 表格",
-        "smarty-list": "使用 SMART，一个更好的 Markdown 列表",
-        "smarty-pants": "使用聪明短语和符号检测"
+        "gfm-line-breaks": "使用 GFM 换行模式",
+        "gfm-table": "使用 GFM 表格",
+        "smarty-list": "智能列表",
+        "smarty-pants": "智能标点符号"
     },
 
     "about": {
         "donate": "捐赠",
-        "mean": "<strong>哈录</strong> 是韩语 \"一天\" 的翻译",
-        "version": "版本号",
+        "mean": "<strong>Haroo</strong> 在韩语中意为 \"一天\"",
+        "version": "版本",
         "official-site": "官方网站",
-        "developer": "开发人员",
+        "developer": "开发者",
         "special-thanks": "特别感谢",
-        "icon": "ICON",
-        "description": "哈录笔记<small>是未来的文档编辑器程序。</small>",
-        "donate-msg": "如果您喜欢哈录笔记，请捐赠！"
+        "icon": "图标",
+        "description": "Haroopad<small>下一代文档编辑器</small>",
+        "donate-msg": "如果您喜欢 Haroopad, 请捐赠以支持发展 :)"
     }
 }
