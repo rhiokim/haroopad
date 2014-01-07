@@ -1,19 +1,5 @@
-/* ============================================================
- * bootstrapSwitch v1.8 by Larentis Mattia @SpiritualGuru
- * http://www.larentis.eu/
- *
- * Enhanced for radiobuttons by Stein, Peter @BdMdesigN
- * http://www.bdmdesign.org/
- *
- * Project site:
- * http://www.larentis.eu/switch/
- * ============================================================
- * Licensed under the Apache License, Version 2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- * ============================================================ */
-
-@import "deps/variables";
-@import "deps/mixins";
+@import "variables";
+@import "mixins";
 
 .has-switch {
   display: inline-block;
@@ -27,21 +13,23 @@
   line-height: 8px;
   .user-select(none);
   vertical-align: middle;
-
   min-width: 100px;
+  .transition(~"border-color ease-in-out .15s, box-shadow ease-in-out .15s");
 
   &.switch-mini {
     min-width: 72px;
+
+    i.switch-mini-icons {
+      height: 1.20em;
+      line-height: 9px;
+      vertical-align: text-top;
+      text-align: center;
+      transform: scale(0.6);
+      margin-top: -1px;
+      margin-bottom: -1px;
+    }
   }
-  &.switch-mini i.switch-mini-icons {
-    height: 1.20em;
-    line-height: 9px;
-    vertical-align: text-top;
-    text-align: center;
-    transform: scale(0.6);
-    margin-top: -1px;
-    margin-bottom: -1px;
-  }
+
   &.switch-small {
     min-width: 80px;
   }
@@ -50,13 +38,16 @@
     min-width: 120px;
   }
 
-  &.deactivate {
+  &.disabled {
     .opacity(50);
     cursor: default !important;
-    label, span {
+
+    label,
+    span {
       cursor: default !important;
     }
   }
+
   > div {
     display: inline-block;
     width: 150%;
@@ -66,30 +57,28 @@
     &.switch-animate {
       .transition(left 0.5s);
     }
+
     &.switch-off {
       left: -50%;
     }
+
     &.switch-on {
       left: 0%;
     }
   }
+
   input[type=radio],
   input[type=checkbox] {
-    //debug
     display: none;
-    //position: absolute;
-    //margin-left: 60%;
-    //z-index: 123;
   }
 
-  span, label {
+  span,
+  label {
     .box-sizing(border-box);
-
     cursor: pointer;
     position: relative;
     display: inline-block;
     height: 100%;
-
     padding-bottom: 4px;
     padding-top: 4px;
     font-size: 14px;
@@ -125,7 +114,6 @@
     width: 34%;
     border-left: 1px solid @btnBorder;
     border-right: 1px solid @btnBorder;
-
     .buttonBackground(@btnBackground, @btnBackgroundHighlight, @grayDark);
 
     i {
