@@ -174,12 +174,12 @@ define([
   window.ee.on('menu.insert.markdown', function(tag) {
     WindowMgr.actived.window.ee.emit('menu.insert.markdown', tag);
   });
-  window.ee.on('menu.insert.page.break', function() {
-    WindowMgr.actived.window.ee.emit('insert.page.break');
-  });
-  window.ee.on('menu.insert.section.break', function() {
-    WindowMgr.actived.window.ee.emit('insert.section.break');
-  });
+  // window.ee.on('menu.insert.page.break', function() {
+  //   WindowMgr.actived.window.ee.emit('insert.page.break');
+  // });
+  // window.ee.on('menu.insert.section.break', function() {
+  //   WindowMgr.actived.window.ee.emit('insert.section.break');
+  // });
   window.ee.on('menu.insert.toc', function() {
     WindowMgr.actived.window.ee.emit('insert.toc');
   });

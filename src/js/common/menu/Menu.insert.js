@@ -164,7 +164,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: i18n.t('insert.page-break'),
       click: function() {
-        window.parent.ee.emit('menu.insert.page.break');
+        window.parent.ee.emit('menu.insert.markdown', 'hr-page');
       }
     })
   );
@@ -172,7 +172,7 @@ MenuBarInsert = function () {
     new gui.MenuItem({
       label: i18n.t('insert.section-break'),
       click: function() {
-        window.parent.ee.emit('menu.insert.section.break');
+        window.parent.ee.emit('menu.insert.markdown', 'hr-section');
       }
     })
   );
