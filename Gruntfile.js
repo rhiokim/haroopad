@@ -262,7 +262,7 @@ module.exports = function(grunt) {
           /* viewer */
           '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js': [ 
             '<%= vendors %>/haroopad-oembed/jquery.oembed.js' 
-          ],
+          ]
         }
       },
 
@@ -458,6 +458,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.node_modules/'}
         ]
       },
+
       locales: {
         files: [
           { expand: true, cwd: 'lib/haroopad-locales/', src: [ '**' ], dest: 'src/locales/' },
@@ -481,6 +482,13 @@ module.exports = function(grunt) {
       mkdcss: {
         files: [
           { expand: true, cwd: '<%= vendors %>/markdown-css/build/', src: [ '**' ], dest: 'src/css/markdown' }
+        ]
+      },
+
+      todc: {
+        files: [
+          { expand: true, cwd: '<%= vendors %>/todc-bootstrap/dist/', src: [ '**' ], dest: 'src/css/' },
+          { expand: true, cwd: '<%= vendors %>/todc-bootstrap/img/', src: [ '**' ], dest: 'src/img/' }
         ]
       },
 
