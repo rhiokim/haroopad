@@ -22,6 +22,13 @@ define([
 			initialize: function() {
 				this.$el.i18n();
 				this.$pel = this.$el.parent();
+
+				/* not need */
+				// $('#md-help #md-help-content').tooltip({
+    		//		selector: "a[data-toggle=tooltip]",
+    		//		trigger: 'hover',
+    		//		html: true
+				// });
 			},
 
 			show: function() {

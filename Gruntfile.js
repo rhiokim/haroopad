@@ -1,5 +1,8 @@
-module.exports = function(grunt) {
+var timer = require("grunt-timer");
 
+module.exports = function(grunt) {
+  timer.init(grunt, {deferLogs: true, friendlyTime: true});
+  
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
