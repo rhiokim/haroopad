@@ -1,0 +1,81 @@
+@import "../lib/elements.less";
+@import "solarized-light/before";
+
+@font-size: 15px;
+@bg-color: #fdf6e3;
+
+@base-color: #737373;
+@base-size: .9em;
+@base-link-color: darken(#268bd2, 10%);
+@base-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
+@code-family: Consolas, Inconsolata, Courier, monospace;
+
+@line-height: 1.7em;
+
+@base-margin: 0;
+@base-padding: 0;
+@border-color: darken(@bg-color, 10%);
+
+@bg-color-table: darken(@bg-color, 1%);
+
+.solarized-light {
+  padding: 20px;
+  color: @base-color;
+  font-size: @font-size;
+  font-family: @base-family;
+  background: @bg-color;
+  -webkit-font-smoothing: antialiased;
+
+  a {
+    color: @base-link-color;
+
+    &:hover {
+      color: lighten(@base-link-color, 10%);
+    }
+  }
+
+  h1, h2, h3, h4, h5 {
+    color: #b58900;
+  }
+
+  h2 {
+    border-bottom: 1px solid darken(@bg-color, 20%);
+    line-height: @line-height;
+  }
+
+  h6 {
+    color: darken(#b58900, 5%);
+  }
+
+  hr {
+    border:1px solid darken(@bg-color, 10%);
+  }
+
+  pre {
+    &>code {
+      font-size: .9em;
+      font-family: @code-family;
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid @border-color;
+    padding: 0 15px;
+    font-style: italic;
+  }
+
+  table {
+    background-color: overlay(@bg-color, #666);
+
+    tr {
+      th, td {
+        border: 1px solid darken(@bg-color, 10%);
+      }
+      &:nth-child(2n) {
+        background-color: overlay(@bg-color, #a0a0a0);
+      }
+    }
+  }
+}
+
+@import "solarized-light/after";

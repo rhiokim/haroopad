@@ -1,0 +1,89 @@
+{
+    "title": "",
+    "experimental": "experimental",
+
+    "footer": {
+        "lines": "líneas",
+        "words": "palabras"
+    },
+
+    "toc": {
+        "name": "Tabla de contenidos"
+    },
+
+    "share": "Compartir",
+    "state": {
+        "label": "Elementos",
+        "image": "Imagen",
+        "header": "Título",
+        "link": "Enlace",
+        "table": "Tabla",
+        "paragraph": "Párrafo",
+        "code": "Código",
+        "blockquote": "Cita en bloque"
+    },
+
+    "config": {
+        "toc": "Mostrar la tabla de contenidos",
+        "outline": "Mostrar el esquema del documento",
+        "fullscreen": "Habilitar pantalla completa",
+        "tab": "Ancho del tabulador",
+        "usetab": "Indentar usando el tabulador",
+        "experimental": "Experimental",
+        "spaces": "Espacios",
+        "column": {
+            "label": "Columna",
+            "one": "Individual",
+            "two": "Dos columnas",
+            "three": "Tres columnas"
+        },
+        "md-help": "Mostrar ayuda de sintaxis"
+    },
+
+    "promotion": {
+        "desc": "¡Por favor, Comparte!"
+    },
+
+    "donate": {
+        "label": "Donar",
+        "title": "¡Dona para apoyar el desarrollo!",
+        "desc": "Si crees que Haroopad es útil, dona para continuar su desarrollo. <a href='http://pad.haroopress.com/page.html?f=grow-up-donate' id='donate-link'>Donar</a>"
+    },
+
+    "email": {
+        "title": "Enviando correo electrónico",
+        "subject": "Insertar asunto",
+        "to": "PARA",
+        "from": "DE",
+        "reciver": "Insertar la dirección de correo del destinatario",
+        "html": "HTML",
+        "markdown": "Markdown",
+        "close": "Cerrar",
+        "send": "Enviar",
+        "sent": "Enviado",
+        "remember": "Recordar correo electrónico",
+        "password": "Contraseña",
+        "secure": "La contraseña no será guardada.",
+        "yours": "Ingrese su correo de Gmail",
+        "evernote": "Evernote",
+        "tumblr": "Tumblr"
+    },
+
+    "dialog": {
+        "save-change": "¿Quieres guardar los cambios realizados al documento?",
+        "cancel": "Cancelar",
+        "dont-save": "No guardar",
+        "save": "Guardar",
+        "yes": "Si",
+        "no": "No",
+        "changed-file": "ha sido cambiado por otra aplicación. <br/>¿Quieres recargar?"
+    },
+
+    "upgrade": {
+        "uptodate": "¡Estás al día!",
+        "message": "¿Buscas la versión más reciente?",
+        "note": "Notas de la versión",
+        "download": "Descargar",
+        "newest": "Haroopad esta en su versión más reciente disponible."
+    }
+}

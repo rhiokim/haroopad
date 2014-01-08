@@ -21,7 +21,7 @@ define([
 
 		/* exist file save */
 		if (!nw.file.get('readOnly')) {
-			window.ee.on('menu.file.save', function() {
+			window.ee.on('menu.file.save', function(e) {
 				var fileEntry = nw.file.get('fileEntry');
 				if (!fileEntry) {
 					SaveDialog.show(getWorkingDir());

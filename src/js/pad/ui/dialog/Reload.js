@@ -1,5 +1,8 @@
+/**
+ * reload changed file
+ */
 define([
-		'vendors/text!tpl/modal-changed-file.html'
+		'txt!tpl/modal-changed-file.html'
 	], 
 	function(html) {
 		$('#dialogs').append(html);
@@ -13,6 +16,7 @@ define([
 			},
 
 			initialize: function() {
+				this.$el.i18n();
 			},
 
 			show: function(file) {

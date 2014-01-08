@@ -6,6 +6,7 @@ define([
 ], function(store, HotKey, Dialogs, Exports) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
+	var moment = require('moment');
 
 	var orgTitle = 'Untitled';
 	var edited = false,
@@ -80,7 +81,7 @@ define([
 		var opt = file.toJSON();
 
 		if (opt.tmp) {
-			nw.title = 'Restored (writen at ' + opt.ctime + ')';
+			nw.title = 'Restored (writen at ' + moment(opt.ctime).format('LLL') + ')';
 		} else {
 			nw.title = orgTitle = opt.basename || orgTitle;
 		}
@@ -130,7 +131,7 @@ define([
 
 	}, false);
 
-	$(document.body).bind('contextmenu', function(e, ev) {
+	$('#editor').bind('contextmenu', function(e, ev) {
 		var x, y;
 		e.preventDefault();
 
@@ -221,12 +222,13 @@ define([
 
 	/* update haroopad */
 	window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
-		Notifier.notify('Looking for the latest version? <a href="#" data-href="release.note.haroopad">release note</a>, <a href="#" data-href="download.haroopad">download</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
+		// Notifier.notify('Looking for the latest version? <a href="#" data-href="release.note.haroopad">release note</a>, <a href="#" data-href="download.haroopad">download</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
+		Notifier.notify(i18n.t('pad:upgrade.message'), ' <a href="#" data-href="release.note.haroopad">'+ i18n.t('pad:upgrade.note') +'</a>, <a href="#" data-href="download.haroopad">'+ i18n.t('pad:upgrade.download') +'</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
 	});
 
 	/* up to date haroopad */
 	window.ee.on('up.to.date.haroopad', function(version) {
-		Notifier.notify('Haroopad <strong>v' + version + '</strong> is currently the newest version available.', 'You\'re up to date!', undefined, 5000);
+		Notifier.notify(i18n.t('pad:upgrade.newest'), i18n.t('pad:upgrade.uptodate'), undefined, 5000);
 	});
 
 	window.ee.on('print.editor', function() {
@@ -235,11 +237,11 @@ define([
 
 	HotKey('defmod-enter', function() {
 		window.ee.emit('view.fullscreen');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-f11', function() {
 		window.ee.emit('view.fullscreen');
-	});
+	}, { preventDefault: true });
 
 	HotKey('esc esc', function() {
 		if (win.isFullscreen) {
@@ -251,30 +253,36 @@ define([
 
 	HotKey('defmod-o', function() {
 		window.ee.emit('menu.file.open');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-s', function() {
 		window.ee.emit('menu.file.save');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-shift-s', function() {
 		window.ee.emit('menu.file.save.as');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-w', function() {
 		nw.emit('close');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-f4', function() {
 		nw.emit('close');
-	});
+	}, { preventDefault: true });
 
 	HotKey('defmod-alt-e', function() {
 		window.ee.emit('file.exports.html');
 
 		global._gaq.push('haroopad.file', 'exports', 'html');
-	});
+	}, { preventDefault: true });
 
+	HotKey('defmod-q', function() {
+		var generalOpt = store.get('General');
+		if (generalOpt.enableLastFileRestore === false) {
+			window.parent.ee.emit('clear.lastfiles');
+		}
+	}, { preventDefault: true });
 
 	window.ondragover = function(e) {
 		e.preventDefault();

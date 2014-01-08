@@ -2,18 +2,15 @@ define([
 		'store',
 		'keyboard',
 		'viewer/Viewer.inlineStyle',
-		'viewer/Viewer.explicitStyleMaker',
+		'viewer/Viewer.inlineStyleForEmail',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, inlineStyle, StyleMaker, DragDrop) {
+	function(store, HotKey, inlineStyle, StyleForEmail, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
-		// var sass = require('node-sass');
 
-		var iframe = $('#haroo iframe')[0];
+		var iframe = $('#viewer iframe')[0];
 		var _viewer = iframe.contentWindow;
-		var content = '',
-			options;
 
 		var gui = require('nw.gui'),
 			clipboard = gui.Clipboard.get();
@@ -25,14 +22,17 @@ define([
 			viewerConfig.fontSize = Number(viewerConfig.fontSize || 15);
 		var codeConfig = store.get('Code') || {};
 		var customConfig = store.get('Custom') || {};
+		var generalConfig = store.get('General') || {};
 
 		// var config = option.toJSON();
 
+		// function setTitle() {
+		// 	var viewerDoc = iframe.contentDocument.body;
+		// 	var el = viewerDoc.querySelectorAll('h1, h2, h3, h4, h5, h6')[0];
+		// 	var title = (el && el.innerText) || '';
 
-		function update(markdown, html, editor) {
-			content = html;
-			_viewer.update(content);
-		}
+		// 	nw.file.set({ title: title }, { silent: true });
+		// }
 
 		/* change editor theme */
 
@@ -40,7 +40,7 @@ define([
 			_viewer.setViewStyle(value);
 
 			window.setTimeout(function() {
-				StyleMaker.generateInlineStyle();
+				StyleForEmail.generateInlineStyle();
 			}, 1000);
 
 			global._gaq.push('haroopad.preferences', 'style', value);
@@ -98,6 +98,7 @@ define([
 		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
 		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
+		window.parent.ee.on('preferences.general.enableMath.after', enableMath);
 
 		/* window close */
 		nw.on('destory', function() {
@@ -107,6 +108,7 @@ define([
 			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
 			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
+			window.parent.ee.off('preferences.general.enableMath.after', enableMath);
 		});
 
 		window.ee.on('print.viewer', function(value) {
@@ -118,9 +120,6 @@ define([
 		window.ee.on('change.column', function(count) {
 			_viewer.setColumn(count);
 		});
-
-		/* change markdown event handler */
-		window.ee.on('change.after.markdown', update);
 
 		/* scroll editor for sync */
 		window.ee.on('editor.scroll', function(top, per) {
@@ -152,22 +151,16 @@ define([
 		 * delegate right mouse down event
 		 */
 		_viewer.addEventListener('contextmenu', function(ev) {
-			$(document.body).trigger('contextmenu', [ev]);
+			$('#editor').trigger('contextmenu', [ev]);
 		}.bind(this), false);
 
 		/* copy html to clipboard */
 		window.ee.on('menu.file.exports.clipboard.plain', function() {
 			clipboard.set(content, 'text');
 		});
+
 		window.ee.on('menu.file.exports.clipboard.haroopad', function() {
 			clipboard.set(content, 'text');
-		});
-
-		window.ee.on('menu.view.doc.outline', function(show) {
-			show ? _viewer.showOutline() : _viewer.hideOutline();
-		});
-		window.ee.on('menu.view.doc.toc', function(show) {
-			show ? _viewer.showTOC() : _viewer.hideTOC();
 		});
 
 		window.ee.on('menu.view.viewer.font.size', function(value) {
@@ -191,17 +184,36 @@ define([
 		});
 
 		HotKey('defmod-shift-alt-c', function() {
-			window.ee.emit('menu.file.exports.clipboard.styled');
+			window.ee.emit('menu.file.exports.clipboard.haroopad');
 		});
 
 		HotKey('defmod-shift-.', function() {
 			window.ee.emit('menu.view.viewer.font.size', 1);
 		});
+
 		HotKey('defmod-shift-,', function() {
 			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
 
-		_viewer.onload = function() {}
+		/* change markdown event handler */
+		nw.file.doc.on('change:html', function(doc, html) {
+			setTimeout(function() {
+				_viewer.update(doc.dom());
+			}, 1);
+		});
+
+		_viewer.ee.on('rendered', function() {
+			nw.file.doc.parse();
+
+			var toc = nw.file.doc.get('toc') || '';
+			_viewer.updateTOC(toc);
+
+			window.ee.emit('rendered');
+			//@TODO lazy
+			// content = content.replace(/<p class="toc"><\/p>/gm, _toc);
+
+			// nw.file.set({ 'html': content }, { silent: true });
+		});
 
 		//linkable
 		_viewer.ee.on('link', function(href) {
@@ -210,13 +222,21 @@ define([
 			}
 		});
 
-		_viewer.ee.on('dom', function(dom) {
-			window.ee.emit('dom', dom);
-		});
+		// _viewer.ee.on('dom', function(dom) {
+			// window.ee.emit('dom', dom);
+		// });
 
-		_viewer.ee.on('title', function(title) {
-			nw.file.set('title', title);
-		});
+		/*
+		 * Math rendering event proxy
+		 * viewer.html -> Viewer.js -> index.html -> math/Math.js -> Rendering
+		 */
+		_viewer.ee.on('math', function(target, cb) {
+			window.parent.ee.emit('math', target, cb);
+		})
+
+		// _viewer.ee.on('title', function(title) {
+		// 	nw.file.set('title', title);
+		// });
 
 		/**
 		 * drop in viewer
@@ -228,23 +248,6 @@ define([
 			var ext = path.extname(file);
 
 			switch (ext) {
-				// case '.scss':
-				// 	var dir = path.dirname(file);
-				// 	var name = path.basename(file);
-				// 	var _name = path.join(dir, name);
-				// 	_name = _name.replace(ext, '.css');
-
-				// 	sass.render({
-				// 		file: file,
-				// 		success: function(css) {
-				// 			fs.writeFile(path.join(_name), css, 'utf8', function(err) {
-				// 				_viewer.loadCustomCSS(_name);
-				// 			});
-				// 		},
-				// 		includePaths: [ dir ],
-				// 					outputStyle: 'compressed'
-				// 	});
-				// break;
 				case '.css':
 					_viewer.loadCustomCSS(file);
 					break;
@@ -261,12 +264,11 @@ define([
 		}
 
 		return {
-			init: function(opt) {
-				options = opt;
-				_viewer.init(options);
+			init: function() {
+				_viewer.init(nw.file.toJSON());
 			},
 
-			update: update,
+			// update: update,
 
 			/**
 			 * for html exporting
@@ -274,6 +276,10 @@ define([
 			 */
 			getContentDocument: function() {
 				return iframe.contentDocument;
+			},
+
+			getHTML: function() {
+				return iframe.contentDocument.body.innerHTML;
 			}
 		};
 	});

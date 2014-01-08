@@ -24,10 +24,11 @@ define([
 		};
 		config.fontSize = Number(config.fontSize || 13);
 		var generalConf = store.get('General') || {
-			enableSyncScroll: true
+			enableSyncScroll: true,
+			playKeypressSound: false
 		};
 
-		var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 			mode: 'markdown',
 			lineNumbers: true,
 			lineWrapping: true,
@@ -35,9 +36,12 @@ define([
 			viewportMargin: 40,
 			autofocus: true,
 			workDelay: 1000,
-			extraKeys: Keymap,
 			showTrailingSpace: true
 		});
+		editor.refresh();
+
+
+		// requirejs([ 'editor/Editor.emoji' ]);
 
 		var CodeMirrorElement = document.querySelector('.CodeMirror'),
 			CodeMirrorGutters = document.querySelector('.CodeMirror-gutters'),
@@ -57,18 +61,72 @@ define([
 			e.preventDefault();
 		});
 
-		/* initialize editor */
+		//auto completion end signal
+		CodeMirror.on(editor, 'endCompletion', function(cm) {
+			var cur = cm.getCursor();
+			var token = cm.getTokenAt(cur);
+			var md = token.string;
+			var doc = cm.getDoc();
 
+			switch(md) {
+			  case '##':
+			  case '###':
+			  case '####':
+			  case '#####':
+			  case '######':
+			  	cm.replaceSelection(' ');
+			  	cur.ch++;
+			    cm.setCursor(cur);
+			    cm.replaceSelection('[Header]');
+			  break;
+			  case '**':
+			  case '~~':
+			  case '==':
+			  case '$$$':
+			    cm.replaceSelection(md);
+			    cm.setCursor(cur);
+			    cm.replaceSelection('      ');
+			  break;
+			  case '```':
+			    cm.replaceSelection('\n'+ md);
+			    cm.setCursor(cur);
+			    cm.replaceSelection('language');
+			  break;
+			  case '$$':
+			    cm.replaceSelection('\n\n'+ md);
+			    cur.line++;
+			    cm.setCursor(cur);
+			  break;
+			  case '()':
+			    cur.ch--;
+			    cm.setCursor(cur);
+			    cm.replaceSelection('      ');
+			  break;
+			  case '* * *':
+			  case '*****':
+			  case '- - -':
+			  case '-----':
+			  case '_ _ _':
+			  case '_____':
+			  	cur.ch -= md.length;
+			  	cm.setCursor(cur);
+			    cm.replaceSelection('\n');
+			    cur.line += 1;
+			  	cur.ch += md.length;
+			  	cm.setCursor(cur);
+			    cm.replaceSelection('\n\n');
+			    cur.line += 2;
+			    cm.setCursor(cur);
+			  break;
+			  default:
+			  break;
+			}
+		});
+
+		/* initialize editor */
 		function setFontSize(value) {
 			CodeMirrorElement.style.fontSize = value + 'px';
 		}
-		
-		editor.setOption('theme', config.theme);
-		editor.setOption('lineNumbers', config.displayLineNumber);
-		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
-		editor.setOption('tabSize', config.tabSize || 4);
-		editor.setOption('indentUnit', config.indentUnit || 4);
-		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
 		//TODO FIXME
 		function setFontFmaily() {
@@ -81,9 +139,6 @@ define([
 			}
 			// CodeMirrorElement.style.fontFamily = "Monaco, Menlo, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular";
 		}
-
-		setFontSize(config.fontSize);
-		setFontFmaily();
 
 		/**
 		 * sync scroll handler
@@ -157,7 +212,24 @@ define([
 			global._gaq.push('haroopad.preferences', 'editor', 'syncScroll: ' + value);
 		}
 
+		function toggleAutoComplete(value) {
+			var keyMap = value ? Keymap.markdown : Keymap.defaults;
+			editor.setOption('extraKeys', keyMap);
+		}
+		
+		editor.setOption('theme', config.theme);
+		editor.setOption('lineNumbers', config.displayLineNumber);
+		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
+		editor.setOption('tabSize', config.tabSize || 4);
+		editor.setOption('indentUnit', config.indentUnit || 4);
+		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
+
+		toggleAutoComplete(generalConf.enableAutoComplete || false);
+		setFontSize(config.fontSize);
+		setFontFmaily();
+
 		window.parent.ee.on('preferences.general.enableSyncScroll', toggleSyncScroll);
+		window.parent.ee.on('preferences.general.enableAutoComplete', toggleAutoComplete);
 
 		window.parent.ee.on('preferences.editor.theme', changeTheme);
 		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
@@ -265,7 +337,9 @@ define([
 				case 'i': CodeMirror.commands.markdownItalic(editor); break;
 				case 'code': CodeMirror.commands.markdownInlineCode(editor); break;
 				case 'a': CodeMirror.commands.markdownLink(editor); break;
+				case 'u': CodeMirror.commands.markdownUnderline(editor); break;
 				case 'del': CodeMirror.commands.markdownStrike(editor); break;
+				case 'highlight': CodeMirror.commands.markdownHighlight(editor); break;
 				case 'image': CodeMirror.commands.markdownImage(editor); break;
 				case 'blockquote': CodeMirror.commands.markdownBlockQuote(editor); break;
 				case 'ol': CodeMirror.commands.markdownOrderedList(editor); break;
@@ -274,20 +348,14 @@ define([
 				case 'table': CodeMirror.commands.markdownTable(editor); break;
 				case 'comment': CodeMirror.commands.markdownComment(editor); break;
 				case 'embed': CodeMirror.commands.markdownEmbed(editor); break;
+				case 'math-inline': CodeMirror.commands.markdownMathInline(editor); break;
+				case 'math-block': CodeMirror.commands.markdownMathBlock(editor); break;
+				case 'toc': CodeMirror.commands.markdownTOC(editor); break;
+				case 'hr-page': CodeMirror.commands.markdownPageBreak(editor); break;
+				case 'hr-section': CodeMirror.commands.markdownSectionBreak(editor); break;
 			}
 
 			global._gaq.push('haroopad.insert', 'markdown', tag);
-		});
-
-		window.ee.on('insert.page.break', function() {
-			CodeMirror.commands.markdownPageBreak(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'page break');
-		});
-		window.ee.on('insert.section.break', function() {
-			CodeMirror.commands.markdownSectionBreak(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'section break');
 		});
 
 		window.ee.on('insert.toc', function() {

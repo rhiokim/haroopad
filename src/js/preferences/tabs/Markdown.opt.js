@@ -3,14 +3,17 @@ define([
 	], function(store) {
 		var Model = Backbone.Model.extend({
 			defaults: {
-	      gfm: true,
-	      tables: true,
-	      breaks: false,
-	      pedantic: false,
-	      sanitize: false,
-	      smartLists: true,
-	      smartypants: true,
-	      silent: false,
+				gfm: true,
+				tables: true,
+				breaks: false,
+				pedantic: false,
+				sanitize: false,
+				smartLists: true,
+				smartypants: true,
+				silent: false,
+				highlight: null,
+				langPrefix: '',
+				mathjax: false
 			},
 
 			initialize: function() {

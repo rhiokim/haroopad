@@ -1,0 +1,51 @@
+<html>
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery.oembed.js"></script>
+<link rel="stylesheet" type="text/css" href="../jquery.oembed.css"> 
+
+
+<script>
+
+ $(document).ready(function () {
+	 
+	$('#info').keyup(function(){
+		tagdata = [];
+		eventdata = [];
+		var scriptruns = [];
+		var text = $('#info').val();
+		text = $('<span>'+text+'</span>').text(); //strip html
+		text = text.replace(/(\s|>|^)(https?:[^\s<]*)/igm,'$1<div><a href="$2" class="oembed">$2</a></div>');
+		text = text.replace(/(\s|>|^)(mailto:[^\s<]*)/igm,'$1<div><a href="$2" class="oembed">$2</a></div>');
+	
+		
+			
+		
+		
+		$('#out').empty().html(text);
+		
+		$(".oembed").oembed(null,{
+			apikeys: {
+				//etsy : 'd0jq4lmfi5bjbrxq2etulmjr',
+				amazon : 'caterwall-20',
+				//eventbrite: 'SKOFRBQRGNQW5VAS6P',
+			},
+			//maxHeight: 200, maxWidth:300
+		});
+		
+	}); 
+		
+ });
+ 
+</script>
+</head>
+<body>
+
+
+<textarea id="info" style="width:80%; margin-right:auto; margin-left: auto; height:200px;">
+</textarea>
+<hr/>
+<div id="out"></div>
+
+</body>
+</html>

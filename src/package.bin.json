@@ -1,9 +1,9 @@
 {
   "main": "index.html",
-  "name": "haroopad",
+  "name": "Haroopad",
   "description": "The Next Document processor based on Markdown",
   "version": "0.10.0",
-  "keywords": [ "markdown", "haroopress", "editor" ],
+  "keywords": ["markdown", "haroopress", "editor"],
   "window": {
     "icon": "logo.png",
     "toolbar": false,
@@ -16,13 +16,14 @@
   "webkit": {
     "plugin": true
   },
+  "chromium-args": "--enable-threaded-compositing",
   "upgrade": "http://pad.haroopress.com/upgrade.json",
-  "maintainers":[{
-   "name": "Rhio Kim",
-   "email": "rhio.kim@gmail.com",
-   "web": "http://pad.haroopress.com",
-   "blog": "http://pad.haroopress.com/page.html",
-   "feedback": "http://haroopad.userecho.com"
+  "maintainers": [{
+    "name": "Rhio Kim",
+    "email": "rhio.kim@gmail.com",
+    "web": "http://pad.haroopress.com",
+    "blog": "http://pad.haroopress.com/page.html",
+    "feedback": "http://haroopad.userecho.com"
   }],
   "licenses": [{
     "type": "GPLv2",
@@ -30,7 +31,7 @@
   }],
   "bugs": "https://github.com/rhiokim/haroopad/issues",
   "repositories": [{
-    "type": "git", 
+    "type": "git",
     "url": "git@github.com:rhiokim/haroopad.git"
   }]
 }

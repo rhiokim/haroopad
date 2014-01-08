@@ -1,0 +1,69 @@
+<h2>What is Resource-Tree?</h2>
+<p>Simply put, Resource-Tree is a file resource management
+system. Resource-Tree simplifies the process of turning data into a
+usable form. It creates an easy to access tree from files and
+directories; and also provides a convenient means for &quot;freeing&quot; data
+after use.</p>
+<h2>Code Example</h2>
+<p>Where <code>/path/to/file/or/dir/</code> has the directory structure:</p>
+<pre><code>dir
+ |- branch
+ |   |- sub-branch
+ |   |   |- leaf.png
+ |   |   |- acorn.png
+ |   |
+ |   |- other-sub-branch
+ |       |- ...
+ |    
+ |- other-branch
+     |- ...</code></pre>
+<p>The following code creates a tree of readily usable images by
+recursively iterating through directories to find files. For each file
+found, the <code>LOAD-FUNCTION</code> is called. In this case it&#39;s
+<code>LOAD-IMAGE</code>. If the <code>LOAD-FUNCTION</code> returns anything other than <code>NIL</code>
+the value returned is bound in a hash-table to a key which is a
+keyword corresponding to <code>FILE-NAME</code> with everything after the first
+full-stop truncated and all spaces and underscores replaced with a
+hyphen. All directories turn into branches when <code>LOAD-PATH</code> is called
+with the recursive flag set to <code>T</code> (set by default). The same
+&quot;path-name to keyword&quot; methodology is applied to directories.</p>
+<pre><code>(defun load-image (file-name)
+  (unless (string= &quot;png&quot; (pathname-type file-name))
+    (return-from load-image))
+  (let ((image (il:gen-image)))
+    (il:bind-image image)
+    (il:load-image file-name)
+    image))
+
+(with-resource-tree (tree :load-function #&#39;load-image
+                          :free-function #&#39;il:delete-images)
+  (load-path tree &quot;/path/to/file/or/dir/&quot;)
+  (with-nodes (leaf acorn) (node tree :branch :sub-branch)
+    (il:bind-image leaf)
+    (il:flip-image)
+    ...))</code></pre>
+<p><code>WITH-RESOURCE-TREE</code> creates an instance of <code>RESOURCE-TREE</code> and
+assigns it to <code>TREE</code> with the remaining arguments being initialisation
+arguments for the instance. <code>LOAD-PATH</code> loads a file or directory into
+the tree. The optional <code>:PARENT-NODE-PATH</code> key specifies the path to
+the parent node using a list. <code>LOAD-PATH</code> may be called more than
+once. <code>WITH-NODES</code> creates variables bound to the specified leaves of
+the provided node. <code>NODE</code> is used to retrieve a single node (a leaf or
+branch) from the tree path given to it. After the code is run, <code>FREE</code>
+is called on <code>TREE</code> which frees all nodes in tree using
+<code>FREE-FUNCTION</code> <em>if</em> <code>FREE-FUNCTION</code> was set.</p>
+<h2>Dependencies</h2>
+<p>Prerequisites:</p>
+<ul>
+<li>None</li>
+</ul>
+<p>Optional:</p>
+<ul>
+<li>xlUnit (for unit tests)</li>
+</ul>
+<h2>Installation</h2>
+<h3>On Unix-like Systems</h3>
+<p>Extract the source to the desired directory. Then, while in the
+appropriate ASDF systems directory execute the following command,
+where <code>../path/to/resource-tree</code> is obviously replaced as suitable:</p>
+<pre><code>find ../path/to/resource-tree -name &#39;*.asd&#39; -exec ln -s &#39;{}&#39; \;</code></pre>

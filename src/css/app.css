@@ -1,11 +1,26 @@
+*, .btn {
+  font-family: "Lucida Grande", "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+}
 
 body {
-  font-family: Droid Sans, Arial, sans-serif;
   line-height: 1.5;
   overflow-y: hidden;
   background: url('../img/linen.png');
   -webkit-user-select: none;
 }
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+/* -----------------------------------------
+  todc
+------------------------------------------*/
+.btn-group > .btn-mini {
+  font-size: 10.5px;
+}
+
 
 /* -----------------------------------------
    custom scroll
@@ -13,13 +28,13 @@ body {
 
 /* Let's get this party started */
 #editor ::-webkit-scrollbar, 
-#haroo ::-webkit-scrollbar {
+#viewer ::-webkit-scrollbar {
     width: 6px;
 }
  
 /* Track */
 #editor ::-webkit-scrollbar-track, 
-#haroo ::-webkit-scrollbar-track {
+#viewer ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
     -webkit-border-radius: 10px;
     border-radius: 10px;
@@ -27,14 +42,14 @@ body {
  
 /* Handle */
 #editor ::-webkit-scrollbar-thumb, 
-#haroo ::-webkit-scrollbar-thumb {
+#viewer ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 6px;
     border-radius: 6px;
     background: rgba(255,255,255,0.8); 
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 #editor ::-webkit-scrollbar-thumb:window-inactive, 
-#haroo ::-webkit-scrollbar-thumb:window-inactive {
+#viewer ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(255,0,0,0.4); 
 }
 
@@ -93,4 +108,10 @@ body {
   /*word-break: break-word;
   white-space: inherit;
   word-wrap: break-word;*/
+}
+
+/* email */
+#send-email-dialog .progress {
+  height: 10px;
+  margin-bottom: 0;
 }

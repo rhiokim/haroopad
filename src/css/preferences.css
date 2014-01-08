@@ -1,7 +1,12 @@
+*, .btn {
+  font-family: "Lucida Grande", "Segoe UI", "Apple SD Gothic Neo", "Lucida Sans Unicode", Helvetica, "Malgun Gothic", Arial, sans-serif;
+}
+
 html, body {
 	margin: 0 auto;
 	padding: 0;
 }
+
 body {
 	margin-top: 3px;
 	margin-left: 3px;
@@ -9,8 +14,21 @@ body {
   -webkit-user-select: none;
 }
 
+span {
+  font-size: 12px;
+}
+
 hr {
 	margin: 10px 0;
+}
+
+input[type=checkbox] {
+	width: 13px;
+	height: 13px;
+}
+
+.nav {
+	margin-bottom: 10px;
 }
 
 .select2-search {
@@ -45,4 +63,12 @@ hr {
 
 label.checkbox {
 	margin-bottom: 0;
+}
+
+/*
+ * fixed select2
+ */
+
+.select2-drop {
+	margin-top: -3px;
 }

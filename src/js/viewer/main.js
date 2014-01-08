@@ -151,9 +151,7 @@ function createTOC() {
 }
 
 function init(options) {
-  _options = options || {
-    dirname: '.'
-  };
+  _options = options;
 }
 
 /**
@@ -208,6 +206,12 @@ function _lazySyntaxHighlight(el) {
   var code = el.innerHTML;
   var lang = el.className;
 
+  if (!lang) {
+    return;
+  }
+
+  el.setAttribute('class', lang +' hljs');
+
   lang = lang == 'js' ? 'javascript' : lang;
   code = htmlDecode(code);
 
@@ -246,12 +250,27 @@ function _lazySyntaxHighlight(el) {
  * @return {[type]} [description]
  */
 
-function _preventDefaultAnchor() {
-  $('a').off('click', '**');
+// function _preventDefaultAnchor() {
+//   $('a').off('click', '**');
 
-  $('a').on('click', function(e) {
-    window.ee.emit('link', $(e.target).attr('href'));
-    e.preventDefault();
+//   $('a').on('click', function(e) {
+//     window.ee.emit('link', $(e.target).attr('href'));
+//     e.preventDefault();
+//   });
+// }
+
+
+/**
+ * dynamic update TOC
+ * @param  {[type]} toc [description]
+ * @return {[type]}     [description]
+ */
+function updateTOC(toc) {
+  var tocEls = _md_body.querySelectorAll('.toc');
+  tocEls = Array.prototype.slice.call(tocEls, 0);
+
+  tocEls.forEach(function(tocEl) {  
+    tocEl.innerHTML = toc;
   });
 }
 
@@ -279,6 +298,16 @@ function countFragments(target) {
   });
 
   window.ee.emit('title', headers[0] && headers[0].innerHTML);
+}
+
+function drawMathJax() {
+  var i, math = _md_body.querySelectorAll('.mathjax');
+  math = Array.prototype.slice.call(math, 0);
+
+  for (i = 0; i < math.length; i++) {
+    // processMathJax(math[i]);
+    window.ee.emit('math', math[i]);
+  }
 }
 
 var _embedTimeout;
@@ -335,14 +364,14 @@ function empty() {
  * @param  {[type]} contents [description]
  * @return {[type]}          [description]
  */
-
-var wrapper = document.createElement('div');
-function update(html) {
-  // var wrapper = $('<div>').html(html);
+// var wrapper = document.createElement('div');
+//@TODO initial render
+function update(wrapper) {
   var i, j, limit, frag, frags, _frag, _frags, origin, _origin,
     code, codes, _code, _codes;
+  // var changeTOC = false;
 
-  wrapper.innerHTML = html;
+  // wrapper.innerHTML = html;
 
   frags = wrapper.querySelectorAll(':scope>*');
   frags = Array.prototype.slice.call(frags, 0);
@@ -375,12 +404,13 @@ function update(html) {
     }
   }
   
-  var src, imgs = wrapper.querySelectorAll('img');
+  var src, img, imgs = wrapper.querySelectorAll('img');
   for (i = 0; i < imgs.length; i++) {
-    src = imgs[i].getAttribute('src');
+    img = imgs[i];
+    src = img.getAttribute('src');
 
-    if (src.indexOf('//') == -1 && !/^\//.test(src)) {
-      imgs[i].setAttribute('src', _options.dirname + '/' + src);
+    if (src.indexOf('://') == -1 && !/^\//.test(src) && !/^[a-zA-Z]\:/.test(src)) {
+      img.setAttribute('src', _options.dirname + '/' + src);
     }
   }
 
@@ -389,7 +419,7 @@ function update(html) {
   i = 0;
   limit = frags.length;
   while (i < limit) {
-    frag = frags[i];
+    frag = frags[i].cloneNode(true);
     _frag = _frags.shift();
 
     origin = frag.outerHTML;
@@ -398,6 +428,11 @@ function update(html) {
     //이전 프레그먼트 없는 경우 body 에 추가
     if (!_frag) {
       _md_body.appendChild(frag);
+
+      //check change toc 
+      // if (/^H[1-6]/.test(frag.tagName) == true) {
+      //   changeTOC = true;
+      // }
     } else {
 
       //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
@@ -409,7 +444,9 @@ function update(html) {
         _md_body.insertBefore(frag, _frag);
         _md_body.removeChild(_frag);
 
-        // _frags = [_frag].concat(_frags);
+        // if (/^H[1-6]/.test(frag.tagName) == true) {
+        //   changeTOC = true;
+        // }
       }
     }
     i++;
@@ -420,19 +457,19 @@ function update(html) {
   if (_frags.length > 0) {
     _frags.forEach(function(frag, idx) {
       _md_body.removeChild(frag);
-      // $(frag).remove();
     });
   }
 
-  // if (frags.find('img').length > 0) {
-  //   _fixImagePath();
+  //fire event when changed TOC
+  // if (changeTOC) {
+  //   window.ee.emit('change.toc', undefined, _md_body);
   // }
-
-  // _preventDefaultAnchor();
-  // _lazySyntaxHighlight();
   
-  countFragments(_md_body);
+  // countFragments(_md_body);
+  drawMathJax();
   drawEmbedContents(document.body);
+
+  window.ee.emit('rendered', _md_body);
 }
 /**
  * sync scroll position
@@ -447,13 +484,6 @@ function scrollTop(per) {
   $(window).scrollTop(top / 100 * per);
 }
 
-// function replaceExternalContent(el, origin) {
-//   var plugin = $(origin)[0];
-//   plugin.setAttribute('origin', origin);
-//   el.style.display = 'none';
-//   document.body.insertBefore(plugin, el);
-//   document.body.removeChild(el);
-// }
 
 $(document.body).ready(function() {
   _doc = document,
@@ -461,15 +491,18 @@ $(document.body).ready(function() {
   _md_body = _doc.getElementById('root');
 
   $(_body).click(function(e) {
-    var origin, el = e.target;
-    e.preventDefault();
+    var origin, href, el = e.target;
 
     switch (el.tagName.toUpperCase()) {
       case 'A':
-        window.ee.emit('link', el.getAttribute('href'));
-        break;
-    }
+        href = el.getAttribute('href') || '';
 
+        if (href.charAt(0) !== '#') {
+          e.preventDefault();
+          window.ee.emit('link', href);
+        }
+      break;
+    }
   });
 
 });

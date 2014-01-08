@@ -7,14 +7,14 @@ define([
 	var gui = require('nw.gui'),
 		clipboard = gui.Clipboard.get();
 
-	var iframe = $('#haroo iframe')[0];
+	var iframe = $('#viewer iframe')[0];
 	var viewer = iframe.contentWindow;
 
 	var htmlDoc = iframe.contentDocument;
 	var shadow = document.createElement('html');
 
 	function setInlineStyles(rules) {
-		var i, j, selectorMatches, styleAttr;
+		var i, j, elem, selectorMatches, styleAttr;
 
 		for (i = 0; i < rules.length; i++) {
 			rule = rules[i];
