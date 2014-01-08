@@ -1,0 +1,13 @@
+{
+  "name": "todc-bootstrap",
+  "version": "0.1.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "bootstrap": "latest"
+  },
+  "main": "./dist/todc-bootstrap.css"
+}

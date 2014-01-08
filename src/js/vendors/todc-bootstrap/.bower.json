@@ -1,0 +1,23 @@
+{
+  "name": "todc-bootstrap",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "bootstrap": "latest"
+  },
+  "main": "./dist/todc-bootstrap.css",
+  "homepage": "https://github.com/Freyskeyd/bower-todc-bootstrap",
+  "_release": "9bbbda1132",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9bbbda11329849ac920142362db69df0a480f04f"
+  },
+  "_source": "git://github.com/Freyskeyd/bower-todc-bootstrap.git",
+  "_target": "*",
+  "_originalSource": "todc-bootstrap",
+  "_direct": true
+}
