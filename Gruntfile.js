@@ -224,7 +224,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/jquery/jquery.min.js',
             '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js',
-            '<%= vendors %>/highlightjs/highlight.pack.js',
+            '<%= vendors %>/highlight.js/build/highlight.pack.js',
             '<%= build %>/viewer.min.js'
           ]
         }
@@ -404,7 +404,7 @@ module.exports = function(grunt) {
         files: [
           // { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
-          { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
+          // { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
           { expand: true, cwd: 'src/css/column/', src: [ '**' ], dest: 'build/haroopad/css/column/' },
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad/css/viewer-toc/' },
@@ -515,7 +515,7 @@ module.exports = function(grunt) {
       
       highlightjs: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/highlightjs/styles/', src: [ '**' ], dest: 'src/css/code/' }
+          { expand: true, cwd: '<%= vendors %>/highlight.js/src/styles/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.css/code/' }
         ]
       },
       
@@ -555,6 +555,16 @@ module.exports = function(grunt) {
 
       deploy: {
         command: 'rm -rf /Applications/haroopad.app; cp -R ./build/haroopad.app /Applications'
+      },
+
+      highlightjs: {
+        command: 'python3 tools/build.py',
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: './src/js/vendors/highlight.js/'
+          }
+        }
       }
     },
 
@@ -626,7 +636,7 @@ module.exports = function(grunt) {
   grunt.registerTask('snapshot', [ 'concat:snapshot', 'shell:bin' ]);
 
   /* pre built */
-  grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs' ]);
+  grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs' ]);
   grunt.registerTask('prebower', [ 
     'copy:btmodal', 
     'copy:mkdcss', 
