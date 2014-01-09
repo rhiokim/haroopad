@@ -1,6 +1,8 @@
 define([
 		'tabs/Viewer.opt'
 	], function(options) {
+		var readdir = require('readdir');
+		var path = require('path');
 
 		var config = options.toJSON();
 
@@ -13,6 +15,22 @@ define([
 				window.parent.ee.emit(en, data[prop]);
 			}
 		});
+
+		function loadCodeCSSFiles() {
+			var csses = readdir.readSync(getExecPath() +'Libraries/.css/code/', [ '*.css' ], readdir.ABSOLUTE_PATHS + readdir.CASELESS_SORT);
+			var name, themes = {};
+
+			csses.forEach(function(css, idx) {
+				name = path.basename(css).replace('.css','');
+				themes[name] = {
+					id: idx,
+					name: name,
+					path: css
+				}
+			});
+
+			return themes;
+		}
 
 		var ViewerTabView = Backbone.View.extend({
 			el: '#viewer-tab',
