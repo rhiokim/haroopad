@@ -48,6 +48,7 @@ define([
 					realCount--;
 
 					if (!realCount/* && getPlatformName() != 'mac'*/) {
+						config = store.get('Window');
 						window.ee.emit('exit');
 					}
 					return;
@@ -86,8 +87,10 @@ define([
 				left = 0;
 			}
 
-			left = left + 20;
-			top = top + 20;
+			if (realCount > 1) {
+				left = left + 20;
+				top = top + 20;
+			}
 
 			this.moveTo(left, top);
 		});
