@@ -52,11 +52,10 @@ input[type=checkbox] {
 	margin-bottom: -3px;
 }
 
-#about-tab .panel-body:after {
-	opacity: .5;
-	background: url(../logo.png); 
+body {
+	background: url('../logo.png');
 	background-repeat: no-repeat;
-	background-position: right top;
+	background-position: top right;
 }
 
 .dropdown-menu {
