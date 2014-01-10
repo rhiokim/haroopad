@@ -44,12 +44,19 @@ input[type=checkbox] {
 	max-height: 175px;
 }
 
-#about-tab h1,
-#about-tab h2,
-#about-tab h3,
-#about-tab h4 {
+#about-tab .panel-body h1,
+#about-tab .panel-body h2,
+#about-tab .panel-body h3,
+#about-tab .panel-body h4 {
 	margin-top: -5px;
 	margin-bottom: -3px;
+}
+
+#about-tab .panel-body:after {
+	opacity: .5;
+	background: url(../logo.png); 
+	background-repeat: no-repeat;
+	background-position: right top;
 }
 
 .dropdown-menu {

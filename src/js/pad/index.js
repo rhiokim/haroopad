@@ -181,6 +181,7 @@ i18n.init({
       new gnMenu(document.getElementById('editControls'));
     }
 
+    throw new Error('aaa');
   });
 
 });
