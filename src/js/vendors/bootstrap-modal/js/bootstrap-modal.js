@@ -1,5 +1,5 @@
 /* ===========================================================
- * bootstrap-modal.js v2.1
+ * bootstrap-modal.js v2.2.2
  * ===========================================================
  * Copyright 2012 Jordan Schroter
  *
@@ -33,12 +33,17 @@
 		constructor: Modal,
 
 		init: function (element, options) {
+			var that = this;
+
 			this.options = options;
 
 			this.$element = $(element)
 				.delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this));
 
-			this.options.remote && this.$element.find('.modal-body').load(this.options.remote);
+			this.options.remote && this.$element.find('.modal-body').load(this.options.remote, function () {
+				var e = $.Event('loaded');
+				that.$element.trigger(e);
+			});
 
 			var manager = typeof this.options.manager === 'function' ?
 				this.options.manager.call(this) : this.options.manager;
@@ -58,7 +63,7 @@
 
 			if (this.isShown) return;
 
-			this.$element.triggerHandler(e);
+			this.$element.trigger(e);
 
 			if (e.isDefaultPrevented()) return;
 
@@ -74,7 +79,7 @@
 
 			e = $.Event('hide');
 
-			this.$element.triggerHandler(e);
+			this.$element.trigger(e);
 
 			if (!this.isShown || e.isDefaultPrevented()) return (this.isShown = false);
 
@@ -124,14 +129,14 @@
 				.css('overflow', '')
 				.css(prop, '');
 
-			var modalOverflow = $(window).height() - 10 < this.$element.height();
-
 			if (value){
 				this.$element.find('.modal-body')
 					.css('overflow', 'auto')
 					.css(prop, value);
 			}
 
+			var modalOverflow = $(window).height() - 10 < this.$element.height();
+            
 			if (modalOverflow || this.options.modalOverflow) {
 				this.$element
 					.css('margin-top', 0)
@@ -202,10 +207,6 @@
 		},
 
 		hideModal: function () {
-			this.$element
-				.hide()
-				.triggerHandler('hidden');
-
 			var prop = this.options.height ? 'height' : 'max-height';
 			var value = this.options.height || this.options.maxHeight;
 
@@ -215,6 +216,9 @@
 					.css(prop, '');
 			}
 
+			this.$element
+				.hide()
+				.trigger('hidden');
 		},
 
 		removeLoading: function () {
@@ -290,7 +294,7 @@
 
 		destroy: function () {
 			var e = $.Event('destroy');
-			this.$element.triggerHandler(e);
+			this.$element.trigger(e);
 			if (e.isDefaultPrevented()) return;
 
 			this.teardown();
@@ -346,7 +350,8 @@
 		resize: false,
 		attentionAnimation: 'shake',
 		manager: 'body',
-		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
+		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>',
+		backdropTemplate: '<div class="modal-backdrop" />'
 	};
 
 	$.fn.modal.Constructor = Modal;
@@ -356,7 +361,7 @@
 	* ============== */
 
 	$(function () {
-		$(document).off('.modal').on('click.modal.data-api', '[data-toggle="modal"]', function ( e ) {
+		$(document).off('click.modal').on('click.modal.data-api', '[data-toggle="modal"]', function ( e ) {
 			var $this = $(this),
 				href = $this.attr('href'),
 				$target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))), //strip for ie7

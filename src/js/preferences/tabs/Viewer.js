@@ -43,11 +43,15 @@ define([
 			},
 
 			initialize: function() {
-				this.$el.find('select[name=viewStyle]').select2().select2("val", config.theme);
-				this.$el.find('select[name=fontSize]').select2().select2("val", config.fontSize);
-				this.$el.find('select[name=fontFamily]').select2().select2("val", config.fontFamily);
+				this.$('select[name=viewStyle]').val(config.theme).select2({
+					width: '200px'
+				});
+				this.$('select[name=fontSize]').val(config.fontSize).select2();
+				this.$('select[name=fontFamily]').val(config.fontFamily).select2({
+					width: '100px'
+				});
 				
-				this.$el.find('input[name=clickableLink]').prop('checked', config.clickableLink);
+				this.$('input[name=clickableLink]').prop('checked', config.clickableLink);
 			},
 
 			changeViewStyle: function(e) {

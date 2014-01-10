@@ -28,20 +28,22 @@ define([
 			},
 
 			initialize: function() {
-				this.$el.find('select[name=theme]').select2().select2("val", config.theme);
-				this.$el.find('select[name=fontSize]').select2().select2("val", config.fontSize);
+				this.$('select[name=theme]').val(config.theme).select2({
+					width: '200px'
+				});
+				this.$('select[name=fontSize]').val(config.fontSize).select2();
 				
-				this.$el.find('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
-				this.$el.find('input[name=vimKeyBinding]').prop('checked', config.vimKeyBinding);
-				this.$el.find('input[name=autoPairCharacters]').prop('checked', config.autoPairCharacters);
-				this.$el.find('input[name=indentWithTabs]').prop('checked', config.indentWithTabs);
+				this.$('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
+				this.$('input[name=vimKeyBinding]').prop('checked', config.vimKeyBinding);
+				this.$('input[name=autoPairCharacters]').prop('checked', config.autoPairCharacters);
+				this.$('input[name=indentWithTabs]').prop('checked', config.indentWithTabs);
 
 				if (config.tabSize) {
 					this.activeTabsize(config.tabSize);
 				}
 			
 				options.bind('change:displayLineNumber', function(model, data) {
-					this.$el.find('input[name=displayLineNumber]').prop('checked', data);
+					this.$('input[name=displayLineNumber]').prop('checked', data);
 				}.bind(this));
 			},
 

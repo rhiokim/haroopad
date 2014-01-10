@@ -13,6 +13,7 @@ define([
 				silent: false,
 				highlight: null,
 				langPrefix: '',
+				headerPrefix: '',
 				mathjax: false
 			},
 

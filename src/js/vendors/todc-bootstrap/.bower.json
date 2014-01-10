@@ -1,23 +1,36 @@
 {
   "name": "todc-bootstrap",
+  "main": [
+    "./dist/css/bootstrap.css",
+    "./dist/css/todc-bootstrap.css",
+    "./dist/js/bootstrap.js",
+    "./dist/js/todc-bootstrap.js",
+    "./dist/fonts/glyphicons-halflings-regular.eot",
+    "./dist/fonts/glyphicons-halflings-regular.svg",
+    "./dist/fonts/glyphicons-halflings-regular.ttf",
+    "./dist/fonts/glyphicons-halflings-regular.woff"
+  ],
   "ignore": [
     "**/.*",
-    "node_modules",
-    "components"
+    "_config.yml",
+    "CNAME",
+    "composer.json",
+    "CONTRIBUTING.md",
+    "docs",
+    "js/tests"
   ],
   "dependencies": {
-    "bootstrap": "latest"
+    "jquery": ">= 1.9.0"
   },
-  "main": "./dist/todc-bootstrap.css",
-  "homepage": "https://github.com/Freyskeyd/bower-todc-bootstrap",
-  "_release": "9bbbda1132",
+  "homepage": "https://github.com/todc/todc-bootstrap",
+  "_release": "bcf9cbfa9a",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "9bbbda11329849ac920142362db69df0a480f04f"
+    "commit": "bcf9cbfa9ab958390b2c84a61fe7acf1a67876b4"
   },
-  "_source": "git://github.com/Freyskeyd/bower-todc-bootstrap.git",
-  "_target": "*",
-  "_originalSource": "todc-bootstrap",
+  "_source": "git@github.com:todc/todc-bootstrap.git",
+  "_target": "master",
+  "_originalSource": "git@github.com:todc/todc-bootstrap.git",
   "_direct": true
 }

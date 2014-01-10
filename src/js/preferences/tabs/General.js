@@ -22,15 +22,20 @@ define([
 				'click input[name=enableMath]': 'enableMath',	
 				'click input[name=enableSyncScroll]': 'enableSyncScroll',	
 				'click input[name=enableLastFileRestore]': 'enableLastFileRestore',
-				'click input[name=playKeypressSound]': 'playKeypressSound'
+				'click input[name=playKeypressSound]': 'playKeypressSound',
+				'change select[name=displayLanguage]': 'changeDisplayLanguage'
 			},
 
 			initialize: function() {
-				this.$el.find('input[name=enableAutoComplete]').prop('checked', config.enableAutoComplete);
-				this.$el.find('input[name=enableMath]').prop('checked', config.enableMath);
-				this.$el.find('input[name=enableSyncScroll]').prop('checked', config.enableSyncScroll);
-				this.$el.find('input[name=enableLastFileRestore]').prop('checked', config.enableLastFileRestore);
-				this.$el.find('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
+				this.$('input[name=enableAutoComplete]').prop('checked', config.enableAutoComplete);
+				this.$('input[name=enableMath]').prop('checked', config.enableMath);
+				this.$('input[name=enableSyncScroll]').prop('checked', config.enableSyncScroll);
+				this.$('input[name=enableLastFileRestore]').prop('checked', config.enableLastFileRestore);
+				this.$('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
+
+				this.$('select[name=displayLanguage]').select2({
+					width: '180px'
+				}).select2('val', config.displayLanguage);
 			},
 
 			enableAutoComplete: function(e) {
@@ -51,6 +56,10 @@ define([
 			enableLastFileRestore: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('enableLastFileRestore', bool);
+			},
+
+			changeDisplayLanguage: function(e) {
+				options.set('displayLanguage', e.val);
 			},
 
 			playKeypressSound: function(e) {

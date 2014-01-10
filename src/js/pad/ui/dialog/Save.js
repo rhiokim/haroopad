@@ -12,7 +12,7 @@ define([
 				'click ._dont_save': 'dontSaveHandler',
 				'click ._save': 'saveHandler',
 				'click ._cancel': 'cancelHandler',
-				'keydown': 'keydownHandler'
+				// 'keydown': 'keydownHandler'
 			},
 
 			initialize: function() {
@@ -43,6 +43,7 @@ define([
 							this.$('._save').focus();
 						break;
 					}
+
 					e.preventDefault();
 				}
 			},

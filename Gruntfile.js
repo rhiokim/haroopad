@@ -51,9 +51,9 @@ module.exports = function(grunt) {
       pad: {
         files: {
           "build/haroopad/css/pad.vendors.min.css": [
-            'src/css/bootstrap.css',
-            'src/css/todc-bootstrap.css',
-            'src/css/bootstrap-modal.css'
+            '<%= vendors %>/bootstrap/dist/css/bootstrap.css',
+            '<%= vendors %>/todc-bootstrap/dist/todc-bootstrap.css',
+            '<%= vendors %>/bootstrap-modal/css/bootstrap-modal.css'
           ],
           "build/haroopad/css/pad.layout.min.css": [
             'src/css/layout/basic.css',
@@ -75,8 +75,8 @@ module.exports = function(grunt) {
       preferences: {
         files: {
           "build/haroopad/css/preferences.vendors.min.css": [
-            'src/css/bootstrap.css',
-            'src/css/todc-bootstrap.css',
+            '<%= vendors %>/bootstrap/dist/css/bootstrap.css',
+            '<%= vendors %>/todc-bootstrap/dist/todc-bootstrap.css',
             'src/css/select2.css'
           ],
           "build/haroopad/css/preferences.style.min.css": [
@@ -488,12 +488,19 @@ module.exports = function(grunt) {
         ]
       },
 
-      todc: {
-        files: [
-          { expand: true, cwd: '<%= vendors %>/todc-bootstrap/dist/', src: [ '**' ], dest: 'src/css/' },
-          { expand: true, cwd: '<%= vendors %>/todc-bootstrap/img/', src: [ '**' ], dest: 'src/img/' }
-        ]
-      },
+      // twbs: {
+      //   files: [
+      //     { expand: true, cwd: '<%= vendors %>/bootstrap/dist/css/', src: [ '**' ], dest: 'src/css/' },
+      //     { expand: true, cwd: '<%= vendors %>/bootstrap/dist/fonts/', src: [ '**' ], dest: 'src/img/' }
+      //   ]
+      // },
+
+      // todc: {
+      //   files: [
+      //     { expand: true, cwd: '<%= vendors %>/todc-bootstrap/dist/', src: [ '**' ], dest: 'src/css/' },
+      //     { expand: true, cwd: '<%= vendors %>/todc-bootstrap/img/', src: [ '**' ], dest: 'src/img/' }
+      //   ]
+      // },
 
       // libs: {
       //   files: [

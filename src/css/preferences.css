@@ -31,6 +31,11 @@ input[type=checkbox] {
 	margin-bottom: 10px;
 }
 
+.nav-tabs > li > a { 
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
 .select2-search {
 	display: none;
 }

@@ -1,0 +1,24 @@
+#send-email-dialog .row {
+  margin-bottom: 10px;
+}
+
+#send-email-dialog .help-block {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+#send-email-dialog h3,
+#send-email-dialog h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#send-email-dialog .modal-header {
+  padding-bottom: 10px;
+}
+#send-email-dialog .modal-footer {
+  padding-top: 10px;
+}
+#file-changed-dialog .modal-footer {
+  padding-top: 10px;
+}

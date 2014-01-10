@@ -8,7 +8,7 @@ define([
 		var shell = gui.Shell;
 
 		var el = $('#send-email-dialog');
-		var bar = el.find('.progress div.bar');
+		var bar = el.find('.progress div.progress-bar');
 		var postTimeout;
 
 		function progress() {
@@ -26,6 +26,7 @@ define([
 				}
 
 				bar.css({ width: per+'%' });
+				bar.attr({ 'aria-valuenow': per });
 			}, 300);
 		}
 
@@ -97,10 +98,10 @@ define([
 
 				this.$('input[name=title]').val(title || '');
 
-				this.$el.find('input[name=to]').val(Emails.to || '');
-				this.$el.find('input[name=from]').val(Emails.from || '');
-				this.$el.find('input[name=remember]').attr('checked', Emails.remember);
-				this.$el.find('input[name=to]').data({ source: Emails.addrs });
+				this.$('input[name=to]').val(Emails.to || '');
+				this.$('input[name=from]').val(Emails.from || '');
+				this.$('input[name=remember]').attr('checked', Emails.remember);
+				this.$('input[name=to]').data({ source: Emails.addrs });
 
 				this.$el.modal('show');
 
@@ -135,12 +136,12 @@ define([
 
 				el.find('button._save').button('loading');
 
-				title = this.$el.find('input[name=title]').val() || '';
-				to = this.$el.find('input[name=to]').val();
-				from = this.$el.find('input[name=from]').val();
-				password = this.$el.find('input[name=password]').val();
-				remember = this.$el.find('input[name=remember]').is(':checked');
-				mode = this.$el.find('button[name=html]').hasClass('active');
+				title = this.$('input[name=title]').val() || '';
+				to = this.$('input[name=to]').val();
+				from = this.$('input[name=from]').val();
+				password = this.$('input[name=password]').val();
+				remember = this.$('input[name=remember]').is(':checked');
+				mode = this.$('input[name=html]').parent().hasClass('active');
 				mode = mode ? 'html' : 'md';
 
 				progress();
@@ -156,14 +157,14 @@ define([
 			},
 
 			keypressHandler: function(e) {
-				var to = this.$el.find('input[name=to]').val();
+				var to = this.$('input[name=to]').val();
 
 				if (to.indexOf('@tumblr.co') > -1) {
-					this.$el.find('button[name=html]').removeClass('active');
-					this.$el.find('button[name=markdown]').addClass('active');
+					this.$('input[name=html]').parent().removeClass('active');
+					this.$('input[name=markdown]').parent().addClass('active');
 				} else {
-					this.$el.find('button[name=markdown]').removeClass('active');
-					this.$el.find('button[name=html]').addClass('active');
+					this.$('input[name=markdown]').parent().removeClass('active');
+					this.$('input[name=html]').parent().addClass('active');
 				}
 			},
 

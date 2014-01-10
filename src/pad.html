@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <title>haroopad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
 <!-- for develop -->
   <script src="js/vendors/keymage/keymage.js"></script>
@@ -49,9 +50,8 @@
   <link rel="stylesheet" href="js/vendors/CodeMirror/addon/hint/show-hint.css">
   <link rel="stylesheet" href="js/vendors/CodeMirror-custom/addon/dialog/dialog.css">
   
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/todc-bootstrap.css">
-  <link rel="stylesheet" href="css/bootstrap-modal.css">
+  <link rel="stylesheet" href="js/vendors/todc-bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="js/vendors/todc-bootstrap/dist/css/todc-bootstrap.css">
   <link rel="stylesheet" href="css/layout/basic.css">
   <link rel="stylesheet" href="css/layout/header.css">
   <link rel="stylesheet" href="css/layout/footer.css">
@@ -63,15 +63,15 @@
   <link rel="stylesheet" href="css/aside-oembed.css">
   <link rel="stylesheet" href="css/nav-md-help.css">
 
+  <link rel="stylesheet" href="css/pad.dialog.css">
+
   <link rel="stylesheet" href="css/app.css">
 
   <script src="js/vendors/jquery/jquery.js"></script>
   <script src="js/vendors/eventEmitter/EventEmitter.js"></script>
   <script src="js/vendors/underscore/underscore.js"></script>
   <script src="js/vendors/backbone/backbone.js"></script>
-  <script src="js/vendors/bootstrap.min.js"></script>
-  <script src="js/vendors/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
-  <script src="js/vendors/bootstrap-modal/js/bootstrap-modal.js"></script>
+  <script src="js/vendors/todc-bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="js/vendors/store.js/store.js"></script>
   <script src="js/vendors/haroopad-reMarked.js/reMarked.js"></script>
   <script src="js/vendors/haroopad-notifer.js/notifier.js"></script>
@@ -243,11 +243,11 @@
     </aside>
   </div>
 
-  <footer class="navbar navbar-inverse navbar-fixed-bottom">
+  <footer class="navbar navbar-default navbar-fixed-bottom">
     <div class="navbar-inner">
       <div class="btn-group pull-left">
-        <a href="#" id="toggle-md-help" class="btn btn-mini btn-inverse dropdown-toggle">
-          <i class="icon-list-alt icon-white"></i>
+        <a href="#" id="toggle-md-help" class="btn btn-primary btn-xs dropdown-toggle">
+          <span class="glyphicon glyphicon-list-alt"></span>
         </a>
       </div>
       <div id="area-status" class="pull-left">
@@ -260,8 +260,9 @@
 
       <!-- <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button> -->
       <div id="documentConfig" class="btn-group dropup pull-right">
-        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="icon-cog icon-white"></i>
+        <a class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+          <!-- <i class="icon-cog icon-white"></i> -->
+          <span class="glyphicon glyphicon-cog"></span>
         </a>
         <ul class="dropdown-menu">
           <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i><span data-i18n="pad:config.outline">Show Document Outline</span></a></li>
@@ -270,7 +271,7 @@
           <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i><span data-i18n="pad:config.fullscreen">Toggle Fullscreen</span></a></li>
         </ul>
       </div><div id="columnCount" class="btn-group dropup pull-right">
-        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+        <a class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
           <span data-i18n="pad:config.column.label">Columns</span>
           <span class="caret"></span>
         </a>
@@ -282,7 +283,7 @@
         </ul>
       </div>
       <div id="indentation" class="btn-group dropup pull-right">
-        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+        <a class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
           <span data-i18n="pad:config.spaces">Spaces</span>
           <span class="caret"></span>
         </a>
@@ -303,8 +304,8 @@
         </ul>
       </div>
       <div id="shareit" class="btn-group dropup pull-right">
-        <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="icon-share-alt icon-white"></i> <span data-i18n="pad:share">share</span>
+        <a class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="glyphicon glyphicon-share-alt"></i> <span data-i18n="pad:share">share</span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -319,7 +320,7 @@
         </ul>
       </div>
       <div id="donate-btn" class="btn-group pull-right">
-        <a href="#" class="btn btn-mini btn-danger" data-toggle="popover" data-trigger="click" data-placement="top" data-html="true"><i class="icon-leaf icon-white"></i> <span data-i18n="pad:donate.label">keep development</span></a>
+        <a href="#" class="btn btn-danger btn-xs" data-toggle="popover" data-trigger="click" data-placement="top" data-html="true"><i class="glyphicon glyphicon-leaf"></i> <span data-i18n="pad:donate.label">keep development</span></a>
       </div>
     </div>
   </footer>

@@ -31,13 +31,13 @@ define([
 			},
 
 			initialize: function() {
-				this.$el.find('input[name=gfm]').prop('checked', config.gfm);
-				this.$el.find('input[name=sanitize]').prop('checked', config.sanitize);
-				this.$el.find('input[name=tables]').prop('checked', config.tables);
-				this.$el.find('input[name=breaks]').prop('checked', config.breaks);
-				this.$el.find('input[name=smartLists]').prop('checked', config.smartLists);
-				this.$el.find('input[name=smartypants]').prop('checked', config.smartypants);
-				this.$el.find('input[name=mathajx]').prop('checked', config.mathjax);
+				this.$('input[name=gfm]').prop('checked', config.gfm);
+				this.$('input[name=sanitize]').prop('checked', config.sanitize);
+				this.$('input[name=tables]').prop('checked', config.tables);
+				this.$('input[name=breaks]').prop('checked', config.breaks);
+				this.$('input[name=smartLists]').prop('checked', config.smartLists);
+				this.$('input[name=smartypants]').prop('checked', config.smartypants);
+				this.$('input[name=mathajx]').prop('checked', config.mathjax);
 			},
 
 			clickHandler: function(e) {

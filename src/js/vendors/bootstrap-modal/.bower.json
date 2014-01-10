@@ -1,15 +1,24 @@
 {
   "name": "bootstrap-modal",
-  "homepage": "https://github.com/jschr/bootstrap-modal",
-  "version": "2.1.0",
-  "_release": "2.1.0",
-  "_resolution": {
-    "type": "version",
-    "tag": "2.1.0",
-    "commit": "02b6c6bfe15c1d49e198dbddd35cd4e74722d689"
+  "description": "Extends the default Bootstrap Modal class. Responsive, stackable, ajax and more.",
+  "dependencies": {
+    "bootstrap": "2.3.0"
   },
-  "_source": "git://github.com/jschr/bootstrap-modal.git",
-  "_target": "~2.1.0",
-  "_originalSource": "bootstrap-modal",
+  "url": "https://github.com/jschr/bootstrap-modal.git",
+  "author": "Jordan Schroter",
+  "license": {
+    "type": "Apache License 2.0",
+    "url": "https://github.com/jschr/bootstrap-modal/blob/master/LICENSE"
+  },
+  "homepage": "https://github.com/jschr/bootstrap-modal",
+  "_release": "19ac6234e6",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "19ac6234e682c9e426194b92600b90d31ffa4f8b"
+  },
+  "_source": "git@github.com:jschr/bootstrap-modal.git",
+  "_target": "master",
+  "_originalSource": "git@github.com:jschr/bootstrap-modal.git",
   "_direct": true
 }

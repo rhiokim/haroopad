@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <title></title>
 
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/todc-bootstrap.css">
-  <link rel="stylesheet" href="css/select2.css">
+  <link rel="stylesheet" href="js/vendors/todc-bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="js/vendors/todc-bootstrap/dist/css/todc-bootstrap.css">
+  <link rel="stylesheet" href="js/vendors/select2/select2.css">
   <link rel="stylesheet" href="css/preferences.css">
 
   <script src="js/vendors/jquery/jquery.js"></script>
@@ -26,14 +26,14 @@
     <ul class="nav nav-tabs">
       <li class="active"><a href="#about-tab" data-toggle="tab" data-i18n="tab.about">About</a></li>
       <li><a href="#general-tab" data-toggle="tab" data-i18n="tab.general">General</a></li>
-      <li class="hide"><a href="#markdown-tab" data-toggle="tab" data-i18n="tab.markdown">Markdown</a></li>
+      <li><a href="#markdown-tab" data-toggle="tab" data-i18n="tab.markdown">Markdown</a></li>
       <li><a href="#editor-tab" data-toggle="tab" data-i18n="tab.editor">Editor</a></li>
       <li><a href="#viewer-tab" data-toggle="tab" data-i18n="tab.viewer">Viewer</a></li>
       <li><a href="#custom-tab" data-toggle="tab" data-i18n="tab.custom">Custom</a></li>
       <li><a href="#code-tab" data-toggle="tab" data-i18n="tab.code">Code</a></li>
-      <li class="hide"><a href="#addon-tab" data-toggle="tab">Add-ons</a></li>
-      <li class="hide"><a href="#keymap-tab" data-toggle="tab">Keymap</a></li>
-      <li class="hide"><a href="#plugin-tab" data-toggle="tab">Plugin</a></li>
+      <li><a href="#addon-tab" data-toggle="tab">Add-ons</a></li>
+      <li><a href="#keymap-tab" data-toggle="tab">Keymap</a></li>
+      <li><a href="#plugin-tab" data-toggle="tab">Plugin</a></li>
     </ul>
 
     <div class="tab-content">
@@ -42,19 +42,75 @@
         <div>
           <p>
             <h5>Markdown Style</h5>
-            <div class="btn-group">
-              <button class="btn btn-primary">Markdown</button>
-              <button class="btn btn-primary">GFM</button>
-              <button class="btn btn-primary">Pandoc</button>
-              <button class="btn btn-primary">Multimarkdown</button>
+            <div class="btn-group" data-toggle="buttons-radio">
+              <button class="btn btn-default">Markdown</button>
+              <button class="btn btn-default">GFM</button>
+              <button class="btn btn-default">Pandoc</button>
+              <button class="btn btn-default">Multimarkdown</button>
             </div>
           </p>
           
           <p>
-            <h5>Language</h5>
+            <h5>Display Language</h5>
 
-            <select class="select2" name="language">
-              <option value="en">English</option>
+            <select class="select2" name="displayLanguage">
+              <option value="id">Bahasa Indonesia</option>
+              <option value="ms">Bahasa Melayu</option>
+              <option value="ca">Català</option>
+              <option value="cs">Čeština</option>
+              <option value="cy">Cymraeg</option>
+              <option value="da">Dansk</option>
+              <option value="de">Deutsch</option>
+              <option value="et">Eesti keel</option>
+              <option value="en-GB">English (UK)</option>
+              <option value="en">English (US)</option>
+              <option value="es">Español</option>
+              <option value="es-419">Español (Latinoamérica)</option>
+              <option value="eu">Euskara</option>
+              <option value="tl">Filipino</option>
+              <option value="fr">Français</option>
+              <option value="hr">Hrvatski</option>
+              <option value="it">Italiano</option>
+              <option value="is">Íslenska</option>
+              <option value="sw">Kiswahili</option>
+              <option value="lv">Latviešu</option>
+              <option value="lt">Lietuvių</option>
+              <option value="hu">Magyar</option>
+              <option value="no">Norsk (Bokmål)</option>
+              <option value="nl">Nederlands</option>
+              <option value="pl">Polski</option>
+              <option value="pt-BR">Português (Brasil)</option>
+              <option value="pt-PT">Português (Portugal)</option>
+              <option value="ro">Română</option>
+              <option value="sk">Slovenčina</option>
+              <option value="sl">Slovenščina</option>
+              <option value="fi">Suomi</option>
+              <option value="sv">Svenska</option>
+              <option value="vi">Tiếng Việt</option>
+              <option value="tr">Türkçe</option>
+              <option value="el">Ελληνικά</option>
+              <option value="bg">Български</option>
+              <option value="ru">Русский</option>
+              <option value="sr">Српски</option>
+              <option value="uk">Українська</option>
+              <option value="iw">‫עברית‬‎</option>
+              <option value="ur">‫اردو‬‎</option>
+              <option value="ar">‫العربية‬‎</option>
+              <option value="fa">‫فارسی‬‎</option>
+              <option value="mr">मराठी</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+              <option value="gu">ગુજરાતી</option>
+              <option value="ta">தமிழ்</option>
+              <option value="te">తెలుగు</option>
+              <option value="kn">ಕನ್ನಡ</option>
+              <option value="ml">മലയാളം</option>
+              <option value="th">ภาษาไทย</option>
+              <option value="am">አማርኛ (Amharic)</option>
+              <option value="chr">ᏣᎳᎩ (Cherokee)</option>
+              <option value="zh-TW">中文（繁體）</option>
+              <option value="zh-CN">中文（简体）</option>
+              <option value="ja">日本語</option>
               <option value="ko">한국어</option>
             </select>
           </p>
@@ -387,7 +443,26 @@
 
       <div id="keymap-tab" class="tab-pane">
         <div>
-          keymap
+          <h5>File</h5>
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+              </div>
+            </div>
+          </form>
+
+          <h5>View</h5>
+          <h5>Find</h5>
+          <h5>Insert</h5>
+          <h5>Markdown</h5>
         </div>
       </div>
 
