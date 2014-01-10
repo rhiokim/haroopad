@@ -88,7 +88,6 @@
 
   <div class="tab-content" style="display: inline-table; width: 453px; margin-left:140px;">
 
-
     <div id="general-tab" class="tab-pane">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -267,7 +266,7 @@
               <span data-i18n="editor.indent-use-tab">Indent Using Tab</span>
 
               <div class="btn-group dropdown">
-                <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+                <a class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" href="#">
                   <i class="icon-share-alt"></i> <span data-i18n="editor.spaces">Spaces</span>
                   <span class="caret"></span>
                 </a>
@@ -380,17 +379,18 @@
 
           <p>
             <h5 data-i18n="custom.directory">Directory</h5>
-            <input class="hide" id="openCustomTheme" type="file" placeholder="Choose your directory" nwdirectory />
-            <!-- <input id="custom-theme-path" class="span12" type="text" readonly/> -->
-            <div class="input-append">
-              <input id="custom-theme-path" style="width:214px;" type="text" readonly>
-              <button id="custom-theme-open" class="btn" type="button">...</button>
-              <button id="custom-theme-reload" class="btn" type="button" data-i18n="custom.reload">Reload</button>
-            </div>
+            <div class="input-group">
+              <input class="hide" id="openCustomTheme" type="file" placeholder="Choose your directory" nwdirectory />
+              <input type="text" id="custom-theme-path" class="form-control" style="width:100%;" placeholder="Choose your directory" readonly>
+              <div class="input-group-btn">
+                <button id="custom-theme-open" class="btn btn-primary">...</button>
+                <button id="custom-theme-reload" class="btn btn-default" data-i18n="custom.reload">Reload</button>
+              </div>
+            </div><!-- /.input-group -->
           </p>
 
           <p>
-            <span class="label label-info">New!</span> <span class="text-warning" style="font-size:12px" data-i18n="custom.description">This theme applies to Live Preview, Exporting HTML/PDF and Sending Email(Evernote, Tumblr) export.</span>
+            <span class="label label-info">New!</span> <span class="text-primary" style="font-size:12px" data-i18n="custom.description">This theme applies to Live Preview, Exporting HTML/PDF and Sending Email(Evernote, Tumblr) export.</span>
           </p>
        </div>
       </div>
@@ -471,6 +471,7 @@
         <div class="panel-body">
           <p>
             <h5>GFM</h5>
+
             <label class="checkbox">
               <input type="checkbox" value="" name="gfm" checked="checked">
               <span data-i18n="markdown.enable-gfm">Enable github flavored markdown</span> [<a href="http://github.github.com/github-flavored-markdown/">?</a>]
@@ -494,6 +495,10 @@
             <label class="checkbox">
               <input type="checkbox" value="" name="smartypants">
               <span data-i18n="markdown.smarty-pants">Use "smart" typograhic punctuation</span> [<a href="http://daringfireball.net/projects/smartypants/">?</a>]
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" value="" name="mathjax">
+              <span data-i18n="markdown.mathjax">Use Mathematics Expression</span> [<a href="http://mathjax.org">?</a>]
             </label>
           </p>
         </div>
@@ -529,25 +534,124 @@
         </div>
         <div class="panel-body">
           <h5>File</h5>
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-              <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-              </div>
-            </div>
-          </form>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="120">Shortcut</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#8984;(^) - N</td>
+                <td>New Window</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Larry</td>
+              </tr>
+            </tbody>
+          </table>
 
           <h5>View</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="120">Shortcut</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#8984;(^) - N</td>
+                <td>New Window</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Larry</td>
+              </tr>
+            </tbody>
+          </table>
+
           <h5>Find</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="120">Shortcut</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#8984;(^) - N</td>
+                <td>New Window</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Larry</td>
+              </tr>
+            </tbody>
+          </table>
+
           <h5>Insert</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="120">Shortcut</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#8984;(^) - N</td>
+                <td>New Window</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Larry</td>
+              </tr>
+            </tbody>
+          </table>
+
           <h5>Markdown</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="120">Shortcut</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#8984;(^) - N</td>
+                <td>New Window</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jacob</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Larry</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -586,8 +690,8 @@
               <a href="https://twitter.com/fantalon">Fantalon</a>
           </p>
 
-          <p class="text-warning" >
-            <span data-i18n="about.donate-msg">If you like haroopad, donate to help keep growing up.</span> <a href="http://pad.haroopress.com/page.html?f=grow-up-donate" class="btn btn-mini btn-primary" type="button" data-i18n="about.donate"></a>
+          <p class="text-success" >
+            <span data-i18n="about.donate-msg">If you like haroopad, donate to help keep growing up.</span> <a href="http://pad.haroopress.com/page.html?f=grow-up-donate" class="btn btn-xs btn-primary" type="button" data-i18n="about.donate"></a>
           </p>
         </div>
       </div>
