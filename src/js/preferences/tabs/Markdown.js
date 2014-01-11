@@ -1,10 +1,11 @@
 define([
-		'tabs/Markdown.opt'
-	], function(options) {
+		'tabs/Markdown.opt',
+		'tabs/markdown/dialog.default'
+	], function(options, dialogDefault) {
 		var gui = require('nw.gui');
 		var shell = gui.Shell;
 
-		var config = options.toJSON();
+		// var config = options.toJSON();
 
 		options.bind('change', function(model) {
 			var prop, en,
@@ -27,17 +28,42 @@ define([
 				'click input[name=breaks]': 'enableBreaks',	
 				'click input[name=smartLists]': 'enableSmartLists',	
 				'click input[name=smartypants]': 'enableSmartyPants',	
-				'click input[name=mathjax]': 'enableMathjax'	
+				'click input[name=mathjax]': 'enableMathjax',
+				'click button[name=apply]': 'clickApply',
+				'click button[name=default]': 'clickDefault'
 			},
 
 			initialize: function() {
-				this.$('input[name=gfm]').prop('checked', config.gfm);
-				this.$('input[name=sanitize]').prop('checked', config.sanitize);
-				this.$('input[name=tables]').prop('checked', config.tables);
-				this.$('input[name=breaks]').prop('checked', config.breaks);
-				this.$('input[name=smartLists]').prop('checked', config.smartLists);
-				this.$('input[name=smartypants]').prop('checked', config.smartypants);
-				this.$('input[name=mathajx]').prop('checked', config.mathjax);
+				this.setup();
+
+				dialogDefault.on('yes', this.reset.bind(this));
+			},
+
+			setup: function(opt) {
+				var opt = opt || options.toJSON();
+
+				this.$('input[name=gfm]').prop('checked', opt.gfm);
+				this.$('input[name=sanitize]').prop('checked', opt.sanitize);
+				this.$('input[name=tables]').prop('checked', opt.tables);
+				this.$('input[name=breaks]').prop('checked', opt.breaks);
+				this.$('input[name=smartLists]').prop('checked', opt.smartLists);
+				this.$('input[name=smartypants]').prop('checked', opt.smartypants);
+				this.$('input[name=mathjax]').prop('checked', opt.mathjax);
+			},
+
+			reset: function() {
+				this.setup(options.defaults);
+				options.set(options.defaults);
+
+				// window.parent.ee.emit('preferences.markdown.change', options.defaults);
+			},
+
+			clickApply: function(e) {
+				window.parent.ee.emit('preferences.markdown.change', options.toJSON());
+			},
+
+			clickDefault: function(e) {
+				dialogDefault.show();
 			},
 
 			clickHandler: function(e) {

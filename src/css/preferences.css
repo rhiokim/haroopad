@@ -71,6 +71,9 @@ input[type=checkbox] {
 .panel-heading {
 	padding: 10px 20px;
 }
+.panel-title {
+	display: none;
+}
 .badge {
 	display: none;
 }
@@ -89,6 +92,22 @@ input[type=checkbox] {
   100% { 
     opacity: .3;
   }
+}
+
+.wiggle {
+    -webkit-animation: wiggle 2s;
+    -webkit-animation-iteration-count:  infinite;
+}
+ 
+@-webkit-keyframes wiggle {
+     0% {-webkit-transform:translate3d(0,    0px, 0); -webkit-animation-timing-function: ease-in; }
+    10% {-webkit-transform:translate3d(0,   -1px, 0); -webkit-animation-timing-function: ease-out; }
+    25% {-webkit-transform:translate3d(0,    1px, 0); -webkit-animation-timing-function: ease-in; }
+    40% {-webkit-transform:translate3d(0,  -3px, 0); -webkit-animation-timing-function: ease-out; }
+    55% {-webkit-transform:translate3d(0,   2px, 0); -webkit-animation-timing-function: ease-in; }
+    70% {-webkit-transform:translate3d(0,   -1px, 0); -webkit-animation-timing-function: ease-out; }
+    85% {-webkit-transform:translate3d(0,    1px, 0); -webkit-animation-timing-function: ease-in; }
+   100% {-webkit-transform:translate3d(0,    0px, 0); }
 }
 
 .dropdown-menu {

@@ -23,6 +23,8 @@ i18n.init({
     locale: 'ko-kr',
     paths: {
       // tpl: '../../tpl',
+      tpl: '../../tpl',
+      txt: '../vendors/text/text',
       vendors: '../vendors',
       store: '../vendors/store.js/store',
       keyboard: '../vendors/keymage/keymage'

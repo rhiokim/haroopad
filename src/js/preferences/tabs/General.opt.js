@@ -3,7 +3,7 @@ define([
 	], function(store) {
 		var Model = Backbone.Model.extend({
 			defaults: {
-				enableMath: false,
+				// enableMath: false,
 				enableSyncScroll: true,
 				playKeypressSound: false,
 				enableAutoComplete: false,

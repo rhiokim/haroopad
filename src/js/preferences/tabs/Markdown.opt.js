@@ -4,8 +4,9 @@ define([
 		var Model = Backbone.Model.extend({
 			defaults: {
 				gfm: true,
+        emoji: false,
 				tables: true,
-				breaks: false,
+				breaks: true,
 				pedantic: false,
 				sanitize: false,
 				smartLists: true,

@@ -22,7 +22,8 @@ define([
 			viewerConfig.fontSize = Number(viewerConfig.fontSize || 15);
 		var codeConfig = store.get('Code') || {};
 		var customConfig = store.get('Custom') || {};
-		var generalConfig = store.get('General') || {};
+		// var generalConfig = store.get('General') || {};
+		var markdownConfig = store.get('Markdown') || {};
 
 		// var config = option.toJSON();
 
@@ -93,13 +94,19 @@ define([
 			!log && global._gaq.push('haroopad.preferences', 'enable math expression', value);
 		}
 
+		function changeMarkdownOption() {
+			nw.file.trigger('change:markdown');
+		}
+
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
 		window.parent.ee.on('preferences.viewer.fontSize', changeFontSize);
 		window.parent.ee.on('preferences.viewer.fontFamily', changeFontFamily);
 		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
 		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
-		window.parent.ee.on('preferences.general.enableMath.after', enableMath);
+		window.parent.ee.on('preferences.markdown.change.after', changeMarkdownOption);
+		// window.parent.ee.on('preferences.general.enableMath.after', enableMath);
+		// window.parent.ee.on('preferences.markdown.mathjax.after', enableMath);
 
 		/* window close */
 		nw.on('destory', function() {
@@ -109,7 +116,9 @@ define([
 			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
 			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
-			window.parent.ee.off('preferences.general.enableMath.after', enableMath);
+			window.parent.ee.off('preferences.markdown.change.after', changeMarkdownOption);
+			// window.parent.ee.off('preferences.general.enableMath.after', enableMath);
+			// window.parent.ee.off('preferences.markdown.mathjax.after', enableMath);
 		});
 
 		window.ee.on('print.viewer', function(value) {

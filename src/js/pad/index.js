@@ -180,8 +180,6 @@ i18n.init({
     if (window.gnMenu) {
       new gnMenu(document.getElementById('editControls'));
     }
-
-    throw new Error('aaa');
   });
 
 });
