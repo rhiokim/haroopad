@@ -8,9 +8,9 @@ define([
     var _body = document.createElement('body');
     var _headers = [], _header;
 
-    function isChangeTOC() {
+    function isChangeTOC(headers) {
       var i = 0, res, header,
-          headers = _body.querySelectorAll('h1, h2, h3, h4, h5, h6');
+          // headers = _body.querySelectorAll('h1, h2, h3, h4, h5, h6');
           headers = Array.prototype.slice.call(headers, 0);
 
       if (headers.length <= 0) {
@@ -77,7 +77,7 @@ define([
           }
         });
 
-        if (isChangeTOC()) {
+        if (isChangeTOC(headers)) {
           this.set({
             toc: TOC.get(headers)
           });
