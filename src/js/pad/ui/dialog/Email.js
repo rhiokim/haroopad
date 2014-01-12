@@ -94,7 +94,7 @@ define([
 
 			show: function(file) {
 				var Emails = store.get('Emails') || {};
-				var title = file && file.title;
+				var title = file && file.doc.get('title');
 
 				this.$('input[name=title]').val(title || '');
 
