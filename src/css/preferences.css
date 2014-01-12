@@ -7,27 +7,29 @@ html, body {
 	padding: 0;
 }
 
+/*html, body { height:100% }*/
+
 body {
-	margin-top: 3px;
-	margin-left: 3px;
+  margin-top: 3px;
+  margin-left: 3px;
   user-select: none;
   -webkit-user-select: none;
 }
 
 body:after {
-	content: url('../logo.png');
-	position: absolute;
-	top: 40px;
-	opacity: .2;
-	right: 0;
-	background-repeat: no-repeat;
-	background-position: top right;
-	z-index: -1;
+  content: url('../logo.png');
+  position: absolute;
+  top: 40px;
+  opacity: .2;
+  right: 0;
+  background-repeat: no-repeat;
+  background-position: top right;
+  z-index: -1;
 
-	-webkit-animation-name:             fadeloop; 
-	-webkit-animation-duration:         5s; 
-	-webkit-animation-iteration-count:  infinite;
-	-webkit-transition-timing-function: linear;
+  -webkit-animation-name:             fadeloop; 
+  -webkit-animation-duration:         5s; 
+  -webkit-animation-iteration-count:  infinite;
+  -webkit-transition-timing-function: linear;
 }
 
 span {
@@ -35,12 +37,56 @@ span {
 }
 
 hr {
-	margin: 10px 0;
+  margin: 10px 0;
 }
 
 input[type=checkbox] {
-	width: 13px;
-	height: 13px;
+  width: 13px;
+  height: 13px;
+}
+
+#main {
+  position: absolute;
+  
+  width: 100%;
+
+  top: 0;
+  left: 0;      
+  right: 0;      
+  bottom: 0;
+
+  /* flexbox setup */
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+
+  display: flex;
+  flex-direction: row;
+
+  overflow: hidden;
+}
+
+#main > #nav,
+#main > #content {
+  width: 0;
+  /*height: 100%;*/
+}
+
+#main > #nav { 
+  -webkit-flex: 1 1  20%;
+  flex: 1 1  20%;
+
+ -webkit-order: 1;
+         order: 1;
+  z-index: 1;
+}
+#main > #content { 
+  -webkit-flex: 1 1 80%;
+  flex: 1 1 80%;
+
+ -webkit-order: 2;
+         order: 2;
+  z-index: 1;
+  padding: 1px;
 }
 
 .nav {
@@ -73,6 +119,12 @@ input[type=checkbox] {
 }
 .panel-title {
 	display: none;
+}
+.panel-body {
+  height: 363px; overflow-y: auto;
+}
+.panel-footer {
+  height: 61px;
 }
 .badge {
 	display: none;

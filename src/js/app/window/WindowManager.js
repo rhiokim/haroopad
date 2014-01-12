@@ -33,6 +33,12 @@ define([
 		return;
 	}
 
+	function closeAll() {
+		for (var prop in windows) {
+			windows[prop].close();
+		}
+	}
+
 	function _add(newWin) {
 		exports.actived = windows[newWin.created_at] = newWin;
 
@@ -135,6 +141,8 @@ define([
 
 		openning = false;
 	});
+
+	window.ee.on('closeAll', closeAll);
 
 	exports.open = open;
 

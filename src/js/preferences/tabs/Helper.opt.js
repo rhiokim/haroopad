@@ -1,6 +1,5 @@
 define([
-		'store'
-	], function(store) {
+	], function() {
 		var Model = Backbone.Model.extend({
 			defaults: {
 				youtube: true,

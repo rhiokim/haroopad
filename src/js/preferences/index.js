@@ -1,9 +1,9 @@
-var gui = require('nw.gui'),
-    win = gui.Window.get();
+var gui = require('nw.gui');
 var fs = require('fs');
 var lng = getLang();
 
-window.parent = win.parent;
+window.nw = gui.Window.get();
+window.parent = nw.parent;
 
 i18n.init({
   lng: lng
@@ -25,9 +25,9 @@ i18n.init({
       // tpl: '../../tpl',
       tpl: '../../tpl',
       txt: '../vendors/text/text',
-      vendors: '../vendors',
-      store: '../vendors/store.js/store',
-      keyboard: '../vendors/keymage/keymage'
+      vendors: '../vendors'
+      // store: '../vendors/store.js/store',
+      // keyboard: '../vendors/keymage/keymage'
     },
     config: {
       text: {
@@ -41,7 +41,6 @@ i18n.init({
   };
 
   requirejs([
-      'keyboard',
       'tabs/General',
       'tabs/Editor',
       'tabs/Viewer',
@@ -49,20 +48,19 @@ i18n.init({
       'tabs/Code',
       'tabs/Markdown',
       'tabs/Helper',
-      'tabs/About'
-    ], function(HotKey, General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
+      'tabs/About',
+      'tabs/Backup'
+    ], function(General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
 
-      // $('.switch').bootstrapSwitch();
-      
       $('body').i18n(); 
       document.title = i18n.t('title');
     
-      HotKey('esc', function() {
-        win.close();
+      keymage('esc', function() {
+        nw.close();
       });
 
-      win.show();
-      win.focus();
+      nw.show();
+      nw.focus();
 
       global._gaq.push('haroopad.preferences', 'init', '');
   });
