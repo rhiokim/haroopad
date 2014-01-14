@@ -382,6 +382,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/lib/codemirror.js',
             '<%= vendors %>/CodeMirror/addon/hint/show-hint.js',
             '<%= vendors %>/CodeMirror-custom/addon/hint/markdown-hint.js',
+            '<%= vendors %>/CodeMirror/addon/selection/active-line.js',
             '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
             '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
             '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
