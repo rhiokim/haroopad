@@ -391,9 +391,16 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror-custom/addon/search/search.js',
             '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
             '<%= vendors %>/CodeMirror/mode/xml/xml.js',
-            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
-            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
             '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
+            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
+            '<%= vendors %>/CodeMirror/mode/ruby/ruby.js',
+            '<%= vendors %>/CodeMirror/mode/python/python.js',
+            '<%= vendors %>/CodeMirror/mode/javascript/javascript.js',
+            '<%= vendors %>/CodeMirror/mode/clike/clike.js',
+            '<%= vendors %>/CodeMirror/mode/css/css.js',
+            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
+            '<%= vendors %>/CodeMirror/mode/php/php.js',
+            '<%= vendors %>/CodeMirror/mode/perl/perl.js',
             '<%= vendors %>/CodeMirror/keymap/vim.js'
           ]
         }
