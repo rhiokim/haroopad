@@ -21,6 +21,7 @@ define([
 				'change select[name=theme]': 'changeTheme',
 				'change select[name=fontSize]': 'changeFontSize',
 				'click input[name=displayLineNumber]': 'displayLineNumber',
+				'click input[name=displayActiveLine]': 'displayActiveLine',
 				'click input[name=vimKeyBinding]': 'vimKeyBinding',
 				'click input[name=indentWithTabs]': 'indentWithTabs',
 				'click a[data-tab-size]': 'setTabsize',
@@ -34,6 +35,7 @@ define([
 				this.$('select[name=fontSize]').val(config.fontSize).select2();
 				
 				this.$('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
+				this.$('input[name=displayActiveLine]').prop('checked', config.displayActiveLine);
 				this.$('input[name=vimKeyBinding]').prop('checked', config.vimKeyBinding);
 				this.$('input[name=autoPairCharacters]').prop('checked', config.autoPairCharacters);
 				this.$('input[name=indentWithTabs]').prop('checked', config.indentWithTabs);
@@ -58,6 +60,11 @@ define([
 			displayLineNumber: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('displayLineNumber', bool);
+			},
+
+			displayActiveLine: function(e) {
+				var bool = $(e.target).is(':checked');
+				options.set('displayActiveLine', bool);
 			},
 
 			vimKeyBinding: function(e) {

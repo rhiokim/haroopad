@@ -18,7 +18,7 @@ define([
 		var MAX_FONT_SIZE = 30;
 
 		var config = store.get('Editor') || {
-			displayLineNumber: true,
+			displayLineNumber: false,
 			autoPairCharacters: true,
 			theme: 'solarized dark'
 		};
@@ -185,6 +185,14 @@ define([
 			global._gaq.push('haroopad.preferences', 'editor', 'lineNumbers: ' + value);
 		}
 
+		/* toggle active line */
+
+		function toggleActiveLine(value) {
+			editor.setOption('styleActiveLine', value);
+
+			global._gaq.push('haroopad.preferences', 'editor', 'activeLine: ' + value);
+		}
+
 		/* toggle vim key binding */
 
 		function toggleVim(value) {
@@ -220,6 +228,7 @@ define([
 		
 		editor.setOption('theme', config.theme);
 		editor.setOption('lineNumbers', config.displayLineNumber);
+		editor.setOption('styleActiveLine', config.displayActiveLine);
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', config.tabSize || 4);
 		editor.setOption('indentUnit', config.indentUnit || 4);
@@ -234,6 +243,7 @@ define([
 
 		window.parent.ee.on('preferences.editor.theme', changeTheme);
 		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
+		window.parent.ee.on('preferences.editor.displayActiveLine', toggleActiveLine);
 		window.parent.ee.on('preferences.editor.vimKeyBinding', toggleVim);
 		window.parent.ee.on('preferences.editor.autoPairCharacters', toggleAutoPairChar);
 		window.parent.ee.on('preferences.editor.fontSize', changeFontSize);
@@ -243,6 +253,7 @@ define([
 
 			window.parent.ee.off('preferences.editor.theme', changeTheme);
 			window.parent.ee.off('preferences.editor.displayLineNumber', toggleLineNumber);
+			window.parent.ee.off('preferences.editor.displayActiveLine', toggleActiveLine);
 			window.parent.ee.off('preferences.editor.vimKeyBinding', toggleVim);
 			window.parent.ee.off('preferences.editor.autoPairCharacters', toggleAutoPairChar);
 		});

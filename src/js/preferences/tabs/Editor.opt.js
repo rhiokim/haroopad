@@ -12,12 +12,13 @@ define([
 		var Model = Backbone.Model.extend({
 			defaults: {
 				theme: 'solarized dark',
-				displayLineNumber: true,
+				displayLineNumber: false,
 				vimKeyBinding: false,
 				autoPairCharacters: true,
 				tabSize: 4,
 				indentUnit: 4,
 				indentWithTabs: false,
+				styleActiveLine: true,
 				fontSize: 13,
 				fontFamily: undefined
 			},
