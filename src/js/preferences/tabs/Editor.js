@@ -1,8 +1,6 @@
 define([
 		'tabs/Editor.opt'
 	], function(options) {
-  	var css = require('css');
-
 		var config = options.toJSON();
 
 		options.bind('change', function(model) {
@@ -41,6 +39,7 @@ define([
 				this.$('input[name=vimKeyBinding]').prop('checked', config.vimKeyBinding);
 				this.$('input[name=autoPairCharacters]').prop('checked', config.autoPairCharacters);
 				this.$('input[name=indentWithTabs]').prop('checked', config.indentWithTabs);
+				this.$('textarea[name=userStyle]').val(config.userStyle);
 
 				if (config.tabSize) {
 					this.activeTabsize(config.tabSize);

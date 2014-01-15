@@ -1,4 +1,6 @@
-define([], function() {
+define([
+    'editor/Editor.custom.StyleParser'
+  ], function(parse) {
   var view, config = store.get('Editor') || {};
   var userStyle = config.userStyle || '';
 
@@ -8,10 +10,18 @@ define([], function() {
     initialize: function() {
       var head = document.getElementsByTagName('head')[0];
       head.appendChild(this.el);
+
+      this.updateStyle(userStyle);
     },
 
     updateStyle: function(css) {
-      this.$el.text(css || '');
+      try {
+        var style = parse(css);
+        this.$el.text(style || '');
+        nw.editor.refresh();
+      } catch (e) {
+
+      }
     }
   });
 

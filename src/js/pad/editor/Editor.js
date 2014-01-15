@@ -132,13 +132,13 @@ define([
 
 		//TODO FIXME
 		function setFontFmaily() {
-			var all = document.styleSheets,
-			    s = all[all.length - 1],
-			    l = s.cssRules.length;
+			// var all = document.styleSheets,
+			//     s = all[all.length - 1],
+			//     l = s.cssRules.length;
 
-			if (s.insertRule) {
-			    s.insertRule(".CodeMirror { font-family: Menlo, Monaco, 'Andale Mono','lucida console','Courier New', monospace, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular !important; }", l);
-			}
+			// if (s.insertRule) {
+			//     s.insertRule(".CodeMirror { font-family: Menlo, Monaco, 'Andale Mono','lucida console','Courier New', monospace, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular !important; }", l);
+			// }
 			// CodeMirrorElement.style.fontFamily = "Monaco, Menlo, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular";
 		}
 
