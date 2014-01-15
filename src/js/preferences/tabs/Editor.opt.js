@@ -20,7 +20,8 @@ define([
 				indentWithTabs: false,
 				styleActiveLine: true,
 				fontSize: 13,
-				fontFamily: undefined
+				fontFamily: undefined,
+				userStyle: ''
 			},
 
 			initialize: function() {

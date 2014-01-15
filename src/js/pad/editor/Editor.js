@@ -3,7 +3,8 @@ define([
 		'keyboard',
 		'store',
 		'editor/Editor.keymap',
-		'editor/Editor.drop'
+		'editor/Editor.drop',
+		'editor/Editor.custom'
 	],
 	function(HotKey, store, Keymap, Drop) {
 		var moment = require('moment');

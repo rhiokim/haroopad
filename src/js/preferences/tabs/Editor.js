@@ -1,6 +1,7 @@
 define([
 		'tabs/Editor.opt'
 	], function(options) {
+  	var css = require('css');
 
 		var config = options.toJSON();
 
@@ -20,6 +21,7 @@ define([
 			events: {
 				'change select[name=theme]': 'changeTheme',
 				'change select[name=fontSize]': 'changeFontSize',
+				'keyup textarea[name=userStyle]': 'changeUserStyle',
 				'click input[name=displayLineNumber]': 'displayLineNumber',
 				'click input[name=displayActiveLine]': 'displayActiveLine',
 				'click input[name=vimKeyBinding]': 'vimKeyBinding',
@@ -55,6 +57,14 @@ define([
 
 			changeFontSize: function(e) {
 				options.set({ fontSize: Number(e.val) });
+			},
+
+			changeUserStyle: function(e) {
+				clearTimeout(this._tid);
+
+				this._tid = setTimeout(function() {
+					options.set({ userStyle: e.target.value });
+				}, 800);
 			},
 
 			displayLineNumber: function(e) {
