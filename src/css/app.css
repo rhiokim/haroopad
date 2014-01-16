@@ -1,6 +1,3 @@
-/**, .btn {
-  font-family: "Lucida Grande", "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
-}*/
 
 body {
   line-height: 1.5;
@@ -12,6 +9,13 @@ body {
 form {
   margin: 0;
   padding: 0;
+}
+
+#dialog,
+#md-help-content,
+button, .btn,
+body > footer {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 /* -----------------------------------------
