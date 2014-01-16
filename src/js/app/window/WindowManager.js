@@ -92,7 +92,11 @@ define([
 				top = top + 20;
 			}
 
-			this.moveTo(left, top);
+			if (!top && !left) {
+				this.setPosition('center');
+			} else {
+				this.moveTo(left, top);
+			}
 		});
 	}
 
