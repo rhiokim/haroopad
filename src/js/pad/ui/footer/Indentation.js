@@ -27,7 +27,7 @@ define(function() {
 		},
 
 		changeTabSize: function(e) {
-			var target = $(e.target);
+			var target = $(e.currentTarget);
 			var tabSize = target.data('tab-size');
 
 			this.selectTabSize(tabSize);

@@ -209,9 +209,6 @@ define([
 	});
 
 
-	window.ee.on('menu.view.doc.outline', function(show) {
-		show ? _viewer.showOutline() : _viewer.hideOutline();
-	});
 	window.ee.on('menu.view.toggle.toc', function() {
 		view.toggleTOC();
 	});
