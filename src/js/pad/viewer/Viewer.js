@@ -126,6 +126,10 @@ define([
 		window.ee.on('editor.scroll', function(top, per) {
 			_viewer.scrollTop(top * 100 / per);
 		});
+		
+		window.ee.on('menu.view.doc.outline', function(show) {
+			show ? _viewer.showOutline() : _viewer.hideOutline();
+		});
 
 		/**
 		 * delegate to parent window key mouse down event
