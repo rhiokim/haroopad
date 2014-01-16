@@ -4,9 +4,9 @@ var languageTable = {
 	"ko": 'ko',
 	"es": 'es',
 	"zh": 'cn',
-	"zh-CN": 'cn',
-	"zh-HK": 'cn',
-	"zh-TW": 'cn'
+	"zh-cn": 'cn',
+	"zh-hk": 'cn',
+	"zh-tw": 'cn'
 };
 
 function asVersion(str) {
@@ -55,7 +55,7 @@ function getExecPath() {
 }
 
 function getLang() {
-	var locale = window.navigator.language;
+	var locale = window.navigator.language.toLowerCase();
 	var lang = languageTable[locale];
 
 	if (lang) {
@@ -73,7 +73,7 @@ function getLang() {
 }
 
 function getDocsPath() {
-	return path.join(getExecPath(), 'Libraries/.docs', getLang());
+	return path.join(getExecPath(), 'Libraries/.docs', getLang() != 'ko' && 'en');
 }
 
 function loadCss(url) {
