@@ -73,7 +73,8 @@ function getLang() {
 }
 
 function getDocsPath() {
-	return path.join(getExecPath(), 'Libraries/.docs', getLang() != 'ko' && 'en');
+	var lang = getLang() == 'ko' ? 'ko' : 'en';
+	return path.join(getExecPath(), 'Libraries/.docs/', lang);
 }
 
 function loadCss(url) {
