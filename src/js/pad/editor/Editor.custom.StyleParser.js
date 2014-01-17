@@ -1,9 +1,9 @@
 define(function() {
   var css = require('css');
 
-  var fontStyle = [ 'color', 'font-family', 'font-style', 'text-shadow' ];
+  var fontStyle = [ 'color', 'font-style', 'text-shadow' ];
   var layoutStyle = fontStyle.concat([ 
-    'background', 'background-image', 'background-color' ]);
+    'font-family', 'background', 'background-image', 'background-color' ]);
   var supportTable = {
     '*': { 'select': '.CodeMirror', 'properties': fontStyle},
     'header': { 'selector': '.cm-header', 'properties': fontStyle },

@@ -1,11 +1,11 @@
 define([
-    'editor/Editor.custom.StyleParser'
-  ], function(parse) {
+  'editor/Editor.custom.StyleParser'
+], function(parse) {
   var view, config = store.get('Editor') || {};
   var userStyle = config.userStyle || '';
 
   var CustomStyle = Backbone.View.extend({
-    el : document.createElement('style'),
+    el: document.createElement('style'),
 
     initialize: function() {
       var head = document.getElementsByTagName('head')[0];
@@ -18,9 +18,12 @@ define([
       try {
         var style = parse(css);
         this.$el.text(style || '');
-        nw.editor.refresh();
-      } catch (e) {
 
+        if (nw.editor) {
+          nw.editor.refresh();
+        }
+      } catch (e) {
+        console.log(e);
       }
     }
   });
