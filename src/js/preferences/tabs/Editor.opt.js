@@ -21,7 +21,7 @@ define([
 				styleActiveLine: true,
 				fontSize: 13,
 				fontFamily: undefined,
-				userStyle: ''
+				userStyle: 'editor {\n  /*font-family: "微软雅黑", "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, sans-serif !important;*/\n}'
 			},
 
 			initialize: function() {
