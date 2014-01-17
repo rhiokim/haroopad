@@ -23,7 +23,6 @@ define([
           nw.editor.refresh();
         }
       } catch (e) {
-        console.log(e);
       }
     }
   });
