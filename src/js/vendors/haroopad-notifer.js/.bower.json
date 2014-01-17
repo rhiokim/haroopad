@@ -1,14 +1,14 @@
 {
   "name": "haroopad-notifer.js",
   "homepage": "https://github.com/rhiokim/haroopad-notifer.js",
-  "_release": "4c3cbf7e9d",
+  "_release": "744d61ee9f",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "4c3cbf7e9dccda60ba1c65c0d76cecb132cfab8d"
+    "commit": "744d61ee9fe78f28ec9d96cb3b6f4f8012c03d1d"
   },
   "_source": "git@github.com:rhiokim/haroopad-notifer.js.git",
-  "_target": "*",
-  "_originalSource": "git@github.com:rhiokim/haroopad-notifer.js.git",
+  "_target": "master",
+  "_originalSource": "git@github.com:rhiokim/haroopad-notifer.js",
   "_direct": true
 }
