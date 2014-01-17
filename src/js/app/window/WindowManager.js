@@ -100,6 +100,8 @@ define([
 
 			if (!top && !left) {
 				this.setPosition('center');
+				top = this.x;
+				left = this.y;
 			} else {
 				this.moveTo(left, top);
 			}
