@@ -6,13 +6,13 @@ var NotifierjsConfig = {
     "margin": "0 0 22px 0",
     "background-color": "#000",
     "opacity": 0.8,
-    "-ms-filter": "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)",
-    "filter": "alpha(opacity = 80)",
+    //"-ms-filter": "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)",
+    //"filter": "alpha(opacity = 80)",
     "color": "#fff",
-    "font": "normal 13px 'Droid Sans', sans-serif",
+    //"font": "normal 13px 'Droid Sans', sans-serif",
     "border-radius": "3px",
-    "box-shadow": "#999 0 0 12px",
-    "width": "300px"
+    "box-shadow": "#999 0 0 12px"/*,
+    "width": "300px"*/
   },
   notificationStylesHover: {
     "opacity": 1,
