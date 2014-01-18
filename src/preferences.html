@@ -253,12 +253,10 @@
                   <option>xq-dark</option>
                   <option>xq-light</option>
                 </select>
-              </p>
 
-              <p>
-                <h5>Your Style</h5>
+                <span style="margin:0 1px 0 10px;">font size</span>
 
-                <span>Font Size</span>
+                <!-- <span>Font Size</span> -->
                 <select class="select2" name="fontSize">
                   <option>10</option>
                   <option>11</option>
@@ -278,8 +276,23 @@
                   <option>25</option>
                   <option>30</option>
                 </select>
+              </p>
 
-                <textarea class="form-control" name="userStyle" rows="4"></textarea>
+              <p>
+                <h5>Your Style</h5>
+
+              </p>
+              <p>
+                <div class="input-group">
+                  <!-- <span>Font Style</span> -->
+                  <select class="select2" name="userTheme">
+                  </select>
+
+                  <!-- <div class="input-group-btn"> -->
+                    <button id="openUserThemeDir" class="btn btn-sm btn-primary" data-i18n="editor.theme.edit">Edit</button>
+                    <button id="reloadUserTheme" class="btn btn-sm btn-default" data-i18n="editor.theme.reload">Reload</button>
+                  <!-- </div> -->
+                </div>
               </p>
                   
               <p>

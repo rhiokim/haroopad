@@ -1,0 +1,107 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+/**
+ * https://github.com/rhiokim/markdown-css
+ * made by rhio.kim
+ */
+.metro-vibes-dark {
+  padding: 20px;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: 'Open Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  background: #5c5146;
+  -webkit-font-smoothing: antialiased;
+}
+.metro-vibes-dark a {
+  color: #e5b931;
+}
+.metro-vibes-dark a:hover {
+  color: #ebc85e;
+}
+.metro-vibes-dark h1,
+.metro-vibes-dark h2,
+.metro-vibes-dark h3,
+.metro-vibes-dark h4,
+.metro-vibes-dark h5 {
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+.metro-vibes-dark h2 {
+  border-bottom: 1px solid #796a5c;
+  line-height: 1.7em;
+}
+.metro-vibes-dark h6 {
+  color: #777;
+}
+.metro-vibes-dark hr {
+  border: 1px solid #3f3730;
+}
+.metro-vibes-dark p {
+  line-height: 19px;
+}
+.metro-vibes-dark p > code {
+  font-family: 'Open Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  color: #e86741;
+  font-size: .9em;
+}
+.metro-vibes-dark pre > code {
+  font-size: 1em;
+  font-family: 'Open Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  letter-spacing: -1px;
+  font-weight: normal;
+}
+.metro-vibes-dark blockquote {
+  border-left: 4px solid #4e443b;
+  padding: 0 15px;
+  font-style: italic;
+  color: #e86741;
+}
+.metro-vibes-dark table {
+  background-color: #564c42;
+}
+.metro-vibes-dark table tr th,
+.metro-vibes-dark table tr td {
+  border: 1px solid #3f3730;
+}
+.metro-vibes-dark table tr:nth-child(2n) {
+  background-color: #4e443b;
+}
+/**
+ * after less
+ */
+/*
+.haroopad {
+	
+  img {
+    .bordered(@border-color, @border-color, @border-color, @border-color);
+    .rounded(3px);
+    .box-shadow(0 0 7px darken(@border-color, 18%));
+
+    &:hover {
+	    -webkit-animation-duration: 1s;
+	    -webkit-animation-delay: .2s;
+    	.pulse;
+    }
+  }
+
+  h1 {
+    -webkit-animation-duration: .5s;
+    -webkit-animation-delay: .2s;
+  	.tada;
+  }
+
+  &>ul {
+  	&>li {
+	    -webkit-animation-duration: .5s;
+	    -webkit-animation-delay: .2s;
+	  	.fadeInLeft;
+	  }
+  }
+
+}
+*/
