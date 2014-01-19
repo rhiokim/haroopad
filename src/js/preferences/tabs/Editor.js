@@ -16,7 +16,7 @@ define([
 	});
 
 	function loadCSSFiles(dir) {
-		var csses = readDir.readSync(dir, [ '*.css' ], readDir.ABSOLUTE_PATHS + readDir.CASELESS_SORT);
+		var csses = readDir.readSync(dir, [ '*.css' ], readDir.CASELESS_SORT);
 		var name, themes = {};
 
 		csses.forEach(function(css, idx) {
