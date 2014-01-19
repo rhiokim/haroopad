@@ -18,7 +18,7 @@ define([
 				tabSize: 4,
 				indentUnit: 4,
 				indentWithTabs: false,
-				styleActiveLine: true,
+				displayActiveLine: true,
 				fontSize: 13,
 				fontFamily: undefined,
 				userThemes: {},

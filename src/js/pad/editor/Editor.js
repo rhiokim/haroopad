@@ -21,6 +21,7 @@ define([
 		var config = store.get('Editor') || {
 			displayLineNumber: false,
 			autoPairCharacters: true,
+			displayActiveLine: true,
 			theme: 'solarized dark'
 		};
 		config.fontSize = Number(config.fontSize || 13);
@@ -34,7 +35,6 @@ define([
 			lineNumbers: true,
 			lineWrapping: true,
 			electricChars: false,
-  		styleActiveLine: true,
 			viewportMargin: 40,
 			autofocus: true,
 			workDelay: 1000,
