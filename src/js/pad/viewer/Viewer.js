@@ -81,12 +81,11 @@ define([
 			var css = (theme && theme.path) || '';
 			_viewer.loadCustomCSS(css);
 
-
 			!log && global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
 		}
 
 		function enableMath(value, log) {
-			_viewer.empty();
+			// _viewer.empty();
 			
 			nw.file.trigger('change:markdown');
 
@@ -202,7 +201,7 @@ define([
 		});
 
 		/* change markdown event handler */
-		nw.file.doc.on('change:html', function(doc, html) {
+		nw.file.doc.on('update', function(doc, html) {
 			setTimeout(function() {
 				_viewer.update(doc.dom());
 			}, 1);
