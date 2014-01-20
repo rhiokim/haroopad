@@ -1,0 +1,66 @@
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+/**
+ * https://github.com/rhiokim/markdown-css
+ * solarized-dark style
+ * made by rhio.kim
+ * powered by http://ethanschoonover.com/solarized
+ */
+.node-dark {
+  padding: 20px;
+  color: #d2d8ba;
+  font-size: 15px;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
+  background: #33342d;
+  -webkit-font-smoothing: antialiased;
+}
+.node-dark a {
+  color: #639400;
+}
+.node-dark a:hover {
+  color: #85c700;
+}
+.node-dark h1,
+.node-dark h2,
+.node-dark h3,
+.node-dark h4,
+.node-dark h5 {
+  color: #eee;
+}
+.node-dark h2 {
+  border-bottom: 1px solid #4e4f45;
+  line-height: 1.7em;
+}
+.node-dark h6 {
+  color: #694f00;
+}
+.node-dark hr {
+  border: 1px solid #2b2c26;
+}
+.node-dark pre > code {
+  font-size: 1em;
+  font-family: Consolas, Inconsolata, Courier, monospace;
+  font-weight: bold;
+}
+.node-dark blockquote {
+  border-left: 4px solid #181915;
+  padding: 0 15px;
+  font-style: italic;
+}
+.node-dark table {
+  background-color: #3d3e36;
+}
+.node-dark table tr th,
+.node-dark table tr td {
+  border: 1px solid #5f6154;
+}
+.node-dark table tr:nth-child(2n) {
+  background-color: #46483e;
+}
+/**
+ * after less
+ */

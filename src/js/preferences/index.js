@@ -1,5 +1,6 @@
 var gui = require('nw.gui');
 var fs = require('fs');
+var path = require('path');
 var lng = getLang();
 
 window.nw = gui.Window.get();
@@ -49,14 +50,22 @@ i18n.init({
       'tabs/Markdown',
       'tabs/Helper',
       'tabs/About',
-      'tabs/Backup'
+      'tabs/Backup',
+      'util/ResourceCopy'
     ], function(General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
+      var shell = gui.Shell;
 
       $('body').i18n(); 
       document.title = i18n.t('title');
     
       keymage('esc', function() {
         nw.close();
+      });
+
+      Editor.on('open-theme', function(theme) {
+        var theme = path.join(gui.App.dataPath, 'Themes', 'editor', theme);
+        theme += '.css';
+        shell.showItemInFolder(theme);
       });
 
       nw.show();

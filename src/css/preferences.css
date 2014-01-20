@@ -127,7 +127,7 @@ input[type=checkbox] {
   height: 61px;
 }
 .badge {
-	display: none;
+	/*display: none;*/
 }
 
 .panel {

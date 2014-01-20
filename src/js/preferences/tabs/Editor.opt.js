@@ -21,7 +21,8 @@ define([
 				displayActiveLine: true,
 				fontSize: 13,
 				fontFamily: undefined,
-				userStyle: ''
+				userThemes: {"default":{id:0,name:"default",path:"default.css"}},
+				userTheme: 'default'
 			},
 
 			initialize: function() {

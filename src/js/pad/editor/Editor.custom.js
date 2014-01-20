@@ -1,31 +1,54 @@
 define([
-    'editor/Editor.custom.StyleParser'
-  ], function(parse) {
+  'editor/Editor.custom.StyleParser'
+], function(parse) {
+  var fs = require('fs');
+  var path = require('path');
   var view, config = store.get('Editor') || {};
-  var userStyle = config.userStyle || '';
+
+  function loadUserCss(userTheme) {
+    if (!userTheme) {
+      return;
+    }
+
+    var themeFile = path.join(gui.App.dataPath, 'Themes', 'editor', userTheme);
+    themeFile += '.css';
+
+    try {
+      return fs.readFileSync(themeFile, 'utf8');
+    } catch (e) {}
+  }
 
   var CustomStyle = Backbone.View.extend({
-    el : document.createElement('style'),
+    el: document.createElement('style'),
 
     initialize: function() {
       var head = document.getElementsByTagName('head')[0];
+      var css = loadUserCss(config.userTheme);
       head.appendChild(this.el);
 
-      this.updateStyle(userStyle);
+      if (css) {
+        this.updateStyle(css);
+      }
     },
 
     updateStyle: function(css) {
       try {
         var style = parse(css);
         this.$el.text(style || '');
-        nw.editor.refresh();
-      } catch (e) {
 
-      }
+        if (nw.editor) {
+          nw.editor.refresh();
+        }
+      } catch (e) {}
+    },
+
+    changeUserTheme: function(theme) {
+      var css = loadUserCss(theme);
+      this.updateStyle(css);
     }
   });
 
   view = new CustomStyle;
 
-  window.parent.ee.on('preferences.editor.userStyle', view.updateStyle.bind(view));
+  window.parent.ee.on('preferences.editor.userTheme', view.changeUserTheme.bind(view));
 });

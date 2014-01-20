@@ -1,14 +1,16 @@
 define(function() {
   var css = require('css');
 
-  var fontStyle = [ 'color', 'font-family', 'font-style', 'text-shadow' ];
+  var fontStyle = [ 'color', 'font-style', 'text-shadow' ];
   var layoutStyle = fontStyle.concat([ 
-    'background', 'background-image', 'background-color' ]);
+    'font-family', 'background', 'background-image', 'background-color' ]);
   var supportTable = {
     '*': { 'select': '.CodeMirror', 'properties': fontStyle},
     'header': { 'selector': '.cm-header', 'properties': fontStyle },
     'code': { 'selector': '.cm-comment', 'properties': fontStyle },
     'comment': { 'selector': '.cm-comment', 'properties': fontStyle },
+    'del': { 'selector': '.cm-comment', 'properties': fontStyle  },
+    'strike': { 'selector': '.cm-comment', 'properties': fontStyle },
     'blockquote': { 'selector': '.cm-atom', 'properties': fontStyle },
     'li1': { 'selector': '.cm-variable-2', 'properties': fontStyle},
     'li2': { 'selector': '.cm-variable-3', 'properties': fontStyle },
@@ -16,9 +18,8 @@ define(function() {
     'hr': { 'selector': '.cm-hr', 'properties': fontStyle },
     'img': { 'selector': '.cm-tag', 'properties': fontStyle },
     'a': { 'selector': '.cm-link', 'properties': fontStyle },
+    'link': { 'selector': '.cm-link', 'properties': fontStyle },
     'i': { 'selector': '.cm-em', 'properties': fontStyle },
-    'del': { 'selector': '.cm-comment', 'properties': fontStyle  },
-    'strike': { 'selector': '.cm-comment', 'properties': fontStyle },
     'em': { 'selector': '.cm-em',  'properties': fontStyle },
     'strong': { 'selector': '.cm-strong', 'properties': fontStyle },
 

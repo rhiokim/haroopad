@@ -458,9 +458,7 @@ module.exports = function(grunt) {
         files: [
           { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
           { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
-          { src: 'lib/markdown.icns', dest: 'build/haroopad.app/Contents/Resources/markdown.icns' },
-
-          { expand: true, cwd: 'build/libs/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/libs/' }
+          { src: 'lib/markdown.icns', dest: 'build/haroopad.app/Contents/Resources/markdown.icns' }
         ]
       },
 
@@ -483,16 +481,22 @@ module.exports = function(grunt) {
         ]
       },
 
-      /* vendors */
-      btmodal: {
+      editorTheme: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/bootstrap-modal/css/', src: [ '**' ], dest: 'src/css/' }
+          { expand: true, cwd: '<%= vendors %>/haroopad-theme/css/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Resources/Themes/editor/'}
         ]
       },
 
       mkdcss: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/markdown-css/build/', src: [ '**' ], dest: 'src/css/markdown' }
+          { expand: true, cwd: '<%= vendors %>/markdown-css/build/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Resources/Themes/markdown/' }
+        ]
+      },
+
+      /* vendors */
+      btmodal: {
+        files: [
+          { expand: true, cwd: '<%= vendors %>/bootstrap-modal/css/', src: [ '**' ], dest: 'src/css/' }
         ]
       },
 
@@ -641,6 +645,7 @@ module.exports = function(grunt) {
 
   /* built-in libs for node-webkit */
   grunt.registerTask('nwlibs', [ 'copy:mathjax', 'copy:node_modules', 'copy:docs', 'copy:locales' ]);
+  grunt.registerTask('nwres', [ 'copy:editorTheme', 'copy:mkdcss' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'nwlibs' ]);
 
@@ -654,7 +659,7 @@ module.exports = function(grunt) {
   grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs' ]);
   grunt.registerTask('prebower', [ 
     'copy:btmodal', 
-    'copy:mkdcss', 
+    // 'copy:mkdcss', 
     'copy:mathjax', 
     'copy:highlightjs',
     'copy:select2',
