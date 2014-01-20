@@ -17,13 +17,14 @@ define(function() {
   files = readDir.readSync(editorSource, [ '**.css' ]);
   
   files.forEach(function(file) {
-    dest = editorDest +'/'+ file;
-    source = editorSource +'/'+ file;
+    dest = path.join(editorDest, file);
+    source = path.join(editorSource, file);
 
     isExist = fs.existsSync(dest);
 
     if (!isExist) {
       try {
+        console.log(source, dest)
         fs.copySync(source, dest);
       } catch (e) {}
     } 
@@ -33,8 +34,8 @@ define(function() {
   files = readDir.readSync(markdownSource, [ '**.css' ]);
   
   files.forEach(function(file) {
-    dest = markdownDest +'/'+ file;
-    source = markdownSource +'/'+ file;
+    dest = path.join(markdownDest, file);
+    source = path.join(markdownSource, file);
 
     isExist = fs.existsSync(dest);
 
@@ -42,7 +43,7 @@ define(function() {
       try {
         fs.copySync(source, dest);
       } catch (e) {}
-    } 
+    }
 
   });
   

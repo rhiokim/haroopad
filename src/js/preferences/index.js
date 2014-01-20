@@ -50,7 +50,8 @@ i18n.init({
       'tabs/Markdown',
       'tabs/Helper',
       'tabs/About',
-      'tabs/Backup'
+      'tabs/Backup',
+      'util/ResourceCopy'
     ], function(General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
       var shell = gui.Shell;
 
@@ -62,7 +63,9 @@ i18n.init({
       });
 
       Editor.on('open-theme', function(theme) {
-        shell.showItemInFolder(gui.App.dataPath +'/Themes/editor/'+ theme +'.css');
+        var theme = path.join(gui.App.dataPath, 'Themes', 'editor', theme);
+        theme += '.css';
+        shell.showItemInFolder(theme);
       });
 
       nw.show();

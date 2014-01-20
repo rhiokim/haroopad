@@ -48,14 +48,13 @@ i18n.init({
   MenuBar();
 
   requirejs([
-    'utils/ResourceCopy',
     'context/Context',
     'mail/Mailer',
     'window/Window',
     'window/WindowManager',
     'utils/UpdateNotifier',
     'math/Math'
-  ], function(ResourceCopy, Context, Mailer, Window, WindowMgr, Updater) {
+  ], function(Context, Mailer, Window, WindowMgr, Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
