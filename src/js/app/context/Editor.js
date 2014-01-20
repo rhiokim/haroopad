@@ -1,7 +1,8 @@
 define([
+		'context/format/Text',
 		'context/search/Search'
 	], 
-	function(Search) {
+	function(TextFormatMenu, Search) {
 
 		var gui = require('nw.gui'),
       	win = gui.Window.get();
@@ -56,9 +57,16 @@ define([
 		Context.append(mPaste);
 		Context.append(mDelete);
 		Context.append(mSelectAll);
-		// Context.append(mSelectAll);
 
 		Context.append(sepItem());
+
+		// Context.append(
+	 //    new gui.MenuItem({
+	 //      label: i18n.t('format'),
+	 //      submenu: TextFormatMenu
+	 //    })
+  //   );
+		// Context.append(sepItem());
 
 		mSearch = menuItem({ 
 			label: 'Search with ...',

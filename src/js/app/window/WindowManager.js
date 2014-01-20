@@ -16,8 +16,8 @@ define([
 
 	var config = store.get('Window') || {};
 	var generalOpt = store.get('General');
-	var top = config.y,
-		left = config.x;
+	var top = config.y || 20,
+		left = config.x || 20;
 
 	function _updateStore() {
 		config = store.get('Window') || {};
@@ -86,11 +86,11 @@ define([
 			// }
 
 			if (config.height + top > window.screen.height) {
-				top = 0;
+				top = 20;
 			}
 
 			if (config.width + left > window.screen.width) {
-				left = 0;
+				left = 20;
 			}
 
 			if (realCount > 1) {

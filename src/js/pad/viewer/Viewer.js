@@ -170,12 +170,13 @@ define([
 
 		/* copy html to clipboard */
 		window.ee.on('menu.file.exports.clipboard.plain', function() {
+			var content = nw.file.doc.get('html');
 			clipboard.set(content, 'text');
 		});
 
-		window.ee.on('menu.file.exports.clipboard.haroopad', function() {
-			clipboard.set(content, 'text');
-		});
+		// window.ee.on('menu.file.exports.clipboard.haroopad', function() {
+		// 	clipboard.set(content, 'text');
+		// });
 
 		window.ee.on('menu.view.viewer.font.size', function(value) {
 			viewerConfig.fontSize += value;
@@ -197,9 +198,9 @@ define([
 			window.ee.emit('menu.file.exports.clipboard.plain');
 		});
 
-		HotKey('defmod-shift-alt-c', function() {
-			window.ee.emit('menu.file.exports.clipboard.haroopad');
-		});
+		// HotKey('defmod-shift-alt-c', function() {
+		// 	window.ee.emit('menu.file.exports.clipboard.haroopad');
+		// });
 
 		HotKey('defmod-shift-.', function() {
 			window.ee.emit('menu.view.viewer.font.size', 1);

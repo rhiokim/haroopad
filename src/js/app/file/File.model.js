@@ -34,7 +34,6 @@ define([
       markdown: '',
       tmp: undefined,
       readOnly: false,
-      toc: '',
       doc: null
     },
 
