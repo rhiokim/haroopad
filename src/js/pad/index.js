@@ -35,8 +35,8 @@ i18n.init({
   lng: lng
 }, function() {
 
-  i18n.addResourceBundle(lng, 'menu', global.locales['menu']);
-  i18n.addResourceBundle(lng, 'pad', global.locales['pad']);
+  i18n.addResourceBundle(lng, 'menu', global._locales['menu']);
+  i18n.addResourceBundle(lng, 'pad', global._locales['pad']);
 
   i18n.setDefaultNamespace('menu');
 

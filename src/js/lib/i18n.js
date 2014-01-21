@@ -3,36 +3,26 @@
  */
 ;(function() {
 
-	var fs = require('fs');
+	var fs = require('fs-extra');
 	var path = require('path');
 
-	var lng, url, locales = global.locales = {};
+	var locales = global._locales = {};
 
-	function load(ns) {
-		var res, file;
-		file = ns +'.json';
+	var baseDir = path.join(getExecPath(), 'Libraries', '.locales');
+	var locale = window.navigator.language.toLowerCase();
+	var langDir = path.join(baseDir, locale);
 
-		res = fs.readFileSync(path.join(url, file), 'utf8');
-		res = JSON.parse(res);
-			
-		locales[ns] = res;
+	if (!fs.existsSync(langDir)) {
+		locale = locale.split('-')[0];
+		langDir = path.join(baseDir, locale);
+
+		if (!fs.existsSync(langDir)) {
+			langDir = path.join(baseDir, 'en');
+		}
 	}
 
-	function init(options) {
-		var ns;
-		lng = options.lng || 'en';
-
-		url = options.path || 'locales';
-		url = path.join(url, lng);
-
-		ns = options.ns || [];
-		ns.forEach(load);
-	}
-
-	init({
-	  lng: getLang(),
-	  path: getExecPath() +'/Libraries/.locales/',
-	  ns: [ 'menu', 'pad', 'preference' ]
+	[ 'menu', 'pad', 'preference' ].forEach(function(ns) {
+		locales[ns] = fs.readJSONSync(path.join(langDir, ns +'.json'));
 	});
 
 }());
