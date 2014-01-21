@@ -481,9 +481,10 @@ module.exports = function(grunt) {
         ]
       },
 
-      editorTheme: {
+      userThemes: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/haroopad-theme/css/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Resources/Themes/editor/'}
+          { expand: true, cwd: '<%= vendors %>/haroopad-theme/editor/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Resources/Themes/editor/'},
+          { expand: true, cwd: '<%= vendors %>/haroopad-theme/viewer/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Resources/Themes/viewer/'}
         ]
       },
 
@@ -645,7 +646,7 @@ module.exports = function(grunt) {
 
   /* built-in libs for node-webkit */
   grunt.registerTask('nwlibs', [ 'copy:mathjax', 'copy:node_modules', 'copy:docs', 'copy:locales' ]);
-  grunt.registerTask('nwres', [ 'copy:editorTheme', 'copy:mkdcss' ]);
+  grunt.registerTask('nwres', [ 'copy:userThemes', 'copy:mkdcss' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'nwlibs' ]);
 

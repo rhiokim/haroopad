@@ -62,11 +62,19 @@ i18n.init({
         nw.close();
       });
 
-      Editor.on('open-theme', function(theme) {
-        var theme = path.join(gui.App.dataPath, 'Themes', 'editor', theme);
+      function showItemInFolder(area, file) {
+        var theme = path.join(gui.App.dataPath, 'Themes', area, file);
         theme += '.css';
         shell.showItemInFolder(theme);
+      }
+      
+      Editor.on('open-theme', function(theme) {
+        showItemInFolder('editor', theme);
       });
+
+      Viewer.on('open-theme', function(theme) {
+        showItemInFolder('viewer', theme);
+      })
 
       nw.show();
       nw.focus();
