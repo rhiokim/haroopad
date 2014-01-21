@@ -3,9 +3,10 @@ define([
 		'keyboard',
 		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.inlineStyleForEmail',
+		'viewer/Viewer.userTheme',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, inlineStyle, StyleForEmail, DragDrop) {
+	function(store, HotKey, inlineStyle, StyleForEmail, UserTheme, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 
@@ -21,7 +22,7 @@ define([
 		var viewerConfig = store.get('Viewer') || {};
 			viewerConfig.fontSize = Number(viewerConfig.fontSize || 15);
 		var codeConfig = store.get('Code') || {};
-		var customConfig = store.get('Custom') || {};
+		// var customConfig = store.get('Custom') || {};
 		// var generalConfig = store.get('General') || {};
 		var markdownConfig = store.get('Markdown') || {};
 
@@ -273,9 +274,10 @@ define([
 		changeFontFamily(viewerConfig.fontFamily, true);
 		changeCodeTheme(codeConfig.theme || 'solarized_light', true);
 
-		if (customConfig.theme) {
-			_viewer.loadCustomCSS(customConfig.theme.path);
-		}
+		UserTheme.init();
+		// if (customConfig.theme) {
+		// 	_viewer.loadCustomCSS(customConfig.theme.path);
+		// }
 
 		return {
 			init: function() {
