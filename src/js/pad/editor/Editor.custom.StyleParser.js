@@ -37,9 +37,17 @@ define(function() {
     var userRules = userStyle.stylesheet.rules || [];
     var selector, supportRule, declarations;
 
+    cssRules.forEach(function(rule) {
+      if (rule.type == 'import') {
+        userRules.push(rule);
+      }
+    });
+
     cssRules = cssRules.filter(function(rule) {
-      selector = rule['selectors'][0];
-      return selector in supportTable;
+      if (rule.type == 'rule') {
+        selector = rule['selectors'][0];
+        return selector in supportTable;
+      }
     });
 
     while(rule = cssRules.shift()) {
