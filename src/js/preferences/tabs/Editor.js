@@ -106,6 +106,8 @@ define([
 			options.set({ userThemes: themes });
 
 			this.setThemeData(themes);
+
+			window.parent.ee.emit('preferences.editor.userTheme', 'default');
 		},
 
 		setThemeData: function(themes) {
