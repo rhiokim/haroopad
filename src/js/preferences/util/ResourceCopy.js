@@ -6,10 +6,10 @@ define(function() {
   var files, isExist, source, dest;
 
   var editorSource = path.join(getExecPath(), 'Resources', 'Themes', 'editor');
-  var markdownSource = path.join(getExecPath(), 'Resources', 'Themes', 'markdown');
+  var markdownSource = path.join(getExecPath(), 'Resources', 'Themes', 'viewer');
 
   var editorDest = path.join(gui.App.dataPath, 'Themes', 'editor');
-  var markdownDest = path.join(gui.App.dataPath, 'Themes', 'markdown');
+  var markdownDest = path.join(gui.App.dataPath, 'Themes', 'viewer');
 
   fs.mkdirpSync(editorDest);
   fs.mkdirpSync(markdownDest);
@@ -24,7 +24,6 @@ define(function() {
 
     if (!isExist) {
       try {
-        console.log(source, dest)
         fs.copySync(source, dest);
       } catch (e) {}
     } 

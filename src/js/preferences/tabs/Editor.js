@@ -16,7 +16,7 @@ define([
 	});
 
 	function loadCSSFiles(dir) {
-		var csses = readDir.readSync(dir, [ '*.css' ], readDir.CASELESS_SORT);
+		var csses = readDir.readSync(dir, ['*.css'], readDir.CASELESS_SORT);
 		var name, themes = {};
 
 		csses.forEach(function(css, idx) {
@@ -30,7 +30,7 @@ define([
 
 		return themes;
 	}
-	
+
 	var EditorTabView = Backbone.View.extend({
 		el: '#editor-tab',
 
@@ -42,8 +42,8 @@ define([
 			'click input[name=displayActiveLine]': 'displayActiveLine',
 			'click input[name=vimKeyBinding]': 'vimKeyBinding',
 			'click input[name=indentWithTabs]': 'indentWithTabs',
-			'click a[data-tab-size]': 'setTabsize',
 			'click input[name=autoPairCharacters]': 'autoPairCharacters',
+			'click a[data-tab-size]': 'setTabsize',
 			'click #openUserThemeDir': 'openUserThemeDir',
 			'click #reloadUserTheme': 'reloadUserTheme'
 		},
@@ -92,7 +92,9 @@ define([
 			var theme = themes[el.val()].name;
 
 			config.userTheme = theme;
-			options.set({ userTheme: theme });
+			options.set({
+				userTheme: theme
+			});
 		},
 
 		openUserThemeDir: function(e) {
@@ -101,13 +103,16 @@ define([
 		},
 
 		reloadUserTheme: function(e) {
+			var theme = this.$('select[name=userTheme]').val();
 			var themes = loadCSSFiles(path.join(gui.App.dataPath, 'Themes', 'editor'));
 
-			options.set({ userThemes: themes });
+			options.set({
+				userThemes: themes
+			});
 
 			this.setThemeData(themes);
 
-			window.parent.ee.emit('preferences.editor.userTheme', 'default');
+			window.parent.ee.emit('preferences.editor.userTheme', theme);
 		},
 
 		setThemeData: function(themes) {
@@ -115,7 +120,7 @@ define([
 
 			el.empty();
 
-			for(prop in themes) {
+			for (prop in themes) {
 				items = themes[prop];
 
 				option = $('<option>').attr('value', prop).text(prop);

@@ -5,7 +5,9 @@ define([
 				theme: 'haroopad',
 				clickableLink: false,
 				fontSize: 15,
-				fontFamily: undefined
+				fontFamily: undefined,
+				userThemes: {"default":{id:0,name:"default",path:"default.css"}},
+				userTheme: 'default'
 			},
 
 			// localStorage: new Backbone.LocalStorage('General'),
