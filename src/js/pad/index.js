@@ -1,6 +1,5 @@
 /* globally for window event system */
 var gui = require('nw.gui');
-var fs = require('fs');
 var lng = getLang();
 
 window.nw = gui.Window.get();

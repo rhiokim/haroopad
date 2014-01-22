@@ -302,8 +302,9 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= build %>/app.common.min.js': [
-            'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
+            'src/js/lib/system.js',
+            'src/js/lib/logger.js',
             'src/js/app/app.common.js',
             'src/js/lib/utils/analytics.js',
             'src/js/lib/utils/package.info.js',
@@ -544,18 +545,18 @@ module.exports = function(grunt) {
         ]
       },
       
-      select2: {
-        files: [
+      // select2: {
+      //   files: [
           // { src: '<%= vendors %>/select2/select2.png', dest: 'src/css/select2.png' },
           // { src: '<%= vendors %>/select2/select2x2.png', dest: 'src/css/select2x2.png' }
-        ]
-      },
+        // ]
+      // },
       
-      jqoembed: {
-        files: [
+      // jqoembed: {
+        // files: [
           // { src: '<%= vendors %>/haroopad-oembed/jquery.oembed.css', dest: 'src/css/jquery.oembed.css' }
-        ]
-      }
+        // ]
+      // }
     },
 
     shell: {
@@ -648,7 +649,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
   /* built-in libs for node-webkit */
-  grunt.registerTask('nwlibs', [ 'copy:mathjax', 'copy:node_modules', 'copy:docs', 'copy:locales' ]);
+  grunt.registerTask('nwlibs', [ 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales' ]);
   grunt.registerTask('nwres', [ 'copy:userThemes', 'copy:mkdcss' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
@@ -661,14 +662,14 @@ module.exports = function(grunt) {
 
   /* pre built */
   grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs' ]);
-  grunt.registerTask('prebower', [ 
+  // grunt.registerTask('prebower', [ 
     // 'copy:btmodal', 
     // 'copy:mkdcss', 
     // 'copy:mathjax', 
     // 'copy:highlightjs',
     // 'copy:select2',
     // 'copy:jqoembed' 
-    ]);
+    // ]);
 
   /* css */
   grunt.registerTask('css', [ 'cssmin:pad', 'cssmin:preferences', 'cssmin:viewer', 'cssmin:codemirror' ]);

@@ -8,7 +8,7 @@ define([
 
 	function init() {
 		prefWin = gui.Window.open('preferences.html', {
-	        // toolbar: false,
+	        toolbar: false,
 	        show: true,
 	        width: 600,
 	        height: 450,

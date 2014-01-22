@@ -3,6 +3,9 @@ body {
   line-height: 1.5;
   overflow-y: hidden;
   background: url('../img/linen.png');
+}
+
+body, button, a {
   -webkit-user-select: none;
 }
 
