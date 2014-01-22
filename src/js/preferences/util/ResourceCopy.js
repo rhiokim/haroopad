@@ -1,4 +1,4 @@
-define(function() {
+define([],function() {
   var fs = require('fs-extra');
   var readDir = require('readdir');
   var path = require('path');

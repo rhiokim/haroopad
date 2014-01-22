@@ -1,4 +1,4 @@
-define(function() {
+define([], function() {
   var css = require('css');
 
   return function(style) {

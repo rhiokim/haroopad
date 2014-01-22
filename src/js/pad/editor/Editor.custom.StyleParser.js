@@ -1,4 +1,4 @@
-define(function() {
+define([],function() {
   var css = require('css');
 
   var fontStyle = [ 'color', 'font-style', 'text-shadow' ];

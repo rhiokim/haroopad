@@ -72,14 +72,6 @@ function setCodeStyle(style) {
   document.querySelector('#code').setAttribute('href', style);
 }
 
-function loadCustomCSS(style) {
-  $(_body).addClass('custom');
-
-  $('#custom').attr({
-    href: style + '?' + new Date().getTime()
-  });
-}
-
 /**
  * set column layout
  * @param {[type]} count [description]

@@ -92,8 +92,8 @@
       <header>
         <h5 class="pull-left"><span data-i18n="markdown.name">Markdown Syntax Help</span></h5>
         <div class="btn-group pull-right">
-          <a href="html/markdown-help.html" target="md-help" class="btn btn-mini btn-primary" data-exec="link"><i class="icon-white icon-share"></i></a>
-          <a id="close-md-help" class="btn btn-mini btn-primary "><i class="icon-white icon-remove"></i></a>
+          <a href="html/markdown-help.html" target="md-help" class="btn btn-mini btn-primary" data-exec="link"><i class="glyphicon glyphicon-share"></i></a>
+          <a id="close-md-help" class="btn btn-mini btn-primary "><i class="glyphicon glyphicon-remove"></i></a>
         </div>
       </header>
       <div id="md-help-content">
@@ -130,11 +130,11 @@
     </aside>
   </div>
 
-  <footer class="navbar navbar-inverse navbar-fixed-bottom">
+  <footer class="navbar navbar-default navbar-fixed-bottom">
     <div class="navbar-inner">
       <div class="btn-group pull-left">
-        <a href="#" id="toggle-md-help" class="btn btn-mini btn-inverse dropdown-toggle">
-          <i class="icon-list-alt icon-white"></i>
+        <a href="#" id="toggle-md-help" class="btn btn-primary btn-xs dropdown-toggle">
+          <i class="glyphicon glyphicon-list-alt"></i>
         </a>
       </div>
       <div id="area-status" class="pull-left">
@@ -147,8 +147,9 @@
 
       <!-- <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button> -->
       <div id="documentConfig" class="btn-group dropup pull-right">
-        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="icon-cog icon-white"></i>
+        <a class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+          <!-- <i class="icon-cog icon-white"></i> -->
+          <i class="glyphicon glyphicon-cog"></i>
         </a>
         <ul class="dropdown-menu">
           <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i><span data-i18n="pad:config.outline">Show Document Outline</span></a></li>
@@ -157,7 +158,7 @@
           <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i><span data-i18n="pad:config.fullscreen">Toggle Fullscreen</span></a></li>
         </ul>
       </div><div id="columnCount" class="btn-group dropup pull-right">
-        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+        <a class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
           <span data-i18n="pad:config.column.label">Columns</span>
           <span class="caret"></span>
         </a>
@@ -169,7 +170,7 @@
         </ul>
       </div>
       <div id="indentation" class="btn-group dropup pull-right">
-        <a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+        <a class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
           <span data-i18n="pad:config.spaces">Spaces</span>
           <span class="caret"></span>
         </a>
@@ -190,8 +191,8 @@
         </ul>
       </div>
       <div id="shareit" class="btn-group dropup pull-right">
-        <a class="btn btn-mini btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="icon-share-alt icon-white"></i> <span data-i18n="pad:share">share</span>
+        <a class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="glyphicon glyphicon-share-alt"></i> <span data-i18n="pad:share">share</span>
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -206,20 +207,20 @@
         </ul>
       </div>
       <div id="donate-btn" class="btn-group pull-right">
-        <a href="#" class="btn btn-mini btn-danger" data-toggle="popover" data-trigger="click" data-placement="top" data-html="true"><i class="icon-leaf icon-white"></i> <span data-i18n="pad:donate.label">keep development</span></a>
+        <a href="#" class="btn btn-danger btn-xs" data-toggle="popover" data-trigger="click" data-placement="top" data-html="true"><i class="glyphicon glyphicon-leaf"></i> <span data-i18n="pad:donate.label">keep development</span></a>
       </div>
     </div>
   </footer>
 
   <div id="fields">
-    <input class="hide" id="openFile" type="file" />
+    <input class="hide" id="openFile" type="file" accept=".md,.mmd,.markdown,.mdown,.markdn,.mkd,.mkdn,.mdwn,.mdtxt,.mdtext,.mdml,.txt,text/plain,text/x-markdown"/>
     <input class="hide" id="saveFile" type="file" nwsaveas />
     <input class="hide" id="exportHTML" type="file" nwsaveas/>
   </div>
   <div id="dialogs">
     <div id="error-dialog" class="modal hide fade" data-width="400">
       <div class="modal-body text-center" style="text-align: center;">
-        <i class="icon-bullhorn"></i><br/>
+        <i class="glyphicon glyphicon-bullhorn"></i><br/>
         <strong class="text-error">Crash!</strong>
       </div>
     </div>

@@ -79,12 +79,12 @@ define([
 
 		/* change custom theme */
 
-		function changeCustomTheme(theme, log) {
-			var css = (theme && theme.path) || '';
-			_viewer.loadCustomCSS(css);
+		// function changeCustomTheme(theme, log) {
+		// 	var css = (theme && theme.path) || '';
+		// 	_viewer.loadCustomCSS(css);
 
-			!log && global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
-		}
+		// 	!log && global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
+		// }
 
 		function enableMath(value, log) {
 			// _viewer.empty();
@@ -103,7 +103,7 @@ define([
 		window.parent.ee.on('preferences.viewer.fontFamily', changeFontFamily);
 		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
-		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
+		// window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
 		window.parent.ee.on('preferences.markdown.change.after', changeMarkdownOption);
 		// window.parent.ee.on('preferences.general.enableMath.after', enableMath);
 		// window.parent.ee.on('preferences.markdown.mathjax.after', enableMath);
@@ -114,7 +114,7 @@ define([
 			window.parent.ee.off('preferences.viewer.fontSize', changeFontSize);
 			window.parent.ee.off('preferences.viewer.fontFamily', changeFontFamily);
 			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
-			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
+			// window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
 			window.parent.ee.off('preferences.markdown.change.after', changeMarkdownOption);
 			// window.parent.ee.off('preferences.general.enableMath.after', enableMath);
@@ -258,16 +258,16 @@ define([
 		 * @param  {[type]} fileObject [description]
 		 * @return {[type]}            [description]
 		 */
-		_viewer.ee.on('drop', function(fileObject) {
-			var file = fileObject.path;
-			var ext = path.extname(file);
+		// _viewer.ee.on('drop', function(fileObject) {
+		// 	var file = fileObject.path;
+		// 	var ext = path.extname(file);
 
-			switch (ext) {
-				case '.css':
-					_viewer.loadCustomCSS(file);
-					break;
-			}
-		});
+		// 	switch (ext) {
+		// 		case '.css':
+		// 			_viewer.loadCustomCSS(file);
+		// 			break;
+		// 	}
+		// });
 
 		changeTheme(viewerConfig.theme || 'haroopad', true);
 		changeFontSize(viewerConfig.fontSize, true);

@@ -45,14 +45,14 @@ i18n.init({
       'tabs/General',
       'tabs/Editor',
       'tabs/Viewer',
-      'tabs/Custom',
+      // 'tabs/Custom',
       'tabs/Code',
       'tabs/Markdown',
       'tabs/Helper',
       'tabs/About',
       'tabs/Backup',
       'util/ResourceCopy'
-    ], function(General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
+    ], function(General, Editor, Viewer, /*Custom, */Code, Markdown, Helper, About) {
       var shell = gui.Shell;
 
       $('body').i18n(); 

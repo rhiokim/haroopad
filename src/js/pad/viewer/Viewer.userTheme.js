@@ -9,7 +9,7 @@ define([
 
   function loadUserCss(userTheme) {
     if (!userTheme) {
-      return;
+      return '';
     }
 
     var themeFile = path.join(gui.App.dataPath, 'Themes', 'viewer', userTheme);
