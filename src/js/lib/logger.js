@@ -1,23 +1,33 @@
 ;(function() {
   var path = require('path'),
-  fs = require('fs'),
+  fs = require('fs-extra'),
+  moment = require('moment'),
   gui = require('nw.gui'),
-  errorLog = path.join(gui.App.dataPath, '.error.log');
+  errDir = path.join(gui.App.dataPath, '.error', moment().format('YYYY/MM'));
+  errFile = path.join(errDir, moment().format('DD') +'.log');
 
-  if (!fs.existsSync(gui.App.dataPath)) {
-    fs.mkdirSync(gui.App.dataPath);
-  }
+  fs.mkdirsSync(errDir);
+  
+  process.on('userException', function(message) {
+    var message = 
+        ' Information | Description \n'
+      + '-------------|-----------------------------\n'
+      + ' Type        | userException \n'
+      + ' Date        | '+ new Date +'\n'
+      + ' Stack       | '+ message +'\n\n'
+      
+    fs.appendFile(errFile, message);
+  });
 
   process.on('uncaughtException', function(err) {
-
-    var message = 
+    var message =  
         ' Information | Description \n'
       + '-------------|-----------------------------\n'
       + ' Type        | UncaughtException \n'
       + ' Date        | '+ new Date +'\n'
       + ' Stack       | '+ err.stack +'\n\n'
       
-    fs.appendFile(errorLog, '---uncaughtException---\n' + new Date +'\n'+ err.stack + '\n\n');
+    fs.appendFile(errFile, message);
   });
 
   window.addEventListener('error', function(err) {
@@ -30,6 +40,7 @@
       + ' Line Number | '+ err.lineno +'\n'
       + ' Message     | '+ err.message +'\n\n'
       
-    fs.appendFile(errorLog, message);
+    fs.appendFile(errFile, message);
   }, false);
+
 })(window);

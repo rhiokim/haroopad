@@ -9,7 +9,7 @@ window.parent = nw.parent;
 i18n.init({
   lng: lng
 }, function() {
-  i18n.addResourceBundle(lng, 'preference', global.locales['preference']);
+  i18n.addResourceBundle(lng, 'preference', global._locales['preference']);
   i18n.setDefaultNamespace('preference');
     
   //fixed text.js error on node-webkit
