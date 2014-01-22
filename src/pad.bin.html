@@ -92,8 +92,8 @@
       <header>
         <h5 class="pull-left"><span data-i18n="markdown.name">Markdown Syntax Help</span></h5>
         <div class="btn-group pull-right">
-          <a href="html/markdown-help.html" target="md-help" class="btn btn-mini btn-primary" data-exec="link"><i class="glyphicon glyphicon-share"></i></a>
-          <a id="close-md-help" class="btn btn-mini btn-primary "><i class="glyphicon glyphicon-remove"></i></a>
+          <button href="html/markdown-help.html" target="md-help" class="btn btn-mini btn-primary" data-exec="link"><i class="glyphicon glyphicon-share"></i></button>
+          <button id="close-md-help" class="btn btn-mini btn-primary "><i class="glyphicon glyphicon-remove"></i></button>
         </div>
       </header>
       <div id="md-help-content">
@@ -110,7 +110,7 @@
       <header>
         <h5 class="pull-left"><span data-i18n="oembed.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span></h5>
         <div class="btn-group pull-right">
-          <a id="close-oembed" class="btn btn-mini btn-primary"><i class="icon-white icon-remove"></i></a>
+          <button id="close-oembed" class="btn btn-mini btn-primary"><i class="icon-white icon-remove"></i></button>
         </div>
       </header>
       <div id="oembed-content">
@@ -121,7 +121,7 @@
       <header>
         <span data-i18n="toc.name">Table of Contents</span> <span class="label label-warning" data-i18n="experimental">experimental</span>
         <div class="btn-group pull-right">
-          <a id="close-toc" class="btn btn-mini btn-inverse"><i class="icon-white icon-remove"></i></a>
+          <button id="close-toc" class="btn btn-mini btn-inverse"><i class="icon-white icon-remove"></i></button>
         </div>
       </header>
       <div id="toc-content">
@@ -133,9 +133,9 @@
   <footer class="navbar navbar-default navbar-fixed-bottom">
     <div class="navbar-inner">
       <div class="btn-group pull-left">
-        <a href="#" id="toggle-md-help" class="btn btn-primary btn-xs dropdown-toggle">
+        <button href="#" id="toggle-md-help" class="btn btn-primary btn-xs dropdown-toggle">
           <i class="glyphicon glyphicon-list-alt"></i>
-        </a>
+        </button>
       </div>
       <div id="area-status" class="pull-left">
         <span id="lineCount"><span data-i18n="pad:footer.lines">lines</span>: <span class="_cnt">0</span></span> 
@@ -147,10 +147,10 @@
 
       <!-- <button id="preference" class="btn btn-mini pull-right"><i class="icon-cog"></i></button> -->
       <div id="documentConfig" class="btn-group dropup pull-right">
-        <a class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+        <button class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
           <!-- <i class="icon-cog icon-white"></i> -->
           <i class="glyphicon glyphicon-cog"></i>
-        </a>
+        </button>
         <ul class="dropdown-menu">
           <li><a tabindex="0" href="#" data-exec="outline"><i class="icon-ok"></i><span data-i18n="pad:config.outline">Show Document Outline</span></a></li>
           <!-- <li><a tabindex="0" href="#" data-exec="toc"><i class="icon-ok"></i><span data-i18n="pad:config.toc">Show TOC</span></a></li> -->
@@ -158,10 +158,10 @@
           <li><a tabindex="0" href="#" data-exec="fullscreen"><i class="icon-ok"></i><span data-i18n="pad:config.fullscreen">Toggle Fullscreen</span></a></li>
         </ul>
       </div><div id="columnCount" class="btn-group dropup pull-right">
-        <a class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+        <button class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
           <span data-i18n="pad:config.column.label">Columns</span>
           <span class="caret"></span>
-        </a>
+        </button>
         <ul class="dropdown-menu">
           <li><a tabindex="0" href="#" data-column="single" class="active"><i class="icon-ok"></i><span data-i18n="pad:config.column.one">Single</span></a></li>
           <li class="divider"></li>
@@ -170,10 +170,10 @@
         </ul>
       </div>
       <div id="indentation" class="btn-group dropup pull-right">
-        <a class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+        <button class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
           <span data-i18n="pad:config.spaces">Spaces</span>
           <span class="caret"></span>
-        </a>
+        </button>
         <ul class="dropdown-menu">
           <li><a tabindex="0" href="#"><span class="label label-warning"><span data-i18n="pad:config.experimental">Experimental</span></span></a></li>
           <li><a tabindex="0" href="#" data-using-tab="true"><i class="icon-ok"></i><span data-i18n="pad:config.usetab">Indent Using Tabs</span></a></li>
@@ -191,10 +191,10 @@
         </ul>
       </div>
       <div id="shareit" class="btn-group dropup pull-right">
-        <a class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
+        <button class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" href="#">
           <i class="glyphicon glyphicon-share-alt"></i> <span data-i18n="pad:share">share</span>
           <span class="caret"></span>
-        </a>
+        </button>
         <ul class="dropdown-menu">
           <li><a tabindex="-1" href="#" data-i18n="pad:promotion.desc">It's Promotion</a></li>
           <li class="divider"></li>
@@ -207,7 +207,7 @@
         </ul>
       </div>
       <div id="donate-btn" class="btn-group pull-right">
-        <a href="#" class="btn btn-danger btn-xs" data-toggle="popover" data-trigger="click" data-placement="top" data-html="true"><i class="glyphicon glyphicon-leaf"></i> <span data-i18n="pad:donate.label">keep development</span></a>
+        <button href="#" class="btn btn-danger btn-xs" data-toggle="popover" data-trigger="click" data-placement="top" data-html="true"><i class="glyphicon glyphicon-leaf"></i> <span data-i18n="pad:donate.label">keep development</span></button>
       </div>
     </div>
   </footer>

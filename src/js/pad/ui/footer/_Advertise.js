@@ -24,7 +24,7 @@ define([
 		},
 
 		initialize: function() {
-			this.$('a[data-toggle=popover]').popover({
+			this.$('button[data-toggle=popover]').popover({
 				content: i18n.t('pad:donate.desc'),
 				title: i18n.t('pad:donate.title')/*,
 				animation: false*/
