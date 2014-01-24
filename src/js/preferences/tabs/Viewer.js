@@ -17,7 +17,7 @@ define([
 		});
 
 		function loadCodeCSSFiles() {
-			var csses = readdir.readSync(getExecPath() +'Libraries/.css/code/', [ '*.css' ], readdir.ABSOLUTE_PATHS + readdir.CASELESS_SORT);
+			var csses = readdir.readSync(global.PATHS.css_code, [ '*.css' ], readdir.ABSOLUTE_PATHS + readdir.CASELESS_SORT);
 			var name, themes = {};
 
 			csses.forEach(function(css, idx) {

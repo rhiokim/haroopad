@@ -1,13 +1,4 @@
 var path = require('path');
-var languageTable = {
-	"en": 'en',
-	"ko": 'ko',
-	"es": 'es',
-	"zh": 'cn',
-	"zh-cn": 'cn',
-	"zh-hk": 'cn',
-	"zh-tw": 'cn'
-};
 
 function asVersion(str) {
 	var v = str.split(".");
@@ -40,65 +31,29 @@ function getPlatformName() {
 	return names[process.platform];
 }
 
-function getExecPath() {
-	switch(getPlatformName()) {
-		case 'windows':
-			return path.join(process.execPath, '../');//process.cwd();
-		break;
-		case 'mac':
-			return path.join(process.execPath, '../../../../../');
-		break;
-		case 'linux':
-			return path.join(process.execPath, '../');
-		break;
-	}
-}
-
-function getLang() {
-	var locale = window.navigator.language.toLowerCase();
-	var lang = languageTable[locale];
-
-	if (lang) {
-		return lang; 
-	} else {
-		locale = locale.split('-')[0];
-		lang = languageTable[locale];
-
-		if (lang) {
-			return lang;
-		}
-	}
-
-	return 'en';
-}
-
 function getDocsPath() {
-	var lang = getLang() == 'ko' ? 'ko' : 'en';
-	return path.join(getExecPath(), 'Libraries/.docs/', lang);
+	var lang = global.LOCALES._lang == 'ko' ? 'ko' : 'en';
+	return path.join(global.PATHS.docs, lang);
+}
+
+function loadJs(url, cb) {
+  var head = document.getElementsByTagName('head')[0];
+  var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = url;
+      script.onload = cb;
+
+   head.appendChild(script);
 }
 
 function loadCss(url) {
+  var head = document.getElementsByTagName('head')[0];
   var link = document.createElement("link");
   link.type = "text/css";
   link.rel = "stylesheet";
   link.href = url;
-  document.getElementsByTagName("head")[0].appendChild(link);
-}
-
-function merge(obj) {
-	var i = 1,
-		target, key;
-
-	for (; i < arguments.length; i++) {
-		target = arguments[i];
-		for (key in target) {
-			if (Object.prototype.hasOwnProperty.call(target, key)) {
-				obj[key] = target[key];
-			}
-		}
-	}
-
-	return obj;
+  
+  head.appendChild(link);
 }
 
 function merge(obj) {

@@ -61,7 +61,7 @@ define([
 		/* change syntax highlight theme */
 
 		function changeCodeTheme(value, log) {
-			var style = path.join(getExecPath(), 'Libraries', '.css', 'code', value +'.css');
+			var style = path.join(global.PATHS.css_code, value +'.css');
 			_viewer.setCodeStyle(style);
 
 			!log && global._gaq.push('haroopad.preferences', 'code', value);

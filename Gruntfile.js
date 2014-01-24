@@ -306,6 +306,7 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= build %>/app.common.min.js': [
+            'src/js/lib/system.js',
             'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
             'src/js/app/app.common.js',
@@ -503,13 +504,13 @@ module.exports = function(grunt) {
 
       mathjax: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/config/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/extensions/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/fonts/HTML-CSS/TeX/woff/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/images/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/jax/input/TeX', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/input/TeX/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/jax/output/HTML-CSS', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/output/HTML-CSS/' },
-          { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/', filter: 'isFile'}
+          { expand: true, cwd: '<%= vendors %>/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/config/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/extensions/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/fonts/HTML-CSS/TeX/woff/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/images/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/input/TeX', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/jax/input/TeX/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/output/HTML-CSS', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/jax/output/HTML-CSS/' },
+          { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/', filter: 'isFile'}
         ]
       },
       
