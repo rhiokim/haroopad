@@ -5,6 +5,8 @@ define([
   var moment = require('moment');
   var manifest = gui.App.manifest;
 
+  var _gaq = global._gaq;
+
   function importJson(res) {
     var view, prop;
 
@@ -37,8 +39,9 @@ define([
         try {
           var res = JSON.parse(e.target.result);
           importJson(res);
+
+          _gaq.push('haroopad.preferences', 'backup', 'import settings');
         } catch (e) {
-          console.log(e);
           alert('broken setting.json');
         }
       };
@@ -57,7 +60,7 @@ define([
       delete config.Temporary;
       delete config.Recents;
       delete config.Window;
-      delete config.Helper
+      delete config.Helper;
       delete config.Markdown.gfm;
       delete config.Markdown.highlight;
       delete config.Markdown.langPrefix;
@@ -80,6 +83,8 @@ define([
       // $(a).trigger('click');
 
       dialogExport.show();
+
+      _gaq.push('haroopad.preferences', 'backup', 'export settings');
     }
   });
 

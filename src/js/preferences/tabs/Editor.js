@@ -5,6 +5,8 @@ define([
 	var path = require('path');
 	var config = options.toJSON();
 
+  var _gaq = global._gaq;
+
 	options.bind('change', function(model) {
 		var prop, en,
 			data = model.changedAttributes();
@@ -95,6 +97,8 @@ define([
 			options.set({
 				userTheme: theme
 			});
+
+    	_gaq.push('haroopad.preferences', 'editor user theme', theme);
 		},
 
 		openUserThemeDir: function(e) {

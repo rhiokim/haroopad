@@ -77,6 +77,8 @@ define([
 			options.set({
 				userTheme: theme
 			});
+
+    	_gaq.push('haroopad.preferences', 'viewer user theme', theme);
 		},
 
 		openUserThemeDir: function(e) {
