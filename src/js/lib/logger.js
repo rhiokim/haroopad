@@ -1,10 +1,10 @@
 ;(function() {
   var path = require('path'),
-  fs = require('fs-extra'),
-  moment = require('moment'),
-  gui = require('nw.gui'),
-  errDir = path.join(gui.App.dataPath, '.error', moment().format('YYYY/MM'));
-  errFile = path.join(errDir, moment().format('DD') +'.log');
+      fs = require('fs-extra'),
+      moment = require('moment'),
+      gui = require('nw.gui'),
+      errDir = path.join(gui.App.dataPath, '.error', moment().format('YYYY/MM'));
+      errFile = path.join(errDir, moment().format('DD') +'.log');
 
   fs.mkdirsSync(errDir);
   

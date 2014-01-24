@@ -2,27 +2,34 @@
  * i18n data preloader
  */
 ;(function() {
-
-	var fs = require('fs-extra');
 	var path = require('path');
 
-	var locales = global._locales = {};
+	var G = global;
+	var locales = G.LOCALES = {};
 
-	var baseDir = path.join(getExecPath(), 'Libraries', '.locales');
+	var baseDir = G.PATHS.locales;
 	var locale = window.navigator.language.toLowerCase();
-	var langDir = path.join(baseDir, locale);
+	var prefix = locale.split('-')[0];
 
-	if (!fs.existsSync(langDir)) {
-		locale = locale.split('-')[0];
-		langDir = path.join(baseDir, locale);
+	function load( locale ) {
+		var json, file = path.join(baseDir, locale);
+		G.LOCALES._lang = locale;
 
-		if (!fs.existsSync(langDir)) {
-			langDir = path.join(baseDir, 'en');
-		}
+		[ 'menu', 'pad', 'preference' ].forEach(function( ns ) {
+			json = fs.readFileSync(path.join(file, ns +'.json'));
+			locales[ns] = JSON.parse(json);
+		});
 	}
 
-	[ 'menu', 'pad', 'preference' ].forEach(function(ns) {
-		locales[ns] = fs.readJSONSync(path.join(langDir, ns +'.json'));
-	});
+	/* supported locale */
+	if (G.LANGS.hasOwnProperty(locale)) {
+		load(locale);
+	} else {
+		if (G.LANGS.hasOwnProperty(prefix)) {
+			load(prefix);
+		} else {
+			load('en');
+		}
+	}
 
 }());

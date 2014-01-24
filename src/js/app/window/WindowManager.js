@@ -7,17 +7,13 @@ define([
 	var gui = require('nw.gui');
 
 	var windows = {},
-		windowsByFile = {},
 		openning = false,
-		realCount = 0,
-		shadowCount = 0,
-		gapX = 0,
-		gapY = 0;
+		realCount = 0;
 
 	var config = store.get('Window') || {};
 	var generalOpt = store.get('General');
-	var top = config.y || 20,
-		left = config.x || 20;
+	var top = config.y,
+		left = config.x;
 
 	function _updateStore() {
 		config = store.get('Window') || {};
@@ -78,12 +74,14 @@ define([
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			shadowCount++;
+			/* initial exec */
+			if (top <= 0 && left <= 0) {
+				this.setPosition('center');
+				top = this.x;
+				left = this.y;
 
-			//윈도우 오픈 시 position 파라미터가 존재하면 위치 지정은 패스한다.
-			// if (newWin._params.position) {
-			// 	return;
-			// }
+				return;
+			}
 
 			if (config.height + top > window.screen.height) {
 				top = 20;
@@ -98,39 +96,29 @@ define([
 				top = top + 20;
 			}
 
-			if (!top && !left) {
-				this.setPosition('center');
-				top = this.x;
-				left = this.y;
-			} else {
-				this.moveTo(left, top);
-			}
+			this.moveTo(left, top);
 		});
 	}
 
 	function open(file) {
-		var fileEntry, newWin, activedWin = exports.actived;
+		var fileEntry, newWin, existWin;
+
+		if (openning) {
+			return;
+		}
+
+		openning = true;
 
 		file = (typeof file === 'string') ? File.open(file) : file;
 		fileEntry = file && file.get('fileEntry');
 
 		//이미 열려 있는 파일 일 경우
-		var existWin = getWindowByFile(fileEntry);
+		existWin = getWindowByFile(fileEntry);
 
 		if (fileEntry && existWin) {
 			existWin.focus();
 			return;
 		}
-
-		//TODO
-		// if (activedWin) {
-		// 	var fo = activedWin.file.toJSON();
-
-		// 	if (fo.fileEntry === undefined && fo.markdown === undefined) {
-		// 		activedWin.file.set(file.toJSON());
-		// 		return;
-		// 	}
-		// }
 
 		newWin = gui.Window.open('pad.html', gui.App.manifest.window);
 		newWin.parent = window;

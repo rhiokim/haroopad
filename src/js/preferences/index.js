@@ -1,15 +1,13 @@
 var gui = require('nw.gui');
-var fs = require('fs');
 var path = require('path');
-var lng = getLang();
 
 window.nw = gui.Window.get();
 window.parent = nw.parent;
 
 i18n.init({
-  lng: lng
+  lng: global.LOCALES._lang
 }, function() {
-  i18n.addResourceBundle(lng, 'preference', global._locales['preference']);
+  i18n.addResourceBundle(global.LOCALES._lang, 'preference', global.LOCALES['preference']);
   i18n.setDefaultNamespace('preference');
     
   //fixed text.js error on node-webkit
@@ -38,6 +36,7 @@ i18n.init({
   });
 
   requirejs.onError = function (e) {
+    console.log(e.stack)
     alert('Oops! Preferences dialog is crash :-(');
   };
 

@@ -5,11 +5,11 @@ define([],function() {
   var gui = require('nw.gui');
   var files, isExist, source, dest;
 
-  var editorSource = path.join(getExecPath(), 'Resources', 'Themes', 'editor');
-  var markdownSource = path.join(getExecPath(), 'Resources', 'Themes', 'viewer');
+  var editorSource = global.PATHS.theme_res_editor;
+  var markdownSource = global.PATHS.theme_res_viewer;
 
-  var editorDest = path.join(gui.App.dataPath, 'Themes', 'editor');
-  var markdownDest = path.join(gui.App.dataPath, 'Themes', 'viewer');
+  var editorDest = global.PATHS.theme_dest_editor;
+  var markdownDest = global.PATHS.theme_dest_viewer;
 
   fs.mkdirpSync(editorDest);
   fs.mkdirpSync(markdownDest);

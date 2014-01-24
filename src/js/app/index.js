@@ -1,6 +1,6 @@
-global.gui = gui = require('nw.gui');
-global.top = window;
+var gui = require('nw.gui');
 
+window.top = window;
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 
@@ -31,12 +31,10 @@ requirejs.onError = function (e) {
   alert('Oops! app is crash :-(');
 };
 
-var lng = getLang();
-
 i18n.init({
-  lng: lng
+  lng: global.LOCALES._lang
 }, function() {
-  i18n.addResourceBundle(lng, 'menu', global._locales['menu']);
+  i18n.addResourceBundle(global.LOCALES._lang, 'menu', global.LOCALES['menu']);
   i18n.setDefaultNamespace('menu');
 
   MenuBar();
