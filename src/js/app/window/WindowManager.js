@@ -7,11 +7,8 @@ define([
 	var gui = require('nw.gui');
 
 	var windows = {},
-		windowsByFile = {},
 		openning = false,
-		realCount = 0,
-		gapX = 0,
-		gapY = 0;
+		realCount = 0;
 
 	var config = store.get('Window') || {};
 	var generalOpt = store.get('General');
@@ -98,28 +95,24 @@ define([
 	}
 
 	function open(file) {
-		var fileEntry, newWin, activedWin = exports.actived;
+		var fileEntry, newWin, existWin;
+
+		if (openning) {
+			return;
+		}
+
+		openning = true;
 
 		file = (typeof file === 'string') ? File.open(file) : file;
 		fileEntry = file && file.get('fileEntry');
 
 		//이미 열려 있는 파일 일 경우
-		var existWin = getWindowByFile(fileEntry);
+		existWin = getWindowByFile(fileEntry);
 
 		if (fileEntry && existWin) {
 			existWin.focus();
 			return;
 		}
-
-		//TODO
-		// if (activedWin) {
-		// 	var fo = activedWin.file.toJSON();
-
-		// 	if (fo.fileEntry === undefined && fo.markdown === undefined) {
-		// 		activedWin.file.set(file.toJSON());
-		// 		return;
-		// 	}
-		// }
 
 		newWin = gui.Window.open('pad.html', gui.App.manifest.window);
 		newWin.parent = window;
