@@ -252,10 +252,6 @@ define([
   // });
 
   window.ee.on('exit', function() {
-    // Options.set({
-    //   x: nw.x - 20,
-    //   y: nw.y - 20
-    // });
     gui.App.quit();
   });
 
