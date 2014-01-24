@@ -1,10 +1,13 @@
 define([
-		'tabs/Markdown.opt'
-	], function(options) {
+		'tabs/Markdown.opt',
+		'tabs/markdown/dialog.default'
+	], function(options, dialogDefault) {
 		var gui = require('nw.gui');
 		var shell = gui.Shell;
 
-		var config = options.toJSON();
+		var _gaq = global._gaq;
+
+		// var config = options.toJSON();
 
 		options.bind('change', function(model) {
 			var prop, en,
@@ -27,17 +30,42 @@ define([
 				'click input[name=breaks]': 'enableBreaks',	
 				'click input[name=smartLists]': 'enableSmartLists',	
 				'click input[name=smartypants]': 'enableSmartyPants',	
-				'click input[name=mathjax]': 'enableMathjax'	
+				'click input[name=mathjax]': 'enableMathjax',
+				'click button[name=apply]': 'clickApply',
+				'click button[name=default]': 'clickDefault'
 			},
 
 			initialize: function() {
-				this.$el.find('input[name=gfm]').prop('checked', config.gfm);
-				this.$el.find('input[name=sanitize]').prop('checked', config.sanitize);
-				this.$el.find('input[name=tables]').prop('checked', config.tables);
-				this.$el.find('input[name=breaks]').prop('checked', config.breaks);
-				this.$el.find('input[name=smartLists]').prop('checked', config.smartLists);
-				this.$el.find('input[name=smartypants]').prop('checked', config.smartypants);
-				this.$el.find('input[name=mathajx]').prop('checked', config.mathjax);
+				this.setup();
+
+				dialogDefault.on('yes', this.reset.bind(this));
+			},
+
+			setup: function(opt) {
+				var opt = opt || options.toJSON();
+
+				this.$('input[name=gfm]').prop('checked', opt.gfm);
+				this.$('input[name=sanitize]').prop('checked', opt.sanitize);
+				this.$('input[name=tables]').prop('checked', opt.tables);
+				this.$('input[name=breaks]').prop('checked', opt.breaks);
+				this.$('input[name=smartLists]').prop('checked', opt.smartLists);
+				this.$('input[name=smartypants]').prop('checked', opt.smartypants);
+				this.$('input[name=mathjax]').prop('checked', opt.mathjax);
+			},
+
+			reset: function() {
+				this.setup(options.defaults);
+				options.set(options.defaults);
+
+				// window.parent.ee.emit('preferences.markdown.change', options.defaults);
+			},
+
+			clickApply: function(e) {
+				window.parent.ee.emit('preferences.markdown.change', options.toJSON());
+			},
+
+			clickDefault: function(e) {
+				dialogDefault.show();
 			},
 
 			clickHandler: function(e) {
@@ -49,36 +77,50 @@ define([
 			enableGFM: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('gfm', bool);
+				
+      	_gaq.push('haroopad.preferences', 'markdown option', 'gfm:'+bool);
 			},
 
 			enableSanitize: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('sanitize', bool);
+
+      	_gaq.push('haroopad.preferences', 'markdown option', 'sanitize:'+bool);
 			},
 
 			enableTables: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('tables', bool);
+
+      	_gaq.push('haroopad.preferences', 'markdown option', 'gfm tables:'+bool);
 			},
 
 			enableBreaks: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('breaks', bool);
+
+      	_gaq.push('haroopad.preferences', 'markdown option', 'gfm line breaks:'+bool);
 			},
 
 			enableSmartLists: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('smartLists', bool);
+
+      	_gaq.push('haroopad.preferences', 'markdown option', 'smartLists:'+bool);
 			},
 
 			enableSmartyPants: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('smartypants', bool);
+
+      	_gaq.push('haroopad.preferences', 'markdown option', 'smartypants:'+bool);
 			},
 
 			enableMathjax: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('mathjax', bool);
+				
+      	_gaq.push('haroopad.preferences', 'markdown option', 'mathjax:'+bool);
 			}
 		});
 

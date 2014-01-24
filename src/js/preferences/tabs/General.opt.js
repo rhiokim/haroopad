@@ -1,13 +1,13 @@
 define([
-		'store'
-	], function(store) {
+	], function() {
 		var Model = Backbone.Model.extend({
 			defaults: {
-				enableMath: false,
+				// enableMath: false,
 				enableSyncScroll: true,
 				playKeypressSound: false,
 				enableAutoComplete: false,
-				enableLastFileRestore: true
+				enableLastFileRestore: true,
+				displayLanguage: 'en'
 			},
 
 			// localStorage: new Backbone.LocalStorage('General'),

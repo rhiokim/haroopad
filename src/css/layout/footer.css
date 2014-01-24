@@ -1,7 +1,16 @@
 
 footer {
-   display: block;
-  font-size: 10.5px;
+  display: block;
+  font-size: 12px;
+}
+
+footer .btn-xs {
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+footer i.glyphicon {
+  font-size: 10px;
 }
 
 footer .btn {
@@ -22,7 +31,7 @@ footer .navbar .btn#preference {
 }
 
 .navbar-fixed-bottom {
-  bottom: -8px !important;
+  bottom: -4px !important;
 }
 
 footer .navbar-inner>div {

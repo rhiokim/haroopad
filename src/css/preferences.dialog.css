@@ -1,0 +1,8 @@
+.modal-dialog {
+  width: 450px; 
+  margin: 30px auto;
+}
+
+.modal-footer {
+  padding-top: 10px;
+}

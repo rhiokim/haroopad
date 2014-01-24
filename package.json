@@ -1,6 +1,6 @@
 {
   "name": "haroopad",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "The Next Document processor based on Markdown",
   "main": "",
   "homepage": "https://rhiokim.github.com/haroopad",
@@ -26,5 +26,8 @@
   "deploy": {
     "docs": "../baas.io-Portal/_documentation/_docs/ko/javascript/reference",
     "sdk": "../baas.io-Portal/_documentation/_docs/sdk/javascript/"
+  },
+  "dependencies": {
+    "time-grunt": "~0.2.8"
   }
 }

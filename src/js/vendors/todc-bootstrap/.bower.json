@@ -1,0 +1,36 @@
+{
+  "name": "todc-bootstrap",
+  "main": [
+    "./dist/css/bootstrap.css",
+    "./dist/css/todc-bootstrap.css",
+    "./dist/js/bootstrap.js",
+    "./dist/js/todc-bootstrap.js",
+    "./dist/fonts/glyphicons-halflings-regular.eot",
+    "./dist/fonts/glyphicons-halflings-regular.svg",
+    "./dist/fonts/glyphicons-halflings-regular.ttf",
+    "./dist/fonts/glyphicons-halflings-regular.woff"
+  ],
+  "ignore": [
+    "**/.*",
+    "_config.yml",
+    "CNAME",
+    "composer.json",
+    "CONTRIBUTING.md",
+    "docs",
+    "js/tests"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  },
+  "homepage": "https://github.com/todc/todc-bootstrap",
+  "_release": "bcf9cbfa9a",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "bcf9cbfa9ab958390b2c84a61fe7acf1a67876b4"
+  },
+  "_source": "git@github.com:todc/todc-bootstrap.git",
+  "_target": "master",
+  "_originalSource": "git@github.com:todc/todc-bootstrap.git",
+  "_direct": true
+}

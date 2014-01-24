@@ -1,0 +1,29 @@
+{
+  "name": "haroopad-theme",
+  "homepage": "https://github.com/rhiokim/haroopad-theme",
+  "authors": [
+    "rhiokim <rhio.kim@gmail.com>"
+  ],
+  "description": "themes for haroopad editor",
+  "keywords": [
+    "haroopad",
+    "markdown"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "71233bf72d",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "71233bf72d98843bf6af9ab9fb7ab37992c1cab1"
+  },
+  "_source": "git@github.com:rhiokim/haroopad-theme.git",
+  "_target": "master",
+  "_originalSource": "git@github.com:rhiokim/haroopad-theme.git"
+}

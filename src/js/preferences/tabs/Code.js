@@ -23,9 +23,11 @@ define([
 			},
 
 			initialize: function() {
-				this.$el.find('select[name=codeStyle]').select2().select2("val", config.theme);
+				this.$('select[name=codeStyle]').val(config.theme).select2({
+					width: '200px'
+				});
 
-				this.$el.find('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
+				this.$('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
 			},
 
 			changeCodeStyle: function(e) {

@@ -2,6 +2,7 @@
  * Markdown Helper
  */
 nav#md-help {
+  color: #fff;
   background-color: #222;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0,0,0, 0.9) inset;
 
@@ -78,6 +79,11 @@ nav#md-help {
   margin-left: 10px;
   margin-top: 10px;
 }
+
+#md-help-content > ul {
+  -webkit-padding-start: 0px;
+}
+
 #md-help-content li {
   list-style-type: none;
   line-height: 16px;

@@ -1,4 +1,4 @@
-Bootstrap Modal v2.1
+Bootstrap Modal v2.2.1
 =============
 
 See live demo [here](http://jschr.github.com/bootstrap-modal/).
@@ -10,6 +10,21 @@ A single ModalManager is created by default on body and can be accessed through 
     $('body').modalmanager('loading');
 
 Bootstrap-Modal can be used as a replacement for Bootstrap's Modal class or as a patch to the library.
+
+
+Bootstrap 3
+-----------
+
+If you're using BS3, I've provided a compatible css patch. Include `bootstrap-modal-bs3patch.css` **before** the main `bootstrap-modal.css` file to use this plugin with Bootstrap 3.
+
+If you're using the loading spinner functionality you may also need to change the default template to be compatible in js:
+
+    $.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner = 
+        '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' +
+            '<div class="progress progress-striped active">' +
+                '<div class="progress-bar" style="width: 100%;"></div>' +
+            '</div>' +
+        '</div>';
 
 Overview
 -----------
@@ -56,6 +71,9 @@ Toggle the loading state.
 + **spinner**
 Provide a custom image or animation for the loading spinner.
 
++ **backdropTemplate**
+Provide a custom modal backdrop.
+
 + **consumeTab**
 Used to enable tabindexing for modals with `data-tabindex`. This is set to true by default.
 
@@ -84,6 +102,9 @@ Limit the amount of backdrops that will appear on the page at the same time.
 
 + **spinner**
 Provide a custom image or animation for the loading spinner.
+
++ **backdropTemplate**
+Provide a custom modalmanager backdrop. This backdrop is used when `$element.modalmanager('loading')` is called.
 
 Disable Background Scrolling
 -----------
@@ -124,4 +145,8 @@ See the stackable example on the [demo](http://jschr.github.com/bootstrap-modal/
 	
 
 
+
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jschr/bootstrap-modal/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 

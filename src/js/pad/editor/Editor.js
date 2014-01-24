@@ -3,7 +3,8 @@ define([
 		'keyboard',
 		'store',
 		'editor/Editor.keymap',
-		'editor/Editor.drop'
+		'editor/Editor.drop',
+		'editor/Editor.custom'
 	],
 	function(HotKey, store, Keymap, Drop) {
 		var moment = require('moment');
@@ -18,8 +19,9 @@ define([
 		var MAX_FONT_SIZE = 30;
 
 		var config = store.get('Editor') || {
-			displayLineNumber: true,
+			displayLineNumber: false,
 			autoPairCharacters: true,
+			displayActiveLine: true,
 			theme: 'solarized dark'
 		};
 		config.fontSize = Number(config.fontSize || 13);
@@ -33,7 +35,6 @@ define([
 			lineNumbers: true,
 			lineWrapping: true,
 			electricChars: false,
-  		styleActiveLine: true,
 			viewportMargin: 40,
 			autofocus: true,
 			workDelay: 1000,
@@ -131,13 +132,13 @@ define([
 
 		//TODO FIXME
 		function setFontFmaily() {
-			var all = document.styleSheets,
-			    s = all[all.length - 1],
-			    l = s.cssRules.length;
+			// var all = document.styleSheets,
+			//     s = all[all.length - 1],
+			//     l = s.cssRules.length;
 
-			if (s.insertRule) {
-			    s.insertRule(".CodeMirror { font-family: Menlo, Monaco, 'Andale Mono','lucida console','Courier New', monospace, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular !important; }", l);
-			}
+			// if (s.insertRule) {
+			//     s.insertRule(".CodeMirror { font-family: Menlo, Monaco, 'Andale Mono','lucida console','Courier New', monospace, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular !important; }", l);
+			// }
 			// CodeMirrorElement.style.fontFamily = "Monaco, Menlo, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular";
 		}
 
@@ -185,6 +186,14 @@ define([
 			global._gaq.push('haroopad.preferences', 'editor', 'lineNumbers: ' + value);
 		}
 
+		/* toggle active line */
+
+		function toggleActiveLine(value) {
+			editor.setOption('styleActiveLine', value);
+
+			global._gaq.push('haroopad.preferences', 'editor', 'activeLine: ' + value);
+		}
+
 		/* toggle vim key binding */
 
 		function toggleVim(value) {
@@ -220,6 +229,7 @@ define([
 		
 		editor.setOption('theme', config.theme);
 		editor.setOption('lineNumbers', config.displayLineNumber);
+		editor.setOption('styleActiveLine', config.displayActiveLine);
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', config.tabSize || 4);
 		editor.setOption('indentUnit', config.indentUnit || 4);
@@ -234,6 +244,7 @@ define([
 
 		window.parent.ee.on('preferences.editor.theme', changeTheme);
 		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
+		window.parent.ee.on('preferences.editor.displayActiveLine', toggleActiveLine);
 		window.parent.ee.on('preferences.editor.vimKeyBinding', toggleVim);
 		window.parent.ee.on('preferences.editor.autoPairCharacters', toggleAutoPairChar);
 		window.parent.ee.on('preferences.editor.fontSize', changeFontSize);
@@ -243,6 +254,7 @@ define([
 
 			window.parent.ee.off('preferences.editor.theme', changeTheme);
 			window.parent.ee.off('preferences.editor.displayLineNumber', toggleLineNumber);
+			window.parent.ee.off('preferences.editor.displayActiveLine', toggleActiveLine);
 			window.parent.ee.off('preferences.editor.vimKeyBinding', toggleVim);
 			window.parent.ee.off('preferences.editor.autoPairCharacters', toggleAutoPairChar);
 		});
