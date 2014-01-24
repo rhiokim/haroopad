@@ -42,7 +42,7 @@ define([
 			el.find('.progress').addClass('hide');
 			bar.css({ width: 0 });
 
-			el.find('.alert-block').removeClass('hide').html(msg);
+			el.find('.alert-danger').removeClass('hide').html(msg);
 		}
 
 		function success(msg) {

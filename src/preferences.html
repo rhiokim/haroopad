@@ -74,12 +74,13 @@
             <a href="#markdown-tab" data-toggle="tab">
               <!-- <span class="badge pull-right">3</span> -->
               <span data-i18n="tab.markdown">Markdown </span>
-              <span class="label label-success">!</span>
+              <span class="label label-danger">N</span>
             </a>
           </li>
           <li>
             <a href="#backup-tab" data-toggle="tab">
               <span data-i18n="tab.backup">Backup</span>
+              <span class="label label-danger">N</span>
             </a>
           </li>
           <!--li>
@@ -538,7 +539,7 @@
             </div>
             <div class="panel-body">
               <p>
-                <h5>Github Flavored Markdown [<a href="http://github.github.com/github-flavored-markdown/">?</a>]</h5>
+                <h5 data-i18n="markdown.enable-gfm">Github Flavored Markdown</h5>
 
                 <!-- <label class="checkbox">
                   <input type="checkbox" value="" name="gfm" checked="checked">
@@ -546,21 +547,21 @@
                 </label> -->
                 <label class="checkbox">
                   <input type="checkbox" value="" name="tables" checked="checked">
-                  <span data-i18n="markdown.gfm-table">Enable GFM tables.</span>
+                  <span data-i18n="markdown.gfm-table">Enable GFM tables.</span> <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables">[?]</a>
                 </label>
                 <label class="checkbox">
                   <input type="checkbox" value="" name="breaks">
-                  <span data-i18n="markdown.gfm-line-breaks">Enable GFM line breaks</span>
+                  <span data-i18n="markdown.gfm-line-breaks">Enable GFM line breaks</span> <a href="https://help.github.com/articles/github-flavored-markdown#newlines">[?]</a>
                 </label>
 
-                <h5>ETC [<a href="http://github.github.com/github-flavored-markdown/">?</a>]</h5>
+                <h5 data-i18n="markdown.etc">ETC</h5>
                 <label class="checkbox">
                   <input type="checkbox" value="" name="sanitize" checked="checked">
                   <span data-i18n="markdown.sanitize-desc">Ignore any HTML that has been input.</span>
                 </label>
                 <label class="checkbox">
                   <input type="checkbox" value="" name="smartLists" checked="checked">
-                  <span data-i18n="markdown.smart-list">Use smarter list behavior than the original markdown.</span>
+                  <span data-i18n="markdown.smarty-list">Use smarter list behavior than the original markdown.</span>
                 </label>
                 <label class="checkbox">
                   <input type="checkbox" value="" name="smartypants">
@@ -568,7 +569,7 @@
                 </label>
                 <label class="checkbox">
                   <input type="checkbox" value="" name="mathjax">
-                  <span data-i18n="markdown.mathjax">Use Mathematics Expression</span> [<a href="http://mathjax.org">?</a>]
+                  <span data-i18n="markdown.enable-math">Use Mathematics Expression</span> [<a href="http://mathjax.org">?</a>]
                 </label>
               </p>
             </div>
@@ -740,7 +741,7 @@
               <h3 class="panel-title">Panel title</h3>
             </div>
             <div class="panel-body">
-              <h5>Import & Export Settings...</h5>
+              <h5 data-i18n="backup.title">Import & Export Settings...</h5>
               <p>
                 <label class="checkbox">
                   <input type="checkbox" name="general" checked>
@@ -767,8 +768,8 @@
 
             <div class="panel-footer">
               <input class="hide" id="openFile" accept=".json,application/json" type="file" />
-              <a class="btn btn-primary pull-right" name="export">Export Settings</a>
-              <a class="btn btn-default" name="import">Import Settings</a>
+              <a class="btn btn-primary pull-right" name="export" data-i18n="backup.export">Export Settings</a>
+              <a class="btn btn-default" name="import" data-i18n="backup.import">Import Settings</a>
             </div>
           </div>
         </div>
@@ -793,7 +794,7 @@
               </p>
 
               <p>
-                <span data-i18n="[html]about.mean"></span>
+                <span data-i18n="[html]about.mean"></span> <a href="http://en.wikipedia.org/wiki/Day">wikipedia</a>
               </p>
 
               <hr>

@@ -9,7 +9,7 @@ define([], function() {
     cssRules.forEach(function(rule) {
       if (rule.type == 'rule') {
         selector = rule['selectors'][0];
-        rule['selectors'][0] = '#root>' + selector;
+        rule['selectors'][0] = '#root ' + selector;
       }
     });
 
