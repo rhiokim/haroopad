@@ -1,116 +1,116 @@
-## shortcuts
+## Shortcuts
 
-GLYPH    | NAME
----------|----------------------------------------
-&#8984;  | Command, Cmd, Clover, (formerly) Apple
-⌥        | Option, Opt, (Windows) Alt
-⇧        | Shift
-^        | Control, Ctl, Ctrl
+GLYPH        | NAME
+--------------|----------------------------------------
+COMMAND   | Command, Cmd, Clover, (formerly) Apple
+ALT           | Option, Opt, (Windows) Alt
+SHIFT        | Shift
+CTRL         | Control, Ctl, Ctrl
 
 ##### File
-Shortcut                 | Description
--------------------------|-------------------
-&#8984;(^) - N           | new window
-&#8984;(^) - S           | save
-&#8984;(^) - ⇧ - S       | save as
-&#8984;(^) - O           | open file
-&#8984;(^) - ⇧ - E       | sending email
-&#8984;(^) - ⌥ - E       | export html
-&#8984;(^) - ⌥ - C       | copy to clipboard
-&#8984;(^) - ,           | preferences
-&#8984;(^) - W           | close window
-&#8984;(^) - F4          | close
-&#8984;(^) - P           | print
-&#8984;(^) - Q           | quit haroopad
+Shortcut                                 | Description
+------------------------------------|-------------------
+COMMAND (CTRL) - N              | new window
+COMMAND (CTRL) - S              | save
+COMMAND (CTRL) - SHIFT - S   | save as
+COMMAND (CTRL) - O              | open file
+COMMAND (CTRL) - SHIFT - E   | sending email
+COMMAND (CTRL) - ALT - E     | export html
+COMMAND (CTRL) - ALT - C     | copy to clipboard
+COMMAND (CTRL) - ,              | preferences
+COMMAND (CTRL) - W            | close window
+COMMAND (CTRL) - F4           | close
+COMMAND (CTRL) - P             | print
+COMMAND (CTRL) - Q            | quit haroopad
 
 ##### View
-Shortcut            | Description
---------------------|-------------------
-&#8984;(^) - ⌥ - 1  | (editor : viewer) mode
-&#8984;(^) - ⌥ - 2  | (viewer : editor) mode
-&#8984;(^) - ⌥ - 3  | editor mode
-&#8984;(^) - ⌥ - 4  | viewer mode
-⇧ - ^ - ]           | editor mode
-⇧ - ^ - [           | dual mode
-^ - ⌥ - ]           | editor width +5%
-^ - ⌥ - [           | editor width -5%
-&#8984;(^) - ⇧ - L  | toggle line number
-&#8984;(^) - ⇧ - H  | toggle markdown helper
-&#8984;(^) - Enter  | toggle fullscreen #1
-&#8984;(^) - F11    | toggle fullscreen #2
-Double ESC          | escape fullscreen
-&#8984;(^) - ⌥ - V  | vim keyboard binding
-&#8984; - ⌥ - .     | editor font size +1px
-&#8984; - ⌥ - ,     | editor font size -1px
-&#8984; - ⇧ - .     | viewer font size +1px
-&#8984; - ⇧ - ,     | viewer font size -1px
+Shortcut                              | Description
+----------------------------------|-------------------
+COMMAND (CTRL) - ALT - 1  | (editor : viewer) mode
+COMMAND (CTRL) - ALT - 2  | (viewer : editor) mode
+COMMAND (CTRL) - ALT - 3  | editor mode
+COMMAND (CTRL) - ALT - 4  | viewer mode
+SHIFT - CTRL - ]                  | editor mode
+SHIFT - CTRL - [                  | dual mode
+CTRL - ALT - ]                     | editor width +5%
+CTRL - ALT - [                     | editor width -5%
+COMMAND (CTRL) - SHIFT - L  | toggle line number
+COMMAND (CTRL) - SHIFT - H  | toggle markdown helper
+COMMAND (CTRL) - Enter        | toggle fullscreen #1
+COMMAND (CTRL) - F11           | toggle fullscreen #2
+Double ESC                             | escape fullscreen
+COMMAND (CTRL) - ALT - V     | vim keyboard binding
+COMMAND - ALT - .                | editor font size +1px
+COMMAND - ALT - ,                | editor font size -1px
+COMMAND - SHIFT - .             | viewer font size +1px
+COMMAND - SHIFT - ,             | viewer font size -1px
 
 ##### Editing
- Shortcut                | Description
--------------------------|---------------------
-&#8984;(^) - A           | Select All
-&#8984;(^) - D           | Delete Line
-&#8984;(^) - Z           | Undo
-⇧ - &#8984;(^) - Z       | Redo
-&#8984;(^) - Y           | Redo
-&#8984;(^) - Up          | Go to Doc Start
-&#8984;(^) - End         | Go to Doc End
-&#8984;(^) - Down        | Go to Doc End
-⌥ - Left                 | Go to Group Left
-⌥ - Right                | Go to Group Right
-&#8984;(^) - Left        | Go to Line Start
-&#8984;(^) - Right       | Go to Line End
-⌥ - Backspace            | Delete Group before
-^ - ⌥ - Backspace        | Delete Group after
-⌥ - Delete               | Delete Group after
-&#8984;(^) - [           | Indent less
-&#8984;(^) - ]           | Indent
+ Shortcut                               | Description
+-----------------------------------|---------------------
+COMMAND (CTRL) - A             | Select All
+COMMAND (CTRL) - D             | Delete Line
+COMMAND (CTRL) - Z             | Undo
+SHIFT - COMMAND (CTRL) - Z  | Redo
+COMMAND (CTRL) - Y             | Redo
+COMMAND (CTRL) - Up           | Go to Doc Start
+COMMAND (CTRL) - End         | Go to Doc End
+COMMAND (CTRL) - Down      | Go to Doc End
+ALT - Left                            | Go to Group Left
+ALT - Right                          | Go to Group Right
+COMMAND (CTRL) - Left        | Go to Line Start
+COMMAND (CTRL) - Right       | Go to Line End
+ALT - Backspace                   | Delete Group before
+CTRL - ALT - Backspace        | Delete Group after
+ALT - Delete                        | Delete Group after
+COMMAND (CTRL) - [           | Indent less
+COMMAND (CTRL) - ]           | Indent
 
 ##### Inserting
- Shortcut          | Description
--------------------|---------------------
-⇧ - ^ - 1          | 10/7/2013
-⇧ - ^ - 2          | 10/07/2013
-⇧ - ^ - 3          | October 17 2013
-⇧ - ^ - 4          | Oct 17 2013
-⇧ - ^ - 5          | October 17 2013 3:17 AM
-⇧ - ^ - 6          | Oct 17 2013 3:17 AM
-⇧ - ^ - 7          | Thursday, October 17 2013 3:17 AM
-⇧ - ^ - 8          | Thu, Oct 17 2013 3:17 AM
+ Shortcut                     | Description
+---------------------------|---------------------
+SHIFT - CTRL - 1          | 10/7/2013
+SHIFT - CTRL - 2          | 10/07/2013
+SHIFT - CTRL - 3          | October 17 2013
+SHIFT - CTRL - 4          | Oct 17 2013
+SHIFT - CTRL - 5          | October 17 2013 3:17 AM
+SHIFT - CTRL - 6          | Oct 17 2013 3:17 AM
+SHIFT - CTRL - 7          | Thursday, October 17 2013 3:17 AM
+SHIFT - CTRL - 8          | Thu, Oct 17 2013 3:17 AM
 
 ##### Markdown Editing
-Shortcut                     | Example        | Description
------------------------------|:--------------:|-------------------
-&#8984;(^) - 1               | #              | Header 1
-&#8984;(^) - 2               | ##             | Header 2
-&#8984;(^) - 3               | ###            | Header 3
-&#8984;(^) - 4               | ####           | Header 4
-&#8984;(^) - 5               | #####          | Header 5
-&#8984;(^) - 6               | ######         | Header 6
-&#8984;(^) - B               | \*\*Bold\*\*   | bold
-&#8984;(^) - I               | \*Italic\*     | italic
-&#8984;(^) - L               | \[link\](url)  | link
-&#8984;(^) - Y               | \_underline_   | underline
-&#8984;(^) - K               | \`code`        | inline code
-&#8984;(^) - E               | @\[]()         | embed
-&#8984;(^) - T               | [TOC]          | table of content
-&#8984;(^) - ⌥ - S           | \~~strike~~    | strike
-&#8984;(^) - ⌥ - H           | \==highlight== | highlight
-&#8984;(^) - ⌥ - O           | 1. markdown    | ordered list
-&#8984;(^) - ⌥ - U           | * haroopad     | unordered list
-&#8984;(^) - ⌥ - I           | \!\[]()        | image
-&#8984;(^) - ⌥ - M           | $$math$$       | math
-&#8984;(^) - ⌥ - B          | > blockquote    | blockquote
-&#8984;(^) - ⌥ - Enter       | \- \- \-       | section break
-&#8984;(^) - ⌥ - `           | \* \* \*       | page break
+Shortcut                                  | Example       | Description
+-------------------------------------|:--------------:|-------------------
+COMMAND (CTRL) - 1               | #                 | Header 1
+COMMAND (CTRL) - 2               | ##               | Header 2
+COMMAND (CTRL) - 3               | ###              | Header 3
+COMMAND (CTRL) - 4               | ####            | Header 4
+COMMAND (CTRL) - 5               | #####          | Header 5
+COMMAND (CTRL) - 6               | ######         | Header 6
+COMMAND (CTRL) - B               | \*\*Bold\*\*   | bold
+COMMAND (CTRL) - I               | \*Italic\*        | italic
+COMMAND (CTRL) - L               | \[link\](url)       | link
+COMMAND (CTRL) - Y               | \_underline\_    | underline
+COMMAND (CTRL) - K               | \`code\`           | inline code
+COMMAND (CTRL) - E               | @\[]()               | embed
+COMMAND (CTRL) - T               | [TOC]               | table of content
+COMMAND (CTRL) - ALT - S       | \~~strike~~      | strike
+COMMAND (CTRL) - ALT - H      | \==highlight== | highlight
+COMMAND (CTRL) - ALT - O      | 1. markdown   | ordered list
+COMMAND (CTRL) - ALT - U      | * haroopad      | unordered list
+COMMAND (CTRL) - ALT - I       | \!\[]()             | image
+COMMAND (CTRL) - ALT - M      | $$math$$       | math
+COMMAND (CTRL) - ALT - B      | > blockquote    | blockquote
+COMMAND (CTRL) - ALT - Enter    | \- \- \-       | section break
+COMMAND (CTRL) - ALT - `          | \* \* \*       | page break
 
 ##### Finding
-Shortcut                  | Description
---------------------------|-------------------
-&#8984;(^) - F            | Starting search
-&#8984;(^) - G            | Find next
-&#8984;(^) - ⇧ + G        | Find previous
-&#8984; - ⌥ - F           | Replace (Mac)
-^ - ⇧ - F                 | Replace (linux, win)
-&#8984; - ⇧ - ⌥ - F       | Replace all (Mac)
-⇧ - ^ - R                 | Replace all (linux, win)
+Shortcut                                  | Description
+-------------------------------------|-------------------
+COMMAND (CTRL) - F                | Starting search
+COMMAND (CTRL) - G               | Find next
+COMMAND (CTRL) - SHIFT + G   | Find previous
+COMMAND - ALT - F                  | Replace (Mac)
+SHIFTL - CTR- F                       | Replace (linux, win)
+COMMAND - SHIFT - ALT - F       | Replace all (Mac)
+SHIFT - CTRL - R                       | Replace all (linux, win)
