@@ -17,11 +17,11 @@
     "test",
     "tests"
   ],
-  "_release": "71233bf72d",
+  "_release": "32542e2561",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "71233bf72d98843bf6af9ab9fb7ab37992c1cab1"
+    "commit": "32542e2561aecf97dcf0c0f627060cffdbd86f12"
   },
   "_source": "git@github.com:rhiokim/haroopad-theme.git",
   "_target": "master",
