@@ -23,14 +23,13 @@
     "jquery": ">= 1.9.0"
   },
   "homepage": "https://github.com/todc/todc-bootstrap",
-  "_release": "bcf9cbfa9a",
+  "_release": "06416bcff7",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "bcf9cbfa9ab958390b2c84a61fe7acf1a67876b4"
+    "commit": "06416bcff7e92e38c9604a960e1b48f23de5e975"
   },
   "_source": "git@github.com:todc/todc-bootstrap.git",
   "_target": "master",
-  "_originalSource": "git@github.com:todc/todc-bootstrap.git",
-  "_direct": true
+  "_originalSource": "git@github.com:todc/todc-bootstrap.git"
 }

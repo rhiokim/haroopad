@@ -11,14 +11,13 @@
     "url": "https://github.com/jschr/bootstrap-modal/blob/master/LICENSE"
   },
   "homepage": "https://github.com/jschr/bootstrap-modal",
-  "_release": "19ac6234e6",
+  "_release": "1b9fa66ce8",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "19ac6234e682c9e426194b92600b90d31ffa4f8b"
+    "commit": "1b9fa66ce8b152d0546f6925d813724439fbfd15"
   },
   "_source": "git@github.com:jschr/bootstrap-modal.git",
   "_target": "master",
-  "_originalSource": "git@github.com:jschr/bootstrap-modal.git",
-  "_direct": true
+  "_originalSource": "git@github.com:jschr/bootstrap-modal.git"
 }

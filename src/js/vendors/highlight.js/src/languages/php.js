@@ -27,6 +27,7 @@ function(hljs) {
   };
   var NUMBER = {variants: [hljs.BINARY_NUMBER_MODE, hljs.C_NUMBER_MODE]};
   return {
+    aliases: ['php3', 'php4', 'php5', 'php6'],
     case_insensitive: true,
     keywords:
       'and include_once list abstract global private echo interface as static endswitch ' +
@@ -65,7 +66,7 @@ function(hljs) {
       VARIABLE,
       {
         className: 'function',
-        beginKeywords: 'function', end: /[;{]/,
+        beginKeywords: 'function', end: /[;{]/, excludeEnd: true,
         illegal: '\\$|\\[|%',
         contains: [
           hljs.UNDERSCORE_TITLE_MODE,
@@ -84,7 +85,7 @@ function(hljs) {
       },
       {
         className: 'class',
-        beginKeywords: 'class interface', end: '{',
+        beginKeywords: 'class interface', end: '{', excludeEnd: true,
         illegal: /[:\(\$"]/,
         contains: [
           {
