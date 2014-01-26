@@ -3,7 +3,7 @@ define([],function() {
 
   var fontStyle = [ 'color', 'font-style', 'text-shadow' ];
   var layoutStyle = fontStyle.concat([ 
-    'font-family', 'background', 'background-image', 'background-color' ]);
+    'font-family', 'background' ]);
   var supportTable = {
     '*': { 'select': '.CodeMirror', 'properties': fontStyle},
     'header': { 'selector': '.cm-header', 'properties': fontStyle },
