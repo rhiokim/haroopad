@@ -47,11 +47,11 @@
     border:1px solid darken(@bg-color, 10);
   }
 
-  p {
+  p, li, td, h1, h2, h3, h4, h5, h6, blockquote {
     &>code {
-      font-family: @code-family;
-      color: #BD006A;
-      //text-shadow: 0 0 1px rgba(0,0,0,.5);
+      color: #000;
+      background-color: #feecdd;
+      border: 1px solid #efdfd0;
     }
   }
 
@@ -67,7 +67,7 @@
   blockquote {
     border-left: 4px solid @border-color;
     padding: 0 15px;
-    font-style: italic;
+    color: #777;
   }
 
   table {

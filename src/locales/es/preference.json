@@ -1,5 +1,11 @@
 {
     "title": "Preferencias",
+    "ok": "OK",
+    "no": "No",
+    "yes": "Yes",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "apply": "Apply",
 
     "tab": {
         "general": "General",
@@ -8,7 +14,8 @@
         "custom": "Personalización",
         "code": "Código",
         "markdown": "Markdown",
-        "about": "Acerca"
+        "about": "Acerca",
+        "backup": "Backup"
     },
 
     "general": {
@@ -52,11 +59,14 @@
 
     "markdown": {
         "enable-gfm": "Usar Markdown estilo GitHub",
-        "sanitize-desc": "Usar HTML",
+        "etc": "Additional options",
+        "sanitize-desc": "Ignore any HTML that has been input.",
         "gfm-line-breaks": "Usar saltos de línea de Markdown estilo GitHub",
         "gfm-table": "Usar tablas de Markdown estilo GitHub",
         "smarty-list": "Usa los comportamientos de listas más inteligentes que el del Markdown original",
-        "smarty-pants": "Usa puntuación tipográfica \"inteligente\" para cosas como citas y guiones"
+        "smarty-pants": "Usa puntuación tipográfica \"inteligente\" para cosas como citas y guiones",
+        "enable-math": "Use Mathematics Expression",
+        "restore": "Your Markdown settings will be restored to their original defaults"
     },
 
     "about": {
@@ -69,5 +79,15 @@
         "icon": "ICON",
         "description": "Haroopad <small>El próximo procesador de documentos</small>",
         "donate-msg": "Si te gusta Haroopad  dona para ayudar a su crecimiento"
+    },
+
+    "backup": {
+        "title": "Import & Export Settings...",
+        "import": "Import Settings",
+        "export": "Export Settings",
+        "import-done": "Restart Needed",
+        "import-done-msg": "Settings imported successfully. You have to restart Haroopad to reload the settings.<br/>Restart Haroopad?",
+        "export-done": "Export Complete!",
+        "export-done-msg": "Your settings have ben successfully exported.<br/>You can import settings using \"<b>Preference > Backup > Import Settings</b>\""
     }
 }

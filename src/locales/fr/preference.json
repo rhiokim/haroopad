@@ -1,5 +1,11 @@
 {
     "title": "Preference",
+    "ok": "OK",
+    "no": "No",
+    "yes": "Yes",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "apply": "Apply",
 
     "tab": {
         "general": "General",
@@ -8,7 +14,8 @@
         "custom": "Custom",
         "code": "Code",
         "markdown": "Markdown",
-        "about": "About"
+        "about": "About",
+        "backup": "Backup"
     },
 
     "general": {
@@ -22,7 +29,7 @@
     "editor": {
         "general": "General",
         "spaces": "Spaces",
-        "tab-width": "Tab with",
+        "tab-width": "Tab width",
         "indent-use-tab": "Indent Use Tab",
         "display-line-number": "Show Line Number",
         "vim-key-binding": "Vim Key Binding",
@@ -52,11 +59,14 @@
 
     "markdown": {
         "enable-gfm": "Use Github Flavord Markdown",
-        "sanitize-desc": "Use HTML",
-        "gfm-line-breaks": "Use Github Flavord Markdown Line Break",
+        "etc": "Additional options",
+        "sanitize-desc": "Ignore any HTML that has been input.",
+        "gfm-line-breaks": "Use Github Flavored Markdown Line Break",
         "gfm-table": "Use Github Flavord Markdown Table",
         "smarty-list": "Use smarter list behavior than the original markdown",
-        "smarty-pants": "Use \"smart\" typograhic punctuation for things like quotes and dashes"
+        "smarty-pants": "Use \"smart\" typograhic punctuation for things like quotes and dashes",
+        "enable-math": "Use Mathematics Expression",
+        "restore": "Your Markdown settings will be restored to their original defaults"
     },
 
     "about": {
@@ -69,5 +79,15 @@
         "icon": "ICON",
         "description": "Haroopad <small>The next document process</small>",
         "donate-msg": "If you like haroopad, donate to help growing up"
+    },
+
+    "backup": {
+        "title": "Import & Export Settings...",
+        "import": "Import Settings",
+        "export": "Export Settings",
+        "import-done": "Restart Needed",
+        "import-done-msg": "Settings imported successfully. You have to restart Haroopad to reload the settings.<br/>Restart Haroopad?",
+        "export-done": "Export Complete!",
+        "export-done-msg": "Your settings have ben successfully exported.<br/>You can import settings using \"<b>Preference > Backup > Import Settings</b>\""
     }
 }
