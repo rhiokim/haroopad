@@ -66,7 +66,8 @@
         "secure": "密码不会被保存",
         "yours": "输入您的Gmail地址",
         "evernote": "Evernote",
-        "tumblr": "Tumblr"
+        "tumblr": "Tumblr",
+        "invalid-account": "Invalid login or password."
     },
 
     "dialog": {

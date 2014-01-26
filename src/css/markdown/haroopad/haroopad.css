@@ -37,9 +37,19 @@
 .haroopad hr {
   border: 1px solid #e6e6e6;
 }
-.haroopad p > code {
-  font-family: Consolas, Inconsolata, Courier, monospace;
-  color: #BD006A;
+.haroopad p > code,
+.haroopad li > code,
+.haroopad td > code,
+.haroopad h1 > code,
+.haroopad h2 > code,
+.haroopad h3 > code,
+.haroopad h4 > code,
+.haroopad h5 > code,
+.haroopad h6 > code,
+.haroopad blockquote > code {
+  color: #000;
+  background-color: #feecdd;
+  border: 1px solid #efdfd0;
 }
 .haroopad pre > code {
   font-size: 1em;
@@ -67,31 +77,31 @@
  */
 /*
 .haroopad {
-	
+  
   img {
     .bordered(@border-color, @border-color, @border-color, @border-color);
     .rounded(3px);
     .box-shadow(0 0 7px darken(@border-color, 18%));
 
     &:hover {
-	    -webkit-animation-duration: 1s;
-	    -webkit-animation-delay: .2s;
-    	.pulse;
+      -webkit-animation-duration: 1s;
+      -webkit-animation-delay: .2s;
+      .pulse;
     }
   }
 
   h1 {
     -webkit-animation-duration: .5s;
     -webkit-animation-delay: .2s;
-  	.tada;
+    .tada;
   }
 
   &>ul {
-  	&>li {
-	    -webkit-animation-duration: .5s;
-	    -webkit-animation-delay: .2s;
-	  	.fadeInLeft;
-	  }
+    &>li {
+      -webkit-animation-duration: .5s;
+      -webkit-animation-delay: .2s;
+      .fadeInLeft;
+    }
   }
 
 }

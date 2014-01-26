@@ -3,6 +3,9 @@
     "ok": "확인",
     "no": "아니오",
     "yes": "예",
+    "cancel": "취소",
+    "reset": "초기화",
+    "apply": "적용",
 
     "tab": {
         "general": "일반",
@@ -62,7 +65,8 @@
         "gfm-table": "GFM 테이블 사용",
         "smarty-list": "표준 마크다운보다 더 나은 스마트 리스트 사용",
         "smarty-pants": "기호 및 텍스트 대체 항목 사용",
-        "enable-math": "수학 표현식 사용"
+        "enable-math": "수학 표현식 사용",
+        "restore": "마크다운 옵션을 기본 설정으로 되돌리겠습니까?"
     },
 
     "about": {

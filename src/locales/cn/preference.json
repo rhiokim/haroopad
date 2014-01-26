@@ -1,5 +1,11 @@
 {
     "title": "偏好设置",
+    "ok": "OK",
+    "no": "No",
+    "yes": "Yes",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "apply": "Apply",
 
     "tab": {
         "general": "通用",
@@ -8,7 +14,8 @@
         "custom": "自定义",
         "code": "代码",
         "markdown": "Markdown",
-        "about": "关于"
+        "about": "关于",
+        "backup": "Backup"
     },
 
     "general": {
@@ -51,12 +58,15 @@
     },
 
     "markdown": {
-        "enable-gfm": "使用 Github Flavord Markdown (GFM)",
-        "sanitize-desc": "使用 HTML",
+        "enable-gfm": "使用 Github Flavored Markdown (GFM)",
+        "etc": "Additional options",
+        "sanitize-desc": "Ignore any HTML that has been input.",
         "gfm-line-breaks": "使用 GFM 换行模式",
         "gfm-table": "使用 GFM 表格",
         "smarty-list": "智能列表",
-        "smarty-pants": "智能标点符号"
+        "smarty-pants": "智能标点符号",
+        "enable-math": "Use Mathematics Expression",
+        "restore": "Your Markdown settings will be restored to their original defaults"
     },
 
     "about": {
@@ -69,5 +79,15 @@
         "icon": "图标",
         "description": "Haroopad<small>下一代文档编辑器</small>",
         "donate-msg": "如果您喜欢 Haroopad, 请捐赠以支持发展 :)"
+    },
+
+    "backup": {
+        "title": "Import & Export Settings...",
+        "import": "Import Settings",
+        "export": "Export Settings",
+        "import-done": "Restart Needed",
+        "import-done-msg": "Settings imported successfully. You have to restart Haroopad to reload the settings.<br/>Restart Haroopad?",
+        "export-done": "Export Complete!",
+        "export-done-msg": "Your settings have ben successfully exported.<br/>You can import settings using \"<b>Preference > Backup > Import Settings</b>\""
     }
 }
