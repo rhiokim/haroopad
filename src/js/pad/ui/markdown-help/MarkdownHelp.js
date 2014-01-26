@@ -66,11 +66,11 @@ define([
 
 				popWin = gui.Window.open('app://root/html/markdown-help.html', {
 					title: 'Markdown Syntax Help',
-					width: 400,
+					width: 420,
 					height: nw.height,
 					toolbar: false,
-					min_width: 350,
-					min_height: 300
+					min_width: 420,
+					min_height: 500
 				});
 				popWin.on('loaded', function() {
 					popWin.focus();
