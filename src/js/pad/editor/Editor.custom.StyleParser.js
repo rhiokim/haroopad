@@ -39,7 +39,9 @@ define([],function() {
 
     cssRules.forEach(function(rule) {
       if (rule.type == 'import') {
-        userRules.push(rule);
+        if (rule.import.indexOf('.css') < 0 || rule.import.indexOf('chrome://') < 0) {
+          userRules.push(rule);
+        }
       }
     });
 
@@ -66,6 +68,7 @@ define([],function() {
       });
     }
 
+    console.log(userStyle);
     return css.stringify(userStyle);
   }
 
