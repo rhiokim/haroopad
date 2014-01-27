@@ -1,3 +1,44 @@
+## Haroopad v0.11.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#288             | ==추가== 편집중인 라인 하이라이팅 옵션
+#289, #287       | ==추가== 이미지 구문에 스타일 속성 `![](path "title" "css")`
+#275             | ==추가== [TOC] 정렬 속성 `[TOC "float:right"]`
+#257             | ==추가== 환경설정 내보내기, 가져오기
+#189             | ==추가== 국체화 (독일어 추가) by [Tobias Mücksch](https://github.com/tobiasmuecksch)
+                 | ==추가== 코드 하이라이팅 71가지 언어 지원 및 44가지 스타일 제공
+                 | ==추가== 에디터 테마 30가지로 확장
+                 | ==추가== 에디터 펜스 코드블럭 하이라이팅 지원 <br>(Ruby, PHP, Python, C, Javascript, HTML, CSS)
+**Font Issues**  | 
+#282             | 국가별 기본 폰트 지정 오류
+#269, #242       | 고정폭 폰트 문제
+**Markdown**     | 
+#264             | ==추가== GFM 줄바꿈(Line break)
+                 | ==추가== 구두점 변환 (따옴표, 큰따옴표, 말줄임 등)
+**Bugs**         |
+#286             | li > blockquote 마크다운 렌더링 오류
+#278, #272       | HTML 파일로 출력 오류
+#276             | 저장되지 않는 문서에 절대 경로 이미지 표시 오류
+**Enhancements** |
+#238             | 에디터 영역에 코드 하이라이팅 개선
+#290             | UI 프레임워크 업데이트
+#245             | 문서 로딩 퍼포먼스 향상
+
+
+##### Github Issue tracker
+
+* v0.10.1 -- https://github.com/rhiokim/haroopad/issues?milestone=36&page=1&state=closed
+* v0.11.0 -- https://github.com/rhiokim/haroopad/issues?milestone=32&page=1&state=closed
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/xkopo54ikj4pm86/haroopad-v0.10.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/vpq1l0racrky8vp/haroopad-v0.10.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/a8nrq54hf0esauw/haroopad-v0.10.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/z0bapcxguzgh8df/haroopad-v0.10.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/g4du6i4foc4y502/haroopad-v0.10.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/6zkglx8v2j3dimx/haroopad-v0.10.0_amd64.deb
 
 ## Haroopad v0.10.0
 
