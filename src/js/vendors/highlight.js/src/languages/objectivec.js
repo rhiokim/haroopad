@@ -35,6 +35,7 @@ function(hljs) {
   var LEXEMES = /[a-zA-Z@][a-zA-Z0-9_]*/;
   var CLASS_KEYWORDS = '@interface @class @protocol @implementation';
   return {
+    aliases: ['m', 'mm'],
     keywords: OBJC_KEYWORDS, lexemes: LEXEMES,
     illegal: '</',
     contains: [
@@ -73,7 +74,7 @@ function(hljs) {
       },
       {
         className: 'class',
-        begin: '(' + CLASS_KEYWORDS.split(' ').join('|') + ')\\b', end: '({|$)',
+        begin: '(' + CLASS_KEYWORDS.split(' ').join('|') + ')\\b', end: '({|$)', excludeEnd: true,
         keywords: CLASS_KEYWORDS, lexemes: LEXEMES,
         contains: [
           hljs.UNDERSCORE_TITLE_MODE

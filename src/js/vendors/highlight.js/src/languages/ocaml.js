@@ -6,6 +6,7 @@ Description: OCaml language definition.
 */
 function(hljs) {
   return {
+    aliases: ['ml'],
     keywords: {
       keyword:
         'and as assert asr begin class constraint do done downto else end ' +
@@ -30,7 +31,7 @@ function(hljs) {
       },
       {
         className: 'class',
-        beginKeywords: 'type', end: '\\(|=|$',
+        beginKeywords: 'type', end: '\\(|=|$', excludeEnd: true,
         contains: [
           hljs.UNDERSCORE_TITLE_MODE
         ]

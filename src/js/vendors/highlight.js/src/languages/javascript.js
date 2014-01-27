@@ -18,7 +18,8 @@ function(hljs) {
         'EvalError InternalError RangeError ReferenceError StopIteration SyntaxError ' +
         'TypeError URIError Number Math Date String RegExp Array Float32Array ' +
         'Float64Array Int16Array Int32Array Int8Array Uint16Array Uint32Array ' +
-        'Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require'
+        'Uint8Array Uint8ClampedArray ArrayBuffer DataView JSON Intl arguments require ' +
+        'module console window document'
     },
     contains: [
       {
@@ -48,7 +49,7 @@ function(hljs) {
       },
       {
         className: 'function',
-        beginKeywords: 'function', end: /\{/,
+        beginKeywords: 'function', end: /\{/, excludeEnd: true,
         contains: [
           hljs.inherit(hljs.TITLE_MODE, {begin: /[A-Za-z$_][0-9A-Za-z$_]*/}),
           {

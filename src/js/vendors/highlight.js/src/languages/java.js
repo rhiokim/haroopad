@@ -10,6 +10,7 @@ function(hljs) {
     'enum else break transient new catch instanceof byte super volatile case assert short ' +
     'package default double public try this switch continue throws';
   return {
+    aliases: ['jsp'],
     keywords: KEYWORDS,
     illegal: /<\//,
     contains: [
@@ -31,7 +32,7 @@ function(hljs) {
         contains: [
           {
             className: 'class',
-            beginKeywords: 'class interface', endsWithParent: true,
+            beginKeywords: 'class interface', endsWithParent: true, excludeEnd: true,
             illegal: /[:"<>]/,
             contains: [
               {
