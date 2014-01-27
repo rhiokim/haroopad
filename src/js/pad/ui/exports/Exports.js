@@ -89,8 +89,23 @@ define([
 			});
 		}
 
+		/**
+		 * replace data-echo
+		 */
+		function _replaceLazyLoading() {
+			var frags, data;
+			frags = shadow.querySelectorAll('[data-echo]');
+			frags = Array.prototype.slice.call(frags, 0);
+
+			_.each(frags, function(frag) {
+				data = frag.getAttribute('data-echo');
+				frag.setAttribute('src', data);
+				frag.removeAttribute('data-echo');
+			});
+		}
+
 		function getBodyHtml() {
-			contentDocument = Viewer.getContentDocument();
+			var contentDocument = Viewer.getContentDocument();
 
 			shadow = document.createElement('body');
 			shadow.style.display = 'none';
@@ -99,6 +114,7 @@ define([
 
 			_replaceOriginalEmbed();
 			_removeDataProperties();
+			_replaceLazyLoading();
 
 			shadow.removeAttribute('style');
 

@@ -8,23 +8,24 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==새로운 기능 (v0.11)==
+### ==New Feature (v0.11)==
 
-* 환경설정 백업 내보내기/가져오기 기능 추가
-* 마크다운 파서 옵션 설정기능 추가
-* 사용자 테마 강화
-	- 에디터, 뷰어 테마를 CSS 기반으로 좀더 쉽게 제공합니다. [자세히 보기]()
-* `[TOC]` 목차 정렬 속성 추가
-	- 왼쪽정렬: `[TOC "float:left"]`
-	- 오른쪽정렬: `[TOC "float:right"]`
-* `![]()` 이미지 스타일 속성 추가
-	- `![alt text](url "title" "css")`
-* 다국어 지원 추가
-	- 독일어 (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
-* 편집중인 라인 하이라이팅 옵션 추가
-* 코드 하이라이팅 71 언어, 44 스타일 지원 확장
-* 에디터 테마 추가 (30) 및 코드 하이라이팅 지원 
-	- Ruby, Python, PHP, Javascript, C, HTML, CSS
+* Added Import and Export settings
+* Added Options for markdown parsing
+* Added Current line highlighting
+* Added Syntax highlighting 71 languages, 44 styles
+* Added Themes for editor 30 styles
+* Added Syntax highlighting in fenced code block on editor
+     - Ruby, Python, PHP, Javascript, C, HTML, CSS
+* Enhanced custom theme UX
+     - Easy to customizing your style. [See more details]()
+* `[TOC]` Alignment for TOC
+     - Left Align: `[TOC "float:left"]`
+     - Right Align: `[TOC "float:right"]`
+* `![]()` Alignment for Image
+     - `![alt text](url "title" "css")`
+* Internationalization
+     - German (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch) 
 
 ### Main Features
 

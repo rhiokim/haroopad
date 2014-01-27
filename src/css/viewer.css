@@ -66,6 +66,13 @@ kbd {
   display: inline-block;
 }
 
+img[data-echo] {
+  margin:25px 0;
+  width: 100px;
+  height: 100px;
+  background: #fff url(../img/ajax.gif) no-repeat center center;
+}
+
 /**
  * spinner
  */

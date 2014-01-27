@@ -426,10 +426,10 @@
     code = '<span class="oembed_photo">';
     
     if (oembedData.url) {
-      code += '<a href="' + url + '" target="_blank"><img src="' + oembedData.url + '" alt="' + alt + '"/></a><br/>';
+      code += '<a href="' + url + '" target="_blank"><img src="app://root/img/blank.gif" data-echo="' + oembedData.url + '" alt="' + alt + '"/></a><br/>';
     } else if (oembedData.thumbnail_url) {
       var newURL = oembedData.thumbnail_url.replace('_s', '_b');
-      code += '<a href="' + url + '" target="_blank"><img src="' + newURL + '" alt="' + alt + '"/></a><br/>';
+      code += '<a href="' + url + '" target="_blank"><img src="app://root/img/blank.gif" data-echo="' + newURL + '" alt="' + alt + '"/></a><br/>';
     } else {
       code += '<span>Error loading this picture</span>';
     }
@@ -1157,7 +1157,7 @@
           } else if (results['og:image']) {
             // var div = $('<div style="float:left; margin-right:5px;"/>');
             var div = $('<span/>');
-            var img = $('<a href="' + results['og:url'] + '" target="_blank"><img src="' + results['og:image'] + '"></a><br/>');
+            var img = $('<a href="' + results['og:url'] + '" target="_blank"><img src="app://root/img/blank.gif" data-echo="' + results['og:image'] + '"></a><br/>');
             var caption = $('<span>');
             caption.append('<b><a href="' + results['og:url'] + '" target="_blank">' + results['og:title'] + '</a></b><br/>');
             caption.append((results['og:description'] || results['description'] || '') + '<br/>');
