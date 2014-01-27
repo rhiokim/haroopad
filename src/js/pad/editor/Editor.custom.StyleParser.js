@@ -68,7 +68,6 @@ define([],function() {
       });
     }
 
-    console.log(userStyle);
     return css.stringify(userStyle);
   }
 
