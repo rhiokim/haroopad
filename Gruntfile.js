@@ -223,6 +223,7 @@ module.exports = function(grunt) {
           '<%= build %>/haroopad/js/viewer.min.js': [
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/jquery/jquery.min.js',
+            '<%= vendors %>/haroopad-echo/dist/echo.min.js',
             '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js',
             '<%= vendors %>/highlight.js/build/highlight.pack.js',
             '<%= build %>/viewer.min.js'
@@ -263,9 +264,12 @@ module.exports = function(grunt) {
           ],
 
           /* viewer */
+          '<%= vendors %>/haroopad-echo/dist/echo.min.js': [ 
+            '<%= vendors %>/haroopad-echo/src/echo.js' 
+          ],
           '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js': [ 
             '<%= vendors %>/haroopad-oembed/jquery.oembed.js' 
-          ],
+          ]
         }
       },
 
@@ -472,7 +476,6 @@ module.exports = function(grunt) {
       },
       locales: {
         files: [
-          { expand: true, cwd: 'lib/haroopad-locales/', src: [ '**' ], dest: 'src/locales/' },
           { expand: true, cwd: 'lib/haroopad-locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
         ]
       },
