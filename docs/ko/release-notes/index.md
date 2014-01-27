@@ -29,8 +29,9 @@ Issue Number     | Description
 
 ##### Github Issue tracker
 
-* v0.10.1 -- https://github.com/rhiokim/haroopad/issues?milestone=36&page=1&state=closed
 * v0.11.0 -- https://github.com/rhiokim/haroopad/issues?milestone=32&page=1&state=closed
+* v0.10.1 -- https://github.com/rhiokim/haroopad/issues?milestone=36&page=1&state=closed
+
 ##### Download
 
 > * Windows MSI: https://www.dropbox.com/s/xkopo54ikj4pm86/haroopad-v0.10.0-i386.msi

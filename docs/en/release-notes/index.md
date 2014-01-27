@@ -1,3 +1,45 @@
+## Haroopad v0.11.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#288             | ==Added== Current line highlighting
+#289, #287       | ==Added== Align attribute for Image `![](path "title" "css")`
+#275             | ==Added== Align attribute for TOC `[TOC "float:right"]`
+#257             | ==Added== Import and Export settings
+#189             | ==Added== German(Deutsch) translation by [Tobias Mücksch](https://github.com/tobiasmuecksch)
+                 | ==Added== Syntax highlighting 71 languages, 44 styles
+                 | ==Added== Themes for editor 30 styles
+                 | ==Added== Syntax highlighting in fenced code block on editor <br>(Ruby, PHP, Python, C, Javascript, HTML, CSS)
+**Font Issues**  | 
+#282             | Font Issues
+#269, #242       | monospace/fixed-width font <br>equals and minus characters different width if followed by space
+**Markdown**     | 
+#264             | ==Added== GFM Line Break
+                 | ==Added== Support Smartypants
+**Bugs**         |
+#286             | Fixed li > blockquote parse error
+#278, #272       | Fixed export HTML file 
+#276             | Fixed Absolutely image path error on non-saved file
+**Enhancements** |
+#238             | Syntax highlighting has some problems
+#290             | Update base ui framework 
+#245             | Lazy-loading image resouces 
+
+
+##### Github Issue tracker
+
+* v0.11.0 -- https://github.com/rhiokim/haroopad/issues?milestone=32&page=1&state=closed
+* v0.10.1 -- https://github.com/rhiokim/haroopad/issues?milestone=36&page=1&state=closed
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/xkopo54ikj4pm86/haroopad-v0.10.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/vpq1l0racrky8vp/haroopad-v0.10.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/a8nrq54hf0esauw/haroopad-v0.10.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/z0bapcxguzgh8df/haroopad-v0.10.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/g4du6i4foc4y502/haroopad-v0.10.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/6zkglx8v2j3dimx/haroopad-v0.10.0_amd64.deb
 
 ## Haroopad v0.10.0
 
