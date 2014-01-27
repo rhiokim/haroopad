@@ -1,14 +1,6 @@
-// for Memory leak detect
-process.setMaxListeners(0);
+var gui = require('nw.gui');
 
-//add node main module path
-process.mainModule.paths = [getExecPath() +'Libraries/.node_modules'].concat(process.mainModule.paths);
-
-var lng = getLang();
-
-global.gui = gui = require('nw.gui');
-global.top = window;
-
+window.top = window;
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
 
@@ -40,9 +32,9 @@ requirejs.onError = function (e) {
 };
 
 i18n.init({
-  lng: lng
+  lng: global.LOCALES._lang
 }, function() {
-  i18n.addResourceBundle(lng, 'menu', global.locales['menu']);
+  i18n.addResourceBundle(global.LOCALES._lang, 'menu', global.LOCALES['menu']);
   i18n.setDefaultNamespace('menu');
 
   MenuBar();

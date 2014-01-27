@@ -66,7 +66,8 @@
         "secure": "메일 주소를 기억합니다.",
         "yours": "Gmail 주소를 입력해주세요.",
         "evernote": "에버노트",
-        "tumblr": "텀블러"
+        "tumblr": "텀블러",
+        "invalid-account": "유효하지 않는 계정입니다."
     },
 
     "dialog": {

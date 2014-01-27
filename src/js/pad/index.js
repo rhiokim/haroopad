@@ -1,7 +1,5 @@
 /* globally for window event system */
 var gui = require('nw.gui');
-var fs = require('fs');
-var lng = getLang();
 
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
@@ -32,11 +30,11 @@ requirejs.config({
 });
 
 i18n.init({
-  lng: lng
+  lng: global.LOCALES._lang
 }, function() {
 
-  i18n.addResourceBundle(lng, 'menu', global.locales['menu']);
-  i18n.addResourceBundle(lng, 'pad', global.locales['pad']);
+  i18n.addResourceBundle(global.LOCALES._lang, 'menu', global.LOCALES['menu']);
+  i18n.addResourceBundle(global.LOCALES._lang, 'pad', global.LOCALES['pad']);
 
   i18n.setDefaultNamespace('menu');
 

@@ -1,22 +1,25 @@
 {
   "name": "bootstrap-switch",
   "description": "Unofficial bootstrap switch",
-  "main": "static/js/bootstrap-switch.js",
+  "version": "2.0.0",
+  "main": [
+    "build/js/bootstrap-switch.js",
+    "build/css/bootstrap3/bootstrap-switch.css"
+  ],
   "ignore": [
-    "examples"
+    "docs"
   ],
   "dependencies": {
-    "jquery": "~1.9.0"
+    "jquery": ">=1.9.0"
   },
   "homepage": "https://github.com/nostalgiaz/bootstrap-switch",
-  "_release": "fecbe28730",
+  "_release": "2.0.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "fecbe2873011a89c3ff5f12297fd89012cf7a80c"
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "74412a2abf110c0a4608837b861db6db8ba168c6"
   },
   "_source": "git://github.com/nostalgiaz/bootstrap-switch.git",
   "_target": "*",
-  "_originalSource": "bootstrap-switch",
-  "_direct": true
+  "_originalSource": "bootstrap-switch"
 }

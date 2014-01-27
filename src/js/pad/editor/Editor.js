@@ -29,10 +29,11 @@ define([
 		};
 
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-			mode: 'markdown',
+			mode: 'gfm',
 			lineNumbers: true,
 			lineWrapping: true,
 			electricChars: false,
+  		styleActiveLine: true,
 			viewportMargin: 40,
 			autofocus: true,
 			workDelay: 1000,

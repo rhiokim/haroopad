@@ -1,5 +1,8 @@
-module.exports = function(grunt) {
+var timer = require("grunt-timer");
 
+module.exports = function(grunt) {
+  timer.init(grunt, {deferLogs: true, friendlyTime: true});
+  
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -182,8 +185,8 @@ module.exports = function(grunt) {
             '<%= vendors %>/bootstrap-modal/js/bootstrap-modalmanager.min.js',
             '<%= vendors %>/bootstrap-modal/js/bootstrap-modal.min.js',
             '<%= vendors %>/store.js/store.min.js',
-            '<%= vendors %>/reMarked.js/reMarked.min.js',
-            '<%= vendors %>/notifer.js/notifier.min.js',
+            '<%= vendors %>/haroopad-reMarked.js/reMarked.min.js',
+            '<%= vendors %>/haroopad-notifer.js/notifier.min.js',
             '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
             '<%= vendors %>/requirejs/require.min.js'
           ]
@@ -221,7 +224,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/jquery/jquery.min.js',
             '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js',
-            '<%= vendors %>/highlightjs/highlight.pack.js',
+            '<%= vendors %>/highlight.js/build/highlight.pack.js',
             '<%= build %>/viewer.min.js'
           ]
         }
@@ -252,11 +255,11 @@ module.exports = function(grunt) {
           '<%= vendors %>/bootstrap-modal/js/bootstrap-modalmanager.min.js': [ 
             '<%= vendors %>/bootstrap-modal/js/bootstrap-modalmanager.js' 
           ],
-          '<%= vendors %>/reMarked.js/reMarked.min.js': [ 
-            '<%= vendors %>/reMarked.js/reMarked.js' 
+          '<%= vendors %>/haroopad-reMarked.js/reMarked.min.js': [ 
+            '<%= vendors %>/haroopad-reMarked.js/reMarked.js' 
           ],
-          '<%= vendors %>/notifer.js/notifier.min.js': [ 
-            '<%= vendors %>/notifer.js/notifier.js' 
+          '<%= vendors %>/haroopad-notifer.js/notifier.min.js': [ 
+            '<%= vendors %>/haroopad-notifer.js/notifier.js' 
           ],
 
           /* viewer */
@@ -303,6 +306,7 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= build %>/app.common.min.js': [
+            'src/js/lib/system.js',
             'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
             'src/js/app/app.common.js',
@@ -379,6 +383,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/lib/codemirror.js',
             '<%= vendors %>/CodeMirror/addon/hint/show-hint.js',
             '<%= vendors %>/CodeMirror-custom/addon/hint/markdown-hint.js',
+            '<%= vendors %>/CodeMirror/addon/selection/active-line.js',
             '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
             '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
             '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
@@ -387,9 +392,16 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror-custom/addon/search/search.js',
             '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
             '<%= vendors %>/CodeMirror/mode/xml/xml.js',
-            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
-            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
             '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
+            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
+            '<%= vendors %>/CodeMirror/mode/ruby/ruby.js',
+            '<%= vendors %>/CodeMirror/mode/python/python.js',
+            '<%= vendors %>/CodeMirror/mode/javascript/javascript.js',
+            '<%= vendors %>/CodeMirror/mode/clike/clike.js',
+            '<%= vendors %>/CodeMirror/mode/css/css.js',
+            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
+            '<%= vendors %>/CodeMirror/mode/php/php.js',
+            '<%= vendors %>/CodeMirror/mode/perl/perl.js',
             '<%= vendors %>/CodeMirror/keymap/vim.js'
           ]
         }
@@ -401,7 +413,7 @@ module.exports = function(grunt) {
         files: [
           // { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
-          { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
+          // { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
           { expand: true, cwd: 'src/css/column/', src: [ '**' ], dest: 'build/haroopad/css/column/' },
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad/css/viewer-toc/' },
@@ -492,19 +504,19 @@ module.exports = function(grunt) {
 
       mathjax: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/config/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/extensions/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/fonts/HTML-CSS/TeX/woff/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/images/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/jax/input/TeX', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/input/TeX/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/jax/output/HTML-CSS', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/jax/output/HTML-CSS/' },
-          { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/MathJax/', filter: 'isFile'}
+          { expand: true, cwd: '<%= vendors %>/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/config/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/extensions/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/fonts/HTML-CSS/TeX/woff/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/images/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/input/TeX', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/jax/input/TeX/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/output/HTML-CSS', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/jax/output/HTML-CSS/' },
+          { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/', filter: 'isFile'}
         ]
       },
       
       highlightjs: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/highlightjs/styles/', src: [ '**' ], dest: 'src/css/code/' }
+          { expand: true, cwd: '<%= vendors %>/highlight.js/src/styles/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.css/code/' }
         ]
       },
       
@@ -544,6 +556,16 @@ module.exports = function(grunt) {
 
       deploy: {
         command: 'rm -rf /Applications/haroopad.app; cp -R ./build/haroopad.app /Applications'
+      },
+
+      highlightjs: {
+        command: 'python3 tools/build.py',
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: './src/js/vendors/highlight.js/'
+          }
+        }
       }
     },
 
@@ -615,7 +637,7 @@ module.exports = function(grunt) {
   grunt.registerTask('snapshot', [ 'concat:snapshot', 'shell:bin' ]);
 
   /* pre built */
-  grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs' ]);
+  grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs' ]);
   grunt.registerTask('prebower', [ 
     'copy:btmodal', 
     'copy:mkdcss', 

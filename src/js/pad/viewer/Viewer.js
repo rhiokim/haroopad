@@ -36,60 +36,60 @@ define([
 
 		/* change editor theme */
 
-		function changeTheme(value) {
+		function changeTheme(value, log) {
 			_viewer.setViewStyle(value);
 
 			window.setTimeout(function() {
 				StyleForEmail.generateInlineStyle();
 			}, 1000);
 
-			global._gaq.push('haroopad.preferences', 'style', value);
+			!log && global._gaq.push('haroopad.preferences', 'style', value);
 		}
 
-		function changeFontSize(value) {
+		function changeFontSize(value, log) {
 			_viewer.setFontSize(value);
 
-			global._gaq.push('haroopad.preferences', 'fontSize', value);
+			!log && global._gaq.push('haroopad.preferences', 'fontSize', value);
 		}
 
-		function changeFontFamily(value) {
+		function changeFontFamily(value, log) {
 			_viewer.setFontFamily(value);
 
-			global._gaq.push('haroopad.preferences', 'fontFamily', value);
+			!log && global._gaq.push('haroopad.preferences', 'fontFamily', value);
 		}
 
 		/* change syntax highlight theme */
 
-		function changeCodeTheme(value) {
-			_viewer.setCodeStyle(value);
+		function changeCodeTheme(value, log) {
+			var style = path.join(global.PATHS.css_code, value +'.css');
+			_viewer.setCodeStyle(style);
 
-			global._gaq.push('haroopad.preferences', 'code', value);
+			!log && global._gaq.push('haroopad.preferences', 'code', value);
 		}
 
 		/* change clickable link */
 
-		function changeClickableLink(value) {
+		function changeClickableLink(value, log) {
 			viewerConfig.clickableLink = value;
 
-			global._gaq.push('haroopad.preferences', 'viewer', 'changeClickableLink: ' + value);
+			!log && global._gaq.push('haroopad.preferences', 'viewer', 'changeClickableLink: ' + value);
 		}
 
 		/* change custom theme */
 
-		function changeCustomTheme(theme) {
+		function changeCustomTheme(theme, log) {
 			var css = (theme && theme.path) || '';
 			_viewer.loadCustomCSS(css);
 
-
-			global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
+			!log && global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
 		}
 
-		function enableMath(value) {
-			_viewer.empty();
+		function enableMath(value, log) {
+			// _viewer.empty();
 			
 			nw.file.trigger('change:markdown');
 
-			global._gaq.push('haroopad.preferences', 'enable math expression', value);
+			!log && global._gaq.push('haroopad.preferences', 'enable math expression', value);
 		}
 
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
@@ -125,6 +125,10 @@ define([
 		window.ee.on('editor.scroll', function(top, per) {
 			_viewer.scrollTop(top * 100 / per);
 		});
+		
+		window.ee.on('menu.view.doc.outline', function(show) {
+			show ? _viewer.showOutline() : _viewer.hideOutline();
+		});
 
 		/**
 		 * delegate to parent window key mouse down event
@@ -156,12 +160,13 @@ define([
 
 		/* copy html to clipboard */
 		window.ee.on('menu.file.exports.clipboard.plain', function() {
+			var content = nw.file.doc.get('html');
 			clipboard.set(content, 'text');
 		});
 
-		window.ee.on('menu.file.exports.clipboard.haroopad', function() {
-			clipboard.set(content, 'text');
-		});
+		// window.ee.on('menu.file.exports.clipboard.haroopad', function() {
+		// 	clipboard.set(content, 'text');
+		// });
 
 		window.ee.on('menu.view.viewer.font.size', function(value) {
 			viewerConfig.fontSize += value;
@@ -183,9 +188,9 @@ define([
 			window.ee.emit('menu.file.exports.clipboard.plain');
 		});
 
-		HotKey('defmod-shift-alt-c', function() {
-			window.ee.emit('menu.file.exports.clipboard.haroopad');
-		});
+		// HotKey('defmod-shift-alt-c', function() {
+		// 	window.ee.emit('menu.file.exports.clipboard.haroopad');
+		// });
 
 		HotKey('defmod-shift-.', function() {
 			window.ee.emit('menu.view.viewer.font.size', 1);
@@ -196,7 +201,7 @@ define([
 		});
 
 		/* change markdown event handler */
-		nw.file.doc.on('change:html', function(doc, html) {
+		nw.file.doc.on('update', function(doc, html) {
 			setTimeout(function() {
 				_viewer.update(doc.dom());
 			}, 1);
@@ -254,10 +259,10 @@ define([
 			}
 		});
 
-		_viewer.setViewStyle(viewerConfig.theme || 'haroopad');
-		_viewer.setFontSize(viewerConfig.fontSize);
-		_viewer.setFontFamily(viewerConfig.fontFamily);
-		_viewer.setCodeStyle(codeConfig.theme || 'solarized_light');
+		changeTheme(viewerConfig.theme || 'haroopad', true);
+		changeFontSize(viewerConfig.fontSize, true);
+		changeFontFamily(viewerConfig.fontFamily, true);
+		changeCodeTheme(codeConfig.theme || 'solarized_light', true);
 
 		if (customConfig.theme) {
 			_viewer.loadCustomCSS(customConfig.theme.path);

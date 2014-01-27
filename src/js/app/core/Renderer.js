@@ -70,5 +70,21 @@ define([
 		  return '<hr class="'+ text +'">\n';
 		}
 
+		renderer.heading = function(text, level, raw) {
+			//<a name="verlet-js" class="anchor" href="#verlet-js"><span class="octicon octicon-link"></span></a>
+			raw = raw.toLowerCase().replace(/[^\w]+/g, '-');
+		  return '<h'
+		    + level
+		    + ' id="'
+		    + this.options.headerPrefix
+		    + raw
+		    + '">'
+		    + '<a name="'+ raw +'" href="#'+ raw +'"></a>'
+		    + text
+		    + '</h'
+		    + level
+		    + '>\n';
+		};
+
 		return renderer;
 });

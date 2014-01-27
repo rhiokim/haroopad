@@ -65,10 +65,11 @@ function setViewStyle(style) {
 }
 
 function setCodeStyle(style) {
-  var href = 'css/code/' + style + '.css';
-  $('#code').attr({
-    href: href
-  });
+  // var href = 'css/code/' + style + '.css';
+  // $('#code').attr({
+  //   href: href
+  // });
+  document.querySelector('#code').setAttribute('href', style);
 }
 
 function loadCustomCSS(style) {

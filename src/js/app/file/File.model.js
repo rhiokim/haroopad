@@ -34,7 +34,6 @@ define([
       markdown: '',
       tmp: undefined,
       readOnly: false,
-      toc: '',
       doc: null
     },
 
@@ -46,7 +45,7 @@ define([
         var md = this.get('markdown') || '';
         var html = parse(md);
 
-        this.doc.set('html', html);
+        this.doc.set({ html: html });
         // this.trigger('change:doc', this, this.doc);
         // this.set('html', html);
 

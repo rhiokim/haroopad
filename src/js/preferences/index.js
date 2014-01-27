@@ -1,14 +1,12 @@
 var gui = require('nw.gui'),
     win = gui.Window.get();
-var fs = require('fs');
-var lng = getLang();
 
 window.parent = win.parent;
 
 i18n.init({
-  lng: lng
+  lng: global.LOCALES._lang
 }, function() {
-  i18n.addResourceBundle(lng, 'preference', global.locales['preference']);
+  i18n.addResourceBundle(global.LOCALES._lang, 'preference', global.LOCALES['preference']);
   i18n.setDefaultNamespace('preference');
     
   //fixed text.js error on node-webkit

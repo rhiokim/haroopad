@@ -8,23 +8,24 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.10)==
+### ==New Feature (v0.11)==
 
-* Added `[TOC]` Syntax
-	- Now you can easily embed table of content in documents.
-* Markdown Autocompletion
-	- Boost the efficiency of markdown documentation.
+* Added Import and Export settings
+* Added Options for markdown parsing
+* Added Current line highlighting
+* Added Syntax highlighting 71 languages, 44 styles
+* Added Themes for editor 30 styles
+* Added Syntax highlighting in fenced code block on editor
+     - Ruby, Python, PHP, Javascript, C, HTML, CSS
+* Enhanced custom theme UX
+     - Easy to customizing your style. [See more details]()
+* `[TOC]` Alignment for TOC
+     - Left Align: `[TOC "float:left"]`
+     - Right Align: `[TOC "float:right"]`
+* `![]()` Alignment for Image
+     - `![alt text](url "title" "css")`
 * Internationalization
-	- English
-	- Korea (한국어)
-	- Spanish (Español) - [davegomez](https://github.com/davegomez)
-	- Chinese Simplified (中文) - [toiletfreak](https://github.com/toiletfreak)
-* Added Themes
-	- Metro Vibes, Metro Vibes Dark, Wood, Wood Ri
-* Etc
-	- Added Markdown Syntax Window.
-	- Added Option `Enable Last file restore`
-	- Improved execution speed.
+     - German (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch) 
 
 ### Main Features
 
@@ -32,24 +33,14 @@ Haroopad gives you the same editing experience regardless of the platform you ar
   - Window
   - Mac OS X
   - Linux 32/64
-* [Gitub Flavored Markdown](http://github.github.com/github-flavored-markdown/) & extensions
-	- Syntax highlighting
-	- Table
-	- URL autolinking
-	- Strikethrough
-	- Smartypants
 * Theme for editing
 	- Solaraized Dark & Light based on CodeMirror
 * Live Preview themes
 	- 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
 * Syntax Highlighting
-	- 52 languages & 26 styles based on highlight.js
+	- 71 languages & 44 styles based on highlight.js
 * Custom Theme
   - Style based on CSS(Cascading Style Sheet)
-* Outline View
-* Mathematics Expression
-	- Inline Expression: `$$$...$$$`
-	- Block Expression: `$$...$$`
 * Font Size
 	- Editor and Viewer font size control using Preference Window & Shortcuts
 * Embedding Rich Media Contents - v0.8
@@ -62,6 +53,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 	- Various Format support (Insert > Date & Time)
 * HTML to Markdown - v0.8
 	- Drag & Drop your selected text on Web Browser
+* Outline View
 * Vim Key-binding
 * Export to PDF, HTML
 * Styled HTML copy to clipboard for WYSIWYG editors
@@ -69,6 +61,29 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Document state information
 * Tab or Spaces for Indentation
 * Colum(Single, Two and Three) Layout View
+* Added Markdown Syntax Window.
+
+### Internationalization
+
+- English
+- Korea (한국어)
+- Spanish (Español) - [davegomez](https://github.com/davegomez)
+- Chinese Simplified (中文) - [toiletfreak](https://github.com/toiletfreak)
+- German (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
+
+### 향상된 마크다운 문법
+
+* Added `[TOC]` Syntax
+	- Now you can easily embed table of content in documents.
+* [Gitub Flavored Markdown](http://github.github.com/github-flavored-markdown/) & extensions
+	- Syntax highlighting
+	- Table
+	- URL autolinking
+	- Strikethrough
+	- Smartypants
+* Mathematics Expression
+	- Inline Expression: `$$$...$$$`
+	- Block Expression: `$$...$$`
 
 ### Upcoming Features
 
