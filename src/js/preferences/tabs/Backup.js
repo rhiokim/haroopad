@@ -82,7 +82,7 @@ define([
 
       // $(a).trigger('click');
 
-      dialogExport.show();
+      // dialogExport.show();
 
       _gaq.push('haroopad.preferences', 'backup', 'export settings');
     }
