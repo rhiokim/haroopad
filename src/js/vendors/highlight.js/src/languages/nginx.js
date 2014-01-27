@@ -66,12 +66,17 @@ function(hljs) {
   };
 
   return {
+    aliases: ['nginxconf'],
     contains: [
       hljs.HASH_COMMENT_MODE,
       {
         begin: hljs.UNDERSCORE_IDENT_RE + '\\s', end: ';|{', returnBegin: true,
         contains: [
-          hljs.inherit(hljs.UNDERSCORE_TITLE_MODE, {starts: DEFAULT})
+          {
+            className: 'title',
+            begin: hljs.UNDERSCORE_IDENT_RE,
+            starts: DEFAULT
+          }
         ],
         relevance: 0
       }

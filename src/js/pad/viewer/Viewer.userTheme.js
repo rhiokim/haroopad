@@ -25,7 +25,12 @@ define([
 
     initialize: function() {
       var head = iframe.contentDocument.getElementsByTagName('head')[0];
+      var css = loadUserCss(config.userTheme);
       head.appendChild(this.el);
+
+      if (css) {
+        this.updateStyle(css);
+      }
     },
 
     init: function() {

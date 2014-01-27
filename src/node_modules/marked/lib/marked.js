@@ -1008,7 +1008,7 @@ Renderer.prototype.image = function(href, title, text, props) {
     out += ' title="' + title + '"';
   }
   if (props) {
-    out += ' style="' + props.replace(/\s+/g,';') + '"';
+    out += ' style="' + props + '"';
   }
   out += '>';
   return out;

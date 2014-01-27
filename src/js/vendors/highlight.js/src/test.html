@@ -960,6 +960,49 @@ End Namespace
 </code></pre>
 
   <tr>
+    <th>Protocol Buffers
+    <td class="protobuf">
+<pre><code>package languages.protobuf;
+
+option java_package = "org.highlightjs.languages.protobuf";
+
+message Account {
+  required int64 account_id = 1;
+  repeated Customer customer = 2;
+  optional int32 max_allowed_admins = 3 [default = 3];
+}
+
+message Customer {
+  required int64 customer_id = 1;
+  optional string name = 2;
+  optional string real_name = 3 [default = "Anonymous"];
+  optional Gender gender = 4;
+  repeated string email_addresses = 5;
+
+  optional bool is_admin = 6 [default = false]; // or should this be a repeated field in Account?
+
+  enum Gender {
+    MALE = 1,
+    FEMALE = 2
+  }
+}
+
+message CustomerRequest {
+  optional int64 customer_id = 1;
+  optional string name = 2;
+  optional string email_address = 3;
+}
+
+message CustomerResponse {
+  repeated Customer customer = 1;
+}
+
+service CustomerSearch {
+  rpc FirstMatch(CustomerRequest) returns (CustomerResponse);
+  rpc AllMatches(CustomerRequest) returns (CustomerResponse);
+}</code></pre>
+
+  <tr>
     <th>HTTP
     <td class="http">
 <pre><code>POST /task?id=1 HTTP/1.1
@@ -1024,6 +1067,26 @@ on do_something(s, y)
 end do_something
 
 do shell script "/bin/echo 'hello'"
+</code></pre>
+
+  <tr>
+    <th>Vim Script
+    <td class="vim">
+<pre><code>if foo &gt; 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+set autoindent
+
+" switch on highlighting
+function UnComment(fl, ll)
+  while idx &gt;= a:ll
+    let srclines=getline(idx)
+    let dstlines=substitute(srclines, b:comment, "", "")
+    call setline(idx, dstlines)
+  endwhile
+endfunction
 </code></pre>
 
   <tr>
@@ -1578,9 +1641,12 @@ ALTER TABLE "topic" ADD CONSTRAINT forum_id FOREIGN KEY ("forum_id") REFERENCES 
 -- Initials
 insert into "topic" ("forum_id", "subject") values (2, 'D''artagnian');
 
-select count(*) from cicero_forum;
+select /* comment */ count(*) from cicero_forum;
 
 -- this line lacks ; at the end to allow people to be sloppy and omit it in one-liners
+/*
+but who cares?
+*/
 COMMIT</code></pre>
 
   <tr>
@@ -1911,6 +1977,44 @@ qt5_use_modules(myproject Widgets)
 </code></pre>
 
   <tr>
+    <th>NSIS
+    <td class="nsis">
+<pre><code>/*
+  NSIS Scheme
+  for highlight.js
+*/
+
+; Includes
+!include MUI2.nsh
+
+; Settings
+Name "installer_name"
+OutFile "installer_name.exe"
+RequestExecutionLevel user
+CRCCheck on
+!ifdef x64
+  InstallDir "$PROGRAMFILES64\installer_name"
+!else
+  InstallDir "$PROGRAMFILES\installer_name"
+!endif
+
+; Pages
+!insertmacro MUI_PAGE_INSTFILES
+
+; Sections
+Section "section_name" section_index
+  # your code here
+SectionEnd
+
+; Functions
+Function .onInit
+
+  MessageBox MB_OK "Here comes a$\n$\rline-break!"
+
+FunctionEnd
+</code></pre>
+
+  <tr>
     <th>Axapta
     <td class="axapta">
 <pre><code>class ExchRateLoadBatch extends RunBaseBatch {
@@ -2129,39 +2233,15 @@ put "blog,index" into gControllerHandlers
 
 
 command blog
+  -- simple comment
   put "Hello World!" into sTest
+  # ANOTHER COMMENT
   put "form,url,asset" into tHelpers
   rigLoadHelper tHelpers
 end blog
 
-
-command index
-  -- simple comment
-  put "YourPageTitle" into gData["pageTitle"]
-
-  # ANOTHER COMMENT
-  get rigLoadView("blogView")
-end index
-
-
 /*Hello
 block comment!*/
-
-
-command rigCommand pParam1 pParam2
-  put empty into sEmptyLocal
-  // comment
-  put "test" contains "es" into tTemp
-  put "test" &amp; $_POST["post"] into tTestVar
-  put rigFunction(tTestVar) into gData["arrayVal"]
-end rigCommand
-
-
-function rigFunction pParam
-  rigAnotherCommand pParamA, pPAramB
-  return "bla" &amp;&amp; pParam &amp; comma
-end rigFunction
-
 
 function myFunction
   if the secs > 2000000000 then
@@ -2358,6 +2438,60 @@ ok
 5
 11&gt; 1.85e+3.
 1850
+</code></pre>
+
+  <tr>
+    <th>Elixir</th>
+    <td class="elixir">
+<pre><code>defrecord Person, first_name: nil, last_name: "Dudington" do
+  def name record do # huh ?
+    "#{record.first_name} #{record.last_name}"
+  end
+end
+
+defrecord User, name: "José", age: 25
+
+guy = Person.new first_name: "Guy"
+guy.name
+
+defmodule ListServer do
+  @moduledoc """
+  This module provides an easy to use ListServer, useful for keeping
+  lists of things.
+  """
+  use GenServer.Behaviour
+  alias Foo.Bar
+
+  ### Public API
+  @doc """
+  Starts and links a new ListServer, returning {:ok, pid}
+
+  ## Example
+
+    iex> {:ok, pid} = ListServer.start_link
+
+  """
+  def start_link do
+    :gen_server.start_link({:local, :list}, __MODULE__, [], [])
+  end
+
+  ### GenServer API
+  def init(list) do
+    {:ok, list}
+  end
+
+  # Clear the list
+  def handle_cast :clear, list do
+    {:noreply, []}
+  end
+end
+
+{:ok, pid} = ListServer.start_link
+pid &lt;- {:foo, "bar"}
+
+greeter = fn(x) -&gt; IO.puts "hey #{x}" end
+greeter.("Bob")
+
 </code></pre>
 
   <tr>
@@ -2709,6 +2843,7 @@ return
 
 8=FIX.4.29=035=849=SENDERTEST56=TARGETTEST34=0000000152652=20120429-13:30:08.1371=ABC1234511=2012abc123414=10017=20125432120=030=NYSE31=108.2032=10038=10039=240=147=A54=555=BRK59=260=20120429-13:30:08.00065=B76=BROKER84=0100=NYSE111=100150=2151=0167=CS377=N10000=SampleCustomTag10=123
 </code></pre>
+
 </table>
 
 <script>
@@ -2809,6 +2944,12 @@ return
     <th>Language alias
     <td>
       <pre><code class="language-js">var x = '&lt;p&gt;this should &lt;b&gt;not&lt;/b&gt; be highlighted as &lt;em&gt;HTML&lt;/em&gt;';</code></pre>
+
+  <tr>
+    <th>Shortened language prefix (lang)
+    <td>
+      <pre><code class="lang-python">def add_one(x):
+    return x + 1</code></pre>
 
   <tr>
     <th>Disabled highlighting
