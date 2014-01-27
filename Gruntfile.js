@@ -122,6 +122,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/night.css',
             '<%= vendors %>/CodeMirror/theme/paraiso-dark.css',
             '<%= vendors %>/CodeMirror/theme/paraiso-light.css',
+            '<%= vendors %>/CodeMirror/theme/pastel-on-dark.css',
             '<%= vendors %>/CodeMirror/theme/rubyblue.css',
             '<%= vendors %>/CodeMirror/theme/solarized.css',
             '<%= vendors %>/CodeMirror/theme/the-matrix.css',
