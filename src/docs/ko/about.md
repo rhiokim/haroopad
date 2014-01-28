@@ -70,11 +70,11 @@
 
 ### 국제화
 
-	- 영어 (English)
-	- 한국어 (Korea)
-	- 스페인 (Español) - [davegomez](https://github.com/davegomez)
-	- 중국어 간체 (中文) - [toiletfreak](https://github.com/toiletfreak)
-	- 독일어 (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
+- 영어 (English)
+- 한국어 (Korea)
+- 스페인 (Español) - [davegomez](https://github.com/davegomez)
+- 중국어 간체 (中文) - [toiletfreak](https://github.com/toiletfreak)
+- 독일어 (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
 
 ### 향상된 마크다운 문법
 
