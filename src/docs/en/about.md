@@ -71,7 +71,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 - Chinese Simplified (中文) - [toiletfreak](https://github.com/toiletfreak)
 - German (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
 
-### 향상된 마크다운 문법
+### Enhanced Markdown Syntax
 
 * Added `[TOC]` Syntax
 	- Now you can easily embed table of content in documents.
