@@ -61,52 +61,6 @@ $$
 
 Finally, while display equations look good for a page of samples, the ability to mix math and text in a paragraph is also important. This expression $$$\sqrt{3x-1}+(1+x)^2$$$ is an example of an inline equation. As you see, MathJax equations can be used this way as well, without unduly disturbing the spacing between lines.
 
-## MathML Samples
-This page contains sample equations represented by MathML markup. The page has been configured to always use HTML-CSS mode with web fonts to display the equations, which produces uniform layout and typesetting across browsers.
-
-Note that MathJax can also be configured to use native MathML rendering when available in a browser, and only fall back to HTML-CSS mode when native rendering is not available.
-
-### The Quadratic Formula
-
-$$ 
-x=−b±b2−4ac2a
-$$
-
-### Cauchy's Integral Formula
-
-$$
-f(a)=12πi∮γf(z)z−adz
-$$
-
-### Double angle formula for Cosines
-
-$$
-cos⁡(θ+φ)=cos⁡(θ)cos⁡(φ)−sin⁡(θ)sin⁡(φ)
-$$
-
-### Gauss' Divergence Theorem
-
-$$
-∫D(∇⋅F)dV=∫∂D F⋅ndS
-$$
-
-### Curl of a Vector Field
-
-$$
-∇→×F→=(∂Fz∂y−∂Fy∂z)i+(∂Fx∂z−∂Fz∂x)j+(∂Fy∂x−∂Fx∂y)k
-$$
-
-### Standard Deviation
-
-$$
-σ=1N∑i=1N(xi−μ)2.
-$$
-
-### Definition of Christoffel Symbols
-
-$$
-(∇XY)k=Xi(∇iY)k=Xi(∂Yk∂xi+ΓimkYm)
-$$
 
 **markdown**
 
@@ -171,52 +125,6 @@ $$
 
 Finally, while display equations look good for a page of samples, the ability to mix math and text in a paragraph is also important. This expression $$$\sqrt{3x-1}+(1+x)^2$$$ is an example of an inline equation. As you see, MathJax equations can be used this way as well, without unduly disturbing the spacing between lines.
 
-## MathML Samples
-This page contains sample equations represented by MathML markup. The page has been configured to always use HTML-CSS mode with web fonts to display the equations, which produces uniform layout and typesetting across browsers.
-
-Note that MathJax can also be configured to use native MathML rendering when available in a browser, and only fall back to HTML-CSS mode when native rendering is not available.
-
-### The Quadratic Formula
-
-$$ 
-x=−b±b2−4ac2a
-$$
-
-### Cauchy's Integral Formula
-
-$$
-f(a)=12πi∮γf(z)z−adz
-$$
-
-### Double angle formula for Cosines
-
-$$
-cos⁡(θ+φ)=cos⁡(θ)cos⁡(φ)−sin⁡(θ)sin⁡(φ)
-$$
-
-### Gauss' Divergence Theorem
-
-$$
-∫D(∇⋅F)dV=∫∂D F⋅ndS
-$$
-
-### Curl of a Vector Field
-
-$$
-∇→×F→=(∂Fz∂y−∂Fy∂z)i+(∂Fx∂z−∂Fz∂x)j+(∂Fy∂x−∂Fx∂y)k
-$$
-
-### Standard Deviation
-
-$$
-σ=1N∑i=1N(xi−μ)2.
-$$
-
-### Definition of Christoffel Symbols
-
-$$
-(∇XY)k=Xi(∇iY)k=Xi(∂Yk∂xi+ΓimkYm)
-$$
 ```
 
 

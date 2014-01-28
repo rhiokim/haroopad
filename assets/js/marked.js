@@ -21,11 +21,14 @@ var block = {
   blockquote: /^( *>[^\n]+(\n[^\n]+)*\n*)+/,
   list: /^( *)(bull) [\s\S]+?(?:hr|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,
   html: /^ *(?:comment|closed|closing) *(?:\n{2,}|\s*$)/,
-  def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,
+  // def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["'(]([^\n]+)['")])? *(?:\n+|$)/,
+  def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?:\s+['"]([\s\S]*?)['"])?(?:\s+['"]([\s\S]*?)['"])? *(?:\n+|$)/,
   table: noop,
   paragraph: /^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def|math))+)\n*/,
   text: /^[^\n]+/,
-  math: /^ *(\${2,2}) *([\s\S]+?)\s*\1 *(?:\n+|$)/
+  math: /^ *(\${2,2}) *([\s\S]+?)\s*\1 *(?:\n+|$)/,
+  oembed: noop,
+  toc: noop
 };
 
 block.bullet = /(?:[*+-]|\d+\.)/;
@@ -42,7 +45,7 @@ block.list = replace(block.list)
 block._tag = '(?!(?:'
   + 'a|em|strong|small|s|cite|q|dfn|abbr|data|time|code'
   + '|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo'
-  + '|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|@)\\b';
+  + '|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b';
 
 block.html = replace(block.html)
   ('comment', /<!--[\s\S]*?-->/)
@@ -90,7 +93,6 @@ block.tables = merge({}, block.gfm, {
   nptable: /^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,
   table: /^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/
 });
-
 
 /**
  * Block Lexer
@@ -167,17 +169,6 @@ Lexer.prototype.token = function(src, top) {
       }
     }
 
-    // heading
-    if (cap = this.rules.heading.exec(src)) {
-      src = src.substring(cap[0].length);
-      this.tokens.push({
-        type: 'heading',
-        depth: cap[1].length,
-        text: cap[2]
-      });
-      continue;
-    }
-
     // code
     if (cap = this.rules.code.exec(src)) {
       src = src.substring(cap[0].length);
@@ -198,6 +189,17 @@ Lexer.prototype.token = function(src, top) {
         type: 'code',
         lang: cap[2],
         text: cap[3]
+      });
+      continue;
+    }
+
+    // heading
+    if (cap = this.rules.heading.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'heading',
+        depth: cap[1].length,
+        text: cap[2]
       });
       continue;
     }
@@ -261,7 +263,8 @@ Lexer.prototype.token = function(src, top) {
     if (cap = this.rules.hr.exec(src)) {
       src = src.substring(cap[0].length);
       this.tokens.push({
-        type: 'hr'
+        type: 'hr',
+        text: cap[1]
       });
       continue;
     }
@@ -391,7 +394,8 @@ Lexer.prototype.token = function(src, top) {
     if (cap = this.rules.toc.exec(src)) {
       src = src.substring(cap[0].length);
       this.tokens.push({
-        type: 'toc'
+        type: 'toc',
+        props: cap[2]
       });
       continue;
     }
@@ -401,7 +405,8 @@ Lexer.prototype.token = function(src, top) {
       src = src.substring(cap[0].length);
       this.tokens.links[cap[1].toLowerCase()] = {
         href: cap[2],
-        title: cap[3]
+        title: cap[3],
+        props: cap[4]
       };
       continue;
     }
@@ -497,7 +502,7 @@ var inline = {
 };
 
 inline._inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
-inline._href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;
+inline._href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?(?:\s+['"]([\s\S]*?)['"])?\s*/;
 
 inline.link = replace(inline.link)
   ('inside', inline._inside)
@@ -551,10 +556,12 @@ inline.breaks = merge({}, inline.gfm, {
  * Inline Lexer & Compiler
  */
 
-function InlineLexer(links, options, renderer) {
+function InlineLexer(links, options) {
   this.options = options || marked.defaults;
   this.links = links;
   this.rules = inline.normal;
+  this.renderer = this.options.renderer || new Renderer;
+  this.renderer.options = this.options;
 
   if (!this.links) {
     throw new
@@ -572,7 +579,6 @@ function InlineLexer(links, options, renderer) {
   }
 
   this.emojiTemplate = getEmojiTemplate(options);
-  this.renderer = renderer;
 }
 
 /**
@@ -602,18 +608,16 @@ InlineLexer.prototype.output = function(src) {
     , cap;
 
   while (src) {
-  
-  
     // escape
     if (cap = this.rules.escape.exec(src)) {
-    src = src.substring(cap[0].length);
+      src = src.substring(cap[0].length);
       out += cap[1];
       continue;
     }
 
     // autolink
     if (cap = this.rules.autolink.exec(src)) {
-    src = src.substring(cap[0].length);
+      src = src.substring(cap[0].length);
       if (cap[2] === '@') {
         text = cap[1].charAt(6) === ':'
           ? this.mangle(cap[1].substring(7))
@@ -623,30 +627,22 @@ InlineLexer.prototype.output = function(src) {
         text = escape(cap[1]);
         href = text;
       }
-      out += '<a href="'
-        + href
-        + '">'
-        + text
-        + '</a>';
+      out += this.renderer.link(href, null, text);
       continue;
     }
 
     // url (gfm)
     if (cap = this.rules.url.exec(src)) {
-    src = src.substring(cap[0].length);
+      src = src.substring(cap[0].length);
       text = escape(cap[1]);
       href = text;
-      out += '<a href="'
-        + href
-        + '">'
-        + text
-        + '</a>';
+      out += this.renderer.link(href, null, text);
       continue;
     }
-  
+
     // tag
     if (cap = this.rules.tag.exec(src)) {
-    src = src.substring(cap[0].length);
+      src = src.substring(cap[0].length);
       out += this.options.sanitize
         ? escape(cap[0])
         : cap[0];
@@ -655,10 +651,11 @@ InlineLexer.prototype.output = function(src) {
 
     // link
     if (cap = this.rules.link.exec(src)) {
-    src = src.substring(cap[0].length);
+      src = src.substring(cap[0].length);
       out += this.outputLink(cap, {
         href: cap[2],
-        title: cap[3]
+        title: cap[3],
+        props: cap[4]
       });
       continue;
     }
@@ -666,7 +663,7 @@ InlineLexer.prototype.output = function(src) {
     // reflink, nolink
     if ((cap = this.rules.reflink.exec(src))
         || (cap = this.rules.nolink.exec(src))) {
-    src = src.substring(cap[0].length);
+      src = src.substring(cap[0].length);
       link = (cap[2] || cap[1]).replace(/\s+/g, ' ');
       link = this.links[link.toLowerCase()];
       if (!link || !link.href) {
@@ -674,28 +671,25 @@ InlineLexer.prototype.output = function(src) {
         src = cap[0].substring(1) + src;
         continue;
       }
+      cap[4] = link.props || '';
       out += this.outputLink(cap, link);
       continue;
     }
 
     // strong
     if (cap = this.rules.strong.exec(src)) {
-    src = src.substring(cap[0].length);
-      out += '<strong>'
-        + this.output(cap[2] || cap[1])
-        + '</strong>';
+      src = src.substring(cap[0].length);
+      out += this.renderer.strong(this.output(cap[2] || cap[1]));
       continue;
     }
-  
+
     // em
     if (cap = this.rules.em.exec(src)) {
-    src = src.substring(cap[0].length);
-      out += '<em>'
-        + this.output(cap[2] || cap[1])
-        + '</em>';
+      src = src.substring(cap[0].length);
+      out += this.renderer.em(this.output(cap[2] || cap[1]));
       continue;
     }
-  
+
   // underline
     if (cap = this.rules.underline.exec(src)) {
     src = src.substring(cap[0].length);
@@ -716,36 +710,32 @@ InlineLexer.prototype.output = function(src) {
 
     // code
     if (cap = this.rules.code.exec(src)) {
-    src = src.substring(cap[0].length);
-      out += '<code>'
-        + escape(cap[2], true)
-        + '</code>';
+      src = src.substring(cap[0].length);
+      out += this.renderer.codespan(escape(cap[2], true));
+      continue;
+    }
+
+    // br
+    if (cap = this.rules.br.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.br();
+      continue;
+    }
+
+    // del (gfm)
+    if (cap = this.rules.del.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.del(this.output(cap[1]));
       continue;
     }
 
     // math
     if (this.options.mathjax) {
       if (cap = this.rules.math.exec(src)) {
-        src = src.substring(cap[0].length);
-        out += this.renderer.math(cap[1]);
-        continue;
+          src = src.substring(cap[0].length);
+          out += this.renderer.math(cap[1]);
+          continue;
       }
-    }
-
-    // br
-    if (cap = this.rules.br.exec(src)) {
-    src = src.substring(cap[0].length);
-      out += '<br>';
-      continue;
-    }
-
-    // del (gfm)
-    if (cap = this.rules.del.exec(src)) {
-    src = src.substring(cap[0].length);
-      out += '<del>'
-        + this.output(cap[1])
-        + '</del>';
-      continue;
     }
 
     // emoji (gfm)
@@ -757,7 +747,7 @@ InlineLexer.prototype.output = function(src) {
 
     // text
     if (cap = this.rules.text.exec(src)) {
-    src = src.substring(cap[0].length);
+      src = src.substring(cap[0].length);
       out += escape(this.smartypants(cap[0]));
       continue;
     }
@@ -776,32 +766,12 @@ InlineLexer.prototype.output = function(src) {
  */
 
 InlineLexer.prototype.outputLink = function(cap, link) {
-  if (cap[0].charAt(0) !== '!') {
-    return '<a href="'
-      + escape(link.href)
-      + '"'
-      + (link.title
-      ? ' title="'
-      + escape(link.title)
-      + '"'
-      : '')
-      + '>'
-      + this.output(cap[1])
-      + '</a>';
-  } else {
-    return this.renderer.image(cap, escape(link.href), link.title);
-    // return '<img src="'
-    //   + escape(link.href)
-    //   + '" alt="'
-    //   + escape(cap[1])
-    //   + '"'
-    //   + (link.title
-    //   ? ' title="'
-    //   + escape(link.title)
-    //   + '"'
-    //   : '')
-    //   + '>';
-  }
+  var href = escape(link.href)
+    , title = link.title ? escape(link.title) : null;
+
+  return cap[0].charAt(0) !== '!'
+    ? this.renderer.link(href, title, this.output(cap[1]))
+    : this.renderer.image(href, title, escape(cap[1]), cap[4]);
 };
 
 /**
@@ -894,52 +864,79 @@ InlineLexer.prototype.mangle = function(text) {
 function Renderer(options) {
   this.options = options || {};
 }
-Renderer.prototype.image = function(cap, url, props) {
-  return '<img src="'
-      + url
-      + '" alt="'
-      + escape(cap[1])
-      + '"'
-      + (props
-      ? ' title="'
-      + escape(props)
-      + '"'
-      : '')
-      + '>';
-};
-Renderer.prototype.blockcode = function(code, lang) {
-  if (!lang) {
-    return '<pre><code>' + escape(code, true) + '\n</code></pre>';
+
+Renderer.prototype.code = function(code, lang, escaped) {
+  if (this.options.highlight) {
+    var out = this.options.highlight(code, lang);
+    if (out != null && out !== code) {
+      escaped = true;
+      code = out;
+    }
   }
+
+  if (!lang) {
+    return '<pre><code>'
+      + (escaped ? code : escape(code, true))
+      + '\n</code></pre>';
+  }
+
   return '<pre><code class="'
-    + (this.options.langPrefix || '')
-    + lang
+    + this.options.langPrefix
+    + escape(lang, true)
     + '">'
-    + escape(code)
+    + (escaped ? code : escape(code, true))
     + '\n</code></pre>\n';
 };
+
 Renderer.prototype.blockquote = function(quote) {
   return '<blockquote>\n' + quote + '</blockquote>\n';
 };
-Renderer.prototype.blockhtml = function(html) {
+
+Renderer.prototype.html = function(html) {
   return html;
 };
-Renderer.prototype.header = function(text, level) {
-  return '<h' + level + '>' + text + '</h' + level + '>\n';
+
+Renderer.prototype.heading = function(text, level, raw) {
+  return '<h'
+    + level
+    + ' id="'
+    + this.options.headerPrefix
+    + raw.toLowerCase().replace(/[^\w]+/g, '-')
+    + '">'
+    + text
+    + '</h'
+    + level
+    + '>\n';
 };
-Renderer.prototype.hrule = function() {
-  return '<hr>\n';
+
+Renderer.prototype.hr = function(text) {
+  switch(text.trim()) {
+    case '*':
+      text = 'page';//'asterisk';
+    break;
+    case '-':
+      text = 'section';//'hypen';
+    break;
+    case '_':
+      text = 'underscore';
+    break;
+  }
+  return '<hr class="'+ text +'">\n';
 };
-Renderer.prototype.list = function(body, type) {
-  // var type = ordered ? 'ol' : 'ul';
+
+Renderer.prototype.list = function(body, ordered) {
+  var type = ordered ? 'ol' : 'ul';
   return '<' + type + '>\n' + body + '</' + type + '>\n';
 };
+
 Renderer.prototype.listitem = function(text) {
   return '<li>' + text + '</li>\n';
 };
+
 Renderer.prototype.paragraph = function(text) {
   return '<p>' + text + '</p>\n';
 };
+
 Renderer.prototype.table = function(header, body) {
   return '<table>\n'
     + '<thead>\n'
@@ -950,30 +947,127 @@ Renderer.prototype.table = function(header, body) {
     + '</tbody>\n'
     + '</table>\n';
 };
+
 Renderer.prototype.tablerow = function(content) {
   return '<tr>\n' + content + '</tr>\n';
 };
+
 Renderer.prototype.tablecell = function(content, flags) {
   var type = flags.header ? 'th' : 'td';
   var tag = flags.align
-    ? '<' + type + ' align="' + flags.align + '">' : '<' + type + '>';
+    ? '<' + type + ' style="text-align:' + flags.align + '">'
+    : '<' + type + '>';
   return tag + content + '</' + type + '>\n';
 };
 
+// span level renderer
+Renderer.prototype.strong = function(text) {
+  return '<strong>' + text + '</strong>';
+};
+
+Renderer.prototype.em = function(text) {
+  return '<em>' + text + '</em>';
+};
+
+Renderer.prototype.codespan = function(text) {
+  return '<code>' + text + '</code>';
+};
+
+Renderer.prototype.br = function() {
+  return '<br>';
+};
+
+Renderer.prototype.del = function(text) {
+  return '<del>' + text + '</del>';
+};
+
+Renderer.prototype.link = function(href, title, text) {
+  if (this.options.sanitize) {
+    try {
+      var prot = decodeURIComponent(unescape(href))
+        .replace(/[^\w:]/g, '')
+        .toLowerCase();
+    } catch (e) {
+      return '';
+    }
+    if (prot.indexOf('javascript:') === 0) {
+      return '';
+    }
+  }
+  var out = '<a href="' + href + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += '>' + text + '</a>';
+  return out;
+};
+
+Renderer.prototype.image = function(href, title, text, props) {
+  var out = '<img src="' + href + '" alt="' + text + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  if (props) {
+    out += ' style="' + props + '"';
+  }
+  out += '>';
+  return out;
+};
+
+Renderer.prototype.math = function(text, block) {
+  if (block) {
+    return '<p class="mathjax">$$'
+      + text
+      + '$$</p>';
+  } else {
+    return '<span class="mathjax">$$$'
+      + text
+      + '$$$</span>';
+  }
+};
+
+Renderer.prototype.oembed = function(caption, href, props) {
+  var key, value, link, tmp = {};
+
+  if (!href) {
+    return '';
+  }
+
+  props = !props ? '' : props ;
+
+  if (props) {
+    props = props.split(';');
+    props.forEach(function(prop) {
+      prop = prop.split(':');
+
+      if (prop[0] && prop[1]) {
+        tmp[prop[0].trim()] = prop[1].trim();
+      }
+    });
+    props = JSON.stringify(tmp);
+    props = encodeURIComponent(props);
+  }
+
+  link = '<a href="'+ href +'" data-props="'+ props +'" target="_blank">'+ (caption?caption:href) +'</a>';
+
+  return '<p class="oembed">'+ link +'</p>';
+};
+
+Renderer.prototype.toc = function(props) {
+  return '<p class="toc" style="'+ props +'"></p>';
+};
 
 /**
  * Parsing & Compiling
  */
 
-function Parser(options, renderer) {
+function Parser(options) {
   this.tokens = [];
   this.token = null;
-  if (options instanceof Renderer) {
-    options = null;
-    renderer = options;
-  }
-  this.renderer = renderer || new Renderer();
   this.options = options || marked.defaults;
+  this.options.renderer = this.options.renderer || new Renderer;
+  this.renderer = this.options.renderer;
+  this.renderer.options = this.options;
 }
 
 /**
@@ -1028,7 +1122,7 @@ Parser.prototype.parseText = function() {
     body += '\n' + this.next().text;
   }
 
-  return this.inline.output(body, this.renderer);
+  return this.inline.output(body);
 };
 
 /**
@@ -1036,33 +1130,27 @@ Parser.prototype.parseText = function() {
  */
 
 Parser.prototype.tok = function() {
-  var renderer = this.renderer;
-
   switch (this.token.type) {
     case 'space': {
       return '';
     }
     case 'hr': {
-      return renderer.hrule();
+      return this.renderer.hr(this.token.text);
     }
     case 'heading': {
-      return renderer.header(
+      return this.renderer.heading(
         this.inline.output(this.token.text),
-        this.token.depth
-      );
+        this.token.depth,
+        this.token.text);
     }
-    // case 'plugin': {
-    //   return renderer.plugin(this.token.plugin, this.token.text);
-    // }
     case 'code': {
-      return renderer.blockcode(this.token.text, this.token.lang);
-    }
-    case 'math': {
-      return renderer.math(this.token.text, 'display');
+      return this.renderer.code(this.token.text,
+        this.token.lang,
+        this.token.escaped);
     }
     case 'table': {
-      var body = ''
-        , heading = ''
+      var header = ''
+        , body = ''
         , i
         , row
         , cell
@@ -1072,30 +1160,28 @@ Parser.prototype.tok = function() {
       // header
       cell = '';
       for (i = 0; i < this.token.header.length; i++) {
-        // render cell
-        flags = {header: true, align: this.token.align[i]};
-        cell += renderer.tablecell(
+        flags = { header: true, align: this.token.align[i] };
+        cell += this.renderer.tablecell(
           this.inline.output(this.token.header[i]),
-          {header: true, align: this.token.align[i]}
+          { header: true, align: this.token.align[i] }
         );
-        // render row
       }
-      heading += renderer.tablerow(cell);
+      header += this.renderer.tablerow(cell);
 
       for (i = 0; i < this.token.cells.length; i++) {
         row = this.token.cells[i];
 
         cell = '';
         for (j = 0; j < row.length; j++) {
-          cell += renderer.tablecell(
+          cell += this.renderer.tablecell(
             this.inline.output(row[j]),
-            {header: false, align: this.token.align[j]}
+            { header: false, align: this.token.align[j] }
           );
         }
 
-        body += renderer.tablerow(cell);
+        body += this.renderer.tablerow(cell);
       }
-      return renderer.table(heading, body);
+      return this.renderer.table(header, body);
     }
     case 'blockquote_start': {
       var body = '';
@@ -1104,17 +1190,17 @@ Parser.prototype.tok = function() {
         body += this.tok();
       }
 
-      return renderer.blockquote(body);
+      return this.renderer.blockquote(body);
     }
     case 'list_start': {
-      var type = this.token.ordered ? 'ol' : 'ul'
-        , body = '';
+      var body = ''
+        , ordered = this.token.ordered;
 
       while (this.next().type !== 'list_end') {
         body += this.tok();
       }
 
-      return renderer.list(body, type);
+      return this.renderer.list(body, ordered);
     }
     case 'list_item_start': {
       var body = '';
@@ -1125,7 +1211,7 @@ Parser.prototype.tok = function() {
           : this.tok();
       }
 
-      return renderer.listitem(body);
+      return this.renderer.listitem(body);
     }
     case 'loose_item_start': {
       var body = '';
@@ -1134,27 +1220,28 @@ Parser.prototype.tok = function() {
         body += this.tok();
       }
 
-      return renderer.listitem(body);
+      return this.renderer.listitem(body);
     }
     case 'html': {
       var html = !this.token.pre && !this.options.pedantic
         ? this.inline.output(this.token.text)
         : this.token.text;
-      return renderer.blockhtml(html);
+      return this.renderer.html(html);
     }
     case 'paragraph': {
-      return renderer.paragraph(this.inline.output(this.token.text));
+      return this.renderer.paragraph(this.inline.output(this.token.text));
     }
     case 'text': {
-      return '<p>'
-        + this.parseText()
-        + '</p>\n';
+      return this.renderer.paragraph(this.parseText());
     }
     case 'oembed': {
-      return renderer.oembed(this.token.caption, this.token.href, this.token.props);
+      return this.renderer.oembed(this.token.caption, this.token.href, this.token.props);
     }
     case 'toc': {
-      return renderer.toc();
+      return this.renderer.toc(this.token.props);
+    }
+    case 'math': {
+      return this.renderer.math(this.token.text, 'display');
     }
   }
 };
@@ -1170,6 +1257,19 @@ function escape(html, encode) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function unescape(html) {
+  return html.replace(/&([#\w]+);/g, function(_, n) {
+    n = n.toLowerCase();
+    if (n === 'colon') return ':';
+    if (n.charAt(0) === '#') {
+      return n.charAt(1) === 'x'
+        ? String.fromCharCode(parseInt(n.substring(2), 16))
+        : String.fromCharCode(+n.substring(1));
+    }
+    return '';
+  });
 }
 
 function replace(regex, opt) {
@@ -1231,12 +1331,8 @@ function marked(src, opt, callback) {
 
     pending = tokens.length;
 
-    var done = function(hi) {
+    var done = function() {
       var out, err;
-
-      if (hi !== true) {
-        delete opt.highlight;
-      }
 
       try {
         out = Parser.parse(tokens, opt);
@@ -1252,8 +1348,10 @@ function marked(src, opt, callback) {
     };
 
     if (!highlight || highlight.length < 3) {
-      return done(true);
+      return done();
     }
+
+    delete opt.highlight;
 
     if (!pending) return done();
 
@@ -1301,17 +1399,19 @@ marked.setOptions = function(opt) {
 
 marked.defaults = {
   gfm: true,
-  emoji: false,
   tables: true,
   breaks: false,
   pedantic: false,
   sanitize: false,
-  smartLists: true,
+  smartLists: false,
   silent: false,
   highlight: null,
   langPrefix: 'lang-',
-  smartypants: true,
-  mathjax: false
+  smartypants: false,
+  headerPrefix: '',
+  renderer: new Renderer,
+  mathjax: false,
+  emoji: false
 };
 
 /**
