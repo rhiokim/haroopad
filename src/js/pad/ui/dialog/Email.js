@@ -4,8 +4,8 @@ define([
 	function(html) {
 		$('#dialogs').append(html);
 
-		var gui = require('nw.gui');
-		var shell = gui.Shell;
+		// var gui = require('nw.gui');
+		// var shell = gui.Shell;
 
 		var el = $('#send-email-dialog');
 		var bar = el.find('.progress div.progress-bar');
@@ -68,7 +68,7 @@ define([
 
 			events: {
 				// 'click ._dont_save': 'dontSaveHandler',
-				'click a': 'clickHandler',
+				// 'click a': 'clickHandler',
 				'submit form': 'postHandler',
 				'click ._close': 'closeHandler',
 				'keypress input[name=to]': 'keypressHandler',
@@ -117,11 +117,11 @@ define([
 				success('- Sent!');
 			},
 
-			clickHandler: function(e) {
-				var href = $(e.target).attr('href');
-				e.preventDefault();
-				shell.openExternal(href);
-			},
+			// clickHandler: function(e) {
+			// 	var href = $(e.target).attr('href');
+			// 	e.preventDefault();
+			// 	shell.openExternal(href);
+			// },
 
 			submitHandler: function(e) {
 				if (e.keyCode === 13) {
