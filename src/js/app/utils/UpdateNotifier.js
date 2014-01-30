@@ -1,17 +1,17 @@
 define([], function() {
 	var http = require('http'),
 	
-		manifest = global.package;//gui.App.manifest,
+		manifest = global.Manifest,
 		url = manifest.upgrade,
 		currVersion = manifest.version;
 
 	function updateCheck(newVersion, force) {
 		if (!compareVersions(newVersion, currVersion)) {
-			if (force) process.emit('up.to.date.haroopad', currVersion);
+			if (force) window.ee.emit('up.to.date.haroopad', currVersion);
 			return;
 		}
 
-		process.emit('update.haroopad', currVersion, newVersion);
+		window.ee.emit('update.haroopad', currVersion, newVersion);
 	}
 
 	function check(force) {
@@ -40,5 +40,4 @@ define([], function() {
 		gui.Shell.openExternal(serverInfo.release);
 	});
 
-	check();
 });

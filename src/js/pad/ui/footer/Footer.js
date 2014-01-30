@@ -47,9 +47,9 @@ define([
 		Advertise.hide();
 	});
 
-	Advertise.on('donate', function() {
-		shell.openExternal('http://pad.haroopress.com/page.html?f=grow-up-donate');
-	});
+	// Advertise.on('donate', function() {
+		// shell.openExternal('http://pad.haroopress.com/page.html?f=grow-up-donate');
+	// });
 
 	Document.on('click', function() {
 		Advertise.hide();

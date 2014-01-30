@@ -55,7 +55,7 @@ i18n.init({
     //   var html = Parser(md, options);
 
     global._gaq.init(function(_gaq) {
-      _gaq.push('haroopad', 'init', '');
+      _gaq && _gaq.push('haroopad', 'init', '');
     });
 
     window.ee.on('send.email', function(fileInfo, mailInfo) {
@@ -138,6 +138,12 @@ i18n.init({
     } else {
       WindowMgr.open();
     }
+
+    //TODO not perfect
+    //update check logic
+    window.setTimeout(function() {
+      window.ee.emit('check.version');
+    }, 2000);
   });
 
 });

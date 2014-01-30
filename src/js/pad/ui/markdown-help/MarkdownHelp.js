@@ -5,8 +5,7 @@ define([
 	function(HotKey, html) {
 		$('#md-help #md-help-content').append(html);
 
-		var gui = require('nw.gui');
-		var shell = gui.Shell;
+		// var gui = require('nw.gui');
 
 		var popWin;
 		var view, isShow = false;
@@ -54,7 +53,7 @@ define([
 				e.preventDefault();
 
 				if (!md) {
-					shell.openExternal($el.attr('href'));
+					// global.Shell.openExternal($el.attr('href'));
 					return;
 				}
 

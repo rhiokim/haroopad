@@ -1,7 +1,7 @@
 define([
 	'store'
 	],function(store) {
-	var shell = gui.Shell;
+	// var shell = gui.Shell;
 	
 	var _cookie = store.get('_time') || { donate : 0};
 
@@ -20,7 +20,7 @@ define([
 		el: '#donate-btn',
 
 		events: {
-			'click': 'donateHandler'
+			// 'click': 'donateHandler'
 		},
 
 		initialize: function() {

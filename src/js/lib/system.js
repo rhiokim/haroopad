@@ -6,7 +6,7 @@ var fs = require('fs'),
 global.Shell = gui.Shell;
 global.Clipboard = gui.Clipboard;
 global.App = gui.App;
-global.Manifest = gui.App.Manifest;
+global.Manifest = gui.App.manifest;
 
 // prevent memory leak detect
 process.setMaxListeners(0);

@@ -222,8 +222,7 @@ define([
 
 	/* update haroopad */
 	window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
-		// Notifier.notify('Looking for the latest version? <a href="#" data-href="release.note.haroopad">release note</a>, <a href="#" data-href="download.haroopad">download</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
-		Notifier.notify(i18n.t('pad:upgrade.message'), ' <a href="#" data-href="release.note.haroopad">'+ i18n.t('pad:upgrade.note') +'</a>, <a href="#" data-href="download.haroopad">'+ i18n.t('pad:upgrade.download') +'</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
+		Notifier.notify('<a href="http://pad.haroopress.com/page.html?f=release-notes" style="color:yellow">'+ i18n.t('pad:upgrade.note') +'</a>, <a href="http://pad.haroopress.com/user.html#download" style="color:yellow">'+ i18n.t('pad:upgrade.download') +'</a>', i18n.t('pad:upgrade.message') + ' <span style="color:yellow">v' + newVersion +'</span>', undefined, 10000);
 	});
 
 	/* up to date haroopad */

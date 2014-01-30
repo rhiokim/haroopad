@@ -148,14 +148,15 @@ i18n.init({
       process.emit('actived', nw);
     });
 
-    $("#notifier").click(function(e) {
-      var tagName = e.target.tagName.toUpperCase();
+    $(document.body).click(function(e) {
+      var el = e.target;
+      var tagName = el.tagName.toUpperCase();
 
       switch (tagName) {
         case 'A':
-          window.parent.ee.emit($(e.target).data('href'));
+          global.Shell.openExternal(el.getAttribute('href'));
           e.preventDefault();
-          break;
+        break;
       }
     });
 
