@@ -65,10 +65,11 @@ function setViewStyle(style) {
 }
 
 function setCodeStyle(style) {
-  var href = 'css/code/' + style + '.css';
-  $('#code').attr({
-    href: href
-  });
+  // var href = 'css/code/' + style + '.css';
+  // $('#code').attr({
+  //   href: href
+  // });
+  document.querySelector('#code').setAttribute('href', style);
 }
 
 function loadCustomCSS(style) {
@@ -151,9 +152,7 @@ function createTOC() {
 }
 
 function init(options) {
-  _options = options || {
-    dirname: '.'
-  };
+  _options = options;
 }
 
 /**
@@ -317,8 +316,14 @@ var ebdOpt = {
   includeHandle: false,
   embedMethod: 'fill',
   afterEmbed: function(oembedData, externalUrl) {
+    var hasImage = this[0].querySelector('img');
+
     if (typeof oembedData.code == 'string') {
       this.attr('data-replace', oembedData.code);
+    }
+
+    if (hasImage) {
+      Echo.push(hasImage);
     }
   },
   onProviderNotFound: function(url) {
@@ -366,14 +371,14 @@ function empty() {
  * @param  {[type]} contents [description]
  * @return {[type]}          [description]
  */
-var wrapper = document.createElement('div');
+// var wrapper = document.createElement('div');
 //@TODO initial render
-function update(html) {
+function update(wrapper) {
   var i, j, limit, frag, frags, _frag, _frags, origin, _origin,
     code, codes, _code, _codes;
-  var changeTOC = false;
+  // var changeTOC = false;
 
-  wrapper.innerHTML = html;
+  // wrapper.innerHTML = html;
 
   frags = wrapper.querySelectorAll(':scope>*');
   frags = Array.prototype.slice.call(frags, 0);
@@ -406,12 +411,16 @@ function update(html) {
     }
   }
   
-  var src, imgs = wrapper.querySelectorAll('img');
+  var src, img, imgs = wrapper.querySelectorAll('img');
   for (i = 0; i < imgs.length; i++) {
-    src = imgs[i].getAttribute('src');
+    img = imgs[i];
+    src = img.getAttribute('src');
 
-    if (src.indexOf('//') == -1 && !/^\//.test(src)) {
-      imgs[i].setAttribute('src', _options.dirname + '/' + src);
+    if (src.indexOf('://') == -1 && !/^\//.test(src) && !/^[a-zA-Z]\:/.test(src)) {
+      img.setAttribute('src', _options.dirname + '/' + src);
+    } else {
+      img.setAttribute('src', 'app://root/img/blank.gif');
+      img.setAttribute('data-echo', src);
     }
   }
 
@@ -420,7 +429,7 @@ function update(html) {
   i = 0;
   limit = frags.length;
   while (i < limit) {
-    frag = frags[i];
+    frag = frags[i].cloneNode(true);
     _frag = _frags.shift();
 
     origin = frag.outerHTML;
@@ -431,9 +440,9 @@ function update(html) {
       _md_body.appendChild(frag);
 
       //check change toc 
-      if (/^H[1-6]/.test(frag.tagName) == true) {
-        changeTOC = true;
-      }
+      // if (/^H[1-6]/.test(frag.tagName) == true) {
+      //   changeTOC = true;
+      // }
     } else {
 
       //이전 렌더링에 origin 문자열이 있는 경우 origin 문자열로 대조한다.
@@ -445,9 +454,9 @@ function update(html) {
         _md_body.insertBefore(frag, _frag);
         _md_body.removeChild(_frag);
 
-        if (/^H[1-6]/.test(frag.tagName) == true) {
-          changeTOC = true;
-        }
+        // if (/^H[1-6]/.test(frag.tagName) == true) {
+        //   changeTOC = true;
+        // }
       }
     }
     i++;
@@ -462,14 +471,18 @@ function update(html) {
   }
 
   //fire event when changed TOC
-  if (changeTOC) {
-    window.ee.emit('change.toc', undefined, _md_body);
-  }
+  // if (changeTOC) {
+  //   window.ee.emit('change.toc', undefined, _md_body);
+  // }
   
-  countFragments(_md_body);
+  // countFragments(_md_body);
   drawMathJax();
   drawEmbedContents(document.body);
 
+  Echo.init({
+    offset: 10,
+    throttle: 250
+  });
   window.ee.emit('rendered', _md_body);
 }
 /**
@@ -506,4 +519,7 @@ $(document.body).ready(function() {
     }
   });
 
+  _body.addEventListener("DOMNodeInserted", function (ev) {
+    // console.log(ev.target.tagName);
+  }, false);
 });

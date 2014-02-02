@@ -3,11 +3,11 @@ define([
     'window/Window.opt',
     'window/WindowManager',
     'window/Window.preferences',
-    'window/Window.presentation',
+    // 'window/Window.presentation',
     'window/Window.dragdrop',
     'file/File',
     'file/Recents'
-], function(HotKey, Options, WindowMgr, /*Help,*/ Preferences, Presentation, DragDrop, File, Recents) {
+], function(HotKey, Options, WindowMgr, /*Help,*/ Preferences, /*Presentation,*/ DragDrop, File, Recents) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -65,9 +65,9 @@ define([
     WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.styled');
   });
 
-  window.ee.on('menu.file.exports.clipboard.haroopad', function() {
-    WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.haroopad');
-  });
+  // window.ee.on('menu.file.exports.clipboard.haroopad', function() {
+  //   WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.haroopad');
+  // });
 
   window.ee.on('menu.file.exports.html', function() {
     WindowMgr.actived.window.ee.emit('file.exports.html');
@@ -174,12 +174,12 @@ define([
   window.ee.on('menu.insert.markdown', function(tag) {
     WindowMgr.actived.window.ee.emit('menu.insert.markdown', tag);
   });
-  window.ee.on('menu.insert.page.break', function() {
-    WindowMgr.actived.window.ee.emit('insert.page.break');
-  });
-  window.ee.on('menu.insert.section.break', function() {
-    WindowMgr.actived.window.ee.emit('insert.section.break');
-  });
+  // window.ee.on('menu.insert.page.break', function() {
+  //   WindowMgr.actived.window.ee.emit('insert.page.break');
+  // });
+  // window.ee.on('menu.insert.section.break', function() {
+  //   WindowMgr.actived.window.ee.emit('insert.section.break');
+  // });
   window.ee.on('menu.insert.toc', function() {
     WindowMgr.actived.window.ee.emit('insert.toc');
   });

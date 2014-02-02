@@ -203,10 +203,10 @@ define([
 		});
 
 		HotKey('ctrl-alt-]', function() {
-			window.ee.emit('view.plus5.width');
+			window.ee.emit('view.minus5.width');
 		});
 		HotKey('ctrl-alt-[', function() {
-			window.ee.emit('view.minus5.width');
+			window.ee.emit('view.plus5.width');
 		});
 
 		window.ee.on('view.reset.mode', function() {
@@ -216,10 +216,10 @@ define([
 		window.ee.on('view.minus5.width', left5);*/
 
 		window.ee.on('view.plus5.width', function() {
-			view.moveRight();
+			view.moveLeft();
 		});
 		window.ee.on('view.minus5.width', function() {
-			view.moveLeft();
+			view.moveRight();
 		});
 		window.ee.on('menu.view.mode', setLayout);
 	});

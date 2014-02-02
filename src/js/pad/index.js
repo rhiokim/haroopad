@@ -1,7 +1,5 @@
 /* globally for window event system */
 var gui = require('nw.gui');
-var fs = require('fs');
-var lng = getLang();
 
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
@@ -32,11 +30,11 @@ requirejs.config({
 });
 
 i18n.init({
-  lng: lng
+  lng: global.LOCALES._lang
 }, function() {
 
-  i18n.addResourceBundle(lng, 'menu', global.locales['menu']);
-  i18n.addResourceBundle(lng, 'pad', global.locales['pad']);
+  i18n.addResourceBundle(global.LOCALES._lang, 'menu', global.LOCALES['menu']);
+  i18n.addResourceBundle(global.LOCALES._lang, 'pad', global.LOCALES['pad']);
 
   i18n.setDefaultNamespace('menu');
 
@@ -48,12 +46,12 @@ i18n.init({
     'window/Window',
     'editor/Editor',
     'viewer/Viewer',
-    'ui/toc/TOC',
+    // 'ui/toc/TOC',
     'ui/markdown-help/MarkdownHelp',
     'ui/file/File',
     'ui/layout/Layout',
     'ui/footer/Footer'
-  ], function(Window, Editor, Viewer, TOC, MarkdownHelp, File) {
+  ], function(Window, Editor, Viewer, /*TOC,*/ MarkdownHelp, File) {
     var _tid_;
     var file = nw.file;
 
@@ -66,28 +64,21 @@ i18n.init({
 
       _tid_ = setTimeout(function() {
         nw.file.set('markdown', Editor.getValue());
-
-        window.parent.ee.emit('change.markdown', Editor.getValue(), function(html) {
-          window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
-        });
       }, 210);
     }
 
     nw.on('file.opened', function(file) {
-      var opt;
-      opt = file.toJSON();
+      var opt, doc;
+      opt = file.toJSON()
+      doc = opt.doc;
 
       Editor.setValue(opt.markdown);
-      Viewer.init(opt);
+      Viewer.init();
 
-      // window.ee.emit('change.after.markdown', opt.markdown, opt.html, Editor);
+      file.doc.trigger('change:html', doc, doc.html());
 
       if (!opt.readOnly) {
         Editor.on('change', delayChange);
-      }
-
-      if (opt.html) {
-        file.trigger('change:html');
       }
 
       //temp file
@@ -99,43 +90,31 @@ i18n.init({
       file.on('change:mtime', function() {
         window.ee.emit('file.update', nw.file.get('fileEntry'));
       });
-
-      // window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
-      //   Editor.setValue(opt.markdown);
-
-      //   Viewer.init(opt);
-      //   window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
-
-      //   if (!opt.readOnly) {
-      //     Editor.on("change", delayChange); 
-      //   }
-      // });
+      
+      window.ee.once('rendered', function() {
+        setTimeout(function() {
+          nw.show();
+          nw.focus();
+          process.emit('actived', nw);
+        }, 1);
+      });
     });
 
-    file.on('change:html', function() {
-      window.ee.emit('change.after.markdown', file.get('markdown'), file.get('html'), Editor);
-    });
 
+    /* open blank window */
     if (!file.get('fileEntry')) {
       Editor.on("change", delayChange);
+
+      nw.show();
+      nw.focus();
+      process.emit('actived', nw);
     } else {
       nw.emit('file.opened', file);
     }
 
-    // window.ee.on('file.opened', function(opt) {
-    //   window.parent.ee.emit('change.markdown', opt.markdown, function(html) {
-    //     Editor.setValue(opt.markdown);
-
-    //     Viewer.init(opt);
-    //     window.ee.emit('change.after.markdown', Editor.getValue(), html, Editor);
-
-    //     if (!readOnly) {
-    //       Editor.on("change", delayChange); 
-    //     }
-    //   });
-
-    // });
-
+    /**
+     * change file state by other application
+     */
     window.ee.on('reload', function() {
       file.reload({
         silent: true
@@ -200,9 +179,6 @@ i18n.init({
       new gnMenu(document.getElementById('editControls'));
     }
 
-    nw.show();
-    nw.focus();
-    process.emit('actived', nw);
   });
 
 });

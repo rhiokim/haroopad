@@ -54,14 +54,15 @@ define([
 		var anchorList = {};
 
 		function createAnchor(element) {
-			var id = element.id || element.textContent || 'title';
-			id = id.toLowerCase();
+			var anchor, id = element.id || element.textContent || 'title';
+			// id = id.toLowerCase();
 			/*@TODO Critical performance issue
 			id = stringEx.toASCII(id);
 			id = stringEx.toUrl(id);
 			*/
-			var anchor = id.trim();
+			// var anchor = id.trim();
 			var index = 0;
+			anchor = id;
 			while (anchorList.hasOwnProperty(anchor)) {
 				anchor = id + "-" + (++index);
 			}
@@ -208,9 +209,6 @@ define([
 	});
 
 
-	window.ee.on('menu.view.doc.outline', function(show) {
-		show ? _viewer.showOutline() : _viewer.hideOutline();
-	});
 	window.ee.on('menu.view.toggle.toc', function() {
 		view.toggleTOC();
 	});

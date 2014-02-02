@@ -6,10 +6,11 @@ define([
 		var fs = require('fs'),
 			path = require('path'),
 			os = require('os'),
-			cleanCss = require('clean-css');
+			CleanCss = require('clean-css');
 		var gui = require('nw.gui');
 		var manifest = global.package;
 		var saveEl = $("#exportHTML");
+		var cleanCss = new CleanCss();
 		var shadow;
 
 		var res;
@@ -57,14 +58,14 @@ define([
 			});
 			
 			cssText += '\n footer {position:fixed; font-size:.8em; text-align:right; bottom:0px; margin-left:-25px; height:20px; width:100%;}';
-			cssText = cleanCss.process(cssText);
+			cssText = cleanCss.minify(cssText);
 
 			return cssText;
 		}
 
 		function _replaceOriginalEmbed() {
 			var str, type, provider, 
-				tweets = shadow.querySelectorAll('[data-provider=twitter]');
+					tweets = shadow.querySelectorAll('[data-provider=twitter]');
 	  			tweets = Array.prototype.slice.call(tweets, 0);
 
 			_.each(tweets, function(tweet) {
@@ -88,8 +89,23 @@ define([
 			});
 		}
 
+		/**
+		 * replace data-echo
+		 */
+		function _replaceLazyLoading() {
+			var frags, data;
+			frags = shadow.querySelectorAll('[data-echo]');
+			frags = Array.prototype.slice.call(frags, 0);
+
+			_.each(frags, function(frag) {
+				data = frag.getAttribute('data-echo');
+				frag.setAttribute('src', data);
+				frag.removeAttribute('data-echo');
+			});
+		}
+
 		function getBodyHtml() {
-			contentDocument = Viewer.getContentDocument();
+			var contentDocument = Viewer.getContentDocument();
 
 			shadow = document.createElement('body');
 			shadow.style.display = 'none';
@@ -98,6 +114,7 @@ define([
 
 			_replaceOriginalEmbed();
 			_removeDataProperties();
+			_replaceLazyLoading();
 
 			shadow.removeAttribute('style');
 

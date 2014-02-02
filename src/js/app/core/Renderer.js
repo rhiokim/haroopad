@@ -1,30 +1,12 @@
 define([
-		// 'core/Plugins'
 	], 
-	function(/*Plugins*/) {
+	function() {
 
 		var marked = require('marked');
 		var renderer = new marked.Renderer();
 
-       	// var loading = '<span class="spinner"></span>';
-
-		// renderer.plugin = function(name, args) {
-		// 	var plugin = Plugins[name.toLowerCase()];
-
-		// 	if (!plugin) {
-  // 				return '<p>['+ name +':'+ args +']</p>';
-		// 	}
-			
-		// 	return plugin(name, args);
-		// }
-
-		renderer.oembed = function(caption, href, props) {
-			var key, value, link, tmp = {};
-
-			if (!href) {
-				return '';
-			}
-
+		function genStyle(props) {
+			var key, value, tmp = {};
 			props = !props ? '' : props ;
 
 			if (props) {
@@ -39,6 +21,18 @@ define([
 				props = JSON.stringify(tmp);
 				props = encodeURIComponent(props);
 			}
+
+			return props
+		}
+
+		renderer.oembed = function(caption, href, props) {
+			var link;
+
+			if (!href) {
+				return '';
+			}
+
+			props = genStyle(props) ;
 
 			link = '<a href="'+ href +'" data-props="'+ props +'" target="_blank">'+ (caption?caption:href) +'</a>';
 
@@ -57,9 +51,40 @@ define([
 			}
 		}
 
-		renderer.toc = function(content) {
-		  return '<p class="toc"></p>';
+		renderer.toc = function(props) {
+		  return '<p class="toc" style="'+ props +'"></p>';
 		}
+
+		renderer.hr = function(text) {
+		  switch(text.trim()) {
+		    case '*':
+		      text = 'page';//'asterisk';
+		    break;
+		    case '-':
+		      text = 'section';//'hypen';
+		    break;
+		    case '_':
+		      text = 'underscore';
+		    break;
+		  }
+		  return '<hr class="'+ text +'">\n';
+		}
+
+		renderer.heading = function(text, level, raw) {
+			//<a name="verlet-js" class="anchor" href="#verlet-js"><span class="octicon octicon-link"></span></a>
+			raw = raw.toLowerCase().replace(/[^\w]+/g, '-');
+		  return '<h'
+		    + level
+		    + ' id="'
+		    + this.options.headerPrefix
+		    + raw
+		    + '">'
+		    + '<a name="'+ raw +'" href="#'+ raw +'"></a>'
+		    + text
+		    + '</h'
+		    + level
+		    + '>\n';
+		};
 
 		return renderer;
 });

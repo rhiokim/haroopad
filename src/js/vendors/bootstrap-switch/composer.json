@@ -1,28 +1,26 @@
 {
-  "name"        : "nostalgiaz/bootstrap-switch",
-  "description" : "Unofficial bootstrap switch",
+  "name": "nostalgiaz/bootstrap-switch",
+  "description": "Unofficial bootstrap switch",
+  "version": "1.9.0",
   "type": "component",
   "keywords": [
-    "JavaScript"
+    "javaScript"
   ],
   "homepage": "http://www.larentis.eu/switch/",
   "license": "Apache License, Version 2.0",
   "authors": [
     {
       "name": "Mattia Larentis",
-      "name": "Peter Stein",
-      "homepage": "http://www.larentis.eu/switch/"
+      "homepage": "http://www.larentis.eu"
     }
   ],
-  "require": {
-  },
   "ignore": [
-    "examples"
+    "docs"
   ],
   "extra": {
     "component": {
       "scripts": [
-        "static/js/bootstrap-switch.js"
+        "build/js/bootstrap-switch.js"
       ],
       "shim": {
         "exports": "BootstrapSwitch"

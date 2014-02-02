@@ -1,6 +1,7 @@
 define([
+    'core/Renderer'
 	], 
-	function() {
+	function(Renderer) {
 	var marked = require("marked");
     var config = store.get('General') || {};
     var markdown = store.get('Markdown') || {};
@@ -8,7 +9,7 @@ define([
     var defaults = {
         "gfm": true,
         "tables": true,
-        "breaks": false,
+        "breaks": true,
         "pedantic": false,
         "sanitize": false,
         "smartLists": true,
@@ -16,14 +17,16 @@ define([
         "silent": false,
         "highlight": null,
         "langPrefix": '',
-        "mathjax": config.enableMath
+        "headerPrefix": '',
+        "mathjax": config.enableMath, 
+        "renderer": Renderer
     };
 
     var lexer = new marked.Lexer(defaults);
 
     var customRules = {
         oembed: /^@\[(inside)\]\(href\)/,
-        toc: /^\[(TOC|toc)\] *(?:\n+|$)/
+        toc: /^\[\s*(TOC|toc)(?:\s+['"]([\s\S]*?)['"])?\s*\] *(?:\n+|$)/
     }
     
     var _inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;

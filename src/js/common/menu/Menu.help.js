@@ -21,23 +21,23 @@ window.MenuBarHelp = function () {
 	);
 	Help.append(
 	    new gui.MenuItem({
-	        label: i18n.t('help.markdown-syntax-help'),
-		      click: function() {
-		      	window.parent.ee.emit('menu.help.syntax');
-		      	// (process.platform === 'win32') ?
-		      	// window.parent.ee.emit('menu.help.syntax') :
-		       //  open('http://pad.haroopress.com/page.html?f=syntax');
-		      }
-	    })
-	);
-	Help.append(
-	    new gui.MenuItem({
 	        label: i18n.t('help.haroopad-shortcut-help'),
 		      click: function() {
 		      	window.parent.ee.emit('menu.help.doc', 'shortcut');
 		      	// (process.platform === 'darwin') ?
 		      	// window.parent.ee.emit('menu.help.shortcut') :
 		       //  open('http://pad.haroopress.com/page.html?f=show-shortcuts');
+		      }
+	    })
+	);
+	Help.append(
+	    new gui.MenuItem({
+	        label: i18n.t('help.markdown-syntax-help'),
+		      click: function() {
+		      	window.parent.ee.emit('menu.help.syntax');
+		      	// (process.platform === 'win32') ?
+		      	// window.parent.ee.emit('menu.help.syntax') :
+		       //  open('http://pad.haroopress.com/page.html?f=syntax');
 		      }
 	    })
 	);

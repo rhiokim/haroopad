@@ -18,7 +18,7 @@ define(function() {
 		},
 
 		toggleOutline: function(e) {
-			var target = $(e.target);
+			var target = $(e.currentTarget);
 			var show = target.hasClass('active');
 
 			show = !show;
@@ -28,7 +28,7 @@ define(function() {
 		},
 
 		toggleTOC: function(e) {
-			var target = $(e.target);
+			var target = $(e.currentTarget);
 			var show = target.hasClass('active');
 
 			show = !show;
@@ -38,7 +38,7 @@ define(function() {
 		},
 
 		toggleHelp: function(e) {
-			var target = $(e.target);
+			var target = $(e.currentTarget);
 			var show = target.hasClass('active');
 
 			show = !show;
@@ -48,7 +48,7 @@ define(function() {
 		},
 
 		toggleFullscreen: function(e) {
-			var target = $(e.target);
+			var target = $(e.currentTarget);
 			var show = target.hasClass('active');
 
 			show = !show;

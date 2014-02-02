@@ -29,10 +29,11 @@ define([
 		};
 
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-			mode: 'markdown',
+			mode: 'gfm',
 			lineNumbers: true,
 			lineWrapping: true,
 			electricChars: false,
+  		styleActiveLine: true,
 			viewportMargin: 40,
 			autofocus: true,
 			workDelay: 1000,
@@ -351,20 +352,11 @@ define([
 				case 'math-inline': CodeMirror.commands.markdownMathInline(editor); break;
 				case 'math-block': CodeMirror.commands.markdownMathBlock(editor); break;
 				case 'toc': CodeMirror.commands.markdownTOC(editor); break;
+				case 'hr-page': CodeMirror.commands.markdownPageBreak(editor); break;
+				case 'hr-section': CodeMirror.commands.markdownSectionBreak(editor); break;
 			}
 
 			global._gaq.push('haroopad.insert', 'markdown', tag);
-		});
-
-		window.ee.on('insert.page.break', function() {
-			CodeMirror.commands.markdownPageBreak(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'page break');
-		});
-		window.ee.on('insert.section.break', function() {
-			CodeMirror.commands.markdownSectionBreak(editor);
-
-			global._gaq.push('haroopad.insert', 'markdown', 'section break');
 		});
 
 		window.ee.on('insert.toc', function() {

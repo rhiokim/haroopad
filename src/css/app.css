@@ -115,3 +115,42 @@ form {
   height: 10px;
   margin-bottom: 0;
 }
+
+/* markdown helper */
+#main > .tooltip h1,
+#main > .tooltip h2,
+#main > .tooltip h3,
+#main > .tooltip h4,
+#main > .tooltip h5,
+#main > .tooltip h6 {
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+  line-height: 20px;
+}
+
+#main > .tooltip h1 {
+  font-size: 2.2em;;
+}
+#main > .tooltip h2 {
+  font-size: 1.8em;;
+}
+#main > .tooltip h3 {
+  font-size: 1.6em;;
+}
+#main > .tooltip h4 {
+  font-size: 1.4em;;
+}
+#main > .tooltip h5 {
+  font-size: 1.2em;;
+}
+#main > .tooltip h6 {
+  font-size: 1em;;
+}
+
+#main > .tooltip strong,
+#main > .tooltip del,
+#main > .tooltip i,
+#main > .tooltip u,
+#main > .tooltip strong.highlight {
+  font-size: 1.2em;;
+}

@@ -2,37 +2,34 @@
  * i18n data preloader
  */
 ;(function() {
-
-	var fs = require('fs');
 	var path = require('path');
 
-	var lng, url, locales = global.locales = {};
+	var G = global;
+	var locales = G.LOCALES = {};
 
-	function load(ns) {
-		var res, file;
-		file = ns +'.json';
+	var baseDir = G.PATHS.locales;
+	var locale = window.navigator.language.toLowerCase();
+	var prefix = locale.split('-')[0];
 
-		res = fs.readFileSync(path.join(url, file), 'utf8');
-		res = JSON.parse(res);
-			
-		locales[ns] = res;
+	function load( locale ) {
+		var json, file = path.join(baseDir, locale);
+		G.LOCALES._lang = locale;
+
+		[ 'menu', 'pad', 'preference' ].forEach(function( ns ) {
+			json = fs.readFileSync(path.join(file, ns +'.json'));
+			locales[ns] = JSON.parse(json);
+		});
 	}
 
-	function init(options) {
-		var ns;
-		lng = options.lng || 'en';
-
-		url = options.path || 'locales';
-		url = path.join(url, lng);
-
-		ns = options.ns || [];
-		ns.forEach(load);
+	/* supported locale */
+	if (G.LANGS.hasOwnProperty(locale)) {
+		load(locale);
+	} else {
+		if (G.LANGS.hasOwnProperty(prefix)) {
+			load(prefix);
+		} else {
+			load('en');
+		}
 	}
-
-	init({
-	  lng: getLang(),
-	  path: getExecPath() +'/Libraries/.locales/',
-	  ns: [ 'menu', 'pad', 'preference' ]
-	});
 
 }());
