@@ -1,8 +1,4 @@
 var path = require('path');
-var languageTable = [
-	'en-US',
-	'ko-KR'
-];
 
 function asVersion(str) {
 	var v = str.split(".");
@@ -35,23 +31,43 @@ function getPlatformName() {
 	return names[process.platform];
 }
 
-function getExecPath() {
-	switch(getPlatformName()) {
-		case 'windows':
-			return process.cwd();//path.dirname(process.execPath);
-		break;
-		case 'mac':
-			return process.cwd();
-		break;
-		case 'linux':
-			return process.cwd();//path.dirname(process.execPath);
-		break;
-	}
+function getDocsPath() {
+	var lang = global.LOCALES._lang == 'ko' ? 'ko' : 'en';
+	return path.join(global.PATHS.docs, lang);
 }
 
-function getDocsPath() {
-	var locale = window.navigator.language;
-	locale = languageTable.indexOf(locale) < 0 ? 'en-US': locale ;
+function loadJs(url, cb) {
+  var head = document.getElementsByTagName('head')[0];
+  var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = url;
+      script.onload = cb;
 
-	return path.join(getExecPath(), 'docs', locale);
+   head.appendChild(script);
+}
+
+function loadCss(url) {
+  var head = document.getElementsByTagName('head')[0];
+  var link = document.createElement("link");
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  link.href = url;
+  
+  head.appendChild(link);
+}
+
+function merge(obj) {
+	var i = 1,
+		target, key;
+
+	for (; i < arguments.length; i++) {
+		target = arguments[i];
+		for (key in target) {
+			if (Object.prototype.hasOwnProperty.call(target, key)) {
+				obj[key] = target[key];
+			}
+		}
+	}
+
+	return obj;
 }

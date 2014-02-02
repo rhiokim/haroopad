@@ -1,0 +1,130 @@
+<h1>Plate.js -- A Template Library</h1>
+
+<p>Plate is a Django Template Language implementation in Javascript. Super exciting!</p>
+
+<h2>Plate</h2>
+
+<ul>
+<li>Plays nicely with the event loop and async code. Plate makes it easy to parallelize your view code!</li>
+<li>Aims to be compatible with the latest version of the Django Template Language. If you've got a template in Django, it should render just fine in Plate.</li>
+<li>Thoroughly tested using the <a href="http://github.com/chrisdickinson/platoon">Platoon</a> testing framework.</li>
+<li>Designed to work nicely in a Node.js environment</li>
+<li>Extensible -- It makes use of plugins to provide capabilities (e.g., template loading).</li>
+</ul>
+
+<h2>Can I use it in my browser?</h2>
+
+<p>Yes. Plate was designed to work well in the standard suite of browsers. Each minor point release will target
+compatibility with IE7+, FF3+, Chrome, and Safari 4+.</p>
+
+<h2>How do I use it?</h2>
+
+<p>The most basic case:</p>
+
+<pre><code>var plate = require('plate'),
+    sys = require('sys');
+var template = new plate.Template('hello {{ world }}');
+
+template.render({world:'everyone'}, function(err, data) {
+    sys.puts(data);
+});
+
+// outputs "hello everyone"
+</code></pre>
+
+<p>Plate follows the Node.js style of taking callbacks that receive an error object and a data object. If there's no
+error, <code>err</code> will be null.</p>
+
+<h2>Documentation</h2>
+
+<p>Plate is documented on <a href="https://github.com/chrisdickinson/plate/wiki">it's github wiki</a>. There are "Getting Started"
+guides for both in-browser as well as in-node environments.</p>
+
+<h2>Contributing</h2>
+
+<p>Got a feature you'd like to add? I'd love to see it. The workflow is pretty standard Github fare:</p>
+
+<ul>
+<li>Fork this repository.</li>
+<li>Create a branch -- title it descriptively, please :)</li>
+<li>Work, work, work. </li>
+<li>Push your changes and submit a pull request.</li>
+</ul>
+
+<p>The minimum requirements for a pull request to be merged are:</p>
+
+<ul>
+<li>You've added (passing) tests for your new code.</li>
+<li>The existing tests still pass.</li>
+<li>You've added (or changed, as appropriate) documentation to the <code>docs/</code> folder in Markdown format.</li>
+</ul>
+
+<h2>Run the tests</h2>
+
+<p>In node:</p>
+
+<p>````</p>
+
+<p>$ npm install plate
+$ npm test plate</p>
+
+<p>````</p>
+
+<h3>In browser:</h3>
+
+<ul>
+<li><a href="http://chrisdickinson.github.com/plate/test.html">Your current browser</a></li>
+</ul>
+
+<h3>Using Browserling:</h3>
+
+<ul>
+<li><strong>Internet Explorer</strong>
+
+<ul>
+<li><a href="http://browserling.com/explorer/7.0/http%3A//chrisdickinson.github.com/plate/test.html">IE7</a></li>
+<li><a href="http://browserling.com/explorer/8.0/http%3A//chrisdickinson.github.com/plate/test.html">IE8</a></li>
+<li><a href="http://browserling.com/explorer/9.0/http%3A//chrisdickinson.github.com/plate/test.html">IE9</a></li>
+</ul></li>
+<li><strong>Firefox</strong>
+
+<ul>
+<li><a href="http://browserling.com/firefox/3.6/http%3A//chrisdickinson.github.com/plate/test.html">3.6</a></li>
+<li><a href="http://browserling.com/firefox/8.0/http%3A//chrisdickinson.github.com/plate/test.html">8.0</a></li>
+<li><a href="http://browserling.com/firefox/nightly/http%3A//chrisdickinson.github.com/plate/test.html">nightly</a></li>
+</ul></li>
+<li><strong>Chrome</strong>
+
+<ul>
+<li><a href="http://browserling.com/chrome/10.0/http%3A//chrisdickinson.github.com/plate/test.html">10</a></li>
+<li><a href="http://browserling.com/chrome/canary/http%3A//chrisdickinson.github.com/plate/test.html">latest</a></li>
+</ul></li>
+<li><strong>Safari</strong>
+
+<ul>
+<li><a href="http://browserling.com/safari/4.0/http%3A//chrisdickinson.github.com/plate/test.html">4.0</a></li>
+<li><a href="http://browserling.com/safari/5.1/http%3A//chrisdickinson.github.com/plate/test.html">5.0</a></li>
+</ul></li>
+<li><strong>Opera</strong>
+
+<ul>
+<li><a href="http://browserling.com/opera/10.0/http%3A//chrisdickinson.github.com/plate/test.html">10.0</a></li>
+<li><a href="http://browserling.com/opera/11.0/http%3A//chrisdickinson.github.com/plate/test.html">11.0</a></li>
+</ul></li>
+</ul>
+
+<h3>Locally, in browser:</h3>
+
+<p>````bash</p>
+
+<p>$ git clone git@github.com:chrisdickinson/plate.git
+$ cd plate
+$ make browsertest
+$ python -m SimpleHTTPServer &amp;
+$ open http://localhost:8000/test.html</p>
+
+<p>````</p>
+
+<h2>License</h2>
+
+<p>Licensed new BSD.</p>

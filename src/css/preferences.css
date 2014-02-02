@@ -1,16 +1,31 @@
+*, .btn {
+  font-family: "Lucida Grande", "Segoe UI", "Apple SD Gothic Neo", "Lucida Sans Unicode", Helvetica, "Malgun Gothic", Arial, sans-serif;
+}
+
 html, body {
 	/*height: 100%;*/
 	margin: 0 auto;
 	padding: 0;
 }
+
 body {
+  font-size: 12px;
 	margin-top: 10px;
   user-select: none;
   -webkit-user-select: none;
 }
 
+span {
+  font-size: 12px;
+}
+
 hr {
 	margin: 10px 0;
+}
+
+input[type=checkbox] {
+	width: 13px;
+	height: 13px;
 }
 
 .nav {
@@ -53,4 +68,12 @@ hr {
 
 label.checkbox {
 	margin-bottom: 0;
+}
+
+/*
+ * fixed select2
+ */
+
+.select2-drop {
+	margin-top: -3px;
 }

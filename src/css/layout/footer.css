@@ -1,7 +1,7 @@
 
 footer {
    display: block;
-  font-size: .87em;
+  font-size: 10.5px;
 }
 
 footer .btn {
@@ -46,8 +46,13 @@ footer .dropdown-menu li > a i {
 	left: 3px;
 }
 
+footer #area-status {
+  margin-left: 3px;
+}
+
 footer #lineCount,
 footer #wordCount,
+footer #paraCount,
 footer #cursorActivity {
   margin-right: 8px;
   color: #fff;

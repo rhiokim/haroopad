@@ -4,25 +4,25 @@ window.MenuBarViewColumn = function () {
 
   submenu.append(
     new gui.MenuItem({
-        label: 'Single',
+        label: i18n.t('view.column-single'),
         click: function() {
-          window.parent.ee.emit('menu.view.column.one');
+          window.parent.ee.emit('menu.view.column.change', 'single');
         }
     })
   );
   submenu.append(
     new gui.MenuItem({
-        label: 'Column: 2',
+        label: i18n.t('view.column-two'),
         click: function() {
-          window.parent.ee.emit('menu.view.column.two');
+          window.parent.ee.emit('menu.view.column.change', 'two');
         }
     })
   );
   submenu.append(
     new gui.MenuItem({
-        label: 'Column: 3',
+        label: i18n.t('view.column-three'),
         click: function() {
-          window.parent.ee.emit('menu.view.column.three');
+          window.parent.ee.emit('menu.view.column.change', 'three');
         }
     })
   );

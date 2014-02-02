@@ -15,7 +15,7 @@ define(function() {
 		},
 
 		changeColumn: function(e) {
-			var target = $(e.target);
+			var target = $(e.currentTarget);
 			var column = target.data('column');
 
 			this.$('a[data-column]').removeClass('active');

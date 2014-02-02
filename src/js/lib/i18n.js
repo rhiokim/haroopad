@@ -1,0 +1,35 @@
+/**
+ * i18n data preloader
+ */
+;(function() {
+	var path = require('path');
+
+	var G = global;
+	var locales = G.LOCALES = {};
+
+	var baseDir = G.PATHS.locales;
+	var locale = window.navigator.language.toLowerCase();
+	var prefix = locale.split('-')[0];
+
+	function load( locale ) {
+		var json, file = path.join(baseDir, locale);
+		G.LOCALES._lang = locale;
+
+		[ 'menu', 'pad', 'preference' ].forEach(function( ns ) {
+			json = fs.readFileSync(path.join(file, ns +'.json'));
+			locales[ns] = JSON.parse(json);
+		});
+	}
+
+	/* supported locale */
+	if (G.LANGS.hasOwnProperty(locale)) {
+		load(locale);
+	} else {
+		if (G.LANGS.hasOwnProperty(prefix)) {
+			load(prefix);
+		} else {
+			load('en');
+		}
+	}
+
+}());

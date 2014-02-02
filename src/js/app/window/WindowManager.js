@@ -7,39 +7,13 @@ define([
 	var gui = require('nw.gui');
 
 	var windows = {},
-		windowsByFile = {},
 		openning = false,
-		realCount = 0,
-		shadowCount = 0,
-		gapX = 0,
-		gapY = 0;
+		realCount = 0;
 
 	var config = store.get('Window') || {};
+	var generalOpt = store.get('General');
 	var top = config.y,
 		left = config.x;
-
-	// function merge(obj) {
-	// 	var i = 1,
-	// 		target, key;
-
-	// 	for (; i < arguments.length; i++) {
-	// 		target = arguments[i];
-	// 		for (key in target) {
-	// 			if (Object.prototype.hasOwnProperty.call(target, key)) {
-	// 				obj[key] = target[key];
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return obj;
-	// }
-
-	/* only for mac */
-	// gui.App.on('reopen', function() {
-	// 	if (!realCount) {
-	// 		open();
-	// 	}
-	// });
 
 	function _updateStore() {
 		config = store.get('Window') || {};
@@ -70,6 +44,7 @@ define([
 					realCount--;
 
 					if (!realCount/* && getPlatformName() != 'mac'*/) {
+						config = store.get('Window');
 						window.ee.emit('exit');
 					}
 					return;
@@ -93,51 +68,51 @@ define([
 		newWin.once('loaded', function() {
 			_updateStore();
 
-			shadowCount++;
+			/* initial exec */
+			if (top <= 0 && left <= 0) {
+				this.setPosition('center');
+				top = this.x;
+				left = this.y;
 
-			//윈도우 오픈 시 position 파라미터가 존재하면 위치 지정은 패스한다.
-			// if (newWin._params.position) {
-			// 	return;
-			// }
+				return;
+			}
 
 			if (config.height + top > window.screen.height) {
-				top = 0;
+				top = 20;
 			}
 
 			if (config.width + left > window.screen.width) {
-				left = 0;
+				left = 20;
 			}
 
-			left = left + 20;
-			top = top + 20;
+			if (realCount > 1) {
+				left = left + 20;
+				top = top + 20;
+			}
 
 			this.moveTo(left, top);
 		});
 	}
 
 	function open(file) {
-		var fileEntry, newWin, activedWin = exports.actived;
+		var fileEntry, newWin, existWin;
+
+		if (openning) {
+			return;
+		}
+
+		openning = true;
 
 		file = (typeof file === 'string') ? File.open(file) : file;
 		fileEntry = file && file.get('fileEntry');
 
 		//이미 열려 있는 파일 일 경우
-		var existWin = getWindowByFile(fileEntry);
+		existWin = getWindowByFile(fileEntry);
 
 		if (fileEntry && existWin) {
 			existWin.focus();
 			return;
 		}
-
-		//TODO
-		// if (activedWin) {
-		// 	var fo = activedWin.file.toJSON();
-
-		// 	if (fo.fileEntry === undefined && fo.markdown === undefined) {
-		// 		activedWin.file.set(file.toJSON());
-		// 		return;
-		// 	}
-		// }
 
 		newWin = gui.Window.open('pad.html', gui.App.manifest.window);
 		newWin.parent = window;

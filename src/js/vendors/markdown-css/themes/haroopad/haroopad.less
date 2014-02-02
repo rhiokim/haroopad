@@ -1,0 +1,87 @@
+@import "../lib/elements.less";
+@import "haroopad/before";
+
+@font-size: 15px;
+@bg-color: #fff;
+
+@base-color: #222;
+@base-size: 1em;
+@base-link-color: darken(#4183C4, 10%);
+@base-family: 'Roboto Condensed', 'Tauri', "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
+@code-family: Consolas, Inconsolata, Courier, monospace;
+
+@line-height: 1.7em;
+
+@base-margin: 0;
+@base-padding: 0;
+@border-color: darken(@bg-color, 10%);
+
+@bg-color-table: darken(@bg-color, 1%);
+
+.haroopad {
+  padding: 20px;
+  color: @base-color;
+  font-size: @font-size;
+  font-family: @base-family;
+  background: @bg-color;
+  -webkit-font-smoothing: antialiased;
+
+  a {
+    color: @base-link-color;
+
+    &:hover {
+      color: lighten(@base-link-color, 10);
+    }
+  }
+
+  h2 {
+    border-bottom: 1px solid darken(@bg-color, 10);
+    line-height: @line-height;
+  }
+
+  h6 {
+    color: #777;
+  }
+
+  hr {
+    border:1px solid darken(@bg-color, 10);
+  }
+
+  p, li, td, h1, h2, h3, h4, h5, h6, blockquote {
+    &>code {
+      color: #000;
+      background-color: #feecdd;
+      border: 1px solid #efdfd0;
+    }
+  }
+
+  pre {
+    &>code {
+      font-size: 1em;
+      font-family: @code-family;
+      letter-spacing: -1px;
+      font-weight: bold;
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid @border-color;
+    padding: 0 15px;
+    color: #777;
+  }
+
+  table {
+    background-color: darken(@bg-color, 2%);
+
+    tr {
+      th, td {
+        border: 1px solid darken(@bg-color, 10%);
+      }
+      &:nth-child(2n) {
+        background-color: darken(@bg-color, 5%);
+      }
+    }
+  }
+}
+
+@import "haroopad/after";

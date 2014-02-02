@@ -1,0 +1,21 @@
+v0.1.2:
+  date: 2013-02-25
+  changes:
+    - Strip query params from url.
+    - Set correct Content-Length for multi-byte files.
+v0.1.1:
+  date: 2013-02-17
+  changes:
+    - Ensure Gruntfile.js is included on npm.
+v0.1.0:
+  date: 2013-02-15
+  changes:
+    - First official release for Grunt 0.4.0.
+v0.1.0rc8:
+  date: 2013-02-03
+  changes:
+    - Updated to work with latest grunt-regarde.
+v0.1.0rc7:
+  date: 2013-01-30
+  changes:
+    - Initial release.

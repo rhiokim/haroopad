@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <script type="text/javascript" src="keymage.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+    keymage('defmod-. c', function(e) {
+        console.log(arguments);
+        e.preventDefault();
+    });
+
+    keymage('chat', 'defmod-. k', function(e) {
+        console.log('CHAT', arguments);
+        e.preventDefault();
+    });
+
+    keymage('chat.input', 'defmod-. e', function(e) {
+        console.log('CHAT INPUT', arguments);
+        e.preventDefault();
+    });
+
+    keymage('defmod-. shift-meta-j', function(e) {
+        console.log('default prevented');
+    }, {preventDefault: true});
+
+    keymage.setScope('chat.input');
+        </script>
+    </body>
+</html>

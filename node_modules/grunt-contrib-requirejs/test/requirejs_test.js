@@ -27,5 +27,20 @@ exports['requirejs'] = {
     test.equal(expect, result, 'should process options with template variables.');
 
     test.done();
+  },
+
+  done: function(test) {
+    'use strict';
+
+    var expect, result;
+    
+    test.expect(1);
+    
+    expect = 7;
+    result = grunt.file.read('tmp/done-build.txt').split(require('os').EOL).length;
+    test.equal(expect, result, 'should provide a done hook with the output');
+    
+
+    test.done();
   }
 };

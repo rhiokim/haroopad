@@ -1,0 +1,26 @@
+{
+  "name": "markdown-css",
+  "version": "0.1.0",
+  "description": "markdown theme standard style, using less (for haroopad)",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rhiokim/markdown-css"
+  },
+  "keywords": [
+    "markdown",
+    "less",
+    "css",
+    "haroopad"
+  ],
+  "author": "Rhio Kim",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-less": "~0.5.0",
+    "grunt-contrib": "~0.4.0"
+  }
+}

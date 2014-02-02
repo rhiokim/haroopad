@@ -1,12 +1,8 @@
-// for Memory leak detect
-process.setMaxListeners(0);
-
 var gui = require('nw.gui');
 
+window.top = window;
 window.nw = gui.Window.get();
 window.ee = new EventEmitter();
-
-MenuBar(); 
 
 //fixed text.js error on node-webkit
 require.nodeRequire = require;
@@ -21,7 +17,7 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    keyboard: '../vendors/keymage',
+    keyboard: '../vendors/keymage/keymage',
     parse: 'core/Parser'
   },
   config: {
@@ -32,20 +28,26 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
+  console.log(e)
   alert('Oops! app is crash :-(');
 };
 
-requirejs([
+i18n.init({
+  lng: global.LOCALES._lang
+}, function() {
+  i18n.addResourceBundle(global.LOCALES._lang, 'menu', global.LOCALES['menu']);
+  i18n.setDefaultNamespace('menu');
+
+  MenuBar();
+
+  requirejs([
     'context/Context',
-    // 'core/Parser',
+    'mail/Mailer',
     'window/Window',
     'window/WindowManager',
-    'utils/UpdateNotifier'
-  ], function(Context, /*Parser, */Window, WindowMgr, Updater) {
-
-    global._gaq.init(function(_gaq) {
-      _gaq.push('haroopad', 'command', 'exec');
-    });
+    'utils/UpdateNotifier',
+    'math/Math'
+  ], function(Context, Mailer, Window, WindowMgr, Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
@@ -53,8 +55,39 @@ requirejs([
       
     //   var html = Parser(md, options);
 
-    //   cb(html);
-    // });
+    global._gaq.init(function(_gaq) {
+      _gaq.push('haroopad', 'init', '');
+    });
+
+    window.ee.on('send.email', function(fileInfo, mailInfo) {
+      var child = WindowMgr.actived;
+      var Emails = store.get('Emails') || {};
+      var addrs = Emails.addrs || [];
+
+      Mailer.setCredential(mailInfo);
+      Mailer.send(mailInfo, fileInfo, function(err, response) {
+
+        if (err) {
+          child.window.ee.emit('fail.send.email', err);
+          return;
+        }
+
+        if (mailInfo.remember) {
+          addrs.push(mailInfo.to);
+          addrs = _.uniq(addrs);
+
+          store.set('Emails', {
+            to: mailInfo.to,
+            from: mailInfo.from,
+            mode: mailInfo.mode,
+            addrs: addrs,
+            remember: mailInfo.remember
+          });
+        }
+
+        child.window.ee.emit('sent.email');
+      });
+    })
     
     var os = getPlatformName();
     gui.App.on('open', function(cmdline) {
@@ -64,7 +97,6 @@ requirejs([
         case 'windows':
           //"z:\Works\haroopad\" --original-process-start-time=1302223754723848
           //"z:\Works\haroopad\" --original-process-start-time=1302223754723848 "z:\Works\filename.ext"
-          
           if (cmdline.split('"').length >= 5) {
             cmdline = cmdline.split('"');
             cmdline.pop();
@@ -82,9 +114,10 @@ requirejs([
           file = cmdline.join(' ');
         break;
       }
-      
+        
       WindowMgr.open(file);
     });
+
 
     //open file with commend line
     if (gui.App.argv.length > 0) {
@@ -106,4 +139,6 @@ requirejs([
     } else {
       WindowMgr.open();
     }
+  });
+
 });

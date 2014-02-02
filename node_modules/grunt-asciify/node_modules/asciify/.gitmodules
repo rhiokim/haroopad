@@ -1,0 +1,3 @@
+[submodule "lib/figlet-js"]
+	path = lib/figlet-js
+	url = https://github.com/olizilla/figlet-js

@@ -4,27 +4,37 @@
   <meta charset="utf-8" />
   <title>haroopad</title>
   <script>var dev = true;</script>
+  
+  <script src="js/vendors/jquery/jquery.js"></script>
+  <script src="js/vendors/eventEmitter/EventEmitter.js"></script>
+  <script src="js/vendors/underscore/underscore.js"></script>
+  <script src="js/vendors/backbone/backbone.js"></script>
+  <script src="js/vendors/store.js/store.js"></script>
+  <script src="js/vendors/i18next/release/i18next-1.7.1.js"></script>
+  <script src="js/vendors/requirejs/require.js"></script>
+  
+  <script src="js/lib/system.js"></script>
   <script src="js/lib/logger.js"></script>
-
   <script src="js/lib/utils/util.js"></script>
   <script src="js/lib/utils/analytics.js"></script>
   <script src="js/lib/utils/package.info.js"></script>
-  <script src="js/vendors/eventemitter.js"></script>
-  <script src="js/vendors/underscore.js"></script>
-  <script src="js/vendors/backbone.js"></script>
-  <script src="js/vendors/store.js"></script>
-  <script src="js/vendors/require.js"></script>
-
+  <script src="js/lib/i18n.js"></script>
+  <script src="js/app/app.common.js"></script>
+  
   <script src="js/common/menu/MenuBar.js"></script>
   <script src="js/common/menu/Menu.edit.js"></script>
   <script src="js/common/menu/Menu.file.js"></script>
   <script src="js/common/menu/Menu.file.recents.js"></script>
+  <script src="js/common/menu/Menu.file.send.js"></script>
   <script src="js/common/menu/Menu.file.exports.js"></script>
   <script src="js/common/menu/Menu.file.activities.js"></script>
   <script src="js/common/menu/Menu.find.js"></script>
+  <script src="js/common/menu/Menu.view.column.js"></script>
   <script src="js/common/menu/Menu.view.js"></script>
   <script src="js/common/menu/Menu.view.mode.js"></script>
   <script src="js/common/menu/Menu.view.column.js"></script>
+  <script src="js/common/menu/Menu.view.zoom.js"></script>
+  <script src="js/common/menu/Menu.view.font.js"></script>
   <script src="js/common/menu/Menu.insert.js"></script>
   <script src="js/common/menu/Menu.insert.section.js"></script>
   <script src="js/common/menu/Menu.insert.header.js"></script>
@@ -33,10 +43,12 @@
   <script src="js/common/menu/Menu.tools.post.js"></script>
   <script src="js/common/menu/Menu.tools.presentation.js"></script>
   <script src="js/common/menu/Menu.tools.send.js"></script>
+  <script src="js/common/menu/Menu.share.js"></script>
   <script src="js/common/menu/Menu.help.js"></script>
+</head>
+<body>
   <script>
     requirejs(['js/app/index']);
   </script>
-</head>
-<body></body>
+</body>
 </html>

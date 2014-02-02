@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <title>less theme for standard markdown</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="assets/gh-pages.css">
+        <link rel="stylesheet" href="assets/css/markdown.css">
+        <link rel="stylesheet" href="assets/css/clearness-dark/clearness-dark.css">
+        <link rel="stylesheet" href="assets/css/clearness/clearness.css">
+        <link rel="stylesheet" href="assets/css/github/github.css">
+        <link rel="stylesheet" href="assets/css/haroopad/haroopad.css">
+        <link rel="stylesheet" href="assets/css/solarized-dark/solarized-dark.css">
+        <link rel="stylesheet" href="assets/css/solarized-light/solarized-light.css">
+        <link rel="stylesheet" href="assets/css/node-dark/node-dark.css">
+        <link rel="stylesheet" href="assets/css/metro-vibes/metro-vibes.css">
+        <link rel="stylesheet" href="assets/css/metro-vibes-dark/metro-vibes-dark.css">
+        <link rel="stylesheet" href="assets/css/wood/wood.css">
+        <link rel="stylesheet" href="assets/css/wood-ri/wood-ri.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>
+            $(document.body).ready(function() {
+                $('ul.inner-menu li').click(function() {
+                    var label = $(this).text();
+
+                    label = label.toLowerCase();
+                    label = label.replace(/ /g, '-');
+
+                    $('#markdown').removeClass();
+                    $('#markdown').addClass('markdown');
+                    $('#markdown').addClass(label);
+
+                    $('ul.inner-menu li').removeClass();
+                    $(this).addClass('active');
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <a href="https://github.com/rhiokim/markdown-css"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        <ul class="inner-menu">
+            <li>Clearness Dark</li>
+            <li>Clearness</li>
+            <li>Github</li>
+            <li>Haroopad</li>
+            <li>Solarized Dark</li>
+            <li>Solarized Light</li>
+            <li>Node Dark</li>
+            <li>Metro Vibes</li>
+            <li>Metro Vibes Dark</li>
+            <li>Wood</li>
+            <li>Wood Ri</li>
+        </ul>
+        <i class="clear"></i>
+        <div id="markdown" class="markdown">
+            <h1>Typography &amp; paragraph styles (h1)</h1>
+            <p>Est urna sit amet arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed molestie augue sit amet leo consequat posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin vel ante a orci tempus eleifend ut et magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h2>Subtitle of the paragraph (h2)</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis</p>
+            <h3>Example of another tag (h3)</h3>
+            <p>Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet egestas purus in blandit. Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed molestie augue sit amet leo consequat posuere.</p>
+<pre><code>이것은 인라인 수학 표현법은 달러 사인($)을 3개로 감싸면 됩니다.
+&#39;Double angle formula for Cosines&#39; 룰 표현하는 $$$cos⁡(θ+φ)=cos⁡(θ)cos⁡(φ)−sin⁡(θ)sin⁡(φ)$$$ 표현 구문입니다.
+
+블럭 표현은 다음과 같이 달러 사인 2개로 감싸주면 됩니다.
+
+$$
+cos⁡(θ+φ)=cos⁡(θ)cos⁡(φ)−sin⁡(θ)sin⁡(φ)
+$$
+</code></pre><p> <strong>결과</strong></p>
+<p>이것은 인라인 수학 표현법은 달러 사인($)을 3개로 감싸면 됩니다.
+‘Double angle formula for Cosines’ 를 표현하는 $$$cos⁡(θ+φ)=cos⁡(θ)cos⁡(φ)−sin⁡(θ)sin⁡(φ)$$$ 표현 구문입니다.</p>
+<p>블럭 표현은 다음과 같이 달러 사인 2개로 감싸주면 됩니다.</p>
+<p>$$
+cos⁡(θ+φ)=cos⁡(θ)cos⁡(φ)−sin⁡(θ)sin⁡(φ)
+$$</p>
+<table>
+<thead>
+<tr>
+<th align="right">Issue Number</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right"><strong>New Features</strong></td>
+<td></td>
+</tr>
+<tr>
+<td align="right">#10</td>
+<td><strong class="highlight">Added</strong> <strong>Mathematical Expression</strong> based on MathJax</td>
+</tr>
+<tr>
+<td align="right">#63, #212</td>
+<td><strong class="highlight">Added</strong> Font Size Option</td>
+</tr>
+<tr>
+<td align="right">#183</td>
+<td><strong class="highlight">Added</strong> Copy inline styled html for WYSWIG</td>
+</tr>
+<tr>
+<td align="right">#214</td>
+<td><strong class="highlight">Added</strong> Shortcuts for inserting date &amp; time</td>
+</tr>
+<tr>
+<td align="right">#215</td>
+<td><strong class="highlight">Added</strong> Toggle Vim-mode menu</td>
+</tr>
+<tr>
+<td align="right">#217</td>
+<td><strong class="highlight">Added</strong> Shortcut for Print</td>
+</tr>
+<tr>
+<td align="right"><strong>Bugs</strong></td>
+<td></td>
+</tr>
+<tr>
+<td align="right">#196</td>
+<td>Set email title when seding email using by clicking menu item</td>
+</tr>
+<tr>
+<td align="right"><strong>Enhancements</strong></td>
+<td></td>
+</tr>
+<tr>
+<td align="right">#209</td>
+<td>Enhance embeded contents look when sending email</td>
+</tr>
+</tbody>
+</table>
+<h1>A First Level Header</h1>
+<h2>A Second Level Header</h2>
+<p>Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.</p>
+<p>The quick brown fox jumped over the lazy
+dog's back.</p>
+<h2>Other language</h2>
+<p>멀티마크다운을 지원하는 마크다운 에디터 <strong>하루패드</strong>!! 한글은 어떻게 작성될까요?</p>
+<h3>Header 3</h3>
+<blockquote>
+<p>This is a blockquote.</p>
+<p>This is the second paragraph in the blockquote.</p>
+<h2>This is an H2 in a blockquote</h2>
+</blockquote>
+<h3>PHRASE EMPHASIS</h3>
+<p><strong>Markdown</strong></p>
+<p>Some of these <code>words</code> <em>are emphasized</em>.
+Some of these words <em>are emphasized also</em>.</p>
+<p>Use two asterisks for <strong>strong emphasis</strong>.
+Or, if you prefer, <strong>use two underscores instead</strong>.</p>
+<p><strong>Output</strong></p>
+<pre><code class="xml"><span class="tag">&lt;<span class="title">p</span>&gt;</span>Some of these words <span class="tag">&lt;<span class="title">em</span>&gt;</span>are emphasized<span class="tag">&lt;/<span class="title">em</span>&gt;</span>.
+Some of these words <span class="tag">&lt;<span class="title">em</span>&gt;</span>are emphasized also<span class="tag">&lt;/<span class="title">em</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">p</span>&gt;</span>Use two asterisks for <span class="tag">&lt;<span class="title">strong</span>&gt;</span>strong emphasis<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>.
+Or, if you prefer, <span class="tag">&lt;<span class="title">strong</span>&gt;</span>use two underscores instead<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></code></pre>
+<h3>LISTS</h3>
+<p>Unordered (bulleted) lists use asterisks, pluses, and hyphens (*, +, and -) as list markers. These three markers are interchangable; this:</p>
+<ul>
+<li>Candy.</li>
+<li>Gum.</li>
+<li>Booze.</li>
+</ul>
+<p>this:</p>
+<ul>
+<li>Candy.</li>
+<li>Gum.</li>
+<li>Booze.</li>
+</ul>
+<p>and this:</p>
+<ul>
+<li>Candy.</li>
+<li>Gum.</li>
+<li>Booze.</li>
+</ul>
+<p>all produce the same output:</p>
+<pre><code class="xml"><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Candy.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Gum.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Booze.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span></code></pre>
+<p>Ordered (numbered) lists use regular numbers, followed by periods, as list markers:</p>
+<pre><code>1.  Red
+2.  Green
+3.  Blue</code></pre>
+<p>Output:</p>
+<pre><code class="xml"><span class="tag">&lt;<span class="title">ol</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Red<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Green<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span>Blue<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ol</span>&gt;</span></code></pre>
+<p>If you put blank lines between items, you’ll get &lt;p&gt; tags for the list item text. You can create multi-paragraph list items by indenting the paragraphs by 4 spaces or 1 tab:</p>
+<ul>
+<li><p>A list item.</p>
+<p>With multiple paragraphs.</p>
+</li>
+<li><p>Another item in the list.</p>
+</li>
+</ul>
+
+<ul>
+<li>aaa
+
+<ul>
+<li>bbb</li>
+<li>ccc
+
+<ul>
+<li>ddd</li>
+<li>eee
+
+<ul>
+<li>ddd</li>
+<li>ccc
+
+<ol>
+<li> aaa</li>
+<li> bbb</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<p>Output:</p>
+<pre><code class="xml"><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>A list item.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<span class="tag">&lt;<span class="title">p</span>&gt;</span>With multiple paragraphs.<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Another item in the list.<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span></code></pre>
+<h3>LINKS</h3>
+<p>Markdown supports two styles for creating links: inline and reference. With both styles, you use square brackets to delimit the text you want to turn into a link.</p>
+<p>Inline-style links use parentheses immediately after the link text. For example:</p>
+<p>This is an <a href="http://example.com/">example link</a>.</p>
+<p>Output:</p>
+<pre><code class="xml"><span class="tag">&lt;<span class="title">p</span>&gt;</span>This is an <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.com/"</span>&gt;</span>
+example link<span class="tag">&lt;/<span class="title">a</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></code></pre>
+<p>Optionally, you may include a title attribute in the parentheses:</p>
+<p>This is an <a href="http://example.com/" title="With a Title">example link</a>.</p>
+<p>Output:</p>
+<pre><code class="xml"><span class="tag">&lt;<span class="title">p</span>&gt;</span>This is an <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.com/"</span> <span class="attribute">title</span>=<span class="value">"With a Title"</span>&gt;</span>
+example link<span class="tag">&lt;/<span class="title">a</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></code></pre>
+<p>Reference-style links allow you to refer to your links by names, which you define elsewhere in your document:</p>
+<p>I get 10 times more traffic from <a href="http://google.com/" title="Google">Google</a> than from
+<a href="http://search.yahoo.com/" title="Yahoo Search">Yahoo</a> or <a href="http://search.msn.com/" title="MSN Search">MSN</a>.</p>
+<p>Output:</p>
+<pre><code class="xml"><span class="tag">&lt;<span class="title">p</span>&gt;</span>I get 10 times more traffic from <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://google.com/"</span>
+<span class="attribute">title</span>=<span class="value">"Google"</span>&gt;</span>Google<span class="tag">&lt;/<span class="title">a</span>&gt;</span> than from <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://search.yahoo.com/"</span>
+<span class="attribute">title</span>=<span class="value">"Yahoo Search"</span>&gt;</span>Yahoo<span class="tag">&lt;/<span class="title">a</span>&gt;</span> or <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://search.msn.com/"</span>
+<span class="attribute">title</span>=<span class="value">"MSN Search"</span>&gt;</span>MSN<span class="tag">&lt;/<span class="title">a</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></code></pre>
+<p>The title attribute is optional. Link names may contain letters, numbers and spaces, but are not case sensitive:</p>
+<p>I start my morning with a cup of coffee and</p>
+<p><a href="http://www.nytimes.com/">The New York Times</a>.</p>
+<p>Output:</p>
+<pre><code>&lt;p&gt;I start my morning with a cup of coffee and
+&lt;a href="http://www.nytimes.com/"&gt;The New York Times&lt;/a&gt;.&lt;/p&gt;</code></pre>
+<h3>IMAGES</h3>
+<p>Image syntax is very much like link syntax.</p>
+<p>Inline (titles are optional):</p>
+<p><img src="http://lorempixel.com/400/200/" alt="alt text" title="Title"></p>
+<p>Reference-style:</p>
+<pre><code class="markdown">![alt text][id]
+
+[id]: http://lorempixel.com/400/200/ "Title"</code></pre>
+<p>Both of the above examples produce the same output:</p>
+<pre><code class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"/path/to/img.jpg"</span> <span class="attribute">alt</span>=<span class="value">"alt text"</span> <span class="attribute">title</span>=<span class="value">"Title"</span> /&gt;</span></code></pre>
+</body>
+        </div>
+    </body>
+</html>

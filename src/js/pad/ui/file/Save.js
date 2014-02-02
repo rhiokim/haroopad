@@ -1,13 +1,6 @@
 define(function() {
   var view;
 
-  function setDefault() {
-    var f = new File('/path/to/file', 'name'); 
-    var files = new FileList(); 
-    files.append(f); 
-    document.getElementById('input0').files = files; 
-  }
-
   var View = Backbone.View.extend({
   	el: '#saveFile',
   	
@@ -20,12 +13,9 @@ define(function() {
 
     /* it does not work exactly */
     setDefault: function(file) {
-      // var f = new File(dir +'/Untitled.md', 'Untitled.md');
-      // var files = new FileList();
-      // files.append(f);
+      file = file || ( nw.file.get('title') || 'Untitled' ) + '.md';
 
-      // this.$el[0].files = files;
-      this.$el.attr('nwsaveas', file || 'Untitled.md' );
+      this.$el.attr('nwsaveas', file);
     },
 
   	show: function(dir, file) {

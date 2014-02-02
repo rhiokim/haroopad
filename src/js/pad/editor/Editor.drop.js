@@ -1,7 +1,8 @@
 define([
-	'editor/Editor.drop.file',
-	'editor/Editor.drop.string'
-], function(FILE, STRING) {
+		'editor/Editor.drop.file',
+		'editor/Editor.drop.string',
+		'editor/Editor.drop.html'
+	], function(FILE, STRING, HTML) {
 
 	var path = require('path');
 
@@ -25,9 +26,12 @@ define([
 		} else {
 			var text = e.dataTransfer.getData('text/plain');
 			var url = e.dataTransfer.getData('text/uri-list');
+			var html = e.dataTransfer.getData('text/html');
 
-			if (url) {
+			if (url && html && !text) { //web image
 				STRING.uri(url, dropCallback);
+			} else if (!url && html && text) { //web text and html
+				return dropCallback(HTML(html));
 			} else {
 				return dropCallback(text);
 			}

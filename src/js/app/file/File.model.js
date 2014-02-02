@@ -1,7 +1,8 @@
 define([
     'parse',
+    'file/File.doc',
     'file/File.tmp.opt'
-    ], function(parse, TmpOpt) {
+    ], function(parse, Doc, TmpOpt) {
 
   var fs = require('fs-extra'),
       path = require('path'),
@@ -30,17 +31,23 @@ define([
       extname: '.md',
       dirname: undefined,
       basename: undefined,
-      markdown: undefined,
+      markdown: '',
       tmp: undefined,
-      readOnly: false
+      readOnly: false,
+      doc: null
     },
 
     initialize: function() {
+      this.doc = new Doc;
+      this.set('doc', this.doc);
+
       this.on('change:markdown', function() {
-        var md = this.get('markdown');
+        var md = this.get('markdown') || '';
         var html = parse(md);
 
-        this.set('html', html);
+        this.doc.set({ html: html });
+        // this.trigger('change:doc', this, this.doc);
+        // this.set('html', html);
 
         if (!this.get('tmp')) {
           window.clearTimeout(this._writeTimeout);
@@ -82,20 +89,6 @@ define([
       this.set({ markdown: md }, silent);
       this.set(stat, silent);
     },
-
-    // loadTmp: function(uid, silent) {
-    //   var fileEntry = getTmpFile(uid);
-    //   var md = open(fileEntry);
-
-    //   this._uid = uid;
-    //   this._tmpFile = fileEntry;
-
-    //   this.set({
-    //     'markdown': md,
-    //     'tmp': true,
-    //     'fileEntry': fileEntry
-    //   }, silent);
-    // },
 
     reload: function(silent) {
       var fileEntry = this.get('fileEntry');
@@ -151,28 +144,7 @@ define([
       }
 
       TmpOpt.remove(this._uid);
-    }/*,
-
-    checkUpdate: function() {
-      var fileEntry = this.get('fileEntry');
-      var mtime;
-
-      if (fileEntry) {
-        fs.stat(fileEntry, function(err, stats) {
-          mtime = this.get('mtime');
-
-          if(!mtime) {
-            this.set(stats);
-            return;
-          }
-
-          if (mtime.getTime() != stats.mtime.getTime()) {
-            this.set(stats);
-            window.ee.emit('file.update', this.get('fileEntry'));
-          }
-        });
-      }
-    }*/
+    }
   });
 
   return Model;
