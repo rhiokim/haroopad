@@ -1,57 +1,95 @@
-define([],
-	function() {
+define([
+		'context/util',
+		'context/viewer/export',
+		'context/viewer/publish',
+		'context/viewer/embedVideo',
+		'context/viewer/embedAudio',
+		'context/viewer/embedOthers',
+		'context/viewer/themes',
+		'context/viewer/userThemes'
+	],
+	function(util, MenuExport, MenuPublish, MenuEmbedVideo, MenuEmbedAudio, MenuEmbedOthers, Themes, UserThemes) {
 
-		var gui = require('nw.gui'),
-			win = gui.Window.get();
+		var gui = require('nw.gui');
 		var Context = new gui.Menu();
 
-		var mCopy, mCopyHTML, mCopyStyledHTML, mPreferences;
-
-		function menuItem(options) {
-			return new gui.MenuItem(options);
+		function add(item) {
+			Context.append(item);
 		}
 
-		function sepItem() {
-			return new gui.MenuItem({
-				type: 'separator'
-			});
-		}
 
-		mCopy = menuItem({
-			label: i18n.t('edit.copy'),
+		add(util.menuItem({
+			label: i18n.t('Table of Contents'),
 			click: function() {
-				window.ee.emit('context.copy');
 			}
-		});
+		}));
 
-		// Context.append(mCopy);
+		add(util.sepItem());
 
-		mCopyHTML = menuItem({
+		add(util.menuItem({
 			label: i18n.t('edit.copy-html'),
 			click: function() {
 				window.ee.emit('context.copy.html');
 			}
-		});
+		}));
 
-		mCopyStyledHTML = menuItem({
+		add(util.menuItem({
 			label: i18n.t('edit.copy-styled-html'),
 			click: function() {
 				window.parent.ee.emit('menu.file.exports.clipboard.styled');
 			}
-		});
-		Context.append(mCopyHTML);
-		Context.append(mCopyStyledHTML);
-		Context.append(sepItem());
+		}));
 
-		mPreferences = menuItem({
+		add(util.sepItem());
+
+		add(util.menuItem({
+			label: i18n.t('Export...'),
+			submenu: MenuExport
+		}));
+
+		add(util.menuItem({
+			label: i18n.t('Publish...'),
+			submenu: MenuPublish
+		}));
+
+		add(util.sepItem());
+
+		add(util.menuItem({
+			label: i18n.t('Embed Video'),
+			submenu: MenuEmbedVideo
+		}));
+
+		add(util.menuItem({
+			label: i18n.t('Embed Image'),
+			submenu: MenuEmbedAudio
+		}));
+
+		add(util.menuItem({
+			label: i18n.t('Embed Others...'),
+			submenu: MenuEmbedOthers
+		}));
+
+
+		add(util.sepItem());
+
+		add(util.menuItem({
+			label: i18n.t('Viewer Themes...'),
+			submenu: Themes
+		}));
+
+		add(util.menuItem({
+			label: i18n.t('Viewer User Themes...'),
+			submenu: UserThemes
+		}));
+
+		add(util.sepItem());
+
+		add(util.menuItem({
 			label: i18n.t('file.preferences'),
 			click: function() {
 				window.ee.emit('context.preferences');
 			}
-		});
-		Context.append(mPreferences);
-
-		//TODO: https://github.com/rhiokim/haroopad/issues/15
+		}));
 
 		return Context;
 	});
