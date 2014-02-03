@@ -71,7 +71,7 @@ define([
 
         elementList = groupTags(elementList);
 
-        toc = '<ul>\n<h5>Table of Contents</h5>\n' + elementList.join("") + '\n</ul>\n';
+        toc = '<ul>\n' + elementList.join("") + '\n</ul>\n';
 
         return toc;
     }
