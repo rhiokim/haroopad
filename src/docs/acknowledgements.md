@@ -375,6 +375,6 @@ Copyright (c) 2011 Jan Mühlemann (MIT)
 
 * * *
 
-**reworks css**
+**css**
 
-Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca> (MIT)

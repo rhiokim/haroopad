@@ -21,7 +21,7 @@ define([], function() {
 					serverInfo = JSON.parse(chunk);
 
 					updateCheck(serverInfo.version, force);
-				} catch (e) {
+				} catch(e) {
 					serverInfo = {};
 				}
 			});

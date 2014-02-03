@@ -3,7 +3,8 @@ define([
 		'editor/Editor.drop.string',
 		'editor/Editor.drop.html'
 	], function(FILE, STRING, HTML) {
-		var path = require('path');
+
+	var path = require('path');
 
 	function Drop(cm, e) {
 		var kind, items;
