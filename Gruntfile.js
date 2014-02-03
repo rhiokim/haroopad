@@ -248,6 +248,32 @@ module.exports = function(grunt) {
     uglify: {
       preBuiltLibs: {
         files: {
+          '<%= vendors %>/CodeMirror/codemirror.min.js': [
+            '<%= vendors %>/CodeMirror/lib/codemirror.js',
+            '<%= vendors %>/CodeMirror/addon/hint/show-hint.js',
+            '<%= vendors %>/CodeMirror-custom/addon/hint/markdown-hint.js',
+            '<%= vendors %>/CodeMirror/addon/selection/active-line.js',
+            '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
+            '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
+            '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
+            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.js',
+            '<%= vendors %>/CodeMirror/addon/search/searchcursor.js',
+            '<%= vendors %>/CodeMirror-custom/addon/search/search.js',
+            '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
+            '<%= vendors %>/CodeMirror/mode/xml/xml.js',
+            '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
+            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
+            '<%= vendors %>/CodeMirror/mode/ruby/ruby.js',
+            '<%= vendors %>/CodeMirror/mode/python/python.js',
+            '<%= vendors %>/CodeMirror/mode/javascript/javascript.js',
+            '<%= vendors %>/CodeMirror/mode/clike/clike.js',
+            '<%= vendors %>/CodeMirror/mode/css/css.js',
+            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
+            '<%= vendors %>/CodeMirror/mode/php/php.js',
+            '<%= vendors %>/CodeMirror/mode/perl/perl.js',
+            '<%= vendors %>/CodeMirror/keymap/vim.js'
+          ],
+
           '<%= vendors %>/requirejs/require.min.js': [ 
             '<%= vendors %>/requirejs/require.js' 
           ],
@@ -381,36 +407,6 @@ module.exports = function(grunt) {
             'src/js/viewer/main.js'
           ]
         }
-      },
-
-      codemirror: {
-        files: {
-          'build/haroopad/js/codemirror.min.js': [
-            '<%= vendors %>/CodeMirror/lib/codemirror.js',
-            '<%= vendors %>/CodeMirror/addon/hint/show-hint.js',
-            '<%= vendors %>/CodeMirror-custom/addon/hint/markdown-hint.js',
-            '<%= vendors %>/CodeMirror/addon/selection/active-line.js',
-            '<%= vendors %>/CodeMirror/addon/edit/continuelist.js',
-            '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
-            '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
-            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.js',
-            '<%= vendors %>/CodeMirror/addon/search/searchcursor.js',
-            '<%= vendors %>/CodeMirror-custom/addon/search/search.js',
-            '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
-            '<%= vendors %>/CodeMirror/mode/xml/xml.js',
-            '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
-            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
-            '<%= vendors %>/CodeMirror/mode/ruby/ruby.js',
-            '<%= vendors %>/CodeMirror/mode/python/python.js',
-            '<%= vendors %>/CodeMirror/mode/javascript/javascript.js',
-            '<%= vendors %>/CodeMirror/mode/clike/clike.js',
-            '<%= vendors %>/CodeMirror/mode/css/css.js',
-            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
-            '<%= vendors %>/CodeMirror/mode/php/php.js',
-            '<%= vendors %>/CodeMirror/mode/perl/perl.js',
-            '<%= vendors %>/CodeMirror/keymap/vim.js'
-          ]
-        }
       }
     },
 
@@ -500,6 +496,12 @@ module.exports = function(grunt) {
           { expand: true, cwd: '<%= vendors %>/todc-bootstrap/dist/fonts/', src: [ '**' ], dest: 'build/haroopad/fonts/' },
           { src: '<%= vendors %>/select2/select2.png', dest: 'build/haroopad/css/select2.png' },
           { src: '<%= vendors %>/select2/select2x2.png', dest: 'build/haroopad/css/select2x2.png' }
+        ]
+      },
+
+      codemirror: {
+        files: [
+          { src: '<%= vendors %>/CodeMirror/codemirror.min.js', dest: 'build/haroopad/js/codemirror.min.js' }
         ]
       },
 
@@ -664,7 +666,7 @@ module.exports = function(grunt) {
   grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
 
   /* codemirror */
-  grunt.registerTask('codemirror', [ 'uglify:codemirror' ]);
+  // grunt.registerTask('codemirror', [ 'uglify:codemirror' ]);
 
   /* snapshot */
   grunt.registerTask('snapshot', [ 'concat:snapshot', 'shell:bin' ]);
@@ -687,7 +689,7 @@ module.exports = function(grunt) {
   grunt.registerTask('app', [ 'concat:appVendors', 'uglify:appCommon', 'requirejs:app', 'uglify:appR', 'concat:app' ]);
 
   /* pad */
-  grunt.registerTask('pad', [ 'concat:padVendors', 'uglify:padCommon', 'requirejs:pad', 'uglify:padR', 'concat:pad' ]);
+  grunt.registerTask('pad', [ 'concat:padVendors', 'uglify:padCommon', 'requirejs:pad', 'uglify:padR', 'concat:pad', 'copy:codemirror' ]);
 
   /* preference */
   grunt.registerTask('preferences', [ 'concat:preferencesVendors', 'uglify:preferencesCommon', 'requirejs:preferences', 'uglify:preferencesR', 'concat:preferences' ]);
@@ -699,6 +701,6 @@ module.exports = function(grunt) {
   grunt.registerTask('menu', [ 'uglify:menu' ]);
 
   /* pkg */
-  grunt.registerTask('default', [ 'asciify', 'clean', 'cp', 'menu', 'css', 'codemirror' ]);
+  grunt.registerTask('default', [ 'asciify', 'clean', 'cp', 'menu', 'css' ]);
   grunt.registerTask('pkg2', [ 'app', 'pad', 'preferences', 'viewer', 'snapshot' ]);
 };
