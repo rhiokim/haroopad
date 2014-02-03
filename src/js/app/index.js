@@ -28,7 +28,6 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  console.log(e)
   alert('Oops! app is crash :-(');
 };
 

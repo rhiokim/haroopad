@@ -309,6 +309,7 @@ module.exports = function(grunt) {
           '<%= build %>/app.common.min.js': [
             'src/js/lib/system.js',
             'src/js/lib/logger.js',
+            'src/js/lib/disable.debug.js',
             'src/js/lib/utils/util.js',
             'src/js/lib/system.js',
             'src/js/lib/logger.js',
@@ -336,6 +337,7 @@ module.exports = function(grunt) {
         files: {
           '<%= build %>/pad.common.min.js': [
             'src/js/lib/logger.js',
+            'src/js/lib/disable.debug.js',
             'src/js/lib/utils/util.js',
             'src/js/pad/pad.common.js'
           ]
@@ -358,6 +360,7 @@ module.exports = function(grunt) {
         files: {
           '<%= build %>/preferences.common.min.js': [
             'src/js/lib/logger.js',
+            'src/js/lib/disable.debug.js',
             'src/js/lib/utils/util.js'
           ]
         }
@@ -374,7 +377,7 @@ module.exports = function(grunt) {
       viewer: {
         files: {
           '<%= build %>/viewer.min.js': [
-            'src/js/viewer/disable.debug.js',
+            'src/js/lib/disable.debug.js',
             'src/js/viewer/main.js'
           ]
         }
