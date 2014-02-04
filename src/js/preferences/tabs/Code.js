@@ -3,6 +3,7 @@ define([
 	], function(options) {
 
 		var config = options.toJSON();
+		var themes = global.THEMES.code;
 
 		options.bind('change', function(model) {
 			var prop, en,
@@ -23,6 +24,14 @@ define([
 			},
 
 			initialize: function() {
+				var optEl, themeEl = document.querySelector('#code-tab select[name=codeStyle]');
+
+				themes.forEach(function(theme) {
+					optEl = document.createElement('option');
+					optEl.innerHTML = theme;
+					themeEl.appendChild(optEl);
+				});
+
 				this.$('select[name=codeStyle]').val(config.theme).select2({
 					width: '200px'
 				});

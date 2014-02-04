@@ -4,6 +4,7 @@ define([
 	var readDir = require('readdir');
 	var path = require('path');
 	var config = options.toJSON();
+	var themes = global.THEMES.viewer;
 
 	options.bind('change', function(model) {
 		var prop, en,
@@ -35,7 +36,7 @@ define([
 		el: '#viewer-tab',
 
 		events: {
-			'change select[name=viewStyle]': 'changeViewStyle',
+			'change select[name=theme]': 'changeViewStyle',
 			'change select[name=fontSize]': 'changeFontSize',
 			'change select[name=userTheme]': 'changeUserTheme',
 			'click input[name=clickableLink]': 'clickableLink',
@@ -44,7 +45,15 @@ define([
 		},
 
 		initialize: function() {
-			this.$('select[name=viewStyle]').val(config.theme).select2({
+			var optEl, themeEl = document.querySelector('#viewer-tab select[name=theme]');
+
+			themes.forEach(function(theme) {
+				optEl = document.createElement('option');
+				optEl.innerHTML = theme;
+				themeEl.appendChild(optEl);
+			});
+
+			this.$('select[name=theme]').val(config.theme).select2({
 				width: '200px'
 			});
 			this.$('select[name=fontSize]').val(config.fontSize).select2({
