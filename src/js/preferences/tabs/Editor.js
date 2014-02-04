@@ -5,6 +5,8 @@ define([
 	var path = require('path');
 	var config = options.toJSON();
 
+	var themes = global.THEMES.editor;
+
   var _gaq = global._gaq;
 
 	options.bind('change', function(model) {
@@ -51,6 +53,13 @@ define([
 		},
 
 		initialize: function() {
+			var optEl, themeEl = document.querySelector('#editor-tab select[name=theme]');
+
+			themes.forEach(function(theme) {
+				optEl = document.createElement('option');
+				optEl.innerHTML = theme;
+				themeEl.appendChild(optEl);
+			});
 
 			this.$('select[name=theme]').val(config.theme).select2({
 				width: '200px'
