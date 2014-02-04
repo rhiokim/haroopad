@@ -64,6 +64,9 @@ function loadCSSFiles(dir) {
 
 /* native themes */
 global.THEMES = {};
+global.THEMES.user = {};
+global.THEMES.user.editor = ['default'];
+global.THEMES.user.viewer = ['default'];
 global.THEMES.editor = ['default', '3024-day', '3024-night', 'ambiance-mobile', 'ambiance',
   'base16-dark', 'base16-light', 'blackboard', 'cobalt', 'eclipse', 'elegant', 'erlang-dark',
   'lesser-dark', 'mbo', 'midnight', 'monokai', 'neat', 'night', 'paraiso-dark', 'paraiso-light',
