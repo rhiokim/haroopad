@@ -38,7 +38,9 @@ module.exports = function(grunt) {
     clean: {
       build: [ 'build/*' ],
       release: [ 'build/haroopad.app' ],
-      core: [ 'build/haroopad.app' ]
+      core: [ 'build/haroopad.app' ],
+      nwlibs: [ 'lib/node-webkit.app/Contents/Libraries'],
+      nwres: [ 'lib/node-webkit.app/Contents/Resources/Themes']
     },
 
     jshint: {
@@ -660,8 +662,8 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
   /* built-in libs for node-webkit */
-  grunt.registerTask('nwlibs', [ 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales' ]);
-  grunt.registerTask('nwres', [ 'copy:userThemes', 'copy:mkdcss' ]);
+  grunt.registerTask('nwlibs', [ 'clean:nwlibs', 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales' ]);
+  grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
 

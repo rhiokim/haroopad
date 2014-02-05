@@ -1,7 +1,6 @@
-var fs = require('fs'),
-  path = require('path'),
+var path = require('path'),
   gui = require('nw.gui'),
-  readDir;
+  fs, watchr, readDir;
 
 /* node-webkit gui */
 global.Shell = gui.Shell;
@@ -40,33 +39,78 @@ global.PATHS = {
 //add node main module path
 process.mainModule.paths = [global.PATHS.node_modules];
 
+fs = require('fs-extra');
+readDir = require('readdir');
+
 /* load locales */
 global.LANGS = fs.readFileSync(path.join(global.PATHS.locales, 'locales.json'));
 global.LANGS = JSON.parse(global.LANGS);
 
-readDir = require('readdir');
+/* native themes */
 
-function loadCSSFiles(dir) {
+
+function loadUserThemes(dir) {
   var csses = readDir.readSync(dir, ['*.css'], readDir.CASELESS_SORT);
-  var name, themes = {};
+  var name, themes = [];
 
   csses.forEach(function(css, idx) {
     name = path.basename(css).replace('.css', '');
-    themes[name] = {
-      id: idx,
-      name: name,
-      path: css
-    }
+    themes.push(name);
   });
 
   return themes;
 }
 
-/* native themes */
+/* copy native resources */
+(function() {
+  var files, isExist, source, dest;
+
+  var editorSource = global.PATHS.theme_res_editor;
+  var markdownSource = global.PATHS.theme_res_viewer;
+
+  var editorDest = global.PATHS.theme_dest_editor;
+  var markdownDest = global.PATHS.theme_dest_viewer;
+
+  fs.mkdirpSync(editorDest);
+  fs.mkdirpSync(markdownDest);
+
+  files = readDir.readSync(editorSource, ['**.css']);
+
+  files.forEach(function(file) {
+    dest = path.join(editorDest, file);
+    source = path.join(editorSource, file);
+
+    isExist = fs.existsSync(dest);
+
+    if (!isExist) {
+      try {
+        fs.copySync(source, dest);
+      } catch (e) {}
+    }
+
+  });
+
+  files = readDir.readSync(markdownSource, ['**.css']);
+
+  files.forEach(function(file) {
+    dest = path.join(markdownDest, file);
+    source = path.join(markdownSource, file);
+
+    isExist = fs.existsSync(dest);
+
+    if (!isExist) {
+      try {
+        fs.copySync(source, dest);
+      } catch (e) {}
+    }
+
+  });
+})();
+
 global.THEMES = {};
 global.THEMES.user = {};
-global.THEMES.user.editor = ['default'];
-global.THEMES.user.viewer = ['default'];
+global.THEMES.user.editor = loadUserThemes(global.PATHS.theme_dest_editor);
+global.THEMES.user.viewer = loadUserThemes(global.PATHS.theme_dest_viewer);
 global.THEMES.editor = ['default', '3024-day', '3024-night', 'ambiance-mobile', 'ambiance',
   'base16-dark', 'base16-light', 'blackboard', 'cobalt', 'eclipse', 'elegant', 'erlang-dark',
   'lesser-dark', 'mbo', 'midnight', 'monokai', 'neat', 'night', 'paraiso-dark', 'paraiso-light',
