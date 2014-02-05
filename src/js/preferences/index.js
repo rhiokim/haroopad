@@ -48,8 +48,7 @@ i18n.init({
       'tabs/Markdown',
       'tabs/Helper',
       'tabs/About',
-      'tabs/Backup',
-      'util/ResourceCopy'
+      'tabs/Backup'
     ], function(General, Editor, Viewer, /*Custom, */Code, Markdown, Helper, About) {
       var shell = gui.Shell;
 
