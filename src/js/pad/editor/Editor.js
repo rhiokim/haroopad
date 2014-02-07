@@ -259,6 +259,9 @@ define([
 			window.parent.ee.off('preferences.editor.autoPairCharacters', toggleAutoPairChar);
 		});
 
+		/* change theme by context menu */
+		window.ee.on('editor.theme', changeTheme);
+
 		window.ee.on('toggle.vim.keybind', function() {
 			var map = editor.getOption('keyMap');
 			// map == 'vim' ? 'default' : 'vim';

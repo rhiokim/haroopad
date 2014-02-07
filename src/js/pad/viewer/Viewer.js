@@ -121,6 +121,10 @@ define([
 			// window.parent.ee.off('preferences.markdown.mathjax.after', enableMath);
 		});
 
+		/* change theme by context menu */
+		window.ee.on('viewer.theme', changeTheme);
+		window.ee.on('viewer.theme.code', changeCodeTheme);
+
 		window.ee.on('print.viewer', function(value) {
 			_viewer.print();
 
