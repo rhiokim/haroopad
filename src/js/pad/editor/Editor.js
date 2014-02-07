@@ -128,6 +128,7 @@ define([
 		/* initialize editor */
 		function setFontSize(value) {
 			CodeMirrorElement.style.fontSize = value + 'px';
+			nw.editor.refresh();
 		}
 
 		//TODO FIXME

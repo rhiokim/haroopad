@@ -34,12 +34,20 @@ define([
 				// this.$el.removeClass('hide');
 				this.$pel.addClass('md-help');
 				isShow = true;
+
+				setTimeout(function() {
+					nw.editor.refresh();
+				}, 250);
 			},
 
 			hide: function() {
 				// this.$el.addClass('hide');
 				this.$pel.removeClass('md-help');
 				isShow = false;
+
+				setTimeout(function() {
+					nw.editor.refresh();
+				}, 250);
 			},
 
 			toggle: function() {
