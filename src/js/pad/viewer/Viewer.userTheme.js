@@ -52,5 +52,7 @@ define([
 
   window.parent.ee.on('preferences.viewer.userTheme', view.changeUserTheme.bind(view));
 
+  window.ee.on('viewer.theme.user', view.changeUserTheme.bind(view));
+
   return view;
 });

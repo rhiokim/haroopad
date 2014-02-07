@@ -21,7 +21,8 @@ define([
 	});
 
 	function reload() {
-		themesUser = loadCSSFiles(global.PATHS.theme_dest_editor);
+		//FIXME: dependency
+		themesUser = global.THEMES.user.editor = loadCSSFiles(global.PATHS.theme_dest_editor);
 	}
 
 	function loadCSSFiles(dir) {

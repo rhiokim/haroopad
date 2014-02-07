@@ -12,24 +12,28 @@ define([
     add(util.menuItem({
       label: i18n.t('Tweet'),
       click: function() {
+        window.parent.ee.emit('context.viewer.embed', this.label);
       }
     }));
 
     add(util.menuItem({
       label: i18n.t('Wikipedia'),
       click: function() {
+        window.parent.ee.emit('context.viewer.embed', this.label);
       }
     }));
 
     add(util.menuItem({
       label: i18n.t('Slideshare.net'),
       click: function() {
+        window.parent.ee.emit('context.viewer.embed', this.label);
       }
     }));
 
     add(util.menuItem({
       label: i18n.t('Speakerdeck.com'),
       click: function() {
+        window.parent.ee.emit('context.viewer.embed', this.label);
       }
     }));
 

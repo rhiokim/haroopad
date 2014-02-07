@@ -283,6 +283,29 @@ define([
     WindowMgr.actived.window.ee.emit('menu.file.exports.clipboard.plain');
   });
 
+  /* context event */
+  window.ee.on('context.editor.theme', function(theme) {
+    WindowMgr.actived.window.ee.emit('editor.theme', theme);
+  });
+  window.ee.on('context.editor.theme.user', function(theme) {
+    WindowMgr.actived.window.ee.emit('editor.theme.user', theme);
+  });
+  window.ee.on('context.viewer.theme', function(theme) {
+    WindowMgr.actived.window.ee.emit('viewer.theme', theme);
+  });
+  window.ee.on('context.viewer.theme.code', function(theme) {
+    WindowMgr.actived.window.ee.emit('viewer.theme.code', theme);
+  });
+  window.ee.on('context.viewer.theme.user', function(theme) {
+    WindowMgr.actived.window.ee.emit('viewer.theme.user', theme);
+  });
+  window.ee.on('context.viewer.export', function(format) {
+    WindowMgr.actived.window.ee.emit('file.exports.html');
+  });
+  window.ee.on('context.viewer.publish', function(service) {
+    WindowMgr.actived.window.ee.emit('menu.file.send.email');
+  });
+
 
   /* process event */
   window.ee.on('update.haroopad', function(currVersion, newVersion) {

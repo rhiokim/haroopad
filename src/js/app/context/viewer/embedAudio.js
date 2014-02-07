@@ -12,6 +12,7 @@ define([
     add(util.menuItem({
       label: i18n.t('SoundCloud.com'),
       click: function() {
+        window.parent.ee.emit('context.viewer.embed', this.label);
       }
     }));
 

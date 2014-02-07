@@ -21,7 +21,8 @@ define([
 	});
 
 	function reload() {
-		themesUser = loadCSSFiles(global.PATHS.theme_dest_viewer);
+		//FIXME: dependency
+		themesUser = global.THEMES.user.viewer = loadCSSFiles(global.PATHS.theme_dest_viewer);
 	}
 
 	function loadCSSFiles(dir) {

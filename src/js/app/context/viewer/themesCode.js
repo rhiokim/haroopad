@@ -4,7 +4,7 @@ define([
 
     var gui = require('nw.gui');
     var Menu = new gui.Menu();
-    var themes = global.THEMES.editor;
+    var themes = global.THEMES.code;
 
     function add(item) {
       Menu.append(item);
@@ -14,7 +14,7 @@ define([
       add(util.menuItem({
         label: theme,
         click: function() {
-          window.parent.ee.emit('context.editor.theme', this.label);
+          window.parent.ee.emit('context.viewer.theme.code', this.label);
         }
       }));
     });

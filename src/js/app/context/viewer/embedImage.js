@@ -10,21 +10,14 @@ define([
     }
 
     add(util.menuItem({
-      label: i18n.t('Youtube'),
+      label: i18n.t('Flickr.com'),
       click: function() {
         window.parent.ee.emit('context.viewer.embed', this.label);
       }
     }));
 
     add(util.menuItem({
-      label: i18n.t('Vimeo'),
-      click: function() {
-        window.parent.ee.emit('context.viewer.embed', this.label);
-      }
-    }));
-
-    add(util.menuItem({
-      label: i18n.t('Ted.com'),
+      label: i18n.t('Weheartit.com'),
       click: function() {
         window.parent.ee.emit('context.viewer.embed', this.label);
       }

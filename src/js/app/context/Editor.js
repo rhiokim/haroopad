@@ -3,9 +3,9 @@ define([
 		'context/format/Text',
 		'context/search/Search',
 		'context/editor/themes',
-		'context/editor/userThemes'
+		'context/editor/themesUser'
 	],
-	function(util, TextFormatMenu, Search, Themes, UserThemes) {
+	function(util, TextFormatMenu, Search, Themes, ThemesUser) {
 
 		var gui = require('nw.gui');
 		var Context = new gui.Menu();
@@ -51,13 +51,14 @@ define([
 
 		add(util.sepItem());
 
-		add(util.menuItem({
-			label: i18n.t('Format'),
-			enabled: false,
-			submenu: TextFormatMenu
-		}));
+		// Do not support!!!
+		// add(util.menuItem({
+		// 	label: i18n.t('Format'),
+		// 	enabled: false,
+		// 	submenu: TextFormatMenu
+		// }));
 		
-		add(util.sepItem());
+		// add(util.sepItem());
 
 		// add(util.menuItem({
 		// 	label: i18n.t('edit.services'),
@@ -66,13 +67,13 @@ define([
 		// }));
 
 		add(util.menuItem({
-			label: i18n.t('Editor Themes'),
+			label: i18n.t('view.editor.theme'),
 			submenu: Themes
 		}));
 
 		add(util.menuItem({
-			label: i18n.t('Editor User Themes'),
-			submenu: UserThemes
+			label: i18n.t('view.editor.theme-user'),
+			submenu: ThemesUser
 		}));
 		
 		add(util.sepItem());
