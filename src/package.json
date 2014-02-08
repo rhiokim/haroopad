@@ -20,7 +20,9 @@
     "plugin": true
   },
   "chromium-args": "--enable-threaded-compositing",
-  "upgrade": "http://pad.haroopress.com/upgrade.json",
+  "app": {
+    "upgrade": "http://pad.haroopress.com/upgrade.json"
+  },
   "maintainers": [
     {
       "name": "Rhio Kim",
