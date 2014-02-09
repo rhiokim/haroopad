@@ -62,7 +62,7 @@ define([
     }
 
     // headers = target.querySelectorAll(':scope>h1, :scope>h2, :scope>h3, :scope>h4, :scope>h5, :scope>h6');
-    headers = Array.prototype.slice.call(headers, 0);
+    // headers = Array.prototype.slice.call(headers, 0);
 
     headers.forEach(function(elt, idx) {
       console.log(elt.id, idx)
