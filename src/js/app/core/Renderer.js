@@ -40,14 +40,16 @@ define([
 		}
 	
 		renderer.math = function(text, block) {
-			if (block) {
+			if (block === '$$') {
 				return '<p class="mathjax">$$'
 					+ text
 					+ '$$</p>';
 			} else {
-				return '<span class="mathjax">$$$'
+				return '<span class="mathjax">'
+					+ block
 					+ text
-					+ '$$$</span>';
+					+ block
+					+ '</span>';
 			}
 		}
 

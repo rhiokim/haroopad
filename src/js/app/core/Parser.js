@@ -1,12 +1,14 @@
 define([
-    'core/Lexer'
+    'core/Lexer',
+    'core/InlineLexer'
   ],
-  function(Lexer) {
+  function(Lexer, InlineLexer) {
 
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
     var marked = require("marked");
+    marked.InlineLexer = InlineLexer;
     
     var parse = function(src) {
       var tokens = Lexer.lex(src);
