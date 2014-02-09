@@ -8,7 +8,7 @@ define([
 			os = require('os'),
 			CleanCss = require('clean-css');
 		var gui = require('nw.gui');
-		var manifest = global.package;
+		var manifest = global.Manifest;
 		var saveEl = $("#exportHTML");
 		var cleanCss = new CleanCss();
 		var shadow;

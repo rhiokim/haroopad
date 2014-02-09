@@ -5,6 +5,9 @@ define([
 	var path = require('path');
 	var config = options.toJSON();
 
+	var themes = global.THEMES.editor;
+	var themesUser = global.THEMES.user.editor;
+
   var _gaq = global._gaq;
 
 	options.bind('change', function(model) {
@@ -17,17 +20,18 @@ define([
 		}
 	});
 
+	function reload() {
+		//FIXME: dependency
+		themesUser = global.THEMES.user.editor = loadCSSFiles(global.PATHS.theme_dest_editor);
+	}
+
 	function loadCSSFiles(dir) {
 		var csses = readDir.readSync(dir, ['*.css'], readDir.CASELESS_SORT);
-		var name, themes = {};
+		var name, themes = [];
 
 		csses.forEach(function(css, idx) {
 			name = path.basename(css).replace('.css', '');
-			themes[name] = {
-				id: idx,
-				name: name,
-				path: css
-			}
+			themes.push(name);
 		});
 
 		return themes;
@@ -51,6 +55,15 @@ define([
 		},
 
 		initialize: function() {
+			var optEl, themeEl = document.querySelector('#editor-tab select[name=theme]');
+
+			themes.forEach(function(theme) {
+				optEl = document.createElement('option');
+				optEl.innerHTML = theme;
+				themeEl.appendChild(optEl);
+			});
+
+			this.setThemeData(themesUser);
 
 			this.$('select[name=theme]').val(config.theme).select2({
 				width: '200px'
@@ -68,8 +81,6 @@ define([
 			if (config.tabSize) {
 				this.activeTabsize(config.tabSize);
 			}
-
-			this.setThemeData(config.userThemes);
 
 			options.bind('change:displayLineNumber', function(model, data) {
 				this.$('input[name=displayLineNumber]').prop('checked', data);
@@ -89,11 +100,9 @@ define([
 		},
 
 		changeUserTheme: function(e) {
-			var themes = options.get('userThemes');
 			var el = $(e.target);
-			var theme = themes[el.val()].name;
+			var theme = el.val();
 
-			config.userTheme = theme;
 			options.set({
 				userTheme: theme
 			});
@@ -102,36 +111,29 @@ define([
 		},
 
 		openUserThemeDir: function(e) {
-			var theme = this.$('select[name=userTheme]').val();
-			this.trigger('open-theme', theme);
+			this.trigger('open-theme', options.get('userTheme'));
 		},
 
 		reloadUserTheme: function(e) {
-			var theme = this.$('select[name=userTheme]').val();
-			var themes = loadCSSFiles(path.join(gui.App.dataPath, 'Themes', 'editor'));
+			reload();
 
-			options.set({
-				userThemes: themes
-			});
+			this.setThemeData(themesUser);
 
-			this.setThemeData(themes);
-
-			window.parent.ee.emit('preferences.editor.userTheme', theme);
+			window.parent.ee.emit('preferences.editor.userTheme', options.get('userTheme'));
 		},
 
 		setThemeData: function(themes) {
-			var prop, option, el = this.$('select[name=userTheme]');
+			var optEl, el = this.$('select[name=userTheme]');
 
 			el.empty();
 
-			for (prop in themes) {
-				items = themes[prop];
+			themes.forEach(function(theme) {
+				optEl = document.createElement('option');
+				optEl.innerHTML = theme;
+				el.append(optEl);
+			});
 
-				option = $('<option>').attr('value', prop).text(prop);
-				el.append(option);
-			}
-
-			el.val(config.userTheme).select2({
+			el.val(options.get('userTheme')).select2({
 				width: '200px'
 			});
 		},

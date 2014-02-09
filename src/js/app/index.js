@@ -1,4 +1,4 @@
-var gui = require('nw.gui');
+window.gui = require('nw.gui');
 
 window.top = window;
 window.nw = gui.Window.get();

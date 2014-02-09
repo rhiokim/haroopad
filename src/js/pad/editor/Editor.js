@@ -128,6 +128,7 @@ define([
 		/* initialize editor */
 		function setFontSize(value) {
 			CodeMirrorElement.style.fontSize = value + 'px';
+			nw.editor.refresh();
 		}
 
 		//TODO FIXME
@@ -258,6 +259,9 @@ define([
 			window.parent.ee.off('preferences.editor.vimKeyBinding', toggleVim);
 			window.parent.ee.off('preferences.editor.autoPairCharacters', toggleAutoPairChar);
 		});
+
+		/* change theme by context menu */
+		window.ee.on('editor.theme', changeTheme);
 
 		window.ee.on('toggle.vim.keybind', function() {
 			var map = editor.getOption('keyMap');

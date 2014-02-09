@@ -36,7 +36,6 @@ i18n.init({
   });
 
   requirejs.onError = function (e) {
-    console.log(e.stack)
     alert('Oops! Preferences dialog is crash :-(');
   };
 
@@ -49,8 +48,7 @@ i18n.init({
       'tabs/Markdown',
       'tabs/Helper',
       'tabs/About',
-      'tabs/Backup',
-      'util/ResourceCopy'
+      'tabs/Backup'
     ], function(General, Editor, Viewer, /*Custom, */Code, Markdown, Helper, About) {
       var shell = gui.Shell;
 

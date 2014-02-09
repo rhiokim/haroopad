@@ -51,4 +51,6 @@ define([
   view = new CustomStyle;
 
   window.parent.ee.on('preferences.editor.userTheme', view.changeUserTheme.bind(view));
+
+  window.ee.on('editor.theme.user', view.changeUserTheme.bind(view));
 });

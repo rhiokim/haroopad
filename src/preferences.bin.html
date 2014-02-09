@@ -167,11 +167,7 @@
                 <label class="checkbox">
                   <input type="checkbox" value="" name="enableAutoComplete">
                   <span data-i18n="general.enableAutoComplete">Enable Markdown Auto Completion</a>
-                </label><!-- 
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="enableMath">
-                  <span data-i18n="general.enableMath">Enable Mathematics Expression</span>
-                </label> -->
+                </label>
                 <label class="checkbox">
                   <input type="checkbox" value="" name="enableSyncScroll" checked="checked">
                   <span data-i18n="general.enableSyncScroll">Enable sync scroll</span>
@@ -198,42 +194,10 @@
               <p>
                 <h5 data-i18n="editor.themes">Themes</h5>
 
-                <select class="select2" name="theme">
-                  <option>default</option>
-                  <option>3024-day</option>
-                  <option>3024-night</option>
-                  <option>ambiance-mobile</option>
-                  <option>ambiance</option>
-                  <option>base16-dark</option>
-                  <option>base16-light</option>
-                  <option>blackboard</option>
-                  <option>cobalt</option>
-                  <option>eclipse</option>
-                  <option>elegant</option>
-                  <option>erlang-dark</option>
-                  <option>lesser-dark</option>
-                  <option>mbo</option>
-                  <option>midnight</option>
-                  <option>monokai</option>
-                  <option>neat</option>
-                  <option>night</option>
-                  <option>paraiso-dark</option>
-                  <option>paraiso-light</option>
-                  <option>pastel-on-dark</option>
-                  <option>rubyblue</option>
-                  <option>solarized dark</option>
-                  <option>solarized light</option>
-                  <option>the-matrix</option>
-                  <option>tomorrow-night-eighties</option>
-                  <option>twilight</option>
-                  <option>vibrant-ink</option>
-                  <option>xq-dark</option>
-                  <option>xq-light</option>
-                </select>
+                <select class="select2" name="theme"></select>
 
-                <span style="margin:0 1px 0 10px;">font size</span>
+                <span data-i18n="viewer.font-size" style="margin:0 1px 0 10px;">Font size</span>
 
-                <!-- <span>Font Size</span> -->
                 <select class="select2" name="fontSize">
                   <option>10</option>
                   <option>11</option>
@@ -327,21 +291,9 @@
               <p>
                 <h5 data-i18n="viewer.themes">Themes</h5>
 
-                <select class="select2" name="viewStyle">
-                  <option value="clearness">Clearness</option>
-                  <option value="clearness-dark">Clearness Dark</option>
-                  <option value="node-dark">Node Dark</option>
-                  <option value="github">Github</option>
-                  <option value="haroopad">Haroopad</option>
-                  <option value="solarized-dark">Solarized Dark</option>
-                  <option value="solarized-light">Solarized Light</option>
-                  <option value="metro-vibes">Metro Vibes</option>
-                  <option value="metro-vibes-dark">Metro Vibes Dark</option>
-                  <option value="wood">Wood</option>
-                  <option value="wood-ri">Wood Ri</option>
-                </select>
+                <select class="select2" name="theme"></select>
 
-                <span style="margin:0 1px 0 10px;">font size</span>
+                <span data-i18n="viewer.font-size" tyle="margin:0 1px 0 10px;">Font size</span>
 
                 <select class="select2" name="fontSize">
                   <option>10</option>
@@ -445,51 +397,7 @@
               <p>
                 <h5 data-i18n="code.themes">Themes</h5>
 
-                <select class="select2" name="codeStyle">
-                  <option value="default">Default</option>
-                  <option value="arta">Arta</option>
-                  <option value="ascetic">Ascetic</option>
-                  <option value="atelier-dune.dark">Atelier Dune Dark</option>
-                  <option value="atelier-dune.light">Atelier Dune Light</option>
-                  <option value="atelier-forest.dark">Atelier Forest Dark</option>
-                  <option value="atelier-forest.light">Atelier Forest Light</option>
-                  <option value="atelier-heath.dark">Atelier Heath Dark</option>
-                  <option value="atelier-heath.light">Atelier Heath Light</option>
-                  <option value="atelier-lakeside.dark">Atelier Lakeside Dark</option>
-                  <option value="atelier-lakeside.light">Atelier Lakeside Light</option>
-                  <option value="atelier-seaside.dark">Atelier Seaside Dark</option>
-                  <option value="atelier-seaside.dark">Atelier Seaside Light</option>
-                  <option value="brown_paper">Brown Paper</option>
-                  <option value="brown_papersq">Brown Papersq</option>
-                  <option value="docco">Docco</option>
-                  <option value="far">Far</option>
-                  <option value="foundation">Foundation</option>
-                  <option value="github">Github</option>
-                  <option value="googlecode">Googlecode</option>
-                  <option value="idea">IDEA</option>
-                  <option value="ir_black">IR Black</option>
-                  <option value="magula">Magula</option>
-                  <option value="mono-blue">Mono Blue</option>
-                  <option value="monokai_sublime">Monokai Sublime</option>
-                  <option value="obsidian">Obsidian</option>
-                  <option value="paraiso.dark">Paraiso Dark</option>
-                  <option value="paraiso.light">Paraiso Light</option>
-                  <option value="pojoaque">Pojoaque</option>
-                  <option value="railscasts">Railscasts</option>
-                  <option value="rainbow">Rainbow</option>
-                  <option value="school_book">School Book</option>
-                  <option value="solarized_dark">Solarized Dark</option>
-                  <option value="solarized_light">Solarized Light</option>
-                  <option value="sunburst">Sunburst</option>
-                  <option value="tomorrow-night-blue">Tomorrow Night Blue</option>
-                  <option value="tomorrow-night-bright">Tomorrow Night Bright</option>
-                  <option value="tomorrow-night-eighties">Tomorrow Night Eighties</option>
-                  <option value="tomorrow-night">Tomorrow Night</option>
-                  <option value="tomorrow">Tomorrow</option>
-                  <option value="vs">VS</option>
-                  <option value="xcode">XCode</option>
-                  <option value="zenburn">Zenburn</option>
-                </select>
+                <select class="select2" name="codeStyle"></select>
               </p>
               <p>
                 <h5 data-i18n="code.general">General</h5>
@@ -549,8 +457,8 @@
             </div>
 
             <div class="panel-footer">
-              <button class="btn btn-primary pull-right" name="apply">Apply</button>
-              <button class="btn btn-default" name="default">Default</button>
+              <button class="btn btn-primary pull-right" name="apply" data-i18n="apply">Apply</button>
+              <button class="btn btn-default" name="default" data-i18n="reset">Reset</button>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ define([], function() {
 	var http = require('http'),
 	
 		manifest = global.Manifest,
-		url = manifest.upgrade,
+		url = manifest.app.upgrade,
 		currVersion = manifest.version;
 
 	function updateCheck(newVersion, force) {

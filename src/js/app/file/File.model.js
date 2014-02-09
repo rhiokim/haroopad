@@ -55,7 +55,7 @@ define([
           this._writeTimeout = window.setTimeout(function() {
             fs.writeFileSync(this._tmpFile, md, 'utf8');
             TmpOpt.add(this._uid);
-          }.bind(this), 5000);
+          }.bind(this), 2500);
         }
       });
 

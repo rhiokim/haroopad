@@ -6,7 +6,6 @@ define([
 				clickableLink: false,
 				fontSize: 15,
 				fontFamily: undefined,
-				userThemes: {"default":{id:0,name:"default",path:"default.css"}},
 				userTheme: 'default'
 			},
 
