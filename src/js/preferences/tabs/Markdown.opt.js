@@ -14,7 +14,8 @@ define([
 				highlight: null,
 				langPrefix: '',
 				headerPrefix: '',
-				mathjax: false
+				mathjax: false,
+				dollarSign: false
 			},
 
 			initialize: function() {

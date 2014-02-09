@@ -30,6 +30,7 @@ define([
 				'click input[name=breaks]': 'enableBreaks',	
 				'click input[name=smartLists]': 'enableSmartLists',	
 				'click input[name=smartypants]': 'enableSmartyPants',	
+				'click input[name=dollarSign]': 'enableDollarSign',	
 				'click input[name=mathjax]': 'enableMathjax',
 				'click button[name=apply]': 'clickApply',
 				'click button[name=default]': 'clickDefault'
@@ -51,6 +52,7 @@ define([
 				this.$('input[name=smartLists]').prop('checked', opt.smartLists);
 				this.$('input[name=smartypants]').prop('checked', opt.smartypants);
 				this.$('input[name=mathjax]').prop('checked', opt.mathjax);
+				this.$('input[name=dollarSign]').prop('checked', opt.dollarSign);
 			},
 
 			reset: function() {
@@ -121,6 +123,13 @@ define([
 				options.set('mathjax', bool);
 				
       	_gaq.push('haroopad.preferences', 'markdown option', 'mathjax:'+bool);
+			},
+
+			enableDollarSign: function(e) {
+				var bool = $(e.target).is(':checked');
+				options.set('dollarSign', bool);
+				
+      	_gaq.push('haroopad.preferences', 'markdown option', 'use single dollar sign:'+bool);
 			}
 		});
 

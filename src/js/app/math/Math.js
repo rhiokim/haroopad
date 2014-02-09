@@ -18,9 +18,9 @@ define([], function() {
 
   loadJs(global.PATHS.js + '/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
     MathJax.Hub.Config({
-      showProcessingMessages: true,
+      showProcessingMessages: false,
       tex2jax: {
-        inlineMath: [ ['$$$','$$$'], ["\\(","\\)"] ],
+        inlineMath: [ ['$$$','$$$'], ['$','$'], ["\\(","\\)"] ],
         displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
       	processEscapes: true
       }
