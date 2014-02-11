@@ -2,8 +2,8 @@ var supportLanuages = ['en', 'ko'];
 var _md_body;
 var codeThemes = ['default', 'arta', 'ascetic', 'atelier-dune.dark', 'atelier-dune.light',
   'atelier-forest.dark', 'atelier-forest.light', 'atelier-heath.dark', 'atelier-heath.light',
-  'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-seaside.dark', 'atelier-seaside.dark',
-  'brown_paper', 'brown_papersq', 'docco', 'far', 'foundation', 'github', 'googlecode', 'idea',
+  'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-seaside.dark', 'atelier-seaside.light',
+  'brown_paper', 'docco', 'far', 'foundation', 'github', 'googlecode', 'idea',
   'ir_black', 'magula', 'mono-blue', 'monokai_sublime', 'obsidian', 'paraiso.dark', 'paraiso.light',
   'pojoaque', 'railscasts', 'rainbow', 'school_book', 'solarized_dark', 'solarized_light', 'sunburst',
   'tomorrow-night-blue', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night',
@@ -190,10 +190,10 @@ function lazySyntaxHighlight() {
   });
 }
 
-function loadCodeCss() {
+function loadCodeCss(theme) {
   var el = document.getElementById('codeTheme');
   var rnd = parseInt(Math.random() * codeThemes.length, 10);
-  var theme = codeThemes[rnd];
+  theme = theme || codeThemes[rnd];
   el.setAttribute('href', '/assets/css/code/'+ theme +'.css');
 }
 
