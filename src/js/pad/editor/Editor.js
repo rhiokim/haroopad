@@ -164,7 +164,6 @@ define([
 
 
 		/* change theme */
-
 		function changeTheme(value) {
 			editor.setOption('theme', value);
 
@@ -172,7 +171,6 @@ define([
 		}
 
 		/* change font size */
-
 		function changeFontSize(value) {
 			setFontSize(value);
 
@@ -180,7 +178,6 @@ define([
 		}
 
 		/* toggle line number */
-
 		function toggleLineNumber(value) {
 			editor.setOption('lineNumbers', value);
 
@@ -188,15 +185,20 @@ define([
 		}
 
 		/* toggle active line */
-
 		function toggleActiveLine(value) {
 			editor.setOption('styleActiveLine', value);
 
 			global._gaq.push('haroopad.preferences', 'editor', 'activeLine: ' + value);
 		}
 
-		/* toggle vim key binding */
+		/* toggle indent with tab */
+		function toggleIndentWithTab(value) {
+			editor.setOption('indentWithTabs', value);
 
+			global._gaq.push('haroopad.preferences', 'editor', 'indent with tab: ' + value);
+		}
+
+		/* toggle vim key binding */
 		function toggleVim(value) {
 			editor.setOption('keyMap', value ? 'vim' : 'default');
 
@@ -204,7 +206,6 @@ define([
 		}
 
 		/* toggle auto pair char */
-
 		function toggleAutoPairChar(value) {
 			editor.setOption('autoCloseBrackets', value);
 
@@ -212,7 +213,6 @@ define([
 		}
 
 		/* toggle sync scroll */
-
 		function toggleSyncScroll(value) {
 			if (value) {
 				editor.on('scroll', syncScrollHandler);
@@ -234,6 +234,7 @@ define([
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', config.tabSize || 4);
 		editor.setOption('indentUnit', config.indentUnit || 4);
+		editor.setOption('indentWithTabs', config.indentWithTabs || false);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
 		toggleAutoComplete(generalConf.enableAutoComplete || false);
@@ -248,16 +249,20 @@ define([
 		window.parent.ee.on('preferences.editor.displayActiveLine', toggleActiveLine);
 		window.parent.ee.on('preferences.editor.vimKeyBinding', toggleVim);
 		window.parent.ee.on('preferences.editor.autoPairCharacters', toggleAutoPairChar);
+		window.parent.ee.on('preferences.editor.indentWithTabs', toggleIndentWithTab);
 		window.parent.ee.on('preferences.editor.fontSize', changeFontSize);
 
 		nw.on('destroy', function() {
 			window.parent.ee.off('preferences.general.enableSyncScroll', toggleSyncScroll);
+			window.parent.ee.off('preferences.general.enableAutoComplete', toggleAutoComplete);
 
 			window.parent.ee.off('preferences.editor.theme', changeTheme);
 			window.parent.ee.off('preferences.editor.displayLineNumber', toggleLineNumber);
 			window.parent.ee.off('preferences.editor.displayActiveLine', toggleActiveLine);
 			window.parent.ee.off('preferences.editor.vimKeyBinding', toggleVim);
 			window.parent.ee.off('preferences.editor.autoPairCharacters', toggleAutoPairChar);
+			window.parent.ee.off('preferences.editor.indentWithTabs', toggleIndentWithTab);
+			window.parent.ee.off('preferences.editor.fontSize', changeFontSize);
 		});
 
 		/* change theme by context menu */
