@@ -1,5 +1,13 @@
 var supportLanuages = ['en', 'ko'];
 var _md_body;
+var codeThemes = ['default', 'arta', 'ascetic', 'atelier-dune.dark', 'atelier-dune.light',
+  'atelier-forest.dark', 'atelier-forest.light', 'atelier-heath.dark', 'atelier-heath.light',
+  'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-seaside.dark', 'atelier-seaside.dark',
+  'brown_paper', 'brown_papersq', 'docco', 'far', 'foundation', 'github', 'googlecode', 'idea',
+  'ir_black', 'magula', 'mono-blue', 'monokai_sublime', 'obsidian', 'paraiso.dark', 'paraiso.light',
+  'pojoaque', 'railscasts', 'rainbow', 'school_book', 'solarized_dark', 'solarized_light', 'sunburst',
+  'tomorrow-night-blue', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night',
+  'tomorrow', 'vs', 'xcode', 'zenburn' ];
 var language = window.navigator.language || window.navigator.userLanguage;
 language = language.substr(0, 2);
 
@@ -78,6 +86,7 @@ function loadPost(file) {
 		drawEmbedContents($('.contents')[0]);
 		drawMathJax();
 		drawTOC();
+    lazySyntaxHighlight();
 
 		setStarrre(title.replace(' | ', '\n\n') + '\n#markdown #haroopad');
 	});
@@ -144,11 +153,57 @@ function drawTOC() {
 	})
 }
 
+function _htmlDecode(input) {
+  var e = document.createElement('div');
+  e.innerHTML = input;
+  return e.textContent;
+}
+
+function lazySyntaxHighlight() {
+  var code, lang, 
+  _codes = document.body.querySelectorAll('.contents pre>code');
+  _codes = Array.prototype.slice.call(_codes, 0);
+
+  _codes.forEach(function(el) {
+    var code = el.innerHTML;
+    var lang = el.className;
+
+    if (!lang) {
+      return;
+    }
+
+    el.setAttribute('class', lang +' hljs');
+
+    lang = lang == 'js' ? 'javascript' : lang;
+    code = _htmlDecode(code);
+
+    try {
+      if (!lang) {
+        el.innerHTML = hljs.highlightAuto(code).value;
+      } else {
+        el.innerHTML = hljs.highlight(lang, code).value;
+      }
+    } catch (e) {
+      // return code;
+    }
+    
+  });
+}
+
+function loadCodeCss() {
+  var el = document.getElementById('codeTheme');
+  var rnd = parseInt(Math.random() * codeThemes.length, 10);
+  var theme = codeThemes[rnd];
+  el.setAttribute('href', '/assets/css/code/'+ theme +'.css');
+}
+
 var __timeout;
 
 $(document).ready(function() {
 	var file;
 	var prevHash;
+
+  loadCodeCss();
 
 	file = url('?f');
 

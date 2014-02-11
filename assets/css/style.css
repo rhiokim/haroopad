@@ -246,3 +246,10 @@ blockquote p {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/**
+ * code block issue
+ */
+.contents pre {
+    padding: 0;
+}
