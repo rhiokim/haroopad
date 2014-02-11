@@ -65,7 +65,6 @@ define([
     // headers = Array.prototype.slice.call(headers, 0);
 
     headers.forEach(function(elt, idx) {
-      console.log(elt.id, idx)
       elt.setAttribute('data-idx', idx);
       elementList.push(new TocElement(elt.tagName, createAnchor(elt), elt.textContent, idx));
     });
