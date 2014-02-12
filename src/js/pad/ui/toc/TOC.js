@@ -1,7 +1,6 @@
 define([
-	'keyboard',
 	'ui/toc/TocElement'
-], function(HotKey, TocElement) {
+], function(TocElement) {
 
 	// var stringEx = require('stringex');
 
@@ -213,7 +212,7 @@ define([
 		view.toggleTOC();
 	});
 
-	HotKey('defmod-shift-t', function() {
+	keymage('defmod-shift-t', function() {
 		// disable on v0.10
 		// window.ee.emit('menu.view.toggle.toc');
 	});

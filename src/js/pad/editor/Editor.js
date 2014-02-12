@@ -1,12 +1,12 @@
 define([
 		// 'editor/Parser',
-		'keyboard',
+		// 'keyboard',
 		'store',
 		'editor/Editor.keymap',
 		'editor/Editor.drop',
 		'editor/Editor.custom'
 	],
-	function(HotKey, store, Keymap, Drop) {
+	function(store, Keymap, Drop) {
 		var moment = require('moment');
 
 		var gui = require('nw.gui'),
@@ -431,54 +431,54 @@ define([
 			CodeMirrorGutters.style.height = '5000px';
 		}
 
-		HotKey('defmod-alt-.', function() {
+		keymage('defmod-alt-.', function() {
 			window.ee.emit('menu.view.editor.font.size', 1);
 		});
-		HotKey('defmod-alt-,', function() {
+		keymage('defmod-alt-,', function() {
 			window.ee.emit('menu.view.editor.font.size', -1);
 		});
 
-		// HotKey('defmod-1', function() {
+		// keymage('defmod-1', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h1');
 		// });
-		// HotKey('defmod-2', function() {
+		// keymage('defmod-2', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h2');
 		// });
-		// HotKey('defmod-3', function() {
+		// keymage('defmod-3', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h3');
 		// });
-		// HotKey('defmod-4', function() {
+		// keymage('defmod-4', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h4');
 		// });
-		// HotKey('defmod-5', function() {
+		// keymage('defmod-5', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h5');
 		// });
-		// HotKey('defmod-6', function() {
+		// keymage('defmod-6', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h6');
 		// });
 
-		HotKey('shift-ctrl-1', function() {
+		keymage('shift-ctrl-1', function() {
 			window.ee.emit('insert.date', 'l');
 		});
-		HotKey('shift-ctrl-2', function() {
+		keymage('shift-ctrl-2', function() {
 			window.ee.emit('insert.date', 'L');
 		});
-		HotKey('shift-ctrl-3', function() {
+		keymage('shift-ctrl-3', function() {
 			window.ee.emit('insert.date', 'll');
 		});
-		HotKey('shift-ctrl-4', function() {
+		keymage('shift-ctrl-4', function() {
 			window.ee.emit('insert.date', 'LL');
 		});
-		HotKey('shift-ctrl-5', function() {
+		keymage('shift-ctrl-5', function() {
 			window.ee.emit('insert.date', 'lll');
 		});
-		HotKey('shift-ctrl-6', function() {
+		keymage('shift-ctrl-6', function() {
 			window.ee.emit('insert.date', 'LLL');
 		});
-		HotKey('shift-ctrl-7', function() {
+		keymage('shift-ctrl-7', function() {
 			window.ee.emit('insert.date', 'llll');
 		});
-		HotKey('shift-ctrl-8', function() {
+		keymage('shift-ctrl-8', function() {
 			window.ee.emit('insert.date', 'LLLL');
 		});
 

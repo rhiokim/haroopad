@@ -1,8 +1,7 @@
 define([
-		'keyboard',
 		'txt!tpl/markdown-help.html'
 	], 
-	function(HotKey, html) {
+	function(html) {
 		$('#md-help #md-help-content').append(html);
 
 		// var gui = require('nw.gui');
@@ -89,7 +88,7 @@ define([
 
 		view = new View;
 
-		HotKey('defmod-shift-h', function() {
+		keymage('defmod-shift-h', function() {
 			window.ee.emit('toggle.syntax.help');
 		});
 
