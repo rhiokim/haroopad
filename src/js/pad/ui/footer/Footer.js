@@ -1,5 +1,4 @@
 define([
-	'store',
 	// 'editor/Editor',
 	'ui/footer/State',
 	'ui/footer/Column',
@@ -7,7 +6,7 @@ define([
 	'ui/footer/Document',
 	'ui/footer/_Advertise',
 	'ui/footer/_Share'
-], function(store, State, Column, Indentation, Document, Advertise, Share) {
+], function(State, Column, Indentation, Document, Advertise, Share) {
 	var shell = gui.Shell;
 	var editorOpt = store.get('Editor') || {};
 

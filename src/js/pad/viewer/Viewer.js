@@ -1,11 +1,10 @@
 define([
-		'store',
 		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.inlineStyleForEmail',
 		'viewer/Viewer.userTheme',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, inlineStyle, StyleForEmail, UserTheme, DragDrop) {
+	function(inlineStyle, StyleForEmail, UserTheme, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 

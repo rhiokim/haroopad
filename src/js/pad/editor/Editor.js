@@ -1,12 +1,9 @@
 define([
-		// 'editor/Parser',
-		// 'keyboard',
-		'store',
 		'editor/Editor.keymap',
 		'editor/Editor.drop',
 		'editor/Editor.custom'
 	],
-	function(store, Keymap, Drop) {
+	function(Keymap, Drop) {
 		var moment = require('moment');
 
 		var gui = require('nw.gui'),

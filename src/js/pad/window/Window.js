@@ -1,8 +1,7 @@
 define([
-	'store',
 	'ui/dialog/Dialogs',
 	'ui/exports/Exports'
-], function(store, Dialogs, Exports) {
+], function(Dialogs, Exports) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
 	var moment = require('moment');
