@@ -1,4 +1,5 @@
 var path = require('path'),
+  cp = require('child_process'),
   gui = require('nw.gui'),
   fs, watchr, readDir;
 
@@ -129,3 +130,65 @@ global.THEMES.code = ['default', 'arta', 'ascetic', 'atelier-dune.dark', 'atelie
   'tomorrow-night-blue', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night',
   'tomorrow', 'vs', 'xcode', 'zenburn'
 ];
+
+global.SHORTCUTS = {
+  /* app */
+  'new window': 'defmod-n',
+  'quite': 'defmod-q',
+  'toggle linenumber': 'defmod-shift-l',
+  'toggle vim bind': 'defmod-alt-v',
+  'show preference': 'defmod-,',
+  'editor font size up': 'defmod-alt-.',
+  'editor font size down': 'defmod-alt-,',
+
+  /* pad */
+  'insert date l': 'shift-ctrl-1',
+  'insert date L': 'shift-ctrl-2',
+  'insert date ll': 'shift-ctrl-3',
+  'insert date LL': 'shift-ctrl-4',
+  'insert date lll': 'shift-ctrl-5',
+  'insert date LLL': 'shift-ctrl-6',
+  'insert date llll': 'shift-ctrl-7',
+  'insert date LLLL': 'shift-ctrl-8',
+
+  'sending email': 'defmod-shift-e',
+
+  'editor viewer mode': 'defmod-alt-1',
+  'reset mode': 'ctrl-\\',
+  'viewer editor mode': 'defmod-alt-2',
+  'editor mode': 'defmod-alt-3',
+  'viewer mode': 'defmod-alt-4',
+  'move right': 'shift-ctrl-]',
+  'move left': 'shift-ctrl-[',
+  'viewer width minus': 'ctrl-alt-]',
+  'viewer width plus': 'ctrl-alt-[',
+
+  'show markdown help': 'defmod-shift-h',
+  'show table of content': 'defmod-shift-t',
+
+  'print': 'defmod-p',
+  'copy to clipboard': 'defmod-alt-c',
+  'viewer font size up': 'defmod-shift-.',
+  'viewer font size down': 'defmod-shift-,',
+
+  'enter fullscreen1': 'defmod-enter',
+  'enter fullscreen2': 'defmod-f11',
+  'escape fullscreen': 'esc esc',
+
+  'file open': 'defmod-o',
+  'file save': 'defmod-s',
+  'file save as': 'defmod-shift-s',
+  'file close1': 'defmod-w',
+  'file close2': 'defmod-f4',
+  'export html': 'defmod-alt-e',
+  'exit': 'defmod-q',
+
+  /* preference */
+  'close preference': 'esc'
+};
+global.SHORTCUTS.core = {};
+global.SHORTCUTS.menu = {
+
+};
+global.SHORTCUTS.pad = {};
+global.SHORTCUTS.preference = {};
