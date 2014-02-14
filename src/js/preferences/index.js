@@ -21,12 +21,9 @@ i18n.init({
     waitSeconds: 30,
     locale: 'ko-kr',
     paths: {
-      // tpl: '../../tpl',
       tpl: '../../tpl',
       txt: '../vendors/text/text',
       vendors: '../vendors'
-      // store: '../vendors/store.js/store',
-      // keyboard: '../vendors/keymage/keymage'
     },
     config: {
       text: {

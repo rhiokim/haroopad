@@ -1,9 +1,7 @@
 define([
-	'store',
-	'keyboard',
 	'ui/dialog/Dialogs',
 	'ui/exports/Exports'
-], function(store, HotKey, Dialogs, Exports) {
+], function(Dialogs, Exports) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
 	var moment = require('moment');
@@ -234,15 +232,15 @@ define([
 		// TODO print after popup window
 	});
 
-	HotKey('defmod-enter', function() {
+	keymage('defmod-enter', function() {
 		window.ee.emit('view.fullscreen');
 	}, { preventDefault: true });
 
-	HotKey('defmod-f11', function() {
+	keymage('defmod-f11', function() {
 		window.ee.emit('view.fullscreen');
 	}, { preventDefault: true });
 
-	HotKey('esc esc', function() {
+	keymage('esc esc', function() {
 		if (win.isFullscreen) {
 			win.leaveFullscreen();
 			config.isFullscreen = win.isFullscreen;
@@ -250,33 +248,33 @@ define([
 		}
 	});
 
-	HotKey('defmod-o', function() {
+	keymage('defmod-o', function() {
 		window.ee.emit('menu.file.open');
 	}, { preventDefault: true });
 
-	HotKey('defmod-s', function() {
+	keymage('defmod-s', function() {
 		window.ee.emit('menu.file.save');
 	}, { preventDefault: true });
 
-	HotKey('defmod-shift-s', function() {
+	keymage('defmod-shift-s', function() {
 		window.ee.emit('menu.file.save.as');
 	}, { preventDefault: true });
 
-	HotKey('defmod-w', function() {
+	keymage('defmod-w', function() {
 		nw.emit('close');
 	}, { preventDefault: true });
 
-	HotKey('defmod-f4', function() {
+	keymage('defmod-f4', function() {
 		nw.emit('close');
 	}, { preventDefault: true });
 
-	HotKey('defmod-alt-e', function() {
+	keymage('defmod-alt-e', function() {
 		window.ee.emit('file.exports.html');
 
 		global._gaq.push('haroopad.file', 'exports', 'html');
 	}, { preventDefault: true });
 
-	HotKey('defmod-q', function() {
+	keymage('defmod-q', function() {
 		var generalOpt = store.get('General');
 		if (generalOpt.enableLastFileRestore === false) {
 			window.parent.ee.emit('clear.lastfiles');

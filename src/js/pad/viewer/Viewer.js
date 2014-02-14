@@ -1,12 +1,10 @@
 define([
-		'store',
-		'keyboard',
 		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.inlineStyleForEmail',
 		'viewer/Viewer.userTheme',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, inlineStyle, StyleForEmail, UserTheme, DragDrop) {
+	function(inlineStyle, StyleForEmail, UserTheme, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 
@@ -194,23 +192,23 @@ define([
 			changeFontSize(viewerConfig.fontSize);
 		});
 
-		HotKey('defmod-p', function() {
+		keymage('defmod-p', function() {
 			window.ee.emit('print.viewer');
 		});
 
-		HotKey('defmod-alt-c', function() {
+		keymage('defmod-alt-c', function() {
 			window.ee.emit('menu.file.exports.clipboard.plain');
 		});
 
-		// HotKey('defmod-shift-alt-c', function() {
+		// keymage('defmod-shift-alt-c', function() {
 		// 	window.ee.emit('menu.file.exports.clipboard.haroopad');
 		// });
 
-		HotKey('defmod-shift-.', function() {
+		keymage('defmod-shift-.', function() {
 			window.ee.emit('menu.view.viewer.font.size', 1);
 		});
 
-		HotKey('defmod-shift-,', function() {
+		keymage('defmod-shift-,', function() {
 			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
 

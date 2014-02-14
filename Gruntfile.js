@@ -216,7 +216,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/todc-bootstrap/dist/js/bootstrap.min.js',
             '<%= vendors %>/select2/select2.min.js',
             '<%= vendors %>/store.js/store.js',
-            '<%= vendors %>/keymage/keymage.js',
+            '<%= vendors %>/haroopad-keymage/keymage.min.js',
             '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
             '<%= vendors %>/requirejs/require.min.js'
           ]
@@ -278,6 +278,10 @@ module.exports = function(grunt) {
 
           '<%= vendors %>/requirejs/require.min.js': [ 
             '<%= vendors %>/requirejs/require.js' 
+          ],
+
+          '<%= vendors %>/haroopad-keymage/keymage.min.js': [ 
+            '<%= vendors %>/haroopad-keymage/keymage.js' 
           ],
 
           /* pad */

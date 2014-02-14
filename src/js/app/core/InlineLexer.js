@@ -8,7 +8,9 @@ define([
 
     var customRules = {
         stronghighlight: /^==([^=]+)==/,
-        underline: /^_([^_]+)_/
+        underline: /^\+\+([\s\S]+)\+\+(?!\+)/,
+        sup: /^\^([\S]+?)\^(?!\^)/,
+        sub: /^\~([\S]+?)\~(?!\~)/
     };
 
     var inlineMathRegEx = /^ *(split)([\s\S]*?[^\$])\1(?!\$)/;

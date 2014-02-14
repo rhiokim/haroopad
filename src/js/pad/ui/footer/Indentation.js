@@ -36,7 +36,7 @@ define(function() {
 		},
 
 		toggleIndentUsingTab: function(e) {
-			var target = $(e.target);
+			var target = this.$('a[data-using-tab]');
 			var use = target.hasClass('active');
 
 			use = !use;

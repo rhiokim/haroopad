@@ -1,7 +1,6 @@
 define([
-		'keyboard'
 	],
-	function(HotKey) {
+	function() {
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
 
@@ -171,30 +170,30 @@ define([
 			nw.editor.refresh();
 		}
 
-		HotKey('defmod-alt-1', function() {
+		keymage('defmod-alt-1', function() {
 			window.ee.emit('view.reset.mode');
 		});
-		HotKey('ctrl-\\', function() {
+		keymage('ctrl-\\', function() {
 			window.ee.emit('view.reset.mode');
 		});
-		HotKey('defmod-alt-2', function() {
+		keymage('defmod-alt-2', function() {
 			setLayout('reverse');
 		});
-		HotKey('defmod-alt-3', function() {
+		keymage('defmod-alt-3', function() {
 			setLayout('editor');
 		});
-		HotKey('defmod-alt-4', function() {
+		keymage('defmod-alt-4', function() {
 			setLayout('viewer');
 		});
 
-		HotKey('shift-ctrl-]', function() {
+		keymage('shift-ctrl-]', function() {
 			if (_layout == 'layout0') {
 				setLayout('editor');	
 			} else if (_layout == 'layout3') {
 				window.ee.emit('view.reset.mode');
 			}
 		});
-		HotKey('shift-ctrl-[', function() {
+		keymage('shift-ctrl-[', function() {
 			if (_layout == 'layout2') {
 				window.ee.emit('view.reset.mode');
 			} else if (_layout == 'layout0') {
@@ -202,10 +201,10 @@ define([
 			}
 		});
 
-		HotKey('ctrl-alt-]', function() {
+		keymage('ctrl-alt-]', function() {
 			window.ee.emit('view.minus5.width');
 		});
-		HotKey('ctrl-alt-[', function() {
+		keymage('ctrl-alt-[', function() {
 			window.ee.emit('view.plus5.width');
 		});
 

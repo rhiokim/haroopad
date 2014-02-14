@@ -123,9 +123,9 @@ global.THEMES.viewer = ['clearness', 'clearness-dark', 'node-dark', 'github', 'h
 ];
 global.THEMES.code = ['default', 'arta', 'ascetic', 'atelier-dune.dark', 'atelier-dune.light',
   'atelier-forest.dark', 'atelier-forest.light', 'atelier-heath.dark', 'atelier-heath.light',
-  'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-seaside.dark', 'atelier-seaside.dark',
-  'brown_paper', 'brown_papersq', 'docco', 'far', 'foundation', 'github', 'googlecode', 'idea',
-  'ir_black', 'magula', 'mono-blue', 'monokai_sublime', 'obsidian', 'paraiso.dark', 'paraiso.light',
+  'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-seaside.dark', 'atelier-seaside.light',
+  'brown_paper', 'dark', 'docco', 'far', 'foundation', 'github', 'googlecode', 'idea',
+  'ir_black', 'magula', 'mono-blue', 'monokai', 'monokai_sublime', 'obsidian', 'paraiso.dark', 'paraiso.light',
   'pojoaque', 'railscasts', 'rainbow', 'school_book', 'solarized_dark', 'solarized_light', 'sunburst',
   'tomorrow-night-blue', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night',
   'tomorrow', 'vs', 'xcode', 'zenburn'
