@@ -24,5 +24,8 @@
   "deploy": {
     "docs": "../baas.io-Portal/_documentation/_docs/ko/javascript/reference",
     "sdk": "../baas.io-Portal/_documentation/_docs/sdk/javascript/"
+  },
+  "dependencies": {
+    "text-statistics": "~0.1.1"
   }
 }
