@@ -71,13 +71,22 @@ function _fixImagePath() {
 function update(contents) {
   //unregister previous anchor click event handler
   $('a').off('click', '**');
-  $(document.body).html(contents);
+  $('#content').html(contents);
 
   $('img').on('error', function() {
     $(this).attr('src', './img/noimage.gif');
   });
   _fixImagePath();
   // createTOC();
+}
+
+function updateStatistics(stats) {
+  $('li#readingEase').html("Reading Ease: " + stats.fleschKincaidReadingEase());
+  $('li#gradeLevel').html("Grade: " + stats.fleschKincaidGradeLevel());
+  $('li#fogScore').html("Fog Score: " + stats.gunningFogScore());
+  $('li#colemanIndex').html("Coleman Index: " + stats.colemanLiauIndex());
+  $('li#smogIndex').html("Smog Index: " + stats.smogIndex());
+  $('li#readabilityIndex').html("Readability Index: " + stats.automatedReadabilityIndex());
 }
 
 /**
