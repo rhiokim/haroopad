@@ -115,6 +115,17 @@ describe('base', function () {
     );
   });
 
+  it("should overwrite arguments when given the 'resolve' conflictHandler", function () {
+    parser = new ArgumentParser({conflictHandler: 'resolve'});
+
+    parser.addArgument(['--foo'], {help: 'old foo'});
+    parser.addArgument(['--foo'], {help: 'new foo'});
+
+    var help = parser._optionStringActions['--foo'].help;
+
+    assert.equal(help, 'new foo');
+  });
+
   it("should parse negative arguments", function () {
     parser = new ArgumentParser({debug: true});
     parser.addArgument(['-f', '--foo']);
