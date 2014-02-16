@@ -65,7 +65,6 @@ define([
 			var cur = cm.getCursor();
 			var token = cm.getTokenAt(cur);
 			var md = token.string;
-			var doc = cm.getDoc();
 
 			switch(md) {
 			  case '##':
@@ -79,6 +78,7 @@ define([
 			    cm.replaceSelection('[Header]');
 			  break;
 			  case '**':
+			  case '++':
 			  case '~~':
 			  case '==':
 			  case '$$$':
