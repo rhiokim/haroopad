@@ -71,6 +71,7 @@ i18n.init({
       doc = opt.doc;
 
       Editor.setValue(opt.markdown);
+      Editor.getDoc().clearHistory();
       Viewer.init();
 
       file.doc.trigger('change:html', doc, doc.html());
