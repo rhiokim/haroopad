@@ -2,6 +2,7 @@
  * i18n data preloader
  */
 ;(function() {
+	var fs = require('fs');
 	var path = require('path');
 
 	var G = global;

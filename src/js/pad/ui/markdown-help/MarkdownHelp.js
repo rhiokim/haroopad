@@ -88,7 +88,7 @@ define([
 
 		view = new View;
 
-		keymage('defmod-shift-h', function() {
+		keymage(__key('show-markdown-help'), function() {
 			window.ee.emit('toggle.syntax.help');
 		});
 

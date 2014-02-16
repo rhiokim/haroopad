@@ -33,7 +33,7 @@ define([
 			}
 		});
 
-		keymage('defmod-shift-e', function() {
+		keymage(__key('send-email'), function() {
 			window.ee.emit('menu.file.send.email');
 		});
 

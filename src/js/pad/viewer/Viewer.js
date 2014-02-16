@@ -192,11 +192,11 @@ define([
 			changeFontSize(viewerConfig.fontSize);
 		});
 
-		keymage('defmod-p', function() {
+		keymage(__key('print'), function() {
 			window.ee.emit('print.viewer');
 		});
 
-		keymage('defmod-alt-c', function() {
+		keymage(__key('copy-to-clipboard'), function() {
 			window.ee.emit('menu.file.exports.clipboard.plain');
 		});
 
@@ -204,11 +204,11 @@ define([
 		// 	window.ee.emit('menu.file.exports.clipboard.haroopad');
 		// });
 
-		keymage('defmod-shift-.', function() {
+		keymage(__key('viewer-font-size-up'), function() {
 			window.ee.emit('menu.view.viewer.font.size', 1);
 		});
 
-		keymage('defmod-shift-,', function() {
+		keymage(__key('viewer-font-size-down'), function() {
 			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
 

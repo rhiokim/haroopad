@@ -232,15 +232,15 @@ define([
 		// TODO print after popup window
 	});
 
-	keymage('defmod-enter', function() {
+	keymage(__key('enter-fullscreen'), function() {
 		window.ee.emit('view.fullscreen');
 	}, { preventDefault: true });
 
-	keymage('defmod-f11', function() {
+	keymage(__key('enter-fullscreen-win'), function() {
 		window.ee.emit('view.fullscreen');
 	}, { preventDefault: true });
 
-	keymage('esc esc', function() {
+	keymage(__key('escape-fullscreen'), function() {
 		if (win.isFullscreen) {
 			win.leaveFullscreen();
 			config.isFullscreen = win.isFullscreen;
@@ -248,38 +248,46 @@ define([
 		}
 	});
 
-	keymage('defmod-o', function() {
+	keymage(__key('open'), function() {
 		window.ee.emit('menu.file.open');
 	}, { preventDefault: true });
 
-	keymage('defmod-s', function() {
+	keymage(__key('save'), function() {
 		window.ee.emit('menu.file.save');
 	}, { preventDefault: true });
 
-	keymage('defmod-shift-s', function() {
+	keymage(__key('save-as'), function() {
 		window.ee.emit('menu.file.save.as');
 	}, { preventDefault: true });
 
-	keymage('defmod-w', function() {
+	keymage(__key('close'), function() {
 		nw.emit('close');
 	}, { preventDefault: true });
 
-	keymage('defmod-f4', function() {
+	keymage(__key('close-win'), function() {
 		nw.emit('close');
 	}, { preventDefault: true });
 
-	keymage('defmod-alt-e', function() {
+	keymage(__key('export-html'), function() {
 		window.ee.emit('file.exports.html');
 
 		global._gaq.push('haroopad.file', 'exports', 'html');
 	}, { preventDefault: true });
 
-	keymage('defmod-q', function() {
+	keymage(__key('exit'), function() {
 		var generalOpt = store.get('General');
 		if (generalOpt.enableLastFileRestore === false) {
 			window.parent.ee.emit('clear.lastfiles');
 		}
 	}, { preventDefault: true });
+
+  keymage(__key('toggle-line-number'), function() {
+    window.ee.emit('show.toggle.linenum');
+  });
+
+  keymage(__key('toggle-vim-key-binding'), function() {
+    window.ee.emit('toggle.vim.keybind');
+  });
 
 	window.ondragover = function(e) {
 		e.preventDefault();

@@ -170,30 +170,30 @@ define([
 			nw.editor.refresh();
 		}
 
-		keymage('defmod-alt-1', function() {
+		keymage(__key('perspective-edit-view'), function() {
 			window.ee.emit('view.reset.mode');
 		});
-		keymage('ctrl-\\', function() {
+		keymage(__key('perspective-set-default'), function() {
 			window.ee.emit('view.reset.mode');
 		});
-		keymage('defmod-alt-2', function() {
+		keymage(__key('perspective-view-edit'), function() {
 			setLayout('reverse');
 		});
-		keymage('defmod-alt-3', function() {
+		keymage(__key('perspective-only-edit'), function() {
 			setLayout('editor');
 		});
-		keymage('defmod-alt-4', function() {
+		keymage(__key('perspective-only-view'), function() {
 			setLayout('viewer');
 		});
 
-		keymage('shift-ctrl-]', function() {
+		keymage(__key('perspective-move-right'), function() {
 			if (_layout == 'layout0') {
 				setLayout('editor');	
 			} else if (_layout == 'layout3') {
 				window.ee.emit('view.reset.mode');
 			}
 		});
-		keymage('shift-ctrl-[', function() {
+		keymage(__key('perspective-move-left'), function() {
 			if (_layout == 'layout2') {
 				window.ee.emit('view.reset.mode');
 			} else if (_layout == 'layout0') {
@@ -201,10 +201,10 @@ define([
 			}
 		});
 
-		keymage('ctrl-alt-]', function() {
+		keymage(__key('perspective-minus-view'), function() {
 			window.ee.emit('view.minus5.width');
 		});
-		keymage('ctrl-alt-[', function() {
+		keymage(__key('perspective-plus-view'), function() {
 			window.ee.emit('view.plus5.width');
 		});
 

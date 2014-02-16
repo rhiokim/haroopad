@@ -233,22 +233,8 @@ define([
     WindowMgr.open(file);
   });
   window.ee.on('menu.help.syntax', function() {
-    // var file = File.open(pathDocs +'/syntax.md');
-    //     file.set('readOnly', true);
-    // WindowMgr.open(file);
-    
     WindowMgr.actived.window.ee.emit('menu.help.syntax');
   });
-  // window.ee.on('menu.help.acknowledgements', function() {
-  //   var file = File.open(pathDocs +'/../acknowledgements.md');
-  //       file.set('readOnly', true);
-  //   WindowMgr.open(file);
-  // });
-  // window.ee.on('menu.help.shortcut', function() {
-  //   var file = File.open(pathDocs +'/shortcut.md');
-  //       file.set('readOnly', true);
-  //   WindowMgr.open(file);
-  // });
 
   window.ee.on('exit', function() {
     gui.App.quit();
@@ -314,47 +300,17 @@ define([
     WindowMgr.actived.window.ee.emit('up.to.date.haroopad', currVersion);
   });
 
-  keymage('defmod-n', function() {
+  keymage(__key('new-window'), function() {
     WindowMgr.open();
   });
 
-  // keymage('defmod-o', function() {
-  //   window.ee.emit('menu.file.open');
-  // });
-
-  // keymage('defmod-s', function() {
-  //   WindowMgr.actived.window.ee.emit('file.save');
-  // });
-
-  // keymage('defmod-shift-s', function() {
-  //   WindowMgr.actived.window.ee.emit('file.save.as');
-  // });
-
-  keymage('defmod-q', function() {
+  keymage(__key('exit'), function() {
     gui.App.quit();
   });
 
-  /**
-   * function shortcut
-   * @return {[type]} [description]
-   */
-
-  keymage('defmod-shift-l', function() {
-    WindowMgr.actived.window.ee.emit('show.toggle.linenum');
-  });
-
-  keymage('defmod-alt-v', function() {
-    WindowMgr.actived.window.ee.emit('toggle.vim.keybind');
-  });
-
-  keymage('defmod-,', function() {
+  keymage(__key('show-preference'), function() {
     Preferences.show();
   });
-
-  //window, linux specify doc path error
-  // keymage('shift-ctrl-space', function() {
-  //   window.ee.emit('menu.help.shortcut');
-  // });
 
   File.loadTemporary();
 });

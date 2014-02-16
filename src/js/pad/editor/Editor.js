@@ -423,15 +423,14 @@ define([
 			editor.setOption('readOnly', true);
 		}
 
-
-		window.onresize = function() {
+		window.addEventListener('resize', function(e) {
 			CodeMirrorGutters.style.height = '5000px';
-		}
+		});
 
-		keymage('defmod-alt-.', function() {
+		keymage(__key('editor-font-size-up'), function() {
 			window.ee.emit('menu.view.editor.font.size', 1);
 		});
-		keymage('defmod-alt-,', function() {
+		keymage(__key('editor-font-size-down'), function() {
 			window.ee.emit('menu.view.editor.font.size', -1);
 		});
 
@@ -454,28 +453,28 @@ define([
 		// 	window.ee.emit('menu.insert.markdown', 'h6');
 		// });
 
-		keymage('shift-ctrl-1', function() {
+		keymage(__key('insert-date-l'), function() {
 			window.ee.emit('insert.date', 'l');
 		});
-		keymage('shift-ctrl-2', function() {
+		keymage(__key('insert-date-L'), function() {
 			window.ee.emit('insert.date', 'L');
 		});
-		keymage('shift-ctrl-3', function() {
+		keymage(__key('insert-date-ll'), function() {
 			window.ee.emit('insert.date', 'll');
 		});
-		keymage('shift-ctrl-4', function() {
+		keymage(__key('insert-date-LL'), function() {
 			window.ee.emit('insert.date', 'LL');
 		});
-		keymage('shift-ctrl-5', function() {
+		keymage(__key('insert-date-lll'), function() {
 			window.ee.emit('insert.date', 'lll');
 		});
-		keymage('shift-ctrl-6', function() {
+		keymage(__key('insert-date-LLL'), function() {
 			window.ee.emit('insert.date', 'LLL');
 		});
-		keymage('shift-ctrl-7', function() {
+		keymage(__key('insert-date-llll'), function() {
 			window.ee.emit('insert.date', 'llll');
 		});
-		keymage('shift-ctrl-8', function() {
+		keymage(__key('insert-date-LLLL'), function() {
 			window.ee.emit('insert.date', 'LLLL');
 		});
 
