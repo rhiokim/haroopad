@@ -18,9 +18,7 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    txt: '../vendors/text/text',
-    store: '../vendors/store.js/store',
-    keyboard: '../vendors/keymage/keymage'
+    txt: '../vendors/text/text'
   },
   config: {
     text: {
@@ -73,6 +71,7 @@ i18n.init({
       doc = opt.doc;
 
       Editor.setValue(opt.markdown);
+      Editor.getDoc().clearHistory();
       Viewer.init();
 
       file.doc.trigger('change:html', doc, doc.html());

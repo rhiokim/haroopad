@@ -78,18 +78,18 @@
             </a>
           </li>
           <li>
+            <a href="#keymap-tab" data-toggle="tab">
+              <span data-i18n="tab.keymap">Keymap</span>
+              <span class="label label-danger">!</span>
+            </a>
+          </li>
+          <li>
             <a href="#backup-tab" data-toggle="tab">
               <span data-i18n="tab.backup">Backup</span>
               <span class="label label-danger">!</span>
             </a>
           </li>
           <!--li>
-            <a href="#keymap-tab" data-toggle="tab">
-              <span class="badge pull-right">3</span>
-              <span data-i18n="tab.keymap">Keymap</span>
-            </a>
-          </li>
-          <li>
             <a href="#addon-tab" data-toggle="tab">
               <span class="badge pull-right">3</span>
               <span data-i18n="tab.addon">Addon</span>
@@ -271,17 +271,17 @@
 
                   <div class="btn-group dropdown">
                     <a class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-                      <i class="icon-share-alt"></i> <span data-i18n="editor.spaces">Spaces</span>
+                      <i class="glyphicon glyphicon-share-alt"></i> <span data-i18n="editor.spaces">Spaces</span>
                       <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a tabindex="1" href="#" data-tab-size="2" class="active"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 2</a></li>
-                      <li><a tabindex="2" href="#" data-tab-size="3"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 3</a></li>
-                      <li><a tabindex="3" href="#" data-tab-size="4"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 4</a></li>
-                      <li><a tabindex="4" href="#" data-tab-size="5"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 5</a></li>
-                      <li><a tabindex="5" href="#" data-tab-size="6"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 6</a></li>
-                      <li><a tabindex="6" href="#" data-tab-size="7"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 7</a></li>
-                      <li><a tabindex="7" href="#" data-tab-size="8"><i class="icon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 8</a></li>
+                      <li><a tabindex="1" href="#" data-tab-size="2" class="active"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 2</a></li>
+                      <li><a tabindex="2" href="#" data-tab-size="3"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 3</a></li>
+                      <li><a tabindex="3" href="#" data-tab-size="4"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 4</a></li>
+                      <li><a tabindex="4" href="#" data-tab-size="5"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 5</a></li>
+                      <li><a tabindex="5" href="#" data-tab-size="6"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 6</a></li>
+                      <li><a tabindex="6" href="#" data-tab-size="7"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 7</a></li>
+                      <li><a tabindex="7" href="#" data-tab-size="8"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 8</a></li>
                     </ul>
                   </div>
                 </label>
@@ -480,6 +480,17 @@
                   <input type="checkbox" value="" name="mathjax">
                   <span data-i18n="markdown.enable-math">Use Mathematics Expression</span> [<a href="http://mathjax.org">?</a>]
                 </label>
+
+
+                <h5 data-i18n="markdown.math">Math Expression options</h5>
+                <label class="checkbox">
+                  <input type="checkbox" value="" name="mathjax">
+                  <span data-i18n="markdown.enable-math">Use Mathematics Expression</span> [<a href="http://mathjax.org">?</a>]
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" value="" name="dollarSign">
+                  <span data-i18n="markdown.enable-dollar-sign">Use $ Sign for Inline Expression</span>
+                </label>
               </p>
             </div>
 
@@ -519,121 +530,89 @@
             </div>
             <div class="panel-body">
               <h5>File</h5>
-              <table class="table">
+              <table class="table table-bordered table-condensed">
                 <thead>
                   <tr>
-                    <th width="120">Shortcut</th>
                     <th>Action</th>
+                    <th width="120">Shortcut</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>&#8984;(^) - N</td>
                     <td>New Window</td>
+                    <td>&#8984;(^) - N</td>
                   </tr>
                   <tr>
+                    <td>Save File</td>
                     <td>2</td>
-                    <td>Jacob</td>
                   </tr>
                   <tr>
+                    <td>Save As File</td>
                     <td>3</td>
-                    <td>Larry</td>
                   </tr>
                 </tbody>
               </table>
 
               <h5>View</h5>
-              <table class="table">
+              <table class="table table-bordered table-condensed">
                 <thead>
                   <tr>
-                    <th width="120">Shortcut</th>
                     <th>Action</th>
+                    <th width="120">Shortcut</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>&#8984;(^) - N</td>
                     <td>New Window</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry</td>
+                    <td>&#8984;(^) - N</td>
                   </tr>
                 </tbody>
               </table>
 
               <h5>Find</h5>
-              <table class="table">
+              <table class="table table-bordered table-condensed">
                 <thead>
                   <tr>
-                    <th width="120">Shortcut</th>
                     <th>Action</th>
+                    <th width="120">Shortcut</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>&#8984;(^) - N</td>
                     <td>New Window</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry</td>
+                    <td>&#8984;(^) - N</td>
                   </tr>
                 </tbody>
               </table>
 
               <h5>Insert</h5>
-              <table class="table">
+              <table class="table table-bordered table-condensed">
                 <thead>
                   <tr>
-                    <th width="120">Shortcut</th>
                     <th>Action</th>
+                    <th width="120">Shortcut</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>&#8984;(^) - N</td>
                     <td>New Window</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry</td>
+                    <td>&#8984;(^) - N</td>
                   </tr>
                 </tbody>
               </table>
 
               <h5>Markdown</h5>
-              <table class="table">
+              <table class="table table-bordered table-condensed">
                 <thead>
                   <tr>
-                    <th width="120">Shortcut</th>
                     <th>Action</th>
+                    <th width="120">Shortcut</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>&#8984;(^) - N</td>
                     <td>New Window</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry</td>
+                    <td>&#8984;(^) - N</td>
                   </tr>
                 </tbody>
               </table>

@@ -1,5 +1,4 @@
 define([
-		'keyboard',
     'window/Window.opt',
     'window/WindowManager',
     'window/Window.preferences',
@@ -7,7 +6,7 @@ define([
     'window/Window.dragdrop',
     'file/File',
     'file/Recents'
-], function(HotKey, Options, WindowMgr, /*Help,*/ Preferences, /*Presentation,*/ DragDrop, File, Recents) {
+], function(Options, WindowMgr, /*Help,*/ Preferences, /*Presentation,*/ DragDrop, File, Recents) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get(),
 		subWin;
@@ -234,22 +233,8 @@ define([
     WindowMgr.open(file);
   });
   window.ee.on('menu.help.syntax', function() {
-    // var file = File.open(pathDocs +'/syntax.md');
-    //     file.set('readOnly', true);
-    // WindowMgr.open(file);
-    
     WindowMgr.actived.window.ee.emit('menu.help.syntax');
   });
-  // window.ee.on('menu.help.acknowledgements', function() {
-  //   var file = File.open(pathDocs +'/../acknowledgements.md');
-  //       file.set('readOnly', true);
-  //   WindowMgr.open(file);
-  // });
-  // window.ee.on('menu.help.shortcut', function() {
-  //   var file = File.open(pathDocs +'/shortcut.md');
-  //       file.set('readOnly', true);
-  //   WindowMgr.open(file);
-  // });
 
   window.ee.on('exit', function() {
     gui.App.quit();
@@ -315,47 +300,17 @@ define([
     WindowMgr.actived.window.ee.emit('up.to.date.haroopad', currVersion);
   });
 
-  HotKey('defmod-n', function() {
+  keymage(__key('new-window'), function() {
     WindowMgr.open();
   });
 
-  // HotKey('defmod-o', function() {
-  //   window.ee.emit('menu.file.open');
-  // });
-
-  // HotKey('defmod-s', function() {
-  //   WindowMgr.actived.window.ee.emit('file.save');
-  // });
-
-  // HotKey('defmod-shift-s', function() {
-  //   WindowMgr.actived.window.ee.emit('file.save.as');
-  // });
-
-  HotKey('defmod-q', function() {
+  keymage(__key('exit'), function() {
     gui.App.quit();
   });
 
-  /**
-   * function shortcut
-   * @return {[type]} [description]
-   */
-
-  HotKey('defmod-shift-l', function() {
-    WindowMgr.actived.window.ee.emit('show.toggle.linenum');
-  });
-
-  HotKey('defmod-alt-v', function() {
-    WindowMgr.actived.window.ee.emit('toggle.vim.keybind');
-  });
-
-  HotKey('defmod-,', function() {
+  keymage(__key('show-preference'), function() {
     Preferences.show();
   });
-
-  //window, linux specify doc path error
-  // HotKey('shift-ctrl-space', function() {
-  //   window.ee.emit('menu.help.shortcut');
-  // });
 
   File.loadTemporary();
 });

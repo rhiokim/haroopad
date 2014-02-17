@@ -1,7 +1,7 @@
 define([
 		'text!tpl/modal-shortcuts.html'
 	], 
-	function(html, HotKey) {
+	function(html) {
 		$('#dialogs').append(html);
 		
 		loadCss('css/keys.css');

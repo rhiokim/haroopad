@@ -1,6 +1,5 @@
 define([
-	'store'
-	],function(store) {
+	],function() {
 	// var shell = gui.Shell;
 	
 	var _cookie = store.get('_time') || { donate : 0};

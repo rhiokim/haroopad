@@ -1,12 +1,9 @@
 define([
-		// 'editor/Parser',
-		'keyboard',
-		'store',
 		'editor/Editor.keymap',
 		'editor/Editor.drop',
 		'editor/Editor.custom'
 	],
-	function(HotKey, store, Keymap, Drop) {
+	function(Keymap, Drop) {
 		var moment = require('moment');
 
 		var gui = require('nw.gui'),
@@ -164,7 +161,6 @@ define([
 
 
 		/* change theme */
-
 		function changeTheme(value) {
 			editor.setOption('theme', value);
 
@@ -172,7 +168,6 @@ define([
 		}
 
 		/* change font size */
-
 		function changeFontSize(value) {
 			setFontSize(value);
 
@@ -180,7 +175,6 @@ define([
 		}
 
 		/* toggle line number */
-
 		function toggleLineNumber(value) {
 			editor.setOption('lineNumbers', value);
 
@@ -188,15 +182,20 @@ define([
 		}
 
 		/* toggle active line */
-
 		function toggleActiveLine(value) {
 			editor.setOption('styleActiveLine', value);
 
 			global._gaq.push('haroopad.preferences', 'editor', 'activeLine: ' + value);
 		}
 
-		/* toggle vim key binding */
+		/* toggle indent with tab */
+		function toggleIndentWithTab(value) {
+			editor.setOption('indentWithTabs', value);
 
+			global._gaq.push('haroopad.preferences', 'editor', 'indent with tab: ' + value);
+		}
+
+		/* toggle vim key binding */
 		function toggleVim(value) {
 			editor.setOption('keyMap', value ? 'vim' : 'default');
 
@@ -204,7 +203,6 @@ define([
 		}
 
 		/* toggle auto pair char */
-
 		function toggleAutoPairChar(value) {
 			editor.setOption('autoCloseBrackets', value);
 
@@ -212,7 +210,6 @@ define([
 		}
 
 		/* toggle sync scroll */
-
 		function toggleSyncScroll(value) {
 			if (value) {
 				editor.on('scroll', syncScrollHandler);
@@ -234,6 +231,7 @@ define([
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', config.tabSize || 4);
 		editor.setOption('indentUnit', config.indentUnit || 4);
+		editor.setOption('indentWithTabs', config.indentWithTabs || false);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
 		toggleAutoComplete(generalConf.enableAutoComplete || false);
@@ -248,16 +246,20 @@ define([
 		window.parent.ee.on('preferences.editor.displayActiveLine', toggleActiveLine);
 		window.parent.ee.on('preferences.editor.vimKeyBinding', toggleVim);
 		window.parent.ee.on('preferences.editor.autoPairCharacters', toggleAutoPairChar);
+		window.parent.ee.on('preferences.editor.indentWithTabs', toggleIndentWithTab);
 		window.parent.ee.on('preferences.editor.fontSize', changeFontSize);
 
 		nw.on('destroy', function() {
 			window.parent.ee.off('preferences.general.enableSyncScroll', toggleSyncScroll);
+			window.parent.ee.off('preferences.general.enableAutoComplete', toggleAutoComplete);
 
 			window.parent.ee.off('preferences.editor.theme', changeTheme);
 			window.parent.ee.off('preferences.editor.displayLineNumber', toggleLineNumber);
 			window.parent.ee.off('preferences.editor.displayActiveLine', toggleActiveLine);
 			window.parent.ee.off('preferences.editor.vimKeyBinding', toggleVim);
 			window.parent.ee.off('preferences.editor.autoPairCharacters', toggleAutoPairChar);
+			window.parent.ee.off('preferences.editor.indentWithTabs', toggleIndentWithTab);
+			window.parent.ee.off('preferences.editor.fontSize', changeFontSize);
 		});
 
 		/* change theme by context menu */
@@ -421,59 +423,58 @@ define([
 			editor.setOption('readOnly', true);
 		}
 
-
-		window.onresize = function() {
+		window.addEventListener('resize', function(e) {
 			CodeMirrorGutters.style.height = '5000px';
-		}
+		});
 
-		HotKey('defmod-alt-.', function() {
+		keymage(__key('editor-font-size-up'), function() {
 			window.ee.emit('menu.view.editor.font.size', 1);
 		});
-		HotKey('defmod-alt-,', function() {
+		keymage(__key('editor-font-size-down'), function() {
 			window.ee.emit('menu.view.editor.font.size', -1);
 		});
 
-		// HotKey('defmod-1', function() {
+		// keymage('defmod-1', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h1');
 		// });
-		// HotKey('defmod-2', function() {
+		// keymage('defmod-2', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h2');
 		// });
-		// HotKey('defmod-3', function() {
+		// keymage('defmod-3', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h3');
 		// });
-		// HotKey('defmod-4', function() {
+		// keymage('defmod-4', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h4');
 		// });
-		// HotKey('defmod-5', function() {
+		// keymage('defmod-5', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h5');
 		// });
-		// HotKey('defmod-6', function() {
+		// keymage('defmod-6', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h6');
 		// });
 
-		HotKey('shift-ctrl-1', function() {
+		keymage(__key('insert-date-l'), function() {
 			window.ee.emit('insert.date', 'l');
 		});
-		HotKey('shift-ctrl-2', function() {
+		keymage(__key('insert-date-L'), function() {
 			window.ee.emit('insert.date', 'L');
 		});
-		HotKey('shift-ctrl-3', function() {
+		keymage(__key('insert-date-ll'), function() {
 			window.ee.emit('insert.date', 'll');
 		});
-		HotKey('shift-ctrl-4', function() {
+		keymage(__key('insert-date-LL'), function() {
 			window.ee.emit('insert.date', 'LL');
 		});
-		HotKey('shift-ctrl-5', function() {
+		keymage(__key('insert-date-lll'), function() {
 			window.ee.emit('insert.date', 'lll');
 		});
-		HotKey('shift-ctrl-6', function() {
+		keymage(__key('insert-date-LLL'), function() {
 			window.ee.emit('insert.date', 'LLL');
 		});
-		HotKey('shift-ctrl-7', function() {
+		keymage(__key('insert-date-llll'), function() {
 			window.ee.emit('insert.date', 'llll');
 		});
-		HotKey('shift-ctrl-8', function() {
+		keymage(__key('insert-date-LLLL'), function() {
 			window.ee.emit('insert.date', 'LLLL');
 		});
 

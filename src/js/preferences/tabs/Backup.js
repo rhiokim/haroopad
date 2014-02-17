@@ -62,6 +62,7 @@ define([
       delete config.Window;
       delete config.Helper;
       delete config.Markdown.gfm;
+      delete config.Markdown.emoji;
       delete config.Markdown.highlight;
       delete config.Markdown.langPrefix;
       delete config.Markdown.headerPrefix;

@@ -1,9 +1,7 @@
 define([
-	'store',
-	'keyboard',
 	'ui/dialog/Dialogs',
 	'ui/exports/Exports'
-], function(store, HotKey, Dialogs, Exports) {
+], function(Dialogs, Exports) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
 	var moment = require('moment');
@@ -234,15 +232,15 @@ define([
 		// TODO print after popup window
 	});
 
-	HotKey('defmod-enter', function() {
+	keymage(__key('enter-fullscreen'), function() {
 		window.ee.emit('view.fullscreen');
 	}, { preventDefault: true });
 
-	HotKey('defmod-f11', function() {
+	keymage(__key('enter-fullscreen-win'), function() {
 		window.ee.emit('view.fullscreen');
 	}, { preventDefault: true });
 
-	HotKey('esc esc', function() {
+	keymage(__key('escape-fullscreen'), function() {
 		if (win.isFullscreen) {
 			win.leaveFullscreen();
 			config.isFullscreen = win.isFullscreen;
@@ -250,38 +248,46 @@ define([
 		}
 	});
 
-	HotKey('defmod-o', function() {
+	keymage(__key('open'), function() {
 		window.ee.emit('menu.file.open');
 	}, { preventDefault: true });
 
-	HotKey('defmod-s', function() {
+	keymage(__key('save'), function() {
 		window.ee.emit('menu.file.save');
 	}, { preventDefault: true });
 
-	HotKey('defmod-shift-s', function() {
+	keymage(__key('save-as'), function() {
 		window.ee.emit('menu.file.save.as');
 	}, { preventDefault: true });
 
-	HotKey('defmod-w', function() {
+	keymage(__key('close'), function() {
 		nw.emit('close');
 	}, { preventDefault: true });
 
-	HotKey('defmod-f4', function() {
+	keymage(__key('close-win'), function() {
 		nw.emit('close');
 	}, { preventDefault: true });
 
-	HotKey('defmod-alt-e', function() {
+	keymage(__key('export-html'), function() {
 		window.ee.emit('file.exports.html');
 
 		global._gaq.push('haroopad.file', 'exports', 'html');
 	}, { preventDefault: true });
 
-	HotKey('defmod-q', function() {
+	keymage(__key('exit'), function() {
 		var generalOpt = store.get('General');
 		if (generalOpt.enableLastFileRestore === false) {
 			window.parent.ee.emit('clear.lastfiles');
 		}
 	}, { preventDefault: true });
+
+  keymage(__key('toggle-line-number'), function() {
+    window.ee.emit('show.toggle.linenum');
+  });
+
+  keymage(__key('toggle-vim-key-binding'), function() {
+    window.ee.emit('toggle.vim.keybind');
+  });
 
 	window.ondragover = function(e) {
 		e.preventDefault();

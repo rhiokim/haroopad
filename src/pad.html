@@ -3,17 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <title>Haroopad - The next document processor</title>
-  
-<!-- for develop -->
-  <script src="js/vendors/keymage/keymage.js"></script>
-  <script>
-    keymage('defmod-shift-j', function() {
-      var gui = require("nw.gui");
-      var win = gui.Window.get();
-      win.showDevTools();
-    });
-  </script>
-<!-- for develop -->
 
   <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans:bold"/> -->
   <!-- Included CSS Files (Compressed) -->
@@ -74,6 +63,7 @@
   <script src="js/vendors/backbone/backbone.js"></script>
   <script src="js/vendors/todc-bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="js/vendors/store.js/store.js"></script>
+  <script src="js/vendors/haroopad-keymage/keymage.js"></script>
   <script src="js/vendors/haroopad-reMarked.js/reMarked.js"></script>
   <script src="js/vendors/haroopad-notifer.js/notifier.js"></script>
   <script src="js/vendors/i18next/release/i18next-1.7.1.js"></script>
@@ -130,6 +120,16 @@
   <script src="js/vendors/CodeMirror/mode/php/php.js"></script>
   <script src="js/vendors/CodeMirror/mode/perl/perl.js"></script>
   <script src="js/vendors/CodeMirror/keymap/vim.js"></script>
+  
+  <!-- for develop -->
+    <script>
+      keymage('defmod-shift-j', function() {
+        var gui = require("nw.gui");
+        var win = gui.Window.get();
+        win.showDevTools();
+      });
+    </script>
+  <!-- for develop -->
 </head>
 <body>
   <header id="editControls" class="navbar navbar-fixed-top">
