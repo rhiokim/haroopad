@@ -1,9 +1,10 @@
 define([
 		'editor/Editor.keymap',
 		'editor/Editor.drop',
+		'editor/Editor.autoComplete',
 		'editor/Editor.custom'
 	],
-	function(Keymap, Drop) {
+	function(Keymap, Drop, AutoComplete) {
 		var moment = require('moment');
 
 		var gui = require('nw.gui'),
@@ -28,7 +29,7 @@ define([
 		};
 
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-			mode: 'gfm',
+			mode: 'markdown',
 			lineNumbers: true,
 			lineWrapping: true,
 			electricChars: false,
@@ -61,66 +62,7 @@ define([
 		});
 
 		//auto completion end signal
-		CodeMirror.on(editor, 'endCompletion', function(cm) {
-			var cur = cm.getCursor();
-			var token = cm.getTokenAt(cur);
-			var md = token.string;
-
-			switch(md) {
-			  case '##':
-			  case '###':
-			  case '####':
-			  case '#####':
-			  case '######':
-			  	cm.replaceSelection(' ');
-			  	cur.ch++;
-			    cm.setCursor(cur);
-			    cm.replaceSelection('[Header]');
-			  break;
-			  case '**':
-			  case '++':
-			  case '~~':
-			  case '==':
-			  case '$$$':
-			    cm.replaceSelection(md);
-			    cm.setCursor(cur);
-			    cm.replaceSelection('      ');
-			  break;
-			  case '```':
-			    cm.replaceSelection('\n'+ md);
-			    cm.setCursor(cur);
-			    cm.replaceSelection('language');
-			  break;
-			  case '$$':
-			    cm.replaceSelection('\n\n'+ md);
-			    cur.line++;
-			    cm.setCursor(cur);
-			  break;
-			  case '()':
-			    cur.ch--;
-			    cm.setCursor(cur);
-			    cm.replaceSelection('      ');
-			  break;
-			  case '* * *':
-			  case '*****':
-			  case '- - -':
-			  case '-----':
-			  case '_ _ _':
-			  case '_____':
-			  	cur.ch -= md.length;
-			  	cm.setCursor(cur);
-			    cm.replaceSelection('\n');
-			    cur.line += 1;
-			  	cur.ch += md.length;
-			  	cm.setCursor(cur);
-			    cm.replaceSelection('\n\n');
-			    cur.line += 2;
-			    cm.setCursor(cur);
-			  break;
-			  default:
-			  break;
-			}
-		});
+		CodeMirror.on(editor, 'endCompletion', AutoComplete);
 
 		/* initialize editor */
 		function setFontSize(value) {
