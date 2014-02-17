@@ -177,7 +177,7 @@ define([], function() {
           replaceSelection('*');
           break;
         case 'underline':
-          replaceSelection('_');
+          replaceSelection('++');
           break;
         case 'code':
           replaceSelection('`');
