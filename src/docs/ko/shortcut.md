@@ -90,7 +90,7 @@ COMMAND (CTRL) - 6               | ######            | 헤더6
 COMMAND (CTRL) - B               | \*\*Bold\*\*      | 볼드
 COMMAND (CTRL) - I                | \*Italic\*          | 이탤릭
 COMMAND (CTRL) - L               | \[link\](url)      | 링크
-COMMAND (CTRL) - Y               | \_underline\_    | 밑줄
+COMMAND (CTRL) - Y               | \+\+underline\+\+    | 밑줄
 COMMAND (CTRL) - K               | \`code\`           | 인라인 코드
 COMMAND (CTRL) - E               | @\[]()               | 임베드
 COMMAND (CTRL) - T               | [TOC]               | 목차
