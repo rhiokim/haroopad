@@ -1,9 +1,41 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <script type="text/javascript" src="../keymage.js"></script>
-    <script type="text/javascript" src="wru.dom.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+  <style type="text/css">
+#wru {
+    font-family: sans-serif;
+    font-size: 11pt;
+    border: 1px solid #333;
+}
+#wru div {
+    cursor: default;
+    padding: 0;
+    color: #000;
+}
+#wru div span,
+#wru div strong {
+    display: block;
+    padding: 4px;
+    margin: 0;
+}
+#wru div ul {
+    margin: 0;
+    padding-bottom: 4px;
+}
+#wru div.pass {
+    background: #90EE90;
+}
+#wru div.fail {
+    background: #FF6347;
+}
+#wru div.error {
+    background: #000;
+    color: #FFF;
+}
+  </style>
+  <script type="text/javascript" src="../keymage.js"></script>
 </head>
 <body>
 
@@ -12,92 +44,7 @@
   <div id="wru">
   </div>
 
-<script type="text/javascript">
-wru.node = document.getElementById('wru');
-
-var MODS = ['ctrl', 'shift', 'alt', 'meta'];
-function fire(key) {
-    var e = document.createEvent('Event');
-
-    if (typeof keystring === 'string') {
-        key = keymage.parse(key);
-    }
-
-    e.initEvent('keydown', true, true);
-    e.keyCode = key.code;
-    for (var i = 0; i < MODS.length; i++) {
-        var mod = MODS[i];
-        if (key[mod]) {
-            e[mod + 'Key'] = true;
-        }
-    }
-    document.dispatchEvent(e);
-}
-
-wru.test({
-    name: 'single shortcut',
-    test: function() {
-        var count = 0;
-        keymage('a', function() { count++; });
-
-        fire({code: 65});
-        wru.assert('pressed', count === 1);
-
-        fire({code: 65});
-        wru.assert('pressed', count === 2);
-    }});
-
-wru.test({
-    name: 'sequence',
-    test: function() {
-        var count = 0;
-        keymage('ctrl-a a', function() { count++; });
-
-        fire({code: 65, ctrl: true}); fire({code: 65});
-        wru.assert('', count === 1);
-
-        // failing attempts
-        fire({code: 65, ctrl: true}); fire({code: 66});
-        fire({code: 65, ctrl: true}); fire({code: 65, ctrl: true}); fire({code: 65});
-        wru.assert('', count === 1);
-
-        // still works
-        fire({code: 65, ctrl: true}); fire({code: 65});
-        wru.assert('', count === 2);
-    }});
-
-wru.test({
-    name: 'scopes',
-    test: function() {
-        var count = 0;
-        var handler = function() { count++; };
-        keymage('ctrl-a a', handler);
-        keymage('chat', 'ctrl-a b', handler);
-        keymage('chat.input', 'ctrl-a c', handler);
-
-        keymage.pushScope('chat');
-        fire({code: 65, ctrl: true}); fire({code: 65});
-        wru.assert('', count === 1);
-        fire({code: 65, ctrl: true}); fire({code: 66});
-        wru.assert('', count === 2);
-        fire({code: 65, ctrl: true}); fire({code: 67});
-        wru.assert('', count === 2);
-
-        keymage.pushScope('input');
-        fire({code: 65, ctrl: true}); fire({code: 67});
-        wru.assert('', count === 3);
-
-        keymage.popScope('chat');
-        fire({code: 65, ctrl: true}); fire({code: 65});
-        wru.assert('', count === 4);
-        fire({code: 65, ctrl: true}); fire({code: 66});
-        wru.assert('', count === 4);
-
-        keymage.pushScope('loading');
-        keymage.popScope();
-        wru.assert('', keymage.getScope() === '');
-    }});
-
-</script>
+<script type="text/javascript" src="wru.min.js"></script>
+<script src="test.js"></script>
 </body>
 </html>

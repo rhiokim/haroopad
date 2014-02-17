@@ -160,6 +160,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/underscore/underscore-min.js',
             '<%= vendors %>/backbone/backbone-min.js',
+            '<%= vendors %>/haroopad-keymage/keymage.min.js',
             '<%= vendors %>/store.js/store.min.js',
             '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
             '<%= vendors %>/requirejs/require.min.js'
@@ -188,6 +189,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/backbone/backbone-min.js',
             '<%= vendors %>/todc-bootstrap/dist/js/bootstrap.min.js',
             '<%= vendors %>/store.js/store.min.js',
+            '<%= vendors %>/haroopad-keymage/keymage.min.js',
             '<%= vendors %>/haroopad-reMarked.js/reMarked.min.js',
             '<%= vendors %>/haroopad-notifer.js/notifier.min.js',
             '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
@@ -339,16 +341,13 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= build %>/app.common.min.js': [
+            // 'src/js/lib/disable.debug.js',
             'src/js/lib/system.js',
             'src/js/lib/logger.js',
-            'src/js/lib/disable.debug.js',
             'src/js/lib/utils/util.js',
-            'src/js/lib/system.js',
-            'src/js/lib/logger.js',
-            'src/js/app/app.common.js',
             'src/js/lib/utils/analytics.js',
-            'src/js/lib/utils/package.info.js',
-            'src/js/lib/i18n.js'
+            'src/js/lib/i18n.js',
+            'src/js/app/app.common.js'
           ]
         }
       },

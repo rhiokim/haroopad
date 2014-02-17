@@ -4,7 +4,7 @@
 // (c) 2012 Alexander Solovyov
 // under terms of ISC License
 
-(function(define, undefined) {
+;(function(define, undefined) {
 define(function() {
     var VERSION = '1.0.1';
 
