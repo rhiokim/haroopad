@@ -1,15 +1,14 @@
 {
   "name": "haroopad-keymage",
   "homepage": "https://github.com/rhiokim/haroopad-keymage",
-  "version": "1.0.1",
-  "_release": "1.0.1",
+  "_release": "ba52da6a0d",
   "_resolution": {
-    "type": "version",
-    "tag": "1.0.1",
-    "commit": "94b1b52b673c5c2d156eabb896a96670bdcca72b"
+    "type": "branch",
+    "branch": "master",
+    "commit": "ba52da6a0dc2a5e4ff008eb32464a3aae2e96a51"
   },
   "_source": "git@github.com:rhiokim/haroopad-keymage.git",
-  "_target": "~1.0.1",
+  "_target": "master",
   "_originalSource": "git@github.com:rhiokim/haroopad-keymage.git",
   "_direct": true
 }

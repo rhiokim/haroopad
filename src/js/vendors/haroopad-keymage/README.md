@@ -5,7 +5,7 @@ Keymage is a small library for handling key bindings in JavaScript.
 It was written out of the fact that no other library supported combination of
 all necessary features and their design made it easier to write a new one.
 
-[Test results](http://htmlpreview.github.com/?http://github.com/piranha/keymage/blob/master/test/test.html).
+[Check tests](https://rawgithub.com/piranha/keymage/master/test/test.html)
 
 ## Features
 
@@ -27,6 +27,13 @@ Include `keymage.min.js` in your page:
 
 There are no dependencies. It is possible to use library as a simple JS module
 or as an AMD module.
+
+It worth to note that [Keymage is on cdnjs](http://cdnjs.com/libraries/keymage/)
+and you can use it without downloading:
+
+```html
+<script src="//cdnjs.cloudflare.com/ajax/libs/keymage/1.0.1/keymage.min.js"></script>
+```
 
 
 ## Defining shortcuts
