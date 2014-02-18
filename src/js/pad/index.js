@@ -148,12 +148,18 @@ i18n.init({
     });
 
     $(document.body).click(function(e) {
-      var el = e.target;
+      var el = e.target, href;
       var tagName = el.tagName.toUpperCase();
 
       switch (tagName) {
         case 'A':
-          global.Shell.openExternal(el.getAttribute('href'));
+          href = el.getAttribute('href');
+
+          if (!href || href === '#') {
+            return;
+          }
+
+          global.Shell.openExternal(href);
           e.preventDefault();
         break;
       }
