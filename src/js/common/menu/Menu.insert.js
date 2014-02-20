@@ -25,7 +25,10 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.date-time'),
-      submenu: MenuBarInsertDate()
+      // submenu: MenuBarInsertDate()
+      click: function() {
+        window.parent.ee.emit('menu.insert.date');
+      }
     })
   );
   Insert.append(

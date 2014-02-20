@@ -25,7 +25,8 @@ define([
 		config.fontSize = Number(config.fontSize || 13);
 		var generalConf = store.get('General') || {
 			enableSyncScroll: true,
-			playKeypressSound: false
+			playKeypressSound: false,
+			dateFormat: 'll'
 		};
 
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -182,6 +183,9 @@ define([
 
 		window.parent.ee.on('preferences.general.enableSyncScroll', toggleSyncScroll);
 		window.parent.ee.on('preferences.general.enableAutoComplete', toggleAutoComplete);
+		window.parent.ee.on('preferences.general.dateFormat', function(format) {
+			generalConf.dateFormat = format;
+		});
 
 		window.parent.ee.on('preferences.editor.theme', changeTheme);
 		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
@@ -323,7 +327,8 @@ define([
 			global._gaq.push('haroopad.insert', 'TOC', '');
 		});
 
-		window.ee.on('insert.date', function(format) {
+		window.ee.on('insert.date', function() {
+			var format = generalConf.dateFormat;
 			editor.replaceSelection(moment().format(format));
 			editor.setCursor(editor.getCursor());
 
@@ -375,6 +380,10 @@ define([
 		keymage(__key('editor-font-size-down'), function() {
 			window.ee.emit('menu.view.editor.font.size', -1);
 		});
+		
+		keymage(__key('insert-date-time'), function() {
+			window.ee.emit('insert.date');
+		});
 
 		// keymage('defmod-1', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h1');
@@ -395,30 +404,27 @@ define([
 		// 	window.ee.emit('menu.insert.markdown', 'h6');
 		// });
 
-		keymage(__key('insert-date-l'), function() {
-			window.ee.emit('insert.date', 'l');
-		});
-		keymage(__key('insert-date-L'), function() {
-			window.ee.emit('insert.date', 'L');
-		});
-		keymage(__key('insert-date-ll'), function() {
-			window.ee.emit('insert.date', 'll');
-		});
-		keymage(__key('insert-date-LL'), function() {
-			window.ee.emit('insert.date', 'LL');
-		});
-		keymage(__key('insert-date-lll'), function() {
-			window.ee.emit('insert.date', 'lll');
-		});
-		keymage(__key('insert-date-LLL'), function() {
-			window.ee.emit('insert.date', 'LLL');
-		});
-		keymage(__key('insert-date-llll'), function() {
-			window.ee.emit('insert.date', 'llll');
-		});
-		keymage(__key('insert-date-LLLL'), function() {
-			window.ee.emit('insert.date', 'LLLL');
-		});
+		// keymage(__key('insert-date-L'), function() {
+		// 	window.ee.emit('insert.date', 'L');
+		// });
+		// keymage(__key('insert-date-ll'), function() {
+		// 	window.ee.emit('insert.date', 'll');
+		// });
+		// keymage(__key('insert-date-LL'), function() {
+		// 	window.ee.emit('insert.date', 'LL');
+		// });
+		// keymage(__key('insert-date-lll'), function() {
+		// 	window.ee.emit('insert.date', 'lll');
+		// });
+		// keymage(__key('insert-date-LLL'), function() {
+		// 	window.ee.emit('insert.date', 'LLL');
+		// });
+		// keymage(__key('insert-date-llll'), function() {
+		// 	window.ee.emit('insert.date', 'llll');
+		// });
+		// keymage(__key('insert-date-LLLL'), function() {
+		// 	window.ee.emit('insert.date', 'LLLL');
+		// });
 
 		return editor;
 	});
