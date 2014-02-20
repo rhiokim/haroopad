@@ -44,9 +44,9 @@ define([
 				}).select2('val', config.displayLanguage);
 
 				this.formats.forEach(function(prop) {
-					var option = $('<option>').attr('value', prop).text(moment(000000008806).format(prop));
+					var option = $('<option>').attr('value', prop).text(moment(8806).format(prop));
 					this.$('select[name=dateTime]').append(option);
-				})
+				});
 
 				this.$('select[name=dateTime]').select2({
         	placeholder: "Select Date and Format",
