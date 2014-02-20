@@ -461,6 +461,12 @@ module.exports = function(grunt) {
         ]
       },
 
+      ffmpeg: {
+        files: [
+          { src:'libs/ffmpegsumo.so', dest: 'lib/node-webkit.app/Contents/Frameworks/node-webkit Framework.framework/Libraries/ffmpegsumo.so' }
+        ]
+      },
+
       build: {
         files: [
           { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
@@ -664,7 +670,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
   /* built-in libs for node-webkit */
-  grunt.registerTask('nwlibs', [ 'clean:nwlibs', 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales' ]);
+  grunt.registerTask('nwlibs', [ 'clean:nwlibs', 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales', 'copy:ffmpeg' ]);
   grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
