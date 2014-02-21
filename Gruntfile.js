@@ -323,7 +323,6 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.insert.js',
             'src/js/common/menu/Menu.insert.section.js',
             'src/js/common/menu/Menu.insert.header.js',
-            'src/js/common/menu/Menu.insert.date.js',
             'src/js/common/menu/Menu.tools.js',
             'src/js/common/menu/Menu.tools.post.js',
             'src/js/common/menu/Menu.tools.presentation.js',
@@ -459,6 +458,12 @@ module.exports = function(grunt) {
           { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
           { src: 'src/logo.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/logo.png' },
           { src: 'About.md', dest: 'build/haroopad.app/Contents/Resources/app.nw/About.md' }
+        ]
+      },
+
+      ffmpeg: {
+        files: [
+          { src:'libs/ffmpegsumo.so', dest: 'lib/node-webkit.app/Contents/Frameworks/node-webkit Framework.framework/Libraries/ffmpegsumo.so' }
         ]
       },
 
@@ -665,7 +670,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
   /* built-in libs for node-webkit */
-  grunt.registerTask('nwlibs', [ 'clean:nwlibs', 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales' ]);
+  grunt.registerTask('nwlibs', [ 'clean:nwlibs', 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales', 'copy:ffmpeg' ]);
   grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
