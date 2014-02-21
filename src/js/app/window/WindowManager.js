@@ -75,13 +75,16 @@ define([
 			_updateStore();
 
 			/* initial exec */
-			if (top <= 0 && left <= 0) {
+			if (!top && !left) {
 				this.setPosition('center');
 				top = this.x;
 				left = this.y;
 
 				return;
 			}
+
+			top = top < 20 ? 20 : top;
+			left = left < 20 ? 20 : left;
 
 			if (config.height + top > window.screen.height) {
 				top = 20;
