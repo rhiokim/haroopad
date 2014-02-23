@@ -2,12 +2,11 @@ define([
 	], function() {
 		var Model = Backbone.Model.extend({
 			defaults: {
-				// enableMath: false,
 				enableSyncScroll: true,
 				playKeypressSound: false,
 				enableAutoComplete: false,
 				enableLastFileRestore: true,
-				displayLanguage: 'en'
+				displayLanguage: window.navigator.language.toLowerCase()
 			},
 
 			// localStorage: new Backbone.LocalStorage('General'),

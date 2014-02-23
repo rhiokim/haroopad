@@ -8,8 +8,11 @@
 	var G = global;
 	var locales = G.LOCALES = {};
 
+	var config = localStorage.getItem('General');
+	config = JSON.parse(config) || { displayLanguage: window.navigator.language.toLowerCase() };
+
 	var baseDir = G.PATHS.locales;
-	var locale = window.navigator.language.toLowerCase();
+	var locale = config.displayLanguage;
 	var prefix = locale.split('-')[0];
 
 	function load( locale ) {
