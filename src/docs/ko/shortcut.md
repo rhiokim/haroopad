@@ -91,9 +91,9 @@ SHIFT - CTRL - I             | \!\[]()            | 이미지
 SHIFT - CTRL - T             | [TOC]              | 목차
 SHIFT - CTRL - O             | 1. markdown        | 정렬목록
 SHIFT - CTRL - L             | * haroopad         | 비정렬 목록
-SHIFT - CTRL - J             | $$math$$           | 수학
-SHIFT - CTRL - M             | $$math$$           | 수학
-SHIFT - CTRL - Q             | > blockquot        | 블럭쿼트
+SHIFT - CTRL - J             | $math$             | 수학 인라인 표현
+SHIFT - CTRL - M             | $$math$$           | 수학 블럭 표현
+SHIFT - CTRL - Q             | > blockquot        | 인용구
 SHIFT - ALT - ENTER          | \- \- \-           | 섹션 나누기
 SHIFT - CTRL - ENTER         | \* \* \*           | 페이지 나누기
 SHIFT - CTRL - ALT - ENTER   | \_ \_ \_           | 문단 나누기
