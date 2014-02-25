@@ -45,7 +45,8 @@ i18n.init({
       'tabs/Markdown',
       'tabs/Helper',
       'tabs/About',
-      'tabs/Backup'
+      'tabs/Backup',
+      'updater/UpdateLanguagePack'
     ], function(General, Editor, Viewer, /*Custom, */Code, Markdown, Helper, About) {
       var shell = gui.Shell;
 
