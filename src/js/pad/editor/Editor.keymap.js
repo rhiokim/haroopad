@@ -3,10 +3,14 @@ define([
 		'editor/Codemirror.markdown.hint'
 	],
 	function() {
-		var keyMaps, keyMapAutoCompletion;
+		var keyMaps = {}, keyMapAutoCompletion;
 		var gui = require('nw.gui'),
 			win = gui.Window.get(),
 			clipboard = gui.Clipboard.get();
+
+		function _reKey(key) {
+  		return key.replace('defmod', /Mac/.test(navigator.platform) ? 'Cmd' : 'Ctrl');
+		}
 
 		function cut(cm) {
 			clipboard.set(cm.getSelection());
@@ -26,68 +30,35 @@ define([
 			cm.setCursor(cm.getCursor());
 		}
 
-	  if (/Mac/.test(navigator.platform)) {
-	    keyMaps = {
-				'Cmd-1': 'markdownH1',
-				'Cmd-2': 'markdownH2',
-				'Cmd-3': 'markdownH3',
-				'Cmd-4': 'markdownH4',
-				'Cmd-5': 'markdownH5',
-				'Cmd-6': 'markdownH6',
-				'Cmd-B': 'markdownBold',
-				'Cmd-I': 'markdownItalic',
-				'Cmd-L': 'markdownLink',
-				'Cmd-Y': 'markdownUnderline',
-				'Cmd-K': 'markdownInlineCode',
-				'Cmd-E': 'markdownEmbed',
-				'Cmd-T': 'markdownTOC',
-				'Cmd-Alt-S': 'markdownStrike',
-				'Cmd-Alt-H': 'markdownHighlight',
-				'Cmd-Alt-O': 'markdownOrderedList',
-				'Cmd-Alt-U': 'markdownUnOrderedList',
-				'Cmd-Alt-I': 'markdownImage',
-				'Cmd-Alt-M': 'markdownMathBlock',
-				'Cmd-Alt-J': 'markdownMathInline',
-				'Cmd-Alt-B': 'markdownBlockQuote',
-				'Cmd-Alt-Enter': 'markdownSectionBreak',
-				'Cmd-Alt-\'': 'markdownPageBreak',
+		keyMaps[_reKey('defmod-X')] = cut;
+		keyMaps[_reKey('defmod-C')] = copy;
+		keyMaps[_reKey('defmod-V')] = paste;
 
-				'Cmd-X': cut,
-				'Cmd-C': copy,
-				'Cmd-V': paste
-			};
+		keyMaps[_reKey(__key('insert-md-header1'))] = 'markdownH1';
+		keyMaps[_reKey(__key('insert-md-header2'))] = 'markdownH2';
+		keyMaps[_reKey(__key('insert-md-header3'))] = 'markdownH3';
+		keyMaps[_reKey(__key('insert-md-header4'))] = 'markdownH4';
+		keyMaps[_reKey(__key('insert-md-header5'))] = 'markdownH5';
+		keyMaps[_reKey(__key('insert-md-header6'))] = 'markdownH6';
 
-	  } else {
-	    keyMaps = {
-				'Ctrl-1': 'markdownH1',
-				'Ctrl-2': 'markdownH2',
-				'Ctrl-3': 'markdownH3',
-				'Ctrl-4': 'markdownH4',
-				'Ctrl-5': 'markdownH5',
-				'Ctrl-6': 'markdownH6',
-				'Ctrl-B': 'markdownBold',
-				'Ctrl-I': 'markdownItalic',
-				'Ctrl-L': 'markdownLink',
-				'Ctrl-Y': 'markdownUnderline',
-				'Ctrl-K': 'markdownInlineCode',
-				'Ctrl-E': 'markdownEmbed',
-				'Ctrl-T': 'markdownTOC',
-				'Ctrl-Alt-S': 'markdownStrike',
-				'Ctrl-Alt-H': 'markdownHighlight',
-				'Ctrl-Alt-O': 'markdownOrderedList',
-				'Ctrl-Alt-U': 'markdownUnOrderedList',
-				'Ctrl-Alt-I': 'markdownImage',
-				'Ctrl-Alt-M': 'markdownMathBlock',
-				'Ctrl-Alt-J': 'markdownMathInline',
-				'Ctrl-Alt-B': 'markdownBlockQuote',
-				'Ctrl-Alt-Enter': 'markdownSectionBreak',
-				'Ctrl-Alt-\'': 'markdownPageBreak',
-
-				'Ctrl-X': cut,
-				'Ctrl-C': copy,
-				'Ctrl-V': paste
-			};
-		}
+		keyMaps[_reKey(__key('insert-md-bold'))] = 'markdownBold';
+		keyMaps[_reKey(__key('insert-md-italic'))] = 'markdownItalic';
+		keyMaps[_reKey(__key('insert-md-link'))] = 'markdownLink';
+		keyMaps[_reKey(__key('insert-md-underline'))] = 'markdownUnderline';
+		keyMaps[_reKey(__key('insert-md-inline-code'))] = 'markdownInlineCode';
+		keyMaps[_reKey(__key('insert-md-embed'))] = 'markdownEmbed';
+		keyMaps[_reKey(__key('insert-md-toc'))] = 'markdownTOC';
+		keyMaps[_reKey(__key('insert-md-strike'))] = 'markdownStrike';
+		keyMaps[_reKey(__key('insert-md-highlight'))] = 'markdownHighlight';
+		keyMaps[_reKey(__key('insert-md-ordered-list'))] = 'markdownOrderedList';
+		keyMaps[_reKey(__key('insert-md-unordered-list'))] = 'markdownUnOrderedList';
+		keyMaps[_reKey(__key('insert-md-image'))] = 'markdownImage';
+		keyMaps[_reKey(__key('insert-md-math-block'))] = 'markdownMathBlock';
+		keyMaps[_reKey(__key('insert-md-math-inline'))] = 'markdownMathInline';
+		keyMaps[_reKey(__key('insert-md-blockquote'))] = 'markdownBlockQuote';
+		keyMaps[_reKey(__key('insert-md-section-break'))] = 'markdownSectionBreak';
+		keyMaps[_reKey(__key('insert-md-page-break'))] = 'markdownPageBreak';
+		keyMaps[_reKey(__key('insert-md-sentence-break'))] = 'markdownSentenceBreak';
 
 		keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
 		keyMaps['Shift-Tab'] = 'indentLess';
@@ -102,6 +73,7 @@ define([
 			"'='": 'markdownAutoComplete',
 			"'-'": 'markdownAutoComplete',
 			"'_'": 'markdownAutoComplete',
+			"'+'": 'markdownAutoComplete',
 			"'@'": 'markdownAutoComplete'
 		}
 		keyMapAutoCompletion = merge(keyMapAutoCompletion, keyMaps);

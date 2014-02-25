@@ -323,7 +323,6 @@ module.exports = function(grunt) {
             'src/js/common/menu/Menu.insert.js',
             'src/js/common/menu/Menu.insert.section.js',
             'src/js/common/menu/Menu.insert.header.js',
-            'src/js/common/menu/Menu.insert.date.js',
             'src/js/common/menu/Menu.tools.js',
             'src/js/common/menu/Menu.tools.post.js',
             'src/js/common/menu/Menu.tools.presentation.js',
