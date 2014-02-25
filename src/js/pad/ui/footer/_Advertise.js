@@ -2,15 +2,14 @@ define([
 	],function() {
 	// var shell = gui.Shell;
 	
-	var _cookie = store.get('_time') || { donate : 0};
+	var _cookie = store.get('_time') || { donate : 0 };
 
 	function loop() {
 		var now = new Date().getTime();
 
 		if (_cookie.donate < now) {
-			$('#donate-btn>a').popover('show');
+			$('#donate-btn>button').popover('show');
 			_cookie.donate = now + Math.random() * 1000 * 60 * 60 * 8;
-			// _cookie.donate = now + Math.random() * 1000 * 10;
 			store.set('_time', _cookie);
 		}
 	}
@@ -19,28 +18,28 @@ define([
 		el: '#donate-btn',
 
 		events: {
-			// 'click': 'donateHandler'
+			'click': 'donateHandler'
 		},
 
 		initialize: function() {
 			this.$('button[data-toggle=popover]').popover({
 				content: i18n.t('pad:donate.desc'),
-				title: i18n.t('pad:donate.title')/*,
-				animation: false*/
+				title: i18n.t('pad:donate.title')
 			});
 
-			window.setInterval(loop, 1000);
+			window.setInterval(loop, 10000);
 		},
 
 		hide: function() {
-			this.$('a[data-toggle=popover]').popover('hide');
+			this.$('button[data-toggle=popover]').popover('hide');
 		},
 
 		donateHandler: function(e) {
 			e.preventDefault();
 
 			if (e.target.id == 'donate-link') {
-				this.trigger('donate');	
+				_cookie.donate = new Date().getTime() + Math.random() * 1000 * 60 * 60 * 24 * 7;
+				store.set('_time', _cookie);
 			} 
 		}
 	});
