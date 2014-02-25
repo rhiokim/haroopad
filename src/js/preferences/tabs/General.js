@@ -37,6 +37,17 @@ define([
 				this.$('input[name=enableLastFileRestore]').prop('checked', config.enableLastFileRestore);
 				this.$('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
 
+
+				this.formats.forEach(function(prop) {
+					var option = $('<option>').attr('value', prop).text(moment(8806).format(prop));
+					this.$('select[name=dateTime]').append(option);
+				});
+
+				this.$('select[name=dateTime]').select2({
+        	placeholder: "Select Date and Format",
+					width: '300px'
+				}).select2('val', config.dateFormat);
+				
 				// this._setLanguage();
 			},
 
@@ -55,16 +66,6 @@ define([
 				this.$('select[name=displayLanguage]').select2({
 					width: '180px'
 				}).select2('val', config.displayLanguage);
-
-				this.formats.forEach(function(prop) {
-					var option = $('<option>').attr('value', prop).text(moment(8806).format(prop));
-					this.$('select[name=dateTime]').append(option);
-				});
-
-				this.$('select[name=dateTime]').select2({
-        	placeholder: "Select Date and Format",
-					width: '300px'
-				}).select2('val', config.dateFormat);
 			},
 
 			enableAutoComplete: function(e) {
