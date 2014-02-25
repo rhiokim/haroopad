@@ -9,7 +9,6 @@ define([], function() {
 			dateFormat: 'LLL'
 		},
 
-		// localStorage: new Backbone.LocalStorage('General'),
 		initialize: function() {
 			var opt = localStorage.getItem('General');
 
