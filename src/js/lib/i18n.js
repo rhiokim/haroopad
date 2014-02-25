@@ -9,10 +9,10 @@
 	var locales = G.LOCALES = {};
 
 	var config = localStorage.getItem('General');
-	config = JSON.parse(config) || { displayLanguage: window.navigator.language.toLowerCase() };
+	config = JSON.parse(config) || { displayLanguage: undefined };
 
 	var baseDir = G.PATHS.locales;
-	var locale = config.displayLanguage;
+	var locale = config.displayLanguage || window.navigator.language.toLowerCase();
 	var prefix = locale.split('-')[0];
 
 	function load( locale ) {
