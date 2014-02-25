@@ -2,18 +2,16 @@ window.MenuBarInsertDate = function () {
   var gui = require('nw.gui');
   var submenu = new gui.Menu();
 
-  var moment = require('moment');
-      moment.lang(navigator.language.toLowerCase());
+  // var moment = require('moment');
   
-  var i, formats = ['L', 'l', 'LL', 'll', 'LLL', 'lll', 'LLLL', 'llll'];
+  // var i, formats = ['L', 'l', 'LL', 'll', 'LLL', 'lll', 'LLLL', 'llll'];
 
   for(i = 0; i < formats.length; i++) {
     submenu.append(
       new gui.MenuItem({
           label: moment().format(formats[i]),
-          tooltip: formats[i],
           click: function() {
-            window.parent.ee.emit('menu.insert.date', this.tooltip);
+            window.parent.ee.emit('menu.insert.date');
           }
       })
     );
