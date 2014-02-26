@@ -27,9 +27,11 @@ define([
         }, 2500);
       });
     }
-
-    if (locales.indexOf(window.navigator.language.toLowerCase().split('-')[0]) > -1 && compareVersions(language.version, pkgObj.version)) {
-      $('#update-languages-dialog').modal('show');
+    
+    if (language.version && compareVersions(language.version, pkgObj.version)) {
+      if (locales[0] == 'all' || locales.indexOf(window.navigator.language.toLowerCase().split('-')[0]) > -1) {
+        $('#update-languages-dialog').modal('show');
+      }
     }
 
     $('#update-languages-dialog button[name=yes]').click(function() {
