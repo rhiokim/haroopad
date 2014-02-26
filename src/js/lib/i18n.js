@@ -12,7 +12,7 @@
 	config = JSON.parse(config) || { displayLanguage: undefined };
 
 	var baseDir = G.PATHS.locales;
-	var locale = config.displayLanguage || window.navigator.language.toLowerCase();
+	var locale = window.navigator.language.toLowerCase();
 	var prefix = locale.split('-')[0];
 
 	function load( locale ) {

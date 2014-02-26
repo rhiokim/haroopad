@@ -8,28 +8,27 @@ define([
       language = info.language || {},
       locales = language.locales || [];
 
+    var fs = require('fs-extra');
     var download = require('download-github-repo');
-    var system = store.get('System') || { versions: { language: manifest.version } };
+    var pkgObj = fs.readJsonSync(global.PATHS.locales +'/package.json', 'utf8');
 
     function update() {
       download(language.path, global.PATHS.locales, function(err) {
         if (err) {
-          $('data-i18n=[system.update.language]').update(t.i18n('system.update.language.error'));
+          $('#update-languages-dialog .modal-body strong').html(i18n.t('system.language.update.error'));
           return;
         }
 
-        system.versions.language = language.version;
-        store.set('System', system);
-
-        $('#update-languages-dialog button[name=yes]').html('Done');
+        $('#update-languages-dialog .modal-body strong').html(i18n.t('system.language.update.done'));
+        $('#update-languages-dialog button[name=yes]').html(i18n.t('done'));
 
         setTimeout(function() {
           $('#update-languages-dialog').modal('hide');
-        }, 1500);
+        }, 2500);
       });
     }
-    language.version = '0.11.2';
-    if (locales.indexOf(global.LOCALES._lang) > -1 && compareVersions(language.version, system.versions.language)) {
+
+    if (locales.indexOf(window.navigator.language.toLowerCase().split('-')[0]) > -1 && compareVersions(language.version, pkgObj.version)) {
       $('#update-languages-dialog').modal('show');
     }
 
@@ -42,5 +41,7 @@ define([
     $('#update-languages-dialog button[name=no]').click(function(e) {
       $('#update-languages-dialog').modal('hide');
     });
+
+    $('#update-languages-dialog button[name=yes]').attr({ 'data-loading-text': i18n.t('updating') });
 
 });

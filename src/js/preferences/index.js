@@ -32,7 +32,7 @@ i18n.init({
     }
   });
 
-  requirejs.onError = function (e) {
+  requirejs.onError = function (e) {console.log(e.stack)
     alert('Oops! Preferences dialog is crash :-(');
   };
 
