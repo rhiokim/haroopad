@@ -7,8 +7,9 @@ define([
     var InlineLexer = marked.InlineLexer;
 
     var customRules = {
+        emoji: /^:([A-Za-z0-9_\-\+]+?):/,
         stronghighlight: /^==([^=]+)==/,
-        underline: /^\+\+([\s\S]+)\+\+(?!\+)/,
+        underline: /^\+\+([\s\S]+?)\+\+(?!\+)/,
         sup: /^\^([\S]+?)\^(?!\^)/,
         sub: /^\~([\S]+?)\~(?!\~)/
     };

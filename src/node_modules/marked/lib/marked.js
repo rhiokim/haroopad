@@ -487,7 +487,7 @@ Lexer.prototype.token = function(src, top, bq) {
  */
 
 var inline = {
-  escape: /^\\([=\\\^`*{}\[\]~()#$+\-.!_>])/,
+  escape: /^\\([=\\\^\+`*{}\[\]~()#$+\-.!_>])/,
   autolink: /^<([^ >]+(@|:\/)[^ >]+)>/,
   url: noop,
   tag: /^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,
@@ -500,7 +500,7 @@ var inline = {
   br: /^ {2,}\n(?!\s*$)/,
   del: noop,
   emoji: noop,
-  text: /^[\s\S]+?(?=[\\<!\[\^~_*`$]|==| {2,}\n|$)/,
+  text: /^[\s\S]+?(?=[\\<!\[\^\+~_*`$]|==| {2,}\n|$)/,
   stronghighlight: noop,
   underline: noop,
   sup: noop,
@@ -545,7 +545,6 @@ inline.gfm = merge({}, inline.normal, {
   escape: replace(inline.escape)('])', '~|])')(),
   url: /^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,
   del: /^~~(?=\S)([\s\S]*?\S)~~/,
-  emoji: /^:([A-Za-z0-9_\-\+]+?):/,
   text: replace(inline.text)
     (']|', ':~]|')
     ('|', '|https?://|')
