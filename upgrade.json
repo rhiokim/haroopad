@@ -10,7 +10,7 @@
 	"platform": [ "windows", "mac", "linux" ],
   "language": {
     "version": "0.11.2",
-    "locales": [ "en", "ko" ],
+    "locales": [ "en", "ko", "el" ],
     "path": "rhiokim/haroopad-locales#supports"
   }
 }
