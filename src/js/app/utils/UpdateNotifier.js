@@ -19,6 +19,7 @@ define([], function() {
 			res.on("data", function(chunk) {
 				try {
 					serverInfo = JSON.parse(chunk);
+					manifest.app.info = serverInfo;
 
 					updateCheck(serverInfo.version, force);
 				} catch(e) {
