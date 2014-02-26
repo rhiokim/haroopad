@@ -45,7 +45,5 @@
       "url": "git@github.com:rhiokim/haroopad.git"
     }
   ],
-  "dependencies": {
-    "watchr": "~2.4.9"
-  }
+  "dependencies": {}
 }
