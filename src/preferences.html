@@ -124,71 +124,6 @@
                 </div>
               </p> -->
               
-              <!--p>
-                <h5>Display Language</h5>
-
-                <select class="select2" name="displayLanguage">
-                  <option value="id">Bahasa Indonesia</option>
-                  <option value="ms">Bahasa Melayu</option>
-                  <option value="ca">Català</option>
-                  <option value="cs">Čeština</option>
-                  <option value="cy">Cymraeg</option>
-                  <option value="da">Dansk</option>
-                  <option value="de">Deutsch</option>
-                  <option value="et">Eesti keel</option>
-                  <option value="en-GB">English (UK)</option>
-                  <option value="en">English (US)</option>
-                  <option value="es">Español</option>
-                  <option value="es-419">Español (Latinoamérica)</option>
-                  <option value="eu">Euskara</option>
-                  <option value="tl">Filipino</option>
-                  <option value="fr">Français</option>
-                  <option value="hr">Hrvatski</option>
-                  <option value="it">Italiano</option>
-                  <option value="is">Íslenska</option>
-                  <option value="sw">Kiswahili</option>
-                  <option value="lv">Latviešu</option>
-                  <option value="lt">Lietuvių</option>
-                  <option value="hu">Magyar</option>
-                  <option value="no">Norsk (Bokmål)</option>
-                  <option value="nl">Nederlands</option>
-                  <option value="pl">Polski</option>
-                  <option value="pt-BR">Português (Brasil)</option>
-                  <option value="pt-PT">Português (Portugal)</option>
-                  <option value="ro">Română</option>
-                  <option value="sk">Slovenčina</option>
-                  <option value="sl">Slovenščina</option>
-                  <option value="fi">Suomi</option>
-                  <option value="sv">Svenska</option>
-                  <option value="vi">Tiếng Việt</option>
-                  <option value="tr">Türkçe</option>
-                  <option value="el">Ελληνικά</option>
-                  <option value="bg">Български</option>
-                  <option value="ru">Русский</option>
-                  <option value="sr">Српски</option>
-                  <option value="uk">Українська</option>
-                  <option value="iw">‫עברית‬‎</option>
-                  <option value="ur">‫اردو‬‎</option>
-                  <option value="ar">‫العربية‬‎</option>
-                  <option value="fa">‫فارسی‬‎</option>
-                  <option value="mr">मराठी</option>
-                  <option value="hi">हिन्दी</option>
-                  <option value="bn">বাংলা</option>
-                  <option value="gu">ગુજરાતી</option>
-                  <option value="ta">தமிழ்</option>
-                  <option value="te">తెలుగు</option>
-                  <option value="kn">ಕನ್ನಡ</option>
-                  <option value="ml">മലയാളം</option>
-                  <option value="th">ภาษาไทย</option>
-                  <option value="am">አማርኛ (Amharic)</option>
-                  <option value="chr">ᏣᎳᎩ (Cherokee)</option>
-                  <option value="zh-TW">中文（繁體）</option>
-                  <option value="zh-CN">中文（简体）</option>
-                  <option value="ja">日本語</option>
-                  <option value="ko">한국어</option>
-                </select>
-              </p-->
-
               <p>
                 <h5 data-i18n="general.general">General</h5>
                 <label class="checkbox">
@@ -204,6 +139,81 @@
                   <span data-i18n="general.enableLastFileRestore">Enable Lastest File Restore</span>
                 </label>
               </p>
+              <!--p>
+                <h5 data-i18n="general.languages">Languages</h5>
+                <div class="input-group">
+                  <select class="select2 hide" name="displayLanguage"></select>
+
+                  <button id="updateLanguages" class="btn btn-sm btn-primary disabled" disabled="disabled" data-i18n="general.update.language">Update</button>
+                </div-->
+
+                <!--
+                  <select class="select2" name="displayLanguage">
+                    <option value="id">Bahasa Indonesia</option>
+                    <option value="ms">Bahasa Melayu</option>
+                    <option value="ca">Català</option>
+                    <option value="cs">Čeština</option>
+                    <option value="cy">Cymraeg</option>
+                    <option value="da">Dansk</option>
+                    <option value="de">Deutsch</option>
+                    <option value="et">Eesti keel</option>
+                    <option value="en-GB">English (UK)</option>
+                    <option value="en">English (US)</option>
+                    <option value="es">Español</option>
+                    <option value="es-419">Español (Latinoamérica)</option>
+                    <option value="eu">Euskara</option>
+                    <option value="tl">Filipino</option>
+                    <option value="fr">Français</option>
+                    <option value="hr">Hrvatski</option>
+                    <option value="it">Italiano</option>
+                    <option value="is">Íslenska</option>
+                    <option value="sw">Kiswahili</option>
+                    <option value="lv">Latviešu</option>
+                    <option value="lt">Lietuvių</option>
+                    <option value="hu">Magyar</option>
+                    <option value="no">Norsk (Bokmål)</option>
+                    <option value="nl">Nederlands</option>
+                    <option value="pl">Polski</option>
+                    <option value="pt-BR">Português (Brasil)</option>
+                    <option value="pt-PT">Português (Portugal)</option>
+                    <option value="ro">Română</option>
+                    <option value="sk">Slovenčina</option>
+                    <option value="sl">Slovenščina</option>
+                    <option value="fi">Suomi</option>
+                    <option value="sv">Svenska</option>
+                    <option value="vi">Tiếng Việt</option>
+                    <option value="tr">Türkçe</option>
+                    <option value="el">Ελληνικά</option>
+                    <option value="bg">Български</option>
+                    <option value="ru">Русский</option>
+                    <option value="sr">Српски</option>
+                    <option value="uk">Українська</option>
+                    <option value="iw">‫עברית‬‎</option>
+                    <option value="ur">‫اردو‬‎</option>
+                    <option value="ar">‫العربية‬‎</option>
+                    <option value="fa">‫فارسی‬‎</option>
+                    <option value="mr">मराठी</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="gu">ગુજરાતી</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="te">తెలుగు</option>
+                    <option value="kn">ಕನ್ನಡ</option>
+                    <option value="ml">മലയാളം</option>
+                    <option value="th">ภาษาไทย</option>
+                    <option value="am">አማርኛ (Amharic)</option>
+                    <option value="chr">ᏣᎳᎩ (Cherokee)</option>
+                    <option value="zh-TW">中文（繁體）</option>
+                    <option value="zh-CN">中文（简体）</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                  </select>
+                -->
+              <!--/p>
+
+              <p>
+                <span class="label label-info">Contribution!</span> <span style="font-size:12px" data-i18n="[html]general.lang.contribution">We have created a <a href="http://github.com/rhiokim/haroopad-locales"><b>repository</b></a> for translation. If you can help with this project, why don't you join us?</span>
+              </p-->
               <p>
                 <h5 data-i18n="editor.date-time">Date & Time</h5>
 

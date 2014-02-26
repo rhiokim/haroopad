@@ -22,11 +22,10 @@ define([
 
 			events: {
 				'click input[name=enableAutoComplete]': 'enableAutoComplete',	
-				// 'click input[name=enableMath]': 'enableMath',	
 				'click input[name=enableSyncScroll]': 'enableSyncScroll',	
 				'click input[name=enableLastFileRestore]': 'enableLastFileRestore',
+				// 'change select[name=displayLanguage]': 'changeDisplayLanguage',
 				'click input[name=playKeypressSound]': 'playKeypressSound',
-				'change select[name=displayLanguage]': 'changeDisplayLanguage',
 				'change select[name=dateTime]': 'changeDateFormat'
 			},
 
@@ -34,14 +33,10 @@ define([
 
 			initialize: function() {
 				this.$('input[name=enableAutoComplete]').prop('checked', config.enableAutoComplete);
-				// this.$('input[name=enableMath]').prop('checked', config.enableMath);
 				this.$('input[name=enableSyncScroll]').prop('checked', config.enableSyncScroll);
 				this.$('input[name=enableLastFileRestore]').prop('checked', config.enableLastFileRestore);
 				this.$('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
 
-				this.$('select[name=displayLanguage]').select2({
-					width: '180px'
-				}).select2('val', config.displayLanguage);
 
 				this.formats.forEach(function(prop) {
 					var option = $('<option>').attr('value', prop).text(moment(8806).format(prop));
@@ -52,6 +47,25 @@ define([
         	placeholder: "Select Date and Format",
 					width: '300px'
 				}).select2('val', config.dateFormat);
+				
+				// this._setLanguage();
+			},
+
+			_setLanguage: function() {
+				var optEl, lang, langs = global.LANGS;
+				var parent = document.querySelector('select[name=displayLanguage]');
+
+				for(lang in langs) {
+					optEl = document.createElement('option');
+					optEl.setAttribute('value', lang);
+					optEl.innerHTML = langs[lang].name;
+
+					parent.appendChild(optEl);
+				}
+
+				this.$('select[name=displayLanguage]').select2({
+					width: '180px'
+				}).select2('val', config.displayLanguage);
 			},
 
 			enableAutoComplete: function(e) {
