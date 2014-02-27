@@ -38,8 +38,11 @@ define([
     },
 
     updateStyle: function(css) {
-      var style = parse(css);
-      this.$el.text(style || '');
+      try {
+        var style = parse(css);
+        this.$el.text(style || '');
+      } catch (e) {
+      }
     },
 
     changeUserTheme: function(theme) {

@@ -39,7 +39,9 @@ define([
         if (nw.editor) {
           nw.editor.refresh();
         }
-      } catch (e) {}
+      } catch (e) {
+        throw e;
+      }
     },
 
     changeUserTheme: function(theme) {
