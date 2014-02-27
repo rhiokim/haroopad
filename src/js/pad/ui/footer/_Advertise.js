@@ -46,13 +46,13 @@ define([
 		}
 	});
 
-	keymage('i space n e e d space f o r e v e r space h a r o o p a d', function(e) {
+	keymage('i space n e e d space h a r o o p a d space f o r e v e r', function(e) {
 		_cookie.donate = new Date().getTime() + 1000 * 60 * 60 * 24 * 99999;
 		store.set('_time', _cookie);
 
 		global._gaq.push('haroopad', 'ester egg', 'disabled donation popover');
 		
-		alert('Thanks\nDisabled donation popover!\n\nEnjoy Markdown. Enjoy Haroopad');
+		alert('Thank you :-)\nDisabled donation popover!\n\nEnjoy Markdown. Enjoy Haroopad');
 	});
 
 	return new Adver;
