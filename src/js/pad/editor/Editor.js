@@ -25,9 +25,9 @@ define([
 		config.fontSize = Number(config.fontSize || 13);
 		var generalConf = store.get('General') || {
 			enableSyncScroll: true,
-			playKeypressSound: false,
-			dateFormat: 'll'
+			playKeypressSound: false
 		};
+		generalConf.dateFormat = generalConf.dateFormat || 'LLL';
 
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 			mode: 'markdown',
@@ -336,7 +336,7 @@ define([
 		});
 
 		window.ee.on('insert.filename', function() {
-			editor.replaceSelection(nw.file.get('basename'));
+			editor.replaceSelection(nw.file.get('basename') || '');
 			editor.setCursor(editor.getCursor());
 
 			global._gaq.push('haroopad.insert', 'filename', '');
