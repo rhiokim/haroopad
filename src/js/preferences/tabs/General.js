@@ -3,7 +3,7 @@ define([
 	], function(options) {
 
 		var moment = require('moment');
-    moment.lang(navigator.language.toLowerCase());
+    moment.lang(global.LOCALES._lang);
     
 		var config = options.toJSON();
 
