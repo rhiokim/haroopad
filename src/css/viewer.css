@@ -47,9 +47,9 @@ iframe {
   border: 0;
 }
 
-#root>ul, #root>ol {
+/*#root>ul, #root>ol {
   display: inline-block;
-}
+}*/
 
 figure {
   -webkit-margin-before: 0;
