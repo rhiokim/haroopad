@@ -306,6 +306,8 @@ define([
 				case 'u': CodeMirror.commands.markdownUnderline(editor); break;
 				case 'del': CodeMirror.commands.markdownStrike(editor); break;
 				case 'highlight': CodeMirror.commands.markdownHighlight(editor); break;
+				case 'superscript': CodeMirror.commands.markdownSuperscript(editor); break;
+				case 'subscript': CodeMirror.commands.markdownSubscript(editor); break;
 				case 'image': CodeMirror.commands.markdownImage(editor); break;
 				case 'blockquote': CodeMirror.commands.markdownBlockQuote(editor); break;
 				case 'ol': CodeMirror.commands.markdownOrderedList(editor); break;
@@ -319,6 +321,7 @@ define([
 				case 'toc': CodeMirror.commands.markdownTOC(editor); break;
 				case 'hr-page': CodeMirror.commands.markdownPageBreak(editor); break;
 				case 'hr-section': CodeMirror.commands.markdownSectionBreak(editor); break;
+				case 'hr-sentence': CodeMirror.commands.markdownSentenceBreak(editor); break;
 			}
 
 			global._gaq.push('haroopad.insert', 'markdown', tag);
