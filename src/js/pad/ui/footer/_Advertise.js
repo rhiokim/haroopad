@@ -52,7 +52,7 @@ define([
 
 		global._gaq.push('haroopad', 'ester egg', 'disabled donation popover');
 		
-		alert('Thank you :-)\nDisabled donation popover!\n\nEnjoy Markdown. Enjoy Haroopad');
+		alert('# Thank you :-)\nDisabled donation popover!\nEnjoy Markdown. Enjoy Haroopad\n');
 	});
 
 	return new Adver;
