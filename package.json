@@ -1,6 +1,6 @@
 {
   "name": "haroopad",
-  "version": "0.10.0",
+  "version": "0.11.1",
   "description": "Markdown Editor",
   "main": "",
   "homepage": "https://rhiokim.github.com/haroopad",
@@ -20,9 +20,5 @@
     "grunt-contrib-uglify": "~0.1.2",
     "grunt-contrib-cssmin": "~0.4.1",
     "grunt-contrib-clean": "~0.4.0"
-  },
-  "deploy": {
-    "docs": "../baas.io-Portal/_documentation/_docs/ko/javascript/reference",
-    "sdk": "../baas.io-Portal/_documentation/_docs/sdk/javascript/"
   }
 }
