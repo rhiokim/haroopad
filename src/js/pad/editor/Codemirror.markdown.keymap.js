@@ -170,6 +170,12 @@ define([], function() {
         case 'highlight':
           replaceSelection('==');
           break;
+        case 'superscript':
+          replaceSelection('^');
+          break;
+        case 'subscript':
+          replaceSelection('~');
+          break;
         case 'strike':
           replaceSelection('~~');
           break;
@@ -260,6 +266,12 @@ define([], function() {
   };
   CodeMirror.commands.markdownHighlight = function(cm) {
     action('highlight', cm);
+  };
+  CodeMirror.commands.markdownSuperscript = function(cm) {
+    action('superscript', cm);
+  };
+  CodeMirror.commands.markdownSubscript = function(cm) {
+    action('subscript', cm);
   };
   CodeMirror.commands.markdownItalic = function(cm) {
     action('italic', cm);
