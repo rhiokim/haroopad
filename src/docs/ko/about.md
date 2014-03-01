@@ -8,23 +8,26 @@
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==새로운 기능 (v0.11)==
+### ==새로운 기능 (v0.11.1)==
 
-* 환경설정 백업 내보내기/가져오기 기능 추가
-* 마크다운 파서 옵션 설정기능 추가
-* 사용자 테마 강화
-	- 에디터, 뷰어 테마를 CSS 기반으로 좀더 쉽게 제공합니다. [자세히 보기]()
-* `[TOC]` 목차 정렬 속성 추가
-	- 왼쪽정렬: `[TOC "float:left"]`
-	- 오른쪽정렬: `[TOC "float:right"]`
-* `![]()` 이미지 스타일 속성 추가
-	- `![alt text](url "title" "css")`
+* 위첨자, 아래첨자 문법 추가
+	- `위첨자^superscript^`, `아래첨자~subscript~`
+* 이미지 문법 확장
+	- 만약 `![](path/*.mp3)` 과 같이 audio 확장자(mp3, ogg) 인 경우 audio 요소로 표시
+	- 만약 `![](path/*.mp4)` 와 같이 video 확장자(mp4, ogv, webm) 인 경우 video 요소로 표시
+* 인라인 수학 표현식 (**$**, $$$) 선택적 옵션추가
 * 다국어 지원 추가
-	- 독일어 (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
-* 편집중인 라인 하이라이팅 옵션 추가
-* 코드 하이라이팅 71 언어, 44 스타일 지원 확장
-* 에디터 테마 추가 (30) 및 코드 하이라이팅 지원 
-	- Ruby, Python, PHP, Javascript, C, HTML, CSS
+	- 그리스어 (Greek) - [pdudis](https://github.com/pdudis)
+
+### ==중요 변경 사항==
+* 밑줄(Underline) 문법 `_underline_` 에서 `++underline++` 으로 변경
+* 글로벌 키보드 시스템에 대응하도록 단축키 전체 리뉴얼 (Ctrl + Alt 조합 키보드 모두 제거)
+* 컨텍스트 메뉴 개선
+	- 에디터, 뷰어, 사용자 테마 변경 기능
+	- HTML 로 출력
+	- 메일 보내기
+* 마크다운 스마트 리스트
+* 기타 다수 개선 사항 및 오류 수정
 
 ### 주요기능
 
@@ -32,8 +35,9 @@
 	- Window
 	- Mac OS X
 	- Linux 32/64
-* 에디팅 테마를 지원
+* 에디터 테마 추가 (30) 및 코드 하이라이팅 지원 
 	- Solaraized Dark & Light 등 30 여가지의 테마
+	- Ruby, Python, PHP, Javascript, C, HTML, CSS
 	- CodeMirror 기반
 * 라이브 뷰 테마를 지원
 	- less 를 기반으로 한 7 가지의 테마
@@ -44,8 +48,8 @@
 	- highlight.js 기반
 * 마크다운 자동완성 기능
 	- 마크다운 문법의 자동완성을 이용해 문서의 작성의 효율을 높힐 수 있습니다.
-* 사용자 스타일
-  - CSS(Cascading Style Sheet)을 기반으로 한 손쉬운 테마제작
+* 사용자 테마 강화
+  - 에디터, 뷰어 테마를 CSS 기반으로 좀더 쉽게 제공
 * 폰트 사이즈 조절 기능
 	- 환경설정 혹은 단축키를 이용해 에디터와 뷰어의 폰트 사이즈를 조절
 * 스타일 적용 된 HTML 복사 기능
@@ -60,6 +64,7 @@
 	- 현재 시간을 다양한 포맷으로 입력 (Insert > Date & Time)
 * HTML 마크다운 전환 기능 - v0.8
 	- 브라우저 인용하고 싶은 문서를 선택하고 하루패드로 드래그 드랍해보세요.
+* 마크다운 파서 옵션 설정기능 추가
 * 개요보기 기능
 * Vim 키 바인딩을 지원
 * PDF, HTML 출력 지원
@@ -67,6 +72,7 @@
 * 들여쓰기 탭과 스페이스 지원
 * 2,3 단 컬럼 레이아웃 지원
 * 마크다운 구문 헬프 윈도우
+* 환경설정 백업 내보내기/가져오기 기능 추가
 
 ### 국제화
 
@@ -75,6 +81,9 @@
 - 스페인 (Español) - [davegomez](https://github.com/davegomez)
 - 중국어 간체 (中文) - [toiletfreak](https://github.com/toiletfreak)
 - 독일어 (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
+- 베트남 (Vietnamese) - [nguyenkinh](https://github.com/nguyenkinh)
+- 러시아 (Russian) - [aprilix ](https://github.com/aprilix)
+- 그리스어 (Greek) - [pdudis](https://github.com/pdudis)
 
 ### 향상된 마크다운 문법
 
@@ -96,7 +105,8 @@
 
 ### 곧 출시될 기능
 
-* 각주 기능
+* 각주 기능(footnotes)
+* 할일 목록 기능(tasklist)
 
 ### 추가 정보
 
