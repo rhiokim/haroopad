@@ -10,22 +10,24 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ### ==New Features (v0.11)==
 
-* Added Import and Export settings
-* Added Options for markdown parsing
-* Added Current line highlighting
-* Added Syntax highlighting 71 languages, 44 styles
-* Added Themes for editor 30 styles 
-* Added Syntax highlighting in fenced code block on editor
-	- Ruby, Python, PHP, Javascript, C, HTML, CSS
-* Enhanced custom theme UX
-	- Easy to customizing your style. [See more details]()
-* `[TOC]` Alignment for TOC
-	- Left Align: `[TOC "float:left"]`
-	- Right Align: `[TOC "float:right"]`
-* `![]()` Alignment for Image
-	- `![alt text](url "title" "css")`
+* Added Superscript, Subscript
+	- `Sup^superscript^`, `Sub~subscript~`
+* Extended Image Syntax
+	- If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
+	- If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
+* Added Option inline mathematics expression (**$**, $$$) 
 * Internationalization
-	- German (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
+	- Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
+
+### ==More changelog==
+* Changed Underline syntax `_underline_` -> `++underline++`
+* Removed Ctrl + Alt shortcut at all
+* Enhanced Context menu
+	- Added Editor, Viewer, Custom theme menus
+	- Added Export to HTML
+	- Added Sending email
+* Continous List Item (ol, li)
+* Fixed number of bugs & enhancements
 
 ### Main Features
 
@@ -34,7 +36,10 @@ Haroopad gives you the same editing experience regardless of the platform you ar
   - Mac OS X
   - Linux 32/64
 * Theme for editing
-	- Solaraized Dark & Light based on CodeMirror
+	- Themes for editor 30 styles 
+	- Syntax highlighting in fenced code block on editor
+	- Ruby, Python, PHP, Javascript, C, HTML, CSS
+	- based on CodeMirror
 * Live Preview themes
 	- 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
 * Syntax Highlighting
@@ -53,6 +58,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 	- Various Format support (Insert > Date & Time)
 * HTML to Markdown - v0.8
 	- Drag & Drop your selected text on Web Browser
+* Options for markdown parsing
 * Outline View
 * Vim Key-binding
 * Export to PDF, HTML
@@ -61,7 +67,8 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Document state information
 * Tab or Spaces for Indentation
 * Colum(Single, Two and Three) Layout View
-* Added Markdown Syntax Window.
+* Markdown Syntax Help Dialog.
+* Import and Export settings
 
 ### Internationalization
 
@@ -70,11 +77,18 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 - Spanish (Español) - [davegomez](https://github.com/davegomez)
 - Chinese Simplified (中文) - [toiletfreak](https://github.com/toiletfreak)
 - German (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
+- Vietnamese (Tiếng Việt) - [nguyenkinh](https://github.com/nguyenkinh)
+- Russian (Русский) - [aprilix ](https://github.com/aprilix)
+- Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
 
 ### Enhanced Markdown Syntax
 
 * Added `[TOC]` Syntax
 	- Now you can easily embed table of content in documents.
+	- Left Align: `[TOC "float:left"]`
+	- Right Align: `[TOC "float:right"]`
+* `![]()` Extended image syntax
+	- `![alt text](url "title" "css")`
 * [Gitub Flavored Markdown](http://github.github.com/github-flavored-markdown/) & extensions
 	- Syntax highlighting
 	- Table
@@ -88,6 +102,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 ### Upcoming Features
 
 * Footnotes
+* Tasklist - GFM
 
 ### And more?
 
