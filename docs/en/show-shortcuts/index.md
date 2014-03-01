@@ -1,126 +1,110 @@
-## Shortcuts
+## 단축키
 
-하루패드는 크로스플랫폼을 지원하기 때문에 단축키를 이용할 때 유의해야 한다. 아래 단축키에 대한 설명은 맥을 기준으로 설명되고 있고 운영체제마다 특수키(Command)의 경우는 **&#8963; (Ctrl)** 키로 대체된다.
+키보드       | 명칭
+------------|----------------------------------------
+COMMAND     | Command, Cmd, Clover, (formerly) Apple
+ALT         | Option, Opt, (Windows) Alt
+SHIFT       | Shift
+CTRL        | Control, Ctl, Ctrl
 
-## Shortcuts
+##### 파일
+단축키                            | 설명
+--------------------------------|-------------------
+COMMAND (CTRL) - N              | 새로운 에디터 윈도우 생성
+COMMAND (CTRL) - S              | 파일 저장
+COMMAND (CTRL) - SHIFT - S      | 새로운 이름으로 저장
+COMMAND (CTRL) - O              | 파일 불러오기
+COMMAND (CTRL) - SHIFT - E      | 메일 보내기
+COMMAND (CTRL) - SHIFT - X      | HTML 출력
+COMMAND (CTRL) - SHIFT - C      | HTML 클립보드 복사
+COMMAND (CTRL) - ,              | 환경설정
+COMMAND (CTRL) - W              | 윈도우 닫기
+COMMAND (CTRL) - F4             | 윈도우 닫기
+COMMAND (CTRL) - P              | 인쇄
+COMMAND (CTRL) - Q              | 하루패드 종료
 
-GLYPH        | NAME
---------------|----------------------------------------
-COMMAND   | Command, Cmd, Clover, (formerly) Apple
-ALT           | Option, Opt, (Windows) Alt
-SHIFT        | Shift
-CTRL         | Control, Ctl, Ctrl
+##### 뷰
+단축키                        | 설명
+----------------------------|-------------------
+SHIFT - CTRL - 1            | (에디터 : 뷰어) 모드
+SHIFT - CTRL - 2            | (뷰어 : 에디터) 모드
+SHIFT - CTRL - 3            | 에디터 모드
+SHIFT - CTRL - 4            | 뷰어 모드
+SHIFT - CTRL - ALT - ]      | 에디터 모드
+SHIFT - CTRL - ALT - [      | 에디터 + 뷰어 모드
+SHIFT - CTRL - ]            | 에디터 가로 사이즈 +5%
+SHIFT - CTRL - [            | 에디터 가로 사이즈 -5%
+COMMAND (CTRL) - SHIFT - G  | 에디터 라인넘버 토글
+COMMAND (CTRL) - SHIFT - H  | 마크다운 구문 헬퍼
+COMMAND (CTRL) - Enter      | 전체화면 모드 토글 #1
+COMMAND (CTRL) - F11        | 전체화면 모드 토글 #2
+Double ESC                  | 전체화면 종료
+COMMAND (CTRL) - SHIFT - Y  | VIM 키 바인딩
+ALT - UP                    | 에디터 폰트 사이즈 +1px
+ALT - DOWN                  | 에디터 폰트 사이즈 -1px
+SHIFT - ALT - UP            | 뷰어 폰트 사이즈 +1px
+SHIFT - ALT - DOWN          | 뷰어 폰트 사이즈 -1px
 
-##### File
-Shortcut                                 | Description
-------------------------------------|-------------------
-COMMAND (CTRL) - N              | new window
-COMMAND (CTRL) - S              | save
-COMMAND (CTRL) - SHIFT - S   | save as
-COMMAND (CTRL) - O              | open file
-COMMAND (CTRL) - SHIFT - E   | sending email
-COMMAND (CTRL) - ALT - E     | export html
-COMMAND (CTRL) - ALT - C     | copy to clipboard
-COMMAND (CTRL) - ,              | preferences
-COMMAND (CTRL) - W            | close window
-COMMAND (CTRL) - F4           | close
-COMMAND (CTRL) - P             | print
-COMMAND (CTRL) - Q            | quit haroopad
+##### 편집
+ 단축키                       | 설명
+----------------------------|---------------------
+COMMAND (CTRL) - A          | 전체 선택
+COMMAND (CTRL) - D          | 라인 삭제
+COMMAND (CTRL) - Z          | 실행 취소
+COMMAND (CTRL) - SHIFT - Z  | 실행 복구
+COMMAND (CTRL) - Up         | 문서의 시작으로
+COMMAND (CTRL) - End        | 문서의 끝으로
+COMMAND (CTRL) - Down       | 문서의 끝으로
+ALT - Left                  | 왼쪽으로 그룹 단위 이동
+ALT - Right                 | 오른쪽으로 그룹 단위 이동
+COMMAND (CTRL) - Left       | 라인의 시작으로
+COMMAND (CTRL) - Right      | 라인의 끝으로
+ALT - Backspace             | 이전 그룹 삭제
+CTRL - ALT - Backspace      | 다음 그룹 삭제
+ALT - Delete                | 다음 그룹 삭제
+COMMAND (CTRL) - [          | 내어쓰기
+COMMAND (CTRL) - ]          | 들여쓰기
 
-##### View
-Shortcut                              | Description
-----------------------------------|-------------------
-COMMAND (CTRL) - ALT - 1  | (editor : viewer) mode
-COMMAND (CTRL) - ALT - 2  | (viewer : editor) mode
-COMMAND (CTRL) - ALT - 3  | editor mode
-COMMAND (CTRL) - ALT - 4  | viewer mode
-SHIFT - CTRL - ]                  | editor mode
-SHIFT - CTRL - [                  | dual mode
-CTRL - ALT - ]                     | editor width +5%
-CTRL - ALT - [                     | editor width -5%
-COMMAND (CTRL) - SHIFT - L  | toggle line number
-COMMAND (CTRL) - SHIFT - H  | toggle markdown helper
-COMMAND (CTRL) - Enter        | toggle fullscreen #1
-COMMAND (CTRL) - F11           | toggle fullscreen #2
-Double ESC                             | escape fullscreen
-COMMAND (CTRL) - ALT - V     | vim keyboard binding
-COMMAND - ALT - .                | editor font size +1px
-COMMAND - ALT - ,                | editor font size -1px
-COMMAND - SHIFT - .             | viewer font size +1px
-COMMAND - SHIFT - ,             | viewer font size -1px
+##### 삽입
+ 단축키              | 설명
+--------------------|---------------------
+SHIFT - CTRL - D    | Date & Time
 
-##### Editing
- Shortcut                               | Description
------------------------------------|---------------------
-COMMAND (CTRL) - A             | Select All
-COMMAND (CTRL) - D             | Delete Line
-COMMAND (CTRL) - Z             | Undo
-SHIFT - COMMAND (CTRL) - Z  | Redo
-COMMAND (CTRL) - Y             | Redo
-COMMAND (CTRL) - Up           | Go to Doc Start
-COMMAND (CTRL) - End         | Go to Doc End
-COMMAND (CTRL) - Down      | Go to Doc End
-ALT - Left                            | Go to Group Left
-ALT - Right                          | Go to Group Right
-COMMAND (CTRL) - Left        | Go to Line Start
-COMMAND (CTRL) - Right       | Go to Line End
-ALT - Backspace                   | Delete Group before
-CTRL - ALT - Backspace        | Delete Group after
-ALT - Delete                        | Delete Group after
-COMMAND (CTRL) - [           | Indent less
-COMMAND (CTRL) - ]           | Indent
+##### 마크다운 편집
+단축키                        | 예시                 | 설명
+-----------------------------|:------------------:|-------------
+COMMAND (CTRL) - 1           | #                  | 문서 제목
+COMMAND (CTRL) - 2           | ##                 | 문단 제목
+COMMAND (CTRL) - 3           | ###                | 단락 제목
+COMMAND (CTRL) - 4           | ####               | 헤더4
+COMMAND (CTRL) - 5           | #####              | 헤더5
+COMMAND (CTRL) - 6           | ######             | 헤더6
+COMMAND (CTRL) - B           | \*\*Bold\*\*       | 볼드
+COMMAND (CTRL) - I           | \*Italic\*         | 이탤릭
+COMMAND (CTRL) - L           | \[link\](url)      | 링크
+COMMAND (CTRL) - Y           | \+\+underline\+\+  | 밑줄
+COMMAND (CTRL) - K           | \`code\`           | 인라인 코드
+COMMAND (CTRL) - E           | @\[]()             | 임베드
+COMMAND (CTRL) - U           | \~\~strike~~       | 취소선
+COMMAND (CTRL) - T           | \==highlight=      | 하이라이팅
+SHIFT - CTRL - I             | \!\[]()            | 이미지
+SHIFT - CTRL - T             | [TOC]              | 목차
+SHIFT - CTRL - O             | 1. markdown        | 정렬목록
+SHIFT - CTRL - L             | * haroopad         | 비정렬 목록
+SHIFT - CTRL - J             | $math$             | 수학 인라인 표현
+SHIFT - CTRL - M             | $$math$$           | 수학 블럭 표현
+SHIFT - CTRL - Q             | > blockquot        | 인용구
+SHIFT - ALT - ENTER          | \- \- \-           | 섹션 나누기
+SHIFT - CTRL - ENTER         | \* \* \*           | 페이지 나누기
+SHIFT - CTRL - ALT - ENTER   | \_ \_ \_           | 문단 나누기
 
-##### Inserting
- Shortcut                     | Description
----------------------------|---------------------
-SHIFT - CTRL - 1          | 10/7/2013
-SHIFT - CTRL - 2          | 10/07/2013
-SHIFT - CTRL - 3          | October 17 2013
-SHIFT - CTRL - 4          | Oct 17 2013
-SHIFT - CTRL - 5          | October 17 2013 3:17 AM
-SHIFT - CTRL - 6          | Oct 17 2013 3:17 AM
-SHIFT - CTRL - 7          | Thursday, October 17 2013 3:17 AM
-SHIFT - CTRL - 8          | Thu, Oct 17 2013 3:17 AM
-
-##### Markdown Editing
-Shortcut                                  | Example       | Description
--------------------------------------|:--------------:|-------------------
-COMMAND (CTRL) - 1               | #                 | Header 1
-COMMAND (CTRL) - 2               | ##               | Header 2
-COMMAND (CTRL) - 3               | ###              | Header 3
-COMMAND (CTRL) - 4               | ####            | Header 4
-COMMAND (CTRL) - 5               | #####          | Header 5
-COMMAND (CTRL) - 6               | ######         | Header 6
-COMMAND (CTRL) - B               | \*\*Bold\*\*   | bold
-COMMAND (CTRL) - I               | \*Italic\*        | italic
-COMMAND (CTRL) - L               | \[link\](url)       | link
-COMMAND (CTRL) - Y               | \_underline\_    | underline
-COMMAND (CTRL) - K               | \`code\`           | inline code
-COMMAND (CTRL) - E               | @\[]()               | embed
-COMMAND (CTRL) - T               | [TOC]               | table of content
-COMMAND (CTRL) - ALT - S       | \~~strike~~      | strike
-COMMAND (CTRL) - ALT - H      | \==highlight== | highlight
-COMMAND (CTRL) - ALT - O      | 1. markdown   | ordered list
-COMMAND (CTRL) - ALT - U      | * haroopad      | unordered list
-COMMAND (CTRL) - ALT - I       | \!\[]()             | image
-COMMAND (CTRL) - ALT - M      | $$math$$       | math
-COMMAND (CTRL) - ALT - B      | > blockquote    | blockquote
-COMMAND (CTRL) - ALT - Enter    | \- \- \-       | section break
-COMMAND (CTRL) - ALT - `          | \* \* \*       | page break
-
-##### Finding
-Shortcut                                  | Description
--------------------------------------|-------------------
-COMMAND (CTRL) - F                | Starting search
-COMMAND (CTRL) - G               | Find next
-COMMAND (CTRL) - SHIFT + G   | Find previous
-COMMAND - ALT - F                  | Replace (Mac)
-SHIFTL - CTR- F                       | Replace (linux, win)
-COMMAND - SHIFT - ALT - F       | Replace all (Mac)
-SHIFT - CTRL - R                       | Replace all (linux, win)
-
----
-
-일반적으로 단축키는 드랍다운 메뉴에 함께 표시되는게 일반적이나 웹 기술을 기반으로 하는 하루패드는 아직 이 부분에 있어서는 완벽하지 않다.
-
-향후 단축키는 일반적인 윈도우 시스템에서 제공하는 단축키 기능을 제공할 예정이다.
+##### 찾기
+단축키                         | 설명
+-----------------------------|-------------------
+COMMAND (CTRL) - F           | 검색
+COMMAND (CTRL) - G           | 다음 검색
+COMMAND (CTRL) - SHIFT + G   | 이전 검색
+COMMAND - ALT - F            | 치환 (Mac)
+SHIFT - CTRL - F             | 치환
+COMMAND - SHIFT - ALT - F    | 전체 치환 (Mac)
+SHIFT - CTRL - R             | 전체 치환
