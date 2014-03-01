@@ -18,7 +18,9 @@
 
     if (!match.input.replace(match[0], '').trim()) {
       cm.removeLine(pos.line);
-      cm.execCommand('newlineAndIndent');
+      cm.replaceSelection('\n', 'end');
+      // cm.setLine(pos.line+1, '');
+      // cm.execCommand('newlineAndIndent');
       return;
     }
 
