@@ -27,7 +27,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
   - Added Export to HTML
   - Added Sending email
 * Continous List Item (ol, li)
-* Fixed number of bugs & enhancements
+* Fixed many number of bugs & enhancements
 
 ### Main Features
 

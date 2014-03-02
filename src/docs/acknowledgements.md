@@ -378,3 +378,9 @@ Copyright (c) 2011 Jan Mühlemann (MIT)
 **css**
 
 Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca> (MIT)
+
+* * *
+
+**download-github-repo**
+
+https://github.com/ianstormtaylor/download-github-repo (MIT)
