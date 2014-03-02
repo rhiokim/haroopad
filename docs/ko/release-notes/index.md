@@ -1,3 +1,40 @@
+## Haroopad v0.11.1
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#309             | ==추가== 위첨자 마크다운 문법 `위첨자^superscript^`
+#308             | ==추가== 아래첨자 마크다운 문법 `아래첨자~subscript~`
+#302             | ==추가== 이미지 마크다운 문법 (오디오, 비디오)
+#191             | ==추가== 국제화 - 그리스어 추가
+#293             | ==추가== 컨텍스트 메뉴에 테마 설정, 파일출력, 메일 전송 메뉴
+#283             | ==추가== 인라인 수학 표현식 문법 `$`, `$$$` 옵션
+#266             | ==추가== 밑줄 마크다운 문법 `_` 에서 `++` 으로 변경
+**Bugs**         |
+#310             | 우분투 민트 15에서 애플리케이션 시작 오류 해결
+#305             | 윈도우 포지션 0,0 으로 설정되는 오류 해결
+#301, #271, #261 | 서드파티 라이브러리 의존성 문제로 실행되지 않던 문제 해결
+#299             | 중국어 언어 설정 문제 해결
+**Enhancements** |
+#307             | 마크다운 스마트 리스트
+#306             | HTML 출력 시 이미지 경로 개선
+#304,#294, #258  | 글로벌 단축키 시스템에 맞도록 (Ctrl + Alt 키 조합 모두 제거) 개선
+#296             | 목차(TOC) 고정 헤더 라벨 제거
+
+##### Github Issue tracker
+
+* v0.11.1 -- https://github.com/rhiokim/haroopad/issues?milestone=39&page=1&state=closed
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/aqz9deb54le3b1b/haroopad-v0.11.1-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/dhclfu538188yox/haroopad-v0.11.1.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/rnvq59dcytz6z8z/haroopad-v0.11.1_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/d1x3fap7sk57p02/haroopad-v0.11.1-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/2ncg44ybixjezzq/haroopad-v0.11.1_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/2km44jkax2lsarf/haroopad-v0.11.1_amd64.deb
+
+
 ## Haroopad v0.11.0
 
 Issue Number     | Description

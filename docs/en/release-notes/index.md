@@ -1,3 +1,39 @@
+## Haroopad v0.11.1
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#309             | ==Added== Superscript Syntax `Superscript^superscript^`
+#308             | ==Added== Subscript Syntax `Subscript~subscript~`
+#302             | ==Added== Support Audio & Video with Image Syntax extention
+#191             | ==Added== Internationalization - Greek (Ελληνικά)
+#293             | ==Added== Enhanced Context menu
+#283             | ==Added== Option inline mathematics expression (**$**, $$$) 
+#266             | ==Changed== Underline Syntax `_underline_` -> `++underline++`
+**Bugs**         |
+#310             | Application is not started on Mint15/64bit
+#305             | Window postion x,y error
+#301, #271, #261 | NVCtrl extension does not exist
+#299             | Chinese language error
+**Enhancements** |
+#307             | Continous List Item (ol, li)
+#306             | Smart resource path when exporting html file
+#304,#294, #258  | Removed Ctrl + Alt shortcut at all for global keyboard shortcut
+#296             | TOC starts with "TABLE OF CONTENTS" (en-us) string in v 0.11
+
+##### Github Issue tracker
+
+* v0.11.1 -- https://github.com/rhiokim/haroopad/issues?milestone=39&page=1&state=closed
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/aqz9deb54le3b1b/haroopad-v0.11.1-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/dhclfu538188yox/haroopad-v0.11.1.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/rnvq59dcytz6z8z/haroopad-v0.11.1_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/d1x3fap7sk57p02/haroopad-v0.11.1-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/2ncg44ybixjezzq/haroopad-v0.11.1_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/2km44jkax2lsarf/haroopad-v0.11.1_amd64.deb
+
 ## Haroopad v0.11.0
 
 Issue Number     | Description
