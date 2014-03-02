@@ -50,9 +50,11 @@ define([
 		_cookie.donate = new Date().getTime() + 1000 * 60 * 60 * 24 * 99999;
 		store.set('_time', _cookie);
 
-		global._gaq.push('haroopad', 'ester egg', 'disabled donation popover');
+		setTimeout(function() {
+			nw.file.set('markdown', '## Thank you :-)\nDisabled donation auto popover!\n\nEnjoy Markdown. Enjoy Haroopad.\n');
+		}, 250);
 		
-		alert('# Thank you :-)\nDisabled donation popover!\nEnjoy Markdown. Enjoy Haroopad\n');
+		global._gaq.push('haroopad', 'ester egg', 'disabled donation popover');
 	});
 
 	return new Adver;
