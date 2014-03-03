@@ -35,11 +35,15 @@ define([
 		},
 
 		donateHandler: function(e) {
+			var d;
 			e.preventDefault();
 
 			if (e.target.id == 'donate-link') {
-				_cookie.donate = new Date().getTime() + Math.random() * 1000 * 60 * 60 * 24 * 10;
-				store.set('_time', _cookie);
+				d = new Date().getTime() + Math.random() * 1000 * 60 * 60 * 24 * 10;
+
+				if (_cookie.donate < d) {
+					store.set('_time', _cookie);
+				}
 
 				this.$('button[data-toggle=popover]').popover('hide');
 			} 
