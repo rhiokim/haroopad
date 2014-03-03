@@ -20,14 +20,6 @@ Syntax ==highlighting==, **display of text** in different colors and/or fonts, d
 
 Syntax ==highlighting==, **display of text** in different colors and/or fonts, depending upon its meaning in context (e.g. different parts of speech in a sentence, or ==function== vs. ==variables names== in computer source code)
 
-### Underline
-
-```markdown
-An _underline_, also called an underscore is one or more horizontal lines immediately below a portion of writing.
-```
-
-An _underline_, also called an underscore is one or more _horizontal lines_ immediately below a portion of writing.
-
 ### Table of Contents
 
 A table of contents, usually headed simply "Contents" and abbreviated informally as TOC, is a list of the parts of a book or document organized in the order in which the parts appear.
@@ -46,8 +38,8 @@ A table of contents, usually headed simply "Contents" and abbreviated informally
 ```
 
 * [Chapter 1: Getting Started]()
-	- [Introduction]()
-	- [Next Steps]()
+  - [Introduction]()
+  - [Next Steps]()
 
 **example**
 

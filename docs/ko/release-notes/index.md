@@ -27,12 +27,12 @@ Issue Number     | Description
 
 ##### Download
 
-> * Windows MSI: https://www.dropbox.com/s/aqz9deb54le3b1b/haroopad-v0.11.1-i386.msi
-> * Mac OS X DMG: https://www.dropbox.com/s/dhclfu538188yox/haroopad-v0.11.1.dmg
-> * Linux 32-bit Binary: https://www.dropbox.com/s/rnvq59dcytz6z8z/haroopad-v0.11.1_i386.tar.gz
-> * Linux 32-bit Debian Package: https://www.dropbox.com/s/d1x3fap7sk57p02/haroopad-v0.11.1-i386.deb
-> * Linux 64-bit Binary: https://www.dropbox.com/s/2ncg44ybixjezzq/haroopad-v0.11.1_amd64.tar.gz
-> * Linux 64-bit Debian Package: https://www.dropbox.com/s/2km44jkax2lsarf/haroopad-v0.11.1_amd64.deb
+> * Windows MSI: https://dl.dropbox.com/s/aqz9deb54le3b1b/haroopad-v0.11.1-i386.msi
+> * Mac OS X DMG: https://dl.dropbox.com/s/dhclfu538188yox/haroopad-v0.11.1.dmg
+> * Linux 32-bit Binary: https://dl.dropbox.com/s/rnvq59dcytz6z8z/haroopad-v0.11.1_i386.tar.gz
+> * Linux 32-bit Debian Package: https://dl.dropbox.com/s/d1x3fap7sk57p02/haroopad-v0.11.1-i386.deb
+> * Linux 64-bit Binary: https://dl.dropbox.com/s/2ncg44ybixjezzq/haroopad-v0.11.1_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://dl.dropbox.com/s/2km44jkax2lsarf/haroopad-v0.11.1_amd64.deb
 
 
 ## Haroopad v0.11.0

@@ -27,7 +27,6 @@
 * Use HTML
 * Use smarter list behavior than the original markdown
 * Use "smart" typographic punctuation for things like quotes and dashes
-* Use Mathematics Expression
 
 기타 옵션은 하나씩 살펴봅니다.
 
@@ -54,8 +53,19 @@
 > * `...` 말줄임 표현을 `…` 으로 변경
 
 
+### 수학표현식
+
+* Use Mathematics Expression
+* Use Signle $ sign for inline Expression (default: $$$)
+
 ##### Use Mathematics Expression
 
-수학 표현식은 본래 마크다운과는 별도로 LaTeX 문법을 사용하고 있지만 마크다운과 유연하게 연결되는 많이 사용됩니다.
+수학 표현식은 본래 마크다운과는 별도로 LaTeX 문법을 사용하고 있지만 마크다운과 유연하게 연계되어 많이 사용됩니다.
 
-하루패드에서 `$$`, `$$$` 을 통해 LaTeX 구문을 파싱하여 수학 표현식을 렌더링하게 됩니다. 
+하루패드에서 `$` 을 통해 LaTeX 구문을 파싱하여 수학 표현식을 렌더링하게 됩니다. 
+
+##### * Use Signle $ sign for inline Expression
+
+수학 표현식을 위해 사용되는 `$` 기호는 미국의 화폐 단위인 $ 기호를 사용하기 때문에 단일 $ 기호를 사용할 경우 마크다운 파싱에 오류가 발생할 수 있습니다.
+
+하지만 마크다운의 목표에 좀더 가깝게 인라인 수학 표현식에서 단일 $ 기호를 사용할 수 있도록 옵션을 제공합니다.
