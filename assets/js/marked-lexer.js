@@ -13,23 +13,20 @@ var defaults = merge(marked.defaults, {
   "smartypants": true,
   "headerPrefix": '',
   "mathjax": true,
-  "emoji": false
+  "emoji": false,
+  "xhtml": false
 });
 
 var lexer = new marked.Lexer(defaults);
 
 var customRules = {
+    math: /^ *(\${2,2}) *([\s\S]+?)\s*\1 *(?:\n+|$)/,
     oembed: /^@\[(inside)\]\(href\)/,
     toc: /^\[\s*(TOC|toc)(?:\s+['"]([\s\S]*?)['"])?\s*\] *(?:\n+|$)/
 }
 
 var _inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
 var _href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;
-
-customRules.oembed = replace(customRules.oembed)
-  ('inside', _inside)
-  ('href', _href)
-  ();
 
 function replace(regex, opt) {
   regex = regex.source;
@@ -60,6 +57,18 @@ function merge(obj) {
   return obj;
 }
 
+customRules.oembed = replace(customRules.oembed)
+  ('inside', _inside)
+  ('href', _href)
+  ();
+
+lexer.rules.paragraph = replace(lexer.rules.paragraph)
+  ('math', customRules.math)
+  ();
+
 lexer.rules = merge({}, lexer.rules, customRules);
+lexer.rules.pedantic = merge({}, lexer.rules.pedantic, customRules);
+lexer.rules.gfm = merge({}, lexer.rules.gfm, customRules);
+lexer.rules.tables = merge({}, lexer.rules.tables, customRules);
 
 var Lexer = lexer;
