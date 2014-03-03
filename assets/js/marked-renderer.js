@@ -105,7 +105,7 @@ function audio(href, ext, title, text, props) {
 
   out += '>';
   out += '<source src="'+ href +'" type="audio/'+ ext +'" />';
-  out += i18n.t('Your browser does not support the audio tag!');
+  out += 'Your browser does not support the audio tag!';
   out += '</audio>';
 
   return out;
@@ -120,7 +120,7 @@ function video(href, ext, title, text, props) {
 
   out += '>';
   out += '<source src="'+ href +'" type="video/'+ ext +'" />';
-  out += i18n.t('Your browser does not support the video tag!');
+  out += 'Your browser does not support the video tag!'
   out += '</video>';
 
   return out;
