@@ -1,12 +1,10 @@
 define([
-		'keyboard',
 		'txt!tpl/markdown-help.html'
 	], 
-	function(HotKey, html) {
+	function(html) {
 		$('#md-help #md-help-content').append(html);
 
-		var gui = require('nw.gui');
-		var shell = gui.Shell;
+		// var gui = require('nw.gui');
 
 		var popWin;
 		var view, isShow = false;
@@ -35,12 +33,20 @@ define([
 				// this.$el.removeClass('hide');
 				this.$pel.addClass('md-help');
 				isShow = true;
+
+				setTimeout(function() {
+					nw.editor.refresh();
+				}, 250);
 			},
 
 			hide: function() {
 				// this.$el.addClass('hide');
 				this.$pel.removeClass('md-help');
 				isShow = false;
+
+				setTimeout(function() {
+					nw.editor.refresh();
+				}, 250);
 			},
 
 			toggle: function() {
@@ -54,7 +60,7 @@ define([
 				e.preventDefault();
 
 				if (!md) {
-					shell.openExternal($el.attr('href'));
+					// global.Shell.openExternal($el.attr('href'));
 					return;
 				}
 
@@ -82,7 +88,7 @@ define([
 
 		view = new View;
 
-		HotKey('defmod-shift-h', function() {
+		keymage(__key('show-markdown-help'), function() {
 			window.ee.emit('toggle.syntax.help');
 		});
 

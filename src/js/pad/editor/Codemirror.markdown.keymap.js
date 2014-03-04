@@ -170,6 +170,12 @@ define([], function() {
         case 'highlight':
           replaceSelection('==');
           break;
+        case 'superscript':
+          replaceSelection('^');
+          break;
+        case 'subscript':
+          replaceSelection('~');
+          break;
         case 'strike':
           replaceSelection('~~');
           break;
@@ -177,7 +183,7 @@ define([], function() {
           replaceSelection('*');
           break;
         case 'underline':
-          replaceSelection('_');
+          replaceSelection('++');
           break;
         case 'code':
           replaceSelection('`');
@@ -213,6 +219,12 @@ define([], function() {
             var pos = cm.getCursor();
                 pos.line += 2;
             cm.replaceSelection('\n* * *\n');
+            cm.setCursor(pos);
+          break;
+        case 'sentence-break':
+            var pos = cm.getCursor();
+                pos.line += 2;
+            cm.replaceSelection('\n_ _ _\n');
             cm.setCursor(pos);
           break;
         case 'quote':
@@ -255,6 +267,12 @@ define([], function() {
   CodeMirror.commands.markdownHighlight = function(cm) {
     action('highlight', cm);
   };
+  CodeMirror.commands.markdownSuperscript = function(cm) {
+    action('superscript', cm);
+  };
+  CodeMirror.commands.markdownSubscript = function(cm) {
+    action('subscript', cm);
+  };
   CodeMirror.commands.markdownItalic = function(cm) {
     action('italic', cm);
   };
@@ -287,6 +305,9 @@ define([], function() {
   };
   CodeMirror.commands.markdownPageBreak = function(cm) {
     action('page-break', cm);
+  };
+  CodeMirror.commands.markdownSentenceBreak = function(cm) {
+    action('sentence-break', cm);
   };
 
   CodeMirror.commands.markdownFencedCode = function(cm) {

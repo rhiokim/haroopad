@@ -1,11 +1,10 @@
 define([
-		'store',
-		'keyboard',
 		'viewer/Viewer.inlineStyle',
 		'viewer/Viewer.inlineStyleForEmail',
+		'viewer/Viewer.userTheme',
 		'viewer/Viewer.dragdrop'
 	],
-	function(store, HotKey, inlineStyle, StyleForEmail, DragDrop) {
+	function(inlineStyle, StyleForEmail, UserTheme, DragDrop) {
 		var fs = require('fs');
 		var path = require('path');
 
@@ -21,8 +20,9 @@ define([
 		var viewerConfig = store.get('Viewer') || {};
 			viewerConfig.fontSize = Number(viewerConfig.fontSize || 15);
 		var codeConfig = store.get('Code') || {};
-		var customConfig = store.get('Custom') || {};
-		var generalConfig = store.get('General') || {};
+		// var customConfig = store.get('Custom') || {};
+		// var generalConfig = store.get('General') || {};
+		var markdownConfig = store.get('Markdown') || {};
 
 		// var config = option.toJSON();
 
@@ -77,12 +77,12 @@ define([
 
 		/* change custom theme */
 
-		function changeCustomTheme(theme, log) {
-			var css = (theme && theme.path) || '';
-			_viewer.loadCustomCSS(css);
+		// function changeCustomTheme(theme, log) {
+		// 	var css = (theme && theme.path) || '';
+		// 	_viewer.loadCustomCSS(css);
 
-			!log && global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
-		}
+		// 	!log && global._gaq.push('haroopad.preferences', 'change.custom.theme', '');
+		// }
 
 		function enableMath(value, log) {
 			// _viewer.empty();
@@ -92,13 +92,19 @@ define([
 			!log && global._gaq.push('haroopad.preferences', 'enable math expression', value);
 		}
 
+		function changeMarkdownOption() {
+			nw.file.trigger('change:markdown');
+		}
+
 		window.parent.ee.on('preferences.viewer.theme', changeTheme);
 		window.parent.ee.on('preferences.viewer.fontSize', changeFontSize);
 		window.parent.ee.on('preferences.viewer.fontFamily', changeFontFamily);
 		window.parent.ee.on('preferences.code.theme', changeCodeTheme);
 		window.parent.ee.on('preferences.viewer.clickableLink', changeClickableLink);
-		window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
-		window.parent.ee.on('preferences.general.enableMath.after', enableMath);
+		// window.parent.ee.on('preferences.custom.theme', changeCustomTheme);
+		window.parent.ee.on('preferences.markdown.change.after', changeMarkdownOption);
+		// window.parent.ee.on('preferences.general.enableMath.after', enableMath);
+		// window.parent.ee.on('preferences.markdown.mathjax.after', enableMath);
 
 		/* window close */
 		nw.on('destory', function() {
@@ -106,10 +112,16 @@ define([
 			window.parent.ee.off('preferences.viewer.fontSize', changeFontSize);
 			window.parent.ee.off('preferences.viewer.fontFamily', changeFontFamily);
 			window.parent.ee.off('preferences.code.theme', changeCodeTheme);
-			window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
+			// window.parent.ee.off('preferences.custom.theme', changeCustomTheme);
 			window.parent.ee.off('preferences.viewer.clickableLink', changeClickableLink);
-			window.parent.ee.off('preferences.general.enableMath.after', enableMath);
+			window.parent.ee.off('preferences.markdown.change.after', changeMarkdownOption);
+			// window.parent.ee.off('preferences.general.enableMath.after', enableMath);
+			// window.parent.ee.off('preferences.markdown.mathjax.after', enableMath);
 		});
+
+		/* change theme by context menu */
+		window.ee.on('viewer.theme', changeTheme);
+		window.ee.on('viewer.theme.code', changeCodeTheme);
 
 		window.ee.on('print.viewer', function(value) {
 			_viewer.print();
@@ -180,23 +192,23 @@ define([
 			changeFontSize(viewerConfig.fontSize);
 		});
 
-		HotKey('defmod-p', function() {
+		keymage(__key('print'), function() {
 			window.ee.emit('print.viewer');
 		});
 
-		HotKey('defmod-alt-c', function() {
+		keymage(__key('copy-to-clipboard'), function() {
 			window.ee.emit('menu.file.exports.clipboard.plain');
 		});
 
-		// HotKey('defmod-shift-alt-c', function() {
+		// keymage('defmod-shift-alt-c', function() {
 		// 	window.ee.emit('menu.file.exports.clipboard.haroopad');
 		// });
 
-		HotKey('defmod-shift-.', function() {
+		keymage(__key('viewer-font-size-up'), function() {
 			window.ee.emit('menu.view.viewer.font.size', 1);
 		});
 
-		HotKey('defmod-shift-,', function() {
+		keymage(__key('viewer-font-size-down'), function() {
 			window.ee.emit('menu.view.viewer.font.size', -1);
 		});
 
@@ -248,25 +260,26 @@ define([
 		 * @param  {[type]} fileObject [description]
 		 * @return {[type]}            [description]
 		 */
-		_viewer.ee.on('drop', function(fileObject) {
-			var file = fileObject.path;
-			var ext = path.extname(file);
+		// _viewer.ee.on('drop', function(fileObject) {
+		// 	var file = fileObject.path;
+		// 	var ext = path.extname(file);
 
-			switch (ext) {
-				case '.css':
-					_viewer.loadCustomCSS(file);
-					break;
-			}
-		});
+		// 	switch (ext) {
+		// 		case '.css':
+		// 			_viewer.loadCustomCSS(file);
+		// 			break;
+		// 	}
+		// });
 
 		changeTheme(viewerConfig.theme || 'haroopad', true);
 		changeFontSize(viewerConfig.fontSize, true);
 		changeFontFamily(viewerConfig.fontFamily, true);
 		changeCodeTheme(codeConfig.theme || 'solarized_light', true);
 
-		if (customConfig.theme) {
-			_viewer.loadCustomCSS(customConfig.theme.path);
-		}
+		UserTheme.init();
+		// if (customConfig.theme) {
+		// 	_viewer.loadCustomCSS(customConfig.theme.path);
+		// }
 
 		return {
 			init: function() {

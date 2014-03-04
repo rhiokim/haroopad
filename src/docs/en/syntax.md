@@ -296,10 +296,10 @@ Syntax ==highlighting==, **display of text** in different colors and/or fonts, d
 ##### Underline
 
 ```markdown
-An _underline_, also called an underscore is one or more horizontal lines immediately below a portion of writing.
+An ++underline++, also called an underscore is one or more horizontal lines immediately below a portion of writing.
 ```
 
-An _underline_, also called an underscore is one or more _horizontal lines_ immediately below a portion of writing.
+An ++underline++, also called an underscore is one or more ++horizontal lines++ immediately below a portion of writing.
 
 ##### Embedding
 

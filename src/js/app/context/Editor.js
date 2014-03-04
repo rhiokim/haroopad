@@ -1,100 +1,89 @@
 define([
+		'context/util',
 		'context/format/Text',
-		'context/search/Search'
-	], 
-	function(TextFormatMenu, Search) {
+		'context/search/Search',
+		'context/editor/themes',
+		'context/editor/themesUser'
+	],
+	function(util, TextFormatMenu, Search, Themes, ThemesUser) {
 
-		var gui = require('nw.gui'),
-      	win = gui.Window.get();
+		var gui = require('nw.gui');
 		var Context = new gui.Menu();
 
-		var mCut, mCopy, mPaste, mSelectAll,
-				mCopyHTML, mSearch, mPreferences;
-
-		function menuItem(options) {
-			return new gui.MenuItem(options);
+		function add(item) {
+			Context.append(item);
 		}
 
-		function sepItem() {
-			return new gui.MenuItem({
-	      type: 'separator'
-	    });
-		}
-
-		mCut = menuItem({ 
+		add(util.menuItem({
 			label: i18n.t('edit.cut'),
 			click: function() {
 				window.ee.emit('context.cut');
-			} 
-		});
-		mCopy = menuItem({
+			}
+		}));
+
+		add(util.menuItem({
 			label: i18n.t('edit.copy'),
 			click: function() {
 				window.ee.emit('context.copy');
-			} 
-		});
-		mPaste = menuItem({
+			}
+		}));
+
+		add(util.menuItem({
 			label: i18n.t('edit.paste'),
 			click: function() {
 				window.ee.emit('context.paste');
-			} 
-		});
-		mDelete = menuItem({ 
+			}
+		}));
+
+		add(util.menuItem({
 			label: i18n.t('edit.delete'),
 			click: function() {
 				window.ee.emit('context.delete');
 			}
-		});
-		mSelectAll = menuItem({ 
+		}));
+
+		add(util.menuItem({
 			label: i18n.t('edit.select-all'),
 			click: function() {
 				window.ee.emit('context.selectall');
 			}
-		});
+		}));
+
+		add(util.sepItem());
+
+		// Do not support!!!
+		// add(util.menuItem({
+		// 	label: i18n.t('Format'),
+		// 	enabled: false,
+		// 	submenu: TextFormatMenu
+		// }));
 		
-		Context.append(mCut);
-		Context.append(mCopy);
-		Context.append(mPaste);
-		Context.append(mDelete);
-		Context.append(mSelectAll);
+		// add(util.sepItem());
 
-		Context.append(sepItem());
+		// add(util.menuItem({
+		// 	label: i18n.t('edit.services'),
+		// 	enabled: false,
+		// 	submenu: Search
+		// }));
 
-		// Context.append(
-	 //    new gui.MenuItem({
-	 //      label: i18n.t('format'),
-	 //      submenu: TextFormatMenu
-	 //    })
-  //   );
-		// Context.append(sepItem());
+		add(util.menuItem({
+			label: i18n.t('view.editor.theme'),
+			submenu: Themes
+		}));
 
-		mSearch = menuItem({ 
-			label: 'Search with ...',
-      		enabled: false,
-			submenu: Search
-		});
+		add(util.menuItem({
+			label: i18n.t('view.editor.theme-user'),
+			submenu: ThemesUser
+		}));
+		
+		add(util.sepItem());
 
-		// Context.append(mSearch);
-		// Context.append(sepItem());
-
-		mEditorTheme = menuItem({ 
-			label: 'Editor Themes', 
-			click: function() {
-			} 
-		});
-		mViewTheme = menuItem({ 
-			label: 'Viewer Themes', 
-			click: function() {
-			} 
-		});
-
-		mPreferences = menuItem({
+		add(util.menuItem({
 			label: i18n.t('file.preferences'),
 			click: function() {
-		  	window.ee.emit('context.preferences');
+				window.ee.emit('context.preferences');
 			}
-		});
-		Context.append(mPreferences);
+		}));
 
 		return Context;
-});
+	});

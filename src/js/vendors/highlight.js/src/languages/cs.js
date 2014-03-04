@@ -17,6 +17,7 @@ function(hljs) {
     'where yield';
   return {
     keywords: KEYWORDS,
+    illegal: /::/,
     contains: [
       {
         className: 'comment',
@@ -24,11 +25,17 @@ function(hljs) {
         contains: [
           {
             className: 'xmlDocTag',
-            begin: '///|<!--|-->'
-          },
-          {
-            className: 'xmlDocTag',
-            begin: '</?', end: '>'
+            variants: [
+              {
+                begin: '///', relevance: 0
+              },
+              {
+                begin: '<!--|-->'
+              },
+              {
+                begin: '</?', end: '>'
+              }
+            ]
           }
         ]
       },

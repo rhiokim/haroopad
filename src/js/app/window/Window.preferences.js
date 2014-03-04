@@ -10,8 +10,8 @@ define([
 		prefWin = gui.Window.open('preferences.html', {
 	        toolbar: false,
 	        show: true,
-	        width: 550,
-	        height: 320,
+	        width: 600,
+	        height: 450,
     			icon: "logo.png",
 	        resizable: false,
 	        position: 'center',

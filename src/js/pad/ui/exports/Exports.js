@@ -8,10 +8,11 @@ define([
 			os = require('os'),
 			CleanCss = require('clean-css');
 		var gui = require('nw.gui');
-		var manifest = global.package;
+		var manifest = global.Manifest;
 		var saveEl = $("#exportHTML");
 		var cleanCss = new CleanCss();
-		var shadow;
+		var shadow = document.createElement('body');
+				shadow.style.display = 'none';
 
 		var res;
 		
@@ -19,13 +20,20 @@ define([
 			if(path.extname(file).indexOf('.htm') < 0) {
 				file += '.html';
 			}
-			
+
 			if(fs.existsSync(file)) {
 				//TODO overwriting confirm dialog
 				fs.writeFileSync(file, res, 'utf8');
 			} else {
 				fs.writeFileSync(file, res, 'utf8');
 			}
+		}
+
+		function _clone() {
+			var contentDocument = Viewer.getContentDocument();
+
+			shadow.setAttribute('class', contentDocument.body.getAttribute('class'));
+			shadow.innerHTML = contentDocument.getElementById('root').innerHTML;
 		}
 
 		function getGenerator() {
@@ -104,14 +112,25 @@ define([
 			});
 		}
 
+		/**
+		 * replace absolute path to relative path
+		 */
+		function _replaceAbsolutePath() {
+			var els, prefx = process.platform != 'win32' ? 'file://' : 'file:///',
+					dirname = nw.file.get('dirname'),
+					dirname = process.platform != 'win32' ? dirname : dirname.replace(/\\/g, '/'),
+					re = new RegExp(prefx + dirname +'/', 'g');
+
+			els = shadow.querySelectorAll('img[src], source[src]');
+			els = Array.prototype.slice.call(els, 0);
+
+			els.forEach(function(el) {
+				el.src = el.src.replace(re, '');
+			});
+		}
+
+
 		function getBodyHtml() {
-			var contentDocument = Viewer.getContentDocument();
-
-			shadow = document.createElement('body');
-			shadow.style.display = 'none';
-			shadow.setAttribute('class', contentDocument.body.getAttribute('class'));
-			shadow.innerHTML = contentDocument.getElementById('root').innerHTML;
-
 			_replaceOriginalEmbed();
 			_removeDataProperties();
 			_replaceLazyLoading();
@@ -143,6 +162,18 @@ define([
 
 		function saveHandler(e) {
 			var file = $(e.target).val();
+			var title = getTitle();
+
+			if (nw.file.get('dirname') == path.dirname(file)) {
+				_replaceAbsolutePath();
+			}
+
+			res = html.replace('@@style', getStyleSheets());
+			res = res.replace('@@body', getBodyHtml());
+			res = res.replace('@@class', getBodyClass());
+			res = res.replace('@@footer', getFooterHtml());
+			res = res.replace('@@title', title);
+			res = res.replace('@@generator', getGenerator());
 
 			save(file);
 
@@ -153,23 +184,11 @@ define([
 		window.ee.on('file.exports.html', function() {
 			var title = getTitle();
 
-			res = html.replace('@@style', getStyleSheets());
-			res = res.replace('@@body', getBodyHtml());
-			res = res.replace('@@class', getBodyClass());
-			res = res.replace('@@footer', getFooterHtml());
-			res = res.replace('@@title', title);
-			res = res.replace('@@generator', getGenerator());
-			// res = res.replace('@@author', os.hostname());
+			_clone();
 
-      		saveEl.attr('nwsaveas', title );
+  		saveEl.attr('nwsaveas', title );
+  		saveEl.attr('nwworkingdir', nw.file.get('dirname') );
 			saveEl.trigger("click");
 			saveEl.on('change', saveHandler);
-			/**
-			 * 1. get html
-			 * 2. load template
-			 * 3. set css
-			 * 4. set html
-			 * 5. save html
-			 */
 		});
 });

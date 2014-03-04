@@ -1,14 +1,20 @@
-<div id="save-dialog" class="modal hide fade" data-width="450">
-  <!-- <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
-  </div> -->
-  <div class="modal-body">
-    <p><strong class="text-error" data-i18n="pad:dialog.save-change">Do you want to save the changes made to the document?</strong></p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn btn-danger pull-left _dont_save" data-i18n="pad:dialog.dont-save">Don't Save</a>
-    <a href="#" class="btn _cancel" data-i18n="pad:dialog.cancel">Cancel</a>
-    <a href="#" class="btn btn-primary _save" data-i18n="pad:dialog.save">Save</a>
+<div id="save-dialog" class="modal fade" tabindex="-1" data-width="450" style="display:none;">
+
+  <div class="modal-dialog" style="width:450px; margin:30px auto;">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Modal header</h3>
+      </div> -->
+      <div class="modal-body">
+        <p><strong class="text-error" data-i18n="pad:dialog.save-change">Do you want to save the changes made to the document?</strong></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-danger pull-left _dont_save" data-tabindex="3" data-i18n="pad:dialog.dont-save">Don't Save</a>
+
+        <button type="button" data-dismiss="modal" class="btn btn-default _cancel" data-tabindex="2" data-i18n="pad:dialog.cancel">Cancel</a>
+        <button type="button" data-dismiss="modal" class="btn btn-primary _save" data-tabindex="1" data-i18n="pad:dialog.save">Save</a>
+      </div>
+    </div>
   </div>
 </div>

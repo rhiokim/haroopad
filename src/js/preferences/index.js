@@ -1,7 +1,8 @@
-var gui = require('nw.gui'),
-    win = gui.Window.get();
+var gui = require('nw.gui');
+var path = require('path');
 
-window.parent = win.parent;
+window.nw = gui.Window.get();
+window.parent = nw.parent;
 
 i18n.init({
   lng: global.LOCALES._lang
@@ -20,10 +21,9 @@ i18n.init({
     waitSeconds: 30,
     locale: 'ko-kr',
     paths: {
-      // tpl: '../../tpl',
-      vendors: '../vendors',
-      store: '../vendors/store.js/store',
-      keyboard: '../vendors/keymage/keymage'
+      tpl: '../../tpl',
+      txt: '../vendors/text/text',
+      vendors: '../vendors'
     },
     config: {
       text: {
@@ -32,33 +32,47 @@ i18n.init({
     }
   });
 
-  requirejs.onError = function (e) {
+  requirejs.onError = function (e) {console.log(e.stack)
     alert('Oops! Preferences dialog is crash :-(');
   };
 
   requirejs([
-      'keyboard',
       'tabs/General',
       'tabs/Editor',
       'tabs/Viewer',
-      'tabs/Custom',
+      // 'tabs/Custom',
       'tabs/Code',
       'tabs/Markdown',
       'tabs/Helper',
-      'tabs/About'
-    ], function(HotKey, General, Editor, Viewer, Custom, Code, Markdown, Helper, About) {
+      'tabs/About',
+      'tabs/Backup',
+      'updater/UpdateLanguagePack'
+    ], function(General, Editor, Viewer, /*Custom, */Code, Markdown, Helper, About) {
+      var shell = gui.Shell;
 
-      // $('.switch').bootstrapSwitch();
-      
       $('body').i18n(); 
       document.title = i18n.t('title');
     
-      HotKey('esc', function() {
-        win.close();
+      keymage('esc', function() {
+        nw.close();
       });
 
-      win.show();
-      win.focus();
+      function showItemInFolder(area, file) {
+        var theme = path.join(gui.App.dataPath, 'Themes', area, file);
+        theme += '.css';
+        shell.showItemInFolder(theme);
+      }
+      
+      Editor.on('open-theme', function(theme) {
+        showItemInFolder('editor', theme);
+      });
+
+      Viewer.on('open-theme', function(theme) {
+        showItemInFolder('viewer', theme);
+      })
+
+      nw.show();
+      nw.focus();
 
       global._gaq.push('haroopad.preferences', 'init', '');
   });

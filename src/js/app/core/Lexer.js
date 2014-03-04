@@ -2,40 +2,23 @@ define([
     'core/Renderer'
 	], 
 	function(Renderer) {
-	var marked = require("marked");
-    var config = store.get('General') || {};
-    var markdown = store.get('Markdown') || {};
-	
-    var defaults = {
-        "gfm": true,
-        "tables": true,
-        "breaks": true,
-        "pedantic": false,
-        "sanitize": false,
-        "smartLists": true,
-        "smartypants": true,
-        "silent": false,
-        "highlight": null,
-        "langPrefix": '',
-        "headerPrefix": '',
-        "mathjax": config.enableMath, 
-        "renderer": Renderer
-    };
+    var marked = require("marked");
+    var options = store.get('Markdown') || {};
+
+    var defaults = merge(marked.defaults, {
+      renderer: Renderer
+    }, options);
 
     var lexer = new marked.Lexer(defaults);
 
     var customRules = {
+        math: /^ *(\${2,2}) *([\s\S]+?)\s*\1 *(?:\n+|$)/,
         oembed: /^@\[(inside)\]\(href\)/,
         toc: /^\[\s*(TOC|toc)(?:\s+['"]([\s\S]*?)['"])?\s*\] *(?:\n+|$)/
     }
     
     var _inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
     var _href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;
-
-    customRules.oembed = replace(customRules.oembed)
-      ('inside', _inside)
-      ('href', _href)
-      ();
 
     function replace(regex, opt) {
       regex = regex.source;
@@ -49,29 +32,49 @@ define([
       };
     }
 
-	function merge(obj) {
-	  var i = 1
-	    , target
-	    , key;
+  	function merge(obj) {
+  	  var i = 1
+  	    , target
+  	    , key;
 
-	  for (; i < arguments.length; i++) {
-	    target = arguments[i];
-	    for (key in target) {
-	      if (Object.prototype.hasOwnProperty.call(target, key)) {
-	        obj[key] = target[key];
-	      }
-	    }
-	  }
+  	  for (; i < arguments.length; i++) {
+  	    target = arguments[i];
+  	    for (key in target) {
+  	      if (Object.prototype.hasOwnProperty.call(target, key)) {
+  	        obj[key] = target[key];
+  	      }
+  	    }
+  	  }
 
-	  return obj;
-	}
+  	  return obj;
+  	}
+
+    customRules.oembed = replace(customRules.oembed)
+      ('inside', _inside)
+      ('href', _href)
+      ();
+
+    lexer.rules.paragraph = replace(lexer.rules.paragraph)
+      ('math', customRules.math)
+      ();
 
     lexer.rules = merge({}, lexer.rules, customRules);
+    lexer.rules.pedantic = merge({}, lexer.rules.pedantic, customRules);
+    lexer.rules.gfm = merge({}, lexer.rules.gfm, customRules);
+    lexer.rules.tables = merge({}, lexer.rules.tables, customRules);
 
-    window.ee.on('preferences.general.enableMath', function(value) {
-        lexer.options.mathjax = value;
-        window.ee.emit('preferences.general.enableMath.after', value);
-    })
+    window.ee.on('preferences.markdown.change', function(options) {
+      var blocks = marked.Lexer.rules;
+
+      marked.setOptions(options);
+
+      if (options.tables) {
+        lexer.rules = merge({}, blocks.tables, customRules);
+      } else {
+        lexer.rules = merge({}, blocks.gfm, customRules);
+      }
+      window.ee.emit('preferences.markdown.change.after');
+    });
 
     return lexer;
 });

@@ -1,9 +1,7 @@
 define([
-	'store',
-	'keyboard',
 	'ui/dialog/Dialogs',
 	'ui/exports/Exports'
-], function(store, HotKey, Dialogs, Exports) {
+], function(Dialogs, Exports) {
 	var gui = require('nw.gui');
 	var win = gui.Window.get();
 	var moment = require('moment');
@@ -222,8 +220,7 @@ define([
 
 	/* update haroopad */
 	window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
-		// Notifier.notify('Looking for the latest version? <a href="#" data-href="release.note.haroopad">release note</a>, <a href="#" data-href="download.haroopad">download</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
-		Notifier.notify(i18n.t('pad:upgrade.message'), ' <a href="#" data-href="release.note.haroopad">'+ i18n.t('pad:upgrade.note') +'</a>, <a href="#" data-href="download.haroopad">'+ i18n.t('pad:upgrade.download') +'</a>', 'Update Haroopad v' + newVersion, undefined, 10000);
+		Notifier.notify('<a href="http://pad.haroopress.com/page.html?f=release-notes" style="color:yellow">'+ i18n.t('pad:upgrade.note') +'</a>, <a href="http://pad.haroopress.com/user.html#download" style="color:yellow">'+ i18n.t('pad:upgrade.download') +'</a>', i18n.t('pad:upgrade.message') + ' <span style="color:yellow">v' + newVersion +'</span>', undefined, 10000);
 	});
 
 	/* up to date haroopad */
@@ -235,15 +232,15 @@ define([
 		// TODO print after popup window
 	});
 
-	HotKey('defmod-enter', function() {
+	keymage(__key('enter-fullscreen'), function() {
 		window.ee.emit('view.fullscreen');
 	}, { preventDefault: true });
 
-	HotKey('defmod-f11', function() {
+	keymage(__key('enter-fullscreen-win'), function() {
 		window.ee.emit('view.fullscreen');
 	}, { preventDefault: true });
 
-	HotKey('esc esc', function() {
+	keymage(__key('escape-fullscreen'), function() {
 		if (win.isFullscreen) {
 			win.leaveFullscreen();
 			config.isFullscreen = win.isFullscreen;
@@ -251,38 +248,46 @@ define([
 		}
 	});
 
-	HotKey('defmod-o', function() {
+	keymage(__key('open'), function() {
 		window.ee.emit('menu.file.open');
 	}, { preventDefault: true });
 
-	HotKey('defmod-s', function() {
+	keymage(__key('save'), function() {
 		window.ee.emit('menu.file.save');
 	}, { preventDefault: true });
 
-	HotKey('defmod-shift-s', function() {
+	keymage(__key('save-as'), function() {
 		window.ee.emit('menu.file.save.as');
 	}, { preventDefault: true });
 
-	HotKey('defmod-w', function() {
+	keymage(__key('close'), function() {
 		nw.emit('close');
 	}, { preventDefault: true });
 
-	HotKey('defmod-f4', function() {
+	keymage(__key('close-win'), function() {
 		nw.emit('close');
 	}, { preventDefault: true });
 
-	HotKey('defmod-alt-e', function() {
+	keymage(__key('export-html'), function() {
 		window.ee.emit('file.exports.html');
 
 		global._gaq.push('haroopad.file', 'exports', 'html');
 	}, { preventDefault: true });
 
-	HotKey('defmod-q', function() {
+	keymage(__key('exit'), function() {
 		var generalOpt = store.get('General');
 		if (generalOpt.enableLastFileRestore === false) {
 			window.parent.ee.emit('clear.lastfiles');
 		}
 	}, { preventDefault: true });
+
+  keymage(__key('toggle-line-number'), function() {
+    window.ee.emit('show.toggle.linenum');
+  });
+
+  keymage(__key('toggle-vim-key-binding'), function() {
+    window.ee.emit('toggle.vim.keybind');
+  });
 
 	window.ondragover = function(e) {
 		e.preventDefault();

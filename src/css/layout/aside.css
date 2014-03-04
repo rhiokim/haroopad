@@ -1,7 +1,7 @@
 #main > aside {
 	/*-webkit-flex: 1 6 75px;*/
 	/*-webkit-order: 3;*/
-	/*display: -webkit-flex;*/
+	display: -webkit-flex;
 	/*-webkit-flex-flow: column;*/
 	/*background-color: rgba(255, 255, 255, 0.8);*/
 	/*position: absolute;*/

@@ -1,7 +1,6 @@
 define([
-		'keyboard'
 	],
-	function(HotKey) {
+	function() {
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
 
@@ -104,12 +103,12 @@ define([
 			setModeDual();
 		}
 
-		HotKey('shift-ctrl-]', setModeEditor);
-		HotKey('shift-ctrl-[', setModeDual);
-		HotKey('ctrl-\\', resetMode);
+		keymage(__key('perspective-move-right'), setModeEditor);
+		keymage(__key('perspective-move-left'), setModeDual);
+		keymage(__key('perspective-set-default'), resetMode);
 
-		HotKey('ctrl-alt-]', setPlus5Width);
-		HotKey('ctrl-alt-[', setMinus5Width);
+		keymage(__key('perspective-minus-view'), setPlus5Width);
+		keymage(__key('perspective-plus-view'), setMinus5Width);
 
 		window.ee.on('view.reset.mode', resetMode);
 		window.ee.on('view.plus5.width', setPlus5Width);

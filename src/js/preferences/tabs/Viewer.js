@@ -1,74 +1,132 @@
 define([
-		'tabs/Viewer.opt'
-	], function(options) {
-		var readdir = require('readdir');
-		var path = require('path');
+	'tabs/Viewer.opt'
+], function(options) {
+	var readDir = require('readdir');
+	var path = require('path');
+	var config = options.toJSON();
 
-		var config = options.toJSON();
+	var themes = global.THEMES.viewer;
+	var themesUser = global.THEMES.user.viewer;
 
-		options.bind('change', function(model) {
-			var prop, en,
-				data = model.changedAttributes();
+  var _gaq = global._gaq;
 
-			for (prop in data) {
-				en = 'preferences.viewer.'+ prop;
-				window.parent.ee.emit(en, data[prop]);
-			}
+	options.bind('change', function(model) {
+		var prop, en,
+			data = model.changedAttributes();
+
+		for (prop in data) {
+			en = 'preferences.viewer.' + prop;
+			window.parent.ee.emit(en, data[prop]);
+		}
+	});
+
+	function reload() {
+		//FIXME: dependency
+		themesUser = global.THEMES.user.viewer = loadCSSFiles(global.PATHS.theme_dest_viewer);
+	}
+
+	function loadCSSFiles(dir) {
+		var csses = readDir.readSync(dir, ['*.css'], readDir.CASELESS_SORT);
+		var name, themes = [];
+
+		csses.forEach(function(css, idx) {
+			name = path.basename(css).replace('.css', '');
+			themes.push(name);
 		});
 
-		function loadCodeCSSFiles() {
-			var csses = readdir.readSync(global.PATHS.css_code, [ '*.css' ], readdir.ABSOLUTE_PATHS + readdir.CASELESS_SORT);
-			var name, themes = {};
+		return themes;
+	}
 
-			csses.forEach(function(css, idx) {
-				name = path.basename(css).replace('.css','');
-				themes[name] = {
-					id: idx,
-					name: name,
-					path: css
-				}
+	var ViewerTabView = Backbone.View.extend({
+		el: '#viewer-tab',
+
+		events: {
+			'change select[name=theme]': 'changeViewStyle',
+			'change select[name=fontSize]': 'changeFontSize',
+			'change select[name=userTheme]': 'changeUserTheme',
+			'click input[name=clickableLink]': 'clickableLink',
+			'click #openViewerThemeDir': 'openUserThemeDir',
+			'click #reloadViewerTheme': 'reloadUserTheme'
+		},
+
+		initialize: function() {
+			var optEl, themeEl = document.querySelector('#viewer-tab select[name=theme]');
+
+			themes.forEach(function(theme) {
+				optEl = document.createElement('option');
+				optEl.innerHTML = theme;
+				themeEl.appendChild(optEl);
 			});
 
-			return themes;
+			this.setThemeData(themesUser);
+
+			this.$('select[name=theme]').val(config.theme).select2({
+				width: '200px'
+			});
+			this.$('select[name=fontSize]').val(config.fontSize).select2({
+				width: '70px'
+			})
+
+			this.$('input[name=clickableLink]').prop('checked', config.clickableLink);
+		},
+
+		changeViewStyle: function(e) {
+			options.set({
+				theme: e.val
+			});
+		},
+
+		changeFontSize: function(e) {
+			options.set({
+				fontSize: Number(e.val)
+			});
+		},
+
+		changeUserTheme: function(e) {
+			var el = $(e.target);
+			var theme = el.val();
+
+			options.set({
+				userTheme: theme
+			});
+
+    	_gaq.push('haroopad.preferences', 'viewer user theme', theme);
+		},
+
+		openUserThemeDir: function(e) {
+			this.trigger('open-theme', options.get('userTheme'));
+		},
+
+		reloadUserTheme: function(e) {
+			reload();
+
+			this.setThemeData(themesUser);
+
+			window.parent.ee.emit('preferences.viewer.userTheme', options.get('userTheme'));
+		},
+
+		setThemeData: function(themes) {
+			var optEl, el = this.$('select[name=userTheme]');
+
+			el.empty();
+
+			themes.forEach(function(theme) {
+				optEl = document.createElement('option');
+				optEl.innerHTML = theme;
+				el.append(optEl);
+			});
+
+			el.val(options.get('userTheme')).select2({
+				width: '200px'
+			});
+		},
+
+		clickableLink: function(e) {
+			var bool = $(e.target).is(':checked');
+			options.set('clickableLink', bool);
 		}
+	});
 
-		var ViewerTabView = Backbone.View.extend({
-			el: '#viewer-tab',
-
-			events: {
-				'change select[name=viewStyle]': 'changeViewStyle',
-				'change select[name=fontSize]': 'changeFontSize',
-				'change select[name=fontFamily]': 'changeFontFamily',
-				'click input[name=clickableLink]': 'clickableLink'	
-			},
-
-			initialize: function() {
-				this.$el.find('select[name=viewStyle]').select2().select2("val", config.theme);
-				this.$el.find('select[name=fontSize]').select2().select2("val", config.fontSize);
-				this.$el.find('select[name=fontFamily]').select2().select2("val", config.fontFamily);
-				
-				this.$el.find('input[name=clickableLink]').prop('checked', config.clickableLink);
-			},
-
-			changeViewStyle: function(e) {
-				options.set({ theme: e.val });
-			},
-
-			changeFontSize: function(e) {
-				options.set({ fontSize: Number(e.val) });
-			},
-
-			changeFontFamily: function(e) {
-				var font = e.val.split(' ').join('+');
-				options.set({ fontFamily: e.val });
-			},
-
-			clickableLink: function(e) {
-				var bool = $(e.target).is(':checked');
-				options.set('clickableLink', bool);
-			}
-		});
-
-		return new ViewerTabView;
+	return new ViewerTabView;
 
 });

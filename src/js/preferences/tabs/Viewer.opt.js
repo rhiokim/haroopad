@@ -1,12 +1,12 @@
 define([
-		'store'
-	], function(store) {
+	], function() {
 		var Model = Backbone.Model.extend({
 			defaults: {
 				theme: 'haroopad',
 				clickableLink: false,
 				fontSize: 15,
-				fontFamily: undefined
+				fontFamily: undefined,
+				userTheme: 'default'
 			},
 
 			// localStorage: new Backbone.LocalStorage('General'),

@@ -1,17 +1,24 @@
-*, .btn {
-  font-family: "Lucida Grande", "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
-}
 
 body {
   line-height: 1.5;
   overflow-y: hidden;
   background: url('../img/linen.png');
+}
+
+body, button, a {
   -webkit-user-select: none;
 }
 
 form {
   margin: 0;
   padding: 0;
+}
+
+#dialog,
+#md-help-content,
+button, .btn,
+body > footer {
+  font-family: "微软雅黑", "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, sans-serif;
 }
 
 /* -----------------------------------------

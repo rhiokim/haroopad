@@ -3,6 +3,7 @@ define([
 	], function(options) {
 
 		var config = options.toJSON();
+		var themes = global.THEMES.code;
 
 		options.bind('change', function(model) {
 			var prop, en,
@@ -23,9 +24,19 @@ define([
 			},
 
 			initialize: function() {
-				this.$el.find('select[name=codeStyle]').select2().select2("val", config.theme);
+				var optEl, themeEl = document.querySelector('#code-tab select[name=codeStyle]');
 
-				this.$el.find('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
+				themes.forEach(function(theme) {
+					optEl = document.createElement('option');
+					optEl.innerHTML = theme;
+					themeEl.appendChild(optEl);
+				});
+
+				this.$('select[name=codeStyle]').val(config.theme).select2({
+					width: '200px'
+				});
+
+				this.$('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
 			},
 
 			changeCodeStyle: function(e) {

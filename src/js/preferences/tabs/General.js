@@ -2,6 +2,9 @@ define([
 		'tabs/General.opt'
 	], function(options) {
 
+		var moment = require('moment');
+    moment.lang(global.LOCALES._lang);
+    
 		var config = options.toJSON();
 
 		options.bind('change', function(model) {
@@ -19,28 +22,55 @@ define([
 
 			events: {
 				'click input[name=enableAutoComplete]': 'enableAutoComplete',	
-				'click input[name=enableMath]': 'enableMath',	
 				'click input[name=enableSyncScroll]': 'enableSyncScroll',	
 				'click input[name=enableLastFileRestore]': 'enableLastFileRestore',
-				'click input[name=playKeypressSound]': 'playKeypressSound'
+				// 'change select[name=displayLanguage]': 'changeDisplayLanguage',
+				'click input[name=playKeypressSound]': 'playKeypressSound',
+				'change select[name=dateTime]': 'changeDateFormat'
 			},
 
+			formats: [ 'l', 'L', 'll', 'LL', 'lll', 'LLL', 'llll', 'LLLL' ],
+
 			initialize: function() {
-				this.$el.find('input[name=enableAutoComplete]').prop('checked', config.enableAutoComplete);
-				this.$el.find('input[name=enableMath]').prop('checked', config.enableMath);
-				this.$el.find('input[name=enableSyncScroll]').prop('checked', config.enableSyncScroll);
-				this.$el.find('input[name=enableLastFileRestore]').prop('checked', config.enableLastFileRestore);
-				this.$el.find('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
+				this.$('input[name=enableAutoComplete]').prop('checked', config.enableAutoComplete);
+				this.$('input[name=enableSyncScroll]').prop('checked', config.enableSyncScroll);
+				this.$('input[name=enableLastFileRestore]').prop('checked', config.enableLastFileRestore);
+				this.$('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
+
+
+				this.formats.forEach(function(prop) {
+					var option = $('<option>').attr('value', prop).text(moment(8806).format(prop));
+					this.$('select[name=dateTime]').append(option);
+				});
+
+				this.$('select[name=dateTime]').select2({
+        	placeholder: "Select Date and Format",
+					width: '300px'
+				}).select2('val', config.dateFormat);
+				
+				// this._setLanguage();
+			},
+
+			_setLanguage: function() {
+				var optEl, lang, langs = global.LANGS;
+				var parent = document.querySelector('select[name=displayLanguage]');
+
+				for(lang in langs) {
+					optEl = document.createElement('option');
+					optEl.setAttribute('value', lang);
+					optEl.innerHTML = langs[lang].name;
+
+					parent.appendChild(optEl);
+				}
+
+				this.$('select[name=displayLanguage]').select2({
+					width: '180px'
+				}).select2('val', config.displayLanguage);
 			},
 
 			enableAutoComplete: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('enableAutoComplete', bool);
-			},
-
-			enableMath: function(e) {
-				var bool = $(e.target).is(':checked');
-				options.set('enableMath', bool);
 			},
 
 			enableSyncScroll: function(e) {
@@ -51,6 +81,14 @@ define([
 			enableLastFileRestore: function(e) {
 				var bool = $(e.target).is(':checked');
 				options.set('enableLastFileRestore', bool);
+			},
+
+			changeDisplayLanguage: function(e) {
+				options.set('displayLanguage', e.val);
+			},
+
+			changeDateFormat: function(e) {
+				options.set('dateFormat', e.val);
 			},
 
 			playKeypressSound: function(e) {

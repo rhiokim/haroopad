@@ -1,6 +1,5 @@
 define([
-		'store'
-	], function(store) {
+	], function() {
 
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
@@ -13,14 +12,16 @@ define([
 		var Model = Backbone.Model.extend({
 			defaults: {
 				theme: 'solarized dark',
-				displayLineNumber: true,
+				displayLineNumber: false,
 				vimKeyBinding: false,
 				autoPairCharacters: true,
 				tabSize: 4,
 				indentUnit: 4,
 				indentWithTabs: false,
+				displayActiveLine: true,
 				fontSize: 13,
-				fontFamily: undefined
+				fontFamily: undefined,
+				userTheme: 'default'
 			},
 
 			initialize: function() {

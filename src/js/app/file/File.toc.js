@@ -1,5 +1,5 @@
 define([
-  'file/file.toc.element'
+  'file/File.toc.element'
 ], function(TocElement) {
 
   // Transform flat list of TocElement into a tree
@@ -36,6 +36,7 @@ define([
 
   // Build the TOC
   var toc = '';
+
   function buildToc(headers) {
     var anchorList = {};
     var elementList = [];
@@ -61,7 +62,7 @@ define([
     }
 
     // headers = target.querySelectorAll(':scope>h1, :scope>h2, :scope>h3, :scope>h4, :scope>h5, :scope>h6');
-    headers = Array.prototype.slice.call(headers, 0);
+    // headers = Array.prototype.slice.call(headers, 0);
 
     headers.forEach(function(elt, idx) {
       elt.setAttribute('data-idx', idx);
@@ -70,7 +71,7 @@ define([
 
     elementList = groupTags(elementList);
 
-    toc = '<ul>\n<h5>Table of Contents</h5>\n' + elementList.join("") + '\n</ul>\n';
+    toc = '<ul>\n' + elementList.join("") + '\n</ul>\n';
 
     return toc;
   }

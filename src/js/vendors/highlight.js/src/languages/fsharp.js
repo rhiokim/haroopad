@@ -6,6 +6,7 @@ Description: F# language definition.
 */
 function(hljs) {
   return {
+    aliases: ['fs'],
     keywords:
       'abstract and as assert base begin class default delegate do done ' +
       'downcast downto elif else end exception extern false finally for ' +
@@ -30,7 +31,7 @@ function(hljs) {
       },
       {
         className: 'class',
-        beginKeywords: 'type', end: '\\(|=|$',
+        beginKeywords: 'type', end: '\\(|=|$', excludeEnd: true,
         contains: [
           hljs.UNDERSCORE_TITLE_MODE
         ]

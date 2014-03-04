@@ -14,6 +14,7 @@ function(hljs) {
   };
 
   return {
+    aliases: ['as'],
     keywords: {
       keyword: 'as break case catch class const continue default delete do dynamic each ' +
         'else extends final finally for function get if implements import in include ' +
@@ -35,7 +36,7 @@ function(hljs) {
       },
       {
         className: 'class',
-        beginKeywords: 'class interface', end: '{',
+        beginKeywords: 'class interface', end: '{', excludeEnd: true,
         contains: [
           {
             beginKeywords: 'extends implements'
@@ -49,7 +50,7 @@ function(hljs) {
       },
       {
         className: 'function',
-        beginKeywords: 'function', end: '[{;]',
+        beginKeywords: 'function', end: '[{;]', excludeEnd: true,
         illegal: '\\S',
         contains: [
           hljs.TITLE_MODE,

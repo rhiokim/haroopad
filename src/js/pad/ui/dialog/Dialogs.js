@@ -1,11 +1,11 @@
 define([
-		'keyboard',
+		// 'keyboard',
 		// 'ui/file/File.opt',
 		'ui/dialog/Save',
 		'ui/dialog/Reload',
 		'ui/dialog/Email'
 	], 
-	function(HotKey, /*FileOpt,*/ Save, Reload, Email) {
+	function(/*FileOpt,*/ Save, Reload, Email) {
 		var dialogs;
 
 		var SaveDialog = new Save,
@@ -29,11 +29,11 @@ define([
 
 		window.ee.on('fail.send.email', function(err) {
 			if(err.name == 'AuthError') {
-				EmailDialog.error('Email and Password not accepted.');
+				EmailDialog.error(i18n.t('pad:email.invalid-account'));
 			}
 		});
 
-		HotKey('defmod-shift-e', function() {
+		keymage(__key('send-email'), function() {
 			window.ee.emit('menu.file.send.email');
 		});
 

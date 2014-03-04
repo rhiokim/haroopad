@@ -1,12 +1,12 @@
 define([
-		// 'editor/Parser',
-		'keyboard',
-		'store',
 		'editor/Editor.keymap',
-		'editor/Editor.drop'
+		'editor/Editor.drop',
+		'editor/Editor.autoComplete',
+		'editor/Editor.custom'
 	],
-	function(HotKey, store, Keymap, Drop) {
+	function(Keymap, Drop, AutoComplete) {
 		var moment = require('moment');
+    moment.lang(global.LOCALES._lang);
 
 		var gui = require('nw.gui'),
 			win = gui.Window.get(),
@@ -18,8 +18,9 @@ define([
 		var MAX_FONT_SIZE = 30;
 
 		var config = store.get('Editor') || {
-			displayLineNumber: true,
+			displayLineNumber: false,
 			autoPairCharacters: true,
+			displayActiveLine: true,
 			theme: 'solarized dark'
 		};
 		config.fontSize = Number(config.fontSize || 13);
@@ -27,13 +28,13 @@ define([
 			enableSyncScroll: true,
 			playKeypressSound: false
 		};
+		generalConf.dateFormat = generalConf.dateFormat || 'LLL';
 
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-			mode: 'gfm',
+			mode: 'markdown',
 			lineNumbers: true,
 			lineWrapping: true,
 			electricChars: false,
-  		styleActiveLine: true,
 			viewportMargin: 40,
 			autofocus: true,
 			workDelay: 1000,
@@ -63,81 +64,23 @@ define([
 		});
 
 		//auto completion end signal
-		CodeMirror.on(editor, 'endCompletion', function(cm) {
-			var cur = cm.getCursor();
-			var token = cm.getTokenAt(cur);
-			var md = token.string;
-			var doc = cm.getDoc();
-
-			switch(md) {
-			  case '##':
-			  case '###':
-			  case '####':
-			  case '#####':
-			  case '######':
-			  	cm.replaceSelection(' ');
-			  	cur.ch++;
-			    cm.setCursor(cur);
-			    cm.replaceSelection('[Header]');
-			  break;
-			  case '**':
-			  case '~~':
-			  case '==':
-			  case '$$$':
-			    cm.replaceSelection(md);
-			    cm.setCursor(cur);
-			    cm.replaceSelection('      ');
-			  break;
-			  case '```':
-			    cm.replaceSelection('\n'+ md);
-			    cm.setCursor(cur);
-			    cm.replaceSelection('language');
-			  break;
-			  case '$$':
-			    cm.replaceSelection('\n\n'+ md);
-			    cur.line++;
-			    cm.setCursor(cur);
-			  break;
-			  case '()':
-			    cur.ch--;
-			    cm.setCursor(cur);
-			    cm.replaceSelection('      ');
-			  break;
-			  case '* * *':
-			  case '*****':
-			  case '- - -':
-			  case '-----':
-			  case '_ _ _':
-			  case '_____':
-			  	cur.ch -= md.length;
-			  	cm.setCursor(cur);
-			    cm.replaceSelection('\n');
-			    cur.line += 1;
-			  	cur.ch += md.length;
-			  	cm.setCursor(cur);
-			    cm.replaceSelection('\n\n');
-			    cur.line += 2;
-			    cm.setCursor(cur);
-			  break;
-			  default:
-			  break;
-			}
-		});
+		CodeMirror.on(editor, 'endCompletion', AutoComplete);
 
 		/* initialize editor */
 		function setFontSize(value) {
 			CodeMirrorElement.style.fontSize = value + 'px';
+			nw.editor.refresh();
 		}
 
 		//TODO FIXME
 		function setFontFmaily() {
-			var all = document.styleSheets,
-			    s = all[all.length - 1],
-			    l = s.cssRules.length;
+			// var all = document.styleSheets,
+			//     s = all[all.length - 1],
+			//     l = s.cssRules.length;
 
-			if (s.insertRule) {
-			    s.insertRule(".CodeMirror { font-family: Menlo, Monaco, 'Andale Mono','lucida console','Courier New', monospace, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular !important; }", l);
-			}
+			// if (s.insertRule) {
+			//     s.insertRule(".CodeMirror { font-family: Menlo, Monaco, 'Andale Mono','lucida console','Courier New', monospace, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular !important; }", l);
+			// }
 			// CodeMirrorElement.style.fontFamily = "Monaco, Menlo, 'Segoe UI', 'Malgun Gothic', AppleSDGothicNeo-Regular";
 		}
 
@@ -162,7 +105,6 @@ define([
 
 
 		/* change theme */
-
 		function changeTheme(value) {
 			editor.setOption('theme', value);
 
@@ -170,7 +112,6 @@ define([
 		}
 
 		/* change font size */
-
 		function changeFontSize(value) {
 			setFontSize(value);
 
@@ -178,15 +119,27 @@ define([
 		}
 
 		/* toggle line number */
-
 		function toggleLineNumber(value) {
 			editor.setOption('lineNumbers', value);
 
 			global._gaq.push('haroopad.preferences', 'editor', 'lineNumbers: ' + value);
 		}
 
-		/* toggle vim key binding */
+		/* toggle active line */
+		function toggleActiveLine(value) {
+			editor.setOption('styleActiveLine', value);
 
+			global._gaq.push('haroopad.preferences', 'editor', 'activeLine: ' + value);
+		}
+
+		/* toggle indent with tab */
+		function toggleIndentWithTab(value) {
+			editor.setOption('indentWithTabs', value);
+
+			global._gaq.push('haroopad.preferences', 'editor', 'indent with tab: ' + value);
+		}
+
+		/* toggle vim key binding */
 		function toggleVim(value) {
 			editor.setOption('keyMap', value ? 'vim' : 'default');
 
@@ -194,7 +147,6 @@ define([
 		}
 
 		/* toggle auto pair char */
-
 		function toggleAutoPairChar(value) {
 			editor.setOption('autoCloseBrackets', value);
 
@@ -202,7 +154,6 @@ define([
 		}
 
 		/* toggle sync scroll */
-
 		function toggleSyncScroll(value) {
 			if (value) {
 				editor.on('scroll', syncScrollHandler);
@@ -220,9 +171,11 @@ define([
 		
 		editor.setOption('theme', config.theme);
 		editor.setOption('lineNumbers', config.displayLineNumber);
+		editor.setOption('styleActiveLine', config.displayActiveLine);
 		editor.setOption('keyMap', config.vimKeyBinding ? 'vim' : 'default');
 		editor.setOption('tabSize', config.tabSize || 4);
 		editor.setOption('indentUnit', config.indentUnit || 4);
+		editor.setOption('indentWithTabs', config.indentWithTabs || false);
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
 		toggleAutoComplete(generalConf.enableAutoComplete || false);
@@ -231,21 +184,33 @@ define([
 
 		window.parent.ee.on('preferences.general.enableSyncScroll', toggleSyncScroll);
 		window.parent.ee.on('preferences.general.enableAutoComplete', toggleAutoComplete);
+		window.parent.ee.on('preferences.general.dateFormat', function(format) {
+			generalConf.dateFormat = format;
+		});
 
 		window.parent.ee.on('preferences.editor.theme', changeTheme);
 		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
+		window.parent.ee.on('preferences.editor.displayActiveLine', toggleActiveLine);
 		window.parent.ee.on('preferences.editor.vimKeyBinding', toggleVim);
 		window.parent.ee.on('preferences.editor.autoPairCharacters', toggleAutoPairChar);
+		window.parent.ee.on('preferences.editor.indentWithTabs', toggleIndentWithTab);
 		window.parent.ee.on('preferences.editor.fontSize', changeFontSize);
 
 		nw.on('destroy', function() {
 			window.parent.ee.off('preferences.general.enableSyncScroll', toggleSyncScroll);
+			window.parent.ee.off('preferences.general.enableAutoComplete', toggleAutoComplete);
 
 			window.parent.ee.off('preferences.editor.theme', changeTheme);
 			window.parent.ee.off('preferences.editor.displayLineNumber', toggleLineNumber);
+			window.parent.ee.off('preferences.editor.displayActiveLine', toggleActiveLine);
 			window.parent.ee.off('preferences.editor.vimKeyBinding', toggleVim);
 			window.parent.ee.off('preferences.editor.autoPairCharacters', toggleAutoPairChar);
+			window.parent.ee.off('preferences.editor.indentWithTabs', toggleIndentWithTab);
+			window.parent.ee.off('preferences.editor.fontSize', changeFontSize);
 		});
+
+		/* change theme by context menu */
+		window.ee.on('editor.theme', changeTheme);
 
 		window.ee.on('toggle.vim.keybind', function() {
 			var map = editor.getOption('keyMap');
@@ -341,6 +306,8 @@ define([
 				case 'u': CodeMirror.commands.markdownUnderline(editor); break;
 				case 'del': CodeMirror.commands.markdownStrike(editor); break;
 				case 'highlight': CodeMirror.commands.markdownHighlight(editor); break;
+				case 'superscript': CodeMirror.commands.markdownSuperscript(editor); break;
+				case 'subscript': CodeMirror.commands.markdownSubscript(editor); break;
 				case 'image': CodeMirror.commands.markdownImage(editor); break;
 				case 'blockquote': CodeMirror.commands.markdownBlockQuote(editor); break;
 				case 'ol': CodeMirror.commands.markdownOrderedList(editor); break;
@@ -354,6 +321,7 @@ define([
 				case 'toc': CodeMirror.commands.markdownTOC(editor); break;
 				case 'hr-page': CodeMirror.commands.markdownPageBreak(editor); break;
 				case 'hr-section': CodeMirror.commands.markdownSectionBreak(editor); break;
+				case 'hr-sentence': CodeMirror.commands.markdownSentenceBreak(editor); break;
 			}
 
 			global._gaq.push('haroopad.insert', 'markdown', tag);
@@ -363,7 +331,8 @@ define([
 			global._gaq.push('haroopad.insert', 'TOC', '');
 		});
 
-		window.ee.on('insert.date', function(format) {
+		window.ee.on('insert.date', function() {
+			var format = generalConf.dateFormat;
 			editor.replaceSelection(moment().format(format));
 			editor.setCursor(editor.getCursor());
 
@@ -371,7 +340,7 @@ define([
 		});
 
 		window.ee.on('insert.filename', function() {
-			editor.replaceSelection(nw.file.get('basename'));
+			editor.replaceSelection(nw.file.get('basename') || '');
 			editor.setCursor(editor.getCursor());
 
 			global._gaq.push('haroopad.insert', 'filename', '');
@@ -405,61 +374,61 @@ define([
 			editor.setOption('readOnly', true);
 		}
 
-
-		window.onresize = function() {
+		window.addEventListener('resize', function(e) {
 			CodeMirrorGutters.style.height = '5000px';
-		}
+		});
 
-		HotKey('defmod-alt-.', function() {
+		keymage(__key('editor-font-size-up'), function() {
 			window.ee.emit('menu.view.editor.font.size', 1);
 		});
-		HotKey('defmod-alt-,', function() {
+		keymage(__key('editor-font-size-down'), function() {
 			window.ee.emit('menu.view.editor.font.size', -1);
 		});
+		
+		keymage(__key('insert-date-time'), function() {
+			window.ee.emit('insert.date');
+		});
 
-		// HotKey('defmod-1', function() {
+		// keymage('defmod-1', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h1');
 		// });
-		// HotKey('defmod-2', function() {
+		// keymage('defmod-2', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h2');
 		// });
-		// HotKey('defmod-3', function() {
+		// keymage('defmod-3', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h3');
 		// });
-		// HotKey('defmod-4', function() {
+		// keymage('defmod-4', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h4');
 		// });
-		// HotKey('defmod-5', function() {
+		// keymage('defmod-5', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h5');
 		// });
-		// HotKey('defmod-6', function() {
+		// keymage('defmod-6', function() {
 		// 	window.ee.emit('menu.insert.markdown', 'h6');
 		// });
 
-		HotKey('shift-ctrl-1', function() {
-			window.ee.emit('insert.date', 'l');
-		});
-		HotKey('shift-ctrl-2', function() {
-			window.ee.emit('insert.date', 'L');
-		});
-		HotKey('shift-ctrl-3', function() {
-			window.ee.emit('insert.date', 'll');
-		});
-		HotKey('shift-ctrl-4', function() {
-			window.ee.emit('insert.date', 'LL');
-		});
-		HotKey('shift-ctrl-5', function() {
-			window.ee.emit('insert.date', 'lll');
-		});
-		HotKey('shift-ctrl-6', function() {
-			window.ee.emit('insert.date', 'LLL');
-		});
-		HotKey('shift-ctrl-7', function() {
-			window.ee.emit('insert.date', 'llll');
-		});
-		HotKey('shift-ctrl-8', function() {
-			window.ee.emit('insert.date', 'LLLL');
-		});
+		// keymage(__key('insert-date-L'), function() {
+		// 	window.ee.emit('insert.date', 'L');
+		// });
+		// keymage(__key('insert-date-ll'), function() {
+		// 	window.ee.emit('insert.date', 'll');
+		// });
+		// keymage(__key('insert-date-LL'), function() {
+		// 	window.ee.emit('insert.date', 'LL');
+		// });
+		// keymage(__key('insert-date-lll'), function() {
+		// 	window.ee.emit('insert.date', 'lll');
+		// });
+		// keymage(__key('insert-date-LLL'), function() {
+		// 	window.ee.emit('insert.date', 'LLL');
+		// });
+		// keymage(__key('insert-date-llll'), function() {
+		// 	window.ee.emit('insert.date', 'llll');
+		// });
+		// keymage(__key('insert-date-LLLL'), function() {
+		// 	window.ee.emit('insert.date', 'LLLL');
+		// });
 
 		return editor;
 	});

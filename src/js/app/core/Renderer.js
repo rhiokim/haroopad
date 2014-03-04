@@ -2,6 +2,7 @@ define([
 	], 
 	function() {
 
+		var path = require('path');
 		var marked = require('marked');
 		var renderer = new marked.Renderer();
 
@@ -40,14 +41,16 @@ define([
 		}
 	
 		renderer.math = function(text, block) {
-			if (block) {
+			if (block === '$$') {
 				return '<p class="mathjax">$$'
 					+ text
 					+ '$$</p>';
 			} else {
-				return '<span class="mathjax">$$$'
+				return '<span class="mathjax">'
+					+ block
 					+ text
-					+ '$$$</span>';
+					+ block
+					+ '</span>';
 			}
 		}
 
@@ -72,7 +75,7 @@ define([
 
 		renderer.heading = function(text, level, raw) {
 			//<a name="verlet-js" class="anchor" href="#verlet-js"><span class="octicon octicon-link"></span></a>
-			raw = raw.toLowerCase().replace(/[^\w]+/g, '-');
+			raw = raw.toLowerCase().trim().replace(/[\s]+/g, '-');
 		  return '<h'
 		    + level
 		    + ' id="'
@@ -84,6 +87,71 @@ define([
 		    + '</h'
 		    + level
 		    + '>\n';
+		};
+
+		function image(href, title, text, props) {
+		  var out = '<img src="' + href + '" alt="' + text + '"';
+
+		  if (title) {
+		    out += ' title="' + title + '"';
+		  }
+		  if (props) {
+		    out += ' style="' + props + '"';
+		  }
+		  out += '>';
+		  return out;
+		}
+
+		function audio(href, ext, title, text, props) {
+		  var out = '<audio controls';
+
+		  if (props) {
+		  	out += ' style="'+ props +'"';
+		  }
+
+		  out += '>';
+	    out += '<source src="'+ href +'" type="audio/'+ ext +'" />';
+	    out += i18n.t('Your browser does not support the audio tag!');
+		  out += '</audio>';
+
+		  return out;
+		}
+
+		function video(href, ext, title, text, props) {
+		  var out = '<video controls';
+
+		  if (props) {
+		  	out += ' style="'+ props +'"';
+		  }
+
+		  out += '>';
+	    out += '<source src="'+ href +'" type="video/'+ ext +'" />';
+	    out += i18n.t('Your browser does not support the video tag!');
+		  out += '</video>';
+
+		  return out;
+		}
+
+		renderer.image = function(href, title, text, props) {
+			var res, ext = path.extname(href);
+			ext = ext.substr(1, ext.length);
+
+			switch(ext) {
+				case 'mp3':
+				case 'ogg':
+					res = audio(href, ext, title, text, props);
+				break;
+				case 'mp4':
+				case 'webm':
+				case 'ogv':
+					res = video(href, ext, title, text, props);
+				break;
+				default:
+					res = image(href, title, text, props);
+				break;
+			}
+
+			return res;
 		};
 
 		return renderer;

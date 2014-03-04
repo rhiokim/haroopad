@@ -1,13 +1,12 @@
 define([
-	'store',
-	'editor/Editor',
+	// 'editor/Editor',
 	'ui/footer/State',
 	'ui/footer/Column',
 	'ui/footer/Indentation',
 	'ui/footer/Document',
 	'ui/footer/_Advertise',
 	'ui/footer/_Share'
-], function(store, Editor, State, Column, Indentation, Document, Advertise, Share) {
+], function(State, Column, Indentation, Document, Advertise, Share) {
 	var shell = gui.Shell;
 	var editorOpt = store.get('Editor') || {};
 
@@ -21,16 +20,16 @@ define([
 	});
 
 	Indentation.on('change', function(tabSize) {
-		Editor.setOption('tabSize', tabSize);
-		Editor.setOption('indentUnit', tabSize);
+		nw.editor.setOption('tabSize', tabSize);
+		nw.editor.setOption('indentUnit', tabSize);
 
-		global._gaq.push('haroopad', 'change tab size', tabSize);
+		global._gaq.push('haroopad', 'footer', 'change tab size: '+ tabSize);
 	});
 
 	Indentation.on('use.tab', function(use) {
-		Editor.setOption('indentWithTabs', use);
+		nw.editor.setOption('indentWithTabs', use);
 
-		global._gaq.push('haroopad', 'indent with tab', use);
+		global._gaq.push('haroopad', 'footer', 'indent with tab: '+ use);
 	});
 
 	Indentation.on('click', function() {
@@ -47,9 +46,9 @@ define([
 		Advertise.hide();
 	});
 
-	Advertise.on('donate', function() {
-		shell.openExternal('http://pad.haroopress.com/page.html?f=grow-up-donate');
-	});
+	// Advertise.on('donate', function() {
+		// shell.openExternal('http://pad.haroopress.com/page.html?f=grow-up-donate');
+	// });
 
 	Document.on('click', function() {
 		Advertise.hide();

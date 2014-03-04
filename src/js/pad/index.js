@@ -18,9 +18,7 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    txt: '../vendors/text/text',
-    store: '../vendors/store.js/store',
-    keyboard: '../vendors/keymage/keymage'
+    txt: '../vendors/text/text'
   },
   config: {
     text: {
@@ -73,6 +71,7 @@ i18n.init({
       doc = opt.doc;
 
       Editor.setValue(opt.markdown);
+      Editor.getDoc().clearHistory();
       Viewer.init();
 
       file.doc.trigger('change:html', doc, doc.html());
@@ -148,14 +147,21 @@ i18n.init({
       process.emit('actived', nw);
     });
 
-    $("#notifier").click(function(e) {
-      var tagName = e.target.tagName.toUpperCase();
+    $(document.body).click(function(e) {
+      var el = e.target, href;
+      var tagName = el.tagName.toUpperCase();
 
       switch (tagName) {
         case 'A':
-          window.parent.ee.emit($(e.target).data('href'));
+          href = el.getAttribute('href');
+
+          if (!href || href === '#') {
+            return;
+          }
+
+          global.Shell.openExternal(href);
           e.preventDefault();
-          break;
+        break;
       }
     });
 
@@ -178,7 +184,6 @@ i18n.init({
     if (window.gnMenu) {
       new gnMenu(document.getElementById('editControls'));
     }
-
   });
 
 });

@@ -1,57 +1,106 @@
-define([],
-	function() {
+define([
+		'context/util',
+		'context/viewer/export',
+		'context/viewer/publish',
+		'context/viewer/embedImage',
+		'context/viewer/embedVideo',
+		'context/viewer/embedAudio',
+		'context/viewer/embedOthers',
+		'context/viewer/themes',
+		'context/viewer/themesUser',
+		'context/viewer/themesCode'
+	],
+	function(util, MenuExport, MenuPublish, MenuEmbedImage, MenuEmbedVideo, MenuEmbedAudio, MenuEmbedOthers, Themes, ThemesUser, ThemesCode) {
 
-		var gui = require('nw.gui'),
-			win = gui.Window.get();
+		var gui = require('nw.gui');
 		var Context = new gui.Menu();
 
-		var mCopy, mCopyHTML, mCopyStyledHTML, mPreferences;
-
-		function menuItem(options) {
-			return new gui.MenuItem(options);
+		function add(item) {
+			Context.append(item);
 		}
 
-		function sepItem() {
-			return new gui.MenuItem({
-				type: 'separator'
-			});
-		}
 
-		mCopy = menuItem({
-			label: i18n.t('edit.copy'),
-			click: function() {
-				window.ee.emit('context.copy');
-			}
-		});
+		// add(util.menuItem({
+		// 	label: i18n.t('Table of Contents'),
+		// 	click: function() {
+		// 	}
+		// }));
 
-		// Context.append(mCopy);
+		add(util.sepItem());
 
-		mCopyHTML = menuItem({
+		add(util.menuItem({
 			label: i18n.t('edit.copy-html'),
 			click: function() {
 				window.ee.emit('context.copy.html');
 			}
-		});
+		}));
 
-		mCopyStyledHTML = menuItem({
+		add(util.menuItem({
 			label: i18n.t('edit.copy-styled-html'),
 			click: function() {
 				window.parent.ee.emit('menu.file.exports.clipboard.styled');
 			}
-		});
-		Context.append(mCopyHTML);
-		Context.append(mCopyStyledHTML);
-		Context.append(sepItem());
+		}));
 
-		mPreferences = menuItem({
+		add(util.sepItem());
+
+		add(util.menuItem({
+			label: i18n.t('file.exports'),
+			submenu: MenuExport
+		}));
+
+		add(util.menuItem({
+			label: i18n.t('file.sending'),
+			submenu: MenuPublish
+		}));
+
+		add(util.sepItem());
+
+		// add(util.menuItem({
+		// 	label: i18n.t('insert.embed-image'),
+		// 	submenu: MenuEmbedImage
+		// }));
+
+		// add(util.menuItem({
+		// 	label: i18n.t('insert.embed-video'),
+		// 	submenu: MenuEmbedVideo
+		// }));
+
+		// add(util.menuItem({
+		// 	label: i18n.t('insert.embed-audio'),
+		// 	submenu: MenuEmbedAudio
+		// }));
+
+		// add(util.menuItem({
+		// 	label: i18n.t('insert.embed-other'),
+		// 	submenu: MenuEmbedOthers
+		// }));
+
+		// add(util.sepItem());
+
+		add(util.menuItem({
+			label: i18n.t('view.viewer.theme'),
+			submenu: Themes
+		}));
+
+		add(util.menuItem({
+			label: i18n.t('view.viewer.theme-code'),
+			submenu: ThemesCode
+		}));
+
+		add(util.menuItem({
+			label: i18n.t('view.viewer.theme-user'),
+			submenu: ThemesUser
+		}));
+
+		add(util.sepItem());
+
+		add(util.menuItem({
 			label: i18n.t('file.preferences'),
 			click: function() {
 				window.ee.emit('context.preferences');
 			}
-		});
-		Context.append(mPreferences);
-
-		//TODO: https://github.com/rhiokim/haroopad/issues/15
+		}));
 
 		return Context;
 	});

@@ -316,13 +316,13 @@ Syntax ==highlighting==, **display of text** in different colors and/or fonts, d
 
 ##### Underline
 
-표준 마크다운에는 밑줄에 대해서는 정의하지 않지만 문서 작성 시 밑줄은 자주 사용된다. 하루패드에서는 표준에서 이탤릭을 위해 사용되는 언더바(_)를 밑줄로 사용한다.
+표준 마크다운에는 밑줄에 대해서는 정의하지 않지만 문서 작성 시 밑줄은 자주 사용된다. 하루패드에서는 더하기 두개(++)를 밑줄로 사용한다. 이것은 멀티 마크다운에서 정의한 것과도 동일합니다.
 
 ```markdown
-An _underline_, also called an underscore is one or more horizontal lines immediately below a portion of writing.
+An ++underline++, also called an underscore is one or more horizontal lines immediately below a portion of writing.
 ```
 
-An _underline_, also called an underscore is one or more _horizontal lines_ immediately below a portion of writing.
+An ++underline++, also called an underscore is one or more ++horizontal lines++ immediately below a portion of writing.
 
 ##### Embedding
 

@@ -32,8 +32,8 @@ function(hljs) {
             'update catalog user sql date on identity timezone_hour natural whenever interval ' +
             'work order cascade diagnostics nchar having left call do handler load replace ' +
             'truncate start lock show pragma exists number trigger if before after each row ' +
-            'merge matched database',
-          aggregate: 'count sum min max avg'
+            'merge matched database limit',
+          aggregate: 'count sum min max avg ifnull'
         },
         contains: [
           {
@@ -51,6 +51,7 @@ function(hljs) {
             begin: '`', end: '`',
             contains: [hljs.BACKSLASH_ESCAPE]
           },
+          hljs.C_BLOCK_COMMENT_MODE,
           hljs.C_NUMBER_MODE
         ]
       },

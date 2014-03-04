@@ -2,10 +2,14 @@
  * i18n data preloader
  */
 ;(function() {
+	var fs = require('fs');
 	var path = require('path');
 
 	var G = global;
 	var locales = G.LOCALES = {};
+
+	var config = localStorage.getItem('General');
+	config = JSON.parse(config) || { displayLanguage: undefined };
 
 	var baseDir = G.PATHS.locales;
 	var locale = window.navigator.language.toLowerCase();

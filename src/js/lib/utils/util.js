@@ -1,5 +1,9 @@
 var path = require('path');
 
+function __key(id) {
+  return global.SHORTCUTS[id];
+}
+
 function asVersion(str) {
 	var v = str.split(".");
 	return {major: parseInt(v[0]), minor: parseInt(v[1]), patch: parseInt(v[2])};

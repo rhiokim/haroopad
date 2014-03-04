@@ -1,4 +1,4 @@
-var gui = require('nw.gui');
+window.gui = require('nw.gui');
 
 window.top = window;
 window.nw = gui.Window.get();
@@ -17,7 +17,6 @@ requirejs.config({
   paths: {
     tpl: '../../tpl',
     vendors: '../vendors',
-    keyboard: '../vendors/keymage/keymage',
     parse: 'core/Parser'
   },
   config: {
@@ -28,7 +27,6 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  console.log(e)
   alert('Oops! app is crash :-(');
 };
 
@@ -56,7 +54,7 @@ i18n.init({
     //   var html = Parser(md, options);
 
     global._gaq.init(function(_gaq) {
-      _gaq.push('haroopad', 'init', '');
+      _gaq && _gaq.push('haroopad', 'init', '');
     });
 
     window.ee.on('send.email', function(fileInfo, mailInfo) {
@@ -139,6 +137,12 @@ i18n.init({
     } else {
       WindowMgr.open();
     }
+
+    //TODO not perfect
+    //update check logic
+    window.setTimeout(function() {
+      window.ee.emit('check.version');
+    }, 2000);
   });
 
 });
