@@ -73,6 +73,8 @@ Follow official social account [@haroopad](https://twitter.com/haroopad) and dev
 
 For feedback, use the menu `Help` - `User Echo`
 
+[![Analytics](https://ga-beacon.appspot.com/UA-32474834-4/rhiokim/haroopad)](https://github.com/igrigorik/ga-beacon)
+
 [haroopad]: http://pad.haroopress.com
 [blog]: http://pad.haroopress.com/page.html
 [userecho]: http://haroopad.userecho.com
