@@ -19,6 +19,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('./src/package.json'),
 
+    nwversion: '0.8.5',
     vendors: 'src/js/vendors',
     build: 'build',
     dist: 'dists/<%= pkg.version %>',
@@ -610,6 +611,19 @@ module.exports = function(grunt) {
             cwd: './src/js/vendors/highlight.js/'
           }
         }
+      },
+
+      pouchdb: {
+        command: [
+          'nw-gyp configure --target=<%= nwversion %>',
+          'nw-gyp build'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: './src/node_modules/pouchdb/node_modules/leveldown/'
+          }
+        }
       }
     },
 
@@ -662,6 +676,7 @@ module.exports = function(grunt) {
       }
     }
   });
+
   
   /* deploy to Application directory */
   grunt.registerTask('deploy', [ 'shell:deploy']);
@@ -675,22 +690,11 @@ module.exports = function(grunt) {
 
   grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
 
-  /* codemirror */
-  // grunt.registerTask('codemirror', [ 'uglify:codemirror' ]);
-
   /* snapshot */
   grunt.registerTask('snapshot', [ 'concat:snapshot', 'shell:bin' ]);
 
   /* pre built */
-  grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs' ]);
-  // grunt.registerTask('prebower', [ 
-    // 'copy:btmodal', 
-    // 'copy:mkdcss', 
-    // 'copy:mathjax', 
-    // 'copy:highlightjs',
-    // 'copy:select2',
-    // 'copy:jqoembed' 
-    // ]);
+  grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs', 'shell:pouchdb' ]);
 
   /* css */
   grunt.registerTask('css', [ 'cssmin:pad', 'cssmin:preferences', 'cssmin:viewer', 'cssmin:codemirror' ]);
