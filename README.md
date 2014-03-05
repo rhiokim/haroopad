@@ -1,4 +1,4 @@
-# Haroopad - The next document processor
+# Haroopad
 
 **Haroopad** is a markdown enabled document processor for creating web-friendly documents.
 
@@ -8,15 +8,30 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.9)==
+### New Features (v0.11.1)
 
-* Mathematics Expression
-	- Inline Expression: `$$$...$$$`
-	- Block Expression: `$$...$$`
-* Font Size
-	- Editor and Viewer font size control using Preference Window & Shortcuts
-* Styled HTML copy to clipboard
-* Update Shortcuts for Print, Inserting Date & Time
+* Added Superscript, Subscript
+  - `Sup^superscript^`, `Sub~subscript~`
+* Extended Image Syntax
+  - If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
+  - If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
+* Added Option inline mathematics expression (**$**, $$$) 
+* Internationalization
+  - Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
+
+### Other Changelog
+* Changed Underline syntax `_underline_` -> `++underline++`
+* Removed Ctrl + Alt shortcut at all
+* Enhanced Context menu
+  - Added Editor, Viewer, Custom theme menus
+  - Added Export to HTML
+  - Added Sending email
+* Continous List Item (ol, li)
+* Fixed many number of bugs & enhancements
+
+### Downloads
+
+* [Official Site](http://pad.haroopress.com/user.html#download)
 
 ### Main Features
 
@@ -24,42 +39,74 @@ Haroopad gives you the same editing experience regardless of the platform you ar
   - Window
   - Mac OS X
   - Linux 32/64
-* [Gitub Flavored Markdown](http://github.github.com/github-flavored-markdown/) & extensions
-	- Syntax highlighting
-	- Table
-	- URL autolinking
-	- Strikethrough
-	- Smartypants
 * Theme for editing
-	- Solaraized Dark & Light based on CodeMirror
+  - Themes for editor 30 styles 
+  - Syntax highlighting in fenced code block on editor
+  - Ruby, Python, PHP, Javascript, C, HTML, CSS
+  - based on CodeMirror
 * Live Preview themes
-	- 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
+  - 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
 * Syntax Highlighting
-	- 52 languages & 26 styles based on highlight.js
+  - 71 languages & 44 styles based on highlight.js
 * Custom Theme
   - Style based on CSS(Cascading Style Sheet)
-* Outline View
+* Font Size
+  - Editor and Viewer font size control using Preference Window & Shortcuts
 * Embedding Rich Media Contents - v0.8
-	- Video, Audio, 3D, Text, Open Graph and oEmbed
-	- About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
-	- Drag & Drop support
+  - Video, Audio, 3D, Text, Open Graph and oEmbed
+  - About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
+  - Drag & Drop support
 * Display Mode - v0.8
-	- Default(Editor:Viewer), Reverse(Viewer:Editor), Only Editor, Only Viewer (View > Mode)
+  - Default(Editor:Viewer), Reverse(Viewer:Editor), Only Editor, Only Viewer (View > Mode)
 * Insert Current Date & Time - v0.8
-	- Various Format support (Insert > Date & Time)
+  - Various Format support (Insert > Date & Time)
 * HTML to Markdown - v0.8
-	- Drag & Drop your selected text on Web Browser
+  - Drag & Drop your selected text on Web Browser
+* Options for markdown parsing
+* Outline View
 * Vim Key-binding
 * Export to PDF, HTML
+* Styled HTML copy to clipboard for WYSIWYG editors
 * Auto Save & Restore
 * Document state information
 * Tab or Spaces for Indentation
 * Colum(Single, Two and Three) Layout View
+* Markdown Syntax Help Dialog.
+* Import and Export settings
+
+### Internationalization
+
+- English
+- Korea (한국어)
+- Spanish (Español) - [davegomez](https://github.com/davegomez)
+- Chinese Simplified (中文) - [toiletfreak](https://github.com/toiletfreak)
+- German (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
+- Vietnamese (Tiếng Việt) - [nguyenkinh](https://github.com/nguyenkinh)
+- Russian (Русский) - [aprilix ](https://github.com/aprilix)
+- Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
+
+### Enhanced Markdown Syntax
+
+* Added `[TOC]` Syntax
+  - Now you can easily embed table of content in documents.
+  - Left Align: `[TOC "float:left"]`
+  - Right Align: `[TOC "float:right"]`
+* `![]()` Extended image syntax
+  - `![alt text](url "title" "css")`
+* [Gitub Flavored Markdown](http://github.github.com/github-flavored-markdown/) & extensions
+  - Syntax highlighting
+  - Table
+  - URL autolinking
+  - Strikethrough
+  - Smartypants
+* Mathematics Expression
+  - Inline Expression: `$$$...$$$`
+  - Block Expression: `$$...$$`
 
 ### Upcoming Features
 
-* Table Of Contents `[TOC]`
 * Footnotes
+* Tasklist - GFM
 
 ### And more?
 
