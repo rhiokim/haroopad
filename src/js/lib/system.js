@@ -35,7 +35,8 @@
     theme_res_editor: path.join(global.EXECPATH, 'Resources', 'Themes', 'editor'),
     theme_res_viewer: path.join(global.EXECPATH, 'Resources', 'Themes', 'viewer'),
     theme_dest_editor: path.join(global.App.dataPath, 'Themes', 'editor'),
-    theme_dest_viewer: path.join(global.App.dataPath, 'Themes', 'viewer')
+    theme_dest_viewer: path.join(global.App.dataPath, 'Themes', 'viewer'),
+    db: path.join(global.App.dataPath, 'LevelDB')
   };
 
   //add node main module path
@@ -48,9 +49,10 @@
   global.LANGS = fs.readFileSync(path.join(global.PATHS.locales, 'locales.json'));
   global.LANGS = JSON.parse(global.LANGS);
 
+  /* level db */
+  fs.mkdirsSync(global.PATHS.db);
+
   /* native themes */
-
-
   function loadUserThemes(dir) {
     var csses = readDir.readSync(dir, ['*.css'], readDir.CASELESS_SORT);
     var name, themes = [];
