@@ -1,5 +1,5 @@
 define([
-  'ui/db/DB',
+  'db/DB',
   'ui/list/DocModel'
   ], function(DB, DocModel) {
 
@@ -8,10 +8,11 @@ define([
     model: DocModel,
 
     query: {
-      limit: 2,
+      limit: 3,
       skip: 0,
       // descending: true,
       include_docs: true,
+      conflicts: true
       // reverse: true,
       // startkey: '01AFC23B-6E44-4937-BF69-FA976265A941'
     },
@@ -24,7 +25,7 @@ define([
 
       DB.allDocs(this.query, function(err, response) {
         response.rows.forEach(function(item, idx) {
-          console.log(item.doc);
+          // console.log(item.doc);
           me.add(item.doc);
         });
       });
@@ -37,7 +38,7 @@ define([
       
       DB.allDocs(this.query, function(err, response) {
         response.rows.forEach(function(item, idx) {
-          console.log(item.doc);
+          // console.log(item.doc);
           me.add(item.doc);
         });
       });

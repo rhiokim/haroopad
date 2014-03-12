@@ -1,6 +1,7 @@
 define([
-    'ui/db/DB'
+    'db/DB'
   ], function(DB) {
+    var updateTimeOut;
 
   var ItemModel = Backbone.Model.extend({
     idAttribute: "_id",
@@ -20,19 +21,36 @@ define([
     },
 
     initialize: function() {
+      this.on('change:markdown', this.updateMarkdown);
     },
 
     save: function() {
       var doc = this.toJSON();
-      console.log(this.id, doc._rev)
+      delete doc._id;
+
+      // console.log(doc, this.id)
       DB.put(doc, this.id, function(err, response) {
-        this.set({ _rev: response._rev });
-        // console.log(err, response);
-      });
+        if (err) {
+          console.log(err);
+          throw err;
+          return;
+        }
+        // console.log('save complete:', response)
+        this.set({ _rev: response.rev });
+        // console.log('updated:', response);
+      }.bind(this));
+    },
+
+    updateMarkdown: function() {
+      clearTimeout(updateTimeOut);
+      updateTimeOut = setTimeout(function() {
+        this.set({ update_at: new Date().getTime() });
+        this.save();
+      }.bind(this), 1000);
     },
 
     updateDoc: function(child, data) {
-      console.log(data);
+      // console.log(data);
     },
 
     toggle: function() {

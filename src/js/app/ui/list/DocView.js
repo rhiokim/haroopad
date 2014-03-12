@@ -4,7 +4,7 @@ define([], function() {
 
     tagName: 'div',
 
-    template: _.template('<h3><%= title %></h3><span><%= _id %></span><br/><small><%= create_at %></small>'),
+    template: _.template('<h3><%= title %></h3><span><%= markdown %></span><br/><small><%= create_at %>, <%= update_at %></small>'),
 
     events: {
       'click': 'clickHandler'

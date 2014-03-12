@@ -1,5 +1,5 @@
 define([
-  'ui/db/DB'
+  'db/DB'
   ], function(DB) {
 
     DB.info(function(err, info) {

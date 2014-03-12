@@ -4,7 +4,7 @@ define([
     'ui/list/DocList'
   ], function(DocView, DocModel, DocList) {
 
-    var updateTimeOut, docId = '';
+    var docId = '';
 
   var ListApp = Backbone.View.extend({
 
@@ -17,13 +17,19 @@ define([
     initialize: function() {
       this.listenTo(DocList, 'add', this.addOne);
 
+      ee.on('update.doc', function(doc) {
+        var d = DocList.get(doc._id);
+        d.set(doc);
+        DocList.set(d);
+      });
+
       DocList.fetch();
     },
 
     add: function(doc) {
-      console.log('new one');
+      // console.log('new one');
       DocList.add(doc, { index: 0, silent: true });
-      console.log(doc);
+      // console.log(doc);
 
       this.newOne(new DocModel(doc));
     },
@@ -32,15 +38,14 @@ define([
       DocList.more();
     },
 
+    saveDoc: function() {
+      var doc = DocList.get(docId);
+      doc.save();
+    },
+
     updateDoc: function(str) {
       var doc = DocList.get(docId);
       doc.set({ markdown: str });
-
-      clearTimeout(updateTimeOut);
-      updateTimeOut = setTimeout(function() {
-        doc.set({ update_at: new Date() });
-        doc.save();
-      }, 500);
     },
 
     newOne: function(doc) {

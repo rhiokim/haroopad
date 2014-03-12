@@ -9,7 +9,8 @@ define([
       'click #btnWrite': 'writeHandler',
       'click #btnNew': 'newHandler',
       'click #btnSave': 'saveHandler',
-      'click #btnMore': 'moreHandler'
+      'click #btnMore': 'moreHandler',
+      'click #btnSync': 'syncHandler'
     },
 
     initialize: function() {
@@ -33,6 +34,11 @@ define([
     moreHandler: function() {
       console.log('more handler');
       this.trigger('more');
+    },
+
+    syncHandler: function() {
+      console.log('sync handler');
+      this.trigger('sync');
     }
   });
 
