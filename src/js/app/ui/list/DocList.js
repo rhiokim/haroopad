@@ -44,6 +44,10 @@ define([
       });
     },
 
+    update: function(model) {
+      
+    },
+
     done: function() {
       return this.where({ done: true });
     },
