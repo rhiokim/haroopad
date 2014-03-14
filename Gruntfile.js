@@ -163,7 +163,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/backbone/backbone-min.js',
             '<%= vendors %>/haroopad-keymage/keymage.min.js',
             '<%= vendors %>/store.js/store.min.js',
-            '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
+            '<%= vendors %>/i18next/i18next.min.js',
             '<%= vendors %>/requirejs/require.min.js'
           ]
         }
@@ -193,7 +193,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/haroopad-keymage/keymage.min.js',
             '<%= vendors %>/haroopad-reMarked.js/reMarked.min.js',
             '<%= vendors %>/haroopad-notifer.js/notifier.min.js',
-            '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
+            '<%= vendors %>/i18next/i18next.min.js',
             '<%= vendors %>/requirejs/require.min.js'
           ]
         }
@@ -220,7 +220,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/select2/select2.min.js',
             '<%= vendors %>/store.js/store.min.js',
             '<%= vendors %>/haroopad-keymage/keymage.min.js',
-            '<%= vendors %>/i18next/release/i18next-1.7.1.min.js',
+            '<%= vendors %>/i18next/i18next.min.js',
             '<%= vendors %>/requirejs/require.min.js'
           ]
         }

@@ -1,60 +1,96 @@
-// i18next, v1.5.6
-// Copyright (c)2012 Jan Mühlemann (jamuhl).
+// i18next, v1.7.2
+// Copyright (c)2014 Jan Mühlemann (jamuhl).
 // Distributed under MIT license
 // http://i18next.com
-(function (root, factory) {
-    if (typeof exports === 'object') {
-
-        module.exports = factory();
-
-    } else if (typeof define === 'function' && define.amd) {
-
-        define([], factory);
-
-    } 
-}(this, function () {
+(function() {
 
     // add indexOf to non ECMA-262 standard compliant browsers
-    if (!Array.prototype.indexOf) {  
-        Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {  
-            "use strict";  
-            if (this == null) {  
-                throw new TypeError();  
-            }  
-            var t = Object(this);  
-            var len = t.length >>> 0;  
-            if (len === 0) {  
-                return -1;  
-            }  
-            var n = 0;  
-            if (arguments.length > 0) {  
-                n = Number(arguments[1]);  
-                if (n != n) { // shortcut for verifying if it's NaN  
-                    n = 0;  
-                } else if (n != 0 && n != Infinity && n != -Infinity) {  
-                    n = (n > 0 || -1) * Math.floor(Math.abs(n));  
-                }  
-            }  
-            if (n >= len) {  
-                return -1;  
-            }  
-            var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);  
-            for (; k < len; k++) {  
-                if (k in t && t[k] === searchElement) {  
-                    return k;  
-                }  
-            }  
-            return -1;  
+    if (!Array.prototype.indexOf) {
+        Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+            "use strict";
+            if (this == null) {
+                throw new TypeError();
+            }
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (len === 0) {
+                return -1;
+            }
+            var n = 0;
+            if (arguments.length > 0) {
+                n = Number(arguments[1]);
+                if (n != n) { // shortcut for verifying if it's NaN
+                    n = 0;
+                } else if (n != 0 && n != Infinity && n != -Infinity) {
+                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
+                }
+            }
+            if (n >= len) {
+                return -1;
+            }
+            var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+            for (; k < len; k++) {
+                if (k in t && t[k] === searchElement) {
+                    return k;
+                }
+            }
+            return -1;
         }
-    } 
+    }
+    
+    // add lastIndexOf to non ECMA-262 standard compliant browsers
+    if (!Array.prototype.lastIndexOf) {
+        Array.prototype.lastIndexOf = function(searchElement /*, fromIndex*/) {
+            "use strict";
+            if (this == null) {
+                throw new TypeError();
+            }
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (len === 0) {
+                return -1;
+            }
+            var n = len;
+            if (arguments.length > 1) {
+                n = Number(arguments[1]);
+                if (n != n) {
+                    n = 0;
+                } else if (n != 0 && n != (1 / 0) && n != -(1 / 0)) {
+                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
+                }
+            }
+            var k = n >= 0 ? Math.min(n, len - 1) : len - Math.abs(n);
+            for (; k >= 0; k--) {
+                if (k in t && t[k] === searchElement) {
+                    return k;
+                }
+            }
+            return -1;
+        };
+    }
 
-    var $ = undefinded
-        , i18n = {}
-        , resStore = {}
-        , currentLng
-        , replacementCounter = 0
-        , languages = [];
+    var root = this
+      , $ = root.jQuery || root.Zepto
+      , i18n = {}
+      , resStore = {}
+      , currentLng
+      , replacementCounter = 0
+      , languages = []
+      , initialized = false;
 
+
+    // Export the i18next object for **CommonJS**. 
+    // If we're not in CommonJS, add `i18n` to the
+    // global object or to jquery.
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = i18n;
+    } else {
+        if ($) {
+            $.i18n = $.i18n || i18n;
+        }
+        
+        root.i18n = root.i18n || i18n;
+    }
     // defaults
     var o = {
         lng: undefined,
@@ -63,9 +99,15 @@
         lowerCaseLng: false,
         returnObjectTrees: false,
         fallbackLng: 'dev',
+        fallbackNS: [],
+        detectLngQS: 'setLng',
         ns: 'translation',
+        fallbackOnNull: true,
+        fallbackOnEmpty: false,
+        fallbackToDefaultNS: false,
         nsseparator: ':',
         keyseparator: '.',
+        selectorAttr: 'data-i18n',
         debug: false,
         
         resGetPath: 'locales/__lng__/__ns__.json',
@@ -90,12 +132,21 @@
         pluralSuffix: '_plural',
         pluralNotFound: ['plural_not_found', Math.random()].join(''),
         contextNotFound: ['context_not_found', Math.random()].join(''),
+        escapeInterpolation: false,
     
         setJqueryExt: true,
+        defaultValueFromContent: true,
         useDataAttrOptions: false,
         cookieExpirationTime: undefined,
+        useCookie: true,
+        cookieName: 'i18next',
+        cookieDomain: undefined,
     
-        postProcess: undefined
+        objectTreeKeyHandler: undefined,
+        postProcess: undefined,
+        parseMissingKey: undefined,
+    
+        shortcutFunction: 'sprintf' // or: defaultValue
     };
     function _extend(target, source) {
         if (!source || typeof source === 'function') {
@@ -144,6 +195,25 @@
         }
     
         return object;
+    }
+    
+    var _entityMap = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': '&quot;',
+        "'": '&#39;',
+        "/": '&#x2F;'
+    };
+    
+    function _escape(data) {
+        if (typeof data === 'string') {
+            return data.replace(/[&<>"'\/]/g, function (s) {
+                return _entityMap[s];
+            });    
+        }else{
+            return data;
+        }
     }
     
     function _ajax(options) {
@@ -308,8 +378,14 @@
                 }
     
                 // Merge the query string and attach it to the url.
-                queryString = '?' + queryString.join('&');
-                url += queryString !== '?' ? queryString : '';
+                queryString = queryString.join('&');
+                if (queryString.length > 1) {
+                    if (url.indexOf('?') > -1) {
+                        url += '&' + queryString;
+                    } else {
+                        url += '?' + queryString;
+                    }
+                }
     
                 // Make a JSONP call if neccessary.
                 if(options.jsonp) {
@@ -418,9 +494,9 @@
         };
     
     
-        var methode = options.sendType ? options.sendType.toLowerCase() : 'get';
+        var methode = options.type ? options.type.toLowerCase() : 'get';
     
-        http[methode](options.url, {async: options.async}, function (status, data) {
+        http[methode](options.url, options, function (status, data) {
             if (status === 200) {
                 options.success(data.json(), status, null);
             } else {
@@ -430,7 +506,7 @@
     }
     
     var _cookie = {
-        create: function(name,value,minutes) {
+        create: function(name,value,minutes,domain) {
             var expires;
             if (minutes) {
                 var date = new Date();
@@ -438,7 +514,8 @@
                 expires = "; expires="+date.toGMTString();
             }
             else expires = "";
-            document.cookie = name+"="+value+expires+"; path=/";
+            domain = (domain)? "domain="+domain+";" : "";
+            document.cookie = name+"="+value+expires+";"+domain+"path=/";
         },
     
         read: function(name) {
@@ -458,7 +535,7 @@
     };
     
     var cookie_noop = {
-        create: function(name,value,minutes) {},
+        create: function(name,value,minutes,domain) {},
         read: function(name) { return null; },
         remove: function(name) {}
     };
@@ -470,15 +547,16 @@
     var f = {
         extend: $ ? $.extend : _extend,
         each: $ ? $.each : _each,
-        ajax: $ ? $.ajax : _ajax,
+        ajax: $ ? $.ajax : (typeof document !== 'undefined' ? _ajax : function() {}),
         cookie: typeof document !== 'undefined' ? _cookie : cookie_noop,
         detectLanguage: detectLanguage,
+        escape: _escape,
         log: function(str) {
-            if (o.debug) console.log(str);
+            if (o.debug && typeof console !== "undefined") console.log(str);
         },
         toLanguages: function(lng) {
             var languages = [];
-            if (lng.indexOf('-') === 2 && lng.length === 5) {
+            if (typeof lng === 'string' && lng.indexOf('-') > -1) {
                 var parts = lng.split('-');
     
                 lng = o.lowerCaseLng ? 
@@ -486,7 +564,7 @@
                     parts[0].toLowerCase() +  '-' + parts[1].toUpperCase();
     
                 if (o.load !== 'unspecific') languages.push(lng);
-                if (o.load !== 'current') languages.push(lng.substr(0, 2));
+                if (o.load !== 'current') languages.push(parts[0]);
             } else {
                 languages.push(lng);
             }
@@ -494,6 +572,9 @@
             if (languages.indexOf(o.fallbackLng) === -1 && o.fallbackLng) languages.push(o.fallbackLng);
     
             return languages;
+        },
+        regexEscape: function(str) {
+            return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
         }
     };
     function init(options, cb) {
@@ -506,24 +587,44 @@
         
         // override defaults with passed in options
         f.extend(o, options);
+        delete o.fixLng; /* passed in each time */
     
         // create namespace object if namespace is passed in as string
         if (typeof o.ns == 'string') {
             o.ns = { namespaces: [o.ns], defaultNs: o.ns};
         }
     
+        // fallback namespaces
+        if (typeof o.fallbackNS == 'string') {
+            o.fallbackNS = [o.fallbackNS];
+        }
+    
+        // escape prefix/suffix
+        o.interpolationPrefixEscaped = f.regexEscape(o.interpolationPrefix);
+        o.interpolationSuffixEscaped = f.regexEscape(o.interpolationSuffix);
+    
         if (!o.lng) o.lng = f.detectLanguage(); 
         if (o.lng) {
             // set cookie with lng set (as detectLanguage will set cookie on need)
-            f.cookie.create('i18next', o.lng, o.cookieExpirationTime);
+            if (o.useCookie) f.cookie.create(o.cookieName, o.lng, o.cookieExpirationTime, o.cookieDomain);
         } else {
             o.lng =  o.fallbackLng;
-            f.cookie.remove('i18next');
+            if (o.useCookie) f.cookie.remove(o.cookieName);
         }
     
         languages = f.toLanguages(o.lng);
         currentLng = languages[0];
         f.log('currentLng set to: ' + currentLng);
+    
+        var lngTranslate = translate;
+        if (options.fixLng) {
+            lngTranslate = function(key, options) {
+                options = options || {};
+                options.lng = options.lng || lngTranslate.lng;
+                return translate(key, options);
+            };
+            lngTranslate.lng = currentLng;
+        }
     
         pluralExtensions.setCurrentLng(currentLng);
     
@@ -539,9 +640,11 @@
         // return immidiatly if res are passed in
         if (o.resStore) {
             resStore = o.resStore;
-            if (cb) cb(translate);
-            if (deferred) deferred.resolve();
-            return deferred;
+            initialized = true;
+            if (cb) cb(lngTranslate);
+            if (deferred) deferred.resolve(lngTranslate);
+            if (deferred) return deferred.promise();
+            return;
         }
     
         // languages to load
@@ -559,12 +662,13 @@
         // else load them
         i18n.sync.load(lngsToLoad, o, function(err, store) {
             resStore = store;
+            initialized = true;
     
-            if (cb) cb(translate);
-            if (deferred) deferred.resolve();
+            if (cb) cb(lngTranslate);
+            if (deferred) deferred.resolve(lngTranslate);
         });
     
-        return deferred;
+        if (deferred) return deferred.promise();
     }
     function preload(lngs, cb) {
         if (typeof lngs === 'string') lngs = [lngs];
@@ -576,8 +680,113 @@
         return init(cb);
     }
     
-    function setLng(lng, cb) {
-        return init({lng: lng}, cb);
+    function addResourceBundle(lng, ns, resources) {
+        if (typeof ns !== 'string') {
+            resources = ns;
+            ns = o.ns.defaultNs;
+        } else if (o.ns.namespaces.indexOf(ns) < 0) {
+            o.ns.namespaces.push(ns);
+        }
+    
+        resStore[lng] = resStore[lng] || {};
+        resStore[lng][ns] = resStore[lng][ns] || {};
+    
+        f.extend(resStore[lng][ns], resources);
+    }
+    
+    function removeResourceBundle(lng, ns) {
+        if (typeof ns !== 'string') {
+            ns = o.ns.defaultNs;
+        }
+    
+        resStore[lng] = resStore[lng] || {};
+        resStore[lng][ns] = {};
+    }
+    
+    function setDefaultNamespace(ns) {
+        o.ns.defaultNs = ns;
+    }
+    
+    function loadNamespace(namespace, cb) {
+        loadNamespaces([namespace], cb);
+    }
+    
+    function loadNamespaces(namespaces, cb) {
+        var opts = {
+            dynamicLoad: o.dynamicLoad,
+            resGetPath: o.resGetPath,
+            getAsync: o.getAsync,
+            customLoad: o.customLoad,
+            ns: { namespaces: namespaces, defaultNs: ''} /* new namespaces to load */
+        };
+    
+        // languages to load
+        var lngsToLoad = f.toLanguages(o.lng);
+        if (typeof o.preload === 'string') o.preload = [o.preload];
+        for (var i = 0, l = o.preload.length; i < l; i++) {
+            var pres = f.toLanguages(o.preload[i]);
+            for (var y = 0, len = pres.length; y < len; y++) {
+                if (lngsToLoad.indexOf(pres[y]) < 0) {
+                    lngsToLoad.push(pres[y]);
+                }
+            }
+        }
+    
+        // check if we have to load
+        var lngNeedLoad = [];
+        for (var a = 0, lenA = lngsToLoad.length; a < lenA; a++) {
+            var needLoad = false;
+            var resSet = resStore[lngsToLoad[a]];
+            if (resSet) {
+                for (var b = 0, lenB = namespaces.length; b < lenB; b++) {
+                    if (!resSet[namespaces[b]]) needLoad = true;
+                }
+            } else {
+                needLoad = true;
+            }
+    
+            if (needLoad) lngNeedLoad.push(lngsToLoad[a]);
+        }
+    
+        if (lngNeedLoad.length) {
+            i18n.sync._fetch(lngNeedLoad, opts, function(err, store) {
+                var todo = namespaces.length * lngNeedLoad.length;
+    
+                // load each file individual
+                f.each(namespaces, function(nsIndex, nsValue) {
+    
+                    // append namespace to namespace array
+                    if (o.ns.namespaces.indexOf(nsValue) < 0) {
+                        o.ns.namespaces.push(nsValue);
+                    }
+    
+                    f.each(lngNeedLoad, function(lngIndex, lngValue) {
+                        resStore[lngValue] = resStore[lngValue] || {};
+                        resStore[lngValue][nsValue] = store[lngValue][nsValue];
+    
+                        todo--; // wait for all done befor callback
+                        if (todo === 0 && cb) {
+                            if (o.useLocalStorage) i18n.sync._storeLocal(resStore);
+                            cb();
+                        }
+                    });
+                });
+            });
+        } else {
+            if (cb) cb();
+        }
+    }
+    
+    function setLng(lng, options, cb) {
+        if (typeof options === 'function') {
+            cb = options;
+            options = {};
+        } else if (!options) {
+            options = {};
+        }
+    
+        options.lng = lng;
+        return init(options, cb);
     }
     
     function lng() {
@@ -604,36 +813,48 @@
     
             var optionsToUse;
             if (attr === 'html') {
-                optionsToUse = $.extend({ defaultValue: ele.html() }, options);
+                optionsToUse = o.defaultValueFromContent ? $.extend({ defaultValue: ele.html() }, options) : options;
                 ele.html($.t(key, optionsToUse));
-            } 
-            else if (attr === 'text') {
-                optionsToUse = $.extend({ defaultValue: ele.text() }, options);
+            } else if (attr === 'text') {
+                optionsToUse = o.defaultValueFromContent ? $.extend({ defaultValue: ele.text() }, options) : options;
                 ele.text($.t(key, optionsToUse));
+            } else if (attr === 'prepend') {
+                optionsToUse = o.defaultValueFromContent ? $.extend({ defaultValue: ele.html() }, options) : options;
+                ele.prepend($.t(key, optionsToUse));
+            } else if (attr === 'append') {
+                optionsToUse = o.defaultValueFromContent ? $.extend({ defaultValue: ele.html() }, options) : options;
+                ele.append($.t(key, optionsToUse));
             } else {
-                optionsToUse = $.extend({ defaultValue: ele.attr(attr) }, options);
+                optionsToUse = o.defaultValueFromContent ? $.extend({ defaultValue: ele.attr(attr) }, options) : options;
                 ele.attr(attr, $.t(key, optionsToUse));
             }
         }
     
         function localize(ele, options) {
-            var key = ele.attr('data-i18n');
+            var key = ele.attr(o.selectorAttr);
+            if (!key && typeof key !== 'undefined' && key !== false) key = ele.text() || ele.val();
             if (!key) return;
+    
+            var target = ele
+              , targetSelector = ele.data("i18n-target");
+            if (targetSelector) {
+                target = ele.find(targetSelector) || ele;
+            }
     
             if (!options && o.useDataAttrOptions === true) {
                 options = ele.data("i18n-options");
             }
             options = options || {};
     
-            if (key.indexOf(';') <= key.length-1) {
+            if (key.indexOf(';') >= 0) {
                 var keys = key.split(';');
     
                 $.each(keys, function(m, k) {
-                    parse(ele, k, options);
+                    if (k !== '') parse(target, k, options);
                 });
     
             } else {
-                parse(ele, k, options);
+                parse(target, key, options);
             }
     
             if (o.useDataAttrOptions === true) ele.data("i18n-options", options);
@@ -646,62 +867,216 @@
                 localize($(this), options);
     
                 // localize childs
-                var elements =  $(this).find('[data-i18n]');
+                var elements =  $(this).find('[' + o.selectorAttr + ']');
                 elements.each(function() { 
                     localize($(this), options);
                 });
             });
         };
     }
-    function applyReplacement(str, replacementHash, nestedKey) {
-        if (str.indexOf(o.interpolationPrefix) < 0) return str;
+    function applyReplacement(str, replacementHash, nestedKey, options) {
+        if (!str) return str;
+        
+        options = options || replacementHash; // first call uses replacement hash combined with options
+        if (str.indexOf(options.interpolationPrefix || o.interpolationPrefix) < 0) return str;
+    
+        var prefix = options.interpolationPrefix ? f.regexEscape(options.interpolationPrefix) : o.interpolationPrefixEscaped
+          , suffix = options.interpolationSuffix ? f.regexEscape(options.interpolationSuffix) : o.interpolationSuffixEscaped
+          , unEscapingSuffix = 'HTML'+suffix;
     
         f.each(replacementHash, function(key, value) {
-            if (typeof value === 'object') {
-                str = applyReplacement(str, value, key);
+            var nextKey = nestedKey ? nestedKey + o.keyseparator + key : key;
+            if (typeof value === 'object' && value !== null) {
+                str = applyReplacement(str, value, nextKey, options);
             } else {
-                str = str.replace(new RegExp([o.interpolationPrefix, nestedKey ? nestedKey + '.' + key : key, o.interpolationSuffix].join(''), 'g'), value);
+                if (options.escapeInterpolation || o.escapeInterpolation) {
+                    str = str.replace(new RegExp([prefix, nextKey, unEscapingSuffix].join(''), 'g'), value);
+                    str = str.replace(new RegExp([prefix, nextKey, suffix].join(''), 'g'), f.escape(value));
+                } else {
+                    str = str.replace(new RegExp([prefix, nextKey, suffix].join(''), 'g'), value);
+                }
+                // str = options.escapeInterpolation;
             }
         });
         return str;
     }
     
-    function applyReuse(translated, options){
+    // append it to functions
+    f.applyReplacement = applyReplacement;
+    
+    function applyReuse(translated, options) {
+        var comma = ',';
+        var options_open = '{';
+        var options_close = '}';
+    
         var opts = f.extend({}, options);
         delete opts.postProcess;
     
         while (translated.indexOf(o.reusePrefix) != -1) {
             replacementCounter++;
             if (replacementCounter > o.maxRecursion) { break; } // safety net for too much recursion
-            var index_of_opening = translated.indexOf(o.reusePrefix);
+            var index_of_opening = translated.lastIndexOf(o.reusePrefix);
             var index_of_end_of_closing = translated.indexOf(o.reuseSuffix, index_of_opening) + o.reuseSuffix.length;
             var token = translated.substring(index_of_opening, index_of_end_of_closing);
-            var token_sans_symbols = token.replace(o.reusePrefix, '').replace(o.reuseSuffix, '');
-            var translated_token = _translate(token_sans_symbols, opts);
+            var token_without_symbols = token.replace(o.reusePrefix, '').replace(o.reuseSuffix, '');
+    
+    
+            if (token_without_symbols.indexOf(comma) != -1) {
+                var index_of_token_end_of_closing = token_without_symbols.indexOf(comma);
+                if (token_without_symbols.indexOf(options_open, index_of_token_end_of_closing) != -1 && token_without_symbols.indexOf(options_close, index_of_token_end_of_closing) != -1) {
+                    var index_of_opts_opening = token_without_symbols.indexOf(options_open, index_of_token_end_of_closing);
+                    var index_of_opts_end_of_closing = token_without_symbols.indexOf(options_close, index_of_opts_opening) + options_close.length;
+                    try {
+                        opts = f.extend(opts, JSON.parse(token_without_symbols.substring(index_of_opts_opening, index_of_opts_end_of_closing)));
+                        token_without_symbols = token_without_symbols.substring(0, index_of_token_end_of_closing);
+                    } catch (e) {
+                    }
+                }
+            }
+    
+            var translated_token = _translate(token_without_symbols, opts);
             translated = translated.replace(token, translated_token);
         }
         return translated;
     }
     
     function hasContext(options) {
-        return (options.context && typeof options.context == 'string');
+        return (options.context && (typeof options.context == 'string' || typeof options.context == 'number'));
     }
     
     function needsPlural(options) {
         return (options.count !== undefined && typeof options.count != 'string' && options.count !== 1);
     }
     
-    function translate(key, options){
-        replacementCounter = 0;
-        return _translate(key, options);
-    }
-    
-    function _translate(key, options){
+    function exists(key, options) {
         options = options || {};
     
-        var optionsSansCount, translated
-          , notfound = options.defaultValue || key
-          , lngs = languages;
+        var notFound = _getDefaultValue(key, options)
+            , found = _find(key, options);
+    
+        return found !== undefined || found === notFound;
+    }
+    
+    function translate(key, options) {
+        options = options || {};
+        
+        if (!initialized) {
+            f.log('i18next not finished initialization. you might have called t function before loading resources finished.')
+            return options.defaultValue || '';
+        };
+        replacementCounter = 0;
+        return _translate.apply(null, arguments);
+    }
+    
+    function _getDefaultValue(key, options) {
+        return (options.defaultValue !== undefined) ? options.defaultValue : key;
+    }
+    
+    function _injectSprintfProcessor() {
+        
+        var values = [];
+        
+        // mh: build array from second argument onwards
+        for (var i = 1; i < arguments.length; i++) {
+            values.push(arguments[i]);
+        }
+        
+        return {
+            postProcess: 'sprintf',
+            sprintf:     values
+        };
+    }
+    
+    function _translate(potentialKeys, options) {
+        if (typeof options == 'string') {
+            if (o.shortcutFunction === 'sprintf') {
+                // mh: gettext like sprintf syntax found, automatically create sprintf processor
+                options = _injectSprintfProcessor.apply(null, arguments);
+            } else if (o.shortcutFunction === 'defaultValue') {
+                options = {
+                    defaultValue: options
+                }
+            }
+        } else {
+            options = options || {};
+        }
+    
+        if (potentialKeys === undefined || potentialKeys === null) return '';
+    
+        if (typeof potentialKeys == 'string') {
+            potentialKeys = [potentialKeys];
+        }
+    
+        var key = potentialKeys[0];
+    
+        if (potentialKeys.length > 1) {
+            for (var i = 0; i < potentialKeys.length; i++) {
+                key = potentialKeys[i];
+                if (exists(key)) {
+                    break;
+                }
+            }
+        }
+    
+        var notFound = _getDefaultValue(key, options)
+            , found = _find(key, options)
+            , lngs = options.lng ? f.toLanguages(options.lng) : languages
+            , ns = options.ns || o.ns.defaultNs
+            , parts;
+    
+        // split ns and key
+        if (key.indexOf(o.nsseparator) > -1) {
+            parts = key.split(o.nsseparator);
+            ns = parts[0];
+            key = parts[1];
+        }
+    
+        if (found === undefined && o.sendMissing) {
+            if (options.lng) {
+                sync.postMissing(lngs[0], ns, key, notFound, lngs);
+            } else {
+                sync.postMissing(o.lng, ns, key, notFound, lngs);
+            }
+        }
+    
+        var postProcessor = options.postProcess || o.postProcess;
+        if (found !== undefined && postProcessor) {
+            if (postProcessors[postProcessor]) {
+                found = postProcessors[postProcessor](found, key, options);
+            }
+        }
+    
+        // process notFound if function exists
+        var splitNotFound = notFound;
+        if (notFound.indexOf(o.nsseparator) > -1) {
+            parts = notFound.split(o.nsseparator);
+            splitNotFound = parts[1];
+        }
+        if (splitNotFound === key && o.parseMissingKey) {
+            notFound = o.parseMissingKey(notFound);
+        }
+    
+        if (found === undefined) {
+            notFound = applyReplacement(notFound, options);
+            notFound = applyReuse(notFound, options);
+    
+            if (postProcessor && postProcessors[postProcessor]) {
+                var val = _getDefaultValue(key, options);
+                found = postProcessors[postProcessor](val, key, options);
+            }
+        }
+    
+        return (found !== undefined) ? found : notFound;
+    }
+    
+    function _find(key, options) {
+        options = options || {};
+    
+        var optionWithoutCount, translated
+            , notFound = _getDefaultValue(key, options)
+            , lngs = languages;
+    
+        if (!resStore) { return notFound; } // no resStore to translate from
     
         if (options.lng) {
             lngs = f.toLanguages(options.lng);
@@ -717,9 +1092,7 @@
             }
         }
     
-        if (!resStore) { return notfound; } // no resStore to translate from
-    
-        var ns = o.ns.defaultNs;
+        var ns = options.ns || o.ns.defaultNs;
         if (key.indexOf(o.nsseparator) > -1) {
             var parts = key.split(o.nsseparator);
             ns = parts[0];
@@ -727,41 +1100,45 @@
         }
     
         if (hasContext(options)) {
-            optionsSansCount = f.extend({}, options);
-            delete optionsSansCount.context;
-            optionsSansCount.defaultValue = o.contextNotFound;
+            optionWithoutCount = f.extend({}, options);
+            delete optionWithoutCount.context;
+            optionWithoutCount.defaultValue = o.contextNotFound;
     
-            var contextKey = ns + ':' + key + '_' + options.context;
-            
-            translated = translate(contextKey, optionsSansCount);
+            var contextKey = ns + o.nsseparator + key + '_' + options.context;
+    
+            translated = translate(contextKey, optionWithoutCount);
             if (translated != o.contextNotFound) {
                 return applyReplacement(translated, { context: options.context }); // apply replacement for context only
             } // else continue translation with original/nonContext key
         }
     
         if (needsPlural(options)) {
-            optionsSansCount = f.extend({}, options);
-            delete optionsSansCount.count;
-            optionsSansCount.defaultValue = o.pluralNotFound;
+            optionWithoutCount = f.extend({}, options);
+            delete optionWithoutCount.count;
+            optionWithoutCount.defaultValue = o.pluralNotFound;
     
-            var pluralKey = ns + ':' + key + o.pluralSuffix;
-            var pluralExtension = pluralExtensions.get(currentLng, options.count);
-            if (pluralExtension >= 0) { 
-                pluralKey = pluralKey + '_' + pluralExtension; 
+            var pluralKey = ns + o.nsseparator + key + o.pluralSuffix;
+            var pluralExtension = pluralExtensions.get(lngs[0], options.count);
+            if (pluralExtension >= 0) {
+                pluralKey = pluralKey + '_' + pluralExtension;
             } else if (pluralExtension === 1) {
-                pluralKey = ns + ':' + key; // singular
+                pluralKey = ns + o.nsseparator + key; // singular
             }
-            
-            translated = translate(pluralKey, optionsSansCount);
+    
+            translated = translate(pluralKey, optionWithoutCount);
             if (translated != o.pluralNotFound) {
-                return applyReplacement(translated, { count: options.count }); // apply replacement for count only
+                return applyReplacement(translated, {
+                    count: options.count,
+                    interpolationPrefix: options.interpolationPrefix,
+                    interpolationSuffix: options.interpolationSuffix
+                }); // apply replacement for count only
             } // else continue translation with original/singular key
         }
     
         var found;
         var keys = key.split(o.keyseparator);
         for (var i = 0, len = lngs.length; i < len; i++ ) {
-            if (found) break;
+            if (found !== undefined) break;
     
             var l = lngs[i];
     
@@ -771,51 +1148,65 @@
                 value = value && value[keys[x]];
                 x++;
             }
-            if (value) {
+            if (value !== undefined) {
+                var valueType = Object.prototype.toString.apply(value);
                 if (typeof value === 'string') {
                     value = applyReplacement(value, options);
                     value = applyReuse(value, options);
-                } else if (Object.prototype.toString.apply(value) === '[object Array]' && !o.returnObjectTrees && !options.returnObjectTrees) {
+                } else if (valueType === '[object Array]' && !o.returnObjectTrees && !options.returnObjectTrees) {
                     value = value.join('\n');
                     value = applyReplacement(value, options);
                     value = applyReuse(value, options);
-                } else {
+                } else if (value === null && o.fallbackOnNull === true) {
+                    value = undefined;
+                } else if (value !== null) {
                     if (!o.returnObjectTrees && !options.returnObjectTrees) {
-                        value = 'key \'' + ns + ':' + key + ' (' + l + ')\' ' + 
-                                'returned a object instead of string.';
-                        f.log(value);
-                    } else {
-                        for (var m in value) {
-                            // apply translation on childs
-                            value[m] = _translate(key + '.' + m, options);
+                        if (o.objectTreeKeyHandler && typeof o.objectTreeKeyHandler == 'function') {
+                            value = o.objectTreeKeyHandler(key, value, l, ns, options);
+                        } else {
+                            value = 'key \'' + ns + ':' + key + ' (' + l + ')\' ' +
+                                'returned an object instead of string.';
+                            f.log(value);
                         }
+                    } else if (valueType !== '[object Number]' && valueType !== '[object Function]' && valueType !== '[object RegExp]') {
+                        var copy = (valueType === '[object Array]') ? [] : {}; // apply child translation on a copy
+                        f.each(value, function(m) {
+                            copy[m] = _translate(ns + o.nsseparator + key + o.keyseparator + m, options);
+                        });
+                        value = copy;
                     }
                 }
+    
+                if (typeof value === 'string' && value.trim() === '' && o.fallbackOnEmpty === true)
+                    value = undefined;
+    
                 found = value;
             }
         }
     
-        if (!found && o.sendMissing) {
-            if (options.lng) {
-                sync.postMissing(options.lng, ns, key, notfound, lngs);
+        if (found === undefined && !options.isFallbackLookup && (o.fallbackToDefaultNS === true || (o.fallbackNS && o.fallbackNS.length > 0))) { 
+            // set flag for fallback lookup - avoid recursion
+            options.isFallbackLookup = true;
+    
+            if (o.fallbackNS.length) {
+    
+                for (var y = 0, lenY = o.fallbackNS.length; y < lenY; y++) {
+                    found = _find(o.fallbackNS[y] + o.nsseparator + key, options);
+                    
+                    if (found) {
+                        /* compare value without namespace */
+                        var foundValue = found.indexOf(o.nsseparator) > -1 ? found.split(o.nsseparator)[1] : found
+                          , notFoundValue = notFound.indexOf(o.nsseparator) > -1 ? notFound.split(o.nsseparator)[1] : notFound;
+    
+                        if (foundValue !== notFoundValue) break;
+                    }
+                }
             } else {
-                sync.postMissing(o.lng, ns, key, notfound, lngs);
+                found = _find(key, options); // fallback to default NS
             }
         }
     
-        var postProcessor = options.postProcess || o.postProcess;
-        if (found && postProcessor) {
-            if (postProcessors[postProcessor]) {
-                found = postProcessors[postProcessor](found, key, options);
-            }
-        }
-    
-        if (!found) {
-            notfound = applyReplacement(notfound, options);
-            notfound = applyReuse(notfound, options);
-        }
-    
-        return (found) ? found : notfound;
+        return found;
     }
     function detectLanguage() {
         var detectedLng;
@@ -835,14 +1226,14 @@
                     }
                 }
             })();
-            if (qsParm.setLng) {
-                detectedLng = qsParm.setLng;
+            if (qsParm[o.detectLngQS]) {
+                detectedLng = qsParm[o.detectLngQS];
             }
         }
     
         // get from cookie
-        if (!detectedLng && typeof document !== 'undefined') {
-            var c = f.cookie.read('i18next');
+        if (!detectedLng && typeof document !== 'undefined' && o.useCookie ) {
+            var c = f.cookie.read(o.cookieName);
             if (c) detectedLng = c;
         }
     
@@ -864,7 +1255,7 @@
                     }
     
                     if (missingLngs.length > 0) {
-                        sync._fetch(missingLngs, options, function(err, fetched){
+                        sync._fetch(missingLngs, options, function(err, fetched) {
                             f.extend(store, fetched);
                             sync._storeLocal(fetched);
     
@@ -927,7 +1318,9 @@
                 // load each file individual
                 f.each(ns.namespaces, function(nsIndex, nsValue) {
                     f.each(lngs, function(lngIndex, lngValue) {
-                        sync._fetchOne(lngValue, nsValue, options, function(err, data) {
+                        
+                        // Call this once our translation has returned.
+                        var loadComplete = function(err, data) {
                             if (err) {
                                 errors = errors || [];
                                 errors.push(err);
@@ -937,25 +1330,43 @@
     
                             todo--; // wait for all done befor callback
                             if (todo === 0) cb(errors, store);
-                        });
+                        };
+                        
+                        if(typeof options.customLoad == 'function'){
+                            // Use the specified custom callback.
+                            options.customLoad(lngValue, nsValue, options, loadComplete);
+                        } else {
+                            //~ // Use our inbuilt sync.
+                            sync._fetchOne(lngValue, nsValue, options, loadComplete);
+                        }
                     });
                 });
             } else {
-                var url = applyReplacement(options.resGetPath, { lng: lngs.join('+'), ns: ns.namespaces.join('+') });
-                // load all needed stuff once
-                f.ajax({
-                    url: url,
-                    success: function(data, status, xhr) {
-                        f.log('loaded: ' + url);
-                        cb(null, data);
-                    },
-                    error : function(xhr, status, error) {
-                        f.log('failed loading: ' + url);
-                        cb('failed loading resource.json error: ' + error);
-                    },
-                    dataType: "json",
-                    async : options.getAsync
-                });         
+                // Call this once our translation has returned.
+                var loadComplete = function(err, data) {
+                    cb(null, data);
+                };
+    
+                if(typeof options.customLoad == 'function'){
+                    // Use the specified custom callback.
+                    options.customLoad(lngs, ns.namespaces, options, loadComplete);
+                } else {
+                    var url = applyReplacement(options.resGetPath, { lng: lngs.join('+'), ns: ns.namespaces.join('+') });
+                    // load all needed stuff once
+                    f.ajax({
+                        url: url,
+                        success: function(data, status, xhr) {
+                            f.log('loaded: ' + url);
+                            loadComplete(null, data);
+                        },
+                        error : function(xhr, status, error) {
+                            f.log('failed loading: ' + url);
+                            loadComplete('failed loading resource.json error: ' + error);
+                        },
+                        dataType: "json",
+                        async : options.getAsync
+                    });
+                }    
             }
         },
     
@@ -968,7 +1379,15 @@
                     done(null, data);
                 },
                 error : function(xhr, status, error) {
-                    f.log('failed loading: ' + url);
+                    if (error.status == 200) {
+                        // file loaded but invalid json, stop waste time !
+                        f.log('There is a typo in: ' + url);
+                    } else if (error.status == 404) {
+                        f.log('Does not exist: ' + url);
+                    } else {
+                        f.log(error.status + ' when loading ' + url);
+                    }
+                    
                     done(error, {});
                 },
                 dataType: "json",
@@ -982,9 +1401,9 @@
     
             var urls = [];
     
-            if (o.sendMissingTo === 'fallback') {
+            if (o.sendMissingTo === 'fallback' && o.fallbackLng !== false) {
                 urls.push({lng: o.fallbackLng, url: applyReplacement(o.resPostPath, { lng: o.fallbackLng, ns: ns })});
-            } else if (o.sendMissingTo === 'current') {
+            } else if (o.sendMissingTo === 'current' || (o.sendMissingTo === 'fallback' && o.fallbackLng === false) ) {
                 urls.push({lng: lng, url: applyReplacement(o.resPostPath, { lng: lng, ns: ns })});
             } else if (o.sendMissingTo === 'all') {
                 for (var i = 0, l = lngs.length; i < l; i++) {
@@ -1000,7 +1419,19 @@
                     data: payload,
                     success: function(data, status, xhr) {
                         f.log('posted missing key \'' + key + '\' to: ' + item.url);
-                        resStore[item.lng][ns][key] = defaultValue;
+    
+                        // add key to resStore
+                        var keys = key.split('.');
+                        var x = 0;
+                        var value = resStore[item.lng][ns];
+                        while (keys[x]) {
+                            if (x === keys.length - 1) {
+                                value = value[keys[x]] = defaultValue;
+                            } else {
+                                value = value[keys[x]] = value[keys[x]] || {};
+                            }
+                            x++;
+                        }
                     },
                     error : function(xhr, status, error) {
                         f.log('failed posting missing key \'' + key + '\' to: ' + item.url);
@@ -1026,8 +1457,8 @@
             "af": {
                 "name": "Afrikaans", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1050,8 +1481,8 @@
             "an": {
                 "name": "Aragonese", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1078,8 +1509,8 @@
             "ast": {
                 "name": "Asturian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1093,33 +1524,33 @@
             "az": {
                 "name": "Azerbaijani", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "be": {
                 "name": "Belarusian", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2, 
+                    5
                 ], 
                 "plurals": function(n) { return Number(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); }
             }, 
             "bg": {
                 "name": "Bulgarian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "bn": {
                 "name": "Bengali", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1141,17 +1572,17 @@
             "bs": {
                 "name": "Bosnian", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2, 
+                    5
                 ], 
                 "plurals": function(n) { return Number(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); }
             }, 
             "ca": {
                 "name": "Catalan", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1165,27 +1596,27 @@
             "cs": {
                 "name": "Czech", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2, 
+                    5
                 ], 
                 "plurals": function(n) { return Number((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2); }
             }, 
             "csb": {
                 "name": "Kashubian", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2, 
+                    5
                 ], 
                 "plurals": function(n) { return Number(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); }
             }, 
             "cy": {
                 "name": "Welsh", 
                 "numbers": [
-                    3, 
                     1, 
                     2, 
+                    3, 
                     8
                 ], 
                 "plurals": function(n) { return Number((n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3); }
@@ -1193,16 +1624,16 @@
             "da": {
                 "name": "Danish", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "de": {
                 "name": "German", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1216,56 +1647,56 @@
             "el": {
                 "name": "Greek", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "en": {
                 "name": "English", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "eo": {
                 "name": "Esperanto", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "es": {
                 "name": "Spanish", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "es_ar": {
                 "name": "Argentinean Spanish", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "et": {
                 "name": "Estonian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "eu": {
                 "name": "Basque", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1279,8 +1710,8 @@
             "fi": {
                 "name": "Finnish", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1295,8 +1726,8 @@
             "fo": {
                 "name": "Faroese", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1311,25 +1742,25 @@
             "fur": {
                 "name": "Friulian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "fy": {
                 "name": "Frisian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "ga": {
                 "name": "Irish", 
                 "numbers": [
-                    3, 
                     1, 
-                    2, 
+                    2,
+                    3,
                     7, 
                     11
                 ], 
@@ -1338,26 +1769,26 @@
             "gd": {
                 "name": "Scottish Gaelic", 
                 "numbers": [
-                    20, 
                     1, 
                     2, 
-                    3
+                    3,
+                    20
                 ], 
                 "plurals": function(n) { return Number((n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3); }
             }, 
             "gl": {
                 "name": "Galician", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "gu": {
                 "name": "Gujarati", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1372,57 +1803,57 @@
             "ha": {
                 "name": "Hausa", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "he": {
                 "name": "Hebrew", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "hi": {
                 "name": "Hindi", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "hr": {
                 "name": "Croatian", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2,
+                    5
                 ], 
                 "plurals": function(n) { return Number(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); }
             }, 
             "hu": {
                 "name": "Hungarian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "hy": {
                 "name": "Armenian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "ia": {
                 "name": "Interlingua", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1436,16 +1867,16 @@
             "is": {
                 "name": "Icelandic", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n%10!=1 || n%100==11); }
             }, 
             "it": {
                 "name": "Italian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1495,8 +1926,8 @@
             "kn": {
                 "name": "Kannada", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1510,18 +1941,18 @@
             "ku": {
                 "name": "Kurdish", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "kw": {
                 "name": "Cornish", 
                 "numbers": [
-                    4, 
                     1, 
                     2, 
-                    3
+                    3,
+                    4
                 ], 
                 "plurals": function(n) { return Number((n==1) ? 0 : (n==2) ? 1 : (n == 3) ? 2 : 3); }
             }, 
@@ -1535,8 +1966,8 @@
             "lb": {
                 "name": "Letzeburgesch", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1558,9 +1989,9 @@
             "lt": {
                 "name": "Lithuanian", 
                 "numbers": [
-                    10, 
                     1, 
-                    2
+                    2,
+                    10
                 ], 
                 "plurals": function(n) { return Number(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2); }
             }, 
@@ -1576,8 +2007,8 @@
             "mai": {
                 "name": "Maithili", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1608,24 +2039,24 @@
             "mk": {
                 "name": "Macedonian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n==1 || n%10==1 ? 0 : 1); }
             }, 
             "ml": {
                 "name": "Malayalam", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "mn": {
                 "name": "Mongolian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1641,8 +2072,8 @@
             "mr": {
                 "name": "Marathi", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1656,8 +2087,8 @@
             "mt": {
                 "name": "Maltese", 
                 "numbers": [
-                    2, 
                     1, 
+                    2, 
                     11, 
                     20
                 ], 
@@ -1666,64 +2097,64 @@
             "nah": {
                 "name": "Nahuatl", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "nap": {
                 "name": "Neapolitan", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "nb": {
                 "name": "Norwegian Bokmal", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "ne": {
                 "name": "Nepali", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "nl": {
                 "name": "Dutch", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "nn": {
                 "name": "Norwegian Nynorsk", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "no": {
                 "name": "Norwegian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "nso": {
                 "name": "Northern Sotho", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1746,73 +2177,73 @@
             "pa": {
                 "name": "Punjabi", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "pap": {
                 "name": "Papiamento", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "pl": {
                 "name": "Polish", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2,
+                    5
                 ], 
                 "plurals": function(n) { return Number(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); }
             }, 
             "pms": {
                 "name": "Piemontese", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "ps": {
                 "name": "Pashto", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "pt": {
                 "name": "Portuguese", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "pt_br": {
                 "name": "Brazilian Portuguese", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "rm": {
                 "name": "Romansh", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "ro": {
                 "name": "Romanian", 
                 "numbers": [
-                    2, 
                     1, 
+                    2,
                     20
                 ], 
                 "plurals": function(n) { return Number(n==1 ? 0 : (n===0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2); }
@@ -1820,9 +2251,9 @@
             "ru": {
                 "name": "Russian", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2, 
+                    5
                 ], 
                 "plurals": function(n) { return Number(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); }
             }, 
@@ -1836,33 +2267,33 @@
             "sco": {
                 "name": "Scots", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "se": {
                 "name": "Northern Sami", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "si": {
                 "name": "Sinhala", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "sk": {
                 "name": "Slovak", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2, 
+                    5
                 ], 
                 "plurals": function(n) { return Number((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2); }
             }, 
@@ -1879,33 +2310,33 @@
             "so": {
                 "name": "Somali", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "son": {
                 "name": "Songhay", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "sq": {
                 "name": "Albanian", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "sr": {
                 "name": "Serbian", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2,
+                    5
                 ], 
                 "plurals": function(n) { return Number(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); }
             }, 
@@ -1919,32 +2350,32 @@
             "sv": {
                 "name": "Swedish", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "sw": {
                 "name": "Swahili", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "ta": {
                 "name": "Tamil", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
             "te": {
                 "name": "Telugu", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -1974,8 +2405,8 @@
             "tk": {
                 "name": "Turkmen", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -2004,17 +2435,17 @@
             "uk": {
                 "name": "Ukrainian", 
                 "numbers": [
-                    5, 
                     1, 
-                    2
+                    2,
+                    5
                 ], 
                 "plurals": function(n) { return Number(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); }
             }, 
             "ur": {
                 "name": "Urdu", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -2051,8 +2482,8 @@
             "yo": {
                 "name": "Yoruba", 
                 "numbers": [
-                    2, 
-                    1
+                    1, 
+                    2
                 ], 
                 "plurals": function(n) { return Number(n != 1); }
             }, 
@@ -2094,13 +2525,13 @@
                 if (ext) {
                     var i = ext.plurals(c);
                     var number = ext.numbers[i];
-                    if (ext.numbers.length === 2) {
+                    if (ext.numbers.length === 2 && ext.numbers[0] === 1) {
                         if (number === 2) { 
-                            number = 1;
+                            number = -1; // regular plural
                         } else if (number === 1) {
-                            number = -1;
+                            number = 1; // singular
                         }
-                    } //console.log(count + '-' + number);
+                    }//console.log(count + '-' + number);
                     return number;
                 } else {
                     return c === 1 ? '1' : '-1';
@@ -2255,8 +2686,14 @@
     i18n.init = init;
     i18n.setLng = setLng;
     i18n.preload = preload;
+    i18n.addResourceBundle = addResourceBundle;
+    i18n.removeResourceBundle = removeResourceBundle;
+    i18n.loadNamespace = loadNamespace;
+    i18n.loadNamespaces = loadNamespaces;
+    i18n.setDefaultNamespace = setDefaultNamespace;
     i18n.t = translate;
     i18n.translate = translate;
+    i18n.exists = exists;
     i18n.detectLanguage = f.detectLanguage;
     i18n.pluralExtensions = pluralExtensions;
     i18n.sync = sync;
@@ -2264,7 +2701,5 @@
     i18n.lng = lng;
     i18n.addPostProcessor = addPostProcessor;
     i18n.options = o;
-        
-    return i18n; 
 
-}));
+})();
