@@ -160,7 +160,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/jquery/jquery.min.js',
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/underscore/underscore-min.js',
-            '<%= vendors %>/backbone/backbone-min.js',
+            '<%= vendors %>/backbone/backbone.min.js',
             '<%= vendors %>/haroopad-keymage/keymage.min.js',
             '<%= vendors %>/store.js/store.min.js',
             '<%= vendors %>/i18next/i18next.min.js',
@@ -187,7 +187,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/jquery/jquery.min.js',
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/underscore/underscore-min.js',
-            '<%= vendors %>/backbone/backbone-min.js',
+            '<%= vendors %>/backbone/backbone.min.js',
             '<%= vendors %>/todc-bootstrap/dist/js/bootstrap.min.js',
             '<%= vendors %>/store.js/store.min.js',
             '<%= vendors %>/haroopad-keymage/keymage.min.js',
@@ -215,7 +215,7 @@ module.exports = function(grunt) {
           '<%= build %>/haroopad/js/preferences.vendors.min.js': [
             '<%= vendors %>/jquery/jquery.min.js',
             '<%= vendors %>/underscore/underscore-min.js',
-            '<%= vendors %>/backbone/backbone-min.js',
+            '<%= vendors %>/backbone/backbone.min.js',
             '<%= vendors %>/todc-bootstrap/dist/js/bootstrap.min.js',
             '<%= vendors %>/select2/select2.min.js',
             '<%= vendors %>/store.js/store.min.js',
@@ -277,6 +277,10 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/mode/php/php.js',
             '<%= vendors %>/CodeMirror/mode/perl/perl.js',
             '<%= vendors %>/CodeMirror/keymap/vim.js'
+          ],
+
+          '<%= vendors %>/backbone/backbone.min.js': [ 
+            '<%= vendors %>/backbone/backbone.js' 
           ],
 
           '<%= vendors %>/requirejs/require.min.js': [ 
