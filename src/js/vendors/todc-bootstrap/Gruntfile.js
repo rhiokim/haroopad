@@ -1,4 +1,3 @@
-/* jshint node: true */
 /*!
  * Bootstrap's Gruntfile
  * http://getbootstrap.com
@@ -18,9 +17,9 @@ module.exports = function (grunt) {
 
   var fs = require('fs');
   var path = require('path');
-  var generateGlyphiconsData = require('./docs/grunt/bs-glyphicons-data-generator.js');
-  var BsLessdocParser = require('./docs/grunt/bs-lessdoc-parser.js');
-  var generateRawFilesJs = require('./docs/grunt/bs-raw-files-generator.js');
+  var generateGlyphiconsData = require('./grunt/bs-glyphicons-data-generator.js');
+  var BsLessdocParser = require('./grunt/bs-lessdoc-parser.js');
+  var generateRawFiles = require('./grunt/bs-raw-files-generator.js');
 
   // Project configuration.
   grunt.initConfig({
@@ -28,78 +27,65 @@ module.exports = function (grunt) {
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*!\n' +
-              ' * TODC Bootstrap v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-              ' * Copyright 2011-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-              ' * Licensed under <%= _.pluck(pkg.licenses, "type") %> (<%= _.pluck(pkg.licenses, "url") %>)\n' +
-              ' */\n',
-    bannerDocs: '/*!\n' +
-              ' * TODC Bootstrap Docs (<%= pkg.homepage %>)\n' +
-              ' * Copyright 2011-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-              ' * Licensed under the Creative Commons Attribution 3.0 Unported License. For\n' +
-              ' * details, see http://creativecommons.org/licenses/by/3.0/.\n' +
-              ' */\n',
-    jqueryCheck: 'if (typeof jQuery === \'undefined\') { throw new Error(\'Bootstrap requires jQuery\') }\n\n',
+            ' * TODC Bootstrap v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+            ' * Copyright 2011-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+            ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n' +
+            ' */\n',
+    jqueryCheck: 'if (typeof jQuery === \'undefined\') { throw new Error(\'Bootstrap\\\'s JavaScript requires jQuery\') }\n\n',
 
     // Bootstrap variables
     bootstrapDir: 'bootstrap',
     bootstrapGit: 'https://github.com/twbs/bootstrap.git',
-    bootstrapVersion: 'v3.1.0',
+    bootstrapVersion: 'v3.1.1',
 
     // Task configuration.
     clean: {
-      dist: 'dist'
+      dist: ['dist', 'docs/dist']
     },
 
     jshint: {
       options: {
         jshintrc: 'js/.jshintrc'
       },
-      gruntfile: {
-        src: 'Gruntfile.js'
+      grunt: {
+        options: {
+          jshintrc: 'grunt/.jshintrc'
+        },
+        src: ['Gruntfile.js', 'grunt/*.js']
       },
       assets: {
-        src: 'docs/assets/js/application.js'
-      },
-      docsGrunt: {
-        src: 'docs/grunt/*.js'
+        src: 'docs/assets/js/src/*.js'
       }
     },
 
     jscs: {
       options: {
-        config: 'js/.jscs.json',
+        config: 'js/.jscsrc'
       },
-      gruntfile: {
-        src: 'Gruntfile.js'
+      grunt: {
+        options: {
+          requireCamelCaseOrUpperCaseIdentifiers: null,
+          requireParenthesesAroundIIFE: true
+        },
+        src: '<%= jshint.grunt.src %>'
       },
       assets: {
-        src: 'docs/assets/js/application.js'
-       },
-      docsGrunt: {
-        src: 'docs/grunt/*.js'
+        src: '<%= jshint.assets.src %>'
       }
     },
 
-    csslint: {
-      options: {
-        csslintrc: 'less/.csslintrc'
-      },
-      src: [
-        'dist/css/todc-bootstrap.css',
-        'docs/assets/css/docs.css'
-      ]
-    },
-
     uglify: {
+      options: {
+        report: 'min'
+      },
       docsJs: {
         options: {
-          preserveComments: 'some',
-          report: 'min'
+          preserveComments: 'some'
         },
         src: [
           'docs/assets/js/vendor/select2.js',
           'docs/assets/js/vendor/holder.js',
-          'docs/assets/js/application.js'
+          'docs/assets/js/src/application.js'
         ],
         dest: 'docs/assets/js/docs.min.js'
       }
@@ -124,50 +110,106 @@ module.exports = function (grunt) {
           report: 'min'
         },
         files: {
-          'dist/css/<%= pkg.name %>.min.css': 'dist/css/<%= pkg.name %>.css'
+          'dist/css/<%= pkg.name %>.min.css': 'dist/css/<%= pkg.name %>.css',
+          'dist/css/<%= pkg.name %>-rtl.min.css': 'dist/css/<%= pkg.name %>-rtl.css'
         }
+      }
+    },
+
+    autoprefixer: {
+      options: {
+        browsers: ['last 2 versions', 'ie 8', 'ie 9', 'android 2.3', 'android 4', 'opera 12']
+      },
+      core: {
+        options: {
+          map: true
+        },
+        src: 'dist/css/<%= pkg.name %>.css'
+      },
+      docs: {
+        src: 'docs/assets/css/src/docs.css'
+      },
+      examples: {
+        expand: true,
+        cwd: 'docs/examples/',
+        src: '**/*.css',
+        dest: 'docs/examples/'
+      }
+    },
+
+    cssflip: {
+      rtl: {
+        files: {
+          'dist/css/<%= pkg.name %>-rtl.css': 'dist/css/<%= pkg.name %>.css'
+        }
+      }
+    },
+
+    csslint: {
+      options: {
+        csslintrc: 'less/.csslintrc'
+      },
+      src: [
+        'dist/css/todc-bootstrap.css'
+      ],
+      examples: [
+        'docs/examples/**/*.css'
+      ],
+      docs: {
+        options: {
+          ids: false,
+          'overqualified-elements': false
+        },
+        src: 'docs/assets/css/src/docs.css'
       }
     },
 
     cssmin: {
-      compress: {
-        options: {
-          keepSpecialComments: '*',
-          noAdvanced: true, // turn advanced optimizations off until the issue is fixed in clean-css
-          report: 'min',
-          selectorsMergeMode: 'ie8'
-        },
+      options: {
+        keepSpecialComments: '*',
+        noAdvanced: true, // turn advanced optimizations off until the issue is fixed in clean-css
+        report: 'min',
+        compatibility: 'ie8'
+      },
+      docs: {
         src: [
-          'docs/assets/css/docs.css',
-          'docs/assets/css/pygments-manni.css',
-          'docs/assets/css/select2.css'
+          'docs/assets/css/src/docs.css',
+          'docs/assets/css/src/pygments-manni.css',
+          'docs/assets/css/src/select2.css'
         ],
-        dest: 'docs/assets/css/pack.min.css'
+        dest: 'docs/assets/css/docs.min.css'
       }
     },
 
     usebanner: {
-      dist: {
-        options: {
-          position: 'top',
-          banner: '<%= banner %>'
-        },
-        files: {
-          src: [
-            'dist/css/<%= pkg.name %>.css',
-            'dist/css/<%= pkg.name %>.min.css',
-          ]
-        }
+      options: {
+        position: 'top',
+        banner: '<%= banner %>'
+      },
+      files: {
+        src: 'dist/css/*.css'
       }
     },
 
     csscomb: {
-      sort: {
-        options: {
-          config: 'less/.csscomb.json'
-        },
+      options: {
+        config: 'less/.csscomb.json'
+      },
+      dist: {
+        expand: true,
+        cwd: 'dist/css/',
+        src: ['*.css', '!*.min.css'],
+        dest: 'dist/css/'
+      },
+      examples: {
+        expand: true,
+        cwd: 'docs/examples/',
+        src: '**/*.css',
+        dest: 'docs/examples/'
+      },
+      docs: {
         files: {
-          'dist/css/<%= pkg.name %>.css': 'dist/css/<%= pkg.name %>.css'
+          'docs/assets/css/src/docs.css': 'docs/assets/css/src/docs.css'
         }
       }
     },
@@ -180,6 +222,11 @@ module.exports = function (grunt) {
         src: '**',
         dest: 'dist'
       },
+      images: {
+        expand: true,
+        src: 'img/*',
+        dest: 'dist'
+      },
       docs: {
         expand: true,
         cwd: './dist',
@@ -190,11 +237,6 @@ module.exports = function (grunt) {
           'img/*'
         ],
         dest: 'docs/dist'
-      },
-      images: {
-        expand: true,
-        src: 'img/*',
-        dest: 'dist'
       }
     },
 
@@ -228,8 +270,8 @@ module.exports = function (grunt) {
           }
         },
         files: {
-          'docs/_includes/customizer-variables.html': 'docs/customizer-variables.jade',
-          'docs/_includes/nav-customize.html': 'docs/customizer-nav.jade'
+          'docs/_includes/customizer-variables.html': 'docs/jade/customizer-variables.jade',
+          'docs/_includes/nav-customize.html': 'docs/jade/customizer-nav.jade'
         }
       }
     },
@@ -294,6 +336,7 @@ module.exports = function (grunt) {
 
   // These plugins provide necessary tasks.
   require('load-grunt-tasks')(grunt, {scope: 'devDependencies'});
+  require('time-grunt')(grunt);
 
   // Clone bootstrap and checkout the appropriate tag task.
   grunt.registerTask('checkout-bootstrap', 'shell');
@@ -310,7 +353,8 @@ module.exports = function (grunt) {
   grunt.registerTask('dist-js', 'uglify');
 
   // CSS distribution task.
-  grunt.registerTask('dist-css', ['less', 'cssmin', 'csscomb', 'usebanner', 'dist-docs']);
+  grunt.registerTask('less-compile', ['less:compileCore']);
+  grunt.registerTask('dist-css', ['less-compile', 'autoprefixer', 'cssflip', 'usebanner', 'csscomb', 'less:minify', 'cssmin', 'dist-docs']);
 
   // Docs distribution task.
   grunt.registerTask('dist-docs', 'copy:docs');
@@ -334,6 +378,6 @@ module.exports = function (grunt) {
   grunt.registerTask('build-customizer-html', 'jade');
   grunt.registerTask('build-raw-files', 'Add scripts/less files to customizer.', function () {
     var banner = grunt.template.process('<%= banner %>');
-    generateRawFilesJs(banner);
+    generateRawFiles(banner);
   });
 };
