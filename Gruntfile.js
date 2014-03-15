@@ -260,6 +260,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/addon/hint/show-hint.js',
             '<%= vendors %>/CodeMirror-custom/addon/hint/markdown-hint.js',
             '<%= vendors %>/CodeMirror/addon/selection/active-line.js',
+            '<%= vendors %>/CodeMirror/addon/display/placeholder.js',
             '<%= vendors %>/CodeMirror/addon/fold/foldcode.js',
             '<%= vendors %>/CodeMirror/addon/fold/foldgutter.js',
             '<%= vendors %>/CodeMirror/addon/fold/markdown-fold.js',
