@@ -38,7 +38,9 @@ define([
 			viewportMargin: 40,
 			autofocus: true,
 			workDelay: 1000,
-			showTrailingSpace: true
+			showTrailingSpace: true,
+	    foldGutter: true,
+	    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
 		});
 		editor.refresh();
 

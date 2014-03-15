@@ -62,6 +62,7 @@ define([
 
 		keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
 		keyMaps['Shift-Tab'] = 'indentLess';
+		keyMaps['Ctrl-Q'] = function(cm) { cm.foldCode(cm.getCursor()); };
 
 		keyMapAutoCompletion = {
 			// "'#'": 'markdownAutoComplete',

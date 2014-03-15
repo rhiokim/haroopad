@@ -136,6 +136,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/xq-dark.css',
             '<%= vendors %>/CodeMirror/theme/xq-light.css',
             '<%= vendors %>/CodeMirror/addon/hint/show-hint.css',
+            '<%= vendors %>/CodeMirror/addon/fold/foldgutter.css',
             '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.css'
           ]
         }
@@ -259,6 +260,9 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/addon/hint/show-hint.js',
             '<%= vendors %>/CodeMirror-custom/addon/hint/markdown-hint.js',
             '<%= vendors %>/CodeMirror/addon/selection/active-line.js',
+            '<%= vendors %>/CodeMirror/addon/fold/foldcode.js',
+            '<%= vendors %>/CodeMirror/addon/fold/foldgutter.js',
+            '<%= vendors %>/CodeMirror/addon/fold/markdown-fold.js',
             '<%= vendors %>/CodeMirror-custom/addon/edit/continuelist.js',
             '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
             '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
