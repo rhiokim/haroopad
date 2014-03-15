@@ -5,8 +5,9 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 */
 
 .hljs {
-  display: block; padding: 0.5em;
-  background: #F0F0F0;
+  display: block;
+  padding: 0.5em;
+  background: #f0f0f0;
 }
 
 .hljs,
@@ -29,7 +30,6 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .haml .hljs-symbol,
 .ruby .hljs-symbol,
 .ruby .hljs-symbol .hljs-string,
-.hljs-aggregate,
 .hljs-template_tag,
 .django .hljs-variable,
 .smalltalk .hljs-class,
@@ -106,14 +106,13 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .lasso .hljs-attribute,
 .coffeescript .hljs-property,
 .hljs-phony {
-  color: #88F
+  color: #88f;
 }
 
 .hljs-keyword,
 .hljs-id,
 .hljs-title,
 .hljs-built_in,
-.hljs-aggregate,
 .css .hljs-tag,
 .hljs-javadoctag,
 .hljs-phpdoc,

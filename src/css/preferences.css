@@ -45,6 +45,10 @@ input[type=checkbox] {
   height: 13px;
 }
 
+.checkbox {
+  height: 18px;
+}
+
 #main {
   position: absolute;
   
@@ -175,10 +179,10 @@ input[type=checkbox] {
 .dropdown-menu li > a i {
 	display: none;
 }
-
+/*
 label.checkbox {
 	margin-bottom: 5px;
-}
+}*/
 
 /*
  * fixed select2

@@ -117,6 +117,10 @@ body > footer {
   word-wrap: break-word;*/
 }
 
+.CodeMirror pre.CodeMirror-placeholder {
+  color: #999;
+}
+
 /* email */
 #send-email-dialog .progress {
   height: 10px;

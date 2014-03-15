@@ -47,6 +47,7 @@ define([
 			'click input[name=displayLineNumber]': 'displayLineNumber',
 			'click input[name=displayActiveLine]': 'displayActiveLine',
 			'click input[name=vimKeyBinding]': 'vimKeyBinding',
+			'click input[name=useMarkdownFolding]': 'useMarkdownFolding',
 			'click input[name=indentWithTabs]': 'indentWithTabs',
 			'click input[name=autoPairCharacters]': 'autoPairCharacters',
 			'click a[data-tab-size]': 'setTabsize',
@@ -75,6 +76,7 @@ define([
 			this.$('input[name=displayLineNumber]').prop('checked', config.displayLineNumber);
 			this.$('input[name=displayActiveLine]').prop('checked', config.displayActiveLine);
 			this.$('input[name=vimKeyBinding]').prop('checked', config.vimKeyBinding);
+			this.$('input[name=useMarkdownFolding]').prop('checked', config.useMarkdownFolding);
 			this.$('input[name=autoPairCharacters]').prop('checked', config.autoPairCharacters);
 			this.$('input[name=indentWithTabs]').prop('checked', config.indentWithTabs);
 
@@ -151,6 +153,11 @@ define([
 		vimKeyBinding: function(e) {
 			var bool = $(e.target).is(':checked');
 			options.set('vimKeyBinding', bool);
+		},
+
+		useMarkdownFolding: function(e) {
+			var bool = $(e.target).is(':checked');
+			options.set('useMarkdownFolding', bool);
 		},
 
 		indentWithTabs: function(e) {
