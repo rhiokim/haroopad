@@ -19,7 +19,7 @@
   <script src="js/vendors/select2/select2.js"></script>
   <script src="js/vendors/store.js/store.js"></script>
   <script src="js/vendors/haroopad-keymage/keymage.js"></script>
-  <script src="js/vendors/i18next/release/i18next-1.7.1.js"></script>
+  <script src="js/vendors/i18next/i18next.min.js"></script>
   <script src="js/vendors/requirejs/require.js"></script>
 
 <!-- for develop -->
@@ -126,18 +126,24 @@
               
               <p>
                 <h5 data-i18n="general.general">General</h5>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="enableAutoComplete">
-                  <span data-i18n="general.enableAutoComplete">Enable Markdown Auto Completion</a>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="enableSyncScroll" checked="checked">
-                  <span data-i18n="general.enableSyncScroll">Enable sync scroll</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="enableLastFileRestore" checked="checked">
-                  <span data-i18n="general.enableLastFileRestore">Enable Lastest File Restore</span>
-                </label>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="enableAutoComplete">
+                    <span data-i18n="general.enableAutoComplete">Enable Markdown Auto Completion</a>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="enableSyncScroll" checked="checked">
+                    <span data-i18n="general.enableSyncScroll">Enable sync scroll</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="enableLastFileRestore" checked="checked">
+                    <span data-i18n="general.enableLastFileRestore">Enable Lastest File Restore</span>
+                  </label>
+                </div>
               </p>
               <!--p>
                 <h5 data-i18n="general.languages">Languages</h5>
@@ -215,7 +221,7 @@
                 <span class="label label-info">Contribution!</span> <span style="font-size:12px" data-i18n="[html]general.lang.contribution">We have created a <a href="http://github.com/rhiokim/haroopad-locales"><b>repository</b></a> for translation. If you can help with this project, why don't you join us?</span>
               </p-->
               <p>
-                <h5 data-i18n="editor.date-time">Date & Time</h5>
+                <h5 data-i18n="general.date-time">Date & Time</h5>
 
                 <select class="select2" name="dateTime"></select>
               </p>
@@ -262,7 +268,7 @@
               </p>
 
               <p>
-                <h5>Your Style</h5>
+                <h5 data-i18n="editor.user-style">Your Style</h5>
 
               </p>
               <p>
@@ -272,50 +278,69 @@
                   </select>
 
                   <!-- <div class="input-group-btn"> -->
-                    <button id="openUserThemeDir" class="btn btn-sm btn-primary" data-i18n="editor.theme.edit">Edit</button>
-                    <button id="reloadUserTheme" class="btn btn-sm btn-default" data-i18n="editor.theme.reload">Reload</button>
+                    <button id="openUserThemeDir" class="btn btn-sm btn-primary" data-i18n="edit">Edit</button>
+                    <button id="reloadUserTheme" class="btn btn-sm btn-default" data-i18n="reload">Reload</button>
                   <!-- </div> -->
                 </div>
               </p>
                   
               <p>
                 <h5 data-i18n="editor.general">General</h5>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="indentWithTabs">
-                  <span data-i18n="editor.indent-use-tab">Indent Using Tab</span>
 
-                  <div class="btn-group dropdown">
-                    <a class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-                      <i class="glyphicon glyphicon-share-alt"></i> <span data-i18n="editor.spaces">Spaces</span>
-                      <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a tabindex="1" href="#" data-tab-size="2" class="active"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 2</a></li>
-                      <li><a tabindex="2" href="#" data-tab-size="3"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 3</a></li>
-                      <li><a tabindex="3" href="#" data-tab-size="4"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 4</a></li>
-                      <li><a tabindex="4" href="#" data-tab-size="5"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 5</a></li>
-                      <li><a tabindex="5" href="#" data-tab-size="6"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 6</a></li>
-                      <li><a tabindex="6" href="#" data-tab-size="7"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 7</a></li>
-                      <li><a tabindex="7" href="#" data-tab-size="8"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 8</a></li>
-                    </ul>
-                  </div>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="displayLineNumber">
-                  <span data-i18n="editor.display-line-number">Display line number</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="displayActiveLine" checked="checked">
-                  <span data-i18n="editor.display-active-line">Display active line</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="vimKeyBinding">
-                  <span data-i18n="editor.vim-key-binding">Vim key binding</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="autoPairCharacters" checked="checked">
-                  <span data-i18n="editor.auto-pair-char">Auto pair characters</span> <code>[]</code>, <code>()</code>, <code>""</code>
-                </label>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="indentWithTabs">
+                    <span data-i18n="editor.indent-use-tab">Indent Using Tab</span>
+
+                    <div class="btn-group dropdown">
+                      <a class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="glyphicon glyphicon-share-alt"></i> <span data-i18n="editor.spaces">Spaces</span>
+                        <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a tabindex="1" href="#" data-tab-size="2" class="active"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 2</a></li>
+                        <li><a tabindex="2" href="#" data-tab-size="3"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 3</a></li>
+                        <li><a tabindex="3" href="#" data-tab-size="4"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 4</a></li>
+                        <li><a tabindex="4" href="#" data-tab-size="5"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 5</a></li>
+                        <li><a tabindex="5" href="#" data-tab-size="6"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 6</a></li>
+                        <li><a tabindex="6" href="#" data-tab-size="7"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 7</a></li>
+                        <li><a tabindex="7" href="#" data-tab-size="8"><i class="glyphicon glyphicon-ok"></i> <span data-i18n="editor.tab-width">Tab width</span>: 8</a></li>
+                      </ul>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="displayLineNumber">
+                    <span data-i18n="editor.display-line-number">Display line number</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="displayActiveLine" checked="checked">
+                    <span data-i18n="editor.display-active-line">Display active line</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="vimKeyBinding">
+                    <span data-i18n="editor.vim-key-binding">Vim key binding</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="useMarkdownFolding">
+                    <span data-i18n="editor.use-markdown-folding">Use Markdown Folding</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="autoPairCharacters" checked="checked">
+                    <span data-i18n="editor.auto-pair-char">Auto pair characters</span> <code>[]</code>, <code>()</code>, <code>""</code>
+                  </label>
+                </div>
+                
               </p>
             </div>
 
@@ -359,7 +384,7 @@
               </p>
 
               <p>
-                <h5>Your Style</h5>
+                <h5 data-i18n="viewer.user-style">Your Style</h5>
 
               </p>
               <p>
@@ -369,8 +394,8 @@
                   </select>
 
                   <!-- <div class="input-group-btn"> -->
-                    <button id="openViewerThemeDir" class="btn btn-sm btn-primary" data-i18n="editor.theme.edit">Edit</button>
-                    <button id="reloadViewerTheme" class="btn btn-sm btn-default" data-i18n="editor.theme.reload">Reload</button>
+                    <button id="openViewerThemeDir" class="btn btn-sm btn-primary" data-i18n="edit">Edit</button>
+                    <button id="reloadViewerTheme" class="btn btn-sm btn-default" data-i18n="reload">Reload</button>
                   <!-- </div> -->
                 </div>
               </p>
@@ -382,10 +407,12 @@
               <p>
                 <h5 data-i18n="viewer.general">General</h5>
 
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="clickableLink">
-                  <span data-i18n="viewer.clickable-link">Make links clickable in Editor view</span>
-                </label>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="clickableLink">
+                    <span data-i18n="viewer.clickable-link">Make links clickable in Editor view</span>
+                  </label>
+                </div>
               </p>
             </div>
 
@@ -444,10 +471,12 @@
               <p>
                 <h5 data-i18n="code.general">General</h5>
 
-                <label class="checkbox">
-                  <input type="checkbox" disabled name="diplayLineNumber">
-                  <span class="muted" data-i18n="code.show-line-number">Show line number at syntax highlight</span>
-                </label>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" disabled name="diplayLineNumber">
+                    <span class="muted" data-i18n="code.show-line-number">Show line number at syntax highlight</span>
+                  </label>
+                </div>
               </p>
             </div>
 
@@ -469,39 +498,53 @@
                   <input type="checkbox" value="" name="gfm" checked="checked">
                   <span data-i18n="markdown.enable-gfm">Enable github flavored markdown</span> [<a href="http://github.github.com/github-flavored-markdown/">?</a>]
                 </label> -->
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="tables" checked="checked">
-                  <span data-i18n="markdown.gfm-table">Enable GFM tables.</span> <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables">[?]</a>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="breaks">
-                  <span data-i18n="markdown.gfm-line-breaks">Enable GFM line breaks</span> <a href="https://help.github.com/articles/github-flavored-markdown#newlines">[?]</a>
-                </label>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="tables" checked="checked">
+                    <span data-i18n="markdown.gfm-table">Enable GFM tables.</span> <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables">[?]</a>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="breaks">
+                    <span data-i18n="markdown.gfm-line-breaks">Enable GFM line breaks</span> <a href="https://help.github.com/articles/github-flavored-markdown#newlines">[?]</a>
+                  </label>
+                </div>
 
                 <h5 data-i18n="markdown.etc">ETC</h5>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="sanitize" checked="checked">
-                  <span data-i18n="markdown.sanitize-desc">Ignore any HTML that has been input.</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="smartLists" checked="checked">
-                  <span data-i18n="markdown.smarty-list">Use smarter list behavior than the original markdown.</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="smartypants">
-                  <span data-i18n="markdown.smarty-pants">Use "smart" typograhic punctuation</span> [<a href="http://daringfireball.net/projects/smartypants/">?</a>]
-                </label>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="sanitize" checked="checked">
+                    <span data-i18n="markdown.sanitize-desc">Ignore any HTML that has been input.</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="smartLists" checked="checked">
+                    <span data-i18n="markdown.smarty-list">Use smarter list behavior than the original markdown.</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="smartypants">
+                    <span data-i18n="markdown.smarty-pants">Use "smart" typograhic punctuation</span> [<a href="http://daringfireball.net/projects/smartypants/">?</a>]
+                  </label>
+                </div>
 
 
                 <h5 data-i18n="markdown.math">Math Expression options</h5>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="mathjax">
-                  <span data-i18n="markdown.enable-math">Use Mathematics Expression</span> [<a href="http://mathjax.org">?</a>]
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" value="" name="dollarSign">
-                  <span data-i18n="markdown.enable-dollar-sign">Use $ Sign for Inline Expression</span>
-                </label>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="mathjax">
+                    <span data-i18n="markdown.enable-math">Use Mathematics Expression</span> [<a href="http://mathjax.org">?</a>]
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" name="dollarSign">
+                    <span data-i18n="markdown.enable-dollar-sign">Use $ Sign for Inline Expression</span>
+                  </label>
+                </div>
               </p>
             </div>
 
@@ -642,26 +685,36 @@
             <div class="panel-body">
               <h5 data-i18n="backup.title">Import & Export Settings...</h5>
               <p>
-                <label class="checkbox">
-                  <input type="checkbox" name="general" checked>
-                  <span data-i18n="tab.general">General</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" name="editor" checked>
-                  <span data-i18n="tab.editor">Editor</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" name="viewer" checked>
-                  <span data-i18n="tab.viewer">Viewer</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" name="code" checked>
-                  <span data-i18n="tab.code">Code</span>
-                </label>
-                <label class="checkbox">
-                  <input type="checkbox" name="markdown" checked>
-                  <span data-i18n="tab.markdown">Markdown</span>
-                </label>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="general" checked>
+                    <span data-i18n="tab.general">General</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="editor" checked>
+                    <span data-i18n="tab.editor">Editor</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="viewer" checked>
+                    <span data-i18n="tab.viewer">Viewer</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="code" checked>
+                    <span data-i18n="tab.code">Code</span>
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="markdown" checked>
+                    <span data-i18n="tab.markdown">Markdown</span>
+                  </label>
+                </div>
               </p>
             </div>
 

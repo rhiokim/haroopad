@@ -15,6 +15,7 @@ define([
 				displayLineNumber: false,
 				vimKeyBinding: false,
 				autoPairCharacters: true,
+				useMarkdownFolding: false,
 				tabSize: 4,
 				indentUnit: 4,
 				indentWithTabs: false,

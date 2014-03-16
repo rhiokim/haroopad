@@ -64,6 +64,7 @@ CTRL - ALT - Backspace       | Delete Group after
 ALT - Delete                 | Delete Group after
 COMMAND (CTRL) - [           | Indent less
 COMMAND (CTRL) - ]           | Indent
+CTRL - Q                     | Folding
 
 ##### Inserting
  Shortcut           | Description

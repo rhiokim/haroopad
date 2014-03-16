@@ -44,7 +44,6 @@ i18n.init({
     'window/Window',
     'editor/Editor',
     'viewer/Viewer',
-    // 'ui/toc/TOC',
     'ui/markdown-help/MarkdownHelp',
     'ui/file/File',
     'ui/layout/Layout',

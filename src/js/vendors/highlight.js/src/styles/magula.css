@@ -8,7 +8,8 @@ Music: Aphex Twin / Xtal
 */
 
 .hljs {
-  display: block; padding: 0.5em;
+  display: block;
+  padding: 0.5em;
   background-color: #f4f4f4;
 }
 
@@ -28,7 +29,6 @@ Music: Aphex Twin / Xtal
 .hljs-pragma,
 .ruby .hljs-symbol,
 .ruby .hljs-symbol .hljs-string,
-.hljs-aggregate,
 .hljs-template_tag,
 .django .hljs-variable,
 .smalltalk .hljs-class,
@@ -87,7 +87,6 @@ Music: Aphex Twin / Xtal
 .hljs-phpdoc,
 .hljs-title,
 .hljs-built_in,
-.hljs-aggregate,
 .smalltalk .hljs-class,
 .hljs-winutils,
 .bash .hljs-variable,

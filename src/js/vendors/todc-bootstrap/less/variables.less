@@ -22,7 +22,7 @@
 
 //== Scaffolding
 //
-// ## Settings for some of the most global styles.
+//## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
 @body-bg:               #fff;
@@ -69,12 +69,15 @@
 @headings-color:          inherit;
 
 
-//-- Iconography
+//== Iconography
 //
-//## Specify custom locations of the include Glyphicons icon font. Useful for those including Bootstrap via Bower.
+//## Specify custom location and filename of the included Glyphicons icon font. Useful for those including Bootstrap via Bower.
 
+//** Load fonts from this directory.
 @icon-font-path:          "../fonts/";
+//** File name for all font files.
 @icon-font-name:          "glyphicons-halflings-regular";
+//** Element ID within SVG icon file.
 @icon-font-svg-id:        "glyphicons_halflingsregular";
 
 
@@ -235,7 +238,7 @@
 //** Text color for headers within dropdown menus.
 @dropdown-header-color:          @gray-light;
 
-// Note: Deprecated @dropdown-caret-color as of v3.1
+// Note: Deprecated @dropdown-caret-color as of v3.1.0
 @dropdown-caret-color:           #000;
 
 
@@ -306,6 +309,26 @@
 @grid-float-breakpoint:     @screen-sm-min;
 //** Point at which the navbar begins collapsing.
 @grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
+
+
+//== Container sizes
+//
+//## Define the maximum width of `.container` for different screen sizes.
+
+// Small screen / tablet
+@container-tablet:             ((720px + @grid-gutter-width));
+//** For `@screen-sm-min` and up.
+@container-sm:                 @container-tablet;
+
+// Medium screen / desktop
+@container-desktop:            ((940px + @grid-gutter-width));
+//** For `@screen-md-min` and up.
+@container-md:                 @container-desktop;
+
+// Large screen / wide desktop
+@container-large-desktop:      ((1140px + @grid-gutter-width));
+//** For `@screen-lg-min` and up.
+@container-lg:                 @container-large-desktop;
 
 
 //== Navbar
@@ -788,17 +811,26 @@
 //** List group border radius
 @list-group-border-radius:      0;
 
-//** Background color of single list elements on hover
+//** Background color of single list items on hover
 @list-group-hover-bg:           @gray-lighter;
-//** Text color of active list elements
+//** Text color of active list items
 @list-group-active-color:       #dd4b39;
-//** Background color of active list elements
+//** Background color of active list items
 @list-group-active-bg:          transparent;
 //** Border color of active list elements
 @list-group-active-border:      @list-group-border;
+//** Text color for content within active list items
 @list-group-active-text-color:  lighten(@gray-darker, 40%);
 
+//** Text color of disabled list items
+@list-group-disabled-color:      @gray-light;
+//** Background color of disabled list items
+@list-group-disabled-bg:         @gray-lighter;
+//** Text color for content within disabled list items
+@list-group-disabled-text-color: @list-group-disabled-color;
+
 @list-group-link-color:         #555;
+@list-group-link-hover-color:   @list-group-link-color;
 @list-group-link-heading-color: #333;
 
 
@@ -808,6 +840,8 @@
 
 @panel-bg:                    #fff;
 @panel-body-padding:          15px 20px;
+@panel-heading-padding:       @panel-body-padding;
+@panel-footer-padding:        @panel-heading-padding;
 @panel-border-radius:         3px;
 
 //** Border color for elements within panels
@@ -921,16 +955,20 @@
 //
 //##
 
-@carousel-text-shadow:                        0 1px 2px rgba(0,0,0,.6);
+@carousel-bg:                                 #f5f5f5;
+@carousel-text-shadow:                        none;
 
-@carousel-control-color:                      #fff;
+@carousel-control-color:                      #777;
 @carousel-control-width:                      15%;
-@carousel-control-opacity:                    .5;
+@carousel-control-opacity:                    .33;
 @carousel-control-font-size:                  20px;
 
-@carousel-indicator-active-bg:                #fff;
-@carousel-indicator-border-color:             #fff;
+@carousel-indicator-bg:                       #c2c2c2;
+@carousel-indicator-active-bg:                #444;
+@carousel-indicator-border-color:             @carousel-indicator-bg;
 
+@carousel-caption-bg:                         rgba(0, 0, 0, 0.55);
+@carousel-caption-fallback-bg:                #262626;
 @carousel-caption-color:                      #fff;
 
 
@@ -971,6 +1009,8 @@
 @headings-small-color:        @gray-light;
 //** Blockquote small color
 @blockquote-small-color:      @gray-light;
+//** Blockquote font size
+@blockquote-font-size:        (@font-size-base * 1.25);
 //** Blockquote border color
 @blockquote-border-color:     @gray-lighter;
 //** Page header border color
@@ -986,23 +1026,3 @@
 
 //** Horizontal offset for forms and lists.
 @component-offset-horizontal: 180px;
-
-
-//== Container sizes
-//
-//## Define the maximum width of `.container` for different screen sizes.
-
-// Small screen / tablet
-@container-tablet:             ((720px + @grid-gutter-width));
-//** For `@screen-sm-min` and up.
-@container-sm:                 @container-tablet;
-
-// Medium screen / desktop
-@container-desktop:            ((940px + @grid-gutter-width));
-//** For `@screen-md-min` and up.
-@container-md:                 @container-desktop;
-
-// Large screen / wide desktop
-@container-large-desktop:      ((1140px + @grid-gutter-width));
-//** For `@screen-lg-min` and up.
-@container-lg:                 @container-large-desktop;

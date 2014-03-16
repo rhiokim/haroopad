@@ -1,3 +1,6 @@
+v1.3.16
++ Improve environment/module.exports detection (#88, github.com/benrudolph)
+
 v1.3.15
 + Enable inlining the minified build
 + Fix AMD issue (https://github.com/marcuswestin/store.js/issues/85)
@@ -22,7 +25,7 @@ v1.3.9
 + Make store.js work in Node.js (using any working localStorage shim for Node.js)
 
 v1.3.8
-+ Fix closing </iframe> tag for IE7 (GH issue #67)
++ Fix closing </iframe> tag for IE7 (GH issue #68)
 
 v1.3.7
 + Fix store.getAll for IE6

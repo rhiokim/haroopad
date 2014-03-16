@@ -58,8 +58,12 @@
     var name, themes = [];
 
     csses.forEach(function(css, idx) {
-      name = path.basename(css).replace('.css', '');
-      themes.push(name);
+      name = path.basename(css);
+
+      if (name.charAt(0) != '.') {
+        name = name.replace('.css', '');
+        themes.push(name);
+      }
     });
 
     return themes;
@@ -117,7 +121,7 @@
   global.THEMES.user.viewer = loadUserThemes(global.PATHS.theme_dest_viewer);
   global.THEMES.editor = ['default', '3024-day', '3024-night', 'ambiance-mobile', 'ambiance',
     'base16-dark', 'base16-light', 'blackboard', 'cobalt', 'eclipse', 'elegant', 'erlang-dark',
-    'lesser-dark', 'mbo', 'midnight', 'monokai', 'neat', 'night', 'paraiso-dark', 'paraiso-light',
+    'lesser-dark', 'mbo', 'mdn-like', 'midnight', 'monokai', 'neat', 'night', 'paraiso-dark', 'paraiso-light',
     'pastel-on-dark', 'rubyblue', 'solarized dark', 'solarized light', 'the-matrix',
     'tomorrow-night-eighties', 'twilight', 'vibrant-ink', 'xq-dark', 'xq-light'
   ];
@@ -189,6 +193,8 @@
     'delete-group-after2':  'alt-delete',
     'indent-less':          'defmod-[',
     'indent':               'defmod-]',
+
+    'folding':               'Ctrl-Q',
 
     /* pad */
     'insert-date-time': 'shift-ctrl-d',
