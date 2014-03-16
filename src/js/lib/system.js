@@ -56,8 +56,12 @@
     var name, themes = [];
 
     csses.forEach(function(css, idx) {
-      name = path.basename(css).replace('.css', '');
-      themes.push(name);
+      name = path.basename(css);
+
+      if (name.charAt(0) != '.') {
+        name = name.replace('.css', '');
+        themes.push(name);
+      }
     });
 
     return themes;
