@@ -44,8 +44,41 @@
   <script src="js/common/menu/Menu.tools.send.js"></script>
   <script src="js/common/menu/Menu.share.js"></script>
   <script src="js/common/menu/Menu.help.js"></script>
+
+  <!-- for develop -->
+    <script>
+      keymage('defmod-shift-j', function() {
+        var gui = require("nw.gui");
+        var win = gui.Window.get();
+        win.showDevTools();
+      });
+    </script>
+  <!-- for develop -->
+  <style>
+    .active {
+      border: 1px solid red;
+    }
+  </style>
 </head>
 <body>
+  <div id="nav" style="float:left; width:80px;">
+    <button id="btnWrite">write</button><br/>
+    <button id="btnNew">new</button><br/>
+    <button id="btnSave">save</button>
+    <button id="btnMore">more</button>
+    <button id="btnSync">sync</button>
+  </div>
+  <div id="list" style="float:left; width: 250px; background-color: #afafaf;">
+    list
+  </div>
+  <div id="editor" style="float:left; width: 200px; background-color: red;">
+    <textarea rows="10" cols="25"></textarea>
+  </div>
+  <div id="viewer" style="float:left; width: 100px; background-color: blue;">
+    viewer
+  </div>
+  <i style="clear:both;"></i>
+  <div id="dbinfo"></div>
   <script>
     requirejs(['js/app/index']);
   </script>

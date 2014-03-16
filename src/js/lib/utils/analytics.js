@@ -5,7 +5,7 @@ global._gaq = {
 
 	init: function(next) {
 		var cw, iframe, wrapper,
-				html = '<iframe src="about:blank" id="__google" nwdisable nwfaketop></iframe>';
+				html = '<iframe src="about:blank" id="__google" style="position:absolute;width:1px;height:1px;top:-100px;left:-100px;" nwdisable nwfaketop></iframe>';
 		
 		wrapper = document.createElement('p');
 		wrapper.innerHTML = html;
