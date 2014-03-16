@@ -173,9 +173,19 @@ define([
 
 		/* toggle markdown folding */
 		function toggleFolding(value) {
+			var keyMaps = editor.getOption('extraKeys');
+
 			editor.setOption('foldGutter', value);
 			editor.setOption('gutters', value ? ["CodeMirror-linenumbers", "CodeMirror-foldgutter"] : []);
 			
+			if (value) {
+				keyMaps[__key('folding')] = function(cm) { cm.foldCode(cm.getCursor()); };
+				editor.setOption('extraKeys', keyMaps);
+			} else {
+				delete keyMaps[__key('folding')];
+				editor.setOption('extraKeys', keyMaps);
+			}
+
 			global._gaq.push('haroopad.preferences', 'editor', 'markdown folding: ' + value);
 		}
 		

@@ -192,6 +192,8 @@
     'indent-less':          'defmod-[',
     'indent':               'defmod-]',
 
+    'folding':               'Ctrl-Q',
+
     /* pad */
     'insert-date-time': 'shift-ctrl-d',
 
