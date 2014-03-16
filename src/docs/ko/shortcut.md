@@ -64,6 +64,7 @@ CTRL - ALT - Backspace      | 다음 그룹 삭제
 ALT - Delete                | 다음 그룹 삭제
 COMMAND (CTRL) - [          | 내어쓰기
 COMMAND (CTRL) - ]          | 들여쓰기
+CTRL - Q                    | 내용 접고 펼치기(폴딩)
 
 ##### 삽입
  단축키              | 설명

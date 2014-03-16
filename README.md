@@ -14,7 +14,7 @@
 
 ## features
 * cross platform markdown editor
-	- support Window, Linux, Mac OS
+  - support Window, Linux, Mac OS
 * support multi-markdown
 * editor theme, syntax highlight, markdown theme
 * vim key binding
@@ -49,7 +49,7 @@
 **list**
 
 * li1
-	- li1-1
+  - li1-1
    - li1-2
      * li-2-1
      * li-2-2
@@ -85,7 +85,7 @@ function syntaxHighlight() {
 
 ```css
 body {
-	font-size: 1em;
+  font-size: 1em;
 }
 ```
 
@@ -112,5 +112,4 @@ jedi  | 44  | robot
 
 perform_complicated_task  
 do_this_and_do_that_and_another_thing
-
 

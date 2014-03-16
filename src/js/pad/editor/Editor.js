@@ -30,6 +30,8 @@ define([
 		};
 		generalConf.dateFormat = generalConf.dateFormat || 'LLL';
 
+		document.getElementById("code").setAttribute('placeholder', i18n.t('pad:placeholder'));
+
 		var editor = nw.editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 			mode: 'markdown',
 			lineNumbers: true,
@@ -168,6 +170,24 @@ define([
 			var keyMap = value ? Keymap.markdown : Keymap.defaults;
 			editor.setOption('extraKeys', keyMap);
 		}
+
+		/* toggle markdown folding */
+		function toggleFolding(value) {
+			var keyMaps = editor.getOption('extraKeys');
+
+			editor.setOption('foldGutter', value);
+			editor.setOption('gutters', value ? ["CodeMirror-linenumbers", "CodeMirror-foldgutter"] : []);
+			
+			if (value) {
+				keyMaps[__key('folding')] = function(cm) { cm.foldCode(cm.getCursor()); };
+				editor.setOption('extraKeys', keyMaps);
+			} else {
+				delete keyMaps[__key('folding')];
+				editor.setOption('extraKeys', keyMaps);
+			}
+
+			global._gaq.push('haroopad.preferences', 'editor', 'markdown folding: ' + value);
+		}
 		
 		editor.setOption('theme', config.theme);
 		editor.setOption('lineNumbers', config.displayLineNumber);
@@ -179,6 +199,7 @@ define([
 		editor.setOption('autoCloseBrackets', config.autoPairCharacters);
 
 		toggleAutoComplete(generalConf.enableAutoComplete || false);
+		toggleFolding(config.useMarkdownFolding || false);
 		setFontSize(config.fontSize);
 		setFontFmaily();
 
@@ -192,6 +213,7 @@ define([
 		window.parent.ee.on('preferences.editor.displayLineNumber', toggleLineNumber);
 		window.parent.ee.on('preferences.editor.displayActiveLine', toggleActiveLine);
 		window.parent.ee.on('preferences.editor.vimKeyBinding', toggleVim);
+		window.parent.ee.on('preferences.editor.useMarkdownFolding', toggleFolding);
 		window.parent.ee.on('preferences.editor.autoPairCharacters', toggleAutoPairChar);
 		window.parent.ee.on('preferences.editor.indentWithTabs', toggleIndentWithTab);
 		window.parent.ee.on('preferences.editor.fontSize', changeFontSize);
@@ -204,6 +226,7 @@ define([
 			window.parent.ee.off('preferences.editor.displayLineNumber', toggleLineNumber);
 			window.parent.ee.off('preferences.editor.displayActiveLine', toggleActiveLine);
 			window.parent.ee.off('preferences.editor.vimKeyBinding', toggleVim);
+			window.parent.ee.off('preferences.editor.useMarkdownFolding', toggleFolding);
 			window.parent.ee.off('preferences.editor.autoPairCharacters', toggleAutoPairChar);
 			window.parent.ee.off('preferences.editor.indentWithTabs', toggleIndentWithTab);
 			window.parent.ee.off('preferences.editor.fontSize', changeFontSize);

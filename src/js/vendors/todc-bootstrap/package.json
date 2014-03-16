@@ -1,10 +1,16 @@
 {
   "name": "todc-bootstrap",
   "description": "Google-styled theme for Bootstrap.",
-  "version": "3.1.0-3.1.0",
+  "version": "3.1.1-3.2.1",
   "keywords": [
     "bootstrap",
     "css",
+    "js",
+    "less",
+    "mobile-first",
+    "responsive",
+    "front-end",
+    "web",
     "theme",
     "google"
   ],
@@ -13,6 +19,11 @@
   "scripts": {
     "test": "grunt test"
   },
+  "style": [
+    "dist/css/bootstrap.css",
+    "dist/css/todc-bootstrap.css"
+  ],
+  "less": "less/todc-bootstrap.less",
   "repository": {
     "type": "git",
     "url": "https://github.com/todc/todc-bootstrap.git"
@@ -20,34 +31,38 @@
   "bugs": {
     "url": "https://github.com/todc/todc-bootstrap/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/mit-license.php"
-    }
-  ],
+  "license": {
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/mit-license.php"
+  },
   "devDependencies": {
     "btoa": "~1.1.1",
-    "grunt": "~0.4.2",
-    "grunt-banner": "~0.2.0",
+    "grunt": "~0.4.3",
+    "grunt-autoprefixer": "~0.7.2",
+    "grunt-banner": "~0.2.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-compress": "~0.5.3",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-csslint": "~0.2.0",
-    "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-contrib-jade": "~0.9.1",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-less": "~0.9.0",
-    "grunt-contrib-uglify": "~0.3.0",
-    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-cssmin": "~0.9.0",
+    "grunt-contrib-jade": "~0.11.0",
+    "grunt-contrib-jshint": "~0.9.0",
+    "grunt-contrib-less": "~0.10.0",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-watch": "~0.6.0",
     "grunt-csscomb": "~2.0.1",
+    "grunt-css-flip": "~0.2.0",
     "grunt-html-validation": "~0.1.13",
     "grunt-jekyll": "~0.4.1",
-    "grunt-jscs-checker": "~0.3.0",
+    "grunt-jscs-checker": "~0.4.0",
     "grunt-sed": "~0.1.1",
-    "grunt-shell": "~0.6.1",
-    "load-grunt-tasks": "~0.3.0",
-    "markdown": "~0.5.0"
+    "grunt-shell": "~0.6.4",
+    "load-grunt-tasks": "~0.4.0",
+    "markdown": "~0.5.0",
+    "time-grunt": "~0.2.10"
+  },
+  "engines": {
+    "node": "~0.10.1"
   },
   "jspm": {
     "main": "js/todc-bootstrap",

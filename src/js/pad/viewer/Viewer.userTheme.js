@@ -1,9 +1,11 @@
 define([
   'viewer/Viewer.userTheme.StyleParser'
 ], function(parse) {
-  var fs = require('fs');
+  var fs = require('fs-extra');
   var path = require('path');
   var view, config = store.get('Viewer') || {};
+  var baseDir = path.join(gui.App.dataPath, 'Themes', 'viewer');
+  var userCssDir = path.join(baseDir, '.userStyle.css') || '';
 
   var iframe = $('#viewer iframe')[0];
 
@@ -12,7 +14,7 @@ define([
       return '';
     }
 
-    var themeFile = path.join(gui.App.dataPath, 'Themes', 'viewer', userTheme);
+    var themeFile = path.join(baseDir, userTheme);
     themeFile += '.css';
 
     try {
@@ -21,16 +23,20 @@ define([
   }
 
   var CustomStyle = Backbone.View.extend({
-    el: document.createElement('style'),
+    el: document.createElement('link'),
 
     initialize: function() {
       var head = iframe.contentDocument.getElementsByTagName('head')[0];
-      var css = loadUserCss(config.userTheme);
+      // var css = loadUserCss(config.userTheme);
+      this.el.setAttribute('rel', 'stylesheet');
+      this.el.setAttribute('type', 'text/css');
+      this.el.setAttribute('href', userCssDir);
+
       head.appendChild(this.el);
 
-      if (css) {
-        this.updateStyle(css);
-      }
+      // if (css) {
+      //   this.updateStyle(css);
+      // }
     },
 
     init: function() {
@@ -39,8 +45,10 @@ define([
 
     updateStyle: function(css) {
       try {
-        var style = parse(css);
-        this.$el.text(style || '');
+        fs.writeFileSync(path.join(baseDir, '.userStyle.css'), parse(css), 'utf8');
+        // var style = parse(css);
+        this.el.setAttribute('href', userCssDir +'?'+ new Date().getTime());
+        // this.$el.text(style || '');
       } catch (e) {
       }
     },

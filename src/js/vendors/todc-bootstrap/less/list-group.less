@@ -40,7 +40,9 @@ a.list-group-item {
   .list-group-item-heading {
     color: @list-group-link-heading-color;
   }
+}
 
+.list-group-item {
   // Active class on item itself, not parent
   &.active,
   &.active:hover,
@@ -68,6 +70,7 @@ li.list-group-item a {
   &:hover,
   &:focus {
     text-decoration: none;
+    color: @list-group-link-hover-color;
     background-color: @list-group-hover-bg;
   }
 }
@@ -82,10 +85,10 @@ li.list-group-item {
     margin: 0 0 0 14px;
   }
 
-  &.active {
-    font-weight: bold;
+  &.active,
+  &.active:hover,
+  &.active:focus {
     background-color: @list-group-active-bg;
-    border-left: 4px solid #DD4B39;
     > a {
       margin-left: 10px;
       color: @list-group-active-color;

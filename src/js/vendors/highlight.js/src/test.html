@@ -49,6 +49,7 @@
   <link rel="alternate stylesheet" title="Paraíso - Light" href="styles/paraiso.light.css">
 
   <style>
+    /* Base styles */
     body {
       font: small Arial, sans-serif;
     }
@@ -58,7 +59,9 @@
       margin-bottom: 0.5em;
     }
     table {
-      width: 100%; padding: 0; border-collapse: collapse;
+      width: 100%;
+      padding: 0;
+      border-collapse: collapse;
     }
     th {
       width: 12em;
@@ -74,6 +77,7 @@
     pre {
       margin: 0; font-size: medium;
     }
+    /* Style switcher */
     #switch {
       overflow: auto; width: 67em;
       list-style: none;
@@ -88,6 +92,7 @@
     #switch li.current {
       background: #CCC;
     }
+    /* Tests */
     .test {
       color: #888;
       font-weight: normal;
@@ -99,7 +104,7 @@
     .passed {
       color: green;
     }
-    .failed {
+    .failed, .failed a {
       color: red;
     }
     .code {
@@ -107,6 +112,13 @@
     }
     .code .hljs-keyword {
       font-weight: bold;
+    }
+    /* Export form */
+    #export_from, #export_to {
+      width: 98%;
+    }
+    address {
+      margin-top: 4em;
     }
   </style>
 
@@ -133,26 +145,24 @@
           }
       }
 
-
       attach(window, 'load', function() {
           var current = null;
 
           var info = {};
           var links = document.getElementsByTagName('link');
-          var ul = document.createElement('ul')
+          var ul = document.createElement('ul');
 
           for (var i = 0; (link = links[i]); i++) {
-              if (link.getAttribute('rel').indexOf('style') != -1
-                  && link.title) {
+              if ((link.getAttribute('rel').indexOf('style') != -1) && link.title) {
 
                   var title = link.title;
 
                   info[title] = {
                   'link': link,
                   'li': document.createElement('li')
-                  }
+                  };
 
-                  ul.appendChild(info[title].li)
+                  ul.appendChild(info[title].li);
                   info[title].li.title = title;
 
                   info[title].link.disabled = true;
@@ -169,7 +179,7 @@
               }
           }
 
-          current = info['Default']
+          current = info['Default'];
           current.li.className = 'current';
           current.link.disabled = false;
 
@@ -177,8 +187,80 @@
           container = document.getElementById(container_id);
           container.appendChild(ul);
       });
-
   })('styleswitcher');
+  </script>
+
+  <script>
+  // Test result detection © Ivan Sagalaev <maniac@softwaremaniacs.org>
+  function testDetection() {
+      if (!hljs.initHighlighting.called) {
+          window.setTimeout(testDetection, 500);
+          return;
+      }
+      var table = document.getElementById('autotest');
+      var tds = table.getElementsByTagName('TD');
+      var failed = [];
+      var passed, result
+      for (var i = 0; i < tds.length; i++) {
+          var tdClass = tds[i].className;
+          tds[i].id = 'anchor-' + tdClass.replace(/[^\w]/, '-');
+          if (hljs.getLanguage(tdClass)) {
+              var code = tds[i].getElementsByTagName('CODE')[0];
+              var langClass = code.className.replace('hljs', '').trim();
+              passed = (tdClass == langClass);
+              result = document.createElement('DIV');
+              result.className = 'test';
+              result.innerHTML = '<var class="'+ (passed ? 'passed' : 'failed') +'">' + langClass + '</var>';
+              result.innerHTML += ' (' + code.result.re + ')';
+              if (code.second_best) {
+                  result.innerHTML += '<br>' + code.second_best.language + ' (' + code.second_best.re + ')';
+              }
+              tds[i].parentNode.getElementsByTagName('th')[0].appendChild(result);
+	      if (!passed) {
+	          failed.push('<a href="#' + tds[i].id + '">' + tdClass + '</a>');
+	      }
+          } else {
+              tds[i].parentNode.style.display = 'none';
+          }
+      }
+      var summary = document.getElementById('summary');
+      summary.innerHTML = failed.length ? ('Failed tests: ' + failed.join(', ')) : 'All tests passed';
+      summary.className = failed.length ? 'failed' : 'passed';
+  }
+  testDetection();
+  </script>
+
+  <script>
+  // Highlighted code export © Vladimir Gubarkov <xonixx@gmail.com>
+  String.prototype.escape = function() {
+      return this.replace(/&/gm, '&amp;').replace(/</gm, '&lt;').replace(/>/gm, '&gt;');
+  };
+
+  function ExportDoIt() {
+      var export_from = document.getElementById("export_from");
+      var export_to = document.getElementById("export_to");
+      var export_view = document.getElementById("export_view");
+      var selector = document.getElementById("langSelector");
+      var selectedLang = selector.options[selector.selectedIndex].value.toLowerCase();
+      if (selectedLang) {
+          export_view.innerHTML = '<pre><code class="' + selectedLang + '">' + export_from.value.escape() + "</code></pre>";
+      } else { // try auto
+          export_view.innerHTML = '<pre><code>' + export_from.value.escape() + "</code></pre>";
+      }
+      hljs.highlightBlock(export_view.firstChild.firstChild);
+      export_to.value = export_view.innerHTML;
+  }
+
+  function ExportCopyToBuffer(textToCopy) {
+      if (window.clipboardData) { // IE
+          window.clipboardData.setData("Text", textToCopy);
+      } else if (window.netscape) { // FF
+          // from http://developer.mozilla.org/en/docs/Using_the_Clipboard
+          netscape.security.PrivilegeManager.enablePrivilege('UniversalXPConnect');
+          var gClipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
+          gClipboardHelper.copyString(textToCopy);
+      }
+  }
   </script>
 <body>
 
@@ -245,6 +327,13 @@ module ABC::DEF
   def ==(other) other == self end
 end
 
+class Car < ActiveRecord::Base
+  has_many :wheels, :class_name => 'Wheel', :foreign_key => 'car_id'
+end
+omega = -> { 'alpha' }
+alpha = ->(arg) { arg*2 }
+hash = {1 => 'one', 2 => 'two'}
+
 anIdentifier = an_identifier
 Constant = 1
 render action: :new
@@ -254,6 +343,26 @@ str =~ %r{foo|bar|buz$}
 str =~ %r!foo|bar$!
 str =~ %r[foo|bar$]
 str =~ %r(\(foo|bar\)$)
+
+2.0.0p0 :001 > ['some']
+ => ["some"] 
+2.0.0p0 :002 > if true
+2.0.0p0 :003?>   "yop"
+2.0.0p0 :004?>   end
+ => "yop" 
+
+>> obj = OpenStruct.new :integer => 987, :symbol => :so_great
+=> #&lt;OpenStruct integer=987, symbol=:so_great&gt;
+>> [obj,obj,obj]
+=> [#&lt;OpenStruct integer=987, symbol=:so_great>, #&lt;OpenStruct integer=987, symbol=:so_great>, #&lt;OpenStruct integer=987, symbol=:so_great>]
+>> {1 => obj, 2 => obj}
+=> {1=>#&lt;OpenStruct integer=987, symbol=:so_great>, 2=>#&lt;OpenStruct integer=987, symbol=:so_great>}
+>> if 10 > 20
+>> "YEAH"
+>> else
+?> "NO"
+>> end
+=> "NO"
 </code></pre>
 
   <tr>
@@ -273,6 +382,35 @@ str =~ %r(\(foo|bar\)$)
     ~ variable3
     ~variable4
     The current year is #{DataTime.now.year}.
+</code></pre>
+
+  <tr>
+    <th>Nix
+    <td class="nix">
+<pre><code>{ stdenv, foo, bar ? false, ... }:
+
+/*
+ * foo
+ */
+
+let
+  a = 1; # just a comment
+  b = null;
+  c = toString 10;
+in stdenv.mkDerivation rec {
+  name = "foo-${version}";
+  version = "1.3";
+
+  configureFlags = [ "--with-foo2" ] ++ stdenv.lib.optional bar "--with-foo=${ with stdenv.lib; foo }"
+
+  postInstall = ''
+    ${ if true then "--${test}" else false }
+  '';
+
+  meta = with stdenv.lib; {
+    homepage = https://nixos.org;
+  };
+}
 </code></pre>
 
   <tr>
@@ -966,12 +1104,6 @@ End Namespace
 
 option java_package = "org.highlightjs.languages.protobuf";
 
-message Account {
-  required int64 account_id = 1;
-  repeated Customer customer = 2;
-  optional int32 max_allowed_admins = 3 [default = 3];
-}
-
 message Customer {
   required int64 customer_id = 1;
   optional string name = 2;
@@ -985,16 +1117,6 @@ message Customer {
     MALE = 1,
     FEMALE = 2
   }
-}
-
-message CustomerRequest {
-  optional int64 customer_id = 1;
-  optional string name = 2;
-  optional string email_address = 3;
-}
-
-message CustomerResponse {
-  repeated Customer customer = 1;
 }
 
 service CustomerSearch {
@@ -1632,9 +1754,10 @@ void main(void) {
     <td class="sql">
 <pre><code>BEGIN;
 CREATE TABLE "topic" (
+    -- This is the greatest table of all time
     "id" serial NOT NULL PRIMARY KEY,
     "forum_id" integer NOT NULL,
-    "subject" varchar(255) NOT NULL
+    "subject" varchar(255) NOT NULL -- Because nobody likes an empty subject
 );
 ALTER TABLE "topic" ADD CONSTRAINT forum_id FOREIGN KEY ("forum_id") REFERENCES "forum" ("id");
 
@@ -2844,44 +2967,126 @@ return
 8=FIX.4.29=035=849=SENDERTEST56=TARGETTEST34=0000000152652=20120429-13:30:08.1371=ABC1234511=2012abc123414=10017=20125432120=030=NYSE31=108.2032=10038=10039=240=147=A54=555=BRK59=260=20120429-13:30:08.00065=B76=BROKER84=0100=NYSE111=100150=2151=0167=CS377=N10000=SampleCustomTag10=123
 </code></pre>
 
-</table>
+  <tr>
+    <th>x86asm</th>
+    <td class="x86asm">
+<pre>
+<code>section .text
+extern  _MessageBoxA@16
+%if     __NASM_VERSION_ID__ >= 0x02030000
+safeseh handler         ; register handler as "safe handler"
+%endif
 
-<script>
-  function testDetection() {
-    if (!hljs.initHighlighting.called) {
-      window.setTimeout(testDetection, 500);
-      return;
-    }
-    var table = document.getElementById('autotest');
-    var tds = table.getElementsByTagName('TD');
-    var failed = [];
-    for (var i = 0; i < tds.length; i++) {
-      var tdClass = tds[i].className;
-      if (!hljs.getLanguage(tdClass)) {
-        tds[i].parentNode.style.display = 'none';
-        continue;
-      }
-      var code = tds[i].getElementsByTagName('CODE')[0];
-      var langClass = code.className.replace('hljs', '').trim();
-      var passed = tdClass == langClass;
-      var result = document.createElement('DIV');
-      result.className = 'test';
-      result.innerHTML = '<var class="'+ (passed ? 'passed' : 'failed') +'">' + langClass + '</var>';
-      result.innerHTML += ' (' + code.result.re + ')';
-      if (code.second_best) {
-        result.innerHTML += '<br>' + code.second_best.language + ' (' + code.second_best.re + ')';
-      }
-      tds[i].parentNode.getElementsByTagName('th')[0].appendChild(result);
-      if (!passed) {
-        failed.push(tdClass);
-      }
-    }
-    var summary = document.getElementById('summary');
-    summary.innerHTML = failed.length ? ('Failed tests: ' + failed.join(', ')) : 'All tests passed';
-    summary.className = failed.length ? 'failed' : 'passed';
-  }
-  testDetection();
-</script>
+handler:
+        push    dword 1 ; MB_OKCANCEL
+        push    dword caption
+        push    dword text
+        push    dword 0
+        call    _MessageBoxA@16
+        sub     eax,1   ; incidentally suits as return value
+                        ; for exception handler
+        ret
+
+global  _main
+_main:  push    dword handler
+        push    dword [fs:0]
+        mov     dword [fs:0], esp
+        xor     eax,eax
+        mov     eax, dword[eax]   ; cause exception
+        pop     dword [fs:0]      ; disengage exception handler
+        add     esp, 4
+        ret
+
+avx2:   vzeroupper
+        push      rbx
+        mov       rbx,   rsp
+        sub       rsp,   0h20
+        vmovdqa   ymm0,  [rcx]
+        vpaddb    ymm0,  [rdx]
+        leave
+        ret
+
+text:   db      'OK to rethrow, CANCEL to generate core dump',0
+caption:db      'SEGV',0
+
+section .drectve info
+        db      '/defaultlib:user32.lib /defaultlib:msvcrt.lib '
+</code></pre>
+
+  <tr>
+  <th>Monkey
+      <td class="monkey">
+<pre>
+<code>#IMAGE_FILES="*.png|*.jpg"
+#SOUND_FILES="*.wav|*.ogg"
+#MUSIC_FILES="*.wav|*.ogg"
+#BINARY_FILES="*.bin|*.dat"
+
+Import mojo
+
+' The main class which expends Mojo's 'App' class:
+Class GameApp Extends App
+    Field player:Player
+
+    Method OnCreate:Int()
+        Local img:Image = LoadImage("player.png")
+        Self.player = New Player()
+        SetUpdateRate(60)
+
+        Return 0
+    End
+
+    Method OnUpdate:Int()
+        player.x += HALFPI
+
+        If (player.x > 100) Then
+            player.x = 0
+        Endif
+
+        Return 0
+    End
+
+    Method OnRender:Int()
+        Cls(32, 64, 128)
+        player.Draw()
+
+        player = Null
+        Return 0
+    End
+End
+</code></pre>
+
+  <tr>
+    <th>Gherkin
+    <td class="gherkin">
+<pre><code># language: en
+Feature: Addition
+  In order to avoid silly mistakes
+  As a math idiot
+  I want to be told the sum of two numbers
+
+  @this_is_a_tag
+  Scenario Outline: Add two numbers
+    * I have a calculator
+    Given I have entered &lt;input_1&gt; into the calculator
+    And I have entered &lt;input_2&gt; into the calculator
+    When I press &lt;button&gt;
+    Then the result should be &lt;output&gt; on the screen
+    And I have a string like
+    """
+    Here is
+    some
+    multiline text
+    """
+
+  Examples:
+    | input_1 | input_2 | button | output |
+    | 20      | 30      | add    | 50     |
+    | 2       | 5       | add    | 7      |
+    | 0       | 40      | add    | 40     |
+</code></pre>
+
+</table>
 
 
 <h2>Special tests</h2>
@@ -2955,7 +3160,7 @@ return
     <th>Disabled highlighting
     <td>
 <pre><code class="no-highlight">&lt;div id="contents"&gt;
-  &lt;p&gt;Hello, World!
+  &lt;p&gt;Hello, World!c
 &lt;/div&gt;
 </code></pre>
 
@@ -2965,3 +3170,41 @@ return
 <pre><samp>Computer output</samp></pre>
 
 </table>
+
+<h2>Highlighted code export</h2>
+
+<script type="text/javascript">
+    var langSelectorHtml = '<label>Language <select id="langSelector">';
+    langSelectorHtml += '<option value="">Auto</option>';
+    var languages = hljs.listLanguages();
+    for (var i in languages) {
+        langSelectorHtml += '<option value=\"' + languages[i] + '\">' + languages[i].charAt(0).toUpperCase() + languages[i].substr(1) + '</option>';
+    }
+    langSelectorHtml += '</select></label>';
+    document.write(langSelectorHtml);
+</script>
+
+<table>
+    <tr>
+        <td><textarea rows="20" cols="50" id="export_from"></textarea></td>
+        <td><textarea rows="20" cols="50" id="export_to"></textarea></td>
+    </tr>
+    <tr>
+        <td>Write a code snippet</td>
+        <td>Get HTML to paste anywhere (for actual styles and colors see sample.css)</td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td><input type="button" value="Export &rarr;" onclick="ExportDoIt()"/></td>
+        <td align="right"><input type="button" value="Copy to buffer" onclick="ExportCopyToBuffer(document.getElementById('export_to').value);"/></td>
+    </tr>
+</table>
+<div id="export_view"></div>
+
+<address>
+    Stylesheet switcher: <a href="mailto:voldmar@voldmar.ru">Vladimir Epifanov</a><br>
+    Test result detection: <a href="mailto:maniac@softwaremaniacs.org">Ivan Sagalaev</a><br>
+    Export script: <a href="mailto:xonixx@gmail.com">Vladimir Gubarkov</a><br>
+    Highlighting: <a href="http://highlightjs.org/">highlight.js</a>
+</address>

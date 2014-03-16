@@ -1,0 +1,11 @@
+*.tar.gz
+build/
+test-data.tar
+test-data.db.tar
+test/benchmarks/
+deps/leveldb/leveldb-basho/
+deps/leveldb/leveldb-hyper/
+deps/leveldb/leveldb-rocksdb/
+deps/snappy/snappy-1.1.0/testdata/
+leakydb
+bench/
