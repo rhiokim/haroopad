@@ -16,6 +16,7 @@ define([
 
     initialize: function() {
       this.listenTo(DocList, 'add', this.addOne);
+      this.listenTo(DocList, 'reset', this.reset);
 
       ee.on('update.doc', this.updateOne.bind(this));
 
@@ -26,6 +27,26 @@ define([
       DocList.add(doc, { index: 0, silent: true });
 
       this.newOne(new DocModel(doc));
+    },
+
+    query: function() {
+      this.$el.html('');
+
+      db.query({ map: function(doc) {
+        if (doc.title !== 'Untitled') {
+          emit(doc);
+        }
+      }}, { reduce: false, include_docs: true }, function(err, results) {
+        if (err) {
+          throw err;
+        }
+
+        DocList.reset();
+        results.rows.forEach(function(row) {
+          DocList.add(row.doc);
+        });
+        console.log(err, results);
+      });
     },
 
     more: function() {

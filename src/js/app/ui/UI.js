@@ -38,6 +38,10 @@ define([
       Replicator.sync();
     });
 
+    nav.on('query', function() {
+      listApp.query();
+    });
+
     editor.on('change', function(txt) {
       listApp.updateDoc(txt);
     });

@@ -10,7 +10,8 @@ define([
       'click #btnNew': 'newHandler',
       'click #btnSave': 'saveHandler',
       'click #btnMore': 'moreHandler',
-      'click #btnSync': 'syncHandler'
+      'click #btnSync': 'syncHandler',
+      'click #btnQuery': 'queryHandler'
     },
 
     initialize: function() {
@@ -39,6 +40,11 @@ define([
     syncHandler: function() {
       console.log('sync handler');
       this.trigger('sync');
+    },
+
+    queryHandler: function() {
+      console.log('query handler');
+      this.trigger('query');
     }
   });
 
