@@ -10,8 +10,8 @@
   ],
   "window": {
     "icon": "logo.png",
-    "toolbar": true,
-    "show": true,
+    "toolbar": false,
+    "show": false,
     "min_width": 700,
     "min_height": 350
   },
