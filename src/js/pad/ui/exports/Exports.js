@@ -153,7 +153,7 @@ define([
 			var extname = nw.file.get('extname');
 			
 			title = basename ? basename.replace(extname, '') : title;
-			title = title || 'Untitled';
+			title = title || i18n.t('pad:untitled');
 			title += '.html';
 
 			return title;

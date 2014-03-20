@@ -13,7 +13,7 @@ define(function() {
 
     /* it does not work exactly */
     setDefault: function(file) {
-      file = file || ( nw.file.get('title') || 'Untitled' ) + '.md';
+      file = file || ( nw.file.get('title') || i18n.t('pad:untitled') ) + '.md';
 
       this.$el.attr('nwsaveas', file);
     },
