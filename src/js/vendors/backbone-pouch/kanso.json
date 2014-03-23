@@ -1,0 +1,16 @@
+{
+    "name": "backbone-pouch",
+    "version": "1.0.1-kanso.1",
+    "description": "Backbone PouchDB Sync Adapter",
+    "categories": ["frameworks"],
+    "modules": [
+        "backbone-pouch.js"
+    ],
+    "url" : "https://github.com/jo/backbone-pouch",
+    "dependencies": {
+        "modules": null,
+        "backbone": null,
+        "underscore": null,
+	"pouch" : null
+    }
+}

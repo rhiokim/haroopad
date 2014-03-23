@@ -27,7 +27,6 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  console.log(e.stack);
   alert('Oops! app is crash :-(');
 };
 
@@ -44,10 +43,10 @@ i18n.init({
     'mail/Mailer',
     'window/Window',
     'window/WindowManager',
-    'db/DB',
+    // 'ui/UI',
     'utils/UpdateNotifier',
     'math/Math'
-  ], function(Context, Mailer, Window, WindowMgr, DB, Updater) {
+  ], function(Context, Mailer, Window, WindowMgr, /*UI,*/ Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
