@@ -104,7 +104,7 @@ body > footer {
 
 /* fixed broken cursor pos */
 .CodeMirror-lines pre {
-  white-space: pre;
+  /*white-space: pre;*/
 }
 
 .CodeMirror .cm-em {
