@@ -8,18 +8,18 @@ define([], function() {
     auto_compaction: true
   });
 
-  var changes = db.changes({
-    include_docs: true,
-    since: 20,
-    continuous: true,
-    complete: function(err, response) {
-      console.log('change complete')
-    },
-    onChange: function(change) {
-      ee.emit('update.doc', change.doc);
-      console.log('change set: ', change)
-    }
-  });
+  // var changes = db.changes({
+  //   include_docs: true,
+  //   since: 20,
+  //   continuous: true,
+  //   complete: function(err, response) {
+  //     console.log('change complete')
+  //   },
+  //   onChange: function(change) {
+  //     ee.emit('update.doc', change.doc);
+  //     console.log('change set: ', change)
+  //   }
+  // });
 
   return window.db = db;
 });
