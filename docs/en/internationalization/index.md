@@ -5,8 +5,12 @@
 
 * Make sure you have a GitHub account
 	- https://github.com/signup/free
-* Fork the repository on GitHub
-	- https://github.com/rhiokim/haroopad-locales
+
+* Fork the repository for Haroopad Official site on GitHub
+  - https://github.com/rhiokim/haroopad
+
+* Fork the repository for Haroopad on GitHub
+  - https://github.com/rhiokim/haroopad-locales
 
 ### Language Codes
 
@@ -16,6 +20,15 @@
 
 ### Contributing
 
+#### Site Documentation
+1. Fork it - [git@github.com:rhiokim/haroopad.git](https://github.com:rhiokim/haroopad.git)
+2. Move to docs directory `cd /path/to/haroopad/docs/[your locale]`
+2. Translate documents in your forked repository
+3. Commit -m "Added {Country} Translation"
+4. Write your name & email in AUTHORS.md
+5. Pull request
+
+#### Haroopad
 1. Fork it - [git@github.com:rhiokim/haroopad-locales.git](https://github.com:rhiokim/haroopad-locales)
 2. Translate in your forked repository
 3. Commit -m "Added {Country} Translation"
