@@ -13,7 +13,7 @@ define([
 		var files = [];
 
 		function checkTemporary() {
-			var tmp = TmpOpt.get('files'),
+			var tmp = TmpOpt.get('files') || [],
 				tmpFile,
 				appTmpDataPath = path.join(gui.App.dataPath, '.tmp');
 
@@ -21,7 +21,7 @@ define([
 			  fs.mkdirSync(appTmpDataPath);
 			}
 
-			_.forEach(tmp, function(uid, idx) {
+			tmp.forEach(function(uid, idx) {
 				tmpFile = path.join(appTmpDataPath, uid);
 				if (fs.existsSync(tmpFile)) {
 					var file = new FileModel({ fileEntry: tmpFile, tmp: true });
@@ -47,7 +47,7 @@ define([
 
 		//disabled last file restore 
 		window.ee.on('clear.lastfiles', function() {
-			_.forEach(files, function(file) {
+			files.forEach(function(file) {
 				file.close();
 			});
 		});

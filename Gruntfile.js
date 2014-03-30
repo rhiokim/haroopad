@@ -610,7 +610,11 @@ module.exports = function(grunt) {
       },
 
       deploy: {
-        command: 'rm -rf /Applications/haroopad.app; cp -R ./build/haroopad.app /Applications'
+        command: [
+          'rm -rf /Applications/haroopad.app',
+          'cp -R ./lib/node-webkit.app /Applications/haroopad.app',
+          'cp -R ./build/haroopad /Applications/haroopad.app/Contents/Resources/app.nw'
+        ].join(';')
       },
 
       highlightjs: {
