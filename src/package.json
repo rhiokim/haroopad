@@ -19,7 +19,7 @@
   "webkit": {
     "plugin": true
   },
-  "chromium-args": "--enable-threaded-compositing --disable-gpu",
+  "chromium-args": "--enable-threaded-compositing",
   "app": {
     "upgrade": "http://pad.haroopress.com/upgrade.json"
   },
