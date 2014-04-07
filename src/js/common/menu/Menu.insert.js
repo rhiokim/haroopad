@@ -86,6 +86,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.header'),
+      tooltip: '#',
       // icon: 'img/menu/header.png',
       submenu: MenuBarInsertHeader()
     })
@@ -93,6 +94,7 @@ MenuBarInsert = function () {
 	Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.bold'),
+      tooltip: '**text**, __text__',
       // icon: 'img/menu/bold.png',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'strong');
@@ -102,6 +104,7 @@ MenuBarInsert = function () {
 	Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.italic'),
+      tooltip: '*text*, _text_',
       // icon: 'img/menu/italic.png',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'i');
@@ -111,6 +114,7 @@ MenuBarInsert = function () {
 	Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.inline-code'),
+      tooltip: '`code`',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'code');
       }
@@ -119,6 +123,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.image'),
+      tooltip: '![alt text](image path)',
       // icon: 'img/menu/image.png',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'image');
@@ -128,6 +133,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.link'),
+      tooltip: '[link text](url)',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'a');
       }
@@ -136,6 +142,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.blockquote'),
+      tooltip: '> text',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'blockquote');
       }
@@ -144,6 +151,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.ordered-list'),
+      tooltip: '1. list1\n2. list2\n3. list3',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'ol');
       }
@@ -152,6 +160,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.unordered-list'),
+      tooltip: '- list1\n- list2\n- list3',
       // icon: 'img/menu/unorder.png',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'li');
@@ -166,6 +175,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.page-break'),
+      tooltip: '* * *',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'hr-page');
       }
@@ -174,6 +184,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.section-break'),
+      tooltip: '- - -',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'hr-section');
       }
@@ -194,6 +205,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.fenced-code'),
+      tooltip: '```\ncode block\n```',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'precode');
       }
@@ -202,6 +214,7 @@ MenuBarInsert = function () {
 	Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.strikethrough'),
+      tooltip: '~~text~~',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'del');
       }
@@ -210,6 +223,7 @@ MenuBarInsert = function () {
 	Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.table'),
+      tooltip: '|         |         |\n|-----|-----|\n|         |         |',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'table');
       }
@@ -246,6 +260,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.highlight'),
+      tooltip: '==text==',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'highlight');
       }
@@ -254,6 +269,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.underline'),
+      tooltip: '++text++',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'u');
       }
@@ -262,6 +278,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.toc'),
+      tooltip: '[TOC]',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'toc');
       }
@@ -270,6 +287,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.embed'),
+      tooltip: '@[alt text](url)',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'embed');
       }
@@ -278,6 +296,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.math-block'),
+      tooltip: '$$\nexpression\n$$',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'math-block');
       }
@@ -286,6 +305,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.math-inline'),
+      tooltip: '$$$expression$$$',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'math-inline');
       }
@@ -294,6 +314,7 @@ MenuBarInsert = function () {
   Insert.append(
     new gui.MenuItem({
       label: i18n.t('insert.comment'),
+      tooltip: '<!--text-->',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'comment');
       }
