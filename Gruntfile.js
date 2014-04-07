@@ -243,7 +243,7 @@ module.exports = function(grunt) {
 
       snapshot: {
         files: {
-          '<%= build %>/haroopad.min.js': [
+          '<%= build %>/haroopad.bin.js': [
             '<%= build %>/app.js',
             '<%= build %>/pad.js',
             '<%= build %>/preferences.js'
@@ -605,9 +605,9 @@ module.exports = function(grunt) {
       },
 
       /* v8 heap snapshot for protect source */
-      bin: {
-        command: './lib/nwsnapshot --extra_code ./build/haroopad.min.js ./build/haroopad/js/haroopad.bin'
-      },
+      // bin: {
+      //   command: './lib/nwsnapshot --extra_code ./build/haroopad.min.js ./build/haroopad/js/haroopad.bin'
+      // },
 
       deploy: {
         command: [
@@ -615,6 +615,43 @@ module.exports = function(grunt) {
           'cp -R ./lib/node-webkit.app /Applications/haroopad.app',
           'cp -R ./build/haroopad /Applications/haroopad.app/Contents/Resources/app.nw'
         ].join(';')
+      },
+
+      /* v8 heap snapshot for protect source */
+      ss_darwin: {
+        command: [
+          '../haroopad-build/lib/osx-ia32/nwsnapshot',
+          '--extra_code',
+          './build/haroopad.bin.js',
+          './build/haroopad/js/haroopad.bin'
+        ].join(' ')
+      },
+
+      ss_win32: {
+        command: [
+          '../haroopad-build/lib/win-ia32/nwsnapshot.exe',
+          '--extra_code',
+          './build/haroopad.bin.js',
+          './build/haroopad/js/haroopad.bin'
+        ].join(' ')
+      },
+
+      ss_linux32: {
+        command: [
+          '../haroopad-build/lib/linux-ia32/nwsnapshot',
+          '--extra_code',
+          './build/haroopad.bin.js',
+          './build/haroopad/js/haroopad.bin'
+        ].join(' ')
+      },
+
+      ss_linux64: {
+        command: [
+          '../haroopad-build/lib/linux-ia64/nwsnapshot',
+          '--extra_code',
+          './build/haroopad.bin.js',
+          './build/haroopad/js/haroopad.bin'
+        ].join(' ')
       },
 
       highlightjs: {
@@ -691,6 +728,24 @@ module.exports = function(grunt) {
     }
   });
 
+
+  /* v8 protect source code task for cross platform */
+  grunt.registerTask('snapshot', 'cross platform nwsnapshot', function() {
+    var postfix;
+
+    if (process.platform === 'linux') {
+      if (process.arch === 'x64') {
+        postfix = 'linux64';
+      } else {
+        postfix = 'linux32'
+      }
+    } else {
+      postfix = process.platform;
+    }
+    grunt.task.run('concat:snapshot');
+    grunt.task.run('shell:ss_' + postfix);
+  });
+
   
   /* deploy to Application directory */
   grunt.registerTask('deploy', [ 'shell:deploy']);
@@ -705,7 +760,7 @@ module.exports = function(grunt) {
   grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
 
   /* snapshot */
-  grunt.registerTask('snapshot', [ 'concat:snapshot', 'shell:bin' ]);
+  // grunt.registerTask('snapshot', [ 'concat:snapshot', 'snapshot' ]);
 
   /* pre built */
   grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs', 'shell:pouchdb' ]);

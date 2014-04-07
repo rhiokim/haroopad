@@ -26,10 +26,6 @@ requirejs.config({
   }
 });
 
-requirejs.onError = function (e) {
-  alert('Oops! app is crash :-(');
-};
-
 i18n.init({
   lng: global.LOCALES._lang
 }, function() {
@@ -37,6 +33,10 @@ i18n.init({
   i18n.setDefaultNamespace('menu');
 
   MenuBar();
+
+  requirejs.onError = function (e) {
+    alert('Oops! app is crash :-(');
+  };
 
   requirejs([
     'context/Context',
@@ -107,13 +107,15 @@ i18n.init({
           file = cmdline;
         break;
         case 'linux':
+          //--enable-threaded-compositing /home/rhio/Dropbox/HarooPad/촬영-시나리오.md
           cmdline = cmdline.split(' ');
           cmdline.shift();
 
+
           file = cmdline.join(' ');
+          file = file.replace(global.Manifest['chromium-args'], '').trim();
         break;
       }
-        
       WindowMgr.open(file);
     });
 

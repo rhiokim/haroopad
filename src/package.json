@@ -10,8 +10,8 @@
   ],
   "window": {
     "icon": "logo.png",
-    "toolbar": false,
-    "show": false,
+    "toolbar": true,
+    "show": true,
     "min_width": 700,
     "min_height": 350
   },
@@ -23,27 +23,21 @@
   "app": {
     "upgrade": "http://pad.haroopress.com/upgrade.json"
   },
-  "maintainers": [
-    {
-      "name": "Rhio Kim",
-      "email": "rhio.kim@gmail.com",
-      "web": "http://pad.haroopress.com",
-      "blog": "http://pad.haroopress.com/page.html",
-      "feedback": "http://haroopad.userecho.com"
-    }
-  ],
-  "licenses": [
-    {
-      "type": "GPLv2",
-      "url": "http://www.example.com/licenses/gpl.html"
-    }
-  ],
+  "maintainers": [{
+    "name": "Rhio Kim",
+    "email": "rhio.kim@gmail.com",
+    "web": "http://pad.haroopress.com",
+    "blog": "http://pad.haroopress.com/page.html",
+    "feedback": "http://haroopad.userecho.com"
+  }],
+  "licenses": [{
+    "type": "GPLv2",
+    "url": "http://www.example.com/licenses/gpl.html"
+  }],
   "bugs": "https://github.com/rhiokim/haroopad/issues",
-  "repositories": [
-    {
-      "type": "git",
-      "url": "git@github.com:rhiokim/haroopad.git"
-    }
-  ],
+  "repositories": [{
+    "type": "git",
+    "url": "git@github.com:rhiokim/haroopad.git"
+  }],
   "dependencies": {}
 }
