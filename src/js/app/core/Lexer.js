@@ -73,6 +73,7 @@ define([
       } else {
         lexer.rules = merge({}, blocks.gfm, customRules);
       }
+      
       window.ee.emit('preferences.markdown.change.after');
     });
 

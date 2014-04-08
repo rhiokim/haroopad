@@ -27,6 +27,7 @@ define([
 				'click input[name=gfm]': 'enableGFM',	
 				'click input[name=sanitize]': 'enableSanitize',	
 				'click input[name=tables]': 'enableTables',	
+				'click input[name=footnotes]': 'enableFootnotes',	
 				'click input[name=breaks]': 'enableBreaks',	
 				'click input[name=smartLists]': 'enableSmartLists',	
 				'click input[name=smartypants]': 'enableSmartyPants',	
@@ -48,6 +49,7 @@ define([
 				this.$('input[name=gfm]').prop('checked', opt.gfm);
 				this.$('input[name=sanitize]').prop('checked', opt.sanitize);
 				this.$('input[name=tables]').prop('checked', opt.tables);
+				this.$('input[name=footnotes]').prop('checked', opt.footnotes);
 				this.$('input[name=breaks]').prop('checked', opt.breaks);
 				this.$('input[name=smartLists]').prop('checked', opt.smartLists);
 				this.$('input[name=smartypants]').prop('checked', opt.smartypants);
@@ -95,6 +97,13 @@ define([
 				options.set('tables', bool);
 
       	_gaq.push('haroopad.preferences', 'markdown option', 'gfm tables:'+bool);
+			},
+
+			enableFootnotes: function(e) {
+				var bool = $(e.target).is(':checked');
+				options.set('footnotes', bool);
+
+      	_gaq.push('haroopad.preferences', 'markdown option', 'gfm footnotes:'+bool);
 			},
 
 			enableBreaks: function(e) {
