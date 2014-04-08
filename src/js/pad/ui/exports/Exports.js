@@ -68,6 +68,9 @@ define([
 			cssText += '\n footer {position:fixed; font-size:.8em; text-align:right; bottom:0px; margin-left:-25px; height:20px; width:100%;}';
 			cssText = cleanCss.minify(cssText);
 
+			//exception user-style theme
+			cssText = cssText.replace(new RegExp('#root', 'g'), '.markdown');
+
 			return cssText;
 		}
 
@@ -150,7 +153,7 @@ define([
 			var extname = nw.file.get('extname');
 			
 			title = basename ? basename.replace(extname, '') : title;
-			title = title || 'Untitled';
+			title = title || i18n.t('pad:untitled');
 			title += '.html';
 
 			return title;

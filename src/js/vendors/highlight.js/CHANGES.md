@@ -1,3 +1,43 @@
+## Master
+
+New features:
+
+- Add `listLanguages()` API method.
+- export.html merged into test.html.
+- Added a bunch of aliases for languages and document current ones.
+  Thanks to [Sindre Sorhus][] for background research.
+- Added phrasal English words to boost relevance in comments.
+- Include docs into the browser download and node.js package.
+- Many improvements to SQL definition made by [Heiko August][],
+  [Nikolay Lisienko][] and [Travis Odom][].
+- Add shorted `lang-` prefix for specifying what language will be
+  highlighted.
+  Thanks to [Jeff Escalante][]
+- Ruby's got support for interactive console sessions. [Pascal Hurni][]
+
+[Heiko August]: https://github.com/auge8472
+[Nikolay Lisienko]: https://github.com/neor-ru
+[Travis Odom]: https://github.com/Burstaholic
+[Jeff Escalante]: https://github.com/jenius
+
+New languages and styles:
+
+- *Elixir* by [Josh Adams][]
+- *NSIS* by [Jan T. Sott][]
+- *VIM script* by [Jun Yang][]
+- *Protocol Buffers* by [Dan Tao][]
+- *Nix* by [Domen Kožar][]
+- *x86asm* by [innocenat][]
+
+[Sindre Sorhus]: https://github.com/sindresorhus
+[Josh Adams]: https://github.com/knewter
+[Jan T. Sott]: https://github.com/idleberg
+[Jun Yang]: https://github.com/harttle
+[Dan Tao]: https://github.com/dtao
+[Domen Kožar]: https://github.com/iElectric
+[innocenat]: https://github.com/innocenat
+[Pascal Hurni]: https://github.com/phurni
+
 ## Version 8.0
 
 This new major release is quite a big overhaul bringing both new features and
@@ -47,7 +87,7 @@ New features:
   aliases can be specified in the class attribute of the code container in your
   HTML as well as in various API calls. For now there are only a few very common
   aliases but we'll expand it in the future. All of them are listed in the
-  [class reference][].
+  [class reference][cr].
 
 - Language detection can now be restricted to a subset of languages relevant in
   a given context — a web page or even a single highlighting call. This is

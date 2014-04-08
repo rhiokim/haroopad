@@ -104,7 +104,7 @@ body > footer {
 
 /* fixed broken cursor pos */
 .CodeMirror-lines pre {
-  white-space: pre;
+  /*white-space: pre;*/
 }
 
 .CodeMirror .cm-em {
@@ -115,6 +115,10 @@ body > footer {
   /*word-break: break-word;
   white-space: inherit;
   word-wrap: break-word;*/
+}
+
+.CodeMirror pre.CodeMirror-placeholder {
+  color: #999;
 }
 
 /* email */

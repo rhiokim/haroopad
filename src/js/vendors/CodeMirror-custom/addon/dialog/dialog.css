@@ -6,32 +6,36 @@
 
   left: 0; 
   right: 0;
-  padding: .1em .8em;
+  padding: .3em .8em;
 
   text-shadow: 0 0 2px rgba(0, 0, 0, 1);
   box-shadow: 0 0 3px rgba(0,0,0,0.7);
 
-  background: linear-gradient(to bottom,  rgba(225,225,225,0.7), rgba(200,200,200,0.7)); /* W3C */
+  /*background: linear-gradient(to bottom,  rgba(225,225,225,0.7), rgba(200,200,200,0.7)); /* W3C */*/
+  background-color: RGBA(85, 85, 85, 1); /* W3C */
 
   overflow: hidden;
   z-index: 15;
 }
 
 .CodeMirror-dialog-top {
-  border-bottom: 1px solid #eee;
-  top: 0;
+  background-color: RGBA(85, 85, 85, 1);
+  border-top: 1px solid rgba(187, 187, 187, 0.4);
+  bottom: 0;
 }
 
 .CodeMirror-dialog-bottom {
-  border-top: 1px solid #eee;
-  bottom: 21px;
+  border-bottom: 1px solid #eee;
+  top: 0;
 }
 
 .CodeMirror-dialog input {
   margin: 1px 0 !important;
   padding: 0 3px !important;
-  font-size: 12px;
+  font-size: 1em;
   width: 15.2em !important;
+  outline: 0;
+  color: #000;
 }
 
 .CodeMirror-dialog button {

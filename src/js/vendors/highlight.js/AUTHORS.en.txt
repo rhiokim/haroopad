@@ -94,11 +94,18 @@ Contributors:
 - Bram de Haan <info@atelierbramdehaan.nl>
 - Seongwon Lee <dlimpid@gmail.com>
 - Zaven Muradyan <megalivoithos@gmail.com>
-- Jan T. Sott <jan@idleberg.com>
+- Jan T. Sott <git@idleberg.com>
 - Brent Bradbury <brent@brentium.com>
 - Martin Dilling-Hansen <martindlling@gmail.com>
 - Ilya Vassilevsky <vassilevsky@gmail.com>
 - Josh Adams <josh@isotope11.com>
 - Dan Tao <daniel.tao@gmail.com>
 - Jeff Escalante <hello@jenius.me>
-- Harttle <yangjvn@126.com>
+- Jun Yang <yangjvn@126.com>
+- Nikolay Lisienko <info@neor.ru>
+- Heiko August <post@auge8472.de>
+- Domen Kožar <domen@dev.si>
+- Travis Odom <travis.a.odom@gmail.com>
+- innocenat <innocenat@gmail.com>
+- Arthur Bikmullin <devolonter@gmail.com>
+- Pascal Hurni <phi@ruby-reactive.org>

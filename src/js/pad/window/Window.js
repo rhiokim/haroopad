@@ -6,7 +6,7 @@ define([
 	var win = gui.Window.get();
 	var moment = require('moment');
 
-	var orgTitle = 'Untitled';
+	var orgTitle = i18n.t('pad:untitled');
 	var edited = false,
 		delayClose = false;
 
@@ -79,13 +79,14 @@ define([
 		var opt = file.toJSON();
 
 		if (opt.tmp) {
-			nw.title = 'Restored (writen at ' + moment(opt.ctime).format('LLL') + ')';
+			// nw.title = 'Restored (writen at ' + moment(opt.ctime).format('LLL') + ')';
+			nw.title = i18n.t('pad:restored-file').replace('{{date}}', moment(opt.ctime).format('LLL'));
 		} else {
 			nw.title = orgTitle = opt.basename || orgTitle;
 		}
 
 		if (opt.readOnly) {
-			nw.title += ' (read only)';
+			nw.title += ' ('+ i18n.t('pad:read-only-file') +')';
 		}
 	});
 	// window.ee.on('file.opened', function(opt) {
@@ -108,7 +109,7 @@ define([
 	});
 
 	window.ee.on('change.before.markdown', function(markdown, html, editor) {
-		win.title = orgTitle + ' (edited)';
+		win.title = orgTitle + ' ('+ i18n.t('pad:modified') +')';
 		edited = true;
 	});
 
