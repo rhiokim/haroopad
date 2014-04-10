@@ -343,23 +343,21 @@ $$
 ### Media Embed
 
 This is Block syntax.
-@[Alt Text](Content-URL "CSS")
 
-@[2NE1 - Missing You](https://vimeo.com/70385914 "width:100%;height:350px")
+@[Haroopad](https://vimeo.com/70385914 "width:100%;height:350px")
+
 ```markdown
 @[Alt Text](Content-URL "CSS")
 
-@[2NE1 - Missing You](https://vimeo.com/70385914 "width:100%;height:350px")
+@[Haroopad](https://vimeo.com/70385914 "width:100%;height:350px")
 ```
 
 ## PHP Extras Markdown
 
-### Footnotes
+### Footnotes (with v0.12)
 
 <p>This is footnote<sup class="footnote-ref" id="fnref-f1"><a href="#fn-f1">1</a></sup></p>
-<ol class="footnotes"><li id="fn-f1">explanatory information
-
-<a href="#fnref-f1">&#8617;</a></li></ol>
+<ol class="footnotes"><li id="fn-f1">explanatory information <a href="#fnref-f1">&#8617;</a></li></ol>
 
 ```markdown
 This is footnote[^1]

@@ -3,6 +3,7 @@ var defaults = merge(marked.defaults, {
 }, {
   "gfm": true,
   "tables": true,
+  "footnotes": true,
   "breaks": true,
   "pedantic": false,
   "sanitize": false,

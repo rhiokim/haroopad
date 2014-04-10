@@ -88,6 +88,10 @@ function loadPost(file) {
 		drawTOC();
     lazySyntaxHighlight();
 
+    // $('[data-echo]').each(function(idx, el) {
+    //   el.src = el.getAttribute('data-echo');
+    // });
+
 		setStarrre(title.replace(' | ', '\n\n') + '\n#markdown #haroopad');
 	});
 }
@@ -111,7 +115,8 @@ function drawEmbedContents(target) {
   for (i = 0; i < embeds.length; i++) {
     ebdOpt.ebdOpt = {};
     embed = embeds[i];
-    url = embed.getAttribute('data-url');
+    
+    url = embed.firstElementChild.getAttribute('href');
 
     $(embed).oembed(url, ebdOpt);
 
