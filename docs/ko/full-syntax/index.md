@@ -1,6 +1,6 @@
 # Markdown Characters
 
-[TOC "float:right"]
+[TOC "float:right;margin:0 0 0 10px"]
 
 * \\ backslash
 * \` backtick
