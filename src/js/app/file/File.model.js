@@ -120,14 +120,20 @@ define([
     },
 
     save: function(fileEntry) {
-      var stat;
+      var stat, markdown;
       fileEntry = fileEntry || this.get('fileEntry');
 
       if (!path.extname(fileEntry)) {
         fileEntry += '.md';
       }
 
-      fs.writeFileSync(fileEntry, this.get('markdown'), 'utf8');
+      //CRLF issue on window platform
+      markdown = this.get('markdown');
+      if (process.platform.indexOf('win') == 0) {
+        markdown = markdown.replace(/\n/g, '\r\n');
+      }
+
+      fs.writeFileSync(fileEntry, markdown, 'utf8');
       stat = fs.statSync(fileEntry);
 
       this.update(fileEntry);
