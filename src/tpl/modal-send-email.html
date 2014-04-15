@@ -36,7 +36,9 @@
 
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-              <input type="text" name="to" class="form-control" style="width:100%;" data-provide="typeahead" data-items="4" placeholder="Reciver's email address" required>
+              <input type="text" name="to" class="form-control" style="width:100%;" data-provide="typeahead" data-items="4" placeholder="Reciver's email address" list="sent-email-list" required>
+              <datalist id="sent-email-list">
+              </datalist>
             </div>
           </div>
         </div>
