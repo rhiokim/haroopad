@@ -2,9 +2,9 @@ define([
   ], 
   function() {
     var marked = require("marked");
-    var options = store.get('Markdown') || {};
+    // var options = store.get('Markdown') || {};
 
-    var InlineLexer = marked.InlineLexer;
+    // var InlineLexer = marked.InlineLexer;
 
     var customRules = {
         emoji: /^:([A-Za-z0-9_\-\+]+?):/,
@@ -15,11 +15,11 @@ define([
     };
 
     var inlineMathRegEx = /^ *(split)([\s\S]*?[^\$])\1(?!\$)/;
-    if (options.dollarSign) {
-      customRules.math = replace(inlineMathRegEx)
-        ('split', /\${3,3}|\${1,1}/)
-        ();
-    }
+    // if (options.dollarSign) {
+    //   customRules.math = replace(inlineMathRegEx)
+    //     ('split', /\${3,3}|\${1,1}/)
+    //     ();
+    // }
 
 
     function replace(regex, opt) {
@@ -51,12 +51,13 @@ define([
       return obj;
     }
 
-    InlineLexer.rules.normal = merge({}, InlineLexer.rules.normal, customRules);
-    InlineLexer.rules.gfm = merge({}, InlineLexer.rules.gfm, customRules);
-    InlineLexer.rules.breaks = merge({}, InlineLexer.rules.breaks, customRules);
-
-    window.ee.on('preferences.markdown.change', function(options) {
+    return function (options) {
+      var InlineLexer = marked.InlineLexer;
       var rules = InlineLexer.rules;
+
+      InlineLexer.rules.normal = merge({}, InlineLexer.rules.normal, customRules);
+      InlineLexer.rules.gfm = merge({}, InlineLexer.rules.gfm, customRules);
+      InlineLexer.rules.breaks = merge({}, InlineLexer.rules.breaks, customRules);
 
       if (options.dollarSign) {
         customRules.math = replace(inlineMathRegEx)
@@ -76,8 +77,32 @@ define([
         InlineLexer.rules.breaks = merge({}, rules.breaks, customRules);
       }
 
-      window.ee.emit('preferences.markdown.change.after');
-    });
+      return InlineLexer;
+    }
 
-    return InlineLexer;
+    // window.ee.on('preferences.markdown.change', function(options) {
+    //   var rules = InlineLexer.rules;
+
+    //   if (options.dollarSign) {
+    //     customRules.math = replace(inlineMathRegEx)
+    //       ('split', /\${3,3}|\${1,1}/)
+    //       ();
+    //   } else {
+    //     customRules.math = replace(inlineMathRegEx)
+    //       ('split', /\${3,3}/)
+    //       ();
+    //   }
+
+    //   if (options.gfm) {
+    //     InlineLexer.rules.gfm = merge({}, rules.gfm, customRules);
+    //   }
+
+    //   if (options.breaks) {
+    //     InlineLexer.rules.breaks = merge({}, rules.breaks, customRules);
+    //   }
+
+    //   window.ee.emit('preferences.markdown.change.after');
+    // });
+
+    // return InlineLexer;
 });
