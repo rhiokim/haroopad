@@ -5,6 +5,7 @@ define([
 				gfm: true,
         emoji: false,
 				tables: true,
+  			footnotes: false,
 				breaks: true,
 				pedantic: false,
 				sanitize: false,
