@@ -6,6 +6,8 @@ define([
 
 		// var gui = require('nw.gui');
 		// var shell = gui.Shell;
+		var Emails = store.get('Emails') || {};
+		var SentList = Emails.addrs || [];
 
 		var el = $('#send-email-dialog');
 		var bar = el.find('.progress div.progress-bar');
@@ -76,6 +78,7 @@ define([
 			},
 
 			initialize: function() {
+				var elOpt, elSentList = this.$('#sent-email-list');
 				this.$('input[name=title]').attr('placeholder', i18n.t('pad:email.subject'));
 				this.$('input[name=to]').attr('placeholder', i18n.t('pad:email.reciver'));
 				this.$('input[name=from]').attr('placeholder', i18n.t('pad:email.yours'));
@@ -90,18 +93,23 @@ define([
 				this.$el.on('hidden', function() {
 					nw.editor.focus();
 				});
+
+				SentList.forEach(function(email) {
+					elOpt = document.createElement('option');
+					elOpt.value = email;
+					elSentList.append(elOpt);
+				});
 			},
 
 			show: function(file) {
-				var Emails = store.get('Emails') || {};
 				var title = file && file.doc.get('title');
 
 				this.$('input[name=title]').val(title || '');
 
 				this.$('input[name=to]').val(Emails.to || '');
 				this.$('input[name=from]').val(Emails.from || '');
-				this.$('input[name=remember]').attr('checked', Emails.remember);
-				this.$('input[name=to]').data({ source: Emails.addrs });
+				this.$('input[name=remember]').attr('checked', !!Emails.remember);
+				// this.$('input[name=to]').data({ source: Emails.addrs });
 
 				this.$el.modal('show');
 
