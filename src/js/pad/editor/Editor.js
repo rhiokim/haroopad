@@ -342,6 +342,8 @@ define([
 				case 'math-inline': CodeMirror.commands.markdownMathInline(editor); break;
 				case 'math-block': CodeMirror.commands.markdownMathBlock(editor); break;
 				case 'toc': CodeMirror.commands.markdownTOC(editor); break;
+				case 'fn': CodeMirror.commands.markdownFootnotes(editor); break;
+				case 'fn-ref': CodeMirror.commands.markdownFootnotesRef(editor); break;
 				case 'hr-page': CodeMirror.commands.markdownPageBreak(editor); break;
 				case 'hr-section': CodeMirror.commands.markdownSectionBreak(editor); break;
 				case 'hr-sentence': CodeMirror.commands.markdownSentenceBreak(editor); break;

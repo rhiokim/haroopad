@@ -194,6 +194,18 @@ define([], function() {
         case 'comment':
           replaceSelection('<!--', '-->');
           break;
+        case 'footnotes':
+          replaceSelection('[^', ']');
+          break;
+        case 'footnotes-ref':
+            var pos = cm.getCursor();
+            pos.line = cm.lineCount();
+            cm.setCursor(pos);
+            replaceSelection('\n[^', ']: ');
+            pos.line++;
+            pos.ch = 1;
+            cm.setCursor(pos);
+          break;
         case 'link':
           replaceSelection('[', '](http://)');
           break;
@@ -330,6 +342,12 @@ define([], function() {
   }
   CodeMirror.commands.markdownTOC = function(cm) {
     action('toc', cm);
+  };
+  CodeMirror.commands.markdownFootnotes = function(cm) {
+    action('footnotes', cm);
+  };
+  CodeMirror.commands.markdownFootnotesRef = function(cm) {
+    action('footnotes-ref', cm);
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();

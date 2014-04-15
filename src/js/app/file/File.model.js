@@ -43,9 +43,10 @@ define([
 
       this.on('change:markdown', function() {
         var md = this.get('markdown') || '';
-        var html = parse(md);
+        var res = parse(md);
+        var html = res.html;
 
-        this.doc.set({ html: html });
+        this.doc.set({ html: html, footnotes: res.tokens.footnotes, links: res.tokens.links });
         // this.trigger('change:doc', this, this.doc);
         // this.set('html', html);
 

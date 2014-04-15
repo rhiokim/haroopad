@@ -79,7 +79,7 @@ MenuBarInsert = function () {
 
   Insert.append(
     new gui.MenuItem({
-      label: 'John Gruber Markdown',
+      label: 'Gruber\'s Markdown',
       enabled: false
     })
   );
@@ -192,6 +192,15 @@ MenuBarInsert = function () {
   );
   Insert.append(
     new gui.MenuItem({
+      label: i18n.t('insert.sentence-break'),
+      tooltip: '_ _ _',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'hr-sentence');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
       type: 'separator'
     })
   );
@@ -220,15 +229,6 @@ MenuBarInsert = function () {
       }
     })
   );
-	Insert.append(
-    new gui.MenuItem({
-      label: i18n.t('insert.table'),
-      tooltip: '|         |         |\n|-----|-----|\n|         |         |',
-      click: function() {
-        window.parent.ee.emit('menu.insert.markdown', 'table');
-      }
-    })
-  );
 	// Insert.append(
  //    new gui.MenuItem({
  //      label: 'Table Row',
@@ -253,6 +253,68 @@ MenuBarInsert = function () {
   
   Insert.append(
     new gui.MenuItem({
+      label: 'MultiMarkdown',
+      enabled: false
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.underline'),
+      tooltip: '++text++',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'u');
+      }
+    })
+  );
+
+  Insert.append(
+    new gui.MenuItem({
+      type: 'separator'
+    })
+  );
+  
+  Insert.append(
+    new gui.MenuItem({
+      label: 'PHP Extras Markdown',
+      enabled: false
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.footnotes'),
+      tooltip: '[^id]',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'fn');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.footnotes-ref'),
+      tooltip: '[^id]: text',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'fn-ref');
+      }
+    })
+  );
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.table'),
+      tooltip: '|         |         |\n|-----|-----|\n|         |         |',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'table');
+      }
+    })
+  );
+
+  Insert.append(
+    new gui.MenuItem({
+      type: 'separator'
+    })
+  );
+  
+  Insert.append(
+    new gui.MenuItem({
       label: 'Haroopad Flavored Markdown',
       enabled: false
     })
@@ -263,15 +325,6 @@ MenuBarInsert = function () {
       tooltip: '==text==',
       click: function() {
         window.parent.ee.emit('menu.insert.markdown', 'highlight');
-      }
-    })
-  );
-  Insert.append(
-    new gui.MenuItem({
-      label: i18n.t('insert.underline'),
-      tooltip: '++text++',
-      click: function() {
-        window.parent.ee.emit('menu.insert.markdown', 'u');
       }
     })
   );

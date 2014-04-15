@@ -47,6 +47,8 @@ define([
 		keyMaps[_reKey(__key('insert-md-underline'))] = 'markdownUnderline';
 		keyMaps[_reKey(__key('insert-md-inline-code'))] = 'markdownInlineCode';
 		keyMaps[_reKey(__key('insert-md-embed'))] = 'markdownEmbed';
+		keyMaps[_reKey(__key('insert-md-footnotes'))] = 'markdownFootnotes';
+		keyMaps[_reKey(__key('insert-md-footnotes-ref'))] = 'markdownFootnotesRef';
 		keyMaps[_reKey(__key('insert-md-toc'))] = 'markdownTOC';
 		keyMaps[_reKey(__key('insert-md-strike'))] = 'markdownStrike';
 		keyMaps[_reKey(__key('insert-md-highlight'))] = 'markdownHighlight';

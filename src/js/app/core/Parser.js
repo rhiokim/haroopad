@@ -21,7 +21,12 @@ define([
     
     var parse = function(src) {
       var tokens = lexer.lex(src);
-      return marked.parser(tokens, lexer.options);
+      // return marked.parser(tokens, lexer.options);
+
+      return {
+        tokens: tokens,
+        html: marked.parser(tokens, lexer.options)
+      }
     }
 
     window.ee.on('preferences.markdown.change', function(options) {

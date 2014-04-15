@@ -215,6 +215,8 @@
     'insert-md-strike':          'defmod-U',
     'insert-md-highlight':       'defmod-T',
     'insert-md-image':           'Shift-Ctrl-I',
+    'insert-md-footnotes':       'Shift-Ctrl-F',
+    'insert-md-footnotes-ref':   'Shift-Ctrl-R',
     'insert-md-toc':             'Shift-Ctrl-T',
     'insert-md-ordered-list':    'Shift-Ctrl-O',
     'insert-md-unordered-list':  'Shift-Ctrl-L',
