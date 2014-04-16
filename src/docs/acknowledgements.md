@@ -384,3 +384,9 @@ Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca> (MIT)
 **download-github-repo**
 
 https://github.com/ianstormtaylor/download-github-repo (MIT)
+
+* * *
+
+**pouchdb**
+
+https://github.com/pouchdb/pouchdb/blob/master/LICENSE (Apache 2)
