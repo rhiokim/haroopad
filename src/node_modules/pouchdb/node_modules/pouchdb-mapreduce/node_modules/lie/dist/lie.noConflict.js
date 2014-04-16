@@ -61,7 +61,7 @@ Promise.prototype.then = function(onFulfilled, onRejected) {
 };
 (function(){
     try {
-        Promise.prototype.catch = function(onRejected) {
+        Promise.prototype['catch'] = function(onRejected) {
             return this.then(null, onRejected);
         };
     } catch(e){}

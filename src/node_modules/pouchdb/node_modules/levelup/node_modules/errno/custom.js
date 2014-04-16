@@ -1,4 +1,4 @@
-const prr = require('prr')
+var prr = require('prr')
 
 function init (type, message, cause) {
   prr(this, {
