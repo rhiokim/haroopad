@@ -8,26 +8,31 @@
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==새로운 기능 (v0.11.1)==
+### ==새로운 기능 (v0.12.0)==
 
-* 위첨자, 아래첨자 문법 추가
-	- `위첨자^superscript^`, `아래첨자~subscript~`
-* 이미지 문법 확장
-	- 만약 `![](path/*.mp3)` 과 같이 audio 확장자(mp3, ogg) 인 경우 audio 요소로 표시
-	- 만약 `![](path/*.mp4)` 와 같이 video 확장자(mp4, ogv, webm) 인 경우 video 요소로 표시
-* 인라인 수학 표현식 (**$**, $$$) 선택적 옵션추가
+* 각추 문법 추가
+	- 각주: `[^1]`
+	- 각주 참조: `[^1]: text`
+* 마크다운 폴딩 기능 추가
 * 다국어 지원 추가
-	- 그리스어 (Greek) - [pdudis](https://github.com/pdudis)
+	- 포루투칼 (Portuguese) - [alexandre mbm](https://github.com/alexandre-mbm)
+	- 일본어 (Japanese) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
 
 ### ==중요 변경 사항==
-* 밑줄(Underline) 문법 `_underline_` 에서 `++underline++` 으로 변경
-* 글로벌 키보드 시스템에 대응하도록 단축키 전체 리뉴얼 (Ctrl + Alt 조합 키보드 모두 제거)
-* 컨텍스트 메뉴 개선
-	- 에디터, 뷰어, 사용자 테마 변경 기능
-	- HTML 로 출력
-	- 메일 보내기
-* 마크다운 스마트 리스트
-* 기타 다수 개선 사항 및 오류 수정
+
+* 버그
+	- 이메일 기능: 보낸 메일 주소 자동완성 오류
+	- 마크다운: `_text_` 구문 HTML 렌더링 오류
+	- 파일오픈: 우분투에서 파일 클릭으로 오픈할 경우 오류
+	- 마크다운: 헤더에 태그가 입력될 경우 렌더링 오류
+	- 출력: HTML 파일로 내보내기 시 커스텀 테마가 적용되지 않는 오류
+* 개선
+	- 크로스 플랫폼 개행 개선 (CRLF / LF)
+	- 1Byte 문자열이 라인 끝에서 자동으로 줄바뀜 되는 문제 개선
+	- 상단 메뉴에 마크다운 입력의 구문 설명을 툴팁으로 변경
+	- 마크다운: 리스트 내에 테이블 문법 렌더링 개선
+	- 국제화: 적용되지 않았던 부분들 개선
+	- 파일오픈: 최근 파일 오픈 시 기존 윈도우에서 띄워지도록 개선
 
 ### 주요기능
 
@@ -84,6 +89,8 @@
 - 베트남 (Vietnamese) - [nguyenkinh](https://github.com/nguyenkinh)
 - 러시아 (Russian) - [aprilix ](https://github.com/aprilix)
 - 그리스어 (Greek) - [pdudis](https://github.com/pdudis)
+- 포루투칼 (Portuguese) - [alexandre mbm](https://github.com/alexandre-mbm)
+- 일본어 (Japanese) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
 
 ### 향상된 마크다운 문법
 
@@ -102,10 +109,15 @@
 * 수학 표현식(Mathematics Expression)
 	- `$$$...$$$` 인라인 표현식
 	- `$$...$$` 블럭 표현식
+	- 인라인 수학 표현식 (**$**, $$$) 선택적 옵션추가
+* 위첨자, 아래첨자 문법 추가
+	- `위첨자^superscript^`, `아래첨자~subscript~`
+* 이미지 문법 확장
+	- 만약 `![](path/*.mp3)` 과 같이 audio 확장자(mp3, ogg) 인 경우 audio 요소로 표시
+	- 만약 `![](path/*.mp4)` 와 같이 video 확장자(mp4, ogv, webm) 인 경우 video 요소로 표시
 
 ### 곧 출시될 기능
 
-* 각주 기능(footnotes)
 * 할일 목록 기능(tasklist)
 
 ### 추가 정보
