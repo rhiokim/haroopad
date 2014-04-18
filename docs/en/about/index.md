@@ -8,26 +8,29 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.11)==
+### ==New Features (v0.12)==
 
-* Added Superscript, Subscript
-	- `Sup^superscript^`, `Sub~subscript~`
-* Extended Image Syntax
-	- If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
-	- If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
-* Added Option inline mathematics expression (**$**, $$$) 
+* Added Footnotes syntax
+  - footnote: `[^1]`
+  - footnote reference: `[^1]: text`
+* Added Markdown Folding
 * Internationalization
-	- Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
+  - Portuguese (Portuguesa) - [alexandre mbm](https://github.com/alexandre-mbm)
+  - Japanese (日本語) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
 
 ### ==More changelog==
-* Changed Underline syntax `_underline_` -> `++underline++`
-* Removed Ctrl + Alt shortcut at all
-* Enhanced Context menu
-	- Added Editor, Viewer, Custom theme menus
-	- Added Export to HTML
-	- Added Sending email
-* Continous List Item (ol, li)
-* Fixed number of bugs & enhancements
+
+* Bugs
+  - Fixed Some markdown rendering error
+  - Fixed clicking file open on Linux
+  - Fixed export html with custom theme
+* Enhancements
+  - Line break on cross platform (CRLF / LF)
+  - Word newline
+  - Fancy at menu edit
+  - Supports Autocompletion for sent email address
+  - Supports tables in lists like github
+  - Replace current windows instead of opening a new one
 
 ### Main Features
 
@@ -36,28 +39,28 @@ Haroopad gives you the same editing experience regardless of the platform you ar
   - Mac OS X
   - Linux 32/64
 * Theme for editing
-	- Themes for editor 30 styles 
-	- Syntax highlighting in fenced code block on editor
-	- Ruby, Python, PHP, Javascript, C, HTML, CSS
-	- based on CodeMirror
+  - Themes for editor 30 styles 
+  - Syntax highlighting in fenced code block on editor
+  - Ruby, Python, PHP, Javascript, C, HTML, CSS
+  - based on CodeMirror
 * Live Preview themes
-	- 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
+  - 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
 * Syntax Highlighting
-	- 71 languages & 44 styles based on highlight.js
+  - 71 languages & 44 styles based on highlight.js
 * Custom Theme
   - Style based on CSS(Cascading Style Sheet)
 * Font Size
-	- Editor and Viewer font size control using Preference Window & Shortcuts
+  - Editor and Viewer font size control using Preference Window & Shortcuts
 * Embedding Rich Media Contents - v0.8
-	- Video, Audio, 3D, Text, Open Graph and oEmbed
-	- About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
-	- Drag & Drop support
+  - Video, Audio, 3D, Text, Open Graph and oEmbed
+  - About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
+  - Drag & Drop support
 * Display Mode - v0.8
-	- Default(Editor:Viewer), Reverse(Viewer:Editor), Only Editor, Only Viewer (View > Mode)
+  - Default(Editor:Viewer), Reverse(Viewer:Editor), Only Editor, Only Viewer (View > Mode)
 * Insert Current Date & Time - v0.8
-	- Various Format support (Insert > Date & Time)
+  - Various Format support (Insert > Date & Time)
 * HTML to Markdown - v0.8
-	- Drag & Drop your selected text on Web Browser
+  - Drag & Drop your selected text on Web Browser
 * Options for markdown parsing
 * Outline View
 * Vim Key-binding
@@ -80,28 +83,35 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 - Vietnamese (Tiếng Việt) - [nguyenkinh](https://github.com/nguyenkinh)
 - Russian (Русский) - [aprilix ](https://github.com/aprilix)
 - Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
+- Portuguese (Portuguesa) - [alexandre mbm](https://github.com/alexandre-mbm)
+- Japanese (日本語) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
 
 ### Enhanced Markdown Syntax
 
 * Added `[TOC]` Syntax
-	- Now you can easily embed table of content in documents.
-	- Left Align: `[TOC "float:left"]`
-	- Right Align: `[TOC "float:right"]`
+  - Now you can easily embed table of content in documents.
+  - Left Align: `[TOC "float:left"]`
+  - Right Align: `[TOC "float:right"]`
 * `![]()` Extended image syntax
-	- `![alt text](url "title" "css")`
+  - `![alt text](url "title" "css")`
 * [Gitub Flavored Markdown](http://github.github.com/github-flavored-markdown/) & extensions
-	- Syntax highlighting
-	- Table
-	- URL autolinking
-	- Strikethrough
-	- Smartypants
+  - Syntax highlighting
+  - Table
+  - URL autolinking
+  - Strikethrough
+  - Smartypants
 * Mathematics Expression
-	- Inline Expression: `$$$...$$$`
-	- Block Expression: `$$...$$`
+  - Inline Expression: `$$$...$$$`
+  - Block Expression: `$$...$$`
+  - Added Option inline mathematics expression (**$**, $$$) 
+* Added Superscript, Subscript
+  - `Sup^superscript^`, `Sub~subscript~`
+* Extended Image Syntax
+  - If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
+  - If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
 
 ### Upcoming Features
 
-* Footnotes
 * Tasklist - GFM
 
 ### And more?
