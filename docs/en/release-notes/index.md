@@ -1,3 +1,36 @@
+## Haroopad v0.12.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#317             | ==Added== Markdown folding
+#13              | ==Added== Multimarkdown Footnotes syntax
+**Bugs**         |
+#335             | Supports Autocompletion for sent email address
+#331             | Fixed _text_ don't make italic as *text* and GitHub Flavored Markdown
+#329             | Fixed strange preview with <i></i> in Header
+#330             | Fixed Haroopad don't open second file onclick
+#312             | Fixed export html with custom theme
+**Enhancements** |
+#334             | Line break on cross platform (CRLF / LF)
+#325             | Word newline
+#323             | Fancy at menu edit
+#320             | Supports tables in lists like github
+#169             | Replace current windows instead of opening a new one
+
+##### Github Issue tracker
+
+* v0.12.0 -- https://github.com/rhiokim/haroopad/issues?labels=&milestone=38&page=1&state=closed
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/7fwdzam2ipfoqg6/haroopad-v0.12.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/yvjb90ywib551ex/haroopad-v0.12.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/q3gglhci8mx4ysh/haroopad-v0.12.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/9kw4w5gl319erth/haroopad-v0.12.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/mk9e2wyjjuva9jl/haroopad-v0.12.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/urnoicuv5euqfwm/haroopad-v0.12.0_amd64.deb
+
 ## Haroopad v0.11.1
 
 Issue Number     | Description

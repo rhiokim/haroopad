@@ -1,3 +1,37 @@
+## Haroopad v0.12.0
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#317             | ==추가== 마크다운 폴딩 기능
+#13              | ==추가== 멀티마크다운 각주(footnote) 문법 추가
+**Bugs**         |
+#335             | 이메일 기능 - 보낸 메일 주소 자동완성 오류
+#331             | 마크다운 - `_text_` 구문 HTML 렌더링 오류
+#330             | 파일오픈 - 우분투에서 파일 클릭으로 오픈할 경우 오류
+#329             | 마크다운 - 헤더에 태그가 입력될 경우 렌더링 오류
+#312             | 출력 - HTML 파일로 내보내기 시 커스텀 테마가 적용되지 않는 오류
+**Enhancements** |
+#334             | 크로스 플랫폼 개행 개선 (CRLF / LF)
+#325             | 1Byte 문자열이 라인 끝에서 자동으로 줄바뀜 되는 문제 개선
+#323             | 상단 메뉴에 마크다운 입력의 구문 설명을 툴팁으로 변경
+#320             | 마크다운 - 리스트 내에 테이블 문법 렌더링 개선
+#315             | 국제화 - 적용되지 않았던 부분들 개선
+#169             | 파일오픈 - 최근 파일 오픈 시 기존 윈도우에서 띄워지도록 개선
+
+##### Github Issue tracker
+
+* v0.12.0 -- https://github.com/rhiokim/haroopad/issues?labels=&milestone=38&page=1&state=closed
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/7fwdzam2ipfoqg6/haroopad-v0.12.0-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/yvjb90ywib551ex/haroopad-v0.12.0.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/q3gglhci8mx4ysh/haroopad-v0.12.0_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/9kw4w5gl319erth/haroopad-v0.12.0-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/mk9e2wyjjuva9jl/haroopad-v0.12.0_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/urnoicuv5euqfwm/haroopad-v0.12.0_amd64.deb
+
 ## Haroopad v0.11.1
 
 Issue Number     | Description
