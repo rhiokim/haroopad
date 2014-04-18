@@ -629,10 +629,10 @@ module.exports = function(grunt) {
 
       ss_win32: {
         command: [
-          '../haroopad-build/lib/win-ia32/nwsnapshot.exe',
+          '..\\haroopad-build\\lib\\win-ia32\\nwsnapshot.exe',
           '--extra_code',
-          './build/haroopad.bin.js',
-          './build/haroopad/js/haroopad.bin'
+          'build\\haroopad.bin.js',
+          'build\\haroopad\\js\\haroopad.bin'
         ].join(' ')
       },
 

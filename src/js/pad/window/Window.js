@@ -75,8 +75,8 @@ define([
 		win.close();
 	});
 
-	nw.on('file.opened', function(file) {
-		var opt = file.toJSON();
+	window.ee.on('file.opened', function() {
+		var opt = nw.file.toJSON();
 
 		if (opt.tmp) {
 			// nw.title = 'Restored (writen at ' + moment(opt.ctime).format('LLL') + ')';

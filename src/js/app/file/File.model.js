@@ -33,13 +33,14 @@ define([
       basename: undefined,
       markdown: '',
       tmp: undefined,
-      readOnly: false,
-      doc: null
+      readOnly: false
     },
+
+    doc: null, 
 
     initialize: function() {
       this.doc = new Doc;
-      this.set('doc', this.doc);
+      // this.set('doc', this.doc);
 
       this.on('change:markdown', function() {
         var md = this.get('markdown') || '';
@@ -49,6 +50,7 @@ define([
         this.doc.set({ html: html, footnotes: res.tokens.footnotes, links: res.tokens.links });
         // this.trigger('change:doc', this, this.doc);
         // this.set('html', html);
+        this.set({ updated_at: new Date() });
 
         if (!this.get('tmp')) {
           window.clearTimeout(this._writeTimeout);

@@ -123,6 +123,17 @@ define([
 			return;
 		}
 
+		//비어있는 윈도우만 있는 경우
+		if (file && exports.actived && exports.actived.file && !exports.actived.file.get('fileEntry')) {
+			if (exports.actived.file.get('created_at').getTime() == exports.actived.file.get('updated_at').getTime()) {
+				exports.actived.file.set(file.toJSON());
+				exports.actived.file.doc.set(file.doc.toJSON());
+				exports.actived.file._tmpFile = file._tmpFile;
+				exports.actived.emit('file.opened', file);
+				return;
+			}
+		}
+
 		newWin = gui.Window.open('pad.html', gui.App.manifest.window);
 		newWin.parent = window;
 		newWin.file = file || File.open();
