@@ -1157,7 +1157,7 @@ Renderer.prototype.footnoteref = function(key, count) {
 };
 
 Renderer.prototype.footnotes = function(notes) {
-  var out = '<ol class="footnotes">';
+  var out = '<hr><ol class="footnotes">';
   for (var i = 0; i < notes.length; i++) {
     out += '<li id="fn-' + escape(notes[i].key) + '">';
     out += notes[i].text;
