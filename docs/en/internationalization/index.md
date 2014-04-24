@@ -41,14 +41,18 @@ license your work under the the terms of the MIT License.
 ### Contributors
 
 | Language | Contributors |
-|---------|------------|
-| English     | [rhiokim](https://github.com/rhiokim) |
-| Korea       | [rhiokim](https://github.com/rhiokim)  |
-| Chinese (Simplified)  | [toiletfreak](https://github.com/toiletfreak) |
-| Japanese       | - |
-| German    | - |
-| French     | - |
+|----------|---------------------------------------|
+| English  | [rhiokim](https://github.com/rhiokim) |
+| Korea    | [rhiokim](https://github.com/rhiokim) |
+| Chinese (Simplified) | [toiletfreak](https://github.com/toiletfreak) |
+| Japanese | [Toshiyuki Tega](https://github.com/Toshiyuki-Tega) |
+| German   | [tobiasmuecksch](https://github.com/tobiasmuecksch) |
+| French   | - |
+| Greek    | [pdudis](https://github.com/pdudis) |
+| Vietnamese | [nguyenkinh](https://github.com/nguyenkinh) |
+| Russian  | [aprilix](https://github.com/aprilix) |
 | Spanish  | [David Gómez](https://github.com/davegomez) |
+| Brazilian Portuguese  | [Alexandre mbm](https://github.com/alexandre-mbm) |
 
 ### Get more information
 
