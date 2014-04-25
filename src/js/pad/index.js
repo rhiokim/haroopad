@@ -44,7 +44,6 @@ i18n.init({
     'window/Window',
     'editor/Editor',
     'viewer/Viewer',
-    // 'ui/toc/TOC',
     'ui/markdown-help/MarkdownHelp',
     'ui/file/File',
     'ui/layout/Layout',
@@ -67,12 +66,16 @@ i18n.init({
 
     nw.on('file.opened', function(file) {
       var opt, doc;
-      opt = file.toJSON()
-      doc = opt.doc;
 
+      opt = file.toJSON();
+      doc = file.doc;
+
+      Editor.off("change", delayChange);
       Editor.setValue(opt.markdown);
       Editor.getDoc().clearHistory();
       Viewer.init();
+
+      window.ee.emit('file.opened');
 
       file.doc.trigger('change:html', doc, doc.html());
 

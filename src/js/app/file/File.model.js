@@ -33,21 +33,24 @@ define([
       basename: undefined,
       markdown: '',
       tmp: undefined,
-      readOnly: false,
-      doc: null
+      readOnly: false
     },
+
+    doc: null, 
 
     initialize: function() {
       this.doc = new Doc;
-      this.set('doc', this.doc);
+      // this.set('doc', this.doc);
 
       this.on('change:markdown', function() {
         var md = this.get('markdown') || '';
-        var html = parse(md);
+        var res = parse(md);
+        var html = res.html;
 
-        this.doc.set({ html: html });
+        this.doc.set({ html: html, footnotes: res.tokens.footnotes, links: res.tokens.links });
         // this.trigger('change:doc', this, this.doc);
         // this.set('html', html);
+        this.set({ updated_at: new Date() });
 
         if (!this.get('tmp')) {
           window.clearTimeout(this._writeTimeout);
@@ -120,14 +123,20 @@ define([
     },
 
     save: function(fileEntry) {
-      var stat;
+      var stat, markdown;
       fileEntry = fileEntry || this.get('fileEntry');
 
       if (!path.extname(fileEntry)) {
         fileEntry += '.md';
       }
 
-      fs.writeFileSync(fileEntry, this.get('markdown'), 'utf8');
+      //CRLF issue on window platform
+      markdown = this.get('markdown');
+      if (process.platform.indexOf('win') == 0) {
+        markdown = markdown.replace(/\n/g, '\r\n');
+      }
+
+      fs.writeFileSync(fileEntry, markdown, 'utf8');
       stat = fs.statSync(fileEntry);
 
       this.update(fileEntry);

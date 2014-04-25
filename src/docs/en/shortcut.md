@@ -64,6 +64,7 @@ CTRL - ALT - Backspace       | Delete Group after
 ALT - Delete                 | Delete Group after
 COMMAND (CTRL) - [           | Indent less
 COMMAND (CTRL) - ]           | Indent
+CTRL - Q                     | Folding
 
 ##### Inserting
  Shortcut           | Description
@@ -94,6 +95,8 @@ SHIFT - CTRL - L            | * haroopad         | unordered list
 SHIFT - CTRL - J            | $math$             | inline math
 SHIFT - CTRL - M            | $$math$$           | block math
 SHIFT - CTRL - Q            | > blockquote       | blockquote
+SHIFT - CTRL - F            | [^id]              | footnote reference
+SHIFT - CTRL - R            | [^id]: text        | footnote
 SHIFT - ALT - ENTER         | \- \- \-           | section break
 SHIFT - CTRL - ENTER        | \* \* \*           | page break
 SHIFT - CTRL - ALT - ENTER  | \_ \_ \_           | sentence break

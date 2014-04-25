@@ -64,6 +64,7 @@ CTRL - ALT - Backspace      | 다음 그룹 삭제
 ALT - Delete                | 다음 그룹 삭제
 COMMAND (CTRL) - [          | 내어쓰기
 COMMAND (CTRL) - ]          | 들여쓰기
+CTRL - Q                    | 내용 접고 펼치기(폴딩)
 
 ##### 삽입
  단축키              | 설명
@@ -93,7 +94,9 @@ SHIFT - CTRL - O             | 1. markdown        | 정렬목록
 SHIFT - CTRL - L             | * haroopad         | 비정렬 목록
 SHIFT - CTRL - J             | $math$             | 수학 인라인 표현
 SHIFT - CTRL - M             | $$math$$           | 수학 블럭 표현
-SHIFT - CTRL - Q             | > blockquot        | 인용구
+SHIFT - CTRL - Q             | > blockquote       | 인용구
+SHIFT - CTRL - F             | [^id]              | 각주 참조 링크
+SHIFT - CTRL - R             | [^id]: text        | 각주
 SHIFT - ALT - ENTER          | \- \- \-           | 섹션 나누기
 SHIFT - CTRL - ENTER         | \* \* \*           | 페이지 나누기
 SHIFT - CTRL - ALT - ENTER   | \_ \_ \_           | 문단 나누기

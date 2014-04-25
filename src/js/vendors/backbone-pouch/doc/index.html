@@ -1,0 +1,567 @@
+<!DOCTYPE  html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <title>backbone-pouch: Backbone PouchDB Sync Adapter</title>
+    <meta name=viewport content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,300|Noto+Serif' rel=stylesheet type=text/css>
+    <style>
+      body {
+        margin: 5%;
+        font-family: 'Noto Serif', serif;
+        color: #333;
+      }
+      a {
+        color: #2e64fe;
+      }
+      nav a {
+        text-decoration: none;
+      }
+      nav {
+        border-bottom: 1px solid black;
+        padding-bottom: 3px;
+      }
+      nav ul {
+        margin: 0;
+        padding: 0;
+      }
+      nav ul:first-child {
+        float: right;
+      }
+      nav li {
+        display: inline;
+        margin-right: 1em;
+      }
+      nav ul:first-child li {
+        margin-right: 0;
+        margin-left: 1em;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: normal;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      h1 a {
+        float: right;
+      }
+      h2, h3, h4, h5, h6 {
+        margin: 6ex 0 1ex 0;
+      }
+      h1 { font-size: 3em; }
+      h2 { font-size: 2em; }
+      h3 { font-size: 1.7em; }
+      h4 { font-size: 1.5em; }
+      h5 { font-size: 1.3em; }
+      h6 { font-size: 1.1em; }
+      h2 code, h3 code, h4 code, h5 code, h6 code {
+        font: inherit;
+        font-weight: bold;
+      }
+      code, pre {
+        font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+        color: #333;
+        font-size: 12px;
+      }
+      pre {
+        padding: 8px 15px;
+        background: #f8f8f8;
+        border-radius: 5px;
+        border: 1px solid #e5e5e5;
+        overflow-x: auto;
+      }
+      main li {
+        margin-bottom: 1ex;
+      }
+      main ul {
+        list-style-type: none;
+      }
+      main ul li {
+        margin: 1.5ex 0;
+      }
+      main li code:first-child {
+        font-size: 1em;
+        padding: 1px 3px;
+        background: #f8f8f8;
+        border-radius: 2px;
+        border: 1px solid #e5e5e5;
+      }
+      a[href="http://jo.github.io/backbone-pouch/examples/todos"],
+      a[href="http://jo.github.io/backbone-pouch/examples/todos-sync"] {
+        border-radius: 5px;
+        border: 1px solid #e5e5e5;
+        display: block;
+        width: 490px;
+        margin: 1ex 0;
+        padding: 2px 5px;
+      }
+      a[href="http://jo.github.io/backbone-pouch/examples/todos"] {
+        background: url("examples/todos/screenshot.png") no-repeat scroll center center transparent;
+        height: 323px;
+      }
+      a[href="http://jo.github.io/backbone-pouch/examples/todos-sync"] {
+        background: url("examples/todos-sync/screenshot.png") no-repeat scroll center center transparent;
+        height: 301px;
+      }
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <nav>
+      <ul>
+        <li><a href=https://raw.github.com/jo/backbone-pouch/master/dist/backbone-pouch.min.js>Download</a></li>
+        <li><a href=https://github.com/jo/backbone-pouch>Source</a></li>
+        <li><a href=https://github.com/jo/backbone-pouch/issues>Issues</a></li>
+      </ul>
+      <ul>
+        <li><a href=#usage>Usage</a></li>
+        <li><a href=#configuration>Configuration</a></li>
+        <li><a href=#examples>Examples</a></li>
+      </ul>
+    </nav>
+    <main>
+      <h1>backbone-pouch <a href="http://travis-ci.org/jo/backbone-pouch"><img src="https://secure.travis-ci.org/jo/backbone-pouch.png?branch=master" alt="Build Status"></a></h1>
+<p><a href="http://backbonejs.org/">Backbone</a> <a href="http://pouchdb.com/">PouchDB</a> Sync Adapter</p>
+<h2>Getting Started</h2>
+<p>You can use backbone-pouch on the server with node or in the browser:</p>
+<h3>On the Server</h3>
+<p>Install the module with: <code>npm install backbone-pouch</code></p>
+<pre><code class="lang-javascript">var backbone = require(&#39;backbone&#39;);
+var backbone_pouch = require(&#39;backbone-pouch&#39;);
+backbone.sync = backbone_pouch.sync();</code></pre>
+<h3>In the Browser</h3>
+<ol>
+<li>Download <a href="http://code.jquery.com/jquery-2.0.0.min.js">jQuery</a>, <a href="http://underscorejs.org/underscore-min.js">Underscore</a>, <a href="http://backbonejs.org/backbone-min.js">Backbone</a> and <a href="http://download.pouchdb.com/pouchdb-nightly.min.js">PouchDB</a></li>
+<li>Download the <a href="https://raw.github.com/jo/backbone-pouch/master/dist/backbone-pouch.min.js">production version</a> or the <a href="https://raw.github.com/jo/backbone-pouch/master/dist/backbone-pouch.js">development version</a>.</li>
+<li>In your web page:</li>
+</ol>
+<pre><code class="lang-html">&lt;script src=&quot;jquery-2.0.0.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;underscore-min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;backbone-min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;pouchdb-nightly.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;backbone-pouch.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  Backbone.sync = BackbonePouch.sync();
+&lt;/script&gt;</code></pre>
+<h2>Setup backbone-pouch</h2>
+<p>You can configure Backbone to persist via backbone-pouch per model:</p>
+<pre><code class="lang-javascript">var MyModel = Backbone.Model.extend({
+  sync: BackbonePouch.sync(options)
+});</code></pre>
+<p>Or you might want to set backbone-pouch sync globally:</p>
+<pre><code class="lang-javascript">Backbone.sync = BackbonePouch.sync(defaults);
+
+var MyModel = Backbone.Model.extend({
+  pouch: options
+});</code></pre>
+<h3><code>BackbonePouch.attachments()</code></h3>
+<p>You can mixin attachment support into a single model:</p>
+<pre><code class="lang-javascript">var MyModel = Backbone.Model.extend(BackbonePouch.attachments());</code></pre>
+<p>Or you may want to mixin attachment support globally:</p>
+<pre><code class="lang-javascript">_.extend(Backbone.Model.prototype, BackbonePouch.attachments());</code></pre>
+<p>Note that you have to call the attachments function - don&#39;t forget the braces.</p>
+<p>You can also pass the PouchDB adapter to <code>BackbonePouch.attachments</code>:</p>
+<pre><code class="lang-javascript">_.extend(Backbone.Model.prototype, BackbonePouch.attachments({
+  db: PouchDB(&#39;mydb&#39;)
+}));</code></pre>
+<h3><code>idAttribute</code></h3>
+<p>You should adjust the <code>idAttribute</code>, because CouchDB (and therefore PouchDB)
+uses <code>_id</code> instead of the default <code>id</code> attribute:</p>
+<pre><code class="lang-javascript">Backbone.Model.prototype.idAttribute = &#39;_id&#39;;</code></pre>
+<p><p id=usage></p></p>
+<h2>Usage</h2>
+<pre><code class="lang-javascript">var MyModel = Backbone.Model.extend({
+  idAttribute: &#39;_id&#39;,
+  sync: BackbonePouch.sync({
+    db: PouchDB(&#39;mydb&#39;)
+  })
+});</code></pre>
+<h3>Query documents of type <code>post</code></h3>
+<p>Retrieve single documents with all conflicts.
+Retrieve collections via Map Reduce, filtering all documents of type <code>post</code>, ordered by <code>position</code>.
+Limit results to <code>10</code>.</p>
+<pre><code class="lang-javascript">var Post = Backbone.Model.extend({
+  idAttribute: &#39;_id&#39;,
+  sync: BackbonePouch.sync({
+    db: PouchDB(&#39;mydb&#39;)
+  })
+});
+var Posts = Backbone.Collection.extend({
+  model: Post,
+  sync: BackbonePouch.sync({
+    db: PouchDB(&#39;mydb&#39;),
+    fetch: &#39;query&#39;,
+    options: {
+      query: {
+        include_docs: true,
+        fun: {
+          map: function(doc) {
+            if (doc.type === &#39;post&#39;) {
+              emit(doc.position, null)
+            }
+          }
+        },
+        limit: 10
+      },
+      changes: {
+        include_docs: true,
+        filter: function(doc) {
+          return doc._deleted || doc.type === &#39;post&#39;;
+        }
+      }
+    }
+  }),
+  parse: function(result) {
+    return _.pluck(result.rows, &#39;doc&#39;);
+  }
+});</code></pre>
+<h3>Global Backbone Sync Configuration</h3>
+<p>Use <code>mydb</code> as default for all databases.
+Setup Map Reduce as default query method.
+Limit resultset to <code>10</code>.
+Authors are returnd by <code>name</code>, Posts by <code>date</code>.</p>
+<pre><code class="lang-javascript">Backbone.sync =  BackbonePouch.sync({
+  db: PouchDB(&#39;mydb&#39;),
+  fetch: &#39;query&#39;,
+  options: {
+    query: {
+      include_docs: true,
+      limit: 10
+    }
+  }
+});
+Backbone.Model.prototype.idAttribute = &#39;_id&#39;;</code></pre>
+<p>Then you can define your models and collections as usual
+and overwrite backbone-pouchdb settings via the <code>pouch</code> property:</p>
+<pre><code class="lang-javascript">var Author = Backbone.Model.extend();
+var Authors = Backbone.Collection.extend({
+  model: Author,
+  pouch: {
+    options: {
+      query: {
+        include_docs: true,
+        fun: {
+          map: function(doc) {
+            if (doc.type === &#39;author&#39;) {
+              emit(doc.name, null)
+            }
+          }
+        }
+      },
+      changes: {
+        include_docs: true,
+        filter: function(doc) {
+          return doc._deleted || doc.type === &#39;author&#39;;
+        }
+      }
+    }
+  },
+  parse: function(result) {
+    return _.pluck(result.rows, &#39;doc&#39;);
+  }
+});
+var Post = Backbone.Model.extend();
+var Posts = Backbone.Collection.extend({
+  model: Post,
+  pouch: {
+    options: {
+      query: {
+        include_docs: true,
+        fun: {
+          map: function(doc) {
+            if (doc.type === &#39;post&#39;) {
+              emit(doc.date, null)
+            }
+          }
+        }
+      },
+      changes: {
+        include_docs: true,
+        filter: function(doc) {
+          return doc._deleted || doc.type === &#39;post&#39;;
+        }
+      }
+    }
+  },
+  parse: function(result) {
+    return _.pluck(result.rows, &#39;doc&#39;);
+  }
+});</code></pre>
+<h3>Attachments</h3>
+<pre><code class="lang-javascript">Backbone.sync =  BackbonePouch.sync({
+  db: PouchDB(&#39;mydb&#39;)
+});
+Backbone.Model.prototype.idAttribute = &#39;_id&#39;;
+var MyModel = Backbone.Model.extend(BackbonePouch.attachments());
+var model = new MyModel();
+model.attach(blob);     // store file
+model.attachments();    // list files
+model.attachment(name); // retrieve file</code></pre>
+<p>backbone-pouch helps you with binary attachments by providing convenient methods
+for retrieving, storing and listing files.</p>
+<h4><code>attach(blob, name, type, callback)</code></h4>
+<p>Store an attachment.</p>
+<p><code>blob</code> must be a <code>Blob</code> in the browser or a <code>Buffer</code> in node.
+You can omit <code>name</code> if the blob has a <code>filename</code> property.
+You can omit <code>type</code> if the blob has a <code>type</code> property.</p>
+<p>The callback is invoked with <code>err</code> and <code>result</code> callbacks.
+After the file is stored, the models <code>_rev</code> property is updated.
+If the model wasn&#39;t saved before, an <code>id</code> will be assigned and it will be created.</p>
+<h4><code>attachments(filter)</code></h4>
+<p>List attachment names.</p>
+<p>The optional <code>filter</code> argument can be used to list only attachments of a certain type.</p>
+<p>If the <code>filter</code> argument is a string or a RegExp,
+it will be matched against the <code>content_type</code> of each attachment
+and only the matching attachment names will be returned.</p>
+<p>If <code>filter</code> is a function, it will be called with the attachments name and its stub.</p>
+<h4><code>attachment(name, callback)</code></h4>
+<p>Retrieve an attachment blob by name.</p>
+<p><code>callback</code> is called with <code>error</code> and <code>blob</code> arguments.</p>
+<p>In the browser a <code>Blob</code> object is returned, a <code>Buffer</code> in node.</p>
+<p><p id=configuration></p></p>
+<h2>Configuration</h2>
+<p>You can configure every option passed to PouchDB.</p>
+<h3>Option Inheritance</h3>
+<p>Options are merged (using Underscores <a href="http://underscorejs.org/#extend">extend</a>) in the following order:</p>
+<ol>
+<li>BackbonePouch defaults</li>
+<li>BackbonePouch sync options</li>
+<li>pouch object</li>
+<li>save / get / destroy / fetch options</li>
+</ol>
+<h3>backbone-pouch Options</h3>
+<p>These options control the behaviour of backbone-pouch.</p>
+<h4><code>db</code>: PouchDB Adapter</h4>
+<p>Setup a database. This option is mendatory. Must be a PouchDB adapter:</p>
+<pre><code class="lang-javascript">PouchDB(&#39;dbname&#39;)</code></pre>
+<p>See <a href="http://pouchdb.com/api.html#create_a_database">Create a database</a>.</p>
+<h4><code>fetch</code>: Fetch Method</h4>
+<p>Specify the fetch method. Can be either <code>allDocs</code> (default), <code>query</code> or <code>spatial</code>.</p>
+<p>Use the default <code>allDocs</code> if you want all documents.</p>
+<p>Using <code>query</code> you can use Map-Reduce to query the database.</p>
+<p><code>spatial</code> requires the Spatial query plugin.</p>
+<h4><code>listen</code>: Listen for Changes</h4>
+<p>When this is checked, backbone-pouchdb will listen for changes in the database
+and update the model / collection on every change.
+Default is true.</p>
+<p><em>Note that you will need to setup a <code>filter</code> function when used in combination with <code>query</code> fetch method.</em></p>
+<h4><code>options</code>: PouchDB Options</h4>
+<p>Those options are passed directly to PouchDB.</p>
+<p>The keys are PouchDB methods. Possible keys are <code>post</code>, <code>put</code>, <code>remove</code>, <code>get</code>, <code>query</code>, <code>allDocs</code> and <code>spatial</code>.</p>
+<p>Refer to the <a href="http://pouchdb.com/api.html">PouchDB API Documentation</a> for more options.</p>
+<h5><code>post</code>: Create</h5>
+<p>Options for document creation. Currently no options supported.</p>
+<p>See <a href="http://pouchdb.com/api.html#create_a_document">Create a Document</a>.</p>
+<h5><code>put</code>: Update</h5>
+<p>Options for document update. Currently no options supported.</p>
+<p>See <a href="http://pouchdb.com/api.html#update_a_document">Update a Document</a>.</p>
+<h5><code>remove</code>: Delete</h5>
+<p>Options for document delete. Currently no options supported.</p>
+<p>See <a href="http://pouchdb.com/api.html#delete_a_document">Delete a Document</a>.</p>
+<h5><code>get</code>: Retrieve Model</h5>
+<p>Options for fetching a single document.</p>
+<ul>
+<li><code>attachments</code>: Include attachment data.</li>
+<li><code>conflicts</code>: If specified conflicting leaf revisions will be attached in _conflicts array.</li>
+<li><code>open_revs</code>: Fetch all leaf revisions if open_revs=&#39;all&#39;.</li>
+<li><code>rev</code>: Fetch specific revision of a document. Defaults to winning revision.</li>
+<li><code>revs_info</code>: Include a list of revisions of the document, and their availability.</li>
+<li><code>revs</code>: Include revision history of the document.</li>
+</ul>
+<p>See <a href="http://pouchdb.com/api.html#fetch_a_document">Fetch a Document</a>.</p>
+<h5>Fetch Collections</h5>
+<p>When fetching collections from views, one might want to parse the result, eg:</p>
+<pre><code class="lang-javascript">parse: function(result) {
+  return _.pluck(result.rows, &#39;doc&#39;);
+}</code></pre>
+<h6><code>allDocs</code>: Retrieve Collection</h6>
+<p>Options for fetching all documents. This is a built in view which outputs all documents by id.</p>
+<ul>
+<li><code>attachments</code>: Include attachment data.</li>
+<li><code>conflicts</code>: If specified conflicting leaf revisions will be attached in _conflicts array.</li>
+<li><code>descending</code>: Return result in descending order. Default is ascending order.</li>
+<li><code>endkey</code>: Endkey of the query.</li>
+<li><code>include_docs</code>: Whether to include the document in <code>doc</code> property. Default is true.</li>
+<li><code>key</code>: Key of the query.</li>
+<li><code>keys</code>: Multiple keys.</li>
+<li><code>limit</code>: Limit the resultset. Default is to return all documents.</li>
+<li><code>startkey</code>: Startkey of the query.</li>
+</ul>
+<p>See <a href="http://pouchdb.com/api.html#fetch_documents">Fetch Documents</a>.</p>
+<h6><code>query</code>: Retrieve Collection via Map Reduce</h6>
+<p>Query options for Map Reduce queries.</p>
+<ul>
+<li><code>attachments</code>: Include attachment data.</li>
+<li><code>conflicts</code>: If specified conflicting leaf revisions will be attached in _conflicts array.</li>
+<li><code>descending</code>: Return result in descending order. Default is ascending order.</li>
+<li><code>endkey</code>: Endkey of the query.</li>
+<li><code>fun</code>: Map Reduce Function: can be a string addressing a view in a design document or an object with a <code>map</code> and optional <code>reduce</code> property. A map function is <em>required</em>, if you use the query fetch method.</li>
+<li><code>include_docs</code>: Whether to include the document in <code>doc</code> property. Default is true.</li>
+<li><code>key</code>: Key of the query.</li>
+<li><code>keys</code>: Multiple keys.</li>
+<li><code>limit</code>: Limit the resultset. Default is to return all documents.</li>
+<li><code>reduce</code>: Whether to include the document in <code>doc</code> property. Default is to reduce if there is a reduce function.</li>
+<li><code>startkey</code>: Startkey of the query.</li>
+</ul>
+<p>See <a href="http://pouchdb.com/api.html#query_the_database">Query the Database</a>.</p>
+<h6><code>spatial</code>: Retrieve Collection via Spatial Index</h6>
+<p>Options for Spatial query. The spatial query has not been tested.
+You have to use a PouchDB build with included <a href="https://github.com/daleharvey/pouchdb/blob/master/src/plugins/pouchdb.spatial.js">Spatial</a> plugin.</p>
+<ul>
+<li><code>conflicts</code>: If specified conflicting leaf revisions will be attached in _conflicts array.</li>
+<li><code>end_range</code>: End range of query</li>
+<li><code>include_docs</code>: Whether to include the document on each change. Default is true.</li>
+<li><code>start_range</code>: Start range of query</li>
+</ul>
+<h5><code>changes</code>: Listen for changes</h5>
+<p>Options passed to changes feed.</p>
+<ul>
+<li><code>filter</code>: Reference a filter function from a design document or define a function to selectively get updates.</li>
+<li><code>descending</code>: Return result in descending order. Default is ascending order.</li>
+<li><code>conflicts</code>: If specified conflicting leaf revisions will be attached in _conflicts array.</li>
+<li><code>continuous</code>: Continuously listen to changes. Default is true.</li>
+<li><code>include_docs</code>: Whether to include the document on each change. Default is true.</li>
+</ul>
+<p>See <a href="http://pouchdb.com/api.html#listen_to_database_changes">Listen to Database Changes</a>.</p>
+<p><p id=examples></p></p>
+<h2>Examples</h2>
+<p>Check out the <a href="http://jo.github.io/backbone-pouch/examples/todos">TODO Application</a>
+in the <code>doc/examples</code> folder.</p>
+<p>It`s the standard <a href="http://backbonejs.org/examples/todos/index.html">Backbone TODO example</a>,
+extended to use backbone-pouch.</p>
+<h3>Advanced TODO Sync Example</h3>
+<p><a href="http://jo.github.io/backbone-pouch/examples/todos-sync">TODO Sync Application</a>
+is also in the <code>doc/examples</code> folder.</p>
+<p>You can setup external CouchDB (with <a href="http://wiki.apache.org/couchdb/CORS">CORS</a> enabled)
+to sync your local TODO database.</p>
+<h2>Contributing</h2>
+<p>backbone-pouch is written with <a href="https://github.com/felixge/node-style-guide">Felix Geisendörfers Node.js Style Guide</a> in mind.</p>
+<p>Add <a href="https://github.com/caolan/nodeunit">nodeunit</a> tests for any new or changed functionality.
+Lint and test your code using <a href="http://gruntjs.com/">Grunt</a>.</p>
+<p><em>Also, please don&#39;t edit files in the &quot;dist&quot; subdirectory as they are generated via Grunt.
+You&#39;ll find source code in the &quot;lib&quot; subdirectory!</em></p>
+<h2>Generating the Documentation</h2>
+<p><em>The files in the &quot;doc&quot; subdirectory are generated via Grunt, too.
+Edit this README.md and template.jst and run <code>grunt doc</code> to generate the documentation.</em></p>
+<p>To update the Github page, change to the <code>gh-pages</code> branch and merge the <code>doc</code> subtree:</p>
+<pre><code>git pull -s subtree origin master</code></pre>
+<p>You will need <code>git-subtree</code>, of course.</p>
+<h2>Versioning</h2>
+<p>backbone-pouch follows <a href="http://semver-ftw.org/">semver-ftw</a>.
+Dont think 1.0.0 means production ready yet.
+There were some breaking changes, so had to move up the major version.</p>
+<h2>Release History</h2>
+<ul>
+<li><code>1.3.0</code>: Do not parse view results, leave that up to the user</li>
+<li><code>1.2.1</code>: Improve option inheritance</li>
+<li><code>1.2.0</code>: Change defaults: do not listen and include_docs</li>
+<li><code>1.1.1</code>: Adapt PouchDB attachment API change with seperate docId and attachment name</li>
+<li><code>1.1</code>: Attachment support</li>
+<li><code>1.0</code>: New chained api, Node support, tests. Support listen to changes feed. Use Grunt.</li>
+<li><code>prior 1.0</code>: Experimental version with example TODO apps</li>
+</ul>
+<h2>License</h2>
+<p>Copyright (c) 2013 Johannes J. Schmidt<br>Licensed under the MIT license.</p>
+
+    </main>
+  </body>
+</html>

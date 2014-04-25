@@ -26,10 +26,6 @@ requirejs.config({
   }
 });
 
-requirejs.onError = function (e) {
-  alert('Oops! app is crash :-(');
-};
-
 i18n.init({
   lng: global.LOCALES._lang
 }, function() {
@@ -38,14 +34,20 @@ i18n.init({
 
   MenuBar();
 
+  requirejs.onError = function (e) {
+    console.log(e.stack)
+    alert('Oops! app is crash :-(');
+  };
+
   requirejs([
     'context/Context',
     'mail/Mailer',
     'window/Window',
     'window/WindowManager',
+    // 'db/DB',
     'utils/UpdateNotifier',
     'math/Math'
-  ], function(Context, Mailer, Window, WindowMgr, Updater) {
+  ], function(Context, Mailer, Window, WindowMgr, /*DB,*/ Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
@@ -106,13 +108,15 @@ i18n.init({
           file = cmdline;
         break;
         case 'linux':
+          //--enable-threaded-compositing /home/rhio/Dropbox/HarooPad/촬영-시나리오.md
           cmdline = cmdline.split(' ');
           cmdline.shift();
 
+
           file = cmdline.join(' ');
+          file = file.replace(global.Manifest['chromium-args'], '').trim();
         break;
       }
-        
       WindowMgr.open(file);
     });
 

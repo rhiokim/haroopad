@@ -1,0 +1,14 @@
+{
+  "name": "backbone-pouch",
+  "homepage": "https://github.com/jo/backbone-pouch",
+  "_release": "d362ebd45f",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d362ebd45f85b263d66fb84ef539117a3c7448f5"
+  },
+  "_source": "git@github.com:jo/backbone-pouch.git",
+  "_target": "*",
+  "_originalSource": "git@github.com:jo/backbone-pouch.git",
+  "_direct": true
+}

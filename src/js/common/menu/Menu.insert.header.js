@@ -5,6 +5,7 @@ window.MenuBarInsertHeader = function () {
   submenu.append(
     new gui.MenuItem({
         label: 'H1   #',
+        tooltip: '#',
         click: function() {
           window.parent.ee.emit('menu.insert.markdown', 'h1');
         }
@@ -13,6 +14,7 @@ window.MenuBarInsertHeader = function () {
   submenu.append(
     new gui.MenuItem({
         label: 'H2   ##',
+        tooltip: '##',
         click: function() {
           window.parent.ee.emit('menu.insert.markdown', 'h2');
         }
@@ -21,6 +23,7 @@ window.MenuBarInsertHeader = function () {
   submenu.append(
     new gui.MenuItem({
         label: 'H3   ###',
+        tooltip: '###',
         click: function() {
           window.parent.ee.emit('menu.insert.markdown', 'h3');
         }
@@ -29,6 +32,7 @@ window.MenuBarInsertHeader = function () {
   submenu.append(
     new gui.MenuItem({
         label: 'H4   ####',
+        tooltip: '####',
         click: function() {
           window.parent.ee.emit('menu.insert.markdown', 'h4');
         }
@@ -37,6 +41,7 @@ window.MenuBarInsertHeader = function () {
   submenu.append(
     new gui.MenuItem({
         label: 'H5   #####',
+        tooltip: '#####',
         click: function() {
           window.parent.ee.emit('menu.insert.markdown', 'h5');
         }
@@ -45,6 +50,7 @@ window.MenuBarInsertHeader = function () {
   submenu.append(
     new gui.MenuItem({
         label: 'H6   ######',
+        tooltip: '######',
         click: function() {
           window.parent.ee.emit('menu.insert.markdown', 'h6');
         }

@@ -8,26 +8,29 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.11)==
+### ==New Features (v0.12)==
 
-* Added Superscript, Subscript
-  - `Sup^superscript^`, `Sub~subscript~`
-* Extended Image Syntax
-  - If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
-  - If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
-* Added Option inline mathematics expression (**$**, $$$) 
+* Added Footnotes syntax
+  - footnote: `[^1]`
+  - footnote reference: `[^1]: text`
+* Added Markdown Folding
 * Internationalization
-  - Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
+  - Portuguese (Portuguesa) - [alexandre mbm](https://github.com/alexandre-mbm)
+  - Japanese (日本語) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
 
 ### ==More changelog==
-* Changed Underline syntax `_underline_` -> `++underline++`
-* Removed Ctrl + Alt shortcut at all
-* Enhanced Context menu
-  - Added Editor, Viewer, Custom theme menus
-  - Added Export to HTML
-  - Added Sending email
-* Continous List Item (ol, li)
-* Fixed many number of bugs & enhancements
+
+* Bugs
+  - Fixed Some markdown rendering error
+  - Fixed clicking file open on Linux
+  - Fixed export html with custom theme
+* Enhancements
+  - Line break on cross platform (CRLF / LF)
+  - Word newline
+  - Fancy at menu edit
+  - Supports Autocompletion for sent email address
+  - Supports tables in lists like github
+  - Replace current windows instead of opening a new one
 
 ### Main Features
 
@@ -80,6 +83,8 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 - Vietnamese (Tiếng Việt) - [nguyenkinh](https://github.com/nguyenkinh)
 - Russian (Русский) - [aprilix ](https://github.com/aprilix)
 - Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
+- Portuguese (Portuguesa) - [alexandre mbm](https://github.com/alexandre-mbm)
+- Japanese (日本語) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
 
 ### Enhanced Markdown Syntax
 
@@ -98,10 +103,15 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Mathematics Expression
   - Inline Expression: `$$$...$$$`
   - Block Expression: `$$...$$`
+  - Added Option inline mathematics expression (**$**, $$$) 
+* Added Superscript, Subscript
+  - `Sup^superscript^`, `Sub~subscript~`
+* Extended Image Syntax
+  - If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
+  - If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
 
 ### Upcoming Features
 
-* Footnotes
 * Tasklist - GFM
 
 ### And more?

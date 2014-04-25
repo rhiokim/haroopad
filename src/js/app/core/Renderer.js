@@ -75,7 +75,8 @@ define([
 
 		renderer.heading = function(text, level, raw) {
 			//<a name="verlet-js" class="anchor" href="#verlet-js"><span class="octicon octicon-link"></span></a>
-			raw = raw.toLowerCase().trim().replace(/[\s]+/g, '-');
+			raw = raw.replace(/(<([^>]+)>)/gi,'').toLowerCase().trim().replace(/[^\w]+/g, '-');
+			
 		  return '<h'
 		    + level
 		    + ' id="'

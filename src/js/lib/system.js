@@ -35,7 +35,8 @@
     theme_res_editor: path.join(global.EXECPATH, 'Resources', 'Themes', 'editor'),
     theme_res_viewer: path.join(global.EXECPATH, 'Resources', 'Themes', 'viewer'),
     theme_dest_editor: path.join(global.App.dataPath, 'Themes', 'editor'),
-    theme_dest_viewer: path.join(global.App.dataPath, 'Themes', 'viewer')
+    theme_dest_viewer: path.join(global.App.dataPath, 'Themes', 'viewer'),
+    db: path.join(global.App.dataPath, 'LevelDB')
   };
 
   //add node main module path
@@ -48,16 +49,21 @@
   global.LANGS = fs.readFileSync(path.join(global.PATHS.locales, 'locales.json'));
   global.LANGS = JSON.parse(global.LANGS);
 
+  /* level db */
+  fs.mkdirsSync(global.PATHS.db);
+
   /* native themes */
-
-
   function loadUserThemes(dir) {
     var csses = readDir.readSync(dir, ['*.css'], readDir.CASELESS_SORT);
     var name, themes = [];
 
     csses.forEach(function(css, idx) {
-      name = path.basename(css).replace('.css', '');
-      themes.push(name);
+      name = path.basename(css);
+
+      if (name.charAt(0) != '.') {
+        name = name.replace('.css', '');
+        themes.push(name);
+      }
     });
 
     return themes;
@@ -115,7 +121,7 @@
   global.THEMES.user.viewer = loadUserThemes(global.PATHS.theme_dest_viewer);
   global.THEMES.editor = ['default', '3024-day', '3024-night', 'ambiance-mobile', 'ambiance',
     'base16-dark', 'base16-light', 'blackboard', 'cobalt', 'eclipse', 'elegant', 'erlang-dark',
-    'lesser-dark', 'mbo', 'midnight', 'monokai', 'neat', 'night', 'paraiso-dark', 'paraiso-light',
+    'lesser-dark', 'mbo', 'mdn-like', 'midnight', 'monokai', 'neat', 'night', 'paraiso-dark', 'paraiso-light',
     'pastel-on-dark', 'rubyblue', 'solarized dark', 'solarized light', 'the-matrix',
     'tomorrow-night-eighties', 'twilight', 'vibrant-ink', 'xq-dark', 'xq-light'
   ];
@@ -188,6 +194,8 @@
     'indent-less':          'defmod-[',
     'indent':               'defmod-]',
 
+    'folding':               'Ctrl-Q',
+
     /* pad */
     'insert-date-time': 'shift-ctrl-d',
 
@@ -207,6 +215,8 @@
     'insert-md-strike':          'defmod-U',
     'insert-md-highlight':       'defmod-T',
     'insert-md-image':           'Shift-Ctrl-I',
+    'insert-md-footnotes':       'Shift-Ctrl-F',
+    'insert-md-footnotes-ref':   'Shift-Ctrl-R',
     'insert-md-toc':             'Shift-Ctrl-T',
     'insert-md-ordered-list':    'Shift-Ctrl-O',
     'insert-md-unordered-list':  'Shift-Ctrl-L',

@@ -2,13 +2,17 @@
   "main": "index.html",
   "name": "Haroopad",
   "description": "The Next Document processor based on Markdown",
-  "version": "0.11.1",
-  "keywords": ["markdown", "haroopress", "editor"],
+  "version": "0.12.0",
+  "keywords": [
+    "markdown",
+    "haroopress",
+    "editor"
+  ],
   "window": {
     "icon": "logo.png",
     "toolbar": false,
     "show": false,
-    "min_width": 550,
+    "min_width": 700,
     "min_height": 350
   },
   "single-instance": true,
@@ -35,5 +39,6 @@
   "repositories": [{
     "type": "git",
     "url": "git@github.com:rhiokim/haroopad.git"
-  }]
+  }],
+  "dependencies": {}
 }

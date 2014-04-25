@@ -14,7 +14,7 @@ define([
 
 
 		window.ee.on('menu.file.send.email', function() {
-			EmailDialog.show(nw.file.toJSON());
+			EmailDialog.show(nw.file);
 		});
 		
 		EmailDialog.bind('post', function(mailInfo) {

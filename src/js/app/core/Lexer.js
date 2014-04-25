@@ -1,15 +1,15 @@
 define([
-    'core/Renderer'
+    // 'core/Renderer'
 	], 
-	function(Renderer) {
+	function(/*Renderer*/) {
     var marked = require("marked");
-    var options = store.get('Markdown') || {};
+    // var options = store.get('Markdown') || {};
 
-    var defaults = merge(marked.defaults, {
-      renderer: Renderer
-    }, options);
+    // var defaults = merge(marked.defaults, {
+    //   renderer: Renderer
+    // }, options);
 
-    var lexer = new marked.Lexer(defaults);
+    // var lexer = new marked.Lexer(defaults);
 
     var customRules = {
         math: /^ *(\${2,2}) *([\s\S]+?)\s*\1 *(?:\n+|$)/,
@@ -19,6 +19,11 @@ define([
     
     var _inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
     var _href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;
+
+    customRules.oembed = replace(customRules.oembed)
+      ('inside', _inside)
+      ('href', _href)
+      ();
 
     function replace(regex, opt) {
       regex = regex.source;
@@ -49,32 +54,45 @@ define([
   	  return obj;
   	}
 
-    customRules.oembed = replace(customRules.oembed)
-      ('inside', _inside)
-      ('href', _href)
-      ();
+    return function(options) {
+      // var lexer = new marked.Lexer(defaults);
+      var lexer = new marked.Lexer(options);
+      var blocks;
 
-    lexer.rules.paragraph = replace(lexer.rules.paragraph)
-      ('math', customRules.math)
-      ();
+      lexer.rules.paragraph = replace(lexer.rules.paragraph)
+        ('math', customRules.math)
+        ();
 
-    lexer.rules = merge({}, lexer.rules, customRules);
-    lexer.rules.pedantic = merge({}, lexer.rules.pedantic, customRules);
-    lexer.rules.gfm = merge({}, lexer.rules.gfm, customRules);
-    lexer.rules.tables = merge({}, lexer.rules.tables, customRules);
+      lexer.rules = merge({}, lexer.rules, customRules);
+      lexer.rules.pedantic = merge({}, lexer.rules.pedantic, customRules);
+      lexer.rules.gfm = merge({}, lexer.rules.gfm, customRules);
+      lexer.rules.tables = merge({}, lexer.rules.tables, customRules);
 
-    window.ee.on('preferences.markdown.change', function(options) {
-      var blocks = marked.Lexer.rules;
+      
+      // blocks = marked.Lexer.rules;
+      // marked.setOptions(options);
 
-      marked.setOptions(options);
+      // if (options.tables) {
+      //   lexer.rules = lexer.rules.tables;
+      // } else {
+      //   lexer.rules = lexer.rules.gfm;
+      // }
 
-      if (options.tables) {
-        lexer.rules = merge({}, blocks.tables, customRules);
-      } else {
-        lexer.rules = merge({}, blocks.gfm, customRules);
-      }
-      window.ee.emit('preferences.markdown.change.after');
-    });
+      return lexer;
+    }
+    // window.ee.on('preferences.markdown.change', function(options) {
+    //   var blocks = marked.Lexer.rules;
 
-    return lexer;
+    //   marked.setOptions(options);
+
+    //   if (options.tables) {
+    //     lexer.rules = merge({}, blocks.tables, customRules);
+    //   } else {
+    //     lexer.rules = merge({}, blocks.gfm, customRules);
+    //   }
+      
+    //   window.ee.emit('preferences.markdown.change.after');
+    // });
+
+    // return lexer;
 });
