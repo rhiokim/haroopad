@@ -2,7 +2,6 @@ define([
 	], function() {
 
 		function URI(str, cb) {
-			var hostname = url('hostname', str);
 			var proxyImg = new Image();
 			var res;
 
