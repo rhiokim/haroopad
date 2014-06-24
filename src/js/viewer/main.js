@@ -203,6 +203,8 @@ function _lazySyntaxHighlight(el) {
     return;
   }
 
+  lang = lang.toLowerCase();
+
   el.setAttribute('class', lang +' hljs');
 
   lang = lang == 'js' ? 'javascript' : lang;
