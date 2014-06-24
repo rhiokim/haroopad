@@ -795,6 +795,13 @@ InlineLexer.prototype.output = function(src) {
       continue;
     }
 
+    // del (gfm)
+    if (cap = this.rules.del.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.del(this.output(cap[1]));
+      continue;
+    }
+
     // sup
     if (cap = this.rules.sup.exec(src)) {
       src = src.substring(cap[0].length);
@@ -810,13 +817,6 @@ InlineLexer.prototype.output = function(src) {
       out += '<sub>'
         + cap[1]
         + '</sub>';
-      continue;
-    }
-
-    // del (gfm)
-    if (cap = this.rules.del.exec(src)) {
-      src = src.substring(cap[0].length);
-      out += this.renderer.del(this.output(cap[1]));
       continue;
     }
 
