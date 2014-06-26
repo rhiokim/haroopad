@@ -19,7 +19,7 @@ define([
     marked.InlineLexer = InlineLexer(defaults);
     // marked.setOptions(defaults);
     
-    var parse = function(src) {
+    var parse = window.marked = function(src) {
       var tokens = lexer.lex(src);
       // return marked.parser(tokens, lexer.options);
 

@@ -150,6 +150,13 @@ i18n.init({
       process.emit('actived', nw);
     });
 
+    window.ee.on('up.to.date.news', function(md) {
+      //if already editor has not any contents
+      if (!nw.editor.getValue()) { 
+        Viewer.set(md);
+      }
+    });
+
     $(document.body).click(function(e) {
       var el = e.target, href;
       var tagName = el.tagName.toUpperCase();

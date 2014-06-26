@@ -11,7 +11,7 @@
   "window": {
     "icon": "logo.png",
     "toolbar": true,
-    "show": false,
+    "show": true,
     "min_width": 700,
     "min_height": 350
   },
