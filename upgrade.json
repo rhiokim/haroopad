@@ -12,5 +12,9 @@
     "version": "0.3.0",
     "locales": [ ],
     "path": "rhiokim/haroopad-locales#supports"
+  },
+  "news": {
+    "url": "http://pad.haroopress.com/docs/ko/about/index.md",
+    "expire": "360"
   }
 }
