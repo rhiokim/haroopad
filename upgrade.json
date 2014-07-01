@@ -15,6 +15,6 @@
   },
   "news": {
     "url": "http://pad.haroopress.com/news/test.md",
-    "expire": .5
+    "expire": ".5"
   }
 }
