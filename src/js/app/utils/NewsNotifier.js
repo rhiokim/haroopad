@@ -45,6 +45,7 @@ define([], function() {
 
     if (newsData.url != news.url) {
       newsData.url = news.url;
+      newsData.expire = news.expire;
 
       check(news.url);
     } else {
