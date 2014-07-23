@@ -47,6 +47,11 @@
   <link rel="alternate stylesheet" title="Atelier Seaside - Light" href="styles/atelier-seaside.light.css">
   <link rel="alternate stylesheet" title="Paraíso - Dark" href="styles/paraiso.dark.css">
   <link rel="alternate stylesheet" title="Paraíso - Light" href="styles/paraiso.light.css">
+  <link rel="alternate stylesheet" title="Colorbrewer" href="styles/color-brewer.css">
+  <link rel="alternate stylesheet" title="Codepen.io Embed" href="styles/codepen-embed.css">
+  <link rel="alternate stylesheet" title="Kimbie - Dark" href="styles/kimbie.dark.css">
+  <link rel="alternate stylesheet" title="Kimbie - Light" href="styles/kimbie.light.css">
+  <link rel="alternate stylesheet" title="Hybrid" href="styles/hybrid.css">
 
   <style>
     /* Base styles */
@@ -75,21 +80,39 @@
       text-align: left;
     }
     pre {
-      margin: 0; font-size: medium;
+      margin: 0;
+      font-size: medium;
+    }
+    .hljs-debug {
+      color: red;
     }
     /* Style switcher */
-    #switch {
-      overflow: auto; width: 67em;
+    ul#switch {
+      width: 66em;
+      -webkit-column-width: 15em;
+      -webkit-column-gap: 2em;
+      -moz-column-width: 15em;
+      -moz-column-gap: 2em;
+      -o-column-width: 15em;
+      -o-column-gap: 2em;
+      column-width: 15em;
+      column-gap: 2em;
       list-style: none;
-      padding: 0; margin: 0;
+      overflow: auto;
+      padding: 0;
+      margin: 0;
     }
-    #switch li {
-      float: left; width: 12em;
-      padding: 0.1em; margin: 0.1em 1em 0.1em 0;
+    ul#switch li {
+      -webkit-column-break-inside: avoid;
+      -moz-column-break-inside: avoid;
+      -o-column-break-inside: avoid;
+      column-break-inside: avoid;
+      padding: 0.1em;
+      margin: 0.1em 1em 0.1em 0;
       background: #EEE;
       cursor: pointer;
     }
-    #switch li.current {
+    ul#switch li.current {
       background: #CCC;
     }
     /* Tests */
@@ -154,12 +177,11 @@
 
           for (var i = 0; (link = links[i]); i++) {
               if ((link.getAttribute('rel').indexOf('style') != -1) && link.title) {
-
                   var title = link.title;
 
                   info[title] = {
-                  'link': link,
-                  'li': document.createElement('li')
+                      'link': link,
+                      'li': document.createElement('li')
                   };
 
                   ul.appendChild(info[title].li);
@@ -168,6 +190,7 @@
                   info[title].link.disabled = true;
 
                   info[title].li.appendChild(document.createTextNode(title));
+
                   attach(info[title].li, 'click', (function (el) {
                       return function() {
                           current.li.className = '';
@@ -175,7 +198,8 @@
                           current = el;
                           current.li.className = 'current';
                           current.link.disabled = false;
-                      }})(info[title]));
+                      }
+                  })(info[title]));
               }
           }
 
@@ -286,7 +310,8 @@ def somefunc(param1='', param2=0):
         print 'Gre\'ater'
     return (param2 - param1 + 1 + 0b10l) or None
 
-class SomeClass:<br>    pass
+class SomeClass:
+    pass
 
 &gt;&gt;&gt; message = '''interpreter
 ... prompt'''
@@ -345,11 +370,11 @@ str =~ %r[foo|bar$]
 str =~ %r(\(foo|bar\)$)
 
 2.0.0p0 :001 > ['some']
- => ["some"] 
+ => ["some"]
 2.0.0p0 :002 > if true
 2.0.0p0 :003?>   "yop"
 2.0.0p0 :004?>   end
- => "yop" 
+ => "yop"
 
 >> obj = OpenStruct.new :integer => 987, :symbol => :so_great
 => #&lt;OpenStruct integer=987, symbol=:so_great&gt;
@@ -439,6 +464,10 @@ sub load
     }
   }
   $o-&gt;save if delete $o-&gt;{'_save_after_load'};
+
+  # GH-117
+  my $g = glob("/usr/bin/*");
+
   return $o;
 }
 
@@ -462,6 +491,11 @@ abstract class URI extends BaseURI implements Factory
 {
     abstract function test();
 
+    public static $st1 = 1;
+    const ME = "Yo";
+    var $list = NULL;
+    private $var;
+
     /**
      * Returns a URI
      *
@@ -480,12 +514,17 @@ line description';
             throw new Zend_Uri_Exception('Illegal scheme');
         }
 
+       	$this-&gt;var = 0 - self::$st;
+        $this-&gt;list = list(Array("1"=&gt; 2, 2=&gt;self::ME));
+
         return [
             'uri'   => $uri,
             'value' => null,
         ];
     }
 }
+
+echo URI::ME . URI::$st1;
 
 __halt_compiler () ; datahere
 datahere
@@ -495,38 +534,50 @@ datahere</code></pre>
   <tr>
     <th>Scala
     <td class="scala">
-<pre><code>object abstractTypes extends Application {
-  abstract class SeqBuffer {
-    type T; val element: Seq[T]; def length = element.length
-  }
+<pre><code>case class Person(name: String, age: Int)
+
+def absoluteValue(n: Int): Int =
+  if (n < 0) -n else n
+
+val hux = "hux"
+def mux = "mux"
+def qux: String = "qux"
+
+type ξ[A] = (A, A)
+
+trait Hist { lhs =>
+  def ⊕(rhs: Hist): Hist
 }
 
-/** Turn command line arguments to uppercase */
-object Main {
-  def main(args: Array[String]) {
-    val res = for (a &lt;- args) yield a.toUpperCase
-    println("Arguments: " + res.toString)
-  }
+def gsum[A: Ring](as: Seq[A]): A =
+  as.foldLeft(Ring[A].zero)(_ + _)
+
+sealed trait Compass
+case object North extends Compass
+case object South extends Compass
+case object East extends Compass
+case object West extends Compass
+
+trait Cake {
+  type T;
+  val things: Seq[T]
+
+  abstract class Spindler
+
+  def spindle(s: Spindler, ts: Seq[T], reversed: Boolean = false): Seq[T]
 }
 
-/** Maps are easy to use in Scala. */
-object Maps {
-  val colors = Map("red" -&gt; 0xFF0000,
-                   "turquoise" -&gt; 0x00FFFF,
-                   "black" -&gt; 0x000000,
-                   "orange" -&gt; 0xFF8040,
-                   "brown" -&gt; 0x804000)
-  def main(args: Array[String]) {
-    for (name &lt;- args) println(
-      colors.get(name) match {
-        case Some(code) =&gt;
-          name + " has code: " + code
-        case None =&gt;
-          "Unknown color: " + name
-      }
-    )
-  }
-}
+val colors = Map(
+  "red" -&gt; 0xFF0000,
+  "turquoise" -&gt; 0x00FFFF,
+  "black" -&gt; 0x000000,
+  "orange" -&gt; 0xFF8040,
+  "brown" -&gt; 0x804000)
+
+lazy val ns = for {
+  x <- 0 until 100
+  y <- 0 until 100
+} yield (x + y) * 33.33
 </code></pre>
 
   <tr>
@@ -929,6 +980,26 @@ a {
 }</code></pre>
 
   <tr>
+    <th>TypeScript
+    <td class="typescript">
+<pre><code>class MyClass {
+    public static myValue: string;
+    constructor(init: string) {
+      this.myValue = init;
+    }
+  }
+  import fs = require("fs");
+  module MyModule {
+    export interface MyInterface extends OtherInterface {
+      myProperty: any;
+    }
+  }
+  declare magicNumber number;
+  myArray.forEach(() => {
+    // fat arrow syntax
+  });</code></pre>
+
+  <tr>
     <th>CoffeeScript
     <td class="coffeescript">
 <pre><code># Divisions
@@ -1016,6 +1087,40 @@ OPERATOR = /// ^ (
         }
     }
 }</code></pre>
+
+  <tr>
+     <th>Haxe</th>
+     <td class="haxe">
+<pre><code>
+// quicksort example from http://haxe.org/doc/snip/quicksort
+class Quicksort {
+
+    static var arr = [4,8,0,3,9,1,5,2,6,7];
+
+    static function quicksort( lo : Int, hi : Int ) : Void {
+        var i = lo;
+        var j = hi;
+        var buf = arr;
+        var p = buf[(lo+hi)>>1];
+        while( i <= j ) {
+            while( arr[i] > p ) i++;
+            while( arr[j] < p ) j--;
+            if( i <= j ) {
+                var t = buf[i];
+                buf[i++] = buf[j];
+                buf[j--] = t;
+            }
+        }
+        if( lo < j ) quicksort( lo, j );
+        if( i < hi ) quicksort( i, hi );
+    }
+
+    static function main() {
+        quicksort( 0, arr.length-1 );
+        trace(arr);
+    }
+}
+</code></pre>
 
   <tr>
     <th>VBScript
@@ -1122,6 +1227,109 @@ message Customer {
 service CustomerSearch {
   rpc FirstMatch(CustomerRequest) returns (CustomerResponse);
   rpc AllMatches(CustomerRequest) returns (CustomerResponse);
+}</code></pre>
+
+  <tr>
+  <th>Cap’n Proto
+  <td class="capnproto">
+<pre><code>@0xdbb9ad1f14bf0b36;  # unique file ID, generated by `capnp id`
+
+struct Person {
+  name @0 :Text;
+  birthdate @3 :Date;
+
+  email @1 :Text;
+  phones @2 :List(PhoneNumber);
+
+  struct PhoneNumber {
+    number @0 :Text;
+    type @1 :Type;
+
+    enum Type {
+      mobile @0;
+      home @1;
+      work @2;
+    }
+  }
+}
+
+struct Date {
+  year @0 :Int16;
+  month @1 :UInt8;
+  day @2 :UInt8;
+  flags @3 :List(Bool) = [ true, false, false, true ];
+}
+
+interface Node {
+  isDirectory @0 () -&gt; (result :Bool);
+}
+
+interface Directory extends(Node) {
+  list @0 () -&gt; (list: List(Entry));
+  struct Entry {
+    name @0 :Text;
+    node @1 :Node;
+  }
+
+  create @1 (name :Text) -&gt; (file :File);
+  mkdir @2 (name :Text) -&gt; (directory :Directory)
+  open @3 (name :Text) -&gt; (node :Node);
+  delete @4 (name :Text);
+  link @5 (name :Text, node :Node);
+}
+
+interface File extends(Node) {
+  size @0 () -&gt; (size: UInt64);
+  read @1 (startAt :UInt64 = 0, amount :UInt64 = 0xffffffffffffffff)
+       -&gt; (data: Data);
+  # Default params = read entire file.
+
+  write @2 (startAt :UInt64, data :Data);
+  truncate @3 (size :UInt64);
+}</code></pre>
+
+  <tr>
+    <th>Thrift
+    <td class="thrift">
+<pre><code>namespace * thrift.test
+
+/**
+ * Docstring!
+ */
+enum Numberz
+{
+  ONE = 1,
+  TWO,
+  THREE,
+  FIVE = 5,
+  SIX,
+  EIGHT = 8
+}
+
+const Numberz myNumberz = Numberz.ONE;
+// the following is expected to fail:
+// const Numberz urNumberz = ONE;
+
+typedef i64 UserId
+
+struct Msg
+{
+  1: string message,
+  2: i32 type
+}
+struct NestedListsI32x2
+{
+  1: list&lt;list&lt;i32&gt;&gt; integerlist
+}
+struct NestedListsI32x3
+{
+  1: list&lt;list&lt;list&lt;i32&gt;&gt;&gt; integerlist
+}
+service ThriftTest
+{
+  void        testVoid(),
+  string      testString(1: string thing),
+  oneway void testInit()
 }</code></pre>
 
   <tr>
@@ -2486,11 +2694,20 @@ pingUDPPort s a = sendTo s (Strict.singleton 0) a &gt;&gt; return ()
 %% backwards compatibility
 -export([listen/1, listen/2, listen/3, listen/4, stop/1]).
 
+if L =/= [] ->      % If L is not empty
+    sum(L) / count(L);
+true ->
+    error
+end.
+
 %% state
 -record(state, {
     cm,
     channel
    }).
+
+-spec foo(integer()) -&gt; integer().
+foo(X) -&gt; 1 + X.
 
 test(Foo)-&gt;Foo.
 
@@ -2623,9 +2840,6 @@ greeter.("Bob")
 <pre>
 <code>use std;
 
-import std::io;
-export fac, test1;
-
 123;                               // type int
 123u;                              // type uint
 123_u;                             // type uint
@@ -2638,6 +2852,16 @@ export fac, test1;
 0.1f32;                            // type f32
 12E+99_f64;                        // type f64
 
+'a';
+'\n';
+'\x1A';
+'\u12AS';
+'\U1234ASDF';
+
+r"hello";
+r###"world"###;
+r##" "### "# "##;
+
 /* Factorial */
 fn fac(n: int) -&gt; int {
     let s: str = "This is
@@ -2645,6 +2869,7 @@ a multi-line string.
 
 It ends with an unescaped '\"'.";
     let c: char = 'Ф';
+    let r: str = r##" raw string "##;
 
     let result = 1, i = 1;
     while i &lt;= n { // No parens around the condition
@@ -2663,11 +2888,7 @@ let x = id::&lt;int&gt;(10);
 #[path = "foo.rs"]
 mod foo;
 
-iface seq&lt;T&gt; {
-    fn len() -&gt; uint;
-}
-
-impl &lt;T&gt; of seq&lt;T&gt; for [T] {
+impl &lt;T&gt; Seq&lt;T&gt; for [T] {
     fn len() -&gt; uint { vec::len(self) }
     fn iter(b: fn(T)) {
         for elt in self { b(elt); }
@@ -2675,11 +2896,23 @@ impl &lt;T&gt; of seq&lt;T&gt; for [T] {
 }
 
 enum list&lt;T&gt; {
-    nil;
-    cons(T, @list&lt;T&gt;);
+    Nil;
+    Cons(T, @list&lt;T&gt;);
 }
 
-let a: list&lt;int&gt; = cons(7, @cons(13, @nil));
+let a: list&lt;int&gt; = Cons(7, @cons(13, @nil));
+
+struct Baz<'a> {
+    baz: &'a str,
+}
+
+'h: for i in range(0,10) {
+    'g: loop {
+        if i % 2 == 0 { continue 'h; }
+        if i == 9 { break 'h; }
+        break 'g;
+    }
+}
 </code></pre>
 
   <tr>
@@ -3086,6 +3319,116 @@ Feature: Addition
     | 0       | 40      | add    | 40     |
 </code></pre>
 
+  <tr>
+    <th>Nimrod
+    <td class="nimrod">
+<pre><code>
+import module1, module2, module3
+from module4 import nil
+
+type
+  TFoo = object ## Doc comment
+    a: int32
+  PFoo = ref TFoo
+
+proc do_stuff314(param_1: TFoo, par2am: var PFoo): PFoo {.exportc: "dostuff" .} =
+  # Regular comment
+  discard """
+  dfag
+sdfg""
+"""
+  result = nil
+
+method abc(a: TFoo) = discard 1u32 + 0xabcdefABCDEFi32 + 0o01234567i8 + 0b010
+
+discard rawstring"asdf""adfa"
+var normalstring = "asdf"
+let a: uint32 = 0xFFaF'u32
+</code></pre>
+
+  <tr>
+    <th>Swift
+    <td class="swift">
+<pre><code>extension MyClass : Interface {
+    class func unarchiveFromFile&lt;A&gt;(file : A, (Int,Int) -> B) -> SKNode? {
+        let path: String = bundle.pathForResource(file, ofType: "file\(name + 5).txt")
+        let funnyNumber = 3 + 0xC2.15p2 * (1_000_000.000_000_1 - 000123.456) + 0o21
+        var sceneData = NSData.dataWithContentsOfFile(path, options: .DataReadingMappedIfSafe, error: nil)
+        /* a comment /* with a nested comment */ and the end */
+    }
+    @objc override func shouldAutorotate() {
+        return true
+    }
+}
+</code></pre>
+
+  <tr>
+    <th>Gradle
+    <td class="gradle">
+<pre><code>
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 19
+        versionCode 5
+        versionName "0.4.4"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    signingConfigs {
+        release
+    }
+    buildTypes {
+        release {
+            // runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile 'com.example:example-lib:1.0.0'
+}
+
+
+def propFile = file('../signing.properties')
+if( propFile.canRead() ) {
+    def Properties p = new Properties()
+    p.load(new FileInputStream(propFile))
+
+    if( p!=null
+    &&  p.containsKey("STORE_FILE")
+    &&  p.containsKey('STORE_PASSWORD')
+    &&  p.containsKey('KEY_ALIAS')
+    &&  p.containsKey('KEY_PASSWORD')
+    ) {
+        println "RELEASE_BUILD: Signing..."
+
+        android.signingConfigs.release.storeFile = file( p['STORE_FILE'] )
+        android.signingConfigs.release.storePassword = p['STORE_PASSWORD']
+        android.signingConfigs.release.keyAlias = p['KEY_ALIAS']
+        android.signingConfigs.release.keyPassword = p['KEY_PASSWORD']
+    } else {
+        println "RELEASE_BUILD: Required properties in signing.properties are missing"
+        android.buildTypes.release.signingConfig = null
+    }
+} else {
+    println "RELEASE_BUILD: signing.properties not found"
+    android.buildTypes.release.signingProperties = null
+}
+</code></pre>
+
 </table>
 
 
@@ -3136,14 +3479,6 @@ Feature: Addition
 	if x == 3:
 	<span style="background:yellow">	</span>count(x + 1)
 </code></pre>
-
-  <tr>
-    <th>Non-pre container
-    <td>
-<div id="codecontainer" class="code">for x in [1, 2, 3]:<br>
-&nbsp;&nbsp;count(x)<br>
-</div>
-<script>hljs.highlightBlock(document.getElementById('codecontainer'), null, true);</script>
 
   <tr>
     <th>Language alias

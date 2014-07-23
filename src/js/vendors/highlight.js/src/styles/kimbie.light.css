@@ -1,15 +1,17 @@
-/* Base16 Atelier Dune Light - Theme */
-/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/dune) */
-/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
-/* https://github.com/jmblog/color-themes-for-highlightjs */
+/*
+    Name:     Kimbie (light)
+    Author:   Jan T. Sott
+    License:  Creative Commons Attribution-ShareAlike 4.0 Unported License
+    URL:      https://github.com/idleberg/Kimbie-highlight.js
+*/
 
-/* Atelier Dune Light Comment */
+/* Kimbie Comment */
 .hljs-comment,
 .hljs-title {
-  color: #7d7a68;
+  color: #a57a4c;
 }
 
-/* Atelier Dune Light Red */
+/* Kimbie Red */
 .hljs-variable,
 .hljs-attribute,
 .hljs-tag,
@@ -22,42 +24,41 @@
 .css .hljs-id,
 .css .hljs-class,
 .css .hljs-pseudo {
-  color: #d73737;
+  color: #dc3958;
 }
 
-/* Atelier Dune Light Orange */
+/* Kimbie Orange */
 .hljs-number,
 .hljs-preprocessor,
-.hljs-pragma,
 .hljs-built_in,
 .hljs-literal,
 .hljs-params,
 .hljs-constant {
-  color: #b65611;
+  color: #f79a32;
 }
 
-/* Atelier Dune Light Yellow */
-.hljs-ruby .hljs-class .hljs-title,
+/* Kimbie Yellow */
+.ruby .hljs-class .hljs-title,
 .css .hljs-rules .hljs-attribute {
-  color: #cfb017;
+  color: #f06431;
 }
 
-/* Atelier Dune Light Green */
+/* Kimbie Green */
 .hljs-string,
 .hljs-value,
 .hljs-inheritance,
 .hljs-header,
 .ruby .hljs-symbol,
 .xml .hljs-cdata {
-  color: #60ac39;
+  color: #889b4a;
 }
 
-/* Atelier Dune Light Aqua */
+/* Kimbie Aqua */
 .css .hljs-hexcolor {
-  color: #1fad83;
+  color: #088649;
 }
 
-/* Atelier Dune Light Blue */
+/* Kimbie Blue */
 .hljs-function,
 .python .hljs-decorator,
 .python .hljs-title,
@@ -66,20 +67,20 @@
 .perl .hljs-sub,
 .javascript .hljs-title,
 .coffeescript .hljs-title {
-  color: #6684e1;
+  color: #8ab1b0;
 }
 
-/* Atelier Dune Light Purple */
+/* Kimbie Purple */
 .hljs-keyword,
 .javascript .hljs-function {
-  color: #b854d4;
+  color: #98676a;
 }
 
 .hljs {
   display: block;
   overflow-x: auto;
-  background: #fefbec;
-  color: #6e6b5e;
+  background: #fbebd4;
+  color: #84613d;
   padding: 0.5em;
   -webkit-text-size-adjust: none;
 }

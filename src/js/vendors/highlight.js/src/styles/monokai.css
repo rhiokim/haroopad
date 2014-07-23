@@ -4,8 +4,10 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 
 .hljs {
   display: block;
+  overflow-x: auto;
   padding: 0.5em;
   background: #272822;
+  -webkit-text-size-adjust: none;
 }
 
 .hljs-tag,
@@ -54,7 +56,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 .hljs-subst,
 .hljs-title,
 .hljs-emphasis,
-.haskell .hljs-type,
+.hljs-type,
 .hljs-preprocessor,
 .hljs-pragma,
 .ruby .hljs-class .hljs-parent,
@@ -100,7 +102,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 .hljs-phpdoc,
 .hljs-title,
 .hljs-header,
-.haskell .hljs-type,
+.hljs-type,
 .vbscript .hljs-built_in,
 .rsl .hljs-built_in,
 .smalltalk .hljs-class,

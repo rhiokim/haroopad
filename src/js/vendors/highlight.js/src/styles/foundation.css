@@ -8,8 +8,10 @@ Date: 2013-04-02
 
 .hljs {
   display: block;
+  overflow-x: auto;
   padding: 0.5em;
   background: #eee;
+  -webkit-text-size-adjust: none;
 }
 
 .hljs-header,

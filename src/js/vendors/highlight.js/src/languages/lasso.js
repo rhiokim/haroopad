@@ -48,7 +48,7 @@ function(hljs) {
       className: 'markup',
       end: '\\[/noprocess\\]',
       returnEnd: true,
-      contains: [ HTML_COMMENT ]
+      contains: [HTML_COMMENT]
     }
   };
   var LASSO_START = {
@@ -63,7 +63,8 @@ function(hljs) {
     hljs.C_LINE_COMMENT_MODE,
     {
       className: 'javadoc',
-      begin: '/\\*\\*!', end: '\\*/'
+      begin: '/\\*\\*!', end: '\\*/',
+      contains: [hljs.PHRASAL_WORDS_MODE]
     },
     hljs.C_BLOCK_COMMENT_MODE,
     hljs.inherit(hljs.C_NUMBER_MODE, {begin: hljs.C_NUMBER_RE + '|-?(infinity|nan)\\b'}),
@@ -92,14 +93,22 @@ function(hljs) {
     },
     {
       className: 'attribute',
-      begin: '\\.\\.\\.|-' + hljs.UNDERSCORE_IDENT_RE
+      variants: [
+        {
+          begin: '-' + hljs.UNDERSCORE_IDENT_RE,
+          relevance: 0
+        },
+        {
+          begin: '(\\.\\.\\.)'
+        }
+      ]
     },
     {
       className: 'subst',
       variants: [
         {
           begin: '->\\s*',
-          contains: [ LASSO_DATAMEMBER ]
+          contains: [LASSO_DATAMEMBER]
         },
         {
           begin: ':=|/(?!\\w)=?|[-+*%=<>&|!?\\\\]+',
@@ -111,7 +120,7 @@ function(hljs) {
       className: 'built_in',
       begin: '\\.\\.?',
       relevance: 0,
-      contains: [ LASSO_DATAMEMBER ]
+      contains: [LASSO_DATAMEMBER]
     },
     {
       className: 'class',
@@ -137,7 +146,7 @@ function(hljs) {
           end: '\\[|' + LASSO_ANGLE_RE,
           returnEnd: true,
           relevance: 0,
-          contains: [ HTML_COMMENT ]
+          contains: [HTML_COMMENT]
         }
       },
       LASSO_NOPROCESS,
@@ -158,7 +167,7 @@ function(hljs) {
                 className: 'markup',
                 end: LASSO_ANGLE_RE,
                 returnEnd: true,
-                contains: [ HTML_COMMENT ]
+                contains: [HTML_COMMENT]
               }
             },
             LASSO_NOPROCESS,
