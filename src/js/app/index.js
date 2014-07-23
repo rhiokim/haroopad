@@ -122,22 +122,26 @@ i18n.init({
 
 
     //open file with commend line
-    if (gui.App.argv.length > 0) {
-      var file;
+    if (global.argv._.length > 0) {
+      global.argv._.forEach(function(f) {
+        WindowMgr.open(f);
+      });
+    // if (gui.App.argv.length > 0) {
+    //   var file;
       
-      switch(os) {
-        case 'windows':
-          file = gui.App.argv[0];
-        break;
-        case 'mac':
-          file = gui.App.argv[0];
-        break;
-        case 'linux':
-          file = gui.App.fullArgv.join(' ');  //it's bug
-        break;
-      }
+    //   switch(os) {
+    //     case 'windows':
+    //       file = gui.App.argv[0];
+    //     break;
+    //     case 'mac':
+    //       file = gui.App.argv[0];
+    //     break;
+    //     case 'linux':
+    //       file = gui.App.fullArgv.join(' ');  //it's bug
+    //     break;
+    //   }
 
-      WindowMgr.open(file);
+    //   WindowMgr.open(file);
     } else {
       WindowMgr.open();
     }

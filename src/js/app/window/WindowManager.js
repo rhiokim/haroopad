@@ -106,7 +106,7 @@ define([
 	function open(file) {
 		var fileEntry, newWin, existWin;
 
-		if (openning) {
+		if (openning && !file) {
 			return;
 		}
 

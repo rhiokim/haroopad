@@ -2,7 +2,7 @@
   var path = require('path'),
     cp = require('child_process'),
     gui = require('nw.gui'),
-    fs, watchr, readDir;
+    fs, watchr, readDir, optimist;
 
   /* node-webkit gui */
   global.Shell = gui.Shell;
@@ -43,12 +43,16 @@
   process.mainModule.paths = [global.PATHS.node_modules];
 
   fs = require('fs-extra');
+  optimist = require('optimist').boolean('f');
   readDir = require('readdir');
 
   /* load locales */
   global.LANGS = fs.readFileSync(path.join(global.PATHS.locales, 'locales.json'));
   global.LANGS = JSON.parse(global.LANGS);
-
+  
+  /* cli arguments */
+  global.argv = optimist.parse(gui.App.argv);
+  
   /* level db */
   fs.mkdirsSync(global.PATHS.db);
 
