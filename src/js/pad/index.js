@@ -93,6 +93,15 @@ i18n.init({
         window.ee.emit('file.update', nw.file.get('fileEntry'));
       });
       
+      switch(nw._args.mode) {
+        case 'view':
+          window.ee.emit('menu.view.mode', 'viewer');
+        break;
+        case 'edit':
+          window.ee.emit('menu.view.mode', 'editor');
+        break;
+      }
+
       window.ee.once('rendered', function() {
         setTimeout(function() {
           nw.show();
