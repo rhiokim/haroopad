@@ -148,6 +148,8 @@ define([
 	process.on('actived', function(child) {
 		exports.actived = child;
 
+		child.show(); //#346
+
 		openning = false;
 	});
 

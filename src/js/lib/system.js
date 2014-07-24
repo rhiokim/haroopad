@@ -25,6 +25,9 @@
       break;
   }
 
+  global.mdexts = [ 'md', 'mmd', 'markdown', 'mdown', 'markdn', 'mkd', 'mkdn', 'mdwn',
+                  'mdtxt', 'mdtext', 'mdml' ];
+
   /* system path */
   global.PATHS = {
     node_modules: path.join(global.EXECPATH, 'Libraries', '.node_modules'),
