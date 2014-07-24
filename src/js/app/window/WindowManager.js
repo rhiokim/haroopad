@@ -103,7 +103,7 @@ define([
 		});
 	}
 
-	function open(file) {
+	function open(file, args) {
 		var fileEntry, newWin, existWin;
 
 		if (openning && !file) {
@@ -123,7 +123,7 @@ define([
 			return;
 		}
 
-		//비어있는 윈도우만 있는 경우
+		//if already exist empty window
 		if (file && exports.actived && exports.actived.file && !exports.actived.file.get('fileEntry')) {
 			if (exports.actived.file.get('created_at').getTime() == exports.actived.file.get('updated_at').getTime()) {
 				exports.actived.file.set(file.toJSON());
@@ -138,6 +138,7 @@ define([
 		newWin.parent = window;
 		newWin.file = file || File.open();
 		newWin.created_at = new Date().getTime();
+		newWin._args = args || {};
 		
 		_add(newWin);
 

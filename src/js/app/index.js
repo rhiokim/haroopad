@@ -124,7 +124,9 @@ i18n.init({
     //open file with commend line
     if (global.argv._.length > 0) {
       global.argv._.forEach(function(f) {
-        WindowMgr.open(f);
+        WindowMgr.open(f, {
+          mode: global.argv.mode
+        });
       });
     // if (gui.App.argv.length > 0) {
     //   var file;
