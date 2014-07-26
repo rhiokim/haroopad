@@ -2,7 +2,7 @@
 <a href="http://promises-aplus.github.com/promises-spec">
   <img src="http://promises-aplus.github.com/promises-spec/assets/logo-small.png"
        alt="Promises/A+ logo" title="Promises/A+ 1.1 compliant" align="right" />
-</a>
+</a> [![Build Status](https://travis-ci.org/calvinmetcalf/lie.svg)](https://travis-ci.org/calvinmetcalf/lie)
 
 lie a small, performant, promise library implementing the [Promises/A+ spec Version 1.1](http://promises-aplus.github.com/promises-spec/).
 

@@ -1,0 +1,25 @@
+{
+	"name": "md5-jkmyers",
+	"description": "Joseph K. Myers' high performance (in fact, the fastest) MD5 implementation for npm, Bower, Component, etc.",
+	"version": "0.0.1",
+	"keywords": [
+		"fast",
+		"amd",
+		"commonjs",
+		"browser",
+		"node",
+		"md5",
+		"myers",
+		"node",
+		"bower",
+		"component",
+		"hash",
+		"crypto"
+	],
+	"main": "md5.min.js",
+	"license": "MIT",
+	"repo": {
+		"type": "git",
+		"url": "https://github.com/AndreasPizsa/md5-jkmyers.git"
+	}
+}

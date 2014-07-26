@@ -44,7 +44,7 @@ can clone dates in arrays in objects, for example.
 
 ## API
 
-`clone(val, circular)`
+`clone(val, circular, depth)`
 
   * `val` -- the value that you want to clone, any type allowed
   * `circular` -- boolean
@@ -52,6 +52,8 @@ can clone dates in arrays in objects, for example.
     Call `clone` with `circular` set to `false` if you are certain that `obj`
     contains no circular references. This will give better performance if needed.
     There is no error if `undefined` or `null` is passed as `obj`.
+  * `depth` -- depth to wich the object is to be cloned (optional,
+    defaults to infinity)
 
 `clone.clonePrototype(obj)`
 

@@ -4,9 +4,40 @@ var utils = require('../utils');
 var merge = require('../merge');
 var errors = require('../deps/errors');
 
+var cachedDBs = {};
+var taskQueue = {
+  running: false,
+  queue: []
+};
+
+function tryCode(fun, that, args) {
+  try {
+    fun.apply(that, args);
+  } catch (err) { // shouldn't happen
+    if (window.PouchDB) {
+      window.PouchDB.emit('error', err);
+    }
+  }
+}
+
+function applyNext() {
+  if (taskQueue.running || !taskQueue.queue.length) {
+    return;
+  }
+  taskQueue.running = true;
+  var item = taskQueue.queue.shift();
+  item.action(function (err, res) {
+    tryCode(item.callback, this, [err, res]);
+    taskQueue.running = false;
+    process.nextTick(applyNext);
+  });
+}
+
 function idbError(callback) {
   return function (event) {
-    callback(errors.error(errors.IDB_ERROR, event.target, event.type));
+    var message = (event.target && event.target.error &&
+      event.target.error.name) || event.target;
+    callback(errors.error(errors.IDB_ERROR, message, event.type));
   };
 }
 
@@ -17,7 +48,7 @@ function isModernIdb() {
   // cache based on appVersion, in case the browser is updated
   var cacheKey = "_pouch__checkModernIdb_" +
     (global.navigator && global.navigator.appVersion);
-  var cached = global.localStorage && global.localStorage[cacheKey];
+  var cached = utils.hasLocalStorage() && global.localStorage[cacheKey];
   if (cached) {
     return JSON.parse(cached);
   }
@@ -28,12 +59,25 @@ function isModernIdb() {
   if (global.indexedDB.deleteDatabase) {
     global.indexedDB.deleteDatabase(dbName); // db no longer needed
   }
-  if (global.localStorage) {
+  if (utils.hasLocalStorage()) {
     global.localStorage[cacheKey] = JSON.stringify(result); // cache
   }
   return result;
 }
+
 function IdbPouch(opts, callback) {
+  var api = this;
+
+  taskQueue.queue.push({
+    action: function (thisCallback) {
+      init(api, opts, thisCallback);
+    },
+    callback: callback
+  });
+  applyNext();
+}
+
+function init(api, opts, callback) {
 
   // IndexedDB requires a versioned database structure, so we use the
   // version here to manage migrations.
@@ -41,46 +85,31 @@ function IdbPouch(opts, callback) {
 
   // The object stores created for each database
   // DOC_STORE stores the document meta data, its revision history and state
+  // Keyed by document id
   var DOC_STORE = 'document-store';
   // BY_SEQ_STORE stores a particular version of a document, keyed by its
   // sequence id
   var BY_SEQ_STORE = 'by-sequence';
   // Where we store attachments
   var ATTACH_STORE = 'attach-store';
-  // Where we store meta data
+  // Where we store database-wide meta data in a single record
+  // keyed by id: META_STORE
   var META_STORE = 'meta-store';
   // Where we detect blob support
   var DETECT_BLOB_SUPPORT_STORE = 'detect-blob-support';
 
   var name = opts.name;
-  var req = global.indexedDB.open(name, ADAPTER_VERSION);
-
-  if (!('openReqList' in IdbPouch)) {
-    IdbPouch.openReqList = {};
-  }
-  IdbPouch.openReqList[name] = req;
 
   var blobSupport = null;
   var instanceId = null;
-  var api = this;
+  var idStored = false;
   var idb = null;
-
-  req.onupgradeneeded = function (e) {
-    var db = e.target.result;
-    if (e.oldVersion < 1) {
-      // initial schema
-      createSchema(db);
-    }
-    if (e.oldVersion < 2) {
-      // version 2 adds the deletedOrLocal index
-      addDeletedOrLocalIndex(e);
-    }
-  };
+  var docCount = -1;
 
   function createSchema(db) {
     db.createObjectStore(DOC_STORE, {keyPath : 'id'})
       .createIndex('seq', 'seq', {unique: true});
-    db.createObjectStore(BY_SEQ_STORE, {autoIncrement : true})
+    db.createObjectStore(BY_SEQ_STORE, {autoIncrement: true})
       .createIndex('_doc_id_rev', '_doc_id_rev', {unique: true});
     db.createObjectStore(ATTACH_STORE, {keyPath: 'digest'});
     db.createObjectStore(META_STORE, {keyPath: 'id', autoIncrement: false});
@@ -98,64 +127,13 @@ function IdbPouch(opts, callback) {
         var local = utils.isLocalId(metadata.id);
         metadata.deletedOrLocal = (deleted || local) ? "1" : "0";
         docStore.put(metadata);
-        cursor['continue']();
+        cursor.continue();
       } else {
-        docStore.createIndex('deletedOrLocal', 'deletedOrLocal', {unique : false});
+        docStore.createIndex('deletedOrLocal',
+                             'deletedOrLocal', {unique : false});
       }
     };
   }
-
-  req.onsuccess = function (e) {
-
-    idb = e.target.result;
-
-    idb.onversionchange = function () {
-      idb.close();
-    };
-
-    var txn = idb.transaction([META_STORE, DETECT_BLOB_SUPPORT_STORE],
-                              'readwrite');
-
-    var req = txn.objectStore(META_STORE).get(META_STORE);
-
-    req.onsuccess = function (e) {
-
-      var idStored = false;
-      var checkSetupComplete = function () {
-        if (blobSupport === null || !idStored) {
-          return;
-        } else {
-          callback(null, api);
-        }
-      };
-
-      var meta = e.target.result || {id: META_STORE};
-      if (name  + '_id' in meta) {
-        instanceId = meta[name + '_id'];
-        idStored = true;
-        checkSetupComplete();
-      } else {
-        instanceId = utils.uuid();
-        meta[name + '_id'] = instanceId;
-        txn.objectStore(META_STORE).put(meta).onsuccess = function () {
-          idStored = true;
-          checkSetupComplete();
-        };
-      }
-
-      // detect blob support
-      try {
-        txn.objectStore(DETECT_BLOB_SUPPORT_STORE).put(utils.createBlob(), "key");
-        blobSupport = true;
-      } catch (err) {
-        blobSupport = false;
-      } finally {
-        checkSetupComplete();
-      }
-    };
-  };
-
-  req.onerror = idbError(callback);
 
   api.type = function () {
     return 'idb';
@@ -183,6 +161,7 @@ function IdbPouch(opts, callback) {
     }
 
     var results = [];
+    var fetchedDocs = {};
     var docsWritten = 0;
 
     function writeMetaData(e) {
@@ -197,7 +176,14 @@ function IdbPouch(opts, callback) {
         return;
       }
       var currentDoc = docInfos.shift();
-      var req = txn.objectStore(DOC_STORE).get(currentDoc.metadata.id);
+      var id = currentDoc.metadata.id;
+
+      if (id in fetchedDocs) {
+        // if newEdits=false, can re-use the same id from this batch
+        return updateDoc(fetchedDocs[id], currentDoc);
+      }
+
+      var req = txn.objectStore(DOC_STORE).get(id);
       req.onsuccess = function process_docRead(event) {
         var oldDoc = event.target.result;
         if (!oldDoc) {
@@ -229,10 +215,9 @@ function IdbPouch(opts, callback) {
         if (utils.isLocalId(metadata.id)) {
           return;
         }
-
-        IdbPouch.Changes.notify(name);
-        IdbPouch.Changes.notifyLocalWindows(name);
       });
+      IdbPouch.Changes.notify(name);
+      docCount = -1; // invalidate
       callback(null, aresults);
     }
 
@@ -249,7 +234,7 @@ function IdbPouch(opts, callback) {
                                 "Attachments need to be base64 encoded");
           return callback(err);
         }
-        att.digest = 'md5-' + utils.Crypto.MD5(data);
+        att.digest = 'md5-' + utils.MD5(data);
         if (blobSupport) {
           var type = att.content_type;
           data = utils.fixBinary(data);
@@ -259,13 +244,14 @@ function IdbPouch(opts, callback) {
       }
       var reader = new FileReader();
       reader.onloadend = function (e) {
-        att.digest = 'md5-' + utils.Crypto.MD5(this.result);
+        var binary = utils.arrayBufferToBinaryString(this.result);
+        att.digest = 'md5-' + utils.MD5(binary);
         if (!blobSupport) {
-          att.data = btoa(this.result);
+          att.data = btoa(binary);
         }
         finish();
       };
-      reader.readAsBinaryString(att.data);
+      reader.readAsArrayBuffer(att.data);
     }
 
     function preprocessAttachments(callback) {
@@ -292,7 +278,8 @@ function IdbPouch(opts, callback) {
 
         for (var key in docInfo.data._attachments) {
           if (docInfo.data._attachments.hasOwnProperty(key)) {
-            preprocessAttachment(docInfo.data._attachments[key], attachmentProcessed);
+            preprocessAttachment(docInfo.data._attachments[key],
+                                 attachmentProcessed);
           }
         }
       });
@@ -305,7 +292,7 @@ function IdbPouch(opts, callback) {
       }
     }
 
-    function writeDoc(docInfo, callback) {
+    function writeDoc(docInfo, winningRev, deleted, callback) {
       var err = null;
       var recv = 0;
       docInfo.data._id = docInfo.metadata.id;
@@ -313,7 +300,7 @@ function IdbPouch(opts, callback) {
 
       docsWritten++;
 
-      if (utils.isDeleted(docInfo.metadata, docInfo.metadata.rev)) {
+      if (deleted) {
         docInfo.data._deleted = true;
       }
 
@@ -349,19 +336,32 @@ function IdbPouch(opts, callback) {
       }
 
       function finish() {
+
         docInfo.data._doc_id_rev = docInfo.data._id + "::" + docInfo.data._rev;
-        var dataReq = txn.objectStore(BY_SEQ_STORE).put(docInfo.data);
-        dataReq.onsuccess = function (e) {
-          docInfo.metadata.seq = e.target.result;
-          // Current _rev is calculated from _rev_tree on read
-          delete docInfo.metadata.rev;
-          var deleted = utils.isDeleted(docInfo.metadata);
-          var local = utils.isLocalId(docInfo.metadata.id);
-          var metadata = utils.extend(true, {deletedOrLocal : (deleted || local) ? "1" : "0"}, docInfo.metadata);
-          var metaDataReq = txn.objectStore(DOC_STORE).put(metadata);
-          metaDataReq.onsuccess = function () {
-            results.push(docInfo);
-            utils.call(callback);
+        var index = txn.objectStore(BY_SEQ_STORE).index('_doc_id_rev');
+
+        index.getKey(docInfo.data._doc_id_rev).onsuccess = function (e) {
+
+          var dataReq = e.target.result ?
+            txn.objectStore(BY_SEQ_STORE).put(docInfo.data, e.target.result) :
+            txn.objectStore(BY_SEQ_STORE).put(docInfo.data);
+
+          dataReq.onsuccess = function (e) {
+            var metadata = docInfo.metadata;
+            metadata.seq = e.target.result;
+            // Current _rev is calculated from _rev_tree on read
+            delete metadata.rev;
+            var local = utils.isLocalId(metadata.id);
+            metadata.deletedOrLocal = (deleted || local) ? "1" : "0";
+            metadata.winningRev = winningRev;
+            var metaDataReq = txn.objectStore(DOC_STORE).put(metadata);
+            metaDataReq.onsuccess = function () {
+              delete metadata.deletedOrLocal;
+              delete metadata.winningRev;
+              results.push(docInfo);
+              fetchedDocs[docInfo.metadata.id] = docInfo.metadata;
+              utils.call(callback);
+            };
           };
         };
       }
@@ -372,10 +372,11 @@ function IdbPouch(opts, callback) {
     }
 
     function updateDoc(oldDoc, docInfo) {
-      var merged = merge.merge(oldDoc.rev_tree, docInfo.metadata.rev_tree[0], 1000);
+      var merged =
+        merge.merge(oldDoc.rev_tree, docInfo.metadata.rev_tree[0], 1000);
       var wasPreviouslyDeleted = utils.isDeleted(oldDoc);
-      var inConflict = (wasPreviouslyDeleted &&
-                        utils.isDeleted(docInfo.metadata)) ||
+      var deleted = utils.isDeleted(docInfo.metadata);
+      var inConflict = (wasPreviouslyDeleted && deleted && newEdits) ||
         (!wasPreviouslyDeleted && newEdits && merged.conflicts !== 'new_leaf');
 
       if (inConflict) {
@@ -384,16 +385,24 @@ function IdbPouch(opts, callback) {
       }
 
       docInfo.metadata.rev_tree = merged.tree;
-      writeDoc(docInfo, processDocs);
+
+      // recalculate
+      var winningRev = merge.winningRev(docInfo.metadata);
+      deleted = utils.isDeleted(docInfo.metadata, winningRev);
+
+      writeDoc(docInfo, winningRev, deleted, processDocs);
     }
 
     function insertDoc(docInfo) {
+      var winningRev = merge.winningRev(docInfo.metadata);
+      var deleted = utils.isDeleted(docInfo.metadata, winningRev);
       // Cant insert new deleted documents
-      if ('was_delete' in opts && utils.isDeleted(docInfo.metadata)) {
+      if ('was_delete' in opts && deleted) {
         results.push(errors.MISSING_DOC);
         return processDocs();
       }
-      writeDoc(docInfo, processDocs);
+
+      writeDoc(docInfo, winningRev, deleted, processDocs);
     }
 
     // Insert sequence number into the error so we can sort later
@@ -442,11 +451,12 @@ function IdbPouch(opts, callback) {
     var metadata;
     var err;
     var txn;
-    opts = utils.extend(true, {}, opts);
+    opts = utils.clone(opts);
     if (opts.ctx) {
       txn = opts.ctx;
     } else {
-      txn = idb.transaction([DOC_STORE, BY_SEQ_STORE, ATTACH_STORE], 'readonly');
+      txn =
+        idb.transaction([DOC_STORE, BY_SEQ_STORE, ATTACH_STORE], 'readonly');
     }
 
     function finish() {
@@ -468,12 +478,13 @@ function IdbPouch(opts, callback) {
         err = errors.error(errors.MISSING_DOC, "deleted");
         return finish();
       }
+      var objectStore = txn.objectStore(BY_SEQ_STORE);
 
-      var rev = merge.winningRev(metadata);
-      var key = metadata.id + '::' + (opts.rev ? opts.rev : rev);
-      var index = txn.objectStore(BY_SEQ_STORE).index('_doc_id_rev');
+      // metadata.winningRev was added later, so older DBs might not have it
+      var rev = opts.rev || metadata.winningRev || merge.winningRev(metadata);
+      var key = metadata.id + '::' + rev;
 
-      index.get(key).onsuccess = function (e) {
+      objectStore.index('_doc_id_rev').get(key).onsuccess = function (e) {
         doc = e.target.result;
         if (doc && doc._doc_id_rev) {
           delete(doc._doc_id_rev);
@@ -490,11 +501,12 @@ function IdbPouch(opts, callback) {
   api._getAttachment = function (attachment, opts, callback) {
     var result;
     var txn;
-    opts = utils.extend(true, {}, opts);
+    opts = utils.clone(opts);
     if (opts.ctx) {
       txn = opts.ctx;
     } else {
-      txn = idb.transaction([DOC_STORE, BY_SEQ_STORE, ATTACH_STORE], 'readonly');
+      txn =
+        idb.transaction([DOC_STORE, BY_SEQ_STORE, ATTACH_STORE], 'readonly');
     }
     var digest = attachment.digest;
     var type = attachment.content_type;
@@ -505,10 +517,11 @@ function IdbPouch(opts, callback) {
         if (blobSupport) {
           var reader = new FileReader();
           reader.onloadend = function (e) {
-            result = btoa(this.result);
+            var binary = utils.arrayBufferToBinaryString(this.result);
+            result = btoa(binary);
             callback(null, result);
           };
-          reader.readAsBinaryString(data);
+          reader.readAsArrayBuffer(data);
         } else {
           result = data;
           callback(null, result);
@@ -525,73 +538,14 @@ function IdbPouch(opts, callback) {
     };
   };
 
-  function allDocsKeysQuery(totalRows, opts, callback) {
-    var keys = opts.keys;
-    var descending = 'descending' in opts ? opts.descending : false;
-
-    if (!keys.length) { // empty list is okay
-      callback(null, {
-        offset : opts.skip,
-        rows : [],
-        total_rows : totalRows
-      });
-    } else {
-      // do a separate "key" query for each key in the keys array
-      var resultsToCollate = [];
-      keys.forEach(function (key) {
-        var subOpts = utils.extend(true, {}, opts);
-        subOpts.keys_request = true; // internal param, says this is a "keys" request
-        subOpts.key = key;
-        delete subOpts.keys;
-        delete subOpts.skip;
-        delete subOpts.limit;
-
-        allDocsNormalQuery(totalRows, subOpts, function (err, res) {
-          resultsToCollate.push({err : err, res : res, key : key});
-          if (resultsToCollate.length === keys.length) {
-            // all done, time to collate
-            var keysToResults = {};
-            for (var i = 0; i < resultsToCollate.length; i++) {
-              var result = resultsToCollate[i];
-              if (result.err) {
-                callback(err);
-                return;
-              } else {
-                keysToResults[result.key] = result;
-              }
-            }
-            var results = [];
-            keys.forEach(function (key) {
-              var result = keysToResults[key];
-              if (result.res.rows.length) {
-                results.push(result.res.rows[0]); // only one result ever
-              } else {
-                results.push({"key": key, "error": "not_found"});
-              }
-            });
-            if (descending) {
-              results = results.reverse();
-            }
-            callback(null, {
-              total_rows: totalRows,
-              offset: opts.skip,
-              rows: ('limit' in opts) ? results.slice(opts.skip, opts.limit + opts.skip) :
-                (opts.skip > 0) ? results.slice(opts.skip) : results
-            });
-          }
-        });
-      });
-    }
-  }
-
-  function allDocsNormalQuery(totalRows, opts, callback) {
+  function allDocsQuery(totalRows, opts, callback) {
     var start = 'startkey' in opts ? opts.startkey : false;
     var end = 'endkey' in opts ? opts.endkey : false;
     var key = 'key' in opts ? opts.key : false;
-
+    var skip = opts.skip || 0;
+    var limit = typeof opts.limit === 'number' ? opts.limit : -1;
+    var inclusiveEnd = opts.inclusive_end !== false;
     var descending = 'descending' in opts && opts.descending ? 'prev' : null;
-
-    var skipped = 0;
 
     var manualDescEnd = false;
     if (descending && start && end) {
@@ -602,16 +556,33 @@ function IdbPouch(opts, callback) {
       end = false;
     }
 
-    var keyRange;
+    var keyRange = null;
     try {
-      keyRange = start && end ? global.IDBKeyRange.bound(start, end)
-        : start ? (descending ? global.IDBKeyRange.upperBound(start) : global.IDBKeyRange.lowerBound(start))
-        : end ? (descending ? global.IDBKeyRange.lowerBound(end) : global.IDBKeyRange.upperBound(end))
-        : key ? global.IDBKeyRange.only(key) : null;
+      if (start && end) {
+        keyRange = global.IDBKeyRange.bound(start, end, false, !inclusiveEnd);
+      } else if (start) {
+        if (descending) {
+          keyRange = global.IDBKeyRange.upperBound(start);
+        } else {
+          keyRange = global.IDBKeyRange.lowerBound(start);
+        }
+      } else if (end) {
+        if (descending) {
+          keyRange = global.IDBKeyRange.lowerBound(end, !inclusiveEnd);
+        } else {
+          keyRange = global.IDBKeyRange.upperBound(end, !inclusiveEnd);
+        }
+      } else if (key) {
+        keyRange = global.IDBKeyRange.only(key);
+      }
     } catch (e) {
       if (e.name === "DataError" && e.code === 0) {
         // data error, start is less than end
-        return callback(null, {total_rows : totalRows, offset : opts.skip, rows : []}); // no docs possible
+        return callback(null, {
+          total_rows : totalRows,
+          offset : opts.skip,
+          rows : []
+        });
       } else {
         return callback(errors.error(errors.IDB_ERROR, e.name, e.message));
       }
@@ -636,21 +607,23 @@ function IdbPouch(opts, callback) {
       }
       var cursor = e.target.result;
       var metadata = cursor.value;
+      // metadata.winningRev added later, some dbs might be missing it
+      var winningRev = metadata.winningRev || merge.winningRev(metadata);
 
       function allDocsInner(metadata, data) {
         if (utils.isLocalId(metadata.id)) {
-          return cursor['continue']();
+          return cursor.continue();
         }
         var doc = {
           id: metadata.id,
           key: metadata.id,
           value: {
-            rev: merge.winningRev(metadata)
+            rev: winningRev
           }
         };
         if (opts.include_docs) {
           doc.doc = data;
-          doc.doc._rev = merge.winningRev(metadata);
+          doc.doc._rev = winningRev;
           if (doc.doc._doc_id_rev) {
             delete(doc.doc._doc_id_rev);
           }
@@ -663,36 +636,35 @@ function IdbPouch(opts, callback) {
             }
           }
         }
-        if (opts.keys_request) {
+        var deleted = utils.isDeleted(metadata, winningRev);
+        if (opts.deleted === 'ok') {
           // deleted docs are okay with keys_requests
-          if (utils.isDeleted(metadata)) {
+          if (deleted) {
             doc.value.deleted = true;
             doc.doc = null;
           }
           results.push(doc);
-        } else if (!utils.isDeleted(metadata)) {
-          if (!results.length && opts.skip > 0 && skipped < opts.skip) {
-            skipped++;
-          } else if (manualDescEnd && doc.key <= manualDescEnd) {
-            if (doc.key === manualDescEnd) {
-              results.push(doc);
+        } else if (!deleted && skip-- <= 0) {
+          if (manualDescEnd) {
+            if (inclusiveEnd && doc.key < manualDescEnd) {
+              return;
+            } else if (!inclusiveEnd && doc.key <= manualDescEnd) {
+              return;
             }
-            return; // done reading
-          } else if ('limit' in opts && results.length === opts.limit) {
-            return; // done reading
-          } else {
-            results.push(doc);
+          }
+          results.push(doc);
+          if (--limit === 0) {
+            return;
           }
         }
-        cursor['continue']();
+        cursor.continue();
       }
 
       if (!opts.include_docs) {
         allDocsInner(metadata);
       } else {
         var index = transaction.objectStore(BY_SEQ_STORE).index('_doc_id_rev');
-        var mainRev = merge.winningRev(metadata);
-        var key = metadata.id + "::" + mainRev;
+        var key = metadata.id + "::" + winningRev;
         index.get(key).onsuccess = function (event) {
           allDocsInner(cursor.value, event.target.result);
         };
@@ -700,87 +672,105 @@ function IdbPouch(opts, callback) {
     };
   }
 
-  api._allDocs = function idb_allDocs(opts, callback) {
-
-    // first count the total_rows using the undeleted/non-local count
-    var txn = idb.transaction([DOC_STORE], 'readonly');
-
-    var totalRows;
-    function countUndeletedNonlocalDocs(e) {
-      totalRows = e.target.result;
+  function countDocs(callback) {
+    if (docCount !== -1) {
+      return callback(null, docCount);
     }
 
+    var count;
+    var txn = idb.transaction([DOC_STORE], 'readonly');
     var index = txn.objectStore(DOC_STORE).index('deletedOrLocal');
-    index.count(global.IDBKeyRange.only("0")).onsuccess = countUndeletedNonlocalDocs;
-
-    txn.onerror = idbError(callback);
-
-    txn.oncomplete = function () {
-      if ('keys' in opts) {
-        allDocsKeysQuery(totalRows, opts, callback);
-      } else {
-        allDocsNormalQuery(totalRows, opts, callback);
-      }
+    index.count(global.IDBKeyRange.only("0")).onsuccess = function (e) {
+      count = e.target.result;
     };
+    txn.onerror = idbError(callback);
+    txn.oncomplete = function () {
+      docCount = count;
+      callback(null, docCount);
+    };
+  }
+
+  api._allDocs = function idb_allDocs(opts, callback) {
+
+    // first count the total_rows
+    countDocs(function (err, totalRows) {
+      if (err) {
+        return callback(err);
+      }
+      if (opts.limit === 0) {
+        return callback(null, {
+          total_rows : totalRows,
+          offset : opts.skip,
+          rows : []
+        });
+      }
+      allDocsQuery(totalRows, opts, callback);
+    });
   };
 
   api._info = function idb_info(callback) {
-    var count = 0;
-    var update_seq = 0;
-    var txn = idb.transaction([DOC_STORE, META_STORE], 'readonly');
 
-    function fetchUpdateSeq(e) {
-      update_seq = e.target.result && e.target.result.updateSeq || 0;
-    }
-
-    function countDocs(e) {
-      var cursor = e.target.result;
-      if (!cursor) {
-        txn.objectStore(META_STORE).get(META_STORE).onsuccess = fetchUpdateSeq;
-        return;
+    countDocs(function (err, count) {
+      if (err) {
+        return callback(err);
       }
-      if (cursor.value.deleted !== true) {
-        count++;
+      if (idb === null) {
+        var error = new Error('db isn\'t open');
+        error.id = 'idbNull';
+        return callback(error);
       }
-      cursor['continue']();
-    }
+      var updateSeq = 0;
+      var txn = idb.transaction([META_STORE], 'readonly');
 
-    txn.oncomplete = function () {
-      callback(null, {
-        db_name: name,
-        doc_count: count,
-        update_seq: update_seq
-      });
-    };
+      txn.objectStore(META_STORE).get(META_STORE).onsuccess = function (e) {
+        updateSeq = e.target.result && e.target.result.updateSeq || 0;
+      };
 
-    txn.objectStore(DOC_STORE).openCursor().onsuccess = countDocs;
+      txn.oncomplete = function () {
+        callback(null, {
+          db_name: name,
+          doc_count: count,
+          update_seq: updateSeq
+        });
+      };
+    });
   };
 
-  api._changes = function idb_changes(opts) {
-    opts = utils.extend(true, {}, opts);
+  api._changes = function (opts) {
+    opts = utils.clone(opts);
 
     if (opts.continuous) {
       var id = name + ':' + utils.uuid();
-      opts.cancelled = false;
       IdbPouch.Changes.addListener(name, id, api, opts);
       IdbPouch.Changes.notify(name);
       return {
         cancel: function () {
-          opts.complete(null, {status: 'cancelled'});
-          opts.complete = null;
-          opts.cancelled = true;
           IdbPouch.Changes.removeListener(name, id);
         }
       };
     }
 
     var descending = opts.descending ? 'prev' : null;
-    var last_seq = 0;
+    var lastSeq = 0;
 
     // Ignore the `since` parameter when `descending` is true
     opts.since = opts.since && !descending ? opts.since : 0;
 
-    var results = [], resultIndices = {}, dedupResults = [];
+    var limit = 'limit' in opts ? opts.limit : -1;
+    if (limit === 0) {
+      limit = 1; // per CouchDB _changes spec
+    }
+    var returnDocs;
+    if ('returnDocs' in opts) {
+      returnDocs = opts.returnDocs;
+    } else {
+      returnDocs = true;
+    }
+
+    var results = [];
+    var numResults = 0;
+    var filter = utils.filterChange(opts);
+
     var txn;
 
     function fetchChanges() {
@@ -791,7 +781,8 @@ function IdbPouch(opts, callback) {
 
       if (descending) {
         req = txn.objectStore(BY_SEQ_STORE)
-            .openCursor(global.IDBKeyRange.lowerBound(opts.since, true), descending);
+            .openCursor(global.IDBKeyRange.lowerBound(opts.since, true),
+                        descending);
       } else {
         req = txn.objectStore(BY_SEQ_STORE)
             .openCursor(global.IDBKeyRange.lowerBound(opts.since, true));
@@ -804,67 +795,56 @@ function IdbPouch(opts, callback) {
     fetchChanges();
 
     function onsuccess(event) {
-      if (!event.target.result) {
-        // Filter out null results casued by deduping
-        for (var i = 0, l = results.length; i < l; i++) {
-          var result = results[i];
-          if (result) {
-            dedupResults.push(result);
-          }
-        }
-        return false;
-      }
-
       var cursor = event.target.result;
 
-      // Try to pre-emptively dedup to save us a bunch of idb calls
-      var changeId = cursor.value._id;
-      var changeIdIndex = resultIndices[changeId];
-      if (changeIdIndex !== undefined) {
-        results[changeIdIndex].seq = cursor.key;
-        // update so it has the later sequence number
-        results.push(results[changeIdIndex]);
-        results[changeIdIndex] = null;
-        resultIndices[changeId] = results.length - 1;
-        return cursor['continue']();
+      if (!cursor) {
+        return;
+      }
+
+      var doc = cursor.value;
+
+      if (utils.isLocalId(doc._id) ||
+          (opts.doc_ids && opts.doc_ids.indexOf(doc._id) === -1)) {
+        return cursor.continue();
       }
 
       var index = txn.objectStore(DOC_STORE);
-      index.get(cursor.value._id).onsuccess = function (event) {
+      index.get(doc._id).onsuccess = function (event) {
         var metadata = event.target.result;
-        if (utils.isLocalId(metadata.id)) {
-          return cursor['continue']();
+
+        if (lastSeq < metadata.seq) {
+          lastSeq = metadata.seq;
+        }
+        // metadata.winningRev was only added later
+        var winningRev = metadata.winningRev || merge.winningRev(metadata);
+        if (doc._rev !== winningRev) {
+          return cursor.continue();
         }
 
-        if (last_seq < metadata.seq) {
-          last_seq = metadata.seq;
-        }
+        delete doc['_doc_id_rev'];
 
-        var mainRev = merge.winningRev(metadata);
-        var key = metadata.id + "::" + mainRev;
-        var index = txn.objectStore(BY_SEQ_STORE).index('_doc_id_rev');
-        index.get(key).onsuccess = function (docevent) {
-          var doc = docevent.target.result;
-          delete doc['_doc_id_rev'];
-
-          doc._rev = mainRev;
-          var change = opts.processChange(doc, metadata, opts);
-          change.seq = cursor.key;
-
-          // Dedupe the changes feed
-          var changeId = change.id, changeIdIndex = resultIndices[changeId];
-          if (changeIdIndex !== undefined) {
-            results[changeIdIndex] = null;
+        var change = opts.processChange(doc, metadata, opts);
+        change.seq = cursor.key;
+        if (filter(change)) {
+          numResults++;
+          if (returnDocs) {
+            results.push(change);
           }
-          results.push(change);
-          resultIndices[changeId] = results.length - 1;
-          cursor['continue']();
-        };
+          opts.onChange(change);
+        }
+        if (numResults !== limit) {
+          cursor.continue();
+        }
       };
     }
 
     function onTxnComplete() {
-      utils.processChanges(opts, dedupResults, last_seq);
+      if (!opts.continuous) {
+        opts.complete(null, {
+          results: results,
+          last_seq: lastSeq
+        });
+      }
     }
   };
 
@@ -876,6 +856,8 @@ function IdbPouch(opts, callback) {
     // https://developer.mozilla.org/en-US/docs/IndexedDB/IDBDatabase#close
     // "Returns immediately and closes the connection in a separate thread..."
     idb.close();
+    delete cachedDBs[name];
+    idb = null;
     callback();
   };
 
@@ -916,11 +898,6 @@ function IdbPouch(opts, callback) {
 
           count--;
           if (!count) {
-            if (metadata) {
-              var deleted = utils.isDeleted(metadata);
-              var local = utils.isLocalId(metadata.id);
-              metadata = utils.extend(true, {deletedOrLocal : (deleted || local) ? "1" : "0"}, metadata);
-            }
             txn.objectStore(DOC_STORE).put(metadata);
           }
         };
@@ -931,17 +908,113 @@ function IdbPouch(opts, callback) {
     };
   };
 
+  var cached = cachedDBs[name];
+
+  if (cached) {
+    idb = cached.idb;
+    blobSupport = cached.blobSupport;
+    instanceId = cached.instanceId;
+    idStored = cached.idStored;
+    process.nextTick(function () {
+      callback(null, api);
+    });
+    return;
+  }
+
+  var req = global.indexedDB.open(name, ADAPTER_VERSION);
+
+  if (!('openReqList' in IdbPouch)) {
+    IdbPouch.openReqList = {};
+  }
+  IdbPouch.openReqList[name] = req;
+
+  req.onupgradeneeded = function (e) {
+    var db = e.target.result;
+    if (e.oldVersion < 1) {
+      // initial schema
+      createSchema(db);
+    }
+    if (e.oldVersion < 2) {
+      // version 2 adds the deletedOrLocal index
+      addDeletedOrLocalIndex(e);
+    }
+  };
+
+  req.onsuccess = function (e) {
+
+    idb = e.target.result;
+
+    idb.onversionchange = function () {
+      idb.close();
+      delete cachedDBs[name];
+    };
+    idb.onabort = function () {
+      idb.close();
+      delete cachedDBs[name];
+    };
+
+    var txn = idb.transaction([META_STORE, DETECT_BLOB_SUPPORT_STORE],
+      'readwrite');
+
+    var req = txn.objectStore(META_STORE).get(META_STORE);
+
+    req.onsuccess = function (e) {
+
+      var checkSetupComplete = function () {
+        if (blobSupport === null || !idStored) {
+          return;
+        } else {
+          cachedDBs[name] = {
+            idb: idb,
+            blobSupport: blobSupport,
+            instanceId: instanceId,
+            idStored: idStored,
+            loaded: true
+          };
+          callback(null, api);
+        }
+      };
+
+      var meta = e.target.result || {id: META_STORE};
+      if (name  + '_id' in meta) {
+        instanceId = meta[name + '_id'];
+        idStored = true;
+        checkSetupComplete();
+      } else {
+        instanceId = utils.uuid();
+        meta[name + '_id'] = instanceId;
+        txn.objectStore(META_STORE).put(meta).onsuccess = function () {
+          idStored = true;
+          checkSetupComplete();
+        };
+      }
+
+      // detect blob support
+      try {
+        txn.objectStore(DETECT_BLOB_SUPPORT_STORE).put(utils.createBlob(),
+          "key");
+        blobSupport = true;
+      } catch (err) {
+        blobSupport = false;
+      } finally {
+        checkSetupComplete();
+      }
+    };
+  };
+
+  req.onerror = idbError(callback);
+
 }
 
 IdbPouch.valid = function () {
   return global.indexedDB && isModernIdb();
 };
 
-IdbPouch.destroy = utils.toPromise(function (name, opts, callback) {
+function destroy(name, opts, callback) {
   if (!('openReqList' in IdbPouch)) {
     IdbPouch.openReqList = {};
   }
-  IdbPouch.Changes.clearListeners(name);
+  IdbPouch.Changes.removeAllListeners(name);
 
   //Close open request for "name" database to fix ie delay.
   if (IdbPouch.openReqList[name] && IdbPouch.openReqList[name].result) {
@@ -954,10 +1027,24 @@ IdbPouch.destroy = utils.toPromise(function (name, opts, callback) {
     if (IdbPouch.openReqList[name]) {
       IdbPouch.openReqList[name] = null;
     }
-    callback();
+    if (utils.hasLocalStorage()) {
+      delete global.localStorage[name];
+    }
+    delete cachedDBs[name];
+    callback(null, { 'ok': true });
   };
 
   req.onerror = idbError(callback);
+}
+
+IdbPouch.destroy = utils.toPromise(function (name, opts, callback) {
+  taskQueue.queue.push({
+    action: function (thisCallback) {
+      destroy(name, opts, thisCallback);
+    },
+    callback: callback
+  });
+  applyNext();
 });
 
 IdbPouch.Changes = new utils.Changes();

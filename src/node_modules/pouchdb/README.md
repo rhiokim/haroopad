@@ -18,7 +18,7 @@ If you want to get involved then check out the [contributing guide](https://gith
 Example
 -------
 
-```
+```javascript
 var db = new PouchDB('dbname');
 
 db.put({
@@ -27,10 +27,8 @@ db.put({
  age: 66
 });
 
-db.changes({
-  onChange: function() {
-    console.log('Ch-Ch-Changes');
-  }
+db.changes().on('change', function() {
+  console.log('Ch-Ch-Changes');
 });
 
 db.replicate.to('http://example.com/mydb');

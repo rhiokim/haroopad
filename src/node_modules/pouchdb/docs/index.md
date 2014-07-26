@@ -3,65 +3,125 @@ layout: default
 title: PouchDB, the JavaScript Database that Syncs!
 ---
 
-<h1 id="the_database_that_syncs">The Database that Syncs!</h1>
+<div class="intro">
 
-<div id="home1">
+  <div class="container">
 
-<section>
+    <div class="row">
 
-<p>PouchDB is an open-source JavaScript Database inspired by <a href="http://couchdb.apache.org/">Apache CouchDB</a> that is designed to run well within the browser.</p>
+      <div class='col-sm-6'>
 
-<p>PouchDB was created to help web developers build applications that work equally as well offline as they do online. It enables applications to store data locally while offline, and synchronize it with CouchDB and compatible servers when the application is back online, keeping the user's data in sync no matter where they next login.</p>
+        <h1>The Database that Syncs!</h1>
 
-<!--<ul id="news">
-  {% for post in site.posts %}
-    <li>
-      <small>{{ post.date | date_to_string }}</small>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-  {% endfor %}
-</ul>-->
+        <p>PouchDB is an open-source JavaScript database inspired by <a href="http://couchdb.apache.org/">Apache CouchDB</a> that is designed to run well within the browser.</p>
 
-</section>
+        <p>PouchDB was created to help web developers build applications that work as well offline as they do online.<br>
+        <p>It enables applications to store data locally while offline, then synchronize it with CouchDB and compatible servers when the application is back online, keeping the user's data in sync no matter where they next login.</p>
 
-<section>
+        <a href="{{ site.baseurl }}/learn.html" class="btn btn-primary btn-lg">Learn more</a>
 
-{% highlight js linenos=table %}
-var db = new PouchDB('dbname');
+      </div>
 
-db.put({
- _id: 'dave@gmail.com',
- name: 'David',
- age: 66
-});
+      <div class='col-sm-6'>
 
-db.changes({
-  onChange: function() {
+  {% highlight js %}
+  var db = new PouchDB('dbname');
+
+  db.put({
+   _id: 'dave@gmail.com',
+   name: 'David',
+   age: 67
+  });
+
+  db.changes().on('change', function() {
     console.log('Ch-Ch-Changes');
-  }
-});
+  });
 
-db.replicate.to('http://example.com/mydb');
-{% endhighlight %}
+  db.replicate.to('http://example.com/mydb');
+  {% endhighlight %}
 
-</section></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="infoblocks">
+
+  <div class="container">
+
+    <div class='row'>
 
 
-<div id="home2">
+      <div class='block col-sm-6 col-md-3'>
 
-<section>
-  <h2>Cross Browser</h2>
-  Works in Firefox, Chrome, Opera, Safari, IE and Node.js
-</section>
+        <div class="icon icon-node"></div>
 
-<section>
-  <h2>Lightweight</h2>
-  PouchDB is just a script tag and 25KB(gzipped) away in the browser, or<br /> <code>$ npm install pouchdb</code> away
-  in node.
-</section>
+        <h3>Cross Browser</h3>
+        <p>Works in Firefox, Chrome, Opera, Safari, IE and Node.js</p>
 
-<section id="learn-more">
-  <h2><a href="learn.html">Learn More &raquo;</a></h2>
-</section>
+      </div>
+
+      <div class='block col-sm-6 col-md-3'>
+
+        <div class="icon icon-light"></div>
+
+        <h3>Lightweight</h3>
+        <p>PouchDB is just a script tag and 34KB (gzipped) away in the browser, or <code>$ npm install pouchdb</code> away
+        in Node.</p>
+
+      </div>
+
+      <div class='block col-sm-6 col-md-3'>
+
+        <div class="icon icon-learn"></div>
+
+        <h3>Easy to Learn</h3>
+        <p>Requires some programming knowledge, however PouchDB is a piece of cake to learn.</p>
+
+      </div>
+
+      <div class='block col-sm-6 col-md-3'>
+
+        <div class="icon icon-open"></div>
+
+        <h3>Open Source</h3>
+        <p>Everything is developed out in the open on Github, contributors always welcome!</p>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="blog">
+
+  <div class="container">
+
+    <h3>Latest</h3>
+
+        <div class="row">
+
+{% for post in site.posts limit:2 %}
+
+<div class="col-md-6">
+
+
+  <p><a class='h4' href='{{ site.baseurl }}{{ post.url }}'>{{ post.title }}</a></p>
+
+{% include post_details.html %}
+
+  </div>
+
+{% endfor %}
+
+   </div>
+
+   <a class="btn btn-primary btn-lg" href="/blog.html">View more</a>
+
+  </div>
 
 </div>

@@ -4,6 +4,10 @@ var utils = require('./utils');
 var merge = require('./merge');
 var errors = require('./deps/errors');
 var EventEmitter = require('events').EventEmitter;
+var upsert = require('./deps/upsert');
+var Changes = require('./changes');
+var Promise = utils.Promise;
+
 /*
  * A generic pouch adapter
  */
@@ -56,8 +60,43 @@ function computeHeight(revs) {
   });
   return height;
 }
+
+function allDocsKeysQuery(api, opts, callback) {
+  var keys =  ('limit' in opts) ?
+      opts.keys.slice(opts.skip, opts.limit + opts.skip) :
+      (opts.skip > 0) ? opts.keys.slice(opts.skip) : opts.keys;
+  if (opts.descending) {
+    keys.reverse();
+  }
+  if (!keys.length) {
+    return api._allDocs({limit: 0}, callback);
+  }
+  var finalResults = {
+    offset: opts.skip
+  };
+  return Promise.all(keys.map(function (key, i) {
+    var subOpts = utils.extend(true, {key: key, deleted: 'ok'}, opts);
+    ['limit', 'skip', 'keys'].forEach(function (optKey) {
+      delete subOpts[optKey];
+    });
+    return new Promise(function (resolve, reject) {
+      api._allDocs(subOpts, function (err, res) {
+        if (err) {
+          return reject(err);
+        }
+        finalResults.total_rows = res.total_rows;
+        resolve(res.rows[0] || {key: key, error: 'not_found'});
+      });
+    });
+  })).then(function (results) {
+    finalResults.rows = results;
+    return finalResults;
+  });
+}
+
 utils.inherits(AbstractPouchDB, EventEmitter);
 module.exports = AbstractPouchDB;
+
 function AbstractPouchDB() {
   var self = this;
   EventEmitter.call(this);
@@ -87,6 +126,7 @@ function AbstractPouchDB() {
       }
     };
   };
+
   var listeners = 0, changes;
   var eventNames = ['change', 'delete', 'create', 'update'];
   this.on('newListener', function (eventName) {
@@ -105,7 +145,7 @@ function AbstractPouchDB() {
       conflicts: true,
       include_docs: true,
       continuous: true,
-      since: 'latest',
+      since: 'now',
       onChange: function (change) {
         if (change.seq <= lastChange) {
           return;
@@ -134,7 +174,9 @@ function AbstractPouchDB() {
     changes.cancel();
   });
 }
-AbstractPouchDB.prototype.post = utils.toPromise(function (doc, opts, callback) {
+
+AbstractPouchDB.prototype.post =
+  utils.adapterFun('post', function (doc, opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;
     opts = {};
@@ -142,26 +184,27 @@ AbstractPouchDB.prototype.post = utils.toPromise(function (doc, opts, callback) 
   if (typeof doc !== 'object' || Array.isArray(doc)) {
     return callback(errors.NOT_AN_OBJECT);
   }
-  return this.bulkDocs({docs: [doc]}, opts,
+  this.bulkDocs({docs: [doc]}, opts,
       this.autoCompact(yankError(callback)));
 });
 
-AbstractPouchDB.prototype.put = utils.toPromise(function () {
-  var args = Array.prototype.slice.call(arguments);
-  var temp, temptype, doc, id, opts, callback;
-  doc = args.shift();
+AbstractPouchDB.prototype.put =
+  utils.adapterFun('put', utils.getArguments(function (args) {
+  var temp, temptype, opts, callback;
+  var doc = args.shift();
+  var id = '_id' in doc;
   if (typeof doc !== 'object' || Array.isArray(doc)) {
     callback = args.pop();
     return callback(errors.NOT_AN_OBJECT);
   }
-  doc = utils.extend(true, {}, doc);
+  doc = utils.clone(doc);
   while (true) {
     temp = args.shift();
     temptype = typeof temp;
     if (temptype === "string" && !id) {
       doc._id = temp;
       id = true;
-    } else if (temptype === "string" && id) {
+    } else if (temptype === "string" && id && !('_rev' in doc)) {
       doc._rev = temp;
     } else if (temptype === "object") {
       opts = temp;
@@ -177,15 +220,13 @@ AbstractPouchDB.prototype.put = utils.toPromise(function () {
   if (error) {
     return callback(error);
   }
-  return this.bulkDocs({docs: [doc]}, opts,
+  this.bulkDocs({docs: [doc]}, opts,
       this.autoCompact(yankError(callback)));
-});
+}));
 
-AbstractPouchDB.prototype.putAttachment = utils.toPromise(function (docId, attachmentId, rev, blob, type, callback) {
-  if (!this.taskqueue.isReady) {
-    this.taskqueue.addTask('putAttachment', arguments);
-    return;
-  }
+AbstractPouchDB.prototype.putAttachment =
+  utils.adapterFun('putAttachment', function (docId, attachmentId, rev,
+                                              blob, type, callback) {
   var api = this;
   if (typeof type === 'function') {
     callback = type;
@@ -205,30 +246,28 @@ AbstractPouchDB.prototype.putAttachment = utils.toPromise(function (docId, attac
       content_type: type,
       data: blob
     };
-    api.put(doc, callback);
+    return api.put(doc);
   }
 
-  api.get(docId, function (err, doc) {
-    // create new doc
-    if (err && err.error === errors.MISSING_DOC.error) {
-      createAttachment({_id: docId});
-      return;
-    }
-    if (err) {
-      callback(err);
-      return;
-    }
-
+  return api.get(docId).then(function (doc) {
     if (doc._rev !== rev) {
-      callback(errors.REV_CONFLICT);
-      return;
+      throw errors.REV_CONFLICT;
     }
 
-    createAttachment(doc);
+    return createAttachment(doc);
+  }, function (err) {
+     // create new doc
+    if (err.error === errors.MISSING_DOC.error) {
+      return createAttachment({_id: docId});
+    } else {
+      throw err;
+    }
   });
 });
 
-AbstractPouchDB.prototype.removeAttachment = utils.toPromise(function (docId, attachmentId, rev, callback) {
+AbstractPouchDB.prototype.removeAttachment =
+  utils.adapterFun('removeAttachment', function (docId, attachmentId, rev,
+                                                 callback) {
   var self = this;
   self.get(docId, function (err, obj) {
     if (err) {
@@ -250,27 +289,33 @@ AbstractPouchDB.prototype.removeAttachment = utils.toPromise(function (docId, at
   });
 });
 
-AbstractPouchDB.prototype.remove = utils.toPromise(function (doc, opts, callback) {
+AbstractPouchDB.prototype.remove =
+  utils.adapterFun('remove', function (doc, opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;
     opts = {};
-  }
-  if (opts === undefined) {
+  } else if (typeof opts === 'string') {
+    doc = {
+      _id: doc,
+      _rev: opts
+    };
+  } else if (opts === undefined) {
     opts = {};
   }
-  opts = utils.extend(true, {}, opts);
+  opts = utils.clone(opts);
   opts.was_delete = true;
   var newDoc = {_id: doc._id, _rev: doc._rev};
   newDoc._deleted = true;
-  return this.bulkDocs({docs: [newDoc]}, opts, yankError(callback));
+  this.bulkDocs({docs: [newDoc]}, opts, yankError(callback));
 });
 
-AbstractPouchDB.prototype.revsDiff = utils.toPromise(function (req, opts, callback) {
+AbstractPouchDB.prototype.revsDiff =
+  utils.adapterFun('revsDiff', function (req, opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
-  opts = utils.extend(true, {}, opts);
+  opts = utils.clone(opts);
   var ids = Object.keys(req);
   var count = 0;
   var missing = {};
@@ -326,7 +371,8 @@ AbstractPouchDB.prototype.revsDiff = utils.toPromise(function (req, opts, callba
 // compact one document and fire callback
 // by compacting we mean removing all revisions which
 // are further from the leaf in revision tree than max_height
-AbstractPouchDB.prototype.compactDocument = function (docId, max_height, callback) {
+AbstractPouchDB.prototype.compactDocument =
+  function (docId, max_height, callback) {
   var self = this;
   this._getRevisionTree(docId, function (err, rev_tree) {
     if (err) {
@@ -354,7 +400,8 @@ AbstractPouchDB.prototype.compactDocument = function (docId, max_height, callbac
 
 // compact the whole database using single document
 // compaction
-AbstractPouchDB.prototype.compact = utils.toPromise(function (opts, callback) {
+AbstractPouchDB.prototype.compact =
+  utils.adapterFun('compact', function (opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;
     opts = {};
@@ -381,12 +428,10 @@ AbstractPouchDB.prototype.compact = utils.toPromise(function (opts, callback) {
   }});
 });
 
-/* Begin api wrappers. Specific functionality to storage belongs in the _[method] */
-AbstractPouchDB.prototype.get = utils.toPromise(function (id, opts, callback) {
-  if (!this.taskqueue.isReady) {
-    this.taskqueue.addTask('get', arguments);
-    return;
-  }
+/* Begin api wrappers. Specific functionality to storage belongs in the 
+   _[method] */
+AbstractPouchDB.prototype.get =
+  utils.adapterFun('get', function (id, opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;
     opts = {};
@@ -403,7 +448,9 @@ AbstractPouchDB.prototype.get = utils.toPromise(function (id, opts, callback) {
     }
     // order with open_revs is unspecified
     leaves.forEach(function (leaf) {
-      self.get(id, {rev: leaf, revs: opts.revs, attachments: opts.attachments}, function (err, doc) {
+      self.get(id,
+               {rev: leaf, revs: opts.revs, attachments: opts.attachments},
+               function (err, doc) {
         if (!err) {
           result.push({ok: doc});
         } else {
@@ -451,12 +498,16 @@ AbstractPouchDB.prototype.get = utils.toPromise(function (id, opts, callback) {
   }
 
   return this._get(id, opts, function (err, result) {
-    opts = utils.extend(true, {}, opts);
+    opts = utils.clone(opts);
     if (err) {
       return callback(err);
     }
 
     var doc = result.doc;
+    if (!doc) {
+      // a smoke test for something being very wrong
+      return callback(new Error('no doc!'));
+    }
     var metadata = result.metadata;
     var ctx = result.ctx;
 
@@ -474,8 +525,10 @@ AbstractPouchDB.prototype.get = utils.toPromise(function (id, opts, callback) {
           .indexOf(doc._rev.split('-')[1]) !== -1;
       });
 
-      path.ids.splice(path.ids.map(function (x) {return x.id; })
-                      .indexOf(doc._rev.split('-')[1]) + 1);
+      var indexOfRev = path.ids.map(function (x) {return x.id; })
+        .indexOf(doc._rev.split('-')[1]) + 1;
+      var howMany = path.ids.length - indexOfRev;
+      path.ids.splice(indexOfRev, howMany);
       path.ids.reverse();
 
       if (opts.revs) {
@@ -509,7 +562,8 @@ AbstractPouchDB.prototype.get = utils.toPromise(function (id, opts, callback) {
         return callback(null, doc);
       }
       Object.keys(attachments).forEach(function (key) {
-        this._getAttachment(attachments[key], {encode: true, ctx: ctx}, function (err, data) {
+        this._getAttachment(attachments[key],
+                            {encode: true, ctx: ctx}, function (err, data) {
           doc._attachments[key].data = data;
           if (!--count) {
             callback(null, doc);
@@ -529,17 +583,15 @@ AbstractPouchDB.prototype.get = utils.toPromise(function (id, opts, callback) {
   });
 });
 
-AbstractPouchDB.prototype.getAttachment = utils.toPromise(function (docId, attachmentId, opts, callback) {
-  if (!this.taskqueue.isReady) {
-    this.taskqueue.addTask('getAttachment', arguments);
-    return;
-  }
+AbstractPouchDB.prototype.getAttachment =
+  utils.adapterFun('getAttachment', function (docId, attachmentId, opts,
+                                              callback) {
   var self = this;
   if (opts instanceof Function) {
     callback = opts;
     opts = {};
   }
-  opts = utils.extend(true, {}, opts);
+  opts = utils.clone(opts);
   this._get(docId, opts, function (err, res) {
     if (err) {
       return callback(err);
@@ -553,202 +605,67 @@ AbstractPouchDB.prototype.getAttachment = utils.toPromise(function (docId, attac
   });
 });
 
-AbstractPouchDB.prototype.allDocs = utils.toPromise(function (opts, callback) {
-  if (!this.taskqueue.isReady) {
-    this.taskqueue.addTask('allDocs', arguments);
-    return;
-  }
+AbstractPouchDB.prototype.allDocs =
+  utils.adapterFun('allDocs', function (opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
-  opts = utils.extend(true, {}, opts);
+  opts = utils.clone(opts);
+  opts.skip = typeof opts.skip !== 'undefined' ? opts.skip : 0;
   if ('keys' in opts) {
-    var incompatibleOpt = ['startkey', 'endkey', 'key'].filter(function (incompatibleOpt) {
+    if (!Array.isArray(opts.keys)) {
+      return callback(new TypeError('options.keys must be an array'));
+    }
+    var incompatibleOpt =
+      ['startkey', 'endkey', 'key'].filter(function (incompatibleOpt) {
       return incompatibleOpt in opts;
     })[0];
     if (incompatibleOpt) {
       callback(errors.error(errors.QUERY_PARSE_ERROR,
-        'Query parameter `' + incompatibleOpt + '` is not compatible with multi-get'
+        'Query parameter `' + incompatibleOpt +
+        '` is not compatible with multi-get'
       ));
       return;
     }
-  }
-  if (typeof opts.skip === 'undefined') {
-    opts.skip = 0;
+    if (this.type() !== 'http') {
+      return allDocsKeysQuery(this, opts, callback);
+    }
   }
 
   return this._allDocs(opts, callback);
 });
 
-function processChange(doc, metadata, opts) {
-  var changeList = [{rev: doc._rev}];
-  if (opts.style === 'all_docs') {
-    changeList = merge.collectLeaves(metadata.rev_tree)
-    .map(function (x) { return {rev: x.rev}; });
+AbstractPouchDB.prototype.changes = function (opts, callback) {
+  if (typeof opts === 'function') {
+    callback = opts;
+    opts = {};
   }
-  var change = {
-    id: metadata.id,
-    changes: changeList,
-    doc: doc
-  };
-
-  if (utils.isDeleted(metadata, doc._rev)) {
-    change.deleted = true;
-  }
-  if (opts.conflicts) {
-    change.doc._conflicts = merge.collectConflicts(metadata);
-    if (!change.doc._conflicts.length) {
-      delete change.doc._conflicts;
-    }
-  }
-  return change;
-}
-AbstractPouchDB.prototype.changes = function (opts) {
-  if (!this.taskqueue.isReady) {
-    var task = this.taskqueue.addTask('changes', arguments);
-    return {
-      cancel: function () {
-        if (task.task) {
-          return task.task.cancel();
-        }
-        task.parameters[0].aborted = true;
-      }
-    };
-  }
-  var api = this;
-  opts = utils.extend(true, {}, opts);
-  opts.processChange = processChange;
-
-  if (!opts.since) {
-    opts.since = 0;
-  }
-  if (opts.since === 'latest') {
-    var changes;
-    api.info(function (err, info) {
-      if (!opts.aborted) {
-        opts.since = info.update_seq  - 1;
-        changes = api.changes(opts);
-      }
-    });
-    // Return a method to cancel this method from processing any more
-    return {
-      cancel: function () {
-        if (changes) {
-          return changes.cancel();
-        }
-        opts.aborted = true;
-      }
-    };
-  }
-
-  if (opts.filter && typeof opts.filter === 'string') {
-    if (opts.filter === '_view') {
-      if (opts.view && typeof opts.view === 'string') {
-        // fetch a view from a design doc, make it behave like a filter
-        var viewName = opts.view.split('/');
-        api.get('_design/' + viewName[0], function (err, ddoc) {
-          if (ddoc && ddoc.views && ddoc.views[viewName[1]]) {
-            /*jshint evil: true */
-            var filter = eval('(function () {' +
-                              '  return function (doc) {' +
-                              '    var emitted = false;' +
-                              '    var emit = function (a, b) {' +
-                              '      emitted = true;' +
-                              '    };' +
-                              '    var view = ' + ddoc.views[viewName[1]].map + ';' +
-                              '    view(doc);' +
-                              '    if (emitted) {' +
-                              '      return true;' +
-                              '    }' +
-                              '  }' +
-                              '})()');
-            if (!opts.aborted) {
-              opts.filter = filter;
-              api.changes(opts);
-            }
-          } else {
-            var msg = ddoc.views ? 'missing json key: ' + viewName[1] :
-              'missing json key: views';
-            err = err || errors.error(errors.MISSING_DOC, msg);
-            opts.complete(err);
-          }
-        });
-      } else {
-        var err = errors.error(errors.BAD_REQUEST,
-                              '`view` filter parameter is not provided.');
-        opts.complete(err);
-      }
-    } else {
-      // fetch a filter from a design doc
-      var filterName = opts.filter.split('/');
-      api.get('_design/' + filterName[0], function (err, ddoc) {
-        if (ddoc && ddoc.filters && ddoc.filters[filterName[1]]) {
-          /*jshint evil: true */
-          var filter = eval('(function () { return ' +
-                            ddoc.filters[filterName[1]] + ' })()');
-          if (!opts.aborted) {
-            opts.filter = filter;
-            api.changes(opts);
-          }
-        } else {
-          var msg = (ddoc && ddoc.filters) ? 'missing json key: ' + filterName[1]
-            : 'missing json key: filters';
-          err = err || errors.error(errors.MISSING_DOC, msg);
-          opts.complete(err);
-        }
-      });
-    }
-    // Return a method to cancel this method from processing any more
-    return {
-      cancel: function () {
-        opts.complete(null, {status: 'cancelled'});
-        opts.complete = null;
-        opts.aborted = true;
-      }
-    };
-  }
-
-  if (!('descending' in opts)) {
-    opts.descending = false;
-  }
-
-  // 0 and 1 should return 1 document
-  opts.limit = opts.limit === 0 ? 1 : opts.limit;
-  return this._changes(opts);
+  return new Changes(this, opts, callback);
 };
 
-AbstractPouchDB.prototype.close = utils.toPromise(function (callback) {
-  if (!this.taskqueue.isReady) {
-    this.taskqueue.addTask('close', arguments);
-    return;
-  }
+AbstractPouchDB.prototype.close =
+  utils.adapterFun('close', function (callback) {
+  this._closed = true;
   return this._close(callback);
 });
 
-AbstractPouchDB.prototype.info = utils.toPromise(function (callback) {
-  if (!this.taskqueue.isReady) {
-    this.taskqueue.addTask('info', arguments);
-    return;
-  }
+AbstractPouchDB.prototype.info = utils.adapterFun('info', function (callback) {
   var self = this;
   this._info(function (err, info) {
     if (err) {
       return callback(err);
     }
     var len = self.prefix.length;
-    if (info.db_name.length > len && info.db_name.slice(0, len) === self.prefix) {
+    if (info.db_name.length > len &&
+        info.db_name.slice(0, len) === self.prefix) {
       info.db_name = info.db_name.slice(len);
     }
     callback(null, info);
   });
 });
 
-AbstractPouchDB.prototype.id = utils.toPromise(function (callback) {
-  if (!this.taskqueue.isReady) {
-    this.taskqueue.addTask('id', arguments);
-    return;
-  }
+AbstractPouchDB.prototype.id = utils.adapterFun('id', function (callback) {
   return this._id(callback);
 });
 
@@ -756,27 +673,23 @@ AbstractPouchDB.prototype.type = function () {
   return (typeof this._type === 'function') ? this._type() : this.adapter;
 };
 
-AbstractPouchDB.prototype.bulkDocs = utils.toPromise(function (req, opts, callback) {
-  if (!this.taskqueue.isReady) {
-    this.taskqueue.addTask('bulkDocs', arguments);
-    return;
-  }
+AbstractPouchDB.prototype.bulkDocs =
+  utils.adapterFun('bulkDocs', function (req, opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;
     opts = {};
   }
-  if (!opts) {
-    opts = {};
-  } else {
-    opts = utils.extend(true, {}, opts);
+
+  opts = utils.clone(opts);
+
+  if (Array.isArray(req)) {
+    req = {
+      docs: req
+    };
   }
 
-  if (!req || !req.docs) {
+  if (!req || !req.docs || !Array.isArray(req.docs)) {
     return callback(errors.MISSING_BULK_DOCS);
-  }
-
-  if (!Array.isArray(req.docs)) {
-    return callback(errors.QUERY_PARSE_ERROR);
   }
 
   for (var i = 0; i < req.docs.length; ++i) {
@@ -785,7 +698,7 @@ AbstractPouchDB.prototype.bulkDocs = utils.toPromise(function (req, opts, callba
     }
   }
 
-  req = utils.extend(true, {}, req);
+  req = utils.clone(req);
   if (!('new_edits' in opts)) {
     if ('new_edits' in req) {
       opts.new_edits = req.new_edits;
@@ -795,4 +708,24 @@ AbstractPouchDB.prototype.bulkDocs = utils.toPromise(function (req, opts, callba
   }
 
   return this._bulkDocs(req, opts, this.autoCompact(callback));
+});
+
+AbstractPouchDB.prototype.registerDependentDatabase =
+  utils.adapterFun('registerDependentDatabase', function (dependentDb,
+                                                          callback) {
+  var depDB = new this.constructor(dependentDb, {adapter: this._adapter});
+  function diffFun(doc) {
+    doc.dependentDbs = doc.dependentDbs || {};
+    if (doc.dependentDbs[dependentDb]) {
+      return false; // no update required
+    }
+    doc.dependentDbs[dependentDb] = true;
+    return doc;
+  }
+  upsert(this, '_local/_pouch_dependentDbs', diffFun, function (err) {
+    if (err) {
+      return callback(err);
+    }
+    return callback(null, {db: depDB});
+  });
 });

@@ -67,12 +67,21 @@ To veto (remove) the current change call `add(false)`.
 
 `db.hooks.pre` returns a function that will remove the hook when called.
 
+#### unsafe mode
+
+normally, pre hooks prevent you from inserting into the hooked range
+when the hook is triggered. However, sometimes you do need to do this.
+In those cases, pass in a range with `{start: START, end: END, safe: false}`
+and level-hooks will not error. If you use this option, your hook must
+avoid triggering in a loop itself.
+
 ### rm = db.hooks.post (range?, hook)
 
 Post hooks do not offer any chance to change the value.
 but do take a range option, just like `pre`
 
 `db.hooks.post` returns a function that will remove the hook when called.
+
 
 ## License
 
