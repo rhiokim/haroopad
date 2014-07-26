@@ -83,15 +83,15 @@ define([
 				return;
 			}
 
-			top = top < 20 ? 20 : top;
-			left = left < 20 ? 20 : left;
+			top = top < 20 ? 40 : top;
+			left = left < 20 ? 40 : left;
 
 			if (config.height + top > window.screen.height) {
-				top = 20;
+				top = 40;
 			}
 
 			if (config.width + left > window.screen.width) {
-				left = 20;
+				left = 40;
 			}
 
 			if (realCount > 1) {
