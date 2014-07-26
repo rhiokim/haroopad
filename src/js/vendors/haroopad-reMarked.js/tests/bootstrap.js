@@ -16,5 +16,7 @@ var list = [
 	"Resource-Tree",
 	"TaskList",
 	"tables",
-	"tables2"
+	"tables2",
+	"inline-whitespace",
+	"empty_href"
 ];

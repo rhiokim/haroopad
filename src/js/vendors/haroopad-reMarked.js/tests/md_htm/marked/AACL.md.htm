@@ -120,8 +120,8 @@ class Model_Post extends Sprig_AACL
             }
         }
     }
-}</code></pre>
-<p>As you have probably guessed, <code>$user</code> is populated by the logged in user object when the rule is evaluated so conditions allow a neat 
+}
+</code></pre><p>As you have probably guessed, <code>$user</code> is populated by the logged in user object when the rule is evaluated so conditions allow a neat 
 and simple way of adding fine-grained user/resource specific rules in a general way.</p>
 <h3>AACL Rules</h3>
 <p>Once you have some Controllers, Models or other objects defined as AACL_Resources, you can grant access to specific user roles.</p>
@@ -162,8 +162,8 @@ AACL::grant(&#39;login&#39;, &#39;m:post&#39;, &#39;view&#39;);                 
 AACL::grant(&#39;login&#39;, &#39;m:post&#39;, &#39;edit&#39;, &#39;is_author&#39;);    // ... but only edit their own
 
 AACL::grant(&#39;sales&#39;, &#39;m:page.32&#39;, &#39;edit&#39;);                // Sales team can edit page with ID 32 (ths is probably vital 
-                                                        // for one of their campaigns...) but no other pages</code></pre>
-<h4>Revoking access</h4>
+                                                        // for one of their campaigns...) but no other pages
+</code></pre><h4>Revoking access</h4>
 <p><code>AACL::revoke()</code> is used to remove rules and accepts exactly the same arguments used to grant the rules. 
 Note that the arguments don&#39;t have to exactly match a defined rule to delete it. For example</p>
 <pre><code>AACL::grant(&#39;staff&#39;, &#39;m:post&#39;, &#39;edit&#39;);                    // 1
@@ -172,8 +172,8 @@ AACL::grant(&#39;staff&#39;, &#39;m:comment&#39;, &#39;delete&#39;);            
 
 AACL::revoke(&#39;staff&#39;, &#39;m:post&#39;, &#39;edit&#39;);                // Removes 1 from above
 AACL::revoke(&#39;staff&#39;, &#39;m:post&#39;);                        // Removes 1 AND 2 from above
-AACL::revoke(&#39;staff&#39;, &#39;*&#39;);                                // Removes all rules for &#39;staff&#39; (i.e. they now have access to nothing)</code></pre>
-<h4>Rule Specificity</h4>
+AACL::revoke(&#39;staff&#39;, &#39;*&#39;);                                // Removes all rules for &#39;staff&#39; (i.e. they now have access to nothing)
+</code></pre><h4>Rule Specificity</h4>
 <p>If you grant a rule which is <em>more</em> permissive than one or more rules that currently exist, the current rules will be automatically deleted since they are now logically useless.</p>
 <h3>Checking Permissions</h3>
 <p>One of the key requirements for this library is to make checking access rights as simple and clear as possible.</p>
@@ -205,8 +205,8 @@ AACL::revoke(&#39;staff&#39;, &#39;*&#39;);                                // Re
 
      // Check permission for other action
      AACL::check($this, &#39;other&#39;);
- }</code></pre>
-</li>
+ }
+</code></pre></li>
 </ul>
 <h4>Failing check()</h4>
 <p>If the user doesn&#39;t have access to the required object and action, AACL throws an exception which must be handled to resolve the issue.</p>
@@ -231,8 +231,8 @@ catch (AACL_Exception_403 $e)
 
 echo $request
         -&gt;send_headers()
-        -&gt;response;</code></pre>
-<h3>Listing Resources</h3>
+        -&gt;response;
+</code></pre><h3>Listing Resources</h3>
 <p>A major motivation for this library is to make it easy to create Rules using a UI. To facilitate this, all potential resources defined in the application can be found using
 <code>AACL::list_resources()</code>. This returns a multi-dimensional array listing all the resources and any actions or conditions they define.</p>
 <p>It works by scanning the file system and using reflection so in a big app this is likely to take some time. I feel that is not a big deal here though as it should only ever be done in 

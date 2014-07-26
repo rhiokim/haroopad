@@ -17,8 +17,8 @@
        ;  | |
        /  | |
  jgs  |___\_.\_
-      `-&quot;--&#39;---&#39;</code></pre>
-<h2>what is it?</h2>
+      `-&quot;--&#39;---&#39;
+</code></pre><h2>what is it?</h2>
 <p>pjax loads HTML from your server into the current page
 without a full reload. It&#39;s ajax with real permalinks,
 page titles, and a working back button that fully degrades.</p>
@@ -26,15 +26,19 @@ page titles, and a working back button that fully degrades.</p>
 <p>You can find a demo on <a href="http://pjax.heroku.com/">http://pjax.heroku.com/</a></p>
 <h2>three ways to pjax on the client side:</h2>
 <p>One. Functionally obtrusive, loading the href with ajax into data-pjax:</p>
-<pre><code class="lang-html">&lt;a href=&#39;/explore&#39; data-pjax=&#39;#main&#39;&gt;Explore&lt;/a&gt;</code></pre>
-<pre><code class="lang-js">$(&#39;a[data-pjax]&#39;).pjax()</code></pre>
+<pre><code class="lang-html">&lt;a href=&#39;/explore&#39; data-pjax=&#39;#main&#39;&gt;Explore&lt;/a&gt;
+</code></pre>
+<pre><code class="lang-js">$(&#39;a[data-pjax]&#39;).pjax()
+</code></pre>
 <p>Two. Slightly obtrusive, passing a container and binding an error handler:</p>
-<pre><code class="lang-html">&lt;a href=&#39;/explore&#39; class=&#39;js-pjax&#39;&gt;Explore&lt;/a&gt;</code></pre>
+<pre><code class="lang-html">&lt;a href=&#39;/explore&#39; class=&#39;js-pjax&#39;&gt;Explore&lt;/a&gt;
+</code></pre>
 <pre><code class="lang-js">$(&#39;.js-pjax&#39;).pjax(&#39;#main&#39;)
 
 $(&#39;#main&#39;).live(&#39;pjax:error&#39;, function(e, xhr, err) {
   $(&#39;.error&#39;).text(&#39;Something went wrong: &#39; + err)
-})</code></pre>
+})
+</code></pre>
 <p>Three. Unobtrusive, showing a &#39;loading&#39; spinner:</p>
 <pre><code class="lang-html">&lt;div id=&#39;main&#39;&gt;
   &lt;div class=&#39;loader&#39; style=&#39;display:none&#39;&gt;&lt;img src=&#39;spin.gif&#39;&gt;&lt;/div&gt;
@@ -42,10 +46,12 @@ $(&#39;#main&#39;).live(&#39;pjax:error&#39;, function(e, xhr, err) {
     &lt;a href=&#39;/explore&#39;&gt;Explore&lt;/a&gt;
     &lt;a href=&#39;/help&#39;&gt;Help&lt;/a&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+</code></pre>
 <pre><code class="lang-js">$(&#39;a&#39;).pjax(&#39;#main&#39;).live(&#39;click&#39;, function(){
   $(this).showLoader()
-})</code></pre>
+})
+</code></pre>
 <h2>$(link).pjax( container, options )</h2>
 <p>The <code>$(link).pjax()</code> function accepts a container, an options object,
 or both. The container MUST be a string selector - this is because we
@@ -53,18 +59,18 @@ cannot persist jQuery objects using the History API between page loads.</p>
 <p>The options are the same as jQuery&#39;s <code>$.ajax</code> options with the
 following additions:</p>
 <ul>
-<li><code>container</code>      - The String selector of the container to load the<pre><code>               reponse body. Must be a String.</code></pre>
-</li>
+<li><code>container</code>      - The String selector of the container to load the<pre><code>               reponse body. Must be a String.
+</code></pre></li>
 <li><code>clickedElement</code> - The element that was clicked to start the pjax call.</li>
 <li><code>push</code>           - Whether to pushState the URL. Default: true (of course)</li>
 <li><code>replace</code>        - Whether to replaceState the URL. Default: false</li>
 <li><code>timeout</code>        - pjax sets this low, &lt;1s. Set this higher if using a<pre><code>               custom error handler. It&#39;s ms, so something like
-               `timeout: 2000`</code></pre>
-</li>
+               `timeout: 2000`
+</code></pre></li>
 <li><code>fragment</code>       - A String selector that specifies a sub-element to<pre><code>               be pulled out of the response HTML and inserted
                into the `container`. Useful if the server always returns
-               full HTML pages.</code></pre>
-</li>
+               full HTML pages.
+</code></pre></li>
 </ul>
 <h2>$.pjax( options )</h2>
 <p>You can also just call <code>$.pjax</code> directly. It acts much like <code>$.ajax</code>, even
@@ -75,7 +81,8 @@ as well.</p>
 <pre><code class="lang-js">$.pjax({
   url: &#39;/authors&#39;,
   container: &#39;#main&#39;
-})</code></pre>
+})
+</code></pre>
 <p>Roughly translates into this ajax call:</p>
 <pre><code class="lang-js">$.ajax({
   url: &#39;/authors&#39;,
@@ -87,7 +94,8 @@ as well.</p>
     $(&#39;#main&#39;).html(data)
     history.pushState(null, $(data).filter(&#39;title&#39;).text(), &#39;/authors&#39;)
   })
-})</code></pre>
+})
+</code></pre>
 <h2>pjax on the server side</h2>
 <p>You&#39;ll want to give pjax requests a &#39;chrome-less&#39; version of your page.
 That is, the page without any layout.</p>
@@ -98,7 +106,8 @@ header to &#39;true&#39; when it makes an ajax request to make detecting it easy
   if request.headers[&#39;X-PJAX&#39;]
     render :layout =&gt; false
   end
-end</code></pre>
+end
+</code></pre>
 <p>Or as a before filter in application controller:</p>
 <pre><code class="lang-ruby">layout :set_layout
 
@@ -109,7 +118,8 @@ private
     else
       &quot;application&quot;
     end
-  end</code></pre>
+  end
+</code></pre>
 <p>Django: <a href="https://github.com/jacobian/django-pjax">https://github.com/jacobian/django-pjax</a></p>
 <p>Asp.Net MVC3: <a href="http://biasecurities.com/blog/2011/using-pjax-with-asp-net-mvc3/">http://biasecurities.com/blog/2011/using-pjax-with-asp-net-mvc3/</a></p>
 <h2>page titles</h2>
@@ -127,24 +137,26 @@ reponse body into:</p>
 <pre><code class="lang-js">$(&#39;a.pjax&#39;).pjax(&#39;#main&#39;)
 $(&#39;#main&#39;)
   .on(&#39;pjax:start&#39;, function() { $(&#39;#loading&#39;).show() })
-  .on(&#39;pjax:end&#39;,   function() { $(&#39;#loading&#39;).hide() })</code></pre>
+  .on(&#39;pjax:end&#39;,   function() { $(&#39;#loading&#39;).hide() })
+</code></pre>
 <p>Because these events bubble, you can also set them on the document:</p>
 <pre><code class="lang-js">$(&#39;a.pjax&#39;).pjax()
 $(document)
   .on(&#39;pjax:start&#39;, function() { $(&#39;#loading&#39;).show() })
-  .on(&#39;pjax:end&#39;,   function() { $(&#39;#loading&#39;).hide() })</code></pre>
+  .on(&#39;pjax:end&#39;,   function() { $(&#39;#loading&#39;).hide() })
+</code></pre>
 <p>In addition, custom events are added to complement <code>$.ajax</code>&#39;s
 callbacks.</p>
 <ul>
-<li><code>pjax:beforeSend</code> - Fired before the pjax request begins. Returning<pre><code>                false will abort the request.</code></pre>
-</li>
+<li><code>pjax:beforeSend</code> - Fired before the pjax request begins. Returning<pre><code>                false will abort the request.
+</code></pre></li>
 <li><code>pjax:complete</code>   - Fired after the pjax request finishes.</li>
 <li><code>pjax:success</code>    - Fired after the pjax request succeeds.</li>
-<li><code>pjax:error</code>      - Fired after the pjax request fails. Returning<pre><code>                false will prevent the the fallback redirect.</code></pre>
-</li>
+<li><code>pjax:error</code>      - Fired after the pjax request fails. Returning<pre><code>                false will prevent the the fallback redirect.
+</code></pre></li>
 <li><code>pjax:timeout</code>    - Fired if after timeout is reached. Returning<pre><code>                false will disable the fallback and will wait
-                indefinitely until the response returns.</code></pre>
-</li>
+                indefinitely until the response returns.
+</code></pre></li>
 </ul>
 <p><strong>CAUTION</strong> Callback handlers passed to <code>$.pjax</code> <strong>cannot</strong> be persisted
 across full page reloads. Its recommended you use custom events instead.</p>
@@ -156,9 +168,10 @@ across full page reloads. Its recommended you use custom events instead.</p>
 work normally) and <code>$.pjax({url:url})</code> calls will redirect to the given URL.</p>
 <h2>install it</h2>
 <pre><code>$ cd path/to/js
-$ wget https://github.com/defunkt/jquery-pjax/raw/master/jquery.pjax.js</code></pre>
-<p>Then, in your HTML:</p>
-<pre><code class="lang-html">&lt;script src=&quot;path/to/js/jquery.pjax.js&quot;&gt;&lt;/script&gt;</code></pre>
+$ wget https://github.com/defunkt/jquery-pjax/raw/master/jquery.pjax.js
+</code></pre><p>Then, in your HTML:</p>
+<pre><code class="lang-html">&lt;script src=&quot;path/to/js/jquery.pjax.js&quot;&gt;&lt;/script&gt;
+</code></pre>
 <p>Replace <code>path/to/js</code> with the path to your JavaScript directory,
 e.g. <code>public/javascripts</code>.</p>
 <h2>minimize it</h2>
@@ -166,4 +179,5 @@ e.g. <code>public/javascripts</code>.</p>
   -d output_info=compiled_code \
   -d compilation_level=SIMPLE_OPTIMIZATIONS \
   -d code_url=https://github.com/defunkt/jquery-pjax/raw/master/jquery.pjax.js \
-  http://closure-compiler.appspot.com/compile</code></pre>
+  http://closure-compiler.appspot.com/compile
+</code></pre>

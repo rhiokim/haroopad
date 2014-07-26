@@ -45,8 +45,8 @@
 <h2><a name="toc-technology-stack">Technology Stack</a></h2>
 <p>For simplicity reasons, Chaplin consists of plain HTML, CSS and JavaScript. However, the JavaScripts are originally written in the <a href="http://coffeescript.org/">CoffeeScript</a> meta-language. Most <code>.coffee</code> files contain CoffeeScript “class” declarations. In this repository, you will find <em>both</em> the original CoffeeScripts and the compiled JavaScripts. So there is no need to compile the CoffeeScripts in order to start the demo.</p>
 <p>If you would like to modify the CoffeeScripts, you can translate them JavaScript using the CoffeeScript compiler. After installing CoffeeScript, you might run this command:</p>
-<pre><code>coffee --bare --output js/ coffee/</code></pre>
-<p>The example application uses the following JavaScript libraries:</p>
+<pre><code>coffee --bare --output js/ coffee/
+</code></pre><p>The example application uses the following JavaScript libraries:</p>
 <ul>
 <li><a href="http://requirejs.org/">RequireJS</a> for lazy-loading of scripts and dependency management,</li>
 <li><a href="http://jquery.com/">jQuery</a> for DOM scripting and Ajax,</li>
@@ -57,8 +57,8 @@
 <p>We’re using RequireJS to define AMD modules and load JavaScript files automatically. However, the mentioned core libraries are not loaded using RequireJS, they are loaded with normal <code>script</code> elements synchronously. You might want to <a href="https://github.com/geddesign/wrap.js">wrap</a> jQuery, Backbone, Underscore and Handlebars as RequireJS modules to get the full AMD experience.</p>
 <p>In our real-world applications, we’re using several tools for compiling and packaging scripts, stylesheets and templates. On moviepilot.com, we’re using the <a href="http://guides.rubyonrails.org/asset_pipeline.html">Ruby on Rails 3.2 asset pipeline</a> together with Node.js to compile CoffeeScripts, Sass/Compass stylesheets as well as Handlebars templates on the server. On salon.io, we’re using <a href="http://brunch.io/">Brunch</a> which is based on Node.js.</p>
 <p>Since this example isn’t about building and deployment, it has no such dependencies. Nevertheless RequireJS allows to <a href="http://requirejs.org/docs/optimization.html">pre-build a package</a> with the initial modules. You might build a bootstrap package by running this command in the <code>/js</code> directory:</p>
-<pre><code>r.js -o name=application out=built.js paths.text=vendor/require-text-1.0.6 baseUrl=.</code></pre>
-<h2><a name="toc-example-application">The Example Application: Facebook Likes Browser</a></h2>
+<pre><code>r.js -o name=application out=built.js paths.text=vendor/require-text-1.0.6 baseUrl=.
+</code></pre><h2><a name="toc-example-application">The Example Application: Facebook Likes Browser</a></h2>
 <p>While traditional site login using e-mail and password is still around, single sign-on gained popularity. The example application features a client-side OAuth 2.0 login with <a href="https://developers.facebook.com/docs/reference/javascript/FB.login/">Facebook Connect</a>. Facebook is just a sample service provider. On moviepilot.com, we’re also using the <a href="http://code.google.com/p/google-api-javascript-client/">Google APIs Client Library</a>. We have experimented with <a href="https://dev.twitter.com/docs/anywhere/welcome">Twitter Anywhere</a> which provides a client-side login but doesn’t support OAuth 2.0. (Moviepilot.com allows you to log in with Twitter, but it’s an old-school OAuth 1.0 server-side login.)</p>
 <p>This example uses a Facebook application named “Chaplin Example App”. On login, you will be asked to grant access rights to this Facebook app. Of course this app will not post anything to Facebook on your behalf or publish/submit your personal data. You’re free to <a href="https://www.facebook.com/settings/?tab=applications">revoke access rights</a> at any time. You might easily <a href="https://developers.facebook.com/apps">create your own Facebook App</a> and change the app ID in <code>facebook.coffee</code>/<code>facebook.js</code>.</p>
 <p>The Facebook login only works if the app runs on the (nonexistent) domain <code>chaplin.moviepilot.com</code>. To access the application, follow these steps:</p>
@@ -90,28 +90,28 @@
 <p><a href="http://en.wikipedia.org/wiki/Publish/subscribe">Publish/Subscribe</a> (Pub/Sub) is a versatile pattern to ensure loose coupling of application modules. To inform other modules that something happened, a module doesn’t send messages directly (i.e. calling methods of specific objects). Instead, it publishes a message to a central channel without having to know who is listening. Other application modules might subscribe to these messages and react upon them.</p>
 <p>For simplicity, we borrow the functionality from the <code>Backbone.Events</code> mixin. The <code>subscribe</code>, <code>unsubscribe</code> and <code>publish</code> methods are simply aliases for <code>trigger</code>, <code>bind</code> and <code>unbind</code> of the <code>Backbone.Events</code> mixin.</p>
 <p>For example, several modules are interested in the user login event and subscribe to the <code>login</code> message. In practice, they load <code>mediator</code> as a dependency and register a callback function for the <code>login</code> event:</p>
-<pre><code>mediator.subscribe &#39;login&#39;, @doSomething</code></pre>
-<p>A Publish/Subscribe message consists of a name and optional data. The <code>SessionController</code> is in charge for the user login, so it publishes a message with the identifer <code>login</code> and the <code>user</code> object as additional data:</p>
+<pre><code>mediator.subscribe &#39;login&#39;, @doSomething
+</code></pre><p>A Publish/Subscribe message consists of a name and optional data. The <code>SessionController</code> is in charge for the user login, so it publishes a message with the identifer <code>login</code> and the <code>user</code> object as additional data:</p>
 <pre><code># Publish a global login event
-mediator.publish &#39;login&#39;, user</code></pre>
-<p>The second and all following arguments are passed as arguments to the handler functions.</p>
+mediator.publish &#39;login&#39;, user
+</code></pre><p>The second and all following arguments are passed as arguments to the handler functions.</p>
 <h2><a name="toc-router-and-route">Router and Route</a></h2>
 <p>The <code>Router</code> in this example application does not inherit from Backbone’s <code>Router</code>. In fact it’s an implementation of its own with several advantages over the standard Backbone <code>Router</code>.</p>
 <p>In Backbone’s concept, there are models and views, but no controllers. Backbone’s router maps routes to its <em>own methods</em>, so it’s serves two purposes. Our <code>Router</code> is just a router, it maps URLs to <em>separate controllers</em>, in particular controller actions. Just like Backbone’s standard router, we’re using an instance of <code>Backbone.History</code> in the background.</p>
 <p>Our <code>Router</code> does not have a <code>route</code> method, but a <code>match</code> method to create routes:</p>
-<pre><code>@match &#39;likes/:id&#39;, &#39;likes#show&#39;</code></pre>
-<p><code>match</code> works much like the Ruby on Rails counterpart since it creates a proper <code>params</code> hash. If a route matches, the corresponding <code>Route</code> object publishes a <code>matchRoute</code> event passing the route instance and the parameter hash.</p>
+<pre><code>@match &#39;likes/:id&#39;, &#39;likes#show&#39;
+</code></pre><p><code>match</code> works much like the Ruby on Rails counterpart since it creates a proper <code>params</code> hash. If a route matches, the corresponding <code>Route</code> object publishes a <code>matchRoute</code> event passing the route instance and the parameter hash.</p>
 <p>Additional fixed parameters and parameter constraints may be specified in the <code>match</code> call:</p>
-<pre><code>@match &#39;likes/:id&#39;, &#39;likes#show&#39;, constraints: { id: /^\d+$/ }, params: { foo: &#39;bar&#39; }</code></pre>
-<h2><a name="toc-controllers">The Controllers</a></h2>
+<pre><code>@match &#39;likes/:id&#39;, &#39;likes#show&#39;, constraints: { id: /^\d+$/ }, params: { foo: &#39;bar&#39; }
+</code></pre><h2><a name="toc-controllers">The Controllers</a></h2>
 <p>In our concept, a controller is the place where a model and associated views are instantiated. A controller is also in charge of model and view disposal once another controller takes over. Typically, a controller represents a screen of the application. There can be one current controller.</p>
 <p>There may be plenty of controllers for specific replaceable application modules, but few persistent meta-controllers with special views.</p>
 <h3>ApplicationController</h3>
 <p>The application controller instantiates common models/collections and views which are active the whole time (header, sidebars, footer and so on). Most importantly, it instantiates the <code>ApplicationView</code>.</p>
 <h3>ApplicationView</h3>
 <p>Between the router and the controllers, there’s the <code>ApplicationView</code> as a dispatcher. It allows switching between user interface modules by starting up specific controllers. To show a specific module, an app-wide <code>!startupController</code> event is published:</p>
-<pre><code>mediator.publish &#39;!startupController&#39;, &#39;controllerName&#39;, &#39;controllerAction&#39;, optionalParams</code></pre>
-<p>The <code>ApplicationView</code> handles the <code>!startupController</code> event. It creates a controller instance, calls the controller action and may perform a transition from the current to the new controller.</p>
+<pre><code>mediator.publish &#39;!startupController&#39;, &#39;controllerName&#39;, &#39;controllerAction&#39;, optionalParams
+</code></pre><p>The <code>ApplicationView</code> handles the <code>!startupController</code> event. It creates a controller instance, calls the controller action and may perform a transition from the current to the new controller.</p>
 <p>In addition, the <code>ApplicationView</code> changes the interface chrome on application-wide events like <code>login</code> and <code>logout</code>. It also handles the activation of application-internal links. That is, you just have to use a normal <code>&lt;a href=&quot;/foo&quot;&gt;</code> element to link to another application module.</p>
 <h3>Specific Module Controllers</h3>
 <p>By convention, there is a controller for each application module. A controller may provide several action methods like <code>index</code>, <code>show</code> and so on. These actions are called by <code>ApplicationView</code> when a route matches. In addition to specific actions, a controller might provide a <code>initialize</code> method which is called before a specific action.</p>
@@ -134,8 +134,8 @@ mediator.publish &#39;login&#39;, user</code></pre>
 
     show: (params) -&gt;
       @model = new Like { id: params.id }, { loadDetails: true }
-      @view = new FullLikeView model: @model</code></pre>
-<p>A typical controller has one model or collection and one associated view. They should be stored in the <code>model</code>/<code>collection</code> and <code>view</code> instance properties so they are disposed automatically on controller disposal.</p>
+      @view = new FullLikeView model: @model
+</code></pre><p>A typical controller has one model or collection and one associated view. They should be stored in the <code>model</code>/<code>collection</code> and <code>view</code> instance properties so they are disposed automatically on controller disposal.</p>
 <h2><a name="toc-models-and-collections">Models and Collections</a></h2>
 <p>We extended the standard Backbone models and collections with some new methods. <code>dispose</code> is the destructor for cleaning up. Our <code>Collection</code> also has <code>addAtomic</code> for adding several items while fireing a <code>reset</code> event, and <code>update</code> for updating a collection while fireing several <code>add</code>/<code>remove</code> events instead of a single <code>reset</code> event.</p>
 <p>Using these <code>Model</code> and <code>Collection</code> classes, we create a hierarchy of CoffeeScript classes. Many child classes override methods while calling <code>super</code>.</p>
@@ -159,25 +159,25 @@ mediator.publish &#39;login&#39;, user</code></pre>
 <p>For models and views, there are several wrapper methods for event handler registration. In contrast to the direct methods they will save memory because the handlers will be removed correctly once the model or view is disposed.</p>
 <h3>Global Publish/Subscribe Events</h3>
 <p>In models and views, there is a shortcut for subscribing to global events:</p>
-<pre><code>@subscribeEvent &#39;login&#39;, @doSomething</code></pre>
-<p>This method has the advantage of cancelling the subscription on model or view disposal.</p>
+<pre><code>@subscribeEvent &#39;login&#39;, @doSomething
+</code></pre><p>This method has the advantage of cancelling the subscription on model or view disposal.</p>
 <p>The <code>subscribeEvent</code> method has a counterpart <code>unsubscribeEvent</code>. These mehods are defined in the <code>Subscriber</code> mixin, which also provides the <code>unsubscribeAllEvents</code> method.</p>
 <h3>Model Events</h3>
 <p>In views, we don’t use the standard <code>@model.bind</code> method to register a handler for a model event. We use a memory-saving wrapper named <code>modelBind</code> instead.</p>
-<pre><code>@modelBind &#39;add&#39;, @doSomething</code></pre>
-<p>In a model, it’s fine to use <code>bind</code> directly as long as the handler is a method of the model itself.</p>
+<pre><code>@modelBind &#39;add&#39;, @doSomething
+</code></pre><p>In a model, it’s fine to use <code>bind</code> directly as long as the handler is a method of the model itself.</p>
 <p>A view also provides <code>modelUnbind</code> and <code>modelUnbindAll</code> for deregistering. The latter is called automatically on view disposal.</p>
-<pre><code>@modelUnbind &#39;add&#39;, @doSomething</code></pre>
-<h3>User Input Events</h3>
+<pre><code>@modelUnbind &#39;add&#39;, @doSomething
+</code></pre><h3>User Input Events</h3>
 <p>Most views handle user input by listening to DOM events. Backbone provides the <code>events</code> property to register event handlers declaratively. But this does not work nicely when views inherit from each other and a specific view needs to handle additional events. Therefore Backbone’s <code>events</code> object and <code>delegateEvents</code> aren’t used.</p>
 <p>Our <code>View</code> class provides the <code>delegate</code> method as a shortcut for <code>@$el.on</code>. It has the same signature as the jQuery 1.7 <code>on</code> method. Some examples:</p>
 <pre><code>@delegate &#39;click&#39;, &#39;.like-button&#39;, @like
-@delegate &#39;click&#39;, &#39;.close-button&#39;, @skip</code></pre>
-<p><code>delegate</code> registers the handler at the topmost DOM element of the view (<code>@el</code>) and catches events from nested elements using event bubbling. You can specify an optional selector to target nested elements.</p>
+@delegate &#39;click&#39;, &#39;.close-button&#39;, @skip
+</code></pre><p><code>delegate</code> registers the handler at the topmost DOM element of the view (<code>@el</code>) and catches events from nested elements using event bubbling. You can specify an optional selector to target nested elements.</p>
 <p>In addition, <code>delegate</code> automatically binds the handler to the view object, so <code>@</code>/<code>this</code> points to the view. This means <code>delegate</code> creates a wrapper function which acts as the handler. As a consequence, it’s currently not possible to unbind a specific handler. At the moment, we’re using <code>@$el.off</code> directly to unbind all handlers for an event type for a selector:</p>
 <pre><code>@$el.off &#39;click&#39;, &#39;.like-button&#39;
-@$el.off &#39;click&#39;, &#39;.close&#39;</code></pre>
-<p>This isn’t the best solution but acceptable for now since this doesn’t occur frequently in our application.</p>
+@$el.off &#39;click&#39;, &#39;.close&#39;
+</code></pre><p>This isn’t the best solution but acceptable for now since this doesn’t occur frequently in our application.</p>
 <h2><a name="toc-memory-management">Memory Management and Object Disposal</a></h2>
 <p>One of the core concerns of this architecture is a proper memory management. It seems there isn’t a broad discussion about garbage collection in JavaScript applications, but in fact it’s an important topic. Backbone provides little out of the box so we implemented it by hand: Every controller, model, collection and view cleans up after itself.</p>
 <p>Event handling creates references between objects. If a view listens for model changes, the model has a reference to a view method in its <code>_callbacks</code> list. View methods are often bound to the view instance using <code>_.bind()</code>, CoffeeScript’s <code>=&gt;</code> or such. When you register a <code>change</code> handler which is bound to the view, the view will remain in memory even if it was already detached from the DOM. The garbage collector can’t free their memory because of this reference.</p>
