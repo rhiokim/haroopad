@@ -128,8 +128,9 @@ define([
 			if (exports.actived.file.get('created_at').getTime() == exports.actived.file.get('updated_at').getTime()) {
 				exports.actived.file.set(file.toJSON());
 				exports.actived.file.doc.set(file.doc.toJSON());
-				exports.actived.file._tmpFile = file._tmpFile;
+				// exports.actived.file._tmpFile = file._tmpFile;
 				exports.actived.emit('file.opened', file);
+				file.close();
 				return;
 			}
 		}
@@ -139,7 +140,7 @@ define([
 		newWin.file = file || File.open();
 		newWin.created_at = new Date().getTime();
 		newWin._args = args || {};
-		
+
 		_add(newWin);
 
 		return newWin;

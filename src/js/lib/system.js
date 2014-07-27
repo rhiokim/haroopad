@@ -56,7 +56,10 @@
   
   /* cli arguments */
   global.argv = optimist.parse(gui.App.argv);
-  
+
+  /* temporary */
+  fs.mkdirsSync(global.PATHS.tmp);
+
   /* level db */
   fs.mkdirsSync(global.PATHS.db);
 

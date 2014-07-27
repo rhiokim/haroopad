@@ -17,12 +17,9 @@ define([
 		function checkTemporary() {
 			var tmpFile;
 
-			if (!fs.existsSync(appTmpDataPath)) {
-			  fs.mkdirSync(appTmpDataPath);
-			}
-
 			tmp.forEach(function(uid, idx) {
 				tmpFile = path.join(appTmpDataPath, uid);
+		
 				if (fs.existsSync(tmpFile)) {
 					var file = new FileModel({ fileEntry: tmpFile, tmp: true });
 					files.push(file);
