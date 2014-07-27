@@ -39,7 +39,8 @@
     theme_res_viewer: path.join(global.EXECPATH, 'Resources', 'Themes', 'viewer'),
     theme_dest_editor: path.join(global.App.dataPath, 'Themes', 'editor'),
     theme_dest_viewer: path.join(global.App.dataPath, 'Themes', 'viewer'),
-    db: path.join(global.App.dataPath, 'LevelDB')
+    db: path.join(global.App.dataPath, 'LevelDB'),
+    tmp: path.join(global.App.dataPath, '.tmp')
   };
 
   //add node main module path

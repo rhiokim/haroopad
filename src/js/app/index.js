@@ -43,14 +43,15 @@ i18n.init({
   };
 
   requirejs([
+    'db/DB',
     'context/Context',
     'mail/Mailer',
+    'file/File',
     'window/Window',
     'window/WindowManager',
-    'db/DB',
     'utils/UpdateNotifier',
     'math/Math'
-  ], function(Context, Mailer, Window, WindowMgr, DB, Updater) {
+  ], function(DB, Context, Mailer, FileMgr, Window, WindowMgr, Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
@@ -135,24 +136,9 @@ i18n.init({
           });
         }
       });
-    // if (gui.App.argv.length > 0) {
-    //   var file;
-      
-    //   switch(os) {
-    //     case 'windows':
-    //       file = gui.App.argv[0];
-    //     break;
-    //     case 'mac':
-    //       file = gui.App.argv[0];
-    //     break;
-    //     case 'linux':
-    //       file = gui.App.fullArgv.join(' ');  //it's bug
-    //     break;
-    //   }
-
-    //   WindowMgr.open(file);
     } else {
-      WindowMgr.open();
+      FileMgr.loadTemporary();
+      // WindowMgr.open();
     }
 
     //TODO not perfect
@@ -160,6 +146,7 @@ i18n.init({
     window.setTimeout(function() {
       window.ee.emit('check.version');
     }, 2000);
+
   });
 
 });

@@ -312,5 +312,4 @@ define([
     Preferences.show();
   });
 
-  File.loadTemporary();
 });

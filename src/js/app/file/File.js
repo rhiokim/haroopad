@@ -10,12 +10,12 @@ define([
 		var gui = require('nw.gui'),
 			win = gui.Window.get();
 
+		var tmp = TmpOpt.get('files') || [];
 		var files = [];
+		var appTmpDataPath = global.PATHS.tmp;
 
 		function checkTemporary() {
-			var tmp = TmpOpt.get('files') || [],
-				tmpFile,
-				appTmpDataPath = path.join(gui.App.dataPath, '.tmp');
+			var tmpFile;
 
 			if (!fs.existsSync(appTmpDataPath)) {
 			  fs.mkdirSync(appTmpDataPath);
@@ -41,15 +41,23 @@ define([
 			},
 
 			loadTemporary: function() {
+				var generalConf = store.get('General') || {
+					enableLastFileRestore: true
+				};
+
+				if (tmp.length == 0 || !generalConf.enableLastFileRestore) {
+					window.ee.emit('menu.file.new');
+					return;
+				}
+				
 				checkTemporary();
 			}
-		}
+		};
 
 		//disabled last file restore 
 		window.ee.on('clear.lastfiles', function() {
-			files.forEach(function(file) {
-				file.close();
-			});
+			fs.removeSync(appTmpDataPath);
+			TmpOpt.clearAll();
 		});
 
 		return fileApp;
