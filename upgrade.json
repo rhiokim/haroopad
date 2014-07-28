@@ -1,5 +1,5 @@
 {
-	"version": "0.12.0",
+	"version": "0.12.1",
 	"news": "http://pad.haroopress.com",
   "release": "http://pad.haroopress.com/page.html?f=release-notes",
 	"download": {
@@ -14,7 +14,7 @@
     "path": "rhiokim/haroopad-locales#supports"
   },
   "news": {
-    "url": "",
-    "expire": ""
+    "url": "https://raw.githubusercontent.com/rhiokim/haroopad/gh-pages/news/test.md",
+    "expire": ".5"
   }
 }
