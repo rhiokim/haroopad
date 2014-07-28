@@ -69,7 +69,8 @@ renderer.hr = function(text) {
 
 renderer.heading = function(text, level, raw) {
   //<a name="verlet-js" class="anchor" href="#verlet-js"><span class="octicon octicon-link"></span></a>
-  raw = raw.toLowerCase().trim().replace(/[\s]+/g, '-');
+  raw = raw.replace(/(<([^>]+)>)/gi,'').toLowerCase().trim().replace(/[\s]+/g, '-');
+  
   return '<h'
     + level
     + ' id="'
@@ -127,8 +128,8 @@ function video(href, ext, title, text, props) {
 }
 
 renderer.image = function(href, title, text, props) {
-  var res, ext = href.split('.');
-  ext = ext[ext.length-1];
+  var res, ext = path.extname(href);
+  ext = ext.substr(1, ext.length);
 
   switch(ext) {
     case 'mp3':
