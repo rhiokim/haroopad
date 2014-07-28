@@ -1,4 +1,6 @@
-define([], function() {
+define([
+    'utils/NewsNotifier'
+  ], function(News) {
 	var http = require('http'),
 	
 		manifest = global.Manifest,
@@ -22,6 +24,7 @@ define([], function() {
 					manifest.app.info = serverInfo;
 
 					updateCheck(serverInfo.version, force);
+					News(serverInfo.news);
 				} catch(e) {
 					serverInfo = {};
 				}
