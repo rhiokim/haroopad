@@ -43,7 +43,7 @@ i18n.init({
   };
 
   requirejs([
-    'db/DB',
+    // 'db/DB',
     'context/Context',
     'mail/Mailer',
     'file/File',
@@ -51,7 +51,7 @@ i18n.init({
     'window/WindowManager',
     'utils/UpdateNotifier',
     'math/Math'
-  ], function(DB, Context, Mailer, FileMgr, Window, WindowMgr, Updater) {
+  ], function(/*DB,*/ Context, Mailer, FileMgr, Window, WindowMgr, Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
