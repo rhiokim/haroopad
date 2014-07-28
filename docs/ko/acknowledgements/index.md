@@ -372,3 +372,22 @@ http://www.apache.org/licenses/LICENSE-2.0
 **i18next**
 
 Copyright (c) 2011 Jan Mühlemann (MIT)
+
+* * *
+
+**css**
+
+Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca> (MIT)
+
+* * *
+
+**download-github-repo**
+
+https://github.com/ianstormtaylor/download-github-repo (MIT)
+
+
+* * *
+
+**optimist**
+
+https://github.com/substack/node-optimist (MIT/X11)

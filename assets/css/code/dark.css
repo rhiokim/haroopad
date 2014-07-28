@@ -5,7 +5,9 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 */
 
 .hljs {
-  display: block; padding: 0.5em;
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
   background: #444;
 }
 
@@ -23,7 +25,7 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 
 .hljs,
 .hljs-subst {
-  color: #DDD;
+  color: #ddd;
 }
 
 .hljs-string,
@@ -38,7 +40,6 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 .ruby .hljs-symbol .hljs-string,
 .ruby .hljs-class .hljs-parent,
 .hljs-built_in,
-.sql .hljs-aggregate,
 .django .hljs-template_tag,
 .django .hljs-variable,
 .smalltalk .hljs-class,
@@ -57,7 +58,7 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 .tex .hljs-command,
 .hljs-prompt,
 .coffeescript .hljs-attribute {
-  color: #D88;
+  color: #d88;
 }
 
 .hljs-comment,
@@ -80,7 +81,6 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 .hljs-phpdoc,
 .haskell .hljs-type,
 .vbscript .hljs-built_in,
-.sql .hljs-aggregate,
 .rsl .hljs-built_in,
 .smalltalk .hljs-class,
 .diff .hljs-header,

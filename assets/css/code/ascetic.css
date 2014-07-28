@@ -5,8 +5,11 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 */
 
 .hljs {
-  display: block; padding: 0.5em;
-  background: white; color: black;
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: white;
+  color: black;
 }
 
 .hljs-string,
@@ -29,7 +32,7 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .hljs-javadoc,
 .hljs-deletion,
 .apache .hljs-sqbracket {
-  color: #CCC;
+  color: #ccc;
 }
 
 .hljs-keyword,

@@ -1,15 +1,17 @@
-/* Base16 Atelier Heath Light - Theme */
-/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/heath) */
-/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
-/* https://github.com/jmblog/color-themes-for-highlightjs */
+/*
+    Name:     Kimbie (dark)
+    Author:   Jan T. Sott
+    License:  Creative Commons Attribution-ShareAlike 4.0 Unported License
+    URL:      https://github.com/idleberg/Kimbie-highlight.js
+*/
 
-/* Atelier Heath Light Comment */
+/* Kimbie Comment */
 .hljs-comment,
 .hljs-title {
-  color: #776977;
+  color: #d6baad;
 }
 
-/* Atelier Heath Light Red */
+/* Kimbie Red */
 .hljs-variable,
 .hljs-attribute,
 .hljs-tag,
@@ -22,42 +24,41 @@
 .css .hljs-id,
 .css .hljs-class,
 .css .hljs-pseudo {
-  color: #ca402b;
+  color: #dc3958;
 }
 
-/* Atelier Heath Light Orange */
+/* Kimbie Orange */
 .hljs-number,
 .hljs-preprocessor,
-.hljs-pragma,
 .hljs-built_in,
 .hljs-literal,
 .hljs-params,
 .hljs-constant {
-  color: #a65926;
+  color: #f79a32;
 }
 
-/* Atelier Heath Light Yellow */
-.hljs-ruby .hljs-class .hljs-title,
+/* Kimbie Yellow */
+.ruby .hljs-class .hljs-title,
 .css .hljs-rules .hljs-attribute {
-  color: #bb8a35;
+  color: #f06431;
 }
 
-/* Atelier Heath Light Green */
+/* Kimbie Green */
 .hljs-string,
 .hljs-value,
 .hljs-inheritance,
 .hljs-header,
 .ruby .hljs-symbol,
 .xml .hljs-cdata {
-  color: #379a37;
+  color: #889b4a;
 }
 
-/* Atelier Heath Light Aqua */
+/* Kimbie Aqua */
 .css .hljs-hexcolor {
-  color: #159393;
+  color:: #088649;
 }
 
-/* Atelier Heath Light Blue */
+/* Kimbie Blue */
 .hljs-function,
 .python .hljs-decorator,
 .python .hljs-title,
@@ -66,20 +67,20 @@
 .perl .hljs-sub,
 .javascript .hljs-title,
 .coffeescript .hljs-title {
-  color: #516aec;
+  color: #8ab1b0;
 }
 
-/* Atelier Heath Light Purple */
+/* Kimbie Purple */
 .hljs-keyword,
 .javascript .hljs-function {
-  color: #7b59c0;
+  color: #98676a;
 }
 
 .hljs {
   display: block;
   overflow-x: auto;
-  background: #f7f3f7;
-  color: #695d69;
+  background: #221a0f;
+  color: #d3af86;
   padding: 0.5em;
 }
 

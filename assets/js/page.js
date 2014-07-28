@@ -1,13 +1,14 @@
 var supportLanuages = ['en', 'ko'];
 var _md_body;
 var codeThemes = ['default', 'arta', 'ascetic', 'atelier-dune.dark', 'atelier-dune.light',
-  'atelier-forest.dark', 'atelier-forest.light', 'atelier-heath.dark', 'atelier-heath.light',
-  'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-seaside.dark', 'atelier-seaside.light',
-  'brown_paper', 'docco', 'far', 'foundation', 'github', 'googlecode', 'idea',
-  'ir_black', 'magula', 'mono-blue', 'monokai_sublime', 'obsidian', 'paraiso.dark', 'paraiso.light',
-  'pojoaque', 'railscasts', 'rainbow', 'school_book', 'solarized_dark', 'solarized_light', 'sunburst',
-  'tomorrow-night-blue', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night',
-  'tomorrow', 'vs', 'xcode', 'zenburn' ];
+    'atelier-forest.dark', 'atelier-forest.light', 'atelier-heath.dark', 'atelier-heath.light',
+    'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-seaside.dark', 'atelier-seaside.light',
+    'brown_paper', 'codepen-embed', 'color-brewer', 'dark', 'docco', 'far', 'foundation', 'github', 'googlecode',
+    'hybrid', 'idea', 'ir_black', 'kimbie.dark', 'kimbie.light', 'magula', 'mono-blue', 'monokai', 
+    'monokai_sublime', 'obsidian', 'paraiso.dark', 'paraiso.light', 'pojoaque', 'railscasts', 'rainbow', 
+    'school_book', 'solarized_dark', 'solarized_light', 'sunburst', 'tomorrow', 'tomorrow-night-blue', 
+    'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night', 'vs', 'xcode', 'zenburn'
+  ];
 var language = window.navigator.language || window.navigator.userLanguage;
 language = language.substr(0, 2);
 
