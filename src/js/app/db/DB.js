@@ -3,7 +3,7 @@ define([], function() {
   var PouchDB = require('pouchdb');
 
   var dbname = path.join(global.PATHS.db, 'haroopad');
-  var db = new PouchDB(dbname, {
+  var db = window.db = new PouchDB(dbname, {
     adapter: 'leveldb',
     auto_compaction: true
   });
@@ -21,5 +21,5 @@ define([], function() {
   //   }
   // });
 
-  return window.db = db;
+  return db;
 });

@@ -277,7 +277,7 @@ define([
 
 	keymage(__key('exit'), function() {
 		var generalOpt = store.get('General');
-		if (generalOpt.enableLastFileRestore === false) {
+		if (generalOpt && generalOpt.enableLastFileRestore === false) {
 			window.parent.ee.emit('clear.lastfiles');
 		}
 	}, { preventDefault: true });

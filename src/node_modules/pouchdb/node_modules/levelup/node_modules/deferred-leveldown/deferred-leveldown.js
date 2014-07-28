@@ -1,5 +1,4 @@
 var util              = require('util')
-  , bops              = require('bops')
   , AbstractLevelDOWN = require('abstract-leveldown').AbstractLevelDOWN
 
 function DeferredLevelDOWN (location) {
@@ -37,7 +36,7 @@ DeferredLevelDOWN.prototype._operation = function (method, args) {
 })
 
 DeferredLevelDOWN.prototype._isBuffer = function (obj) {
-  return bops.is(obj)
+  return Buffer.isBuffer(obj)
 }
 
 // don't need to implement this as LevelUP's ReadStream checks for 'ready' state

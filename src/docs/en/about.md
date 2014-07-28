@@ -8,29 +8,30 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.12)==
+### ==New Features (v0.12.1)==
 
-* Added Footnotes syntax
-  - footnote: `[^1]`
-  - footnote reference: `[^1]: text`
-* Added Markdown Folding
-* Internationalization
-  - Portuguese (Portuguesa) - [alexandre mbm](https://github.com/alexandre-mbm)
-  - Japanese (日本語) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
+* Added CLI features
+  - `$ haroopad -f [ /path/to/a.md /path/to/b.md ]`: files
+  - `$ haroopad --mode`: only view or edit mode
+    + `$ haroopad --mode view`: view mode
+    + `$ haroopad --mode edit`: edit mode
+* Added new code language & themes
+  - 15 languages(swift, gradle ...) and 5 themes(codepen-embed, color-brewer, hybrid, kimbie light/dark)
 
 ### ==More changelog==
 
 * Bugs
-  - Fixed Some markdown rendering error
-  - Fixed clicking file open on Linux
-  - Fixed export html with custom theme
+  - Fixed haroopad won't start for the second time
+  - Fixed embedding content using by D&D HTML object
+  - Fixed Subscript syntax conflict with Strikethrough
 * Enhancements
-  - Line break on cross platform (CRLF / LF)
-  - Word newline
-  - Fancy at menu edit
-  - Supports Autocompletion for sent email address
-  - Supports tables in lists like github
-  - Replace current windows instead of opening a new one
+  - Markdown(link) syntax within footnote
+  - Specify language within fenced code block
+  - Improved Css selection color 
+  - Error while loading shared libraries: libudev.so.0
+  - Improved HTML to Markdown
+* Internationalization
+  - Italy (Italia) - [Zeriuno](https://github.com/Zeriuno)
 
 ### Main Features
 
@@ -62,6 +63,9 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * HTML to Markdown - v0.8
   - Drag & Drop your selected text on Web Browser
 * Options for markdown parsing
+* CLI(Command Line Interface) - v0.12.1
+  - `-f`: files
+  - `--mode=view` or `--mode=edit`: only view or edit mode
 * Outline View
 * Vim Key-binding
 * Export to PDF, HTML
@@ -70,7 +74,8 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Document state information
 * Tab or Spaces for Indentation
 * Colum(Single, Two and Three) Layout View
-* Markdown Syntax Help Dialog.
+* Markdown Syntax Help Dialog
+* Markdown Folding
 * Import and Export settings
 
 ### Internationalization
@@ -109,6 +114,9 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Extended Image Syntax
   - If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
   - If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
+* Footnote
+  - Footnote: `[^identity]`
+  - Footnote Reference: `[^identity]: text`
 
 ### Upcoming Features
 

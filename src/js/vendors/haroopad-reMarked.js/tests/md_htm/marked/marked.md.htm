@@ -7,7 +7,8 @@ Built for speed.</p>
 marked completed in 12071ms.
 showdown (reuse converter) completed in 27387ms.
 showdown (new converter) completed in 75617ms.
-markdown-js completed in 70069ms.</code></pre>
+markdown-js completed in 70069ms.
+</code></pre>
 <p>node v0.6.x</p>
 <pre><code class="lang-bash">$ node test --bench
 marked completed in 6448ms.
@@ -16,14 +17,16 @@ marked (pedantic) completed in 6092ms.
 discount completed in 7314ms.
 showdown (reuse converter) completed in 16018ms.
 showdown (new converter) completed in 18234ms.
-markdown-js completed in 24270ms.</code></pre>
+markdown-js completed in 24270ms.
+</code></pre>
 <p><strong>Marked is now faster than Discount, which is written in C.</strong></p>
 <p>For those feeling skeptical: These benchmarks run the entire markdown test suite
 1000 times. The test suite tests every feature. It doesn&#39;t cater to specific
 aspects.</p>
 <p>Benchmarks for other engines to come (?).</p>
 <h2>Install</h2>
-<pre><code class="lang-bash">$ npm install marked</code></pre>
+<pre><code class="lang-bash">$ npm install marked
+</code></pre>
 <h2>Another javascript markdown parser</h2>
 <p>The point of marked was to create a markdown compiler where it was possible to
 frequently parse huge chunks of markdown without having to worry about
@@ -55,22 +58,26 @@ marked.setOptions({
   pedantic: false,
   sanitize: true
 });
-console.log(marked(&#39;i am using __markdown__.&#39;));</code></pre>
+console.log(marked(&#39;i am using __markdown__.&#39;));
+</code></pre>
 <p>You also have direct access to the lexer and parser if you so desire.</p>
 <pre><code class="lang-js">var tokens = marked.lexer(str);
-console.log(marked.parser(tokens));</code></pre>
+console.log(marked.parser(tokens));
+</code></pre>
 <pre><code class="lang-bash">$ node
 &gt; require(&#39;marked&#39;).lexer(&#39;&gt; i am using marked.&#39;)
 [ { type: &#39;blockquote_start&#39; },
   { type: &#39;text&#39;, text: &#39; i am using marked.&#39; },
   { type: &#39;blockquote_end&#39; },
-  links: {} ]</code></pre>
+  links: {} ]
+</code></pre>
 <h2>CLI</h2>
 <pre><code class="lang-bash">$ marked -o hello.html
 hello world
 ^D
 $ cat hello.html
-&lt;p&gt;hello world&lt;/p&gt;</code></pre>
+&lt;p&gt;hello world&lt;/p&gt;
+</code></pre>
 <h2>Syntax Highlighting</h2>
 <p>Marked has an interface that allows for a syntax highlighter to highlight code
 blocks before they&#39;re output.</p>
@@ -98,7 +105,8 @@ var marked = function(text) {
   return text;
 };
 
-module.exports = marked;</code></pre>
+module.exports = marked;
+</code></pre>
 <h2>License</h2>
 <p>Copyright (c) 2011-2012, Christopher Jeffrey. (MIT License)</p>
 <p>See LICENSE for more info.</p>

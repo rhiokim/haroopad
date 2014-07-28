@@ -1,0 +1,4 @@
+.idea
+.git*
+node_modules
+test/polyfills

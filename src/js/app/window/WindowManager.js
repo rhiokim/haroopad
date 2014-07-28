@@ -83,15 +83,15 @@ define([
 				return;
 			}
 
-			top = top < 20 ? 20 : top;
-			left = left < 20 ? 20 : left;
+			top = top < 20 ? 40 : top;
+			left = left < 20 ? 40 : left;
 
 			if (config.height + top > window.screen.height) {
-				top = 20;
+				top = 40;
 			}
 
 			if (config.width + left > window.screen.width) {
-				left = 20;
+				left = 40;
 			}
 
 			if (realCount > 1) {
@@ -103,10 +103,10 @@ define([
 		});
 	}
 
-	function open(file) {
+	function open(file, args) {
 		var fileEntry, newWin, existWin;
 
-		if (openning) {
+		if (openning && !file) {
 			return;
 		}
 
@@ -123,13 +123,14 @@ define([
 			return;
 		}
 
-		//비어있는 윈도우만 있는 경우
+		//if already exist empty window
 		if (file && exports.actived && exports.actived.file && !exports.actived.file.get('fileEntry')) {
 			if (exports.actived.file.get('created_at').getTime() == exports.actived.file.get('updated_at').getTime()) {
 				exports.actived.file.set(file.toJSON());
 				exports.actived.file.doc.set(file.doc.toJSON());
-				exports.actived.file._tmpFile = file._tmpFile;
+				// exports.actived.file._tmpFile = file._tmpFile;
 				exports.actived.emit('file.opened', file);
+				file.close();
 				return;
 			}
 		}
@@ -138,7 +139,8 @@ define([
 		newWin.parent = window;
 		newWin.file = file || File.open();
 		newWin.created_at = new Date().getTime();
-		
+		newWin._args = args || {};
+
 		_add(newWin);
 
 		return newWin;
@@ -146,6 +148,8 @@ define([
 
 	process.on('actived', function(child) {
 		exports.actived = child;
+
+		child.show(); //#346
 
 		openning = false;
 	});

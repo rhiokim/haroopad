@@ -8,31 +8,30 @@
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==새로운 기능 (v0.12.0)==
+### ==새로운 기능 (v0.12.1)==
 
-* 각추 문법 추가
-	- 각주: `[^1]`
-	- 각주 참조: `[^1]: text`
-* 마크다운 폴딩 기능 추가
-* 다국어 지원 추가
-	- 포루투칼 (Portuguese) - [alexandre mbm](https://github.com/alexandre-mbm)
-	- 일본어 (Japanese) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
+* CLI 기능 추가
+	- `$ haroopad -f [ /path/to/a.md /path/to/b.md ]`: 파일 옵션
+	- `$ haroopad --mode`: 뷰 or 에디팅 모드 옵션
+		+ `$ haroopad --mode view`: 뷰 모드
+		+ `$ haroopad --mode edit`: 에디팅 모드
+* 코드 하이라이팅 언어 및 테마 추가
+	- 15가지 언어(swift, gradle 등) 및 5가지(codepen-embed, color-brewer, hybrid, kimbie light/dark)테마 추가
 
-### ==중요 변경 사항==
+### ==중요 변경 사항 (v0.12.1)==
 
 * 버그
-	- 이메일 기능: 보낸 메일 주소 자동완성 오류
-	- 마크다운: `_text_` 구문 HTML 렌더링 오류
-	- 파일오픈: 우분투에서 파일 클릭으로 오픈할 경우 오류
-	- 마크다운: 헤더에 태그가 입력될 경우 렌더링 오류
-	- 출력: HTML 파일로 내보내기 시 커스텀 테마가 적용되지 않는 오류
+	- 종료(단축키를 이용) 후 재시작 오류 수정
+	- 드래그 엔 드랍 방식 콘텐츠 임베딩 오류 수정
+	- 취소선과 아래처럼자 파싱 우선순위 오류 수정
 * 개선
-	- 크로스 플랫폼 개행 개선 (CRLF / LF)
-	- 1Byte 문자열이 라인 끝에서 자동으로 줄바뀜 되는 문제 개선
-	- 상단 메뉴에 마크다운 입력의 구문 설명을 툴팁으로 변경
-	- 마크다운: 리스트 내에 테이블 문법 렌더링 개선
-	- 국제화: 적용되지 않았던 부분들 개선
-	- 파일오픈: 최근 파일 오픈 시 기존 윈도우에서 띄워지도록 개선
+	- 각주(footnote)에서 마크다운 문법(볼드, 이텔릭, 링크 등) 적용 개선
+	- 코드 블럭 언어명 대소문자 구분하지 않도록 개선
+	- 에디터에 블럭 선택 색상 개선 (기본 테마)
+	- libudev.so.0 의존성 문제 개선 - Post Install 스크립트 추가
+	- HTML 을 Markdown 으로 변환 기능 개선
+* 다국어 지원 추가
+	- 이탈리아 (Italiano) - [Zeriuno](https://github.com/Zeriuno)
 
 ### 주요기능
 
@@ -48,8 +47,8 @@
 	- less 를 기반으로 한 7 가지의 테마
 	- [markdown-css](https://github.com/rhiokim/markdown-css) 프로젝트 기반
 * 코드 문법 하이라이팅 스타일을 지원
-	- 71 가지의 언어에 대한 문법 강조를 지원
-	- Solaraized, Tomorrow 등 44 가지의 스타일
+	- 86 가지의 언어에 대한 문법 강조를 지원
+	- Solaraized, Tomorrow 등 49 가지의 스타일
 	- highlight.js 기반
 * 마크다운 자동완성 기능
 	- 마크다운 문법의 자동완성을 이용해 문서의 작성의 효율을 높힐 수 있습니다.
@@ -70,6 +69,9 @@
 * HTML 마크다운 전환 기능 - v0.8
 	- 브라우저 인용하고 싶은 문서를 선택하고 하루패드로 드래그 드랍해보세요.
 * 마크다운 파서 옵션 설정기능 추가
+* CLI(Command Line Interface) 지원 - v0.12.1
+  - `-f`: 파일
+  - `--mode=view` or `--mode=edit`: 모드 설정
 * 개요보기 기능
 * Vim 키 바인딩을 지원
 * PDF, HTML 출력 지원
@@ -77,7 +79,8 @@
 * 들여쓰기 탭과 스페이스 지원
 * 2,3 단 컬럼 레이아웃 지원
 * 마크다운 구문 헬프 윈도우
-* 환경설정 백업 내보내기/가져오기 기능 추가
+* 마크다운 폴딩 지원
+* 환경설정 백업 내보내기/가져오기 지원
 
 ### 국제화
 
@@ -91,6 +94,7 @@
 - 그리스어 (Greek) - [pdudis](https://github.com/pdudis)
 - 포루투칼 (Portuguese) - [alexandre mbm](https://github.com/alexandre-mbm)
 - 일본어 (Japanese) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
+- 이탈리아 (Italiano) - [Zeriuno](https://github.com/Zeriuno)
 
 ### 향상된 마크다운 문법
 
@@ -115,6 +119,10 @@
 * 이미지 문법 확장
 	- 만약 `![](path/*.mp3)` 과 같이 audio 확장자(mp3, ogg) 인 경우 audio 요소로 표시
 	- 만약 `![](path/*.mp4)` 와 같이 video 확장자(mp4, ogv, webm) 인 경우 video 요소로 표시
+* 각주 문법
+	- 각주: `[^1]`
+	- 각주 참조: `[^1]: text`
+		+ 각주 참조 내용에 마크다운 문법 지원
 
 ### 곧 출시될 기능
 

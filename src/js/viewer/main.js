@@ -360,6 +360,24 @@ function empty() {
   _md_body.innerHTML = '';
 }
 
+function cleanXSS(element) {
+  var meta = element.querySelectorAll('meta[http-equiv]');
+  meta = Array.prototype.slice.call(meta, 0);
+
+  meta.forEach(function(el) {
+    el.remove();
+  });
+
+  var script = element.querySelectorAll('script');
+  script = Array.prototype.slice.call(script, 0);
+
+  script.forEach(function(el) {
+    el.remove();
+  });
+
+  return element;
+}
+
 /**
  * update contents
  * @param  {[type]} contents [description]
@@ -373,6 +391,7 @@ function update(wrapper) {
   // var changeTOC = false;
 
   // wrapper.innerHTML = html;
+  wrapper = cleanXSS(wrapper);
 
   frags = wrapper.querySelectorAll(':scope>*');
   frags = Array.prototype.slice.call(frags, 0);

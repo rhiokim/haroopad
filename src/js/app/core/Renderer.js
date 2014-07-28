@@ -2,10 +2,17 @@ define([
 	], 
 	function() {
 
-		var path = require('path');
 		var marked = require('marked');
 		var renderer = new marked.Renderer();
 
+		function getExt(str) {
+	    var ext, sts;
+	    str = str || '';
+	    sts = str.split('.');
+
+	    return sts.length <= 1 ? '' : '.'+ sts[sts.length-1];
+	  }
+	  
 		function genStyle(props) {
 			var key, value, tmp = {};
 			props = !props ? '' : props ;
@@ -75,7 +82,7 @@ define([
 
 		renderer.heading = function(text, level, raw) {
 			//<a name="verlet-js" class="anchor" href="#verlet-js"><span class="octicon octicon-link"></span></a>
-			raw = raw.replace(/(<([^>]+)>)/gi,'').toLowerCase().trim().replace(/[^\w]+/g, '-');
+			raw = raw.replace(/(<([^>]+)>)/gi,'').toLowerCase().trim().replace(/[\s]+/g, '-');
 			
 		  return '<h'
 		    + level
@@ -134,7 +141,7 @@ define([
 		}
 
 		renderer.image = function(href, title, text, props) {
-			var res, ext = path.extname(href);
+			var res, ext = getExt(href);
 			ext = ext.substr(1, ext.length);
 
 			switch(ext) {

@@ -385,8 +385,9 @@ Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca> (MIT)
 
 https://github.com/ianstormtaylor/download-github-repo (MIT)
 
+
 * * *
 
-**pouchdb**
+**optimist**
 
-https://github.com/pouchdb/pouchdb/blob/master/LICENSE (Apache 2)
+https://github.com/substack/node-optimist (MIT/X11)

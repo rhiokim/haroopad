@@ -1,0 +1,16 @@
+## DNT config file
+## see https://github.com/rvagg/dnt
+
+NODE_VERSIONS="\
+  master   \
+  v0.11.12 \
+  v0.10.26 \
+  v0.8.26  \
+"
+OUTPUT_PREFIX="memdown-"
+TEST_CMD="\
+  cd /dnt/ &&                                                    \
+  npm install &&                                                 \
+  npm test;                                                      \
+"
+LOG_OK_CMD="sed 's/..1A..1G..1m..32m.\sok..0m..1B..1G/ok/' | tail -1"

@@ -17,11 +17,16 @@ especially since one of my core aims is simplicity and small amounts of clear co
 I need an ACL to:
 
 * define _all_ rules in database so that applications can provide a UI for simple but fine-grained control of user's privileges;
+
 * be flexible enough to actually work in real apps without special-cases and hacks. That means being able to specify rules
     such as "Moderators can edit all posts, Normal Users can edit only their own posts";
+
 * be simple enough that you don't need to get your head round arcane and abstract mappings of objects and resources;
+
 * not require you to manually hard code lists of resources and permission types to be later checked against. All resources should be defined naturally with short, functional code, not abstract mappings and list definitions;
+
 * work with Kohana default Auth module. That means non-hierarchical user roles as managing hierarchies can get messy quickly; and
+
 * require a minimal amount of clear code to check permissions in controllers (and potentially anywhere else it may make sense to).
 
 If you think you know of an ACL library that fits these needs already then feel free to let me know I've missed it but 
@@ -42,7 +47,9 @@ an ORM User/Auth driver should work just as well.
 This means:
 
 1.  Users and roles have a many-to-many mapping
+
 2.  Roles are non-hierarchical and no role is given special treatment
+
 3.  The only exception to 2. is the 'login' role which all active users must have. 
     In reality you may choose to special case this in a UI and represent it as an 'active account' checkbox rather 
     than requiring end-users to understand that it is different from other roles.
@@ -81,6 +88,7 @@ The `AACL_Resource` interface defines four methods:
     This method also servers a dual purpose: it both defines available conditions and checks them.
     * When both arguments are NULL, the function should return an array containing information about any special conditions the resource supports. More on what conditions are below.
         The format of this array is `array('condition_id' => 'Nice description for UIs')`.
+
     * When a user object and condition id are passed, the funtion should return a boolean indicating whether or not the condition has passed.
 
 * **public static function acl_instance($class_name)**
@@ -219,7 +227,7 @@ All checking is done using `AACL::check()` described below:
     The AACL_Resource being requested. `check()` will attempt to get the current action from the resource automatically
     using `$reource->acl_actions(TRUE)`. If this returns a string action then that action will be used for checking without having to specify the `$action` parameter.
 
-    Note that the string resource ID can't be specified since the `check()` function requires access to the objects acl_\* methods. It
+    Note that the string resource ID can't be specified since the `check()` function requires access to the objects acl_* methods. It
     is simpler not to have to define mappings from id back to class name in some separate global class in order to create instances.
     If I think of a way to make this neat and relatively seemless I may implement it but I don't feel this is a big issue.
 

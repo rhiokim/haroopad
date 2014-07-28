@@ -9,8 +9,6 @@ define([
       base62 = require('base62');
   var gui = require('nw.gui');
 
-  var appTmpDataPath = gui.App.dataPath;
-
   function open(fileEntry) {
     return fs.readFileSync(fileEntry, 'utf8');
   }
@@ -20,7 +18,7 @@ define([
   }
 
   function getTmpFile(uid) {
-    return path.join(appTmpDataPath, '.tmp', uid);
+    return path.join(global.PATHS.tmp, uid);
   }
 
   var Model = Backbone.Model.extend({

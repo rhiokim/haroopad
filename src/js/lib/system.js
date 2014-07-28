@@ -2,7 +2,7 @@
   var path = require('path'),
     cp = require('child_process'),
     gui = require('nw.gui'),
-    fs, watchr, readDir;
+    fs, watchr, readDir, optimist;
 
   /* node-webkit gui */
   global.Shell = gui.Shell;
@@ -25,6 +25,9 @@
       break;
   }
 
+  global.mdexts = [ 'md', 'mmd', 'markdown', 'mdown', 'markdn', 'mkd', 'mkdn', 'mdwn',
+                  'mdtxt', 'mdtext', 'mdml' ];
+
   /* system path */
   global.PATHS = {
     node_modules: path.join(global.EXECPATH, 'Libraries', '.node_modules'),
@@ -36,18 +39,26 @@
     theme_res_viewer: path.join(global.EXECPATH, 'Resources', 'Themes', 'viewer'),
     theme_dest_editor: path.join(global.App.dataPath, 'Themes', 'editor'),
     theme_dest_viewer: path.join(global.App.dataPath, 'Themes', 'viewer'),
-    db: path.join(global.App.dataPath, 'LevelDB')
+    db: path.join(global.App.dataPath, 'LevelDB'),
+    tmp: path.join(global.App.dataPath, '.tmp')
   };
 
   //add node main module path
   process.mainModule.paths = [global.PATHS.node_modules];
 
   fs = require('fs-extra');
+  optimist = require('optimist').boolean('f');
   readDir = require('readdir');
 
   /* load locales */
   global.LANGS = fs.readFileSync(path.join(global.PATHS.locales, 'locales.json'));
   global.LANGS = JSON.parse(global.LANGS);
+  
+  /* cli arguments */
+  global.argv = optimist.parse(gui.App.argv);
+
+  /* temporary */
+  fs.mkdirsSync(global.PATHS.tmp);
 
   /* level db */
   fs.mkdirsSync(global.PATHS.db);
@@ -131,11 +142,11 @@
   global.THEMES.code = ['default', 'arta', 'ascetic', 'atelier-dune.dark', 'atelier-dune.light',
     'atelier-forest.dark', 'atelier-forest.light', 'atelier-heath.dark', 'atelier-heath.light',
     'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-seaside.dark', 'atelier-seaside.light',
-    'brown_paper', 'dark', 'docco', 'far', 'foundation', 'github', 'googlecode', 'idea',
-    'ir_black', 'magula', 'mono-blue', 'monokai', 'monokai_sublime', 'obsidian', 'paraiso.dark', 'paraiso.light',
-    'pojoaque', 'railscasts', 'rainbow', 'school_book', 'solarized_dark', 'solarized_light', 'sunburst',
-    'tomorrow-night-blue', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night',
-    'tomorrow', 'vs', 'xcode', 'zenburn'
+    'brown_paper', 'codepen-embed', 'color-brewer', 'dark', 'docco', 'far', 'foundation', 'github', 'googlecode',
+    'hybrid', 'idea', 'ir_black', 'kimbie.dark', 'kimbie.light', 'magula', 'mono-blue', 'monokai', 
+    'monokai_sublime', 'obsidian', 'paraiso.dark', 'paraiso.light', 'pojoaque', 'railscasts', 'rainbow', 
+    'school_book', 'solarized_dark', 'solarized_light', 'sunburst', 'tomorrow', 'tomorrow-night-blue', 
+    'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night', 'vs', 'xcode', 'zenburn'
   ];
   
   global.SHORTCUTS = {

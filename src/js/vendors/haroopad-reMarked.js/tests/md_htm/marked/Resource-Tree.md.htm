@@ -16,8 +16,8 @@ after use.</p>
  |       |- ...
  |    
  |- other-branch
-     |- ...</code></pre>
-<p>The following code creates a tree of readily usable images by
+     |- ...
+</code></pre><p>The following code creates a tree of readily usable images by
 recursively iterating through directories to find files. For each file
 found, the <code>LOAD-FUNCTION</code> is called. In this case it&#39;s
 <code>LOAD-IMAGE</code>. If the <code>LOAD-FUNCTION</code> returns anything other than <code>NIL</code>
@@ -41,8 +41,8 @@ with the recursive flag set to <code>T</code> (set by default). The same
   (with-nodes (leaf acorn) (node tree :branch :sub-branch)
     (il:bind-image leaf)
     (il:flip-image)
-    ...))</code></pre>
-<p><code>WITH-RESOURCE-TREE</code> creates an instance of <code>RESOURCE-TREE</code> and
+    ...))
+</code></pre><p><code>WITH-RESOURCE-TREE</code> creates an instance of <code>RESOURCE-TREE</code> and
 assigns it to <code>TREE</code> with the remaining arguments being initialisation
 arguments for the instance. <code>LOAD-PATH</code> loads a file or directory into
 the tree. The optional <code>:PARENT-NODE-PATH</code> key specifies the path to
@@ -66,4 +66,5 @@ is called on <code>TREE</code> which frees all nodes in tree using
 <p>Extract the source to the desired directory. Then, while in the
 appropriate ASDF systems directory execute the following command,
 where <code>../path/to/resource-tree</code> is obviously replaced as suitable:</p>
-<pre><code>find ../path/to/resource-tree -name &#39;*.asd&#39; -exec ln -s &#39;{}&#39; \;</code></pre>
+<pre><code>find ../path/to/resource-tree -name &#39;*.asd&#39; -exec ln -s &#39;{}&#39; \;
+</code></pre>

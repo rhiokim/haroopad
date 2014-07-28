@@ -6,9 +6,11 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 .hljs {
   display: block;
+  overflow-x: auto;
   padding: 0.5em;
   color: #333;
   background: #f8f8f8;
+  -webkit-text-size-adjust: none;
 }
 
 .hljs-comment,
@@ -34,7 +36,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-number,
 .hljs-hexcolor,
 .ruby .hljs-constant {
-  color: #099;
+  color: #008080;
 }
 
 .hljs-string,
@@ -60,7 +62,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .hljs-class .hljs-title,
-.haskell .hljs-type,
+.hljs-type,
 .vhdl .hljs-literal,
 .tex .hljs-command {
   color: #458;

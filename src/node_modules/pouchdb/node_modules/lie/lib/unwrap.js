@@ -1,7 +1,7 @@
 'use strict';
 
 var immediate = require('immediate');
-
+var handlers = require('./handlers');
 module.exports = unwrap;
 
 function unwrap(promise, func, value) {
@@ -10,12 +10,12 @@ function unwrap(promise, func, value) {
     try {
       returnValue = func(value);
     } catch (e) {
-      return promise.reject(e);
+      return handlers.reject(promise, e);
     }
     if (returnValue === promise) {
-      promise.reject(new TypeError('Cannot resolve promise with itself'));
+      handlers.reject(promise, new TypeError('Cannot resolve promise with itself'));
     } else {
-      promise.resolve(returnValue);
+      handlers.resolve(promise, returnValue);
     }
   });
 }
