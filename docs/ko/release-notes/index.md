@@ -1,3 +1,35 @@
+## Haroopad v0.12.1
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#374             | ==추가== CLI 파일 열기 및 뷰 모드 설정
+#                | ==추가== 코드 하이라이팅 15가지 (swift, gradle 등) 및 테마 5가지 추가
+#                | ==추가== 다국어 지원 - 이탈리아어
+**Bugs**         |
+#363             | 종료 후(단축키 이용) 재 시작 오류 - 윈도우, 리눅스
+#353             | 드래그 앤 드랍을 이용한 콘텐츠 임베딩 오류 수정
+#360             | 취소선, 아래첨자 파싱 충돌 오류 수정
+**Enhancements** |
+#343             | 각주(footnote)에서 마크다운 구문 파싱 개선
+#351             | 펜스 코드 블럭 언어명 대소문자 구분하지 않도록 개선
+#354             | 에디터 기본 테마 셀렉션 색상 개선
+#375             | lbudev.so.0 의존성 문제 개선
+#                | HTML 마크다운 변환 기능 개선
+
+##### Github Issue tracker
+
+* v0.12.1 -- https://github.com/rhiokim/haroopad/issues?q=milestone%3Av0.12.1+is%3Aclosed
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/ovwxer3lif37qck/haroopad-v0.12.1-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/0zp5fq079pzrr5x/haroopad-v0.12.1.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/zlp608oak1vif53/haroopad-v0.12.1_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/x0qbu91zgf4cncw/haroopad-v0.12.1-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/rhvtz64rthv3djl/haroopad-v0.12.1_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/7tfcroz2zcl76j5/haroopad-v0.12.1_amd64.deb
+
 ## Haroopad v0.12.0
 
 Issue Number     | Description

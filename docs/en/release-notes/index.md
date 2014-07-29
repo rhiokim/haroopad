@@ -1,3 +1,35 @@
+## Haroopad v0.12.1
+
+Issue Number     | Description
+----------------:|-----------------------------------------------
+**New Features** |
+#374             | ==Added== Cannot open more than one file on cli  
+#                | ==Added== 15 languages(swift, gradle ...) and 5 themes for code block
+#                | ==Added== Internationalization - Italy (Italiano) - 
+**Bugs**         |
+#363             | Fixed Haroopad won't start for the second time
+#353             | Fixed Embedding content using by D&D HTML object
+#360             | Fixed Subscript syntax conflict with Strikethrough
+**Enhancements** |
+#343             | Support markdown syntax within footnote
+#                | Improve HTML to Markdown
+#354             | Improve css selection color
+#351             | Not Case-sensitive language name in fenced code block
+#375             | Error while loading shared libraries: libudev.so.0
+
+##### Github Issue tracker
+
+* v0.12.1 -- https://github.com/rhiokim/haroopad/issues?q=milestone%3Av0.12.1+is%3Aclosed
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/ovwxer3lif37qck/haroopad-v0.12.1-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/0zp5fq079pzrr5x/haroopad-v0.12.1.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/zlp608oak1vif53/haroopad-v0.12.1_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/x0qbu91zgf4cncw/haroopad-v0.12.1-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/rhvtz64rthv3djl/haroopad-v0.12.1_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/7tfcroz2zcl76j5/haroopad-v0.12.1_amd64.deb
+
 ## Haroopad v0.12.0
 
 Issue Number     | Description
