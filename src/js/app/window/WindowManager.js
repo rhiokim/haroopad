@@ -29,6 +29,10 @@ define([
 		return;
 	}
 
+	function getLength() {
+		return realCount;
+	}
+
 	function closeAll() {
 		for (var prop in windows) {
 			windows[prop].close();
@@ -157,5 +161,7 @@ define([
 	window.ee.on('closeAll', closeAll);
 
 	exports.open = open;
+
+	exports.length = getLength;
 
 });

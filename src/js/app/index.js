@@ -124,10 +124,13 @@ i18n.init({
       WindowMgr.open(file);
     });
 
+    /* load temporary files */
+    FileMgr.loadTemporary();
 
     //open file with commend line
     if (global.argv._.length > 0) {
       global.argv._.forEach(function(f) {
+        var f = path.resolve(process.env.PWD, f);
         var ext = path.extname(f).replace('.', '');
 
         if (global.mdexts.indexOf(ext) > -1 && fs.existsSync(f)) {
@@ -136,9 +139,10 @@ i18n.init({
           });
         }
       });
-    } else {
-      FileMgr.loadTemporary();
-      // WindowMgr.open();
+    }
+
+    if (WindowMgr.length() < 1) {
+      WindowMgr.open();
     }
 
     //TODO not perfect

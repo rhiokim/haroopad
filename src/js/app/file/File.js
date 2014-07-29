@@ -38,15 +38,6 @@ define([
 			},
 
 			loadTemporary: function() {
-				var generalConf = store.get('General') || {
-					enableLastFileRestore: true
-				};
-
-				if (tmp.length == 0 || !generalConf.enableLastFileRestore) {
-					window.ee.emit('menu.file.new');
-					return;
-				}
-				
 				checkTemporary();
 			}
 		};
