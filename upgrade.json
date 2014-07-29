@@ -14,7 +14,7 @@
     "path": "rhiokim/haroopad-locales#supports"
   },
   "news": {
-    "url": "https://raw.githubusercontent.com/rhiokim/haroopad/gh-pages/news/test.md",
+    "url": "http://pad.haroopress.com/news/test.md",
     "expire": ".5"
   }
 }
