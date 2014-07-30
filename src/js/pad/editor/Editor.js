@@ -313,6 +313,10 @@ define([
 			CodeMirror.commands.replaceAll(editor);
 		});
 
+		CodeMirror.commands.save = function() {
+			window.ee.emit('menu.file.save');
+		}
+
 		window.ee.on('menu.insert.markdown', function(tag) {
 			switch(tag) {
 				case 'h1': CodeMirror.commands.markdownH1(editor); break;
