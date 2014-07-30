@@ -299,6 +299,9 @@ define([
   window.ee.on('up.to.date.haroopad', function(currVersion) {
     WindowMgr.actived.window.ee.emit('up.to.date.haroopad', currVersion);
   });
+  window.ee.on('up.to.date.news', function(contents) {
+    WindowMgr.actived.window.ee.emit('up.to.date.news', contents);
+  });
 
   keymage(__key('new-window'), function() {
     WindowMgr.open();
@@ -312,5 +315,4 @@ define([
     Preferences.show();
   });
 
-  File.loadTemporary();
 });

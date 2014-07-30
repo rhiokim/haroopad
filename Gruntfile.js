@@ -159,7 +159,7 @@ module.exports = function(grunt) {
       appVendors: {
         files: {
           '<%= build %>/haroopad/js/app.vendors.min.js': [
-            '<%= vendors %>/jquery/jquery.min.js',
+            '<%= vendors %>/jquery/dist/jquery.min.js',
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/underscore/underscore-min.js',
             '<%= vendors %>/backbone/backbone.min.js',
@@ -186,7 +186,7 @@ module.exports = function(grunt) {
       padVendors: {
         files: {
           '<%= build %>/haroopad/js/pad.vendors.min.js': [
-            '<%= vendors %>/jquery/jquery.min.js',
+            '<%= vendors %>/jquery/dist/jquery.min.js',
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
             '<%= vendors %>/underscore/underscore-min.js',
             '<%= vendors %>/backbone/backbone.min.js',
@@ -215,7 +215,7 @@ module.exports = function(grunt) {
       preferencesVendors: {
         files: {
           '<%= build %>/haroopad/js/preferences.vendors.min.js': [
-            '<%= vendors %>/jquery/jquery.min.js',
+            '<%= vendors %>/jquery/dist/jquery.min.js',
             '<%= vendors %>/underscore/underscore-min.js',
             '<%= vendors %>/backbone/backbone.min.js',
             '<%= vendors %>/todc-bootstrap/dist/js/bootstrap.min.js',
@@ -232,7 +232,7 @@ module.exports = function(grunt) {
         files: {
           '<%= build %>/haroopad/js/viewer.min.js': [
             '<%= vendors %>/eventEmitter/EventEmitter.min.js',
-            '<%= vendors %>/jquery/jquery.min.js',
+            '<%= vendors %>/jquery/dist/jquery.min.js',
             '<%= vendors %>/haroopad-echo/dist/echo.min.js',
             '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js',
             '<%= vendors %>/highlight.js/build/highlight.pack.js',

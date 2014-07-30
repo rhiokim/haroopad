@@ -795,6 +795,13 @@ InlineLexer.prototype.output = function(src) {
       continue;
     }
 
+    // del (gfm)
+    if (cap = this.rules.del.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.del(this.output(cap[1]));
+      continue;
+    }
+
     // sup
     if (cap = this.rules.sup.exec(src)) {
       src = src.substring(cap[0].length);
@@ -810,13 +817,6 @@ InlineLexer.prototype.output = function(src) {
       out += '<sub>'
         + cap[1]
         + '</sub>';
-      continue;
-    }
-
-    // del (gfm)
-    if (cap = this.rules.del.exec(src)) {
-      src = src.substring(cap[0].length);
-      out += this.renderer.del(this.output(cap[1]));
       continue;
     }
 
@@ -1160,8 +1160,7 @@ Renderer.prototype.footnotes = function(notes) {
   var out = '<hr><ol class="footnotes">';
   for (var i = 0; i < notes.length; i++) {
     out += '<li id="fn-' + escape(notes[i].key) + '">';
-    out += notes[i].text;
-    out += '<a href="#fnref-' + escape(notes[i].key) + '">&#8617;</a>'
+    out += marked(notes[i].text).replace('</p>', '<a href="#fnref-' + escape(notes[i].key) + '">&#8617;</a></p>');
     out += '</li>';
   }
   out += '</ol>';

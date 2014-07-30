@@ -81,6 +81,17 @@ body > footer {
   content: "";   /*visualize tab character*/
 }
 
+/* #354 */
+.cm-s-solarized.cm-s-dark .CodeMirror-selected {
+  background: #004050;
+}
+
+/* hidden linenumer */
+.cm-s-solarized.CodeMirror {
+  -webkit-box-shadow: 0 0 0;
+  box-shadow: 0 0 0;
+}
+
 .cm-trailingspace {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QUXCToH00Y1UgAAACFJREFUCNdjPMDBUc/AwNDAAAFMTAwMDA0OP34wQgX/AQBYgwYEx4f9lQAAAABJRU5ErkJggg==);
   background-position: bottom left;

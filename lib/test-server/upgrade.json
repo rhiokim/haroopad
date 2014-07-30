@@ -1,0 +1,20 @@
+{
+  "version": "0.12.1",
+  "news": "http://pad.haroopress.com",
+  "release": "http://pad.haroopress.com/page.html?f=release-notes",
+  "download": {
+    "windows": "http://pad.haroopress.com/user.html#download",
+    "linux": "http://pad.haroopress.com/user.html#download",
+    "mac": "http://pad.haroopress.com/user.html#download"
+  },
+  "platform": [ "windows", "mac", "linux" ],
+  "language": {
+    "version": "0.4.0",
+    "locales": [ "all" ],
+    "path": "rhiokim/haroopad-locales#supports"
+  },
+  "news": {
+    "url": "http://pad.haroopress.com/news/a.md",
+    "expire": "1"
+  }
+}

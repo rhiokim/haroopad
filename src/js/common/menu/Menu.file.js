@@ -102,7 +102,8 @@ window.MenuBarFile = function () {
   menuItem({
           label: i18n.t('file.quit'),
           click: function() {
-            gui.App.closeAllWindows()();
+            // gui.App.closeAllWindows();
+            window.parent.ee.emit('closeAll');
           }
       });
     /*

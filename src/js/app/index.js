@@ -1,3 +1,6 @@
+var fs = require('fs'),
+    path = require('path');
+
 window.gui = require('nw.gui');
 
 window.top = window;
@@ -40,14 +43,15 @@ i18n.init({
   };
 
   requirejs([
+    // 'db/DB',
     'context/Context',
     'mail/Mailer',
+    'file/File',
     'window/Window',
     'window/WindowManager',
-    // 'db/DB',
     'utils/UpdateNotifier',
     'math/Math'
-  ], function(Context, Mailer, Window, WindowMgr, /*DB,*/ Updater) {
+  ], function(/*DB,*/ Context, Mailer, FileMgr, Window, WindowMgr, Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;
@@ -120,25 +124,24 @@ i18n.init({
       WindowMgr.open(file);
     });
 
+    /* load temporary files */
+    FileMgr.loadTemporary();
 
     //open file with commend line
-    if (gui.App.argv.length > 0) {
-      var file;
-      
-      switch(os) {
-        case 'windows':
-          file = gui.App.argv[0];
-        break;
-        case 'mac':
-          file = gui.App.argv[0];
-        break;
-        case 'linux':
-          file = gui.App.fullArgv.join(' ');  //it's bug
-        break;
-      }
+    if (global.argv._.length > 0) {
+      global.argv._.forEach(function(f) {
+        var f = path.resolve(process.env.PWD, f);
+        var ext = path.extname(f).replace('.', '');
 
-      WindowMgr.open(file);
-    } else {
+        if (global.mdexts.indexOf(ext) > -1 && fs.existsSync(f)) {
+          WindowMgr.open(f, {
+            mode: global.argv.mode
+          });
+        }
+      });
+    }
+
+    if (WindowMgr.length() < 1) {
       WindowMgr.open();
     }
 
@@ -147,6 +150,7 @@ i18n.init({
     window.setTimeout(function() {
       window.ee.emit('check.version');
     }, 2000);
+
   });
 
 });

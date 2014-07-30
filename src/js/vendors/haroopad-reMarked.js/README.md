@@ -34,6 +34,9 @@ var options = {
     hash_lnks:  false,    // anchors w/hash hrefs as links
     br_only:    false,    // avoid using "  " as line break indicator
     col_pre:    "col ",   // column prefix to use when creating missing headers for tables
+    nbsp_spc:   false,    // convert &nbsp; entities in html to regular spaces
+    span_tags:  true,     // output spans (ambiguous) using html tags
+    div_tags:   true,     // output divs (ambiguous) using html tags
     unsup_tags: {         // handling of unsupported tags, defined in terms of desired output style. if not listed, output = outerHTML
         // no output
         ignore: "script style noscript",
@@ -44,9 +47,14 @@ var options = {
         // eg: "\n<tag>some content</tag>"
         block1c: "dt dd caption legend figcaption output",
         // eg: "\n\n<tag>some content</tag>"
-        block2c: "canvas audio video iframe",
+        block2c: "canvas audio video iframe"
     },
+    tag_remap: {          // remap of variants or deprecated tags to internal classes
+        "i": "em",
+        "b": "strong"
+    }
 };
+
 
 var reMarker = new reMarked(options);
 

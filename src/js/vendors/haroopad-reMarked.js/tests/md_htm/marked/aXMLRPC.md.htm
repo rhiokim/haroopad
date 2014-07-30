@@ -34,14 +34,14 @@ for your project. This is not recommended, because you will not stay up to date 
     // An error occured in the client.
 } catch(Exception ex) {
     // Any other exception
-}</code></pre>
-<p>Instead of passing the parameters as seperated values, you can also pack them in
+}
+</code></pre><p>Instead of passing the parameters as seperated values, you can also pack them in
 an array and pass the array to the method, like in the following example:</p>
 <pre><code>// ... The try-catch has been ommited for clarity.
 XMLRPCClient client = new XMLRPCClient(url, &quot;MyUserAgentString&quot;);
 client.call(&quot;someMethod&quot;, new Object[]{ o1, o2, o3 });
-// ...</code></pre>
-<p>The above method calls are synchronous. So the method <code>call</code> will return when the server responded
+// ...
+</code></pre><p>The above method calls are synchronous. So the method <code>call</code> will return when the server responded
 or an error occured. There is also a possibility for asynchronous server calls.
 You need to implement an XMLRPCCallback that will get noticed about the respone (or error) from
 the server. The <code>callAsync</code> method can be used to make asynchronous calls. It returns an identifier
@@ -61,8 +61,8 @@ between the different request by their ids.</p>
 };
 
 XMLRPCClient client = new XMLRPCClient(url);
-long id = client.callAsync(listener, &quot;add&quot;, 5, 10);</code></pre>
-<h2>The data types</h2>
+long id = client.callAsync(listener, &quot;add&quot;, 5, 10);
+</code></pre><h2>The data types</h2>
 <p>The specification give some data tags for the server response. If you want to work on the
 type you must cast the returning <code>Object</code> from the <code>call</code> method to its specific type.
 Which type to cast which XML server response, tells the following list:</p>
@@ -81,8 +81,8 @@ a combination of multiple flags. It could work like the following example:</p>
 <pre><code>// ...
 XMLRPCClient client = new XMLRPCClient(url, 
     XMLRPCClient.FLAGS_STRICT | XMLRPCClient.FLAGS_8BYTE_INT);
-// ...</code></pre>
-<p>The following flags are implemented:</p>
+// ...
+</code></pre><p>The following flags are implemented:</p>
 <h4>FLAGS_STRICT</h4>
 <p>The client should parse responses strict to specification.
 It will check if the given content-type is right.

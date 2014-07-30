@@ -46,7 +46,11 @@ module.exports = function (db) {
     },
     pre: function (prefix, hook) {
       if(!hook) hook = prefix, prefix = ''
-      var h = {test: ranges.checker(prefix), hook: hook}
+      var h = {
+        test: ranges.checker(prefix),
+        hook: hook,
+        safe: false !== prefix.safe
+      }
       prehooks.push(h)
       return remover(prehooks, h)
     },
@@ -103,7 +107,7 @@ module.exports = function (db) {
               //don't leave a circular json object there incase using multilevel.
               if(prefix) ch.prefix = prefix
               ch.key = prefix + ch.key
-              if(h.test(String(ch.key))) {
+              if(h.safe && h.test(String(ch.key))) {
                 //this usually means a stack overflow.
                 throw new Error('prehook cannot insert into own range')
               }

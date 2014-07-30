@@ -13,7 +13,9 @@
 * Code snippets: [Snipplr](http://snipplr.com)
 * Keychain(s) stored in `/System/Library/Keychains/*.keychain`
 * Access US via OpenVPN Proxy Server: [Hotspot Shield](http://hotspotshield.com)
+
 * [UpsideDownText](http://www.upsidedowntext.com)
+
 * [Epoch Converter](http://www.epochconverter.com)
 * [Pandoc: Universal document converter](http://johnmacfarlane.net/pandoc/try)
 

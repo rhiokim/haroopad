@@ -9,13 +9,25 @@ define([], function() {
 		hr_char:    "-",      // hr style
 		indnt_str:  "    ",   // indentation string
 		bold_char:  "*",      // char used for strong
-		emph_char:  "*",      // char used for em
+		emph_char:  "_",      // char used for em
 		gfm_del:    true,     // ~~strikeout~~ for <del>strikeout</del>
 		gfm_tbls:   true,     // markdown-extra tables
 		tbl_edges:  false,    // show side edges on tables
 		hash_lnks:  false,    // anchors w/hash hrefs as links
 		br_only:    false,    // avoid using "  " as line break indicator
+		col_pre:    "col ",   // column prefix to use when creating missing headers for tables
+    nbsp_spc:   false,    // convert &nbsp; entities in html to regular spaces
+    span_tags:  true,     // output spans (ambiguous) using html tags
+    div_tags:   true,     // output divs (ambiguous) using html tags
+    unsup_tags: {
+      ignore: "script style noscript",
+    },
+    tag_remap: {
+    	"i": "em",
+      "b": "strong"
+    }
 	};
+	
 	var reMarker = new reMarked(options);
 
 	return function(html) {

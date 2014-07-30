@@ -6,9 +6,11 @@ Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmai
 
 .hljs {
   display: block;
+  overflow-x: auto;
   padding: 0.5em;
   background: #fdf6e3;
   color: #657b83;
+  -webkit-text-size-adjust: none;
 }
 
 .hljs-comment,
@@ -68,7 +70,7 @@ Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmai
 .hljs-constant,
 .hljs-class .hljs-title,
 .hljs-parent,
-.haskell .hljs-type,
+.hljs-type,
 .hljs-link_reference {
   color: #b58900;
 }

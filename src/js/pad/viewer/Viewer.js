@@ -298,6 +298,14 @@ define([
 
 			getHTML: function() {
 				return iframe.contentDocument.body.innerHTML;
+			},
+
+			set: function(md) {
+				var res = window.parent.marked(md);
+				var dom = document.createElement('div');
+				dom.innerHTML = res.html
+
+				_viewer.update(dom);
 			}
 		};
 	});
