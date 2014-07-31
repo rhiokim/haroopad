@@ -26,7 +26,7 @@ define([
 		// 	}
 		// }));
 
-		add(util.sepItem());
+		// add(util.sepItem());
 
 		add(util.menuItem({
 			label: i18n.t('edit.copy-html'),
@@ -52,6 +52,15 @@ define([
 		add(util.menuItem({
 			label: i18n.t('file.sending'),
 			submenu: MenuPublish
+		}));
+
+		add(util.sepItem());
+
+		add(util.menuItem({
+			label: i18n.t('view.enter-presentation'),
+			click: function() {
+				window.parent.ee.emit('menu.view.presentation');
+			}
 		}));
 
 		add(util.sepItem());

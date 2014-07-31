@@ -72,5 +72,11 @@ window.update = function(e, data) {
 }
 
 requirejs([], function() {
+  console.log('presentation box is loaded');
+
+  $('a[href=#exit]').click(function(e) {
+    window.ee.emit('exit.presentation');
+  });
+
 
 });
