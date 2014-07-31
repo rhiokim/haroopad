@@ -1,0 +1,22 @@
+{
+  "name": "jscapture",
+  "version": "0.0.0",
+  "description": "Screen capturing with JavaScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "video",
+    "capture",
+    "screen",
+    "recording"
+  ],
+  "author": "mgechev <mgechev@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "~3.6.2",
+    "gulp-uglify": "~0.3.0"
+  }
+}

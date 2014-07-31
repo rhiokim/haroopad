@@ -120,9 +120,18 @@ window.MenuBarView = function () {
 
 	View.append(
 		new gui.MenuItem({
+		  label: i18n.t('view.enter-presentation'),
+		  click: function() {
+				window.parent.ee.emit('menu.view.presentation');
+		  }
+		})
+	);
+
+	View.append(
+		new gui.MenuItem({
 		  label: i18n.t('view.enter-full-screen'),
 		  click: function() {
-			window.parent.ee.emit('menu.view.fullscreen');
+				window.parent.ee.emit('menu.view.fullscreen');
 		  }
 		})
 	);

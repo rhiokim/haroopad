@@ -1,0 +1,28 @@
+{
+  "name": "shower-core",
+  "version": "1.0.4",
+  "license": "MIT",
+  "main": "shower.min.js",
+  "ignore": [
+    "*",
+    "!License.md",
+    "!Readme.md",
+    "!shower.min.js",
+    "!bower.json"
+  ],
+  "keywords": [
+    "shower",
+    "presentation",
+    "core"
+  ],
+  "homepage": "https://github.com/shower/core",
+  "_release": "1.0.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.4",
+    "commit": "0b732c75011ca0efed66a2fd7e35752008ec189f"
+  },
+  "_source": "git://github.com/shower/core.git",
+  "_target": "^1.0.4",
+  "_originalSource": "shower-core"
+}

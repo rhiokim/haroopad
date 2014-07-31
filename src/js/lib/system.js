@@ -1,10 +1,10 @@
 ;(function() {
-  var path = require('path'),
+  var gui, path = require('path'),
     cp = require('child_process'),
-    gui = require('nw.gui'),
     fs, watchr, readDir, optimist;
 
   /* node-webkit gui */
+  global.gui = gui = require('nw.gui');
   global.Shell = gui.Shell;
   global.Clipboard = gui.Clipboard;
   global.App = gui.App;

@@ -1,0 +1,23 @@
+{
+  "name": "shower-bright",
+  "version": "1.0.10",
+  "license": "MIT",
+  "main": "styles/screen.css",
+  "ignore": [
+    "*",
+    "!fonts/**",
+    "!images/**",
+    "!pictures/**",
+    "!styles/screen.css",
+    "!index.html",
+    "!License.md",
+    "!Readme.md",
+    "!bower.json"
+  ],
+  "keywords": [
+    "shower",
+    "presentation",
+    "bright",
+    "theme"
+  ]
+}
