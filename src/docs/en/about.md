@@ -11,7 +11,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 ### ==New Features (v0.12.1)==
 
 * Added CLI features
-  - `$ haroopad -f [ /path/to/a.md /path/to/b.md ]`: files
+  - `$ haroopad -f [ /path/to/a.md ./path/to/b.md ]`: files
   - `$ haroopad --mode`: only view or edit mode
     + `$ haroopad --mode view`: view mode
     + `$ haroopad --mode edit`: edit mode
