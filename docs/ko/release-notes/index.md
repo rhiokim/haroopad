@@ -1,3 +1,17 @@
+## Haroopad v0.12.2 - ==Hotfix==
+
+* 단축키(CTRL + S)를 이용한 신규 파일저장 시 중복 다이얼로그 오류 해결
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/m7qurpshwy9hsv5/haroopad-v0.12.2-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/63jpjs5q4jurwwv/haroopad-v0.12.2.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/jj93m7i8aw4j839/haroopad-v0.12.2_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/dlt4xunl7ucmawx/haroopad-v0.12.2-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/9e4x2w44whj85kp/haroopad-v0.12.2_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/uyszzczcr1wqdwv/haroopad-v0.12.2_amd64.deb
+
+
 ## Haroopad v0.12.1
 
 Issue Number     | Description
@@ -23,12 +37,12 @@ Issue Number     | Description
 
 ##### Download
 
-> * Windows MSI: https://www.dropbox.com/s/ovwxer3lif37qck/haroopad-v0.12.1-i386.msi
-> * Mac OS X DMG: https://www.dropbox.com/s/0zp5fq079pzrr5x/haroopad-v0.12.1.dmg
-> * Linux 32-bit Binary: https://www.dropbox.com/s/zlp608oak1vif53/haroopad-v0.12.1_i386.tar.gz
-> * Linux 32-bit Debian Package: https://www.dropbox.com/s/x0qbu91zgf4cncw/haroopad-v0.12.1-i386.deb
-> * Linux 64-bit Binary: https://www.dropbox.com/s/rhvtz64rthv3djl/haroopad-v0.12.1_amd64.tar.gz
-> * Linux 64-bit Debian Package: https://www.dropbox.com/s/7tfcroz2zcl76j5/haroopad-v0.12.1_amd64.deb
+> * Windows MSI: 
+> * Mac OS X DMG: 
+> * Linux 32-bit Binary: 
+> * Linux 32-bit Debian Package: 
+> * Linux 64-bit Binary: 
+> * Linux 64-bit Debian Package: 
 
 ## Haroopad v0.12.0
 

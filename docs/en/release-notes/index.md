@@ -1,3 +1,16 @@
+## Haroopad v0.12.2 - ==Hotfix==
+
+* Fixed duplicated dialog box when you save a new file with shortcut(CTRL + S)
+
+##### Download
+
+> * Windows MSI: https://www.dropbox.com/s/m7qurpshwy9hsv5/haroopad-v0.12.2-i386.msi
+> * Mac OS X DMG: https://www.dropbox.com/s/63jpjs5q4jurwwv/haroopad-v0.12.2.dmg
+> * Linux 32-bit Binary: https://www.dropbox.com/s/jj93m7i8aw4j839/haroopad-v0.12.2_i386.tar.gz
+> * Linux 32-bit Debian Package: https://www.dropbox.com/s/dlt4xunl7ucmawx/haroopad-v0.12.2-i386.deb
+> * Linux 64-bit Binary: https://www.dropbox.com/s/9e4x2w44whj85kp/haroopad-v0.12.2_amd64.tar.gz
+> * Linux 64-bit Debian Package: https://www.dropbox.com/s/uyszzczcr1wqdwv/haroopad-v0.12.2_amd64.deb
+
 ## Haroopad v0.12.1
 
 Issue Number     | Description
