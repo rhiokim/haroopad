@@ -30,6 +30,7 @@ define([
 			cm.setCursor(cm.getCursor());
 		}
 
+		keyMaps[_reKey('defmod-S')] = function() {};
 		keyMaps[_reKey('defmod-X')] = cut;
 		keyMaps[_reKey('defmod-C')] = copy;
 		keyMaps[_reKey('defmod-V')] = paste;
