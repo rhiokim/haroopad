@@ -11,7 +11,7 @@
 ### ==새로운 기능 (v0.12.1)==
 
 * CLI 기능 추가
-	- `$ haroopad -f [ /path/to/a.md /path/to/b.md ]`: 파일 옵션
+	- `$ haroopad -f [ /path/to/a.md ./path/to/b.md ]`: 파일 옵션
 	- `$ haroopad --mode`: 뷰 or 에디팅 모드 옵션
 		+ `$ haroopad --mode view`: 뷰 모드
 		+ `$ haroopad --mode edit`: 에디팅 모드
