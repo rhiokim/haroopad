@@ -34,6 +34,14 @@ define([
 		// 	nw.file.set({ title: title }, { silent: true });
 		// }
 
+		function initViewer() {
+			var f = nw.file.toJSON();
+
+			f.jslib = global.PATHS.js;
+			
+			_viewer.init(f);
+		}
+
 		/* change editor theme */
 
 		function changeTheme(value, log) {
@@ -247,9 +255,9 @@ define([
 		 * Math rendering event proxy
 		 * viewer.html -> Viewer.js -> index.html -> math/Math.js -> Rendering
 		 */
-		_viewer.ee.on('math', function(target, cb) {
-			window.parent.ee.emit('math', target, cb);
-		})
+		// _viewer.ee.on('math', function(target, cb) {
+		// 	window.parent.ee.emit('math', target, cb);
+		// })
 
 		// _viewer.ee.on('title', function(title) {
 		// 	nw.file.set('title', title);
@@ -281,10 +289,10 @@ define([
 		// 	_viewer.loadCustomCSS(customConfig.theme.path);
 		// }
 
+		initViewer();
+
 		return {
-			init: function() {
-				_viewer.init(nw.file.toJSON());
-			},
+			init: initViewer,
 
 			// update: update,
 

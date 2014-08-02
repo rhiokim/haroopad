@@ -40,15 +40,15 @@ function getDocsPath() {
 	return path.join(global.PATHS.docs, lang);
 }
 
-function loadJs(url, cb) {
-  var head = document.getElementsByTagName('head')[0];
-  var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = url;
-      script.onload = cb;
+// function loadJs(url, cb) {
+//   var head = document.getElementsByTagName('head')[0];
+//   var script = document.createElement('script');
+//       script.type = 'text/javascript';
+//       script.src = url;
+//       script.onload = cb;
 
-   head.appendChild(script);
-}
+//    head.appendChild(script);
+// }
 
 function loadCss(url) {
   var head = document.getElementsByTagName('head')[0];

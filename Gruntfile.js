@@ -564,6 +564,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: '<%= vendors %>/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/config/' },
           { expand: true, cwd: '<%= vendors %>/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/extensions/' },
           { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/fonts/HTML-CSS/TeX/woff/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/STIX-Web/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/fonts/HTML-CSS/STIX-Web/woff/' },
           { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/images/' },
           { expand: true, cwd: '<%= vendors %>/MathJax/jax/input/TeX', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/jax/input/TeX/' },
           { expand: true, cwd: '<%= vendors %>/MathJax/jax/output/HTML-CSS', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/jax/output/HTML-CSS/' },
