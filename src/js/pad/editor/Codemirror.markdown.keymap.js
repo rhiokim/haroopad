@@ -21,6 +21,8 @@ define([], function() {
           }
         } else if (data === 'atom') {
           ret.quote = true;
+        } else if (data === 'quote') {
+          ret.quote = true;
         } else if (data === 'em') {
           ret.italic = true;
         }
