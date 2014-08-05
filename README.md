@@ -8,30 +8,30 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### New Features (v0.11.1)
+### New Features (v0.12.1)
 
-* Added Superscript, Subscript
-  - `Sup^superscript^`, `Sub~subscript~`
-* Extended Image Syntax
-  - If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
-  - If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
-* Added Option inline mathematics expression (**$**, $$$) 
+* Added CLI features
+  - `$ haroopad -f [ /path/to/a.md ./path/to/b.md ]`: files
+  - `$ haroopad --mode`: only view or edit mode
+    + `$ haroopad --mode view`: view mode
+    + `$ haroopad --mode edit`: edit mode
+* Added new code language & themes
+  - 15 languages(swift, gradle ...) and 5 themes(codepen-embed, color-brewer, hybrid, kimbie light/dark)
+
+### More changelog
+
+* Bugs
+  - Fixed haroopad won't start for the second time
+  - Fixed embedding content using by D&D HTML object
+  - Fixed Subscript syntax conflict with Strikethrough
+* Enhancements
+  - Markdown(link) syntax within footnote
+  - Specify language within fenced code block
+  - Improved Css selection color 
+  - Error while loading shared libraries: libudev.so.0
+  - Improved HTML to Markdown
 * Internationalization
-  - Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
-
-### Other Changelog
-* Changed Underline syntax `_underline_` -> `++underline++`
-* Removed Ctrl + Alt shortcut at all
-* Enhanced Context menu
-  - Added Editor, Viewer, Custom theme menus
-  - Added Export to HTML
-  - Added Sending email
-* Continous List Item (ol, li)
-* Fixed many number of bugs & enhancements
-
-### Downloads
-
-* [Official Site](http://pad.haroopress.com/user.html#download)
+  - Italy (Italia) - [Zeriuno](https://github.com/Zeriuno)
 
 ### Main Features
 
@@ -63,6 +63,9 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * HTML to Markdown - v0.8
   - Drag & Drop your selected text on Web Browser
 * Options for markdown parsing
+* CLI(Command Line Interface) - v0.12.1
+  - `-f`: files
+  - `--mode=view` or `--mode=edit`: only view or edit mode
 * Outline View
 * Vim Key-binding
 * Export to PDF, HTML
@@ -71,7 +74,8 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Document state information
 * Tab or Spaces for Indentation
 * Colum(Single, Two and Three) Layout View
-* Markdown Syntax Help Dialog.
+* Markdown Syntax Help Dialog
+* Markdown Folding
 * Import and Export settings
 
 ### Internationalization
@@ -84,6 +88,8 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 - Vietnamese (Tiếng Việt) - [nguyenkinh](https://github.com/nguyenkinh)
 - Russian (Русский) - [aprilix ](https://github.com/aprilix)
 - Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
+- Portuguese (Portuguesa) - [alexandre mbm](https://github.com/alexandre-mbm)
+- Japanese (日本語) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
 
 ### Enhanced Markdown Syntax
 
@@ -102,10 +108,18 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Mathematics Expression
   - Inline Expression: `$$$...$$$`
   - Block Expression: `$$...$$`
+  - Added Option inline mathematics expression (**$**, $$$) 
+* Added Superscript, Subscript
+  - `Sup^superscript^`, `Sub~subscript~`
+* Extended Image Syntax
+  - If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
+  - If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
+* Footnote
+  - Footnote: `[^identity]`
+  - Footnote Reference: `[^identity]: text`
 
 ### Upcoming Features
 
-* Footnotes
 * Tasklist - GFM
 
 ### And more?
@@ -119,8 +133,6 @@ Don't forget to check Preferences, lots of useful options are there.
 Follow official social account [@haroopad](https://twitter.com/haroopad) and developer [@rhiokim](https://twitter.com/rhiokim) on Twitter for the latest news.
 
 For feedback, use the menu `Help` - `User Echo`
-
-[![Analytics](https://ga-beacon.appspot.com/UA-32474834-4/rhiokim/haroopad)](https://github.com/igrigorik/ga-beacon)
 
 [haroopad]: http://pad.haroopress.com
 [blog]: http://pad.haroopress.com/page.html
