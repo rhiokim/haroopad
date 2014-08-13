@@ -39,7 +39,6 @@ Replication.prototype.ready = function (src, target) {
   src.once('destroyed', onDestroy);
   target.once('destroyed', onDestroy);
   function cleanup() {
-    self.removeAllListeners();
     src.removeListener('destroyed', onDestroy);
     target.removeListener('destroyed', onDestroy);
   }
@@ -55,7 +54,9 @@ function genReplicationId(src, target, opts) {
     return target.id().then(function (target_id) {
       var queryData = src_id + target_id + filterFun +
         JSON.stringify(opts.query_params) + opts.doc_ids;
-      return '_local/' + utils.MD5(queryData);
+      return utils.MD5(queryData).then(function (md5) {
+        return '_local/' + md5;
+      });
     });
   });
 }
@@ -94,7 +95,9 @@ Checkpointer.prototype.updateSource = function (checkpoint) {
     return utils.Promise.resolve(true);
   }
   return updateCheckpoint(this.src, this.id, checkpoint).catch(function (err) {
-    if (err.status === 401) {
+    var isForbidden = typeof err.status === 'number' &&
+      Math.floor(err.status / 100) === 4;
+    if (isForbidden) {
       self.readOnlySource = true;
       return true;
     }
@@ -197,74 +200,65 @@ function replicate(repId, src, target, opts, returnValue) {
     });
   }
 
-
-  function getNextDoc() {
-    var diffs = currentBatch.diffs;
-    var id = Object.keys(diffs)[0];
-    var revs = diffs[id].missing;
-    return src.get(id, {revs: true, open_revs: revs, attachments: true})
-    .then(function (docs) {
-      docs.forEach(function (doc) {
-        if (returnValue.cancelled) {
-          return completeReplication();
-        }
-        if (doc.ok) {
-          result.docs_read++;
-          currentBatch.pendingRevs++;
-          currentBatch.docs.push(doc.ok);
-          delete diffs[doc.ok._id];
-        }
-      });
-    });
-  }
-
-
-  function getAllDocs() {
-    if (Object.keys(currentBatch.diffs).length > 0) {
-      return getNextDoc().then(getAllDocs);
-    } else {
+  function getDocs() {
+    var docIds = Object.keys(currentBatch.diffs);
+    if (!docIds.length) {
       return utils.Promise.resolve();
     }
-  }
-
-
-  function getRevisionOneDocs() {
-    // filter out the generation 1 docs and get them
-    // leaving the non-generation one docs to be got otherwise
-    var ids = Object.keys(currentBatch.diffs).filter(function (id) {
-      var missing = currentBatch.diffs[id].missing;
-      return missing.length === 1 && missing[0].slice(0, 2) === '1-';
+    var idsToDocs = new utils.Map();
+    currentBatch.changes.forEach(function (change) {
+      idsToDocs.set(change.id, change.doc);
     });
-    return src.allDocs({
-      keys: ids,
-      include_docs: true
-    }).then(function (res) {
-      if (returnValue.cancelled) {
-        completeReplication();
-        throw (new Error('cancelled'));
-      }
-      res.rows.forEach(function (row, i) {
-        if (row.doc && !row.deleted &&
-          row.value.rev.slice(0, 2) === '1-' && (
-            !row.doc._attachments ||
-            Object.keys(row.doc._attachments).length === 0
-          )
-        ) {
-          result.docs_read++;
-          currentBatch.pendingRevs++;
-          currentBatch.docs.push(row.doc);
-          delete currentBatch.diffs[row.id];
-        }
+    return utils.Promise.all(docIds.map(function (docId) {
+      return mapToDocWithOpenRevs(docId, idsToDocs.get(docId));
+    })).then(function (docLists) {
+      docLists.forEach(function (docs) {
+        docs.forEach(processSourceDoc);
       });
     });
   }
 
+  function mapToDocWithOpenRevs(docId, doc) {
+    // as an optimization, we optimistically try to fetch all the open
+    // revs using just the docs returned from changes()
+    // if that's not possible, we do separate GETs for the open_revs
+    if (doc._deleted) {
+      return [{ok: doc}];
+    }
+    var diffs = currentBatch.diffs;
+    var missing = diffs[docId].missing;
+    var needAttachments = doc._attachments;
+    var needOtherRevs = missing.length > 1 || missing[0] !== doc._rev;
+    if (needAttachments || needOtherRevs) {
+      // fetch individually (slower)
+      return src.get(docId, {
+        revs: true,
+        open_revs: "all", // avoid url too long error, don't send revs array
+        attachments: true
+      }).then(function (results) {
+        var missingMap = {};
+        missing.forEach(function (missingRev) {
+          missingMap[missingRev] = true;
+        });
+        return results.filter(function (res) {
+          var rev = res.ok ? res.ok._rev : res.missing;
+          return missingMap[rev];
+        });
+      });
+    }
+    return [{ok: doc}];
+  }
 
-  function getDocs() {
-    if (src.type() === 'http') {
-      return getRevisionOneDocs().then(getAllDocs);
-    } else {
-      return getAllDocs();
+  function processSourceDoc(doc) {
+    var diffs = currentBatch.diffs;
+    if (returnValue.cancelled) {
+      return completeReplication();
+    }
+    if (doc.ok) {
+      result.docs_read++;
+      currentBatch.pendingRevs++;
+      currentBatch.docs.push(doc.ok);
+      delete diffs[doc.ok._id];
     }
   }
 
@@ -365,7 +359,6 @@ function replicate(repId, src, target, opts, returnValue) {
     }
     result.ok = false;
     result.status = 'aborted';
-    err.message = reason;
     result.errors.push(err);
     batches = [];
     pendingBatch = {
@@ -401,6 +394,7 @@ function replicate(repId, src, target, opts, returnValue) {
     } else {
       returnValue.emit('complete', result);
     }
+    returnValue.removeAllListeners();
   }
 
 
@@ -473,9 +467,11 @@ function replicate(repId, src, target, opts, returnValue) {
       changesOpts = {
         since: last_seq,
         limit: batch_size,
+        batch_size: batch_size,
         style: 'all_docs',
         doc_ids: doc_ids,
-        returnDocs: false
+        returnDocs: false,
+        include_docs: true
       };
       if (opts.filter) {
         changesOpts.filter = opts.filter;
@@ -524,9 +520,9 @@ function replicate(repId, src, target, opts, returnValue) {
 }
 
 
-function toPouch(db) {
+function toPouch(db, PouchConstructor) {
   if (typeof db === 'string') {
-    return new Pouch(db);
+    return new PouchConstructor(db);
   } else if (db.then) {
     return db;
   } else {
@@ -549,27 +545,12 @@ function replicateWrapper(src, target, opts, callback) {
   opts = utils.clone(opts);
   opts.continuous = opts.continuous || opts.live;
   var replicateRet = new Replication(opts);
-  toPouch(src).then(function (src) {
-    return toPouch(target).then(function (target) {
-      if (opts.server) {
-        if (typeof src.replicateOnServer !== 'function') {
-          throw new TypeError(
-            'Server replication not supported for ' + src.type() + ' adapter'
-          );
-        }
-        if (src.type() !== target.type()) {
-          throw new TypeError('Server replication' +
-              ' for different adapter types (' +
-            src.type() + ' and ' + target.type() + ') is not supported'
-          );
-        }
-        src.replicateOnServer(target, opts, replicateRet);
-      } else {
-        return genReplicationId(src, target, opts).then(function (repId) {
-          replicateRet.emit('id', repId);
-          replicate(repId, src, target, opts, replicateRet);
-        });
-      }
+  var PouchConstructor = opts.pouchConstructor || Pouch;
+  toPouch(src, PouchConstructor).then(function (src) {
+    return toPouch(target, PouchConstructor).then(function (target) {
+      return genReplicationId(src, target, opts).then(function (repId) {
+        replicate(repId, src, target, opts, replicateRet);
+      });
     });
   }).catch(function (err) {
     replicateRet.emit('error', err);

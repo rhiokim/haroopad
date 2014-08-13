@@ -1,0 +1,91 @@
+html {
+	width: 100%;
+	height: 100%;
+}
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-family: sans-serif;
+}
+a {
+	color: black;
+}
+
+/* box setup */
+.vbox {
+	display: -webkit-box;
+	display: -moz-box;
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+}
+.hbox {
+	display: -webkit-box;
+	display: -moz-box;
+	-webkit-box-orient: horizontal;
+	-moz-box-orient: horizontal;
+}
+.flex {
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+}
+.container {
+	overflow: auto;
+	padding: 10px;
+}
+
+/* head */
+#head {
+	background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%);
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%);
+	padding: 10px;
+	border-bottom: solid 1px #9E9E9E;
+}
+#head .sourceLink {
+  float: right;
+  font-size: 14px;
+}
+
+/* table */
+#results-container {
+	border-right: solid 1px black;
+	padding: 10px;
+	overflow: auto;
+}
+#results-container table {
+	border-collapse: collapse;
+}
+#results-container th {
+	border-bottom: solid 1px #808080;
+}
+#results-container th,
+#results-container td {
+	padding: 2px 5px;
+	font-size: 14px;
+}
+#results-container input {
+	border: none;
+	border-bottom: solid 1px white;
+	font-size: 14px;
+}
+#results-container input:hover,
+#results-container input:active {
+	border-bottom: dotted 1px black;
+}
+
+/* input */
+#input {
+	padding: 10px;
+	width: 300px;
+}
+#input div {
+	padding: 5px;
+}
+#input label {
+	display: inline-block;
+	width: 100px;
+}
+
+#clear {
+	padding: 10px;
+}
