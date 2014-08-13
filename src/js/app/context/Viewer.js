@@ -26,7 +26,7 @@ define([
 		// 	}
 		// }));
 
-		add(util.sepItem());
+		// add(util.sepItem());
 
 		add(util.menuItem({
 			label: i18n.t('edit.copy-html'),

@@ -46,6 +46,7 @@
     }
   ],
   "dependencies": {
-    "optimist": "~0.6.1"
+    "optimist": "~0.6.1",
+    "mime": "~1.2.11"
   }
 }

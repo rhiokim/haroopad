@@ -124,6 +124,7 @@ define([
 		window.ee.on('viewer.theme.code', changeCodeTheme);
 
 		window.ee.on('print.viewer', function(value) {
+			_viewer.replaceLazyLoading();
 			_viewer.print();
 
 			global._gaq.push('haroopad.file', 'print', '');

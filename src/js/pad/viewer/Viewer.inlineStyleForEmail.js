@@ -72,6 +72,7 @@ define([
 			if (src.indexOf('://') < 0) {
 				src = decodeURIComponent(src);
 				img = fs.readFileSync(src);
+				console.log(img.toString('base64'));
 			}
 		}
 	}
