@@ -9,8 +9,8 @@
 	},
 	"platform": [ "windows", "mac", "linux" ],
   "language": {
-    "version": "0.5.0",
-    "locales": [ "id", "en" ],
+    "version": "0.5.1",
+    "locales": [ "ru", "fr" ],
     "path": "rhiokim/haroopad-locales#supports"
   },
   "news": {
