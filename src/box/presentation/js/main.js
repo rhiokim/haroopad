@@ -39,7 +39,7 @@ function convert(html) {
 function getTitle(data) {
   var str = '<header class="caption">'
             + '  <h1>'+ data.title +'</h1>'
-            + '  <p>'+ +'</p>'
+            // + '  <p>'+ +'</p>'
             + '</header>\n\n';
 
   return str;
