@@ -5,6 +5,9 @@ define([
 	var path = require('path');
 	var config = options.toJSON();
 
+	var gui = require('nw.gui');
+	var shell = gui.Shell;
+	
 	var themes = global.THEMES.viewer;
 	var themesUser = global.THEMES.user.viewer;
 
@@ -41,6 +44,7 @@ define([
 		el: '#viewer-tab',
 
 		events: {
+			'click a': 'clickHandler',
 			'change select[name=theme]': 'changeViewStyle',
 			'change select[name=fontSize]': 'changeFontSize',
 			'change select[name=userTheme]': 'changeUserTheme',
@@ -124,6 +128,12 @@ define([
 		clickableLink: function(e) {
 			var bool = $(e.target).is(':checked');
 			options.set('clickableLink', bool);
+		},
+
+		clickHandler: function(e) {
+			var href = $(e.target).attr('href');
+			e.preventDefault();
+			shell.openExternal(href);
 		}
 	});
 

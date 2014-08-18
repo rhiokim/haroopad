@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>IDBWrapper ObjectStore Example</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="../lib/requirejs/require.js"></script>
+</head>
+<body class="vbox">
+<div id="head">IDBWrapper ObjectStore Example
+  <span class="sourceLink">
+    <a href="../../">IDBWrapper Home</a> /
+    <a href="../">IDBWrapper Examples</a>
+    -- <a href="https://github.com/jensarps/IDBWrapper/tree/master/example/objectstore" target="_blank">View Source on GitHub</a>
+  </span>
+</div>
+<div class="hbox flex">
+  <div class="vbox flex container" id="results-container">
+    QueryResults
+  </div>
+  <div class="vbox container" id="interaction-container">
+    <div id="query" class="vbox"></div>
+    <div id="input" class="vbox">
+      <p>
+        IDB is not a relational database; it's an object store. That means you
+        have
+        no such things as fixed, defined columns.<br/>
+        Just enter <em>any name</em> as key and <em>anything</em> as value.<br/>
+        <br/>
+        To enter non-primitive values, use literal notaion.
+      </p>
+      <table>
+        <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><input id="prop_1"/></td>
+          <td><textarea id="value_1"></textarea></td>
+        </tr>
+        <tr>
+          <td><input id="prop_2"/></td>
+          <td><textarea id="value_2"></textarea></td>
+        </tr>
+        <tr>
+          <td><input id="prop_3"/></td>
+          <td><textarea id="value_3"></textarea></td>
+        </tr>
+        </tbody>
+      </table>
+      <button id="submit">Enter data</button>
+    </div>
+    <div id="clear" class="">
+      <button onclick="app.clear()">Clear Store</button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>

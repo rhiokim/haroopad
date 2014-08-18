@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>IDBWrapper Basic Index Example</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="../lib/requirejs/require.js"></script>
+</head>
+<body class="vbox">
+<div id="head">IDBWrapper Basic Index Example
+  <span class="sourceLink">
+    <a href="../../">IDBWrapper Home</a> /
+    <a href="../">IDBWrapper Examples</a>
+    -- <a href="https://github.com/jensarps/IDBWrapper/tree/master/example/index" target="_blank">View Source on GitHub</a>
+  </span>
+</div>
+<div class="hbox flex">
+  <div class="vbox flex" id="results-container">
+    QueryResults
+  </div>
+  <div id="query">
+    <h1>Query</h1>
+
+    <div>
+      <label>Index to use</label>
+      <select id="index">
+        <option value="" selected>None (use store's keyPath)</option>
+        <option value="lastname">lastname</option>
+      </select>
+    </div>
+    <div><label>Lower Bound</label><input id="lower"></div>
+    <div><label>Exclude Lower</label><input type="checkbox" id="excludeLower"></div>
+    <div><label>Upper Bound</label><input id="upper"></div>
+    <div><label>Exclude Upper</label><input type="checkbox" id="excludeUpper"></div>
+
+    <div>
+      <label>Sort Order</label>
+      <select id="sortOrder">
+        <option value="ASC" selected>Ascending</option>
+        <option value="DESC">Descending</option>
+      </select>
+    </div>
+
+    <div><label>Filter Duplicates</label><input type="checkbox" id="filterDuplicates"></div>
+
+    <button id="submitQuery">Submit Query</button>
+  </div>
+  <div id="input">
+    <h1>Add data</h1>
+
+    <p>
+      Add a random customer:
+      <button onclick="app.addRandomCustomer()">Add random customer data
+      </button>
+    </p>
+    <p>
+      Or, enter customer data below:
+    </p>
+
+    <div><label>Customer ID</label><input id="customerid"></div>
+    <div><label>First Name</label><input id="firstname"></div>
+    <div><label>Last Name</label><input id="lastname"></div>
+    <div><label>Age</label><input id="age"></div>
+    <button id="submit">Enter data</button>
+  </div>
+</div>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>

@@ -221,8 +221,22 @@ function htmlDecode(input) {
   return e.textContent;
 }
 
-//for performance
+/**
+ * replace data-echo
+ */
+function replaceLazyLoading() {
+  var frags, data;
+  frags = _md_body.querySelectorAll('[data-echo]');
+  frags = Array.prototype.slice.call(frags, 0);
 
+  _.each(frags, function(frag) {
+    data = frag.getAttribute('data-echo');
+    frag.setAttribute('src', data);
+    frag.removeAttribute('data-echo');
+  });
+}
+
+//for performance
 function _lazySyntaxHighlight(el) {
   // var codeEl = el.firstElementChild;
   var code = el.innerHTML;
@@ -472,7 +486,7 @@ function update(wrapper) {
     img = imgs[i];
     src = img.getAttribute('src');
 
-    if (src.indexOf('://') == -1 && !/^\//.test(src) && !/^[a-zA-Z]\:/.test(src)) {
+    if (src.indexOf('://') == -1 && !/^\//.test(src) && !/^[a-zA-Z]\:/.test(src) && src.indexOf('data:') == -1) {
       img.setAttribute('src', _options.dirname + '/' + src);
     } else {
       img.setAttribute('src', 'app://root/img/blank.gif');
