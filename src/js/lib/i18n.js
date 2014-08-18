@@ -20,7 +20,7 @@
 		G.LOCALES._lang = locale;
 
 		[ 'menu', 'pad', 'preference' ].forEach(function( ns ) {
-			json = fs.readFileSync(path.join(file, ns +'.json'));
+			json = fs.readFileSync(path.join(file, ns +'.json'), 'utf8');
 			locales[ns] = JSON.parse(json);
 		});
 	}

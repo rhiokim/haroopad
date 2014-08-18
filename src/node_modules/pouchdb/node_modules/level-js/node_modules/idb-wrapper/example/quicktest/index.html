@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>IndexedDB Wrapper Quick Test</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="vbox" onload="onload();">
+<div id="head">IDBWrapper Quick Test
+  <span class="sourceLink">
+    <a href="../../">IDBWrapper Home</a> /
+    <a href="../">IDBWrapper Examples</a>
+    -- <a href="https://github.com/jensarps/IDBWrapper/tree/master/example/quicktest" target="_blank">View Source on GitHub</a>
+  </span>
+</div>
+<div class="container">
+  <p>Open the console and click 'Open DB'. You will then see a bunch of buttons
+    that allow data manipulation. Click them, and check the console for
+    results.</p>
+
+  <p id="openWrapper" style="display: none;">
+    <button onclick="createStore_1_1()">Open DB</button>
+  </p>
+  <p id="dataWrapper" style="display: none;">
+    <button onclick="testWrite()">put</button>
+    <br/>
+    <button onclick="testRead()">get</button>
+    <br/>
+    <button onclick="testGetAll()">getAll</button>
+    <br/>
+    <button onclick="testRemove()">remove</button>
+    <br/>
+    <button onclick="testClear()">clear</button>
+    <br/>
+    <button onclick="testBatch()">batch</button>
+  </p>
+</div>
+
+<script type="text/javascript" src="../../idbstore.js"></script>
+<script type="text/javascript">
+
+  function onload () {
+    document.getElementById('openWrapper').style.display = '';
+  }
+
+  /* methods for walking thorugh the data ops: */
+
+  var lastnames = ['Smith', 'Miller', 'Doe', 'Frankenstein', 'Furter'],
+      firstnames = ['Peter', 'John', 'Frank', 'James'],
+      id = 1;
+
+  function testWrite (store) {
+    store = store || store_1_1;
+    var dataObj = {
+      lastname: lastnames[Math.floor(Math.random() * 5)],
+      firstname: firstnames[Math.floor(Math.random() * 4)],
+      age: Math.floor(Math.random() * (100 - 20)) + 20,
+      id: id++
+    };
+    store.put(dataObj, function (result) {
+      console.log('put() call success. Result:', result);
+    });
+  }
+
+  function testRead (store) {
+    store = store || store_1_1;
+    store.get(1, function (result) {
+      console.log('get() call success. Result:', result);
+    });
+  }
+
+  function testGetAll (store) {
+    store = store || store_1_1;
+    store.getAll(function (result) {
+      console.log('getAll() call success. Result:', result);
+    });
+  }
+
+  function testRemove (store) {
+    store = store || store_1_1;
+    store.remove(1, function (result) {
+      console.log('remove() call success. Result:', result);
+    });
+  }
+
+  function testClear (store) {
+    store = store || store_1_1;
+    store.clear(function (result) {
+      console.log('clear() call success. Result:', result);
+    });
+  }
+
+  function testBatch (store) {
+    store = store || store_1_1;
+    var list = [];
+    for (var i = 0; i < 5; i++) {
+      var dataObj = {
+        lastname: lastnames[Math.floor(Math.random() * 5)],
+        firstname: firstnames[Math.floor(Math.random() * 4)],
+        age: Math.floor(Math.random() * (100 - 20)) + 20,
+        id: id++
+      };
+      list.push({ type: "put", value: dataObj });
+    }
+    store.batch(list, function (result) {
+      console.log('batch() call success. Result:', result);
+    }, function (error) {
+      console.log("error", error);
+    });
+  }
+
+  /* create a store using the wrapper and kick off: */
+
+  function createStore_1_1 () {
+    window['store_1_1'] = new IDBStore({
+      dbVersion: '1',
+      storeName: 'testStore_1_1',
+      keyPath: 'id',
+      autoIncrement: true,
+      onStoreReady: function () {
+        console.log('Store ready, go ahead!');
+        console.log('The store is accessible at window.store_1_1');
+
+        document.getElementById('openWrapper').style.display = 'none';
+        document.getElementById('dataWrapper').style.display = '';
+      }
+    });
+  }
+
+</script>
+</body>
+</html>

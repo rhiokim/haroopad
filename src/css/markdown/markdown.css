@@ -85,12 +85,10 @@
 }
 .markdown .code {
   border-radius: 3px;
-  word-break: break-all;
   word-wrap: break-word;
 }
 .markdown pre {
   border-radius: 3px;
-  word-break: break-all;
   word-wrap: break-word;
   overflow: auto;
 }
@@ -105,7 +103,6 @@
 }
 .markdown code {
   border-radius: 3px;
-  word-break: break-all;
   word-wrap: break-word;
   border: 1px solid #cccccc;
   padding: 0 5px;

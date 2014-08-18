@@ -2,7 +2,9 @@ define([
 ], function() {
 
 	var fs = require('fs'),
-		path = require('path');
+		path = require('path'),
+    util = require("util"),
+		mime = require('mime');
 
 	var gui = require('nw.gui'),
 		clipboard = gui.Clipboard.get();
@@ -46,6 +48,21 @@ define([
 		});
 	}
 
+	/**
+	 * replace data-echo
+	 */
+	function _replaceLazyLoading() {
+		var frags, data;
+		frags = shadow.querySelectorAll('[data-echo]');
+		frags = Array.prototype.slice.call(frags, 0);
+
+		_.each(frags, function(frag) {
+			data = frag.getAttribute('data-echo');
+			frag.setAttribute('src', data);
+			frag.removeAttribute('data-echo');
+		});
+	}
+
 	function _removeDataProperties() {
 		var frags, attrs, dataAttr = /^data-/;
 
@@ -65,6 +82,36 @@ define([
 		});
 	}
 
+	function base64Image(src) {
+	    var data = fs.readFileSync(src).toString("base64");
+	    return util.format("data:%s;base64,%s", mime.lookup(src), data);
+	}
+
+	function _makeImageEncode() {
+		var i, img, image, images;
+
+		images = shadow.querySelectorAll('img');
+
+		for (i = 0; i < images.length; i++) {
+			image = images[i];
+			src = image.src;
+
+			if (!src) {
+				continue;
+			}
+
+			if (process.platform !== 'win32') {
+				src = src.replace('file://', '');
+			}
+
+			//only web image
+			if (src.indexOf('://') < 0 && src.indexOf('data:') < 0) {
+				src = decodeURIComponent(src);
+				image.src = base64Image(src);
+			}
+		}
+	}
+
 	function makeStylesExplicit() {
 		var styleSheets, i;
 		var wrapper = document.createElement('div');
@@ -76,7 +123,10 @@ define([
 		}
 
 		_replaceOriginalEmbed();
+		_replaceLazyLoading();
 		_removeDataProperties();
+
+		_makeImageEncode();
 
 		wrapper.innerHTML = shadow.querySelector('#root').innerHTML;
 		wrapper.setAttribute('style', shadow.lastElementChild.getAttribute('style'));

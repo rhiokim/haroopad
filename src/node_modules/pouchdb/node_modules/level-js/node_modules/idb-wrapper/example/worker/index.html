@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>IDBWrapper Worker Example</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="../lib/requirejs/require.js"></script>
+</head>
+<body class="vbox">
+<div id="head">IDBWrapper Worker Example
+  <span class="sourceLink">
+    <a href="../../">IDBWrapper Home</a> /
+    <a href="../">IDBWrapper Examples</a>
+    -- <a href="https://github.com/jensarps/IDBWrapper/tree/master/example/worker" target="_blank">View Source on GitHub</a>
+  </span>
+</div>
+<div class="hbox flex">
+  <div class="vbox flex container" id="results-container">
+    QueryResults
+  </div>
+  <div class="vbox container" id="interaction-container">
+    <div id="query" class="vbox"></div>
+    <div id="input" class="vbox">
+      <p>
+        This example shows IDBWrapper running inside of a worker.
+      </p>
+      <p>
+        While this introduces some overhead for your application architecture,
+        it might be worth considering if you are doing loads of transactions
+        and want to keep them out of the UI thread.
+      </p>
+      <p>
+        Besides running IDBWrapper in a worker, this example is a copy of the
+        object store example. Just enter any name as key and anything as value.
+        To enter non-primitive values, use literal notaion.
+      </p>
+      <table>
+        <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><input id="prop_1"/></td>
+          <td><textarea id="value_1"></textarea></td>
+        </tr>
+        <tr>
+          <td><input id="prop_2"/></td>
+          <td><textarea id="value_2"></textarea></td>
+        </tr>
+        <tr>
+          <td><input id="prop_3"/></td>
+          <td><textarea id="value_3"></textarea></td>
+        </tr>
+        </tbody>
+      </table>
+      <button id="submit">Enter data</button>
+    </div>
+    <div id="clear" class="">
+      <button onclick="app.clear()">Clear Store</button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
