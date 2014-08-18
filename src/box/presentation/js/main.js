@@ -72,11 +72,14 @@ window.update = function(e, data) {
 }
 
 requirejs([], function() {
-  console.log('presentation box is loaded');
-
   $('a[href=#exit]').click(function(e) {
-    window.ee.emit('exit.presentation');
+    shower.enterListMode();
+    // window.ee.emit('exit.presentation');
   });
 
-
+  $(document.body).keydown(function(e) {
+    if (e.which == 27 && shower.isListMode()) {
+      window.ee.emit('exit.presentation');
+    }
+  });
 });
