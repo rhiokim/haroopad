@@ -8,3 +8,4 @@ build
 haroopad.app
 assets
 lib/node-webkit.app/Contents/Libraries/
+lib/node-webkit-v*
