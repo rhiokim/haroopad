@@ -39,6 +39,7 @@ COMMAND (CTRL) - SHIFT - H  | toggle markdown helper
 COMMAND (CTRL) - Enter      | toggle fullscreen #1
 COMMAND (CTRL) - F11        | toggle fullscreen #2
 Double ESC                  | escape fullscreen
+COMMAND (CTRL) - ALT - P    | presentation mode
 COMMAND (CTRL) - SHIFT - Y  | vim keyboard binding
 ALT - UP                    | editor font size +1px
 ALT - DOWN                  | editor font size -1px

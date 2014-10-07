@@ -1,10 +1,10 @@
 ;(function() {
-  var path = require('path'),
+  var gui, path = require('path'),
     cp = require('child_process'),
-    gui = require('nw.gui'),
     fs, watchr, readDir, optimist;
 
   /* node-webkit gui */
+  global.gui = gui = require('nw.gui');
   global.Shell = gui.Shell;
   global.Clipboard = gui.Clipboard;
   global.App = gui.App;
@@ -183,6 +183,8 @@
     'enter-fullscreen':       'defmod-enter',
     'enter-fullscreen-win':   'defmod-f11',
     'escape-fullscreen':      'esc esc',
+    'enter-presentation':     'defmod-alt-p',
+    'enter-presentation-win': 'defmod-alt-p',
     'editor-font-size-up':    'alt-up',
     'editor-font-size-down':  'alt-down',
     'viewer-font-size-up':    'shift-alt-up',

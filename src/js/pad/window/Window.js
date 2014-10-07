@@ -290,6 +290,10 @@ define([
     window.ee.emit('toggle.vim.keybind');
   });
 
+  keymage(__key('enter-presentation'), function() {
+    window.parent.ee.emit('menu.view.presentation');
+  });
+
 	window.ondragover = function(e) {
 		e.preventDefault();
 		return false

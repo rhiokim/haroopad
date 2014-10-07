@@ -428,9 +428,7 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          // { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad/font/' },
           { expand: true, cwd: 'src/img/', src: [ '**' ], dest: 'build/haroopad/img/' },
-          // { expand: true, cwd: 'src/css/code/', src: [ '**' ], dest: 'build/haroopad/css/code/' },
           { expand: true, cwd: 'src/css/markdown/', src: [ '**' ], dest: 'build/haroopad/css/markdown/' },
           { expand: true, cwd: 'src/css/column/', src: [ '**' ], dest: 'build/haroopad/css/column/' },
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad/css/viewer-toc/' },
@@ -443,6 +441,21 @@ module.exports = function(grunt) {
           { src: 'src/logo.png', dest: 'build/haroopad/logo.png' },
           { src: 'src/css/select2.png', dest: 'build/haroopad/css/select2.png' },
           { src: 'src/css/select2x2.png', dest: 'build/haroopad/css/select2x2.png' }
+        ]
+      },
+
+      plugins: {
+        files: [
+          { cwd: 'src/box/presentation/css/', src: [ '**' ], dest: 'build/haroopad/box/presentation/css/', expand: true },
+          { cwd: 'src/box/presentation/img/', src: [ '**' ], dest: 'build/haroopad/box/presentation/img/', expand: true },
+          { cwd: 'src/box/presentation/js/', src: [ '**' ], dest: 'build/haroopad/box/presentation/js/', expand: true },
+          { cwd: 'src/box/presentation/vendors/shower-ribbon', src: [ '**' ], dest: 'build/haroopad/box/presentation/vendors/shower-ribbon', expand: true },
+          { src: 'src/box/presentation/vendors/backbone/backbone.js', dest: 'build/haroopad/box/presentation/vendors/backbone/backbone.js' },
+          { src: 'src/box/presentation/vendors/jquery/dist/jquery.min.js', dest: 'build/haroopad/box/presentation/vendors/jquery/dist/jquery.min.js' },
+          { src: 'src/box/presentation/vendors/requirejs/require.js', dest: 'build/haroopad/box/presentation/vendors/requirejs/require.js' },
+          { src: 'src/box/presentation/vendors/shower-core/shower.min.js', dest: 'build/haroopad/box/presentation/vendors/shower-core/shower.min.js' },
+          { src: 'src/box/presentation/vendors/underscore/underscore.js', dest: 'build/haroopad/box/presentation/vendors/underscore/underscore.js' },
+          { src: 'src/box/presentation/index.html', dest: 'build/haroopad/box/presentation/index.html' },
         ]
       },
 
@@ -757,7 +770,7 @@ module.exports = function(grunt) {
   grunt.registerTask('nwlibs', [ 'clean:nwlibs', 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales', 'copy:ffmpeg' ]);
   grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss' ]);
 
-  grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
+  grunt.registerTask('cp', [ 'copy:main', 'copy:plugins', 'copy:pkgres', 'nwlibs', 'nwres' ]);
 
   /* snapshot */
   // grunt.registerTask('snapshot', [ 'concat:snapshot', 'snapshot' ]);
