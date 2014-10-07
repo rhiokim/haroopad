@@ -200,7 +200,7 @@ function replaceLazyLoading() {
   frags = _md_body.querySelectorAll('[data-echo]');
   frags = Array.prototype.slice.call(frags, 0);
 
-  _.each(frags, function(frag) {
+  frags.forEach(function(frag) {
     data = frag.getAttribute('data-echo');
     frag.setAttribute('src', data);
     frag.removeAttribute('data-echo');
