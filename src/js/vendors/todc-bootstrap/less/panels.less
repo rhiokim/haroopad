@@ -67,12 +67,26 @@
 // watch it go full width.
 
 .panel {
+  > .table,
+  > .table-responsive > .table,
+  > .panel-collapse > .table {
+
+    caption {
+      padding-left: @panel-body-padding;
+      padding-right: @panel-body-padding;
+    }
+  }
   // Add border top radius for first one
   > .table:first-child,
   > .table-responsive:first-child > .table:first-child {
+    .border-top-radius((@panel-border-radius - 1));
+
     > thead:first-child,
     > tbody:first-child {
       > tr:first-child {
+        border-top-left-radius: (@panel-border-radius - 1);
+        border-top-right-radius: (@panel-border-radius - 1);
+
         td:first-child,
         th:first-child {
           border-top-left-radius: (@panel-border-radius - 1);
@@ -87,9 +101,14 @@
   // Add border bottom radius for last one
   > .table:last-child,
   > .table-responsive:last-child > .table:last-child {
+    .border-bottom-radius((@panel-border-radius - 1));
+
     > tbody:last-child,
     > tfoot:last-child {
       > tr:last-child {
+        border-bottom-left-radius: (@panel-border-radius - 1);
+        border-bottom-right-radius: (@panel-border-radius - 1);
+
         td:first-child,
         th:first-child {
           border-bottom-left-radius: (@panel-border-radius - 1);
@@ -102,7 +121,9 @@
     }
   }
   > .panel-body + .table,
-  > .panel-body + .table-responsive {
+  > .panel-body + .table-responsive,
+  > .table + .panel-body,
+  > .table-responsive + .panel-body {
     border-top: 1px solid @table-border-color;
   }
 }
@@ -141,6 +162,7 @@
   .panel {
     border-color: transparent;
     border-radius: 0;
+
     + .panel {
       margin-top: -3px;
     }
@@ -183,10 +205,12 @@
       font-size: @font-size-base;
     }
 
-    + .panel-collapse .panel-body {
+    + .panel-collapse > .panel-body,
+    + .panel-collapse > .list-group {
       border-top: 0 none;
     }
   }
+
   .panel-footer {
     + .panel-collapse .panel-body {
       border-bottom: 0 none;
