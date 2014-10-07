@@ -16,7 +16,7 @@
   margin-bottom: @line-height-computed;
   background-color: transparent;
   background-image: none;
-  border-radius: 0;
+  border-radius: @progress-border-radius;
   .box-shadow(none);
 }
 
@@ -29,10 +29,15 @@
 }
 
 // Striped bars
-.progress-striped .progress-bar {
+//
+// `.progress-striped .progress-bar` is deprecated as of v3.2.0 in favor of the
+// `.progress-bar-striped` class, which you just add to an existing
+// `.progress-bar`.
+.progress-striped .progress-bar,
+.progress-bar-striped {
   #gradient > .striped();
   background-size: 40px 40px;
- }
+}
 
 
 

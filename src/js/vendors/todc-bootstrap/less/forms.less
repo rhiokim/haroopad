@@ -109,22 +109,44 @@ output {
   }
 }
 
-// Special styles for iOS date input
+// Special styles for iOS temporal inputs
 //
-// In Mobile Safari, date inputs require a pixel line-height that matches the
+// In Mobile Safari, setting `display: block` on temporal inputs causes the
+// text within the input to become vertically misaligned.
+// As a workaround, we set a pixel line-height that matches the
 // given height of the input. Since this fucks up everything else, we have to
 // appropriately reset it for Internet Explorer and the size variations.
 
-input[type="date"] {
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"] {
   line-height: @input-height-base;
   // IE8+ misaligns the text within date inputs, so we reset
   line-height: @line-height-base ~"\0";
 
   &.input-sm {
     line-height: @input-height-small;
+    line-height: @line-height-small ~"\0";
   }
   &.input-lg {
     line-height: @input-height-large;
+    line-height: @line-height-large ~"\0";
+  }
+}
+
+// IE 11 hack to reverse the iOS temporal input hack.
+_:-ms-fullscreen, :root input[type="date"],
+_:-ms-fullscreen, :root input[type="time"],
+_:-ms-fullscreen, :root input[type="datetime-local"],
+_:-ms-fullscreen, :root input[type="month"] {
+  line-height: @line-height-base;
+
+  &.input-sm {
+    line-height: @line-height-small;
+  }
+  &.input-lg {
+    line-height: @line-height-large;
   }
 }
 
@@ -135,7 +157,9 @@ input[type="date"] {
 
 .radio,
 .checkbox {
-  min-height: @line-height-computed; // clear the floating input if there is no label text
+  label {
+    min-height: @line-height-computed; // Ensure the input doesn't jump when there is no text
+  }
 }
 input[type="radio"],
 .radio input[type="radio"],
@@ -152,7 +176,9 @@ input[type="checkbox"],
   -webkit-appearance: none;
 
   // override styles for IE
-  border-width: 0 \0;
+  width: 16px ~"\0";
+  height: 16px ~"\0";
+  border: 1px solid transparent ~"\0";
 
   &:focus {
     outline: 0;
@@ -176,6 +202,10 @@ input[type="radio"],
   border-radius: 1em;
   width: 15px;
   height: 15px;
+
+  // override styles for IE
+  width: 18px ~"\0";
+  height: 18px ~"\0";
 
   &:checked::after {
     content: '';
@@ -210,17 +240,31 @@ input[type="checkbox"],
 }
 
 
+// Static form control text
+//
+// Apply class to a `p` element to make any string of text align with labels in
+// a horizontal form layout.
+
+.form-control-static {
+  // Size it appropriately next to real form controls
+  padding-top: (@padding-base-vertical + 1);
+  padding-bottom: (@padding-base-vertical + 1);
+}
+
+
 // Form control sizing
 //
 // Build on `.form-control` with modifier classes to decrease or increase the
 // height and font-size of form controls.
 
-.input-sm {
-  .input-size(@input-height-small; @padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+.input-sm,
+.form-group-sm .form-control {
+  .input-size(@input-height-small; @padding-small-vertical; @padding-small-horizontal; @font-size-small; @line-height-small; @input-border-radius-small);
 }
 
-.input-lg {
-  .input-size(@input-height-large; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @border-radius-large);
+.input-lg,
+.form-group-lg .form-control {
+  .input-size(@input-height-large; @padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @input-border-radius-large);
 }
 
 
@@ -264,11 +308,13 @@ input[type="checkbox"],
   .form-control-validation(#dd4b39; #dd4b39; @state-danger-bg);
 }
 
+// Reposition feedback icon if input has visible label above
+.has-feedback label {
 
-// Static form control text
-//
-// Apply class to a `p` element to make any string of text align with labels in
-// a horizontal form layout.
+  & ~ .form-control-feedback {
+     top: (@line-height-computed + 5); // Height of the `label` and its margin
+  }
+}
 
 
 // Help text
@@ -291,7 +337,6 @@ input[type="checkbox"],
 .form-horizontal .checkbox-inline {
   padding-top: @padding-base-vertical;
 }
-
 
 
 // Inline forms
@@ -323,6 +368,27 @@ input[type="checkbox"],
       vertical-align: middle;
     }
 
+    // Make static controls behave like regular ones
+    .form-control-static {
+      display: inline-block;
+    }
+
+    .input-group {
+      display: inline-table;
+      vertical-align: middle;
+
+      .input-group-addon,
+      .input-group-btn,
+      .form-control {
+        width: auto;
+      }
+    }
+
+    // Input groups need that 100% width though
+    .input-group > .form-control {
+      width: 100%;
+    }
+
     .control-label {
       margin-bottom: 0;
       vertical-align: middle;
@@ -336,20 +402,20 @@ input[type="checkbox"],
       display: inline-block;
       margin-top: 0;
       margin-bottom: 0;
-      padding-left: 0;
       vertical-align: middle;
+
+      label {
+        padding-left: 0;
+      }
     }
     .radio input[type="radio"],
     .checkbox input[type="checkbox"] {
-      float: none;
+      position: relative;
       margin-left: 0;
       margin-bottom: -2px;
     }
 
-    // Validation states
-    //
-    // Reposition the icon because it's now within a grid column and columns have
-    // `position: relative;` on them. Also accounts for the grid gutter padding.
+    // Re-override the feedback icon.
     .has-feedback .form-control-feedback {
       top: 0;
     }
@@ -380,16 +446,30 @@ input[type="checkbox"],
     min-height: (@line-height-computed + (@padding-base-vertical + 1));
   }
 
-  .form-control-static {
-    padding-top: (@padding-base-vertical + 1);
-    padding-bottom: (@padding-base-vertical + 1);
-  }
-
   // Reset spacing and right align labels, but scope to media queries so that
   // labels on narrow viewports stack the same as a default form example.
   @media (min-width: @screen-sm-min) {
     .control-label {
       padding-top: (@padding-base-vertical + 1); // Default padding plus a border
+    }
+  }
+
+  // Form group sizes
+  //
+  // Quick utility class for applying `.input-lg` and `.input-sm` styles to the
+  // inputs and labels within a `.form-group`.
+  .form-group-lg {
+    @media (min-width: @screen-sm-min) {
+      .control-label {
+        padding-top: ((@padding-large-vertical * @line-height-large) + 1);
+      }
+    }
+  }
+  .form-group-sm {
+    @media (min-width: @screen-sm-min) {
+      .control-label {
+        padding-top: (@padding-small-vertical + 1);
+      }
     }
   }
 }
