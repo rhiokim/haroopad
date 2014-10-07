@@ -1,11 +1,11 @@
 {
   "name": "markdown-css",
   "homepage": "https://github.com/rhiokim/markdown-css",
-  "_release": "a1d6d68f3e",
+  "_release": "6b4f25bd3e",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "a1d6d68f3ef72f45eb1b560a907396419d1ca6fa"
+    "commit": "6b4f25bd3e1d9075ef5595a198b1ca9456a17e83"
   },
   "_source": "git@github.com:rhiokim/markdown-css.git",
   "_target": "*",
