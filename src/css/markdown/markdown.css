@@ -115,6 +115,7 @@
   padding: 0;
   border-collapse: collapse;
   border-spacing: 0;
+  margin-bottom: 16px;
 }
 .markdown table tr th,
 .markdown table tr td {
