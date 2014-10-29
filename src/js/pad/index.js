@@ -136,7 +136,7 @@ i18n.init({
 
     file.on('saved', function() {
       var opt = nw.file.toJSON();
-      Viewer.init(opt);
+      Viewer.init();
       nw.emit('file.saved', opt);
     });
 

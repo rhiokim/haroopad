@@ -32,6 +32,16 @@ window.ondrop = function(e) {
   e.preventDefault();
 };
 
+function loadJs(url, cb) {
+  var head = document.getElementsByTagName('head')[0];
+  var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = url;
+      script.onload = cb;
+
+   head.appendChild(script);
+}
+
 function loadCss(url) {
   $('<link>').attr({
     type: 'text/css',
@@ -145,6 +155,25 @@ function createTOC() {
 
 function init(options) {
   _options = options;
+
+  loadJs(_options.jslib + '/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+    MathJax.Hub.Config({
+      messageStyle: "none",
+      showProcessingMessages: false,
+      "HTML-CSS": { 
+        linebreaks: { automatic: true } 
+      },
+      TeX: { 
+        // equationNumbers: { autoNumber: "AMS" } 
+      },
+      tex2jax: {
+        inlineMath: [ ['$$$','$$$'], ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      }
+    });
+    MathJax.Hub.config.menuSettings.renderer = 'HTML-CSS'; //'SVG', 'NativeMML'
+  });
 }
 
 /**
@@ -309,13 +338,27 @@ function countFragments(target) {
   window.ee.emit('title', headers[0] && headers[0].innerHTML);
 }
 
+function processMathJax(target, cb) {
+  var mathEl = document.createElement('div');
+  mathEl.innerHTML = target.innerHTML;
+
+  MathJax.Hub.Queue(
+    ["Typeset", MathJax.Hub, mathEl],
+    [function() {
+      target.innerHTML = mathEl.innerHTML;
+      target.removeAttribute('class');
+    }],
+    [cb]
+  );
+}
+
 function drawMathJax() {
   var i, math = _md_body.querySelectorAll('.mathjax');
   math = Array.prototype.slice.call(math, 0);
 
   for (i = 0; i < math.length; i++) {
-    // processMathJax(math[i]);
-    window.ee.emit('math', math[i]);
+    processMathJax(math[i]);
+    // window.ee.emit('math', math[i]);
   }
 }
 
@@ -530,6 +573,7 @@ $(document.body).ready(function() {
   _doc = document,
   _body = _doc.body,
   _md_body = _doc.getElementById('root');
+
 
   $(_body).click(function(e) {
     var origin, href, el = e.target;

@@ -49,9 +49,7 @@ i18n.init({
     'file/File',
     'window/Window',
     'window/WindowManager',
-    'utils/UpdateNotifier',
-    'math/Math',
-    'tools/Tools'
+    'utils/UpdateNotifier'
   ], function(/*DB,*/ Context, Mailer, FileMgr, Window, WindowMgr, Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {
