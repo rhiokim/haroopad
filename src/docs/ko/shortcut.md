@@ -39,6 +39,7 @@ COMMAND (CTRL) - SHIFT - H  | 마크다운 구문 헬퍼
 COMMAND (CTRL) - Enter      | 전체화면 모드 토글 #1
 COMMAND (CTRL) - F11        | 전체화면 모드 토글 #2
 Double ESC                  | 전체화면 종료
+COMMAND (CTRL) - ALT - P    | 프리젠테이션 모드
 COMMAND (CTRL) - SHIFT - Y  | VIM 키 바인딩
 ALT - UP                    | 에디터 폰트 사이즈 +1px
 ALT - DOWN                  | 에디터 폰트 사이즈 -1px

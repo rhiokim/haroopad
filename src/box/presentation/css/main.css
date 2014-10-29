@@ -1,0 +1,150 @@
+body {
+}
+
+#Cover h1,
+#Cover h2 {
+  margin:30px 0 0;
+  color:#FFF;
+  text-align:center;
+  font-size:70px;
+}
+#Cover p {
+  margin:10px 0 0;
+  text-align:center;
+  color:#FFF;
+  font-style:italic;
+  font-size:20px;
+}
+#Cover p a {
+  color:#FFF;
+}
+
+.slide h2 {
+  margin: 0 0 30px;
+  color: #666;
+  font-size: 1.8em;
+}
+
+.slide h3 {
+  margin: 0 0 24px;
+  color: #666;
+  font-size: 1.6em;
+}
+
+.slide h4 {
+  margin: 0 0 18px;
+  color: #666;
+  font-size: 1.4em;
+}
+
+.slide img[alt=picture] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/**
+ * video
+ */
+
+video {
+  opacity: 0;
+  border: 2px solid #444;
+}
+.screenrec #camFeed {
+  position: absolute; z-index: 1; bottom: 30px; right: -60px;
+  -webkit-animation: reccam 1s;
+  -webkit-animation-fill-mode: forwards;
+}
+
+.screenrec .slide {
+  -webkit-animation: recslide 1s;
+  -webkit-animation-fill-mode: forwards;
+  /*-webkit-animation-iteration-count:  infinite;*/
+}
+
+@-webkit-keyframes recslide {
+  from {}
+  to { -webkit-transform: perspective( 800px ) rotateY( 15deg ) scale(.87); }
+}
+
+@-webkit-keyframes reccam {
+  from { opacity: 0; }
+  to { 
+    opacity: 1; 
+    -webkit-transform: perspective( 800px ) rotateY( -15deg ) scale(.6); 
+  }
+}
+
+.progress {
+  height: 2px;
+}
+
+.grayscale {
+  -webkit-filter: grayscale(1);
+}
+.sepia {
+  -webkit-filter: sepia(1);
+}
+.blur {
+  -webkit-filter: blur(3px);
+}
+.saturate {
+    -webkit-filter: saturate(4);
+    filter: saturate(4);
+}
+.hue-rotate {
+    -webkit-filter: hue-rotate(90deg);
+    filter: hue-rotate(90deg);
+}
+.invert {
+    -webkit-filter: invert(.8);
+    filter: invert(.8);
+}
+.opacity {
+    -webkit-filter: opacity(.5);
+    filter: opacity(.5);
+}
+.brightness {
+    -webkit-filter: brightness(.5);
+    filter: brightness(.5);
+}
+.contrast {
+    -webkit-filter: contrast(3);
+    filter: contrast(3);
+}
+.tint {
+    -webkit-filter: sepia(1) hue-rotate(200deg);
+    filter: sepia(1) hue-rotate(200deg);
+}
+.multiple-filters {
+    -webkit-filter: contrast(1.4) saturate(1.8) sepia(.6);
+    filter: contrast(1.4) saturate(1.8) sepia(.6);
+}
+.inkwell {
+    -webkit-filter: grayscale(1) brightness(0.45) contrast(1.05);
+    filter: grayscale(1) brightness(0.45) contrast(1.05);
+}
+
+/**
+ * tool
+ */
+.tools {
+  display: none;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: -15px;
+  right: 10px;
+  z-index: 2;
+}
+.tools a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-size: 12px !important;
+}
+.full .tools {
+  display: block;
+}

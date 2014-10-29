@@ -151,7 +151,7 @@ define([
 	}
 
 	process.on('actived', function(child) {
-		exports.actived = child;
+		exports.actived = window.activedWindow = child;
 
 		child.show(); //#346
 

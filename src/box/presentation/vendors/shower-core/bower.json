@@ -1,0 +1,18 @@
+{
+  "name": "shower-core",
+  "version": "1.0.4",
+  "license": "MIT",
+  "main": "shower.min.js",
+  "ignore": [
+    "*",
+    "!License.md",
+    "!Readme.md",
+    "!shower.min.js",
+    "!bower.json"
+  ],
+  "keywords": [
+    "shower",
+    "presentation",
+    "core"
+  ]
+}

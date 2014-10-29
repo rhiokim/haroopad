@@ -56,6 +56,15 @@ define([
 
 		add(util.sepItem());
 
+		add(util.menuItem({
+			label: i18n.t('view.enter-presentation'),
+			click: function() {
+				window.parent.ee.emit('menu.view.presentation');
+			}
+		}));
+
+		add(util.sepItem());
+
 		// add(util.menuItem({
 		// 	label: i18n.t('insert.embed-image'),
 		// 	submenu: MenuEmbedImage
