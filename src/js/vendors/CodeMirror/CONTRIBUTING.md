@@ -12,7 +12,7 @@ Community discussion, questions, and informal bug reporting is done on the
 ## Submitting bug reports
 
 The preferred way to report bugs is to use the
-[GitHub issue tracker](http://github.com/marijnh/CodeMirror/issues). Before
+[GitHub issue tracker](http://github.com/codemirror/CodeMirror/issues). Before
 reporting a bug, read these pointers.
 
 **Note:** The issue tracker is for *bugs*, not requests for help. Questions
@@ -48,7 +48,7 @@ should be asked on the
 ## Contributing code
 
 - Make sure you have a [GitHub Account](https://github.com/signup/free)
-- Fork [CodeMirror](https://github.com/marijnh/CodeMirror/)
+- Fork [CodeMirror](https://github.com/codemirror/CodeMirror/)
   ([how to fork a repo](https://help.github.com/articles/fork-a-repo))
 - Make your changes
 - If your changes are easy to test or likely to regress, add tests.
@@ -70,3 +70,7 @@ should be asked on the
 - Note that the linter (`bin/lint`) which is run after each commit
   complains about unused variables and functions. Prefix their names
   with an underscore to muffle it.
+
+- CodeMirror does *not* follow JSHint or JSLint prescribed style.
+  Patches that try to 'fix' code to pass one of these linters will be
+  unceremoniously discarded.

@@ -1,4 +1,9 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
 /* Just enough of CodeMirror to run runMode under node.js */
+
+// declare global: StringStream
 
 function splitLines(string){ return string.split(/\r?\n|\r/); };
 
@@ -69,10 +74,8 @@ exports.startState = function(mode, a1, a2) {
 
 var modes = exports.modes = {}, mimeModes = exports.mimeModes = {};
 exports.defineMode = function(name, mode) {
-  if (arguments.length > 2) {
-    mode.dependencies = [];
-    for (var i = 2; i < arguments.length; ++i) mode.dependencies.push(arguments[i]);
-  }
+  if (arguments.length > 2)
+    mode.dependencies = Array.prototype.slice.call(arguments, 2);
   modes[name] = mode;
 };
 exports.defineMIME = function(mime, spec) { mimeModes[mime] = spec; };
@@ -105,6 +108,7 @@ exports.runMode = function(string, modespec, callback, options) {
   for (var i = 0, e = lines.length; i < e; ++i) {
     if (i) callback("\n");
     var stream = new exports.StringStream(lines[i]);
+    if (!stream.string && mode.blankLine) mode.blankLine(state);
     while (!stream.eol()) {
       var style = mode.token(stream, state);
       callback(stream.current(), style, i, stream.start, state);
@@ -112,3 +116,5 @@ exports.runMode = function(string, modespec, callback, options) {
     }
   }
 };
+
+require.cache[require.resolve("../../lib/codemirror")] = require.cache[require.resolve("./runmode.node")];

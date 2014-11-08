@@ -1,3 +1,16 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
+(function(mod) {
+  if (typeof exports == "object" && typeof module == "object") // CommonJS
+    mod(require("../../lib/codemirror"), require("../xml/xml"), require("../javascript/javascript"), require("../css/css"));
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror", "../xml/xml", "../javascript/javascript", "../css/css"], mod);
+  else // Plain browser env
+    mod(CodeMirror);
+})(function(CodeMirror) {
+"use strict";
+
 CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
   var htmlMode = CodeMirror.getMode(config, {name: "xml",
                                              htmlMode: true,
@@ -17,6 +30,7 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
 
   function html(stream, state) {
     var tagName = state.htmlState.tagName;
+    if (tagName) tagName = tagName.toLowerCase();
     var style = htmlMode.token(stream, state.htmlState);
     if (tagName == "script" && /\btag\b/.test(style) && stream.current() == ">") {
       // Script block: mode to change to depends on type attribute
@@ -103,3 +117,5 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
 }, "xml", "javascript", "css");
 
 CodeMirror.defineMIME("text/html", "htmlmixed");
+
+});
