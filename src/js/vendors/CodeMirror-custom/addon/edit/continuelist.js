@@ -6,30 +6,32 @@
 
   CodeMirror.commands.newlineAndIndentContinueMarkdownList = function(cm) {
     if (cm.getOption("disableInput")) return CodeMirror.Pass;
+    var ranges = cm.listSelections(), replacements = [];
+    for (var i = 0; i < ranges.length; i++) {
+      var pos = ranges[i].head, match;
+      var inList = cm.getStateAfter(pos.line).list !== false;
 
-    var pos = cm.getCursor(),
-        inList = cm.getStateAfter(pos.line).list !== false,
-        match;
+      if (!ranges[i].empty() || !inList || !(match = cm.getLine(pos.line).match(listRE))) {
+        cm.execCommand("newlineAndIndent");
+        return;
+      }
 
-    if (!inList || !(match = cm.getLine(pos.line).match(listRE))) {
-      cm.execCommand('newlineAndIndent');
-      return;
+      if (!match.input.replace(match[0], '').trim()) {
+        //TODO previous list item check
+        pos.ch = 0;
+        cm.replaceRange('', pos, { line: pos.line, ch: match.input.length });
+        return;
+      }
+
+      var indent = match[1], after = match[4];
+      var bullet = unorderedBullets.indexOf(match[2]) >= 0
+        ? match[2]
+        : (parseInt(match[3], 10) + 1) + ".";
+
+      replacements[i] = "\n" + indent + bullet + after;
     }
 
-    if (!match.input.replace(match[0], '').trim()) {
-      cm.removeLine(pos.line);
-      cm.replaceSelection('\n', 'end');
-      // cm.setLine(pos.line+1, '');
-      // cm.execCommand('newlineAndIndent');
-      return;
-    }
-
-    var indent = match[1], after = match[4];
-    var bullet = unorderedBullets.indexOf(match[2]) >= 0
-      ? match[2]
-      : (parseInt(match[3], 10) + 1) + '.';
-
-    cm.replaceSelection('\n' + indent + bullet + after, 'end');
+    cm.replaceSelections(replacements);
   };
 
 }());
