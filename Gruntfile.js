@@ -123,6 +123,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/theme/midinight.css',
             '<%= vendors %>/CodeMirror/theme/monokai.css',
             '<%= vendors %>/CodeMirror/theme/neat.css',
+            '<%= vendors %>/CodeMirror/theme/neo.css',
             '<%= vendors %>/CodeMirror/theme/night.css',
             '<%= vendors %>/CodeMirror/theme/paraiso-dark.css',
             '<%= vendors %>/CodeMirror/theme/paraiso-light.css',
@@ -282,7 +283,9 @@ module.exports = function(grunt) {
             '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
             '<%= vendors %>/CodeMirror/mode/php/php.js',
             '<%= vendors %>/CodeMirror/mode/perl/perl.js',
-            '<%= vendors %>/CodeMirror/keymap/vim.js'
+            '<%= vendors %>/CodeMirror/keymap/vim.js',
+            '<%= vendors %>/CodeMirror/keymap/emacs.js',
+            '<%= vendors %>/CodeMirror/keymap/sublime.js'
           ],
 
           '<%= vendors %>/backbone/backbone.min.js': [ 
