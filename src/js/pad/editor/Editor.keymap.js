@@ -26,7 +26,7 @@ define([
 			cm.setCursor(cm.getCursor());
 		}
 
-		keyMaps[__reKey({ key: 's', modifiers: 'cmd' })] = function() {};
+		// keyMaps[__reKey({ key: 's', modifiers: 'cmd' })] = function() {};
 		keyMaps[__reKey({ key: 'x', modifiers: 'cmd' })] = cut;
 		keyMaps[__reKey({ key: 'c', modifiers: 'cmd' })] = copy;
 		keyMaps[__reKey({ key: 'v', modifiers: 'cmd' })] = paste;

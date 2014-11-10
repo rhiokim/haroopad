@@ -27,6 +27,42 @@ function shortcut(key, cb) {
   gui.App.registerGlobalHotKey(shortcut);
 }
 
+/**
+ * Use composition to expand capabilities of Notifications feature.
+ */
+function NotificationWrapper(title, description, appIcon, soundFile) {
+    // appIcon = appIcon || 'logo.png';
+
+    /**
+     * A path to a sound file, like /sounds/notification.wav
+     */        
+    function playSound(soundFile) {
+        if(soundFile === undefined) return; 
+        var audio = document.createElement('audio');
+        audio.src = soundFile;
+        audio.play();
+        audio = undefined;
+    }
+
+    /**
+     * Show the notification here.
+     */
+    var notification = new window.Notification(title, {
+        body: description,
+        icon: appIcon
+    });
+
+    /**
+     * Play the sound.
+     */
+    soundFile && playSound(soundFile);
+
+    /**
+     * Return notification object to controller so we can bind click events.
+     */
+    return notification;
+}
+
 function asVersion(str) {
 	var v = str.split(".");
 	return {major: parseInt(v[0]), minor: parseInt(v[1]), patch: parseInt(v[2])};

@@ -224,11 +224,17 @@ define([
 	/* update haroopad */
 	window.ee.on('update.haroopad', function(currVersion, newVersion, link) {
 		Notifier.notify('<a href="http://pad.haroopress.com/page.html?f=release-notes" style="color:yellow">'+ i18n.t('pad:upgrade.note') +'</a>, <a href="http://pad.haroopress.com/user.html#download" style="color:yellow">'+ i18n.t('pad:upgrade.download') +'</a>', i18n.t('pad:upgrade.message') + ' <span style="color:yellow">v' + newVersion +'</span>', undefined, 10000);
+		// var noti = NotificationWrapper('Haroopad', i18n.t('pad:upgrade.message') +'\n'+ newVersion);
+		
+		// noti.addEventListener('click', function() {
+		// 	global.Shell.openExternal('http://pad.haroopress.com/user.html#download');
+		// });
 	});
 
 	/* up to date haroopad */
 	window.ee.on('up.to.date.haroopad', function(version) {
-		Notifier.notify(i18n.t('pad:upgrade.newest'), i18n.t('pad:upgrade.uptodate'), undefined, 5000);
+		NotificationWrapper('Haroopad', i18n.t('pad:upgrade.uptodate'));
+		// Notifier.notify(i18n.t('pad:upgrade.newest'), i18n.t('pad:upgrade.uptodate'), undefined, 5000);
 	});
 
 	window.ee.on('print.editor', function() {
