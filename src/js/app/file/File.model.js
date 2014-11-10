@@ -9,6 +9,7 @@ define([
       base62 = require('base62');
   var gui = require('nw.gui');
 
+  var _window = window;
   function open(fileEntry) {
     return fs.readFileSync(fileEntry, 'utf8');
   }
@@ -65,6 +66,8 @@ define([
 
         this.update(fileEntry);
       });
+
+      this.on('close', this.close, this);
 
       if (!this.get('tmp')) {
         this._uid = unique();
@@ -144,7 +147,7 @@ define([
     },
 
     close: function() {
-      window.clearTimeout(this._writeTimeout);
+      _window.clearTimeout(this._writeTimeout);
       
       if (fs.existsSync(this._tmpFile)) {
         fs.removeSync(this._tmpFile);

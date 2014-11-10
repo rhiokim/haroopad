@@ -201,25 +201,25 @@ define([
 			changeFontSize(viewerConfig.fontSize);
 		});
 
-		keymage(__key('print'), function() {
-			window.ee.emit('print.viewer');
-		});
+		// keymage(__kbd('print'), function() {
+		// 	window.ee.emit('print.viewer');
+		// });
 
-		keymage(__key('copy-to-clipboard'), function() {
-			window.ee.emit('menu.file.exports.clipboard.plain');
-		});
+		// keymage(__kbd('copy-to-clipboard'), function() {
+		// 	window.ee.emit('menu.file.exports.clipboard.plain');
+		// });
 
 		// keymage('defmod-shift-alt-c', function() {
 		// 	window.ee.emit('menu.file.exports.clipboard.haroopad');
 		// });
 
-		keymage(__key('viewer-font-size-up'), function() {
-			window.ee.emit('menu.view.viewer.font.size', 1);
-		});
+		// keymage(__kbd('viewer-font-size-up'), function() {
+		// 	window.ee.emit('menu.view.viewer.font.size', 1);
+		// });
 
-		keymage(__key('viewer-font-size-down'), function() {
-			window.ee.emit('menu.view.viewer.font.size', -1);
-		});
+		// keymage(__kbd('viewer-font-size-down'), function() {
+		// 	window.ee.emit('menu.view.viewer.font.size', -1);
+		// });
 
 		/* change markdown event handler */
 		nw.file.doc.on('update', function(doc, html) {

@@ -53,9 +53,9 @@ i18n.init({
       $('body').i18n(); 
       document.title = i18n.t('title');
     
-      keymage('esc', function() {
-        nw.close();
-      });
+      // keymage('esc', function() {
+      //   nw.close();
+      // });
 
       function showItemInFolder(area, file) {
         var theme = path.join(gui.App.dataPath, 'Themes', area, file);

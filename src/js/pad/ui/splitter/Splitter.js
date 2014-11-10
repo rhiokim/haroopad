@@ -103,12 +103,12 @@ define([
 			setModeDual();
 		}
 
-		keymage(__key('perspective-move-right'), setModeEditor);
-		keymage(__key('perspective-move-left'), setModeDual);
-		keymage(__key('perspective-set-default'), resetMode);
+		// keymage(__kbd('perspective-move-right'), setModeEditor);
+		// keymage(__kbd('perspective-move-left'), setModeDual);
+		// keymage(__kbd('perspective-set-default'), resetMode);
 
-		keymage(__key('perspective-minus-view'), setPlus5Width);
-		keymage(__key('perspective-plus-view'), setMinus5Width);
+		// keymage(__kbd('perspective-minus-view'), setPlus5Width);
+		// keymage(__kbd('perspective-plus-view'), setMinus5Width);
 
 		window.ee.on('view.reset.mode', resetMode);
 		window.ee.on('view.plus5.width', setPlus5Width);

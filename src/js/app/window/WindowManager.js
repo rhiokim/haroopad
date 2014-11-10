@@ -4,7 +4,9 @@ define([
 	'file/Recents'
 ], function(exports, File, Recents) {
 
-	var gui = require('nw.gui');
+	var gui = global.gui;//require('nw.gui');
+	var win = gui.Window.get();
+	var closeAll = false;
 
 	var windows = {},
 		openning = false,
@@ -34,8 +36,9 @@ define([
 	}
 
 	function closeAll() {
+		// gui.App.closeAllWindows();
 		for (var prop in windows) {
-			windows[prop].close();
+			windows[prop].emit('close');
 		}
 	}
 
@@ -45,16 +48,19 @@ define([
 		realCount++;
 
 		newWin.on('closed', function() {
-			this.file.close();
-			
+			// this.file.close();
+
 			for (var prop in windows) {
 				if (prop == this.created_at) {
 					windows[prop] = null;
 					delete windows[prop];
 					realCount--;
 
-					if (!realCount/* && getPlatformName() != 'mac'*/) {
-						config = store.get('Window');
+					// if (!realCount/* && getPlatformName() != 'mac'*/) {
+					// 	config = store.get('Window');
+					// 	window.ee.emit('exit');
+					// }
+					if (!realCount && closeAll/* && getPlatformName() != 'mac'*/) {
 						window.ee.emit('exit');
 					}
 					return;
@@ -158,7 +164,25 @@ define([
 		openning = false;
 	});
 
-	window.ee.on('closeAll', closeAll);
+	window.ee.on('closeAll', function() {
+		gui.App.closeAllWindows();
+	});
+
+	gui.App.on('reopen', function() {
+		if (realCount < 1) {
+			// alert('reopen');			
+			open();
+		}
+	});
+
+	//When quit app using Command+Q short, prevent close major window first.
+	win.on('close', function() {
+		closeAll = true;
+
+		if (!realCount) {
+			window.ee.emit('exit');
+		}
+	});
 
 	exports.open = open;
 

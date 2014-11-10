@@ -135,6 +135,10 @@ define([
     WindowMgr.actived.window.ee.emit('show.toggle.linenum');
   });
 
+  window.ee.on('menu.show.toggle.markdown.help', function() {
+    WindowMgr.actived.window.ee.emit('toggle.syntax.help');
+  });
+
   window.ee.on('menu.view.toggle.vim', function() {
     WindowMgr.actived.window.ee.emit('menu.view.toggle.vim');
   });
@@ -303,16 +307,16 @@ define([
     WindowMgr.actived.window.ee.emit('up.to.date.news', contents);
   });
 
-  keymage(__key('new-window'), function() {
-    WindowMgr.open();
-  });
+  // keymage(__key('new-window'), function() {
+  //   WindowMgr.open();
+  // });
 
-  keymage(__key('exit'), function() {
-    gui.App.quit();
-  });
+  // keymage(__key('exit'), function() {
+  //   gui.App.quit();
+  // });
 
-  keymage(__key('show-preference'), function() {
-    Preferences.show();
-  });
+  // keymage(__key('show-preference'), function() {
+  //   Preferences.show();
+  // });
 
 });

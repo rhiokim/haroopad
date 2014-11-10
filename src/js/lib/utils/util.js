@@ -1,7 +1,30 @@
 var path = require('path');
 
-function __key(id) {
+function __reKey(kbd) {
+	var key = kbd.key.toUpperCase();
+	var modifiers = kbd.modifiers;
+	modifiers = modifiers.replace('shift', 'Shift').replace('ctrl', 'Ctrl').replace('alt', 'Alt');
+	modifiers = modifiers.replace('cmd', /Mac/.test(navigator.platform) ? 'Cmd' : 'Ctrl');
+	return modifiers +'-'+ key;
+	// return key.replace('cmd', /Mac/.test(navigator.platform) ? 'Cmd' : 'Ctrl');
+}
+
+function __kbd(id) {
   return global.SHORTCUTS[id];
+}
+
+function shortcut(key, cb) {
+  var gui = global.gui;
+
+  var shortcut = new gui.Shortcut({
+    key: key.replace(/\-/g,'+'),
+    active: cb,
+	  failed : function(msg) {
+	    console.log(msg);
+	  }
+  });
+
+  gui.App.registerGlobalHotKey(shortcut);
 }
 
 function asVersion(str) {

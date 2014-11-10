@@ -22,6 +22,7 @@ define([
 
 	function close() {
 		nw.emit('destory');
+		nw.file.trigger('close');
 
 		win.hide();
 
@@ -55,6 +56,7 @@ define([
 	});
 
 	Dialogs.save.bind('dont-save', function() {
+		// nw.file.trigger('close');
 		close();
 	});
 
@@ -72,7 +74,7 @@ define([
 	});
 
 	window.ee.on('file.close', function() {
-		win.close();
+		win.emit('close');
 	});
 
 	window.ee.on('file.opened', function() {
@@ -233,66 +235,66 @@ define([
 		// TODO print after popup window
 	});
 
-	keymage(__key('enter-fullscreen'), function() {
-		window.ee.emit('view.fullscreen');
-	}, { preventDefault: true });
+	// keymage(__kbd('enter-fullscreen'), function() {
+	// 	window.ee.emit('view.fullscreen');
+	// }, { preventDefault: true });
 
-	keymage(__key('enter-fullscreen-win'), function() {
-		window.ee.emit('view.fullscreen');
-	}, { preventDefault: true });
+	// keymage(__kbd('enter-fullscreen-win'), function() {
+	// 	window.ee.emit('view.fullscreen');
+	// }, { preventDefault: true });
 
-	keymage(__key('escape-fullscreen'), function() {
-		if (win.isFullscreen) {
-			win.leaveFullscreen();
-			config.isFullscreen = win.isFullscreen;
-			store.set('Window', config);
-		}
-	});
+	// keymage(__kbd('escape-fullscreen'), function() {
+	// 	if (win.isFullscreen) {
+	// 		win.leaveFullscreen();
+	// 		config.isFullscreen = win.isFullscreen;
+	// 		store.set('Window', config);
+	// 	}
+	// });
 
-	keymage(__key('open'), function() {
-		window.ee.emit('menu.file.open');
-	}, { preventDefault: true });
+	// keymage(__kbd('open'), function() {
+	// 	window.ee.emit('menu.file.open');
+	// }, { preventDefault: true });
 
-	keymage(__key('save'), function() {
-		window.ee.emit('menu.file.save');
-	}, { preventDefault: true });
+	// keymage(__kbd('save'), function() {
+	// 	window.ee.emit('menu.file.save');
+	// }, { preventDefault: true });
 
-	keymage(__key('save-as'), function() {
-		window.ee.emit('menu.file.save.as');
-	}, { preventDefault: true });
+	// keymage(__kbd('save-as'), function() {
+	// 	window.ee.emit('menu.file.save.as');
+	// }, { preventDefault: true });
 
-	keymage(__key('close'), function() {
-		nw.emit('close');
-	}, { preventDefault: true });
+	// keymage(__kbd('close'), function() {
+	// 	nw.emit('close');
+	// }, { preventDefault: true });
 
-	keymage(__key('close-win'), function() {
-		nw.emit('close');
-	}, { preventDefault: true });
+	// keymage(__kbd('close-win'), function() {
+	// 	nw.emit('close');
+	// }, { preventDefault: true });
 
-	keymage(__key('export-html'), function() {
-		window.ee.emit('file.exports.html');
+	// keymage(__kbd('export-html'), function() {
+	// 	window.ee.emit('file.exports.html');
 
-		global._gaq.push('haroopad.file', 'exports', 'html');
-	}, { preventDefault: true });
+	// 	global._gaq.push('haroopad.file', 'exports', 'html');
+	// }, { preventDefault: true });
 
-	keymage(__key('exit'), function() {
-		var generalOpt = store.get('General');
-		if (generalOpt && generalOpt.enableLastFileRestore === false) {
-			window.parent.ee.emit('clear.lastfiles');
-		}
-	}, { preventDefault: true });
+	// keymage(__kbd('exit'), function() {
+	// 	var generalOpt = store.get('General');
+	// 	if (generalOpt && generalOpt.enableLastFileRestore === false) {
+	// 		window.parent.ee.emit('clear.lastfiles');
+	// 	}
+	// }, { preventDefault: true });
 
-  keymage(__key('toggle-line-number'), function() {
-    window.ee.emit('show.toggle.linenum');
-  });
+ //  keymage(__kbd('toggle-line-number'), function() {
+ //    window.ee.emit('show.toggle.linenum');
+ //  });
 
-  keymage(__key('toggle-vim-key-binding'), function() {
-    window.ee.emit('toggle.vim.keybind');
-  });
+ //  keymage(__kbd('toggle-vim-key-binding'), function() {
+ //    window.ee.emit('toggle.vim.keybind');
+ //  });
 
-  keymage(__key('enter-presentation'), function() {
-    window.parent.ee.emit('menu.view.presentation');
-  });
+ //  keymage(__kbd('enter-presentation'), function() {
+ //    window.parent.ee.emit('menu.view.presentation');
+ //  });
 
 	window.ondragover = function(e) {
 		e.preventDefault();

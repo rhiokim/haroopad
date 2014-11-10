@@ -88,10 +88,6 @@ define([
 
 		view = new View;
 
-		keymage(__key('show-markdown-help'), function() {
-			window.ee.emit('toggle.syntax.help');
-		});
-
 		window.ee.on('toggle.syntax.help', function() {
 			view.toggle();
 		});
