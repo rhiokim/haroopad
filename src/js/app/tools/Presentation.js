@@ -27,10 +27,9 @@ define([], function() {
       }.bind(this));
 
       this.win.on('close', function() {
-        this.win.hide();
-        this.win.close(true);
-        this.win = null;
-      }.bind(this));
+        this.hide();
+        this.close(true);
+      });
 
       this.win.on('leave-fullscreen', function() {
         this.win && this.win.close();

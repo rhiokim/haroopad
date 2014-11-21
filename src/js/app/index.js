@@ -47,10 +47,11 @@ i18n.init({
     'context/Context',
     'mail/Mailer',
     'file/File',
+    'tools/Tools',
     'window/Window',
     'window/WindowManager',
     'utils/UpdateNotifier'
-  ], function(/*DB,*/ Context, Mailer, FileMgr, Window, WindowMgr, Updater) {
+  ], function(/*DB,*/ Context, Mailer, FileMgr, Tools, Window, WindowMgr, Updater) {
 
     // window.ee.on('change.markdown', function(md, options, cb) {
     //   cb = typeof options === 'function' ? options : cb;

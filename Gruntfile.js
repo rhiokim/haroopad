@@ -19,7 +19,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('./src/package.json'),
 
-    nwversion: '0.8.5',
+    nwversion: '0.11.1',
     vendors: 'src/js/vendors',
     build: 'build',
     dist: 'dists/<%= pkg.version %>',

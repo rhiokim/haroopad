@@ -20,7 +20,9 @@ requirejs.onError = function (e) {
 
 
 function tokenize(html) {
-  var tokens = html.split('<hr class="page">');
+  var tokens;
+  html = html || '';
+  tokens = html.split('<hr class="page">');
   return tokens;
 }
 
