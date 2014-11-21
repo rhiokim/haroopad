@@ -191,6 +191,9 @@
     'viewer_font_size_up':    {key:'up', modifiers:'shift-alt'},//'shift-alt-up',
     'viewer_font_size_down':  {key:'down', modifiers:'shift-alt'},//'shift-alt-down',
 
+    'cut':                  {key:'x', modifiers:'cmd'},//'defmod-x',
+    'copy':                 {key:'c', modifiers:'cmd'},//'defmod-c',
+    'paste':                {key:'v', modifiers:'cmd'},//'defmod-v',
     'select_all':           {key:'a', modifiers:'cmd'},//'defmod-a',
     'delete_line':          {key:'d', modifiers:'cmd'},//'defmod-d',
     'undo':                 {key:'z', modifiers:'cmd'},//'defmod-z',

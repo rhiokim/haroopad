@@ -23,6 +23,7 @@ window.MenuBar = function() {
 			menu.insert( MenuBarView(), 5 );
 		} else {
 			menu.append(MenuBarFile())
+			menu.append(MenuBarEdit())
 			menu.append(MenuBarFind())
 			menu.append(MenuBarInsert())
 			menu.append(MenuBarView())

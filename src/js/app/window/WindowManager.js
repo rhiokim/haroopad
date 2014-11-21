@@ -60,8 +60,12 @@ define([
 					// 	config = store.get('Window');
 					// 	window.ee.emit('exit');
 					// }
-					if (!realCount && closeAll/* && getPlatformName() != 'mac'*/) {
-						window.ee.emit('exit');
+					if (!realCount) {
+						if (process.platform === 'win32' || closeAll) {
+							window.ee.emit('exit');
+						} else if (closeAll) {
+							window.ee.emit('exit');
+						}
 					}
 					return;
 				}
