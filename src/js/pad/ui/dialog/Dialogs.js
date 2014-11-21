@@ -33,10 +33,6 @@ define([
 			}
 		});
 
-		keymage(__key('send-email'), function() {
-			window.ee.emit('menu.file.send.email');
-		});
-
 		return dialogs = {
 			save: SaveDialog,
 			reload: ReloadDialog,

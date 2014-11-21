@@ -212,10 +212,10 @@ define([
 		view.toggleTOC();
 	});
 
-	keymage(__key('show-table-of-content'), function() {
+	// keymage(__kbd('show-table-of-content'), function() {
 		// disable on v0.10
 		// window.ee.emit('menu.view.toggle.toc');
-	});
+	// });
 
 	return view = new View;
 });

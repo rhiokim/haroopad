@@ -170,43 +170,43 @@ define([
 			nw.editor.refresh();
 		}
 
-		keymage(__key('perspective-edit-view'), function() {
-			window.ee.emit('view.reset.mode');
-		});
-		keymage(__key('perspective-set-default'), function() {
-			window.ee.emit('view.reset.mode');
-		});
-		keymage(__key('perspective-view-edit'), function() {
-			setLayout('reverse');
-		});
-		keymage(__key('perspective-only-edit'), function() {
-			setLayout('editor');
-		});
-		keymage(__key('perspective-only-view'), function() {
-			setLayout('viewer');
-		});
+		// keymage(__kbd('perspective-edit-view'), function() {
+		// 	window.ee.emit('view.reset.mode');
+		// });
+		// keymage(__kbd('perspective-set-default'), function() {
+		// 	window.ee.emit('view.reset.mode');
+		// });
+		// keymage(__kbd('perspective-view-edit'), function() {
+		// 	setLayout('reverse');
+		// });
+		// keymage(__kbd('perspective-only-edit'), function() {
+		// 	setLayout('editor');
+		// });
+		// keymage(__kbd('perspective-only-view'), function() {
+		// 	setLayout('viewer');
+		// });
 
-		keymage(__key('perspective-move-right'), function() {
-			if (_layout == 'layout0') {
-				setLayout('editor');	
-			} else if (_layout == 'layout3') {
-				window.ee.emit('view.reset.mode');
-			}
-		});
-		keymage(__key('perspective-move-left'), function() {
-			if (_layout == 'layout2') {
-				window.ee.emit('view.reset.mode');
-			} else if (_layout == 'layout0') {
-				setLayout('viewer');
-			}
-		});
+		// keymage(__kbd('perspective-move-right'), function() {
+		// 	if (_layout == 'layout0') {
+		// 		setLayout('editor');	
+		// 	} else if (_layout == 'layout3') {
+		// 		window.ee.emit('view.reset.mode');
+		// 	}
+		// });
+		// keymage(__kbd('perspective-move-left'), function() {
+		// 	if (_layout == 'layout2') {
+		// 		window.ee.emit('view.reset.mode');
+		// 	} else if (_layout == 'layout0') {
+		// 		setLayout('viewer');
+		// 	}
+		// });
 
-		keymage(__key('perspective-minus-view'), function() {
-			window.ee.emit('view.minus5.width');
-		});
-		keymage(__key('perspective-plus-view'), function() {
-			window.ee.emit('view.plus5.width');
-		});
+		// keymage(__kbd('perspective-minus-view'), function() {
+		// 	window.ee.emit('view.minus5.width');
+		// });
+		// keymage(__kbd('perspective-plus-view'), function() {
+		// 	window.ee.emit('view.plus5.width');
+		// });
 
 		window.ee.on('view.reset.mode', function() {
 			setLayout('default');

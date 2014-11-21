@@ -8,10 +8,6 @@ define([
 			win = gui.Window.get(),
 			clipboard = gui.Clipboard.get();
 
-		function _reKey(key) {
-  		return key.replace('defmod', /Mac/.test(navigator.platform) ? 'Cmd' : 'Ctrl');
-		}
-
 		function cut(cm) {
 			clipboard.set(cm.getSelection());
 			cm.replaceSelection('');
@@ -30,38 +26,38 @@ define([
 			cm.setCursor(cm.getCursor());
 		}
 
-		keyMaps[_reKey('defmod-S')] = function() {};
-		keyMaps[_reKey('defmod-X')] = cut;
-		keyMaps[_reKey('defmod-C')] = copy;
-		keyMaps[_reKey('defmod-V')] = paste;
+		// keyMaps[__reKey({ key: 's', modifiers: 'cmd' })] = function() {};
+		keyMaps[__reKey({ key: 'x', modifiers: 'cmd' })] = cut;
+		keyMaps[__reKey({ key: 'c', modifiers: 'cmd' })] = copy;
+		keyMaps[__reKey({ key: 'v', modifiers: 'cmd' })] = paste;
 
-		keyMaps[_reKey(__key('insert-md-header1'))] = 'markdownH1';
-		keyMaps[_reKey(__key('insert-md-header2'))] = 'markdownH2';
-		keyMaps[_reKey(__key('insert-md-header3'))] = 'markdownH3';
-		keyMaps[_reKey(__key('insert-md-header4'))] = 'markdownH4';
-		keyMaps[_reKey(__key('insert-md-header5'))] = 'markdownH5';
-		keyMaps[_reKey(__key('insert-md-header6'))] = 'markdownH6';
+		keyMaps[__reKey(__kbd('insert_md_header1'))] = 'markdownH1';
+		keyMaps[__reKey(__kbd('insert_md_header2'))] = 'markdownH2';
+		keyMaps[__reKey(__kbd('insert_md_header3'))] = 'markdownH3';
+		keyMaps[__reKey(__kbd('insert_md_header4'))] = 'markdownH4';
+		keyMaps[__reKey(__kbd('insert_md_header5'))] = 'markdownH5';
+		keyMaps[__reKey(__kbd('insert_md_header6'))] = 'markdownH6';
 
-		keyMaps[_reKey(__key('insert-md-bold'))] = 'markdownBold';
-		keyMaps[_reKey(__key('insert-md-italic'))] = 'markdownItalic';
-		keyMaps[_reKey(__key('insert-md-link'))] = 'markdownLink';
-		keyMaps[_reKey(__key('insert-md-underline'))] = 'markdownUnderline';
-		keyMaps[_reKey(__key('insert-md-inline-code'))] = 'markdownInlineCode';
-		keyMaps[_reKey(__key('insert-md-embed'))] = 'markdownEmbed';
-		keyMaps[_reKey(__key('insert-md-footnotes'))] = 'markdownFootnotes';
-		keyMaps[_reKey(__key('insert-md-footnotes-ref'))] = 'markdownFootnotesRef';
-		keyMaps[_reKey(__key('insert-md-toc'))] = 'markdownTOC';
-		keyMaps[_reKey(__key('insert-md-strike'))] = 'markdownStrike';
-		keyMaps[_reKey(__key('insert-md-highlight'))] = 'markdownHighlight';
-		keyMaps[_reKey(__key('insert-md-ordered-list'))] = 'markdownOrderedList';
-		keyMaps[_reKey(__key('insert-md-unordered-list'))] = 'markdownUnOrderedList';
-		keyMaps[_reKey(__key('insert-md-image'))] = 'markdownImage';
-		keyMaps[_reKey(__key('insert-md-math-block'))] = 'markdownMathBlock';
-		keyMaps[_reKey(__key('insert-md-math-inline'))] = 'markdownMathInline';
-		keyMaps[_reKey(__key('insert-md-blockquote'))] = 'markdownBlockQuote';
-		keyMaps[_reKey(__key('insert-md-section-break'))] = 'markdownSectionBreak';
-		keyMaps[_reKey(__key('insert-md-page-break'))] = 'markdownPageBreak';
-		keyMaps[_reKey(__key('insert-md-sentence-break'))] = 'markdownSentenceBreak';
+		keyMaps[__reKey(__kbd('insert_md_bold'))] = 'markdownBold';
+		keyMaps[__reKey(__kbd('insert_md_italic'))] = 'markdownItalic';
+		keyMaps[__reKey(__kbd('insert_md_link'))] = 'markdownLink';
+		keyMaps[__reKey(__kbd('insert_md_underline'))] = 'markdownUnderline';
+		keyMaps[__reKey(__kbd('insert_md_inline_code'))] = 'markdownInlineCode';
+		keyMaps[__reKey(__kbd('insert_md_embed'))] = 'markdownEmbed';
+		keyMaps[__reKey(__kbd('insert_md_footnotes'))] = 'markdownFootnotes';
+		keyMaps[__reKey(__kbd('insert_md_footnotes_ref'))] = 'markdownFootnotesRef';
+		keyMaps[__reKey(__kbd('insert_md_toc'))] = 'markdownTOC';
+		keyMaps[__reKey(__kbd('insert_md_strike'))] = 'markdownStrike';
+		keyMaps[__reKey(__kbd('insert_md_highlight'))] = 'markdownHighlight';
+		keyMaps[__reKey(__kbd('insert_md_ordered_list'))] = 'markdownOrderedList';
+		keyMaps[__reKey(__kbd('insert_md_unordered_list'))] = 'markdownUnOrderedList';
+		keyMaps[__reKey(__kbd('insert_md_image'))] = 'markdownImage';
+		keyMaps[__reKey(__kbd('insert_md_math_block'))] = 'markdownMathBlock';
+		keyMaps[__reKey(__kbd('insert_md_math_inline'))] = 'markdownMathInline';
+		keyMaps[__reKey(__kbd('insert_md_blockquote'))] = 'markdownBlockQuote';
+		keyMaps[__reKey(__kbd('insert_md_section_break'))] = 'markdownSectionBreak';
+		keyMaps[__reKey(__kbd('insert_md_page_break'))] = 'markdownPageBreak';
+		keyMaps[__reKey(__kbd('insert_md_sentence_break'))] = 'markdownSentenceBreak';
 
 		keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
 		keyMaps['Shift-Tab'] = 'indentLess';

@@ -179,10 +179,10 @@ define([
 			editor.setOption('gutters', value ? ["CodeMirror-linenumbers", "CodeMirror-foldgutter"] : []);
 			
 			if (value) {
-				keyMaps[__key('folding')] = function(cm) { cm.foldCode(cm.getCursor()); };
+				keyMaps[__reKey(__kbd('folding'))] = function(cm) { cm.foldCode(cm.getCursor()); };
 				editor.setOption('extraKeys', keyMaps);
 			} else {
-				delete keyMaps[__key('folding')];
+				delete keyMaps[__reKey(__kbd('folding'))];
 				editor.setOption('extraKeys', keyMaps);
 			}
 
@@ -406,58 +406,6 @@ define([
 		window.addEventListener('resize', function(e) {
 			CodeMirrorGutters.style.height = '5000px';
 		});
-
-		keymage(__key('editor-font-size-up'), function() {
-			window.ee.emit('menu.view.editor.font.size', 1);
-		});
-		keymage(__key('editor-font-size-down'), function() {
-			window.ee.emit('menu.view.editor.font.size', -1);
-		});
-		
-		keymage(__key('insert-date-time'), function() {
-			window.ee.emit('insert.date');
-		});
-
-		// keymage('defmod-1', function() {
-		// 	window.ee.emit('menu.insert.markdown', 'h1');
-		// });
-		// keymage('defmod-2', function() {
-		// 	window.ee.emit('menu.insert.markdown', 'h2');
-		// });
-		// keymage('defmod-3', function() {
-		// 	window.ee.emit('menu.insert.markdown', 'h3');
-		// });
-		// keymage('defmod-4', function() {
-		// 	window.ee.emit('menu.insert.markdown', 'h4');
-		// });
-		// keymage('defmod-5', function() {
-		// 	window.ee.emit('menu.insert.markdown', 'h5');
-		// });
-		// keymage('defmod-6', function() {
-		// 	window.ee.emit('menu.insert.markdown', 'h6');
-		// });
-
-		// keymage(__key('insert-date-L'), function() {
-		// 	window.ee.emit('insert.date', 'L');
-		// });
-		// keymage(__key('insert-date-ll'), function() {
-		// 	window.ee.emit('insert.date', 'll');
-		// });
-		// keymage(__key('insert-date-LL'), function() {
-		// 	window.ee.emit('insert.date', 'LL');
-		// });
-		// keymage(__key('insert-date-lll'), function() {
-		// 	window.ee.emit('insert.date', 'lll');
-		// });
-		// keymage(__key('insert-date-LLL'), function() {
-		// 	window.ee.emit('insert.date', 'LLL');
-		// });
-		// keymage(__key('insert-date-llll'), function() {
-		// 	window.ee.emit('insert.date', 'llll');
-		// });
-		// keymage(__key('insert-date-LLLL'), function() {
-		// 	window.ee.emit('insert.date', 'LLLL');
-		// });
 
 		return editor;
 	});

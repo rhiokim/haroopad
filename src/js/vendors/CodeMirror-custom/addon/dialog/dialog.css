@@ -25,8 +25,9 @@
 }
 
 .CodeMirror-dialog-bottom {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(187, 187, 187, 0.4);
   top: 0;
+  background-color: RGBA(85, 85, 85, 1);
 }
 
 .CodeMirror-dialog input {

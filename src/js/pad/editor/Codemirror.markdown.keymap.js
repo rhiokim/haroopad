@@ -1,261 +1,264 @@
 define([], function() {
 
-    function getState(cm, pos) {
-      pos = pos || cm.getCursor('start');
-      var stat = cm.getTokenAt(pos);
-      if (!stat.type) return {};
+  function getState(cm, pos) {
+    pos = pos || cm.getCursor('start');
+    var stat = cm.getTokenAt(pos);
+    if (!stat.type) return {};
 
-      var types = stat.type.split(' ');
+    var types = stat.type.split(' ');
 
-      var ret = {}, data, text;
-      for (var i = 0; i < types.length; i++) {
-        data = types[i];
-        if (data === 'strong') {
-          ret.bold = true;
-        } else if (data === 'variable-2') {
-          text = cm.getLine(pos.line);
-          if (/^\s*\d+\.\s/.test(text)) {
-            ret['ordered-list'] = true;
-          } else {
-            ret['unordered-list'] = true;
-          }
-        } else if (data === 'atom') {
-          ret.quote = true;
-        } else if (data === 'quote') {
-          ret.quote = true;
-        } else if (data === 'em') {
-          ret.italic = true;
+    var ret = {},
+      data, text;
+    for (var i = 0; i < types.length; i++) {
+      data = types[i];
+      if (data === 'strong') {
+        ret.bold = true;
+      } else if (data === 'variable-2') {
+        text = cm.getLine(pos.line);
+        if (/^\s*\d+\.\s/.test(text)) {
+          ret['ordered-list'] = true;
+        } else {
+          ret['unordered-list'] = true;
         }
+      } else if (data === 'quote') {
+        ret.quote = true;
+      } else if (data === 'atom') {
+        ret.quote = true;
+      } else if (data === 'em') {
+        ret.italic = true;
       }
-      return ret;
+    }
+    return ret;
+  }
+
+  function action(name, cm) {
+    var stat = getState(cm);
+
+    var replaceSelection = function(start, end) {
+      var text;
+      var startPoint = cm.getCursor('start');
+      var endPoint = cm.getCursor('end');
+      if (stat[name]) {
+        text = cm.getLine(startPoint.line);
+        start = text.slice(0, startPoint.ch);
+        end = text.slice(startPoint.ch);
+        if (name === 'bold') {
+          start = start.replace(/^(.*)?(\*|\_){2}(\S+.*)?$/, '$1$3');
+          end = end.replace(/^(.*\S+)?(\*|\_){2}(\s+.*)?$/, '$1$3');
+          startPoint.ch -= 2;
+          endPoint.ch += 2;
+        } else if (name === 'italic') {
+          start = start.replace(/^(.*)?(\*|\_)(\S+.*)?$/, '$1$3');
+          end = end.replace(/^(.*\S+)?(\*|\_)(\s+.*)?$/, '$1$3');
+          startPoint.ch -= 1;
+          endPoint.ch += 1;
+        }
+        // cm.setLine(startPoint.line, start + end);
+        cm.replaceRange(start + end, startPoint, endPoint);
+        cm.setSelection(startPoint, endPoint);
+        cm.focus();
+        return;
+      }
+      if (end === null) {
+        end = '';
+      } else {
+        end = end || start;
+      }
+      text = cm.getSelection();
+      cm.replaceSelection(start + text + end);
+
+      startPoint.ch += start.length;
+      endPoint.ch += start.length;
+
+      cm.setSelection(startPoint, endPoint);
+      cm.focus();
+    };
+
+    var toggleLine = function() {
+      var startPoint = cm.getCursor('start');
+      var endPoint = cm.getCursor('end');
+      var repl = {
+        quote: /^(\s*)\>\s+/,
+        'unordered-list': /^(\s*)(\*|\-|\+)\s+/,
+        'ordered-list': /^(\s*)\d+\.\s+/
+      };
+      var map = {
+        quote: '> ',
+        'unordered-list': '- ',
+        'ordered-list': '1. '
+      };
+      for (var i = startPoint.line; i <= endPoint.line; i++) {
+        (function(i) {
+          var text = cm.getLine(i);
+          var len = text.length;
+
+          if (stat[name]) {
+            text = text.replace(repl[name], '$1');
+          } else {
+            text = map[name] + text;
+          }
+          cm.replaceRange(text, { line: i, ch: 0 }, { line: i, ch: len });
+        })(i);
+      }
+      cm.focus();
+    };
+
+    var addTable = function() {
+      var text = cm.getSelection();
+      cm.replaceSelection(text + '| column | column |\n' + '|--------|--------|\n' + '|        |        |');
     }
 
-    function action(name, cm) {
-      var stat = getState(cm);
+    var addTOC = function() {
+      cm.replaceSelection('\n[TOC]\n\n');
+    }
 
-      var replaceSelection = function(start, end) {
-        var text;
-        var startPoint = cm.getCursor('start');
-        var endPoint = cm.getCursor('end');
-        if (stat[name]) {
-          text = cm.getLine(startPoint.line);
-          start = text.slice(0, startPoint.ch);
-          end = text.slice(startPoint.ch);
-          if (name === 'bold') {
-            start = start.replace(/^(.*)?(\*|\_){2}(\S+.*)?$/, '$1$3');
-            end = end.replace(/^(.*\S+)?(\*|\_){2}(\s+.*)?$/, '$1$3');
-            startPoint.ch -= 2;
-            endPoint.ch -= 2;
-          } else if (name === 'italic') {
-            start = start.replace(/^(.*)?(\*|\_)(\S+.*)?$/, '$1$3');
-            end = end.replace(/^(.*\S+)?(\*|\_)(\s+.*)?$/, '$1$3');
-            startPoint.ch -= 1;
-            endPoint.ch -= 1;
-          }
-          cm.setLine(startPoint.line, start + end);
-          cm.setSelection(startPoint, endPoint);
+    var headerMap = {
+      '1': '#',
+      '2': '##',
+      '3': '###',
+      '4': '####',
+      '5': '#####',
+      '6': '######'
+    };
+    var toggleHeader = function(depth) {
+      var pos = cm.getCursor();
+      var h, repl = /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/;
+
+      var text = cm.getLine(pos.line);
+      var len = text.length;
+
+      if (repl.test(text)) {
+        h = text.replace(repl, '$1');
+        text = text.replace(repl, '$2');
+
+        if (h == headerMap[depth]) {
+          cm.replaceRange(text, { line: pos.line, ch: 0 }, { line: pos.line, ch: len });
           cm.focus();
           return;
         }
-        if (end === null) {
-          end = '';
-        } else {
-          end = end || start;
-        }
-        text = cm.getSelection();
-        cm.replaceSelection(start + text + end);
+      }
 
-        startPoint.ch += start.length;
-        endPoint.ch += start.length;
+      text = headerMap[depth] + ' ' + text;
 
-        cm.setSelection(startPoint, endPoint);
+      cm.replaceRange(text, { line: pos.line, ch: 0 }, { line: pos.line, ch: len });
+      cm.focus();
+    }
+
+    switch (name) {
+      case 'h1':
+        toggleHeader(1);
+        break;
+      case 'h2':
+        toggleHeader(2);
+        break;
+      case 'h3':
+        toggleHeader(3);
+        break;
+      case 'h4':
+        toggleHeader(4);
+        break;
+      case 'h5':
+        toggleHeader(5);
+        break;
+      case 'h6':
+        toggleHeader(6);
+        break;
+      case 'bold':
+        replaceSelection('**');
+        break;
+      case 'math-block':
+        replaceSelection('$$\n', '\n$$');
+        break;
+      case 'math-line':
+        replaceSelection('$$$');
+        break;
+      case 'highlight':
+        replaceSelection('==');
+        break;
+      case 'superscript':
+        replaceSelection('^');
+        break;
+      case 'subscript':
+        replaceSelection('~');
+        break;
+      case 'strike':
+        replaceSelection('~~');
+        break;
+      case 'italic':
+        replaceSelection('*');
+        break;
+      case 'underline':
+        replaceSelection('++');
+        break;
+      case 'code':
+        replaceSelection('`');
+        break;
+      case 'toc':
+        addTOC();
+        break;
+      case 'comment':
+        replaceSelection('<!--', '-->');
+        break;
+      case 'footnotes':
+        replaceSelection('[^', ']');
+        break;
+      case 'footnotes-ref':
+        var pos = cm.getCursor();
+        pos.line = cm.lineCount();
+        cm.setCursor(pos);
+        replaceSelection('\n[^', ']: ');
+        pos.line++;
+        pos.ch = 1;
+        cm.setCursor(pos);
+        break;
+      case 'link':
+        replaceSelection('[', '](http://)');
+        break;
+      case 'image':
+        replaceSelection('![', '](http://)');
+        break;
+      case 'embed':
+        replaceSelection('@[](', ')');
+        break;
+      case 'fenced-code':
+        replaceSelection('```\n', '\n```');
+        break;
+      case 'table':
+        addTable();
+        break;
+      case 'section-break':
+        var pos = cm.getCursor();
+        cm.replaceSelection('\n- - -\n');
+        pos.line += 2;
+        cm.setCursor(pos);
+        break;
+      case 'page-break':
+        var pos = cm.getCursor();
+        cm.replaceSelection('\n* * *\n');
+        pos.line += 2;
+        cm.setCursor(pos);
+        break;
+      case 'sentence-break':
+        var pos = cm.getCursor();
+        cm.replaceSelection('\n_ _ _\n');
+        pos.line += 2;
+        cm.setCursor(pos);
+        break;
+      case 'quote':
+      case 'unordered-list':
+      case 'ordered-list':
+        toggleLine();
+        break;
+      case 'undo':
+        cm.undo();
         cm.focus();
-      };
-
-      var toggleLine = function() {
-        var startPoint = cm.getCursor('start');
-        var endPoint = cm.getCursor('end');
-        var repl = {
-          quote: /^(\s*)\>\s+/,
-          'unordered-list': /^(\s*)(\*|\-|\+)\s+/,
-          'ordered-list': /^(\s*)\d+\.\s+/
-        };
-        var map = {
-          quote: '> ',
-          'unordered-list': '- ',
-          'ordered-list': '1. '
-        };
-        for (var i = startPoint.line; i <= endPoint.line; i++) {
-          (function(i) {
-            var text = cm.getLine(i);
-            if (stat[name]) {
-              text = text.replace(repl[name], '$1');
-            } else {
-              text = map[name] + text;
-            }
-            cm.setLine(i, text);
-          })(i);
-        }
+        break;
+      case 'redo':
+        cm.redo();
         cm.focus();
-      };
-
-      var addTable = function() {
-        var text = cm.getSelection();
-        cm.replaceSelection(text + '| column | column |\n'
-                                 + '|--------|--------|\n'
-                                 + '|        |        |');
-      }
-
-      var addTOC = function() {
-        cm.replaceSelection('\n[TOC]\n\n');
-      }
-
-      var headerMap = {
-          '1': '#',
-          '2': '##',
-          '3': '###',
-          '4': '####',
-          '5': '#####',
-          '6': '######'
-        };
-      var toggleHeader = function(depth) {
-        var startPoint = cm.getCursor('start');
-        var endPoint = cm.getCursor('end');
-        var h, repl = /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/;
-
-        var text = cm.getLine(startPoint.line);
-
-        if (repl.test(text)) {
-          h = text.replace(repl, '$1');
-          text = text.replace(repl, '$2'); 
-
-          if (h == headerMap[depth]) {
-            cm.setLine(startPoint.line, text);
-            cm.focus();
-            return;
-          }
-        }
-        
-        text = headerMap[depth] +' '+ text;
-        cm.setLine(startPoint.line, text);
-        cm.focus();
-      }
-
-      switch (name) {
-        case 'h1':
-          toggleHeader(1);
-          break;
-        case 'h2':
-          toggleHeader(2);
-          break;
-        case 'h3':
-          toggleHeader(3);
-          break;
-        case 'h4':
-          toggleHeader(4);
-          break;
-        case 'h5':
-          toggleHeader(5);
-          break;
-        case 'h6':
-          toggleHeader(6);
-          break;
-        case 'bold':
-          replaceSelection('**');
-          break;
-        case 'math-block':
-          replaceSelection('$$\n', '\n$$');
-          break;
-        case 'math-line':
-          replaceSelection('$$$');
-          break;
-        case 'highlight':
-          replaceSelection('==');
-          break;
-        case 'superscript':
-          replaceSelection('^');
-          break;
-        case 'subscript':
-          replaceSelection('~');
-          break;
-        case 'strike':
-          replaceSelection('~~');
-          break;
-        case 'italic':
-          replaceSelection('*');
-          break;
-        case 'underline':
-          replaceSelection('++');
-          break;
-        case 'code':
-          replaceSelection('`');
-          break;
-        case 'toc':
-          addTOC();
-          break;
-        case 'comment':
-          replaceSelection('<!--', '-->');
-          break;
-        case 'footnotes':
-          replaceSelection('[^', ']');
-          break;
-        case 'footnotes-ref':
-            var pos = cm.getCursor();
-            pos.line = cm.lineCount();
-            cm.setCursor(pos);
-            replaceSelection('\n[^', ']: ');
-            pos.line++;
-            pos.ch = 1;
-            cm.setCursor(pos);
-          break;
-        case 'link':
-          replaceSelection('[', '](http://)');
-          break;
-        case 'image':
-          replaceSelection('![', '](http://)');
-          break;
-        case 'embed':
-          replaceSelection('@[](', ')');
-          break;
-        case 'fenced-code':
-          replaceSelection('```\n', '\n```');
-          break;
-        case 'table':
-            addTable();
-          break;
-        case 'section-break':
-            var pos = cm.getCursor();
-                pos.line += 2;
-            cm.replaceSelection('\n- - -\n');
-            cm.setCursor(pos);
-          break;
-        case 'page-break':
-            var pos = cm.getCursor();
-                pos.line += 2;
-            cm.replaceSelection('\n* * *\n');
-            cm.setCursor(pos);
-          break;
-        case 'sentence-break':
-            var pos = cm.getCursor();
-                pos.line += 2;
-            cm.replaceSelection('\n_ _ _\n');
-            cm.setCursor(pos);
-          break;
-        case 'quote':
-        case 'unordered-list':
-        case 'ordered-list':
-          toggleLine();
-          break;
-        case 'undo':
-          cm.undo();
-          cm.focus();
-          break;
-        case 'redo':
-          cm.redo();
-          cm.focus();
-          break;
-      }
-    };
+        break;
+    }
+  };
 
   CodeMirror.commands.markdownH1 = function(cm) {
     action('h1', cm);
@@ -359,5 +362,5 @@ define([], function() {
     cm.redo();
     cm.focus();
   };
-  
+
 });
