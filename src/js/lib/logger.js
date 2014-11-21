@@ -25,6 +25,7 @@
       + '-------------|-----------------------------\n'
       + ' Type        | UncaughtException \n'
       + ' Date        | '+ new Date +'\n'
+      + ' Agent       | '+ navigator.userAgent +'\n'
       + ' Stack       | '+ err.stack +'\n\n'
       
     fs.appendFile(errFile, message);
@@ -36,6 +37,7 @@
       + '-------------|-----------------------------\n'
       + ' Type        | Error\n'
       + ' Date        | '+ new Date +'\n'
+      + ' Agent       | '+ navigator.userAgent +'\n'
       + ' File        | '+ err.filename.replace(process.cwd(), '') +'\n'
       + ' Line Number | '+ err.lineno +'\n'
       + ' Message     | '+ err.message +'\n\n'
