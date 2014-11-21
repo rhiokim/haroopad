@@ -149,6 +149,7 @@
     'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night', 'vs', 'xcode', 'zenburn'
   ];
   
+
   global.SHORTCUTS = {
     /* app */
     'new_window':         {key:'n', modifiers:'cmd'},//'defmod-n',
@@ -253,4 +254,12 @@
     /* preference */
     'close-preference': {key:'esc', modifiers:''},//'esc'
   };
+
+  var p, shortcut, SHORTCUTS = global.SHORTCUTS;
+  if (process.platform !== 'darwin') {
+    for (p in SHORTCUTS) {
+      shortcut = SHORTCUTS[p];
+      shortcut.modifiers = shortcut.modifiers.replace('cmd', 'ctrl');
+    }
+  }
 })();

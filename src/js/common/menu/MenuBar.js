@@ -10,25 +10,27 @@ window.MenuBar = function() {
 		    type:   'menubar'
 		});
 		
-	  menu.createMacBuiltin(global.Manifest.name, {
-	    // hideWindow: true
-	  });
+		if (process.platform == 'darwin') {
+		  menu.createMacBuiltin(global.Manifest.name, {
+		    // hideWindow: true
+		  });
+	  }
 
-		// if (platform != 'darwin') {
-		// 	menu.append( MenuBarFile() );
-		// 	menu.append( MenuBarEdit() );
-		// }
-
-		win.menu = MenuBar._systemMenu = menu;
-
-		win.menu.insert( MenuBarFile(), 1 );
-		win.menu.insert( MenuBarFind(), 3 );
-		win.menu.insert( MenuBarInsert(), 4 );
-		win.menu.insert( MenuBarView(), 5 );
-		// menu.append( MenuBarTools() );
-		// menu.append( MenuBarShare() );
+		if (process.platform !== 'win32') {
+			menu.insert( MenuBarFile(), 1 );
+			menu.insert( MenuBarFind(), 3 );
+			menu.insert( MenuBarInsert(), 4 );
+			menu.insert( MenuBarView(), 5 );
+		} else {
+			menu.append(MenuBarFile())
+			menu.append(MenuBarFind())
+			menu.append(MenuBarInsert())
+			menu.append(MenuBarView())
+		}
 		
-		win.menu.append( MenuBarHelp() );
+		menu.append( MenuBarHelp() );
+		
+		win.menu = MenuBar._systemMenu = menu;
 	}
 
 	create();
