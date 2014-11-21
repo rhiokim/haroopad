@@ -33,6 +33,17 @@ define([
 			return props
 		}
 
+		renderer.listitem = function(text) {
+			if (/^\s*\[[xv ]\]\s*/.test(text)) {
+				text = text
+					.replace(/^\s*\[ \]\s*/, '<input type="checkbox" /> ')
+					.replace(/^\s*\[[x|v]\]\s*/, '<input type="checkbox" checked /> ');
+				return '<li style="list-style: none">' + text + '</li>';
+			} else {
+				return '<li>' + text + '</li>';
+			}
+		};
+
 		renderer.oembed = function(caption, href, props) {
 			var link;
 
