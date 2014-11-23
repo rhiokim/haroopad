@@ -11,15 +11,33 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-asciify');
 
+  function platform() {
+    var os = process.platform;
+    if (os === 'linux') {
+      return 'linux'
+    } else if (os === 'darwin') {
+      return 'osx'
+    } else {
+      return 'win';
+    }
+  }
+
+  function arch() {
+    var arch = process.arch;
+
+    return arch == 'x64' ? arch : 'ia32';
+  }
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('./src/package.json'),
 
-    nwversion: '0.11.1',
+    nwv: '0.11.1',
     vendors: 'src/js/vendors',
     build: 'build',
     dist: 'dists/<%= pkg.version %>',
@@ -683,7 +701,7 @@ module.exports = function(grunt) {
 
       pouchdb: {
         command: [
-          'nw-gyp configure --target=<%= nwversion %>',
+          'nw-gyp configure --target=<%= nwv %>',
           'nw-gyp build'
         ].join('&&'),
         options: {
@@ -775,9 +793,6 @@ module.exports = function(grunt) {
   grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'copy:plugins', 'copy:pkgres', 'nwlibs', 'nwres' ]);
-
-  /* snapshot */
-  // grunt.registerTask('snapshot', [ 'concat:snapshot', 'snapshot' ]);
 
   /* pre built */
   grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs', 'shell:pouchdb' ]);
