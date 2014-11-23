@@ -122,7 +122,7 @@ module.exports = function(grunt) {
           keepSpecialComments: 0
         },
         files: {
-          "build/haroopad/css/codemirror.min.css": [
+          "build/haroopad/css/editor.min.css": [
             '<%= vendors %>/CodeMirror/lib/codemirror.css',
             '<%= vendors %>/CodeMirror/theme/3024-day.css',
             '<%= vendors %>/CodeMirror/theme/3024-night.css',
@@ -165,7 +165,7 @@ module.exports = function(grunt) {
     concat: {
       app: {
         files: {
-          '<%= build %>/app.js': [
+          '<%= build %>/haroopad/js/app.js': [
             'src/js/app/before.app.js',
             '<%= build%>/app.common.min.js',
             '<%= build%>/menu.min.js',
@@ -192,7 +192,7 @@ module.exports = function(grunt) {
 
       pad: {
         files: {
-          '<%= build %>/pad.js': [
+          '<%= build %>/haroopad/js/pad.js': [
             'src/js/pad/before.pad.js',
             '<%= build%>/pad.common.min.js',
             '<%= build%>/menu.min.js',
@@ -222,7 +222,7 @@ module.exports = function(grunt) {
 
       preferences: {
         files: {
-          '<%= build %>/preferences.js': [
+          '<%= build %>/haroopad/js/preferences.js': [
             'src/js/preferences/before.preferences.js',
             '<%= build%>/preferences.common.min.js',
             '<%= build%>/preferences.r.min.js',
@@ -556,7 +556,7 @@ module.exports = function(grunt) {
 
       codemirror: {
         files: [
-          { src: '<%= vendors %>/CodeMirror/codemirror.min.js', dest: 'build/haroopad/js/codemirror.min.js' }
+          { src: '<%= vendors %>/CodeMirror/codemirror.min.js', dest: 'build/haroopad/js/editor.min.js' }
         ]
       },
 
@@ -760,6 +760,21 @@ module.exports = function(grunt) {
           preserveLicenseComments: false
         }
       }
+    },
+
+    htmlmin: {
+      dist: {                                      // Target
+        options: {                                 // Target options
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {                                   // Dictionary of files
+          'build/haroopad/index.html': 'src/index.bin.html',     // 'destination': 'source'
+          'build/haroopad/pad.html': 'src/pad.bin.html',
+          'build/haroopad/preferences.html': 'src/preferences.bin.html',
+          'build/haroopad/viewer.html': 'src/viewer.bin.html'
+        }
+      }
     }
   });
 
@@ -817,5 +832,5 @@ module.exports = function(grunt) {
 
   /* pkg */
   grunt.registerTask('default', [ 'asciify', 'clean', 'cp', 'menu', 'css' ]);
-  grunt.registerTask('pkg2', [ 'app', 'pad', 'preferences', 'viewer', 'snapshot' ]);
+  grunt.registerTask('pkg2', [ 'app', 'pad', 'preferences', 'viewer', 'htmlmin' ]);
 };
