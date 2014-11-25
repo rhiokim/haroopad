@@ -1,4 +1,6 @@
 module.exports = function(grunt) {
+  var path = require('path');
+
   require('time-grunt')(grunt);
 
   grunt.initConfig();
@@ -38,6 +40,14 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('./src/package.json'),
 
     nwv: '0.11.1',
+    os: platform(),
+    arch: arch(),
+    app: path.normalize('lib/node-webkit-v<%= nwv %>-<%= os %>-<%= arch %>'),
+
+    resdir: path.normalize(platform() == 'osx' ? '<%= app %>/node-webkit.app/Contents' : '<%= app %>'),
+
+    nwexe: path.normalize(platform() == 'osx' ? '<%= resdir %>/MacOS/node-webkit' : '<%= resdir %>/nw'),
+
     vendors: 'src/js/vendors',
     build: 'build',
     dist: 'dists/<%= pkg.version %>',
@@ -58,8 +68,8 @@ module.exports = function(grunt) {
       build: [ 'build/*' ],
       release: [ 'build/haroopad.app' ],
       core: [ 'build/haroopad.app' ],
-      nwlibs: [ 'lib/node-webkit.app/Contents/Libraries'],
-      nwres: [ 'lib/node-webkit.app/Contents/Resources/Themes']
+      nwlibs: [ '<%= resdir %>/Libraries'],
+      nwres: [ '<%= resdir %>/Resources/Themes'],
     },
 
     jshint: {
@@ -523,26 +533,26 @@ module.exports = function(grunt) {
 
       node_modules: {
         files: [
-          { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.node_modules/'}
+          { expand: true, cwd: 'src/node_modules/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.node_modules/'}
         ]
       },
 
       locales: {
         files: [
-          { expand: true, cwd: 'lib/haroopad-locales/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.locales/' }
+          { expand: true, cwd: 'lib/haroopad-locales/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.locales/' }
         ]
       },
 
       docs: {
         files: [
-          { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.docs/' }
+          { expand: true, cwd: 'src/docs/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.docs/' }
         ]
       },
 
       userThemes: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/haroopad-theme/editor/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Resources/Themes/editor/'},
-          { expand: true, cwd: '<%= vendors %>/haroopad-theme/viewer/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Resources/Themes/viewer/'}
+          { expand: true, cwd: '<%= vendors %>/haroopad-theme/editor/', src: [ '**' ], dest: '<%= resdir %>/Resources/Themes/editor/'},
+          { expand: true, cwd: '<%= vendors %>/haroopad-theme/viewer/', src: [ '**' ], dest: '<%= resdir %>/Resources/Themes/viewer/'}
         ]
       },
 
@@ -596,20 +606,20 @@ module.exports = function(grunt) {
 
       mathjax: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/MathJax/config/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/config/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/extensions/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/extensions/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/fonts/HTML-CSS/TeX/woff/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/STIX-Web/woff/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/fonts/HTML-CSS/STIX-Web/woff/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/images/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/jax/input/TeX', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/jax/input/TeX/' },
-          { expand: true, cwd: '<%= vendors %>/MathJax/jax/output/HTML-CSS', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/jax/output/HTML-CSS/' },
-          { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: 'lib/node-webkit.app/Contents/Libraries/.js/MathJax/', filter: 'isFile'}
+          { expand: true, cwd: '<%= vendors %>/MathJax/config/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/config/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/extensions/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/extensions/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/TeX/woff/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/fonts/HTML-CSS/TeX/woff/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/fonts/HTML-CSS/STIX-Web/woff/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/fonts/HTML-CSS/STIX-Web/woff/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/images/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/input/TeX', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/jax/input/TeX/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/output/HTML-CSS', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/jax/output/HTML-CSS/' },
+          { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: '<%= resdir %>/Libraries/.js/MathJax/', filter: 'isFile'}
         ]
       },
       
       highlightjs: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/highlight.js/src/styles/', src: [ '**' ], dest: 'lib/node-webkit.app/Contents/Libraries/.css/code/' }
+          { expand: true, cwd: '<%= vendors %>/highlight.js/src/styles/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.css/code/' }
         ]
       },
       
@@ -628,6 +638,10 @@ module.exports = function(grunt) {
     },
 
     shell: {
+      debug: {
+        command: '<%= nwexe %> src --debug' 
+      },
+
       cpLib: {
         command: 'cp -R lib/node-webkit.app build/haroopad.app'
       },

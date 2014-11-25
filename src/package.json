@@ -20,7 +20,7 @@
     "plugin": true
   },
   "user-agent": "%name/%ver (%osinfo) NodeWebkit/%nwver AppleWebKit/%webkit_ver",
-  "chromium-args": "--enable-threaded-compositing",
+  "chromium-args": "--enable-threaded-compositing --disable-setuid-sandbox",
   "app": {
     "upgrade": "http://pad.haroopress.com/upgrade.json"
   },
