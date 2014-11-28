@@ -390,7 +390,7 @@
     if (filesize <= 0) { return '0 bytes'; }
     if (filesize < kilo && decimals === undefined) { decimals = 0; }
     if (suffixSep === undefined) { suffixSep = ' '; }
-    return humanize.intword(filesize, ['bytes', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb'], kilo, decimals, decPoint, thousandsSep, suffixSep);
+    return humanize.intword(filesize, ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB'], kilo, decimals, decPoint, thousandsSep, suffixSep);
   };
 
   /**

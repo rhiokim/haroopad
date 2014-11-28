@@ -103,7 +103,6 @@ module.exports.sequence = function (test) {
       t.ok(err, 'returned error')
       t.equal(err.name, 'Error', 'correct error')
       t.equal(err.message, 'cannot call next() before previous next() has completed')
-      t.end()
     })
   })
 }

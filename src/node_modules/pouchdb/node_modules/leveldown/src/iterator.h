@@ -1,14 +1,15 @@
-/* Copyright (c) 2012-2013 LevelDOWN contributors
+/* Copyright (c) 2012-2014 LevelDOWN contributors
  * See list at <https://github.com/rvagg/node-leveldown#contributing>
- * MIT +no-false-attribs License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE>
+ * MIT License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE.md>
  */
 
 #ifndef LD_ITERATOR_H
 #define LD_ITERATOR_H
 
 #include <node.h>
+#include <vector>
+#include <nan.h>
 
-#include "nan.h"
 #include "leveldown.h"
 #include "database.h"
 #include "async.h"
@@ -44,11 +45,12 @@ public:
     , bool keyAsBuffer
     , bool valueAsBuffer
     , v8::Local<v8::Object> &startHandle
+    , size_t highWaterMark
   );
 
   ~Iterator ();
 
-  bool IteratorNext (std::string& key, std::string& value);
+  bool IteratorNext (std::vector<std::pair<std::string, std::string> >& result);
   leveldb::Status IteratorStatus ();
   void IteratorEnd ();
   void Release ();
@@ -69,6 +71,7 @@ private:
   std::string* gt;
   std::string* gte;
   int count;
+  size_t highWaterMark;
 
 public:
   bool keyAsBuffer;
@@ -80,6 +83,7 @@ public:
 private:
   v8::Persistent<v8::Object> persistentHandle;
 
+  bool Read (std::string& key, std::string& value);
   bool GetIterator ();
 
   static NAN_METHOD(New);

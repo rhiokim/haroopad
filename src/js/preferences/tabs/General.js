@@ -3,7 +3,7 @@ define([
 	], function(options) {
 
 		var moment = require('moment');
-    moment.lang(global.LOCALES._lang);
+    moment.locale(global.LOCALES._lang);
     
 		var config = options.toJSON();
 

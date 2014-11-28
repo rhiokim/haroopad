@@ -75,18 +75,18 @@ module.exports.approximateSize = function (test) {
           return { type: 'put', key: 'foo' + i, value: data }
         })
       , function (err) {
-          t.notOk(err, 'no error')
+          t.error(err)
 
           // cycle open/close to ensure a pack to .sst
 
           db.close(function (err) {
-            t.notOk(err, 'no error')
+            t.error(err)
 
             db.open(function (err) {
-              t.notOk(err, 'no error')
+              t.error(err)
 
               db.approximateSize('!', '~', function (err, size) {
-                t.notOk(err, 'no error')
+                t.error(err)
 
                 t.type(size, 'number')
                 t.ok(
@@ -96,7 +96,7 @@ module.exports.approximateSize = function (test) {
                 )
 
                 db.close(function (err) {
-                  t.notOk(err, 'no error')
+                  t.error(err)
                   t.end()
                 })
               })

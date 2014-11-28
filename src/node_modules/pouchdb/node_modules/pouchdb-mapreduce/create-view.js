@@ -57,7 +57,7 @@ module.exports = function (opts) {
         };
         return view.db.get('_local/lastSeq').catch(function (err) {
           /* istanbul ignore if */
-          if (err.name !== 'not_found') {
+          if (err.status !== 404) {
             throw err;
           }
         }).then(function (lastSeqDoc) {

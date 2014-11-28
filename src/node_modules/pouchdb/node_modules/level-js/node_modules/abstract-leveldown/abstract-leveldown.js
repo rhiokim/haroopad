@@ -240,8 +240,6 @@ AbstractLevelDOWN.prototype._isBuffer = function (obj) {
 }
 
 AbstractLevelDOWN.prototype._checkKeyValue = function (obj, type) {
-  if (obj === null || obj === undefined)
-    return new Error(type + ' cannot be `null` or `undefined`')
 
   if (obj === null || obj === undefined)
     return new Error(type + ' cannot be `null` or `undefined`')

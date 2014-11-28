@@ -1,8 +1,7 @@
 #include <node.h>
 #include <node_buffer.h>
+#include <nan.h>
 
-
-#include "nan.h"
 #include "database.h"
 #include "batch_async.h"
 #include "batch.h"
@@ -16,7 +15,6 @@ Batch::Batch (leveldown::Database* database, bool sync) : database(database) {
   options->sync = sync;
   batch = new leveldb::WriteBatch();
   hasData = false;
-  written = false;
 }
 
 Batch::~Batch () {
@@ -29,9 +27,9 @@ leveldb::Status Batch::Write () {
 }
 
 void Batch::Init () {
-  v8::Local<v8::FunctionTemplate> tpl = v8::FunctionTemplate::New(Batch::New);
-  NanAssignPersistent(v8::FunctionTemplate, batch_constructor, tpl);
-  tpl->SetClassName(NanSymbol("Batch"));
+  v8::Local<v8::FunctionTemplate> tpl = NanNew<v8::FunctionTemplate>(Batch::New);
+  NanAssignPersistent(batch_constructor, tpl);
+  tpl->SetClassName(NanNew("Batch"));
   tpl->InstanceTemplate()->SetInternalFieldCount(1);
   NODE_SET_PROTOTYPE_METHOD(tpl, "put", Batch::Put);
   NODE_SET_PROTOTYPE_METHOD(tpl, "del", Batch::Del);
@@ -49,7 +47,7 @@ NAN_METHOD(Batch::New) {
     optionsObj = v8::Local<v8::Object>::Cast(args[1]);
   }
 
-  bool sync = NanBooleanOptionValue(optionsObj, NanSymbol("sync"));
+  bool sync = NanBooleanOptionValue(optionsObj, NanNew("sync"));
 
   Batch* batch = new Batch(database, sync);
   batch->Wrap(args.This());
@@ -62,12 +60,12 @@ v8::Handle<v8::Value> Batch::NewInstance (
       , v8::Handle<v8::Object> optionsObj
     ) {
 
-  NanScope();
+  NanEscapableScope();
 
   v8::Local<v8::Object> instance;
 
   v8::Local<v8::FunctionTemplate> constructorHandle =
-      NanPersistentToLocal(batch_constructor);
+      NanNew<v8::FunctionTemplate>(batch_constructor);
 
   if (optionsObj.IsEmpty()) {
     v8::Handle<v8::Value> argv[1] = { database };
@@ -77,21 +75,14 @@ v8::Handle<v8::Value> Batch::NewInstance (
     instance = constructorHandle->GetFunction()->NewInstance(2, argv);
   }
 
-  return scope.Close(instance);
+  return NanEscapeScope(instance);
 }
 
 NAN_METHOD(Batch::Put) {
   NanScope();
 
   Batch* batch = ObjectWrap::Unwrap<Batch>(args.Holder());
-
-  if (batch->written)
-    return NanThrowError("write() already called on this batch");
-
   v8::Handle<v8::Function> callback; // purely for the error macros
-
-  LD_CB_ERR_IF_NULL_OR_UNDEFINED(args[0], key)
-  LD_CB_ERR_IF_NULL_OR_UNDEFINED(args[1], value)
 
   v8::Local<v8::Value> keyBuffer = args[0];
   v8::Local<v8::Value> valueBuffer = args[1];
@@ -113,12 +104,7 @@ NAN_METHOD(Batch::Del) {
 
   Batch* batch = ObjectWrap::Unwrap<Batch>(args.Holder());
 
-  if (batch->written)
-    return NanThrowError("write() already called on this batch");
-
   v8::Handle<v8::Function> callback; // purely for the error macros
-
-  LD_CB_ERR_IF_NULL_OR_UNDEFINED(args[0], key)
 
   v8::Local<v8::Value> keyBuffer = args[0];
   LD_STRING_OR_BUFFER_TO_SLICE(key, keyBuffer, key)
@@ -137,9 +123,6 @@ NAN_METHOD(Batch::Clear) {
 
   Batch* batch = ObjectWrap::Unwrap<Batch>(args.Holder());
 
-  if (batch->written)
-    return NanThrowError("write() already called on this batch");
-
   batch->batch->Clear();
   batch->hasData = false;
 
@@ -151,21 +134,13 @@ NAN_METHOD(Batch::Write) {
 
   Batch* batch = ObjectWrap::Unwrap<Batch>(args.Holder());
 
-  if (batch->written)
-    return NanThrowError("write() already called on this batch");
-  
-  if (args.Length() == 0)
-    return NanThrowError("write() requires a callback argument");
-
-  batch->written = true;
-
   if (batch->hasData) {
     NanCallback *callback =
         new NanCallback(v8::Local<v8::Function>::Cast(args[0]));
     BatchWriteWorker* worker  = new BatchWriteWorker(batch, callback);
     // persist to prevent accidental GC
     v8::Local<v8::Object> _this = args.This();
-    worker->SavePersistent("batch", _this);
+    worker->SaveToPersistent("batch", _this);
     NanAsyncQueueWorker(worker);
   } else {
     LD_RUN_CALLBACK(v8::Local<v8::Function>::Cast(args[0]), 0, NULL);

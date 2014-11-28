@@ -111,7 +111,7 @@ PouchDB.destroy = utils.toPromise(function (name, opts, callback) {
     }
     db.get('_local/_pouch_dependentDbs', function (err, localDoc) {
       if (err) {
-        if (err.name !== 'not_found') {
+        if (err.status !== 404) {
           return callback(err);
         } else { // no dependencies
           return destroyDb();
@@ -190,19 +190,6 @@ PouchDB.defaults = function (defaultOpts) {
       PouchAlt[key] = PouchDB[key];
     }
   });
-
-  PouchAlt.replicate = function replicateWrapper(src, target, opts, callback) {
-    if (typeof opts === 'function') {
-      callback = opts;
-      opts = {};
-    }
-    if (typeof opts === 'undefined') {
-      opts = {};
-    }
-    opts = utils.clone(opts);
-    opts.pouchConstructor = PouchAlt;
-    return PouchDB.replicate(src, target, opts, callback);
-  };
 
   return PouchAlt;
 };

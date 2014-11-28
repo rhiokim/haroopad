@@ -6,7 +6,7 @@ define([
 	],
 	function(Keymap, Drop, AutoComplete) {
 		var moment = require('moment');
-    moment.lang(global.LOCALES._lang);
+    moment.locale(global.LOCALES._lang);
 
 		var gui = require('nw.gui'),
 			win = gui.Window.get(),

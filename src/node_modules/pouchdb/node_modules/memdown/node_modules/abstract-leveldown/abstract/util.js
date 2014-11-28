@@ -1,5 +1,7 @@
+var nfre = /NotFound/i
+
 module.exports.verifyNotFoundError = function verifyNotFoundError (err) {
-  return (/NotFound/i).test(err.message)
+  return nfre.test(err.message) || nfre.test(err.name)
 }
 
 module.exports.isTypedArray = function isTypedArray (value) {

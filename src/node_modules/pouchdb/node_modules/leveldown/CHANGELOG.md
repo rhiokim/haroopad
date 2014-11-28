@@ -1,3 +1,14 @@
+### 1.0.0 Aug 26 2014
+  * NAN@1.3 for Node 0.11.13+ support (@rvagg)
+  * Allow writing empty values: null, undefined, '', [] and Buffer(0). Entries come out as '' or Buffer(0) (@ggreer, @juliangruber, @rvagg)
+  * Fix clang build (@thlorenz)
+  * Massive speed up of iterators by chunking reads (@kesla)
+  * Wrap in abstract-leveldown for consistent type-checking across *DOWNs (@kesla)
+  * Upgrade to LevelDB 1.17.0 (@kesla)
+  * Minor memory leaks
+  * Remove compile option that borked EL5 compiles
+  * Switch to plain MIT license
+
 ### 0.10.2 @ Nov 30 2013
 
   * Apply fix by @rescrv for long-standing OSX corruption bug, https://groups.google.com/forum/#!topic/leveldb/GXhx8YvFiig (@rvagg / @rescrv)

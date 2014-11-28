@@ -232,7 +232,17 @@ function make (elements, ranges) {
         var actual = elements.filter(ltgt.filter(e.range))
         if(e.range.reverse)
           actual.reverse()
-        t.deepEqual(actual, e.selection)
+        t.deepEqual(actual, e.selection, 'test range:' + JSON.stringify(e.range))
+
+        var range = ltgt.toLtgt(e.range)
+        //should not just return the same thing.
+        t.notOk(range.min || range.max || range.start || range.end)
+
+        var actual2 = elements.filter(ltgt.filter(range))
+        if(e.range.reverse)
+          actual2.reverse()
+        t.deepEqual(actual2, e.selection)
+        
         t.end()
       })
   })

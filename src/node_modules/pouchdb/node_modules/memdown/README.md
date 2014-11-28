@@ -6,6 +6,8 @@
 
 [![Travis](https://secure.travis-ci.org/rvagg/memdown.png)](http://travis-ci.org/rvagg/memdown)
 
+[![testling](http://ci.testling.com/rvagg/memdown.png)](http://ci.testling.com/rvagg/memdown)
+
 As of version 0.7, LevelUP allows you to pass a `'db'` option when you create a new instance. This will override the default LevelDOWN store with a LevelDOWN API compatible object. MemDOWN conforms exactly to the LevelDOWN API but only performs operations in memory, so your data is discarded when the process ends or you release a reference to the database.
 
 ## Example

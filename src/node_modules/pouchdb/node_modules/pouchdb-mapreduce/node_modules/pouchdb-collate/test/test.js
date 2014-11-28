@@ -5,6 +5,7 @@ var pouchCollate = require('../lib');
 var collate = pouchCollate.collate;
 var normalizeKey = pouchCollate.normalizeKey;
 var toIndexableString = pouchCollate.toIndexableString;
+var parseIndexableString = pouchCollate.parseIndexableString;
 var utils = require('../lib/utils');
 
 var verifyLexicalKeysSort = function (keys) {
@@ -312,5 +313,107 @@ describe('indexableString', function () {
     collate(a, b).should.equal(0, 'collate a,b');
     collate(a, a).should.equal(0, 'collate a,a');
     collate(b, b).should.equal(0, 'collate b,b');
+  });
+
+  it('verify parseIndexableString', function () {
+    var keys = [null, false, true, 0, 1, -1, 9, -9, 10, -10, 0.1, -0.1, -0.01,
+    100, 200, 20, -20, -200, -30, Number.MAX_VALUE, Number.MIN_VALUE,
+      'foo', '', '\u0000', '\u0001', '\u0002', [1], {foo: true},
+      {foo: 'bar', 'baz': 'quux', foobaz: {bar: 'bar', baz: 'baz', quux: {foo: 'bar'}}},
+      {foo: {bar: true}},
+      [{foo: 'bar'}, {bar: 'baz'}, {}, ['foo', 'bar', 'baz']],
+      [[[['foo']], [], [['bar']]]],
+      -Number.MAX_VALUE,
+      -300,
+      -200,
+      -100,
+      -10,
+      -2.5,
+      -2,
+      -1.5,
+      -1,
+      -0.5,
+      -0.0001,
+      -Number.MIN_VALUE,
+      0,
+      Number.MIN_VALUE,
+      0.0001,
+      0.1,
+      0.5,
+      1,
+      1.5,
+      2,
+      3,
+      10,
+      15,
+      100,
+      200,
+      300,
+      Number.MAX_VALUE,
+      '',
+      '1',
+      '10',
+      '100',
+      '2',
+      '20',
+      '[]',
+      //'é',
+      'foo',
+      'mo',
+      'moe',
+      //'moé',
+      //'moët et chandon',
+      'moz',
+      'mozilla',
+      'mozilla with a super long string see how far it can go',
+      'mozzy',
+      [],
+      [ null ],
+      [ null, null ],
+      [ null, 'foo' ],
+      [ false ],
+      [ false, 100 ],
+      [ true ],
+      [ true, 100 ],
+      [ 0 ],
+      [ 0, null ],
+      [ 0, 1 ],
+      [ 0, '' ],
+      [ 0, 'foo' ],
+      [ '', '' ],
+      [ 'foo' ],
+      [ 'foo', 1 ],
+      {},
+      { '0': null },
+      { '0': false },
+      { '0': true },
+      { '0': 0 },
+      { '0': 1 },
+      { '0': 'bar' },
+      { '0': 'foo' },
+      { '0': 'foo', '1': false },
+      { '0': 'foo', '1': true },
+      { '0': 'foo', '1': 0 },
+      { '0': 'foo', '1': '0' },
+      { '0': 'foo', '1': 'bar' },
+      { '0': 'quux' },
+      { '1': 'foo' }
+    ];
+
+    keys.forEach(function (key) {
+      var indexableString = toIndexableString(key);
+      JSON.stringify(parseIndexableString(indexableString)).should.equal(
+        JSON.stringify(key), 'check parseIndexableString for key: ' + key +
+          '(indexable string is: ' + indexableString + ')');
+    });
+  });
+  it('throws error in parseIndexableString on invalid input', function () {
+
+    try {
+      var obj = parseIndexableString('');
+      should.fail("didn't expect to parse correctly");
+    } catch (err) {
+      should.exist(err);
+    }
   });
 });

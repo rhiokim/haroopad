@@ -3,7 +3,7 @@ module.exports.close = function (leveldown, test, testCommon) {
     var db = leveldown(testCommon.location())
 
     db.open(function (err) {
-      t.notOk(err, 'no error')
+      t.error(err)
       t.throws(
           db.close.bind(db)
         , { name: 'Error', message: 'close() requires a callback argument' }
@@ -16,7 +16,7 @@ module.exports.close = function (leveldown, test, testCommon) {
       )
 
       db.close(function (err) {
-        t.notOk(err, 'no error')
+        t.error(err)
         t.end()
       })
     })

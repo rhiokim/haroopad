@@ -1,6 +1,6 @@
-/* Copyright (c) 2012-2013 LevelDOWN contributors
+/* Copyright (c) 2012-2014 LevelDOWN contributors
  * See list at <https://github.com/rvagg/node-leveldown#contributing>
- * MIT +no-false-attribs License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE>
+ * MIT License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE.md>
  */
 #ifndef LD_LEVELDOWN_H
 #define LD_LEVELDOWN_H
@@ -8,11 +8,11 @@
 #include <node.h>
 #include <node_buffer.h>
 #include <leveldb/slice.h>
-
-#include "nan.h"
+#include <nan.h>
 
 static inline size_t StringOrBufferLength(v8::Local<v8::Value> obj) {
-  return node::Buffer::HasInstance(obj->ToObject())
+  return (!obj->ToObject().IsEmpty()
+    && node::Buffer::HasInstance(obj->ToObject()))
     ? node::Buffer::Length(obj->ToObject())
     : obj->ToString()->Utf8Length();
 }
@@ -23,40 +23,37 @@ static inline void DisposeStringOrBufferFromSlice(
         v8::Persistent<v8::Object> &handle
       , leveldb::Slice slice) {
 
-  if (!node::Buffer::HasInstance(NanPersistentToLocal(handle)->Get(NanSymbol("obj"))))
-    delete[] slice.data();
-  NanDispose(handle);
+  if (!slice.empty()) {
+    v8::Local<v8::Value> obj = NanNew<v8::Object>(handle)->Get(NanNew<v8::String>("obj"));
+    if (!node::Buffer::HasInstance(obj))
+      delete[] slice.data();
+  }
+
+  NanDisposePersistent(handle);
 }
 
 static inline void DisposeStringOrBufferFromSlice(
         v8::Local<v8::Value> handle
       , leveldb::Slice slice) {
 
-  if (!node::Buffer::HasInstance(handle))
+  if (!slice.empty() && !node::Buffer::HasInstance(handle))
     delete[] slice.data();
 }
-
-#define LD_CB_ERR_IF_NULL_OR_UNDEFINED(thing, name)                            \
-  if (thing->IsNull() || thing->IsUndefined()) {                               \
-    LD_RETURN_CALLBACK_OR_ERROR(callback, #name " cannot be `null` or `undefined`") \
-  }
 
 // NOTE: must call DisposeStringOrBufferFromSlice() on objects created here
 #define LD_STRING_OR_BUFFER_TO_SLICE(to, from, name)                           \
   size_t to ## Sz_;                                                            \
   char* to ## Ch_;                                                             \
-  if (node::Buffer::HasInstance(from->ToObject())) {                           \
+  if (from->IsNull() || from->IsUndefined()) {                                 \
+    to ## Sz_ = 0;                                                             \
+    to ## Ch_ = 0;                                                             \
+  } else if (!from->ToObject().IsEmpty()                                       \
+      && node::Buffer::HasInstance(from->ToObject())) {                        \
     to ## Sz_ = node::Buffer::Length(from->ToObject());                        \
-    if (to ## Sz_ == 0) {                                                      \
-      LD_RETURN_CALLBACK_OR_ERROR(callback, #name " cannot be an empty Buffer") \
-    }                                                                          \
     to ## Ch_ = node::Buffer::Data(from->ToObject());                          \
   } else {                                                                     \
     v8::Local<v8::String> to ## Str = from->ToString();                        \
     to ## Sz_ = to ## Str->Utf8Length();                                       \
-    if (to ## Sz_ == 0) {                                                      \
-      LD_RETURN_CALLBACK_OR_ERROR(callback, #name " cannot be an empty String") \
-    }                                                                          \
     to ## Ch_ = new char[to ## Sz_];                                           \
     to ## Str->WriteUtf8(                                                      \
         to ## Ch_                                                              \
@@ -69,9 +66,7 @@ static inline void DisposeStringOrBufferFromSlice(
 #define LD_RETURN_CALLBACK_OR_ERROR(callback, msg)                             \
   if (!callback.IsEmpty() && callback->IsFunction()) {                         \
     v8::Local<v8::Value> argv[] = {                                            \
-      NanNewLocal<v8::Value>(v8::Exception::Error(                          \
-        v8::String::New(msg))                                                  \
-      )                                                                        \
+      NanError(msg)                                                            \
     };                                                                         \
     LD_RUN_CALLBACK(callback, 1, argv)                                         \
     NanReturnUndefined();                                                      \
@@ -79,8 +74,8 @@ static inline void DisposeStringOrBufferFromSlice(
   return NanThrowError(msg);
 
 #define LD_RUN_CALLBACK(callback, argc, argv)                                  \
-  node::MakeCallback(                                                          \
-      v8::Context::GetCurrent()->Global(), callback, argc, argv);
+  NanMakeCallback(                                                          \
+      NanGetCurrentContext()->Global(), callback, argc, argv);
 
 /* LD_METHOD_SETUP_COMMON setup the following objects:
  *  - Database* database

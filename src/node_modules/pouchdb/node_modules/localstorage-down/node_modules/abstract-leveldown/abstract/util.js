@@ -3,5 +3,6 @@ module.exports.verifyNotFoundError = function verifyNotFoundError (err) {
 }
 
 module.exports.isTypedArray = function isTypedArray (value) {
-  return value instanceof ArrayBuffer || value instanceof Uint8Array
+  return (typeof ArrayBuffer != 'undefined' && value instanceof ArrayBuffer)
+      || (typeof Uint8Array != 'undefined' && value instanceof Uint8Array)
 }

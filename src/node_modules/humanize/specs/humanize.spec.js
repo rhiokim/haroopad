@@ -305,26 +305,26 @@ describe('humanize:', function() {
     it('should be able to use the defaults properly', function() {
       humanize.filesize(12).should.equal('12 bytes');
       humanize.filesize(1021).should.equal('1,021 bytes');
-      humanize.filesize(1024).should.equal('1.00 Kb');
+      humanize.filesize(1024).should.equal('1.00 KB');
 
-      humanize.filesize(Math.pow(1024, 2)).should.equal('1.00 Mb');
-      humanize.filesize(Math.pow(1024, 3)).should.equal('1.00 Gb');
-      humanize.filesize(Math.pow(1024, 4)).should.equal('1.00 Tb');
-      humanize.filesize(Math.pow(1024, 5)).should.equal('1.00 Pb');
-      humanize.filesize(Math.pow(1024, 6)).should.equal('1,024.00 Pb');
-      humanize.filesize(1234567890).should.equal('1.15 Gb');
+      humanize.filesize(Math.pow(1024, 2)).should.equal('1.00 MB');
+      humanize.filesize(Math.pow(1024, 3)).should.equal('1.00 GB');
+      humanize.filesize(Math.pow(1024, 4)).should.equal('1.00 TB');
+      humanize.filesize(Math.pow(1024, 5)).should.equal('1.00 PB');
+      humanize.filesize(Math.pow(1024, 6)).should.equal('1,024.00 PB');
+      humanize.filesize(1234567890).should.equal('1.15 GB');
     });
 
     it('should be able to change kilo to a different value', function() {
       humanize.filesize(12, 1000).should.equal('12 bytes');
-      humanize.filesize(1021, 1000).should.equal('1.02 Kb');
-      humanize.filesize(1024, 1000).should.equal('1.02 Kb');
-      humanize.filesize(Math.pow(1024, 2), 1000).should.equal('1.05 Mb');
-      humanize.filesize(Math.pow(1024, 3), 1000).should.equal('1.07 Gb');
-      humanize.filesize(Math.pow(1024, 4), 1000).should.equal('1.10 Tb');
-      humanize.filesize(Math.pow(1024, 5), 1000).should.equal('1.13 Pb');
-      humanize.filesize(Math.pow(1024, 6), 1000).should.equal('1,152.92 Pb');
-      humanize.filesize(1234567890, 1000).should.equal('1.23 Gb');
+      humanize.filesize(1021, 1000).should.equal('1.02 KB');
+      humanize.filesize(1024, 1000).should.equal('1.02 KB');
+      humanize.filesize(Math.pow(1024, 2), 1000).should.equal('1.05 MB');
+      humanize.filesize(Math.pow(1024, 3), 1000).should.equal('1.07 GB');
+      humanize.filesize(Math.pow(1024, 4), 1000).should.equal('1.10 TB');
+      humanize.filesize(Math.pow(1024, 5), 1000).should.equal('1.13 PB');
+      humanize.filesize(Math.pow(1024, 6), 1000).should.equal('1,152.92 PB');
+      humanize.filesize(1234567890, 1000).should.equal('1.23 GB');
     });
   });
 

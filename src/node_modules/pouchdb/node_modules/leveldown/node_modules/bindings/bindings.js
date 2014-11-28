@@ -96,9 +96,10 @@ module.exports = exports = bindings
 /**
  * Gets the filename of the JavaScript file that invokes this function.
  * Used to help find the root directory of a module.
+ * Optionally accepts an filename argument to skip when searching for the invoking filename
  */
 
-exports.getFileName = function getFileName () {
+exports.getFileName = function getFileName (calling_file) {
   var origPST = Error.prepareStackTrace
     , origSTL = Error.stackTraceLimit
     , dummy = {}
@@ -110,7 +111,13 @@ exports.getFileName = function getFileName () {
     for (var i=0, l=st.length; i<l; i++) {
       fileName = st[i].getFileName()
       if (fileName !== __filename) {
-        return
+        if (calling_file) {
+            if (fileName !== calling_file) {
+              return
+            }
+        } else {
+          return
+        }
       }
     }
   }

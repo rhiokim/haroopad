@@ -39,7 +39,7 @@ var dbidx = 0
 
   , setUp = function (t) {
       cleanup(function (err) {
-        t.notOk(err, 'cleanup returned an error')
+        t.error(err, 'cleanup returned an error')
         t.end()
       })
     }
@@ -59,7 +59,7 @@ var dbidx = 0
                 })
               }
               data.push({ key: key, value: value })
-              process.nextTick(next)
+              setTimeout(next, 0)
             })
           }
       next()

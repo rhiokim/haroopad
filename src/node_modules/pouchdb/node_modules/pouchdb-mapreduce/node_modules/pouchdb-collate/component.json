@@ -1,6 +1,6 @@
 {
   "name": "pouchdb-collate",
-  "version": "0.2.0",
+  "version": "1.2.0",
   "repo": "pouchdb/collate",
   "authors": [
     "Calvin Metcalf et al."

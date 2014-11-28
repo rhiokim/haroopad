@@ -3,6 +3,9 @@ language: node_js
 services:
   - couchdb
 
+git:
+  depth: 30
+
 node_js:
   - "0.10"
 script: npm run $COMMAND

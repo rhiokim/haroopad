@@ -51,9 +51,9 @@ module.exports.args = function (test) {
 module.exports.put = function (test) {
   test('test simple put()', function (t) {
     db.put('foo', 'bar', function (err) {
-      t.notOk(err, 'no error')
+      t.error(err)
       db.get('foo', function (err, value) {
-        t.notOk(err, 'no error')
+        t.error(err)
         var result = value.toString()
         if (isTypedArray(value))
           result = String.fromCharCode.apply(null, new Uint16Array(value))
@@ -66,9 +66,9 @@ module.exports.put = function (test) {
   if (process.browser) {
     test('test object value put()', function (t) {
       db.put('dood', {pete: 'sampras'}, function (err) {
-        t.notOk(err, 'no error')
+        t.error(err)
         db.get('dood', { asBuffer: false }, function (err, value) {
-          t.notOk(err, 'no error')
+          t.error(err)
           t.equal(JSON.stringify(value), JSON.stringify({pete: 'sampras'}))
           t.end()
         })

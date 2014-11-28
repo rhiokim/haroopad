@@ -1,6 +1,6 @@
-/* Copyright (c) 2012-2013 LevelDOWN contributors
+/* Copyright (c) 2012-2014 LevelDOWN contributors
  * See list at <https://github.com/rvagg/node-leveldown#contributing>
- * MIT +no-false-attribs License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE>
+ * MIT License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE.md>
  */
 
 

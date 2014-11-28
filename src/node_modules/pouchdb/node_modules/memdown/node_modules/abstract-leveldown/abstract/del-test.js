@@ -42,9 +42,9 @@ module.exports.args = function (test) {
 module.exports.del = function (test) {
   test('test simple del()', function (t) {
     db.put('foo', 'bar', function (err) {
-      t.notOk(err, 'no error')
+      t.error(err)
       db.del('foo', function (err) {
-        t.notOk(err, 'no error')
+        t.error(err)
         db.get('foo', function (err) {
           t.ok(err, 'entry propertly deleted')
           t.ok(typeof value == 'undefined', 'value is undefined')
@@ -57,7 +57,7 @@ module.exports.del = function (test) {
 
   test('test del on non-existent key', function (t) {
     db.del('blargh', function (err) {
-      t.notOk(err, 'should not error on delete')
+      t.error(err)
       t.end()
     })
   })

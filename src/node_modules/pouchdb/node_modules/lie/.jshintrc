@@ -15,5 +15,6 @@
   "globals": {
     "describe": true,
     "it": true
-  }
+  },
+  "predef": [ "-Promise" ]
 }

@@ -1,6 +1,6 @@
-/* Copyright (c) 2012-2013 LevelDOWN contributors
+/* Copyright (c) 2012-2014 LevelDOWN contributors
  * See list at <https://github.com/rvagg/node-leveldown#contributing>
- * MIT +no-false-attribs License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE>
+ * MIT License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE.md>
  */
 
 #include <leveldb/db.h>
@@ -13,37 +13,37 @@ namespace leveldown {
 /** DESTROY WORKER **/
 
 DestroyWorker::DestroyWorker (
-    char* location
+    NanUtf8String* location
   , NanCallback *callback
 ) : AsyncWorker(NULL, callback)
   , location(location)
 {};
 
 DestroyWorker::~DestroyWorker () {
-  delete[] location;
+  delete location;
 }
 
 void DestroyWorker::Execute () {
   leveldb::Options options;
-  SetStatus(leveldb::DestroyDB(location, options));
+  SetStatus(leveldb::DestroyDB(**location, options));
 }
 
 /** REPAIR WORKER **/
 
 RepairWorker::RepairWorker (
-    char* location
+    NanUtf8String* location
   , NanCallback *callback
 ) : AsyncWorker(NULL, callback)
   , location(location)
 {};
 
 RepairWorker::~RepairWorker () {
-  delete[] location;
+  delete location;
 }
 
 void RepairWorker::Execute () {
   leveldb::Options options;
-  SetStatus(leveldb::RepairDB(location, options));
+  SetStatus(leveldb::RepairDB(**location, options));
 }
 
 } // namespace leveldown

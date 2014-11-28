@@ -8,7 +8,7 @@
  */
 
 module.exports = function (arr) {
-  if (typeof Buffer._augment === 'function' && Buffer._useTypedArrays) {
+  if (typeof Buffer._augment === 'function' && Buffer.TYPED_ARRAY_SUPPORT) {
     // If `Buffer` is from the `buffer` module and this browser supports typed arrays,
     // then augment it with all the `Buffer` methods.
     return Buffer._augment(arr)

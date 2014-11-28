@@ -43,6 +43,7 @@
                 '-Wno-sign-compare'
               , '-Wno-unused-function'
             ]
+          , 'cflags!': [ '-fno-tree-vrp' ]
         }]
       , ['OS == "freebsd"', {
             'cflags': [

@@ -17,8 +17,8 @@
           }]
         , ['OS == "linux"', {
               'cflags': [
-                  '-Wno-unused-local-typedefs'
               ]
+            , 'cflags!': [ '-fno-tree-vrp' ]
           }]
         ]
       , "dependencies": [

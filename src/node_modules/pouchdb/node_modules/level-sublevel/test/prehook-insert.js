@@ -84,7 +84,7 @@ tape('insert in prehook - encodings', function (t) {
     console.log('A   :', op)
     add({
       key: op.key, value: JSON.stringify({value: op.value}), 
-      type: 'put', prefix: b//, valueEncoding: 'utf8'
+      type: 'put', prefix: b, valueEncoding: 'utf8'
     })
   })
 

@@ -1,6 +1,6 @@
-/* Copyright (c) 2012-2013 LevelDOWN contributors
+/* Copyright (c) 2012-2014 LevelDOWN contributors
  * See list at <https://github.com/rvagg/node-leveldown#contributing>
- * MIT +no-false-attribs License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE>
+ * MIT License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE.md>
  */
 
 #ifndef LD_LEVELDOWN_ASYNC_H
@@ -15,7 +15,7 @@ namespace leveldown {
 class DestroyWorker : public AsyncWorker {
 public:
   DestroyWorker (
-      char* location
+      NanUtf8String* location
     , NanCallback *callback
   );
 
@@ -23,13 +23,13 @@ public:
   virtual void Execute ();
 
 private:
-  char* location;
+  NanUtf8String* location;
 };
 
 class RepairWorker : public AsyncWorker {
 public:
   RepairWorker (
-      char* location
+      NanUtf8String* location
     , NanCallback *callback
   );
 
@@ -37,7 +37,7 @@ public:
   virtual void Execute ();
 
 private:
-  char* location;
+  NanUtf8String* location;
 };
 
 } // namespace leveldown

@@ -1,15 +1,12 @@
 'use strict';
 var utils = require('./utils');
-var replicate = require('./replicate').replicate;
+var replication = require('./replicate');
+var replicate = replication.replicate;
 var EE = require('events').EventEmitter;
 
-module.exports = Sync;
 utils.inherits(Sync, EE);
-function Sync(src, target, opts, callback) {
-  if (!(this instanceof Sync)) {
-    return new Sync(src, target, opts, callback);
-  }
-  var self = this;
+module.exports = sync;
+function sync(src, target, opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;
     opts = {};
@@ -17,8 +14,17 @@ function Sync(src, target, opts, callback) {
   if (typeof opts === 'undefined') {
     opts = {};
   }
-  this.canceled = false;
   opts = utils.clone(opts);
+  /*jshint validthis:true */
+  opts.PouchConstructor = opts.PouchConstructor || this;
+  src = replication.toPouch(src, opts);
+  target = replication.toPouch(target, opts);
+  return new Sync(src, target, opts, callback);
+}
+function Sync(src, target, opts, callback) {
+  var self = this;
+  this.canceled = false;
+  
   var onChange, complete;
   if ('onChange' in opts) {
     onChange = opts.onChange;
@@ -30,6 +36,7 @@ function Sync(src, target, opts, callback) {
     complete = opts.complete;
     delete opts.complete;
   }
+
   this.push = replicate(src, target, opts);
 
   this.pull = replicate(target, src, opts);

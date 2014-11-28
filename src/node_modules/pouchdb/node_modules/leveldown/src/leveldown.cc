@@ -1,6 +1,6 @@
-/* Copyright (c) 2012-2013 LevelDOWN contributors
+/* Copyright (c) 2012-2014 LevelDOWN contributors
  * See list at <https://github.com/rvagg/node-leveldown#contributing>
- * MIT +no-false-attribs License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE>
+ * MIT License <https://github.com/rvagg/node-leveldown/blob/master/LICENSE.md>
  */
 
 #include <node.h>
@@ -16,19 +16,7 @@ namespace leveldown {
 NAN_METHOD(DestroyDB) {
   NanScope();
 
-  if (args.Length() < 2) {
-    return NanThrowError("destroy() requires `location` and `callback` arguments");
-  }
-
-  if (!args[0]->IsString()) {
-    return NanThrowError("destroy() requires a location string argument");
-  }
-
-  if (!args[1]->IsFunction()) {
-    return NanThrowError("destroy() requires a callback function argument");
-  }
-
-  char* location = NanFromV8String(args[0].As<v8::Object>(), Nan::UTF8, NULL, NULL, 0, v8::String::NO_OPTIONS);
+  NanUtf8String* location = new NanUtf8String(args[0]);
 
   NanCallback* callback = new NanCallback(
       v8::Local<v8::Function>::Cast(args[1]));
@@ -46,21 +34,9 @@ NAN_METHOD(DestroyDB) {
 NAN_METHOD(RepairDB) {
   NanScope();
 
-  if (args.Length() < 2) {
-    return NanThrowError("repair() requires `location` and `callback` arguments");
-  }
+  NanUtf8String* location = new NanUtf8String(args[0]);
 
-  if (!args[0]->IsString()) {
-    return NanThrowError("repair() requires a location string argument");
-  }
-
-  if (!args[1]->IsFunction()) {
-    return NanThrowError("repair() requires a callback function argument");
-  }
-
-  char* location = NanFromV8String(args[0].As<v8::Object>(), Nan::UTF8, NULL, NULL, 0, v8::String::NO_OPTIONS);
-
- NanCallback* callback = new NanCallback(
+  NanCallback* callback = new NanCallback(
       v8::Local<v8::Function>::Cast(args[1]));
 
   RepairWorker* worker = new RepairWorker(
@@ -79,19 +55,19 @@ void Init (v8::Handle<v8::Object> target) {
   leveldown::Batch::Init();
 
   v8::Local<v8::Function> leveldown =
-      v8::FunctionTemplate::New(LevelDOWN)->GetFunction();
+      NanNew<v8::FunctionTemplate>(LevelDOWN)->GetFunction();
 
   leveldown->Set(
-      NanSymbol("destroy")
-    , v8::FunctionTemplate::New(DestroyDB)->GetFunction()
+      NanNew("destroy")
+    , NanNew<v8::FunctionTemplate>(DestroyDB)->GetFunction()
   );
 
   leveldown->Set(
-      NanSymbol("repair")
-    , v8::FunctionTemplate::New(RepairDB)->GetFunction()
+      NanNew("repair")
+    , NanNew<v8::FunctionTemplate>(RepairDB)->GetFunction()
   );
 
-  target->Set(NanSymbol("leveldown"), leveldown);
+  target->Set(NanNew("leveldown"), leveldown);
 }
 
 NODE_MODULE(leveldown, Init)

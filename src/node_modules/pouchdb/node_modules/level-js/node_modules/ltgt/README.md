@@ -110,6 +110,15 @@ return true if upper bound is exclusive.
 
 return true if lower bound is exclusive.
 
+## ltgt.toLtgt(range, _range, map)
+
+convert a range to a new ltgt range. `_range`
+is the object to return - if you want to mutate `range`
+call `ltgt.toLtgt(range, range, map)`
+
+`map` gets called on each key in the range -
+so can be used as an encode function.
+
 ## License
 
 MIT

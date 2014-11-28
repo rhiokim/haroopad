@@ -2,10 +2,15 @@
 build/
 test-data.tar
 test-data.db.tar
-test/benchmarks/
 deps/leveldb/leveldb-basho/
 deps/leveldb/leveldb-hyper/
 deps/leveldb/leveldb-rocksdb/
-deps/snappy/snappy-1.1.0/testdata/
+deps/snappy/snappy-1.1.1/testdata/
 leakydb
 bench/
+test/
+deps/leveldb/leveldb-1.17.0/doc/
+README
+INSTALL
+NEWS
+AUTHORS
