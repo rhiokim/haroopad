@@ -16,7 +16,7 @@ window.MenuBar = function() {
 		  });
 	  }
 
-		if (process.platform !== 'win32') {
+		if (process.platform == 'darwin') {
 			menu.insert( MenuBarFile(), 1 );
 			menu.insert( MenuBarFind(), 3 );
 			menu.insert( MenuBarInsert(), 4 );
