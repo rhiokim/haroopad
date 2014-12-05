@@ -18,11 +18,11 @@
     "test",
     "tests"
   ],
-  "_release": "1d8c72e3f0",
+  "_release": "a056253ce0",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "1d8c72e3f01dabbaaed5352088742f874aa2b34d"
+    "commit": "a056253ce0c2c863ccac6dbcd2aacbb93a05fe1a"
   },
   "_source": "git@github.com:rhiokim/markdown-css.git",
   "_target": "master",
