@@ -16,8 +16,6 @@
 .hljs-change,
 .hljs-winutils,
 .hljs-flow,
-.lisp .hljs-title,
-.clojure .hljs-built_in,
 .nginx .hljs-title,
 .css .hljs-id,
 .tex .hljs-special {
@@ -109,11 +107,10 @@
 }
 
 .hljs-comment,
-.java .hljs-annotation,
+.hljs-annotation,
 .hljs-blockquote,
 .hljs-horizontal_rule,
-.python .hljs-decorator,
-.hljs-template_comment,
+.hljs-decorator,
 .hljs-pi,
 .hljs-deletion,
 .hljs-shebang,
@@ -126,6 +123,7 @@
 .hljs-literal,
 .css .hljs-id,
 .hljs-phpdoc,
+.hljs-dartdoc,
 .hljs-title,
 .hljs-header,
 .hljs-type,

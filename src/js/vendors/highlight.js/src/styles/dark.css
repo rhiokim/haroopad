@@ -17,8 +17,6 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 .hljs-change,
 .hljs-winutils,
 .hljs-flow,
-.lisp .hljs-title,
-.clojure .hljs-built_in,
 .nginx .hljs-title,
 .tex .hljs-special {
   color: white;
@@ -63,9 +61,8 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 }
 
 .hljs-comment,
-.java .hljs-annotation,
-.python .hljs-decorator,
-.hljs-template_comment,
+.hljs-annotation,
+.hljs-decorator,
 .hljs-pi,
 .hljs-doctype,
 .hljs-deletion,
@@ -80,6 +77,7 @@ Dark style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Or
 .hljs-title,
 .css .hljs-id,
 .hljs-phpdoc,
+.hljs-dartdoc,
 .hljs-type,
 .vbscript .hljs-built_in,
 .rsl .hljs-built_in,
