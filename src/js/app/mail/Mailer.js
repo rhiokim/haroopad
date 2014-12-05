@@ -17,7 +17,7 @@ define([
 
 	function createTransport(email, password, service) {
 		// create reusable transport method (opens pool of SMTP connections)
-		transport = nodemailer.createTransport("SMTP", {
+		transport = nodemailer.createTransport({
 		    service: service || "Gmail",
 		    auth: {
 		        user: email,

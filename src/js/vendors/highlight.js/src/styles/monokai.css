@@ -18,8 +18,6 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 .hljs-change,
 .hljs-winutils,
 .hljs-flow,
-.lisp .hljs-title,
-.clojure .hljs-built_in,
 .nginx .hljs-title,
 .tex .hljs-special {
   color: #f92672;
@@ -30,7 +28,8 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 }
 
 .hljs .hljs-constant,
-.asciidoc .hljs-code {
+.asciidoc .hljs-code,
+.markdown .hljs-code {
 	color: #66d9ef;
 }
 
@@ -81,12 +80,11 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 }
 
 .hljs-comment,
-.java .hljs-annotation,
+.hljs-annotation,
 .smartquote,
 .hljs-blockquote,
 .hljs-horizontal_rule,
-.python .hljs-decorator,
-.hljs-template_comment,
+.hljs-decorator,
 .hljs-pi,
 .hljs-doctype,
 .hljs-deletion,
@@ -100,6 +98,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 .hljs-literal,
 .css .hljs-id,
 .hljs-phpdoc,
+.hljs-dartdoc,
 .hljs-title,
 .hljs-header,
 .hljs-type,

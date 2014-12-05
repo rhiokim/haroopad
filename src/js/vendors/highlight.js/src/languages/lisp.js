@@ -2,10 +2,12 @@
 Language: Lisp
 Description: Generic lisp syntax
 Author: Vasily Polovnyov <vast@whiteants.net>
+Category: lisp
 */
 
 function(hljs) {
   var LISP_IDENT_RE = '[a-zA-Z_\\-\\+\\*\\/\\<\\=\\>\\&\\#][a-zA-Z0-9_\\-\\+\\*\\/\\<\\=\\>\\&\\#!]*';
+  var MEC_RE = '\\|[^]*?\\|';
   var LISP_SIMPLE_NUMBER_RE = '(\\-|\\+)?\\d+(\\.\\d+|\\/\\d+)?((d|e|f|l|s)(\\+|\\-)?\\d+)?';
   var SHEBANG = {
     className: 'shebang',
@@ -28,7 +30,7 @@ function(hljs) {
   var STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null});
   var COMMENT = {
     className: 'comment',
-    begin: ';', end: '$'
+    begin: ';', end: '$', relevance: 0
   };
   var VARIABLE = {
     className: 'variable',
@@ -37,6 +39,9 @@ function(hljs) {
   var KEYWORD = {
     className: 'keyword',
     begin: '[:&]' + LISP_IDENT_RE
+  };
+  var MEC = {
+    begin: MEC_RE
   };
   var QUOTED_LIST = {
     begin: '\\(', end: '\\)',
@@ -51,7 +56,10 @@ function(hljs) {
       },
       {
         begin: '\\(quote ', end: '\\)',
-        keywords: {title: 'quote'}
+        keywords: 'quote'
+      },
+      {
+        begin: '\'' + MEC_RE
       }
     ]
   };
@@ -67,8 +75,17 @@ function(hljs) {
     endsWithParent: true,
     relevance: 0
   };
-  LIST.contains = [{className: 'title', begin: LISP_IDENT_RE}, BODY];
-  BODY.contains = [QUOTED, QUOTED_ATOM, LIST, LITERAL, NUMBER, STRING, COMMENT, VARIABLE, KEYWORD];
+  LIST.contains = [
+    {
+      className: 'keyword',
+      variants: [
+        {begin: LISP_IDENT_RE},
+        {begin: MEC_RE}
+      ]
+    },
+    BODY
+  ];
+  BODY.contains = [QUOTED, QUOTED_ATOM, LIST, LITERAL, NUMBER, STRING, COMMENT, VARIABLE, KEYWORD, MEC];
 
   return {
     illegal: /\S/,
