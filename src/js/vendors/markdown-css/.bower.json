@@ -1,13 +1,31 @@
 {
   "name": "markdown-css",
   "homepage": "https://github.com/rhiokim/markdown-css",
-  "_release": "6b4f25bd3e",
+  "authors": [
+    "rhiokim <rhio.kim@gmail.com>"
+  ],
+  "description": "markdown style sheet",
+  "keywords": [
+    "markdown",
+    "css",
+    "gfm"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "1d8c72e3f0",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "6b4f25bd3e1d9075ef5595a198b1ca9456a17e83"
+    "commit": "1d8c72e3f01dabbaaed5352088742f874aa2b34d"
   },
   "_source": "git@github.com:rhiokim/markdown-css.git",
-  "_target": "*",
-  "_originalSource": "git@github.com:rhiokim/markdown-css.git"
+  "_target": "master",
+  "_originalSource": "git@github.com:rhiokim/markdown-css.git",
+  "_direct": true
 }

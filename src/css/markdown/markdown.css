@@ -90,13 +90,13 @@
 .markdown pre {
   border-radius: 3px;
   word-wrap: break-word;
+  border: 1px solid #cccccc;
   overflow: auto;
 }
 .markdown pre code {
   display: block;
 }
 .markdown pre > code {
-  border: 1px solid #cccccc;
   white-space: pre;
   padding: .5em;
   margin: 0;

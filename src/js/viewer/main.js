@@ -242,6 +242,7 @@ function _lazySyntaxHighlight(el) {
   // var codeEl = el.firstElementChild;
   var code = el.innerHTML;
   var lang = el.className;
+  var pre = el.parentElement;
 
   if (!lang) {
     return;
@@ -255,15 +256,15 @@ function _lazySyntaxHighlight(el) {
     return code;
   }
 
-  el.setAttribute('class', lang +' hljs');
+  pre.setAttribute('class', lang +' hljs');
 
   code = htmlDecode(code);
 
   try {
     if (!lang) {
-      el.innerHTML = hljs.highlightAuto(code).value;
+      pre.innerHTML = hljs.highlightAuto(code).value;
     } else {
-      el.innerHTML = hljs.highlight(lang, code).value;
+      pre.innerHTML = hljs.highlight(lang, code).value;
     }
   } catch (e) {
     // return code;
