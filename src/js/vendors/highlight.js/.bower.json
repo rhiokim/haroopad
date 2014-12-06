@@ -1,13 +1,14 @@
 {
   "name": "highlight.js",
   "homepage": "https://github.com/isagalaev/highlight.js",
-  "_release": "4e3e383493",
+  "_release": "542ba2a51a",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "4e3e3834931ad36286faed1ff0bb90bdf43a4029"
+    "commit": "542ba2a51ad05bcdfbd3944aa61b9b69c3b135b1"
   },
   "_source": "git@github.com:isagalaev/highlight.js.git",
   "_target": "master",
-  "_originalSource": "git@github.com:isagalaev/highlight.js.git"
+  "_originalSource": "git@github.com:isagalaev/highlight.js.git",
+  "_direct": true
 }

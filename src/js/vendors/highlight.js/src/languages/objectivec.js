@@ -2,6 +2,7 @@
 Language: Objective C
 Author: Valerii Hiora <valerii.hiora@gmail.com>
 Contributors: Angel G. Olloqui <angelgarcia.mail@gmail.com>, Matt Diephouse <matt@diephouse.com>
+Category: common
 */
 
 function(hljs) {
@@ -17,9 +18,9 @@ function(hljs) {
       '@private @protected @public @try @property @end @throw @catch @finally ' +
       '@autoreleasepool @synthesize @dynamic @selector @optional @required',
     literal:
-    	'false true FALSE TRUE nil YES NO NULL',
+      'false true FALSE TRUE nil YES NO NULL',
     built_in:
-      'NSString NSDictionary CGRect CGPoint UIButton UILabel UITextView UIWebView MKMapView ' +
+      'NSString NSData NSDictionary CGRect CGPoint UIButton UILabel UITextView UIWebView MKMapView ' +
       'NSView NSViewController NSWindow NSWindowController NSSet NSUUID NSIndexSet ' +
       'UISegmentedControl NSObject UITableViewDelegate UITableViewDataSource NSThread ' +
       'UIActivityIndicator UITabbar UIToolBar UIBarButtonItem UIImageView NSAutoreleasePool ' +
@@ -31,6 +32,7 @@ function(hljs) {
       'UIFont UIApplication NSNotFound NSNotificationCenter NSNotification ' +
       'UILocalNotification NSBundle NSFileManager NSTimeInterval NSDate NSCalendar ' +
       'NSUserDefaults UIWindow NSRange NSArray NSError NSURLRequest NSURLConnection ' +
+      'NSURLSession NSURLSessionDataTask NSURLSessionDownloadTask NSURLSessionUploadTask NSURLResponse' +
       'UIInterfaceOrientation MPMoviePlayerController dispatch_once_t ' +
       'dispatch_queue_t dispatch_sync dispatch_async dispatch_once'
   };

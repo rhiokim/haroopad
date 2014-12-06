@@ -706,7 +706,7 @@ module.exports = function(grunt) {
       },
 
       highlightjs: {
-        command: 'python3 tools/build.py',
+        command: 'node tools/build.js -t browser',
         options: {
           stdout: true,
           execOptions: {
