@@ -561,7 +561,7 @@ function update(wrapper) {
     throttle: 250
   });
   
-  mermaid.init();
+  try {mermaid.init();} catch(e) {}
   window.ee.emit('rendered', _md_body);
 }
 /**
