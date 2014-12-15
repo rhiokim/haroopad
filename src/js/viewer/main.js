@@ -4,6 +4,7 @@ var _doc,
 var _options = {
   dirname: '.'
 };
+var codeLanguages;
 var viewStyle, codeStyle;
 var contentElements;
 
@@ -248,10 +249,15 @@ function _lazySyntaxHighlight(el) {
   }
 
   lang = lang.toLowerCase();
+  lang = lang == 'js' ? 'javascript' : lang;
+
+  if (codeLanguages.indexOf(lang) == -1) {
+    el.setAttribute('class', lang);
+    return code;
+  }
 
   pre.setAttribute('class', lang +' hljs');
 
-  lang = lang == 'js' ? 'javascript' : lang;
   code = htmlDecode(code);
 
   try {
@@ -565,7 +571,12 @@ function update(wrapper) {
     throttle: 250
   });
   
+  try { 
+    mermaid.init(); 
+  } catch(e) {}
+  
   indexingTasklist();
+
   window.ee.emit('rendered', _md_body);
 }
 /**
@@ -607,6 +618,8 @@ $(document.body).ready(function() {
       break;
     }
   });
+
+  codeLanguages = hljs.listLanguages();
 
   _body.addEventListener("DOMNodeInserted", function (ev) {
     // console.log(ev.target.tagName);
