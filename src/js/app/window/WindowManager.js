@@ -61,7 +61,7 @@ define([
 					// 	window.ee.emit('exit');
 					// }
 					if (!realCount) {
-						if (process.platform === 'win32' || closeAll) {
+						if (process.platform !== 'darwin' || closeAll) {
 							window.ee.emit('exit');
 						} else if (closeAll) {
 							window.ee.emit('exit');
