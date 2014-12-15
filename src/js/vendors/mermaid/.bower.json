@@ -25,11 +25,11 @@
     "dagre-d3": "0.3.2"
   },
   "homepage": "https://github.com/rhiokim/mermaid",
-  "_release": "07011c310b",
+  "_release": "f49f770136",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "07011c310bdadb57f78891958a976fdd351f4c70"
+    "commit": "f49f7701361b064fd366b8e6bc7081d0f7ae5347"
   },
   "_source": "git@github.com:rhiokim/mermaid.git",
   "_target": "master",

@@ -55,7 +55,8 @@ exports.addVertex = function (id, text, type, style) {
 exports.addLink = function (start, end, type, linktext) {
     //console.log('Got edge', start, end);
     var edge = {start: start, end: end, type: undefined, text: ''};
-    var linktext = type.text;
+    linktext = type.text;
+
     if (typeof linktext !== 'undefined') {
         edge.text = linktext;
     }
@@ -128,7 +129,7 @@ exports.setClickEvent = function (id,functionName) {
                         var elem = document.getElementById(id2);
                         if (elem !== null) {
                             elem.onclick = function () {
-                                eval(functionName + '(\'' + id2 + '\')');
+                                eval(functionName + '(\'' + id2 + '\')'); // jshint ignore:line
                             };
                         }
                     });
@@ -141,7 +142,7 @@ exports.setClickEvent = function (id,functionName) {
                     var elem = document.getElementById(id);
                     if(elem !== null){
                         //console.log('id was NOT null: '+id);
-                        elem.onclick = function(){eval(functionName+'(\'' + id + '\')');};
+                        elem.onclick = function(){eval(functionName+'(\'' + id + '\')');}; // jshint ignore:line
                     }
                     else{
                         //console.log('id was null: '+id);
@@ -204,4 +205,3 @@ exports.clear = function () {
 exports.defaultStyle = function () {
     return "fill:#ffa;stroke: #f66; stroke-width: 3px; stroke-dasharray: 5, 5;fill:#ffa;stroke: #666;";
 };
-

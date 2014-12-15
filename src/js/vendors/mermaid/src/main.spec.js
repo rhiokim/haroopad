@@ -19,12 +19,7 @@ describe('when using main and ',function() {
 
 
         });
-        xit('should have a version', function () {
-            div = document.createElement('div');
-            mermaid_config ={startOnLoad : false};
-            main = rewire('./main');
-            expect(main.version()).toBe('0.2.10');
-        });
+
         it('should not call start anything with an empty document', function () {
 
             mermaid_config ={startOnLoad : false};
@@ -36,7 +31,6 @@ describe('when using main and ',function() {
         it('should start something with a mermaid document', function () {
             mermaid_config ={startOnLoad : false};
             main = rewire('./main');
-            console.log('here');
             document.body.innerHTML = '<div class="mermaid">graph TD;\na;</div>';
             spyOn(utils,'detectType');
             mermaid.init();
@@ -47,8 +41,9 @@ describe('when using main and ',function() {
 
     describe('when calling addEdges ',function() {
         var main;
-        var graph = require('./graphDb');
-        var flow = require('./parser/flow');
+        var graph = require('./diagrams/flowchart/graphDb');
+        var flow = require('./diagrams/flowchart/parser/flow');
+        var flowRend = require('./diagrams/flowchart/flowRenderer');
 
         beforeEach(function () {
             mermaid_config ={startOnLoad : false};
@@ -68,12 +63,12 @@ describe('when using main and ',function() {
                 setEdge:function(start, end,options,name){
                     expect(start).toBe('A');
                     expect(end).toBe('B');
-                    expect(options.arrowhead).toBe('vee');
+                    expect(options.arrowhead).toBe('normal');
                     expect(options.label.match('text ex')).toBeTruthy();
                 }
             };
 
-            main.addEdges(edges,mockG);
+            flowRend.addEdges(edges,mockG);
         });
 
         it('should handle edges without text', function () {
@@ -85,11 +80,11 @@ describe('when using main and ',function() {
                 setEdge:function(start, end,options,name){
                     expect(start).toBe('A');
                     expect(end).toBe('B');
-                    expect(options.arrowhead).toBe('vee');
+                    expect(options.arrowhead).toBe('normal');
                 }
             };
 
-            main.addEdges(edges,mockG);
+            flowRend.addEdges(edges,mockG);
         });
 
 
@@ -106,7 +101,7 @@ describe('when using main and ',function() {
                 }
             };
 
-            main.addEdges(edges,mockG);
+            flowRend.addEdges(edges,mockG);
         });
 
         it('should handle edges with styles defined', function () {
@@ -123,7 +118,7 @@ describe('when using main and ',function() {
                 }
             };
 
-            main.addEdges(edges,mockG);
+            flowRend.addEdges(edges,mockG);
         });
         it('should handle edges with text and styles defined', function () {
             var res = flow.parser.parse('graph TD;A---|the text|B; linkStyle 0 stroke:val1,stroke-width:val2;');
@@ -140,7 +135,7 @@ describe('when using main and ',function() {
                 }
             };
 
-            main.addEdges(edges,mockG);
+            flowRend.addEdges(edges,mockG);
         });
     });
 });

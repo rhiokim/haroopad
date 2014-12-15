@@ -248,6 +248,29 @@ define([
 			}
 		});
 
+	  //tasklist
+	  _viewer.ee.on('task.done', function(el, index, isDone) {
+	    var src = nw.file.get('markdown');
+	    var i, mc = 0;
+
+	    src = src.split('\n');
+
+	    for (i = 0; i < src.length; i++) {
+	      if (/^(?:[*+-]|\d+\.)\s*\[[x ]\]\s*/.test(src[i])) {
+	        if (index == mc) {
+	          src[i] = isDone ? src[i].replace(/\[ \]/, '[x]') : src[i].replace(/\[x\]/, '[ ]');
+            nw.editor.replaceRange(src[i], { line:i, ch:0 }, { line:i, ch: src[i].length } );
+	          break;
+	        }
+
+	        mc++;
+	      }
+	    }
+
+	    nw.file.set({ markdown: src.join('\n') }, { silent: true });
+	  });
+
+
 		// _viewer.ee.on('dom', function(dom) {
 			// window.ee.emit('dom', dom);
 		// });

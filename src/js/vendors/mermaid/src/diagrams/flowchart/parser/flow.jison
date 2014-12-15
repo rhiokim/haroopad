@@ -32,6 +32,7 @@
 \-\-\-                return 'ARROW_OPEN';
 \-                    return 'MINUS';
 \+                    return 'PLUS';
+\%                    return 'PCT';
 \=                    return 'EQUALS';
 [\u0021-\u0027\u002A-\u002E\u003F\u0041-\u005A\u0061-\u007A\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00F6]|
 [\u00F8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377]|
@@ -93,7 +94,7 @@
 [\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D]|
 [\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC]]|
 [\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF]|
-[\uFFD2-\uFFD7\uFFDA-\uFFDC_]
+[\uFFD2-\uFFD7\uFFDA-\uFFDC_\/]
                       return 'ALPHA';
 "|"                   return 'PIPE';
 "("                   return 'PS';
@@ -103,9 +104,8 @@
 "{"                   return 'DIAMOND_START'
 "}"                   return 'DIAMOND_STOP'
 "\""                  return 'QUOTE';
-\s                    return 'SPACE';
 \n                    return 'NEWLINE';
-
+\s                    return 'SPACE';
 <<EOF>>               return 'EOF';
 
 /lex
@@ -120,7 +120,7 @@
 
 expressions
     : graphConfig statements EOF
-    | graphConfig spaceList statements EOF
+    | graphConfig spaceListNewline statements EOF
         {$$=$1;}
     ;
 
@@ -130,9 +130,18 @@ graphConfig
     ;
 
 statements
-    : statement spaceList statements
+    : statement spaceListNewline statements
     | statement
     ;
+
+
+spaceListNewline
+    : SPACE spaceListNewline
+    | NEWLINE spaceListNewline
+    | NEWLINE
+    | SPACE
+    ;
+
 
 spaceList
     : SPACE spaceList
@@ -140,7 +149,9 @@ spaceList
     ;
 
 statement
-    : verticeStatement SEMI
+    : commentStatement NEWLINE
+    {$$='Comment';}
+    | verticeStatement SEMI
     | styleStatement SEMI
     | linkStyleStatement SEMI
     | classDefStatement SEMI
@@ -157,17 +168,29 @@ verticeStatement:
 
 vertex:  alphaNum SQS text SQE
         {$$ = $1;yy.addVertex($1,$3,'square');}
+    |  alphaNum SQS text SQE SPACE
+        {$$ = $1;yy.addVertex($1,$3,'square');}
     | alphaNum PS PS text PE PE
+        {$$ = $1;yy.addVertex($1,$4,'circle');}
+    | alphaNum PS PS text PE PE SPACE
         {$$ = $1;yy.addVertex($1,$4,'circle');}
     | alphaNum PS text PE
         {$$ = $1;yy.addVertex($1,$3,'round');}
+    | alphaNum PS text PE SPACE
+        {$$ = $1;yy.addVertex($1,$3,'round');}
     | alphaNum DIAMOND_START text DIAMOND_STOP
         {$$ = $1;yy.addVertex($1,$3,'diamond');}
+    | alphaNum DIAMOND_START text DIAMOND_STOP SPACE
+        {$$ = $1;yy.addVertex($1,$3,'diamond');}
     | alphaNum TAGEND text SQE
+        {$$ = $1;yy.addVertex($1,$3,'odd');}
+    | alphaNum TAGEND text SQE SPACE
         {$$ = $1;yy.addVertex($1,$3,'odd');}
     | alphaNum TAGSTART text TAGEND
         {$$ = $1;yy.addVertex($1,$3,'diamond');}
     | alphaNum
+        {$$ = $1;yy.addVertex($1);}
+    | alphaNum SPACE
         {$$ = $1;yy.addVertex($1);}
     ;
 
@@ -185,31 +208,14 @@ alphaNumStatement
         {$$=$1+'-'+$3;}
     ;
 
-alphaNumToken
-    : ALPHA
-    {$$=$1;}
-    | NUM
-    {$$=$1;}
-    | COLON
-        {$$ = $1;}
-    | COMMA
-        {$$ = $1;}
-    | PLUS
-        {$$ = $1;}
-    | EQUALS
-        {$$ = $1;}
-    | MULT
-        {$$ = $1;}
-    | DOT
-        {$$ = $1;}
-
-    | BRKT
-        {$$ = '<br>';}
-    ;
 
 link: linkStatement arrowText
     {$1.text = $2;$$ = $1;}
+    | linkStatement arrowText SPACE
+    {$1.text = $2;$$ = $1;}
     | linkStatement
+    {$$ = $1;}
+    | linkStatement SPACE
     {$$ = $1;}
     ;
 
@@ -234,39 +240,15 @@ text: textToken
     {$$=$1+''+$2;}
     ;
 
-textStatement: textToken
-    | textToken textStatement
+
+
+commentText: commentToken
+    {$$=$1;}
+    | commentText commentToken
+    {$$=$1+''+$2;}
     ;
 
-textToken: ALPHA
-   {$$=$1;}
-   | NUM
-   {$$=$1;}
-   | COLON
-       {$$ = $1;}
-   | COMMA
-       {$$ = $1;}
-   | PLUS
-       {$$ = $1;}
-   | EQUALS
-       {$$ = $1;}
-   | MULT
-       {$$ = $1;}
-   | DOT
-       {$$ = $1;}
-   | TAGSTART
-       {$$ = $1;}
-   | TAGEND
-       {$$ = $1;}
-   | BRKT
-       {$$ = '<br>';}
-   | SPACE
-       {$$ = $1;}
-   | MINUS
-       {$$ = $1;}
-   | keywords
-       {$$ = $1;}
-    ;
+
 keywords
     : STYLE | LINKSTYLE | CLASSDEF | CLASS | CLICK | GRAPH | DIR;
 
@@ -277,31 +259,6 @@ textNoTags: textNoTagsToken
     {$$=$1+''+$2;}
     ;
 
-textNoTagsToken: ALPHA
-   {$$=$1;}
-   | NUM
-   {$$=$1;}
-   | COLON
-       {$$ = $1;}
-   | COMMA
-       {$$ = $1;}
-   | PLUS
-       {$$ = $1;}
-   | EQUALS
-       {$$ = $1;}
-   | MULT
-       {$$ = $1;}
-   | DOT
-       {$$ = $1;}
-   | BRKT
-       {$$ = '<br>';}
-   | SPACE
-       {$$ = $1;}
-   | MINUS
-       {$$ = $1;}
-   | keywords
-       {$$ = $1;}
-    ;
 
 classDefStatement:CLASSDEF SPACE alphaNum SPACE stylesOpt
     {$$ = $1;yy.addClass($3,$5);}
@@ -326,6 +283,8 @@ linkStyleStatement:
           {$$ = $1;yy.updateLink($3,$5);}
     ;
 
+commentStatement: PCT PCT commentText;
+
 stylesOpt: style
         {$$ = [$1]}
     | stylesOpt COMMA style
@@ -333,28 +292,21 @@ stylesOpt: style
     ;
 
 style: styleComponent
-    {$$=$1;}
     |style styleComponent
     {$$ = $1 + $2;}
     ;
 
-styleComponent: ALPHA
-    {$$=$1}
-    | COLON
-    {$$=$1}
-    | MINUS
-    {$$=$1}
-    | NUM
-    {$$=$1}
-    | UNIT
-    {$$=$1}
-    | SPACE
-    {$$=$1}
-    | HEX
-    {$$=$1}
-    | BRKT
-    {$$=$1}
-    | DOT
-    {$$=$1}
-    ;
+styleComponent: ALPHA | COLON | MINUS | NUM | UNIT | SPACE | HEX | BRKT | DOT;
+
+/* Token lists */
+
+commentToken   : textToken | graphCodeTokens ;
+
+textToken      : textNoTagsToken | TAGSTART | TAGEND ;
+
+textNoTagsToken: alphaNumToken | SPACE | MINUS | keywords ;
+
+alphaNumToken  : ALPHA | NUM | COLON | COMMA | PLUS | EQUALS | MULT | DOT | BRKT ;
+
+graphCodeTokens:  PIPE | PS | PE | SQS | SQE | DIAMOND_START | DIAMOND_STOP | TAG_START | TAG_END | ARROW_CROSS | ARROW_POINT | ARROW_CIRCLE | ARROW_OPEN | QUOTE | SEMI ;
 %%
