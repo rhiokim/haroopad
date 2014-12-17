@@ -62,3 +62,15 @@ Simply use `@[]()` syntax to link to external resources
 @[](http://www.youtube.com/watch?v=jo_B4LTHi3I)
 
 @[](http://www.flickr.com/photos/bees/2362225867/ 'width:300px')
+
+### Presentation
+
+* [How to write presentation](/page.html?f=how-to-write-presentation) You can see detail in this document.
+
+### Tasklist
+
+* [How to manage tasklist](/page.html?f=how-to-manage-tasklist) You can see detail in this document.
+
+### Diagram
+
+* [How to draw diagram](/page.html?f=how-to-draw-diagram) You can see detail in this document.

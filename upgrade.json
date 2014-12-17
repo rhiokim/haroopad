@@ -1,5 +1,5 @@
 {
-	"version": "0.12.2",
+	"version": "0.13.0",
 	"news": "http://pad.haroopress.com",
   "release": "http://pad.haroopress.com/page.html?f=release-notes",
 	"download": {
@@ -10,7 +10,7 @@
 	"platform": [ "windows", "mac", "linux" ],
   "language": {
     "version": "0.6.1",
-    "locales": [ "all" ],
+    "locales": [ ],
     "path": "rhiokim/haroopad-locales#supports"
   },
   "news": {

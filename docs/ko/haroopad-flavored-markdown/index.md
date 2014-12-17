@@ -62,3 +62,15 @@ Simply use `@[]()` syntax to link to external resources
 @[](http://www.youtube.com/watch?v=jo_B4LTHi3I)
 
 @[](http://www.flickr.com/photos/bees/2362225867/ 'width:300px')
+
+### Presentation
+
+* [How to write presentation](/page.html?f=how-to-write-presentation) 문서에서 자세히 확인할 수 있습니다.
+
+### Tasklist
+
+* [How to manage tasklist](/page.html?f=how-to-manage-tasklist) 문서에서 자세히 확인할 수 있습니다.
+
+### Diagram
+
+* [How to draw diagram](/page.html?f=how-to-draw-diagram) 문서에서 자세히 확인할 수 있습니다.

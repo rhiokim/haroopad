@@ -108,78 +108,118 @@ public class HelloWorld
 
 | Language                              | key            |
 |:-------------------------------------:|:--------------:|
-| Python                                | python         |
-| Python's profiler output              | profile        |
-| Ruby                                  | ruby           |
+| 1C                                    | 1c             |
+| ActionScript                          | actionscript   |
+| Apache                                | apache         |
+| AppleScript                           | applescript    |
+| AsciiDoc                              | asciidoc       |
+| AspectJ                               | asciidoc       |
+| AutoHotkey                            | autohotkey     |
+| AVR Assembler                         | avrasm         |
+| Axapta                                | axapta         |
+| Bash                                  | bash           |
+| BrainFuck                             | brainfuck      |
+| Cap’n Proto                           | capnproto      |
+| Clojure REPL                          | clojure        |
+| Clojure                               | clojure        |
+| CMake                                 | cmake          |
+| CoffeeScript                          | coffeescript   |
+| C++                                   | cpp            |
+| C#                                    | cs             |
+| CSS                                   | css            |
+| D                                     | d              |
+| Dart                                  | d              |
+| Delphi                                | delphi         |
+| Diff                                  | diff           |
+| Django                                | django         |
+| DOS .bat                              | dos            |
+| Dust                                  | dust           |
+| Elixir                                | elixir         |
+| ERB (Embedded Ruby)                   | erb            |
+| Erlang REPL                           | erlang-repl    |
+| Erlang                                | erlang         |
+| FIX                                   | fix            |
+| F#                                    | fsharp         |
+| G-code (ISO 6983)                     | gcode          |
+| Gherkin                               | gherkin        |
+| GLSL                                  | glsl           |
+| Go                                    | go             |
+| Gradle                                | gradle         |
+| Groovy                                | groovy         |
 | Haml                                  | haml           |
+| Handlebars                            | handlebars     |
+| Haskell                               | haskell        |
+| Haxe                                  | haxe           |
+| HTTP                                  | http           |
+| Ini file                              | ini            |
+| Java                                  | java           |
+| JavaScript                            | javascript     |
+| JSON                                  | json           |
+| Lasso                                 | lasso          |
+| Less                                  | less           |
+| Lisp                                  | lisp           |
+| LiveCode                              | livecodeserver |
+| LiveScript                            | livescript     |
+| Lua                                   | lua            |
+| Makefile                              | makefile       |
+| Markdown                              | markdown       |
+| Mathematica                           | mathematica    |
+| Matlab                                | matlab         |
+| MEL (Maya Embedded Language)          | mel            |
+| Mercury                               | mercury        |
+| Mizar                                 | mizar          |
+| Monkey                                | monkey         |
+| nginx                                 | nginx          |
+| Nimrod                                | nimrod         |
+| Nix                                   | nix            |
+| NSIS                                  | nsis           |
+| Objective C                           | objectivec     |
+| OCaml                                 | ocaml          |
+| Oxygene                               | oxygene        |
+| Parser 3                              | parser3        |
 | Perl                                  | perl           |
 | PHP                                   | php            |
-| Scala                                 | scala          |
-| Go                                    | go             |
-| XML                                   | xml            |
-| HTML (with inline css and javascript) | xml            |
-| Lasso                                 | lasso          |
-| Markdown                              | markdown       |
-| AsciiDoc                              | asciidoc       |
-| Django templates                      | django         |
-| Handlebars                            | handlebars     |
-| CSS                                   | css            |
-| SCSS                                  | scss           |
-| JSON                                  | json           |
-| JavaScript                            | javascript     |
-| CoffeeScript                          | coffeescript   |
-| ActionScript                          | actionscript   |
-| VBScript                              | vbscript       |
-| VB.NET                                | vbnet          |
-| HTTP                                  | http           |
-| Lua                                   | lua            |
-| AppleScript                           | applescript    |
-| Delphi                                | delphi         |
-| Oxygene                               | oxygene        |
-| Java                                  | java           |
-| C++                                   | cpp            |
-| Objective C                           | objectivec     |
-| Vala                                  | vala           |
-| C#                                    | cs             |
-| F#                                    | fsharp         |
-| OCaml                                 | ocaml          |
-| D                                     | d              |
-| RenderMan RSL                         | rsl            |
-| RenderMan RIB                         | rib            |
-| MEL (Maya Embedded Language)          | mel            |
-| GLSL                                  | glsl           |
-| SQL                                   | sql            |
-| SmallTalk                             | smalltalk      |
-| Lisp                                  | lisp           |
-| Clojure                               | clojure        |
-| Ini file                              | ini            |
-| Apache                                | apache         |
-| nginx                                 | nginx          |
-| Diff                                  | diff           |
-| DOS batch files                       | dos            |
-| Bash                                  | bash           |
-| Makefile                              | makefile       |
-| CMake                                 | cmake          |
-| Axapta                                | axapta         |
-| Oracle Rules Language                 | ruleslanguage  |
-| 1C                                    | 1c             |
-| AVR Assembler                         | avrasm         |
-| VHDL                                  | vhdl           |
-| Parser 3                              | parser3        |
-| LiveCode Server                       | livecodeserver |
-| TeX                                   | tex            |
-| BrainFuck                             | brainfuck      |
-| Haskell                               | haskell        |
-| Erlang                                | erlang         |
-| Erlang REPL                           | erlang-repl    |
-| Rust                                  | rust           |
-| Matlab                                | matlab         |
-| Scilab                                | scilab         |
+| PowerShell                            | powershell     |
+| Processing                            | processing     |
+| Python's profiler output              | profile        |
+| Protocol Buffers                      | protobuf       |
+| Puppet                                | puppet         |
+| Python                                | python         |
+| Q                                     | q              |
 | R                                     | r              |
-| Mizar                                 | mizar          |
-| Mathematica                           | mathematica    |
-| AutoHotkey                            | autohotkey     |
-| FIX                                   | fix            |
+| RenderMan RIB                         | rib            |
+| Roboconf                              | roboconf       |
+| RenderMan RSL                         | rsl            |
+| Ruby                                  | ruby           |
+| Oracle Rules Language                 | ruleslanguage  |
+| Rust                                  | rust           |
+| Scala                                 | scala          |
+| Scheme                                | scheme         |
+| Scilab                                | scilab         |
+| SCSS                                  | scss           |
+| Smali                                 | smali          |
+| SmallTalk                             | smalltalk      |
+| SML                                   | sml            |
+| SQL                                   | sql            |
+| Stata                                 | stata          |
+| STEP Part 21 (ISO 10303-21)           | step21         |
+| Stylus                                | stylus         |
+| Swift                                 | swift          |
+| Tcl                                   | tcl            |
+| TeX                                   | tex            |
+| Thrift                                | thrift         |
+| Twig                                  | twig           |
+| TypeScript                            | typescript     |
+| Vala                                  | vala           |
+| VB.NET                                | vbnet          |
+| VBScript in HTML                      | vbscript-html  |
+| VBScript                              | vbscript       |
+| Verilog                               | verilog        |
+| VHDL                                  | vhdl           |
+| Vim Script                            | vim            |
+| Intel x86 Assembly                    | x86asm         |
+| XL                                    | xl             |
+| XML, HTML                             | xml            |
 
 ### Themes
 

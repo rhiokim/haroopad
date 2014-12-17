@@ -8,30 +8,29 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.12.1)==
+### ==New Features (v0.13.0)==
 
-* Added CLI features
-  - `$ haroopad -f [ /path/to/a.md ./path/to/b.md ]`: files
-  - `$ haroopad --mode`: only view or edit mode
-    + `$ haroopad --mode view`: view mode
-    + `$ haroopad --mode edit`: edit mode
-* Added new code language & themes
-  - 15 languages(swift, gradle ...) and 5 themes(codepen-embed, color-brewer, hybrid, kimbie light/dark)
+* New Features
+  - Presentation Mode - [reference](http://pad.haroopress.com/page.html?f=how-to-write-presentation)
+  - Drawing Diagram (flowchart, Sequence Diagram) - [reference](http://pad.haroopress.com/page.html?f=how-to-draw-diagram)
+* New Syntax
+  - Tasklist(GFM) - [reference](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist)
+* Added new code language & themes - [reference](http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block)
+  - total 112 languages(swift, gradle ...) and 49 themes
 
 ### ==More changelog==
 
 * Bugs
-  - Fixed haroopad won't start for the second time
-  - Fixed embedding content using by D&D HTML object
-  - Fixed Subscript syntax conflict with Strikethrough
+  - Fixed No confirm save in Windows on close Window with [X]
+  - Fixed The file path can't contain space in Windows
 * Enhancements
-  - Markdown(link) syntax within footnote
-  - Specify language within fenced code block
-  - Improved Css selection color 
-  - Error while loading shared libraries: libudev.so.0
-  - Improved HTML to Markdown
-* Internationalization
-  - Italy (Italia) - [Zeriuno](https://github.com/Zeriuno)
+  - Update Codemirror Editor v4.8
+  - Support Font in Math
+  - Support \left and \right in Math
+  - Support custom gfm code block delimiters
+  - Enhance GFM tabls's column width issue
+  - Enhance Two subsequent tables are rendered with no space
+  - Enhance Equation rendering issues 
 
 ### Main Features
 
@@ -64,8 +63,10 @@ Haroopad gives you the same editing experience regardless of the platform you ar
   - Drag & Drop your selected text on Web Browser
 * Options for markdown parsing
 * CLI(Command Line Interface) - v0.12.1
-  - `-f`: files
-  - `--mode=view` or `--mode=edit`: only view or edit mode
+  - `$ haroopad -f [ /path/to/a.md ./path/to/b.md ]`: files
+  - `$ haroopad --mode`: only view or edit mode
+    + `$ haroopad --mode view`: view mode
+    + `$ haroopad --mode edit`: edit mode
 * Outline View
 * Vim Key-binding
 * Export to PDF, HTML
@@ -86,10 +87,14 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 - Chinese Simplified (中文) - [toiletfreak](https://github.com/toiletfreak)
 - German (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
 - Vietnamese (Tiếng Việt) - [nguyenkinh](https://github.com/nguyenkinh)
-- Russian (Русский) - [aprilix ](https://github.com/aprilix)
+- Russian (Русский) - [aprilix](https://github.com/aprilix)
 - Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
 - Portuguese (Portuguesa) - [alexandre mbm](https://github.com/alexandre-mbm)
 - Japanese (日本語) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
+- Italy (Italiano) - [Daniele Pitrolo](https://github.com/Zeriuno)
+- Indonesia (Bahasa Indonesia) - [Reza Faiz A. Rahman](https://github.com/rezafaizarahman)
+- Turkey  (Türkçe) - [Eray AYDIN](https://github.com/erayaydin)
+- French (Français) - [MarcBoyer](https://github.com/MarcBoyer), [Daniel Ménard](https://github.com/daniel-menard)
 
 ### Enhanced Markdown Syntax
 
@@ -117,10 +122,11 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Footnote
   - Footnote: `[^identity]`
   - Footnote Reference: `[^identity]: text`
+* Tasklist
+  - Task: `- [ ]`
+  - Task (Done): `- [x]`
 
 ### Upcoming Features
-
-* Tasklist - GFM
 
 ### And more?
 
