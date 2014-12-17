@@ -251,15 +251,16 @@ define([
 	  //tasklist
 	  _viewer.ee.on('task.done', function(el, index, isDone) {
 	    var src = nw.file.get('markdown');
-	    var i, mc = 0;
+	    var i, line, mc = 0;
 
 	    src = src.split('\n');
 
 	    for (i = 0; i < src.length; i++) {
-	      if (/^(?:[*+-]|\d+\.)\s*\[[x ]\]\s*/.test(src[i])) {
+	    	line = src[i];
+	      if (/^\s*(?:[*+-]|\d+\.)\s*\[[x ]\]\s*/.test(line)) {
 	        if (index == mc) {
-	          src[i] = isDone ? src[i].replace(/\[ \]/, '[x]') : src[i].replace(/\[x\]/, '[ ]');
-            nw.editor.replaceRange(src[i], { line:i, ch:0 }, { line:i, ch: src[i].length } );
+	          src[i] = isDone ? line.replace(/\[ \]/, '[x]') : line.replace(/\[x\]/, '[ ]');
+            nw.editor.replaceRange(line, { line:i, ch:0 }, { line:i, ch: line.length } );
 	          break;
 	        }
 

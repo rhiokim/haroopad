@@ -334,7 +334,7 @@ Haroopad uses MathJax to render LaTeX. You can use triple dollar sign (`$$$..$$$
 
 **example**
 
-```
+```markdown
 The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall
 n\in\mathbb N$ is via through the Euler integral
 
@@ -350,3 +350,52 @@ n\in\mathbb N$ is via through the Euler integral
 
 $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+
+##### Diagram
+
+**example**
+
+~~~markdown
+```mermaid
+graph TD;
+  A-->B;
+  B-->C;
+  D-->C;
+```
+~~~
+
+**become**
+
+```mermaid
+graph TD;
+  A-->B;
+  B-->C;
+  D-->C;
+```
+
+##### Tasklist
+
+**example**
+
+```markdown
+- [ ] first task
+- [x] second task is done
+- [ ] third task
+```
+
+##### Presentation
+
+**example**
+
+```markdown
+## slide1 title
+
+slide2 content
+
+***
+
+## slide2 title
+
+slide2 content
+
+```

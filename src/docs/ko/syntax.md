@@ -377,3 +377,52 @@ $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 $$
 ```
+
+##### 다이어그램 (Diagram)
+
+**example**
+
+~~~markdown
+```mermaid
+graph TD;
+  A-->B;
+  B-->C;
+  D-->C;
+```
+~~~
+
+**become**
+
+```mermaid
+graph TD;
+  A-->B;
+  B-->C;
+  D-->C;
+```
+
+##### 타스크 리스트 (Tasklist)
+
+**example**
+
+```markdown
+- [ ] first task
+- [x] second task is done
+- [ ] third task
+```
+
+##### 프리젠테이션 (Presentation)
+
+**example**
+
+```markdown
+## slide1 title
+
+slide2 content
+
+***
+
+## slide2 title
+
+slide2 content
+
+```

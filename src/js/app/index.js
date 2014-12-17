@@ -132,6 +132,7 @@ i18n.init({
       global.argv._.forEach(function(f) {
         var f = path.resolve(process.env.PWD, f);
         var ext = path.extname(f).replace('.', '');
+        ext = ext.toLowerCase();
 
         if (global.mdexts.indexOf(ext) > -1 && fs.existsSync(f)) {
           WindowMgr.open(f, {
