@@ -62,7 +62,9 @@ For simplicity reasons, Chaplin consists of plain HTML, CSS and JavaScript. Howe
 
 If you would like to modify the CoffeeScripts, you can translate them JavaScript using the CoffeeScript compiler. After installing CoffeeScript, you might run this command:
 
-    coffee --bare --output js/ coffee/
+```
+coffee --bare --output js/ coffee/
+```
 
 The example application uses the following JavaScript libraries:
 
@@ -78,7 +80,9 @@ In our real-world applications, we’re using several tools for compiling and pa
 
 Since this example isn’t about building and deployment, it has no such dependencies. Nevertheless RequireJS allows to [pre-build a package](http://requirejs.org/docs/optimization.html) with the initial modules. You might build a bootstrap package by running this command in the `/js` directory:
 
-    r.js -o name=application out=built.js paths.text=vendor/require-text-1.0.6 baseUrl=.
+```
+r.js -o name=application out=built.js paths.text=vendor/require-text-1.0.6 baseUrl=.
+```
 
 The Example Application: Facebook Likes Browser
 -----------------------------------------------
@@ -130,12 +134,16 @@ For simplicity, we borrow the functionality from the `Backbone.Events` mixin. Th
 
 For example, several modules are interested in the user login event and subscribe to the `login` message. In practice, they load `mediator` as a dependency and register a callback function for the `login` event:
 
-    mediator.subscribe 'login', @doSomething
+```
+mediator.subscribe 'login', @doSomething
+```
 
 A Publish/Subscribe message consists of a name and optional data. The `SessionController` is in charge for the user login, so it publishes a message with the identifer `login` and the `user` object as additional data:
 
-    # Publish a global login event
-    mediator.publish 'login', user
+```
+# Publish a global login event
+mediator.publish 'login', user
+```
 
 The second and all following arguments are passed as arguments to the handler functions.
 
@@ -148,13 +156,17 @@ In Backbone’s concept, there are models and views, but no controllers. Backbon
 
 Our `Router` does not have a `route` method, but a `match` method to create routes:
 
-    @match 'likes/:id', 'likes#show'
+```
+@match 'likes/:id', 'likes#show'
+```
 
 `match` works much like the Ruby on Rails counterpart since it creates a proper `params` hash. If a route matches, the corresponding `Route` object publishes a `matchRoute` event passing the route instance and the parameter hash.
 
 Additional fixed parameters and parameter constraints may be specified in the `match` call:
 
-    @match 'likes/:id', 'likes#show', constraints: { id: /^\d+$/ }, params: { foo: 'bar' }
+```
+@match 'likes/:id', 'likes#show', constraints: { id: /^\d+$/ }, params: { foo: 'bar' }
+```
 
 The Controllers
 ---------------
@@ -171,7 +183,9 @@ The application controller instantiates common models/collections and views whic
 
 Between the router and the controllers, there’s the `ApplicationView` as a dispatcher. It allows switching between user interface modules by starting up specific controllers. To show a specific module, an app-wide `!startupController` event is published:
 
-    mediator.publish '!startupController', 'controllerName', 'controllerAction', optionalParams
+```
+mediator.publish '!startupController', 'controllerName', 'controllerAction', optionalParams
+```
 
 The `ApplicationView` handles the `!startupController` event. It creates a controller instance, calls the controller action and may perform a transition from the current to the new controller.
 
@@ -183,25 +197,27 @@ By convention, there is a controller for each application module. A controller m
 
 For example, this is the stripped-down `LikesController`:
 
-    define ['controllers/controller', 'models/likes', 'models/like', 'views/likes_view', »»
-      'views/full_like_view'], (Controller, Likes, Like, LikesView, FullLikeView) ->
+```
+define ['controllers/controller', 'models/likes', 'models/like', 'views/likes_view', »»
+  'views/full_like_view'], (Controller, Likes, Like, LikesView, FullLikeView) ->
 
-      'use strict'
+  'use strict'
 
-      class LikesController extends Controller
+  class LikesController extends Controller
 
-        historyURL: (params) ->
-          if params.id then "likes/#{params.id}" else ''
+    historyURL: (params) ->
+      if params.id then "likes/#{params.id}" else ''
 
-        # initialize method is empty here
+    # initialize method is empty here
 
-        index: (params) ->
-          @collection = new Likes()
-          @view = new LikesView collection: @collection
+    index: (params) ->
+      @collection = new Likes()
+      @view = new LikesView collection: @collection
 
-        show: (params) ->
-          @model = new Like { id: params.id }, { loadDetails: true }
-          @view = new FullLikeView model: @model
+    show: (params) ->
+      @model = new Like { id: params.id }, { loadDetails: true }
+      @view = new FullLikeView model: @model
+```
 
 A typical controller has one model or collection and one associated view. They should be stored in the `model`/`collection` and `view` instance properties so they are disposed automatically on controller disposal.
 
@@ -255,7 +271,9 @@ For models and views, there are several wrapper methods for event handler regist
 
 In models and views, there is a shortcut for subscribing to global events:
 
-    @subscribeEvent 'login', @doSomething
+```
+@subscribeEvent 'login', @doSomething
+```
 
 This method has the advantage of cancelling the subscription on model or view disposal.
 
@@ -265,13 +283,17 @@ The `subscribeEvent` method has a counterpart `unsubscribeEvent`. These mehods a
 
 In views, we don’t use the standard `@model.bind` method to register a handler for a model event. We use a memory-saving wrapper named `modelBind` instead.
 
-    @modelBind 'add', @doSomething
+```
+@modelBind 'add', @doSomething
+```
 
 In a model, it’s fine to use `bind` directly as long as the handler is a method of the model itself.
 
 A view also provides `modelUnbind` and `modelUnbindAll` for deregistering. The latter is called automatically on view disposal.
 
-    @modelUnbind 'add', @doSomething
+```
+@modelUnbind 'add', @doSomething
+```
 
 ### User Input Events
 
@@ -279,15 +301,19 @@ Most views handle user input by listening to DOM events. Backbone provides the `
 
 Our `View` class provides the `delegate` method as a shortcut for `@$el.on`. It has the same signature as the jQuery 1.7 `on` method. Some examples:
 
-    @delegate 'click', '.like-button', @like
-    @delegate 'click', '.close-button', @skip
+```
+@delegate 'click', '.like-button', @like
+@delegate 'click', '.close-button', @skip
+```
 
 `delegate` registers the handler at the topmost DOM element of the view (`@el`) and catches events from nested elements using event bubbling. You can specify an optional selector to target nested elements.
 
 In addition, `delegate` automatically binds the handler to the view object, so `@`/`this` points to the view. This means `delegate` creates a wrapper function which acts as the handler. As a consequence, it’s currently not possible to unbind a specific handler. At the moment, we’re using `@$el.off` directly to unbind all handlers for an event type for a selector:
 
-    @$el.off 'click', '.like-button'
-    @$el.off 'click', '.close'
+```
+@$el.off 'click', '.like-button'
+@$el.off 'click', '.close'
+```
 
 This isn’t the best solution but acceptable for now since this doesn’t occur frequently in our application.
 

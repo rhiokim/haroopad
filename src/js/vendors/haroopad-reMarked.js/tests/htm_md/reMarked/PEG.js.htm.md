@@ -24,7 +24,9 @@ Installation
 
 To use the command-line version, install [Node.js](http://nodejs.org/) and [npm](http://npmjs.org/) first. You can then install PEG.js:
 
-    $ npm install pegjs
+```
+$ npm install pegjs
+```
 
 Once installed, you can use the `pegjs` command to generate your parser from a grammar and use the JavaScript API from Node.js.
 
@@ -41,11 +43,15 @@ PEG.js generates parser from a grammar that describes expected input and can spe
 
 To generate a parser from your grammar, use the `pegjs` command:
 
-    $ pegjs arithmetics.pegjs
+```
+$ pegjs arithmetics.pegjs
+```
 
 This writes parser source code into a file with the same name as the grammar file but with “.js” extension. You can also specify the output file explicitly:
 
-    $ pegjs arithmetics.pegjs arithmetics-parser.js
+```
+$ pegjs arithmetics.pegjs arithmetics-parser.js
+```
 
 If you omit both input and ouptut file, standard input and output are used.
 
@@ -55,13 +61,17 @@ By default, the parser object is assigned to `module.exports`, which makes the o
 
 In Node.js, require the PEG.js parser generator module:
 
-    var PEG = require("pegjs");
+```
+var PEG = require("pegjs");
+```
 
 In browser, include the PEG.js library in your web page or application using the `<script>` tag. The API will be available via the `PEG` global object.
 
 To generate a parser, call the `PEG.buildParser` method and pass your grammar as a parameter:
 
-    var parser = PEG.buildParser("start = ('a' / 'b')+");
+```
+var parser = PEG.buildParser("start = ('a' / 'b')+");
+```
 
 The method will return generated parser object or throw an exception if the grammar is invalid. The exception will contain `message` property with more details about the error.
 
@@ -72,9 +82,11 @@ Using the Parser
 
 Using the generated parser is simple — just call its `parse` method and pass an input string as a parameter. The method will return a parse result (the exact value depends on the grammar used to build the parser) or throw an exception if the input is invalid. The exception will contain `offset`, `line`, `column`, `expected`, `found` and `message` properties with more details about the error.
 
-    parser.parse("abba"); // returns ["a", "b", "b", "a"]
+```
+parser.parse("abba"); // returns ["a", "b", "b", "a"]
 
-    parser.parse("abcd"); // throws an exception
+parser.parse("abcd"); // throws an exception
+```
 
 You can also start parsing from a specific rule in the grammar. Just pass the rule name to the `parse` method as a second parameter.
 
@@ -85,23 +97,25 @@ The grammar syntax is similar to JavaScript in that it is not line-oriented and 
 
 Let's look at example grammar that recognizes simple arithmetic expressions like `2*(3+4)`. A parser generated from this grammar computes their values.
 
-    start
-      = additive
+```
+start
+  = additive
 
-    additive
-      = left:multiplicative "+" right:additive { return left + right; }
-      / multiplicative
+additive
+  = left:multiplicative "+" right:additive { return left + right; }
+  / multiplicative
 
-    multiplicative
-      = left:primary "*" right:multiplicative { return left * right; }
-      / primary
+multiplicative
+  = left:primary "*" right:multiplicative { return left * right; }
+  / primary
 
-    primary
-      = integer
-      / "(" additive:additive ")" { return additive; }
+primary
+  = integer
+  / "(" additive:additive ")" { return additive; }
 
-    integer "integer"
-      = digits:[0-9]+ { return parseInt(digits.join(""), 10); }
+integer "integer"
+  = digits:[0-9]+ { return parseInt(digits.join(""), 10); }
+```
 
 On the top level, the grammar consists of _rules_ (in our example, there are five of them). Each rule has a _name_ (e.g. `integer`) that identifies the rule, and a _parsing expression_ (e.g. `digits:[0-9]+ { return parseInt(digits.join(""), 10); }`) that defines a pattern to match against the input text and possibly contains some JavaScript code that determines what happens when the pattern matches successfully. A rule can also contain _human-readable name_ that is used in error messages (in our example, only the `integer` rule has a human-readable name). The parsing starts at the first rule, which is also called the _start rule_.
 

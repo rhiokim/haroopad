@@ -1,13 +1,14 @@
 {
   "name": "haroopad-reMarked.js",
   "homepage": "https://github.com/rhiokim/haroopad-reMarked.js",
-  "_release": "754f1c441a",
+  "_release": "f7f167e369",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "754f1c441a5645bb2185ac43e75e26c7b18b1402"
+    "commit": "f7f167e36920dabc60f03534e21a4d1c66921439"
   },
-  "_source": "https://github.com/rhiokim/haroopad-reMarked.js.git",
-  "_target": "*",
-  "_originalSource": "https://github.com/rhiokim/haroopad-reMarked.js.git"
+  "_source": "git@github.com:rhiokim/haroopad-reMarked.js.git",
+  "_target": "master",
+  "_originalSource": "git@github.com:rhiokim/haroopad-reMarked.js",
+  "_direct": true
 }

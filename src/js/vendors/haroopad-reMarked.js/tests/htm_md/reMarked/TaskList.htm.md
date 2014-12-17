@@ -3,9 +3,11 @@ TaskList
 
 Code tasks are constructive comments in the code that are prefixed with a tag. Here are some examples of code tasks in ruby:
 
-    # TODO: This is a todo item that needs to be done urgently!
-    # BUG Something wrong is happening...
-    # NOTE - This method is used for a specific reason.
+```
+# TODO: This is a todo item that needs to be done urgently!
+# BUG Something wrong is happening...
+# NOTE - This method is used for a specific reason.
+```
 
 Obviously real code tasks are a lot more constructive than the examples I gave above.
 
@@ -16,7 +18,9 @@ Installation
 
 TaskList is provided as a gem, so the installation process is as simple as this:
 
-    % [sudo] gem install task-list
+```
+% [sudo] gem install task-list
+```
 
 > **Note**: `%` is the prompt and `sudo` (without the square brackets) is not needed if you use RVM.
 
@@ -46,9 +50,11 @@ The TaskList comes with a command-line script called `tl` which takes one argume
 
 If a file is passed, TaskList will parse this file to find code tags. On the other hand, if a folder is passed, TaskList will recursively parse all the files under that folder to find code tags. Here are some examples:
 
-    % tl task-list.rb
-    % tl task-list/
-    % tl task-list/task-list.rb
-    % tl .
+```
+% tl task-list.rb
+% tl task-list/
+% tl task-list/task-list.rb
+% tl .
+```
 
 All the calls to `tl` shown above are valid.

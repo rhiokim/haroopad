@@ -108,39 +108,41 @@ are available when defining rules for that resource.
 
 A typical and common use for this is allowing Users to edit their own posts but not others'. The implementation for such a condition is given below.
 
-    // Sprig_AACL defines the AACL_Request interface but with no available conditions (since they will be model-specifc)
-    // We don't need to redefine the acl_id() or acl_actions() methods as long as we are happy with the defaults
+```
+// Sprig_AACL defines the AACL_Request interface but with no available conditions (since they will be model-specifc)
+// We don't need to redefine the acl_id() or acl_actions() methods as long as we are happy with the defaults
 
-    class Model_Post extends Sprig_AACL
+class Model_Post extends Sprig_AACL
+{
+    ... Set up model ...
+
+    public function acl_conditions(Model_User $user = NULL, $condition = NULL)
     {
-        ... Set up model ...
-
-        public function acl_conditions(Model_User $user = NULL, $condition = NULL)
+        if (is_null($user) OR is_null($condition))
         {
-            if (is_null($user) OR is_null($condition))
+            // Return condition definition(s)
+            // Here we only have one condition but we could have many
+            return array(
+                'is_author' => 'user is post author',
+            );
+        }
+        else
+        {
+            // Condition logic goes here. Complex condition logic could be implemented in another method and called here.
+            switch ($condition)
             {
-                // Return condition definition(s)
-                // Here we only have one condition but we could have many
-                return array(
-                    'is_author' => 'user is post author',
-                );
-            }
-            else
-            {
-                // Condition logic goes here. Complex condition logic could be implemented in another method and called here.
-                switch ($condition)
-                {
-                    case 'is_author':
-                        // Return TRUE if the post author matches the passed user id
-                        return ($this->author_id === $user->id);
+                case 'is_author':
+                    // Return TRUE if the post author matches the passed user id
+                    return ($this->author_id === $user->id);
 
-                    default:
-                        // Condition doesn't exist therefore fails
-                        return FALSE;
-                }
+                default:
+                    // Condition doesn't exist therefore fails
+                    return FALSE;
             }
         }
     }
+}
+```
 
 As you have probably guessed, `$user` is populated by the logged in user object when the rule is evaluated so conditions allow a neat 
 and simple way of adding fine-grained user/resource specific rules in a general way.
@@ -186,29 +188,33 @@ Params:
 
 To grant access to multiple (but not all) actions of a resource, multiple rules should be used. For example:
 
-    AACL::grant('admin', 'm:post');                         // Grant all rights to admins for post objects
+```
+AACL::grant('admin', 'm:post');                         // Grant all rights to admins for post objects
 
-    AACL::grant('moderator', 'm:post', 'view');             // Moderators can view...
-    AACL::grant('moderator', 'm:post', 'edit');                // ... or edit any post
+AACL::grant('moderator', 'm:post', 'view');             // Moderators can view...
+AACL::grant('moderator', 'm:post', 'edit');                // ... or edit any post
 
-    AACL::grant('login', 'm:post', 'view');                    // Normal users can view all posts...
-    AACL::grant('login', 'm:post', 'edit', 'is_author');    // ... but only edit their own
+AACL::grant('login', 'm:post', 'view');                    // Normal users can view all posts...
+AACL::grant('login', 'm:post', 'edit', 'is_author');    // ... but only edit their own
 
-    AACL::grant('sales', 'm:page.32', 'edit');                // Sales team can edit page with ID 32 (ths is probably vital 
-                                                            // for one of their campaigns...) but no other pages
+AACL::grant('sales', 'm:page.32', 'edit');                // Sales team can edit page with ID 32 (ths is probably vital 
+                                                        // for one of their campaigns...) but no other pages
+```
 
 #### Revoking access
 
 `AACL::revoke()` is used to remove rules and accepts exactly the same arguments used to grant the rules. 
 Note that the arguments don't have to exactly match a defined rule to delete it. For example
 
-    AACL::grant('staff', 'm:post', 'edit');                    // 1
-    AACL::grant('staff', 'm:post', 'delete');                // 2
-    AACL::grant('staff', 'm:comment', 'delete');            // 3
+```
+AACL::grant('staff', 'm:post', 'edit');                    // 1
+AACL::grant('staff', 'm:post', 'delete');                // 2
+AACL::grant('staff', 'm:comment', 'delete');            // 3
 
-    AACL::revoke('staff', 'm:post', 'edit');                // Removes 1 from above
-    AACL::revoke('staff', 'm:post');                        // Removes 1 AND 2 from above
-    AACL::revoke('staff', '*');                                // Removes all rules for 'staff' (i.e. they now have access to nothing)
+AACL::revoke('staff', 'm:post', 'edit');                // Removes 1 from above
+AACL::revoke('staff', 'm:post');                        // Removes 1 AND 2 from above
+AACL::revoke('staff', '*');                                // Removes all rules for 'staff' (i.e. they now have access to nothing)
+```
 
 #### Rule Specificity
 
@@ -247,14 +253,16 @@ All checking is done using `AACL::check()` described below:
     action the resource object claims to be executing. So to check the permission of a _different_ action of the same controller 
     (not sure why you would want to but still...) you could use:
 
-        public function action_one()
-         {
-             // Check permission for this action
-             AACL::check($this);
+    ```
+    public function action_one()
+     {
+         // Check permission for this action
+         AACL::check($this);
 
-             // Check permission for other action
-             AACL::check($this, 'other');
-         }
+         // Check permission for other action
+         AACL::check($this, 'other');
+     }
+    ```
 
 #### Failing check()
 
@@ -267,24 +275,26 @@ It is left to the developer to catch this and display an appropriate message.
 
 These should both be caught in `bootstrap.php` something like this:
 
-    $request = Request::instance($uri);
+```
+$request = Request::instance($uri);
 
-    try
-    {
-        $request->execute();
-    }
-    catch (AACL_Exception_401 $e)
-    {
-        // Redirect to login
-    }
-    catch (AACL_Exception_403 $e)
-    {
-        // Issue request for access denied page or just display a template
-    }
+try
+{
+    $request->execute();
+}
+catch (AACL_Exception_401 $e)
+{
+    // Redirect to login
+}
+catch (AACL_Exception_403 $e)
+{
+    // Issue request for access denied page or just display a template
+}
 
-    echo $request
-            ->send_headers()
-            ->response;
+echo $request
+        ->send_headers()
+        ->response;
+```
 
 ### Listing Resources
 

@@ -16,14 +16,16 @@ Documentation, demos, and discussion can all be found at http://jackrugile.com/j
 
 ### Basic Usage
 
-    // Initialize jRumble on Selector
-    $('#rumble-element').jrumble();
+```javascript
+// Initialize jRumble on Selector
+$('#rumble-element').jrumble();
 
-    // Start rumble on element
-    $('#rumble-element').trigger('startRumble');
+// Start rumble on element
+$('#rumble-element').trigger('startRumble');
 
-    // Stop rumble on element
-    $('#rumble-element').trigger('stopRumble');
+// Stop rumble on element
+$('#rumble-element').trigger('stopRumble');
+```
 
 ### Options  
 

@@ -9,22 +9,26 @@ Benchmarks
 
 node v0.4.x
 
-    $ node test --bench
-    marked completed in 12071ms.
-    showdown (reuse converter) completed in 27387ms.
-    showdown (new converter) completed in 75617ms.
-    markdown-js completed in 70069ms.
+```bash
+$ node test --bench
+marked completed in 12071ms.
+showdown (reuse converter) completed in 27387ms.
+showdown (new converter) completed in 75617ms.
+markdown-js completed in 70069ms.
+```
 
 node v0.6.x
 
-    $ node test --bench
-    marked completed in 6448ms.
-    marked (gfm) completed in 7357ms.
-    marked (pedantic) completed in 6092ms.
-    discount completed in 7314ms.
-    showdown (reuse converter) completed in 16018ms.
-    showdown (new converter) completed in 18234ms.
-    markdown-js completed in 24270ms.
+```bash
+$ node test --bench
+marked completed in 6448ms.
+marked (gfm) completed in 7357ms.
+marked (pedantic) completed in 6092ms.
+discount completed in 7314ms.
+showdown (reuse converter) completed in 16018ms.
+showdown (new converter) completed in 18234ms.
+markdown-js completed in 24270ms.
+```
 
 **Marked is now faster than Discount, which is written in C.**
 
@@ -37,7 +41,9 @@ Benchmarks for other engines to come (?).
 Install
 -------
 
-    $ npm install marked
+```bash
+$ npm install marked
+```
 
 Another javascript markdown parser
 ----------------------------------
@@ -75,34 +81,42 @@ None of the above are mutually exclusive/inclusive.
 Usage
 -----
 
-    // set default options
-    marked.setOptions({
-      gfm: true,
-      pedantic: false,
-      sanitize: true
-    });
-    console.log(marked('i am using __markdown__.'));
+```js
+// set default options
+marked.setOptions({
+  gfm: true,
+  pedantic: false,
+  sanitize: true
+});
+console.log(marked('i am using __markdown__.'));
+```
 
 You also have direct access to the lexer and parser if you so desire.
 
-    var tokens = marked.lexer(str);
-    console.log(marked.parser(tokens));
+```js
+var tokens = marked.lexer(str);
+console.log(marked.parser(tokens));
+```
 
-    $ node
-    > require('marked').lexer('> i am using marked.')
-    [ { type: 'blockquote_start' },
-      { type: 'text', text: ' i am using marked.' },
-      { type: 'blockquote_end' },
-      links: {} ]
+```bash
+$ node
+> require('marked').lexer('> i am using marked.')
+[ { type: 'blockquote_start' },
+  { type: 'text', text: ' i am using marked.' },
+  { type: 'blockquote_end' },
+  links: {} ]
+```
 
 CLI
 ---
 
-    $ marked -o hello.html
-    hello world
-    ^D
-    $ cat hello.html
-    <p>hello world</p>
+```bash
+$ marked -o hello.html
+hello world
+^D
+$ cat hello.html
+<p>hello world</p>
+```
 
 Syntax Highlighting
 -------------------
@@ -112,30 +126,32 @@ blocks before they're output.
 
 Example implementation:
 
-    var highlight = require('my-syntax-highlighter')
-      , marked_ = require('marked');
+```js
+var highlight = require('my-syntax-highlighter')
+  , marked_ = require('marked');
 
-    var marked = function(text) {
-      var tokens = marked_.lexer(text)
-        , l = tokens.length
-        , i = 0
-        , token;
+var marked = function(text) {
+  var tokens = marked_.lexer(text)
+    , l = tokens.length
+    , i = 0
+    , token;
 
-      for (; i < l; i++) {
-        token = tokens[i];
-        if (token.type === 'code') {
-          token.text = highlight(token.text, token.lang);
-          // marked should not escape this
-          token.escaped = true;
-        }
-      }
+  for (; i < l; i++) {
+    token = tokens[i];
+    if (token.type === 'code') {
+      token.text = highlight(token.text, token.lang);
+      // marked should not escape this
+      token.escaped = true;
+    }
+  }
 
-      text = marked_.parser(tokens);
+  text = marked_.parser(tokens);
 
-      return text;
-    };
+  return text;
+};
 
-    module.exports = marked;
+module.exports = marked;
+```
 
 License
 -------

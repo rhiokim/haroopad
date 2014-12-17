@@ -22,7 +22,8 @@ var options = {
     h1_setext:  true,     // underline h1 headers
     h2_setext:  true,     // underline h2 headers
     h_atx_suf:  false,    // header suffixes (###)
-    gfm_code:   false,    // gfm code blocks (```)
+    gfm_code:   "```",    // gfm code blocks
+    trim_code:	true,     // trim whitespace within <pre><code> blocks (full block, not per line)
     li_bullet:  "*",      // list item bullet style
     hr_char:    "-",      // hr style
     indnt_str:  "    ",   // indentation string

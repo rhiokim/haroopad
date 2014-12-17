@@ -40,26 +40,30 @@ How to use the library?
 
 You can use the library by initiating an `XMLRPCClient` and make calls over it:
 
-    try {
-        XMLRPCClient client = new XMLRPCClient(new URL("http://example.com/xmlrpc"));
+```
+try {
+    XMLRPCClient client = new XMLRPCClient(new URL("http://example.com/xmlrpc"));
 
-        Boolean b = (Boolean)client.call("isServerOk");
-        Integer i = (Integer)client.call("add", 5, 10);
-    } catch(XMLRPCServerException ex) {
-        // The server throw an error.
-    } catch(XMLRPCException ex) {
-        // An error occured in the client.
-    } catch(Exception ex) {
-        // Any other exception
-    }
+    Boolean b = (Boolean)client.call("isServerOk");
+    Integer i = (Integer)client.call("add", 5, 10);
+} catch(XMLRPCServerException ex) {
+    // The server throw an error.
+} catch(XMLRPCException ex) {
+    // An error occured in the client.
+} catch(Exception ex) {
+    // Any other exception
+}
+```
 
 Instead of passing the parameters as seperated values, you can also pack them in
 an array and pass the array to the method, like in the following example:
 
-    // ... The try-catch has been ommited for clarity.
-    XMLRPCClient client = new XMLRPCClient(url, "MyUserAgentString");
-    client.call("someMethod", new Object[]{ o1, o2, o3 });
-    // ...
+```
+// ... The try-catch has been ommited for clarity.
+XMLRPCClient client = new XMLRPCClient(url, "MyUserAgentString");
+client.call("someMethod", new Object[]{ o1, o2, o3 });
+// ...
+```
 
 The above method calls are synchronous. So the method `call` will return when the server responded
 or an error occured. There is also a possibility for asynchronous server calls.
@@ -69,20 +73,22 @@ that will also be send to the XMLRPCCallback instance with the response of the s
 application can make multiple calls concurrently and use one listener for them, that distinguish 
 between the different request by their ids.
 
-    XMLRPCCallback listener = new XMLRPCCallback() {
-        public void onResponse(long id, Object result) {
-            // Handling the servers response
-        }
-        public void onError(long id, XMLRPCException error) {
-            // Handling any error in the library
-        }
-        public void onServerError(long id, XMLRPCServerException error) {
-            // Handling an error response from the server
-        }
-    };
+```
+XMLRPCCallback listener = new XMLRPCCallback() {
+    public void onResponse(long id, Object result) {
+        // Handling the servers response
+    }
+    public void onError(long id, XMLRPCException error) {
+        // Handling any error in the library
+    }
+    public void onServerError(long id, XMLRPCServerException error) {
+        // Handling an error response from the server
+    }
+};
 
-    XMLRPCClient client = new XMLRPCClient(url);
-    long id = client.callAsync(listener, "add", 5, 10);
+XMLRPCClient client = new XMLRPCClient(url);
+long id = client.callAsync(listener, "add", 5, 10);
+```
 
 The data types
 --------------
@@ -115,10 +121,12 @@ Flags
 The client takes as second parameter (or third if an user agent is given) 
 a combination of multiple flags. It could work like the following example:
 
-    // ...
-    XMLRPCClient client = new XMLRPCClient(url, 
-        XMLRPCClient.FLAGS_STRICT | XMLRPCClient.FLAGS_8BYTE_INT);
-    // ...
+```
+// ...
+XMLRPCClient client = new XMLRPCClient(url, 
+    XMLRPCClient.FLAGS_STRICT | XMLRPCClient.FLAGS_8BYTE_INT);
+// ...
+```
 
 The following flags are implemented:
 

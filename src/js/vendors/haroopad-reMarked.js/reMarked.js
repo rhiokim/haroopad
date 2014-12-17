@@ -15,7 +15,8 @@ reMarked = function(opts) {
 		h2_setext:	true,			// underline h2 headers
 		h_atx_suf:	false,			// header suffixes (###)
 	//	h_compact:	true,			// compact headers (except h1)
-		gfm_code:	false,			// gfm code blocks (```)
+		gfm_code:	["```","~~~"][0],	// gfm code blocks
+		trim_code:	true,			// trim whitespace within <pre><code> blocks (full block, not per line)
 		li_bullet:	"*-+"[0],		// list item bullet style
 	//	list_indnt:					// indent top-level lists
 		hr_char:	"-_*"[0],		// hr style
@@ -156,13 +157,12 @@ reMarked = function(opts) {
 	this.render = function(ctr) {
 		links = [];
 
-		if (typeof ctr == "string") {
-			var htmlstr = ctr;
-			ctr = document.createElement("div");
-			ctr.innerHTML = htmlstr;
-		}
-		var s = new lib.tag(ctr, null, 0);
-		var re = s.rend().replace(/^[\t ]+\n/gm, "\n");
+		var holder = document.createElement("div");
+
+		holder.innerHTML = typeof ctr == "string" ? ctr : outerHTML(ctr);
+
+		var s = new lib.tag(holder, null, 0);
+		var re = s.rend().replace(/^[\t ]+[\n\r]+/gm, "\n").replace(/^[\n\r]+|[\n\r]+$/g, "");
 		if (cfg.link_list && links.length > 0) {
 			// hack
 			re += "\n\n";
@@ -543,13 +543,21 @@ reMarked = function(opts) {
 						if (cls.indexOf("lang-") === 0)			// marked uses "lang-" prefix now
 							cls = cls.substr(5);
 
-						this.wrapK = ["```" + cls + "\n", "\n```"];
+						this.wrapK = [cfg.gfm_code + cls + "\n", "\n" + cfg.gfm_code];
 					}
 					else {
 						this.wrapK = "";
 						this.p.lnInd = 4;
 					}
 				}
+			},
+			rendK: function() {
+				if (this.p instanceof lib.pre) {
+					var kids = this.e[textContProp];
+					return cfg.trim_code ? kids.trim() : kids;
+				}
+
+				return this.supr();
 			}
 		});
 
@@ -641,7 +649,7 @@ reMarked = function(opts) {
 		lib.txt = lib.inl.extend({
 			initK: function()
 			{
-				this.c = this.e.textContent.split(/^/gm);
+				this.c = this.e[textContProp].split(/^/gm);
 			},
 			rendK: function()
 			{

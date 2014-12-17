@@ -23,15 +23,17 @@ How do I use it?
 
 The most basic case:
 
-    var plate = require('plate'),
-        sys = require('sys');
-    var template = new plate.Template('hello {{ world }}');
+```
+var plate = require('plate'),
+    sys = require('sys');
+var template = new plate.Template('hello {{ world }}');
 
-    template.render({world:'everyone'}, function(err, data) {
-        sys.puts(data);
-    });
+template.render({world:'everyone'}, function(err, data) {
+    sys.puts(data);
+});
 
-    // outputs "hello everyone"
+// outputs "hello everyone"
+```
 
 Plate follows the Node.js style of taking callbacks that receive an error object and a data object. If there's no
 error, `err` will be null.
@@ -63,8 +65,10 @@ Run the tests
 
 In node:
 
-    $ npm install plate
-    $ npm test plate
+```
+$ npm install plate
+$ npm test plate
+```
 
 ### In browser:
 
@@ -92,11 +96,13 @@ In node:
 
 ### Locally, in browser:
 
-    $ git clone git@github.com:chrisdickinson/plate.git
-    $ cd plate
-    $ make browsertest
-    $ python -m SimpleHTTPServer &
-    $ open http://localhost:8000/test.html
+```bash
+$ git clone git@github.com:chrisdickinson/plate.git
+$ cd plate
+$ make browsertest
+$ python -m SimpleHTTPServer &
+$ open http://localhost:8000/test.html
+```
 
 License
 -------

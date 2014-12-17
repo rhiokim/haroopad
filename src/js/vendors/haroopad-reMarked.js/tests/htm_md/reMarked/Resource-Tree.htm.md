@@ -12,17 +12,19 @@ Code Example
 
 Where `/path/to/file/or/dir/` has the directory structure:
 
-    dir
-     |- branch
-     |   |- sub-branch
-     |   |   |- leaf.png
-     |   |   |- acorn.png
-     |   |
-     |   |- other-sub-branch
-     |       |- ...
-     |    
-     |- other-branch
-         |- ...
+```
+dir
+ |- branch
+ |   |- sub-branch
+ |   |   |- leaf.png
+ |   |   |- acorn.png
+ |   |
+ |   |- other-sub-branch
+ |       |- ...
+ |    
+ |- other-branch
+     |- ...
+```
 
 The following code creates a tree of readily usable images by
 recursively iterating through directories to find files. For each file
@@ -35,21 +37,23 @@ hyphen. All directories turn into branches when `LOAD-PATH` is called
 with the recursive flag set to `T` (set by default). The same
 "path-name to keyword" methodology is applied to directories.
 
-    (defun load-image (file-name)
-      (unless (string= "png" (pathname-type file-name))
-        (return-from load-image))
-      (let ((image (il:gen-image)))
-        (il:bind-image image)
-        (il:load-image file-name)
-        image))
+```
+(defun load-image (file-name)
+  (unless (string= "png" (pathname-type file-name))
+    (return-from load-image))
+  (let ((image (il:gen-image)))
+    (il:bind-image image)
+    (il:load-image file-name)
+    image))
 
-    (with-resource-tree (tree :load-function #'load-image
-                              :free-function #'il:delete-images)
-      (load-path tree "/path/to/file/or/dir/")
-      (with-nodes (leaf acorn) (node tree :branch :sub-branch)
-        (il:bind-image leaf)
-        (il:flip-image)
-        ...))
+(with-resource-tree (tree :load-function #'load-image
+                          :free-function #'il:delete-images)
+  (load-path tree "/path/to/file/or/dir/")
+  (with-nodes (leaf acorn) (node tree :branch :sub-branch)
+    (il:bind-image leaf)
+    (il:flip-image)
+    ...))
+```
 
 `WITH-RESOURCE-TREE` creates an instance of `RESOURCE-TREE` and
 assigns it to `TREE` with the remaining arguments being initialisation
@@ -82,4 +86,6 @@ Extract the source to the desired directory. Then, while in the
 appropriate ASDF systems directory execute the following command,
 where `../path/to/resource-tree` is obviously replaced as suitable:
 
-    find ../path/to/resource-tree -name '*.asd' -exec ln -s '{}' \;
+```
+find ../path/to/resource-tree -name '*.asd' -exec ln -s '{}' \;
+```
