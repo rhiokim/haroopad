@@ -266,3 +266,10 @@ blockquote p {
 .contents pre {
     padding: 0;
 }
+
+/**
+ * mermaid fixed
+ */
+svg .label {
+    color: black;
+}

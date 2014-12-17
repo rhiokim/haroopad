@@ -20,6 +20,17 @@ function genStyle(props) {
   return props
 }
 
+renderer.listitem = function(text) {
+  if (/^(\s|<p>)*\[[xv ]\]\s*/.test(text)) {
+    text = text
+      .replace(/^(\s|<p>)*\[ \]\s*/, '$1<input type="checkbox" class="task-list-item" /> ')
+      .replace(/^(\s|<p>)*\[[x|v]\]\s*/, '$1<input type="checkbox" class="task-list-item" checked /> ');
+    return '<li style="list-style: none">' + text + '</li>';
+  } else {
+    return '<li>' + text + '</li>';
+  }
+};
+
 renderer.oembed = function(caption, href, props) {
   var link;
 

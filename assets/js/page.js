@@ -93,6 +93,10 @@ function loadPost(file) {
     //   el.src = el.getAttribute('data-echo');
     // });
 
+    try { 
+      mermaid.init(); 
+    } catch(e) {}
+    
 		setStarrre(title.replace(' | ', '\n\n') + '\n#markdown #haroopad');
 	});
 }
