@@ -75,8 +75,8 @@ function(hljs) {
           }),
           {
             className: 'generics',
-            begin: /\</, end: /\>/,
-            illegal: /\>/
+            begin: /</, end: />/,
+            illegal: />/
           },
           {
             className: 'params',
@@ -96,8 +96,8 @@ function(hljs) {
       },
       {
         className: 'class',
-        keywords: 'struct protocol class extension enum',
-        begin: '(struct|protocol|class(?! (func|var))|extension|enum)',
+        beginKeywords: 'struct protocol class extension enum',
+        keywords: SWIFT_KEYWORDS,
         end: '\\{',
         excludeEnd: true,
         contains: [
@@ -110,7 +110,7 @@ function(hljs) {
                   '@NSCopying|@NSManaged|@objc|@optional|@required|@auto_closure|' +
                   '@noreturn|@IBAction|@IBDesignable|@IBInspectable|@IBOutlet|' +
                   '@infix|@prefix|@postfix)'
-      },
+      }
     ]
   };
 }

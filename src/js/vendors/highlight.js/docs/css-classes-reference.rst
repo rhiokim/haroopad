@@ -519,7 +519,6 @@ Thrift ("thrift")
 * ``comment``:          comment
 * ``class``:            struct, enum, service or exception definition header
 * ``title``:            struct, enum, service or exception identifier
-* ``stl_container``:    instantiation of STL-like containers ("list<...>")
 
 HTTP ("http")
 -------------
@@ -614,7 +613,6 @@ C++ ("cpp", "c", "h", "c++", "h++")
 * ``string``:           string and character
 * ``comment``:          comment
 * ``preprocessor``:     preprocessor directive
-* ``stl_container``:    instantiation of STL containers ("vector<...>")
 
 Objective C ("objectivec", "m", "mm", "objc", "obj-c")
 ------------------------------------------------------
@@ -830,7 +828,7 @@ DOS ("dos", "bat", "cmd")
 * ``envvar``:           environment variables
 
 PowerShell ("powershell", "ps")
---------------------------
+-------------------------------
 
 * ``keyword``:          keyword
 * ``string``:           string
@@ -1332,3 +1330,11 @@ Verilog ("verilog", "v")
 * ``typename``:         types of data, register, and net
 * ``number``:           number literals (including X and Z)
 * ``value``:            parameters passed to instances
+
+Dockerfile ("dockerfile", "docker")
+-----------------------------------
+
+* ``keyword``:          instruction keyword
+* ``comment``:          comment
+* ``number``:           number
+* ``string``:           string

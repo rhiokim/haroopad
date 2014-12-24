@@ -1,0 +1,45 @@
+{
+  "name": "haroopad",
+  "version": "0.13.0",
+  "authors": [
+    "rhiokim <rhio.kim@gmail.com>"
+  ],
+  "keywords": [
+    "markdown"
+  ],
+  "license": "GPLv2",
+  "homepage": "http://pad.haroopress.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/js/vendors",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "MathJax": "*",
+    "backbone-pouch": "git@github.com:jo/backbone-pouch.git",
+    "backbone": "~1.1.0",
+    "bootstrap-switch": "*",
+    "codemirror": "git://github.com/marijnh/CodeMirror.git#master",
+    "eventEmitter": "~4.2.6",
+    "haroopad-echo": "git@github.com:rhiokim/haroopad-echo.git#~1.4.0",
+    "haroopad-keymage": "git@github.com:rhiokim/haroopad-keymage.git#master",
+    "haroopad-notifer.js": "git@github.com:rhiokim/haroopad-notifer.js#master",
+    "haroopad-oembed": "git@github.com:rhiokim/haroopad-oembed.git",
+    "haroopad-reMarked.js": "git@github.com:rhiokim/haroopad-reMarked.js#master",
+    "haroopad-theme": "git@github.com:rhiokim/haroopad-theme.git#master",
+    "highlight.js": "git@github.com:isagalaev/highlight.js.git#master",
+    "i18next": "~1.7.1",
+    "jquery": "2.1.1",
+    "markdown-css": "git@github.com:rhiokim/markdown-css.git#master",
+    "mermaid": "git@github.com:rhiokim/mermaid.git#master",
+    "requirejs": "~2.1.9",
+    "select2": "~3.4.5",
+    "store.js": "~1.3.14",
+    "text": "~2.0.10",
+    "todc-bootstrap": "master",
+    "underscore": "~1.5.2"
+  }
+}

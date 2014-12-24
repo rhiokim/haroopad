@@ -66,13 +66,13 @@ function(hljs) {
         ]
       },
       {
-        className: 'stl_container',
         begin: '\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<', end: '>',
         keywords: CPP_KEYWORDS,
         contains: ['self']
       },
       {
-        begin: hljs.IDENT_RE + '::'
+        begin: hljs.IDENT_RE + '::',
+        keywords: CPP_KEYWORDS
       },
       {
         // Expression keywords prevent 'keyword Name(...)' from being
