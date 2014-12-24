@@ -8,30 +8,29 @@
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==새로운 기능 (v0.12.1)==
+### ==새로운 기능 (v0.13.0)==
 
-* CLI 기능 추가
-	- `$ haroopad -f [ /path/to/a.md ./path/to/b.md ]`: 파일 옵션
-	- `$ haroopad --mode`: 뷰 or 에디팅 모드 옵션
-		+ `$ haroopad --mode view`: 뷰 모드
-		+ `$ haroopad --mode edit`: 에디팅 모드
-* 코드 하이라이팅 언어 및 테마 추가
-	- 15가지 언어(swift, gradle 등) 및 5가지(codepen-embed, color-brewer, hybrid, kimbie light/dark)테마 추가
+* 신규 기능
+	- 프리젠테이션 기능 - [참고](http://pad.haroopress.com/page.html?f=how-to-write-presentation)
+	- 다이어그램(플로우차트, 시퀀스 다이어그램 등) - [참고](http://pad.haroopress.com/page.html?f=how-to-draw-diagram)
+* 신규 문법
+	- 타스크 리스트(GFM) - [참고](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist)
+* 코드 하이라이팅 언어 및 테마 추가 - [참고](http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block)
+	- 총 112가지 언어 하이라이팅 및 49 테마 지원
 
-### ==중요 변경 사항 (v0.12.1)==
+### ==중요 변경 사항==
 
 * 버그
-	- 종료(단축키를 이용) 후 재시작 오류 수정
-	- 드래그 엔 드랍 방식 콘텐츠 임베딩 오류 수정
-	- 취소선과 아래처럼자 파싱 우선순위 오류 수정
+	- [윈도우] 더블 클릭으로 마크다운 문서 파일 열기
+	- 수정된 내용이 있는 윈도우 x 버튼 클릭 시 알림 없이 종료되는 버그 수정
 * 개선
-	- 각주(footnote)에서 마크다운 문법(볼드, 이텔릭, 링크 등) 적용 개선
-	- 코드 블럭 언어명 대소문자 구분하지 않도록 개선
-	- 에디터에 블럭 선택 색상 개선 (기본 테마)
-	- libudev.so.0 의존성 문제 개선 - Post Install 스크립트 추가
-	- HTML 을 Markdown 으로 변환 기능 개선
-* 다국어 지원 추가
-	- 이탈리아 (Italiano) - [Zeriuno](https://github.com/Zeriuno)
+	- 에디터 버젼 업그레이드
+	- 수학 표현식의 폰트 지원
+	- 수학 표현식의 정렬 지원
+	- 마크다운 테이블 내의 자동 줄바꿈 시 단어 단위로 잘리도록 개선
+	- 연속되는 테이블 사이에 공백이 추가되도록 개선
+	- 수학 표현식 Equation 렌더링 문제 개선
+	- HTML 마크다운 변환 시 팬스 코드 블럭 지원
 
 ### 주요기능
 
@@ -70,8 +69,10 @@
 	- 브라우저 인용하고 싶은 문서를 선택하고 하루패드로 드래그 드랍해보세요.
 * 마크다운 파서 옵션 설정기능 추가
 * CLI(Command Line Interface) 지원 - v0.12.1
-  - `-f`: 파일
-  - `--mode=view` or `--mode=edit`: 모드 설정
+	- `$ haroopad -f [ /path/to/a.md ./path/to/b.md ]`: 파일 옵션
+	- `$ haroopad --mode`: 뷰 or 에디팅 모드 옵션
+		+ `$ haroopad --mode view`: 뷰 모드
+		+ `$ haroopad --mode edit`: 에디팅 모드
 * 개요보기 기능
 * Vim 키 바인딩을 지원
 * PDF, HTML 출력 지원
@@ -94,7 +95,11 @@
 - 그리스어 (Greek) - [pdudis](https://github.com/pdudis)
 - 포루투칼 (Portuguese) - [alexandre mbm](https://github.com/alexandre-mbm)
 - 일본어 (Japanese) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
-- 이탈리아 (Italiano) - [Zeriuno](https://github.com/Zeriuno)
+- 이태리어 (Italiano) - [Zeriuno](https://github.com/Zeriuno)
+- 인도어 (Bahasa Indonesia) - [Reza Faiz A. Rahman](https://github.com/rezafaizarahman)
+- 터키어 (Türkçe) - [Eray AYDIN](https://github.com/erayaydin)
+- 프랑스어 (Français) - [MarcBoyer](https://github.com/MarcBoyer), [Daniel Ménard](https://github.com/daniel-menard)
+
 
 ### 향상된 마크다운 문법
 
