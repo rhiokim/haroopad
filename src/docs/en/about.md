@@ -11,11 +11,11 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 ### ==New Features (v0.13.0)==
 
 * New Features
-  - Presentation Mode - [reference](http://pad.haroopress.com/page.html?f=how-to-write-presentation)
-  - Drawing Diagram (flowchart, Sequence Diagram) - [reference](http://pad.haroopress.com/page.html?f=how-to-draw-diagram)
+  - Presentation Mode - [http://pad.haroopress.com/page.html?f=how-to-write-presentation](http://pad.haroopress.com/page.html?f=how-to-write-presentation)
+  - Drawing Diagram (flowchart, Sequence Diagram) - [http://pad.haroopress.com/page.html?f=how-to-draw-diagram](http://pad.haroopress.com/page.html?f=how-to-draw-diagram)
 * New Syntax
-  - Tasklist(GFM) - [reference](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist)
-* Added new code language & themes - [reference](http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block)
+  - Tasklist(GFM) - [http://pad.haroopress.com/page.html?f=how-to-manage-tasklist](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist)
+* Added new code language & themes - [http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block](http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block)
   - total 112 languages(swift, gradle ...) and 49 themes
 
 ### ==More changelog==

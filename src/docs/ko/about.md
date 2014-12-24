@@ -11,11 +11,11 @@
 ### ==새로운 기능 (v0.13.0)==
 
 * 신규 기능
-	- 프리젠테이션 기능 - [참고](http://pad.haroopress.com/page.html?f=how-to-write-presentation)
-	- 다이어그램(플로우차트, 시퀀스 다이어그램 등) - [참고](http://pad.haroopress.com/page.html?f=how-to-draw-diagram)
+	- 프리젠테이션 기능 - [http://pad.haroopress.com/page.html?f=how-to-write-presentation](http://pad.haroopress.com/page.html?f=how-to-write-presentation)
+	- 다이어그램(플로우차트, 시퀀스 다이어그램 등) - [http://pad.haroopress.com/page.html?f=how-to-draw-diagram](http://pad.haroopress.com/page.html?f=how-to-draw-diagram)
 * 신규 문법
-	- 타스크 리스트(GFM) - [참고](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist)
-* 코드 하이라이팅 언어 및 테마 추가 - [참고](http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block)
+	- 타스크 리스트(GFM) - [http://pad.haroopress.com/page.html?f=how-to-manage-tasklist](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist)
+* 코드 하이라이팅 언어 및 테마 추가 - [http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block](http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block)
 	- 총 112가지 언어 하이라이팅 및 49 테마 지원
 
 ### ==중요 변경 사항==
