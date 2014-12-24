@@ -2,282 +2,260 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<style>
+  <title>markdown.html</title>
+  <meta name="generator" content="Haroopad 0.13.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
   body {
-    padding: 5px;
-    font-family: Arial;
+    padding: 5px !important;
+    font-family: Arial !important;
     font-size: 0.9em;
   }
 
-	p, ul, li, td {
-		font-size: 12px;
-	}
-  /*ul, li {
-    display: inline-block;
-  }*/
-</style>
-</head>
-<body>
-  <h1 id="markdown-characters" style="clear: both;font-size: 2.2em; font-weight: bold; margin: 1.5em 0px 1em;margin-top: 0px;"><a name="markdown-characters" href="#markdown-characters" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Markdown Characters</h1>
+  p, ul, li, td {
+    font-size: 12px !important;
+  }
 
-  <ul style="float:right;margin-top:0px;">
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#gruber-s-markdown" title="Gruber’s Markdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Gruber’s Markdown</a>
+  body > ul:nth-child(3) {
+    float: right;
+    margin-top: 0;
+    list-style: none;
+  }
+
+  div.oembedall-githubrepos{border:1px solid #DDD;border-radius:4px;list-style-type:none;margin:0 0 10px;padding:8px 10px 0;font:13.34px/1.4 helvetica,arial,freesans,clean,sans-serif;width:452px;background-color:#fff}div.oembedall-githubrepos .oembedall-body{background:-moz-linear-gradient(center top,#FAFAFA,#EFEFEF);background:-webkit-gradient(linear,left top,left bottom,from(#FAFAFA),to(#EFEFEF));border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-top:1px solid #EEE;margin-left:-10px;margin-top:8px;padding:5px 10px;width:100%}div.oembedall-githubrepos h3{font-size:14px;margin:0;padding-left:18px;white-space:nowrap}div.oembedall-githubrepos p.oembedall-description{color:#444;font-size:12px;margin:0 0 3px}div.oembedall-githubrepos p.oembedall-updated-at{color:#888;font-size:11px;margin:0}div.oembedall-githubrepos ul.oembedall-repo-stats{border:none;float:right;font-size:11px;font-weight:700;padding-left:15px;position:relative;z-index:5;margin:0}div.oembedall-githubrepos ul.oembedall-repo-stats li{border:none;color:#666;display:inline-block;list-style-type:none;margin:0!important}div.oembedall-githubrepos ul.oembedall-repo-stats li a{background-color:transparent;border:none;color:#666!important;background-position:5px -2px;background-repeat:no-repeat;border-left:1px solid #DDD;display:inline-block;height:21px;line-height:21px;padding:0 5px 0 23px}div.oembedall-githubrepos ul.oembedall-repo-stats li:first-child a{border-left:medium none;margin-right:-3px}div.oembedall-githubrepos ul.oembedall-repo-stats li a:hover{background:5px -27px no-repeat #4183C4;color:#FFF!important;text-decoration:none}div.oembedall-githubrepos ul.oembedall-repo-stats li:first-child a:hover{border-bottom-left-radius:3px;border-top-left-radius:3px}ul.oembedall-repo-stats li:last-child a:hover{border-bottom-right-radius:3px;border-top-right-radius:3px}span.oembedall-closehide{background-color:#aaa;border-radius:2px;cursor:pointer;margin-right:3px}div.oembedall-container{margin-top:5px;text-align:left}.oembedall-ljuser{font-weight:700}.oembedall-ljuser img{vertical-align:bottom;border:0;padding-right:1px}.oembedall-stoqembed{border-bottom:1px dotted #999;float:left;overflow:hidden;width:730px;line-height:1;background:#FFF;color:#000;font-family:Arial,Liberation Sans,DejaVu Sans,sans-serif;font-size:80%;text-align:left;margin:0;padding:0}.oembedall-stoqembed a{color:#07C;text-decoration:none;margin:0;padding:0}.oembedall-stoqembed a:hover{text-decoration:underline}.oembedall-stoqembed a:visited{color:#4A6B82}.oembedall-stoqembed h3{font-family:Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;font-size:130%;font-weight:700;margin:0;padding:0}.oembedall-stoqembed .oembedall-reputation-score{color:#444;font-size:120%;font-weight:700;margin-right:2px}.oembedall-stoqembed .oembedall-user-info{height:35px;width:185px}.oembedall-stoqembed .oembedall-user-info .oembedall-user-gravatar32{float:left;height:32px;width:32px}.oembedall-stoqembed .oembedall-user-info .oembedall-user-details{float:left;margin-left:5px;overflow:hidden;white-space:nowrap;width:145px}.oembedall-stoqembed .oembedall-question-hyperlink{font-weight:700}.oembedall-stoqembed .oembedall-stats{background:#EEE;margin:0 0 0 7px;padding:4px 7px 6px;width:58px}.oembedall-stoqembed .oembedall-statscontainer{float:left;margin-right:8px;width:86px}.oembedall-stoqembed .oembedall-votes{color:#555;padding:0 0 7px;text-align:center}.oembedall-stoqembed .oembedall-vote-count-post{font-size:240%;color:#808185;display:block;font-weight:700}.oembedall-stoqembed .oembedall-views{color:#999;padding-top:4px;text-align:center}.oembedall-stoqembed .oembedall-status{margin-top:-3px;padding:4px 0;text-align:center;background:#75845C;color:#FFF}.oembedall-stoqembed .oembedall-status strong{color:#FFF;display:block;font-size:140%}.oembedall-stoqembed .oembedall-summary{float:left;width:635px}.oembedall-stoqembed .oembedall-excerpt{line-height:1.2;margin:0;padding:0 0 5px}.oembedall-stoqembed .oembedall-tags{float:left;line-height:18px}.oembedall-stoqembed .oembedall-tags a:hover{text-decoration:none}.oembedall-stoqembed .oembedall-post-tag{background-color:#E0EAF1;border-bottom:1px solid #3E6D8E;border-right:1px solid #7F9FB6;color:#3E6D8E;font-size:90%;line-height:2.4;margin:2px 2px 2px 0;padding:3px 4px;text-decoration:none;white-space:nowrap}.oembedall-stoqembed .oembedall-post-tag:hover{background-color:#3E6D8E;border-bottom:1px solid #37607D;border-right:1px solid #37607D;color:#E0EAF1}.oembedall-stoqembed .oembedall-fr{float:right}.oembedall-stoqembed .oembedall-statsarrow{background-image:url(http://cdn.sstatic.net/stackoverflow/img/sprites.png?v=3);background-repeat:no-repeat;overflow:hidden;background-position:0 -435px;float:right;height:13px;margin-top:12px;width:7px}.oembedall-facebook1{border:1px solid #1A3C6C;padding:0;font:13.34px/1.4 verdana;width:500px}.oembedall-facebook2{background-color:#627add}.oembedall-facebook2 a{color:#e8e8e8;text-decoration:none}.oembedall-facebookBody{background-color:#fff;vertical-align:top;padding:5px}.oembedall-facebookBody .contents{display:inline-block;width:100%}.oembedall-facebookBody div img{float:left;margin-right:5px}div.oembedall-lanyard{-webkit-box-shadow:none;-webkit-transition-delay:0s;-webkit-transition-duration:.4000000059604645s;-webkit-transition-property:width;-webkit-transition-timing-function:cubic-bezier(0.42,0,.58,1);background-attachment:scroll;background-clip:border-box;background-color:transparent;background-image:none;background-origin:padding-box;border-width:0;box-shadow:none;color:#112644;display:block;float:left;font-family:'Trebuchet MS',Trebuchet,sans-serif;font-size:16px;height:253px;line-height:19px;margin:0;max-width:none;min-height:0;outline:#112644 0;overflow-x:visible;overflow-y:visible;padding:0;position:relative;text-align:left;vertical-align:baseline;width:804px}div.oembedall-lanyard .tagline{font-size:1.5em}div.oembedall-lanyard .wrapper{overflow:hidden;clear:both}div.oembedall-lanyard .split{float:left;display:inline}div.oembedall-lanyard .prominent-place .flag:active,div.oembedall-lanyard .prominent-place .flag:focus,div.oembedall-lanyard .prominent-place .flag:hover,div.oembedall-lanyard .prominent-place .flag:link,div.oembedall-lanyard .prominent-place .flag:visited{float:left;display:block;width:48px;height:48px;position:relative;top:-5px;margin-right:10px}div.oembedall-lanyard .place-context{font-size:.889em}div.oembedall-lanyard .prominent-place .sub-place{display:block}div.oembedall-lanyard .prominent-place{font-size:1.125em;line-height:1.1em;font-weight:400}div.oembedall-lanyard .main-date{color:#8CB4E0;font-weight:700;line-height:1.1}div.oembedall-lanyard .first{width:48.57%;margin:0 0 0 2.857%}html{height:100%}body{margin:0!important;padding:5px 20px 26px!important;background-color:#fff;font-family:"Lucida Grande","Segoe UI","Apple SD Gothic Neo","Malgun Gothic","Lucida Sans Unicode",Helvetica,Arial,sans-serif;font-size:.9em;overflow-x:hidden;overflow-y:auto}br,h1,h2,h3,h4,h5,h6{clear:both}hr.page{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x;border:0;color:#ccc;height:3px;padding:0}hr.underscore{border:0!important;height:30px;padding:0;-webkit-margin-before:0;-webkit-margin-after:0}body >:first-child{margin-top:0!important}img.plugin{box-shadow:0 1px 3px rgba(0,0,0,.1);border-radius:3px}iframe{border:0}figure{-webkit-margin-before:0;-webkit-margin-after:0;-webkit-margin-start:0;-webkit-margin-end:0}kbd{border:1px solid #aaa;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;-moz-box-shadow:1px 2px 2px #ddd;-webkit-box-shadow:1px 2px 2px #ddd;box-shadow:1px 2px 2px #ddd;background-color:#f9f9f9;background-image:-moz-linear-gradient(top,#eee,#f9f9f9,#eee);background-image:-o-linear-gradient(top,#eee,#f9f9f9,#eee);background-image:-webkit-linear-gradient(top,#eee,#f9f9f9,#eee);background-image:linear-gradient(top,#eee,#f9f9f9,#eee);padding:1px 3px;font-family:inherit;font-size:.85em}.oembeded .oembed_photo{display:inline-block}img[data-echo]{margin:25px 0;width:100px;height:100px;background:url(../img/ajax.gif) center center no-repeat #fff}.spinner{display:inline-block;width:10px;height:10px;margin-bottom:-.1em;border:2px solid rgba(0,0,0,.5);border-top-color:transparent;border-radius:100%;-webkit-animation:spin 1s infinite linear;animation:spin 1s infinite linear}.spinner:after{content:'';display:block;width:0;height:0;position:absolute;top:-6px;left:0;border:4px solid transparent;border-bottom-color:rgba(0,0,0,.5);-webkit-transform:rotate(45deg);transform:rotate(45deg)}@-webkit-keyframes spin{to{-webkit-transform:rotate(360deg)}}@keyframes spin{to{transform:rotate(360deg)}}p.toc{margin:0!important}p.toc ul{padding-left:10px}p.toc>ul{padding:10px;margin:0 10px;display:inline-block;border:1px solid #ededed;border-radius:5px}p.toc li,p.toc ul{list-style-type:none}p.toc li{width:100%;padding:0;overflow:hidden}p.toc li a::after{content:"."}p.toc li a:before{content:"• "}p.toc h5{text-transform:uppercase}p.toc .title{float:left;padding-right:3px}p.toc .number{margin:0;float:right;padding-left:3px;background:#fff;display:none}.markdown{padding:20px}.markdown a{text-decoration:none;vertical-align:baseline}.markdown a:hover{text-decoration:underline}.markdown h1{font-size:2.2em;font-weight:700;margin:1.5em 0 1em}.markdown h2{font-size:1.8em;font-weight:700;margin:1.275em 0 .85em}.markdown h3{font-size:1.6em;font-weight:700;margin:1.125em 0 .75em}.markdown h4{font-size:1.4em;font-weight:700;margin:.99em 0 .66em}.markdown h5{font-size:1.2em;font-weight:700;margin:.855em 0 .57em}.markdown h6{font-size:1em;font-weight:700;margin:.75em 0 .5em}.markdown h1+p,.markdown h1:first-child,.markdown h2+p,.markdown h2:first-child,.markdown h3+p,.markdown h3:first-child,.markdown h4+p,.markdown h4:first-child,.markdown h5+p,.markdown h5:first-child,.markdown h6+p,.markdown h6:first-child{margin-top:0}.markdown hr{border:1px solid #ccc}.markdown p{margin:1em 0;word-wrap:break-word}.markdown ol{list-style-type:decimal}.markdown li{display:list-item;line-height:1.4em}.markdown blockquote{margin:1em 20px}.markdown blockquote>:first-child{margin-top:0}.markdown blockquote>:last-child{margin-bottom:0}.markdown blockquote cite:before{content:'\2014 \00A0'}.markdown .code{border-radius:3px;word-wrap:break-word}.markdown pre{border-radius:3px;word-wrap:break-word;border:1px solid #ccc;overflow:auto}.markdown pre code{display:block}.markdown pre>code{white-space:pre;padding:.5em;margin:0}.markdown code{border-radius:3px;word-wrap:break-word;padding:0 5px;margin:0 2px}.markdown img{max-width:100%}.markdown table{padding:0;border-collapse:collapse;border-spacing:0;margin-bottom:16px}.markdown table tr td,.markdown table tr th{border:1px solid #ccc;margin:0;padding:6px 13px}.markdown table tr th{font-weight:700}.markdown table tr th>:first-child{margin-top:0}.markdown table tr th>:last-child{margin-bottom:0}.markdown table tr td>:first-child{margin-top:0}.markdown table tr td>:last-child{margin-bottom:0}.markdown em.underline{font-style:normal;text-decoration:underline}.markdown strong.highlight{color:#000;padding:0 5px;background-color:#fdffb6;-webkit-box-shadow:#fdffb6 0 0 5px;-moz-box-shadow:#fdffb6 0 0 5px;box-shadow:#fdffb6 0 0 5px}@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700);.haroopad{padding:20px;color:#222;font-size:15px;font-family:'Roboto Condensed',Tauri,"Lucida Grande","Lucida Sans Unicode","Lucida Sans",AppleSDGothicNeo-Medium,'Segoe UI','Malgun Gothic',Verdana,Tahoma,sans-serif;background:#fff;-webkit-font-smoothing:antialiased}.haroopad a{color:#3269a0}.haroopad a:hover{color:#4183c4}.haroopad h2{border-bottom:1px solid #e6e6e6;line-height:1.7em}.haroopad h6{color:#777}.haroopad hr{border:1px solid #e6e6e6}.haroopad blockquote>code,.haroopad h1>code,.haroopad h2>code,.haroopad h3>code,.haroopad h4>code,.haroopad h5>code,.haroopad h6>code,.haroopad li>code,.haroopad p>code,.haroopad td>code{color:#000;background-color:#feecdd;border:1px solid #efdfd0}.haroopad pre>code{font-size:1em;font-family:Consolas,Inconsolata,Courier,monospace;letter-spacing:-1px;font-weight:700}.haroopad blockquote{border-left:4px solid #e6e6e6;padding:0 15px;color:#777}.haroopad table{background-color:#fafafa}.haroopad table tr td,.haroopad table tr th{border:1px solid #e6e6e6}.haroopad table tr:nth-child(2n){background-color:#f2f2f2}.hljs{display:block;overflow-x:auto;padding:.5em;background:#fdf6e3;color:#657b83;-webkit-text-size-adjust:none}.diff .hljs-header,.hljs-comment,.hljs-doctype,.hljs-javadoc,.hljs-pi,.lisp .hljs-string{color:#93a1a1}.css .hljs-tag,.hljs-addition,.hljs-keyword,.hljs-request,.hljs-status,.hljs-winutils,.method,.nginx .hljs-title{color:#859900}.hljs-command,.hljs-dartdoc,.hljs-hexcolor,.hljs-link_url,.hljs-number,.hljs-phpdoc,.hljs-regexp,.hljs-rules .hljs-value,.hljs-string,.hljs-tag .hljs-value,.tex .hljs-formula{color:#2aa198}.css .hljs-function,.hljs-built_in,.hljs-chunk,.hljs-decorator,.hljs-id,.hljs-identifier,.hljs-localvars,.hljs-title,.vhdl .hljs-literal{color:#268bd2}.hljs-attribute,.hljs-class .hljs-title,.hljs-constant,.hljs-link_reference,.hljs-parent,.hljs-type,.hljs-variable,.lisp .hljs-body,.smalltalk .hljs-number{color:#b58900}.css .hljs-pseudo,.diff .hljs-change,.hljs-attr_selector,.hljs-cdata,.hljs-header,.hljs-pragma,.hljs-preprocessor,.hljs-preprocessor .hljs-keyword,.hljs-shebang,.hljs-special,.hljs-subst,.hljs-symbol,.hljs-symbol .hljs-string{color:#cb4b16}.hljs-deletion,.hljs-important{color:#dc322f}.hljs-link_label{color:#6c71c4}.tex .hljs-formula{background:#eee8d5}.MathJax_Hover_Frame{border-radius:.25em;-webkit-border-radius:.25em;-moz-border-radius:.25em;-khtml-border-radius:.25em;box-shadow:0 0 15px #83A;-webkit-box-shadow:0 0 15px #83A;-moz-box-shadow:0 0 15px #83A;-khtml-box-shadow:0 0 15px #83A;border:1px solid #A6D!important;display:inline-block;position:absolute}.MathJax_Hover_Arrow{position:absolute;width:15px;height:11px;cursor:pointer}#MathJax_About{position:fixed;left:50%;width:auto;text-align:center;border:3px outset;padding:1em 2em;background-color:#DDD;color:#000;cursor:default;font-family:message-box;font-size:120%;font-style:normal;text-indent:0;text-transform:none;line-height:normal;letter-spacing:normal;word-spacing:normal;word-wrap:normal;white-space:nowrap;float:none;z-index:201;border-radius:15px;-webkit-border-radius:15px;-moz-border-radius:15px;-khtml-border-radius:15px;box-shadow:0 10px 20px gray;-webkit-box-shadow:0 10px 20px gray;-moz-box-shadow:0 10px 20px gray;-khtml-box-shadow:0 10px 20px gray;filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}.MathJax_Menu{position:absolute;background-color:#fff;color:#000;width:auto;padding:5px 0;border:1px solid #CCC;margin:0;cursor:default;font:menu;text-align:left;text-indent:0;text-transform:none;line-height:normal;letter-spacing:normal;word-spacing:normal;word-wrap:normal;white-space:nowrap;float:none;z-index:201;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-khtml-border-radius:5px;box-shadow:0 10px 20px gray;-webkit-box-shadow:0 10px 20px gray;-moz-box-shadow:0 10px 20px gray;-khtml-box-shadow:0 10px 20px gray;filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}.MathJax_MenuItem{padding:1px 2em;background:0 0}.MathJax_MenuArrow{position:absolute;right:.5em;color:#666}.MathJax_MenuActive .MathJax_MenuArrow{color:#fff}.MathJax_MenuCheck,.MathJax_MenuRadioCheck{position:absolute;left:.7em}.MathJax_MenuLabel{padding:1px 2em 3px 1.33em;font-style:italic}.MathJax_MenuRule{border-top:1px solid #DDD;margin:4px 3px}.MathJax_MenuDisabled{color:GrayText}.MathJax_MenuActive{background-color:#606872;color:#fff}.MathJax_Menu_Close{position:absolute;width:31px;height:31px;top:-15px;left:-15px}#MathJax_Zoom{position:absolute;background-color:#F0F0F0;overflow:auto;display:block;z-index:301;padding:.5em;border:1px solid #000;margin:0;font-weight:400;font-style:normal;text-align:left;text-indent:0;text-transform:none;line-height:normal;letter-spacing:normal;word-spacing:normal;word-wrap:normal;white-space:nowrap;float:none;box-shadow:5px 5px 15px #AAA;-webkit-box-shadow:5px 5px 15px #AAA;-moz-box-shadow:5px 5px 15px #AAA;-khtml-box-shadow:5px 5px 15px #AAA;filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}#MathJax_ZoomOverlay{position:absolute;left:0;top:0;z-index:300;display:inline-block;width:100%;height:100%;border:0;padding:0;margin:0;background-color:#fff;opacity:0;filter:alpha(opacity=0)}#MathJax_ZoomFrame{position:relative;display:inline-block;height:0;width:0}#MathJax_ZoomEventTrap{position:absolute;left:0;top:0;z-index:302;display:inline-block;border:0;padding:0;margin:0;background-color:#fff;opacity:0;filter:alpha(opacity=0)}.MathJax_Preview{color:#888}#MathJax_Message{position:fixed;left:1px;bottom:2px;background-color:#E6E6E6;border:1px solid #959595;margin:0;padding:2px 8px;z-index:102;color:#000;font-size:80%;width:auto;white-space:nowrap}#MathJax_MSIE_Frame{position:absolute;top:0;left:0;width:0;z-index:101;border:0;margin:0;padding:0}.MathJax_Error{color:#C00;font-style:italic}.MathJax_Display{text-align:center;margin:1em 0;position:relative;display:block;width:100%}.MathJax .merror{background-color:#FF8;color:#C00;border:1px solid #C00;padding:1px 3px;font-style:normal;font-size:90%}#MathJax_Tooltip{background-color:InfoBackground;color:InfoText;border:1px solid #000;box-shadow:2px 2px 5px #AAA;-webkit-box-shadow:2px 2px 5px #AAA;-moz-box-shadow:2px 2px 5px #AAA;-khtml-box-shadow:2px 2px 5px #AAA;filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true');padding:3px 4px;z-index:401;position:absolute;left:0;top:0;width:auto;height:auto;display:none}.MathJax{display:inline;font-style:normal;font-weight:400;line-height:normal;font-size:100%;font-size-adjust:none;text-indent:0;text-align:left;text-transform:none;letter-spacing:normal;word-spacing:normal;word-wrap:normal;white-space:nowrap;float:none;direction:ltr;border:0;padding:0;margin:0}.MathJax a,.MathJax img,.MathJax nobr{border:0;padding:0;margin:0;max-width:5000em;max-height:5000em;vertical-align:0;line-height:normal;text-decoration:none}img.MathJax_strut{border:0!important;padding:0!important;margin:0!important;vertical-align:0!important}.MathJax span{display:inline;position:static;border:0;padding:0;margin:0;vertical-align:0;line-height:normal;text-decoration:none}.MathJax nobr{white-space:nowrap!important}.MathJax img{display:inline!important;float:none!important}.MathJax *{transition:none;-webkit-transition:none;-moz-transition:none;-ms-transition:none;-o-transition:none}.MathJax_Processing{visibility:hidden;position:fixed;width:0;height:0;overflow:hidden}.MathJax_Processed{display:none!important}.MathJax_ExBox{display:block;overflow:hidden;width:1px;height:60ex}.MathJax .MathJax_EmBox{display:block;overflow:hidden;width:1px;height:60em}.MathJax .MathJax_HitBox{cursor:text;background:#fff;opacity:0;filter:alpha(opacity=0)}#MathJax_Tooltip *,.MathJax .MathJax_HitBox *{filter:none;opacity:1;background:0 0}@font-face{font-family:MathJax_Blank;src:url(about:blank)}.MathJax .noError{font-size:90%;text-align:left;color:#000;padding:1px 3px;border:1px solid}.node{fill:#eaeaea;stroke:#666;stroke-width:1.5px}footer{position:fixed;font-size:.8em;text-align:right;bottom:0;margin-left:-25px;height:20px;width:100%}</style>
+</head>
+<body class="markdown haroopad">
+
+  <h2 id="markdown-characters"><a name="markdown-characters" href="#markdown-characters"></a>Markdown Characters</h2><p class="toc" style="float:right"></p><ul>
+<li><ul>
+<li><span class="title">
+<a href="#markdown-characters" title="Markdown Characters">Markdown Characters</a>
 </span>
 <!--span class="number">
 0
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#emphasis" title="Emphasis" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Emphasis</a>
+<li><span class="title">
+<a href="#gruber's-markdown" title="Gruber’s Markdown">Gruber’s Markdown</a>
 </span>
 <!--span class="number">
 1
 </span-->
-<ul>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#links" title="Links" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Links</a>
+</li>
+<li><span class="title">
+<a href="#emphasis" title="Emphasis">Emphasis</a>
 </span>
 <!--span class="number">
 2
 </span-->
-</li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#code" title="Code" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Code</a>
+<ul>
+<li><span class="title">
+<a href="#links" title="Links">Links</a>
 </span>
 <!--span class="number">
 3
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#image" title="Image" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Image</a>
+<li><span class="title">
+<a href="#code" title="Code">Code</a>
 </span>
 <!--span class="number">
 4
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#headers" title="Headers" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Headers</a>
+<li><span class="title">
+<a href="#image" title="Image">Image</a>
 </span>
 <!--span class="number">
 5
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#lists" title="Lists" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Lists</a>
+<li><span class="title">
+<a href="#headers" title="Headers">Headers</a>
 </span>
 <!--span class="number">
 6
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#blockquotes" title="Blockquotes" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Blockquotes</a>
+<li><span class="title">
+<a href="#lists" title="Lists">Lists</a>
 </span>
 <!--span class="number">
 7
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#horizontal-rules" title="Horizontal Rules" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Horizontal Rules</a>
+<li><span class="title">
+<a href="#blockquotes" title="Blockquotes">Blockquotes</a>
 </span>
 <!--span class="number">
 8
 </span-->
 </li>
-</ul>
-</li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#github-flavored-markdown" title="Github Flavored Markdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Github Flavored Markdown</a>
+<li><span class="title">
+<a href="#horizontal-rules" title="Horizontal Rules">Horizontal Rules</a>
 </span>
 <!--span class="number">
 9
 </span-->
-<ul>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#line-breaks" title="Line Breaks" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Line Breaks</a>
+</li>
+</ul>
+</li>
+<li><span class="title">
+<a href="#github-flavored-markdown" title="Github Flavored Markdown">Github Flavored Markdown</a>
 </span>
 <!--span class="number">
 10
 </span-->
-</li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#fenced-code-block" title="Fenced Code Block" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Fenced Code Block</a>
+<ul>
+<li><span class="title">
+<a href="#line-breaks" title="Line Breaks">Line Breaks</a>
 </span>
 <!--span class="number">
 11
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#table-gfm-" title="Table (GFM)" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Table (GFM)</a>
+<li><span class="title">
+<a href="#fenced-code-block" title="Fenced Code Block">Fenced Code Block</a>
 </span>
 <!--span class="number">
 12
 </span-->
 </li>
-</ul>
-</li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#multimarkdown" title="Multimarkdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Multimarkdown</a>
+<li><span class="title">
+<a href="#table-(gfm)" title="Table (GFM)">Table (GFM)</a>
 </span>
 <!--span class="number">
 13
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#haroopad-flavored-markdown" title="Haroopad Flavored Markdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Haroopad Flavored Markdown</a>
+</ul>
+</li>
+<li><span class="title">
+<a href="#multimarkdown" title="Multimarkdown">Multimarkdown</a>
 </span>
 <!--span class="number">
 14
 </span-->
-<ul>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#pharse-emphasis" title="Pharse Emphasis" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Pharse Emphasis</a>
+</li>
+<li><span class="title">
+<a href="#haroopad-flavored-markdown" title="Haroopad Flavored Markdown">Haroopad Flavored Markdown</a>
 </span>
 <!--span class="number">
 15
 </span-->
-</li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#horizontal-rules-1" title="Horizontal Rules" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Horizontal Rules</a>
+<ul>
+<li><span class="title">
+<a href="#pharse-emphasis" title="Pharse Emphasis">Pharse Emphasis</a>
 </span>
 <!--span class="number">
 16
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#table-of-content" title="Table of Content" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Table of Content</a>
+<li><span class="title">
+<a href="#horizontal-rules-1" title="Horizontal Rules">Horizontal Rules</a>
 </span>
 <!--span class="number">
 17
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#math-expression" title="Math Expression" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Math Expression</a>
+<li><span class="title">
+<a href="#table-of-content" title="Table of Content">Table of Content</a>
 </span>
 <!--span class="number">
 18
 </span-->
 </li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#media-embed" title="Media Embed" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Media Embed</a>
+<li><span class="title">
+<a href="#math-expression" title="Math Expression">Math Expression</a>
 </span>
 <!--span class="number">
 19
 </span-->
 </li>
-</ul>
-</li>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#php-extras-markdown" title="PHP Extras Markdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">PHP Extras Markdown</a>
+<li><span class="title">
+<a href="#media-embed" title="Media Embed">Media Embed</a>
 </span>
 <!--span class="number">
 20
 </span-->
-<ul>
-<li style="display: list-item; line-height: 1.4em;"><span class="title">
-<a href="#footnotes" title="Footnotes" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">Footnotes</a>
+</li>
+<li><span class="title">
+<a href="#diagram-(with-v0.13)" title="Diagram  (with v0.13)">Diagram  (with v0.13)</a>
 </span>
 <!--span class="number">
 21
 </span-->
 </li>
+<li><span class="title">
+<a href="#tasklist-(with-v0.13)" title="Tasklist (with v0.13)">Tasklist (with v0.13)</a>
+</span>
+<!--span class="number">
+22
+</span-->
+</li>
+<li><span class="title">
+<a href="#presentation-(with-v0.13)" title="Presentation (with v0.13)">Presentation (with v0.13)</a>
+</span>
+<!--span class="number">
+23
+</span-->
+</li>
+</ul>
+</li>
+<li><span class="title">
+<a href="#php-extras-markdown" title="PHP Extras Markdown">PHP Extras Markdown</a>
+</span>
+<!--span class="number">
+24
+</span-->
+<ul>
+<li><span class="title">
+<a href="#footnotes-(with-v0.12)" title="Footnotes (with v0.12)">Footnotes (with v0.12)</a>
+</span>
+<!--span class="number">
+25
+</span-->
+</li>
 </ul>
 </li>
 </ul>
-<p style="margin: 1em 0px; word-wrap: break-word;"></p><ul>
-<li style="display: list-item; line-height: 1.4em;">\ backslash</li>
-<li style="display: list-item; line-height: 1.4em;">` backtick</li>
-<li style="display: list-item; line-height: 1.4em;">* asterisk</li>
-<li style="display: list-item; line-height: 1.4em;">_ underscore</li>
-<li style="display: list-item; line-height: 1.4em;">{ } curly braces</li>
-<li style="display: list-item; line-height: 1.4em;">[ ] square brackets</li>
-<li style="display: list-item; line-height: 1.4em;">( ) parentheses</li>
-<li style="display: list-item; line-height: 1.4em;"># hash mark</li>
-<li style="display: list-item; line-height: 1.4em;">+ plus sign</li>
-<li style="display: list-item; line-height: 1.4em;">- minus sign (hyphen)</li>
-<li style="display: list-item; line-height: 1.4em;">. dot</li>
-<li style="display: list-item; line-height: 1.4em;">! exclamation</li>
-<li style="display: list-item; line-height: 1.4em;">^ caret</li>
-<li style="display: list-item; line-height: 1.4em;">~ tilde</li>
-</ul><h2 id="gruber-s-markdown" style="clear: both;font-size: 1.8em; font-weight: bold; margin: 1.275em 0px 0.85em;border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(230, 230, 230); line-height: 1.7em;"><a name="gruber-s-markdown" href="#gruber-s-markdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Gruber’s Markdown</h2><h2 id="emphasis" style="clear: both;font-size: 1.8em; font-weight: bold; margin: 1.275em 0px 0.85em;border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(230, 230, 230); line-height: 1.7em;"><a name="emphasis" href="#emphasis" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Emphasis</h2><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Italic - <em>italic</em></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;*italic*
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-emphasis">*italic*</span>
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Bold - <strong>bold</strong></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;**bold** or __bold__
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-strong">**bold**</span> or <span class="hljs-strong">__bold__</span>
-</code></pre><h3 id="links" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="links" href="#links" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Links</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Inline - <a href="" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">link</a></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;A [Link](http://example.com &quot;Title&quot;)
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">A [<span class="hljs-link_label" style="color: rgb(108, 113, 196);">Link</span>](<span class="hljs-link_url" style="color: rgb(42, 161, 152);">http://example.com "Title"</span>)
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Reference-style - [link][id]</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;A [Link][id].
+</li>
 
-[id]: http://example.com &quot;Title&quot;
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">A [<span class="hljs-link_label" style="color: rgb(108, 113, 196);">Link</span>][<span class="hljs-link_reference" style="color: rgb(181, 137, 0);">id</span>].
+</ul>
+<p></p><ul>
+<li>\ backslash</li><li>` backtick</li><li>* asterisk</li><li>_ underscore</li><li>{ } curly braces</li><li>[&nbsp;] square brackets</li><li>( ) parentheses</li><li># hash mark</li><li>+ plus sign</li><li>- minus sign (hyphen)</li><li>. dot</li><li>! exclamation</li><li>^ caret</li><li>~ tilde</li></ul><h2 id="gruber's-markdown"><a name="gruber's-markdown" href="#gruber's-markdown"></a>Gruber’s Markdown</h2><h2 id="emphasis"><a name="emphasis" href="#emphasis"></a>Emphasis</h2><p>Italic - <em>italic</em></p><pre class="markdown hljs"><span class="hljs-emphasis">*italic*</span>
+</pre><p>Bold - <strong>bold</strong></p><pre class="markdown hljs"><span class="hljs-strong">**bold**</span> or <span class="hljs-strong">__bold__</span>
+</pre><h3 id="links"><a name="links" href="#links"></a>Links</h3><p>Inline - <a href="">link</a></p><pre class="markdown hljs">A [<span class="hljs-link_label">Link</span>](<span class="hljs-link_url">http://example.com "Title"</span>)
+</pre><p>Reference-style - [link][id]</p><pre class="markdown hljs">A [<span class="hljs-link_label">Link</span>][<span class="hljs-link_reference">id</span>].
 
-[<span class="hljs-link_reference" style="color: rgb(181, 137, 0);">id</span>]:<span class="hljs-link_url" style="color: rgb(42, 161, 152);"> http://example.com "Title"</span><span class="hljs-link_url" style="color: rgb(42, 161, 152);">
-</span></code></pre><h3 id="code" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="code" href="#code" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Code</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">A <code style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;color: rgb(0, 0, 0); background-color: rgb(254, 236, 221); border: 1px solid rgb(239, 223, 208);">code span</code></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;A `code span`
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">A <span class="hljs-code">`code span`</span>
-</code></pre><h3 id="image" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="image" href="#image" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Image</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Inline - Image</p><p style="margin: 1em 0px; word-wrap: break-word;"><img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title" style="max-width: 100%;"></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;![Alt Text](http://bit.ly/1drEdWK &quot;Title&quot;)
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">![<span class="hljs-link_label" style="color: rgb(108, 113, 196);">Alt Text</span>](<span class="hljs-link_url" style="color: rgb(42, 161, 152);">http://bit.ly/1drEdWK "Title"</span>)
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Reference-style Image</p><p style="margin: 1em 0px; word-wrap: break-word;"><img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title&quot; &quot;width:50px" style="max-width: 100%;">.</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;A ![Alt Text][logo].
+[<span class="hljs-link_reference">id</span>]:<span class="hljs-link_url"> http://example.com "Title"</span>
+</pre><h3 id="code"><a name="code" href="#code"></a>Code</h3><p>A <code>code span</code></p><pre class="markdown hljs">A <span class="hljs-code">`code span`</span>
+</pre><h3 id="image"><a name="image" href="#image"></a>Image</h3><p>Inline - Image</p><p><img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title"></p><pre class="markdown hljs">![<span class="hljs-link_label">Alt Text</span>](<span class="hljs-link_url">http://bit.ly/1drEdWK "Title"</span>)
+</pre><p>Reference-style Image</p><p><img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title&quot; &quot;width:50px">.</p><pre class="markdown hljs">A ![<span class="hljs-link_label">Alt Text</span>][<span class="hljs-link_reference">logo</span>].
 
-[logo]: http://bit.ly/1drEdWK &quot;Title&quot;
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">A ![<span class="hljs-link_label" style="color: rgb(108, 113, 196);">Alt Text</span>][<span class="hljs-link_reference" style="color: rgb(181, 137, 0);">logo</span>].
+[<span class="hljs-link_reference">logo</span>]:<span class="hljs-link_url"> http://bit.ly/1drEdWK "Title"</span>
+</pre><p>Image Style (Haroopad Flavored Markdown)</p><p><img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title" style="width:30px"><br><img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title" style="width:30px;float:right"></p><p><img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title&quot; &quot;width:50px">.</p><pre class="markdown hljs">![<span class="hljs-link_label">Alt Text</span>](<span class="hljs-link_url">http://bit.ly/1drEdWK "Title" "width:30px"</span>)
+![<span class="hljs-link_label">Alt Text</span>](<span class="hljs-link_url">http://bit.ly/1drEdWK "Title" "width:30px;float:right"</span>)
 
-[<span class="hljs-link_reference" style="color: rgb(181, 137, 0);">logo</span>]:<span class="hljs-link_url" style="color: rgb(42, 161, 152);"> http://bit.ly/1drEdWK "Title"</span><span class="hljs-link_url" style="color: rgb(42, 161, 152);">
-</span></code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Image Style (Haroopad Flavored Markdown)</p><p style="margin: 1em 0px; word-wrap: break-word;"><img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title" style="width:30px; max-width: 100%;">
-<img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title" style="width:30px;float:right; max-width: 100%;"></p><p style="margin: 1em 0px; word-wrap: break-word;"><img src="http://bit.ly/1drEdWK" alt="Alt Text" title="Title&quot; &quot;width:50px" style="max-width: 100%;">.</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;![Alt Text](http://bit.ly/1drEdWK &quot;Title&quot; &quot;width:30px&quot;)
-![Alt Text](http://bit.ly/1drEdWK &quot;Title&quot; &quot;width:30px;float:right&quot;)
+![<span class="hljs-link_label">Alt Text</span>][<span class="hljs-link_reference">logo</span>].
 
-![Alt Text][logo].
-
-[logo]: http://bit.ly/1drEdWK &quot;Title&quot; &quot;width:50px&quot;
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">![<span class="hljs-link_label" style="color: rgb(108, 113, 196);">Alt Text</span>](<span class="hljs-link_url" style="color: rgb(42, 161, 152);">http://bit.ly/1drEdWK "Title" "width:30px"</span>)
-![<span class="hljs-link_label" style="color: rgb(108, 113, 196);">Alt Text</span>](<span class="hljs-link_url" style="color: rgb(42, 161, 152);">http://bit.ly/1drEdWK "Title" "width:30px;float:right"</span>)
-
-![<span class="hljs-link_label" style="color: rgb(108, 113, 196);">Alt Text</span>][<span class="hljs-link_reference" style="color: rgb(181, 137, 0);">logo</span>].
-
-[<span class="hljs-link_reference" style="color: rgb(181, 137, 0);">logo</span>]:<span class="hljs-link_url" style="color: rgb(42, 161, 152);"> http://bit.ly/1drEdWK "Title" "width:50px"</span><span class="hljs-link_url" style="color: rgb(42, 161, 152);">
-</span></code></pre><h3 id="headers" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="headers" href="#headers" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Headers</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Setext-style</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;Header 1
-========
-
-Header 2
---------
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-header" style="color: rgb(203, 75, 22);">Header 1
+[<span class="hljs-link_reference">logo</span>]:<span class="hljs-link_url"> http://bit.ly/1drEdWK "Title" "width:50px"</span>
+</pre><h3 id="headers"><a name="headers" href="#headers"></a>Headers</h3><p>Setext-style</p><pre class="markdown hljs"><span class="hljs-header">Header 1
 ========</span>
 
-<span class="hljs-header" style="color: rgb(203, 75, 22);">Header 2
+<span class="hljs-header">Header 2
 --------</span>
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">atx-style</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;# Header 1
-## Header 2
+</pre><p>atx-style</p><pre class="markdown hljs"><span class="hljs-header"># Header 1</span>
+<span class="hljs-header">## Header 2</span>
 ...
-###### Header 6
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-header" style="color: rgb(203, 75, 22);"># Header 1</span>
-<span class="hljs-header" style="color: rgb(203, 75, 22);">## Header 2</span>
-...
-<span class="hljs-header" style="color: rgb(203, 75, 22);">###### Header 6</span>
-</code></pre><h3 id="lists" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="lists" href="#lists" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Lists</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Ordered (numbered)</p><ol style="list-style-type: decimal;">
-<li style="display: list-item; line-height: 1.4em;">Red</li>
-<li style="display: list-item; line-height: 1.4em;">Blue</li>
-<li style="display: list-item; line-height: 1.4em;">Green</li>
-</ol><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;1. Red
-2. Blue
-3. Green
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-bullet">1. </span>Red
+<span class="hljs-header">###### Header 6</span>
+</pre><h3 id="lists"><a name="lists" href="#lists"></a>Lists</h3><p>Ordered (numbered)</p><ol>
+<li>Red</li><li>Blue</li><li>Green</li></ol><pre class="markdown hljs"><span class="hljs-bullet">1. </span>Red
 <span class="hljs-bullet">2. </span>Blue
 <span class="hljs-bullet">3. </span>Green
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Unordered (bulleted)</p><ul>
-<li style="display: list-item; line-height: 1.4em;">Red</li>
-<li style="display: list-item; line-height: 1.4em;">Blue</li>
-<li style="display: list-item; line-height: 1.4em;">Green</li>
-</ul><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;* Red
-* Blue
-* Green
-
-- Red
-- Blue
-- Green
-
-+ Red
-+ Blue
-+ Green
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-bullet">* </span>Red
+</pre><p>Unordered (bulleted)</p><ul>
+<li>Red</li><li>Blue</li><li>Green</li></ul><pre class="markdown hljs"><span class="hljs-bullet">* </span>Red
 <span class="hljs-bullet">* </span>Blue
 <span class="hljs-bullet">* </span>Green
 
@@ -288,28 +266,12 @@ Header 2
 <span class="hljs-bullet">+ </span>Red
 <span class="hljs-bullet">+ </span>Blue
 <span class="hljs-bullet">+ </span>Green
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Nest Lists</p><ul>
-<li style="display: list-item; line-height: 1.4em;">Colors<ol style="list-style-type: decimal;">
-<li style="display: list-item; line-height: 1.4em;">Red</li>
-<li style="display: list-item; line-height: 1.4em;">Blue</li>
-<li style="display: list-item; line-height: 1.4em;">Green</li>
-<li style="display: list-item; line-height: 1.4em;">Yellow<ul>
-<li style="display: list-item; line-height: 1.4em;">Dark Yellow</li>
-<li style="display: list-item; line-height: 1.4em;">Light Yellow</li>
-<li style="display: list-item; line-height: 1.4em;">Green Yellow</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;* Colors
-  1. Red
-  2. Blue
-  3. Green
-  4. Yellow
-    - Dark Yellow
-    - Light Yellow
-    - Green Yellow
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-bullet">* </span>Colors
+</pre><p>Nest Lists</p><ul>
+<li>Colors<ol>
+<li>Red</li><li>Blue</li><li>Green</li><li>Yellow<ul>
+<li>Dark Yellow</li><li>Light Yellow</li><li>Green Yellow</li></ul>
+</li></ol>
+</li></ul><pre class="markdown hljs"><span class="hljs-bullet">* </span>Colors
   1. Red
   2. Blue
   3. Green
@@ -317,133 +279,113 @@ Header 2
 <span class="hljs-code">    - Dark Yellow</span>
 <span class="hljs-code">    - Light Yellow</span>
 <span class="hljs-code">    - Green Yellow</span>
-</code></pre><h3 id="blockquotes" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="blockquotes" href="#blockquotes" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Blockquotes</h3><blockquote style="margin: 1em 20px;border-left-width: 4px; border-left-style: solid; border-left-color: rgb(230, 230, 230); padding: 0px 15px; color: rgb(119, 119, 119);">
-<p style="margin: 1em 0px; word-wrap: break-word;margin-top: 0px;margin-bottom: 0px;">This is the <strong>Blockquotes</strong></p>
-</blockquote><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;&amp;gt; This is the **Blockquotes**
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-blockquote">&gt; This is the **Blockquotes**</span>
-</code></pre><h3 id="horizontal-rules" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="horizontal-rules" href="#horizontal-rules" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Horizontal Rules</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Three or more hyphens(-), asterisks(*), or underscores(_)</p><p style="margin: 1em 0px; word-wrap: break-word;">Page break</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;* * *
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-bullet">* </span><span class="hljs-bullet">* *</span>
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Section break</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;- - -
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-bullet">- </span>- -
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Margin break (add margin bottom)</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;_ _ _
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-emphasis">_ _</span> _
-</code></pre><h2 id="github-flavored-markdown" style="clear: both;font-size: 1.8em; font-weight: bold; margin: 1.275em 0px 0.85em;border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(230, 230, 230); line-height: 1.7em;"><a name="github-flavored-markdown" href="#github-flavored-markdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Github Flavored Markdown</h2><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Strikethrough - <sub>~strikethrough~</sub></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;~~strikethrough~~
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">~~strikethrough~~
-</code></pre><h3 id="line-breaks" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="line-breaks" href="#line-breaks" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Line Breaks</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">End a line with tow or more spaces</p><p style="margin: 1em 0px; word-wrap: break-word;">Roses are red,<br style="clear: both;">Violets are blue.</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;Roses are red,  
+</pre><h3 id="blockquotes"><a name="blockquotes" href="#blockquotes"></a>Blockquotes</h3><blockquote>
+<p>This is the <strong>Blockquotes</strong></p>
+</blockquote><pre class="markdown hljs"><span class="hljs-blockquote">&gt; This is the **Blockquotes**</span>
+</pre><h3 id="horizontal-rules"><a name="horizontal-rules" href="#horizontal-rules"></a>Horizontal Rules</h3><p>Three or more hyphens(-), asterisks(*), or underscores(_)</p><p>Page break</p><pre class="markdown hljs"><span class="hljs-bullet">* </span><span class="hljs-bullet">* *</span>
+</pre><p>Section break</p><pre class="markdown hljs"><span class="hljs-bullet">- </span>- -
+</pre><p>Margin break (add margin bottom)</p><pre class="markdown hljs"><span class="hljs-emphasis">_ _</span> _
+</pre><h2 id="github-flavored-markdown"><a name="github-flavored-markdown" href="#github-flavored-markdown"></a>Github Flavored Markdown</h2><p>Strikethrough - <del>strikethrough</del></p><pre class="markdown hljs">~~strikethrough~~
+</pre><h3 id="line-breaks"><a name="line-breaks" href="#line-breaks"></a>Line Breaks</h3><p>End a line with tow or more spaces</p><p>Roses are red,<br>Violets are blue.</p><pre class="markdown hljs">Roses are red,  
 Violets are blue.
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">Roses are red,  
-Violets are blue.
-</code></pre><h3 id="fenced-code-block" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="fenced-code-block" href="#fenced-code-block" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Fenced Code Block</h3><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;```
-var your = 'code here';
-```
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-code">```</span>
+</pre><h3 id="fenced-code-block"><a name="fenced-code-block" href="#fenced-code-block"></a>Fenced Code Block</h3><pre class="markdown hljs"><span class="hljs-code">```</span>
 var your = 'code here';
 <span class="hljs-code">```</span>
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Syntax Highlight</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;```[language name]
-var your = 'code here';
-```
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-code">```</span>[language name]
+</pre><p>Syntax Highlight</p><pre class="markdown hljs"><span class="hljs-code">```</span>[language name]
 var your = 'code here';
 <span class="hljs-code">```</span>
-</code></pre><ul>
-<li style="display: list-item; line-height: 1.4em;">Language names - <a href="http://highlightjs.org/static/test.html" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">http://highlightjs.org/static/test.html</a></li>
-</ul><p style="margin: 1em 0px; word-wrap: break-word;">Javascript</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="javascript hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;function syntaxHighlight(a, b) {
-    return a + b;
+</pre><ul>
+<li>Language names - <a href="http://highlightjs.org/static/test.html">http://highlightjs.org/static/test.html</a></li></ul><p>Javascript</p><pre class="javascript hljs"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">syntaxHighlight</span><span class="hljs-params">(a, b)</span> </span>{
+    <span class="hljs-keyword">return</span> a + b;
 }
-&lt;/code&gt;&lt;/pre&gt;" style="display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-function"><span class="hljs-keyword" style="color: rgb(133, 153, 0);">function</span> <span class="hljs-title" style="color: rgb(38, 139, 210);">syntaxHighlight</span><span class="hljs-params">(a, b)</span> </span>{
-    <span class="hljs-keyword" style="color: rgb(133, 153, 0);">return</span> a + b;
-}
-</code></pre><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="cpp hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;#include &amp;lt;iostream&amp;gt;
+</pre><pre class="cpp hljs"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> &lt;iostream&gt;</span>
 
-int main(char *argv[]) {
-    return -2e3 + 121;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *argv[])</span> </span>{
+    <span class="hljs-keyword">return</span> -<span class="hljs-number">2e3</span> + <span class="hljs-number">121</span>;
 }
-&lt;/code&gt;&lt;/pre&gt;" style="display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-preprocessor" style="color: rgb(203, 75, 22);">#<span class="hljs-keyword" style="color: rgb(133, 153, 0);color: rgb(203, 75, 22);">include</span> &lt;iostream&gt;</span>
-
-<span class="hljs-keyword" style="color: rgb(133, 153, 0);">int</span> main(<span class="hljs-keyword" style="color: rgb(133, 153, 0);">char</span> *argv[]) {
-    <span class="hljs-keyword" style="color: rgb(133, 153, 0);">return</span> -<span class="hljs-number" style="color: rgb(42, 161, 152);">2e3</span> + <span class="hljs-number" style="color: rgb(42, 161, 152);">121</span>;
-}
-</code></pre><h3 id="table-gfm-" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="table-gfm-" href="#table-gfm-" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Table (GFM)</h3><table style="padding: 0px; border-collapse: collapse; border-spacing: 0px;background-color: rgb(250, 250, 250);">
+</pre><h3 id="table-(gfm)"><a name="table-(gfm)" href="#table-(gfm)"></a>Table (GFM)</h3><table>
 <thead>
 <tr>
-<th style="border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;font-weight: bold;border: 1px solid rgb(230, 230, 230);">name</th>
-<th style="text-align:center; border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;font-weight: bold;border: 1px solid rgb(230, 230, 230);">age</th>
-<th style="border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;font-weight: bold;border: 1px solid rgb(230, 230, 230);">gender</th>
-<th style="text-align:right; border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;font-weight: bold;border: 1px solid rgb(230, 230, 230);">money</th>
+<th>name</th>
+<th style="text-align:center">age</th>
+<th>gender</th>
+<th style="text-align:right">money</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">rhio</td>
-<td style="text-align:center; border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">384</td>
-<td style="border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">robot</td>
-<td style="text-align:right; border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">$3,000</td>
-</tr>
-<tr style="background-color: rgb(242, 242, 242);">
-<td style="border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">haroo</td>
-<td style="text-align:center; border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">.3</td>
-<td style="border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">bird</td>
-<td style="text-align:right; border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">$430</td>
+<td>rhio</td>
+<td style="text-align:center">384</td>
+<td>robot</td>
+<td style="text-align:right">$3,000</td>
 </tr>
 <tr>
-<td style="border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">jedi</td>
-<td style="text-align:center; border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">?</td>
-<td style="border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">undefined</td>
-<td style="text-align:right; border: 1px solid rgb(204, 204, 204); margin: 0px; padding: 6px 13px;border: 1px solid rgb(230, 230, 230);">$0</td>
+<td>haroo</td>
+<td style="text-align:center">.3</td>
+<td>bird</td>
+<td style="text-align:right">$430</td>
+</tr>
+<tr>
+<td>jedi</td>
+<td style="text-align:center">?</td>
+<td>undefined</td>
+<td style="text-align:right">$0</td>
 </tr>
 </tbody>
-</table><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;| name  | age | gender    | money  |
+</table><pre class="markdown hljs">| name  | age | gender    | money  |
 |-------|:---:|-----------|-------:|
 | rhio  | 384 | robot     | $3,000 |
 | haroo | .3  | bird      | $430   |
 | jedi  | ?   | undefined | $0     |
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">| name  | age | gender    | money  |
-|-------|:---:|-----------|-------:|
-| rhio  | 384 | robot     | $3,000 |
-| haroo | .3  | bird      | $430   |
-| jedi  | ?   | undefined | $0     |
-</code></pre><h2 id="multimarkdown" style="clear: both;font-size: 1.8em; font-weight: bold; margin: 1.275em 0px 0.85em;border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(230, 230, 230); line-height: 1.7em;"><a name="multimarkdown" href="#multimarkdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Multimarkdown</h2><ul>
-<li style="display: list-item; line-height: 1.4em;"><a href="http://fletcherpenney.net/multimarkdown/" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">What is MultiMarkdown?</a></li>
-</ul><p style="margin: 1em 0px; word-wrap: break-word;">Superscript - <sup>superscript</sup></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;^superscript^
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">^superscript^
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Subscript - <sub>subscript</sub></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;~subscript~
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">~subscript~
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Underline - <em class="underline" style="font-style: normal; text-decoration: underline;">underline</em></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;++underline++
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">++underline++
-</code></pre><h2 id="haroopad-flavored-markdown" style="clear: both;font-size: 1.8em; font-weight: bold; margin: 1.275em 0px 0.85em;border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(230, 230, 230); line-height: 1.7em;"><a name="haroopad-flavored-markdown" href="#haroopad-flavored-markdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Haroopad Flavored Markdown</h2><h3 id="pharse-emphasis" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="pharse-emphasis" href="#pharse-emphasis" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Pharse Emphasis</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Highlight - <strong class="highlight" style="color: black; padding: 0px 5px; background-color: rgb(253, 255, 182); -webkit-box-shadow: rgb(253, 255, 182) 0px 0px 5px; box-shadow: rgb(253, 255, 182) 0px 0px 5px;">highlight</strong></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;==highlight==
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">==highlight==
-</code></pre><h3 id="horizontal-rules" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="horizontal-rules" href="#horizontal-rules" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Horizontal Rules</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Sentence break (add margin bottom)</p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;_ _ _
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;"><span class="hljs-emphasis">_ _</span> _
-</code></pre><h3 id="table-of-content" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="table-of-content" href="#table-of-content" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Table of Content</h3><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;[TOC] or [toc]
-
-[TOC &quot;float:left&quot;]
-[TOC &quot;float:right&quot;]
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">[TOC] or [toc]
+</pre><h2 id="multimarkdown"><a name="multimarkdown" href="#multimarkdown"></a>Multimarkdown</h2><ul>
+<li><a href="http://fletcherpenney.net/multimarkdown/">What is MultiMarkdown?</a></li></ul><p>Superscript - <sup>superscript</sup></p><pre class="markdown hljs">^superscript^
+</pre><p>Subscript - <sub>subscript</sub></p><pre class="markdown hljs">~subscript~
+</pre><p>Underline - <em class="underline">underline</em></p><pre class="markdown hljs">++underline++
+</pre><h2 id="haroopad-flavored-markdown"><a name="haroopad-flavored-markdown" href="#haroopad-flavored-markdown"></a>Haroopad Flavored Markdown</h2><h3 id="pharse-emphasis"><a name="pharse-emphasis" href="#pharse-emphasis"></a>Pharse Emphasis</h3><p>Highlight - <strong class="highlight">highlight</strong></p><pre class="markdown hljs">==highlight==
+</pre><h3 id="horizontal-rules"><a name="horizontal-rules" href="#horizontal-rules"></a>Horizontal Rules</h3><p>Sentence break (add margin bottom)</p><pre class="markdown hljs"><span class="hljs-emphasis">_ _</span> _
+</pre><h3 id="table-of-content"><a name="table-of-content" href="#table-of-content"></a>Table of Content</h3><pre class="markdown hljs">[TOC] or [toc]
 
 [TOC "float:left"]
 [TOC "float:right"]
-</code></pre><h3 id="math-expression" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="math-expression" href="#math-expression" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Math Expression</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">Inline Math expression</p><p style="margin: 1em 0px; word-wrap: break-word;"><span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-1-Frame" role="textbox" aria-readonly="true" style=""><nobr><span class="math" id="MathJax-Span-1" style="width: 1.078em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.032em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(1.04em 1000em 2.256em -0.573em); top: -2.063em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="msubsup" id="MathJax-Span-3"><span style="display: inline-block; position: relative; width: 0.975em; height: 0px;"><span style="position: absolute; clip: rect(1.804em 1000em 2.62em -0.573em); top: -2.427em; left: 0em;"><span class="mi" id="MathJax-Span-4" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 2.427em;"></span></span><span style="position: absolute; top: -2.487em; left: 0.536em;"><span class="mn" id="MathJax-Span-5" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 2.124em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.063em;"></span></span></span><span style="border-left-width: 0em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.002em; vertical-align: -0.074em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-1">x^2</script></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;$x^2$ or $$$x^2$$$
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">$x^2$ or $$$x^2$$$
-</code></pre><p style="margin: 1em 0px; word-wrap: break-word;">Block Math expression</p><p style="margin: 1em 0px; word-wrap: break-word;"><span class="MathJax_Preview"></span></p><div role="textbox" aria-readonly="true" style="text-align: center;"><span class="MathJax" id="MathJax-Element-2-Frame" style=""><nobr><span class="math" id="MathJax-Span-6" style="width: 1.078em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.032em; height: 0px; font-size: 103%;"><span style="position: absolute; clip: rect(0.99em 1000em 2.256em -0.573em); top: -2.063em; left: 0em;"><span class="mrow" id="MathJax-Span-7"><span class="msubsup" id="MathJax-Span-8"><span style="display: inline-block; position: relative; width: 0.975em; height: 0px;"><span style="position: absolute; clip: rect(1.804em 1000em 2.62em -0.573em); top: -2.427em; left: 0em;"><span class="mi" id="MathJax-Span-9" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 2.427em;"></span></span><span style="position: absolute; top: -2.537em; left: 0.536em;"><span class="mn" id="MathJax-Span-10" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 2.124em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.063em;"></span></span></span><span style="border-left-width: 0em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.054em; vertical-align: -0.074em;"></span></span></nobr></span></div><script type="math/tex; mode=display" id="MathJax-Element-2">
-x^2</script><p style="margin: 1em 0px; word-wrap: break-word;"></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;$$
+</pre><h3 id="math-expression"><a name="math-expression" href="#math-expression"></a>Math Expression</h3><p>Inline Math expression</p><p><span class="MathJax_Preview"></span><span class="MathJax" id="MathJax-Element-1-Frame" role="textbox" aria-readonly="true"><nobr><span class="math" id="MathJax-Span-1" style="width: 1.283em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.038em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.29em 1000em 2.47em -0.519em); top: -2.295em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="msubsup" id="MathJax-Span-3"><span style="display: inline-block; position: relative; width: 1em; height: 0px;"><span style="position: absolute; clip: rect(1.854em 1000em 2.634em -0.519em); top: -2.459em; left: 0em;"><span class="mi" id="MathJax-Span-4" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 2.459em;"></span></span><span style="position: absolute; top: -2.713em; left: 0.543em;"><span class="mn" id="MathJax-Span-5" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 2.35em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.295em;"></span></span></span><span style="border-left-width: 0em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.173em; vertical-align: -0.08em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-1">x^2</script></p><pre class="markdown hljs">$x^2$ or $$x^2$$
+</pre><p>Block Math expression</p><p><span class="MathJax_Preview"></span></p><div class="MathJax_Display" role="textbox" aria-readonly="true" style="text-align: center;"><span class="MathJax" id="MathJax-Element-2-Frame"><nobr><span class="math" id="MathJax-Span-6" style="width: 1.283em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.038em; height: 0px; font-size: 122%;"><span style="position: absolute; clip: rect(1.24em 1000em 2.47em -0.519em); top: -2.295em; left: 0em;"><span class="mrow" id="MathJax-Span-7"><span class="msubsup" id="MathJax-Span-8"><span style="display: inline-block; position: relative; width: 1em; height: 0px;"><span style="position: absolute; clip: rect(1.854em 1000em 2.634em -0.519em); top: -2.459em; left: 0em;"><span class="mi" id="MathJax-Span-9" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 2.459em;"></span></span><span style="position: absolute; top: -2.763em; left: 0.543em;"><span class="mn" id="MathJax-Span-10" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 2.35em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.295em;"></span></span></span><span style="border-left-width: 0em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.234em; vertical-align: -0.08em;"></span></span></nobr></span></div><script type="math/tex; mode=display" id="MathJax-Element-2">
+x^2</script><p></p><pre class="markdown hljs">$
 x^2
-$$
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">$$
-x^2
-$$
-</code></pre><h3 id="media-embed" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="media-embed" href="#media-embed" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Media Embed</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;">This is Block syntax.</p><p style="margin: 1em 0px; word-wrap: break-word;"><iframe src="http://player.vimeo.com/video/70385914" width="1280" height="720" frameborder="0" title="Haroopad - The Next Document processor based on Markdown" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="width: 100%; height: 350px;border: 0px;"></iframe></p><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;@[Alt Text](Content-URL &quot;CSS&quot;)
+$
+</pre><h3 id="media-embed"><a name="media-embed" href="#media-embed"></a>Media Embed</h3><p>This is Block syntax.</p><p class="oembeded"><iframe src="http://player.vimeo.com/video/70385914" width="1280" height="720" frameborder="0" title="Haroopad - The Next Document processor based on Markdown" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" style="width: 100%; height: 350px;"></iframe></p><pre class="markdown hljs">@[<span class="hljs-link_label">Alt Text</span>](<span class="hljs-link_url">Content-URL "CSS"</span>)
 
-@[Haroopad](https://vimeo.com/70385914 &quot;width:100%;height:350px&quot;)
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">@[<span class="hljs-link_label" style="color: rgb(108, 113, 196);">Alt Text</span>](<span class="hljs-link_url" style="color: rgb(42, 161, 152);">Content-URL "CSS"</span>)
+@[<span class="hljs-link_label">Haroopad</span>](<span class="hljs-link_url">https://vimeo.com/70385914 "width:100%;height:350px"</span>)
+</pre><h3 id="diagram-(with-v0.13)"><a name="diagram-(with-v0.13)" href="#diagram-(with-v0.13)"></a>Diagram  <small>(with v0.13)</small></h3><p>You get more detail <a href="https://github.com/knsv/mermaid/wiki">mermaid syntax</a></p><p><strong>example</strong></p><pre class="markdown hljs"><span class="hljs-code">```</span>mermaid
+graph TD;
+  A--&gt;B;
+  A--&gt;D;
+  B--&gt;C;
+  D--&gt;C;
+<span class="hljs-code">```</span>
+</pre><p><strong>become</strong></p><pre><code class="mermaid" data-origin="<pre><code class=&quot;mermaid&quot;>graph TD;
+  A--&amp;gt;B;
+  A--&amp;gt;D;
+  B--&amp;gt;C;
+  D--&amp;gt;C;
+</code></pre>" data-processed="true"><svg id="mermaidChart0" width="146" xmlns="http://www.w3.org/2000/svg" height="251"><style type="text/css" title="mermaid-svg-internal-css">/*  */
+.node { fill:#eaeaea; stroke:#666; stroke-width:1.5px; }
+/*  */
+</style><g><g class="output"><g class="clusters"></g><g class="edgePaths"><g class="edgePath" style="opacity: 1;"><path class="path" d="M59,54.11538461538461L34,82L34,107" marker-end="url(#arrowhead14)" style="stroke: #333; stroke-width: 1.5px;fill:none"></path><defs><marker id="arrowhead14" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" style="fill: #333"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M87,54.11538461538461L112,82L112,107" marker-end="url(#arrowhead15)" style="stroke: #333; stroke-width: 1.5px;fill:none"></path><defs><marker id="arrowhead15" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" style="fill: #333"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M34,144L34,169L59,196.8846153846154" marker-end="url(#arrowhead16)" style="stroke: #333; stroke-width: 1.5px;fill:none"></path><defs><marker id="arrowhead16" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" style="fill: #333"></path></marker></defs></g><g class="edgePath" style="opacity: 1;"><path class="path" d="M112,144L112,169L87,196.8846153846154" marker-end="url(#arrowhead17)" style="stroke: #333; stroke-width: 1.5px;fill:none"></path><defs><marker id="arrowhead17" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" style="fill: #333"></path></marker></defs></g></g><g class="edgeLabels"><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><foreignObject width="0" height="0"><div style="display: inline-block; white-space: nowrap;"><span style="background:#e8e8e8"></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><foreignObject width="0" height="0"><div style="display: inline-block; white-space: nowrap;"><span style="background:#e8e8e8"></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><foreignObject width="0" height="0"><div style="display: inline-block; white-space: nowrap;"><span style="background:#e8e8e8"></span></div></foreignObject></g></g><g class="edgeLabel" transform="" style="opacity: 1;"><g transform="translate(0,0)" class="label"><foreignObject width="0" height="0"><div style="display: inline-block; white-space: nowrap;"><span style="background:#e8e8e8"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node" id="A" transform="translate(73,38.5)" style="opacity: 1;"><rect rx="0" ry="0" x="-14" y="-18.5" width="28" height="37"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-4,-8.5)"><foreignObject width="8" height="17"><div style="display: inline-block; white-space: nowrap;">A</div></foreignObject></g></g></g><g class="node" id="B" transform="translate(34,125.5)" style="opacity: 1;"><rect rx="0" ry="0" x="-14" y="-18.5" width="28" height="37"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-4,-8.5)"><foreignObject width="8" height="17"><div style="display: inline-block; white-space: nowrap;">B</div></foreignObject></g></g></g><g class="node" id="D" transform="translate(112,125.5)" style="opacity: 1;"><rect rx="0" ry="0" x="-14" y="-18.5" width="28" height="37"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-4,-8.5)"><foreignObject width="8" height="17"><div style="display: inline-block; white-space: nowrap;">D</div></foreignObject></g></g></g><g class="node" id="C" transform="translate(73,212.5)" style="opacity: 1;"><rect rx="0" ry="0" x="-14" y="-18.5" width="28" height="37"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-4,-8.5)"><foreignObject width="8" height="17"><div style="display: inline-block; white-space: nowrap;">C</div></foreignObject></g></g></g></g></g></g></svg></code></pre><h3 id="tasklist-(with-v0.13)"><a name="tasklist-(with-v0.13)" href="#tasklist-(with-v0.13)"></a>Tasklist <small>(with v0.13)</small></h3><p>This statement is useful when you create the TODO or Checklist.</p><p><strong>example</strong></p><pre class="markdown hljs"><span class="hljs-bullet">- </span>[ ] first task
+<span class="hljs-bullet">- </span>[x] second task is done
+<span class="hljs-bullet">- </span>[ ] third task
+</pre><ul>
+<li style="list-style: none"><input type="checkbox" class="task-list-item" data-task-index="0"> first task</li><li style="list-style: none"><input type="checkbox" class="task-list-item" checked="" data-task-index="1"> second task is done</li><li style="list-style: none"><input type="checkbox" class="task-list-item" data-task-index="2"> third task</li></ul><h3 id="presentation-(with-v0.13)"><a name="presentation-(with-v0.13)" href="#presentation-(with-v0.13)"></a>Presentation <small>(with v0.13)</small></h3><p>Just insert <code>***</code> or <code>---</code> separator to separate each slide.</p><p><strong>example</strong></p><pre class="markdown hljs"><span class="hljs-header">## slide1 title</span>
 
-@[<span class="hljs-link_label" style="color: rgb(108, 113, 196);">Haroopad</span>](<span class="hljs-link_url" style="color: rgb(42, 161, 152);">https://vimeo.com/70385914 "width:100%;height:350px"</span>)
-</code></pre><h2 id="php-extras-markdown" style="clear: both;font-size: 1.8em; font-weight: bold; margin: 1.275em 0px 0.85em;border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(230, 230, 230); line-height: 1.7em;"><a name="php-extras-markdown" href="#php-extras-markdown" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>PHP Extras Markdown</h2><h3 id="footnotes" style="clear: both;font-size: 1.6em; font-weight: bold; margin: 1.125em 0px 0.75em;"><a name="footnotes" href="#footnotes" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);"></a>Footnotes (with v0.12)</h3><p style="margin-top: 0px;margin: 1em 0px; word-wrap: break-word;"></p><p style="margin: 1em 0px; word-wrap: break-word;">This is footnote<sup class="footnote-ref" id="fnref-f1"><a href="#fn-f1" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">1</a></sup></p><p style="margin: 1em 0px; word-wrap: break-word;"></p><ol style="list-style-type: decimal;"><li id="fn-f1" style="display: list-item; line-height: 1.4em;">explanatory information <a href="#fnref-f1" style="text-decoration: none; vertical-align: baseline;color: rgb(50, 105, 160);">↩</a></li></ol><pre style="border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; overflow: auto;"><code class="markdown hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;This is footnote[^1]
+slide2 content
 
-[^1]: explanatory information
-&lt;/code&gt;&lt;/pre&gt;" style="padding: 20px;display: block;border: 1px solid rgb(204, 204, 204); white-space: pre; padding: 0.5em; margin: 0px;border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; word-break: break-all; word-wrap: break-word; border: 1px solid rgb(204, 204, 204); padding: 0px 5px; margin: 0px 2px;font-size: 1em; font-family: Consolas, Inconsolata, Courier, monospace; letter-spacing: -1px; font-weight: bold;display: block; padding: 0.5em; background-color: rgb(253, 246, 227); color: rgb(101, 123, 131); background-position: initial initial; background-repeat: initial initial;">This is footnote[^1]
+<span class="hljs-emphasis">***</span>
 
-[<span class="hljs-link_reference" style="color: rgb(181, 137, 0);">^1</span>]:<span class="hljs-link_url" style="color: rgb(42, 161, 152);"> explanatory information</span><span class="hljs-link_url" style="color: rgb(42, 161, 152);">
-</span></code></pre>
+<span class="hljs-header">## slide2 title</span>
 
+slide2 content
+</pre><h2 id="php-extras-markdown"><a name="php-extras-markdown" href="#php-extras-markdown"></a>PHP Extras Markdown</h2><h3 id="footnotes-(with-v0.12)"><a name="footnotes-(with-v0.12)" href="#footnotes-(with-v0.12)"></a>Footnotes <small>(with v0.12)</small></h3><p></p><p>This is footnote<sup class="footnote-ref" id="fnref-f1"><a href="#fn-f1">1</a></sup></p><p></p><ol class="footnotes"><li id="fn-f1">explanatory information <a href="#fnref-f1">↩</a></li></ol><pre class="markdown hljs">This is footnote[^1]
+
+[<span class="hljs-link_reference">^1</span>]:<span class="hljs-link_url"> explanatory information</span>
+</pre>
 </body>
 </html>

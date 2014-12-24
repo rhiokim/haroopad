@@ -259,8 +259,8 @@ define([
 	    	line = src[i];
 	      if (/^\s*(?:[*+-]|\d+\.)\s*\[[x ]\]\s*/.test(line)) {
 	        if (index == mc) {
-	          src[i] = isDone ? line.replace(/\[ \]/, '[x]') : line.replace(/\[x\]/, '[ ]');
-            nw.editor.replaceRange(line, { line:i, ch:0 }, { line:i, ch: line.length } );
+	          src[i] = isDone ? line.replace('[ ]', '[x]') : line.replace('[x]', '[ ]');
+            nw.editor.replaceRange(src[i], { line:i, ch:0 }, { line:i, ch: line.length } );
 	          break;
 	        }
 
@@ -268,6 +268,7 @@ define([
 	      }
 	    }
 
+    	nw.file.task(index, isDone);
 	    nw.file.set({ markdown: src.join('\n') }, { silent: true });
 	  });
 

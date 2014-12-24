@@ -351,6 +351,7 @@ define([
 				case 'hr-page': CodeMirror.commands.markdownPageBreak(editor); break;
 				case 'hr-section': CodeMirror.commands.markdownSectionBreak(editor); break;
 				case 'hr-sentence': CodeMirror.commands.markdownSentenceBreak(editor); break;
+				case 'task': CodeMirror.commands.markdownTask(editor); break;
 			}
 
 			global._gaq.push('haroopad.insert', 'markdown', tag);

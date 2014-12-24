@@ -232,6 +232,7 @@
     'insert_md_strike':          {key:'u', modifiers:'cmd'},//'defmod-U',
     'insert_md_highlight':       {key:'t', modifiers:'cmd'},//'defmod-T',
     'insert_md_fenced_code':     {key:'', modifiers:'cmd'},//'defmod-`',
+    'insert_md_task':            {key:'c', modifiers:'shift-ctrl'},//'Shift-Ctrl-T',
     'insert_md_image':           {key:'i', modifiers:'shift-ctrl'},//'Shift-Ctrl-I',
     'insert_md_footnotes':       {key:'f', modifiers:'shift-ctrl'},//'Shift_Ctrl-F',
     'insert_md_footnotes_ref':   {key:'r', modifiers:'shift-ctrl'},//'Shift-Ctrl-R',

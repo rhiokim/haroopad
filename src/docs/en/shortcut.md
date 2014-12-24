@@ -91,6 +91,7 @@ COMMAND (CTRL) - U          | \~~strike~~        | strike
 COMMAND (CTRL) - T          | \==highlight==     | highlight
 SHIFT - CTRL - I            | \!\[]()            | image
 SHIFT - CTRL - T            | [TOC]              | table of content
+SHIFT - CTRL - C            | - [ ] task         | task list
 SHIFT - CTRL - O            | 1. markdown        | ordered list
 SHIFT - CTRL - L            | * haroopad         | unordered list
 SHIFT - CTRL - J            | $math$             | inline math

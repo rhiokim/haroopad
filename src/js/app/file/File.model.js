@@ -154,6 +154,20 @@ define([
       }
 
       TmpOpt.remove(this._uid);
+    },
+
+    task: function(index, isDone) {
+      var body = this.doc.dom();
+      var ipts = body.querySelectorAll('input.task-list-item');
+
+      ipts = Array.prototype.slice.call(ipts, 0);
+      if (isDone) {
+        ipts[index].setAttribute('checked', 'checked');
+      } else {
+        ipts[index].removeAttribute('checked');
+      }
+
+      // window.doc.set({ html: body.innerHTML }, { silent: true });
     }
   });
 

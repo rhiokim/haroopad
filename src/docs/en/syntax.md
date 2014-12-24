@@ -308,22 +308,22 @@ An ++underline++, also called an underscore is one or more ++horizontal lines++ 
 ```markdown
 @[Vimeo Video](https://vimeo.com/70762354 'float:left;width:400px')
 
-**하루패드**는 웹 친화적인 문서를 작성하기 위한 마크다운 에디터입니다. 
+**Haroopad** is a markdown enabled document processor for creating web-friendly documents.
 
-여러분은 간단한 마크다운 문법을 이용해 웹 문서를 생성하거나 블로그, 이메일 그리고 복잡한 리포트 문서를 작성할 수 있습니다. 
+You can author professional-looking documents of various formats: blog posts, slides, presentations, reports, email and more.
 
-그리고 하루패드는 윈도우, 리눅스, 맥을 지원하여 여러분이 원하는 플랫폼에서 똑같은 문서 편집 경험을 얻을 수 있습니다.
+Haroopad gives you the same editing experience regardless of the platform you are working on. It runs on all three major operating systems—Windows, Mac OS X, and Linux.
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 ```
 
-@[하루패드 비메오 동영상](https://vimeo.com/70762354 'float:left;width:400px')
+@[Haroopad intro](https://vimeo.com/70762354 'float:left;width:500px;height:300px;margin-right:10px;')
 
-**하루패드**는 웹 친화적인 문서를 작성하기 위한 마크다운 에디터입니다. 
+**Haroopad** is a markdown enabled document processor for creating web-friendly documents.
 
-여러분은 간단한 마크다운 문법을 이용해 웹 문서를 생성하거나 블로그, 이메일 그리고 복잡한 리포트 문서를 작성할 수 있습니다. 
+You can author professional-looking documents of various formats: blog posts, slides, presentations, reports, email and more.
 
-그리고 하루패드는 윈도우, 리눅스, 맥을 지원하여 여러분이 원하는 플랫폼에서 똑같은 문서 편집 경험을 얻을 수 있습니다.
+Haroopad gives you the same editing experience regardless of the platform you are working on. It runs on all three major operating systems—Windows, Mac OS X, and Linux.
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
@@ -350,8 +350,15 @@ n\in\mathbb N$ is via through the Euler integral
 
 $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$
 
 ##### Diagram
+
+This statement helps to render the flow charts and diagrams to extend the fence code block.
+
+Just write the `mermaid` grammar in the fenced code block, as in the example below.
+
+You get the detail - [Click Here](https://github.com/knsv/mermaid/wiki)
 
 **example**
 
@@ -359,6 +366,7 @@ $$
 ```mermaid
 graph TD;
   A-->B;
+  A-->D;
   B-->C;
   D-->C;
 ```
@@ -369,11 +377,15 @@ graph TD;
 ```mermaid
 graph TD;
   A-->B;
+  A-->D;
   B-->C;
   D-->C;
 ```
 
 ##### Tasklist
+
+So that it can be represented as a checkbox item GFM statement.
+This statement is useful when you create the TODO or Checklist.
 
 **example**
 
@@ -383,7 +395,13 @@ graph TD;
 - [ ] third task
 ```
 
+- [ ] first task
+- [x] second task is done
+- [ ] third task
+
 ##### Presentation
+
+Just insert `***` or `---` separator to separate each slide.
 
 **example**
 

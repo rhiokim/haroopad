@@ -112,6 +112,19 @@ define([], function() {
       cm.replaceSelection('\n[TOC]\n\n');
     }
 
+    var convertTask = function() {
+      var startPoint = cm.getCursor('start');
+      var line = startPoint.line;
+      var text, src = cm.getLine(line);
+
+      if (/^\s*(?:[*+-]|\d+\.)\s*\[[x ]\]\s*/.test(src)) {
+        text = src.substr(5, src.length).trim();
+        cm.replaceRange(text, { line:line, ch:0 }, { line:line, ch: src.length } );
+      } else {
+        cm.replaceRange('- [ ] '+ src, { line:line, ch:0 }, { line:line, ch: src.length } );
+      }
+    }
+
     var headerMap = {
       '1': '#',
       '2': '##',
@@ -192,6 +205,9 @@ define([], function() {
         break;
       case 'code':
         replaceSelection('`');
+        break;
+      case 'task':
+        convertTask();
         break;
       case 'toc':
         addTOC();
@@ -353,6 +369,9 @@ define([], function() {
   };
   CodeMirror.commands.markdownFootnotesRef = function(cm) {
     action('footnotes-ref', cm);
+  };
+  CodeMirror.commands.markdownTask = function(cm) {
+    action('task', cm);
   };
   CodeMirror.commands.markdownUndo = function(cm) {
     cm.undo();

@@ -340,7 +340,7 @@ An ++underline++, also called an underscore is one or more ++horizontal lines++ 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 ```
 
-@[하루패드 비메오 동영상](https://vimeo.com/70762354 'float:left;width:300px;height:300px;margin-right:10px')
+@[하루패드 비메오 동영상](https://vimeo.com/70762354 'float:left;width:500px;height:300px;margin-right:10px')
 
 **하루패드**는 웹 친화적인 문서를 작성하기 위한 마크다운 에디터입니다. 
 
@@ -348,7 +348,6 @@ An ++underline++, also called an underscore is one or more ++horizontal lines++ 
 
 그리고 하루패드는 윈도우, 리눅스, 맥을 지원하여 여러분이 원하는 플랫폼에서 똑같은 문서 편집 경험을 얻을 수 있습니다.
 
-![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
 ##### 수학 표기법(Mathematics Expression)
 
@@ -371,14 +370,23 @@ An ++underline++, also called an underscore is one or more ++horizontal lines++ 
 **사용예시**
 
 ```
-다음은 블럭 방식의 표현법입니다.
-
 $$
 \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
 $$
 ```
 
+**결과**
+
+$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$
+
 ##### 다이어그램 (Diagram)
+
+이 구문은 펜스 코드 블럭의 확장으로 플로우 차트와 다이어그램을 렌더링할 수 있도록 지원합니다.
+아래의 예시와 같이 펜스 코드블럭내에 `mermaid` 문법을 입력하면 됩니다.
+
+`mermaid` 가 지원하는 문법을 자세히 보시려면 [여기](https://github.com/knsv/mermaid/wiki)를 클릭하세요.
 
 **example**
 
@@ -402,6 +410,9 @@ graph TD;
 
 ##### 타스크 리스트 (Tasklist)
 
+GFM 구문중에 하나로 체크 박스 항목을 표현할 수 있도록 하였다.
+이 구문은 할일 혹은 체크리스트를 작성할 때 유용하다.
+
 **example**
 
 ```markdown
@@ -410,7 +421,13 @@ graph TD;
 - [ ] third task
 ```
 
+- [ ] first task
+- [x] second task is done
+- [ ] third task
+
 ##### 프리젠테이션 (Presentation)
+
+프리젠테이션을 위한 구문은 특별히 존재하는 것은 아니고 슬라이드와 슬라이드를 구분하기 위해 `***`, `---` 를 사용해 구분자를 넣어주면 된다.
 
 **example**
 

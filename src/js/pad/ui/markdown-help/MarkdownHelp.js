@@ -72,7 +72,7 @@ define([
 
 				popWin = gui.Window.open('app://root/html/markdown-help.html', {
 					title: 'Markdown Syntax Help',
-					width: 420,
+					width: 460,
 					height: nw.height,
 					toolbar: false,
 					min_width: 420,

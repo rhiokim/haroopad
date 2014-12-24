@@ -91,7 +91,8 @@ COMMAND (CTRL) - U           | \~\~strike~~       | 취소선
 COMMAND (CTRL) - T           | \==highlight=      | 하이라이팅
 SHIFT - CTRL - I             | \!\[]()            | 이미지
 SHIFT - CTRL - T             | [TOC]              | 목차
-SHIFT - CTRL - O             | 1. markdown        | 정렬목록
+SHIFT - CTRL - C             | - [ ] task         | 타스크 목록
+SHIFT - CTRL - O             | 1. markdown        | 정렬 목록
 SHIFT - CTRL - L             | * haroopad         | 비정렬 목록
 SHIFT - CTRL - J             | $math$             | 수학 인라인 표현
 SHIFT - CTRL - M             | $$math$$           | 수학 블럭 표현

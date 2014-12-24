@@ -273,6 +273,18 @@ MenuBarInsert = function() {
       modifiers: shortcut.modifiers
     })
   );
+  shortcut = __kbd('insert_md_task');
+  Insert.append(
+    new gui.MenuItem({
+      label: i18n.t('insert.task'),
+      tooltip: '- [ ] text',
+      click: function() {
+        window.parent.ee.emit('menu.insert.markdown', 'task');
+      },
+      key: shortcut.key,
+      modifiers: shortcut.modifiers
+    })
+  );
   // Insert.append(
   //    new gui.MenuItem({
   //      label: 'Table Row',
