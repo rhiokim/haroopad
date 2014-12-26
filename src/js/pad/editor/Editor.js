@@ -408,5 +408,12 @@ define([
 			CodeMirrorGutters.style.height = '5000px';
 		});
 
+		keymage('alt-up', function() {
+			window.ee.emit('menu.view.editor.font.size', 1);
+		});
+		keymage('alt-down', function() {
+			window.ee.emit('menu.view.editor.font.size', -1);
+		});
+
 		return editor;
 	});

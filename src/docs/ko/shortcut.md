@@ -8,20 +8,21 @@ SHIFT       | Shift
 CTRL        | Control, Ctl, Ctrl
 
 ##### 파일
-단축키                            | 설명
---------------------------------|-------------------
-COMMAND (CTRL) - N              | 새로운 에디터 윈도우 생성
-COMMAND (CTRL) - S              | 파일 저장
-COMMAND (CTRL) - SHIFT - S      | 새로운 이름으로 저장
-COMMAND (CTRL) - O              | 파일 불러오기
-COMMAND (CTRL) - SHIFT - E      | 메일 보내기
-COMMAND (CTRL) - SHIFT - X      | HTML 출력
-COMMAND (CTRL) - SHIFT - C      | HTML 클립보드 복사
-COMMAND (CTRL) - ,              | 환경설정
-COMMAND (CTRL) - W              | 윈도우 닫기
-COMMAND (CTRL) - F4             | 윈도우 닫기
-COMMAND (CTRL) - P              | 인쇄
-COMMAND (CTRL) - Q              | 하루패드 종료
+단축키                             | 설명
+---------------------------------|-------------------
+COMMAND (CTRL) - N               | 새로운 에디터 윈도우 생성
+COMMAND (CTRL) - S               | 파일 저장
+COMMAND (CTRL) - SHIFT - S       | 새로운 이름으로 저장
+COMMAND (CTRL) - O               | 파일 불러오기
+COMMAND (CTRL) - SHIFT - E       | 메일 보내기
+COMMAND (CTRL) - SHIFT - X       | HTML 출력
+COMMAND (CTRL) - SHIFT - C       | HTML 클립보드 복사
+COMMAND (CTRL) - SHIFT - ALT - C | 스타일 HTML 클립보드 복사
+COMMAND (CTRL) - ,               | 환경설정
+COMMAND (CTRL) - W               | 윈도우 닫기
+COMMAND (CTRL) - F4              | 윈도우 닫기
+COMMAND (CTRL) - P               | 인쇄
+COMMAND (CTRL) - Q               | 하루패드 종료
 
 ##### 뷰
 단축키                        | 설명
@@ -34,8 +35,8 @@ SHIFT - CTRL - ALT - ]      | 에디터 모드
 SHIFT - CTRL - ALT - [      | 에디터 + 뷰어 모드
 SHIFT - CTRL - ]            | 에디터 가로 사이즈 +5%
 SHIFT - CTRL - [            | 에디터 가로 사이즈 -5%
-COMMAND (CTRL) - SHIFT - G  | 에디터 라인넘버 토글
-COMMAND (CTRL) - SHIFT - H  | 마크다운 구문 헬퍼
+SHIFT - CTRL - G            | 에디터 라인넘버 토글
+SHIFT - CTRL - H            | 마크다운 구문 헬퍼
 COMMAND (CTRL) - Enter      | 전체화면 모드 토글 #1
 COMMAND (CTRL) - F11        | 전체화면 모드 토글 #2
 Double ESC                  | 전체화면 종료

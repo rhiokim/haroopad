@@ -8,20 +8,21 @@ SHIFT        | Shift
 CTRL         | Control, Ctl, Ctrl
 
 ##### File
-Shortcut                     | Description
------------------------------|-------------------
-COMMAND (CTRL) - N           | new window
-COMMAND (CTRL) - S           | save
-COMMAND (CTRL) - SHIFT - S   | save as
-COMMAND (CTRL) - O           | open file
-COMMAND (CTRL) - SHIFT - E   | sending email
-COMMAND (CTRL) - SHIFT - X   | export html
-COMMAND (CTRL) - SHIFT - C   | copy html to clipboard
-COMMAND (CTRL) - ,           | preferences
-COMMAND (CTRL) - W           | close window
-COMMAND (CTRL) - F4          | close
-COMMAND (CTRL) - P           | print
-COMMAND (CTRL) - Q           | quit haroopad
+Shortcut                         | Description
+---------------------------------|-------------------
+COMMAND (CTRL) - N               | new window
+COMMAND (CTRL) - S               | save
+COMMAND (CTRL) - SHIFT - S       | save as
+COMMAND (CTRL) - O               | open file
+COMMAND (CTRL) - SHIFT - E       | sending email
+COMMAND (CTRL) - SHIFT - X       | export html
+COMMAND (CTRL) - SHIFT - C       | copy html to clipboard
+COMMAND (CTRL) - SHIFT - ALT - C | copy style html to clipboard
+COMMAND (CTRL) - ,               | preferences
+COMMAND (CTRL) - W               | close window
+COMMAND (CTRL) - F4              | close
+COMMAND (CTRL) - P               | print
+COMMAND (CTRL) - Q               | quit haroopad
 
 ##### View
 Shortcut                    | Description
@@ -34,8 +35,8 @@ SHIFT - CTRL - ALT - ]      | editor mode
 SHIFT - CTRL - ALT - [      | dual mode
 SHIFT - CTRL - ]            | editor width +5%
 SHIFT - CTRL - [            | editor width -5%
-COMMAND (CTRL) - SHIFT - G  | toggle line number
-COMMAND (CTRL) - SHIFT - H  | toggle markdown helper
+SHIFT - CTRL - G            | toggle line number
+- SHIFT CTRL - H            | toggle markdown helper
 COMMAND (CTRL) - Enter      | toggle fullscreen #1
 COMMAND (CTRL) - F11        | toggle fullscreen #2
 Double ESC                  | escape fullscreen

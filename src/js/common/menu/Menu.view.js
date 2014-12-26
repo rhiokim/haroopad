@@ -91,7 +91,7 @@ window.MenuBarView = function() {
 			type: 'separator'
 		})
 	);
-	shortcut = __kbd('perspective_move_left');
+	shortcut = __kbd('perspective_plus_view');
 	View.append(
 		new gui.MenuItem({
 			label: i18n.t('view.live-view-width-plus-5'),
@@ -102,7 +102,7 @@ window.MenuBarView = function() {
 			modifiers: shortcut.modifiers
 		})
 	);
-	shortcut = __kbd('perspective_move_right');
+	shortcut = __kbd('perspective_minus_view');
 	View.append(
 		new gui.MenuItem({
 			label: i18n.t('view.live-view-width-minus-5'),

@@ -34,10 +34,10 @@ define([
 		}
 
 		renderer.listitem = function(text) {
-			if (/^(\s|<p>)*\[[xv ]\]\s*/.test(text)) {
+			if (/^(\s|<p>)*\[[x ]\]\s*/.test(text)) {
 				text = text
 					.replace(/^(\s|<p>)*\[ \]\s*/, '$1<input type="checkbox" class="task-list-item" /> ')
-					.replace(/^(\s|<p>)*\[[x|v]\]\s*/, '$1<input type="checkbox" class="task-list-item" checked /> ');
+					.replace(/^(\s|<p>)*\[[x]\]\s*/, '$1<input type="checkbox" class="task-list-item" checked /> ');
 				return '<li style="list-style: none">' + text + '</li>';
 			} else {
 				return '<li>' + text + '</li>';

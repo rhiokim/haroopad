@@ -201,25 +201,20 @@ define([
 			changeFontSize(viewerConfig.fontSize);
 		});
 
-		// keymage(__kbd('print'), function() {
-		// 	window.ee.emit('print.viewer');
-		// });
 
-		// keymage(__kbd('copy-to-clipboard'), function() {
-		// 	window.ee.emit('menu.file.exports.clipboard.plain');
-		// });
+		/* DEPRECATED */
+		keymage('defmod-shift-alt-c', function() {
+			window.ee.emit('menu.file.exports.clipboard.haroopad');
+		});
 
-		// keymage('defmod-shift-alt-c', function() {
-		// 	window.ee.emit('menu.file.exports.clipboard.haroopad');
-		// });
+		keymage('shift-alt-up', function() {
+			window.ee.emit('menu.view.viewer.font.size', 1);
+		});
 
-		// keymage(__kbd('viewer-font-size-up'), function() {
-		// 	window.ee.emit('menu.view.viewer.font.size', 1);
-		// });
-
-		// keymage(__kbd('viewer-font-size-down'), function() {
-		// 	window.ee.emit('menu.view.viewer.font.size', -1);
-		// });
+		keymage('shift-alt-down', function() {
+			window.ee.emit('menu.view.viewer.font.size', -1);
+		});
+		/* DEPRECATED */
 
 		/* change markdown event handler */
 		nw.file.doc.on('update', function(doc, html) {
@@ -257,7 +252,7 @@ define([
 
 	    for (i = 0; i < src.length; i++) {
 	    	line = src[i];
-	      if (/^\s*(?:[*+-]|\d+\.)\s*\[[x ]\]\s*/.test(line)) {
+	      if (/^( *[> ]*)\s*(?:[*+-]|\d+\.)\s+\[[x ]\]\s*/.test(line)) {
 	        if (index == mc) {
 	          src[i] = isDone ? line.replace('[ ]', '[x]') : line.replace('[x]', '[ ]');
             nw.editor.replaceRange(src[i], { line:i, ch:0 }, { line:i, ch: line.length } );

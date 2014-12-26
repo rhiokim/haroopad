@@ -11,39 +11,10 @@ define([
 		var _offset = 50,
 			_layout = 'layout0';
 
-		var cls, _cls;
-		
 		var View = Backbone.View.extend({
 			el: '#main',
 
 			events: {},
-
-			initialize: function() {},
-
-			set: function(mode) {
-				switch(mode) {
-					case 1:
-						cls = 'layout1';
-					break;
-					case 2:
-						cls = 'layout2';
-					break;
-					case 3:
-						cls = 'layout3';
-					break;
-					default:
-						cls = 'layout0';
-					break;
-				}
-
-				this.$el.removeClass(_cls);
-				this.$el.addClass(cls);
-
-				_cls = cls;
-
-				nw.editor.refresh();
-	    		global._gaq.push('haroopad.view', 'mode', layout);
-			},
 
 			moveRight: function() {
 				if (_offset > 70) {
@@ -83,6 +54,7 @@ define([
 		});
 
 		var view = new View;
+		setLayout(store.get('__layout_mode') || _layout);
 
 		function setLayout(layout) {
 			if (layout == _layout) {
@@ -109,12 +81,13 @@ define([
 			$pad.removeClass(_layout);
 			$pad.addClass(layout);
 
-
-			
 			_layout = layout;
 
-			nw.editor.refresh();
-    		global._gaq.push('haroopad.view', 'mode', layout);
+			store.set('__layout_mode', layout);
+
+			nw.editor && nw.editor.refresh();
+
+  		global._gaq.push('haroopad.view', 'mode', layout);
 		}
 
 		function right5() {
@@ -186,27 +159,20 @@ define([
 		// 	setLayout('viewer');
 		// });
 
-		// keymage(__kbd('perspective-move-right'), function() {
-		// 	if (_layout == 'layout0') {
-		// 		setLayout('editor');	
-		// 	} else if (_layout == 'layout3') {
-		// 		window.ee.emit('view.reset.mode');
-		// 	}
-		// });
-		// keymage(__kbd('perspective-move-left'), function() {
-		// 	if (_layout == 'layout2') {
-		// 		window.ee.emit('view.reset.mode');
-		// 	} else if (_layout == 'layout0') {
-		// 		setLayout('viewer');
-		// 	}
-		// });
-
-		// keymage(__kbd('perspective-minus-view'), function() {
-		// 	window.ee.emit('view.minus5.width');
-		// });
-		// keymage(__kbd('perspective-plus-view'), function() {
-		// 	window.ee.emit('view.plus5.width');
-		// });
+		keymage('shift-ctrl-alt-]', function() {
+			if (_layout == 'layout0') {
+				setLayout('editor');	
+			} else if (_layout == 'layout3') {
+				window.ee.emit('view.reset.mode');
+			}
+		});
+		keymage('shift-ctrl-alt-[', function() {
+			if (_layout == 'layout2') {
+				window.ee.emit('view.reset.mode');
+			} else if (_layout == 'layout0') {
+				setLayout('viewer');
+			}
+		});
 
 		window.ee.on('view.reset.mode', function() {
 			setLayout('default');

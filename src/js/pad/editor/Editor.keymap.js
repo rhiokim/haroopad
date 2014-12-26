@@ -55,9 +55,12 @@ define([
 		keyMaps[__reKey(__kbd('insert_md_math_block'))] = 'markdownMathBlock';
 		keyMaps[__reKey(__kbd('insert_md_math_inline'))] = 'markdownMathInline';
 		keyMaps[__reKey(__kbd('insert_md_blockquote'))] = 'markdownBlockQuote';
-		keyMaps[__reKey(__kbd('insert_md_section_break'))] = 'markdownSectionBreak';
-		keyMaps[__reKey(__kbd('insert_md_page_break'))] = 'markdownPageBreak';
-		keyMaps[__reKey(__kbd('insert_md_sentence_break'))] = 'markdownSentenceBreak';
+
+		/* nw issue */
+		keyMaps['Shift-Alt-Enter'] = 'markdownSectionBreak';
+		keyMaps['Shift-Ctrl-Enter'] = 'markdownPageBreak';
+		keyMaps['Shift-Ctrl-Alt-Enter'] = 'markdownSentenceBreak';
+		/* nw issue */
 
 		keyMaps['Enter'] = 'newlineAndIndentContinueMarkdownList';
 		keyMaps['Shift-Tab'] = 'indentLess';
