@@ -243,7 +243,6 @@ define([
 					gui.Shell.openExternal(href);
 				} else {
 					href = path.resolve(nw.file.get('dirname'), href);
-					alert(href)
 					gui.Shell.openItem(href);
 				}
 			}
