@@ -239,7 +239,13 @@ define([
 		//linkable
 		_viewer.ee.on('link', function(href) {
 			if (viewerConfig.clickableLink) {
-				gui.Shell.openExternal(href);
+				if (/^(http|\/\/)/.test(href)) {
+					gui.Shell.openExternal(href);
+				} else {
+					href = path.resolve(nw.file.get('dirname'), href);
+					alert(href)
+					gui.Shell.openItem(href);
+				}
 			}
 		});
 

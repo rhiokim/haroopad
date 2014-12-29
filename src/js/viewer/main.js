@@ -616,6 +616,9 @@ $(document.body).ready(function() {
         var index = el.getAttribute('data-task-index');
         window.ee.emit('task.done', el, index, isDone);
       break;
+      default:
+        e.preventDefault();
+      break;
     }
   });
 

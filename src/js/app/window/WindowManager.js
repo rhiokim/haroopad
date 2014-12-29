@@ -187,7 +187,7 @@ define([
 		}
 	});
 
-
+	//CMD+Q app terminate in the hidden window.
   var shortcut = new gui.Shortcut({
     key : "Ctrl+Q",
     active : function() {
