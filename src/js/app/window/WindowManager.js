@@ -48,7 +48,6 @@ define([
 		realCount++;
 
 		newWin.on('closed', function() {
-			// this.file.close();
 
 			for (var prop in windows) {
 				if (prop == this.created_at) {
@@ -187,6 +186,16 @@ define([
 			window.ee.emit('exit');
 		}
 	});
+
+
+  var shortcut = new gui.Shortcut({
+    key : "Ctrl+Q",
+    active : function() {
+      window.ee.emit('closeAll');
+    }
+  });
+  gui.App.registerGlobalHotKey(shortcut);
+  // gui.App.unregisterGlobalHotKey(shortcut);
 
 	exports.open = open;
 
