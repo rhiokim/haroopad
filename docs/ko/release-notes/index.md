@@ -1,3 +1,37 @@
+
+## Haroopad v0.13.0
+
+**New Features** 
+* ==추가== 프리젠테이션 모드 추가
+* ==추가== 다이어그램 드로잉 (플로우차트, 시퀀스 다이어그램) - https://github.com/knsv/mermaid 기반
+* ==추가== 타스크 리스트(GFM)
+* ==추가== 다국어 지원 - 프랑스어
+* ==추가== 코드 하이라이팅 지원 언어 다수 추가
+
+**Bugs** 
+* X 버튼으로 윈도우 종료 시 저장 알림 문제 수정
+* 더블 클릭으로 마크다운 파일 오픈 시 열리지 않는 문제 수정
+
+**Enhancements**
+* 수학표현식 폰트, \left 과 \right 정렬 지원 등 (4건 개선)
+* 테이블 내 강제 줄바꿈 단어 단위 줄바꿈으로 변경
+* 연속되는 테이블 사이의 줄간격 추가
+* 윈도우 종료 사용성 개선 (Mac OSX)
+
+##### Github Issue tracker
+
+* v0.13.0 -- https://github.com/rhiokim/haroopad/issues?q=milestone%3Av0.13.0
+
+##### Download
+
+> * [Windows 32 bit](https:/dl.dropbox.com/s/e91gqynlilojz2n/Haroopad-v0.13.0-win-ia32.msi) / [Windows 64 bit](https://dl.dropbox.com/s/aexcuqf519ylf0f/Haroopad-v0.13.0-win-x64.msi)
+> * [Mac OSX](https://dl.dropbox.com/s/jx3rw0gm80l9b1s/Haroopad-v0.13.0-x64.dmg)
+> * [Linux Debian 32 bit](https://dl.dropbox.com/s/dbcz7skqxn45rfm/haroopad-v0.13.0-ia32.deb)
+> * [Linux Debian 64 bit](https://www.dropbox.com/s/3cw5p2836b5xsm2/haroopad-v0.13.0-x64.deb)
+> * [Linux tar.gz 32 bit](https://dl.dropbox.com/s/h1ne1qvf51ob9zo/haroopad-v0.13.0_ia32.tar.gz)
+> * [Linux tar.gz 64 bit](https://dl.dropbox.com/s/hibi5p8dxt6o20n/haroopad-v0.13.0_x64.tar.gz)
+
+
 ## Haroopad v0.12.2 - ==Hotfix==
 
 * 단축키(CTRL + S)를 이용한 신규 파일저장 시 중복 다이얼로그 오류 해결

@@ -1,3 +1,35 @@
+## Haroopad v0.13.0
+
+**New Features**
+* ==Added== Presenation Mode
+* ==Added== Drawing Diagram (flowchart, sequence diagram)
+* ==Added== Tasklist(GFM)
+
+**Bugs**
+* Fixed no confirm save in Windows on close Window with [x]
+* Fixed The file path can't contain space in Window
+
+**Enhancements**
+* Update Codemirror Editor v4.8
+* Support Font in math expression
+* Support \left and \right in math expression
+* Support cutsom gfm code block delemiters
+* Enhance two subsequent tables are rendered with no space
+* Enhance equation rendering issues in math expression
+
+##### Github Issue tracker
+
+* v0.13.0 -- https://github.com/rhiokim/haroopad/issues?q=milestone%3Av0.13.0
+
+##### Download
+
+> * [Windows 32 bit](https:/dl.dropbox.com/s/e91gqynlilojz2n/Haroopad-v0.13.0-win-ia32.msi) / [Windows 64 bit](https://dl.dropbox.com/s/aexcuqf519ylf0f/Haroopad-v0.13.0-win-x64.msi)
+> * [Mac OSX](https://dl.dropbox.com/s/jx3rw0gm80l9b1s/Haroopad-v0.13.0-x64.dmg)
+> * [Linux Debian 32 bit](https://dl.dropbox.com/s/dbcz7skqxn45rfm/haroopad-v0.13.0-ia32.deb)
+> * [Linux Debian 64 bit](https://www.dropbox.com/s/3cw5p2836b5xsm2/haroopad-v0.13.0-x64.deb)
+> * [Linux tar.gz 32 bit](https://dl.dropbox.com/s/h1ne1qvf51ob9zo/haroopad-v0.13.0_ia32.tar.gz)
+> * [Linux tar.gz 64 bit](https://dl.dropbox.com/s/hibi5p8dxt6o20n/haroopad-v0.13.0_x64.tar.gz)
+
 ## Haroopad v0.12.2 - ==Hotfix==
 
 * Fixed duplicated dialog box when you save a new file with shortcut(CTRL + S)
