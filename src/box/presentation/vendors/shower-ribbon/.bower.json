@@ -1,6 +1,6 @@
 {
   "name": "shower-ribbon",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "license": "MIT",
   "main": "styles/screen.css",
   "ignore": [
@@ -21,13 +21,13 @@
     "theme"
   ],
   "homepage": "https://github.com/shower/ribbon",
-  "_release": "1.0.10",
+  "_release": "1.0.11",
   "_resolution": {
     "type": "version",
-    "tag": "v1.0.10",
-    "commit": "daadd13b466c4bc370b8060c161e399cc4ee263b"
+    "tag": "v1.0.11",
+    "commit": "0d7206852ed46e738b1d795e597b3dd838bea9af"
   },
   "_source": "git://github.com/shower/ribbon.git",
-  "_target": "^1.0.10",
+  "_target": "~1.0.11",
   "_originalSource": "shower-ribbon"
 }

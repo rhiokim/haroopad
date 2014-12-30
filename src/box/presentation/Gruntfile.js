@@ -3,54 +3,76 @@ module.exports = function(grunt) {
   require('time-grunt')(grunt);
 
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-shell');
-
-  function platform() {
-
-    if (process.platform === 'linux') {
-      if (process.arch === 'x64') {
-        postfix = 'linux64';
-      } else {
-        postfix = 'linux32'
-      }
-    } else {
-      postfix = process.platform;
-    }
-  }
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   grunt.initConfig({
 
     copy: {
 
-      mkdcss: {
+      img: {
         files: [
-          { expand: true, cwd: 'vendors/markdown-css/build/', src: [ '**' ], dest: 'css/markdown/' }
+          { expand: true, cwd: 'img', src: [ '**' ], dest: 'dist/img' }
         ]
       },
 
-      hljs: {
+      fonts: {
         files: [
-          { expand: true, cwd: 'vendors/highlight.js/src/styles/', src: [ '**' ], dest: 'css/code/' }
+          { expand: true, cwd: 'vendors/shower-bright/fonts', src: [ '**' ], dest: 'dist/fonts' },
+          // { expand: true, cwd: 'vendors/shower-ribbon/fonts', src: [ '**' ], dest: 'dist/fonts' }
         ]
       }
     },
 
-    shell: {
+    clean: {
+      build: [
+        'dist'
+      ]
+    },
 
-      hljs: {
-        command: 'python3 tools/build.py',
+    cssmin: {
+      dist: {
+        files: {
+          "dist/css/app.min.css": [
+            'vendors/shower-bright/styles/screen.css',
+            'css/main.css'
+          ]
+        }
+      }
+    },
+
+    uglify: {
+      dist: {
+        files: {
+          'dist/js/app.min.js': [
+            'vendors/jquery/dist/jquery.min.js',
+            'vendors/underscore/underscore.js',
+            'vendors/backbone/backbone.js',
+            'vendors/requirejs/require.js',
+            'vendors/shower-core/shower.min.js',
+            'js/main.js'
+          ]
+        }
+      }
+    },
+
+    htmlmin: {
+      dist: {
         options: {
-          stdout: true,
-          execOptions: {
-            cwd: './vendors/highlight.js/'
-          }
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {
+          'dist/index.html': 'index.bin.html'
         }
       }
     }
 
   });
 
-  grunt.registerTask('default', [  ]);
+  grunt.registerTask('default', [ 'clean', 'copy', 'uglify:dist', 'cssmin:dist', 'htmlmin:dist' ]);
   grunt.registerTask('build', [ 'shell:hljs' ]);
 
 };

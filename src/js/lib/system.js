@@ -35,6 +35,7 @@
     docs: path.join(global.EXECPATH, 'Libraries', '.docs'),
     css_code: path.join(global.EXECPATH, 'Libraries', '.css', 'code'),
     js: path.join(global.EXECPATH, 'Libraries', '.js'),
+    boxes: path.join(global.EXECPATH, 'Resources', 'Boxes'),
     theme_res_editor: path.join(global.EXECPATH, 'Resources', 'Themes', 'editor'),
     theme_res_viewer: path.join(global.EXECPATH, 'Resources', 'Themes', 'viewer'),
     theme_dest_editor: path.join(global.App.dataPath, 'Themes', 'editor'),

@@ -7,7 +7,8 @@ define([], function() {
     initialize: function() {},
 
     start: function() {
-      this.win = global.gui.Window.open( 'box/presentation/index.html', {
+      // this.win = global.gui.Window.open( 'box/presentation/dist/index.html', {
+      this.win = global.gui.Window.open( 'file://'+ global.PATHS.boxes +'/presentation/index.html', {
           title: 'Haroopad Presentation',
           toolbar: false,
           show: false,

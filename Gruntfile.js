@@ -69,7 +69,7 @@ module.exports = function(grunt) {
       release: [ 'build/haroopad.app' ],
       core: [ 'build/haroopad.app' ],
       nwlibs: [ '<%= resdir %>/Libraries'],
-      nwres: [ '<%= resdir %>/Resources/Themes'],
+      nwres: [ '<%= resdir %>/Resources/Themes','<%= resdir %>/Resources/Boxes' ]
     },
 
     jshint: {
@@ -383,7 +383,7 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= build %>/app.common.min.js': [
-            // 'src/js/lib/disable.debug.js',
+            'src/js/lib/disable.debug.js',
             'src/js/lib/system.js',
             'src/js/lib/logger.js',
             'src/js/lib/utils/util.js',
@@ -483,6 +483,8 @@ module.exports = function(grunt) {
           { cwd: 'src/box/presentation/js/', src: [ '**' ], dest: 'build/haroopad/box/presentation/js/', expand: true },
           { cwd: 'src/box/presentation/vendors/shower-ribbon/styles', src: [ '**' ], dest: 'build/haroopad/box/presentation/vendors/shower-ribbon/styles', expand: true },
           { cwd: 'src/box/presentation/vendors/shower-ribbon/images', src: [ '**' ], dest: 'build/haroopad/box/presentation/vendors/shower-ribbon/images', expand: true },
+          { cwd: 'src/box/presentation/vendors/shower-bright/styles', src: [ '**' ], dest: 'build/haroopad/box/presentation/vendors/shower-bright/styles', expand: true },
+          { cwd: 'src/box/presentation/vendors/shower-bright/images', src: [ '**' ], dest: 'build/haroopad/box/presentation/vendors/shower-bright/images', expand: true },
           { src: 'src/box/presentation/vendors/backbone/backbone.js', dest: 'build/haroopad/box/presentation/vendors/backbone/backbone.js' },
           { src: 'src/box/presentation/vendors/jquery/dist/jquery.min.js', dest: 'build/haroopad/box/presentation/vendors/jquery/dist/jquery.min.js' },
           { src: 'src/box/presentation/vendors/requirejs/require.js', dest: 'build/haroopad/box/presentation/vendors/requirejs/require.js' },
@@ -623,6 +625,12 @@ module.exports = function(grunt) {
           { expand: true, cwd: '<%= vendors %>/highlight.js/src/styles/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.css/code/' }
         ]
       },
+
+      boxes: {
+        files: [
+          { expand: true, cwd: 'src/box/presentation/dist', src: [ '**' ], dest: '<%= resdir %>/Resources/Boxes/presentation' }
+        ]
+      }
       
       // select2: {
       //   files: [
@@ -822,7 +830,7 @@ module.exports = function(grunt) {
 
   /* built-in libs for node-webkit */
   grunt.registerTask('nwlibs', [ 'clean:nwlibs', 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales', 'copy:ffmpeg' ]);
-  grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss' ]);
+  grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss', 'copy:boxes' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'copy:plugins', 'copy:pkgres', 'nwlibs', 'nwres' ]);
 
