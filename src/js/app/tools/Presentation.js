@@ -32,6 +32,10 @@ define([], function() {
         this.close(true);
       });
 
+      this.win.on('closed', function() {
+        PT.win = null;
+      });
+
       this.win.on('leave-fullscreen', function() {
         this.win && this.win.close();
       }.bind(this));
@@ -55,6 +59,11 @@ define([], function() {
   PT = new View;
 
   window.ee.on('menu.view.presentation', function() {
+    if (PT.win) {
+      PT.win.focus();
+      return;
+    }
+
     PT.start();
     // PT.update(window.doc.toJSON());
     // PT.show();

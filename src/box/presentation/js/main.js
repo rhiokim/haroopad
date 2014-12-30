@@ -27,7 +27,7 @@ function tokenize(html) {
 }
 
 function convert(html) {
-  var tokens, html, steps = [];
+  var tokens, html = html || '', steps = [];
 
   tokens = tokenize(html);
 
@@ -40,7 +40,7 @@ function convert(html) {
 
 function getTitle(data) {
   var str = '<header class="caption">'
-            + '  <h1>'+ data.title +'</h1>'
+            + '  <h1>'+ (data.title || '') +'</h1>'
             // + '  <p>'+ +'</p>'
             + '</header>\n\n';
 
