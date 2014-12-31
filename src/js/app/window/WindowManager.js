@@ -17,6 +17,32 @@ define([
 	var top = config.y,
 		left = config.x;
 
+	//fixed for cmd-q app quit issue
+	gui.App.manifest.window.width = config.width;
+	gui.App.manifest.window.height = config.height;
+	gui.App.manifest.window.frame = true;
+	// gui.App.manifest.window.show = true;
+
+	if (process.platform === 'darwin') {
+		win.show();
+
+		//CMD+Q app terminate in the hidden window.
+	  var shortcut = new gui.Shortcut({
+	    key : "Ctrl+Q",
+	    active : function() {
+	      window.ee.emit('closeAll');
+	    }
+	  });
+
+	  window.ee.on('focus', function() {
+		  gui.App.registerGlobalHotKey(shortcut);
+		});
+
+	  window.ee.on('blur', function() {
+		  gui.App.unregisterGlobalHotKey(shortcut);
+		});
+	}
+
 	function _updateStore() {
 		config = store.get('Window') || {};
 	}
@@ -159,7 +185,7 @@ define([
 		return newWin;
 	}
 
-	process.on('actived', function(child) {
+	window.ee.on('actived', function(child) {
 		exports.actived = window.activedWindow = child;
 
 		child.show(); //#346
@@ -186,16 +212,6 @@ define([
 			window.ee.emit('exit');
 		}
 	});
-
-	//CMD+Q app terminate in the hidden window.
-  var shortcut = new gui.Shortcut({
-    key : "Ctrl+Q",
-    active : function() {
-      window.ee.emit('closeAll');
-    }
-  });
-  gui.App.registerGlobalHotKey(shortcut);
-  // gui.App.unregisterGlobalHotKey(shortcut);
 
 	exports.open = open;
 

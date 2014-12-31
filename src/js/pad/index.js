@@ -106,7 +106,7 @@ i18n.init({
         setTimeout(function() {
           nw.show();
           nw.focus();
-          process.emit('actived', nw);
+          window.parent.ee.emit('actived', nw);
         }, 1);
       });
     });
@@ -118,7 +118,7 @@ i18n.init({
 
       nw.show();
       nw.focus();
-      process.emit('actived', nw);
+      window.parent.ee.emit('actived', nw);
     } else {
       nw.emit('file.opened', file);
     }
@@ -156,7 +156,7 @@ i18n.init({
 
     nw.on('focus', function() {
       nw.file.refresh();
-      process.emit('actived', nw);
+      window.parent.ee.emit('actived', nw);
     });
 
     window.ee.on('up.to.date.news', function(md) {

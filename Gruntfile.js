@@ -476,24 +476,6 @@ module.exports = function(grunt) {
         ]
       },
 
-      plugins: {
-        files: [
-          { cwd: 'src/box/presentation/css/', src: [ '**' ], dest: 'build/haroopad/box/presentation/css/', expand: true },
-          { cwd: 'src/box/presentation/img/', src: [ '**' ], dest: 'build/haroopad/box/presentation/img/', expand: true },
-          { cwd: 'src/box/presentation/js/', src: [ '**' ], dest: 'build/haroopad/box/presentation/js/', expand: true },
-          { cwd: 'src/box/presentation/vendors/shower-ribbon/styles', src: [ '**' ], dest: 'build/haroopad/box/presentation/vendors/shower-ribbon/styles', expand: true },
-          { cwd: 'src/box/presentation/vendors/shower-ribbon/images', src: [ '**' ], dest: 'build/haroopad/box/presentation/vendors/shower-ribbon/images', expand: true },
-          { cwd: 'src/box/presentation/vendors/shower-bright/styles', src: [ '**' ], dest: 'build/haroopad/box/presentation/vendors/shower-bright/styles', expand: true },
-          { cwd: 'src/box/presentation/vendors/shower-bright/images', src: [ '**' ], dest: 'build/haroopad/box/presentation/vendors/shower-bright/images', expand: true },
-          { src: 'src/box/presentation/vendors/backbone/backbone.js', dest: 'build/haroopad/box/presentation/vendors/backbone/backbone.js' },
-          { src: 'src/box/presentation/vendors/jquery/dist/jquery.min.js', dest: 'build/haroopad/box/presentation/vendors/jquery/dist/jquery.min.js' },
-          { src: 'src/box/presentation/vendors/requirejs/require.js', dest: 'build/haroopad/box/presentation/vendors/requirejs/require.js' },
-          { src: 'src/box/presentation/vendors/shower-core/shower.min.js', dest: 'build/haroopad/box/presentation/vendors/shower-core/shower.min.js' },
-          { src: 'src/box/presentation/vendors/underscore/underscore.js', dest: 'build/haroopad/box/presentation/vendors/underscore/underscore.js' },
-          { src: 'src/box/presentation/index.html', dest: 'build/haroopad/box/presentation/index.html' },
-        ]
-      },
-
       debug: {
         files: [
           // { expand: true, cwd: 'src/font/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/font/' },
@@ -796,8 +778,7 @@ module.exports = function(grunt) {
           'build/haroopad/index.html': 'src/index.bin.html',     // 'destination': 'source'
           'build/haroopad/pad.html': 'src/pad.bin.html',
           'build/haroopad/preferences.html': 'src/preferences.bin.html',
-          'build/haroopad/viewer.html': 'src/viewer.bin.html',
-          'build/haroopad/box/presentation/index.html': 'src/box/presentation/index.html'
+          'build/haroopad/viewer.html': 'src/viewer.bin.html'
         }
       }
     }
@@ -832,7 +813,7 @@ module.exports = function(grunt) {
   grunt.registerTask('nwlibs', [ 'clean:nwlibs', 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales', 'copy:ffmpeg' ]);
   grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss', 'copy:boxes' ]);
 
-  grunt.registerTask('cp', [ 'copy:main', 'copy:plugins', 'copy:pkgres', 'nwlibs', 'nwres' ]);
+  grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
 
   /* pre built */
   grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs', 'shell:pouchdb' ]);

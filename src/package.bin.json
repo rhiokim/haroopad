@@ -12,8 +12,11 @@
     "icon": "logo.png",
     "toolbar": false,
     "show": false,
+    "width": 0,
+    "height": 0,
     "min_width": 700,
-    "min_height": 350
+    "min_height": 350,
+    "frame": false
   },
   "single-instance": true,
   "webkit": {

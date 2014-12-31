@@ -143,7 +143,7 @@ define([
 
 		switch (process.platform) {
 			case 'linux':
-				y += 28;
+				// y += 28;
 				break;
 			default:
 				break;
@@ -255,6 +255,13 @@ define([
 			config.isFullscreen = win.isFullscreen;
 			store.set('Window', config);
 		}
+	});
+
+	win.on('focus', function() {
+		window.parent.ee.emit('focus');
+	});
+	win.on('blur', function() {
+		window.parent.ee.emit('blur');
 	});
 
 	window.ondragover = function(e) {
