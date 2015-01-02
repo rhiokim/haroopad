@@ -391,3 +391,9 @@ https://github.com/ianstormtaylor/download-github-repo (MIT)
 **optimist**
 
 https://github.com/substack/node-optimist (MIT/X11)
+
+* * *
+
+**mermaid**
+
+https://github.com/knsv/mermaid (MIT)
