@@ -160,4 +160,4 @@ So I just want to contain my thoughts about human writing and markdown to versio
 Current version v0.13.
 And v0.14 will be version v1.0.
 
-### LICENSE
+### [LICENSE](https://github.com/rhiokim/haroopad/blob/develop/LICENSE)
