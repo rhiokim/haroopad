@@ -31,7 +31,7 @@
   color: #b58900;
 }
 .solarized-dark h2 {
-  border-bottom: 1px solid #005469;
+  border-bottom: 1px solid #003f50;
   line-height: 1.7em;
 }
 .solarized-dark h6 {
@@ -40,12 +40,18 @@
 .solarized-dark hr {
   border: 1px solid #001f27;
 }
+.solarized-dark code {
+  border: 1px solid #00475a;
+}
+.solarized-dark pre {
+  border: 1px solid #00475a;
+}
 .solarized-dark pre > code {
   font-size: .9em;
   font-family: Consolas, Inconsolata, Courier, monospace;
 }
 .solarized-dark blockquote {
-  border-left: 4px solid #000203;
+  border-left: 4px solid #005469;
   padding: 0 15px;
   font-style: italic;
 }
