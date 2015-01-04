@@ -6,7 +6,7 @@
   "homepage": "https://rhiokim.github.com/haroopad",
   "repository": "git://github.com/rhiokim/haroopad.git",
   "author": "rhio.kim@gmail.com",
-  "license": "LGPL",
+  "license": "GPL3",
   "devDependencies": {
     "grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
     "grunt-contrib-copy": "git://github.com/gruntjs/grunt-contrib-copy.git",
