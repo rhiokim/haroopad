@@ -9,8 +9,9 @@ define([
 
 		var gui = require('nw.gui'),
 				win = gui.Window.get(),
-				clipboard = gui.Clipboard.get();
-		
+				clipboard = gui.Clipboard.get(),
+				TextStatistics = require('text-statistics');
+
 		var config = option.toJSON();
 
 		option.bind('change:viewStyle', function(model, value) {
@@ -74,6 +75,8 @@ define([
 		function update(markdown, html, editor) {
 			content = html;
 			viewer.update(content);
+			var raw = String(html).replace(/<[^>]+>/gm, '');
+			viewer.updateStatistics(new TextStatistics(raw));
 
 			config.clickableLink ? viewer.allowLink() : viewer.blockLink();
 		}

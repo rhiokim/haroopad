@@ -1,6 +1,6 @@
 html { height: 100% }
 body {
-	padding: 30px;
+	padding: 30px 30px 50px 30px;
   background-color: #fff;
 }
 
@@ -13,6 +13,31 @@ pre>code {
 	word-break: break-all;
 	word-wrap: break-word;
   margin: 0;
+}
+
+/* stick to bottom */
+ul#statistics {
+    bottom:0;
+    left: 0;
+    position:fixed;
+    z-index:150;
+    height: auto;
+}
+
+ul#statistics {
+  list-style: none;
+  font-size: 12px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background: #ddd;
+  width: 100%;
+  box-sizing: border-box;
+}
+ul#statistics li {
+  display: inline-block;
+  padding: 2px;
+  margin: 2px;
 }
 
 /* -----------------------------------------
