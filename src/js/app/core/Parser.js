@@ -9,7 +9,12 @@ define([
         win = gui.Window.get();
 
     var marked = require("marked");
-    var options = store.get('Markdown') || {};
+    var options = store.get('Markdown') || {
+          breaks: true,
+          smartLists: true,
+          langPrefix: '',
+          smartypants: true
+    };
 
     var defaults = merge(marked.defaults, options, {
       renderer: Renderer
