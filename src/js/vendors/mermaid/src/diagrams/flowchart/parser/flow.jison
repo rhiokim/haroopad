@@ -26,15 +26,18 @@
 "."                   return 'DOT';
 "<"                   return 'TAGSTART';
 ">"                   return 'TAGEND';
+"^"                   return 'UP';
+"v"                   return 'DOWN';
 \-\-[x]               return 'ARROW_CROSS';
 \-\-\>                return 'ARROW_POINT';
 \-\-[o]               return 'ARROW_CIRCLE';
 \-\-\-                return 'ARROW_OPEN';
+\-\-                  return '--';
 \-                    return 'MINUS';
 \+                    return 'PLUS';
 \%                    return 'PCT';
 \=                    return 'EQUALS';
-[\u0021-\u0027\u002A-\u002E\u003F\u0041-\u005A\u0061-\u007A\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00F6]|
+[\u0021-\u0027\u002A-\u002E\u003F\u0041-\u005A\u005C\u005F-\u007A\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00F6]|
 [\u00F8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377]|
 [\u037A-\u037D\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5]|
 [\u03F7-\u0481\u048A-\u0527\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA]|
@@ -120,17 +123,32 @@
 
 expressions
     : graphConfig statements EOF
+    | graphConfig statements 
     | graphConfig spaceListNewline statements EOF
+        {$$=$1;}
+    | graphConfig spaceListNewline statements
         {$$=$1;}
     ;
 
 graphConfig
-    : GRAPH SPACE DIR SEMI
+    : GRAPH SPACE DIR FirstStmtSeperator
         { yy.setDirection($3);$$ = $3;}
+    | GRAPH SPACE TAGEND FirstStmtSeperator
+        { yy.setDirection("LR");$$ = $3;}
+    | GRAPH SPACE TAGSTART FirstStmtSeperator
+        { yy.setDirection("RL");$$ = $3;}
+    | GRAPH SPACE UP FirstStmtSeperator
+        { yy.setDirection("BT");$$ = $3;}
+    | GRAPH SPACE DOWN FirstStmtSeperator
+        { yy.setDirection("TB");$$ = $3;}
     ;
+
+FirstStmtSeperator 
+    : SEMI | NEWLINE | spaceList NEWLINE ;
 
 statements
     : statement spaceListNewline statements
+    | statement statements
     | statement
     ;
 
@@ -150,14 +168,15 @@ spaceList
 
 statement
     : commentStatement NEWLINE
-    {$$='Comment';}
-    | verticeStatement SEMI
-    | styleStatement SEMI
-    | linkStyleStatement SEMI
-    | classDefStatement SEMI
-    | classStatement SEMI
-    | clickStatement SEMI
+    | verticeStatement separator
+    | styleStatement separator
+    | linkStyleStatement separator
+    | classDefStatement separator
+    | classStatement separator
+    | clickStatement separator
     ;
+
+separator: NEWLINE | SEMI | EOF ;
 
 verticeStatement:
      vertex link vertex
@@ -217,6 +236,10 @@ link: linkStatement arrowText
     {$$ = $1;}
     | linkStatement SPACE
     {$$ = $1;}
+    | '--' SPACE text SPACE linkStatement
+    {$5.text = $3;$$ = $5;}
+    | '--' SPACE text SPACE linkStatement SPACE
+    {$5.text = $3;$$ = $5;}
     ;
 
 linkStatement: ARROW_POINT

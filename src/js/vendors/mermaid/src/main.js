@@ -28,7 +28,9 @@ var init = function () {
         // Check if previously processed
         if(!element.getAttribute("data-processed")) {
             element.setAttribute("data-processed", true);
-        } else continue;
+        } else {
+            continue;
+        }
 
         var id;
 
@@ -48,7 +50,6 @@ var init = function () {
 
         switch(graphType){
             case 'graph': 
-                console.log('FC');
                 classes = flowRenderer.getClasses(txt, false);
                 flowRenderer.draw(txt, id, false);
                 utils.cloneCssStyles(element.firstChild, classes);
@@ -62,7 +63,7 @@ var init = function () {
             case 'sequenceDiagram': 
                 seq.draw(txt,id);
                 // TODO - Get styles for sequence diagram
-                utils.cloneCssStyles(element.firstChild, classes);
+                utils.cloneCssStyles(element.firstChild, []);
                 break;
         }
 
@@ -96,7 +97,7 @@ if(typeof document !== 'undefined'){
         // Check presence of config object
         if(typeof mermaid_config !== 'undefined'){
             // Check if property startOnLoad is set
-            if(equals(true,mermaid_config.startOnLoad)){
+            if(equals(true, mermaid_config.startOnLoad)){
                 init();
             }
         }
