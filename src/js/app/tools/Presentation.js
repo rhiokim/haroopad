@@ -23,7 +23,7 @@ define([], function() {
 
       this.win.on('loaded', function() {
         this.win.removeAllListeners('loaded');
-        this.win.window.update(window.ee, window.activedWindow.file.doc.toJSON());
+        this.win.window.update(window.ee, window.activedWindow.file.doc.toJSON(), window.activedWindow.file.toJSON());
         this.show();
       }.bind(this));
 

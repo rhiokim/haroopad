@@ -14,7 +14,6 @@ requirejs.config({
 });
 
 requirejs.onError = function (e) {
-  console.log(e.stack)
   alert('Oops! presentation box is crash :-(');
 };
 
@@ -47,6 +46,18 @@ function getTitle(data) {
   return str;
 }
 
+function setRealAssetsPath(dirname) {
+  var src, img, imgs = document.body.querySelectorAll('img');
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    src = img.getAttribute('src');
+
+    if (src.indexOf('://') == -1 && !/^\//.test(src) && !/^[a-zA-Z]\:/.test(src) && src.indexOf('data:') == -1) {
+      img.setAttribute('src', dirname + '/' + src);
+    }
+  }
+}
+
 function setCoverImage() {
   $('img[alt=cover]').each(function() {
     $(this).parent().parent().parent().addClass('cover');
@@ -56,9 +67,10 @@ function setCoverImage() {
   });
 }
 
-window.update = function(e, data) {
+window.update = function(e, data, file) {
   window.ee = e;
   window.raw = data;
+  window.file = file;
 
   shower.enterListMode();
   shower.slideList.length = 0;
@@ -68,6 +80,8 @@ window.update = function(e, data) {
   $('body').prepend( getTitle(data) + convert(data.html) );
 
   $('body>section:nth-child(2)').attr({ id: "Cover" }).addClass('cover');
+
+  setRealAssetsPath(file.dirname);
   setCoverImage();
 
   shower.init();
