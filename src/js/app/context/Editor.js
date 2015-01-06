@@ -1,11 +1,11 @@
 define([
 		'context/util',
-		'context/format/Text',
+		// 'context/format/Text',
 		'context/search/Search',
 		'context/editor/themes',
 		'context/editor/themesUser'
 	],
-	function(util, TextFormatMenu, Search, Themes, ThemesUser) {
+	function(util, Search, Themes, ThemesUser) {
 
 		var gui = require('nw.gui');
 		var Context = new gui.Menu();

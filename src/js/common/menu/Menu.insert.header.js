@@ -72,7 +72,7 @@ window.MenuBarInsertHeader = function() {
         window.parent.ee.emit('menu.insert.markdown', 'h6');
       },
       key: shortcut.key,
-      modifiers: shortcut.modifiersinsert_md_header1
+      modifiers: shortcut.modifiers
     })
   );
   // submenu.append(
