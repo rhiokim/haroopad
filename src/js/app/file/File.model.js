@@ -46,7 +46,12 @@ define([
         var res = parse(md);
         var html = res.html;
 
-        this.doc.set({ html: html, footnotes: res.tokens.footnotes, links: res.tokens.links });
+        this.doc.set({ 
+          html: html, 
+          tasks: res.tasks, 
+          toc: res.toc, 
+          footnotes: res.tokens.footnotes, 
+          links: res.tokens.links });
         // this.trigger('change:doc', this, this.doc);
         // this.set('html', html);
         this.set({ updated_at: new Date() });
@@ -158,6 +163,7 @@ define([
 
     task: function(index, isDone) {
       var body = this.doc.dom();
+      var tasks = this.doc.get('tasks');
       var ipts = body.querySelectorAll('input.task-list-item');
 
       ipts = Array.prototype.slice.call(ipts, 0);
@@ -167,7 +173,11 @@ define([
         ipts[index].removeAttribute('checked');
       }
 
-      // window.doc.set({ html: body.innerHTML }, { silent: true });
+      tasks[index].done = isDone;
+      this.doc.set({ "tasks": tasks }, { silent: true });
+      // this.doc.trigger('change:tasks', tasks);
+
+      this.doc.trigger('change:tasks', this.doc);
     }
   });
 

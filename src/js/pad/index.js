@@ -52,7 +52,7 @@ i18n.init({
     var _tid_;
     var file = nw.file;
 
-    $('body').i18n(); 
+    $('body').i18n();
 
     function delayChange() {
       window.clearTimeout(_tid_);
@@ -85,21 +85,25 @@ i18n.init({
 
       //temp file
       if (opt.tmp) {
-        file.set({ fileEntry: undefined }, { silent: true });
+        file.set({
+          fileEntry: undefined
+        }, {
+          silent: true
+        });
       }
 
       /* change by external application */
       file.on('change:mtime', function() {
         window.ee.emit('file.update', nw.file.get('fileEntry'));
       });
-      
-      switch(nw._args.mode) {
+
+      switch (nw._args.mode) {
         case 'view':
           window.ee.emit('menu.view.mode', 'viewer');
-        break;
+          break;
         case 'edit':
           window.ee.emit('menu.view.mode', 'editor');
-        break;
+          break;
       }
 
       window.ee.once('rendered', function() {
@@ -159,15 +163,28 @@ i18n.init({
       window.parent.ee.emit('actived', nw);
     });
 
+    nw.file.doc.bind('change:tasks', function(model) {
+      var dTasks;
+
+      tasks = model.get('tasks') || [];
+
+      dTasks = tasks.filter(function(task) {
+        return !task.done;
+      });
+
+      nw.setBadgeLabel(dTasks.length || '');
+    });
+
     window.ee.on('up.to.date.news', function(md) {
       //if already editor has not any contents
-      if (!nw.editor.getValue()) { 
+      if (!nw.editor.getValue()) {
         Viewer.set(md);
       }
     });
 
     $(document.body).click(function(e) {
-      var el = e.target, href;
+      var el = e.target,
+        href;
       var tagName = el.tagName.toUpperCase();
 
       switch (tagName) {
@@ -180,7 +197,7 @@ i18n.init({
 
           global.Shell.openExternal(href);
           e.preventDefault();
-        break;
+          break;
       }
     });
 
