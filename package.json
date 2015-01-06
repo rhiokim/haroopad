@@ -1,12 +1,12 @@
 {
   "name": "haroopad",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "The Next Document processor based on Markdown",
   "main": "",
   "homepage": "https://rhiokim.github.com/haroopad",
   "repository": "git://github.com/rhiokim/haroopad.git",
   "author": "rhio.kim@gmail.com",
-  "license": "GPLv2",
+  "license": "GPLv3",
   "devDependencies": {
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-copy": "~0.4.1",

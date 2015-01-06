@@ -160,6 +160,7 @@ i18n.init({
 
     nw.on('focus', function() {
       nw.file.refresh();
+      nw.file.doc.trigger('change:tasks', nw.file.doc);
       window.parent.ee.emit('actived', nw);
     });
 
@@ -171,7 +172,7 @@ i18n.init({
       dTasks = tasks.filter(function(task) {
         return !task.done;
       });
-
+      
       nw.setBadgeLabel(dTasks.length || '');
     });
 

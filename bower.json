@@ -1,13 +1,13 @@
 {
   "name": "haroopad",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "authors": [
     "rhiokim <rhio.kim@gmail.com>"
   ],
   "keywords": [
     "markdown"
   ],
-  "license": "GPLv2",
+  "license": "GPLv3",
   "homepage": "http://pad.haroopress.com",
   "ignore": [
     "**/.*",

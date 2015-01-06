@@ -28,16 +28,16 @@ define([
     
     var parse = window.marked = function(src) {
       var tokens = lexer.lex(src);
-      var toc = TOC(tokens);
+      // var toc = TOC(tokens);
       var tasks = Tasklist(tokens);
-      var title = toc.tokens[0] && toc.tokens[0].heading;
+      // var title = toc.tokens[0] && toc.tokens[0].heading;
       var res = {};
 
-      res.title = title || i18n.t('untitled');
+      // res.title = title || i18n.t('untitled');
 
-      if (toc) {
-        res.toc = toc;
-      }
+      // if (toc) {
+      //   res.toc = toc;
+      // }
 
       if (tasks.length) {
         res.tasks = tasks;

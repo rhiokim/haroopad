@@ -49,7 +49,7 @@ define([
         this.doc.set({ 
           html: html, 
           tasks: res.tasks, 
-          toc: res.toc, 
+          // toc: res.toc, 
           footnotes: res.tokens.footnotes, 
           links: res.tokens.links });
         // this.trigger('change:doc', this, this.doc);

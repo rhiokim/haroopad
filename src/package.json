@@ -2,7 +2,7 @@
   "main": "index.html",
   "name": "Haroopad",
   "description": "The Next Document processor based on Markdown",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "keywords": [
     "markdown",
     "haroopress",
@@ -38,7 +38,7 @@
   ],
   "licenses": [
     {
-      "type": "GPLv2",
+      "type": "GPLv3",
       "url": "http://www.example.com/licenses/gpl.html"
     }
   ],
