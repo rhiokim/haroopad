@@ -37,6 +37,7 @@ define([
 		config.isFullscreen = win.isFullscreen;
 		store.set('Window', config);
 
+		win.setBadgeLabel('');
 		win.close(true);
 	}
 
