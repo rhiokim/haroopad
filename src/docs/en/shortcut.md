@@ -85,12 +85,12 @@ COMMAND (CTRL) - 6          | ######             | Header 6
 COMMAND (CTRL) - B          | \*\*Bold\*\*       | bold
 COMMAND (CTRL) - I          | \*Italic\*         | italic
 COMMAND (CTRL) - L          | \[link\](url)      | link
-COMMAND (CTRL) - Y          | \+\+underline\+\+  | underline
 COMMAND (CTRL) - K          | \`code\`           | inline code
 COMMAND (CTRL) - E          | @\[]()             | embed
 COMMAND (CTRL) - U          | \~~strike~~        | strike
 COMMAND (CTRL) - T          | \==highlight==     | highlight
 SHIFT - CTRL - I            | \!\[]()            | image
+SHIFT - CTRL - U            | \+\+underline\+\+  | underline
 SHIFT - CTRL - T            | [TOC]              | table of content
 SHIFT - CTRL - C            | - [ ] task         | task list
 SHIFT - CTRL - O            | 1. markdown        | ordered list

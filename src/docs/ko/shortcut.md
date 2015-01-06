@@ -85,12 +85,12 @@ COMMAND (CTRL) - 6           | ######             | 헤더6
 COMMAND (CTRL) - B           | \*\*Bold\*\*       | 볼드
 COMMAND (CTRL) - I           | \*Italic\*         | 이탤릭
 COMMAND (CTRL) - L           | \[link\](url)      | 링크
-COMMAND (CTRL) - Y           | \+\+underline\+\+  | 밑줄
 COMMAND (CTRL) - K           | \`code\`           | 인라인 코드
 COMMAND (CTRL) - E           | @\[]()             | 임베드
 COMMAND (CTRL) - U           | \~\~strike~~       | 취소선
 COMMAND (CTRL) - T           | \==highlight=      | 하이라이팅
 SHIFT - CTRL - I             | \!\[]()            | 이미지
+SHIFT - CTRL - U             | \+\+underline\+\+  | 밑줄
 SHIFT - CTRL - T             | [TOC]              | 목차
 SHIFT - CTRL - C             | - [ ] task         | 타스크 목록
 SHIFT - CTRL - O             | 1. markdown        | 정렬 목록
