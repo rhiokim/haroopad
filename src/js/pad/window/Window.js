@@ -135,21 +135,19 @@ define([
 	$('#editor').bind('contextmenu', function(e, ev) {
 		var x, y;
 		e.preventDefault();
-
 		e = (ev) ? ev : e;
 
-		x = win.x - window.parent.screenX + e.clientX;
-		y = win.y - window.parent.screenY + e.clientY;
+		x = e.screenX;
+		y = e.screenY;
 
 		switch (process.platform) {
 			case 'linux':
-				// y += 28;
-				break;
+				x = x + win.x;
+				y = y + win.y;
+			break;
 			default:
 				break;
 		}
-
-		x = (ev) ? x + $('#editor').width() : x;
 
 		//fixed #135
 		if (win.isFullscreen) {

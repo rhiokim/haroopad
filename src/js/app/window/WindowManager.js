@@ -23,6 +23,9 @@ define([
 	gui.App.manifest.window.frame = true;
 	// gui.App.manifest.window.show = true;
 
+	win.x = 0;
+	win.y = 0;
+	
 	if (process.platform === 'darwin') {
 		win.show();
 
