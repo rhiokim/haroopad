@@ -65,8 +65,8 @@ define([], function() {
     }
 
     PT.start();
-    // PT.update(window.doc.toJSON());
-    // PT.show();
+
+    global._gaq.push('haroopad', 'presentation start', '');
   });
 
 });
