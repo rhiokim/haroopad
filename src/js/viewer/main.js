@@ -156,8 +156,10 @@ function createTOC() {
 
 function init(options) {
   _options = options;
+}
 
-  loadJs(_options.jslib + '/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+function loadLibs(base, cb) {
+  loadJs(base + '/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
     MathJax.Hub.Config({
       messageStyle: "none",
       showProcessingMessages: false,
@@ -174,9 +176,10 @@ function init(options) {
       }
     });
     MathJax.Hub.config.menuSettings.renderer = 'HTML-CSS'; //'SVG', 'NativeMML'
+
+    cb();
   });
 }
-
 /**
  * for fix image path
  * @return {[type]} [description]
@@ -624,7 +627,7 @@ $(document.body).ready(function() {
 
   codeLanguages = hljs.listLanguages();
 
-  _body.addEventListener("DOMNodeInserted", function (ev) {
+  // _body.addEventListener("DOMNodeInserted", function (ev) {
     // console.log(ev.target.tagName);
-  }, false);
+  // }, false);
 });

@@ -1,5 +1,6 @@
 {
   "name": "MathJax",
+  "version": "2.4.0",
   "main": "./MathJax.js",
   "homepage": "http://www.mathjax.org/",
   "ignore": [
@@ -14,14 +15,13 @@
     "MathML",
     "AsciiMath"
   ],
-  "_release": "f3aaf3a2a3",
+  "_release": "2.4.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "f3aaf3a2a3e964df2770dc4aaaa9c87ce5f47e2c"
+    "type": "version",
+    "tag": "2.4.0",
+    "commit": "bd9f6e06a1aa8bfee54da9c3127609d09d15fa8b"
   },
   "_source": "git://github.com/mathjax/MathJax.git",
   "_target": "*",
-  "_originalSource": "MathJax",
-  "_direct": true
+  "_originalSource": "MathJax"
 }

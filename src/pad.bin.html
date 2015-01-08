@@ -104,7 +104,7 @@
       <textarea id="code" name="code"></textarea>
     </article>
     <aside id="viewer">
-      <iframe src="viewer.html" onload="start()" nwdisable nwfaketop></iframe>
+      <iframe src="about:blank" nwdisable nwfaketop></iframe>
     </aside>
     <aside id="oembed">
       <header>
@@ -232,6 +232,12 @@
 <script src="js/pad.js"></script>
 
 <script>
+  var viewer = document.querySelector('#viewer>iframe');
+  viewer.onload = function() {
+    viewer.contentWindow.loadLibs(global.PATHS.js, start);
+  };
+  viewer.src = 'viewer.html';
+
   function start() {
     pad.apply(this, [global, this, document]);
   }

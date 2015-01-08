@@ -37,7 +37,7 @@ define([
 		function initViewer() {
 			var f = nw.file.toJSON();
 
-			f.jslib = global.PATHS.js;
+			// f.jslib = global.PATHS.js;
 			
 			_viewer.init(f);
 		}
