@@ -47,6 +47,7 @@ define([
 		keyMaps[__reKey(__kbd('insert_md_footnotes'))] = 'markdownFootnotes';
 		keyMaps[__reKey(__kbd('insert_md_footnotes_ref'))] = 'markdownFootnotesRef';
 		keyMaps[__reKey(__kbd('insert_md_toc'))] = 'markdownTOC';
+		keyMaps[__reKey(__kbd('insert_md_task'))] = 'markdownTask';
 		keyMaps[__reKey(__kbd('insert_md_strike'))] = 'markdownStrike';
 		keyMaps[__reKey(__kbd('insert_md_highlight'))] = 'markdownHighlight';
 		keyMaps[__reKey(__kbd('insert_md_ordered_list'))] = 'markdownOrderedList';
