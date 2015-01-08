@@ -3,7 +3,7 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("../../lib/codemirror", require("../xml/xml"), require("../meta")));
+    mod(require("../../lib/codemirror"), require("../xml/xml"), require("../meta"));
   else if (typeof define == "function" && define.amd) // AMD
     define(["../../lib/codemirror", "../xml/xml", "../meta"], mod);
   else // Plain browser env
@@ -199,21 +199,27 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
   }
 
   function local(stream, state) {
-    if (stream.sol() && stream.match(/^```/, true)) {
+    if (stream.sol() && stream.match("```", false)) {
       state.localMode = state.localState = null;
-      state.f = inlineNormal;
-      state.block = blockNormal;
-      if (modeCfg.highlightFormatting) state.formatting = "code-block";
-      state.code = true;
-      var returnType = getType(state);
-      state.code = false;
-      return returnType;
+      state.f = state.block = leavingLocal;
+      return null;
     } else if (state.localMode) {
       return state.localMode.token(stream, state.localState);
     } else {
       stream.skipToEnd();
       return code;
     }
+  }
+
+  function leavingLocal(stream, state) {
+    stream.match("```");
+    state.block = blockNormal;
+    state.f = inlineNormal;
+    if (modeCfg.highlightFormatting) state.formatting = "code-block";
+    state.code = true;
+    var returnType = getType(state);
+    state.code = false;
+    return returnType;
   }
 
   // Inline
@@ -390,13 +396,13 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       return image;
     }
 
-    if (ch === '[' && stream.match(/.*\](\(| ?\[)/, false)) {
+    if (ch === '[' && stream.match(/.*\](\(.*\)| ?\[.*\])/, false)) {
       state.linkText = true;
       if (modeCfg.highlightFormatting) state.formatting = "link";
       return getType(state);
     }
 
-    if (ch === ']' && state.linkText) {
+    if (ch === ']' && state.linkText && stream.match(/\(.*\)| ?\[.*\]/, false)) {
       if (modeCfg.highlightFormatting) state.formatting = "link";
       var type = getType(state);
       state.linkText = false;
@@ -736,9 +742,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         state.indentation = adjustedIndentation;
         if (indentation > 0) return null;
       }
-      var result = state.f(stream, state);
-      if (stream.start == stream.pos) return this.token(stream, state);
-      else return result;
+      return state.f(stream, state);
     },
 
     innerMode: function(state) {

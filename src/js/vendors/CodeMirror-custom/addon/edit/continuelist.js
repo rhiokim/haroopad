@@ -11,10 +11,10 @@
 })(function(CodeMirror) {
   "use strict";
 
-  var listRE =      /^(\s*)([> ]+|[*+-]|(\d+)\.)(\s+)/,
-      emptyListRE = /^(\s*)([> ]+|[*+-]|(\d+)\.)(\s*\[[x ]\])?\s*$/,
-      taskRE =      /^(\s*)([> ]+|[*+-]|(\d+)\.)(\s*)\[[x ]\]\s*/,
-      unorderedBullets = "*+-";
+  var listRE =      /^(\s*)(>[> ]*|[*+-]\s|(\d+)\.)(\s*)/,
+      emptyListRE = /^(\s*)(>[> ]+|[*+-]|(\d+)\.)(\s*\[[x ]\])?\s*$/,
+      taskRE =      /^(\s*)(>[> ]+|[*+-]|(\d+)\.)(\s*)\[[x ]\]\s*/,
+      unorderedListRE = /[*+-]\s/;
 
   CodeMirror.commands.newlineAndIndentContinueMarkdownList = function(cm) {
     if (cm.getOption("disableInput")) return CodeMirror.Pass;
@@ -38,8 +38,8 @@
         replacements[i] = "\n";
 
       } else {
-        var task = '', indent = match[1], after = match[4];
-        var bullet = unorderedBullets.indexOf(match[2]) >= 0 || match[2].indexOf(">") >= 0
+        var indent = match[1], after = match[4], task = '';
+        var bullet = unorderedListRE.test(match[2]) || match[2].indexOf(">") >= 0
           ? match[2]
           : (parseInt(match[3], 10) + 1) + ".";
 

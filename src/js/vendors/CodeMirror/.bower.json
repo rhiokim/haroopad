@@ -16,14 +16,13 @@
     "package.json"
   ],
   "homepage": "https://github.com/marijnh/CodeMirror",
-  "_release": "e2962a5b0d",
+  "_release": "9ee2cefa7f",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "e2962a5b0df56c8ee5a4482899d308decf3d7677"
+    "commit": "9ee2cefa7f7eded5aba5cb297236038429e5036d"
   },
   "_source": "git://github.com/marijnh/CodeMirror.git",
   "_target": "master",
-  "_originalSource": "git://github.com/marijnh/CodeMirror.git",
-  "_direct": true
+  "_originalSource": "git://github.com/marijnh/CodeMirror.git"
 }

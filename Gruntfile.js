@@ -802,6 +802,21 @@ module.exports = function(grunt) {
     grunt.task.run('shell:ss_' + postfix);
   });
 
+  grunt.registerTask('prebuilt', function() {
+    var nwv = grunt.option('target') || grunt.config.get('nwv');
+    var arch = grunt.option('arch') || 'x64';
+    var deep = grunt.option('deep') || false;
+
+    grunt.config.set('nwv', nwv);
+    grunt.config.set('arch', arch);
+
+    if (deep) {
+      grunt.task.run('shell:pouchdb');
+    }
+
+    grunt.task.run('uglify:preBuiltLibs');
+    grunt.task.run('shell:highlightjs');
+  });
   
   /* deploy to Application directory */
   grunt.registerTask('deploy', [ 'shell:deploy']);
@@ -814,9 +829,6 @@ module.exports = function(grunt) {
   grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss', 'copy:boxes' ]);
 
   grunt.registerTask('cp', [ 'copy:main', 'copy:pkgres', 'nwlibs', 'nwres' ]);
-
-  /* pre built */
-  grunt.registerTask('prebuilt', [ 'uglify:preBuiltLibs', 'shell:highlightjs', 'shell:pouchdb' ]);
 
   /* css */
   grunt.registerTask('css', [ 'cssmin:pad', 'cssmin:preferences', 'cssmin:viewer', 'cssmin:codemirror' ]);
