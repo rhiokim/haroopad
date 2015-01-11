@@ -16,11 +16,11 @@
     "package.json"
   ],
   "homepage": "https://github.com/marijnh/CodeMirror",
-  "_release": "9ee2cefa7f",
+  "_release": "3cf2e251a3",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "9ee2cefa7f7eded5aba5cb297236038429e5036d"
+    "commit": "3cf2e251a3037089a626f53facfe91bfe65d790b"
   },
   "_source": "git://github.com/marijnh/CodeMirror.git",
   "_target": "master",

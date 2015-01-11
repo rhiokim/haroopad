@@ -133,9 +133,10 @@
   global.THEMES.user.viewer = loadUserThemes(global.PATHS.theme_dest_viewer);
   global.THEMES.editor = ['default', '3024-day', '3024-night', 'ambiance-mobile', 'ambiance',
     'base16-dark', 'base16-light', 'blackboard', 'cobalt', 'eclipse', 'elegant', 'erlang-dark',
-    'lesser-dark', 'mbo', 'mdn-like', 'midnight', 'monokai', 'neat', 'neo', 'night', 'paraiso-dark', 'paraiso-light',
-    'pastel-on-dark', 'rubyblue', 'solarized dark', 'solarized light', 'the-matrix',
-    'tomorrow-night-eighties', 'twilight', 'vibrant-ink', 'xq-dark', 'xq-light'
+    'lesser-dark', 'mbo', 'mdn-like', 'midnight', 'monokai', 'neat', 'neo', 'night', 'paraiso-dark', 
+    'paraiso-light', 'pastel-on-dark', 'rubyblue', 'solarized dark', 'solarized light', 'the-matrix',
+    'tomorrow-night-bright', 'tomorrow-night-eighties', 'twilight', 'vibrant-ink', 'xq-dark', 'xq-light',
+    'zenburn'
   ];
   global.THEMES.viewer = ['clearness', 'clearness-dark', 'node-dark', 'github', 'haroopad',
     'solarized-dark', 'solarized-light', 'metro-vibes', 'metro-vibes-dark', 'wood', 'wood-ri'
