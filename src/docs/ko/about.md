@@ -8,29 +8,23 @@
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==새로운 기능 (v0.13.0)==
+### ==새로운 기능 (v0.13.1)==
 
 * 신규 기능
-	- 프리젠테이션 기능 - [http://pad.haroopress.com/page.html?f=how-to-write-presentation](http://pad.haroopress.com/page.html?f=how-to-write-presentation)
-	- 다이어그램(플로우차트, 시퀀스 다이어그램 등) - [http://pad.haroopress.com/page.html?f=how-to-draw-diagram](http://pad.haroopress.com/page.html?f=how-to-draw-diagram)
-* 신규 문법
-	- 타스크 리스트(GFM) - [http://pad.haroopress.com/page.html?f=how-to-manage-tasklist](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist)
-* 코드 하이라이팅 언어 및 테마 추가 - [http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block](http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block)
-	- 총 112가지 언어 하이라이팅 및 49 테마 지원
+	- 완료되지 않는 타스트 수를 앱 뱃지로 표시
+	- tomorrow-night-bright, zenburn 에디터 테마 추가
 
 ### ==중요 변경 사항==
 
 * 버그
-	- [윈도우] 더블 클릭으로 마크다운 문서 파일 열기
-	- 수정된 내용이 있는 윈도우 x 버튼 클릭 시 알림 없이 종료되는 버그 수정
+	- `code` 문법 border 스타일 없어지는 문제 수정
+	- [윈도우, 리눅스] - 시스템 설정 언어로 변경되지 않는 문제 수정
+	- [프리젠테이션] - 커버 이미지를 로컬 이미지로 설정하는 경우 표시되지 않는 오류 수정
+	- 숫자 6 키보드 동작 오류 수정
+	- 실행 직 후 마우스 우측 메뉴 위치 오류 수정
+	- 수학 표현식이 추가된 문서 오픈 시 오류 수정
 * 개선
-	- 에디터 버젼 업그레이드
-	- 수학 표현식의 폰트 지원
-	- 수학 표현식의 정렬 지원
-	- 마크다운 테이블 내의 자동 줄바꿈 시 단어 단위로 잘리도록 개선
-	- 연속되는 테이블 사이에 공백이 추가되도록 개선
-	- 수학 표현식 Equation 렌더링 문제 개선
-	- HTML 마크다운 변환 시 팬스 코드 블럭 지원
+	- [윈도우] Ctrl-Y 단축키 문제 개선
 
 ### 주요기능
 
@@ -46,9 +40,13 @@
 	- less 를 기반으로 한 7 가지의 테마
 	- [markdown-css](https://github.com/rhiokim/markdown-css) 프로젝트 기반
 * 코드 문법 하이라이팅 스타일을 지원
-	- 86 가지의 언어에 대한 문법 강조를 지원
+	- 112 가지의 언어에 대한 문법 강조를 지원
 	- Solaraized, Tomorrow 등 49 가지의 스타일
 	- highlight.js 기반
+* 프리젠테이션 기능 - [http://pad.haroopress.com/page.html?f=how-to-write-presentation](http://pad.haroopress.com/page.html?f=how-to-write-presentation) - v0.13
+	- Shower 기반
+* 다이어그램(플로우차트, 시퀀스 다이어그램 등) - [http://pad.haroopress.com/page.html?f=how-to-draw-diagram](http://pad.haroopress.com/page.html?f=how-to-draw-diagram) - v0.13
+	- Mermaid 기반
 * 마크다운 자동완성 기능
 	- 마크다운 문법의 자동완성을 이용해 문서의 작성의 효율을 높힐 수 있습니다.
 * 사용자 테마 강화
@@ -128,10 +126,11 @@
 	- 각주: `[^1]`
 	- 각주 참조: `[^1]: text`
 		+ 각주 참조 내용에 마크다운 문법 지원
+* Tasklist - [http://pad.haroopress.com/page.html?f=how-to-manage-tasklist](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist) - v0.13.0
+  - Task: `- [ ]`
+  - Task (Done): `- [x]`
 
 ### 곧 출시될 기능
-
-* 할일 목록 기능(tasklist)
 
 ### 추가 정보
 
