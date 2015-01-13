@@ -12,31 +12,37 @@
   text-decoration: underline;
 }
 .markdown h1 {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   font-size: 2.2em;
   font-weight: bold;
   margin: 1.5em 0 1em 0;
 }
 .markdown h2 {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   font-size: 1.8em;
   font-weight: bold;
   margin: 1.275em 0 0.85em 0;
 }
 .markdown h3 {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   font-size: 1.6em;
   font-weight: bold;
   margin: 1.125em 0 0.75em 0;
 }
 .markdown h4 {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   font-size: 1.4em;
   font-weight: bold;
   margin: 0.99em 0 0.66em 0;
 }
 .markdown h5 {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   font-size: 1.2em;
   font-weight: bold;
   margin: 0.855em 0 0.57em 0;
 }
 .markdown h6 {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   font-size: 1em;
   font-weight: bold;
   margin: 0.75em 0 0.5em 0;
@@ -92,14 +98,16 @@
   word-wrap: break-word;
   border: 1px solid #cccccc;
   overflow: auto;
+  padding: .5em;
 }
 .markdown pre code {
   border: 0;
   display: block;
 }
 .markdown pre > code {
+  font-family: Consolas, Inconsolata, Courier, monospace;
+  font-weight: bold;
   white-space: pre;
-  padding: .5em;
   margin: 0;
 }
 .markdown code {
@@ -111,6 +119,10 @@
 }
 .markdown img {
   max-width: 100%;
+}
+.markdown mark {
+  color: #000;
+  background-color: #fcf8e3;
 }
 .markdown table {
   padding: 0;
@@ -138,20 +150,4 @@
 }
 .markdown table tr td > :last-child {
   margin-bottom: 0;
-}
-.markdown {
-  /* custom rule for haroopad */
-
-}
-.markdown em.underline {
-  font-style: normal;
-  text-decoration: underline;
-}
-.markdown strong.highlight {
-  color: black;
-  padding: 0 5px;
-  background-color: #fdffb6;
-  -webkit-box-shadow: #fdffb6 0 0 5px;
-  -moz-box-shadow: #fdffb6 0 0 5px;
-  box-shadow: #fdffb6 0 0 5px;
 }

@@ -265,9 +265,9 @@ function _lazySyntaxHighlight(el) {
 
   try {
     if (!lang) {
-      pre.innerHTML = hljs.highlightAuto(code).value;
+      el.innerHTML = hljs.highlightAuto(code).value;
     } else {
-      pre.innerHTML = hljs.highlight(lang, code).value;
+      el.innerHTML = hljs.highlight(lang, code).value;
     }
   } catch (e) {
     // return code;

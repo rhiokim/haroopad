@@ -13,7 +13,6 @@
   padding: 20px;
   color: #ffffff;
   font-size: 15px;
-  font-family: 'PT Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   background-image: url('wood.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -50,13 +49,11 @@
   line-height: 19px;
 }
 .wood p > code {
-  font-family: 'PT Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   color: #B5FA7F;
   font-size: .9em;
 }
 .wood pre > code {
   font-size: 1em;
-  font-family: 'PT Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   letter-spacing: -1px;
   font-weight: normal;
   text-shadow: none;

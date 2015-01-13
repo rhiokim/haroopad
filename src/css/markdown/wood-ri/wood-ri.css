@@ -13,7 +13,6 @@
   padding: 20px;
   color: #000000;
   font-size: 15px;
-  font-family: 'Lato', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   background-image: url('wood.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -50,13 +49,11 @@
   line-height: 19px;
 }
 .wood-ri p > code {
-  font-family: 'Lato', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   color: #130079;
   font-size: .9em;
 }
 .wood-ri pre > code {
   font-size: 1em;
-  font-family: 'Lato', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   letter-spacing: -1px;
   font-weight: normal;
   text-shadow: none;

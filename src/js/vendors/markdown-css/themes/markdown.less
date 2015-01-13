@@ -4,6 +4,8 @@
 
 @border-color: #ccc;
 @line-height: 1.4em;
+@base-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
+@code-family: Consolas, Inconsolata, Courier, monospace;
 
 .marginT (@margin) {
   margin-top: @margin;
@@ -13,6 +15,7 @@
 }
 
 .hN (@size, @margin) {
+  font-family: @base-family;
   font-size: @size;
   font-weight: bold;
   margin: @margin*1.5 0 @margin 0;
@@ -117,7 +120,8 @@
 
     border: 1px solid @border-color;
     overflow: auto;
-
+    padding: .5em;
+    
     code {
       border: 0;
       display: block;
@@ -125,8 +129,10 @@
 
     &>code {
       //border: 0;
+      font-family: @code-family;
+      font-weight: bold;
       white-space: pre;
-      padding: .5em;
+      //padding: .5em;
       margin: 0;
     }
   }
@@ -143,6 +149,13 @@
   img {
     max-width: 100%;
   }
+
+  mark {
+    color: #000;
+    background-color: #fcf8e3;
+  }
+
+  ins {}
 
   table {
     padding: 0;

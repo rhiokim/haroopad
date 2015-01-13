@@ -13,7 +13,6 @@
   padding: 20px;
   color: #839496;
   font-size: 15px;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   background: #002b36;
   -webkit-font-smoothing: antialiased;
 }
@@ -48,7 +47,6 @@
 }
 .solarized-dark pre > code {
   font-size: .9em;
-  font-family: Consolas, Inconsolata, Courier, monospace;
 }
 .solarized-dark blockquote {
   border-left: 4px solid #005469;

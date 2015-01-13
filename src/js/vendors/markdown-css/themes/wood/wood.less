@@ -8,8 +8,6 @@
 @base-color: #fff;
 @base-size: 1em;
 @base-link-color: darken(#B6F3FF, 10%);
-@base-family: 'PT Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
-@code-family: 'PT Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif !important;
 
 @line-height: 1.7em;
 
@@ -23,7 +21,6 @@
   padding: 20px;
   color: @base-color;
   font-size: @font-size;
-  font-family: @base-family;
   background-image: @bg-image;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -62,7 +59,6 @@
   p {
     line-height: 19px;
     &>code {
-      font-family: @code-family;
       color: #B5FA7F;
       font-size: .9em;
     }
@@ -71,7 +67,6 @@
   pre {
     &>code {
       font-size: 1em;
-      font-family: @code-family;
       letter-spacing: -1px;
       font-weight: normal;
       text-shadow: none;

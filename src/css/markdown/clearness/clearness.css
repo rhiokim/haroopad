@@ -14,7 +14,6 @@
   padding: 20px;
   color: #737373;
   font-size: 15px;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
 }
@@ -43,7 +42,6 @@
 }
 .clearness pre > code {
   font-size: .9em;
-  font-family: Consolas, Inconsolata, Courier, monospace;
 }
 .clearness blockquote {
   padding: 0 15px;

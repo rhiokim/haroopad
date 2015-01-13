@@ -13,7 +13,6 @@
   padding: 20px;
   color: #ffffff;
   font-size: 15px;
-  font-family: 'Open Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   background: #5c5146;
   -webkit-font-smoothing: antialiased;
 }
@@ -45,13 +44,11 @@
   line-height: 19px;
 }
 .metro-vibes-dark p > code {
-  font-family: 'Open Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   color: #e86741;
   font-size: .9em;
 }
 .metro-vibes-dark pre > code {
   font-size: 1em;
-  font-family: 'Open Sans', AppleSDGothicNeo-Medium, 'Segoe UI', 'Malgun Gothic', sans-serif;
   letter-spacing: -1px;
   font-weight: normal;
 }
