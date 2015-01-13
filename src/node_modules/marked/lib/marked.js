@@ -766,18 +766,18 @@ InlineLexer.prototype.output = function(src) {
   // underline
     if (cap = this.rules.underline.exec(src)) {
     src = src.substring(cap[0].length);
-      out += '<em class="underline">'
+      out += '<ins>'
         + this.output(cap[2] || cap[1])
-        + '</em>';
+        + '</ins>';
       continue;
     }
   
   // highlight
     if (cap = this.rules.stronghighlight.exec(src)) {
       src = src.substring(cap[0].length);
-      out += '<strong class="highlight">'
+      out += '<mark>'
         + this.output(cap[2] || cap[1])
-        + '</strong>';
+        + '</mark>';
       continue;
     }
 
