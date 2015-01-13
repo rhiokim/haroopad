@@ -2,7 +2,7 @@
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2014 "Cowboy" Ben Alman
+ * Copyright (c) 2013 "Cowboy" Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
@@ -133,17 +133,9 @@ file.expand = function() {
 
 var pathSeparatorRe = /[\/\\]/g;
 
-// The "ext" option refers to either everything after the first dot (default)
-// or everything after the last dot.
-var extDotRe = {
-  first: /(\.[^\/]*)?$/,
-  last: /(\.[^\/\.]*)?$/,
-};
-
 // Build a multi task "files" object dynamically.
 file.expandMapping = function(patterns, destBase, options) {
   options = grunt.util._.defaults({}, options, {
-    extDot: 'first',
     rename: function(destBase, destPath) {
       return path.join(destBase || '', destPath);
     }
@@ -158,8 +150,8 @@ file.expandMapping = function(patterns, destBase, options) {
       destPath = path.basename(destPath);
     }
     // Change the extension?
-    if ('ext' in options) {
-      destPath = destPath.replace(extDotRe[options.extDot], options.ext);
+    if (options.ext) {
+      destPath = destPath.replace(/(\.[^\/]*)?$/, options.ext);
     }
     // Generate destination filename.
     var dest = options.rename(destBase, destPath, options);
@@ -221,8 +213,6 @@ file.recurse = function recurse(rootdir, callback, subdir) {
 
 // The default file encoding to use.
 file.defaultEncoding = 'utf8';
-// Whether to preserve the BOM on file.read rather than strip it.
-file.preserveBOM = false;
 
 // Read a file, return its contents.
 file.read = function(filepath, options) {
@@ -236,7 +226,7 @@ file.read = function(filepath, options) {
     if (options.encoding !== null) {
       contents = iconv.decode(contents, options.encoding || file.defaultEncoding);
       // Strip any BOM that might exist.
-      if (!file.preserveBOM && contents.charCodeAt(0) === 0xFEFF) {
+      if (contents.charCodeAt(0) === 0xFEFF) {
         contents = contents.substring(1);
       }
     }
@@ -431,7 +421,7 @@ file.doesPathContain = function(ancestor) {
 file.isPathCwd = function() {
   var filepath = path.join.apply(path, arguments);
   try {
-    return file.arePathsEquivalent(fs.realpathSync(process.cwd()), fs.realpathSync(filepath));
+    return file.arePathsEquivalent(process.cwd(), fs.realpathSync(filepath));
   } catch(e) {
     return false;
   }
@@ -441,7 +431,7 @@ file.isPathCwd = function() {
 file.isPathInCwd = function() {
   var filepath = path.join.apply(path, arguments);
   try {
-    return file.doesPathContain(fs.realpathSync(process.cwd()), fs.realpathSync(filepath));
+    return file.doesPathContain(process.cwd(), fs.realpathSync(filepath));
   } catch(e) {
     return false;
   }

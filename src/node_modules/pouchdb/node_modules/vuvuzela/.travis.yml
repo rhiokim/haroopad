@@ -1,0 +1,19 @@
+language: node_js
+
+node_js:
+  - "0.10"
+script: npm run $COMMAND
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - "sleep 5"
+
+env:
+  matrix:
+  - COMMAND=test
+  - COMMAND=coverage
+
+branches:
+  only:
+  - master
+  - /^pull*$/

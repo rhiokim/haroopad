@@ -7,9 +7,9 @@
 @base-color: #222;
 @base-size: 1em;
 @base-link-color: darken(#4183C4, 10%);
-@base-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Roboto Condensed", "Tauri", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
+@base-family: "Roboto Condensed", "Tauri", "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun",  "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
 
-@line-height: 1.7em;
+@line-height: 1.6;
 
 @base-margin: 0;
 @base-padding: 0;
@@ -23,6 +23,7 @@
   font-size: @font-size;
   font-family: @base-family;
   background: @bg-color;
+  line-height: @line-height;
   -webkit-font-smoothing: antialiased;
 
   a {
@@ -35,7 +36,6 @@
 
   h2 {
     border-bottom: 1px solid darken(@bg-color, 10);
-    line-height: @line-height;
   }
 
   h6 {
@@ -48,9 +48,11 @@
 
   p, li, td, h1, h2, h3, h4, h5, h6, blockquote {
     &>code {
-      color: #000;
-      background-color: #feecdd;
-      border: 1px solid #efdfd0;
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 85%;
+      background-color: rgba(0,0,0,0.02);
+      padding: 0.2em 0.5em;
+      border: 1px solid #efefef;
     }
   }
 

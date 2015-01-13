@@ -6,6 +6,7 @@ Map/reduce plugin pulled out of PouchDB.  A PouchDB plugin that, like [PouchDB C
 Building
 ----
 
+    npm install
     npm run build
 
 Testing
@@ -13,14 +14,24 @@ Testing
 
 ### In Node
 
-Run tests with `npm test` and coverage of tests with `npm test --coverage` install dependencies with `npm install`
+    npm test
 
-If you have mocha installed globally you can run single test with:
-```
-TEST_DB=local mocha --reporter spec --grep search_phrase
-```
-In TEST_DB environment variable specify database that PouchDB should use (see package.json)
+To run coverage tests:
+
+    npm run coverage
+
+To run individual tests:
+
+    GREP=my_search_term npm test
 
 ### In the browser
 
-Run `npm run dev` and then point your favorite browser to [http://127.0.0.1:8001/test/index.html](http://127.0.0.1:8001/test/index.html).
+Run 
+
+    npm run dev
+    
+and then point your favorite browser to [http://127.0.0.1:8001/test/index.html](http://127.0.0.1:8001/test/index.html).
+
+To run individual tests, load e.g.:
+
+    http://127.0.0.1:8001/test/index.html?grep=my_search_term

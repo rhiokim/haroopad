@@ -2,7 +2,7 @@
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2014 "Cowboy" Ben Alman
+ * Copyright (c) 2013 "Cowboy" Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
@@ -45,8 +45,6 @@ task.registerTask = function(name) {
   // Override task function.
   var _fn = thisTask.fn;
   thisTask.fn = function(arg) {
-    // Guaranteed to always be the actual task name.
-    var name = thisTask.name;
     // Initialize the errorcount for this task.
     errorcount = grunt.fail.errorcount;
     // Return the number of errors logged during this task.
@@ -60,15 +58,13 @@ task.registerTask = function(name) {
     this.requires = task.requires.bind(task);
     // Expose config.requires on `this`.
     this.requiresConfig = grunt.config.requires;
-    // Return an options object with the specified defaults overwritten by task-
+    // Return an options object with the specified defaults overriden by task-
     // specific overrides, via the "options" property.
     this.options = function() {
       var args = [{}].concat(grunt.util.toArray(arguments)).concat([
         grunt.config([name, 'options'])
       ]);
-      var options = grunt.util._.extend.apply(null, args);
-      grunt.verbose.writeflags(options, 'Options');
-      return options;
+      return grunt.util._.extend.apply(null, args);
     };
     // If this task was an alias or a multi task called without a target,
     // only log if in verbose mode.
@@ -107,7 +103,7 @@ task.normalizeMultiTaskFiles = function(data, target) {
         files.push({src: data.files[prop], dest: grunt.config.process(prop)});
       }
     } else if (Array.isArray(data.files)) {
-      grunt.util._.flatten(data.files).forEach(function(obj) {
+      data.files.forEach(function(obj) {
         var prop;
         if ('src' in obj || 'dest' in obj) {
           files.push(obj);
@@ -232,7 +228,7 @@ task.registerMultiTask = function(name, info, fn) {
     }
     // Fail if any required config properties have been omitted.
     this.requiresConfig([name, target]);
-    // Return an options object with the specified defaults overwritten by task-
+    // Return an options object with the specified defaults overriden by task-
     // and/or target-specific overrides, via the "options" property.
     this.options = function() {
       var targetObj = grunt.config([name, target]);
@@ -240,15 +236,8 @@ task.registerMultiTask = function(name, info, fn) {
         grunt.config([name, 'options']),
         grunt.util.kindOf(targetObj) === 'object' ? targetObj.options : {}
       ]);
-      var options = grunt.util._.extend.apply(null, args);
-      grunt.verbose.writeflags(options, 'Options');
-      return options;
+      return grunt.util._.extend.apply(null, args);
     };
-    // Expose the current target.
-    this.target = target;
-    // Recreate flags object so that the target isn't set as a flag.
-    this.flags = {};
-    this.args.forEach(function(arg) { this.flags[arg] = true; }, this);
     // Expose data on `this` (as well as task.current).
     this.data = grunt.config([name, target]);
     // Expose normalized files object.
@@ -260,6 +249,11 @@ task.registerMultiTask = function(name, info, fn) {
         return grunt.util._(this.files).chain().pluck('src').flatten().uniq().value();
       }.bind(this)
     });
+    // Expose the current target.
+    this.target = target;
+    // Recreate flags object so that the target isn't set as a flag.
+    this.flags = {};
+    this.args.forEach(function(arg) { this.flags[arg] = true; }, this);
     // Call original task function, passing in the target and any other args.
     return fn.apply(this, this.args);
   });
@@ -277,18 +271,11 @@ task.registerInitTask = function(name, info, fn) {
 
 // Override built-in renameTask to use the registry.
 task.renameTask = function(oldname, newname) {
-  var result;
-  try {
-    // Actually rename task.
-    result = parent.renameTask.apply(task, arguments);
-    // Add and remove task.
-    registry.untasks.push(oldname);
-    registry.tasks.push(newname);
-    // Return result.
-    return result;
-  } catch(e) {
-    grunt.log.error(e.message);
-  }
+  // Add and remove task.
+  registry.untasks.push(oldname);
+  registry.tasks.push(newname);
+  // Actually rename task.
+  return parent.renameTask.apply(task, arguments);
 };
 
 // If a property wasn't passed, run all task targets in turn.
@@ -334,7 +321,7 @@ function loadTask(filepath) {
       }
     });
     if (regCount === 0) {
-      grunt.verbose.warn('No tasks were registered or unregistered.');
+      grunt.verbose.error('No tasks were registered or unregistered.');
     }
   } catch(e) {
     // Something went wrong.

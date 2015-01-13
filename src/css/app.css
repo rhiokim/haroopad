@@ -17,8 +17,7 @@ form {
 #dialog,
 #md-help-content,
 button, .btn,
-body > footer,
-.CodeMirror {
+body > footer {
   font-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "微软雅黑", "Meiryo UI", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Segoe UI", AppleSDGothicNeo-Medium, 'Malgun Gothic', Helvetica, Verdana, Tahoma, sans-serif;
 }
 

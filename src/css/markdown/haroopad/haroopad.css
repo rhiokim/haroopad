@@ -17,8 +17,9 @@
   padding: 20px;
   color: #222222;
   font-size: 15px;
-  font-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Roboto Condensed", "Tauri", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
+  font-family: "Roboto Condensed", "Tauri", "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   background: #ffffff;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 .haroopad a {
@@ -29,7 +30,6 @@
 }
 .haroopad h2 {
   border-bottom: 1px solid #e6e6e6;
-  line-height: 1.7em;
 }
 .haroopad h6 {
   color: #777;
@@ -47,9 +47,11 @@
 .haroopad h5 > code,
 .haroopad h6 > code,
 .haroopad blockquote > code {
-  color: #000;
-  background-color: #feecdd;
-  border: 1px solid #efdfd0;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 85%;
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 0.2em 0.5em;
+  border: 1px solid #efefef;
 }
 .haroopad pre > code {
   font-size: 1em;

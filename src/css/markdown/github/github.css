@@ -12,9 +12,10 @@
  */
 .github {
   padding: 20px;
-  color: #000000;
+  font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Segoe UI", AppleSDGothicNeo-Medium, 'Malgun Gothic', Arial, freesans, sans-serif;
   font-size: 15px;
   background: #ffffff;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 .github a {
@@ -25,7 +26,7 @@
 }
 .github h2 {
   border-bottom: 1px solid #e6e6e6;
-  line-height: 1.7em;
+  line-height: 1.6;
 }
 .github h6 {
   color: #777;
@@ -36,6 +37,22 @@
 .github pre > code {
   font-size: .9em;
   font-family: Consolas, Inconsolata, Courier, monospace;
+}
+.github p > code,
+.github li > code,
+.github td > code,
+.github h1 > code,
+.github h2 > code,
+.github h3 > code,
+.github h4 > code,
+.github h5 > code,
+.github h6 > code,
+.github blockquote > code {
+  background-color: rgba(0, 0, 0, 0.07);
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 85%;
+  padding: 0.2em 0.5em;
+  border: 0;
 }
 .github blockquote {
   border-left: 4px solid #e6e6e6;

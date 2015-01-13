@@ -7,9 +7,10 @@
 @base-color: #000;
 @base-size: .9em;
 @base-link-color: darken(#4183C4, 10%);
+@base-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Segoe UI", AppleSDGothicNeo-Medium, 'Malgun Gothic', Arial, freesans, sans-serif;
 @code-family: Consolas, Inconsolata, Courier, monospace;
 
-@line-height: 1.7em;
+@line-height: 1.6;
 
 @base-margin: 0;
 @base-padding: 0;
@@ -19,9 +20,10 @@
 
 .github {
   padding: 20px;
-  color: @base-color;
+  font-family: @base-family;
   font-size: @font-size;
   background: @bg-color;
+  line-height: @line-height;
   -webkit-font-smoothing: antialiased;
 
   a {
@@ -49,6 +51,17 @@
     &>code {
       font-size: .9em;
       font-family: @code-family;
+    }
+  }
+
+  p, li, td, h1, h2, h3, h4, h5, h6, blockquote {
+    &>code {
+      //border: 1px solid #efdfd0;
+      background-color: rgba(0,0,0,0.07);
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 85%;
+      padding: 0.2em 0.5em;
+      border: 0;
     }
   }
 

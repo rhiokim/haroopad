@@ -12,7 +12,7 @@ function Promise(resolver) {
     return new Promise(resolver);
   }
   if (typeof resolver !== 'function') {
-    throw new TypeError('reslover must be a function');
+    throw new TypeError('resolver must be a function');
   }
   this.state = states.PENDING;
   this.queue = [];

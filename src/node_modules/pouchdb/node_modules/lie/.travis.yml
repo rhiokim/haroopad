@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  - "0.10"
+
+before_script:
+  - "cd node_modules/promises-aplus-tests"
+  - "npm run prepublish"
+  - "cd ../.."
+
+script: npm run $COMMAND
+
+env:
+  matrix:
+  - COMMAND=node
+  - COMMAND=browser
+  - COMMAND=cover
+  - COMMAND=jshint

@@ -2,7 +2,7 @@
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2014 "Cowboy" Ben Alman
+ * Copyright (c) 2013 "Cowboy" Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
@@ -22,15 +22,7 @@ var grunt = module.exports = {};
 function gRequire(name) {
   return grunt[name] = require('./grunt/' + name);
 }
-
-var util = require('grunt-legacy-util');
-grunt.util = util;
-grunt.util.task = require('./util/task');
-
-var Log = require('grunt-legacy-log').Log;
-var log = new Log({grunt: grunt});
-grunt.log = log;
-
+var util = gRequire('util');
 gRequire('template');
 gRequire('event');
 var fail = gRequire('fail');
@@ -38,6 +30,7 @@ gRequire('file');
 var option = gRequire('option');
 var config = gRequire('config');
 var task = gRequire('task');
+var log = gRequire('log');
 var help = gRequire('help');
 gRequire('cli');
 var verbose = grunt.verbose = log.verbose;
@@ -159,7 +152,5 @@ grunt.tasks = function(tasks, options, done) {
   // Execute all tasks, in order. Passing each task individually in a forEach
   // allows the error callback to execute multiple times.
   tasks.forEach(function(name) { task.run(name); });
-  // Run tasks async internally to reduce call-stack, per:
-  // https://github.com/gruntjs/grunt/pull/1026
-  task.start({asyncDone:true});
+  task.start();
 };

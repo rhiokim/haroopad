@@ -50,9 +50,9 @@ function backOff(repId, src, target, opts, returnValue, result, error) {
   }
   returnValue.emit('requestError', error);
   if (returnValue.state === 'active') {
-    returnValue.emit('syncStopped');
+    returnValue.emit('paused', error);
     returnValue.state = 'stopped';
-    returnValue.once('syncRestarted', function () {
+    returnValue.once('active', function () {
       opts.current_back_off = opts.default_back_off;
     });
   }
@@ -97,12 +97,9 @@ Replication.prototype.cancel = function () {
 Replication.prototype.ready = function (src, target) {
   var self = this;
   this.once('change', function () {
-    if (this.state === 'pending') {
+    if (this.state === 'pending' || this.state === 'stopped') {
       self.state = 'active';
-      self.emit('syncStarted');
-    } else if (self.state === 'stopped') {
-      self.state = 'active';
-      self.emit('syncRestarted');
+      self.emit('active');
     }
   });
   function onDestroy() {
@@ -174,22 +171,18 @@ function replicate(repId, src, target, opts, returnValue, result) {
       return;
     }
     var docs = currentBatch.docs;
-    return target.bulkDocs({
-      docs: docs
-    }, {
-      new_edits: false
-    }).then(function (res) {
+    return target.bulkDocs({docs: docs, new_edits: false}).then(function (res) {
       if (state.cancelled) {
         completeReplication();
         throw new Error('cancelled');
       }
       var errors = [];
+      var errorsById = {};
       res.forEach(function (res) {
         if (res.error) {
           result.doc_write_failures++;
-          var error = new Error(res.reason || res.message || 'Unknown reason');
-          error.name = res.name || res.error;
-          errors.push(error);
+          errors.push(res);
+          errorsById[res.id] = res;
         }
       });
       result.errors = result.errors.concat(errors);
@@ -197,6 +190,14 @@ function replicate(repId, src, target, opts, returnValue, result) {
       var non403s = errors.filter(function (error) {
         return error.name !== 'unauthorized' && error.name !== 'forbidden';
       });
+
+      docs.forEach(function(doc) {
+        var error = errorsById[doc._id];
+        if (error) {
+          returnValue.emit('denied', utils.clone(error));
+        }
+      });
+
       if (non403s.length > 0) {
         var error = new Error('bulkDocs error');
         error.other_errors = errors;
@@ -209,10 +210,8 @@ function replicate(repId, src, target, opts, returnValue, result) {
     });
   }
 
-
-  function getNextDoc() {
+  function processDiffDoc(id) {
     var diffs = currentBatch.diffs;
-    var id = Object.keys(diffs)[0];
     var allMissing = diffs[id].missing;
     // avoid url too long error by batching
     var missingBatches = [];
@@ -222,29 +221,30 @@ function replicate(repId, src, target, opts, returnValue, result) {
     }
 
     return utils.Promise.all(missingBatches.map(function (missing) {
-      return src.get(id, {revs: true, open_revs: missing, attachments: true})
-        .then(function (docs) {
-          docs.forEach(function (doc) {
-            if (state.cancelled) {
-              return completeReplication();
-            }
-            if (doc.ok) {
-              result.docs_read++;
-              currentBatch.pendingRevs++;
-              currentBatch.docs.push(doc.ok);
-            }
-          });
-          delete diffs[id];
+      var opts = {
+        revs: true,
+        open_revs: missing,
+        attachments: true
+      };
+      return src.get(id, opts).then(function (docs) {
+        docs.forEach(function (doc) {
+          if (state.cancelled) {
+            return completeReplication();
+          }
+          if (doc.ok) {
+            result.docs_read++;
+            currentBatch.pendingRevs++;
+            currentBatch.docs.push(doc.ok);
+          }
         });
+        delete diffs[id];
+      });
     }));
   }
 
   function getAllDocs() {
-    if (Object.keys(currentBatch.diffs).length > 0) {
-      return getNextDoc().then(getAllDocs);
-    } else {
-      return utils.Promise.resolve();
-    }
+    var diffKeys = Object.keys(currentBatch.diffs);
+    return utils.Promise.all(diffKeys.map(processDiffDoc));
   }
 
 
@@ -255,6 +255,9 @@ function replicate(repId, src, target, opts, returnValue, result) {
       var missing = currentBatch.diffs[id].missing;
       return missing.length === 1 && missing[0].slice(0, 2) === '1-';
     });
+    if (!ids.length) { // nothing to fetch
+      return utils.Promise.resolve();
+    }
     return src.allDocs({
       keys: ids,
       include_docs: true
@@ -279,17 +282,13 @@ function replicate(repId, src, target, opts, returnValue, result) {
     });
   }
 
-
   function getDocs() {
     return getRevisionOneDocs().then(getAllDocs);
   }
 
-
   function finishBatch() {
     writingCheckpoint = true;
-    return checkpointer.writeCheckpoint(
-      currentBatch.seq
-    ).then(function (res) {
+    return checkpointer.writeCheckpoint(currentBatch.seq).then(function (res) {
       writingCheckpoint = false;
       if (state.cancelled) {
         completeReplication();
@@ -305,7 +304,6 @@ function replicate(repId, src, target, opts, returnValue, result) {
       throw err;
     });
   }
-
 
   function getDiffs() {
     var diff = {};
@@ -325,7 +323,6 @@ function replicate(repId, src, target, opts, returnValue, result) {
     });
   }
 
-
   function startNextBatch() {
     if (state.cancelled || currentBatch) {
       return;
@@ -336,13 +333,13 @@ function replicate(repId, src, target, opts, returnValue, result) {
     }
     currentBatch = batches.shift();
     getDiffs()
-    .then(getDocs)
-    .then(writeDocs)
-    .then(finishBatch)
-    .then(startNextBatch)
-    .catch(function (err) {
-      abortReplication('batch processing terminated with error', err);
-    });
+      .then(getDocs)
+      .then(writeDocs)
+      .then(finishBatch)
+      .then(startNextBatch)
+      .catch(function (err) {
+        abortReplication('batch processing terminated with error', err);
+      });
   }
 
 
@@ -350,6 +347,7 @@ function replicate(repId, src, target, opts, returnValue, result) {
     if (pendingBatch.changes.length === 0) {
       if (batches.length === 0 && !currentBatch) {
         if ((continuous && changesOpts.live) || changesCompleted) {
+          returnValue.emit('paused');
           returnValue.emit('uptodate', utils.clone(result));
         }
         if (changesCompleted) {
@@ -377,6 +375,9 @@ function replicate(repId, src, target, opts, returnValue, result) {
   function abortReplication(reason, err) {
     if (replicationCompleted) {
       return;
+    }
+    if (!err.message) {
+      err.message = reason;
     }
     result.ok = false;
     result.status = 'aborting';

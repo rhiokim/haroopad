@@ -2,7 +2,7 @@
  * grunt
  * http://gruntjs.com/
  *
- * Copyright (c) 2014 "Cowboy" Ben Alman
+ * Copyright (c) 2013 "Cowboy" Ben Alman
  * Licensed under the MIT license.
  * https://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
  */
@@ -21,7 +21,7 @@
     this._queue = [];
     // Queue placeholder (for dealing with nested tasks).
     this._placeholder = {placeholder: true};
-    // Queue marker (for clearing the queue programmatically).
+    // Queue marker (for clearing the queue programatically).
     this._marker = {marker: true};
     // Options.
     this._options = {};
@@ -85,18 +85,10 @@
     return !!this._tasks[name].fn.alias;
   };
 
-  // Has the specified task been registered?
-  Task.prototype.exists = function(name) {
-    return name in this._tasks;
-  };
-
   // Rename a task. This might be useful if you want to override the default
   // behavior of a task, while retaining the old name. This is a billion times
   // easier to implement than some kind of in-task "super" functionality.
   Task.prototype.renameTask = function(oldname, newname) {
-    if (!this._tasks[oldname]) {
-      throw new Error('Cannot rename missing "' + oldname + '" task.');
-    }
     // Rename task.
     this._tasks[newname] = this._tasks[oldname];
     // Update name property of task.
@@ -185,7 +177,7 @@
     return this;
   };
 
-  // Add a marker to the queue to facilitate clearing it programmatically.
+  // Add a marker to the queue to facilitate clearing it programatically.
   Task.prototype.mark = function() {
     this._push(this._marker);
     // Make chainable!
@@ -193,7 +185,7 @@
   };
 
   // Run a task function, handling this.async / return value.
-  Task.prototype.runTaskFn = function(context, fn, done, asyncDone) {
+  Task.prototype.runTaskFn = function(context, fn, done) {
     // Async flag.
     var async = false;
 
@@ -220,15 +212,7 @@
       if (!success && this._options.error) {
         this._options.error.call({name: context.name, nameArgs: context.nameArgs}, err);
       }
-      // only call done async if explicitly requested to
-      // see: https://github.com/gruntjs/grunt/pull/1026
-      if (asyncDone) {
-        process.nextTick(function () {
-          done(err, success);
-        });
-      } else {
-        done(err, success);
-      }
+      done(err, success);
     }.bind(this);
 
     // When called, sets the async flag and returns a function that can
@@ -259,10 +243,7 @@
   };
 
   // Begin task queue processing. Ie. run all tasks.
-  Task.prototype.start = function(opts) {
-    if (!opts) {
-      opts = {};
-    }
+  Task.prototype.start = function() {
     // Abort if already running.
     if (this._running) { return false; }
     // Actually process the next task.
@@ -299,7 +280,7 @@
       // Actually run the task function (handling this.async, etc)
       this.runTaskFn(context, function() {
         return thing.task.fn.apply(this, this.args);
-      }, nextTask, !!opts.asyncDone);
+      }, nextTask);
 
     }.bind(this);
 

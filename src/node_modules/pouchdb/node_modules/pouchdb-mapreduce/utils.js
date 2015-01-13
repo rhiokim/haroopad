@@ -5,14 +5,6 @@ if (typeof global.Promise === 'function') {
 } else {
   exports.Promise = require('lie');
 }
-// uniquify a list, similar to underscore's _.uniq
-exports.uniq = function (arr) {
-  var map = {};
-  arr.forEach(function (element) {
-    map[element] = true;
-  });
-  return Object.keys(map);
-};
 
 exports.inherits = require('inherits');
 exports.extend = require('pouchdb-extend');
@@ -73,6 +65,24 @@ exports.sequentialize = function (queue, promiseFactory) {
       return promiseFactory.apply(that, args);
     });
   };
+};
+
+// uniq an array of strings, order not guaranteed
+// similar to underscore/lodash _.uniq
+exports.uniq = function (arr) {
+  var map = {};
+
+  for (var i = 0, len = arr.length; i < len; i++) {
+    map['$' + arr[i]] = true;
+  }
+
+  var keys = Object.keys(map);
+  var output = new Array(keys.length);
+
+  for (i = 0, len = keys.length; i < len; i++) {
+    output[i] = keys[i].substring(1);
+  }
+  return output;
 };
 
 var crypto = require('crypto');

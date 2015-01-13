@@ -1,0 +1,17 @@
+{
+  "name": "lie",
+  "version": "2.8.1",
+  "description": "A minimal and fast promise implementation",
+  "repo": "calvinmetcalf/lie",
+  "keywords": [],
+  "development": {},
+  "license": "MIT",
+  "main": "lib/lie.js",
+  "scripts": [
+    "lib/lie.js"
+  ],
+  "dependencies": {
+    "calvinmetcalf/immediate": "3.0.0"
+  },
+  "remotes": []
+}

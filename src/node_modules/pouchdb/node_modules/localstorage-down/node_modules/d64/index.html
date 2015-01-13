@@ -1,0 +1,77 @@
+<h1 id="d64">d64</h1>
+<p>a copy-pastable, url friendly, ascii embeddable, lexiographicly sortable binary encoding.</p>
+<h2 id="example">Example</h2>
+<pre><code class="lang-js"><span class=highlight><span class=kd>var</span><span class=w> </span><span class=nx>d64</span><span class=w>  </span><span class=p>=</span><span class=w> </span><span class=nx>require</span><span class=p>(</span><span class=s2>'d64'</span><span class=p>)</span><span class=w>
+
+</span><span class=kd>var</span><span class=w> </span><span class=nx>buf</span><span class=w>  </span><span class=p>=</span><span class=w> </span><span class=kd>new</span><span class=w> </span><span class=nx>Buffer</span><span class=p>(</span><span class=p>[</span><span class=mi>0</span><span class=nx>x01</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=nx>x23</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=nx>x45</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=nx>x67</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=nx>x89</span><span class=p>,</span><span class=w> </span><span class=mi>0</span><span class=nx>xab</span><span class=p>]</span><span class=p>)</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>str</span><span class=w>  </span><span class=p>=</span><span class=w> </span><span class=nx>d64</span><span class=p>.</span><span class=nx>encode</span><span class=p>(</span><span class=nx>binary</span><span class=p>)</span><span class=w>
+</span><span class=kd>var</span><span class=w> </span><span class=nx>buf2</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>d64</span><span class=p>.</span><span class=nx>decode</span><span class=p>(</span><span class=nx>string</span><span class=p>)</span></span></code></pre>
+<h2 id="encoding-binary-as-base-64-ascii">Encoding binary as base 64 ascii</h2>
+<p>There is already a well described base64 encoding [<a href="http://www.rfc-base.org/txt/rfc-3548.txt">1</a>]
+but it has some downsides, base 64 encoded are not lexiographically sortable,
+because the ascii characters do not have the same ordering as they unencoded
+bytes they encode. Consistent ordering is very useful when building database
+which needs sorting in an enviroment where a binary key is not possible
+(for example, in indexeddb or levelup[<a href="https://github.com/rvagg/node-levelup">2</a>] in the browser)</p>
+<p>Also, it&#39;s simplest if all the characters used do not need to be encoded in
+common text inputs, such as URLs, or the shell. Finally, some of the 
+non-alphanumeric characters may  trigger line breaks in a textarea,
+which can make the encoded string ambigious.</p>
+<p>There are other encodings which have addressed some of these issues,
+such as hex and base32[<a href="http://www.rfc-base.org/txt/rfc-3548.txt">1</a>], base58[<a href="http://search.cpan.org/~miyagawa/Encode-Base58-0.01/lib/Encode/Base58.pm">3</a>].
+base16 or base32 expand the message more than necessary,
+and since base58 does not line up with a whole number of bits,
+then the implementation is not simple, and requires big integers.</p>
+<p>There are also other interesting encodings such as zbase32 [<a href="http://search.cpan.org/~gwyn/Convert-zBase32-0.0201/lib/Convert/zBase32.pm">4</a>] or proquints [<a href="http://arxiv.org/html/0901.4016">5</a>]
+which are optimized for human transmission (recognition and pronouncability).</p>
+<p>d64 is optimized for being easy to implement, fast to encode/decode,
+and that a collection of encoded strings should have the same bytewise ordering
+as they would unencoded.</p>
+<p>the 64 characters, in ascending order, are <code>.</code> (full stop) <code>0-9</code> (the digits),
+<code>A-Z</code> (the capital letters), <code>_</code> (underscore), <code>a-z</code> (the lowercase letters).</p>
+<pre><code class="lang-js"><span class=highlight><span class=kd>var</span><span class=w> </span><span class=nx>chars</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=s2>'.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz'</span></span></code></pre>
+<h2 id="justification-for-choice-of-characters">Justification for choice of characters</h2>
+<p>There are only 62 alphanumeric characters, so we need to pick two more.
+first, lets find the characters which can be used in URLs without escaping them.</p>
+<pre><code class="lang-js"><span class=highlight><span class=kd>var</span><span class=w> </span><span class=nx>sensible</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=s2>'!@#$%^&*(){}?+|_"<>\',-.'</span><span class=w>
+  </span><span class=p>.</span><span class=nx>split</span><span class=p>(</span><span class=s2>''</span><span class=p>)</span><span class=p>.</span><span class=nx>sort</span><span class=p>(</span><span class=p>)</span><span class=p>.</span><span class=nx>map</span><span class=p>(</span><span class=nx>encodeURIComponent</span><span class=p>)</span><span class=w>
+  </span><span class=p>.</span><span class=nx>filter</span><span class=p>(</span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>e</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=kd>return</span><span class=w> </span><span class=nx>e</span><span class=p>.</span><span class=nx>length</span><span class=w> </span><span class=p>=</span><span class=p>=</span><span class=mi>1</span><span class=w> </span><span class=p>}</span><span class=p>)</span><span class=w>
+  </span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=s2>''</span><span class=p>)</span></span></code></pre>
+<p>the non-encoded characters are <code>!&#39;()*-._~</code></p>
+<p><code>_</code> is an obvious choice, because it&#39;s very nearly always a valid character
+within a variable name, so it&#39;s treated like a aphabetic character in most cases.</p>
+<p>It&#39;s better not to choose <code>!</code> and <code>~</code>, because they are the first and last printable
+characters, so they are quite useful for delimiting strings while maintaining the sorting
+properties - for instance strings of d64.</p>
+<p><code>!</code> and <code>~</code> are commonly used in levelup[<a href="https://github.com/rvagg/node-levelup">2</a>], and that is one of the target applications for d64.</p>
+<p><code>-</code> causes text areas to line wrap, so that is out.</p>
+<p><code>&#39;*()</code> are all significant in bash.</p>
+<p>that leaves just <code>.</code>
+It feels weird to use <code>.</code> as a value, but all the other choices have been eliminated.</p>
+<h2 id="invalid-encoded-lengths">Invalid encoded lengths</h2>
+<p>d64 does not use any padding at the end, as in base64.
+(there are no suitable characters left, anyway) the string length mod 4
+a d64 string encodes is always 2, 3, or 0. If the length % 4 is 1,
+that means there is 6 bits overhanging which is invalid.</p>
+<p>For characters which overhang the byte array, (i.e. the last character if length % 4 == 2 or 3)
+the overhanging portion must encode 0 bits.</p>
+<p><code>if length % 4 == 2</code> then 4 bits overhang, the valid characters are: <code>.FVK</code>
+<code>if length % 4 == 3</code> then 2 bits overhang, the valid characters are: <code>.37BFJNRVZcgkosw</code></p>
+<pre><code class="lang-js"><span class=highlight><span class=kd>var</span><span class=w> </span><span class=nx>overhang2bits</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>chars</span><span class=p>.</span><span class=nx>split</span><span class=p>(</span><span class=s2>''</span><span class=p>)</span><span class=p>.</span><span class=nx>filter</span><span class=p>(</span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>_</span><span class=p>,</span><span class=w> </span><span class=nx>i</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=kd>return</span><span class=w> </span><span class=p>!</span><span class=p>(</span><span class=nx>i</span><span class=p>&</span><span class=mi>0</span><span class=nx>xf</span><span class=p>)</span><span class=w> </span><span class=p>}</span><span class=p>)</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=s2>''</span><span class=p>)</span><span class=w>
+</span><span class=c>// ==> .FVK
+</span><span class=kd>var</span><span class=w> </span><span class=nx>overhang4bits</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>chars</span><span class=p>.</span><span class=nx>split</span><span class=p>(</span><span class=s2>''</span><span class=p>)</span><span class=p>.</span><span class=nx>filter</span><span class=p>(</span><span class=kd>function</span><span class=w> </span><span class=p>(</span><span class=nx>_</span><span class=p>,</span><span class=w> </span><span class=nx>i</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=kd>return</span><span class=w> </span><span class=p>!</span><span class=p>(</span><span class=nx>i</span><span class=p>&</span><span class=mi>0</span><span class=nx>x3</span><span class=p>)</span><span class=w> </span><span class=p>}</span><span class=p>)</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=s2>''</span><span class=p>)</span><span class=w>
+</span><span class=>//</span><span class=w> </span><span class=p>=</span><span class=p>=</span><span class=p>></span><span class=w> </span><span class=p>.</span><span class=mi>37</span><span class=nx>BFJNRVZcgkosw</span></span></code></pre>
+<p>Although everything is for a reason and carefully described, that doesn&#39;t mean inventing
+your own encoding isn&#39;t a douchebag thing to do, but hey - everyone else does it!</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="http://www.rfc-base.org/txt/rfc-3548.txt">http://www.rfc-base.org/txt/rfc-3548.txt</a></li>
+<li><a href="https://github.com/rvagg/node-levelup">https://github.com/rvagg/node-levelup</a></li>
+<li><a href="http://search.cpan.org/~miyagawa/Encode-Base58-0.01/lib/Encode/Base58.pm">http://search.cpan.org/~miyagawa/Encode-Base58-0.01/lib/Encode/Base58.pm</a></li>
+<li><a href="http://search.cpan.org/~gwyn/Convert-zBase32-0.0201/lib/Convert/zBase32.pm">http://search.cpan.org/~gwyn/Convert-zBase32-0.0201/lib/Convert/zBase32.pm</a></li>
+<li><a href="http://arxiv.org/html/0901.4016">http://arxiv.org/html/0901.4016</a></li>
+</ol>
+<h2 id="license">License</h2>
+<p>MIT</p>
+<hr>
+

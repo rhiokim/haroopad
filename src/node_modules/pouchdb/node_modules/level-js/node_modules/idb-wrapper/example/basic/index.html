@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>IDBWrapper Basic CRUD Example</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="../lib/requirejs/require.js"></script>
+</head>
+<body class="vbox">
+<div id="head">IDBWrapper Basic CRUD Example
+  <span class="sourceLink">
+    <a href="../../">IDBWrapper Home</a> /
+    <a href="../">IDBWrapper Examples</a>
+    -- <a href="https://github.com/jensarps/IDBWrapper/tree/master/example/basic" target="_blank">View Source on GitHub</a>
+  </span>
+</div>
+<div class="hbox flex">
+  <div class="vbox flex" id="results-container">
+    QueryResults
+  </div>
+  <div class="vbox">
+    <div id="query"></div>
+    <div id="input">
+      <p>
+        Enter some data to save. As ID, enter a numeric value or leave blank.
+      </p>
+
+      <div><label>ID</label><input id="customerid"></div>
+      <div><label>First Name</label><input id="firstname"></div>
+      <div><label>Last Name</label><input id="lastname"></div>
+      <button id="submit">Enter data</button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>

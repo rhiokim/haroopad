@@ -54,6 +54,14 @@ function sliceResults(results, limit, skip) {
   return results;
 }
 
+function rowToDocId(row) {
+  var val = row.value;
+  // Users can explicitly specify a joined doc _id, or it
+  // defaults to the doc _id that emitted the key/value.
+  var docId = (val && typeof val === 'object' && val._id) || row.id;
+  return docId;
+}
+
 function createBuiltInError(name) {
   var error = new Error('builtin ' + name +
     ' function requires map values to be numbers' +
@@ -174,6 +182,7 @@ function httpQuery(db, fun, opts) {
   // not the final result of map and reduce.
   addHttpParam('reduce', opts, params);
   addHttpParam('include_docs', opts, params);
+  addHttpParam('attachments', opts, params);
   addHttpParam('limit', opts, params);
   addHttpParam('descending', opts, params);
   addHttpParam('group', opts, params);
@@ -524,32 +533,43 @@ var queryView = utils.sequentialize(mainQueue, function (view, opts) {
     });
   }
 
-  function onMapResultsReady(results) {
-    var res;
+  function onMapResultsReady(rows) {
+    var finalResults;
     if (shouldReduce) {
-      res = reduceView(view, results, opts);
+      finalResults = reduceView(view, rows, opts);
     } else {
-      res = {
+      finalResults = {
         total_rows: totalRows,
         offset: skip,
-        rows: results
+        rows: rows
       };
     }
     if (opts.include_docs) {
-      var getDocsPromises = results.map(function (row) {
-        var val = row.value;
-        var docId = (val && typeof val === 'object' && val._id) || row.id;
-        return view.sourceDB.get(docId, {conflicts: opts.conflicts}).then(function (joinedDoc) {
-          row.doc = joinedDoc;
-        }, function () {
-          // document error = don't join
+      var docIds = utils.uniq(rows.map(rowToDocId));
+
+      return view.sourceDB.allDocs({
+        keys: docIds,
+        include_docs: true,
+        conflicts: opts.conflicts,
+        attachments: opts.attachments
+      }).then(function (allDocsRes) {
+        var docIdsToDocs = {};
+        allDocsRes.rows.forEach(function (row) {
+          if (row.doc) {
+            docIdsToDocs['$' + row.id] = row.doc;
+          }
         });
-      });
-      return Promise.all(getDocsPromises).then(function () {
-        return res;
+        rows.forEach(function (row) {
+          var docId = rowToDocId(row);
+          var doc = docIdsToDocs['$' + docId];
+          if (doc) {
+            row.doc = doc;
+          }
+        });
+        return finalResults;
       });
     } else {
-      return res;
+      return finalResults;
     }
   }
 
