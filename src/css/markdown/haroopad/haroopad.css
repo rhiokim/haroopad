@@ -17,7 +17,7 @@
   padding: 20px;
   color: #222222;
   font-size: 15px;
-  font-family: 'Roboto Condensed', 'Tauri';
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimSun", "Roboto Condensed", "Tauri", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", 'Segoe UI', AppleSDGothicNeo-Medium, 'Malgun Gothic', Verdana, Tahoma, sans-serif;
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
 }
