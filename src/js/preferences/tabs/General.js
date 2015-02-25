@@ -29,17 +29,22 @@ define([
 				'change select[name=dateTime]': 'changeDateFormat'
 			},
 
-			formats: [ 'l', 'L', 'll', 'LL', 'lll', 'LLL', 'llll', 'LLLL' ],
+			formats: global.DATETIME,
 
 			initialize: function() {
+				var text, option;
+
 				this.$('input[name=enableAutoComplete]').prop('checked', config.enableAutoComplete);
 				this.$('input[name=enableSyncScroll]').prop('checked', config.enableSyncScroll);
 				this.$('input[name=enableLastFileRestore]').prop('checked', config.enableLastFileRestore);
 				this.$('input[name=playKeypressSound]').prop('checked', config.playKeypressSound);
 
 
-				this.formats.forEach(function(prop) {
-					var option = $('<option>').attr('value', prop).text(moment(8806).format(prop));
+				this.formats.forEach(function(prop, idx) {
+					text = idx > 7 ? moment(8806).format(prop) +' ('+ prop +')' : moment(8806).format(prop)
+					option = $('<option>')
+								.attr('value', prop)
+								.text(text);
 					this.$('select[name=dateTime]').append(option);
 				});
 

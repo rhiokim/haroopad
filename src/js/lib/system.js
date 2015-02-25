@@ -28,6 +28,8 @@
   global.mdexts = [ 'md', 'mmd', 'markdown', 'mdown', 'markdn', 'mkd', 'mkdn', 'mdwn',
                   'mdtxt', 'mdtext', 'mdml' ];
 
+  global.DATETIME = [ 'l', 'L', 'll', 'LL', 'lll', 'LLL', 'llll', 'LLLL', 'Do MMMM YYYY' ];
+
   /* system path */
   global.PATHS = {
     node_modules: path.join(global.EXECPATH, 'Libraries', '.node_modules'),
