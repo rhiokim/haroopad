@@ -35,42 +35,45 @@ define([], function() {
     var stat = getState(cm);
 
     var replaceSelection = function(start, end) {
-      var text;
+      var text, selectedText, pre, post;
       var startPoint = cm.getCursor('start');
       var endPoint = cm.getCursor('end');
-      if (stat[name]) {
-        text = cm.getLine(startPoint.line);
-        start = text.slice(0, startPoint.ch);
-        end = text.slice(startPoint.ch);
-        if (name === 'bold') {
-          start = start.replace(/^(.*)?(\*|\_){2}(\S+.*)?$/, '$1$3');
-          end = end.replace(/^(.*\S+)?(\*|\_){2}(\s+.*)?$/, '$1$3');
-          startPoint.ch -= 2;
-          endPoint.ch += 2;
-        } else if (name === 'italic') {
-          start = start.replace(/^(.*)?(\*|\_)(\S+.*)?$/, '$1$3');
-          end = end.replace(/^(.*\S+)?(\*|\_)(\s+.*)?$/, '$1$3');
-          startPoint.ch -= 1;
-          endPoint.ch += 1;
-        }
-        // cm.setLine(startPoint.line, start + end);
-        cm.replaceRange(start + end, startPoint, endPoint);
-        cm.setSelection(startPoint, endPoint);
-        cm.focus();
+
+      end = end || start;
+
+      text = cm.getLine(startPoint.line);
+      selectedText = cm.getSelection();
+
+      if (!selectedText) {
+        cm.replaceSelection(start + end);
+        startPoint.ch += start.length;
+        cm.setCursor(startPoint);
         return;
       }
-      if (end === null) {
-        end = '';
+
+      pre = cm.getRange({ line: startPoint.line, ch: startPoint.ch - start.length }, startPoint);
+      post = cm.getRange(endPoint, { line: endPoint.line, ch: endPoint.ch + end.length });
+
+      if (pre !== start || post !== end) {
+        cm.replaceSelection(start + selectedText + end);
+
+        startPoint.ch += start.length;
+        
+        if (startPoint.line == endPoint.line) {
+          endPoint.ch += end.length;
+        }
+        
+        cm.setSelection(startPoint, endPoint);
       } else {
-        end = end || start;
+        startPoint.ch -= start.length;
+        cm.replaceRange(selectedText, startPoint, { line: endPoint.line, ch: endPoint.ch + end.length });
+        
+        if (startPoint.line == endPoint.line) {
+          endPoint.ch -= end.length;
+        }
+        
+        cm.setSelection(startPoint, endPoint);
       }
-      text = cm.getSelection();
-      cm.replaceSelection(start + text + end);
-
-      startPoint.ch += start.length;
-      endPoint.ch += start.length;
-
-      cm.setSelection(startPoint, endPoint);
       cm.focus();
     };
 
