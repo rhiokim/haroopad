@@ -3,35 +3,37 @@
   "authors": [
     "knsv <knut@sveido.com>"
   ],
-  "description": "Markdownish syntax for generating flowcharts",
+  "description": "Markdownish syntax for generating flowcharts, sequence diagrams and gantt charts.",
   "main": "dist/mermaid.slim.js",
   "keywords": [
     "diagram",
     "markdown",
-    "flowchart"
+    "flowchart",
+    "sequence diagram",
+    "gantt"
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "vendor",
-    "test",
-    "tests"
+    "*",
+    "!dist/",
+    "!dist/*",
+    "!LICENSE"
   ],
   "devDependencies": {
     "jasmine": "~2.0.4",
     "dagre": "0.6.2",
     "d3": "3.3.8",
-    "dagre-d3": "0.3.2"
+    "dagre-d3": "0.3.3"
   },
-  "homepage": "https://github.com/rhiokim/mermaid",
-  "_release": "edaa328c4f",
+  "homepage": "https://github.com/knsv/mermaid",
+  "_release": "3ae1b5f1a3",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "edaa328c4ff4235941916354f14f8e9d0b5e3ee7"
+    "commit": "3ae1b5f1a30a766f82ea6f230372551b1253604c"
   },
-  "_source": "git@github.com:rhiokim/mermaid.git",
+  "_source": "git@github.com:knsv/mermaid.git",
   "_target": "master",
-  "_originalSource": "git@github.com:rhiokim/mermaid.git"
+  "_originalSource": "git@github.com:knsv/mermaid.git",
+  "_direct": true
 }

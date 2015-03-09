@@ -122,6 +122,7 @@ module.exports = function(grunt) {
         files: {
           "build/haroopad/css/viewer.min.css": [
             '<%= vendors %>/haroopad-oembed/jquery.oembed.css',
+            '<%= vendors %>/mermaid/dist/mermaid.css',
             'src/css/viewer.css'
           ]
         }
