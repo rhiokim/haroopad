@@ -21,10 +21,13 @@ Haroopad gives you the same editing experience regardless of the platform you ar
   - [Presentation] - Fixed local cover image error.
   - Fixed border-style display error with code syntax
   - Fixed num 6 key action error
-  - Fixed popup menu position error
   - Fixed open math doc error
+  - Fixed inline math expression
+  - Fixed undoing "Emphasize" does not restore selection
+  - Fixed copy find and paste
 * Enhancements
   - [Win] Ctrl-Y conflict with shortcut for underline syntax. 
+  - align check boxes in task lists with bullet points of regular lists
 
 ### Main Features
 
