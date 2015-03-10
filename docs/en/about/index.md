@@ -8,29 +8,26 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.13.0)==
+### ==New Features (v0.13.1)==
 
 * New Features
-  - Presentation Mode - [reference](http://pad.haroopress.com/page.html?f=how-to-write-presentation)
-  - Drawing Diagram (flowchart, Sequence Diagram) - [reference](http://pad.haroopress.com/page.html?f=how-to-draw-diagram)
-* New Syntax
-  - Tasklist(GFM) - [reference](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist)
-* Added new code language & themes - [reference](http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block)
-  - total 112 languages(swift, gradle ...) and 49 themes
+  - Displays the number of tasks that are not completed in the app badge
+  - Added two themes into editor. tomorrow-night-bright, zenburn
 
 ### ==More changelog==
 
 * Bugs
-  - Fixed No confirm save in Windows on close Window with [X]
-  - Fixed The file path can't contain space in Windows
+  - [Win, Linux] - UI language setting error
+  - [Presentation] - Fixed local cover image error.
+  - Fixed border-style display error with code syntax
+  - Fixed num 6 key action error
+  - Fixed open math doc error
+  - Fixed inline math expression
+  - Fixed undoing "Emphasize" does not restore selection
+  - Fixed copy find and paste
 * Enhancements
-  - Update Codemirror Editor v4.8
-  - Support Font in Math
-  - Support \left and \right in Math
-  - Support custom gfm code block delimiters
-  - Enhance GFM tabls's column width issue
-  - Enhance Two subsequent tables are rendered with no space
-  - Enhance Equation rendering issues 
+  - [Win] Ctrl-Y conflict with shortcut for underline syntax. 
+  - align check boxes in task lists with bullet points of regular lists
 
 ### Main Features
 
@@ -46,7 +43,9 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Live Preview themes
   - 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
 * Syntax Highlighting
-  - 71 languages & 44 styles based on highlight.js
+  - 112 languages & 49 styles based on highlight.js
+* Presentation Mode - [http://pad.haroopress.com/page.html?f=how-to-write-presentation](http://pad.haroopress.com/page.html?f=how-to-write-presentation) - v0.13.0
+* Drawing Diagram (flowchart, Sequence Diagram) - [http://pad.haroopress.com/page.html?f=how-to-draw-diagram](http://pad.haroopress.com/page.html?f=how-to-draw-diagram) - v0.13.0
 * Custom Theme
   - Style based on CSS(Cascading Style Sheet)
 * Font Size
@@ -122,7 +121,7 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 * Footnote
   - Footnote: `[^identity]`
   - Footnote Reference: `[^identity]: text`
-* Tasklist
+* Tasklist - [http://pad.haroopress.com/page.html?f=how-to-manage-tasklist](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist) - v0.13.0
   - Task: `- [ ]`
   - Task (Done): `- [x]`
 
