@@ -171,3 +171,10 @@ p.toc .number {
   background: #fff;
   display: none;
 }
+
+/********************************************
+ * TASK
+ **********************************************/
+input.task-list-item {
+  margin-left: -1.62em;
+}
