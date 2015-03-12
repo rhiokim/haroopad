@@ -17,17 +17,18 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 ### ==More changelog==
 
 * Bugs
-  - [Win, Linux] - UI language setting error
-  - [Presentation] - Fixed local cover image error.
-  - Fixed border-style display error with code syntax
-  - Fixed num 6 key action error
-  - Fixed open math doc error
-  - Fixed inline math expression
-  - Fixed undoing "Emphasize" does not restore selection
-  - Fixed copy find and paste
+  - [Win, Linux] UI language setting error
+  - [Win] Print error
+  - [Presentation] Fixed local cover image error.
+  - Fixed Border-Style display error with code syntax
+  - Fixed Num 6 key action error
+  - Fixed Openning math doc error
+  - Fixed Inline math expression
+  - Fixed Undoing "Emphasize" does not restore selection
+  - Fixed Copy find and paste
 * Enhancements
   - [Win] Ctrl-Y conflict with shortcut for underline syntax. 
-  - align check boxes in task lists with bullet points of regular lists
+  - align Check boxes in task lists with bullet points of regular lists
 
 ### Main Features
 
