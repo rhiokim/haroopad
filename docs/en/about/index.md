@@ -17,8 +17,9 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 ### ==More changelog==
 
 * Bugs
-  - [Win, Linux] - UI language setting error
-  - [Presentation] - Fixed local cover image error.
+  - [Win, Linux] UI language setting error
+  - [Win] Print error
+  - [Presentation] Fixed local cover image error.
   - Fixed border-style display error with code syntax
   - Fixed num 6 key action error
   - Fixed open math doc error

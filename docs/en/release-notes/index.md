@@ -1,3 +1,38 @@
+
+## Haroopad v0.13.1
+
+**New Features** 
+* Displays the number of tasks that are not completed in the app badge
+* Added two themes into editor. tomorrow-night-bright, zenburn
+
+**Bugs** 
+* [Win, Linux] UI language setting error
+* [Win] Print error
+* [Presentation] Fixed local cover image error.
+* Fixed border-style display error with code syntax
+* Fixed num 6 key action error
+* Fixed open math doc error
+* Fixed inline math expression
+* Fixed undoing "Emphasize" does not restore selection
+* Fixed copy find and paste
+
+**Enhancements**
+* [Win] Ctrl-Y conflict with shortcut for underline syntax. 
+* align check boxes in task lists with bullet points of regular lists
+
+##### Github Issue tracker
+
+* v0.13.1 -- https://github.com/rhiokim/haroopad/issues?q=milestone%3Av0.13.1
+
+##### Download
+
+> * [Windows 32 bit](https://dl.dropbox.com/s/13vfiu1ymy1gzty/Haroopad-v0.13.1-win-ia32.msi) / [Windows 64 bit](https://dl.dropbox.com/s/1jdmrbpm4yegen8/Haroopad-v0.13.1-win-x64.msi)
+> * [Mac OSX](https://dl.dropbox.com/s/lfph5rlgerrkgvu/Haroopad-v0.13.1-x64.dmg)
+> * [Linux Debian 32 bit](https://dl.dropbox.com/s/zlpuwe2nk6y0wdo/haroopad-v0.13.1-ia32.deb)
+> * [Linux Debian 64 bit](https://dl.dropbox.com/s/3bcmo6t7plxwdgt/haroopad-v0.13.1-x64.deb)
+> * [Linux tar.gz 32 bit](https://dl.dropbox.com/s/jq41bdk3d6z8d2a/haroopad-v0.13.1-ia32.tar.gz)
+> * [Linux tar.gz 64 bit](https://dl.dropbox.com/s/23ibfziwlxic4jx/haroopad-v0.13.1-x64.tar.gz)
+
 ## Haroopad v0.13.0
 
 **New Features**

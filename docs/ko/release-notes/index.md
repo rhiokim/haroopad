@@ -1,4 +1,42 @@
 
+## Haroopad v0.13.1
+
+**New Features** 
+* ==추가== 프리젠테이션 모드 추가
+* ==추가== 다이어그램 드로잉 (플로우차트, 시퀀스 다이어그램) - https://github.com/knsv/mermaid 기반
+* ==추가== 타스크 리스트(GFM)
+* ==추가== 다국어 지원 - 프랑스어
+* ==추가== 코드 하이라이팅 지원 언어 다수 추가
+
+**Bugs** 
+* [윈도우, 리눅스] - 시스템 설정 언어로 변경되지 않는 문제 수정
+* [윈도우] 프린트가 되지 않는 문제 수정
+* [윈도우] 숫자 6 키보드 동작 오류 수정
+* [프리젠테이션] - 커버 이미지를 로컬 이미지로 설정하는 경우 표시되지 않는 오류 수정
+* `code` 문법 border 스타일 없어지는 문제 수정
+* 수학 표현식이 추가된 문서 오픈 시 오류 수정
+* 수학 표현식이 블럭으로만 렌더링 되는 문제 수정
+* 마크다운 단축키 랩핑, 언랩핑 문제 수정
+* 찾기 입력창에 붙여넣기가 되지 않던 문제 수정
+
+**Enhancements**
+* [윈도우] Ctrl-Y 단축키 문제 개선
+* 타스크 목록과 리스트 목록의 텍스트 시작 정렬 개선
+
+##### Github Issue tracker
+
+* v0.13.1 -- https://github.com/rhiokim/haroopad/issues?q=milestone%3Av0.13.1
+
+##### Download
+
+> * [Windows 32 bit](https://dl.dropbox.com/s/13vfiu1ymy1gzty/Haroopad-v0.13.1-win-ia32.msi) / [Windows 64 bit](https://dl.dropbox.com/s/1jdmrbpm4yegen8/Haroopad-v0.13.1-win-x64.msi)
+> * [Mac OSX](https://dl.dropbox.com/s/lfph5rlgerrkgvu/Haroopad-v0.13.1-x64.dmg)
+> * [Linux Debian 32 bit](https://dl.dropbox.com/s/zlpuwe2nk6y0wdo/haroopad-v0.13.1-ia32.deb)
+> * [Linux Debian 64 bit](https://dl.dropbox.com/s/3bcmo6t7plxwdgt/haroopad-v0.13.1-x64.deb)
+> * [Linux tar.gz 32 bit](https://dl.dropbox.com/s/jq41bdk3d6z8d2a/haroopad-v0.13.1-ia32.tar.gz)
+> * [Linux tar.gz 64 bit](https://dl.dropbox.com/s/23ibfziwlxic4jx/haroopad-v0.13.1-x64.tar.gz)
+
+
 ## Haroopad v0.13.0
 
 **New Features** 
