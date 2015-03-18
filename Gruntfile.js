@@ -39,14 +39,14 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('./src/package.json'),
 
-    nwv: '0.11.5',
+    nwv: '0.12.0',
     os: platform(),
     arch: arch(),
-    app: path.normalize('lib/node-webkit-v<%= nwv %>-<%= os %>-<%= arch %>'),
+    app: path.normalize('lib/nwjs-v<%= nwv %>-<%= os %>-<%= arch %>'),
 
-    resdir: path.normalize(platform() == 'osx' ? '<%= app %>/node-webkit.app/Contents' : '<%= app %>'),
+    resdir: path.normalize(platform() == 'osx' ? '<%= app %>/nwjs.app/Contents' : '<%= app %>'),
 
-    nwexe: path.normalize(platform() == 'osx' ? '<%= resdir %>/MacOS/node-webkit' : '<%= resdir %>/nw'),
+    nwexe: path.normalize(platform() == 'osx' ? '<%= resdir %>/MacOS/nwjs' : '<%= resdir %>/nw'),
 
     vendors: 'src/js/vendors',
     build: 'build',
@@ -148,9 +148,9 @@ module.exports = function(grunt) {
     concat: {
       app: {
         files: {
-          '<%= build %>/haroopad/js/app.js': [
+          '<%= build %>/app.bin.js': [
             'src/js/app/before.app.js',
-            '<%= build%>/app.common.min.js',
+            // '<%= build%>/app.common.min.js',
             '<%= build%>/menu.min.js',
             '<%= build%>/app.r.min.js',
             'src/js/app/after.app.js'
@@ -175,9 +175,9 @@ module.exports = function(grunt) {
 
       pad: {
         files: {
-          '<%= build %>/haroopad/js/pad.js': [
+          '<%= build %>/pad.bin.js': [
             'src/js/pad/before.pad.js',
-            '<%= build%>/pad.common.min.js',
+            // '<%= build%>/pad.common.min.js',
             '<%= build%>/menu.min.js',
             '<%= build%>/pad.r.min.js',
             'src/js/pad/after.pad.js'
@@ -205,9 +205,9 @@ module.exports = function(grunt) {
 
       preferences: {
         files: {
-          '<%= build %>/haroopad/js/preferences.js': [
+          '<%= build %>/preferences.bin.js': [
             'src/js/preferences/before.preferences.js',
-            '<%= build%>/preferences.common.min.js',
+            // '<%= build%>/preferences.common.min.js',
             '<%= build%>/preferences.r.min.js',
             'src/js/preferences/after.preferences.js'
           ]
@@ -242,17 +242,17 @@ module.exports = function(grunt) {
             '<%= build %>/viewer.min.js'
           ]
         }
-      },
+      }//,
 
-      snapshot: {
-        files: {
-          '<%= build %>/haroopad.bin.js': [
-            '<%= build %>/app.js',
-            '<%= build %>/pad.js',
-            '<%= build %>/preferences.js'
-          ]
-        }
-      }
+      // snapshot: {
+      //   files: {
+      //     '<%= build %>/haroopad.bin.js': [
+      //       '<%= build %>/haroopad/js/app.js',
+      //       '<%= build %>/haroopad/js/pad.js',
+      //       '<%= build %>/haroopad/js/preferences.js'
+      //     ]
+      //   }
+      // }
     },
 
     uglify: {
@@ -349,23 +349,22 @@ module.exports = function(grunt) {
         }
       },
 
-      appCommon: {
-        options: {
-          width: 80,
-          mangle: false
-        },
-        files: {
-          '<%= build %>/app.common.min.js': [
-            'src/js/lib/disable.debug.js',
-            'src/js/lib/system.js',
-            'src/js/lib/logger.js',
-            'src/js/lib/utils/util.js',
-            'src/js/lib/utils/analytics.js',
-            'src/js/lib/i18n.js',
-            'src/js/app/app.common.js'
-          ]
-        }
-      },
+      // appCommon: {
+      //   options: {
+      //     width: 80,
+      //     mangle: false
+      //   },
+      //   files: {
+      //     '<%= build %>/app.common.min.js': [
+      //       'src/js/lib/disable.debug.js',
+      //       'src/js/lib/system.js',
+      //       'src/js/lib/logger.js',
+      //       'src/js/lib/utils/util.js',
+      //       'src/js/lib/utils/analytics.js',
+      //       'src/js/lib/i18n.js'
+      //     ]
+      //   }
+      // },
 
       appR: {
         files: {
@@ -375,20 +374,19 @@ module.exports = function(grunt) {
         }
       },
 
-      padCommon: {
-        options: {
-          width: 80,
-          mangle: false
-        },
-        files: {
-          '<%= build %>/pad.common.min.js': [
-            'src/js/lib/logger.js',
-            'src/js/lib/disable.debug.js',
-            'src/js/lib/utils/util.js',
-            'src/js/pad/pad.common.js'
-          ]
-        }
-      },
+      // padCommon: {
+      //   options: {
+      //     width: 80,
+      //     mangle: false
+      //   },
+      //   files: {
+      //     '<%= build %>/pad.common.min.js': [
+      //       'src/js/lib/logger.js',
+      //       'src/js/lib/disable.debug.js',
+      //       'src/js/lib/utils/util.js'
+      //     ]
+      //   }
+      // },
 
       padR: {
         files: {
@@ -398,19 +396,19 @@ module.exports = function(grunt) {
         }
       },
 
-      preferencesCommon: {
-        options: {
-          width: 80,
-          mangle: false
-        },
-        files: {
-          '<%= build %>/preferences.common.min.js': [
-            'src/js/lib/logger.js',
-            'src/js/lib/disable.debug.js',
-            'src/js/lib/utils/util.js'
-          ]
-        }
-      },
+      // preferencesCommon: {
+      //   options: {
+      //     width: 80,
+      //     mangle: false
+      //   },
+      //   files: {
+      //     '<%= build %>/preferences.common.min.js': [
+      //       'src/js/lib/logger.js',
+      //       'src/js/lib/disable.debug.js',
+      //       'src/js/lib/utils/util.js'
+      //     ]
+      //   }
+      // },
 
       preferencesR: {
         files: {
@@ -425,6 +423,34 @@ module.exports = function(grunt) {
           '<%= build %>/viewer.min.js': [
             'src/js/lib/disable.debug.js',
             'src/js/viewer/main.js'
+          ]
+        }
+      },
+
+      system: {
+        options: {
+          width: 80,
+          mangle: false
+        },
+        files: {
+          '<%= build %>/sys.min.js': [
+            'src/js/lib/system.js',
+            'src/js/lib/utils/analytics.js',
+            'src/js/lib/i18n.js'
+          ]
+        }
+      },
+
+      common: {
+        options: {
+          width: 80,
+          mangle: false
+        },
+        files: {
+          '<%= build %>/common.min.js': [
+            'src/js/lib/disable.debug.js',
+            'src/js/lib/logger.js',
+            'src/js/lib/utils/util.js'
           ]
         }
       }
@@ -477,7 +503,7 @@ module.exports = function(grunt) {
 
       ffmpeg: {
         files: [
-          { src:'libs/ffmpegsumo.so', dest: 'lib/node-webkit.app/Contents/Frameworks/node-webkit Framework.framework/Libraries/ffmpegsumo.so' }
+          { src:'libs/ffmpegsumo.so', dest: 'lib/nwjs.app/Contents/Frameworks/nwjs Framework.framework/Libraries/ffmpegsumo.so' }
         ]
       },
 
@@ -558,7 +584,7 @@ module.exports = function(grunt) {
 
       // libs: {
       //   files: [
-      //     { expand: true, cwd: 'lib/node-webkit.app/Contents/Libraries/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' }
+      //     { expand: true, cwd: 'lib/nwjs.app/Contents/Libraries/MathJax/', src: [ '**' ], dest: 'build/lib/MathJax/' }
       //   ]
       // },
 
@@ -607,7 +633,7 @@ module.exports = function(grunt) {
       },
 
       cpLib: {
-        command: 'cp -R lib/node-webkit.app build/haroopad.app'
+        command: 'cp -R lib/nwjs.app build/haroopad.app'
       },
 
       cpZipSrc: {
@@ -620,13 +646,13 @@ module.exports = function(grunt) {
 
       /* v8 heap snapshot for protect source */
       // bin: {
-      //   command: './lib/nwsnapshot --extra_code ./build/haroopad.min.js ./build/haroopad/js/haroopad.bin'
+      //   command: './lib/nwjc --extra_code ./build/haroopad.min.js ./build/haroopad/js/haroopad.bin'
       // },
 
       deploy: {
         command: [
           'rm -rf /Applications/haroopad.app',
-          'cp -R ./lib/node-webkit.app /Applications/haroopad.app',
+          'cp -R ./lib/nwjs.app /Applications/haroopad.app',
           'cp -R ./build/haroopad /Applications/haroopad.app/Contents/Resources/app.nw'
         ].join(';')
       },
@@ -634,7 +660,7 @@ module.exports = function(grunt) {
       /* v8 heap snapshot for protect source */
       ss_darwin: {
         command: [
-          '../haroopad-build/lib/osx-ia32/nwsnapshot',
+          '../haroopad-build/lib/osx-ia32/nwjc',
           '--extra_code',
           './build/haroopad.bin.js',
           './build/haroopad/js/haroopad.bin'
@@ -643,7 +669,7 @@ module.exports = function(grunt) {
 
       ss_win32: {
         command: [
-          '..\\haroopad-build\\lib\\win-ia32\\nwsnapshot.exe',
+          '..\\haroopad-build\\lib\\win-ia32\\nwjc.exe',
           '--extra_code',
           'build\\haroopad.bin.js',
           'build\\haroopad\\js\\haroopad.bin'
@@ -652,7 +678,7 @@ module.exports = function(grunt) {
 
       ss_linux32: {
         command: [
-          '../haroopad-build/lib/linux-ia32/nwsnapshot',
+          '../haroopad-build/lib/linux-ia32/nwjc',
           '--extra_code',
           './build/haroopad.bin.js',
           './build/haroopad/js/haroopad.bin'
@@ -661,7 +687,7 @@ module.exports = function(grunt) {
 
       ss_linux64: {
         command: [
-          '../haroopad-build/lib/linux-ia64/nwsnapshot',
+          '../haroopad-build/lib/linux-ia64/nwjc',
           '--extra_code',
           './build/haroopad.bin.js',
           './build/haroopad/js/haroopad.bin'
@@ -689,6 +715,46 @@ module.exports = function(grunt) {
             cwd: './src/node_modules/pouchdb/node_modules/leveldown/'
           }
         }
+      },
+
+      snap: {
+        command: [
+          '<%=app%>/nwjc',
+          './build/common.min.js',
+          './build/haroopad/js/common.bin'
+        ].join(' ')
+      },
+
+      snapSys: {
+        command: [
+          '<%=app%>/nwjc',
+          './build/sys.min.js',
+          './build/haroopad/js/sys.bin'
+        ].join(' ')
+      },
+
+      snapApp: {
+        command: [
+          '<%=app%>/nwjc',
+          './build/app.bin.js',
+          './build/haroopad/js/app.bin'
+        ].join(' ')
+      },
+
+      snapPad: {
+        command: [
+          '<%=app%>/nwjc',
+          './build/pad.bin.js',
+          './build/haroopad/js/pad.bin'
+        ].join(' ')
+      },
+
+      snapPref: {
+        command: [
+          '<%=app%>/nwjc',
+          './build/preferences.bin.js',
+          './build/haroopad/js/preferences.bin'
+        ].join(' ')
       }
     },
 
@@ -759,7 +825,7 @@ module.exports = function(grunt) {
 
 
   /* v8 protect source code task for cross platform */
-  grunt.registerTask('snapshot', 'cross platform nwsnapshot', function() {
+  grunt.registerTask('snapshot', 'cross platform nwjc', function() {
     var postfix;
 
     if (process.platform === 'linux') {
@@ -771,8 +837,13 @@ module.exports = function(grunt) {
     } else {
       postfix = process.platform;
     }
-    grunt.task.run('concat:snapshot');
-    grunt.task.run('shell:ss_' + postfix);
+    grunt.task.run('uglify:system');
+    grunt.task.run('uglify:common');
+    grunt.task.run('shell:snap');
+    grunt.task.run('shell:snapSys');
+    grunt.task.run('shell:snapApp');
+    grunt.task.run('shell:snapPad');
+    grunt.task.run('shell:snapPref');
   });
 
   grunt.registerTask('prebuilt', function() {
@@ -797,7 +868,7 @@ module.exports = function(grunt) {
   /* luanch mac app */
   grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'shell:bin', 'copy:build', 'replace:info', 'shell:exec' ]);
 
-  /* built-in libs for node-webkit */
+  /* built-in libs for nwjs */
   grunt.registerTask('nwlibs', [ 'clean:nwlibs', 'copy:mathjax', 'copy:highlightjs', 'copy:node_modules', 'copy:docs', 'copy:locales', 'copy:ffmpeg' ]);
   grunt.registerTask('nwres', [ 'clean:nwres', 'copy:userThemes', 'copy:mkdcss', 'copy:boxes' ]);
 
@@ -807,13 +878,13 @@ module.exports = function(grunt) {
   grunt.registerTask('css', [ 'cssmin:pad', 'cssmin:preferences', 'cssmin:viewer', 'cssmin:codemirror' ]);
 
   /* app */
-  grunt.registerTask('app', [ 'concat:appVendors', 'uglify:appCommon', 'requirejs:app', 'uglify:appR', 'concat:app' ]);
+  grunt.registerTask('app', [ 'concat:appVendors', /*'uglify:appCommon',*/ 'requirejs:app', 'uglify:appR', 'concat:app' ]);
 
   /* pad */
-  grunt.registerTask('pad', [ 'concat:padVendors', 'uglify:padCommon', 'requirejs:pad', 'uglify:padR', 'concat:pad', 'copy:codemirror' ]);
+  grunt.registerTask('pad', [ 'concat:padVendors', /*'uglify:padCommon',*/ 'requirejs:pad', 'uglify:padR', 'concat:pad', 'copy:codemirror' ]);
 
   /* preference */
-  grunt.registerTask('preferences', [ 'concat:preferencesVendors', 'uglify:preferencesCommon', 'requirejs:preferences', 'uglify:preferencesR', 'concat:preferences' ]);
+  grunt.registerTask('preferences', [ 'concat:preferencesVendors', /*'uglify:preferencesCommon',*/ 'requirejs:preferences', 'uglify:preferencesR', 'concat:preferences' ]);
 
   /* viewer */
   grunt.registerTask('viewer', [ 'uglify:viewer', 'concat:viewer' ]);

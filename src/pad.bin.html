@@ -238,6 +238,9 @@
   };
   viewer.src = 'viewer.html';
 
+  require('nw.gui').Window.get().evalNWBin(null, 'js/common.bin');
+  require('nw.gui').Window.get().evalNWBin(null, 'js/pad.bin');
+
   function start() {
     pad.apply(this, [global, this, document]);
   }

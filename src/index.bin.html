@@ -26,9 +26,12 @@
   </div>
   <i style="clear:both;"></i>
   <div id="dbinfo"></div-->
-  <script src="js/app.js"></script>
+  <!-- <script src="js/app.js"></script> -->
   <script>
-      app.apply(this, [global, this, document]);
+    require('nw.gui').Window.get().evalNWBin(null, 'js/sys.bin');
+    require('nw.gui').Window.get().evalNWBin(null, 'js/common.bin');
+    require('nw.gui').Window.get().evalNWBin(null, 'js/app.bin');
+    app.apply(this, [global, this, document]);
   </script>
 </body>
 </html>

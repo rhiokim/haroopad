@@ -31,18 +31,20 @@
     fs.appendFile(errFile, message);
   });
 
-  window.addEventListener('error', function(err) {
-    var message = 
-        ' Information | Description \n'
-      + '-------------|-----------------------------\n'
-      + ' Type        | Error\n'
-      + ' Date        | '+ new Date +'\n'
-      + ' Agent       | '+ navigator.userAgent +'\n'
-      + ' File        | '+ err.filename.replace(process.cwd(), '') +'\n'
-      + ' Line Number | '+ err.lineno +'\n'
-      + ' Message     | '+ err.message +'\n\n'
-      
-    fs.appendFile(errFile, message);
-  }, false);
+  global._tracking = function() {
+    window.addEventListener('error', function(err) {
+      var message = 
+          ' Information | Description \n'
+        + '-------------|-----------------------------\n'
+        + ' Type        | Error\n'
+        + ' Date        | '+ new Date +'\n'
+        + ' Agent       | '+ navigator.userAgent +'\n'
+        + ' File        | '+ err.filename.replace(process.cwd(), '') +'\n'
+        + ' Line Number | '+ err.lineno +'\n'
+        + ' Message     | '+ err.message +'\n\n'
+        
+      fs.appendFile(errFile, message);
+    }, false);
+  }
 
 })(window);
