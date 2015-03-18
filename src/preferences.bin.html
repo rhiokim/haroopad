@@ -762,8 +762,10 @@
   <script src="js/preferences.vendors.min.js"></script>
   <!-- <script src="js/preferences.js"></script> -->
   <script>
-    require('nw.gui').Window.get().evalNWBin(null, 'js/common.bin');
-    require('nw.gui').Window.get().evalNWBin(null, 'js/preferences.bin');
+    var win = require('nw.gui').Window.get();
+        win.evalNWBin(null, 'js/common.bin');
+        win.evalNWBin(null, 'js/preferences.bin');
+        
     pref.apply(this, [global, this, document]);
   </script>
 </body>

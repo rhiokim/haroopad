@@ -434,9 +434,9 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= build %>/sys.min.js': [
-            'src/js/lib/system.js',
-            'src/js/lib/utils/analytics.js',
-            'src/js/lib/i18n.js'
+            'src/js/app/sys/system.js',
+            'src/js/app/sys/analytics.js',
+            'src/js/app/sys/i18n.js'
           ]
         }
       },
@@ -450,7 +450,7 @@ module.exports = function(grunt) {
           '<%= build %>/common.min.js': [
             'src/js/lib/disable.debug.js',
             'src/js/lib/logger.js',
-            'src/js/lib/utils/util.js'
+            'src/js/lib/utils.js'
           ]
         }
       }
@@ -894,5 +894,5 @@ module.exports = function(grunt) {
 
   /* pkg */
   grunt.registerTask('default', [ 'asciify', 'clean', 'cp', 'menu', 'css' ]);
-  grunt.registerTask('pkg2', [ 'app', 'pad', 'preferences', 'viewer', 'htmlmin' ]);
+  grunt.registerTask('pkg2', [ 'app', 'pad', 'preferences', 'viewer', 'snapshot', 'htmlmin' ]);
 };
