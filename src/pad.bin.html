@@ -239,8 +239,8 @@
   viewer.src = 'viewer.html';
 
   var win = require('nw.gui').Window.get()
-      win.evalNWBin(null, 'js/common.bin');
-      win.evalNWBin(null, 'js/pad.bin');
+      win.evalNWBin(null, 'dylibs/common.jso');
+      win.evalNWBin(null, 'dylibs/pad.jso');
 
   function start() {
     pad.apply(this, [global, this, document]);

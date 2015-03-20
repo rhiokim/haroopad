@@ -464,6 +464,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/css/column/', src: [ '**' ], dest: 'build/haroopad/css/column/' },
           { expand: true, cwd: 'src/css/viewer-toc/', src: [ '**' ], dest: 'build/haroopad/css/viewer-toc/' },
           { expand: true, cwd: 'src/html/', src: [ '**' ], dest: 'build/haroopad/html/' },
+          { expand: true, cwd: 'src/dylibs/', src: [ '**' ], dest: 'build/haroopad/dylibs/' },
           { src: 'src/index.bin.html', dest: 'build/haroopad/index.html' },
           { src: 'src/pad.bin.html', dest: 'build/haroopad/pad.html' },
           { src: 'src/preferences.bin.html', dest: 'build/haroopad/preferences.html' },
@@ -684,7 +685,7 @@ module.exports = function(grunt) {
         command: [
           '<%=app%>/nwjc',
           './build/common.min.js',
-          './build/haroopad/js/common.bin'
+          './build/haroopad/dylibs/common.jso'
         ].join(' ')
       },
 
@@ -692,7 +693,7 @@ module.exports = function(grunt) {
         command: [
           '<%=app%>/nwjc',
           './build/sys.min.js',
-          './build/haroopad/js/sys.bin'
+          './build/haroopad/dylibs/sys.jso'
         ].join(' ')
       },
 
@@ -700,7 +701,7 @@ module.exports = function(grunt) {
         command: [
           '<%=app%>/nwjc',
           './build/app.bin.js',
-          './build/haroopad/js/app.bin'
+          './build/haroopad/dylibs/app.jso'
         ].join(' ')
       },
 
@@ -708,7 +709,7 @@ module.exports = function(grunt) {
         command: [
           '<%=app%>/nwjc',
           './build/pad.bin.js',
-          './build/haroopad/js/pad.bin'
+          './build/haroopad/dylibs/pad.jso'
         ].join(' ')
       },
 
@@ -716,7 +717,7 @@ module.exports = function(grunt) {
         command: [
           '<%=app%>/nwjc',
           './build/preferences.bin.js',
-          './build/haroopad/js/preferences.bin'
+          './build/haroopad/dylibs/preferences.jso'
         ].join(' ')
       }
     },
@@ -796,7 +797,7 @@ module.exports = function(grunt) {
     if (arch) {
       grunt.config.set('arch', arch);
     }
-    
+
     grunt.task.run('uglify:system');
     grunt.task.run('uglify:common');
     grunt.task.run('shell:snap');
