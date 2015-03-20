@@ -657,43 +657,6 @@ module.exports = function(grunt) {
         ].join(';')
       },
 
-      /* v8 heap snapshot for protect source */
-      ss_darwin: {
-        command: [
-          '../haroopad-build/lib/osx-ia32/nwjc',
-          '--extra_code',
-          './build/haroopad.bin.js',
-          './build/haroopad/js/haroopad.bin'
-        ].join(' ')
-      },
-
-      ss_win32: {
-        command: [
-          '..\\haroopad-build\\lib\\win-ia32\\nwjc.exe',
-          '--extra_code',
-          'build\\haroopad.bin.js',
-          'build\\haroopad\\js\\haroopad.bin'
-        ].join(' ')
-      },
-
-      ss_linux32: {
-        command: [
-          '../haroopad-build/lib/linux-ia32/nwjc',
-          '--extra_code',
-          './build/haroopad.bin.js',
-          './build/haroopad/js/haroopad.bin'
-        ].join(' ')
-      },
-
-      ss_linux64: {
-        command: [
-          '../haroopad-build/lib/linux-ia64/nwjc',
-          '--extra_code',
-          './build/haroopad.bin.js',
-          './build/haroopad/js/haroopad.bin'
-        ].join(' ')
-      },
-
       highlightjs: {
         command: 'node tools/build.js -t browser',
         options: {
@@ -826,17 +789,14 @@ module.exports = function(grunt) {
 
   /* v8 protect source code task for cross platform */
   grunt.registerTask('snapshot', 'cross platform nwjc', function() {
-    var postfix;
+    var nwv = grunt.option('target') || grunt.config.get('nwv');
+    var arch = grunt.option('arch');
+    var deep = grunt.option('deep') || false;
 
-    if (process.platform === 'linux') {
-      if (process.arch === 'x64') {
-        postfix = 'linux64';
-      } else {
-        postfix = 'linux32'
-      }
-    } else {
-      postfix = process.platform;
+    if (arch) {
+      grunt.config.set('arch', arch);
     }
+    
     grunt.task.run('uglify:system');
     grunt.task.run('uglify:common');
     grunt.task.run('shell:snap');
