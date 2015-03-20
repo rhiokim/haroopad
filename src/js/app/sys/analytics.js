@@ -17,8 +17,10 @@ global._gaq = {
 
 		this._iframe = cw = iframe.contentWindow;
 		cw.onload = function() {
-			next(cw._gaq);
 			global._gaq.instance = cw._gaq;
+			if (next) {
+				next(cw._gaq);
+			}
 		};
 	},
 
