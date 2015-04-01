@@ -496,7 +496,7 @@ module.exports = function(grunt) {
           { src: 'src/css/preferences.css', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/preferences.css' },
           { src: 'src/css/keys.css', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/keys.css' },
           { src: 'src/css/select2.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/css/select2.png' },
-          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
+          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/haroopad.icns' },
           { src: 'src/logo.png', dest: 'build/haroopad.app/Contents/Resources/app.nw/logo.png' },
           { src: 'About.md', dest: 'build/haroopad.app/Contents/Resources/app.nw/About.md' }
         ]
@@ -511,7 +511,7 @@ module.exports = function(grunt) {
       build: {
         files: [
           { expand: true, cwd: 'build/haroopad/', src: [ '**' ], dest: 'build/haroopad.app/Contents/Resources/app.nw/' },
-          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/nw.icns' },
+          { src: 'lib/haroopad.icns', dest: 'build/haroopad.app/Contents/Resources/haroopad.icns' },
           { src: 'lib/markdown.icns', dest: 'build/haroopad.app/Contents/Resources/markdown.icns' }
         ]
       },

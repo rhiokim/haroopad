@@ -38,7 +38,7 @@ define([], function() {
 		dummies = body.querySelectorAll('span.Apple-converted-space');
 		dummies = Array.prototype.slice.call(dummies, 0);
 		_.each(dummies, function(dummy) {
-			body.insertBefore(dummy, ' ')
+      dummy.parentElement.insertBefore(document.createTextNode(' '), dummy.nextSibling);
 			dummy.remove();
 		});
 
