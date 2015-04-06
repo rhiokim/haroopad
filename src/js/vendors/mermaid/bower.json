@@ -1,29 +1,28 @@
 {
   "name": "mermaid",
-  "version": "0.4.0",
+  "version": "0.3.2",
   "authors": [
     "knsv <knut@sveido.com>"
   ],
-  "description": "Markdownish syntax for generating flowcharts, sequence diagrams and gantt charts.",
+  "description": "Markdownish syntax for generating flowcharts",
   "main": "dist/mermaid.slim.js",
   "keywords": [
     "diagram",
     "markdown",
-    "flowchart",
-    "sequence diagram",
-    "gantt"
+    "flowchart"
   ],
   "license": "MIT",
   "ignore": [
-    "*",
-    "!dist/",
-    "!dist/*",
-    "!LICENSE"
+    "**/.*",
+    "node_modules",
+    "vendor",
+    "test",
+    "tests"
   ],
   "devDependencies": {
     "jasmine": "~2.0.4",
     "dagre": "0.6.2",
     "d3": "3.3.8",
-    "dagre-d3": "0.3.3"
+    "dagre-d3": "0.3.2"
   }
 }
