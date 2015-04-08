@@ -506,6 +506,8 @@ function update(wrapper) {
     img = imgs[i];
     src = img.getAttribute('src');
 
+    if (!src) { continue; }
+
     if (src.indexOf('://') == -1 && !/^\//.test(src) && !/^[a-zA-Z]\:/.test(src) && src.indexOf('data:') == -1) {
       img.setAttribute('src', _options.dirname + '/' + src);
     } else {
