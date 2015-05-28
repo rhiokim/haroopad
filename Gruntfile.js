@@ -39,7 +39,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('./src/package.json'),
 
-    nwv: '0.12.0',
+    nwv: '0.12.2',
     os: platform(),
     arch: arch(),
     app: path.normalize('lib/nwjs-v<%= nwv %>-<%= os %>-<%= arch %>'),
