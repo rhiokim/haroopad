@@ -5,6 +5,10 @@ var _options = {
   dirname: '.'
 };
 var codeLanguages;
+var codeLangTable = {
+  "js": "javascript",
+  "html": "xml"
+};
 var viewStyle, codeStyle;
 var contentElements;
 
@@ -252,7 +256,12 @@ function _lazySyntaxHighlight(el) {
   }
 
   lang = lang.toLowerCase();
-  lang = lang == 'js' ? 'javascript' : lang;
+
+  if (codeLangTable.hasOwnProperty(lang)) {
+    lang = codeLangTable[lang];
+  }
+
+  // lang = lang == 'js' ? 'javascript' : lang;
 
   if (codeLanguages.indexOf(lang) == -1) {
     el.setAttribute('class', lang);
