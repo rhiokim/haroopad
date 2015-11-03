@@ -9,7 +9,7 @@
  *
  *  ---------------------------------------------------------------------
  *  
- *  Copyright (c) 2009-2014 The MathJax Consortium
+ *  Copyright (c) 2009-2015 The MathJax Consortium
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
  */
 
 MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
-  var VERSION = "2.4.0";
+  var VERSION = "2.5.2";
 
   var MML = MathJax.ElementJax.mml;
   var TEX = MathJax.InputJax.TeX;
@@ -46,13 +46,17 @@ MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
   MML.TeXmathchoice = MML.mbase.Subclass({
     type: "TeXmathchoice", notParent: true,
     choice: function () {
-      if (this.selection == null) {
-        this.selection = 0;
-        var values = this.getValues("displaystyle","scriptlevel");
-        if (values.scriptlevel > 0) {this.selection = Math.min(3,values.scriptlevel+1)}
-          else {this.selection = (values.displaystyle ? 0 : 1)}
-      }
-      return this.selection;
+      if (this.selection != null) return this.selection;
+      if (this.choosing) return 2; // prevent infinite loops:  see issue #1151
+      this.choosing = true;
+      var selection = 0, values = this.getValues("displaystyle","scriptlevel");
+      if (values.scriptlevel > 0) {selection = Math.min(3,values.scriptlevel+1)}
+        else {selection = (values.displaystyle ? 0 : 1)}
+      // only cache the result if we are actually in place in a <math> tag.
+      var node = this.inherit; while (node && node.type !== "math") node = node.inherit;
+      if (node) this.selection = selection;
+      this.choosing = false;
+      return selection;
     },
     selected: function () {return this.data[this.choice()]},
     setTeXclass: function (prev) {return this.selected().setTeXclass(prev)},
@@ -79,6 +83,13 @@ MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
       var svg = this.Core().toSVG();
       this.SVGsaveData(svg);
       return svg;
+    },
+    toCommonHTML: function (span) {
+        span = this.CHTMLcreateSpan(span);
+        this.CHTMLhandleStyle(span);
+        this.CHTMLhandleColor(span);
+        this.CHTMLaddChild(span,this.choice(),{});
+        return span;
     }
   });
   
