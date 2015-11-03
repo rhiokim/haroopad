@@ -133,25 +133,27 @@
   global.THEMES.user = {};
   global.THEMES.user.editor = loadUserThemes(global.PATHS.theme_dest_editor);
   global.THEMES.user.viewer = loadUserThemes(global.PATHS.theme_dest_viewer);
-  global.THEMES.editor = ['default', '3024-day', '3024-night', 'ambiance-mobile', 'ambiance',
-    'base16-dark', 'base16-light', 'blackboard', 'cobalt', 'eclipse', 'elegant', 'erlang-dark',
-    'lesser-dark', 'mbo', 'mdn-like', 'midnight', 'monokai', 'neat', 'neo', 'night', 'paraiso-dark', 
-    'paraiso-light', 'pastel-on-dark', 'rubyblue', 'solarized dark', 'solarized light', 'the-matrix',
-    'tomorrow-night-bright', 'tomorrow-night-eighties', 'twilight', 'vibrant-ink', 'xq-dark', 'xq-light',
-    'zenburn'
-  ];
+  global.THEMES.editor = [ 'default', '3024-day', '3024-night', 'ambiance-mobile', 'ambiance', 
+  'base16-dark', 'base16-light', 'blackboard', 'cobalt', 'colorforth', 'eclipse', 'elegant', 
+  'erlang-dark', 'lesser-dark', 'mbo', 'mdn-like', 'midnight', 'monokai', 'neat', 'neo', 'night', 
+  'paraiso-dark', 'paraiso-light', 'pastel-on-dark', 'rubyblue', 'solarized', 'the-matrix', 
+  'tomorrow-night-bright', 'tomorrow-night-eighties', 'twilight', 'vibrant-ink', 'xq-dark', 
+  'xq-light', 'zenburn' ];
   global.THEMES.viewer = ['clearness', 'clearness-dark', 'node-dark', 'github', 'haroopad',
     'solarized-dark', 'solarized-light', 'metro-vibes', 'metro-vibes-dark', 'wood', 'wood-ri'
   ];
-  global.THEMES.code = ['default', 'arta', 'ascetic', 'atelier-dune.dark', 'atelier-dune.light',
-    'atelier-forest.dark', 'atelier-forest.light', 'atelier-heath.dark', 'atelier-heath.light',
-    'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-seaside.dark', 'atelier-seaside.light',
-    'brown_paper', 'codepen-embed', 'color-brewer', 'dark', 'docco', 'far', 'foundation', 'github', 'googlecode',
-    'hybrid', 'idea', 'ir_black', 'kimbie.dark', 'kimbie.light', 'magula', 'mono-blue', 'monokai', 
-    'monokai_sublime', 'obsidian', 'paraiso.dark', 'paraiso.light', 'pojoaque', 'railscasts', 'rainbow', 
-    'school_book', 'solarized_dark', 'solarized_light', 'sunburst', 'tomorrow', 'tomorrow-night-blue', 
-    'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night', 'vs', 'xcode', 'zenburn'
-  ];
+  global.THEMES.code = [ 'default', 'agate', 'androidstudio', 'arta', 'ascetic', 'atelier-cave.dark', 
+  'atelier-cave.light', 'atelier-dune.dark', 'atelier-dune.light', 'atelier-estuary.dark', 
+  'atelier-estuary.light', 'atelier-forest.dark', 'atelier-forest.light', 'atelier-heath.dark', 
+  'atelier-heath.light', 'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-plateau.dark', 
+  'atelier-plateau.light', 'atelier-savanna.dark', 'atelier-savanna.light', 'atelier-seaside.dark', 
+  'atelier-seaside.light', 'atelier-sulphurpool.dark', 'atelier-sulphurpool.light', 'brown_paper', 
+  'codepen-embed', 'color-brewer', 'dark', 'darkula', 'default', 'docco', 'far', 'foundation', 
+  'github-gist', 'github', 'googlecode', 'grayscale', 'hopscotch', 'hybrid', 'idea', 'ir_black', 
+  'kimbie.dark', 'kimbie.light', 'magula', 'mono-blue', 'monokai', 'monokai_sublime', 'obsidian', 
+  'paraiso.dark', 'paraiso.light', 'pojoaque', 'railscasts', 'rainbow', 'school_book', 'solarized_dark', 
+  'solarized_light', 'sunburst', 'tomorrow-night-blue', 'tomorrow-night-bright', 'tomorrow-night-eighties', 
+  'tomorrow-night', 'tomorrow', 'vs', 'xcode', 'zenburn' ];
   
 
   global.SHORTCUTS = {

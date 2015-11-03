@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
-  var path = require('path');
+  var path = require('path'),
+      fs = require('fs');
 
   require('time-grunt')(grunt);
 
@@ -18,6 +19,32 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-asciify');
+
+  function printCodeStyles() {
+    var res = [];
+    var codes = fs.readdirSync('/Users/rhio/Works/my/haroopad/src/js/vendors/highlight-js/src/styles')
+                  .filter(function(file) { 
+                    return file.indexOf('.css') > -1;
+                  });
+    codes.forEach(function(file) {
+      res.push(path.basename(file, '.css'));
+    });
+
+    grunt.log.write("'default', '"+ res.join("', '") +"'");
+  }
+
+  function printEditorStyles() {
+    var res = [];
+    var codes = fs.readdirSync('/Users/rhio/Works/my/haroopad/src/js/vendors/codemirror/theme')
+                  .filter(function(file) { 
+                    return file.indexOf('.css') > -1;
+                  });
+    codes.forEach(function(file) {
+      res.push(path.basename(file, '.css'));
+    });
+
+    grunt.log.write("'default', '"+ res.join("', '") +"'");
+  }
 
   function platform() {
     var os = process.platform;
@@ -237,7 +264,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/jquery/dist/jquery.min.js',
             '<%= vendors %>/haroopad-echo/dist/echo.min.js',
             '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js',
-            '<%= vendors %>/highlight.js/build/highlight.pack.js',
+            '<%= vendors %>/highlight-js/build/highlight.pack.js',
             '<%= vendors %>/mermaid/dist/mermaid.full.min.js',
             '<%= build %>/viewer.min.js'
           ]
@@ -604,7 +631,7 @@ module.exports = function(grunt) {
       
       highlightjs: {
         files: [
-          { expand: true, cwd: '<%= vendors %>/highlight.js/src/styles/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.css/code/' }
+          { expand: true, cwd: '<%= vendors %>/highlight-js/src/styles/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.css/code/' }
         ]
       },
 
@@ -663,7 +690,7 @@ module.exports = function(grunt) {
         options: {
           stdout: true,
           execOptions: {
-            cwd: './src/js/vendors/highlight.js/'
+            cwd: './src/js/vendors/highlight-js/'
           }
         }
       },
@@ -821,6 +848,14 @@ module.exports = function(grunt) {
 
     grunt.task.run('uglify:preBuiltLibs');
     grunt.task.run('shell:highlightjs');
+  });
+
+  //print themes
+  grunt.registerTask('themes', function() {
+    grunt.log.writeln('=====code themes=====');
+    printCodeStyles();
+    grunt.log.writeln('=====editor themes=====');
+    printEditorStyles();
   });
   
   /* deploy to Application directory */
