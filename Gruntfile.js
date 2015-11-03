@@ -285,36 +285,36 @@ module.exports = function(grunt) {
     uglify: {
       preBuiltLibs: {
         files: {
-          '<%= vendors %>/CodeMirror/codemirror.min.js': [
-            '<%= vendors %>/CodeMirror/lib/codemirror.js',
-            '<%= vendors %>/CodeMirror/addon/hint/show-hint.js',
-            '<%= vendors %>/CodeMirror-custom/addon/hint/markdown-hint.js',
-            '<%= vendors %>/CodeMirror/addon/selection/active-line.js',
-            '<%= vendors %>/CodeMirror/addon/display/placeholder.js',
-            '<%= vendors %>/CodeMirror/addon/fold/foldcode.js',
-            '<%= vendors %>/CodeMirror/addon/fold/foldgutter.js',
-            '<%= vendors %>/CodeMirror/addon/fold/markdown-fold.js',
-            '<%= vendors %>/CodeMirror-custom/addon/edit/continuelist.js',
-            '<%= vendors %>/CodeMirror/addon/edit/closebrackets.js',
-            '<%= vendors %>/CodeMirror/addon/edit/trailingspace.js',
-            '<%= vendors %>/CodeMirror-custom/addon/dialog/dialog.js',
-            '<%= vendors %>/CodeMirror/addon/search/searchcursor.js',
-            '<%= vendors %>/CodeMirror-custom/addon/search/search.js',
-            '<%= vendors %>/CodeMirror/addon/mode/overlay.js',
-            '<%= vendors %>/CodeMirror/mode/xml/xml.js',
-            '<%= vendors %>/CodeMirror/mode/markdown/markdown.js',
-            '<%= vendors %>/CodeMirror/mode/gfm/gfm.js',
-            '<%= vendors %>/CodeMirror/mode/ruby/ruby.js',
-            '<%= vendors %>/CodeMirror/mode/python/python.js',
-            '<%= vendors %>/CodeMirror/mode/javascript/javascript.js',
-            '<%= vendors %>/CodeMirror/mode/clike/clike.js',
-            '<%= vendors %>/CodeMirror/mode/css/css.js',
-            '<%= vendors %>/CodeMirror/mode/htmlmixed/htmlmixed.js',
-            '<%= vendors %>/CodeMirror/mode/php/php.js',
-            '<%= vendors %>/CodeMirror/mode/perl/perl.js',
-            '<%= vendors %>/CodeMirror/keymap/vim.js',
-            '<%= vendors %>/CodeMirror/keymap/emacs.js',
-            '<%= vendors %>/CodeMirror/keymap/sublime.js'
+          '<%= vendors %>/codemirror/codemirror.min.js': [
+            '<%= vendors %>/codemirror/lib/codemirror.js',
+            '<%= vendors %>/codemirror/addon/hint/show-hint.js',
+            '<%= vendors %>/codemirror-custom/addon/hint/markdown-hint.js',
+            '<%= vendors %>/codemirror/addon/selection/active-line.js',
+            '<%= vendors %>/codemirror/addon/display/placeholder.js',
+            '<%= vendors %>/codemirror/addon/fold/foldcode.js',
+            '<%= vendors %>/codemirror/addon/fold/foldgutter.js',
+            '<%= vendors %>/codemirror/addon/fold/markdown-fold.js',
+            '<%= vendors %>/codemirror-custom/addon/edit/continuelist.js',
+            '<%= vendors %>/codemirror/addon/edit/closebrackets.js',
+            '<%= vendors %>/codemirror/addon/edit/trailingspace.js',
+            '<%= vendors %>/codemirror-custom/addon/dialog/dialog.js',
+            '<%= vendors %>/codemirror/addon/search/searchcursor.js',
+            '<%= vendors %>/codemirror-custom/addon/search/search.js',
+            '<%= vendors %>/codemirror/addon/mode/overlay.js',
+            '<%= vendors %>/codemirror/mode/xml/xml.js',
+            '<%= vendors %>/codemirror/mode/markdown/markdown.js',
+            '<%= vendors %>/codemirror/mode/gfm/gfm.js',
+            '<%= vendors %>/codemirror/mode/ruby/ruby.js',
+            '<%= vendors %>/codemirror/mode/python/python.js',
+            '<%= vendors %>/codemirror/mode/javascript/javascript.js',
+            '<%= vendors %>/codemirror/mode/clike/clike.js',
+            '<%= vendors %>/codemirror/mode/css/css.js',
+            '<%= vendors %>/codemirror/mode/htmlmixed/htmlmixed.js',
+            '<%= vendors %>/codemirror/mode/php/php.js',
+            '<%= vendors %>/codemirror/mode/perl/perl.js',
+            '<%= vendors %>/codemirror/keymap/vim.js',
+            '<%= vendors %>/codemirror/keymap/emacs.js',
+            '<%= vendors %>/codemirror/keymap/sublime.js'
           ],
 
           '<%= vendors %>/backbone/backbone.min.js': [ 
@@ -579,7 +579,7 @@ module.exports = function(grunt) {
 
       codemirror: {
         files: [
-          { src: '<%= vendors %>/CodeMirror/codemirror.min.js', dest: 'build/haroopad/js/editor.min.js' }
+          { src: '<%= vendors %>/codemirror/codemirror.min.js', dest: 'build/haroopad/js/editor.min.js' }
         ]
       },
 
