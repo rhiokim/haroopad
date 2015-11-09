@@ -25,14 +25,16 @@
     "d3": "3.3.8",
     "dagre-d3": "0.3.3"
   },
-  "homepage": "https://github.com/rhiokim/mermaid",
-  "_release": "bc85dd7088",
+  "homepage": "https://github.com/knsv/mermaid",
+  "version": "0.5.5",
+  "_release": "0.5.5",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "bc85dd7088480afb275bbda32f5af785c881918e"
+    "type": "version",
+    "tag": "0.5.5",
+    "commit": "c9d29c16e20783700701a340540959ed5680236c"
   },
-  "_source": "git@github.com:rhiokim/mermaid.git",
-  "_target": "master",
-  "_originalSource": "git@github.com:rhiokim/mermaid.git"
+  "_source": "git://github.com/knsv/mermaid.git",
+  "_target": "~0.5.5",
+  "_originalSource": "mermaid",
+  "_direct": true
 }

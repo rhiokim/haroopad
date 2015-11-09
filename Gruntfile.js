@@ -265,7 +265,7 @@ module.exports = function(grunt) {
             '<%= vendors %>/haroopad-echo/dist/echo.min.js',
             '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js',
             '<%= vendors %>/highlight-js/build/highlight.pack.js',
-            '<%= vendors %>/mermaid/dist/mermaid.full.min.js',
+            '<%= vendors %>/mermaid/dist/mermaid.min.js',
             '<%= build %>/viewer.min.js'
           ]
         }

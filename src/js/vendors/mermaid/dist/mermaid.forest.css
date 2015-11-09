@@ -2,9 +2,9 @@
 /* Sequence Diagram variables */
 /* Gantt chart variables */
 .mermaid .label {
+  font-family: 'trebuchet ms', verdana, arial;
   color: #333333;
 }
-
 .node rect,
 .node circle,
 .node polygon {
@@ -17,10 +17,10 @@
   stroke-width: 1.5px;
 }
 .cluster rect {
-  fill: #cdffb2;
-  rx: 40;
-  stroke: #6eaa49;
-  stroke-width: 1px;
+  fill: #cdffb2 !important;
+  rx: 4  !important;
+  stroke: #6eaa49 !important;
+  stroke-width: 1px !important;
 }
 .cluster text {
   fill: #333333;
@@ -255,4 +255,17 @@ text.actor {
 text {
   font-family: 'trebuchet ms', verdana, arial;
   font-size: 14px;
+}
+div.mermaidTooltip {
+  position: absolute;
+  text-align: center;
+  max-width: 200px;
+  padding: 2px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 12px;
+  background: #cdffb2;
+  border: 1px solid #6eaa49;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 100;
 }
