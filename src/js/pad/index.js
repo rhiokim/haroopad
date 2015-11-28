@@ -27,12 +27,14 @@ requirejs.config({
   }
 });
 
+
+var lng = global.LOCALES._lang.split('-')[0];
 i18n.init({
-  lng: global.LOCALES._lang
+  lng: lng
 }, function() {
 
-  i18n.addResourceBundle(global.LOCALES._lang, 'menu', global.LOCALES['menu']);
-  i18n.addResourceBundle(global.LOCALES._lang, 'pad', global.LOCALES['pad']);
+  i18n.addResourceBundle(lng, 'menu', global.LOCALES['menu']);
+  i18n.addResourceBundle(lng, 'pad', global.LOCALES['pad']);
 
   i18n.setDefaultNamespace('menu');
 

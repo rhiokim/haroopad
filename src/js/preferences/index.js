@@ -4,10 +4,11 @@ var path = require('path');
 window.nw = gui.Window.get();
 window.parent = nw.parent;
 
+var lng = global.LOCALES._lang.split('-')[0];
 i18n.init({
-  lng: global.LOCALES._lang
+  lng: lng
 }, function() {
-  i18n.addResourceBundle(global.LOCALES._lang, 'preference', global.LOCALES['preference']);
+  i18n.addResourceBundle(lng, 'preference', global.LOCALES['preference']);
   i18n.setDefaultNamespace('preference');
     
   //fixed text.js error on node-webkit
