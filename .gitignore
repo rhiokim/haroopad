@@ -9,4 +9,4 @@ haroopad.app
 assets
 lib/node-webkit.app/Contents/Libraries/
 lib/node-webkit*
-lib/nwjs-v*
+lib/nwjs-*
