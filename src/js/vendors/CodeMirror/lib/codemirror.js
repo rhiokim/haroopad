@@ -8886,7 +8886,7 @@
 
   // THE END
 
-  CodeMirror.version = "5.11.1";
+  CodeMirror.version = "5.12.1";
 
   return CodeMirror;
 });
