@@ -248,9 +248,11 @@ function _lazySyntaxHighlight(el) {
 
   try {
     if (!lang) {
-      el.innerHTML = hljs.highlightAuto(code).value;
+      // el.innerHTML = hljs.highlightAuto(code).value;
+      pre.innerHTML = hljs.highlightAuto(code).value;
     } else {
-      el.innerHTML = hljs.highlight(lang, code).value;
+      // el.innerHTML = hljs.highlight(lang, code).value;
+      pre.innerHTML = hljs.highlight(lang, code).value;
     }
   } catch (e) {
     // return code;
@@ -437,8 +439,10 @@ function update(wrapper) {
     code = codes[i];
     _code = _codes[i];
 
-    origin = code.parentElement.outerHTML;
-    code.setAttribute('data-origin', origin);
+    // origin = code.parentElement.outerHTML;
+    origin = code.innerHTML;
+    // code.setAttribute('data-origin', origin);
+    code.parentElement.setAttribute('data-origin', origin);
 
     if (_code) {
       _origin = _code.parentElement.getAttribute('data-origin');

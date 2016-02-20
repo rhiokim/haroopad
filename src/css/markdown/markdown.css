@@ -99,11 +99,11 @@
   border: 0;
   display: block;
 }
+.markdown pre.hljs,
 .markdown pre > code {
   font-family: Consolas, Inconsolata, Courier, monospace;
   font-weight: bold;
   white-space: pre;
-  margin: 0;
 }
 .markdown code {
   border-radius: 3px;
