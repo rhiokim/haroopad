@@ -9,14 +9,14 @@ You can use backbone-pouch on the server with node or in the browser:
 Install the module with: `npm install backbone-pouch`
 
 ```javascript
-var backbone = require('backbone');
-var backbone_pouch = require('backbone-pouch');
-backbone.sync = backbone_pouch.sync();
+var Backbone = require('backbone');
+var BackbonePouch = require('backbone-pouch');
+Backbone.sync = BackbonePouch.sync();
 ```
 
 ### In the Browser
 1. Download [jQuery][jquery], [Underscore][underscore], [Backbone][backbone] and [PouchDB][pouchdb]
-2. Download the [production version][min] or the [development version][max].
+2. Download [backbone-pouch][backbone-pouch].
 3. In your web page:
 
 ```html
@@ -24,7 +24,7 @@ backbone.sync = backbone_pouch.sync();
 <script src="underscore-min.js"></script>
 <script src="backbone-min.js"></script>
 <script src="pouchdb-nightly.min.js"></script>
-<script src="backbone-pouch.min.js"></script>
+<script src="backbone-pouch.js"></script>
 <script>
   Backbone.sync = BackbonePouch.sync();
 </script>
@@ -34,9 +34,7 @@ backbone.sync = backbone_pouch.sync();
 [underscore]: http://underscorejs.org/underscore-min.js
 [backbone]: http://backbonejs.org/backbone-min.js
 [pouchdb]: http://download.pouchdb.com/pouchdb-nightly.min.js
-[min]: https://raw.github.com/jo/backbone-pouch/master/dist/backbone-pouch.min.js
-[max]: https://raw.github.com/jo/backbone-pouch/master/dist/backbone-pouch.js
-
+[backbone-pouch]: https://raw.githubusercontent.com/jo/backbone-pouch/master/backbone-pouch.js
 
 ## Setup backbone-pouch
 You can configure Backbone to persist via backbone-pouch per model:
@@ -76,7 +74,7 @@ You can also pass the PouchDB adapter to `BackbonePouch.attachments`:
 
 ```javascript
 _.extend(Backbone.Model.prototype, BackbonePouch.attachments({
-  db: PouchDB('mydb')
+  db: new PouchDB('mydb')
 }));
 ```
 
@@ -95,7 +93,7 @@ Backbone.Model.prototype.idAttribute = '_id';
 var MyModel = Backbone.Model.extend({
   idAttribute: '_id',
   sync: BackbonePouch.sync({
-    db: PouchDB('mydb')
+    db: new PouchDB('mydb')
   })
 });
 ```
@@ -109,19 +107,19 @@ Limit results to `10`.
 var Post = Backbone.Model.extend({
   idAttribute: '_id',
   sync: BackbonePouch.sync({
-    db: PouchDB('mydb')
+    db: new PouchDB('mydb')
   })
 });
 var Posts = Backbone.Collection.extend({
   model: Post,
   sync: BackbonePouch.sync({
-    db: PouchDB('mydb'),
+    db: new PouchDB('mydb'),
     fetch: 'query',
     options: {
       query: {
         include_docs: true,
         fun: {
-          map: function(doc) {
+          map: function(doc, emit) {
             if (doc.type === 'post') {
               emit(doc.position, null)
             }
@@ -151,7 +149,7 @@ Authors are returnd by `name`, Posts by `date`.
 
 ```javascript
 Backbone.sync =  BackbonePouch.sync({
-  db: PouchDB('mydb'),
+  db: new PouchDB('mydb'),
   fetch: 'query',
   options: {
     query: {
@@ -175,7 +173,7 @@ var Authors = Backbone.Collection.extend({
       query: {
         include_docs: true,
         fun: {
-          map: function(doc) {
+          map: function(doc, emit) {
             if (doc.type === 'author') {
               emit(doc.name, null)
             }
@@ -202,7 +200,7 @@ var Posts = Backbone.Collection.extend({
       query: {
         include_docs: true,
         fun: {
-          map: function(doc) {
+          map: function(doc, emit) {
             if (doc.type === 'post') {
               emit(doc.date, null)
             }
@@ -226,7 +224,7 @@ var Posts = Backbone.Collection.extend({
 ### Attachments
 ```javascript
 Backbone.sync =  BackbonePouch.sync({
-  db: PouchDB('mydb')
+  db: new PouchDB('mydb')
 });
 Backbone.Model.prototype.idAttribute = '_id';
 var MyModel = Backbone.Model.extend(BackbonePouch.attachments());
@@ -358,7 +356,7 @@ Options for fetching all documents. This is a built in view which outputs all do
 * `conflicts`: If specified conflicting leaf revisions will be attached in _conflicts array.
 * `descending`: Return result in descending order. Default is ascending order.
 * `endkey`: Endkey of the query.
-* `include_docs`: Whether to include the document in `doc` property. Default is true.
+* `include_docs`: Whether to include the document in `doc` property.
 * `key`: Key of the query.
 * `keys`: Multiple keys.
 * `limit`: Limit the resultset. Default is to return all documents.
@@ -374,7 +372,7 @@ Query options for Map Reduce queries.
 * `descending`: Return result in descending order. Default is ascending order.
 * `endkey`: Endkey of the query.
 * `fun`: Map Reduce Function: can be a string addressing a view in a design document or an object with a `map` and optional `reduce` property. A map function is _required_, if you use the query fetch method.
-* `include_docs`: Whether to include the document in `doc` property. Default is true.
+* `include_docs`: Whether to include the document in `doc` property.
 * `key`: Key of the query.
 * `keys`: Multiple keys.
 * `limit`: Limit the resultset. Default is to return all documents.
@@ -401,7 +399,7 @@ Options passed to changes feed.
 * `continuous`: Continuously listen to changes. Default is true.
 * `include_docs`: Whether to include the document on each change. Default is true.
 
-See [Listen to Database Changes](http://pouchdb.com/api.html#listen_to_database_changes).
+See [Listen to Database Changes](http://pouchdb.com/api.html#changes).
 
 <p id=examples></p>
 ## Examples
@@ -420,24 +418,17 @@ to sync your local TODO database.
 
 
 ## Contributing
-backbone-pouch is written with [Felix Geisendörfers Node.js Style Guide](https://github.com/felixge/node-style-guide) in mind.
-
-Add [nodeunit](https://github.com/caolan/nodeunit) tests for any new or changed functionality.
-Lint and test your code using [Grunt](http://gruntjs.com/).
-
-_Also, please don't edit files in the "dist" subdirectory as they are generated via Grunt.
-You'll find source code in the "lib" subdirectory!_
-
-## Generating the Documentation
-
-_The files in the "doc" subdirectory are generated via Grunt, too.
-Edit this README.md and template.jst and run `grunt doc` to generate the documentation._
+* Install dependencies via `npm install`
+* Edit `backbone-pouch.js`
+* Write [tap](https://github.com/isaacs/node-tap) tests
+* Run the tests with `npm test`
+* Generate the docs with `npm run docs`. This will render `README.md` using `doc/index.html.jst`
 
 To update the Github page, change to the `gh-pages` branch and merge the `doc` subtree:
 
-    git pull -s subtree origin master
-
-You will need `git-subtree`, of course.
+```bash
+git pull -s subtree origin master
+```
 
 ## Versioning
 backbone-pouch follows [semver-ftw](http://semver-ftw.org/).
@@ -446,6 +437,8 @@ There were some breaking changes, so had to move up the major version.
 
 
 ## Release History
+* `1.5.0`: Remove Grunt in favour of purism and switch to tap
+* `1.4.0`: Update Backbone and Underscore
 * `1.3.0`: Do not parse view results, leave that up to the user
 * `1.2.1`: Improve option inheritance
 * `1.2.0`: Change defaults: do not listen and include_docs
@@ -455,5 +448,5 @@ There were some breaking changes, so had to move up the major version.
 * `prior 1.0`: Experimental version with example TODO apps
 
 ## License
-Copyright (c) 2013 Johannes J. Schmidt  
+Copyright (c) 2013-2014 Johannes J. Schmidt, TF  
 Licensed under the MIT license.

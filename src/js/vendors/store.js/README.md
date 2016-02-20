@@ -55,7 +55,7 @@ If your product depends on store.js, you must check the `store.enabled` flag fir
 	init()
 	function init() {
 		if (!store.enabled) {
-			alert('Local storage is not supported by your browser. Please disabled "Private Mode", or upgrade to a modern browser')
+			alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.')
 			return
 		}
 		var user = store.get('user')
@@ -93,9 +93,7 @@ console.log(store.get('foo'))
 
 Supported browsers
 ------------------
- - Tested in iOS 4
- - Tested in iOS 5
- - Tested in iOS 6
+ - Tested in iOS 4+
  - Tested in Firefox 3.5
  - Tested in Firefox 3.6
  - Tested in Firefox 4.0+
@@ -139,6 +137,7 @@ Unsupported browsers
  - Safari 3: no synchronous api (has asynch sqlite api, but store.js is synch)
  - Opera 9: don't know if there is synchronous api for storing data locally
  - Firefox 1.5: don't know if there is synchronous api for storing data locally
+ - Microsoft IIS & IE7: With meta tag & "charset=iso-8859-1", things stop working. See issue #47.
 
 
 Some notes on serialization
@@ -173,7 +172,7 @@ alert("We've got " + store.get('tags').length + " tags here")
 
 The native serialization engine of javascript is JSON. Rather than leaving it up to you to serialize and deserialize your values, store.js uses JSON.stringify() and JSON.parse() on each call to store.set() and store.get(), respectively.
 
-Some browsers do not have native support for JSON. For those browsers you should include [JSON.js](non-minified copy is included in this repo).
+Some browsers do not have native support for JSON. For those browsers you should include [JSON2.js] \(non-minified copy is included in this repo).
 
 
 No sessionStorage/auto-expiration?
@@ -209,6 +208,6 @@ For a browser, locally: do `npm install node-static && ./node_modules/node-stati
 For Nodejs: do `npm install . localStorage && node test-node.js`
 
 
-  [JSON.js]: http://www.json.org/json2.js
+  [JSON2.js]: https://raw.githubusercontent.com/douglascrockford/JSON-js/master/json2.js
   [store.min.js]: https://raw.github.com/marcuswestin/store.js/master/store.min.js
   [store+json2.min.js]: https://raw.github.com/marcuswestin/store.js/master/store+json2.min.js

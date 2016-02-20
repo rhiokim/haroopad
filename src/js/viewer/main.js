@@ -163,7 +163,8 @@ function init(options) {
 }
 
 function loadLibs(base, cb) {
-  loadJs(base + '/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML', function() {
+  window.chrome.loadTimes = true;
+  loadJs(base + '/MathJax/MathJax.js?config=TeX-MML-AM_HTMLorMML', function() {
     MathJax.Hub.Config({
       messageStyle: "none",
       showProcessingMessages: false,
@@ -181,6 +182,7 @@ function loadLibs(base, cb) {
     });
     MathJax.Hub.config.menuSettings.renderer = 'HTML-CSS'; //'SVG', 'NativeMML'
 
+    console.log(MathJax.Hub.Browser)
     cb();
   });
 }
@@ -195,33 +197,6 @@ function _fixImagePath() {
     $(this).attr('title', 'It is not possible to display image does not exist in that location.');
   });
 }
-
-//for performance
-// var timeoutSyntaxHighlight;
-// function _lazySyntaxHighlight2() {
-//   clearTimeout(timeoutSyntaxHighlight);
-
-//   timeoutSyntaxHighlight = setTimeout(function() {
-//     $('pre>code').each(function(i, e) {
-
-//       var codeEl = $(this);
-//       var code = codeEl.html();
-//       var lang = codeEl.attr('class');
-
-//       lang = lang == 'js' ? 'javascript' : '';
-
-//       try {
-//         if (!lang) {
-//           codeEl.html(hljs.highlightAuto(code).value);
-//         } else {
-//           codeEl.html(hljs.highlight(lang, code).value);
-//         }
-//       } catch(e) {
-//         return code;
-//       }
-//     });
-//   }, 400);
-// }
 
 function htmlDecode(input) {
   var e = document.createElement('div');
@@ -281,40 +256,7 @@ function _lazySyntaxHighlight(el) {
   } catch (e) {
     // return code;
   }
-
-  // $('pre>code').each(function(i, e) {
-
-  //   var codeEl = $(this);
-  //   var code = codeEl.html();
-  //   var lang = codeEl.attr('class');
-
-  //   lang = lang == 'js' ? 'javascript' : '';
-
-  //   try {
-  //     if (!lang) {
-  //       codeEl.html(hljs.highlightAuto(code).value);
-  //     } else {
-  //       codeEl.html(hljs.highlight(lang, code).value);
-  //     }
-  //   } catch(e) {
-  //     return code;
-  //   }
-  // });
 }
-
-/**
- * enable click event at link
- * @return {[type]} [description]
- */
-
-// function _preventDefaultAnchor() {
-//   $('a').off('click', '**');
-
-//   $('a').on('click', function(e) {
-//     window.ee.emit('link', $(e.target).attr('href'));
-//     e.preventDefault();
-//   });
-// }
 
 
 /**
@@ -358,15 +300,16 @@ function countFragments(target) {
 }
 
 function processMathJax(target, cb) {
-  var mathEl = document.createElement('div');
-  mathEl.innerHTML = target.innerHTML;
+  // var mathEl = document.createElement('div');
+  // mathEl.innerHTML = target.innerHTML;
 
   MathJax.Hub.Queue(
-    ["Typeset", MathJax.Hub, mathEl],
-    [function() {
-      target.innerHTML = mathEl.innerHTML;
-      target.removeAttribute('class');
-    }],
+    ["Typeset", MathJax.Hub, target],
+    // [function() {
+    //   console.log(mathEl.innerHTML)
+    //   target.innerHTML = mathEl.innerHTML;
+    //   target.removeAttribute('class');
+    // }],
     [cb]
   );
 }
@@ -377,7 +320,6 @@ function drawMathJax() {
 
   for (i = 0; i < math.length; i++) {
     processMathJax(math[i]);
-    // window.ee.emit('math', math[i]);
   }
 }
 

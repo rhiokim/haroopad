@@ -1,340 +1,525 @@
-(($) ->
-  $.fn.bootstrapSwitch = (method) ->
-    methods =
-      init: ->
-        @each ->
-          $element = $(@)
-          $switchLeft = $("<span>",
-            class: "switch-left"
-            html: ->
-              html = "ON"
-              label = $element.data("on-label")
-              html = label if label?
-              html
-          )
-          $switchRight = $("<span>",
-            class: "switch-right"
-            html: ->
-              html = "OFF"
-              label = $element.data("off-label")
-              html = label if label?
-              html
-          )
-          $label = $("<label>",
-            for: $element.attr("id")
-            html: ->
-              html = "&nbsp;"
-              icon = $element.data("label-icon")
-              label = $element.data("text-label")
+do ($ = window.jQuery, window) ->
+  "use strict"
 
-              html = "<i class=\"icon " + icon + "\"></i>" if icon?
-              html = label if label?
+  class BootstrapSwitch
+    constructor: (element, options = {}) ->
+      @$element = $ element
+      @options = $.extend {}, $.fn.bootstrapSwitch.defaults,
+        state: @$element.is ":checked"
+        size: @$element.data "size"
+        animate: @$element.data "animate"
+        disabled: @$element.is ":disabled"
+        readonly: @$element.is "[readonly]"
+        indeterminate: @$element.data "indeterminate"
+        inverse: @$element.data "inverse"
+        radioAllOff: @$element.data "radio-all-off"
+        onColor: @$element.data "on-color"
+        offColor: @$element.data "off-color"
+        onText: @$element.data "on-text"
+        offText: @$element.data "off-text"
+        labelText: @$element.data "label-text"
+        handleWidth: @$element.data "handle-width"
+        labelWidth: @$element.data "label-width"
+        baseClass: @$element.data "base-class"
+        wrapperClass: @$element.data "wrapper-class"
+      , options
+      @$wrapper = $ "<div>",
+        class: do =>
+          classes = ["#{@options.baseClass}"].concat @_getClasses @options.wrapperClass
 
-              html
-          )
-          $div = $("<div>")
-          $wrapper = $("<div>",
-            class: "has-switch"
-            tabindex: 0
-          )
-          $form = $element.closest("form")
-          changeState = ->
-            return if $label.hasClass "label-change-switch"
+          classes.push if @options.state then "#{@options.baseClass}-on" else "#{@options.baseClass}-off"
+          classes.push "#{@options.baseClass}-#{@options.size}" if @options.size?
+          classes.push "#{@options.baseClass}-disabled" if @options.disabled
+          classes.push "#{@options.baseClass}-readonly" if @options.readonly
+          classes.push "#{@options.baseClass}-indeterminate" if @options.indeterminate
+          classes.push "#{@options.baseClass}-inverse" if @options.inverse
+          classes.push "#{@options.baseClass}-id-#{@$element.attr("id")}" if @$element.attr "id"
+          classes.join " "
+      @$container = $ "<div>",
+        class: "#{@options.baseClass}-container"
+      @$on = $ "<span>",
+        html: @options.onText,
+        class: "#{@options.baseClass}-handle-on #{@options.baseClass}-#{@options.onColor}"
+      @$off = $ "<span>",
+        html: @options.offText,
+        class: "#{@options.baseClass}-handle-off #{@options.baseClass}-#{@options.offColor}"
+      @$label = $ "<span>",
+        html: @options.labelText
+        class: "#{@options.baseClass}-label"
 
-            $label
-            .trigger("mousedown")
-            .trigger("mouseup")
-            .trigger "click"
+      # set up events
+      @$element.on "init.bootstrapSwitch", => @options.onInit.apply element, arguments
+      @$element.on "switchChange.bootstrapSwitch", => @options.onSwitchChange.apply element, arguments
 
+      # reassign elements after dom modification
+      @$container = @$element.wrap(@$container).parent()
+      @$wrapper = @$container.wrap(@$wrapper).parent()
 
-          # set bootstrap-switch flag
-          $element.data "bootstrap-switch", true
+      # insert handles and label and trigger event
+      @$element
+      .before(if @options.inverse then @$off else @$on)
+      .before(@$label)
+      .before(if @options.inverse then @$on else @$off)
 
-          # override default
-          $switchLeft.addClass "switch-" + $element.data("on") if $element.data("on")?
-          $switchRight.addClass "switch-" + $element.data("off") if $element.data("off")?
+      # indeterminate state
+      @$element.prop "indeterminate", true  if @options.indeterminate
 
-          # set animated for div
-          $wrapper.data "animated", false
-          $wrapper.addClass("switch-animate").data("animated", true) if $element.data("animated") isnt false
+      # normalize handles width and set container position
+      @_init()
 
-          # reassign elements after dom modification
-          $div = $element.wrap($div).parent()
-          $wrapper = $div.wrap($wrapper).parent()
+      # initialise handlers
+      @_elementHandlers()
+      @_handleHandlers()
+      @_labelHandlers()
+      @_formHandler()
+      @_externalLabelHandler()
 
-          # apply size class
-          if $element.attr "class"
-            $.each ["switch-mini", "switch-small", "switch-large"], (i, cls) ->
-              $wrapper.addClass cls if $element.attr("class").indexOf(cls) >= 0
+      @$element.trigger "init.bootstrapSwitch"
 
-          # insert label and switch parts
-          $element.before($switchLeft).before($label).before($switchRight)
-          $wrapper.addClass(if $element.is(":checked") then "switch-on" else "switch-off")
-          $wrapper.addClass("disabled") if $element.is(":disabled") or $element.is("[readonly]")
+    _constructor: BootstrapSwitch
 
-          # element handlers
-          $element
-          .on("keydown", (e) ->
-            return unless e.keyCode is 32
+    state: (value, skip) ->
+      return @options.state  if typeof value is "undefined"
+      return @$element  if @options.disabled or @options.readonly
+      return @$element  if @options.state and not @options.radioAllOff and @$element.is ":radio"
 
-            e.stopImmediatePropagation()
-            e.preventDefault()
+      # remove indeterminate
+      @indeterminate false  if @options.indeterminate
+      value = not not value
 
-            changeState()
-          )
-          .on "change", (e, skip) ->
-            isChecked = $element.is ":checked"
-            state = $wrapper.hasClass "switch-off"
+      @$element.prop("checked", value).trigger "change.bootstrapSwitch", skip
+      @$element
 
-            e.preventDefault()
+    toggleState: (skip) ->
+      return @$element  if @options.disabled or @options.readonly
 
-            $div.css "left", ""
-            return unless state is isChecked
+      if @options.indeterminate
+        @indeterminate false
+        @state true
+      else
+        @$element.prop("checked", not @options.state).trigger "change.bootstrapSwitch", skip
 
-            if isChecked
-              $wrapper.removeClass("switch-off").addClass "switch-on"
-            else
-              $wrapper.removeClass("switch-on").addClass "switch-off"
+    size: (value) ->
+      return @options.size  if typeof value is "undefined"
 
-            $wrapper.addClass("switch-animate") if $wrapper.data("animated") isnt false
-            return if typeof skip is "boolean" and skip
+      @$wrapper.removeClass "#{@options.baseClass}-#{@options.size}" if @options.size?
+      @$wrapper.addClass "#{@options.baseClass}-#{value}" if value
+      @_width()
+      @_containerPosition()
+      @options.size = value
+      @$element
 
-            $element.trigger "switch-change",
-              el: $element
-              value: isChecked
+    animate: (value) ->
+      return @options.animate  if typeof value is "undefined"
 
-          # wrapper handlers
-          $wrapper.on "keydown", (e) ->
-            return if not e.which or $element.is(":disabled") or $element.is("[readonly]")
+      value = not not value
+      return @$element  if value is @options.animate
 
-            switch e.which
-              when 32
-                e.preventDefault()
-                changeState()
-              when 37
-                e.preventDefault()
-                changeState() if $element.is ":checked"
-              when 39
-                e.preventDefault()
-                changeState() unless $element.is ":checked"
+      @toggleAnimate()
 
-          # switch handlers
-          $switchLeft.on "click", -> changeState()
-          $switchRight.on "click", -> changeState()
+    toggleAnimate: ->
+      @options.animate = not @options.animate
 
-          # label handlers
-          $label.on "mousedown touchstart", (e) ->
-            moving = false
+      @$wrapper.toggleClass "#{@options.baseClass}-animate"
+      @$element
 
-            e.preventDefault()
-            e.stopImmediatePropagation()
+    disabled: (value) ->
+      return @options.disabled  if typeof value is "undefined"
 
-            $wrapper.removeClass "switch-animate"
-            return $label.unbind "click" if $element.is(":disabled") or $element.is("[readonly]") or $element.hasClass("radio-no-uncheck")
+      value = not not value
+      return @$element  if value is @options.disabled
 
-            # other label event handlers
-            $label
-            .on("mousemove touchmove", (e) ->
-              relativeX = (e.pageX or e.originalEvent.targetTouches[0].pageX) - $wrapper.offset().left
-              percent = (relativeX / $wrapper.width()) * 100
-              left = 25
-              right = 75
-              moving = true
+      @toggleDisabled()
 
-              if percent < left
-                percent = left
-              else if percent > right
-                percent = right
+    toggleDisabled: ->
+      @options.disabled = not @options.disabled
 
-              $div.css "left", (percent - right) + "%"
-            )
-            .on("click touchend", (e) ->
-              e.stopImmediatePropagation()
-              e.preventDefault()
+      @$element.prop "disabled", @options.disabled
+      @$wrapper.toggleClass "#{@options.baseClass}-disabled"
+      @$element
 
-              $label.unbind "mouseleave"
+    readonly: (value) ->
+      return @options.readonly  if typeof value is "undefined"
 
-              if moving
-                $element.prop "checked", (parseInt($label.parent().css("left"), 10) > -25)
-              else
-                $element.prop "checked", not $element.is(":checked")
+      value = not not value
+      return @$element  if value is @options.readonly
 
-              moving = false
-              $element.trigger "change"
-            )
-            .on("mouseleave", (e) ->
-              e.preventDefault()
-              e.stopImmediatePropagation()
+      @toggleReadonly()
 
-              $label.unbind("mouseleave mousemove").trigger "mouseup"
-              $element.prop("checked", (parseInt($label.parent().css("left"), 10) > -25)).trigger "change"
-            )
-            .on "mouseup", (e) ->
-              e.stopImmediatePropagation()
-              e.preventDefault()
+    toggleReadonly: ->
+      @options.readonly = not @options.readonly
 
-              $label.trigger "mouseleave"
+      @$element.prop "readonly", @options.readonly
+      @$wrapper.toggleClass "#{@options.baseClass}-readonly"
+      @$element
 
+    indeterminate: (value) ->
+      return @options.indeterminate  if typeof value is "undefined"
 
-          unless $form.data("bootstrap-switch")
-            $form.bind("reset", ->
-              window.setTimeout(->
-                $form.find(".has-switch").each ->
-                  $input = $(@).find("input")
-                  $input.prop("checked", $input.is(":checked")).trigger "change"
+      value = not not value
+      return @$element  if value is @options.indeterminate
 
-              , 1)
-            ).data "bootstrap-switch", true
+      @toggleIndeterminate()
 
-      setDisabled: (disabled) ->
-        $element = $(@)
-        $wrapper = $element.parents(".has-switch")
+    toggleIndeterminate: ->
+      @options.indeterminate = not @options.indeterminate
 
-        if disabled
-          $wrapper.addClass "disabled"
-          $element.prop "disabled", true
+      @$element.prop "indeterminate", @options.indeterminate
+      @$wrapper.toggleClass "#{@options.baseClass}-indeterminate"
+      @_containerPosition()
+      @$element
+
+    inverse: (value) ->
+      return @options.inverse  if typeof value is "undefined"
+
+      value = not not value
+      return @$element  if value is @options.inverse
+
+      @toggleInverse()
+
+    toggleInverse: ->
+      @$wrapper.toggleClass "#{@options.baseClass}-inverse"
+      $on = @$on.clone true
+      $off = @$off.clone true
+      @$on.replaceWith $off
+      @$off.replaceWith $on
+      @$on = $off
+      @$off = $on
+      @options.inverse = not @options.inverse
+      @$element
+
+    onColor: (value) ->
+      color = @options.onColor
+
+      return color  if typeof value is "undefined"
+
+      @$on.removeClass "#{@options.baseClass}-#{color}" if color?
+      @$on.addClass "#{@options.baseClass}-#{value}"
+      @options.onColor = value
+      @$element
+
+    offColor: (value) ->
+      color = @options.offColor
+
+      return color  if typeof value is "undefined"
+
+      @$off.removeClass "#{@options.baseClass}-#{color}" if color?
+      @$off.addClass "#{@options.baseClass}-#{value}"
+      @options.offColor = value
+      @$element
+
+    onText: (value) ->
+      return @options.onText  if typeof value is "undefined"
+
+      @$on.html value
+      @_width()
+      @_containerPosition()
+      @options.onText = value
+      @$element
+
+    offText: (value) ->
+      return @options.offText  if typeof value is "undefined"
+
+      @$off.html value
+      @_width()
+      @_containerPosition()
+      @options.offText = value
+      @$element
+
+    labelText: (value) ->
+      return @options.labelText  if typeof value is "undefined"
+
+      @$label.html value
+      @_width()
+      @options.labelText = value
+      @$element
+
+    handleWidth: (value) ->
+      return @options.handleWidth  if typeof value is "undefined"
+
+      @options.handleWidth = value
+      @_width()
+      @_containerPosition()
+      @$element
+
+    labelWidth: (value) ->
+      return @options.labelWidth  if typeof value is "undefined"
+
+      @options.labelWidth = value
+      @_width()
+      @_containerPosition()
+      @$element
+
+    baseClass: (value) ->
+      @options.baseClass
+
+    wrapperClass: (value) ->
+      return @options.wrapperClass  if typeof value is "undefined"
+
+      value = $.fn.bootstrapSwitch.defaults.wrapperClass unless value
+
+      @$wrapper.removeClass @_getClasses(@options.wrapperClass).join " "
+      @$wrapper.addClass @_getClasses(value).join " "
+      @options.wrapperClass = value
+      @$element
+
+    radioAllOff: (value) ->
+      return @options.radioAllOff  if typeof value is "undefined"
+
+      value = not not value
+      return @$element  if value is @options.radioAllOff
+
+      @options.radioAllOff = value
+      @$element
+
+    onInit: (value) ->
+      return @options.onInit  if typeof value is "undefined"
+
+      value = $.fn.bootstrapSwitch.defaults.onInit unless value
+
+      @options.onInit = value
+      @$element
+
+    onSwitchChange: (value) ->
+      return @options.onSwitchChange  if typeof value is "undefined"
+
+      value = $.fn.bootstrapSwitch.defaults.onSwitchChange unless value
+
+      @options.onSwitchChange = value
+      @$element
+
+    destroy: ->
+      $form = @$element.closest "form"
+
+      $form.off("reset.bootstrapSwitch").removeData "bootstrap-switch" if $form.length
+      @$container.children().not(@$element).remove()
+      @$element.unwrap().unwrap().off(".bootstrapSwitch").removeData "bootstrap-switch"
+      @$element
+
+    _width: ->
+      $handles = @$on.add(@$off)
+
+      # remove width from inline style
+      $handles.add(@$label).css("width", "")
+
+      # save handleWidth for further label width calculation check
+      handleWidth = if @options.handleWidth is "auto"
+      then Math.max @$on.width(), @$off.width()
+      else @options.handleWidth
+
+      # set handles width
+      $handles.width handleWidth
+
+      # set label width
+      @$label.width (index, width) =>
+        return @options.labelWidth  if @options.labelWidth isnt "auto"
+
+        if width < handleWidth then handleWidth else width
+
+      # get handle and label widths
+      @_handleWidth = @$on.outerWidth()
+      @_labelWidth = @$label.outerWidth()
+
+      # set container and wrapper widths
+      @$container.width (@_handleWidth * 2) + @_labelWidth
+      @$wrapper.width @_handleWidth + @_labelWidth
+
+    _containerPosition: (state = @options.state, callback) ->
+      @$container
+      .css "margin-left", =>
+        values = [0, "-#{@_handleWidth}px"]
+
+        return "-#{@_handleWidth / 2}px"  if @options.indeterminate
+
+        if state
+          return  if @options.inverse then values[1] else values[0]
         else
-          $wrapper.removeClass "disabled"
-          $element.prop "disabled", false
-        $element
+          return  if @options.inverse then values[0] else values[1]
 
-      toggleDisabled: ->
-        $element = $(@)
+      return  unless callback
 
-        $element.prop("disabled", not $element.is(":disabled")).parents(".has-switch").toggleClass "disabled"
-        $element
+      setTimeout ->
+        callback()
+      , 50
 
-      isDisabled: ->
-        $(@).is(":disabled")
+    _init: ->
+      init = =>
+        @_width()
+        @_containerPosition null, =>
+          @$wrapper.addClass "#{@options.baseClass}-animate"  if @options.animate
 
-      setReadOnly: (readonly) ->
-        $element = $(@)
-        $wrapper = $element.parents(".has-switch")
+      return init()  if @$wrapper.is ":visible"
 
-        if readonly
-          $wrapper.addClass "disabled"
-          $element.prop "readonly", true
-        else
-          $wrapper.removeClass "disabled"
-          $element.prop "readonly", false
-        $element
+      initInterval = window.setInterval =>
+        if @$wrapper.is ":visible"
+          init()
+          window.clearInterval initInterval
+      , 50
 
-      toggleReadOnly: ->
-        $element = $(@)
+    _elementHandlers: ->
+      @$element.on
+        "change.bootstrapSwitch": (e, skip) =>
+          e.preventDefault()
+          e.stopImmediatePropagation()
 
-        $element.prop("readonly", not $element.is("[readonly]")).parents(".has-switch").toggleClass "disabled"
-        $element
+          state = @$element.is ":checked"
 
-      isReadOnly: ->
-        $(@).is("[readonly]")
+          @_containerPosition state
+          return  if state is @options.state
 
-      toggleState: (skip) ->
-        $element = $(@)
+          @options.state = state
+          @$wrapper.toggleClass("#{@options.baseClass}-off").toggleClass "#{@options.baseClass}-on"
 
-        $element.prop("checked", not $element.is(":checked")).trigger "change", skip
-        $element
+          unless skip
+            if @$element.is ":radio"
+              $("[name='#{@$element.attr('name')}']")
+              .not(@$element)
+              .prop("checked", false)
+              .trigger "change.bootstrapSwitch", true
 
-      toggleRadioState: (skip) ->
-        $element = $(@)
+            @$element.trigger "switchChange.bootstrapSwitch", [state]
 
-        $element.not(":checked").prop("checked", not $element.is(":checked")).trigger "change", skip
-        $element
+        "focus.bootstrapSwitch": (e) =>
+          e.preventDefault()
+          @$wrapper.addClass "#{@options.baseClass}-focused"
 
-      toggleRadioStateAllowUncheck: (uncheck, skip) ->
-        $element = $(@)
+        "blur.bootstrapSwitch": (e) =>
+          e.preventDefault()
+          @$wrapper.removeClass "#{@options.baseClass}-focused"
 
-        if uncheck
-          $element.not(":checked").trigger "change", skip
-        else
-          $element.not(":checked").prop("checked", not $element.is(":checked")).trigger "change", skip
-        $element
+        "keydown.bootstrapSwitch": (e) =>
+          return  if not e.which or @options.disabled or @options.readonly
 
-      setState: (value, skip) ->
-        $element = $(@)
+          switch e.which
+            when 37
+              e.preventDefault()
+              e.stopImmediatePropagation()
 
-        $element.prop("checked", value).trigger "change", skip
-        $element
+              @state false
+            when 39
+              e.preventDefault()
+              e.stopImmediatePropagation()
 
-      setOnLabel: (value) ->
-        $element = $(@)
+              @state true
 
-        $element.siblings(".switch-left").html value
-        $element
+    _handleHandlers: ->
+      @$on.on "click.bootstrapSwitch", (event) =>
+        event.preventDefault()
+        event.stopPropagation()
 
-      setOffLabel: (value) ->
-        $element = $(@)
+        @state false
+        @$element.trigger "focus.bootstrapSwitch"
 
-        $element.siblings(".switch-right").html value
-        $element
+      @$off.on "click.bootstrapSwitch", (event) =>
+        event.preventDefault()
+        event.stopPropagation()
 
-      setOnClass: (value) ->
-        $element = $(@)
-        $switchLeft = $element.siblings(".switch-left")
-        cls = $element.attr("data-on")
+        @state true
+        @$element.trigger "focus.bootstrapSwitch"
 
-        return unless value?
+    _labelHandlers: ->
+      @$label.on
+        "mousedown.bootstrapSwitch touchstart.bootstrapSwitch": (e) =>
+          return  if @_dragStart or @options.disabled or @options.readonly
 
-        $switchLeft.removeClass "switch-#{cls}" if cls?
-        $switchLeft.addClass "switch-#{value}"
-        $element
+          e.preventDefault()
+          e.stopPropagation()
 
-      setOffClass: (value) ->
-        $element = $(@)
-        $switchRight = $element.siblings(".switch-right")
-        cls = $element.attr("data-off")
+          @_dragStart = (e.pageX or e.originalEvent.touches[0].pageX) - parseInt @$container.css("margin-left"), 10
+          @$wrapper.removeClass "#{@options.baseClass}-animate"  if @options.animate
+          @$element.trigger "focus.bootstrapSwitch"
 
-        return unless value?
+        "mousemove.bootstrapSwitch touchmove.bootstrapSwitch": (e) =>
+          return  unless @_dragStart?
 
-        $switchRight.removeClass "switch-#{cls}" if cls?
-        $switchRight.addClass "switch-#{value}"
-        $element
+          e.preventDefault()
 
-      setAnimated: (value) ->
-        $element = $(@)
-        $wrapper = $element.parents(".has-switch")
-        value ?= false
+          difference = (e.pageX or e.originalEvent.touches[0].pageX) - @_dragStart
+          return  if difference < -@_handleWidth or difference > 0
 
-        $wrapper
-        .data("animated", value)
-        .attr("data-animated", value)[if $wrapper.data("animated") isnt false then "addClass" else "removeClass"]("switch-animate")
-        $element
+          @_dragEnd = difference
+          @$container.css "margin-left", "#{@_dragEnd}px"
 
-      setSizeClass: (value) ->
-        $element = $(@)
-        $wrapper = $element.parents(".has-switch")
+        "mouseup.bootstrapSwitch touchend.bootstrapSwitch": (e) =>
+          return  unless @_dragStart
 
-        $.each ["switch-mini", "switch-small", "switch-large"], (i, cls) ->
-          $wrapper[if cls isnt value then "removeClass" else "addClass"](cls)
-        $element
+          e.preventDefault()
 
-      setTextLabel: (value) ->
-        $element = $(@)
+          @$wrapper.addClass "#{@options.baseClass}-animate"  if @options.animate
+          if @_dragEnd
+            state = @_dragEnd > -(@_handleWidth / 2)
 
-        $element.siblings("label").html value or "&nbsp"
-        $element
+            @_dragEnd = false
+            @state if @options.inverse then not state else state
+          else
+            @state not @options.state
 
-      setTextIcon: (value) ->
-        $element = $(@)
+          @_dragStart = false
 
-        $element.siblings("label").html(if value then "<i class=\"icon #{value}\"></i>" else "&nbsp;")
-        $element
+        "mouseleave.bootstrapSwitch": (e) =>
+          @$label.trigger "mouseup.bootstrapSwitch"
 
-      state: ->
-        $(@).is ":checked"
+    _externalLabelHandler: ->
+      $externalLabel = @$element.closest("label")
 
-      destroy: ->
-        $element = $(@)
-        $div = $element.parent()
-        $form = $div.closest("form")
+      $externalLabel.on "click", (event) =>
+        event.preventDefault()
+        event.stopImmediatePropagation()
 
-        $div.children().not($element).remove()
-        $element.unwrap().unwrap().off "change"
-        $form.off("reset").removeData "bootstrap-switch" if $form.length
-        $element
+        # reimplement toggle state on external label only if it is not the target
+        @toggleState()  if event.target is $externalLabel[0]
 
-    return methods[method].apply(@, Array::slice.call(arguments, 1)) if methods[method]
-    return methods.init.apply(@, arguments) if typeof method is "object" or not method
-    $.error "Method " + method + " does not exist!"
+    _formHandler: ->
+      $form = @$element.closest "form"
 
-  @
-) jQuery
+      return  if $form.data "bootstrap-switch"
+
+      $form
+      .on "reset.bootstrapSwitch", ->
+        window.setTimeout ->
+          $form
+          .find("input")
+          .filter( -> $(@).data "bootstrap-switch")
+          .each -> $(@).bootstrapSwitch "state", @checked
+        , 1
+      .data "bootstrap-switch", true
+
+    _getClasses: (classes) ->
+      return ["#{@options.baseClass}-#{classes}"]  unless $.isArray classes
+
+      cls = []
+      for c in classes
+        cls.push "#{@options.baseClass}-#{c}"
+      cls
+
+  $.fn.bootstrapSwitch = (option, args...) ->
+    ret = @
+    @each ->
+      $this = $ @
+      data = $this.data "bootstrap-switch"
+
+      $this.data "bootstrap-switch", data = new BootstrapSwitch @, option  unless data
+      ret = data[option].apply data, args if typeof option is "string"
+    ret
+
+  $.fn.bootstrapSwitch.Constructor = BootstrapSwitch
+  $.fn.bootstrapSwitch.defaults =
+    state: true
+    size: null
+    animate: true
+    disabled: false
+    readonly: false
+    indeterminate: false
+    inverse: false
+    radioAllOff: false
+    onColor: "primary"
+    offColor: "default"
+    onText: "ON"
+    offText: "OFF"
+    labelText: "&nbsp;"
+    handleWidth: "auto"
+    labelWidth: "auto"
+    baseClass: "bootstrap-switch"
+    wrapperClass: "wrapper"
+    onInit: ->
+    onSwitchChange: ->

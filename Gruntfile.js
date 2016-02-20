@@ -625,6 +625,7 @@ module.exports = function(grunt) {
           { expand: true, cwd: '<%= vendors %>/MathJax/images/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/images/' },
           { expand: true, cwd: '<%= vendors %>/MathJax/jax/input/TeX', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/jax/input/TeX/' },
           { expand: true, cwd: '<%= vendors %>/MathJax/jax/output/HTML-CSS', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/jax/output/HTML-CSS/' },
+          { expand: true, cwd: '<%= vendors %>/MathJax/jax/element/mml', src: [ '**' ], dest: '<%= resdir %>/Libraries/.js/MathJax/jax/element/mml/' },
           { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: '<%= resdir %>/Libraries/.js/MathJax/', filter: 'isFile'}
         ]
       },

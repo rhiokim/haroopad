@@ -1,3 +1,33 @@
+### 1.7.7
+- fixes issue with stack overflow on t(lng, count)
+- fixes empty value fallback when processing secondary ns 
+
+### 1.7.6
+- fixes lng detection (i18next-client on npm)
+
+### 1.7.5
+- adds option to define defaultOptions, which gets merged into t(options) [issue 307](https://github.com/i18next/i18next/issues/307)
+- optimization of size added by plural rules
+- handle error on json parse when using internal xhr
+- fixes plural/singular on count if going on fallbacks eg. fr --> en
+- fixes global leak of sync in amd versions
+- apply options.lowerCaseLng to fallbackLng too
+- added hasResourceBundle(lng, ns) to check if bundle exists
+- added experimental i18n.sync.reload --> resets resStore and reloads resources
+- catch issues with localStorage quota
+- changes detectlanguage to support whitelist entries
+
+### 1.7.4
+- add resource bundle gets deep extend flag i18n.addResourceBundle(lng, ns, { 'deep': { 'key2': 'value2' }}, true);
+- new functions to add one key value or multiple i18n.addResource(lng, ns, key, value);, i18n.addResources(lng, ns, {'key1': 'value1', 'deep.key2': 'value2'});
+- lngWhitelist merged
+- override postMissing function
+- allow floats for count
+- added indefinite functionality for plurals
+- optional set replacing vars to replace member to avoid collision with other options
+- experimental optional detectLngFromLocalStorage
+- fix for norwegian language
+
 ### 1.7.3
 - solves issue with ie8 not providing .trim function on string -> added to shim
 - set data using $(selector).i18n() on data-i18n='[data-someDataAttr]key'

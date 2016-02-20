@@ -5,9 +5,13 @@
 
 // Base class
 .tooltip {
+  // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
+  // So reset our font and text properties to avoid inheriting weird values.
+  .reset-text();
   font-size: @font-size-mini;
   font-weight: bold;
   line-height: @line-height-xs;
+
   word-break: break-word;
 
   &.in     { .opacity(@tooltip-opacity); }
@@ -28,6 +32,7 @@
   z-index: -1;
   border: @tooltip-arrow-outer-width solid transparent;
 }
+// Note: Deprecated .top-left, .top-right, .bottom-left, and .bottom-right as of v3.3.1
 .tooltip {
   &.top .tooltip-arrow,
   &.top-left .tooltip-arrow,

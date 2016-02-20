@@ -1,7 +1,7 @@
 {
   "name": "eventEmitter",
   "description": "Event based JavaScript for the browser",
-  "version": "4.2.7",
+  "version": "4.2.11",
   "main": [
     "./EventEmitter.js"
   ],
@@ -11,8 +11,8 @@
   },
   "licenses": [
     {
-      "type": "MIT",
-      "url": "https://github.com/Wolfy87/EventEmitter#license-mit"
+      "type": "Unlicense",
+      "url": "http://unlicense.org/"
     }
   ],
   "keywords": [
@@ -26,14 +26,14 @@
     ".gitignore",
     "package.json"
   ],
-  "homepage": "https://github.com/Wolfy87/EventEmitter",
-  "_release": "4.2.7",
+  "homepage": "https://github.com/Olical/EventEmitter",
+  "_release": "4.2.11",
   "_resolution": {
     "type": "version",
-    "tag": "v4.2.7",
-    "commit": "5cba254c056a143df1c4f5505bfa8c3531ebd56c"
+    "tag": "v4.2.11",
+    "commit": "5da7b55b628b210f2e9b8bd87ae6e4035321d72b"
   },
-  "_source": "git://github.com/Wolfy87/EventEmitter.git",
+  "_source": "git://github.com/Olical/EventEmitter.git",
   "_target": "~4.2.6",
   "_originalSource": "eventEmitter"
 }

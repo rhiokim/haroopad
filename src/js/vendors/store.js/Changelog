@@ -1,3 +1,19 @@
+v1.3.20
++ Fully automated test framework
++ Fix infinite loop in IE
+
+v1.3.19
++ Use umdjs to export store.js (#116, #111, #96, #91, #78, ...)
++ Make compatible with "use strict" mode (#111)
++ Fix store.clear in legacy-IE code path (#103)
++ Roadmap for v1.4.x and v2.x.x
+
+v1.3.17
++ Add store.has
++ Add store.get default value, e.g `store.get('foo', 1)`
++ Fix IE strict mode compatability issue (#105)
++ Added store.version
+
 v1.3.16
 + Improve environment/module.exports detection (#88, github.com/benrudolph)
 

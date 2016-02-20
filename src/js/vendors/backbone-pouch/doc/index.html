@@ -219,186 +219,199 @@
       </ul>
     </nav>
     <main>
-      <h1>backbone-pouch <a href="http://travis-ci.org/jo/backbone-pouch"><img src="https://secure.travis-ci.org/jo/backbone-pouch.png?branch=master" alt="Build Status"></a></h1>
+      <h1 id="backbone-pouch-build-status-https-secure-travis-ci-org-jo-backbone-pouch-png-branch-master-http-travis-ci-org-jo-backbone-pouch-">backbone-pouch <a href="http://travis-ci.org/jo/backbone-pouch"><img src="https://secure.travis-ci.org/jo/backbone-pouch.png?branch=master" alt="Build Status"></a></h1>
 <p><a href="http://backbonejs.org/">Backbone</a> <a href="http://pouchdb.com/">PouchDB</a> Sync Adapter</p>
-<h2>Getting Started</h2>
+<h2 id="getting-started">Getting Started</h2>
 <p>You can use backbone-pouch on the server with node or in the browser:</p>
-<h3>On the Server</h3>
+<h3 id="on-the-server">On the Server</h3>
 <p>Install the module with: <code>npm install backbone-pouch</code></p>
-<pre><code class="lang-javascript">var backbone = require(&#39;backbone&#39;);
-var backbone_pouch = require(&#39;backbone-pouch&#39;);
-backbone.sync = backbone_pouch.sync();</code></pre>
-<h3>In the Browser</h3>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> Backbone = <span class="hljs-built_in">require</span>(<span class="hljs-string">'backbone'</span>);
+<span class="hljs-keyword">var</span> BackbonePouch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'backbone-pouch'</span>);
+Backbone.sync = BackbonePouch.sync();
+</code></pre>
+<h3 id="in-the-browser">In the Browser</h3>
 <ol>
 <li>Download <a href="http://code.jquery.com/jquery-2.0.0.min.js">jQuery</a>, <a href="http://underscorejs.org/underscore-min.js">Underscore</a>, <a href="http://backbonejs.org/backbone-min.js">Backbone</a> and <a href="http://download.pouchdb.com/pouchdb-nightly.min.js">PouchDB</a></li>
 <li>Download the <a href="https://raw.github.com/jo/backbone-pouch/master/dist/backbone-pouch.min.js">production version</a> or the <a href="https://raw.github.com/jo/backbone-pouch/master/dist/backbone-pouch.js">development version</a>.</li>
 <li>In your web page:</li>
 </ol>
-<pre><code class="lang-html">&lt;script src=&quot;jquery-2.0.0.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;underscore-min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;backbone-min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;pouchdb-nightly.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;backbone-pouch.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"jquery-2.0.0.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"underscore-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"backbone-min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"pouchdb-nightly.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"backbone-pouch.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
   Backbone.sync = BackbonePouch.sync();
-&lt;/script&gt;</code></pre>
-<h2>Setup backbone-pouch</h2>
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
+<h2 id="setup-backbone-pouch">Setup backbone-pouch</h2>
 <p>You can configure Backbone to persist via backbone-pouch per model:</p>
-<pre><code class="lang-javascript">var MyModel = Backbone.Model.extend({
-  sync: BackbonePouch.sync(options)
-});</code></pre>
+<pre><code class="lang-javascript">var MyModel = Backbone<span class="hljs-preprocessor">.Model</span><span class="hljs-preprocessor">.extend</span>({
+  sync: BackbonePouch<span class="hljs-preprocessor">.sync</span>(options)
+})<span class="hljs-comment">;</span>
+</code></pre>
 <p>Or you might want to set backbone-pouch sync globally:</p>
-<pre><code class="lang-javascript">Backbone.sync = BackbonePouch.sync(defaults);
+<pre><code class="lang-javascript">Backbone<span class="hljs-preprocessor">.sync</span> = BackbonePouch<span class="hljs-preprocessor">.sync</span>(defaults)<span class="hljs-comment">;</span>
 
-var MyModel = Backbone.Model.extend({
+var MyModel = Backbone<span class="hljs-preprocessor">.Model</span><span class="hljs-preprocessor">.extend</span>({
   pouch: options
-});</code></pre>
-<h3><code>BackbonePouch.attachments()</code></h3>
+})<span class="hljs-comment">;</span>
+</code></pre>
+<h3 id="-backbonepouch-attachments-"><code>BackbonePouch.attachments()</code></h3>
 <p>You can mixin attachment support into a single model:</p>
-<pre><code class="lang-javascript">var MyModel = Backbone.Model.extend(BackbonePouch.attachments());</code></pre>
+<pre><code class="lang-javascript">var MyModel = Backbone<span class="hljs-preprocessor">.Model</span><span class="hljs-preprocessor">.extend</span>(BackbonePouch<span class="hljs-preprocessor">.attachments</span>())<span class="hljs-comment">;</span>
+</code></pre>
 <p>Or you may want to mixin attachment support globally:</p>
-<pre><code class="lang-javascript">_.extend(Backbone.Model.prototype, BackbonePouch.attachments());</code></pre>
+<pre><code class="lang-javascript">_<span class="hljs-preprocessor">.extend</span>(Backbone<span class="hljs-preprocessor">.Model</span><span class="hljs-preprocessor">.prototype</span>, BackbonePouch<span class="hljs-preprocessor">.attachments</span>())<span class="hljs-comment">;</span>
+</code></pre>
 <p>Note that you have to call the attachments function - don&#39;t forget the braces.</p>
 <p>You can also pass the PouchDB adapter to <code>BackbonePouch.attachments</code>:</p>
-<pre><code class="lang-javascript">_.extend(Backbone.Model.prototype, BackbonePouch.attachments({
-  db: PouchDB(&#39;mydb&#39;)
-}));</code></pre>
-<h3><code>idAttribute</code></h3>
+<pre><code class="lang-javascript">_<span class="hljs-class">.extend</span>(<span class="hljs-tag">Backbone</span><span class="hljs-class">.Model</span><span class="hljs-class">.prototype</span>, <span class="hljs-tag">BackbonePouch</span><span class="hljs-class">.attachments</span>(<span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">db</span>:<span class="hljs-value"> <span class="hljs-function">PouchDB(<span class="hljs-string">'mydb'</span>)</span>
+</span></span></span>}));
+</code></pre>
+<h3 id="-idattribute-"><code>idAttribute</code></h3>
 <p>You should adjust the <code>idAttribute</code>, because CouchDB (and therefore PouchDB)
 uses <code>_id</code> instead of the default <code>id</code> attribute:</p>
-<pre><code class="lang-javascript">Backbone.Model.prototype.idAttribute = &#39;_id&#39;;</code></pre>
+<pre><code class="lang-javascript">Backbone.Model.<span class="hljs-keyword">prototype</span>.idAttribute = <span class="hljs-string">'_id'</span>;
+</code></pre>
 <p><p id=usage></p></p>
-<h2>Usage</h2>
-<pre><code class="lang-javascript">var MyModel = Backbone.Model.extend({
-  idAttribute: &#39;_id&#39;,
+<h2 id="usage">Usage</h2>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> MyModel = Backbone.Model.extend({
+  idAttribute: <span class="hljs-string">'_id'</span>,
   sync: BackbonePouch.sync({
-    db: PouchDB(&#39;mydb&#39;)
+    db: PouchDB(<span class="hljs-string">'mydb'</span>)
   })
-});</code></pre>
-<h3>Query documents of type <code>post</code></h3>
+});
+</code></pre>
+<h3 id="query-documents-of-type-post-">Query documents of type <code>post</code></h3>
 <p>Retrieve single documents with all conflicts.
 Retrieve collections via Map Reduce, filtering all documents of type <code>post</code>, ordered by <code>position</code>.
 Limit results to <code>10</code>.</p>
-<pre><code class="lang-javascript">var Post = Backbone.Model.extend({
-  idAttribute: &#39;_id&#39;,
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> Post = Backbone.Model.extend({
+  idAttribute: <span class="hljs-string">'_id'</span>,
   sync: BackbonePouch.sync({
-    db: PouchDB(&#39;mydb&#39;)
+    db: PouchDB(<span class="hljs-string">'mydb'</span>)
   })
 });
-var Posts = Backbone.Collection.extend({
+<span class="hljs-keyword">var</span> Posts = Backbone.Collection.extend({
   model: Post,
   sync: BackbonePouch.sync({
-    db: PouchDB(&#39;mydb&#39;),
-    fetch: &#39;query&#39;,
+    db: PouchDB(<span class="hljs-string">'mydb'</span>),
+    fetch: <span class="hljs-string">'query'</span>,
     options: {
       query: {
-        include_docs: true,
+        include_docs: <span class="hljs-literal">true</span>,
         fun: {
-          map: function(doc) {
-            if (doc.type === &#39;post&#39;) {
-              emit(doc.position, null)
+          map: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(doc)</span> {</span>
+            <span class="hljs-keyword">if</span> (doc.type === <span class="hljs-string">'post'</span>) {
+              emit(doc.position, <span class="hljs-literal">null</span>)
             }
           }
         },
-        limit: 10
+        limit: <span class="hljs-number">10</span>
       },
       changes: {
-        include_docs: true,
-        filter: function(doc) {
-          return doc._deleted || doc.type === &#39;post&#39;;
+        include_docs: <span class="hljs-literal">true</span>,
+        filter: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(doc)</span> {</span>
+          <span class="hljs-keyword">return</span> doc._deleted || doc.type === <span class="hljs-string">'post'</span>;
         }
       }
     }
   }),
-  parse: function(result) {
-    return _.pluck(result.rows, &#39;doc&#39;);
+  parse: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(result)</span> {</span>
+    <span class="hljs-keyword">return</span> _.pluck(result.rows, <span class="hljs-string">'doc'</span>);
   }
-});</code></pre>
-<h3>Global Backbone Sync Configuration</h3>
+});
+</code></pre>
+<h3 id="global-backbone-sync-configuration">Global Backbone Sync Configuration</h3>
 <p>Use <code>mydb</code> as default for all databases.
 Setup Map Reduce as default query method.
 Limit resultset to <code>10</code>.
 Authors are returnd by <code>name</code>, Posts by <code>date</code>.</p>
 <pre><code class="lang-javascript">Backbone.sync =  BackbonePouch.sync({
-  db: PouchDB(&#39;mydb&#39;),
-  fetch: &#39;query&#39;,
+  db: PouchDB(<span class="hljs-string">'mydb'</span>),
+  fetch: <span class="hljs-string">'query'</span>,
   options: {
     query: {
-      include_docs: true,
-      limit: 10
+      include_docs: <span class="hljs-literal">true</span>,
+      limit: <span class="hljs-number">10</span>
     }
   }
 });
-Backbone.Model.prototype.idAttribute = &#39;_id&#39;;</code></pre>
+Backbone.Model.prototype.idAttribute = <span class="hljs-string">'_id'</span>;
+</code></pre>
 <p>Then you can define your models and collections as usual
 and overwrite backbone-pouchdb settings via the <code>pouch</code> property:</p>
-<pre><code class="lang-javascript">var Author = Backbone.Model.extend();
-var Authors = Backbone.Collection.extend({
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> Author = Backbone.Model.extend();
+<span class="hljs-keyword">var</span> Authors = Backbone.Collection.extend({
   model: Author,
   pouch: {
     options: {
       query: {
-        include_docs: true,
+        include_docs: <span class="hljs-literal">true</span>,
         fun: {
-          map: function(doc) {
-            if (doc.type === &#39;author&#39;) {
-              emit(doc.name, null)
+          map: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(doc)</span> {</span>
+            <span class="hljs-keyword">if</span> (doc.type === <span class="hljs-string">'author'</span>) {
+              emit(doc.name, <span class="hljs-literal">null</span>)
             }
           }
         }
       },
       changes: {
-        include_docs: true,
-        filter: function(doc) {
-          return doc._deleted || doc.type === &#39;author&#39;;
+        include_docs: <span class="hljs-literal">true</span>,
+        filter: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(doc)</span> {</span>
+          <span class="hljs-keyword">return</span> doc._deleted || doc.type === <span class="hljs-string">'author'</span>;
         }
       }
     }
   },
-  parse: function(result) {
-    return _.pluck(result.rows, &#39;doc&#39;);
+  parse: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(result)</span> {</span>
+    <span class="hljs-keyword">return</span> _.pluck(result.rows, <span class="hljs-string">'doc'</span>);
   }
 });
-var Post = Backbone.Model.extend();
-var Posts = Backbone.Collection.extend({
+<span class="hljs-keyword">var</span> Post = Backbone.Model.extend();
+<span class="hljs-keyword">var</span> Posts = Backbone.Collection.extend({
   model: Post,
   pouch: {
     options: {
       query: {
-        include_docs: true,
+        include_docs: <span class="hljs-literal">true</span>,
         fun: {
-          map: function(doc) {
-            if (doc.type === &#39;post&#39;) {
-              emit(doc.date, null)
+          map: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(doc)</span> {</span>
+            <span class="hljs-keyword">if</span> (doc.type === <span class="hljs-string">'post'</span>) {
+              emit(doc.date, <span class="hljs-literal">null</span>)
             }
           }
         }
       },
       changes: {
-        include_docs: true,
-        filter: function(doc) {
-          return doc._deleted || doc.type === &#39;post&#39;;
+        include_docs: <span class="hljs-literal">true</span>,
+        filter: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(doc)</span> {</span>
+          <span class="hljs-keyword">return</span> doc._deleted || doc.type === <span class="hljs-string">'post'</span>;
         }
       }
     }
   },
-  parse: function(result) {
-    return _.pluck(result.rows, &#39;doc&#39;);
+  parse: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(result)</span> {</span>
+    <span class="hljs-keyword">return</span> _.pluck(result.rows, <span class="hljs-string">'doc'</span>);
   }
-});</code></pre>
-<h3>Attachments</h3>
-<pre><code class="lang-javascript">Backbone.sync =  BackbonePouch.sync({
-  db: PouchDB(&#39;mydb&#39;)
 });
-Backbone.Model.prototype.idAttribute = &#39;_id&#39;;
-var MyModel = Backbone.Model.extend(BackbonePouch.attachments());
-var model = new MyModel();
-model.attach(blob);     // store file
-model.attachments();    // list files
-model.attachment(name); // retrieve file</code></pre>
+</code></pre>
+<h3 id="attachments">Attachments</h3>
+<pre><code class="lang-javascript">Backbone.sync =  BackbonePouch.sync({
+  db: PouchDB(<span class="hljs-string">'mydb'</span>)
+});
+Backbone.Model.prototype.idAttribute = <span class="hljs-string">'_id'</span>;
+<span class="hljs-keyword">var</span> MyModel = Backbone.Model.extend(BackbonePouch.attachments());
+<span class="hljs-keyword">var</span> model = <span class="hljs-keyword">new</span> MyModel();
+model.attach(blob);     <span class="hljs-comment">// store file</span>
+model.attachments();    <span class="hljs-comment">// list files</span>
+model.attachment(name); <span class="hljs-comment">// retrieve file</span>
+</code></pre>
 <p>backbone-pouch helps you with binary attachments by providing convenient methods
 for retrieving, storing and listing files.</p>
-<h4><code>attach(blob, name, type, callback)</code></h4>
+<h4 id="-attach-blob-name-type-callback-"><code>attach(blob, name, type, callback)</code></h4>
 <p>Store an attachment.</p>
 <p><code>blob</code> must be a <code>Blob</code> in the browser or a <code>Buffer</code> in node.
 You can omit <code>name</code> if the blob has a <code>filename</code> property.
@@ -406,21 +419,21 @@ You can omit <code>type</code> if the blob has a <code>type</code> property.</p>
 <p>The callback is invoked with <code>err</code> and <code>result</code> callbacks.
 After the file is stored, the models <code>_rev</code> property is updated.
 If the model wasn&#39;t saved before, an <code>id</code> will be assigned and it will be created.</p>
-<h4><code>attachments(filter)</code></h4>
+<h4 id="-attachments-filter-"><code>attachments(filter)</code></h4>
 <p>List attachment names.</p>
 <p>The optional <code>filter</code> argument can be used to list only attachments of a certain type.</p>
 <p>If the <code>filter</code> argument is a string or a RegExp,
 it will be matched against the <code>content_type</code> of each attachment
 and only the matching attachment names will be returned.</p>
 <p>If <code>filter</code> is a function, it will be called with the attachments name and its stub.</p>
-<h4><code>attachment(name, callback)</code></h4>
+<h4 id="-attachment-name-callback-"><code>attachment(name, callback)</code></h4>
 <p>Retrieve an attachment blob by name.</p>
 <p><code>callback</code> is called with <code>error</code> and <code>blob</code> arguments.</p>
 <p>In the browser a <code>Blob</code> object is returned, a <code>Buffer</code> in node.</p>
 <p><p id=configuration></p></p>
-<h2>Configuration</h2>
+<h2 id="configuration">Configuration</h2>
 <p>You can configure every option passed to PouchDB.</p>
-<h3>Option Inheritance</h3>
+<h3 id="option-inheritance">Option Inheritance</h3>
 <p>Options are merged (using Underscores <a href="http://underscorejs.org/#extend">extend</a>) in the following order:</p>
 <ol>
 <li>BackbonePouch defaults</li>
@@ -428,36 +441,37 @@ and only the matching attachment names will be returned.</p>
 <li>pouch object</li>
 <li>save / get / destroy / fetch options</li>
 </ol>
-<h3>backbone-pouch Options</h3>
+<h3 id="backbone-pouch-options">backbone-pouch Options</h3>
 <p>These options control the behaviour of backbone-pouch.</p>
-<h4><code>db</code>: PouchDB Adapter</h4>
+<h4 id="-db-pouchdb-adapter"><code>db</code>: PouchDB Adapter</h4>
 <p>Setup a database. This option is mendatory. Must be a PouchDB adapter:</p>
-<pre><code class="lang-javascript">PouchDB(&#39;dbname&#39;)</code></pre>
+<pre><code class="lang-javascript"><span class="hljs-function">PouchDB(<span class="hljs-string">'dbname'</span>)</span>
+</code></pre>
 <p>See <a href="http://pouchdb.com/api.html#create_a_database">Create a database</a>.</p>
-<h4><code>fetch</code>: Fetch Method</h4>
+<h4 id="-fetch-fetch-method"><code>fetch</code>: Fetch Method</h4>
 <p>Specify the fetch method. Can be either <code>allDocs</code> (default), <code>query</code> or <code>spatial</code>.</p>
 <p>Use the default <code>allDocs</code> if you want all documents.</p>
 <p>Using <code>query</code> you can use Map-Reduce to query the database.</p>
 <p><code>spatial</code> requires the Spatial query plugin.</p>
-<h4><code>listen</code>: Listen for Changes</h4>
+<h4 id="-listen-listen-for-changes"><code>listen</code>: Listen for Changes</h4>
 <p>When this is checked, backbone-pouchdb will listen for changes in the database
 and update the model / collection on every change.
 Default is true.</p>
 <p><em>Note that you will need to setup a <code>filter</code> function when used in combination with <code>query</code> fetch method.</em></p>
-<h4><code>options</code>: PouchDB Options</h4>
+<h4 id="-options-pouchdb-options"><code>options</code>: PouchDB Options</h4>
 <p>Those options are passed directly to PouchDB.</p>
 <p>The keys are PouchDB methods. Possible keys are <code>post</code>, <code>put</code>, <code>remove</code>, <code>get</code>, <code>query</code>, <code>allDocs</code> and <code>spatial</code>.</p>
 <p>Refer to the <a href="http://pouchdb.com/api.html">PouchDB API Documentation</a> for more options.</p>
-<h5><code>post</code>: Create</h5>
+<h5 id="-post-create"><code>post</code>: Create</h5>
 <p>Options for document creation. Currently no options supported.</p>
 <p>See <a href="http://pouchdb.com/api.html#create_a_document">Create a Document</a>.</p>
-<h5><code>put</code>: Update</h5>
+<h5 id="-put-update"><code>put</code>: Update</h5>
 <p>Options for document update. Currently no options supported.</p>
 <p>See <a href="http://pouchdb.com/api.html#update_a_document">Update a Document</a>.</p>
-<h5><code>remove</code>: Delete</h5>
+<h5 id="-remove-delete"><code>remove</code>: Delete</h5>
 <p>Options for document delete. Currently no options supported.</p>
 <p>See <a href="http://pouchdb.com/api.html#delete_a_document">Delete a Document</a>.</p>
-<h5><code>get</code>: Retrieve Model</h5>
+<h5 id="-get-retrieve-model"><code>get</code>: Retrieve Model</h5>
 <p>Options for fetching a single document.</p>
 <ul>
 <li><code>attachments</code>: Include attachment data.</li>
@@ -468,12 +482,13 @@ Default is true.</p>
 <li><code>revs</code>: Include revision history of the document.</li>
 </ul>
 <p>See <a href="http://pouchdb.com/api.html#fetch_a_document">Fetch a Document</a>.</p>
-<h5>Fetch Collections</h5>
+<h5 id="fetch-collections">Fetch Collections</h5>
 <p>When fetching collections from views, one might want to parse the result, eg:</p>
-<pre><code class="lang-javascript">parse: function(result) {
-  return _.pluck(result.rows, &#39;doc&#39;);
-}</code></pre>
-<h6><code>allDocs</code>: Retrieve Collection</h6>
+<pre><code class="lang-javascript">parse: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(result)</span> {</span>
+  <span class="hljs-keyword">return</span> _.pluck(result.rows, <span class="hljs-string">'doc'</span>);
+}
+</code></pre>
+<h6 id="-alldocs-retrieve-collection"><code>allDocs</code>: Retrieve Collection</h6>
 <p>Options for fetching all documents. This is a built in view which outputs all documents by id.</p>
 <ul>
 <li><code>attachments</code>: Include attachment data.</li>
@@ -487,7 +502,7 @@ Default is true.</p>
 <li><code>startkey</code>: Startkey of the query.</li>
 </ul>
 <p>See <a href="http://pouchdb.com/api.html#fetch_documents">Fetch Documents</a>.</p>
-<h6><code>query</code>: Retrieve Collection via Map Reduce</h6>
+<h6 id="-query-retrieve-collection-via-map-reduce"><code>query</code>: Retrieve Collection via Map Reduce</h6>
 <p>Query options for Map Reduce queries.</p>
 <ul>
 <li><code>attachments</code>: Include attachment data.</li>
@@ -503,7 +518,7 @@ Default is true.</p>
 <li><code>startkey</code>: Startkey of the query.</li>
 </ul>
 <p>See <a href="http://pouchdb.com/api.html#query_the_database">Query the Database</a>.</p>
-<h6><code>spatial</code>: Retrieve Collection via Spatial Index</h6>
+<h6 id="-spatial-retrieve-collection-via-spatial-index"><code>spatial</code>: Retrieve Collection via Spatial Index</h6>
 <p>Options for Spatial query. The spatial query has not been tested.
 You have to use a PouchDB build with included <a href="https://github.com/daleharvey/pouchdb/blob/master/src/plugins/pouchdb.spatial.js">Spatial</a> plugin.</p>
 <ul>
@@ -512,7 +527,7 @@ You have to use a PouchDB build with included <a href="https://github.com/daleha
 <li><code>include_docs</code>: Whether to include the document on each change. Default is true.</li>
 <li><code>start_range</code>: Start range of query</li>
 </ul>
-<h5><code>changes</code>: Listen for changes</h5>
+<h5 id="-changes-listen-for-changes"><code>changes</code>: Listen for changes</h5>
 <p>Options passed to changes feed.</p>
 <ul>
 <li><code>filter</code>: Reference a filter function from a design document or define a function to selectively get updates.</li>
@@ -523,34 +538,35 @@ You have to use a PouchDB build with included <a href="https://github.com/daleha
 </ul>
 <p>See <a href="http://pouchdb.com/api.html#listen_to_database_changes">Listen to Database Changes</a>.</p>
 <p><p id=examples></p></p>
-<h2>Examples</h2>
+<h2 id="examples">Examples</h2>
 <p>Check out the <a href="http://jo.github.io/backbone-pouch/examples/todos">TODO Application</a>
 in the <code>doc/examples</code> folder.</p>
 <p>It`s the standard <a href="http://backbonejs.org/examples/todos/index.html">Backbone TODO example</a>,
 extended to use backbone-pouch.</p>
-<h3>Advanced TODO Sync Example</h3>
+<h3 id="advanced-todo-sync-example">Advanced TODO Sync Example</h3>
 <p><a href="http://jo.github.io/backbone-pouch/examples/todos-sync">TODO Sync Application</a>
 is also in the <code>doc/examples</code> folder.</p>
 <p>You can setup external CouchDB (with <a href="http://wiki.apache.org/couchdb/CORS">CORS</a> enabled)
 to sync your local TODO database.</p>
-<h2>Contributing</h2>
-<p>backbone-pouch is written with <a href="https://github.com/felixge/node-style-guide">Felix Geisendörfers Node.js Style Guide</a> in mind.</p>
-<p>Add <a href="https://github.com/caolan/nodeunit">nodeunit</a> tests for any new or changed functionality.
-Lint and test your code using <a href="http://gruntjs.com/">Grunt</a>.</p>
-<p><em>Also, please don&#39;t edit files in the &quot;dist&quot; subdirectory as they are generated via Grunt.
-You&#39;ll find source code in the &quot;lib&quot; subdirectory!</em></p>
-<h2>Generating the Documentation</h2>
-<p><em>The files in the &quot;doc&quot; subdirectory are generated via Grunt, too.
-Edit this README.md and template.jst and run <code>grunt doc</code> to generate the documentation.</em></p>
+<h2 id="contributing">Contributing</h2>
+<ul>
+<li>Install dependencies via <code>npm install</code></li>
+<li>Edit <code>lib/backbone-pouch.js</code></li>
+<li>Write <a href="https://github.com/isaacs/node-tap">tap</a> tests</li>
+<li>Run the tests with <code>npm test</code></li>
+<li>Generate the docs with <code>npm run docs</code>. This will render <code>README.md</code> using <code>doc/index.html.jst</code></li>
+</ul>
 <p>To update the Github page, change to the <code>gh-pages</code> branch and merge the <code>doc</code> subtree:</p>
-<pre><code>git pull -s subtree origin master</code></pre>
-<p>You will need <code>git-subtree</code>, of course.</p>
-<h2>Versioning</h2>
+<pre><code class="lang-bash">git pull <span class="hljs-operator">-s</span> subtree origin master
+</code></pre>
+<h2 id="versioning">Versioning</h2>
 <p>backbone-pouch follows <a href="http://semver-ftw.org/">semver-ftw</a>.
 Dont think 1.0.0 means production ready yet.
 There were some breaking changes, so had to move up the major version.</p>
-<h2>Release History</h2>
+<h2 id="release-history">Release History</h2>
 <ul>
+<li><code>1.5.0</code>: Remove Grunt in favour of purenpm purism and switch to tap</li>
+<li><code>1.4.0</code>: Update Backbone and Underscore</li>
 <li><code>1.3.0</code>: Do not parse view results, leave that up to the user</li>
 <li><code>1.2.1</code>: Improve option inheritance</li>
 <li><code>1.2.0</code>: Change defaults: do not listen and include_docs</li>
@@ -559,8 +575,8 @@ There were some breaking changes, so had to move up the major version.</p>
 <li><code>1.0</code>: New chained api, Node support, tests. Support listen to changes feed. Use Grunt.</li>
 <li><code>prior 1.0</code>: Experimental version with example TODO apps</li>
 </ul>
-<h2>License</h2>
-<p>Copyright (c) 2013 Johannes J. Schmidt<br>Licensed under the MIT license.</p>
+<h2 id="license">License</h2>
+<p>Copyright (c) 2013-2014 Johannes J. Schmidt, TF<br>Licensed under the MIT license.</p>
 
     </main>
   </body>

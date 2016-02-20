@@ -15,7 +15,7 @@ $(function(){
   Backbone.sync = BackbonePouch.sync({
     // We currently suffix by the PouchDB version here
     // because at the moment PouchDB does not support upgrade
-    db: Pouch('todos-backbone-0.0.12')
+    db: new PouchDB('todos-backbone-0.0.12')
   });
 
   // Adjust id attribute to the one PouchDB uses

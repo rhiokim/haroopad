@@ -13,7 +13,7 @@ $(function(){
   Backbone.sync = BackbonePouch.sync({
     // We currently suffix by the PouchDB version here
     // because at the moment PouchDB does not support upgrade
-    db: Pouch(dbname),
+    db: new PouchDB(dbname),
     listen: true,
     fetch: 'query'
   });
@@ -469,14 +469,14 @@ $(function(){
           pullResps = this.pullResps,
           renderStats = _.bind(this.renderStats, this);
 
-      Pouch.replicate(dbname, url, {
+      PouchDB.replicate(dbname, url, {
         continuous: true,
         onChange: function(resp) {
           pushResps[url] = resp;
           renderStats();
         }
       });
-      Pouch.replicate(url, dbname, {
+      PouchDB.replicate(url, dbname, {
         continuous: true,
         onChange: function(resp) {
           pullResps[url] = resp;

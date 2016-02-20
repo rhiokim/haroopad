@@ -46,12 +46,15 @@
 
 .panel {
   > .list-group {
+    padding: @panel-body-padding;
+    padding-top: 0;
     // Add border top radius for first one
     &:first-child {
       .list-group-item:first-child {
         .border-top-radius((@panel-border-radius - 1));
       }
     }
+
     // Add border bottom radius for last one
     &:last-child {
       .list-group-item:last-child {

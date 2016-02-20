@@ -1,6 +1,7 @@
 {
   "name": "requirejs",
-  "version": "2.1.11",
+  "version": "2.1.22",
+  "ignore": [],
   "homepage": "http://requirejs.org",
   "authors": [
     "jrburke.com"
@@ -10,12 +11,15 @@
   "keywords": [
     "AMD"
   ],
-  "license": "new BSD, and MIT",
-  "_release": "2.1.11",
+  "license": [
+    "BSD-3-Clause",
+    "MIT"
+  ],
+  "_release": "2.1.22",
   "_resolution": {
     "type": "version",
-    "tag": "2.1.11",
-    "commit": "fc97e49f1ec9fb2f204bef2b60ed21a32d6a2e05"
+    "tag": "2.1.22",
+    "commit": "9cd0b99417eac61e890d11c5119f2e45e752c999"
   },
   "_source": "git://github.com/jrburke/requirejs-bower.git",
   "_target": "~2.1.9",
