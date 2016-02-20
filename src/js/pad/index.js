@@ -95,7 +95,7 @@ i18n.init({
       }
 
       /* change by external application */
-      file.on('change:mtime', function() {
+      nw.file.on('change:mtime', function() {
         window.ee.emit('file.update', nw.file.get('fileEntry'));
       });
 

@@ -182,7 +182,6 @@ function loadLibs(base, cb) {
     });
     MathJax.Hub.config.menuSettings.renderer = 'HTML-CSS'; //'SVG', 'NativeMML'
 
-    console.log(MathJax.Hub.Browser)
     cb();
   });
 }
