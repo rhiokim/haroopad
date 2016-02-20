@@ -118,15 +118,15 @@ img[data-echo] {
 /********************************************
  * TOC
  **********************************************/
-p.toc {
+div.toc {
   margin: 0 !important;
 }
 
-p.toc ul {
+div.toc ul {
   padding-left: 10px;
 }
 
-p.toc>ul {
+div.toc>ul {
   padding: 10px;
   margin: 0 10px 0 10px;
   display: inline-block;
@@ -134,37 +134,37 @@ p.toc>ul {
   border-radius: 5px;
 }
 
-p.toc ul, p.toc li{
+div.toc ul, div.toc li{
   list-style-type: none;
 }
 
-p.toc li {
+div.toc li {
   width: 100%;
   padding: 0;
   overflow: hidden;
 }
 
-p.toc li a::after {
+div.toc li a::after {
   content: ".";
 }
 
-p.toc li a:before {
+div.toc li a:before {
   content: "• ";
 }
 
-p.toc h5 {
+div.toc h5 {
   /*font-family: "Essays 1743", Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;*/
   text-transform: uppercase;
   /*text-align: center;*/
 }
 
-p.toc .title {
+div.toc .title {
   float: left;
   padding-right: 3px;
   /*background: #fff;*/
 }
 
-p.toc .number {
+div.toc .number {
   margin: 0;
   float: right;
   padding-left: 3px;

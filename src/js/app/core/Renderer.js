@@ -73,7 +73,8 @@ define([
 		}
 
 		renderer.toc = function(props) {
-		  return '<p class="toc" style="'+ props +'"></p>';
+			style = props ? ' style="'+ props +'"' : '';
+		  return '<div class="toc"'+ style +'></div>';
 		}
 
 		renderer.hr = function(text) {
