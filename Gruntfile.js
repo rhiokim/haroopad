@@ -859,6 +859,19 @@ module.exports = function(grunt) {
     printEditorStyles();
   });
   
+  grunt.registerTask('appstore', function() {
+    var nwv = grunt.config.get('nwv');
+    var os = grunt.config.get('os');
+    var arch = grunt.config.get('arch');
+
+    var app = path.normalize('lib/nwjs-macappstore-v'+ nwv +'-'+ os +'-'+ arch);
+    grunt.config.set('app', app);
+    
+    grunt.task.run('nwlibs');
+    grunt.task.run('nwres');
+    grunt.task.run('pkg2');
+  });
+
   /* deploy to Application directory */
   grunt.registerTask('deploy', [ 'shell:deploy']);
 
