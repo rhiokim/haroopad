@@ -8,27 +8,22 @@ Haroopad gives you the same editing experience regardless of the platform you ar
 
 ![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-### ==New Features (v0.13.1)==
+### ==New Features (v0.13.2)==
 
 * New Features
-  - Displays the number of tasks that are not completed in the app badge
-  - Added two themes into editor. tomorrow-night-bright, zenburn
+  - Added Romanian([@danielvoicu](https://github.com/danielvoicu)), Polish([@ethernal](https://github.com/ethernal)), Taiwanese([@shin21](https://github.com/shin21)) languages
+  - [Win] Portable version
 
 ### ==More changelog==
 
 * Bugs
-  - [Win, Linux] UI language setting error
-  - [Win] Print error
-  - [Presentation] Fixed local cover image error.
-  - Fixed Border-Style display error with code syntax
-  - Fixed Num 6 key action error
-  - Fixed Openning math doc error
-  - Fixed Inline math expression
-  - Fixed Undoing "Emphasize" does not restore selection
-  - Fixed Copy find and paste
+  - Fixed Mermaid rendering broken
+  - Fixed Gantt Graph are blacken
 * Enhancements
-  - [Win] Ctrl-Y conflict with shortcut for underline syntax. 
-  - align Check boxes in task lists with bullet points of regular lists
+  - Updated Syntax highlight module (150 languages and 71 styles)
+  - Enhanced Syntax highlight rendering
+  - Enhanced Bad HTML export of TOC
+  - Removed Watermark when export to HTML
 
 ### Main Features
 
