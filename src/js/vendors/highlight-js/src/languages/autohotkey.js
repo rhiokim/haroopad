@@ -7,50 +7,37 @@ Category: scripting
 
 function(hljs) {
   var BACKTICK_ESCAPE = {
-    className: 'escape',
-    begin: '`[\\s\\S]'
+    begin: /`[\s\S]/
   };
-  var COMMENTS = hljs.COMMENT(
-    ';',
-    '$',
-    {
-      relevance: 0
-    }
-  );
-  var BUILT_IN = [
-    {
-      className: 'built_in',
-      begin: 'A_[a-zA-Z0-9]+'
-    },
-    {
-      className: 'built_in',
-      beginKeywords: 'ComSpec Clipboard ClipboardAll ErrorLevel'
-    }
-  ];
 
   return {
     case_insensitive: true,
     keywords: {
       keyword: 'Break Continue Else Gosub If Loop Return While',
-      literal: 'A true false NOT AND OR'
+      literal: 'A|0 true false NOT AND OR',
+      built_in: 'ComSpec Clipboard ClipboardAll ErrorLevel',
     },
-    contains: BUILT_IN.concat([
+    contains: [
+      {
+        className: 'built_in',
+        begin: 'A_[a-zA-Z0-9]+'
+      },
       BACKTICK_ESCAPE,
       hljs.inherit(hljs.QUOTE_STRING_MODE, {contains: [BACKTICK_ESCAPE]}),
-      COMMENTS,
+      hljs.COMMENT(';', '$', {relevance: 0}),
       {
         className: 'number',
         begin: hljs.NUMBER_RE,
         relevance: 0
       },
       {
-        className: 'var_expand', // FIXME
+        className: 'variable', // FIXME
         begin: '%', end: '%',
         illegal: '\\n',
         contains: [BACKTICK_ESCAPE]
       },
       {
-        className: 'label',
+        className: 'symbol',
         contains: [BACKTICK_ESCAPE],
         variants: [
           {begin: '^[^\\n";]+::(?!=)'},
@@ -60,9 +47,8 @@ function(hljs) {
       },
       {
         // consecutive commas, not for highlighting but just for relevance
-        begin: ',\\s*,',
-        relevance: 10
+        begin: ',\\s*,'
       }
-    ])
+    ]
   }
 }

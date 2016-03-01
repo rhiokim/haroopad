@@ -59,7 +59,7 @@ Contributors:
 - Joe Cheng <joe@rstudio.org>
 - Angel G. Olloqui <angelgarcia.mail@gmail.com>
 - Jason Tate <adminz@web-cms-designs.com>
-- Sergey Tikhomirov <me@stikhomirov.com>
+- Sergey Tikhomirov <sergey@tikhomirov.io>
 - Marc Fornos <marc.fornos@gmail.com>
 - Yoshihide Jimbo <yjimbo@gmail.com>
 - Casey Duncan <casey.duncan@gmail.com>
@@ -189,4 +189,22 @@ Contributors:
 - Kristoffer Gronlund <kgronlund@suse.com>
 - Søren Enevoldsen <senevoldsen90@gmail.com>
 - Daniel Rosenwasser <DanielRosenwasser@users.noreply.github.com>
-- Ladislav Prskavec: <ladislav@prskavec.net>
+- Ladislav Prskavec <ladislav@prskavec.net>
+- Jan Kühle <jkuehle90@gmail.com>
+- Stefan Wienert <stwienert@gmail.com>
+- Nikita Savchenko <zitros.lab@gmail.com>
+- Stefania Mellai <s.mellai@arduino.cc>
+- Nebuleon Fumika <nebuleon.fumika@gmail.com>
+- prince <MC.prince.0203@gmail.com>
+- Brendan Rocks <rocks.brendan@gmail.com>
+- Raphaël Assénat <raph@raphnet.net>
+- Matt Evans <matt@aptech.com>
+- Martin Braun <martin.braun@ettus.com>
+- Boris Cherny <boris@performancejs.com>
+- John Foster <jfoster@esri.com>
+- Robert Dodier <robert.dodier@gmail.com>
+- Anthony Dugois <dev.anthonydugois@gmail.com>
+- Qeole <qeole@outlook.com>
+- Denis Ciccale <dciccale@gmail.com>
+- Michael Johnston <lastobelus@gmail.com>
+- Taras <oxdef@oxdef.info>

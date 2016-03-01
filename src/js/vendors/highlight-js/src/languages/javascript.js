@@ -5,12 +5,15 @@ Category: common, scripting
 
 function(hljs) {
   return {
-    aliases: ['js'],
+    aliases: ['js', 'jsx'],
     keywords: {
       keyword:
         'in of if for while finally var new function do return void else break catch ' +
         'instanceof with throw case default try this switch continue typeof delete ' +
-        'let yield const export super debugger as async await',
+        'let yield const export super debugger as async await static ' +
+        // ECMAScript 6 modules import
+        'import from as'
+      ,
       literal:
         'true false null undefined NaN Infinity',
       built_in:
@@ -25,9 +28,13 @@ function(hljs) {
     },
     contains: [
       {
-        className: 'pi',
+        className: 'meta',
         relevance: 10,
         begin: /^\s*['"]use (strict|asm)['"]/
+      },
+      {
+        className: 'meta',
+        begin: /^#!/, end: /$/
       },
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE,
@@ -61,9 +68,12 @@ function(hljs) {
           hljs.C_BLOCK_COMMENT_MODE,
           hljs.REGEXP_MODE,
           { // E4X / JSX
-            begin: /</, end: />\s*[);\]]/,
-            relevance: 0,
-            subLanguage: 'xml'
+            begin: /</, end: /(\/\w+|\w+\/)>/,
+            subLanguage: 'xml',
+            contains: [
+              {begin: /<\w+\/>/, skip: true},
+              {begin: /<\w+/, end: /(\/\w+|\w+\/)>/, skip: true, contains: ['self']}
+            ]
           }
         ],
         relevance: 0
@@ -89,18 +99,7 @@ function(hljs) {
       {
         begin: /\$[(.]/ // relevance booster for a pattern common to JS libs: `$(something)` and `$.something`
       },
-      {
-        begin: '\\.' + hljs.IDENT_RE, relevance: 0 // hack: prevents detection of keywords after dots
-      },
-      // ECMAScript 6 modules import
-      {
-        beginKeywords: 'import', end: '[;$]',
-        keywords: 'import from as',
-        contains: [
-          hljs.APOS_STRING_MODE,
-          hljs.QUOTE_STRING_MODE
-        ]
-      },
+      hljs.METHOD_GUARD,
       { // ES6 class
         className: 'class',
         beginKeywords: 'class', end: /[{;=]/, excludeEnd: true,
@@ -109,8 +108,11 @@ function(hljs) {
           {beginKeywords: 'extends'},
           hljs.UNDERSCORE_TITLE_MODE
         ]
+      },
+      {
+        beginKeywords: 'constructor', end: /\{/, excludeEnd: true
       }
     ],
-    illegal: /#/
+    illegal: /#(?!!)/
   };
 }

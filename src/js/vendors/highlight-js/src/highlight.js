@@ -5,19 +5,23 @@ https://highlightjs.org/
 
 (function(factory) {
 
+  // Find the global object for export to both the browser and web workers.
+  var globalObject = typeof window == 'object' && window ||
+                     typeof self == 'object' && self;
+
   // Setup highlight.js for different environments. First is Node.js or
   // CommonJS.
   if(typeof exports !== 'undefined') {
     factory(exports);
-  } else {
+  } else if(globalObject) {
     // Export hljs globally even when using AMD for cases when this script
     // is loaded with others that may still expect a global hljs.
-    window.hljs = factory({});
+    globalObject.hljs = factory({});
 
     // Finally register the global hljs with AMD.
     if(typeof define === 'function' && define.amd) {
-      define('hljs', [], function() {
-        return window.hljs;
+      define([], function() {
+        return globalObject.hljs;
       });
     }
   }
@@ -49,7 +53,7 @@ https://highlightjs.org/
 
     classes += block.parentNode ? block.parentNode.className : '';
 
-    // language-* takes precedence over non-prefixed class names
+    // language-* takes precedence over non-prefixed class names.
     match = (/\blang(?:uage)?-([\w-]+)\b/i).exec(classes);
     if (match) {
       return getLanguage(match[1]) ? match[1] : 'no-highlight';
@@ -369,35 +373,37 @@ https://highlightjs.org/
     }
 
     function processBuffer() {
-      return top.subLanguage !== undefined ? processSubLanguage() : processKeywords();
+      result += (top.subLanguage !== undefined ? processSubLanguage() : processKeywords());
+      mode_buffer = '';
     }
 
     function startNewMode(mode, lexeme) {
-      var markup = mode.className? buildSpan(mode.className, '', true): '';
-      if (mode.returnBegin) {
-        result += markup;
-        mode_buffer = '';
-      } else if (mode.excludeBegin) {
-        result += escape(lexeme) + markup;
-        mode_buffer = '';
-      } else {
-        result += markup;
-        mode_buffer = lexeme;
-      }
+      result += mode.className? buildSpan(mode.className, '', true): '';
       top = Object.create(mode, {parent: {value: top}});
     }
 
     function processLexeme(buffer, lexeme) {
 
       mode_buffer += buffer;
+
       if (lexeme === undefined) {
-        result += processBuffer();
+        processBuffer();
         return 0;
       }
 
       var new_mode = subMode(lexeme, top);
       if (new_mode) {
-        result += processBuffer();
+        if (new_mode.skip) {
+          mode_buffer += lexeme;
+        } else {
+          if (new_mode.excludeBegin) {
+            mode_buffer += lexeme;
+          }
+          processBuffer();
+          if (!new_mode.returnBegin && !new_mode.excludeBegin) {
+            mode_buffer = lexeme;
+          }
+        }
         startNewMode(new_mode, lexeme);
         return new_mode.returnBegin ? 0 : lexeme.length;
       }
@@ -405,21 +411,26 @@ https://highlightjs.org/
       var end_mode = endOfMode(top, lexeme);
       if (end_mode) {
         var origin = top;
-        if (!(origin.returnEnd || origin.excludeEnd)) {
+        if (origin.skip) {
           mode_buffer += lexeme;
+        } else {
+          if (!(origin.returnEnd || origin.excludeEnd)) {
+            mode_buffer += lexeme;
+          }
+          processBuffer();
+          if (origin.excludeEnd) {
+            mode_buffer = lexeme;
+          }
         }
-        result += processBuffer();
         do {
           if (top.className) {
             result += '</span>';
           }
-          relevance += top.relevance;
+          if (!top.skip) {
+            relevance += top.relevance;
+          }
           top = top.parent;
         } while (top != end_mode.parent);
-        if (origin.excludeEnd) {
-          result += escape(lexeme);
-        }
-        mode_buffer = '';
         if (end_mode.starts) {
           startNewMode(end_mode.starts, '');
         }
@@ -609,7 +620,7 @@ https://highlightjs.org/
   };
 
   /*
-  Updates highlight.js global options with values passed in the form of an object
+  Updates highlight.js global options with values passed in the form of an object.
   */
   function configure(user_options) {
     options = inherit(options, user_options);
@@ -672,7 +683,7 @@ https://highlightjs.org/
   hljs.IDENT_RE = '[a-zA-Z]\\w*';
   hljs.UNDERSCORE_IDENT_RE = '[a-zA-Z_]\\w*';
   hljs.NUMBER_RE = '\\b\\d+(\\.\\d+)?';
-  hljs.C_NUMBER_RE = '(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)'; // 0x..., 0..., decimal, float
+  hljs.C_NUMBER_RE = '(-?)(\\b0[xX][a-fA-F0-9]+|(\\b\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)'; // 0x..., 0..., decimal, float
   hljs.BINARY_NUMBER_RE = '\\b(0b[01]+)'; // 0b...
   hljs.RE_STARTERS_RE = '!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|-|-=|/=|/|:|;|<<|<<=|<=|<|===|==|=|>>>=|>>=|>=|>>>|>>|>|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~';
 
@@ -764,6 +775,11 @@ https://highlightjs.org/
   hljs.UNDERSCORE_TITLE_MODE = {
     className: 'title',
     begin: hljs.UNDERSCORE_IDENT_RE,
+    relevance: 0
+  };
+  hljs.METHOD_GUARD = {
+    // excludes method names from keyword processing
+    begin: '\\.\\s*' + hljs.UNDERSCORE_IDENT_RE,
     relevance: 0
   };
 

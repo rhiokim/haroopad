@@ -7,7 +7,7 @@ Description: Verilog is a hardware description language used in electronic desig
 function(hljs) {
   return {
     aliases: ['v'],
-    case_insensitive: true,
+    case_insensitive: false,
     keywords: {
       keyword:
         'always and assign begin buf bufif0 bufif1 case casex casez cmos deassign ' +
@@ -17,8 +17,8 @@ function(hljs) {
         'negedge nmos nor not notif0 notif1 or output parameter pmos posedge ' +
         'primitive pulldown pullup rcmos release repeat rnmos rpmos rtran ' +
         'rtranif0 rtranif1 specify specparam table task timescale tran ' +
-        'tranif0 tranif1 wait while xnor xor',
-      typename:
+        'tranif0 tranif1 wait while xnor xor ' +
+        // types
         'highz0 highz1 integer large medium pull0 pull1 real realtime reg ' +
         'scalared signed small strong0 strong1 supply0 supply0 supply1 supply1 ' +
         'time tri tri0 tri1 triand trior trireg vectored wand weak0 weak1 wire wor'
@@ -29,26 +29,14 @@ function(hljs) {
       hljs.QUOTE_STRING_MODE,
       {
         className: 'number',
-        begin: '\\b(\\d+\'(b|h|o|d|B|H|O|D))?[0-9xzXZ]+',
+        begin: '(\\b((\\d\'(b|h|o|d|B|H|O|D))[0-9xzXZa-fA-F\_]+))|(\\B((\'(b|h|o|d|B|H|O|D))[0-9xzXZa-fA-F\_]+))|(\\b([0-9xzXZ\_])+)',
         contains: [hljs.BACKSLASH_ESCAPE],
-        relevance: 0
-      },
-      /* ports in instances */
-      {
-        className: 'typename',
-        begin: '\\.\\w+',
         relevance: 0
       },
       /* parameters to instances */
       {
-        className: 'value',
+        className: 'variable',
         begin: '#\\((?!parameter).+\\)'
-      },
-      /* operators */
-      {
-        className: 'keyword',
-        begin: '\\+|-|\\*|/|%|<|>|=|#|`|\\!|&|\\||@|:|\\^|~|\\{|\\}',
-        relevance: 0
       }
     ]
   }; // return

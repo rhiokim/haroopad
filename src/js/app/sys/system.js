@@ -145,18 +145,22 @@
     'solarized-dark', 'solarized-light', 'metro-vibes', 'metro-vibes-dark', 'wood', 'wood-ri'
   ];
   
-  global.THEMES.code = [ 'default', 'agate', 'androidstudio', 'arta', 'ascetic', 'atelier-cave.dark', 
-  'atelier-cave.light', 'atelier-dune.dark', 'atelier-dune.light', 'atelier-estuary.dark', 
-  'atelier-estuary.light', 'atelier-forest.dark', 'atelier-forest.light', 'atelier-heath.dark', 
-  'atelier-heath.light', 'atelier-lakeside.dark', 'atelier-lakeside.light', 'atelier-plateau.dark', 
-  'atelier-plateau.light', 'atelier-savanna.dark', 'atelier-savanna.light', 'atelier-seaside.dark', 
-  'atelier-seaside.light', 'atelier-sulphurpool.dark', 'atelier-sulphurpool.light', 'brown_paper', 
-  'codepen-embed', 'color-brewer', 'dark', 'darkula', 'default', 'docco', 'far', 'foundation', 
-  'github-gist', 'github', 'googlecode', 'grayscale', 'hopscotch', 'hybrid', 'idea', 'ir_black', 
-  'kimbie.dark', 'kimbie.light', 'magula', 'mono-blue', 'monokai', 'monokai_sublime', 'obsidian', 
-  'paraiso.dark', 'paraiso.light', 'pojoaque', 'railscasts', 'rainbow', 'school_book', 'solarized_dark', 
-  'solarized_light', 'sunburst', 'tomorrow-night-blue', 'tomorrow-night-bright', 'tomorrow-night-eighties', 
-  'tomorrow-night', 'tomorrow', 'vs', 'xcode', 'zenburn' ];
+  global.THEMES.code = [ 'default', 'agate', 'androidstudio', 'arduino-light', 'arta', 'ascetic', 
+  'atelier-cave-dark', 'atelier-cave-light', 'atelier-dune-dark', 'atelier-dune-light', 
+  'atelier-estuary-dark', 'atelier-estuary-light', 'atelier-forest-dark', 'atelier-forest-light', 
+  'atelier-heath-dark', 'atelier-heath-light', 'atelier-lakeside-dark', 'atelier-lakeside-light', 
+  'atelier-plateau-dark', 'atelier-plateau-light', 'atelier-savanna-dark', 'atelier-savanna-light', 
+  'atelier-seaside-dark', 'atelier-seaside-light', 'atelier-sulphurpool-dark', 
+  'atelier-sulphurpool-light', 'brown-paper', 'codepen-embed', 'color-brewer', 'dark', 'darkula', 
+  'docco', 'dracula', 'far', 'foundation', 'github-gist', 'github', 'googlecode', 'grayscale', 
+  'gruvbox-dark', 'gruvbox-light', 'hopscotch', 'hybrid', 'idea', 'ir-black', 'kimbie.dark', 
+  'kimbie.light', 'magula', 'mono-blue', 'monokai-sublime', 'monokai', 'obsidian', 'paraiso-dark', 
+  'paraiso-light', 'pojoaque', 'qtcreator_dark', 'qtcreator_light', 'railscasts', 'rainbow', 
+  'school-book', 'solarized-dark', 'solarized-light', 'sunburst', 'tomorrow-night-blue', 
+  'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night', 'tomorrow', 'vs', 'xcode', 
+  'zenburn' ];
+
+
   
 
   global.SHORTCUTS = {

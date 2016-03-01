@@ -1,7 +1,6 @@
 'use strict';
 
 describe('hljs', function() {
-  require('./highlightAuto');
   require('./ident');
   require('./underscoreIdent');
   require('./number');
@@ -9,4 +8,5 @@ describe('hljs', function() {
   require('./binaryNumber');
   require('./starters');
   require('./getLanguage');
+  require('./highlight');
 });

@@ -7,10 +7,10 @@ Category: common
 
 function(hljs) {
   var VARIABLE = {
-    className: 'variable', begin: '\\$+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
+    begin: '\\$+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
   };
   var PREPROCESSOR = {
-    className: 'preprocessor', begin: /<\?(php)?|\?>/
+    className: 'meta', begin: /<\?(php)?|\?>/
   };
   var STRING = {
     className: 'string',
@@ -40,8 +40,8 @@ function(hljs) {
       'trait goto instanceof insteadof __DIR__ __NAMESPACE__ ' +
       'yield finally',
     contains: [
-      hljs.C_LINE_COMMENT_MODE,
       hljs.HASH_COMMENT_MODE,
+      hljs.COMMENT('//', '$', {contains: [PREPROCESSOR]}),
       hljs.COMMENT(
         '/\\*',
         '\\*/',
@@ -50,8 +50,7 @@ function(hljs) {
             {
               className: 'doctag',
               begin: '@[A-Za-z]+'
-            },
-            PREPROCESSOR
+            }
           ]
         }
       ),

@@ -1,5 +1,5 @@
 /*
-Language: Objective C
+Language: Objective-C
 Author: Valerii Hiora <valerii.hiora@gmail.com>
 Contributors: Angel G. Olloqui <angelgarcia.mail@gmail.com>, Matt Diephouse <matt@diephouse.com>, Andrew Farmer <ahfarmer@gmail.com>
 Category: common
@@ -8,7 +8,7 @@ Category: common
 function(hljs) {
   var API_CLASS = {
     className: 'built_in',
-    begin: '(AV|CA|CF|CG|CI|MK|MP|NS|UI)\\w+',
+    begin: '(AV|CA|CF|CG|CI|MK|MP|NS|UI|XC)\\w+',
   };
   var OBJC_KEYWORDS = {
     keyword:
@@ -54,12 +54,12 @@ function(hljs) {
         ]
       },
       {
-        className: 'preprocessor',
+        className: 'meta',
         begin: '#',
         end: '$',
         contains: [
           {
-            className: 'title',
+            className: 'meta-string',
             variants: [
               { begin: '\"', end: '\"' },
               { begin: '<', end: '>' }
@@ -76,7 +76,6 @@ function(hljs) {
         ]
       },
       {
-        className: 'variable',
         begin: '\\.'+hljs.UNDERSCORE_IDENT_RE,
         relevance: 0
       }

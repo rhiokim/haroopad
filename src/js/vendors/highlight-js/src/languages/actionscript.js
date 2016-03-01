@@ -31,7 +31,7 @@ function(hljs) {
       hljs.C_BLOCK_COMMENT_MODE,
       hljs.C_NUMBER_MODE,
       {
-        className: 'package',
+        className: 'class',
         beginKeywords: 'package', end: '{',
         contains: [hljs.TITLE_MODE]
       },
@@ -46,8 +46,9 @@ function(hljs) {
         ]
       },
       {
-        className: 'preprocessor',
-        beginKeywords: 'import include', end: ';'
+        className: 'meta',
+        beginKeywords: 'import include', end: ';',
+        keywords: {'meta-keyword': 'import include'}
       },
       {
         className: 'function',
@@ -67,13 +68,11 @@ function(hljs) {
             ]
           },
           {
-            className: 'type',
-            begin: ':',
-            end: IDENT_FUNC_RETURN_TYPE_RE,
-            relevance: 10
+            begin: ':\\s*' + IDENT_FUNC_RETURN_TYPE_RE
           }
         ]
-      }
+      },
+      hljs.METHOD_GUARD
     ],
     illegal: /#/
   };

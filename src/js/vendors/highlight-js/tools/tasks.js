@@ -1,18 +1,18 @@
 'use strict';
 
-var _        = require('lodash');
-var del      = require('del');
-var gear     = require('gear');
-var path     = require('path');
-var utility  = require('./utility');
+let _        = require('lodash');
+let del      = require('del');
+let gear     = require('gear');
+let path     = require('path');
+let utility  = require('./utility');
 
-var parseHeader = utility.parseHeader;
-var tasks       = require('gear-lib');
+let parseHeader = utility.parseHeader;
+let tasks       = require('gear-lib');
 
 tasks.clean = function(directories, blobs, done) {
   directories = _.isString(directories) ? [directories] : directories;
 
-  return del(directories, _.partial(done, _, blobs));
+  return del(directories).then(() => done(null, blobs));
 };
 tasks.clean.type = 'collect';
 
@@ -20,13 +20,13 @@ tasks.clean.type = 'collect';
 // processed, this task reorders it's dependencies first then include the
 // language.
 tasks.reorderDeps = function(options, blobs, done) {
-  var buffer       = {},
+  let buffer       = {},
       newBlobOrder = [];
 
   _.each(blobs, function(blob) {
-    var basename = path.basename(blob.name),
+    let basename = path.basename(blob.name),
         fileInfo = parseHeader(blob.result),
-        extra = { blob: blob, processed: false };
+        extra    = { blob: blob, processed: false };
 
     buffer[basename] = _.merge(extra, fileInfo || {});
   });
@@ -39,7 +39,7 @@ tasks.reorderDeps = function(options, blobs, done) {
   }
 
   _.each(buffer, function(buf) {
-    var object;
+    let object;
 
     if(buf.Requires) {
       _.each(buf.Requires, function(language) {
@@ -58,7 +58,7 @@ tasks.reorderDeps.type = 'collect';
 tasks.template = function(template, blob, done) {
   template = template || '';
 
-  var filename = path.basename(blob.name),
+  let filename = path.basename(blob.name),
       basename = path.basename(filename, '.js'),
       content  = _.template(template)({
         name: basename,
@@ -72,7 +72,7 @@ tasks.template = function(template, blob, done) {
 tasks.templateAll = function(options, blobs, done) {
   return options.callback(blobs)
     .then(function(data) {
-      var template = options.template || data.template,
+      let template = options.template || data.template,
           content  = _.template(template)(data);
 
       return done(null, [new gear.Blob(content)]);
@@ -84,7 +84,7 @@ tasks.templateAll.type = 'collect';
 tasks.rename = function(options, blob, done) {
   options = options || {};
 
-  var name = blob.name,
+  let name = blob.name,
       ext  = new RegExp(path.extname(name) + '$');
 
   name = name.replace(ext, options.extname);
@@ -95,12 +95,12 @@ tasks.rename = function(options, blob, done) {
 // Adds the contributors from `AUTHORS.en.txt` onto the `package.json` file
 // and moves the result into the `build` directory.
 tasks.buildPackage = function(json, blob, done) {
-  var result,
+  let result,
       lines = blob.result.split(/\r?\n/),
       regex = /^- (.*) <(.*)>$/;
 
   json.contributors = _.transform(lines, function(result, line) {
-    var matches = line.match(regex);
+    let matches = line.match(regex);
 
     if(matches) {
       result.push({
@@ -120,7 +120,7 @@ tasks.buildPackage = function(json, blob, done) {
 // pretty generic so long as you use the `utility.replace` function, you can
 // replace a regular expression with a string.
 tasks.replaceSkippingStrings = function(params, blob, done) {
-  var content = blob.result,
+  let content = blob.result,
       length  = content.length,
       offset  = 0,
 
@@ -145,7 +145,7 @@ tasks.replaceSkippingStrings = function(params, blob, done) {
       // We found a starter sequence: either a `//` or a "quote"
       // In the case of `//` our terminator is the end of line.
       // Otherwise it's either a matching quote or an escape symbol.
-      terminator = match[0] !== '//' ? new RegExp('[' + match[0] + '\\\\]')
+      terminator = match[0] !== '//' ? new RegExp(`[${match[0]}\\\\]`)
                                      : /$/m;
       start      = offset;
       offset    += 1;
@@ -173,17 +173,17 @@ tasks.replaceSkippingStrings = function(params, blob, done) {
 };
 
 tasks.filter = function(callback, blobs, done) {
-  var filteredBlobs = _.filter(blobs, callback);
+  let filteredBlobs = _.filter(blobs, callback);
 
   // Re-add in blobs required from header definition
   _.each(filteredBlobs, function(blob) {
-    var dirname  = path.dirname(blob.name),
+    let dirname  = path.dirname(blob.name),
         content  = blob.result,
         fileInfo = parseHeader(content);
 
     if(fileInfo && fileInfo.Requires) {
       _.each(fileInfo.Requires, function(language) {
-        var filename  = dirname + '/' + language,
+        let filename  = `${dirname}/${language}`,
             fileFound = _.find(filteredBlobs, { name: filename });
 
         if(!fileFound) {
@@ -199,14 +199,14 @@ tasks.filter = function(callback, blobs, done) {
 tasks.filter.type = 'collect';
 
 tasks.readSnippet = function(options, blob, done) {
-  var name        = path.basename(blob.name, '.js'),
+  let name        = path.basename(blob.name, '.js'),
       fileInfo    = parseHeader(blob.result),
       snippetName = path.join('test', 'detect', name, 'default.txt');
 
   function onRead(error, blob) {
     if(error) return done(error); // ignore missing snippets
 
-    var meta = { name: name + '.js', fileInfo: fileInfo };
+    let meta = { name: `${name}.js`, fileInfo: fileInfo };
 
     return done(null, new gear.Blob(blob.result, meta));
   }
@@ -214,10 +214,18 @@ tasks.readSnippet = function(options, blob, done) {
   gear.Blob.readFile(snippetName, 'utf8', onRead, false);
 };
 
+tasks.insertLicenseTag = function(options, blob, done) {
+  let hljsVersion = require('../package').version,
+      licenseTag  = `/*! highlight.js v${hljsVersion} | ` +
+                    `BSD3 License | git.io/hljslicense */\n`;
+
+  return done(null, new gear.Blob(licenseTag + blob.result, blob));
+};
+
 // Packages up included languages into the core `highlight.js` and moves the
 // result into the `build` directory.
 tasks.packageFiles = function(options, blobs, done) {
-  var content,
+  let content,
       coreFile  = _.head(blobs),
       languages = _.tail(blobs),
 
@@ -225,9 +233,8 @@ tasks.packageFiles = function(options, blobs, done) {
                     .replace(utility.regex.header, '')
                     .split('\n\n'),
       lastLine  = _.last(lines),
-      langStr   = _.foldl(languages, function(str, language) {
-                    return str + language.result + '\n';
-                  }, '');
+      langStr   = _.reduce(languages, (str, language) =>
+                           `${str + language.result}\n`, '');
 
   lines[lines.length - 1] = langStr.trim();
 

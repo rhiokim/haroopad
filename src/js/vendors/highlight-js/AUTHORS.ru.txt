@@ -59,7 +59,7 @@ URL:   https://highlightjs.org/
 - Джо Ченг <joe@rstudio.org>
 - Анхель Ойоки <angelgarcia.mail@gmail.com>
 - Джейсон Тейт <adminz@web-cms-designs.com>
-- Сергей Тихомиров <me@stikhomirov.com>
+- Сергей Тихомиров <sergey@tikhomirov.io>
 - Марк Форнос <marc.fornos@gmail.com>
 - Йошихиде Джимбо <yjimbo@gmail.com>
 - Кейси Данкан <casey.duncan@gmail.com>
@@ -190,3 +190,21 @@ URL:   https://highlightjs.org/
 - Сорен Эневолдсен <senevoldsen90@gmail.com>
 - Даниэль Розенвассен <DanielRosenwasser@users.noreply.github.com>
 - Ладислав Пршкавеч <ladislav@prskavec.net>
+- Ян Кюле <jkuehle90@gmail.com>
+- Стефан Винерт <stwienert@gmail.com>
+- Никита Савченко <zitros.lab@gmail.com>
+- Стефания Мелай <s.mellai@arduino.cc>
+- Небулеон Фумика <nebuleon.fumika@gmail.com>
+- prince <MC.prince.0203@gmail.com>
+- Брэндан Рокс <rocks.brendan@gmail.com>
+- Рафаэль Ассенат <raph@raphnet.net>
+- Мэт Эванс <matt@aptech.com>
+- Мартин Браун <martin.braun@ettus.com>
+- Боря Черный <boris@performancejs.com>
+- Джон Фостер <jfoster@esri.com>
+- Робер Додье <robert.dodier@gmail.com>
+- Антони Дюгуа <dev.anthonydugois@gmail.com>
+- Qeole <qeole@outlook.com>
+- Денис Сиккале <dciccale@gmail.com>
+- Майкл Джонстон <lastobelus@gmail.com>
+- Тарас <oxdef@oxdef.info>

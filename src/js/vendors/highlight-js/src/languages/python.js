@@ -5,7 +5,7 @@ Category: common
 
 function(hljs) {
   var PROMPT = {
-    className: 'prompt',  begin: /^(>>>|\.\.\.) /
+    className: 'meta',  begin: /^(>>>|\.\.\.) /
   };
   var STRING = {
     className: 'string',
@@ -75,10 +75,17 @@ function(hljs) {
         ],
         end: /:/,
         illegal: /[${=;\n,]/,
-        contains: [hljs.UNDERSCORE_TITLE_MODE, PARAMS]
+        contains: [
+          hljs.UNDERSCORE_TITLE_MODE,
+          PARAMS,
+          {
+            begin: /->/, endsWithParent: true,
+            keywords: 'None'
+          }
+        ]
       },
       {
-        className: 'decorator',
+        className: 'meta',
         begin: /^[\t ]*@/, end: /$/
       },
       {

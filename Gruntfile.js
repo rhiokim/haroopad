@@ -92,6 +92,9 @@ module.exports = function(grunt) {
     },
     
     clean: {
+      options: {
+        force: true
+      },
       build: [ 'build/*' ],
       release: [ 'build/haroopad.app' ],
       core: [ 'build/haroopad.app' ],

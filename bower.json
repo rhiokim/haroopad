@@ -1,6 +1,6 @@
 {
   "name": "haroopad",
-  "version": "0.13.1",
+  "version": "0.13.2",
   "authors": [
     "rhiokim <rhio.kim@gmail.com>"
   ],
@@ -39,7 +39,7 @@
     "text": "~2.0.10",
     "todc-bootstrap": "master",
     "underscore": "~1.5.2",
-    "highlight-js": "~8.9.1",
+    "highlight-js": "^9.2.0",
     "mermaid": "~0.5.5"
   }
 }

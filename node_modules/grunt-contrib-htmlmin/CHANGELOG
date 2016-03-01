@@ -1,0 +1,47 @@
+v0.6.0:
+  date: 2015-10-28
+  changes:
+    - Updated to `html-minifier` 1.0.0.
+v0.5.0:
+  date: 2015-09-25
+  changes:
+    - Updated to `html-minifier` 0.8.0.
+v0.4.0:
+  date: 2015-02-06
+  changes:
+    - Updated to `html-minifier` 0.7.0.
+v0.3.0:
+  date: 2014-05-05
+  changes:
+    - Drop node.js 0.8 support.
+    - Updated to `html-minifier` 0.6.0.
+v0.2.0:
+  date: 2014-02-09
+  changes:
+    - Rewrite task. Drop concat support.
+v0.1.3:
+  date: 2013-04-06
+  changes:
+    - Fail target when minify encounters an error.
+v0.1.2:
+  date: 2013-04-05
+  changes:
+    - Update `html-minifier` which fixes IE conditional comments and prefixed HTML elements `<ng-include>` `<ng:include>`.
+v0.1.1:
+  date: 2013-02-18
+  changes:
+    - First official release for Grunt 0.4.0.
+v0.1.1rc7:
+  date: 2013-01-30
+  changes:
+    - Updating grunt/gruntplugin dependencies to rc7.
+    - Changing in-development grunt/gruntplugin dependency versions from tilde version ranges to specific versions.
+v0.1.1rc5:
+  date: 2013-01-09
+  changes:
+    - Updating to work with grunt v0.4.0rc5.
+    - Switching to this.filesSrc api.
+v0.1.0:
+  date: 2012-11-01
+  changes:
+    - Initial release.

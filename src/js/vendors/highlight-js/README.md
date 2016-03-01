@@ -68,6 +68,34 @@ $('div.code').each(function(i, block) {
 
 For other options refer to the documentation for [`configure`][4].
 
+
+## Web Workers
+
+You can run highlighting inside a web worker to avoid freezing the browser
+window while dealing with very big chunks of code.
+
+In your main script:
+
+```javascript
+addEventListener('load', function() {
+  var code = document.querySelector('#code');
+  var worker = new Worker('worker.js');
+  worker.onmessage = function(event) { code.innerHTML = event.data; }
+  worker.postMessage(code.textContent);
+})
+```
+
+In worker.js:
+
+```javascript
+onmessage = function(event) {
+  importScripts('<path>/highlight.pack.js');
+  var result = self.hljs.highlightAuto(event.data);
+  postMessage(result.value);
+}
+```
+
+
 ## Getting the Library
 
 You can get highlight.js as a hosted, or custom-build, browser script or
@@ -81,6 +109,13 @@ Head over to the [download page][5] for all the options.
 **Note:** the library is not supposed to work straight from the source
 on GitHub; it requires building. If none of the pre-packaged options
 work for you refer to the [building documentation][6].
+
+Also, if you are using something like almond, you need to use the
+optimizer to give the module a name. The basic example would be:
+
+```
+r.js -o name=hljs paths.hljs=/path/to/highlight out=highlight.js
+```
 
 ## License
 

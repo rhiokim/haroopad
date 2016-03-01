@@ -8,26 +8,21 @@
   "author": "rhio.kim@gmail.com",
   "license": "GPLv3",
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-asciify": "~0.2.2",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-compress": "~0.5.3",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-contrib-htmlmin": "~0.3.0",
+    "grunt": "^0.4.5",
+    "grunt-asciify": "^0.2.2",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-compress": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-cssmin": "^0.14.0",
+    "grunt-contrib-htmlmin": "^0.6.0",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-contrib-requirejs": "~0.4.0",
-    "grunt-contrib-uglify": "~0.1.2",
-    "grunt-parallelize": "~1.0.0",
+    "grunt-contrib-uglify": "^0.11.1",
     "grunt-replace": "~0.5.1",
     "grunt-shell": "^1.1.2",
     "grunt-timer": "~0.2.1",
     "time-grunt": "^1.3.0"
-  },
-  "deploy": {
-    "docs": "../baas.io-Portal/_documentation/_docs/ko/javascript/reference",
-    "sdk": "../baas.io-Portal/_documentation/_docs/sdk/javascript/"
   },
   "dependencies": {}
 }

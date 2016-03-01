@@ -18,7 +18,6 @@ function(hljs) {
         begin: /^\w+\s*\W*=/, returnBegin: true,
         relevance: 0,
         starts: {
-          className: 'constant',
           end: /\s*\W*=/, excludeEnd: true,
           starts: {
             end: /$/,
@@ -30,13 +29,13 @@ function(hljs) {
         }
       },
       {
-        className: 'title',
+        className: 'section',
         begin: /^[\w]+:\s*$/
       },
       {
-        className: 'phony',
+        className: 'meta',
         begin: /^\.PHONY:/, end: /$/,
-        keywords: '.PHONY', lexemes: /[\.\w]+/
+        keywords: {'meta-keyword': '.PHONY'}, lexemes: /[\.\w]+/
       },
       {
         begin: /^\t+/, end: /$/,

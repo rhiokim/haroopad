@@ -1,29 +1,36 @@
 'use strict';
 
-var _       = require('lodash');
-var fs      = require('fs');
-var hljs    = require('../../build');
-var jsdom   = require('jsdom').jsdom;
-var utility = require('../utility');
+let _        = require('lodash');
+let bluebird = require('bluebird');
+let hljs     = require('../../build');
+let jsdomEnv = bluebird.promisify(require('jsdom').env);
+let readFile = bluebird.promisify(require('fs').readFile);
+let utility  = require('../utility');
 
-var blocks,
-    filename = utility.buildPath('index.html'),
-    page     = fs.readFileSync(filename, 'utf-8');
+describe('special cases tests', function() {
+  before(function() {
+    const filename = utility.buildPath('fixtures', 'index.html');
 
-// Allows hljs to use document
-global.document = jsdom(page);
+    return readFile(filename, 'utf-8')
+      .then(page => jsdomEnv(page))
+      .then(window => {
+        let blocks;
 
-// Setup hljs environment
-hljs.configure({ tabReplace: '    ' });
-hljs.initHighlighting();
+        // Allows hljs to use document
+        global.document = window.document;
 
-// Setup hljs for non-`<pre><code>` tests
-hljs.configure({ useBR: true });
+        // Setup hljs environment
+        hljs.configure({ tabReplace: '    ' });
+        hljs.initHighlighting();
 
-blocks = document.querySelectorAll('.code');
-_.each(blocks, hljs.highlightBlock);
+        // Setup hljs for non-`<pre><code>` tests
+        hljs.configure({ useBR: true });
 
-describe('special cases test', function() {
+        blocks = document.querySelectorAll('.code');
+        _.each(blocks, hljs.highlightBlock);
+      });
+  });
+
   require('./explicitLanguage');
   require('./customMarkup');
   require('./languageAlias');
