@@ -95,6 +95,7 @@ module.exports = function(grunt) {
       options: {
         force: true
       },
+      garbage: [ '**/.DS_Store' ],
       build: [ 'build/*' ],
       release: [ 'build/haroopad.app' ],
       core: [ 'build/haroopad.app' ],
