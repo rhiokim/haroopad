@@ -125,6 +125,10 @@ i18n.init({
       nw.show();
       nw.focus();
       window.parent.ee.emit('actived', nw);
+
+      if (nw._args.forceOpen) {
+        window.ee.emit('menu.file.open');
+      }
     } else {
       nw.emit('file.opened', file);
     }

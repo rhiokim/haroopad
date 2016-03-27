@@ -89,6 +89,8 @@ define([
 					// 	window.ee.emit('exit');
 					// }
 					if (!realCount) {
+						exports.actived = null;
+
 						if (process.platform !== 'darwin' || closeAll) {
 							window.ee.emit('exit');
 						} else if (closeAll) {

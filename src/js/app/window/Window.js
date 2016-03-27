@@ -29,6 +29,11 @@ define([
   });
 
   window.ee.on('menu.file.open', function() {
+    if (!WindowMgr.actived) {
+      WindowMgr.open(undefined, { forceOpen: true });
+      return;
+    }
+
     WindowMgr.actived.window.ee.emit('menu.file.open');
   });
 
