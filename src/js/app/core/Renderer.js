@@ -92,17 +92,25 @@ define([
 		  return '<hr class="'+ text +'">\n';
 		}
 
+		var anchorList = {};
 		renderer.heading = function(text, level, raw) {
 			//<a name="verlet-js" class="anchor" href="#verlet-js"><span class="octicon octicon-link"></span></a>
 			raw = raw.replace(/(<([^>]+)>)/gi,'').toLowerCase().trim().replace(/[\s]+/g, '-');
-			
+
+      var index = 0;
+      anchor = raw;
+      while (anchorList.hasOwnProperty(anchor)) {
+        anchor = raw + "-" + (++index);
+      }
+      anchorList[anchor] = true;
+
 		  return '<h'
 		    + level
 		    + ' id="'
 		    + this.options.headerPrefix
-		    + raw
+		    + anchor
 		    + '">'
-		    + '<a name="'+ raw +'" href="#'+ raw +'"></a>'
+		    + '<a name="'+ anchor +'" href="#'+ anchor +'"></a>'
 		    + text
 		    + '</h'
 		    + level
@@ -173,6 +181,10 @@ define([
 
 			return res;
 		};
+
+		renderer.finish = function() {
+			anchorList = {};
+		}
 
 		return renderer;
 });

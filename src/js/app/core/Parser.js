@@ -46,6 +46,7 @@ define([
       res.tokens = tokens;  //parser 에 의해서 tokens 유실됨
       res.html = marked.parser(tokens, lexer.options);
 
+      Renderer.finish();
       return res;
     }
 
