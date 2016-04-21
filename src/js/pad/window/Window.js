@@ -162,7 +162,7 @@ define([
 					y -= 28;
 					break;
 				default:
-					y -= 20;
+					y -= 40;
 					break;
 			}
 		}
