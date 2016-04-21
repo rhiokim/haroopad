@@ -176,5 +176,6 @@ div.toc .number {
  * TASK
  **********************************************/
 input.task-list-item {
-  margin-left: -1.62em;
+  margin-left: -2em;
+  margin-right: .5em;
 }
