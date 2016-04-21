@@ -21,7 +21,6 @@ define([
 
 		prefWin.on('close', function() {
 			prefWin.hide();
-			WindowMgr.actived.focus();
 		});
 
 		prefWin.on('loaded', function() {

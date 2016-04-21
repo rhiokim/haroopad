@@ -40,11 +40,11 @@ window.ondrop = function(e) {
 function loadJs(url, cb) {
   var head = document.getElementsByTagName('head')[0];
   var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = url;
-      script.onload = cb;
+  script.type = 'text/javascript';
+  script.src = url;
+  script.onload = cb;
 
-   head.appendChild(script);
+  head.appendChild(script);
 }
 
 function loadCss(url) {
@@ -60,7 +60,7 @@ function setStyle(property, value) {
 }
 
 function setFontSize(size) {
-  setStyle('fontSize', size +'px');
+  setStyle('fontSize', size + 'px');
 }
 
 function setFontFamily(name) {
@@ -70,13 +70,9 @@ function setFontFamily(name) {
 function setViewStyle(style) {
   var href = 'css/markdown/' + style + '/' + style + '.css';
 
-  $('#view').attr({
-    href: href
-  });
+  document.querySelector('#view').setAttribute('href', href);
 
-  $(_body).removeClass();
-  $(_body).addClass('markdown');
-  $(_body).addClass(style);
+  _body.setAttribute('class', 'markdown '+ style);
 }
 
 function setCodeStyle(style) {
@@ -168,15 +164,24 @@ function loadLibs(base, cb) {
     MathJax.Hub.Config({
       messageStyle: "none",
       showProcessingMessages: false,
-      "HTML-CSS": { 
-        linebreaks: { automatic: true } 
+      "HTML-CSS": {
+        linebreaks: {
+          automatic: true
+        }
       },
-      TeX: { 
+      TeX: {
         // equationNumbers: { autoNumber: "AMS" } 
       },
       tex2jax: {
-        inlineMath: [ ['$$$','$$$'], ['$','$'], ["\\(","\\)"] ],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        inlineMath: [
+          ['$$$', '$$$'],
+          ['$', '$'],
+          ["\\(", "\\)"]
+        ],
+        displayMath: [
+          ['$$', '$$'],
+          ["\\[", "\\]"]
+        ],
         processEscapes: true
       }
     });
@@ -242,7 +247,7 @@ function _lazySyntaxHighlight(el) {
     return code;
   }
 
-  pre.setAttribute('class', lang +' hljs');
+  pre.setAttribute('class', lang + ' hljs');
 
   code = htmlDecode(code);
 
@@ -269,7 +274,7 @@ function updateTOC(toc) {
   var tocEls = _md_body.querySelectorAll('.toc');
   tocEls = Array.prototype.slice.call(tocEls, 0);
 
-  tocEls.forEach(function(tocEl) {  
+  tocEls.forEach(function(tocEl) {
     tocEl.innerHTML = toc;
   });
 }
@@ -356,10 +361,10 @@ function drawEmbedContents(target) {
     spinner.setAttribute('class', 'spinner');
   }
 
-  if (_embedTimeout) { 
+  if (_embedTimeout) {
     window.clearTimeout(_embedTimeout);
   }
-  
+
   _embedTimeout = window.setTimeout(function() {
     for (i = 0; i < embeds.length; i++) {
       ebdOpt.ebdOpt = {};
@@ -454,13 +459,15 @@ function update(wrapper) {
       _lazySyntaxHighlight(code);
     }
   }
-  
+
   var src, img, imgs = wrapper.querySelectorAll('img');
   for (i = 0; i < imgs.length; i++) {
     img = imgs[i];
     src = img.getAttribute('src');
 
-    if (!src) { continue; }
+    if (!src) {
+      continue;
+    }
 
     if (src.indexOf('://') == -1 && !/^\//.test(src) && !/^[a-zA-Z]\:/.test(src) && src.indexOf('data:') == -1) {
       img.setAttribute('src', _options.dirname + '/' + src);
@@ -520,7 +527,7 @@ function update(wrapper) {
   // if (changeTOC) {
   //   window.ee.emit('change.toc', undefined, _md_body);
   // }
-  
+
   // countFragments(_md_body);
   drawMathJax();
   drawEmbedContents(document.body);
@@ -529,11 +536,11 @@ function update(wrapper) {
     offset: 10,
     throttle: 250
   });
-  
-  try { 
-    mermaid.init(); 
-  } catch(e) {}
-  
+
+  try {
+    mermaid.init();
+  } catch (e) {}
+
   indexingTasklist();
 
   window.ee.emit('rendered', _md_body);
@@ -569,63 +576,73 @@ $(document.body).ready(function() {
           e.preventDefault();
           window.ee.emit('link', href);
         }
-      break;
+        break;
       case 'INPUT':
         var isDone = el.checked;
         var index = el.getAttribute('data-task-index');
         window.ee.emit('task.done', el, index, isDone);
-      break;
+        break;
       default:
         e.preventDefault();
-      break;
+        break;
     }
   });
 
   codeLanguages = hljs.listLanguages();
   mermaid.sequenceConfig = {
-                  diagramMarginX:50,
-                  diagramMarginY:10,
-                  boxTextMargin:5,
-                  noteMargin:10,
-                  messageMargin:35,
-                  mirrorActors:true,
-                  width:150,
-                  // Height of actor boxes
-                  height:30
-              };
+    diagramMarginX: 50,
+    diagramMarginY: 10,
+    boxTextMargin: 5,
+    noteMargin: 10,
+    messageMargin: 35,
+    mirrorActors: true,
+    width: 150,
+    // Height of actor boxes
+    height: 30
+  };
   mermaid.ganttConfig = {
-      titleTopMargin:25,
-      barHeight:20,
-      barGap:4,
-      topPadding:50,
-      sidePadding:100,
-      gridLineStartPadding:35,
-      fontSize:11,
-      numberSectionStyles:4,
-      axisFormatter: [
-          // Within a day
-          ["%I:%M", function (d) {
-              return d.getHours();
-          }],
-          // Monday a week
-          ["w. %U", function (d) {
-              return d.getDay() == 1;
-          }],
-          // Day within a week (not monday)
-          ["%a %d", function (d) {
-              return d.getDay() && d.getDate() != 1;
-          }],
-          // within a month
-          ["%b %d", function (d) {
-              return d.getDate() != 1;
-          }],
-          // Month
-          ["%m-%y", function (d) {
-              return d.getMonth();
-          }]
+    titleTopMargin: 25,
+    barHeight: 20,
+    barGap: 4,
+    topPadding: 50,
+    sidePadding: 100,
+    gridLineStartPadding: 35,
+    fontSize: 11,
+    numberSectionStyles: 4,
+    axisFormatter: [
+      // Within a day
+      ["%I:%M",
+        function(d) {
+          return d.getHours();
+        }
+      ],
+      // Monday a week
+      ["w. %U",
+        function(d) {
+          return d.getDay() == 1;
+        }
+      ],
+      // Day within a week (not monday)
+      ["%a %d",
+        function(d) {
+          return d.getDay() && d.getDate() != 1;
+        }
+      ],
+      // within a month
+      ["%b %d",
+        function(d) {
+          return d.getDate() != 1;
+        }
+      ],
+      // Month
+      ["%m-%y",
+        function(d) {
+          return d.getMonth();
+        }
       ]
+    ]
   };
   // _body.addEventListener("DOMNodeInserted", function (ev) {
-    // console.log(ev.target.tagName);
+  // console.log(ev.target.tagName);
   // }, false);
 });
