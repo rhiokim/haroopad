@@ -18,11 +18,11 @@
     "mode/*/*.html"
   ],
   "homepage": "https://github.com/marijnh/CodeMirror",
-  "_release": "68076a88d5",
+  "_release": "2319665900",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "68076a88d5e6949a08193e7fcc5b7fc6203fb19a"
+    "commit": "23196659003e0cd18d5e5af7f500146a552e5c7d"
   },
   "_source": "git://github.com/marijnh/CodeMirror.git",
   "_target": "master",
