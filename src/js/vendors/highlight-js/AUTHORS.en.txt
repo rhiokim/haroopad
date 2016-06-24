@@ -208,3 +208,12 @@ Contributors:
 - Denis Ciccale <dciccale@gmail.com>
 - Michael Johnston <lastobelus@gmail.com>
 - Taras <oxdef@oxdef.info>
+- Philipp Wolfer <ph.wolfer@gmail.com>
+- Mikko Kouhia <mikko.kouhia@iki.fi>
+- Billy Quith <chinbillybilbo@gmail.com>
+- Herbert Shin <initbar@protonmail.ch>
+- Tristano Ajmone <tajmone@gmail.com>
+- Taisuke Fujimoto <temp-impl@users.noreply.github.com>
+- Boone Severson <boone.severson@gmail.com>
+- Victor Zhou <OiCMudkips@users.noreply.github.com>
+- Lars Schulna <kartoffelbrei.mit.muskatnuss@gmail.org>

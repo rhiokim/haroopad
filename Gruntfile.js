@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   require('time-grunt')(grunt);
 
   grunt.initConfig();
-  
+
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
   function printCodeStyles() {
     var res = [];
     var codes = fs.readdirSync('/Users/rhio/Works/my/haroopad/src/js/vendors/highlight-js/src/styles')
-                  .filter(function(file) { 
+                  .filter(function(file) {
                     return file.indexOf('.css') > -1;
                   });
     codes.forEach(function(file) {
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
   function printEditorStyles() {
     var res = [];
     var codes = fs.readdirSync('/Users/rhio/Works/my/haroopad/src/js/vendors/codemirror/theme')
-                  .filter(function(file) { 
+                  .filter(function(file) {
                     return file.indexOf('.css') > -1;
                   });
     codes.forEach(function(file) {
@@ -79,18 +79,18 @@ module.exports = function(grunt) {
     build: 'build',
     dist: 'dists/<%= pkg.version %>',
 
-    asciify: { 
+    asciify: {
       banner:{
         text: 'Haroopad',
 
         // Add the awesome to the console, and use the best font.
-        options:{ 
+        options:{
           font:'larry3d',
           log:true
         }
       }
     },
-    
+
     clean: {
       options: {
         force: true
@@ -321,32 +321,32 @@ module.exports = function(grunt) {
             '<%= vendors %>/codemirror/keymap/sublime.js'
           ],
 
-          '<%= vendors %>/backbone/backbone.min.js': [ 
-            '<%= vendors %>/backbone/backbone.js' 
+          '<%= vendors %>/backbone/backbone.min.js': [
+            '<%= vendors %>/backbone/backbone.js'
           ],
 
-          '<%= vendors %>/requirejs/require.min.js': [ 
-            '<%= vendors %>/requirejs/require.js' 
+          '<%= vendors %>/requirejs/require.min.js': [
+            '<%= vendors %>/requirejs/require.js'
           ],
 
-          '<%= vendors %>/haroopad-keymage/keymage.min.js': [ 
-            '<%= vendors %>/haroopad-keymage/keymage.js' 
+          '<%= vendors %>/haroopad-keymage/keymage.min.js': [
+            '<%= vendors %>/haroopad-keymage/keymage.js'
           ],
 
           /* pad */
-          '<%= vendors %>/haroopad-reMarked.js/reMarked.min.js': [ 
-            '<%= vendors %>/haroopad-reMarked.js/reMarked.js' 
+          '<%= vendors %>/haroopad-reMarked.js/reMarked.min.js': [
+            '<%= vendors %>/haroopad-reMarked.js/reMarked.js'
           ],
-          '<%= vendors %>/haroopad-notifer.js/notifier.min.js': [ 
-            '<%= vendors %>/haroopad-notifer.js/notifier.js' 
+          '<%= vendors %>/haroopad-notifer.js/notifier.min.js': [
+            '<%= vendors %>/haroopad-notifer.js/notifier.js'
           ],
 
           /* viewer */
-          '<%= vendors %>/haroopad-echo/dist/echo.min.js': [ 
-            '<%= vendors %>/haroopad-echo/src/echo.js' 
+          '<%= vendors %>/haroopad-echo/dist/echo.min.js': [
+            '<%= vendors %>/haroopad-echo/src/echo.js'
           ],
-          '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js': [ 
-            '<%= vendors %>/haroopad-oembed/jquery.oembed.js' 
+          '<%= vendors %>/haroopad-oembed/jquery.oembed.min.js': [
+            '<%= vendors %>/haroopad-oembed/jquery.oembed.js'
           ]
         }
       },
@@ -633,7 +633,7 @@ module.exports = function(grunt) {
           { expand: true, flatten: true, src: [ '<%= vendors %>/MathJax/*' ], dest: '<%= resdir %>/Libraries/.js/MathJax/', filter: 'isFile'}
         ]
       },
-      
+
       highlightjs: {
         files: [
           { expand: true, cwd: '<%= vendors %>/highlight-js/src/styles/', src: [ '**' ], dest: '<%= resdir %>/Libraries/.css/code/' }
@@ -645,14 +645,14 @@ module.exports = function(grunt) {
           { expand: true, cwd: 'src/box/presentation/dist', src: [ '**' ], dest: '<%= resdir %>/Resources/Boxes/presentation' }
         ]
       }
-      
+
       // select2: {
       //   files: [
           // { src: '<%= vendors %>/select2/select2.png', dest: 'src/css/select2.png' },
           // { src: '<%= vendors %>/select2/select2x2.png', dest: 'src/css/select2x2.png' }
         // ]
       // },
-      
+
       // jqoembed: {
         // files: [
           // { src: '<%= vendors %>/haroopad-oembed/jquery.oembed.css', dest: 'src/css/jquery.oembed.css' }
@@ -662,7 +662,7 @@ module.exports = function(grunt) {
 
     shell: {
       debug: {
-        command: '<%= nwexe %> src --debug' 
+        command: '<%= nwexe %> src --debug'
       },
 
       cpLib: {
@@ -691,7 +691,11 @@ module.exports = function(grunt) {
       },
 
       highlightjs: {
-        command: 'node tools/build.js -t browser',
+        command: [
+          'nvm use default',
+          'npm install',
+          'node tools/build.js -t node'
+        ],
         options: {
           stdout: true,
           execOptions: {
@@ -862,7 +866,7 @@ module.exports = function(grunt) {
     grunt.log.writeln('=====editor themes=====');
     printEditorStyles();
   });
-  
+
   grunt.registerTask('appstore', function() {
     var nwv = grunt.config.get('nwv');
     var os = grunt.config.get('os');
@@ -870,7 +874,7 @@ module.exports = function(grunt) {
 
     var app = path.normalize('lib/nwjs-macappstore-v'+ nwv +'-'+ os +'-'+ arch);
     grunt.config.set('app', app);
-    
+
     grunt.task.run('nwlibs');
     grunt.task.run('nwres');
     grunt.task.run('pkg2');

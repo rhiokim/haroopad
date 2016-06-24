@@ -56,7 +56,7 @@
   /* load locales */
   global.LANGS = fs.readFileSync(path.join(global.PATHS.locales, 'locales.json'));
   global.LANGS = JSON.parse(global.LANGS);
-  
+
   /* cli arguments */
   global.argv = optimist.parse(gui.App.argv);
 
@@ -133,35 +133,22 @@
   global.THEMES.user = {};
   global.THEMES.user.editor = loadUserThemes(global.PATHS.theme_dest_editor);
   global.THEMES.user.viewer = loadUserThemes(global.PATHS.theme_dest_viewer);
-  global.THEMES.editor = [ 'default', '3024-day', '3024-night', 'abcdef', 'ambiance-mobile', 
-  'ambiance', 'base16-dark', 'base16-light', 'bespin', 'blackboard', 'cobalt', 'colorforth', 
-  'dracula', 'eclipse', 'elegant', 'erlang-dark', 'hopscotch', 'icecoder', 'isotope', 'lesser-dark', 
-  'liquibyte', 'material', 'mbo', 'mdn-like', 'midnight', 'monokai', 'neat', 'neo', 'night', 
-  'paraiso-dark', 'paraiso-light', 'pastel-on-dark', 'railscasts', 'rubyblue', 'seti', 'solarized dark', 
-  'solarized light', 'the-matrix', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'ttcn', 'twilight', 'vibrant-ink', 
+  global.THEMES.editor = [ 'default', '3024-day', '3024-night', 'abcdef', 'ambiance-mobile',
+  'ambiance', 'base16-dark', 'base16-light', 'bespin', 'blackboard', 'cobalt', 'colorforth',
+  'dracula', 'eclipse', 'elegant', 'erlang-dark', 'hopscotch', 'icecoder', 'isotope', 'lesser-dark',
+  'liquibyte', 'material', 'mbo', 'mdn-like', 'midnight', 'monokai', 'neat', 'neo', 'night',
+  'paraiso-dark', 'paraiso-light', 'pastel-on-dark', 'railscasts', 'rubyblue', 'seti', 'solarized dark',
+  'solarized light', 'the-matrix', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'ttcn', 'twilight', 'vibrant-ink',
   'xq-dark', 'xq-light', 'yeti', 'zenburn' ];
 
   global.THEMES.viewer = ['clearness', 'clearness-dark', 'node-dark', 'github', 'haroopad',
     'solarized-dark', 'solarized-light', 'metro-vibes', 'metro-vibes-dark', 'wood', 'wood-ri'
   ];
-  
-  global.THEMES.code = [ 'default', 'agate', 'androidstudio', 'arduino-light', 'arta', 'ascetic', 
-  'atelier-cave-dark', 'atelier-cave-light', 'atelier-dune-dark', 'atelier-dune-light', 
-  'atelier-estuary-dark', 'atelier-estuary-light', 'atelier-forest-dark', 'atelier-forest-light', 
-  'atelier-heath-dark', 'atelier-heath-light', 'atelier-lakeside-dark', 'atelier-lakeside-light', 
-  'atelier-plateau-dark', 'atelier-plateau-light', 'atelier-savanna-dark', 'atelier-savanna-light', 
-  'atelier-seaside-dark', 'atelier-seaside-light', 'atelier-sulphurpool-dark', 
-  'atelier-sulphurpool-light', 'brown-paper', 'codepen-embed', 'color-brewer', 'dark', 'darkula', 
-  'docco', 'dracula', 'far', 'foundation', 'github-gist', 'github', 'googlecode', 'grayscale', 
-  'gruvbox-dark', 'gruvbox-light', 'hopscotch', 'hybrid', 'idea', 'ir-black', 'kimbie.dark', 
-  'kimbie.light', 'magula', 'mono-blue', 'monokai-sublime', 'monokai', 'obsidian', 'paraiso-dark', 
-  'paraiso-light', 'pojoaque', 'qtcreator_dark', 'qtcreator_light', 'railscasts', 'rainbow', 
-  'school-book', 'solarized-dark', 'solarized-light', 'sunburst', 'tomorrow-night-blue', 
-  'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night', 'tomorrow', 'vs', 'xcode', 
-  'zenburn' ];
+
+  global.THEMES.code = ['default', 'agate', 'androidstudio', 'arduino-light', 'arta', 'ascetic', 'atelier-cave-dark', 'atelier-cave-light', 'atelier-dune-dark', 'atelier-dune-light', 'atelier-estuary-dark', 'atelier-estuary-light', 'atelier-forest-dark', 'atelier-forest-light', 'atelier-heath-dark', 'atelier-heath-light', 'atelier-lakeside-dark', 'atelier-lakeside-light', 'atelier-plateau-dark', 'atelier-plateau-light', 'atelier-savanna-dark', 'atelier-savanna-light', 'atelier-seaside-dark', 'atelier-seaside-light', 'atelier-sulphurpool-dark', 'atelier-sulphurpool-light', 'brown-paper', 'codepen-embed', 'color-brewer', 'dark', 'darkula', 'docco', 'dracula', 'far', 'foundation', 'github-gist', 'github', 'googlecode', 'grayscale', 'gruvbox-dark', 'gruvbox-light', 'hopscotch', 'hybrid', 'idea', 'ir-black', 'kimbie.dark', 'kimbie.light', 'magula', 'mono-blue', 'monokai-sublime', 'monokai', 'obsidian', 'paraiso-dark', 'paraiso-light', 'pojoaque', 'purebasic', 'qtcreator_dark', 'qtcreator_light', 'railscasts', 'rainbow', 'school-book', 'solarized-dark', 'solarized-light', 'sunburst', 'tomorrow-night-blue', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'tomorrow-night', 'tomorrow', 'vs', 'xcode', 'xt256', 'zenburn'];
 
 
-  
+
 
   global.SHORTCUTS = {
     /* app */

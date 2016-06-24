@@ -12,7 +12,7 @@ function(hljs) {
       keyword:
         'in of on if for while finally var new function do return void else break catch ' +
         'instanceof with throw case default try this switch continue typeof delete ' +
-        'let yield const export super debugger as async await',
+        'let yield const export super debugger as async await import',
       literal:
         'true false null undefined NaN Infinity',
       built_in:
@@ -30,69 +30,44 @@ function(hljs) {
     };
 
   var QML_IDENT_RE = '[a-zA-Z_][a-zA-Z0-9\\._]*';
-  
-  var END_OF_LINE_MODE = {
-    className: 'string',
-    begin: '(\\b|"|\')',
-    end: '(//|/\\*|$)',
-    illegal: '\\n',
-    contains: [hljs.BACKSLASH_ESCAPE]
-  };
 
-  // Isolate import statements. Ends at a comment or end of line.
-  // Use keyword class.
-  var IMPORT = {
-      beginKeywords: 'import', end: '$',
-      starts: {
-        className: 'string',
-        end: '(//|/\\*|$)', 
-        returnEnd: true
-      },
-      contains: [
-        END_OF_LINE_MODE
-      ]
-  };
-  
   // Isolate property statements. Ends at a :, =, ;, ,, a comment or end of line.
   // Use property class.
   var PROPERTY = {
       className: 'keyword',
-      begin: '\\bproperty\\b', 
+      begin: '\\bproperty\\b',
       starts: {
         className: 'string',
-        end: '(:|=|;|,|//|/\\*|$)', 
+        end: '(:|=|;|,|//|/\\*|$)',
         returnEnd: true
-      },
-      relevance: 0
+      }
   };
-  
+
   // Isolate signal statements. Ends at a ) a comment or end of line.
   // Use property class.
   var SIGNAL = {
       className: 'keyword',
-      begin: '\\bsignal\\b', 
+      begin: '\\bsignal\\b',
       starts: {
         className: 'string',
-        end: '(\\(|:|=|;|,|//|/\\*|$)', 
+        end: '(\\(|:|=|;|,|//|/\\*|$)',
         returnEnd: true
-      },
-      relevance: 10
+      }
   };
-  
+
   // id: is special in QML. When we see id: we want to mark the id: as attribute and
   // emphasize the token following.
   var ID_ID = {
       className: 'attribute',
       begin: '\\bid\\s*:',
       starts: {
-        className: 'emphasis',
-        end: QML_IDENT_RE, 
+        className: 'string',
+        end: QML_IDENT_RE,
         returnEnd: false
-      },
-      relevance: 10
+      }
   };
 
-  // Find QML object attribute. An attribute is a QML identifier followed by :. 
+  // Find QML object attribute. An attribute is a QML identifier followed by :.
   // Unfortunately it's hard to know where it ends, as it may contain scalars,
   // objects, object definitions, or javascript. The true end is either when the parent
   // ends or the next attribute is detected.
@@ -102,10 +77,10 @@ function(hljs) {
     contains: [
       {
         className: 'attribute',
-        begin: QML_IDENT_RE, 
-        includeBegin: true,
-        end: '\\s*:', 
-        excludeEnd: true
+        begin: QML_IDENT_RE,
+        end: '\\s*:',
+        excludeEnd: true,
+        relevance: 0
       }
     ],
     relevance: 0
@@ -114,19 +89,12 @@ function(hljs) {
   // Find QML object. A QML object is a QML identifier followed by { and ends at the matching }.
   // All we really care about is finding IDENT followed by { and just mark up the IDENT and ignore the {.
   var QML_OBJECT = {
-    begin: QML_IDENT_RE + '\\s*{',
+    begin: QML_IDENT_RE + '\\s*{', end: '{',
     returnBegin: true,
+    relevance: 0,
     contains: [
-      {
-        className: 'decorator',
-        keywords: KEYWORDS,
-        begin: QML_IDENT_RE, 
-        includeBegin: true,
-        end: '\\s*{', 
-        excludeEnd: true
-      }
-    ],
-    relevance: 0
+      hljs.inherit(hljs.TITLE_MODE, {begin: QML_IDENT_RE})
+    ]
   };
 
   return {
@@ -135,7 +103,7 @@ function(hljs) {
     keywords: KEYWORDS,
     contains: [
       {
-        className: 'pi',
+        className: 'meta',
         begin: /^\s*['"]use (strict|asm)['"]/
       },
       hljs.APOS_STRING_MODE,
@@ -177,7 +145,6 @@ function(hljs) {
         ],
         relevance: 0
       },
-      IMPORT,
       SIGNAL,
       PROPERTY,
       {

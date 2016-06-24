@@ -1,3 +1,67 @@
+## Version 9.4.0
+
+New languages:
+
+- *PureBASIC* by [Tristano Ajmone][]
+- *BNF* by [Oleg Efimov][]
+- *Ada* by [Lars Schulna][]
+
+New styles:
+
+- *PureBASIC* by [Tristano Ajmone][]
+
+Improvements to existing languages and styles:
+
+- We now highlight function declarations in Go.
+- [Taisuke Fujimoto][] contributed very convoluted rules for raw and
+  interpolated strings in C#.
+- [Boone Severson][] updated Verilog to comply with IEEE 1800-2012
+  SystemVerilog.
+- [Victor Zhou][] improved rules for comments and strings in PowerShell files.
+- [Janis Voigtländer][] updated the definition of Elm to version 0.17 of the
+  languages. Elm is now featured on the front page of <https://highlightjs.org>.
+- Special variable `$this` is highlighted as a keyword in PHP.
+- `usize` and `isize` are now highlighted in Rust.
+- Fixed labels and directives in x86 assembler.
+
+[Tristano Ajmone]: https://github.com/tajmone
+[Taisuke Fujimoto]: https://github.com/temp-impl
+[Oleg Efimov]: https://github.com/Sannis
+[Boone Severson]: https://github.com/BooneJS
+[Victor Zhou]: https://github.com/OiCMudkips
+[Lars Schulna]: https://github.com/captain-hanuta
+[Janis Voigtländer]: https://github.com/jvoigtlaender
+
+
+## Version 9.3.0
+
+New languages:
+
+- *Tagger Script* by [Philipp Wolfer][]
+- *MoonScript* by [Billy Quith][]
+
+New styles:
+
+- *xt256* by [Herbert Shin][]
+
+Improvements to existing languages and styles:
+
+- More robust handling of unquoted HTML tag attributes
+- Relevance tuning for QML which was unnecessary eager at seizing other
+  languages' code
+- Improve GAMS language parsing
+- Fixed a bunch of bugs around selectors in Less
+- Kotlin's got a new definition for annotations, updated keywords and other
+  minor improvements
+- Added `move` to Rust keywords
+- Markdown now recognizes \`\`\`-fenced code blocks
+- Improved detection of function declarations in C++ and C#
+
+[Philipp Wolfer]: https://github.com/phw
+[Billy Quith]: https://github.com/billyquith
+[Herbert Shin]: https://github.com/initbar
+
+
 ## Version 9.2.0
 
 New languages:
@@ -31,6 +95,7 @@ Improvements to existing languages and styles:
 [Taras]: https://github.com/oxdef
 [Robert Dodier]: https://github.com/robert-dodier
 
+
 ## Version 9.1.0
 
 New languages:
@@ -59,6 +124,7 @@ Improvements to existing languages and styles:
 [Matt Evans]: https://github.com/matthewevans
 [Martin Braun]: https://github.com/mbr0wn
 [Stefania Mellai]: https://github.com/smellai
+
 
 ## Version 9.0.0
 
@@ -113,6 +179,7 @@ Other notable changes:
 [Nebuleon Fumika]: https://github.com/Nebuleon
 [prince]: https://github.com/prince-0203
 
+
 ## Version 8.9.1
 
 Some last-minute changes reverted due to strange bug with minified browser build:
@@ -122,6 +189,7 @@ Some last-minute changes reverted due to strange bug with minified browser build
 - ECMAScript 6 classes constructors now highlighted
 - Template string support for Typescript, as for ECMAScript 6
 - License added to not minified browser build
+
 
 ## Version 8.9.0
 
@@ -156,6 +224,7 @@ Other notable changes:
 [Tsuyusato Kitsune]: https://github.com/MakeNowJust
 [Nate Cook]: https://github.com/natecook1000
 
+
 ## Version 8.8.0
 
 New languages:
@@ -183,6 +252,7 @@ Other notable changes:
 [Anthony Scemama]: https://github.com/scemama
 [Oleg Efimov]: https://github.com/Sannis
 [Tsuyusato Kitsune]: https://github.com/MakeNowJust
+
 
 ## Version 8.7
 
@@ -225,6 +295,7 @@ Notable fixes and improvements to existing languages:
 [Dotan Dimet]: https://github.com/dotandimet
 [J2TeaM]: https://github.com/J2TeaM
 
+
 ## Version 8.6
 
 New languages:
@@ -262,6 +333,7 @@ Notable fixes and improvements to existing languages:
 [Dan Panzarella]: https://github.com/pzl
 [Bruno Dias]: https://github.com/sequitur
 [Jay Strybis]: https://github.com/unreal
+
 
 ## Version 8.5
 
@@ -303,6 +375,7 @@ Notable fixes and improvements to existing languages:
 [Gu Yiling]: https://github.com/Justineo
 [Sergey Mashkov]: https://github.com/cy6erGn0m
 [Thomas Applencourt]: https://github.com/TApplencourt
+
 
 ## Version 8.4
 
@@ -442,6 +515,7 @@ Other improvements:
 
 [Erik Osheim]: https://github.com/non
 [Lucas Mazza]: https://github.com/lucasmazza
+
 
 ## Version 8.1
 
