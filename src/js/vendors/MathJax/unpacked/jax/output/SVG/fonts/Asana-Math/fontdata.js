@@ -4,7 +4,7 @@
  *  
  *  Initializes the SVG OutputJax to use the Asana-Math fonts
 
- *  Copyright (c) 2013-2015 The MathJax Consortium
+ *  Copyright (c) 2013-2014 The MathJax Consortium
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 
 (function (SVG,MML,AJAX,HUB) {
 
-    var VERSION = "2.6.0";
+    var VERSION = "2.4.0";
 
   var ALPHABETS = "AsanaMathJax_Alphabets",
       ARROWS = "AsanaMathJax_Arrows",
@@ -460,9 +460,6 @@
           HW: [[885,MAIN], [1470,SIZE1], [2041,SIZE2], [2552,SIZE3], [2615,SIZE3,1.025]],
           stretch: {bot:[0x23A6,SYMBOLS], ext:[0x23A5,SYMBOLS]}
         },
-        0x2312: {alias: 0x23DC, dir:H},
-        0x2322: {alias: 0x23DC, dir:H},
-        0x2323: {alias: 0x23DD, dir:H},
         0x2329: {alias: 0x27E8, dir: V},
         0x232A: {alias: 0x27E9, dir: V},
         0x23AA:

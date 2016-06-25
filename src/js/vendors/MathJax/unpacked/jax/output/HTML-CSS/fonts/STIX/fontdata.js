@@ -10,7 +10,7 @@
  *
  *  ---------------------------------------------------------------------
  *  
- *  Copyright (c) 2009-2015 The MathJax Consortium
+ *  Copyright (c) 2009-2014 The MathJax Consortium
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
  */
 
 (function (HTMLCSS,MML,HTML) {
-  var VERSION = "2.6.0";
+  var VERSION = "2.4.0";
   
   HTMLCSS.allowWebFonts = false;
   
@@ -425,9 +425,6 @@
         0x295F: EXTRAH, // rightwards harpoon with barb down from bar
         0x2960: EXTRAV, // up harpoon with barb left from bar
         0x2961: EXTRAV, // down harpoon with barb left from bar
-        0x2312: {alias: 0x23DC, dir:H}, // arc
-        0x2322: {alias: 0x23DC, dir:H}, // frown
-        0x2323: {alias: 0x23DD, dir:H}, // smile
         0x27F5: {alias: 0x2190, dir:H}, // long left arrow
         0x27F6: {alias: 0x2192, dir:H}, // long right arrow
         0x27F7: {alias: 0x2194, dir:H}, // long left-right arrow
@@ -1516,22 +1513,6 @@
     // monospace mathvariant uses space from STIXVariants, so make it the right size
     HTMLCSS.FONTDATA.FONTS['STIXVariants'][0x20][2] += 275;       // fix error in character width
     HTMLCSS.FONTDATA.FONTS['STIXVariants'][0x20][5] = {rfix:275}; // fix error in character width
-  });
-
-  //
-  //  Add some spacing characters (more will come later)
-  //
-  MathJax.Hub.Insert(HTMLCSS.FONTDATA.FONTS['STIXGeneral'],{
-    0x2000: [0,0,500,0,0,{space:1}],     // en quad
-    0x2001: [0,0,1000,0,0,{space:1}],    // em quad
-    0x2002: [0,0,500,0,0,{space:1}],     // en space
-    0x2003: [0,0,1000,0,0,{space:1}],    // em space
-    0x2004: [0,0,333,0,0,{space:1}],     // 3-per-em space
-    0x2005: [0,0,250,0,0,{space:1}],     // 4-per-em space
-    0x2006: [0,0,167,0,0,{space:1}],     // 6-per-em space
-    0x2009: [0,0,167,0,0,{space:1}],     // thin space
-    0x200A: [0,0,83,0,0,{space:1}],      // hair space
-    0x200B: [0,0,0,0,0,{space:1}]        // zero-width space
   });
 
   MathJax.Hub.Browser.Select({

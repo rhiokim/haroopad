@@ -4,7 +4,7 @@
  *  
  *  Initializes the SVG OutputJax to use the Gyre-Termes fonts
 
- *  Copyright (c) 2013-2015 The MathJax Consortium
+ *  Copyright (c) 2013-2014 The MathJax Consortium
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 
 (function (SVG,MML,AJAX,HUB) {
 
-    var VERSION = "2.6.0";
+    var VERSION = "2.4.0";
 
   var ALPHABETS = "GyreTermesMathJax_Alphabets",
       ARROWS = "GyreTermesMathJax_Arrows",
@@ -539,9 +539,6 @@
           HW: [[818,MAIN], [979,SIZE1], [1171,SIZE2], [1402,SIZE3], [1678,SIZE4], [2011,SIZE5], [2410,SIZE6], [2780,SIZE6,1.154]],
           stretch: {bot:[0x23A6,SYMBOLS], ext:[0x23A5,SYMBOLS]}
         },
-        0x2312: {alias: 0x23DC, dir:H},
-        0x2322: {alias: 0x23DC, dir:H},
-        0x2323: {alias: 0x23DD, dir:H},
         0x2329:
         {
           dir: V,

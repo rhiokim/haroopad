@@ -1,3 +1,6 @@
+/* -*- Mode: Javascript; indent-tabs-mode:nil; js-indent-level: 2 -*- */
+/* vim: set ts=2 et sw=2 tw=80: */
+
 /*************************************************************
  *
  *  MathJax/extensions/HelpDialog.js
@@ -6,7 +9,7 @@
  *
  *  ---------------------------------------------------------------------
  *  
- *  Copyright (c) 2013-2015 The MathJax Consortium
+ *  Copyright (c) 2013-2014 The MathJax Consortium
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -24,19 +27,14 @@
 (function (HUB,HTML,AJAX,OUTPUT,LOCALE) {
 
   var HELP = MathJax.Extension.Help = {
-    version: "2.6.0"
+    version: "2.4.0"
   };
 
   var STIXURL = "http://www.stixfonts.org/";
   var MENU = MathJax.Menu;
-  var FALSE, KEY;
-  HUB.Register.StartupHook("MathEvents Ready",function () {
-    FALSE = MathJax.Extension.MathEvents.Event.False;
-    KEY = MathJax.Extension.MathEvents.Event.KEY;
-  });
 
-  
   var CONFIG = HUB.CombineConfig("HelpDialog",{
+    closeImg: AJAX.urlRev(OUTPUT.imageDir+"/CloseX-31.png"), // image for close "X" for mobiles
 
     styles: {
       "#MathJax_Help": {
@@ -58,47 +56,11 @@
         "-khtml-box-shadow":"0px 10px 20px #808080",  // Konqueror
         filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')" // IE
       },
-      "#MathJax_Help.MathJax_MousePost": {
-        outline:"none"
-      },
       
       "#MathJax_HelpContent": {
         overflow:"auto", "text-align":"left", "font-size":"80%",
         padding:".4em .6em", border:"1px inset", margin:"1em 0px",
         "max-height":"20em", "max-width":"30em", "background-color":"#EEEEEE"
-      },
-      
-      "#MathJax_HelpClose": {
-        position:"absolute", top:".2em", right:".2em",
-        cursor:"pointer",
-        display:"inline-block",
-        border:"2px solid #AAA",
-        "border-radius":"18px",
-        "-webkit-border-radius": "18px",             // Safari and Chrome
-        "-moz-border-radius": "18px",                // Firefox
-        "-khtml-border-radius": "18px",              // Konqueror
-        "font-family":"'Courier New',Courier",
-        "font-size":"24px",
-        color:"#F0F0F0"
-      },
-      "#MathJax_HelpClose span": {
-        display:"block", "background-color":"#AAA", border:"1.5px solid",
-        "border-radius":"18px",
-        "-webkit-border-radius": "18px",             // Safari and Chrome
-        "-moz-border-radius": "18px",                // Firefox
-        "-khtml-border-radius": "18px",              // Konqueror
-        "line-height":0, 
-        padding:"8px 0 6px"     // may need to be browser-specific
-      },
-      "#MathJax_HelpClose:hover": {
-        color:"white!important",
-        border:"2px solid #CCC!important"
-      },
-      "#MathJax_HelpClose:hover span": {
-        "background-color":"#CCC!important"
-      },
-      "#MathJax_HelpClose:hover:focus": {
-        outline:"none"
       }
     }
   });
@@ -106,17 +68,17 @@
   /*
    *  Handle the Help Dialog box
    */
-  HELP.Dialog = function (event) {
-    LOCALE.loadDomain("HelpDialog",["Post",HELP,event]);
+  HELP.Dialog = function () {
+    LOCALE.loadDomain("HelpDialog",["Post",HELP]);
   };
   
-  HELP.Post = function (event) {
+  HELP.Post = function () {
     this.div = MENU.Background(this);
     var help = HTML.addElement(this.div,"div",{
-      id: "MathJax_Help", tabIndex: 0, onkeydown: HELP.Keydown
+      id: "MathJax_Help"
     },LOCALE._("HelpDialog",[
       ["b",{style:{fontSize:"120%"}},[["Help","MathJax Help"]]],
-      ["div",{id: "MathJax_HelpContent", tabIndex: 0},[
+      ["div",{id: "MathJax_HelpContent"},[
         ["p",{},[["MathJax",
           "*MathJax* is a JavaScript library that allows page authors to include " +
           "mathematics within their web pages.  As a reader, you don't need to do " +
@@ -133,7 +95,7 @@
         ["div",{style:{"margin-left":"1em"}},[
           ["p",{},[["ShowMath",
             "*Show Math As* allows you to view the formula's source markup " +
-            "for copy & paste (as MathML or in its original format)."]]
+            "for copy & paste (as MathML or in its origianl format)."]]
           ],
           ["p",{},[["Settings",
             "*Settings* gives you control over features of MathJax, such as the " +
@@ -160,14 +122,12 @@
         ]
       ]],
       ["a",{href:"http://www.mathjax.org/"},["www.mathjax.org"]],
-      ["span",{id: "MathJax_HelpClose", onclick: HELP.Remove,
-               onkeydown: HELP.Keydown, tabIndex: 0, role: "button",
-	       "aria-label": LOCALE._(["HelpDialog","CloseDialog"],"Close help dialog")},
-        [["span",{},["\u00D7"]]]
-      ]
+      ["img", {
+        src: CONFIG.closeImg,
+        style: {width:"21px", height:"21px", position:"absolute", top:".2em", right:".2em"},
+        onclick: HELP.Remove
+      }]
     ]));
-    if (event.type === "mouseup") help.className += " MathJax_MousePost";
-    help.focus();
     LOCALE.setCSS(help);
     var doc = (document.documentElement||{});
     var H = window.innerHeight || doc.clientHeight || doc.scrollHeight || 0;
@@ -183,15 +143,6 @@
   HELP.Remove = function (event) {
     if (HELP.div) {document.body.removeChild(HELP.div); delete HELP.div}
   };
-  HELP.Keydown = function(event) {
-    if (event.keyCode === KEY.ESCAPE ||
-        (this.id === "MathJax_HelpClose" &&
-         (event.keyCode === KEY.SPACE || event.keyCode === KEY.RETURN))) {
-      HELP.Remove(event);
-      MENU.CurrentNode().focus();
-      FALSE(event);
-    }
-  },
 
   MathJax.Callback.Queue(
     HUB.Register.StartupHook("End Config",{}), // wait until config is complete

@@ -10,7 +10,7 @@
  *  
  *  ---------------------------------------------------------------------
  *  
- *  Copyright (c) 2010-2015 The MathJax Consortium
+ *  Copyright (c) 2010-2014 The MathJax Consortium
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -156,7 +156,7 @@
       this.Mouseout    = HOVER.Mouseout;
       this.Mousemove   = HOVER.Mousemove;
 
-      if (!HUB.Browser.hasMathPlayer) {
+      if (!isMSIE) {
         // Used in preTranslate to get scaling factors
         this.EmExSpan = HTML.Element("span",
           {style:{position:"absolute","font-size-adjust":"none"}},
@@ -173,11 +173,10 @@
     },
     //
     //  Set up MathPlayer for IE on the first time through.
-    //  Get the ex and em sizes.
     //
     InitializeMML: function () {
       this.initialized = true;
-      if (HUB.Browser.hasMathPlayer) {
+      if (isMSIE) {
         try {
           //
           //  Insert data needed to use MathPlayer for MathML output
@@ -326,9 +325,6 @@
         container.onmousedown   = EVENT.Mousedown;
         container.onclick       = EVENT.Click;
         container.ondblclick    = EVENT.DblClick;
-        // Added for keyboard accessible menu.
-        container.onkeydown = EVENT.Keydown;
-        container.tabIndex = HUB.getTabOrder(jax);
 	if (HUB.Browser.noContextMenu) {
 	  container.ontouchstart = TOUCH.start;
 	  container.ontouchend   = TOUCH.end;
@@ -360,24 +356,6 @@
     //
     MMLnamespace: "http://www.w3.org/1998/Math/MathML",
 
-    isFullWidth: function (node) {
-      if (!node) return;
-      var width = node.getAttribute("width") ||
-                  (String(node.getAttribute("style")).match(/(?:^| )width: *([^; ]*)/)||[])[1];
-      if (width) return !!width.match(/%/);
-      if (node.nodeName.match(/^(semantics|math|mstyle)$/)) {
-        width = this.isFullWidth(node.firstChild);
-      } else if (node.nodeName.toLowerCase() === "mrow") {
-        for (var i = 0, m = node.childNodes.length; i < m && !width; i++)
-          width = this.isFullWidth(node.childNodes[i]);
-      }
-      if (width) {
-        var style = "width:100%; "+(node.getAttribute("style")||"");
-        node.setAttribute("style",style.replace(/ +$/,""));
-      }
-      return width;
-    },
-    
     //
     //  For MSIE, we must overlay the MathPlayer object to trap the events
     //  (since they can't be cancelled when the events are on the <math> tag
@@ -456,17 +434,15 @@
       jax.root.toNativeMML(span);
       if (this.msieIE8HeightBug) {span.style.position = "absolute"}
       if (nMML.widthBug) {span.style.width = span.parentNode.style.width = ""}
-      if (span.parentNode.style.width.match(/%$/)) 
-        {span.parentNode.style.minWidth = Math.ceil(3*Mh/4)+"px"} // for full-width tables
       var mW = math.offsetWidth  || math.scrollWidth,
           mH = math.offsetHeight || math.scrollHeight;
       var zW = span.offsetWidth, zH = span.offsetHeight;
-      if (nMML.widthBug || span.style.width.match(/%/)) {
+      if (nMML.widthBug) {
         //
         //  FF doesn't get width of <math> right, so get it from <mrow>
         //
         var W = span.firstChild.firstChild.scrollWidth;
-        if (W > zW) {zW = W; span.parentNode.style.width = span.style.minWidth = zW + "px";}
+        if (W > zW) {zW = W; span.style.width = zW + "px"}
       }
       if (this.msieIE8HeightBug) {span.style.position = ""}
       return {Y:-EVENT.getBBox(span.parentNode).h, mW:mW, mH:mH, zW:zW, zH:zH}
@@ -513,19 +489,17 @@
       //    and set those in the tag's attribute list
       //
       NativeMMLattributes: function (tag) {
-	var defaults = (this.type === "mstyle" ? MML.math.prototype.defaults : this.defaults);
-        var names = (this.attrNames||MML.copyAttributeNames),
-            skip = MML.skipAttributes, copy = MML.copyAttributes;
+	var defaults = this.defaults;
+	var copy = (this.attrNames||MML.copyAttributeNames), skip = MML.skipAttributes;
         if (!this.attrNames) {
-          for (var id in defaults) {if (!skip[id] && !copy[id] && defaults.hasOwnProperty(id)) {
-	    if (this[id] != null && this[id] !== defaults[id]) 
-              tag.setAttribute(id,this.NativeMMLattribute(this[id]));
+          if (this.type === "mstyle") {defaults = MML.math.prototype.defaults}
+          for (var id in defaults) {if (!skip[id] && defaults.hasOwnProperty(id)) {
+	    if (this[id] != null) {tag.setAttribute(id,this.NativeMMLattribute(this[id]))}
           }}
         }
-	for (var i = 0, m = names.length; i < m; i++) {
-          if (copy[names[i]] === 1 && !defaults.hasOwnProperty(names[i])) continue;
-          var value = (this.attr||{})[names[i]]; if (value == null) {value = this[names[i]]}
-          if (value != null) {tag.setAttribute(names[i],this.NativeMMLattribute(value))}
+	for (var i = 0, m = copy.length; i < m; i++) {
+          var value = (this.attr||{})[copy[i]]; if (value == null) {value = this[copy[i]]}
+	  if (value != null) {tag.setAttribute(copy[i],this.NativeMMLattribute(value))}
 	}
         this.NativeMMLclass(tag);
       },
@@ -533,10 +507,7 @@
         var CLASS = []; if (this["class"]) {CLASS.push(this["class"])}
         if (this.isa(MML.TeXAtom)) {
           var TEXCLASS = ["ORD","OP","BIN","REL","OPEN","CLOSE","PUNCT","INNER","VCENTER"][this.texClass];
-          if (TEXCLASS) {
-            CLASS.push("MJX-TeXAtom-"+TEXCLASS)
-            if (TEXCLASS === "OP" && !this.movablelimits) CLASS.push("MJX-fixedlimits");
-          }
+          if (TEXCLASS) {CLASS.push("MJX-TeXAtom-"+TEXCLASS)}
         }
         if (this.mathvariant && this.NativeMMLvariants[this.mathvariant])
           {CLASS.push("MJX"+this.mathvariant)}
@@ -547,7 +518,7 @@
 	value = String(value);
 	if (nMML.NAMEDSPACE[value]) {value = nMML.NAMEDSPACE[value]} // MP doesn't do negative spaces
 	else if (value.match(/^\s*(([-+])?(\d+(\.\d*)?|\.\d+))\s*mu\s*$/))
-          {value = (RegExp.$2||"")+((1/18)*RegExp.$3).toFixed(3).replace(/\.?0+$/,"")+"em"} // FIXME:  should take scriptlevel into account
+          {value = RegExp.$2+((1/18)*RegExp.$3).toFixed(3).replace(/\.?0+$/,"")+"em"} // FIXME:  should take scriptlevel into account
 	else if (this.NativeMMLvariants[value]) {value = this.NativeMMLvariants[value]}
 	return value;
       },
@@ -562,9 +533,8 @@
       //  Create a MathML element
       //
       NativeMMLelement: function (type) {
-        var math = ( HUB.Browser.mpNamespace ? document.createElement("m:"+type) :
-                   (document.createElementNS ? document.createElementNS(nMML.MMLnamespace,type) :
-                                               document.createElement(type)));
+        var math = (isMSIE ? document.createElement("m:"+type) :
+	                     document.createElementNS(nMML.MMLnamespace,type));
         math.isMathJax = true;
         return math;
       }
@@ -575,7 +545,7 @@
       //  Make inferred rows not include an mrow tag
       //
       toNativeMML: function (parent) {
-        var i, m;
+        var i, m; 
 	if (this.inferred  && this.parent.inferRow) {
 	  for (i = 0, m = this.data.length; i < m; i++) {
 	    if (this.data[i]) {this.data[i].toNativeMML(parent)}
@@ -633,19 +603,12 @@
     MML.munderover.Augment({
       //
       //  Use proper version of munder, mover, or munderover, depending on
-      //  which items are present.  Handle movablelimits on TeXAtom base.
+      //  which items are present
       //
       toNativeMML: function (parent) {
 	var type = this.type;
-        var base = this.data[this.base];
-        if (base && base.isa(MML.TeXAtom) && base.movablelimits && !base.Get("displaystyle")) {
-          type = "msubsup";
-          if (this.data[this.under] == null) {type = "msup"}
-          if (this.data[this.over] == null)  {type = "msub"}
-        } else {
-          if (this.data[this.under] == null) {type = "mover"}
-          if (this.data[this.over] == null)  {type = "munder"}
-        }
+	if (this.data[this.under] == null) {type = "mover"}
+	if (this.data[this.over] == null)  {type = "munder"}
 	var tag = this.NativeMMLelement(type);
 	this.NativeMMLattributes(tag);
 	if (this.data[0]) {delete this.data[0].inferred}
@@ -988,15 +951,15 @@
         }
         //
         //  Look for a top-level mtable and if it has labels
-        //    Make sure the containers have 100% width, when needed.
+        //    Make sure the containers have 100% width, when needed
         //    If the label is on the same side as alignment,
         //      override the margin set by the stylesheet.
         //
-        var mtable = ((this.data[0]||{data:[]}).data[0]||{});
+        var mtable = ((this.data[0]||[]).data[0]||{});
         if (mtable.nMMLhasLabels) {
           if (mtable.nMMLforceWidth || !mtable.nMMLlaMatch) {
-            tag.setAttribute("style","width:100%")  // mrow node
-            if (annotate) tag.parentNode.setAttribute("style","width:100%"); // semantics node
+            tag.setAttribute("style","width:100%")
+            parent.style.width = parent.parentNode.style.width="100%";
           };
           if (mtable.nMMLlaMatch) {
             if (parent.parentNode.parentNode.nodeName.toLowerCase() === "div") {
@@ -1005,11 +968,6 @@
             }
           }
         }
-        //
-        //  Check if container must have width set to 100%
-        //
-        var fullWidth = nMML.isFullWidth(math);
-        if (fullWidth) {parent.style.width = parent.parentNode.style.width = "100%"}
         //
         //  Add the math to the page
         //
@@ -1020,7 +978,8 @@
         //  parent element to match.  Even if we set the <math> width properly,
         //  it doesn't seem to propagate up to the <span> correctly.
         //
-        if (nMML.widthBug &&!fullWidth) {
+        if (nMML.widthBug &&
+            !(mtable.nMMLhasLabels && (mtable.nMMLforceWidth || !mtable.nMMLlaMatch))) {
           //
           //  Convert size to ex's so that it scales properly if the print media
           //    has a different font size.
@@ -1262,7 +1221,7 @@
         // Some browsers do not implement the mmultiscripts element.
         // Try to emulate the support using basic script elements.
         //
-        if (!nMML.mmultiscriptsBug || this.data.length === 0) {
+        if (!nMML.mmultiscriptsBug || this.data.length === 0 ) {
           this.SUPER(arguments).toNativeMML.call(this,parent);
           return;
         }
@@ -1280,7 +1239,7 @@
         //
         if (this.data[0]) {this.data[0].toNativeMML(tag)}
         else {tag.appendChild(this.NativeMMLelement("mrow"))}
-        var base = tag.removeChild(tag.lastChild);
+        base = tag.removeChild(tag.lastChild);
 
         //
         // Process the postscript pairs
@@ -1363,6 +1322,7 @@
       nMML.msieIE8HeightBug = (mode === 8);
     },
     Opera: function (browser) {
+      nMML.operaPositionBug = true;
       nMML.stretchyMoBug = true;
       nMML.tableLabelBug = true;
       nMML.mfencedBug = true;
@@ -1381,8 +1341,8 @@
       // correctly and thus the element is displayed incorrectly in <mtable>.
       nMML.spaceWidthBug = !browser.versionAtLeast("20.0");
 
-      // mtable@rowspacing/mtable@columnspacing not supported.
-      nMML.tableSpacingBug = !browser.versionAtLeast("33.0");
+      nMML.tableSpacingBug = true; // mtable@rowspacing/mtable@columnspacing not
+                                   // supported.
       nMML.tableLabelBug = true;   // mlabeledtr is not implemented.
       nMML.mfencedBug = true;      // mfenced not displayed correctly
     },

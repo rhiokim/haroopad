@@ -9,7 +9,7 @@
  *
  *  ---------------------------------------------------------------------
  *  
- *  Copyright (c) 2011-2015 The MathJax Consortium
+ *  Copyright (c) 2011-2014 The MathJax Consortium
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
  */
 
 MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
-  var VERSION = "2.6.0";
+  var VERSION = "2.4.0";
   var MML = MathJax.ElementJax.mml,
       SVG = MathJax.OutputJax.SVG,
       BBOX = SVG.BBOX;
@@ -91,7 +91,7 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       svg = this.SVG();
       if (isTop && parent.type !== "mtd") {
         if (SVG.linebreakWidth < SVG.BIGDIMEN) {svg.w = SVG.linebreakWidth}
-          else {svg.w = SVG.cwidth}
+          else {svg.w = SVG.cwidth/SVG.em * 1000}
       }
 
       var state = {
@@ -211,6 +211,13 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       var align = this.SVGgetAlign(state,values),
           shift = this.SVGgetShift(state,values,align);
       //
+      //  Add in space for the shift
+      //
+      if (shift) {
+        if (align === MML.INDENTALIGN.LEFT)  {line.x = shift} else
+        if (align === MML.INDENTALIGN.RIGHT) {line.w += shift; line.r = line.w}
+      }
+      //
       //  Set the Y offset based on previous depth, leading, and current height
       //
       if (state.n > 0) {
@@ -221,8 +228,7 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       //
       //  Place the new line
       //
-      if (line.w + shift > svg.w) svg.w = line.w + shift;
-      svg.Align(line,align,0,state.Y,shift);
+      svg.Align(line,align,0,state.Y);
       //
       //  Save the values needed for the future
       //
@@ -243,18 +249,14 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       return align;
     },
     SVGgetShift: function (state,values,align) {
+      if (align === MML.INDENTALIGN.CENTER) {return 0}
       var cur = values, prev = state.values, def = state.VALUES, shift;
       if (state.n === 0)     {shift = cur.indentshiftfirst || prev.indentshiftfirst || def.indentshiftfirst}
       else if (state.isLast) {shift = prev.indentshiftlast || def.indentshiftlast}
       else                   {shift = prev.indentshift || def.indentshift}
       if (shift === MML.INDENTSHIFT.INDENTSHIFT) {shift = prev.indentshift || def.indentshift}
-      if (shift === "auto" || shift === "") {shift = "0"}
-      shift = SVG.length2em(shift,1,SVG.cwidth);
-      if (state.isTop && this.displayIndent !== "0") {
-        var indent = SVG.length2em(this.displayIndent,1,SVG.cwidth);
-        shift += (align === MML.INDENTALIGN.RIGHT ? -indent: indent);
-      }
-      return shift;
+      if (shift === "auto" || shift === "") {shift = (state.isTSop ? this.displayIndent : "0")}
+      return SVG.length2em(shift,0);
     },
     
     /****************************************************************/
@@ -474,8 +476,8 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       //
       if (end.length === 0) {
         var sup = this.data[this.sup], sub = this.data[this.sub], w = svg.w, data;
-        if (sup) {data = sup.SVGdata||{}; svg.Add(sup.toSVG(),w+(data.dx||0),data.dy)}
-        if (sub) {data = sub.SVGdata||{}; svg.Add(sub.toSVG(),w+(data.dx||0),data.dy)}
+        if (sup) {data = sup.SVGdata; svg.Add(sup.toSVG(),w+(data.dx||0),data.dy)}
+        if (sub) {data = sub.SVGdata; svg.Add(sub.toSVG(),w+(data.dx||0),data.dy)}
       }
     }
 
@@ -489,8 +491,8 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       //
       //  Get the current breakpoint position and other data
       //
-      var index = info.index.slice(0); info.index.shift();
-      var W, w, scanW, broken = (info.index.length > 0), better = false;
+      var index = info.index.slice(0), i = info.index.shift(),
+          W, w, scanW, broken = (info.index.length > 0), better = false;
       if (!broken) {info.W += info.w; info.w = 0}
       info.scanW = info.W;
       //
@@ -615,7 +617,7 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       //
       if (penalty >= info.penalty) {return false}
       info.penalty = penalty; info.values = values; info.W = W; info.w = w;
-      values.lineleading = SVG.length2em(values.lineleading,1,state.VALUES.lineleading);
+      values.lineleading = SVG.length2em(values.lineleading,state.VALUES.lineleading);
       values.last = this;
       return true;
     }

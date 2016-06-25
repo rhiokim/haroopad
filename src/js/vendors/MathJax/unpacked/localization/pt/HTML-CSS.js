@@ -5,7 +5,7 @@
  *
  *  MathJax/localization/pt/HTML-CSS.js
  *
- *  Copyright (c) 2009-2015 The MathJax Consortium
+ *  Copyright (c) 2009-2014 The MathJax Consortium
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -22,14 +22,14 @@
  */
 
 MathJax.Localization.addTranslation("pt","HTML-CSS",{
-        version: "2.6.0",
+        version: "2.4.0",
         isLoaded: true,
         strings: {
-          LoadWebFont: "A carregar fonte baseada em web %1",
+          LoadWebFont: "Carregando fonte baseada em web %1",
           CantLoadWebFont: "N\u00E3o foi poss\u00EDvel carregar a fonte baseada em web %1",
-          FirefoxCantLoadWebFont: "O Firefox n\u00E3o pode carregar fontes baseadas em web a partir de um host remoto",
+          FirefoxCantLoadWebFont: "O Firefox N\u00E3o pode carregar fontes baseadas em web a partir de um host remoto",
           CantFindFontUsing: "N\u00E3o \u00E9 poss\u00EDvel encontrar uma fonte v\u00E1lida usando %1",
-          WebFontsNotAvailable: "Fontes baseadas em web n\u00E3o est\u00E3o dispon\u00EDveis -- a usar fontes feitas com imagens em vez disso"
+          WebFontsNotAvailable: "Fontes baseadas em web n\u00E3o est\u00E3o dispon\u00EDveis -- usando fontes feitas com imagens em vez disso"
         }
 });
 

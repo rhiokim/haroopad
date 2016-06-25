@@ -12,7 +12,7 @@
  *
  *  ---------------------------------------------------------------------
  *  
- *  Copyright (c) 2009-2015 The MathJax Consortium
+ *  Copyright (c) 2009-2014 The MathJax Consortium
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -169,12 +169,10 @@ MathJax.Hub.Config({
   //  These two parameters control the alignment and shifting of displayed equations.
   //  The first can be "left", "center", or "right", and determines the alignment of
   //  displayed equations.  When the alignment is not "center", the second determines
-  //  an indentation from the left or right side for the displayed equations.  When
-  //  the alignment is "center", the indent allows you to shift the center to the right
-  //  or left (negative is left).
+  //  an indentation from the left or right side for the displayed equations.
   //  
   displayAlign: "center",
-  displayIndent: "0",
+  displayIndent: "0em",
   
   //
   //  Normally MathJax will perform its starup commands (loading of
@@ -240,18 +238,12 @@ MathJax.Hub.Config({
     ALT: false,          //    require Alt or Option?
     CMD: false,          //    require CMD?
     Shift: false,        //    require Shift?
-    discoverable: false, //  make math menu discoverable on hover?
     zscale: "200%",      //  the scaling factor for MathZoom
-    renderer: null,      //  set when Jax are loaded
     font: "Auto",        //  what font HTML-CSS should use
     context: "MathJax",  //  or "Browser" for pass-through to browser menu
-    locale: null,        //  the language to use for messages
     mpContext: false,    //  true means pass menu events to MathPlayer in IE
     mpMouse: false,      //  true means pass mouse events to MathPlayer in IE
     texHints: true,      //  include class names for TeXAtom elements
-    FastPreview: null,   //  use PreviewHTML output as preview?
-    assistiveMML: null,  //  include hidden MathML for screen readers?
-    inTabOrder: true,    //  set to true if math elements should be included in the tabindex
     semantics: false     //  add semantics tag with original form in MathML output
   },
   
@@ -516,7 +508,7 @@ MathJax.Hub.Config({
     //
     //  This is the amound of indentation (from right or left) for the tags.
     //
-    TagIndent: "0.8em",
+    TagIndent: ".8em",
     
     //
     //  This is the width to use for the multline environment
@@ -742,25 +734,10 @@ MathJax.Hub.Config({
     EqnChunkFactor: 1.5,
     EqnChunkDelay: 100,
 
-    //
     //  This option indicates whether MathJax should try to correct the
     //  x-height of equations to match the size of the surrounding text.
-    //
     matchFontHeight: true,
 
-    //
-    //  When true, MathJax will not measure the widths or heights of the
-    //  subexpressions as it creates its output, but instead will rely on
-    //  its internal calculautions based on teh bounding boxes of the
-    //  characters it uses, and will only take measurements when it
-    //  absolutely has to.  Since measurements cause display reflows, they
-    //  slows down MathJax considerably, so without them MathJax runs
-    //  faster, but can produce slightly less accurate character placements,
-    //  especially in width fractions or roots.
-    //
-    noReflows: true,
-
-    
     //
     //  These settings control automatic line breaking.  It is off by
     //  default, so only explicit line breaks are performed (via

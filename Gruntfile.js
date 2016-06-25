@@ -694,8 +694,9 @@ module.exports = function(grunt) {
         command: [
           'nvm use default',
           'npm install',
+          'node -v',
           'node tools/build.js -t node'
-        ],
+        ].join(';'),
         options: {
           stdout: true,
           execOptions: {
@@ -856,7 +857,7 @@ module.exports = function(grunt) {
     }
 
     grunt.task.run('uglify:preBuiltLibs');
-    grunt.task.run('shell:highlightjs');
+    // grunt.task.run('shell:highlightjs');
   });
 
   //print themes

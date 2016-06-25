@@ -10,7 +10,7 @@
  *
  *  ---------------------------------------------------------------------
  *  
- *  Copyright (c) 2010-2015 The MathJax Consortium
+ *  Copyright (c) 2010-2014 The MathJax Consortium
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
  */
 
 (function (HUB,HTML,AJAX,HTMLCSS,nMML) {
-  var VERSION = "2.6.0";
+  var VERSION = "2.4.0";
   
   var CONFIG = HUB.CombineConfig("MathZoom",{
     styles: {
@@ -40,9 +40,6 @@
         "text-align":"left", "text-indent":0, "text-transform":"none",
         "line-height":"normal", "letter-spacing":"normal", "word-spacing":"normal",
         "word-wrap":"normal", "white-space":"nowrap", "float":"none",
-        "-webkit-box-sizing":"content-box",          // Android ≤ 2.3, iOS ≤ 4
-        "-moz-box-sizing":"content-box",             // Firefox ≤ 28
-        "box-sizing":"content-box",                  // Chrome, Firefox 29+, IE 8+, Opera, Safari 5.1
         "box-shadow":"5px 5px 15px #AAAAAA",         // Opera 10.5 and IE9
         "-webkit-box-shadow":"5px 5px 15px #AAAAAA", // Safari 3 and Chrome
         "-moz-box-shadow":"5px 5px 15px #AAAAAA",    // Forefox 3.5
@@ -254,7 +251,6 @@
     },
     SetWH: function () {
       var overlay = document.getElementById("MathJax_ZoomOverlay");
-      if (!overlay) return;
       overlay.style.display = "none"; // so scrollWidth/Height will be right below
       var doc = overlay.scroll_parent || document.documentElement || document.body;
       overlay.style.width = doc.scrollWidth + "px";

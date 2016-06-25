@@ -5,7 +5,7 @@
  *
  *  MathJax/localization/fr/MathMenu.js
  *
- *  Copyright (c) 2009-2015 The MathJax Consortium
+ *  Copyright (c) 2009-2014 The MathJax Consortium
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
  */
 
 MathJax.Localization.addTranslation("fr","MathMenu",{
-        version: "2.6.0",
+        version: "2.4.0",
         isLoaded: true,
         strings: {
           Show: "Afficher sous forme",
@@ -51,7 +51,7 @@ MathJax.Localization.addTranslation("fr","MathMenu",{
           Command: "Commande",
           Control: "Contr\u00F4le",
           Shift: "Maj",
-          ZoomFactor: "Facteur de grossissement d'\u00E9chelle",
+          ZoomFactor: "Facteur de grossissement",
           Renderer: "Outil de rendu math\u00E9matique",
           MPHandles: "Laisser MathPlayer g\u00E9rer :",
           MenuEvents: "\u00C9v\u00E9nements de menu",

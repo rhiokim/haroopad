@@ -18,7 +18,7 @@
     "tests"
   ],
   "dependencies": {
-    "MathJax": "*",
+    "MathJax": "git@github.com:mathjax/MathJax.git#v2.4-latest",
     "backbone-pouch": "git@github.com:jo/backbone-pouch.git",
     "backbone": "~1.1.0",
     "bootstrap-switch": "*",

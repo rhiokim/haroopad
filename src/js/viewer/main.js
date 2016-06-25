@@ -138,7 +138,7 @@ function showOnlyTOC() {
 
   // contentElements.forEach(function(el) {
   //   el.style.display = 'none';
-  // });  
+  // });
 }
 
 function showAllContent() {
@@ -160,8 +160,10 @@ function init(options) {
 
 function loadLibs(base, cb) {
   window.chrome.loadTimes = true;
-  loadJs(base + '/MathJax/MathJax.js?config=TeX-MML-AM_HTMLorMML', function() {
+  loadJs(base + '/MathJax/MathJax.js?config=TeX-AMS_HTML-full', function() {
     MathJax.Hub.Config({
+      // extensions: ["tex2jax.js"],
+      // jax: ["input/TeX","output/HTML-CSS"],
       messageStyle: "none",
       showProcessingMessages: false,
       "HTML-CSS": {
@@ -170,18 +172,22 @@ function loadLibs(base, cb) {
         }
       },
       TeX: {
-        // equationNumbers: { autoNumber: "AMS" } 
+        // Macros: {
+        //   RR: '{\\bf R}',                // a simple string replacement
+        //   bold: ['\\boldsymbol{#1}',1]   // this macro has one parameter
+        // }
+        // equationNumbers: { autoNumber: "all" }
       },
       tex2jax: {
         inlineMath: [
-          ['$$$', '$$$'],
           ['$', '$'],
-          ["\\(", "\\)"]
+          ['\\(', '\\)'],
+          ['$$$', '$$$']
         ],
-        displayMath: [
-          ['$$', '$$'],
-          ["\\[", "\\]"]
-        ],
+        // displayMath: [
+        //   ['$$', '$$'],
+        //   ['\\[', '\\]']
+        // ],
         processEscapes: true
       }
     });
@@ -306,18 +312,28 @@ function countFragments(target) {
 }
 
 function processMathJax(target, cb) {
-  // var mathEl = document.createElement('div');
-  // mathEl.innerHTML = target.innerHTML;
+  var _mathEl = document.createElement('div');
+  // _mathEl.innerHTML = '';
+  _mathEl.innerHTML = target.innerHTML;
 
   MathJax.Hub.Queue(
-    ["Typeset", MathJax.Hub, target],
-    // [function() {
-    //   console.log(mathEl.innerHTML)
-    //   target.innerHTML = mathEl.innerHTML;
-    //   target.removeAttribute('class');
-    // }],
-    [cb]
+    ["Typeset", MathJax.Hub, _mathEl],
+    [function() {
+      // console.log(_mathEl)
+      target.innerHTML = _mathEl.innerHTML;
+      target.removeAttribute('class');
+    },this]
   );
+  // MathJax.Hub.Queue(
+  //   ["Typeset", MathJax.Hub, _mathEl]
+  //   [function() {
+  //     console.log('aljdsf')
+  //     console.log(_mathEl.innerHTML)
+  //     target.innerHTML = mathEl.innerHTML;
+  //     target.removeAttribute('class');
+  //   }, this],
+  //   [cb]
+  // );
 }
 
 function drawMathJax() {
@@ -492,7 +508,7 @@ function update(wrapper) {
     if (!_frag) {
       _md_body.appendChild(frag);
 
-      //check change toc 
+      //check change toc
       // if (/^H[1-6]/.test(frag.tagName) == true) {
       //   changeTOC = true;
       // }
@@ -563,6 +579,8 @@ $(document.body).ready(function() {
   _doc = document,
   _body = _doc.body,
   _md_body = _doc.getElementById('root');
+  _mathEl = _doc.getElementById('MathBuffer');
+
 
 
   $(_body).click(function(e) {

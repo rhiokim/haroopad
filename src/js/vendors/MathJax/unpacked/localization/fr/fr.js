@@ -5,7 +5,7 @@
  *
  *  MathJax/localization/fr/fr.js
  *
- *  Copyright (c) 2009-2015 The MathJax Consortium
+ *  Copyright (c) 2009-2014 The MathJax Consortium
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@
 
 MathJax.Localization.addTranslation("fr",null,{
   menuTitle: "fran\u00E7ais",
-  version: "2.6.0",
+  version: "2.4.0",
   isLoaded: true,
   domains: {
     "_": {
-        version: "2.6.0",
+        version: "2.4.0",
         isLoaded: true,
         strings: {
           CookieConfig: "MathJax a trouv\u00E9 un t\u00E9moin (cookie) de configuration utilisateur qui inclut du code ex\u00E9cutable. Souhaitez vous l\u2019ex\u00E9cuter ?\n\n(Choisissez Annuler sauf si vous avez cr\u00E9\u00E9 ce t\u00E9moin vous-m\u00EAme.)",
@@ -36,8 +36,8 @@ MathJax.Localization.addTranslation("fr",null,{
           LoadFile: "Chargement de %1",
           Loading: "Chargement",
           LoadFailed: "\u00C9chec du chargement de %1",
-          ProcessMath: "Traitement des formules : %1 %%",
-          Processing: "Traitement en cours",
+          ProcessMath: "Traitement des formules: %1%%",
+          Processing: "En traitement",
           TypesetMath: "Composition des formules: %1%%",
           Typesetting: "Composition",
           MathJaxNotSupported: "Votre navigateur ne supporte pas MathJax"

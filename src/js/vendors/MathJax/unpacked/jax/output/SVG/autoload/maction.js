@@ -9,7 +9,7 @@
  *
  *  ---------------------------------------------------------------------
  *  
- *  Copyright (c) 2011-2015 The MathJax Consortium
+ *  Copyright (c) 2011-2014 The MathJax Consortium
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
  */
 
 MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
-  var VERSION = "2.6.0";
+  var VERSION = "2.4.0";
   var MML = MathJax.ElementJax.mml,
       SVG = MathJax.OutputJax["SVG"];
   
@@ -49,7 +49,6 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       var selected = this.selected();
       if (selected.type == "null") {this.SVGsaveData(svg);return svg;}
       svg.Add(this.SVGdataStretched(this.Get("selection")-1,HW,D));
-      svg.removeable = false;
       this.SVGhandleHitBox(svg);
       this.SVGhandleSpace(svg);
       this.SVGhandleColor(svg);
@@ -57,12 +56,10 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       return svg;
     },
     SVGhandleHitBox: function (svg) {
-      var frame = SVG.Element("rect",
+      var frame = SVG.addElement(svg.element,"rect",
         {width:svg.w, height:svg.h+svg.d, y:-svg.d, fill:"none", "pointer-events":"all"});
-      svg.element.insertBefore(frame,svg.element.firstChild);
       var type = this.Get("actiontype");
-      if (this.SVGaction[type])
-        {this.SVGaction[type].call(this,svg,svg.element,this.Get("selection"))}
+      if (this.SVGaction[type]) {this.SVGaction[type].call(this,svg,frame,this.Get("selection"))}
     },
     SVGstretchH: MML.mbase.prototype.SVGstretchH,
     SVGstretchV: MML.mbase.prototype.SVGstretchV,
@@ -162,7 +159,7 @@ MathJax.Hub.Register.StartupHook("SVG Jax Ready",function () {
       var math = this; while (math.type !== "math") {math = math.inherit}
       var jax = MathJax.Hub.getJaxFor(math.inputID);
       this.em = MML.mbase.prototype.em = jax.SVG.em; this.ex = jax.SVG.ex;
-      this.linebreakWidth = jax.SVG.lineWidth; this.cwidth = jax.SVG.cwidth;
+      this.linebreakWidth = jax.SVG.lineWidth * 1000; this.cwidth = jax.SVG.cwidth;
 
       //
       //  Make a new math element and temporarily move the tooltip to it

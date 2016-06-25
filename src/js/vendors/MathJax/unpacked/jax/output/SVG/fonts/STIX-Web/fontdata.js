@@ -4,7 +4,7 @@
  *  
  *  Initializes the SVG OutputJax to use the STIX-Web fonts
 
- *  Copyright (c) 2013-2015 The MathJax Consortium
+ *  Copyright (c) 2013-2014 The MathJax Consortium
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 
 (function (SVG,MML,AJAX,HUB) {
 
-    var VERSION = "2.6.0";
+    var VERSION = "2.4.0";
 
   var ALPHABETSBOLDITALIC = "STIXMathJax_Alphabets-bold-italic",
       ALPHABETSBOLD = "STIXMathJax_Alphabets-bold",
@@ -564,9 +564,6 @@
           HW: [[926,MAIN], [1230,SIZE1], [1350,SIZE1,1.098], [1845,SIZE2], [2460,SIZE3], [3075,SIZE4]],
           stretch: {bot:[0xE009,SIZE5], ext:[0xE00A,SIZE5]}
         },
-        0x2312: {alias: 0x23DC, dir:H},
-        0x2322: {alias: 0x23DC, dir:H},
-        0x2323: {alias: 0x23DD, dir:H},
         0x2329: {alias: 0x27E8, dir: V},
         0x232A: {alias: 0x27E9, dir: V},
         0x23AA: EXTRAV,

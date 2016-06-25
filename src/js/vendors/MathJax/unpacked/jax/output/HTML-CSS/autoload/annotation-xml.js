@@ -9,7 +9,7 @@
  *
  *  ---------------------------------------------------------------------
  *  
- *  Copyright (c) 2011-2015 The MathJax Consortium
+ *  Copyright (c) 2011-2014 The MathJax Consortium
  * 
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
  */
 
 MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
-  var VERSION = "2.6.0";
+  var VERSION = "2.4.0";
   var MML = MathJax.ElementJax.mml,
       HTMLCSS = MathJax.OutputJax["HTML-CSS"];
 
@@ -48,11 +48,9 @@ MathJax.Hub.Register.StartupHook("HTML-CSS Jax Ready",function () {
     toHTML: function (span,encoding) {
       for (var i = 0, m = this.data.length; i < m; i++) 
         {span.appendChild(this.data[i].cloneNode(true))}
-      var bbox = span.bbox; span.bbox = null;
-      bbox.rw = bbox.w = HTMLCSS.getW(span);
+      span.bbox.w = HTMLCSS.getW(span); span.bbox.rw = span.bbox.w;
       var HD = HTMLCSS.getHD(span);
-      bbox.h = HD.h; bbox.d = HD.d;
-      span.bbox = bbox;
+      span.bbox.h = HD.h; span.bbox.d = HD.d;
     }
   });
   
