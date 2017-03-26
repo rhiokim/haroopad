@@ -1,3 +1,7 @@
+# Note
+
+Development of Haroopad is [currently suspended](https://twitter.com/haroopad/status/803657669697380352). 
+
 # Haroopad
 
 **Haroopad** is a markdown enabled document processor for creating web-friendly documents.
