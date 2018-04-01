@@ -8,8 +8,8 @@
   "author": "rhio.kim@gmail.com",
   "license": "GPL3",
   "devDependencies": {
-    "grunt-shell": "git://github.com/sindresorhus/grunt-shell.git",
     "grunt": "~0.4.5",
+    "grunt-shell": "~2.1.0",
     "grunt-requirejs": "~0.4.2",
     "grunt-contrib-requirejs": "~1.0.0",
     "grunt-contrib-compress": "~1.4.3",
