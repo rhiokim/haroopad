@@ -15,7 +15,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     vendors: 'src/js/vendors',
-    
+
     clean: {
       build: [ 'build/*' ],
       release: [ 'build/haroopad.app' ]
@@ -181,7 +181,7 @@ module.exports = function(grunt) {
       },
 
       exec: {
-        command: 'open ./build/haroopad.app'
+        command: 'xdg-open ./build/haroopad.app'
       },
 
       /* v8 heap snapshot for protect source */
@@ -190,7 +190,7 @@ module.exports = function(grunt) {
       },
 
       deploy: {
-        command: 'cp -R ./build/haroopad.app /Applications'
+        command: 'cp -R ./build/haroopad.app ./Applications'
       }
     },
 
@@ -227,5 +227,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [ 'clean', 'concat', 'uglify:pad', 'uglify:viewer', 'cssmin', 'copy:main', 'requirejs' ]);
   grunt.registerTask('deploy', [ 'shell:deploy']);
   grunt.registerTask('debug', [ 'clean:release', 'shell:cpLib', 'copy:debug', 'replace:info', 'shell:exec' ]);
-  grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:ss_darwin', 'shell:exec' ]);
+  grunt.registerTask('build', [ 'clean:release', 'shell:cpLib', 'copy:build', 'replace:info', 'shell:exec' ]);
 };

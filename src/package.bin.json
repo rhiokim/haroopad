@@ -7,8 +7,8 @@
   "window": {
     "title": "haroopad",
     "icon": "logo.png",
-    "toolbar": false,
-    "show": false,
+    "toolbar": true,
+    "show": true,
     "width": 1024,
     "height": 600,
     "min_width": 300,
@@ -31,9 +31,9 @@
     "type": "GPLv2",
     "url": "http://www.example.com/licenses/gpl.html"
   }],
-  "bugs": "https://github.com/rhiokim/haroopad/issues",
+  "bugs": "https://github.com/Fnjn/haroopad/issues",
   "repositories": [{
     "type": "git", 
-    "url": "git@github.com:rhiokim/haroopad.git"
+    "url": "git@github.com:Fnjn/haroopad.git"
   }]
 }
