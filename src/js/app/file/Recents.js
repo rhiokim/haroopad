@@ -34,7 +34,7 @@ define([
 			},
 
 			add: function(file) {
-				var name = path.basename(file);
+				var name = path.normalize(file);
 				var o = {};
 						o[file] = name;
 				
