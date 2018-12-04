@@ -1,115 +1,150 @@
-## why?
+# Haroopad
 
-## haroopad?
-하루패드는 마크다운 에디터로 크로스 플랫폼에서 동일한 에디팅과 뷰잉을 지원합니다.
+**Haroopad** is a markdown enabled document processor for creating web-friendly documents.
 
-특히 마크다운 포맷의 고유의 기능을 잘 살려 원하는 에디팅 테마와 뷰어 테마를 제공하여 경량의 마크다운 문서가 고품질의 문서로 출력해줍니다.
+You can author professional-looking documents of various formats: blog posts, slides, presentations, reports, email and more.
 
-멀티 마크다운을 기본적으로 지원하고 그에 더불어 하루패드만의 확장 마크다운을 지원합니다. 이 확장 마크다운은 온라인 환경에 의존하는 오픈 컨텐츠 미디어(유튜브, 슬라이드쉐어, 트윗등을)를 손쉽게 문서내에 포함시킬 수 있습니다. 
+Haroopad gives you the same editing experience regardless of the platform you are working on. It runs on all three major operating systems—Windows, Mac OS X, and Linux.
 
-하루패드를 사용하여 새로운 문서 편집의 경험을 느껴보세요.
+![haroopad icon](http://pad.haroopress.com/assets/images/logo-small.png)
 
-* [official site](http://pad.haroopress.com)
-* [official repository](https://github.com/rhiokim/haroopad)
+### New Features (v0.13.2)
 
-## features
-* cross platform markdown editor
-  - support Window, Linux, Mac OS
-* support multi-markdown
-* editor theme, syntax highlight, markdown theme
-* vim key binding
-* auto publishing to sites(tumblr, github)
+* New Features
+  - Presentation Mode - [reference](http://pad.haroopress.com/page.html?f=how-to-write-presentation)
+  - Drawing Diagram (flowchart, Sequence Diagram) - [reference](http://pad.haroopress.com/page.html?f=how-to-draw-diagram)
+* New Syntax
+  - Tasklist(GFM) - [reference](http://pad.haroopress.com/page.html?f=how-to-manage-tasklist)
+* Added new code language & themes - [reference](http://pad.haroopress.com/page.html?f=how-to-write-fenced-code-block)
+  - total 112 languages(swift, gradle ...) and 49 themes
 
-## example
+### More changelog
 
-**header**
+* Bugs
+  - Fixed No confirm save in Windows on close Window with [X]
+  - Fixed The file path can't contain space in Windows
+* Enhancements
+  - Update Codemirror Editor v4.8
+  - Support Font in Math
+  - Support \left and \right in Math
+  - Support custom gfm code block delimiters
+  - Enhance GFM tabls's column width issue
+  - Enhance Two subsequent tables are rendered with no space
+  - Enhance Equation rendering issues
 
-## This is an H2
-### This is an H3
-#### This is an H4
-##### This is an H5
-###### This is an H6
+### Main Features
 
+* Support cross platform
+  - Window
+  - Mac OS X
+  - Linux 32/64
+* Theme for editing
+  - Themes for editor 30 styles
+  - Syntax highlighting in fenced code block on editor
+  - Ruby, Python, PHP, Javascript, C, HTML, CSS
+  - based on CodeMirror
+* Live Preview themes
+  - 7 themes based [markdown-css](https://github.com/rhiokim/markdown-css)
+* Syntax Highlighting
+  - 71 languages & 44 styles based on highlight.js
+* Custom Theme
+  - Style based on CSS(Cascading Style Sheet)
+* Font Size
+  - Editor and Viewer font size control using Preference Window & Shortcuts
+* Embedding Rich Media Contents - v0.8
+  - Video, Audio, 3D, Text, Open Graph and oEmbed
+  - About 100 Major Internet Services(Youtube, SoundCloud, Flickr...) Support
+  - Drag & Drop support
+* Display Mode - v0.8
+  - Default(Editor:Viewer), Reverse(Viewer:Editor), Only Editor, Only Viewer (View > Mode)
+* Insert Current Date & Time - v0.8
+  - Various Format support (Insert > Date & Time)
+* HTML to Markdown - v0.8
+  - Drag & Drop your selected text on Web Browser
+* Options for markdown parsing
+* CLI(Command Line Interface) - v0.12.1
+  - `$ haroopad -f [ /path/to/a.md ./path/to/b.md ]`: files
+  - `$ haroopad --mode`: only view or edit mode
+    + `$ haroopad --mode view`: view mode
+    + `$ haroopad --mode edit`: edit mode
+* Outline View
+* Vim Key-binding
+* Export to PDF, HTML
+* Styled HTML copy to clipboard for WYSIWYG editors
+* Auto Save & Restore
+* Document state information
+* Tab or Spaces for Indentation
+* Colum(Single, Two and Three) Layout View
+* Markdown Syntax Help Dialog
+* Markdown Folding
+* Import and Export settings
 
-**blockquote**
+### Internationalization
 
-> ## This is a H2.
-> 
-> 1.   This is the first list item.
-> 2.   This is the second list item.
-> 
-> Here's some example code:
-> 
-> ```js
-> function syntaxHighlight() {
->   return true;
-> }
-> ```
+- English
+- Korea (한국어)
+- Spanish (Español) - [davegomez](https://github.com/davegomez)
+- Chinese Simplified (中文) - [toiletfreak](https://github.com/toiletfreak)
+- German (Deutsch) - [Tobias Mücksch](https://github.com/tobiasmuecksch)
+- Vietnamese (Tiếng Việt) - [nguyenkinh](https://github.com/nguyenkinh)
+- Russian (Русский) - [aprilix](https://github.com/aprilix)
+- Greek (Ελληνικά) - [pdudis](https://github.com/pdudis)
+- Portuguese (Portuguesa) - [alexandre mbm](https://github.com/alexandre-mbm)
+- Japanese (日本語) - [Toshiyuki Tega](https://github.com/Toshiyuki-Tega)
+- Italy (Italiano) - [Daniele Pitrolo](https://github.com/Zeriuno)
+- Indonesia (Bahasa Indonesia) - [Reza Faiz A. Rahman](https://github.com/rezafaizarahman)
+- Turkey  (Türkçe) - [Eray AYDIN](https://github.com/erayaydin)
+- French (Français) - [MarcBoyer](https://github.com/MarcBoyer), [Daniel Ménard](https://github.com/daniel-menard)
 
-**list**
+### Enhanced Markdown Syntax
 
-* li1
-  - li1-1
-   - li1-2
-     * li-2-1
-     * li-2-2
-       1. li-2-2-1
-       2. li-2-2-2
+* Added `[TOC]` Syntax
+  - Now you can easily embed table of content in documents.
+  - Left Align: `[TOC "float:left"]`
+  - Right Align: `[TOC "float:right"]`
+* `![]()` Extended image syntax
+  - `![alt text](url "title" "css")`
+* [Gitub Flavored Markdown](http://github.github.com/github-flavored-markdown/) & extensions
+  - Syntax highlighting
+  - Table
+  - URL autolinking
+  - Strikethrough
+  - Smartypants
+* Mathematics Expression
+  - Inline Expression: `$$$...$$$`
+  - Block Expression: `$$...$$`
+  - Added Option inline mathematics expression (**$**, $$$)
+* Added Superscript, Subscript
+  - `Sup^superscript^`, `Sub~subscript~`
+* Extended Image Syntax
+  - If `![](path/*.mp3)` then `<audio>` / extensions mp3, ogg
+  - If `![](path/*.mp4)` then `<video>` / extensions mp4, ogv, webm
+* Footnote
+  - Footnote: `[^identity]`
+  - Footnote Reference: `[^identity]: text`
+* Tasklist
+  - Task: `- [ ]`
+  - Task (Done): `- [x]`
 
-** Image **
+### TODO
 
-![](http://placekitten.com/g/160/180)
-![](http://placekitten.com/g/160/180)
-![](http://placekitten.com/g/160/180)
+* Plugin System
+* Integrating with cloud environments
 
-**Syntax highlighting**
+### And more?
 
-`code`
+* Official site : [http://pad.haroopress.com][haroopad]
+* Blog & Manual : [http://pad.haroopress.com/page.html][blog]
+* User echo : [http://haroopad.userecho.com][userecho]
 
-```js
-function syntaxHighlight() {
-  var name = 'haroopad';
-}
-```
+Don't forget to check Preferences, lots of useful options are there.
 
-```xml
-<html>
- <head>
-   <title>haroopad example</title>
- </head>
- <body>
-   <span class="text-info">cross-platform markdown editor</span>
- </body>
-</html>
-```
+Follow official social account [@haroopad](https://twitter.com/haroopad) and developer [@rhiokim](https://twitter.com/rhiokim) on Twitter for the latest news.
 
-```css
-body {
-  font-size: 1em;
-}
-```
+For feedback, use the menu `Help` - `User Echo`
 
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
-```
+[haroopad]: http://pad.haroopress.com
+[blog]: http://pad.haroopress.com/page.html
+[userecho]: http://haroopad.userecho.com
 
-**GFM style table**
-
-name  | age | gender
-------|:---:|-------
-rhio  | 33  | male
-edina | 28  | female
-jedi  | 44  | robot
-
-
-**URL autolinking**
-
-* http://pad.haroopress.com
-
-**Multiple underscores in words**
-
-perform_complicated_task  
-do_this_and_do_that_and_another_thing
-
+### [LICENSE](https://github.com/rhiokim/haroopad/blob/develop/LICENSE)
